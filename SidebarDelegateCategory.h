@@ -10,6 +10,6 @@
 #import "SubViewController.h"
 
 
-@interface SubViewController (SidebarTableViewDelegateCategory)
+@interface SubViewController (SidebarDelegateCategory)
 
 @end
