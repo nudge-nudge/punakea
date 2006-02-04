@@ -16,7 +16,7 @@
 
 - (void)awakeFromNib
 {
-	[tableView setDelegate:[sender window]];
+	
 }
 
 @end
