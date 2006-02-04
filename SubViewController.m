@@ -69,9 +69,4 @@
 -(NSView*)view{
 	return view;
     }
-
-// This method calls a method in the WindowController to get a pointer to its NSTextField and passes it on.  This is usually called by the subview that are eing loaded in from nibs and assigned to the NSTabViews.
-- (id)ownerTextField{
-    return [_owner textField];
-}
 @end

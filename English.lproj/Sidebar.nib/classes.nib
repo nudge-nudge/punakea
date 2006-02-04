@@ -1,7 +1,6 @@
 {
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = SidebarView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {
             CLASS = SubViewController; 
             LANGUAGE = ObjC; 
