@@ -88,12 +88,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				65B17322099564C400B10322 /* New Group */,
 				65B17321099564A800B10322 /* Controllers */,
-				65294BCC0995572100EE8CEE /* SidebarDelegateCategory.h */,
-				65294BCD0995572100EE8CEE /* SidebarDelegateCategory.m */,
-				65B172F2099562A700B10322 /* SidebarView.h */,
-				65B172F3099562A700B10322 /* SidebarView.m */,
+				65B17322099564C400B10322 /* Sidebar */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -176,11 +172,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		65B17322099564C400B10322 /* New Group */ = {
+		65B17322099564C400B10322 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				65294BCC0995572100EE8CEE /* SidebarDelegateCategory.h */,
+				65294BCD0995572100EE8CEE /* SidebarDelegateCategory.m */,
+				65B172F2099562A700B10322 /* SidebarView.h */,
+				65B172F3099562A700B10322 /* SidebarView.m */,
 			);
-			name = "New Group";
+			name = Sidebar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

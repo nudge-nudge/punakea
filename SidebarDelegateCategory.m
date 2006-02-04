@@ -6,10 +6,10 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "SidebarDelegateCategory.h"
+#import "SidebarTableViewDelegateCategory.h"
 
 
-@implementation SubViewController (SidebarDelegateCategory)
+@implementation SubViewController (SidebarTableViewDelegateCategory)
 - (int)numberOfRowsInTableView:(NSTableView *)tableView
 {
     return 4;
