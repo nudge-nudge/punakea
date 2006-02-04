@@ -88,11 +88,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				29B97316FDCFA39411CA2CEA /* main.m */,
-				65E7B0690994D5AA00565251 /* Controller.h */,
-				65E7B06A0994D5AA00565251 /* Controller.m */,
-				65E7B43C0994E3D000565251 /* SubViewController.h */,
-				65E7B43D0994E3D000565251 /* SubViewController.m */,
+				65B17322099564C400B10322 /* New Group */,
+				65B17321099564A800B10322 /* Controllers */,
 				65294BCC0995572100EE8CEE /* SidebarDelegateCategory.h */,
 				65294BCD0995572100EE8CEE /* SidebarDelegateCategory.m */,
 				65B172F2099562A700B10322 /* SidebarView.h */,
@@ -165,6 +162,25 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65B17321099564A800B10322 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+				65E7B0690994D5AA00565251 /* Controller.h */,
+				65E7B06A0994D5AA00565251 /* Controller.m */,
+				65E7B43C0994E3D000565251 /* SubViewController.h */,
+				65E7B43D0994E3D000565251 /* SubViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		65B17322099564C400B10322 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
