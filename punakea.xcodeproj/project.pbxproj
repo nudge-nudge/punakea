@@ -10,12 +10,6 @@
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Controller.m */; };
-		65E7B2B20994D75E00565251 /* OmniAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E7B23B0994D75E00565251 /* OmniAppKit.framework */; };
-		65E7B2C80994D77600565251 /* OmniBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E7B2B60994D77600565251 /* OmniBase.framework */; };
-		65E7B3660994D77F00565251 /* OmniFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E7B2C90994D77E00565251 /* OmniFoundation.framework */; };
-		65E7B3810994D9BE00565251 /* OmniFoundation.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E7B2C90994D77E00565251 /* OmniFoundation.framework */; };
-		65E7B3820994D9BE00565251 /* OmniBase.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E7B2B60994D77600565251 /* OmniBase.framework */; };
-		65E7B3830994D9BE00565251 /* OmniAppKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E7B23B0994D75E00565251 /* OmniAppKit.framework */; };
 		65E7B43E0994E3D100565251 /* SubViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E7B43C0994E3D000565251 /* SubViewController.h */; };
 		65E7B43F0994E3D100565251 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B43D0994E3D000565251 /* SubViewController.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -45,9 +39,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				65E7B3810994D9BE00565251 /* OmniFoundation.framework in CopyFiles */,
-				65E7B3820994D9BE00565251 /* OmniBase.framework in CopyFiles */,
-				65E7B3830994D9BE00565251 /* OmniAppKit.framework in CopyFiles */,
 				65E7B43E0994E3D100565251 /* SubViewController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,9 +57,6 @@
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B0690994D5AA00565251 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
-		65E7B23B0994D75E00565251 /* OmniAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniAppKit.framework; path = Frameworks/OmniAppKit.framework; sourceTree = "<group>"; };
-		65E7B2B60994D77600565251 /* OmniBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniBase.framework; path = Frameworks/OmniBase.framework; sourceTree = "<group>"; };
-		65E7B2C90994D77E00565251 /* OmniFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniFoundation.framework; path = Frameworks/OmniFoundation.framework; sourceTree = "<group>"; };
 		65E7B43C0994E3D000565251 /* SubViewController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
 		65E7B43D0994E3D000565251 /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -81,9 +69,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-				65E7B2B20994D75E00565251 /* OmniAppKit.framework in Frameworks */,
-				65E7B2C80994D77600565251 /* OmniBase.framework in Frameworks */,
-				65E7B3660994D77F00565251 /* OmniFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,9 +147,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				65E7B2C90994D77E00565251 /* OmniFoundation.framework */,
-				65E7B2B60994D77600565251 /* OmniBase.framework */,
-				65E7B23B0994D75E00565251 /* OmniAppKit.framework */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
