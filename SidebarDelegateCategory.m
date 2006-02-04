@@ -9,7 +9,7 @@
 #import "SidebarDelegateCategory.h"
 
 
-@implementation Controller (SidebarDelegateCategory)
+@implementation SubViewController (SidebarDelegateCategory)
 - (int)numberOfRowsInTableView:(NSTableView *)tableView
 {
     return 4;

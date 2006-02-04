@@ -41,6 +41,7 @@
 */
 
 #import "SubViewController.h"
+#import "Controller.h"
 
 
 @implementation SubViewController

@@ -1,12 +1,12 @@
 {
     IBClasses = (
-        {
-            CLASS = Controller; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {drawer = NSDrawer; }; 
-            SUPERCLASS = NSWindowController; 
-        }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = SidebarView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {owner = id; }; 
+            SUPERCLASS = NSView; 
+        }, 
         {
             CLASS = SubViewController; 
             LANGUAGE = ObjC; 

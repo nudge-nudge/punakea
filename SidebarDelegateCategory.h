@@ -7,9 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Controller.h"
+#import "SubViewController.h"
 
 
-@interface Controller (SidebarDelegateCategory)
+@interface SubViewController (SidebarDelegateCategory)
 
 @end
