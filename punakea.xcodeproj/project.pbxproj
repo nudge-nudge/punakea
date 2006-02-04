@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6577F02C0993C2E7007786A1 /* OmniAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6577EFB50993C2E6007786A1 /* OmniAppKit.framework */; };
-		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
+		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
+		65E7B06B0994D5AA00565251 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Controller.m */; };
+		65E7B2B20994D75E00565251 /* OmniAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E7B23B0994D75E00565251 /* OmniAppKit.framework */; };
+		65E7B2C80994D77600565251 /* OmniBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E7B2B60994D77600565251 /* OmniBase.framework */; };
+		65E7B3660994D77F00565251 /* OmniFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E7B2C90994D77E00565251 /* OmniFoundation.framework */; };
+		65E7B3810994D9BE00565251 /* OmniFoundation.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E7B2C90994D77E00565251 /* OmniFoundation.framework */; };
+		65E7B3820994D9BE00565251 /* OmniBase.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E7B2B60994D77600565251 /* OmniBase.framework */; };
+		65E7B3830994D9BE00565251 /* OmniAppKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E7B23B0994D75E00565251 /* OmniAppKit.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -29,16 +36,36 @@
 		};
 /* End PBXBuildStyle section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		65E7B37C0994D97500565251 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				65E7B3810994D9BE00565251 /* OmniFoundation.framework in CopyFiles */,
+				65E7B3820994D9BE00565251 /* OmniBase.framework in CopyFiles */,
+				65E7B3830994D9BE00565251 /* OmniAppKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; explicitFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* punakea_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = punakea_Prefix.pch; sourceTree = "<group>"; };
-		6577EFB50993C2E6007786A1 /* OmniAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniAppKit.framework; path = ../../../../Shared/daniel/Products/Release/OmniAppKit.framework; sourceTree = SOURCE_ROOT; };
+		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
+		65E7B0690994D5AA00565251 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		65E7B06A0994D5AA00565251 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
+		65E7B23B0994D75E00565251 /* OmniAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniAppKit.framework; path = Frameworks/OmniAppKit.framework; sourceTree = "<group>"; };
+		65E7B2B60994D77600565251 /* OmniBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniBase.framework; path = Frameworks/OmniBase.framework; sourceTree = "<group>"; };
+		65E7B2C90994D77E00565251 /* OmniFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniFoundation.framework; path = Frameworks/OmniFoundation.framework; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* punakea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = punakea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -49,7 +76,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-				6577F02C0993C2E7007786A1 /* OmniAppKit.framework in Frameworks */,
+				65E7B2B20994D75E00565251 /* OmniAppKit.framework in Frameworks */,
+				65E7B2C80994D77600565251 /* OmniBase.framework in Frameworks */,
+				65E7B3660994D77F00565251 /* OmniFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +88,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+				65E7B0690994D5AA00565251 /* Controller.h */,
+				65E7B06A0994D5AA00565251 /* Controller.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -105,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				32CA4F630368D1EE00C91783 /* punakea_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -115,7 +146,8 @@
 			children = (
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				65E7B0190994D02E00565251 /* MainMenu.nib */,
+				65E7B01E0994D0AE00565251 /* Sidebar.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -123,7 +155,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6577EFB50993C2E6007786A1 /* OmniAppKit.framework */,
+				65E7B2C90994D77E00565251 /* OmniFoundation.framework */,
+				65E7B2B60994D77600565251 /* OmniBase.framework */,
+				65E7B23B0994D75E00565251 /* OmniAppKit.framework */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
@@ -140,6 +174,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				65E7B37C0994D97500565251 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -179,8 +214,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
+				65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				65E7B06B0994D5AA00565251 /* Controller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,12 +243,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+		65E7B0190994D02E00565251 /* MainMenu.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				29B97319FDCFA39411CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		65E7B01E0994D0AE00565251 /* Sidebar.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65E7B01F0994D0AE00565251 /* English */,
+			);
+			name = Sidebar.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -224,6 +269,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(SRCROOT)/../../../../Shared/daniel/Products/Release",
+					"$(SRCROOT)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -247,6 +293,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(SRCROOT)/../../../../Shared/daniel/Products/Release",
+					"$(SRCROOT)/Frameworks",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
