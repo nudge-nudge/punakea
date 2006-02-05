@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6535E5030995F80F0067528D /* SidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6535E5010995F80F0067528D /* SidebarTableView.h */; };
+		6535E5040995F80F0067528D /* SidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535E5020995F80F0067528D /* SidebarTableView.m */; };
 		65B172F4099562A700B10322 /* SidebarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B172F2099562A700B10322 /* SidebarView.h */; };
 		65B172F5099562A700B10322 /* SidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B172F3099562A700B10322 /* SidebarView.m */; };
 		65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B1738D0995665500B10322 /* SidebarDelegateCategory.h */; };
@@ -46,6 +48,7 @@
 				65E7B43E0994E3D100565251 /* SubViewController.h in CopyFiles */,
 				65B172F4099562A700B10322 /* SidebarView.h in CopyFiles */,
 				65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */,
+				6535E5030995F80F0067528D /* SidebarTableView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +63,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* punakea_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = punakea_Prefix.pch; sourceTree = "<group>"; };
+		6535E5010995F80F0067528D /* SidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarTableView.h; sourceTree = "<group>"; };
+		6535E5020995F80F0067528D /* SidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarTableView.m; sourceTree = "<group>"; };
 		65B172F2099562A700B10322 /* SidebarView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarView.h; sourceTree = "<group>"; };
 		65B172F3099562A700B10322 /* SidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarView.m; sourceTree = "<group>"; };
 		65B1738D0995665500B10322 /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
@@ -177,6 +182,8 @@
 			children = (
 				65B1738D0995665500B10322 /* SidebarDelegateCategory.h */,
 				65B1738E0995665500B10322 /* SidebarDelegateCategory.m */,
+				6535E5010995F80F0067528D /* SidebarTableView.h */,
+				6535E5020995F80F0067528D /* SidebarTableView.m */,
 				65B172F2099562A700B10322 /* SidebarView.h */,
 				65B172F3099562A700B10322 /* SidebarView.m */,
 			);
@@ -251,6 +258,7 @@
 				65E7B43F0994E3D100565251 /* SubViewController.m in Sources */,
 				65B172F5099562A700B10322 /* SidebarView.m in Sources */,
 				65B173900995665500B10322 /* SidebarDelegateCategory.m in Sources */,
+				6535E5040995F80F0067528D /* SidebarTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
