@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		6535E5030995F80F0067528D /* SidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6535E5010995F80F0067528D /* SidebarTableView.h */; };
 		6535E5040995F80F0067528D /* SidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535E5020995F80F0067528D /* SidebarTableView.m */; };
+		6562A1DD099639B600DBE7DB /* mailboxSelectionBackgroundFocus.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A1D9099639B600DBE7DB /* mailboxSelectionBackgroundFocus.tiff */; };
+		6562A1DE099639B600DBE7DB /* mailboxSelectionBackgroundFocusSmall.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6562A1DA099639B600DBE7DB /* mailboxSelectionBackgroundFocusSmall.tif */; };
+		6562A1DF099639B600DBE7DB /* mailboxSelectionBackgroundSmall.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6562A1DB099639B600DBE7DB /* mailboxSelectionBackgroundSmall.tif */; };
+		6562A1E0099639B600DBE7DB /* mailboxSelectionBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A1DC099639B600DBE7DB /* mailboxSelectionBackground.tiff */; };
 		65B172F4099562A700B10322 /* SidebarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B172F2099562A700B10322 /* SidebarView.h */; };
 		65B172F5099562A700B10322 /* SidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B172F3099562A700B10322 /* SidebarView.m */; };
 		65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B1738D0995665500B10322 /* SidebarDelegateCategory.h */; };
@@ -68,6 +72,10 @@
 		32CA4F630368D1EE00C91783 /* punakea_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = punakea_Prefix.pch; sourceTree = "<group>"; };
 		6535E5010995F80F0067528D /* SidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarTableView.h; sourceTree = "<group>"; };
 		6535E5020995F80F0067528D /* SidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarTableView.m; sourceTree = "<group>"; };
+		6562A1D9099639B600DBE7DB /* mailboxSelectionBackgroundFocus.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mailboxSelectionBackgroundFocus.tiff; sourceTree = SOURCE_ROOT; };
+		6562A1DA099639B600DBE7DB /* mailboxSelectionBackgroundFocusSmall.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mailboxSelectionBackgroundFocusSmall.tif; sourceTree = SOURCE_ROOT; };
+		6562A1DB099639B600DBE7DB /* mailboxSelectionBackgroundSmall.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mailboxSelectionBackgroundSmall.tif; sourceTree = SOURCE_ROOT; };
+		6562A1DC099639B600DBE7DB /* mailboxSelectionBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mailboxSelectionBackground.tiff; sourceTree = SOURCE_ROOT; };
 		65B172F2099562A700B10322 /* SidebarView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarView.h; sourceTree = "<group>"; };
 		65B172F3099562A700B10322 /* SidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarView.m; sourceTree = "<group>"; };
 		65B1738D0995665500B10322 /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
@@ -153,6 +161,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6562A1D40996399100DBE7DB /* Images */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				65E7B0190994D02E00565251 /* MainMenu.nib */,
@@ -168,6 +177,25 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6562A1D40996399100DBE7DB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6562A1D50996399E00DBE7DB /* Sidebar */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		6562A1D50996399E00DBE7DB /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				6562A1D9099639B600DBE7DB /* mailboxSelectionBackgroundFocus.tiff */,
+				6562A1DA099639B600DBE7DB /* mailboxSelectionBackgroundFocusSmall.tif */,
+				6562A1DB099639B600DBE7DB /* mailboxSelectionBackgroundSmall.tif */,
+				6562A1DC099639B600DBE7DB /* mailboxSelectionBackground.tiff */,
+			);
+			name = Sidebar;
 			sourceTree = "<group>";
 		};
 		65B17321099564A800B10322 /* Controllers */ = {
@@ -250,6 +278,10 @@
 				65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */,
+				6562A1DD099639B600DBE7DB /* mailboxSelectionBackgroundFocus.tiff in Resources */,
+				6562A1DE099639B600DBE7DB /* mailboxSelectionBackgroundFocusSmall.tif in Resources */,
+				6562A1DF099639B600DBE7DB /* mailboxSelectionBackgroundSmall.tif in Resources */,
+				6562A1E0099639B600DBE7DB /* mailboxSelectionBackground.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
