@@ -1,6 +1,7 @@
 {
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = SidebarCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 
         {CLASS = SidebarHeaderCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = SidebarTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
         {

@@ -1,15 +1,18 @@
 #import "SidebarTableView.h"
+#import "SidebarCell.h"
 
 @implementation SidebarTableView
 
 - (void)awakeFromNib
 {
-	//id headerCell = [[SidebarHeaderCell alloc] init];
-	//[[sidebarHeaderControl setCell:headerCell];
-}
-
-- (NSRect)frameOfCellAtColumn:(int)columnIndex row:(int)rowIndex
-{
-	NSLog(@"frameOfCell column: %d row: %d", columnIndex, rowIndex);
+	id sidebarCell = [[SidebarCell alloc] init];
+	[[self tableColumnWithIdentifier:@"folder"] setDataCell:sidebarCell];
+	
+	// Needed?
+	[self reloadData];
+	
+	// Copied from an older project... more on this l8r...
+	[self registerForDraggedTypes:[NSArray arrayWithObjects:
+            NSColorPboardType, NSFilenamesPboardType, nil]];	
 }
 @end
