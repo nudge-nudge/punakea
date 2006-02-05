@@ -13,6 +13,8 @@
 		65B172F5099562A700B10322 /* SidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B172F3099562A700B10322 /* SidebarView.m */; };
 		65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B1738D0995665500B10322 /* SidebarDelegateCategory.h */; };
 		65B173900995665500B10322 /* SidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B1738E0995665500B10322 /* SidebarDelegateCategory.m */; };
+		65C341450996031700C3B5AC /* SidebarHeaderCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C341430996031700C3B5AC /* SidebarHeaderCell.h */; };
+		65C341460996031700C3B5AC /* SidebarHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C341440996031700C3B5AC /* SidebarHeaderCell.m */; };
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Controller.m */; };
@@ -49,6 +51,7 @@
 				65B172F4099562A700B10322 /* SidebarView.h in CopyFiles */,
 				65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */,
 				6535E5030995F80F0067528D /* SidebarTableView.h in CopyFiles */,
+				65C341450996031700C3B5AC /* SidebarHeaderCell.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +72,8 @@
 		65B172F3099562A700B10322 /* SidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarView.m; sourceTree = "<group>"; };
 		65B1738D0995665500B10322 /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
 		65B1738E0995665500B10322 /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
+		65C341430996031700C3B5AC /* SidebarHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarHeaderCell.h; sourceTree = "<group>"; };
+		65C341440996031700C3B5AC /* SidebarHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarHeaderCell.m; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B0690994D5AA00565251 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
@@ -182,6 +187,8 @@
 			children = (
 				65B1738D0995665500B10322 /* SidebarDelegateCategory.h */,
 				65B1738E0995665500B10322 /* SidebarDelegateCategory.m */,
+				65C341430996031700C3B5AC /* SidebarHeaderCell.h */,
+				65C341440996031700C3B5AC /* SidebarHeaderCell.m */,
 				6535E5010995F80F0067528D /* SidebarTableView.h */,
 				6535E5020995F80F0067528D /* SidebarTableView.m */,
 				65B172F2099562A700B10322 /* SidebarView.h */,
@@ -259,6 +266,7 @@
 				65B172F5099562A700B10322 /* SidebarView.m in Sources */,
 				65B173900995665500B10322 /* SidebarDelegateCategory.m in Sources */,
 				6535E5040995F80F0067528D /* SidebarTableView.m in Sources */,
+				65C341460996031700C3B5AC /* SidebarHeaderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
