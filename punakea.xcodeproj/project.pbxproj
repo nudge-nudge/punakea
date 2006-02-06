@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48C93615099742D800699265 /* Matador.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C93614099742D800699265 /* Matador.h */; };
+		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
+		48F6A9FC0996429100AA118D /* TaggerInterface.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48F6A9FA0996429100AA118D /* TaggerInterface.h */; };
+		48F6A9FD0996429100AA118D /* TaggerInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F6A9FB0996429100AA118D /* TaggerInterface.m */; };
 		6535E5030995F80F0067528D /* SidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6535E5010995F80F0067528D /* SidebarTableView.h */; };
 		6535E5040995F80F0067528D /* SidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535E5020995F80F0067528D /* SidebarTableView.m */; };
 		6562A20609963C5100DBE7DB /* sidebarSelectionBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20209963C5100DBE7DB /* sidebarSelectionBackground.tiff */; };
@@ -56,6 +60,9 @@
 				65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */,
 				6535E5030995F80F0067528D /* SidebarTableView.h in CopyFiles */,
 				65C341BC0996107300C3B5AC /* SidebarCell.h in CopyFiles */,
+				48F6A9FC0996429100AA118D /* TaggerInterface.h in CopyFiles */,
+				48C93615099742D800699265 /* Matador.h in CopyFiles */,
+				48C9362E099743F200699265 /* NSObject.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +77,10 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* punakea_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = punakea_Prefix.pch; sourceTree = "<group>"; };
+		48C93614099742D800699265 /* Matador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matador.h; sourceTree = "<group>"; };
+		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
+		48F6A9FA0996429100AA118D /* TaggerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerInterface.h; sourceTree = "<group>"; };
+		48F6A9FB0996429100AA118D /* TaggerInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerInterface.m; sourceTree = "<group>"; };
 		6535E5010995F80F0067528D /* SidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarTableView.h; sourceTree = "<group>"; };
 		6535E5020995F80F0067528D /* SidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarTableView.m; sourceTree = "<group>"; };
 		6562A20209963C5100DBE7DB /* sidebarSelectionBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sidebarSelectionBackground.tiff; path = Resources/sidebarSelectionBackground.tiff; sourceTree = SOURCE_ROOT; };
@@ -106,6 +117,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				48F6A9F40996423000AA118D /* Tagging */,
 				65B17321099564A800B10322 /* Controllers */,
 				65B17322099564C400B10322 /* Sidebar */,
 			);
@@ -177,6 +189,17 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		48F6A9F40996423000AA118D /* Tagging */ = {
+			isa = PBXGroup;
+			children = (
+				48C93614099742D800699265 /* Matador.h */,
+				48F6A9FA0996429100AA118D /* TaggerInterface.h */,
+				48F6A9FB0996429100AA118D /* TaggerInterface.m */,
+				48C9362D099743F200699265 /* NSObject.h */,
+			);
+			name = Tagging;
 			sourceTree = "<group>";
 		};
 		6562A1D40996399100DBE7DB /* Images */ = {
@@ -255,7 +278,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Punakea" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */;
 			buildSettings = {
 			};
 			buildStyles = (
@@ -300,6 +323,7 @@
 				65B173900995665500B10322 /* SidebarDelegateCategory.m in Sources */,
 				6535E5040995F80F0067528D /* SidebarTableView.m in Sources */,
 				65C341BD0996107300C3B5AC /* SidebarCell.m in Sources */,
+				48F6A9FD0996429100AA118D /* TaggerInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +431,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Punakea" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
