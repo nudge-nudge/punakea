@@ -1,5 +1,6 @@
 #import "Controller.h"
 #import "SubViewController.h"
+#import "TaggerInterface.h"
 
 @implementation Controller
 
@@ -10,6 +11,9 @@
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
 	[drawer toggle:self];
+	
+	//hoffart test code
+	ti = [TaggerInterface new];
 }
 
 - (void)setupToolbar
@@ -30,5 +34,10 @@
     [subViewController initWithNibName:nibName andOwner:self];
     newView = [subViewController view];
     return newView;
+}
+
+-(IBAction)hoffartTest:(id)sender {
+	NSLog(@"rennt");
+	[ti writeSpotlightComment];
 }
 @end

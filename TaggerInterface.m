@@ -11,6 +11,7 @@
 
 @implementation TaggerInterface
 -(void)writeSpotlightComment {
-	
+	NSLog(@"rennt weiter");
+	[[Matador sharedInstance] setAttributeForFileAtPath:@"/Users/darklight/Desktop/punakea_test" name:@"kMDItemFinderComment" value:@"hoffarttest"];
 }
 @end

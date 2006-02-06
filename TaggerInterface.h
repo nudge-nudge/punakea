@@ -13,4 +13,6 @@
 
 }
 
+-(void)writeSpotlightComment;
+
 @end

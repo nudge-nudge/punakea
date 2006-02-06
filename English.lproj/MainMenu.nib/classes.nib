@@ -1,6 +1,7 @@
 {
     IBClasses = (
         {
+            ACTIONS = {hoffartTest = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
             OUTLETS = {drawer = id; }; 
