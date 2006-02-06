@@ -4,7 +4,7 @@
 
 @interface Controller : NSWindowController
 {
-    IBOutlet NSDrawer *drawer;
-	NSView * sidebarNibView;
+    IBOutlet id drawer;
+	NSView *sidebarNibView;
 }
 @end

@@ -7,7 +7,7 @@
         {
             CLASS = SidebarView; 
             LANGUAGE = ObjC; 
-            OUTLETS = {owner = id; tableView = id; }; 
+            OUTLETS = {owner = id; tableView = NSTableView; }; 
             SUPERCLASS = NSView; 
         }, 
         {

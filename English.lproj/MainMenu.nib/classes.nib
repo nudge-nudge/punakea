@@ -3,7 +3,7 @@
         {
             CLASS = Controller; 
             LANGUAGE = ObjC; 
-            OUTLETS = {controller = id; drawer = NSDrawer; }; 
+            OUTLETS = {drawer = id; }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
