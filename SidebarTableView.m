@@ -16,6 +16,11 @@
             NSColorPboardType, NSFilenamesPboardType, nil]];	
 }
 
+- (BOOL)acceptsFirstResponder
+{
+	return YES;
+}
+
 - (id)_highlightColorForCell:(NSCell *)cell
 {
 	return nil;

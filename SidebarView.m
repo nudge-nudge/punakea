@@ -5,7 +5,7 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-		// Add initialization code here
+		[self setNextResponder:tableView];
 	}
 	return self;
 }
