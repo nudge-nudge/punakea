@@ -6,7 +6,7 @@
 {
 		/*NSString *cellPersonName = [NSString stringWithString:[dict objectForKey:@"Title"]];
 		NSString *cellPersonTitle = [NSString stringWithString:[dict objectForKey:@"Artist"]];*/
-		NSString *cellPersonTitle = cellPersonTitle = [NSString stringWithString:@"Smart Tag"];
+		NSString *cellPersonTitle = [NSString stringWithString:@"Smart Tag"];
 	
 		/*NSImage *img = [[NSImage alloc] initWithContentsOfFile:[dict objectForKey:@"Artwork"]];
 		[img setScalesWhenResized:YES];
