@@ -9,10 +9,6 @@
 #import "TaggerInterface.h"
 #import "Matador.h"
 
-//for CFArray
-#import <Carbon/Carbon.h>
-
-
 @implementation TaggerInterface
 -(void)writeSpotlightComment {
 	NSLog(@"rennt weiter");
