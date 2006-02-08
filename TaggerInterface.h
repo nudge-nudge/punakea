@@ -13,6 +13,14 @@
 
 }
 
+//write tags
+-(void)addTagToFile:(NSString*)tag filePath:(NSString*)path;
+-(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+
+//read tags - needed as public?
+-(NSArray*)getTagsForFile:(NSString*)path;
+
+//deprecated
 -(void)writeSpotlightComment;
 
 @end
