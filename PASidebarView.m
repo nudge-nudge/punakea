@@ -1,6 +1,6 @@
-#import "SidebarView.h"
+#import "PASidebarView.h"
 
-@implementation SidebarView
+@implementation PASidebarView
 
 - (id)initWithFrame:(NSRect)frameRect
 {

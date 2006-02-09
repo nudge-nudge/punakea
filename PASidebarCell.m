@@ -1,6 +1,6 @@
-#import "SidebarCell.h"
+#import "PASidebarCell.h"
 
-@implementation SidebarCell
+@implementation PASidebarCell
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {

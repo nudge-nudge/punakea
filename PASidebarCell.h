@@ -1,8 +1,8 @@
-/* SidebarCell */
+/* PASidebarCell */
 
 #import <Cocoa/Cocoa.h>
 
-@interface SidebarCell : NSCell
+@interface PASidebarCell : NSCell
 {
 }
 @end

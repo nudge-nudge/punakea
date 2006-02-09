@@ -17,13 +17,13 @@
 		6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */; };
 		6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20409963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff */; };
 		6562A20909963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20509963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff */; };
-		65851FFC099780B9009C3CA7 /* PAToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* PAToolbarDelegateCategory.h */; };
-		65851FFD099780B9009C3CA7 /* PAToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* PAToolbarDelegateCategory.m */; };
+		657D7979099B7B7500101A0E /* SidebarDelegateCategory.m in Resources */ = {isa = PBXBuildFile; fileRef = 65B1738E0995665500B10322 /* SidebarDelegateCategory.m */; };
+		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
+		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
 		65B172F4099562A700B10322 /* PASidebarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B172F2099562A700B10322 /* PASidebarView.h */; };
 		65B172F5099562A700B10322 /* PASidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B172F3099562A700B10322 /* PASidebarView.m */; };
-		65B1738F0995665500B10322 /* PASidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B1738D0995665500B10322 /* PASidebarDelegateCategory.h */; };
-		65B173900995665500B10322 /* PASidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B1738E0995665500B10322 /* PASidebarDelegateCategory.m */; };
+		65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B1738D0995665500B10322 /* SidebarDelegateCategory.h */; };
 		65C341BC0996107300C3B5AC /* PASidebarCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C341BA0996107300C3B5AC /* PASidebarCell.h */; };
 		65C341BD0996107300C3B5AC /* PASidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C341BB0996107300C3B5AC /* PASidebarCell.m */; };
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
@@ -60,12 +60,12 @@
 			files = (
 				65E7B43E0994E3D100565251 /* SubViewController.h in CopyFiles */,
 				65B172F4099562A700B10322 /* PASidebarView.h in CopyFiles */,
-				65B1738F0995665500B10322 /* PASidebarDelegateCategory.h in CopyFiles */,
+				65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */,
 				6535E5030995F80F0067528D /* PASidebarTableView.h in CopyFiles */,
 				65C341BC0996107300C3B5AC /* PASidebarCell.h in CopyFiles */,
 				48C93615099742D800699265 /* Matador.h in CopyFiles */,
 				48C9362E099743F200699265 /* NSObject.h in CopyFiles */,
-				65851FFC099780B9009C3CA7 /* PAToolbarDelegateCategory.h in CopyFiles */,
+				65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */,
 				48AA6BF7099B78E300D8F70B /* PATaggerInterface.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,13 +91,13 @@
 		6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sidebarSelectionBackgroundFocus.tiff; path = Resources/sidebarSelectionBackgroundFocus.tiff; sourceTree = SOURCE_ROOT; };
 		6562A20409963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = sidebarSelectionBackgroundFocusSmall.tiff; sourceTree = "<group>"; };
 		6562A20509963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = sidebarSelectionBackgroundSmall.tiff; sourceTree = "<group>"; };
-		65851FFA099780B9009C3CA7 /* PAToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAToolbarDelegateCategory.h; sourceTree = "<group>"; };
-		65851FFB099780B9009C3CA7 /* PAToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAToolbarDelegateCategory.m; sourceTree = "<group>"; };
+		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
+		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
 		65B172F2099562A700B10322 /* PASidebarView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarView.h; sourceTree = "<group>"; };
 		65B172F3099562A700B10322 /* PASidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarView.m; sourceTree = "<group>"; };
-		65B1738D0995665500B10322 /* PASidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarDelegateCategory.h; sourceTree = "<group>"; };
-		65B1738E0995665500B10322 /* PASidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarDelegateCategory.m; sourceTree = "<group>"; };
+		65B1738D0995665500B10322 /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
+		65B1738E0995665500B10322 /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
 		65C341BA0996107300C3B5AC /* PASidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarCell.h; sourceTree = "<group>"; };
 		65C341BB0996107300C3B5AC /* PASidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarCell.m; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
@@ -236,8 +236,8 @@
 		65851FFF099780E0009C3CA7 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				65851FFA099780B9009C3CA7 /* PAToolbarDelegateCategory.h */,
-				65851FFB099780B9009C3CA7 /* PAToolbarDelegateCategory.m */,
+				65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */,
+				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -266,8 +266,8 @@
 			children = (
 				65C341BA0996107300C3B5AC /* PASidebarCell.h */,
 				65C341BB0996107300C3B5AC /* PASidebarCell.m */,
-				65B1738D0995665500B10322 /* PASidebarDelegateCategory.h */,
-				65B1738E0995665500B10322 /* PASidebarDelegateCategory.m */,
+				65B1738D0995665500B10322 /* SidebarDelegateCategory.h */,
+				65B1738E0995665500B10322 /* SidebarDelegateCategory.m */,
 				6535E5010995F80F0067528D /* PASidebarTableView.h */,
 				6535E5020995F80F0067528D /* PASidebarTableView.m */,
 				65B172F2099562A700B10322 /* PASidebarView.h */,
@@ -333,6 +333,7 @@
 				6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */,
 				6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */,
 				6562A20909963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff in Resources */,
+				657D7979099B7B7500101A0E /* SidebarDelegateCategory.m in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,10 +348,9 @@
 				65E7B06B0994D5AA00565251 /* Controller.m in Sources */,
 				65E7B43F0994E3D100565251 /* SubViewController.m in Sources */,
 				65B172F5099562A700B10322 /* PASidebarView.m in Sources */,
-				65B173900995665500B10322 /* PASidebarDelegateCategory.m in Sources */,
 				6535E5040995F80F0067528D /* PASidebarTableView.m in Sources */,
 				65C341BD0996107300C3B5AC /* PASidebarCell.m in Sources */,
-				65851FFD099780B9009C3CA7 /* PAToolbarDelegateCategory.m in Sources */,
+				65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */,
 				48AA6BF8099B78E300D8F70B /* PATaggerInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

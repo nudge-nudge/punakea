@@ -1,7 +1,7 @@
-#import "SidebarTableView.h"
-#import "SidebarCell.h"
+#import "PASidebarTableView.h"
+#import "PASidebarCell.h"
 
-@implementation SidebarTableView
+@implementation PASidebarTableView
 
 - (void)awakeFromNib
 {

@@ -1,8 +1,8 @@
-/* SidebarTableView */
+/* PASidebarTableView */
 
 #import <Cocoa/Cocoa.h>
 
-@interface SidebarTableView : NSTableView
+@interface PASidebarTableView : NSTableView
 {
 }
 @end

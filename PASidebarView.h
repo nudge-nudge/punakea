@@ -1,8 +1,8 @@
-/* SidebarView */
+/* PASidebarView */
 
 #import <Cocoa/Cocoa.h>
 
-@interface SidebarView : NSView
+@interface PASidebarView : NSView
 {
     IBOutlet id owner;
     IBOutlet id tableView;

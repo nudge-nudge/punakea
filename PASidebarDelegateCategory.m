@@ -1,5 +1,5 @@
 //
-//  SidebarDelegateCategory.m
+//  PASidebarDelegateCategory.m
 //  punakea
 //
 //  Created by Daniel on 04.02.06.
