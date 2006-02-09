@@ -6,8 +6,8 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 	
-#import "SidebarDelegateCategory.h"
 #import "SubViewController.h"
+#import "SidebarDelegateCategory.h"
 	
 	
 @implementation SubViewController (SidebarDelegateCategory)
