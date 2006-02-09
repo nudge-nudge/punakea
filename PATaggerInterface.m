@@ -51,7 +51,7 @@
 	[[Matador sharedInstance] setAttributeForFileAtPath:path name:@"kMDItemKeywords" value:tags];
 }
 
-//read tags - TODO there could be a lot of mem-leaks in here ... 
+//read tags - TODO there could be a lot of mem-leaks in here ... check if file exists!!
 -(NSArray*)getTagsForFile:(NSString*)path {
 	//carbon api ... can be treated as cocoa objects
 	MDItemRef *item = MDItemCreate(NULL,path);
