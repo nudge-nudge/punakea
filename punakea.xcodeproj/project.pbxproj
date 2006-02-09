@@ -11,8 +11,8 @@
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		48F6A9FC0996429100AA118D /* TaggerInterface.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48F6A9FA0996429100AA118D /* TaggerInterface.h */; };
 		48F6A9FD0996429100AA118D /* TaggerInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F6A9FB0996429100AA118D /* TaggerInterface.m */; };
-		6535E5030995F80F0067528D /* SidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6535E5010995F80F0067528D /* SidebarTableView.h */; };
-		6535E5040995F80F0067528D /* SidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535E5020995F80F0067528D /* SidebarTableView.m */; };
+		6535E5030995F80F0067528D /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6535E5010995F80F0067528D /* PASidebarTableView.h */; };
+		6535E5040995F80F0067528D /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535E5020995F80F0067528D /* PASidebarTableView.m */; };
 		6562A20609963C5100DBE7DB /* sidebarSelectionBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20209963C5100DBE7DB /* sidebarSelectionBackground.tiff */; };
 		6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */; };
 		6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20409963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff */; };
@@ -20,14 +20,14 @@
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
-		65AAA75B099B738D00F14C52 /* FileOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65AAA759099B738D00F14C52 /* FileOutlineView.h */; };
-		65AAA75C099B738D00F14C52 /* FileOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AAA75A099B738D00F14C52 /* FileOutlineView.m */; };
-		65B172F4099562A700B10322 /* SidebarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B172F2099562A700B10322 /* SidebarView.h */; };
-		65B172F5099562A700B10322 /* SidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B172F3099562A700B10322 /* SidebarView.m */; };
-		65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B1738D0995665500B10322 /* SidebarDelegateCategory.h */; };
-		65B173900995665500B10322 /* SidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B1738E0995665500B10322 /* SidebarDelegateCategory.m */; };
-		65C341BC0996107300C3B5AC /* SidebarCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C341BA0996107300C3B5AC /* SidebarCell.h */; };
-		65C341BD0996107300C3B5AC /* SidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C341BB0996107300C3B5AC /* SidebarCell.m */; };
+		65AAA75B099B738D00F14C52 /* PAFileOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65AAA759099B738D00F14C52 /* PAFileOutlineView.h */; };
+		65AAA75C099B738D00F14C52 /* PAFileOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AAA75A099B738D00F14C52 /* PAFileOutlineView.m */; };
+		65B172F4099562A700B10322 /* PASidebarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B172F2099562A700B10322 /* PASidebarView.h */; };
+		65B172F5099562A700B10322 /* PASidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B172F3099562A700B10322 /* PASidebarView.m */; };
+		65B1738F0995665500B10322 /* PASidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B1738D0995665500B10322 /* PASidebarDelegateCategory.h */; };
+		65B173900995665500B10322 /* PASidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B1738E0995665500B10322 /* PASidebarDelegateCategory.m */; };
+		65C341BC0996107300C3B5AC /* PASidebarCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C341BA0996107300C3B5AC /* PASidebarCell.h */; };
+		65C341BD0996107300C3B5AC /* PASidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C341BB0996107300C3B5AC /* PASidebarCell.m */; };
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Controller.m */; };
@@ -61,15 +61,15 @@
 			dstSubfolderSpec = 10;
 			files = (
 				65E7B43E0994E3D100565251 /* SubViewController.h in CopyFiles */,
-				65B172F4099562A700B10322 /* SidebarView.h in CopyFiles */,
-				65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */,
-				6535E5030995F80F0067528D /* SidebarTableView.h in CopyFiles */,
-				65C341BC0996107300C3B5AC /* SidebarCell.h in CopyFiles */,
+				65B172F4099562A700B10322 /* PASidebarView.h in CopyFiles */,
+				65B1738F0995665500B10322 /* PASidebarDelegateCategory.h in CopyFiles */,
+				6535E5030995F80F0067528D /* PASidebarTableView.h in CopyFiles */,
+				65C341BC0996107300C3B5AC /* PASidebarCell.h in CopyFiles */,
 				48F6A9FC0996429100AA118D /* TaggerInterface.h in CopyFiles */,
 				48C93615099742D800699265 /* Matador.h in CopyFiles */,
 				48C9362E099743F200699265 /* NSObject.h in CopyFiles */,
 				65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */,
-				65AAA75B099B738D00F14C52 /* FileOutlineView.h in CopyFiles */,
+				65AAA75B099B738D00F14C52 /* PAFileOutlineView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,8 +88,8 @@
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		48F6A9FA0996429100AA118D /* TaggerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerInterface.h; sourceTree = "<group>"; };
 		48F6A9FB0996429100AA118D /* TaggerInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerInterface.m; sourceTree = "<group>"; };
-		6535E5010995F80F0067528D /* SidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarTableView.h; sourceTree = "<group>"; };
-		6535E5020995F80F0067528D /* SidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarTableView.m; sourceTree = "<group>"; };
+		6535E5010995F80F0067528D /* PASidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PASidebarTableView.h; sourceTree = "<group>"; };
+		6535E5020995F80F0067528D /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PASidebarTableView.m; sourceTree = "<group>"; };
 		6562A20209963C5100DBE7DB /* sidebarSelectionBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sidebarSelectionBackground.tiff; path = Resources/sidebarSelectionBackground.tiff; sourceTree = SOURCE_ROOT; };
 		6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sidebarSelectionBackgroundFocus.tiff; path = Resources/sidebarSelectionBackgroundFocus.tiff; sourceTree = SOURCE_ROOT; };
 		6562A20409963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = sidebarSelectionBackgroundFocusSmall.tiff; sourceTree = "<group>"; };
@@ -97,14 +97,14 @@
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
-		65AAA759099B738D00F14C52 /* FileOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FileOutlineView.h; sourceTree = "<group>"; };
-		65AAA75A099B738D00F14C52 /* FileOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FileOutlineView.m; sourceTree = "<group>"; };
-		65B172F2099562A700B10322 /* SidebarView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarView.h; sourceTree = "<group>"; };
-		65B172F3099562A700B10322 /* SidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarView.m; sourceTree = "<group>"; };
-		65B1738D0995665500B10322 /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
-		65B1738E0995665500B10322 /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
-		65C341BA0996107300C3B5AC /* SidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarCell.h; sourceTree = "<group>"; };
-		65C341BB0996107300C3B5AC /* SidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarCell.m; sourceTree = "<group>"; };
+		65AAA759099B738D00F14C52 /* PAFileOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PAFileOutlineView.h; sourceTree = "<group>"; };
+		65AAA75A099B738D00F14C52 /* PAFileOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PAFileOutlineView.m; sourceTree = "<group>"; };
+		65B172F2099562A700B10322 /* PASidebarView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PASidebarView.h; sourceTree = "<group>"; };
+		65B172F3099562A700B10322 /* PASidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PASidebarView.m; sourceTree = "<group>"; };
+		65B1738D0995665500B10322 /* PASidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PASidebarDelegateCategory.h; sourceTree = "<group>"; };
+		65B1738E0995665500B10322 /* PASidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PASidebarDelegateCategory.m; sourceTree = "<group>"; };
+		65C341BA0996107300C3B5AC /* PASidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PASidebarCell.h; sourceTree = "<group>"; };
+		65C341BB0996107300C3B5AC /* PASidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PASidebarCell.m; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B0690994D5AA00565251 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
@@ -250,8 +250,8 @@
 		65AAA754099B724500F14C52 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				65AAA759099B738D00F14C52 /* FileOutlineView.h */,
-				65AAA75A099B738D00F14C52 /* FileOutlineView.m */,
+				65AAA759099B738D00F14C52 /* PAFileOutlineView.h */,
+				65AAA75A099B738D00F14C52 /* PAFileOutlineView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -271,14 +271,14 @@
 		65B17322099564C400B10322 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
-				65C341BA0996107300C3B5AC /* SidebarCell.h */,
-				65C341BB0996107300C3B5AC /* SidebarCell.m */,
-				65B1738D0995665500B10322 /* SidebarDelegateCategory.h */,
-				65B1738E0995665500B10322 /* SidebarDelegateCategory.m */,
-				6535E5010995F80F0067528D /* SidebarTableView.h */,
-				6535E5020995F80F0067528D /* SidebarTableView.m */,
-				65B172F2099562A700B10322 /* SidebarView.h */,
-				65B172F3099562A700B10322 /* SidebarView.m */,
+				65C341BA0996107300C3B5AC /* PASidebarCell.h */,
+				65C341BB0996107300C3B5AC /* PASidebarCell.m */,
+				65B1738D0995665500B10322 /* PASidebarDelegateCategory.h */,
+				65B1738E0995665500B10322 /* PASidebarDelegateCategory.m */,
+				6535E5010995F80F0067528D /* PASidebarTableView.h */,
+				6535E5020995F80F0067528D /* PASidebarTableView.m */,
+				65B172F2099562A700B10322 /* PASidebarView.h */,
+				65B172F3099562A700B10322 /* PASidebarView.m */,
 			);
 			name = Sidebar;
 			sourceTree = "<group>";
@@ -353,13 +353,13 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				65E7B06B0994D5AA00565251 /* Controller.m in Sources */,
 				65E7B43F0994E3D100565251 /* SubViewController.m in Sources */,
-				65B172F5099562A700B10322 /* SidebarView.m in Sources */,
-				65B173900995665500B10322 /* SidebarDelegateCategory.m in Sources */,
-				6535E5040995F80F0067528D /* SidebarTableView.m in Sources */,
-				65C341BD0996107300C3B5AC /* SidebarCell.m in Sources */,
+				65B172F5099562A700B10322 /* PASidebarView.m in Sources */,
+				65B173900995665500B10322 /* PASidebarDelegateCategory.m in Sources */,
+				6535E5040995F80F0067528D /* PASidebarTableView.m in Sources */,
+				65C341BD0996107300C3B5AC /* PASidebarCell.m in Sources */,
 				48F6A9FD0996429100AA118D /* TaggerInterface.m in Sources */,
 				65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */,
-				65AAA75C099B738D00F14C52 /* FileOutlineView.m in Sources */,
+				65AAA75C099B738D00F14C52 /* PAFileOutlineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
