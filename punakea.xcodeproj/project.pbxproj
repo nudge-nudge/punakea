@@ -17,6 +17,7 @@
 		6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */; };
 		6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20409963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff */; };
 		6562A20909963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20509963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff */; };
+		657D79CF099B7C2900101A0E /* SidebarDelegateCategory.m in Resources */ = {isa = PBXBuildFile; fileRef = 657D79CE099B7C2900101A0E /* SidebarDelegateCategory.m */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
@@ -90,6 +91,7 @@
 		6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sidebarSelectionBackgroundFocus.tiff; path = Resources/sidebarSelectionBackgroundFocus.tiff; sourceTree = SOURCE_ROOT; };
 		6562A20409963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = sidebarSelectionBackgroundFocusSmall.tiff; sourceTree = "<group>"; };
 		6562A20509963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = sidebarSelectionBackgroundSmall.tiff; sourceTree = "<group>"; };
+		657D79CE099B7C2900101A0E /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
@@ -265,6 +267,7 @@
 				65C341BA0996107300C3B5AC /* PASidebarCell.h */,
 				65C341BB0996107300C3B5AC /* PASidebarCell.m */,
 				65B1738D0995665500B10322 /* SidebarDelegateCategory.h */,
+				657D79CE099B7C2900101A0E /* SidebarDelegateCategory.m */,
 				6535E5010995F80F0067528D /* PASidebarTableView.h */,
 				6535E5020995F80F0067528D /* PASidebarTableView.m */,
 				65B172F2099562A700B10322 /* PASidebarView.h */,
@@ -330,6 +333,7 @@
 				6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */,
 				6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */,
 				6562A20909963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff in Resources */,
+				657D79CF099B7C2900101A0E /* SidebarDelegateCategory.m in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
