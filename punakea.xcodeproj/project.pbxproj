@@ -29,8 +29,8 @@
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Controller.m */; };
-		65E7B43E0994E3D100565251 /* PASubViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E7B43C0994E3D000565251 /* PASubViewController.h */; };
-		65E7B43F0994E3D100565251 /* PASubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B43D0994E3D000565251 /* PASubViewController.m */; };
+		65E7B43E0994E3D100565251 /* SubViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E7B43C0994E3D000565251 /* SubViewController.h */; };
+		65E7B43F0994E3D100565251 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B43D0994E3D000565251 /* SubViewController.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -58,7 +58,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				65E7B43E0994E3D100565251 /* PASubViewController.h in CopyFiles */,
+				65E7B43E0994E3D100565251 /* SubViewController.h in CopyFiles */,
 				65B172F4099562A700B10322 /* PASidebarView.h in CopyFiles */,
 				65B1738F0995665500B10322 /* PASidebarDelegateCategory.h in CopyFiles */,
 				6535E5030995F80F0067528D /* PASidebarTableView.h in CopyFiles */,
@@ -103,8 +103,8 @@
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B0690994D5AA00565251 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
-		65E7B43C0994E3D000565251 /* PASubViewController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASubViewController.h; sourceTree = "<group>"; };
-		65E7B43D0994E3D000565251 /* PASubViewController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASubViewController.m; sourceTree = "<group>"; };
+		65E7B43C0994E3D000565251 /* SubViewController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = SubViewController.h; sourceTree = "<group>"; };
+		65E7B43D0994E3D000565251 /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = SubViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Punakea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Punakea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -255,8 +255,8 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				65E7B0690994D5AA00565251 /* Controller.h */,
 				65E7B06A0994D5AA00565251 /* Controller.m */,
-				65E7B43C0994E3D000565251 /* PASubViewController.h */,
-				65E7B43D0994E3D000565251 /* PASubViewController.m */,
+				65E7B43C0994E3D000565251 /* SubViewController.h */,
+				65E7B43D0994E3D000565251 /* SubViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -345,7 +345,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				65E7B06B0994D5AA00565251 /* Controller.m in Sources */,
-				65E7B43F0994E3D100565251 /* PASubViewController.m in Sources */,
+				65E7B43F0994E3D100565251 /* SubViewController.m in Sources */,
 				65B172F5099562A700B10322 /* PASidebarView.m in Sources */,
 				65B173900995665500B10322 /* PASidebarDelegateCategory.m in Sources */,
 				6535E5040995F80F0067528D /* PASidebarTableView.m in Sources */,
