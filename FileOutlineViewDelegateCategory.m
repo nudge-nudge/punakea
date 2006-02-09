@@ -30,6 +30,7 @@
 	for (i = 0; i < count; i++) {
 		MDItemRef item = MDQueryGetResultAtIndex(query, i);
 		CFTypeRef typeref = MDItemCopyAttribute(item, CFSTR("kMDItemPath"));
+		NSLog((CFStringRef) typeref);
 	}
 }
 @end
