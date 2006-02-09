@@ -37,7 +37,6 @@
 }
 
 -(IBAction)hoffartTest:(id)sender {
-	NSLog(@"rennt");
-	[ti writeSpotlightComment];
+	[ti addTagToFile:@"noch schoenerer tag" filePath:@"/Users/darklight/Desktop/punakea_test"];
 }
 @end

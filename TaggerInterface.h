@@ -10,7 +10,7 @@
 
 
 @interface TaggerInterface : NSObject {
-
+	NSAutoreleasePool *pool;
 }
 
 //write tags
@@ -19,8 +19,5 @@
 
 //read tags - needed as public?
 -(NSArray*)getTagsForFile:(NSString*)path;
-
-//deprecated
--(void)writeSpotlightComment;
 
 @end
