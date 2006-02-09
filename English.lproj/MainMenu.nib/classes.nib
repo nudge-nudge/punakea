@@ -7,6 +7,7 @@
             OUTLETS = {drawer = id; }; 
             SUPERCLASS = NSWindowController; 
         }, 
+        {CLASS = FileOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
     ); 
     IBVersion = 1; 

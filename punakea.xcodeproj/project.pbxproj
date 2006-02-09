@@ -20,6 +20,8 @@
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
+		65AAA75B099B738D00F14C52 /* FileOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65AAA759099B738D00F14C52 /* FileOutlineView.h */; };
+		65AAA75C099B738D00F14C52 /* FileOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AAA75A099B738D00F14C52 /* FileOutlineView.m */; };
 		65B172F4099562A700B10322 /* SidebarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B172F2099562A700B10322 /* SidebarView.h */; };
 		65B172F5099562A700B10322 /* SidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B172F3099562A700B10322 /* SidebarView.m */; };
 		65B1738F0995665500B10322 /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B1738D0995665500B10322 /* SidebarDelegateCategory.h */; };
@@ -67,6 +69,7 @@
 				48C93615099742D800699265 /* Matador.h in CopyFiles */,
 				48C9362E099743F200699265 /* NSObject.h in CopyFiles */,
 				65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */,
+				65AAA75B099B738D00F14C52 /* FileOutlineView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +97,8 @@
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
+		65AAA759099B738D00F14C52 /* FileOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FileOutlineView.h; sourceTree = "<group>"; };
+		65AAA75A099B738D00F14C52 /* FileOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FileOutlineView.m; sourceTree = "<group>"; };
 		65B172F2099562A700B10322 /* SidebarView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarView.h; sourceTree = "<group>"; };
 		65B172F3099562A700B10322 /* SidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SidebarView.m; sourceTree = "<group>"; };
 		65B1738D0995665500B10322 /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
@@ -128,6 +133,7 @@
 				65B17321099564A800B10322 /* Controllers */,
 				65851FFF099780E0009C3CA7 /* Main */,
 				48F6A9F40996423000AA118D /* Tagging */,
+				65AAA754099B724500F14C52 /* Views */,
 				65B17322099564C400B10322 /* Sidebar */,
 			);
 			name = Classes;
@@ -241,6 +247,15 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
+		65AAA754099B724500F14C52 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				65AAA759099B738D00F14C52 /* FileOutlineView.h */,
+				65AAA75A099B738D00F14C52 /* FileOutlineView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		65B17321099564A800B10322 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,7 +312,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Punakea" */;
 			buildSettings = {
 			};
 			buildStyles = (
@@ -344,6 +359,7 @@
 				65C341BD0996107300C3B5AC /* SidebarCell.m in Sources */,
 				48F6A9FD0996429100AA118D /* TaggerInterface.m in Sources */,
 				65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */,
+				65AAA75C099B738D00F14C52 /* FileOutlineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,7 +467,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Punakea" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
