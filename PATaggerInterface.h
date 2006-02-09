@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface TaggerInterface : NSObject {
+@interface PATaggerInterface : NSObject {
 
 }
 

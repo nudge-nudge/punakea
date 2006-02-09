@@ -1,13 +1,13 @@
 /* Controller */
 
 #import <Cocoa/Cocoa.h>
-#import "TaggerInterface.h"
+#import "PATaggerInterface.h"
 
 @interface Controller : NSWindowController
 {
     IBOutlet id drawer;
 	NSView *sidebarNibView;
-	TaggerInterface *ti;
+	PATaggerInterface *ti;
 }
 
 -(IBAction)hoffartTest:(id)sender;

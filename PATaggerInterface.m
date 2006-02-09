@@ -6,11 +6,11 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "TaggerInterface.h"
+#import "PATaggerInterface.h"
 #import "Matador.h"
 #import <CoreServices/CoreServices.h>
 
-@implementation TaggerInterface
+@implementation PATaggerInterface
 
 -(id)init {
 	return self;

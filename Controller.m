@@ -1,6 +1,6 @@
 #import "Controller.h"
 #import "SubViewController.h"
-#import "TaggerInterface.h"
+#import "PATaggerInterface.h"
 
 @implementation Controller
 
@@ -13,7 +13,7 @@
 	[drawer toggle:self];
 	
 	//hoffart test code
-	ti = [TaggerInterface new];
+	ti = [PATaggerInterface new];
 }
 
 - (void)setupToolbar
