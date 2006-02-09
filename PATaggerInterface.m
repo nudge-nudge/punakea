@@ -13,6 +13,7 @@
 @implementation PATaggerInterface
 
 -(id)init {
+	self = [super init];
 	return self;
 }
 
@@ -55,10 +56,10 @@
 	//carbon api ... can be treated as cocoa objects
 	MDItemRef *item = MDItemCreate(NULL,path);
 	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
-	return keywords;
+	return [keywords autorelease];
 }
 
--(void)dealloc{
+-(void)dealloc {
 	[super dealloc];
 }
 
