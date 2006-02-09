@@ -15,17 +15,21 @@
 - (IBAction)danielTest:(id)sender {
 	int i;
 	
+	NSMutableString *queryString = [NSMutableString stringWithString:@"kMDItemTextContent == '"];
+	[queryString appendString:[textfieldDaniel stringValue]];
+	[queryString appendString:@"'"];
+	
 	MDQueryRef query;
-		query = MDQueryCreate(kCFAllocatorDefault,
-							  CFSTR("kMDItemTextContent == '*punakea*'"),
-							  NULL,
-							  NULL);
+	query = MDQueryCreate(kCFAllocatorDefault,
+						  (CFStringRef*) queryString,
+						  NULL,
+						  NULL);
 	MDQueryExecute(query, kMDQuerySynchronous);
 	
 	CFIndex count = MDQueryGetResultCount(query);
 	for (i = 0; i < count; i++) {
 		MDItemRef item = MDQueryGetResultAtIndex(query, i);
-		NSLog(@"found file");
+		CFTypeRef typeref = MDItemCopyAttribute(item, CFSTR("kMDItemPath"));
 	}
 }
 @end
