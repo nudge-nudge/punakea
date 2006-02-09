@@ -10,12 +10,13 @@
 
 
 @interface TaggerInterface : NSObject {
-	NSAutoreleasePool *pool;
+
 }
 
 //write tags
 -(void)addTagToFile:(NSString*)tag filePath:(NSString*)path;
 -(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+-(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 
 //read tags - needed as public?
 -(NSArray*)getTagsForFile:(NSString*)path;

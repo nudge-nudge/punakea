@@ -13,7 +13,7 @@
 @implementation TaggerInterface
 
 -(id)init {
-	//pool = [NSAutoreleasePool new];
+	return self;
 }
 
 //write tags
@@ -21,30 +21,44 @@
 	[self addTagsToFile:[NSArray arrayWithObject:tag] filePath:path];
 }
 
-
+//adds the specified tags, doesn't overwrite
 -(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path {
-	//existing tags must be kept
+	NSMutableArray *resultTags = [NSMutableArray arrayWithArray:tags];
+	
+	//existing tags must be kept - only if there are any
 	if ([[self getTagsForFile:path] count] > 0) {
-		NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:tags];
-		[tmpArray addObjectsFromArray:[self getTagsForFile:path]];
-		[tags release];
-		tags = tmpArray;
+		NSArray *currentTags = [self getTagsForFile:path];
+
+		/* check if the file had tags which are not in the
+		   tags to be added - need to keep them */
+		NSEnumerator *e = [currentTags objectEnumerator];
+		id tag;
+		
+		while ( (tag = [e nextObject]) ) {
+			if (![resultTags containsObject:tag]) {
+				[resultTags addObject:tag];
+			}
+		}
 	}
-	//write the tags to kMDItemKeywords
+	
+	//write the tags to kMDItemKeywords - new and existing ones
+	[self writeTagsToFile:resultTags filePath:path];
+}
+
+//sets the tags, overwrites current ones
+-(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path {
 	[[Matador sharedInstance] setAttributeForFileAtPath:path name:@"kMDItemKeywords" value:tags];
 }
 
-//read tags - TODO there must be a lot of mem-leaks in here ... 
+//read tags - TODO there could be a lot of mem-leaks in here ... 
 -(NSArray*)getTagsForFile:(NSString*)path {
 	//carbon api ... can be treated as cocoa objects
 	MDItemRef *item = MDItemCreate(NULL,path);
 	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
-	
 	return keywords;
 }
 
 -(void)dealloc{
-	//[pool release];
 	[super dealloc];
 }
 
