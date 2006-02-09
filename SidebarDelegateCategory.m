@@ -7,6 +7,7 @@
 //
 	
 #import "SidebarDelegateCategory.h"
+#import "SubViewController.h"
 	
 	
 @implementation SubViewController (SidebarDelegateCategory)
