@@ -13,6 +13,8 @@
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		651CF1A0099B9F98007E48DD /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */; };
 		651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */; };
+		651CF1D1099BA213007E48DD /* FileOutlineViewDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */; };
+		651CF1D2099BA213007E48DD /* FileOutlineViewDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CF1D0099BA213007E48DD /* FileOutlineViewDelegateCategory.m */; };
 		6535E5030995F80F0067528D /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6535E5010995F80F0067528D /* PASidebarTableView.h */; };
 		6535E5040995F80F0067528D /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535E5020995F80F0067528D /* PASidebarTableView.m */; };
 		6562A20609963C5100DBE7DB /* sidebarSelectionBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20209963C5100DBE7DB /* sidebarSelectionBackground.tiff */; };
@@ -70,6 +72,7 @@
 				48AA6BF7099B78E300D8F70B /* PATaggerInterface.h in CopyFiles */,
 				657D79DB099B7D5700101A0E /* PAFileOutlineView.h in CopyFiles */,
 				651CF1A0099B9F98007E48DD /* SidebarDelegateCategory.h in CopyFiles */,
+				651CF1D1099BA213007E48DD /* FileOutlineViewDelegateCategory.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +93,8 @@
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
 		651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
+		651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOutlineViewDelegateCategory.h; sourceTree = "<group>"; };
+		651CF1D0099BA213007E48DD /* FileOutlineViewDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileOutlineViewDelegateCategory.m; sourceTree = "<group>"; };
 		6535E5010995F80F0067528D /* PASidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarTableView.h; sourceTree = "<group>"; };
 		6535E5020995F80F0067528D /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableView.m; sourceTree = "<group>"; };
 		6562A20209963C5100DBE7DB /* sidebarSelectionBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sidebarSelectionBackground.tiff; path = Resources/sidebarSelectionBackground.tiff; sourceTree = SOURCE_ROOT; };
@@ -252,6 +257,8 @@
 			children = (
 				657D79D9099B7D5700101A0E /* PAFileOutlineView.h */,
 				657D79DA099B7D5700101A0E /* PAFileOutlineView.m */,
+				651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */,
+				651CF1D0099BA213007E48DD /* FileOutlineViewDelegateCategory.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -360,6 +367,7 @@
 				48AA6BF8099B78E300D8F70B /* PATaggerInterface.m in Sources */,
 				657D79DC099B7D5700101A0E /* PAFileOutlineView.m in Sources */,
 				651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */,
+				651CF1D2099BA213007E48DD /* FileOutlineViewDelegateCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
