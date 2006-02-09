@@ -37,6 +37,6 @@
 }
 
 -(IBAction)hoffartTest:(id)sender {
-	[ti addTagToFile:@"noch schoenerer tag" filePath:@"/Users/darklight/Desktop/punakea_test"];
+	[ti addTagToFile:@"noch schoenerer tag" filePath:@"/Users/daniel/Desktop/punakea_test"];
 }
 @end

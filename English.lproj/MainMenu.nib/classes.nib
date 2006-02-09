@@ -1,14 +1,14 @@
 {
     IBClasses = (
         {
-            ACTIONS = {hoffartTest = id; }; 
+            ACTIONS = {danielTest = id; hoffartTest = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
-            OUTLETS = {drawer = id; }; 
+            OUTLETS = {drawer = id; textfieldDaniel = NSTextField; textfieldJohannes = NSTextField; }; 
             SUPERCLASS = NSWindowController; 
         }, 
-        {CLASS = FileOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PAFileOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }
     ); 
     IBVersion = 1; 
 }

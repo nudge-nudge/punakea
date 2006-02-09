@@ -1,13 +1,12 @@
 {
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = SidebarCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 
-        {CLASS = SidebarHeaderCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
-        {CLASS = SidebarTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
+        {CLASS = PASidebarCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 
+        {CLASS = PASidebarTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
         {
-            CLASS = SidebarView; 
+            CLASS = PASidebarView; 
             LANGUAGE = ObjC; 
-            OUTLETS = {owner = id; tableView = NSTableView; }; 
+            OUTLETS = {owner = id; tableView = id; }; 
             SUPERCLASS = NSView; 
         }, 
         {

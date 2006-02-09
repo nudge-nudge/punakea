@@ -5,7 +5,7 @@
 
 - (void)awakeFromNib
 {
-	id sidebarCell = [[SidebarCell alloc] init];
+	id sidebarCell = [[PASidebarCell alloc] init];
 	[[self tableColumnWithIdentifier:@"folder"] setDataCell:sidebarCell];
 	
 	// Needed?
