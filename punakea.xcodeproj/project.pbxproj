@@ -17,7 +17,6 @@
 		6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */; };
 		6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20409963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff */; };
 		6562A20909963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20509963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff */; };
-		657D7979099B7B7500101A0E /* SidebarDelegateCategory.m in Resources */ = {isa = PBXBuildFile; fileRef = 65B1738E0995665500B10322 /* SidebarDelegateCategory.m */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
@@ -97,7 +96,6 @@
 		65B172F2099562A700B10322 /* PASidebarView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarView.h; sourceTree = "<group>"; };
 		65B172F3099562A700B10322 /* PASidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarView.m; sourceTree = "<group>"; };
 		65B1738D0995665500B10322 /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
-		65B1738E0995665500B10322 /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
 		65C341BA0996107300C3B5AC /* PASidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarCell.h; sourceTree = "<group>"; };
 		65C341BB0996107300C3B5AC /* PASidebarCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarCell.m; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
@@ -267,7 +265,6 @@
 				65C341BA0996107300C3B5AC /* PASidebarCell.h */,
 				65C341BB0996107300C3B5AC /* PASidebarCell.m */,
 				65B1738D0995665500B10322 /* SidebarDelegateCategory.h */,
-				65B1738E0995665500B10322 /* SidebarDelegateCategory.m */,
 				6535E5010995F80F0067528D /* PASidebarTableView.h */,
 				6535E5020995F80F0067528D /* PASidebarTableView.m */,
 				65B172F2099562A700B10322 /* PASidebarView.h */,
@@ -333,7 +330,6 @@
 				6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */,
 				6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */,
 				6562A20909963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff in Resources */,
-				657D7979099B7B7500101A0E /* SidebarDelegateCategory.m in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
