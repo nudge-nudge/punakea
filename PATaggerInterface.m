@@ -59,6 +59,12 @@
 	return [keywords autorelease];
 }
 
+//get all related tags for the given tags. appends newly found tags to datastructure
+-(NSArray*)getRelatedTagsForTag:(NSString*)tag {
+	
+}
+
+
 -(void)dealloc {
 	[super dealloc];
 }

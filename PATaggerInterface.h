@@ -18,7 +18,8 @@
 -(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 -(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 
-//read tags - needed as public?
+//read tags 
 -(NSArray*)getTagsForFile:(NSString*)path;
+-(NSArray*)getRelatedTagsForTag:(NSString*)tag;
 
 @end
