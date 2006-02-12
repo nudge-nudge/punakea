@@ -7,10 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import <CoreServices/CoreServices.h>
+#import "PAQueryHandler.h"
 
 @interface PATaggerInterface : NSObject {
-
+	NSMetadataQuery *query;
+	PAQueryHandler *queryHandler;
 }
 
 //write tags

@@ -10,10 +10,14 @@
 #import "Matador.h"
 #import <CoreServices/CoreServices.h>
 
+//TODO make singleton
 @implementation PATaggerInterface
 
 -(id)init {
 	self = [super init];
+	//initalize the query, the delegate is a seperate class
+	query = [[NSMetadataQuery alloc] init];
+	[query setDelegate:[[queryHandler alloc] init];
 	return self;
 }
 
@@ -59,13 +63,15 @@
 	return [keywords autorelease];
 }
 
-//get all related tags for the given tags. appends newly found tags to datastructure
--(NSArray*)getRelatedTagsForTag:(NSString*)tag {
-	
+//get all related tags for the given tags. appends newly found tags to datastructure - foundation api usable
+//delegate is taggerinterface, will be changed
+-(void)getRelatedTagsForTag:(NSString*)tag {
+		
 }
 
-
 -(void)dealloc {
+	[query dealloc];
+	[queryHandler dealloc];
 	[super dealloc];
 }
 
