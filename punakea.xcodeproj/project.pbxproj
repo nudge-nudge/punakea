@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4858EC24099FB15100D49C7E /* PAQueryHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4858EC22099FB15100D49C7E /* PAQueryHandler.h */; };
-		4858EC25099FB15100D49C7E /* PAQueryHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4858EC23099FB15100D49C7E /* PAQueryHandler.m */; };
 		488A620A09A0F18600C0E397 /* PATags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488A620809A0F18600C0E397 /* PATags.h */; };
 		488A620B09A0F18800C0E397 /* PATags.m in Sources */ = {isa = PBXBuildFile; fileRef = 488A620909A0F18600C0E397 /* PATags.m */; };
 		48AA6BF7099B78E300D8F70B /* PATaggerInterface.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48AA6BF5099B78E300D8F70B /* PATaggerInterface.h */; };
@@ -77,7 +75,6 @@
 				657D79DB099B7D5700101A0E /* PAFileOutlineView.h in CopyFiles */,
 				651CF1A0099B9F98007E48DD /* SidebarDelegateCategory.h in CopyFiles */,
 				651CF1D1099BA213007E48DD /* FileOutlineViewDelegateCategory.h in CopyFiles */,
-				4858EC24099FB15100D49C7E /* PAQueryHandler.h in CopyFiles */,
 				488A620A09A0F18600C0E397 /* PATags.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,8 +90,6 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* punakea_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = punakea_Prefix.pch; sourceTree = "<group>"; };
-		4858EC22099FB15100D49C7E /* PAQueryHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAQueryHandler.h; sourceTree = "<group>"; };
-		4858EC23099FB15100D49C7E /* PAQueryHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAQueryHandler.m; sourceTree = "<group>"; };
 		488A620809A0F18600C0E397 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
 		488A620909A0F18600C0E397 /* PATags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATags.m; sourceTree = "<group>"; };
 		48AA6BF5099B78E300D8F70B /* PATaggerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerInterface.h; sourceTree = "<group>"; };
@@ -229,8 +224,6 @@
 				48AA6BF6099B78E300D8F70B /* PATaggerInterface.m */,
 				48C93614099742D800699265 /* Matador.h */,
 				48C9362D099743F200699265 /* NSObject.h */,
-				4858EC22099FB15100D49C7E /* PAQueryHandler.h */,
-				4858EC23099FB15100D49C7E /* PAQueryHandler.m */,
 				488A620809A0F18600C0E397 /* PATags.h */,
 				488A620909A0F18600C0E397 /* PATags.m */,
 			);
@@ -382,7 +375,6 @@
 				657D79DC099B7D5700101A0E /* PAFileOutlineView.m in Sources */,
 				651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */,
 				651CF1D2099BA213007E48DD /* FileOutlineViewDelegateCategory.m in Sources */,
-				4858EC25099FB15100D49C7E /* PAQueryHandler.m in Sources */,
 				488A620B09A0F18800C0E397 /* PATags.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
