@@ -8,20 +8,25 @@
 
 #import <Cocoa/Cocoa.h>
 #import <CoreServices/CoreServices.h>
-#import "PAQueryHandler.h"
+#import "PATags.h"
 
 @interface PATaggerInterface : NSObject {
-	NSMetadataQuery *query;
-	PAQueryHandler *queryHandler;
+	NSMetadataQuery *relatedTagsQuery;
+	NSMetadataQuery *filesQuery;
+	NSString *tagPrefix;
+	PATags *tagModel;
 }
 
-//write tags
--(void)addTagToFile:(NSString*)tag filePath:(NSString*)path;
--(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
--(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+//accessors - dictionaries the best? can hold occurenceCount ... discussion ...
+-(NSArray*)relatedTags;
+-(NSArray*)activeTags;
+-(NSMetadataQuery*)activeFiles;
 
-//read tags 
--(NSArray*)getTagsForFile:(NSString*)path;
--(NSArray*)getRelatedTagsForTag:(NSString*)tag;
+//write tags
+-(void)addTagToFile:(NSString*)tags filePath:(NSString*)path;
+-(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+
+//update model 
+-(void)activeTagsHaveChanged;
 
 @end

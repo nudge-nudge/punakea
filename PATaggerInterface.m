@@ -10,15 +10,39 @@
 #import "Matador.h"
 #import <CoreServices/CoreServices.h>
 
+//private stuff
+@interface PATaggerInterface (PrivateAPI)
+-(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+-(NSArray*)getTagsForFile:(NSString*)path;
+
+@end
+
 //TODO make singleton
 @implementation PATaggerInterface
 
 -(id)init {
 	self = [super init];
-	//initalize the query, the delegate is a seperate class
-	query = [[NSMetadataQuery alloc] init];
-	[query setDelegate:[[queryHandler alloc] init];
+	//initalize the queries
+	relatedTagsQuery = [[NSMetadataQuery alloc] init];
+	filesQuery = [[NSMetadataQuery alloc] init];
+	//initalize tag model
+	tagModel = [[PATags alloc] init];
+	//set the tag prefix
+	[tagPrefix initWithString:@"tag:"];
 	return self;
+}
+
+//accessors
+-(NSArray*)relatedTags {
+	return [tagModel relatedTags];
+}
+
+-(NSArray*)activeTags {
+	return [tagModel activeTags];
+}
+
+-(NSMetadataQuery*)activeFiles {
+	return filesQuery;
 }
 
 //write tags
@@ -63,15 +87,31 @@
 	return [keywords autorelease];
 }
 
-//get all related tags for the given tags. appends newly found tags to datastructure - foundation api usable
-//delegate is taggerinterface, will be changed
--(void)getRelatedTagsForTag:(NSString*)tag {
+//
+-(void)activeTagsHaveChanged {
+	//start the query for files first	
+	NSMutableString *queryString = [NSMutableString stringWithFormat:@"kMDItemKeywords == '%@:%@'",tagPrefix,[[tagModel activeTags] lastObject]];
+	
+	int i = [[tagModel activeTags] count]-1;
+	while (i--) {
+		NSString *anotherTagQuery = [NSMutableString stringWithFormat:@" && kMDItemKeywords == '%@:%@'",tagPrefix,[[tagModel activeTags] objectAtIndex:i]];
+		[queryString appendString:anotherTagQuery];
+	}
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
+	[filesQuery setPredicate:predicate];
+	[filesQuery startQuery];
 		
+	//then look for related tags and populate the array
+	[relatedTagsQuery setPredicate:predicate];
+	[relatedTagsQuery startQuery];
+	
+	
 }
 
 -(void)dealloc {
-	[query dealloc];
-	[queryHandler dealloc];
+	[relatedTagsQuery dealloc];
+	[filesQuery dealloc];
 	[super dealloc];
 }
 
