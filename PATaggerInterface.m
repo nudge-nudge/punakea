@@ -22,14 +22,18 @@
 
 -(id)init {
 	self = [super init];
-	//initalize the queries
-	relatedTagsQuery = [[NSMetadataQuery alloc] init];
-	filesQuery = [[NSMetadataQuery alloc] init];
+	//initalize the query
+	query = [[NSMetadataQuery alloc] init];
 	//initalize tag model
 	tagModel = [[PATags alloc] init];
 	//set the tag prefix
 	[tagPrefix initWithString:@"tag:"];
 	return self;
+}
+
+//DOESN'T WORK YET (mem leak) - but api will stay
++(PATaggerInterface*)sharedInstance {
+	return [[PATaggerInterface alloc] init];
 }
 
 //accessors
@@ -41,8 +45,9 @@
 	return [tagModel activeTags];
 }
 
--(NSMetadataQuery*)activeFiles {
-	return filesQuery;
+//needed for bindings - bind to query.results
+-(NSMetadataQuery*)query {
+	return query;
 }
 
 //write tags
@@ -87,7 +92,7 @@
 	return [keywords autorelease];
 }
 
-//
+//needs to be called whenever the active tags have been changed -- TODO notification
 -(void)activeTagsHaveChanged {
 	//start the query for files first	
 	NSMutableString *queryString = [NSMutableString stringWithFormat:@"kMDItemKeywords == '%@:%@'",tagPrefix,[[tagModel activeTags] lastObject]];
@@ -99,19 +104,16 @@
 	}
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
-	[filesQuery setPredicate:predicate];
-	[filesQuery startQuery];
-		
-	//then look for related tags and populate the array
-	[relatedTagsQuery setPredicate:predicate];
-	[relatedTagsQuery startQuery];
+	[query setPredicate:predicate];
+	[query startQuery];
 	
-	
+	/* now it is up to PATags to listen for changes in the result of the query to adjust the related tags accordingly
+		view must bind to query.result and also register with notification to be informed about updates */
 }
 
 -(void)dealloc {
-	[relatedTagsQuery dealloc];
-	[filesQuery dealloc];
+	[query dealloc];
+	[tagModel dealloc];
 	[super dealloc];
 }
 

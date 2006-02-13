@@ -11,16 +11,18 @@
 #import "PATags.h"
 
 @interface PATaggerInterface : NSObject {
-	NSMetadataQuery *relatedTagsQuery;
-	NSMetadataQuery *filesQuery;
+	NSMetadataQuery *query;
 	NSString *tagPrefix;
 	PATags *tagModel;
 }
 
+//get singleton instance
++(PATaggerInterface*)sharedInstance;
+
 //accessors - dictionaries the best? can hold occurenceCount ... discussion ...
 -(NSArray*)relatedTags;
 -(NSArray*)activeTags;
--(NSMetadataQuery*)activeFiles;
+-(NSMetadataQuery*)query;
 
 //write tags
 -(void)addTagToFile:(NSString*)tags filePath:(NSString*)path;
