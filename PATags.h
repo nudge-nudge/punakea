@@ -14,9 +14,15 @@
 	NSMutableArray* activeTags;
 }
 
--(NSArray*)activeTags;
-
 //collection type might change, don't depend on it too heavily
+-(NSArray*)activeTags;
 -(NSArray*)relatedTags;
+
+//controller stuff
+-(void)addTagToActiveTags:(NSString*)tag;
+-(void)addTagsToActiveTags:(NSArray*)tags;
+-(void)clearActiveTags;
+-(void)removeTagFromActiveTags:(NSString*)tag;
+-(void)removeTagsFromActiveTags:(NSArray*)tags;
 
 @end

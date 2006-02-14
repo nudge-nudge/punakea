@@ -16,7 +16,7 @@
 	PATags *tagModel;
 }
 
-//get singleton instance
+//get instance
 +(PATaggerInterface*)sharedInstance;
 
 //accessors - dictionaries the best? can hold occurenceCount ... discussion ...
@@ -27,6 +27,9 @@
 //write tags
 -(void)addTagToFile:(NSString*)tags filePath:(NSString*)path;
 -(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+
+//get tags
+-(NSArray*)getTagsForFile:(NSString*)path;
 
 //update model 
 -(void)activeTagsHaveChanged;

@@ -6,9 +6,9 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
+#import <CoreServices/CoreServices.h>
 #import "PATaggerInterface.h"
 #import "Matador.h"
-#import <CoreServices/CoreServices.h>
 
 //private stuff
 @interface PATaggerInterface (PrivateAPI)
@@ -17,10 +17,13 @@
 
 @end
 
-//TODO make singleton
 @implementation PATaggerInterface
 
--(id)init {
+//this is where the sharedInstance is held
+static PATaggerInterface *sharedInstance = nil;
+
+//constructor - TODO synchronize
+-(id)sharedInstanceInit {
 	self = [super init];
 	//initalize the query
 	query = [[NSMetadataQuery alloc] init];
@@ -29,11 +32,6 @@
 	//set the tag prefix
 	[tagPrefix initWithString:@"tag:"];
 	return self;
-}
-
-//DOESN'T WORK YET (mem leak) - but api will stay
-+(PATaggerInterface*)sharedInstance {
-	return [[PATaggerInterface alloc] init];
 }
 
 //accessors
@@ -86,14 +84,19 @@
 
 //read tags - TODO there could be a lot of mem-leaks in here ... check if file exists!!
 -(NSArray*)getTagsForFile:(NSString*)path {
-	//carbon api ... can be treated as cocoa objects
+	//carbon api ... can be treated as cocoa objects - TODO check warnings
 	MDItemRef *item = MDItemCreate(NULL,path);
 	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
 	return [keywords autorelease];
 }
 
-//needs to be called whenever the active tags have been changed -- TODO notification
+//needs to be called whenever the active tags have been changed
 -(void)activeTagsHaveChanged {
+	//stop an active query
+	if ([query isStarted]) {
+		[query stopQuery];
+	}
+	
 	//start the query for files first	
 	NSMutableString *queryString = [NSMutableString stringWithFormat:@"kMDItemKeywords == '%@:%@'",tagPrefix,[[tagModel activeTags] lastObject]];
 	
@@ -111,10 +114,47 @@
 		view must bind to query.result and also register with notification to be informed about updates */
 }
 
+//TODO might never be called - check if needed
 -(void)dealloc {
 	[query dealloc];
 	[tagModel dealloc];
 	[super dealloc];
 }
+
+//---- BEGIN singleton stuff ----
++(PATaggerInterface*)sharedInstance {
+	@synchronized(self) {
+        if (sharedInstance == nil) {
+            sharedInstance = [[self alloc] sharedInstanceInit];
+        }
+    }
+    return sharedInstance;
+}
+
++(id)allocWithZone:(NSZone *)zone {
+    @synchronized(self) {
+        if (sharedInstance == nil) {
+            sharedInstance = [super allocWithZone:zone];
+        }
+    }
+    return sharedInstance;
+}
+
+-(id)retain {
+    return self;
+}
+
+-(unsigned)retainCount {
+    return UINT_MAX;  //denotes an object that cannot be released
+}
+
+-(void)release {
+    //do nothing
+}
+
+- (id)autorelease {
+    return self;
+}
+//---- END singleton stuff ----
 
 @end

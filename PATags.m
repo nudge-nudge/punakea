@@ -23,16 +23,74 @@
 	return self;
 }
 
+//accessors
 -(NSArray*)relatedTags {
 	return relatedTags;
 }
 
+//bind active tag view to this -- TODO check if all the controller stuff can be done with a binding
 -(NSArray*)activeTags {
 	return activeTags;
 }
 
+//---- BEGIN controller stuff ----
+
+//add tags
+-(void)addTagToActiveTags:(NSString*)tag {
+	[self addTagsToActiveTags:[NSArray arrayWithObject:tag]];
+}
+
+-(void)addTagsToActiveTags:(NSArray*)tags {
+	int i = [tags count];
+	while (i--) {
+		if (![activeTags containsObject:[tags objectAtIndex:i]]) {
+			[activeTags addObject:[tags objectAtIndex:i]];
+		} else {
+			NSLog(@"not adding tag @%, already present",[tags objectAtIndex:i]);
+		}
+	}
+}
+
+//remove/clear activetags
+-(void)clearActiveTags {
+	[activeTags removeAllObjects];
+}
+
+-(void)removeTagFromActiveTags:(NSString*)tag {
+	[self removeTagsFromActiveTags:[NSArray arrayWithObject:tag]];
+}
+
+-(void)removeTagsFromActiveTags:(NSArray*)tags {
+	int i = [tags count];
+	while (i--) {
+		[activeTags removeObject:[tags objectAtIndex:i]];
+	}
+}	
+//---- END controller stuff ----
+	
+//act on query notifications -- relatedTags need to be kept in sync with files
 -(void)queryNote:(NSNotification*)note {
-	//TODO implement
+	if ([[note name] isEqualToString:NSMetadataQueryDidUpdateNotification]) {
+		//disable updates, parse files, continue -- TODO make more efficient, performance will SUCK
+		[relatedTags removeAllObjects];
+		NSMetadataQuery *query = [[PATaggerInterface sharedInstance] query];
+		
+		[query disableUpdates];
+		
+		int i = [query resultCount];
+		while (i--) {
+			//get keywords for result
+			NSArray *keywords = [[PATaggerInterface sharedInstance] getTagsForFile:[query resultAtIndex:i]];
+			
+			int j = [keywords count];
+			while (j--) {
+				if (![relatedTags containsObject:[keywords objectAtIndex:j]]) {
+					[relatedTags addObject:[keywords objectAtIndex:i]];
+				}
+			}
+		}
+		[query enableUpdates];
+	}
 }
 
 @end
