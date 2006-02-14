@@ -17,10 +17,16 @@
 		relatedTags = [[NSMutableArray alloc] init];
 		activeTags = [[NSMutableArray alloc] init];
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
-        NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
+        nf = [NSNotificationCenter defaultCenter];
         [nf addObserver:self selector:@selector(queryNote:) name:nil object:[[PATaggerInterface sharedInstance] query]];
 	}
 	return self;
+}
+
+-(void)dealloc {
+	[nf removeObserver:self];
+	[activeTags release];
+	[relatedTags release];
 }
 
 //accessors
