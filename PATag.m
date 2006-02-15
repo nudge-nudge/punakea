@@ -60,9 +60,9 @@
     return [self isEqualToTag:other];
 }
 
--(BOOK)isEqualToTag:(PATag*)otherTag {
+-(BOOL)isEqualToTag:(PATag*)otherTag {
 	//TODO implement this and hash:
-	return NO
+	return NO;
 }
 
 @end
