@@ -52,4 +52,17 @@
 	return query;
 }
 
+-(BOOL)isEqual:(id)other {
+    if (other == self) 
+        return YES;
+    if (!other || ![other isKindOfClass:[self class]]) 
+        return NO;
+    return [self isEqualToTag:other];
+}
+
+-(BOOK)isEqualToTag:(PATag*)otherTag {
+	//TODO implement this and hash:
+	return NO
+}
+
 @end

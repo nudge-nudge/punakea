@@ -76,7 +76,17 @@ static PATaggerInterface *sharedInstance = nil;
 
 //sets the tags, overwrites current ones
 -(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path {
-	[[Matador sharedInstance] setAttributeForFileAtPath:path name:@"kMDItemKeywords" value:tags];
+	//only the names of the tags are written, create tmp array with names only
+	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
+	
+	int j = [tags count];
+	int i = j;
+	while (i--) {
+		[keywordArray addObject:[[tags objectAtIndex:j-i] name]];
+	}
+	
+	[[Matador sharedInstance] setAttributeForFileAtPath:path name:@"kMDItemKeywords" value:keywordArray];
+	[keywordArray release];
 }
 
 //read tags - TODO there could be a lot of mem-leaks in here ... check if file exists!!
@@ -87,8 +97,8 @@ static PATaggerInterface *sharedInstance = nil;
 	NSArray *tagNames = (NSArray*)keywords;
 	NSMutableArray* tags = [[NSMutableArray alloc] init];
 	
-	int i = [tagNames count];
-	int j = i;
+	int j = [tagNames count];
+	int i = j;
 	while (i--) {
 		PATag *tag= [[PATag alloc] initWithName:[tagNames objectAtIndex:j-i]];
 		[tags addObject:tag];
@@ -105,12 +115,13 @@ static PATaggerInterface *sharedInstance = nil;
 		[query stopQuery];
 	}
 	
-	//start the query for files first	
-	NSMutableString *queryString = [NSMutableString stringWithFormat:@"kMDItemKeywords == '%@'",[[tagModel activeTags] lastObject]];
+	//start the query for files first -- LoD
+	NSMutableString *queryString = [[[tagModel activeTags] objectAtIndex:0] query];
 	
-	int i = [[tagModel activeTags] count]-1;
+	int j = [[tagModel activeTags] count];
+	int i = j-1;
 	while (i--) {
-		NSString *anotherTagQuery = [NSMutableString stringWithFormat:@" && kMDItemKeywords == '%@'",[[tagModel activeTags] objectAtIndex:i]];
+		NSString *anotherTagQuery = [NSString stringWithFormat:@" && %@",[[[tagModel activeTags] objectAtIndex:j-i] query]];
 		[queryString appendString:anotherTagQuery];
 	}
 	
