@@ -19,6 +19,7 @@
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
         nf = [NSNotificationCenter defaultCenter];
         [nf addObserver:self selector:@selector(queryNote:) name:nil object:[[PATaggerInterface sharedInstance] query]];
+		//TODO add system Tags ... how?
 	}
 	return self;
 }
@@ -27,6 +28,7 @@
 	[nf removeObserver:self];
 	[activeTags release];
 	[relatedTags release];
+	[super dealloc];
 }
 
 //accessors

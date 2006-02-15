@@ -13,7 +13,6 @@
 //private stuff
 @interface PATaggerInterface (PrivateAPI)
 -(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
--(NSArray*)getTagsForFile:(NSString*)path;
 
 @end
 
@@ -29,8 +28,6 @@ static PATaggerInterface *sharedInstance = nil;
 	query = [[NSMetadataQuery alloc] init];
 	//initalize tag model
 	tagModel = [[PATags alloc] init];
-	//set the tag prefix
-	[tagPrefix initWithString:@"tag:"];
 	return self;
 }
 
@@ -49,11 +46,11 @@ static PATaggerInterface *sharedInstance = nil;
 }
 
 //write tags
--(void)addTagToFile:(NSString*)tag filePath:(NSString*)path {
+-(void)addTagToFile:(PATag*)tag filePath:(NSString*)path {
 	[self addTagsToFile:[NSArray arrayWithObject:tag] filePath:path];
 }
 
-//adds the specified tags, doesn't overwrite
+//adds the specified tags, doesn't overwrite - TODO check if works with PATag
 -(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path {
 	NSMutableArray *resultTags = [NSMutableArray arrayWithArray:tags];
 	
@@ -87,7 +84,18 @@ static PATaggerInterface *sharedInstance = nil;
 	//carbon api ... can be treated as cocoa objects - TODO check warnings
 	MDItemRef *item = MDItemCreate(NULL,path);
 	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
-	return [keywords autorelease];
+	NSArray *tagNames = (NSArray*)keywords;
+	NSMutableArray* tags = [[NSMutableArray alloc] init];
+	
+	int i = [tagNames count];
+	int j = i;
+	while (i--) {
+		PATag *tag= [[PATag alloc] initWithName:[tagNames objectAtIndex:j-i]];
+		[tags addObject:tag];
+		[tag release];
+	}				
+	
+	return [tags autorelease];
 }
 
 //needs to be called whenever the active tags have been changed
@@ -98,11 +106,11 @@ static PATaggerInterface *sharedInstance = nil;
 	}
 	
 	//start the query for files first	
-	NSMutableString *queryString = [NSMutableString stringWithFormat:@"kMDItemKeywords == '%@:%@'",tagPrefix,[[tagModel activeTags] lastObject]];
+	NSMutableString *queryString = [NSMutableString stringWithFormat:@"kMDItemKeywords == '%@'",[[tagModel activeTags] lastObject]];
 	
 	int i = [[tagModel activeTags] count]-1;
 	while (i--) {
-		NSString *anotherTagQuery = [NSMutableString stringWithFormat:@" && kMDItemKeywords == '%@:%@'",tagPrefix,[[tagModel activeTags] objectAtIndex:i]];
+		NSString *anotherTagQuery = [NSMutableString stringWithFormat:@" && kMDItemKeywords == '%@'",[[tagModel activeTags] objectAtIndex:i]];
 		[queryString appendString:anotherTagQuery];
 	}
 	

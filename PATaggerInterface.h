@@ -9,10 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import <CoreServices/CoreServices.h>
 #import "PATags.h"
+#import "PATag.h"
 
 @interface PATaggerInterface : NSObject {
 	NSMetadataQuery *query;
-	NSString *tagPrefix;
 	PATags *tagModel;
 }
 
@@ -25,7 +25,7 @@
 -(NSMetadataQuery*)query;
 
 //write tags
--(void)addTagToFile:(NSString*)tags filePath:(NSString*)path;
+-(void)addTagToFile:(PATag*)tag filePath:(NSString*)path;
 -(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 
 //get tags

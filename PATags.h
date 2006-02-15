@@ -10,9 +10,9 @@
 
 
 @interface PATags : NSObject {
-	NSMutableArray* relatedTags;
-	NSMutableArray* activeTags;
-	NSNotificationCenter* nf;
+	NSMutableArray *relatedTags;
+	NSMutableArray *activeTags;
+	NSNotificationCenter *nf;
 }
 
 //collection type might change, don't depend on it too heavily
