@@ -22,4 +22,6 @@
 -(void)setName:(NSString*)aName;
 -(void)setQuery:(NSString*)aQuery;
 
+-(BOOL)isEqualToTag:(PATag*)otherTag;
+
 @end

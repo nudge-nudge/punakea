@@ -32,6 +32,7 @@
 	[super dealloc];
 }
 
+//accessors
 -(void)setName:(NSString*)aName {
 	[aName retain];
 	[name release];
@@ -52,17 +53,26 @@
 	return query;
 }
 
+//---- BEGIN isEqual: stuff ----
 -(BOOL)isEqual:(id)other {
-    if (other == self) 
-        return YES;
-    if (!other || ![other isKindOfClass:[self class]]) 
+	if (!other || ![other isKindOfClass:[self class]]) 
         return NO;
+    if (other == self)
+        return YES;
     return [self isEqualToTag:other];
 }
 
 -(BOOL)isEqualToTag:(PATag*)otherTag {
-	//TODO implement this and hash:
-	return NO;
+	if ([name isEqual:[otherTag name]] && [query isEqual:[otherTag query]]) {
+		return YES;
+	} else {
+		return NO;
+	}
 }
+
+-(unsigned)hash {
+	return [name hash] ^ [query hash];
+}
+//---- END isEqual: stuff ----
 
 @end
