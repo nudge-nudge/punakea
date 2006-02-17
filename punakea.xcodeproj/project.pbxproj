@@ -19,6 +19,8 @@
 		48E9C1CA09A5B8D200415AC7 /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E9C1C809A5B8D200415AC7 /* PASelectedTags.m */; };
 		48E9C1D809A5B92800415AC7 /* PARelatedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48E9C1D609A5B92800415AC7 /* PARelatedTags.h */; };
 		48E9C1D909A5B92800415AC7 /* PARelatedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E9C1D709A5B92800415AC7 /* PARelatedTags.m */; };
+		48E9C2F609A5C27600415AC7 /* TaggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E9C2F409A5C27600415AC7 /* TaggerViewController.m */; };
+		48E9C2F709A5C27600415AC7 /* TaggerViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48E9C2F509A5C27600415AC7 /* TaggerViewController.h */; };
 		651CF1A0099B9F98007E48DD /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */; };
 		651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */; };
 		651CF1D1099BA213007E48DD /* FileOutlineViewDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */; };
@@ -85,6 +87,7 @@
 				481BF2F209A31B9B00EBD7BA /* PATagSet.h in CopyFiles */,
 				48E9C1C909A5B8D200415AC7 /* PASelectedTags.h in CopyFiles */,
 				48E9C1D809A5B92800415AC7 /* PARelatedTags.h in CopyFiles */,
+				48E9C2F709A5C27600415AC7 /* TaggerViewController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +114,8 @@
 		48E9C1C809A5B8D200415AC7 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
 		48E9C1D609A5B92800415AC7 /* PARelatedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARelatedTags.h; sourceTree = "<group>"; };
 		48E9C1D709A5B92800415AC7 /* PARelatedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTags.m; sourceTree = "<group>"; };
+		48E9C2F409A5C27600415AC7 /* TaggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerViewController.m; sourceTree = "<group>"; };
+		48E9C2F509A5C27600415AC7 /* TaggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerViewController.h; sourceTree = "<group>"; };
 		651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
 		651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
 		651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOutlineViewDelegateCategory.h; sourceTree = "<group>"; };
@@ -299,6 +304,8 @@
 				65E7B06A0994D5AA00565251 /* Controller.m */,
 				65E7B43C0994E3D000565251 /* SubViewController.h */,
 				65E7B43D0994E3D000565251 /* SubViewController.m */,
+				48E9C2F509A5C27600415AC7 /* TaggerViewController.h */,
+				48E9C2F409A5C27600415AC7 /* TaggerViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -400,6 +407,7 @@
 				481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */,
 				48E9C1CA09A5B8D200415AC7 /* PASelectedTags.m in Sources */,
 				48E9C1D909A5B92800415AC7 /* PARelatedTags.m in Sources */,
+				48E9C2F609A5C27600415AC7 /* TaggerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

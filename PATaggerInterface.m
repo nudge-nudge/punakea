@@ -69,7 +69,7 @@ static PATaggerInterface *sharedInstance = nil;
 	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
 	
 	int j = [tags count];
-	int i = j;
+	int i = j+1;
 	while (i--) {
 		[keywordArray addObject:[[tags objectAtIndex:j-i] name]];
 	}
@@ -87,7 +87,7 @@ static PATaggerInterface *sharedInstance = nil;
 	NSMutableArray* tags = [[NSMutableArray alloc] init];
 	
 	int j = [tagNames count];
-	int i = j;
+	int i = j+1;
 	while (i--) {
 		PATag *tag= [[PATag alloc] initWithName:[tagNames objectAtIndex:j-i]];
 		[tags addObject:tag];
@@ -108,7 +108,7 @@ static PATaggerInterface *sharedInstance = nil;
 	NSMutableString *queryString = [[selectedTags objectAtIndex:0] query];
 	
 	int j = [selectedTags count];
-	int i = j-1;
+	int i = j;
 	while (i--) {
 		NSString *anotherTagQuery = [NSString stringWithFormat:@" && %@",[[selectedTags objectAtIndex:j-i] query]];
 		[queryString appendString:anotherTagQuery];

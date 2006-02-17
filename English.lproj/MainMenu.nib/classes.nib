@@ -8,7 +8,14 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = PAFileOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }
+        {CLASS = PAFileOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
+        {
+            ACTIONS = {setTagsForFile = id; }; 
+            CLASS = TaggerViewController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {filePath = NSTextField; tagList = NSTextField; }; 
+            SUPERCLASS = NSWindowController; 
+        }
     ); 
     IBVersion = 1; 
 }
