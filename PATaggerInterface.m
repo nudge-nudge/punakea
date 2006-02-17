@@ -26,18 +26,7 @@ static PATaggerInterface *sharedInstance = nil;
 	self = [super init];
 	//initalize the query
 	query = [[NSMetadataQuery alloc] init];
-	//initalize tag model
-	tagModel = [[PATags alloc] init];
 	return self;
-}
-
-//accessors
--(NSArray*)relatedTags {
-	return [tagModel relatedTags];
-}
-
--(NSArray*)activeTags {
-	return [tagModel activeTags];
 }
 
 //needed for bindings - bind to query.results
@@ -109,19 +98,19 @@ static PATaggerInterface *sharedInstance = nil;
 }
 
 //needs to be called whenever the active tags have been changed
--(void)activeTagsHaveChanged {
+-(void)selectedTagsHaveChanged {
 	//stop an active query
 	if ([query isStarted]) {
 		[query stopQuery];
 	}
 	
 	//start the query for files first -- LoD
-	NSMutableString *queryString = [[[tagModel activeTags] objectAtIndex:0] query];
+	NSMutableString *queryString = [[selectedTags objectAtIndex:0] query];
 	
-	int j = [[tagModel activeTags] count];
+	int j = [selectedTags count];
 	int i = j-1;
 	while (i--) {
-		NSString *anotherTagQuery = [NSString stringWithFormat:@" && %@",[[[tagModel activeTags] objectAtIndex:j-i] query]];
+		NSString *anotherTagQuery = [NSString stringWithFormat:@" && %@",[[selectedTags objectAtIndex:j-i] query]];
 		[queryString appendString:anotherTagQuery];
 	}
 	
@@ -136,7 +125,7 @@ static PATaggerInterface *sharedInstance = nil;
 //TODO might never be called - check if needed
 -(void)dealloc {
 	[query dealloc];
-	[tagModel dealloc];
+	[selectedTags dealloc];
 	[super dealloc];
 }
 

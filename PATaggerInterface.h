@@ -8,12 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import <CoreServices/CoreServices.h>
-#import "PATags.h"
+#import "PASelectedTags.h"
 #import "PATag.h"
 
 @interface PATaggerInterface : NSObject {
 	NSMetadataQuery *query;
-	PATags *tagModel;
+	PASelectedTags *selectedTags;
 }
 
 //get instance
@@ -32,6 +32,6 @@
 -(NSArray*)getTagsForFile:(NSString*)path;
 
 //update model 
--(void)activeTagsHaveChanged;
+-(void)selectedTagsHaveChanged;
 
 @end
