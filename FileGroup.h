@@ -11,10 +11,11 @@
 
 @interface FileGroup : NSObject {
 	NSMutableDictionary * properties;
-    NSMutableArray      * files;
+    //NSMutableArray      * files;
 }
 
 - (NSMutableDictionary *) properties;
+- (void) setProperties: (NSDictionary *)newProperties;
 
-- (NSMutableArray *) files;
+//- (NSMutableArray *) files;
 @end

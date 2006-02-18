@@ -6,13 +6,26 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "File.h"
 
 
-@interface File : NSObject {
-	NSMutableDictionary * properties;
+@implementation File
+
+- (id) init
+{
+  if (self = [super init])
+  {
+    NSArray * keys   = [NSArray arrayWithObjects: @"title", nil];
+    NSArray * values = [NSArray arrayWithObjects: @"New File", nil];
+    
+    properties = [[NSMutableDictionary alloc]
+                      initWithObjects: values forKeys: keys];
+  }
+  return self;
 }
 
-- (NSMutableDictionary *) properties;
+- (NSMutableDictionary *) properties {
+	return properties;
+}
 
 @end

@@ -1,6 +1,7 @@
 #import "Controller.h"
 #import "SubViewController.h"
 #import "PATaggerInterface.h"
+#import "FileGroup.h"
 
 @implementation Controller
 
@@ -39,4 +40,31 @@
 -(IBAction)hoffartTest:(id)sender {
 	[ti addTagToFile:[textfieldJohannes stringValue] filePath:@"/Users/darklight/Desktop/punakea_test"];
 }
+
+// For OutlineView Bindings
+- (id) init
+{
+    if (self = [super init])
+    {
+        fileGroups = [[NSMutableArray alloc] init];
+		myString = @"My String";
+    }
+    return self;
+}
+
+- (void) dealloc
+{
+    [fileGroups release];
+    
+    [super dealloc];
+}
+
+/*- (void) setFileGroups: (NSArray *)newFileGroups
+{
+    if (fileGroups != newFileGroups)
+    {
+        [fileGroups autorelease];
+        fileGroups = [[NSMutableArray alloc] initWithArray: newFileGroups];
+    }
+}*/
 @end

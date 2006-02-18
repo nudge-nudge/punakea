@@ -21,9 +21,26 @@
     properties = [[NSMutableDictionary alloc]
                       initWithObjects: values forKeys: keys];
         
-    files = [[NSMutableArray alloc] init];
+    //files = [[NSMutableArray alloc] init];
   }
   return self;
+}
+
+- (NSMutableDictionary *) properties {
+	return properties;
+}
+
+/*- (NSMutableArray *) files {
+	return files;
+}*/
+
+- (void) setProperties: (NSDictionary *)newProperties
+{
+    if (properties != newProperties)
+    {
+        [properties autorelease];
+        properties = [[NSMutableDictionary alloc] initWithDictionary: newProperties];
+    }
 }
 
 @end

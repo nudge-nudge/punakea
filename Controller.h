@@ -12,11 +12,12 @@
 	PATaggerInterface *ti;
 	
 	// For OutlineView Bindings
-	NSMutableArray *_fileGroups;
+	NSMutableArray *fileGroups;
+	NSMutableString *myString; 
 }
 - (IBAction)danielTest:(id)sender;
 - (IBAction)hoffartTest:(id)sender;
 
 // For OutlineView Bindings
-- (NSMutableArray *) fileGroups;
+// - (NSMutableArray *) fileGroups;
 @end

@@ -310,9 +310,9 @@
 				6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */,
 				6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */,
 				6510E0E209A7356D00E0F73A /* File.h */,
+				6510E14B09A739CC00E0F73A /* File.m */,
 				6510E0F009A7369600E0F73A /* FileGroup.h */,
 				6510E0F109A7369600E0F73A /* FileGroup.m */,
-				6510E14B09A739CC00E0F73A /* File.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
