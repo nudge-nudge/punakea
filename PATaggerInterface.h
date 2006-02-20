@@ -11,18 +11,10 @@
 #import "PASelectedTags.h"
 #import "PATag.h"
 
-@interface PATaggerInterface : NSObject {
-	NSMetadataQuery *query;
-	PASelectedTags *selectedTags;
-}
+@interface PATaggerInterface : NSObject
 
 //get instance
 +(PATaggerInterface*)sharedInstance;
-
-//accessors - dictionaries the best? can hold occurenceCount ... discussion ...
--(NSArray*)relatedTags;
--(NSArray*)activeTags;
--(NSMetadataQuery*)query;
 
 //write tags
 -(void)addTagToFile:(PATag*)tag filePath:(NSString*)path;
@@ -30,8 +22,5 @@
 
 //get tags
 -(NSArray*)getTagsForFile:(NSString*)path;
-
-//update model 
--(void)selectedTagsHaveChanged;
 
 @end

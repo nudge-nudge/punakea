@@ -12,16 +12,23 @@
 @interface PATag : NSObject {
 	NSString *name;
 	NSString *query;
+	int clickCount;
+	int useCount;
 }
 
--(id)initWithName:(NSString*)aName;
--(id)initWithName:(NSString*)aName query:(NSString*)aQuery;
+- (id)initWithName:(NSString*)aName;
+- (id)initWithName:(NSString*)aName query:(NSString*)aQuery;
 
--(NSString*)name;
--(NSString*)query;
--(void)setName:(NSString*)aName;
--(void)setQuery:(NSString*)aQuery;
+- (NSString*)name;
+- (NSString*)query;
+- (int)clickCount;
+- (int)useCount;
 
--(BOOL)isEqualToTag:(PATag*)otherTag;
+- (void)setName:(NSString*)aName;
+- (void)setQuery:(NSString*)aQuery;
+- (void)incrementClickCount;
+- (void)incrementUseCount;
+
+- (BOOL)isEqualToTag:(PATag*)otherTag;
 
 @end

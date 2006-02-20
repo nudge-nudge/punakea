@@ -10,51 +10,70 @@
 
 @implementation PATag 
 
--(id)initWithName:(NSString*)aName {
+- (id)initWithName:(NSString*)aName {
 	return [self initWithName:aName query:nil];
 }
 
 //designated initializer
--(id)initWithName:(NSString*)aName query:(NSString*)aQuery {
+- (id)initWithName:(NSString*)aName query:(NSString*)aQuery {
 	self = [super init];
 	if (self) {
 		if (!aQuery) aQuery = NSLocalizedString(@"default tag name","new Tag");
 
 		name = [aName copy];
 		query = [aQuery copy];
+		
+		clickCount = 0;
+		useCount = 0;
 	}
 	return self;
 }
 
--(void)dealloc {
+- (void)dealloc {
 	[name release];
 	[query release];
 	[super dealloc];
 }
 
 //accessors
--(void)setName:(NSString*)aName {
+- (void)setName:(NSString*)aName {
 	[aName retain];
 	[name release];
 	name = aName;
 }
 
--(void)setQuery:(NSString*)aQuery {
+- (void)setQuery:(NSString*)aQuery {
 	[aQuery retain];
 	[query release];
 	query = aQuery;
 }
 
--(NSString*)name {
+- (void)incrementClickCount {
+	clickCount++;
+}
+
+- (void)incrementUseCount {
+	useCount++;
+}
+
+- (NSString*)name {
 	return name;
 }
 
--(NSString*)query {
+- (NSString*)query {
 	return query;
 }
 
+- (int)clickCount {
+	return clickCount;
+}
+
+- (int)useCount {
+	return useCount;
+}
+
 //---- BEGIN isEqual: stuff ----
--(BOOL)isEqual:(id)other {
+- (BOOL)isEqual:(id)other {
 	if (!other || ![other isKindOfClass:[self class]]) 
         return NO;
     if (other == self)
@@ -62,7 +81,7 @@
     return [self isEqualToTag:other];
 }
 
--(BOOL)isEqualToTag:(PATag*)otherTag {
+- (BOOL)isEqualToTag:(PATag*)otherTag {
 	if ([name isEqual:[otherTag name]] && [query isEqual:[otherTag query]]) {
 		return YES;
 	} else {
@@ -70,7 +89,7 @@
 	}
 }
 
--(unsigned)hash {
+- (unsigned)hash {
 	return [name hash] ^ [query hash];
 }
 //---- END isEqual: stuff ----
