@@ -22,6 +22,8 @@
 
 		name = [aName copy];
 		query = [aQuery copy];
+		lastClicked = [[NSCalendarDate alloc] init];
+		lastUsed = [[NSCalendarDate alloc] init];
 		
 		clickCount = 0;
 		useCount = 0;
@@ -32,6 +34,8 @@
 - (void)dealloc {
 	[name release];
 	[query release];
+	[lastUsed release];
+	[lastClicked release];
 	[super dealloc];
 }
 
@@ -50,10 +54,14 @@
 
 - (void)incrementClickCount {
 	clickCount++;
+	[lastClicked release];
+	lastClicked = [[NSCalendarDate alloc] init];
 }
 
 - (void)incrementUseCount {
 	useCount++;
+	[lastUsed release];
+	lastUsed = [[NSCalendarDate alloc] init];
 }
 
 - (NSString*)name {
@@ -62,6 +70,14 @@
 
 - (NSString*)query {
 	return query;
+}
+
+- (NSCalendarDate*)lastClicked {
+	return lastClicked;
+}
+
+- (NSCalendarDate*)lastUsed {
+	return lastUsed;
 }
 
 - (unsigned long)clickCount {
