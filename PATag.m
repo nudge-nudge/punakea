@@ -64,11 +64,11 @@
 	return query;
 }
 
-- (int)clickCount {
+- (unsigned long)clickCount {
 	return clickCount;
 }
 
-- (int)useCount {
+- (unsigned long)useCount {
 	return useCount;
 }
 

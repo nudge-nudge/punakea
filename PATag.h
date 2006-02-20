@@ -12,8 +12,8 @@
 @interface PATag : NSObject {
 	NSString *name;
 	NSString *query;
-	int clickCount;
-	int useCount;
+	unsigned long clickCount;
+	unsigned long useCount;
 }
 
 - (id)initWithName:(NSString*)aName;
@@ -21,8 +21,8 @@
 
 - (NSString*)name;
 - (NSString*)query;
-- (int)clickCount;
-- (int)useCount;
+- (unsigned long)clickCount;
+- (unsigned long)useCount;
 
 - (void)setName:(NSString*)aName;
 - (void)setQuery:(NSString*)aQuery;
