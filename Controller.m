@@ -12,6 +12,9 @@
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
 	[drawer toggle:self];
+
+	relatedTags = [[relatedTags alloc] init];
+	selectedTags = [[selectedTags alloc] init];
 	
 	//hoffart test code
 	ti = [PATaggerInterface new];
@@ -26,7 +29,7 @@
     [[self window] setToolbar:[toolbar autorelease]];
 }
 
--(NSView*)viewFromNibWithName:(NSString*)nibName{
+- (NSView*)viewFromNibWithName:(NSString*)nibName{
     NSView * 		newView;
     SubViewController *	subViewController;
     
@@ -55,7 +58,9 @@
 - (void) dealloc
 {
     [fileGroups release];
-    
+    [relatedTags release];
+	[selectedTags release];
+	
     [super dealloc];
 }
 
@@ -67,4 +72,33 @@
         fileGroups = [[NSMutableArray alloc] initWithArray: newFileGroups];
     }
 }*/
+
+//---- BEGIN tag stuff ----
+//needs to be called whenever the active tags have been changed
+- (void)selectedTagsHaveChanged {
+	//stop an active query
+	if ([query isStarted]) {
+		[query stopQuery];
+	}
+
+	NSMutableString *queryString = [NSMutableString stringWithString:@""];
+	
+	//append all the tags queries to the string
+	NSEnumerator *e = [selectedTags objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject]) {
+		NSString *anotherTagQuery = [NSString stringWithFormat:@" && %@",[tag query]];
+		[queryString appendString:anotherTagQuery];
+	}
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
+	[query setPredicate:predicate];
+	
+	//only start if query isn't empty
+	if (![queryString isEqualToString:@""]) {
+		[query startQuery];
+	}
+}
+//---- END tag stuff ----
 @end

@@ -61,10 +61,11 @@ static PATaggerInterface *sharedInstance = nil;
 	//only the names of the tags are written, create tmp array with names only
 	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
 	
-	int j = [tags count];
-	int i = j+1;
-	while (i--) {
-		[keywordArray addObject:[[tags objectAtIndex:j-i] name]];
+	NSEnumerator *e = [tags objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject]) {
+		[keywordArray addObject:[tag name]];
 	}
 	
 	[[Matador sharedInstance] setAttributeForFileAtPath:path name:@"kMDItemKeywords" value:keywordArray];
@@ -78,11 +79,12 @@ static PATaggerInterface *sharedInstance = nil;
 	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
 	NSArray *tagNames = (NSArray*)keywords;
 	NSMutableArray* tags = [[NSMutableArray alloc] init];
-	
-	int j = [tagNames count];
-	int i = j+1;
-	while (i--) {
-		PATag *tag= [[PATag alloc] initWithName:[tagNames objectAtIndex:j-i]];
+
+	NSEnumerator *e = [tagNames objectEnumerator];
+	NSString *tagName;
+
+	while (tagName = [e nextObject]) {
+		PATag *tag = [[PATag alloc] initWithName:tagName];
 		[tags addObject:tag];
 		[tag release];
 	}				

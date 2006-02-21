@@ -2,6 +2,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATaggerInterface.h"
+#import "PASelectedTags.h"
+#import "PARelatedTags.h"
 
 @interface Controller : NSWindowController
 {
@@ -13,7 +15,12 @@
 	
 	// For OutlineView Bindings
 	NSMutableArray *fileGroups;
-	NSMutableString *myString; 
+	NSMutableString *myString;
+	
+	//Spotlight query stuff
+	PASelectedTags *selectedTags;
+	PARelatedTags *relatedTags;
+	NSMetadataQuery *query;
 }
 - (IBAction)danielTest:(id)sender;
 - (IBAction)hoffartTest:(id)sender;

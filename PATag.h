@@ -23,6 +23,7 @@
 
 - (NSString*)name;
 - (NSString*)query;
+- (NSCalendarDate*)lastClicked;
 - (NSCalendarDate*)lastUsed;
 - (unsigned long)clickCount;
 - (unsigned long)useCount;

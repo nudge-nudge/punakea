@@ -2,6 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATaggerInterface.h"
+#import "PATag.h"
 
 @interface TaggerViewController : NSWindowController {
     IBOutlet NSTextField *filePath;

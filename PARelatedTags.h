@@ -12,6 +12,9 @@
 @interface PARelatedTags : NSObject {
 	NSMutableArray *tags;
 	NSNotificationCenter *nf;
+	NSMetadataQuery *query;
 }
+
+- (id)initWithQuery:(NSMetadataQuery*)query;
 
 @end
