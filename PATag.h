@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface PATag : NSObject {
+@interface PATag : NSObject <NSCoding> {
 	NSString *name;
 	NSString *query;
 	NSCalendarDate *lastClicked;
@@ -20,6 +20,10 @@
 
 - (id)initWithName:(NSString*)aName;
 - (id)initWithName:(NSString*)aName query:(NSString*)aQuery;
+
+//NSCoding
+- (id)initWithCoder:(NSCoder*)coder;
+- (void)encodeWithCoder:(NSCoder*)coder;
 
 - (NSString*)name;
 - (NSString*)query;
