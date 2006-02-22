@@ -114,8 +114,6 @@
 	if (![queryString isEqualToString:@""]) {
 		[query startQuery];
 	}
-	
-	NSLog(@"%i",[query resultCount]);
 }
 //---- END tag stuff ----
 @end

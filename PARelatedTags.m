@@ -64,7 +64,7 @@
 	[query enableUpdates];
 	
 	NSLog(@"related: %@",tags);
-	NSLog(@"results: %@",[query results]);
+	NSLog(@"%i results: %@",[query resultCount],[query results]);
 }
 
 @end
