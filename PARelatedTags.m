@@ -34,10 +34,11 @@
 
 //act on query notifications -- relatedTags need to be kept in sync with files
 - (void)queryNote:(NSNotification*)note {
+	NSLog(@"received note");
 	if ([[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification] 
 		|| [[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]
 		|| [[note name] isEqualToString:NSMetadataQueryDidUpdateNotification]) {
-		updateRelatedTags:;
+		[self updateRelatedTags];
 	}
 }
 
@@ -50,16 +51,20 @@
 	int i = [query resultCount];
 	while (i--) {
 		//get keywords for result
-		NSArray *keywords = [[PATaggerInterface sharedInstance] getTagsForFile:[query resultAtIndex:i]];
+		NSMetadataItem *mditem =  [query resultAtIndex:i];
+		NSArray *keywords = [[PATaggerInterface sharedInstance] getTagsForFile:[mditem valueForKey:@"kMDItemPath"]];
 		
 		int j = [keywords count];
 		while (j--) {
 			if (![tags containsObject:[keywords objectAtIndex:j]]) {
-				[tags addObject:[keywords objectAtIndex:i]];
+				[tags addObject:[keywords objectAtIndex:j]];
 			}
 		}
 	}
 	[query enableUpdates];
+	
+	NSLog(@"related: %@",tags);
+	NSLog(@"results: %@",[query results]);
 }
 
 @end

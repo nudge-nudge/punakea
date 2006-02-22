@@ -31,7 +31,7 @@
 //---- BEGIN controller stuff ----
 
 //add tags
-- (void)addTagToTags:(NSString*)tag {
+- (void)addTagToTags:(PATag*)tag {
 	[self addTagsToTags:[NSArray arrayWithObject:tag]];
 }
 
@@ -41,7 +41,7 @@
 		if (![tags containsObject:[otherTags objectAtIndex:i]]) {
 			[tags addObject:[otherTags objectAtIndex:i]];
 		} else {
-			NSLog(@"not adding tag @%, already present",[otherTags objectAtIndex:i]);
+			NSLog(@"not adding tag %@, already present",[otherTags objectAtIndex:i]);
 		}
 	}
 }
@@ -51,7 +51,7 @@
 	[tags removeAllObjects];
 }
 
-- (void)removeTagFromTags:(NSString*)tag {
+- (void)removeTagFromTags:(PATag*)tag {
 	[self removeTagsFromTags:[NSArray arrayWithObject:tag]];
 }
 

@@ -13,11 +13,11 @@
 	[drawer setContentView:sidebarNibView];
 	[drawer toggle:self];
 
-	relatedTags = [[PARelatedTags alloc] init];
-	selectedTags = [[PASelectedTags alloc] init];
-	
 	query = [[NSMetadataQuery alloc] init];
 	[query setNotificationBatchingInterval:0.3]; 
+
+	relatedTags = [[PARelatedTags alloc] initWithQuery:query];
+	selectedTags = [[PASelectedTags alloc] init];
 	
 	//hoffart test code
 	ti = [PATaggerInterface new];
@@ -44,7 +44,10 @@
 }
 
 -(IBAction)hoffartTest:(id)sender {
-	[ti addTagToFile:[textfieldJohannes stringValue] filePath:@"/Users/darklight/Desktop/punakea_test"];
+	PATag *tag = [[PATag alloc] initWithName:@"test_tag" query:[NSString stringWithFormat:@"kMDItemKeywords = '%@'",[textfieldJohannes stringValue]]];
+	[selectedTags addTagToTags:tag];
+	[tag release];
+	[self selectedTagsHaveChanged];
 }
 
 // For OutlineView Bindings
@@ -79,6 +82,8 @@
 //---- BEGIN tag stuff ----
 //needs to be called whenever the active tags have been changed
 - (void)selectedTagsHaveChanged {
+	NSLog(@"%i",[query resultCount]);
+
 	//stop an active query
 	if ([query isStarted]) {
 		[query stopQuery];
@@ -90,18 +95,27 @@
 	NSEnumerator *e = [selectedTags objectEnumerator];
 	PATag *tag;
 	
+	//TODO hack, only looks for the first tag
+	if (tag = [e nextObject]) {
+		NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
+		[queryString appendString:anotherTagQuery];
+	}
+	
 	while (tag = [e nextObject]) {
-		NSString *anotherTagQuery = [NSString stringWithFormat:@" && %@",[tag query]];
+		NSString *anotherTagQuery = [NSString stringWithFormat:@" && (%@)",[tag query]];
 		[queryString appendString:anotherTagQuery];
 	}
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
+	NSLog(@"predicate: %@",predicate);
 	[query setPredicate:predicate];
 	
 	//only start if query isn't empty
 	if (![queryString isEqualToString:@""]) {
 		[query startQuery];
 	}
+	
+	NSLog(@"%i",[query resultCount]);
 }
 //---- END tag stuff ----
 @end

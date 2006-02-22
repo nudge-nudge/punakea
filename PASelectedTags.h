@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PATag.h"
 
 @interface PASelectedTags : NSObject {
 	NSMutableArray *tags;
@@ -15,10 +16,10 @@
 - (NSEnumerator*)objectEnumerator;
 
 //controller stuff
-- (void)addTagToTags:(NSString*)tag;
+- (void)addTagToTags:(PATag*)tag;
 - (void)addTagsToTags:(NSArray*)tags;
 - (void)clearTags;
-- (void)removeTagFromTags:(NSString*)tag;
+- (void)removeTagFromTags:(PATag*)tag;
 - (void)removeTagsFromTags:(NSArray*)tags;
 
 @end

@@ -25,6 +25,8 @@
 - (IBAction)danielTest:(id)sender;
 - (IBAction)hoffartTest:(id)sender;
 
+- (void)selectedTagsHaveChanged;
+
 // For OutlineView Bindings
 // - (NSMutableArray *) fileGroups;
 @end

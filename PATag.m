@@ -111,6 +111,10 @@
 	return useCount;
 }
 
+- (NSString*)description {
+	return [NSString stringWithString:name];
+}
+
 //---- BEGIN isEqual: stuff ----
 - (BOOL)isEqual:(id)other {
 	if (!other || ![other isKindOfClass:[self class]]) 
