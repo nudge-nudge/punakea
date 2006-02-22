@@ -51,6 +51,10 @@
 	[self selectedTagsHaveChanged];
 }
 
+- (NSMetadataQuery*)query {
+	return query;
+}
+
 //returns the path to file instead of the NSMetadataItem ... important for binding
 - (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result {
 	return [result valueForKey:@"kMDItemPath"];

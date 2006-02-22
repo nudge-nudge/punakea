@@ -26,6 +26,7 @@
 - (IBAction)hoffartTest:(id)sender;
 
 //for NSMetadataQuery
+- (NSMetadataQuery*)query;
 - (void)selectedTagsHaveChanged;
 - (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result;
 
