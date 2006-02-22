@@ -25,7 +25,9 @@
 - (IBAction)danielTest:(id)sender;
 - (IBAction)hoffartTest:(id)sender;
 
+//for NSMetadataQuery
 - (void)selectedTagsHaveChanged;
+- (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result;
 
 // For OutlineView Bindings
 // - (NSMutableArray *) fileGroups;

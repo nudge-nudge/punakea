@@ -14,7 +14,8 @@
 	[drawer toggle:self];
 
 	query = [[NSMetadataQuery alloc] init];
-	[query setNotificationBatchingInterval:0.3]; 
+	[query setNotificationBatchingInterval:0.3];
+	[query setDelegate:self];
 
 	relatedTags = [[PARelatedTags alloc] initWithQuery:query];
 	selectedTags = [[PASelectedTags alloc] init];
@@ -48,6 +49,11 @@
 	[selectedTags addTagToTags:tag];
 	[tag release];
 	[self selectedTagsHaveChanged];
+}
+
+//returns the path to file instead of the NSMetadataItem ... important for binding
+- (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result {
+	return [result valueForKey:@"kMDItemPath"];
 }
 
 // For OutlineView Bindings

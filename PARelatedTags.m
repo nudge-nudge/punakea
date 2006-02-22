@@ -52,7 +52,7 @@
 	while (i--) {
 		//get keywords for result
 		NSMetadataItem *mditem =  [query resultAtIndex:i];
-		NSArray *keywords = [[PATaggerInterface sharedInstance] getTagsForFile:[mditem valueForKey:@"kMDItemPath"]];
+		NSArray *keywords = [[PATaggerInterface sharedInstance] getTagsForFile:mditem];
 		
 		int j = [keywords count];
 		while (j--) {
@@ -63,8 +63,8 @@
 	}
 	[query enableUpdates];
 	
-	NSLog(@"related: %@",tags);
 	NSLog(@"%i results: %@",[query resultCount],[query results]);
+	NSLog(@"related: %@",tags);
 }
 
 @end
