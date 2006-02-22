@@ -34,26 +34,32 @@
 
 //act on query notifications -- relatedTags need to be kept in sync with files
 - (void)queryNote:(NSNotification*)note {
-	if ([[note name] isEqualToString:NSMetadataQueryDidUpdateNotification]) {
-		//disable updates, parse files, continue -- TODO make more efficient, performance will SUCK
-		[tags removeAllObjects];
+	if ([[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification] 
+		|| [[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]
+		|| [[note name] isEqualToString:NSMetadataQueryDidUpdateNotification]) {
+		updateRelatedTags:;
+	}
+}
+
+- (void)updateRelatedTags {
+	//disable updates, parse files, continue -- TODO make more efficient, performance will SUCK
+	[tags removeAllObjects];
+	
+	[query disableUpdates];
+	
+	int i = [query resultCount];
+	while (i--) {
+		//get keywords for result
+		NSArray *keywords = [[PATaggerInterface sharedInstance] getTagsForFile:[query resultAtIndex:i]];
 		
-		[query disableUpdates];
-		
-		int i = [query resultCount];
-		while (i--) {
-			//get keywords for result
-			NSArray *keywords = [[PATaggerInterface sharedInstance] getTagsForFile:[query resultAtIndex:i]];
-			
-			int j = [keywords count];
-			while (j--) {
-				if (![tags containsObject:[keywords objectAtIndex:j]]) {
-					[tags addObject:[keywords objectAtIndex:i]];
-				}
+		int j = [keywords count];
+		while (j--) {
+			if (![tags containsObject:[keywords objectAtIndex:j]]) {
+				[tags addObject:[keywords objectAtIndex:i]];
 			}
 		}
-		[query enableUpdates];
 	}
+	[query enableUpdates];
 }
 
 @end
