@@ -13,8 +13,11 @@
 	[drawer setContentView:sidebarNibView];
 	[drawer toggle:self];
 
-	relatedTags = [[relatedTags alloc] init];
-	selectedTags = [[selectedTags alloc] init];
+	relatedTags = [[PARelatedTags alloc] init];
+	selectedTags = [[PASelectedTags alloc] init];
+	
+	query = [[NSMetadataQuery alloc] init];
+	[query setNotificationBatchingInterval:0.3]; 
 	
 	//hoffart test code
 	ti = [PATaggerInterface new];
