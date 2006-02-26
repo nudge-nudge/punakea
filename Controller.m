@@ -64,9 +64,30 @@
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setNotificationBatchingInterval:0.3];
 		[_query setDelegate:self];
+		
+		NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
+        [nf addObserver:self selector:@selector(queryNote:) name:nil object:_query];
+		
 		myString = @"My String";
     }
     return self;
+}
+
+- (void)queryNote:(NSNotification *)note {
+    // The NSMetadataQuery will send back a note when updates are happening. By looking at the [note name], we can tell what is happening
+    if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification]) {
+        // The query has just started!
+        NSLog(@"Started gathering");
+    } else if ([[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification]) {
+        // At this point, the query will be done. You may recieve an update later on.
+        NSLog(@"Finished gathering");
+    } else if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]) {
+        // The query is still gatherint results...
+        NSLog(@"Progressing...");
+    } else if ([[note name] isEqualToString:NSMetadataQueryDidUpdateNotification]) {
+        // An update will happen when Spotlight notices that a file as added, removed, or modified that affected the search results.
+        NSLog(@"An update happened.");
+    }
 }
 
 - (void) dealloc

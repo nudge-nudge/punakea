@@ -27,17 +27,24 @@
 	[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
 	
 	// MDQueryRef query;
-	_query = MDQueryCreate(kCFAllocatorDefault,
+	/*_query = MDQueryCreate(kCFAllocatorDefault,
 						  (CFStringRef*) queryString,
 						  NULL,
 						  NULL);
-	MDQueryExecute(_query, kMDQuerySynchronous);
+	MDQueryExecute(_query, kMDQuerySynchronous);*/
+	NSPredicate *predicateToRun = nil;
+	NSString *predicateFormat = @"kMDItemTextContent == %@";
+	predicateToRun = [NSPredicate predicateWithFormat:predicateFormat, [textfieldDaniel stringValue]];
 	
-	CFIndex count = MDQueryGetResultCount(_query);
+	[_query setPredicate:predicateToRun]; 
+	
+	[_query startQuery];
+	
+	/*CFIndex count = MDQueryGetResultCount(_query);
 	for (i = 0; i < count; i++) {
 		MDItemRef item = MDQueryGetResultAtIndex(_query, i);
 		CFTypeRef typeref = MDItemCopyAttribute(item, CFSTR("kMDItemPath"));
 		NSLog((CFStringRef) typeref);
-	}
+	}*/
 }
 @end
