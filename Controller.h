@@ -20,13 +20,15 @@
 	//Spotlight query stuff
 	PASelectedTags *selectedTags;
 	PARelatedTags *relatedTags;
-	NSMetadataQuery *query;
+	
+	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
+	NSMetadataQuery *_query;
 }
 - (IBAction)danielTest:(id)sender;
 - (IBAction)hoffartTest:(id)sender;
 
 //for NSMetadataQuery
-- (NSMetadataQuery*)query;
+- (NSMetadataQuery *)query;
 - (void)selectedTagsHaveChanged;
 - (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result;
 

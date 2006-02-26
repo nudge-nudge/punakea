@@ -13,11 +13,7 @@
 	[drawer setContentView:sidebarNibView];
 	[drawer toggle:self];
 
-	query = [[NSMetadataQuery alloc] init];
-	[query setNotificationBatchingInterval:0.3];
-	[query setDelegate:self];
-
-	relatedTags = [[PARelatedTags alloc] initWithQuery:query];
+	relatedTags = [[PARelatedTags alloc] initWithQuery:_query];
 	selectedTags = [[PASelectedTags alloc] init];
 	
 	//hoffart test code
@@ -51,21 +47,23 @@
 	[self selectedTagsHaveChanged];
 }
 
-- (NSMetadataQuery*)query {
-	return query;
+- (NSMetadataQuery *)query {
+	return _query;
 }
 
 //returns the path to file instead of the NSMetadataItem ... important for binding
-- (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result {
+/*- (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result {
 	return [result valueForKey:@"kMDItemPath"];
-}
+}*/
 
 // For OutlineView Bindings
 - (id) init
 {
     if (self = [super init])
     {
-        fileGroups = [[NSMutableArray alloc] init];
+		_query = [[NSMetadataQuery alloc] init];
+		[_query setNotificationBatchingInterval:0.3];
+		[_query setDelegate:self];
 		myString = @"My String";
     }
     return self;
@@ -73,7 +71,7 @@
 
 - (void) dealloc
 {
-    [fileGroups release];
+    [_query release];
     [relatedTags release];
 	[selectedTags release];
 	
@@ -92,11 +90,11 @@
 //---- BEGIN tag stuff ----
 //needs to be called whenever the active tags have been changed
 - (void)selectedTagsHaveChanged {
-	NSLog(@"%i",[query resultCount]);
+	NSLog(@"%i",[_query resultCount]);
 
 	//stop an active query
-	if ([query isStarted]) {
-		[query stopQuery];
+	if ([_query isStarted]) {
+		[_query stopQuery];
 	}
 
 	NSMutableString *queryString = [NSMutableString stringWithString:@""];
@@ -118,11 +116,11 @@
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
 	NSLog(@"predicate: %@",predicate);
-	[query setPredicate:predicate];
+	[_query setPredicate:predicate];
 	
 	//only start if query isn't empty
 	if (![queryString isEqualToString:@""]) {
-		[query startQuery];
+		[_query startQuery];
 	}
 }
 //---- END tag stuff ----

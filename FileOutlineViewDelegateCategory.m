@@ -23,16 +23,19 @@
 	[queryString appendString:[textfieldDaniel stringValue]];
 	[queryString appendString:@"'"];
 	
-	MDQueryRef query;
-	query = MDQueryCreate(kCFAllocatorDefault,
+	_query = [[NSMetadataQuery alloc] init];
+	[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
+	
+	// MDQueryRef query;
+	_query = MDQueryCreate(kCFAllocatorDefault,
 						  (CFStringRef*) queryString,
 						  NULL,
 						  NULL);
-	MDQueryExecute(query, kMDQuerySynchronous);
+	MDQueryExecute(_query, kMDQuerySynchronous);
 	
-	CFIndex count = MDQueryGetResultCount(query);
+	CFIndex count = MDQueryGetResultCount(_query);
 	for (i = 0; i < count; i++) {
-		MDItemRef item = MDQueryGetResultAtIndex(query, i);
+		MDItemRef item = MDQueryGetResultAtIndex(_query, i);
 		CFTypeRef typeref = MDItemCopyAttribute(item, CFSTR("kMDItemPath"));
 		NSLog((CFStringRef) typeref);
 	}
