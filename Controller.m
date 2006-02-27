@@ -63,6 +63,7 @@
     {
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setNotificationBatchingInterval:0.3];
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
 		[_query setDelegate:self];
 		
 		NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
@@ -74,20 +75,7 @@
 }
 
 - (void)queryNote:(NSNotification *)note {
-    // The NSMetadataQuery will send back a note when updates are happening. By looking at the [note name], we can tell what is happening
-    if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification]) {
-        // The query has just started!
-        NSLog(@"Started gathering");
-    } else if ([[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification]) {
-        // At this point, the query will be done. You may recieve an update later on.
-        NSLog(@"Finished gathering");
-    } else if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]) {
-        // The query is still gatherint results...
-        NSLog(@"Progressing...");
-    } else if ([[note name] isEqualToString:NSMetadataQueryDidUpdateNotification]) {
-        // An update will happen when Spotlight notices that a file as added, removed, or modified that affected the search results.
-        NSLog(@"An update happened.");
-    }
+        NSLog([note name]);
 }
 
 - (void) dealloc
@@ -98,15 +86,6 @@
 	
     [super dealloc];
 }
-
-/*- (void) setFileGroups: (NSArray *)newFileGroups
-{
-    if (fileGroups != newFileGroups)
-    {
-        [fileGroups autorelease];
-        fileGroups = [[NSMutableArray alloc] initWithArray: newFileGroups];
-    }
-}*/
 
 //---- BEGIN tag stuff ----
 //needs to be called whenever the active tags have been changed
