@@ -15,6 +15,8 @@
 	NSMetadataQuery *query;
 }
 
+- (NSArray *)tags;
+
 - (id)initWithQuery:(NSMetadataQuery*)query;
 - (void)updateRelatedTags;
 

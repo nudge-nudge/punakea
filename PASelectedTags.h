@@ -15,6 +15,8 @@
 
 - (NSEnumerator*)objectEnumerator;
 
+- (NSArray *)tags;
+
 //controller stuff
 - (void)addTagToTags:(PATag*)tag;
 - (void)addTagsToTags:(NSArray*)tags;

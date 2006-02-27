@@ -24,6 +24,10 @@
 	[super dealloc];
 }
 
+- (NSArray *)tags {
+	return tags;
+}
+
 - (NSEnumerator*)objectEnumerator {
 	return [tags objectEnumerator];
 }

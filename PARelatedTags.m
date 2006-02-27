@@ -32,6 +32,10 @@
 	[super dealloc];
 }
 
+- (NSArray *)tags {
+	return tags;
+}
+
 //act on query notifications -- relatedTags need to be kept in sync with files
 - (void)queryNote:(NSNotification*)note {
 	NSLog(@"received note");

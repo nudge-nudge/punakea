@@ -11,7 +11,7 @@
 	
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
-	[drawer toggle:self];
+	//[drawer toggle:self];
 
 	relatedTags = [[PARelatedTags alloc] initWithQuery:_query];
 	selectedTags = [[PASelectedTags alloc] init];
@@ -51,6 +51,14 @@
 	return _query;
 }
 
+- (PASelectedTags *)selectedTags {
+	return selectedTags;
+}
+
+- (PARelatedTags *)relatedTags {
+	return relatedTags;
+}
+
 //returns the path to file instead of the NSMetadataItem ... important for binding
 /*- (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result {
 	return [result valueForKey:@"kMDItemPath"];
@@ -64,7 +72,6 @@
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setNotificationBatchingInterval:0.3];
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
-		[_query setDelegate:self];
 		
 		NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
         [nf addObserver:self selector:@selector(queryNote:) name:nil object:_query];

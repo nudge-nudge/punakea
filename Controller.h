@@ -29,8 +29,9 @@
 
 //for NSMetadataQuery
 - (NSMetadataQuery *)query;
+- (PASelectedTags *)selectedTags;
+- (PARelatedTags *)relatedTags;
 - (void)selectedTagsHaveChanged;
-- (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result;
 
 // For OutlineView Bindings
 // - (NSMutableArray *) fileGroups;
