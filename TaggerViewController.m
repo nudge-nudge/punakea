@@ -3,7 +3,7 @@
 @implementation TaggerViewController
 
 - (void)awakeFromNib {
-	ti = [[PATaggerInterface alloc] init];
+	ti = [[PATagger alloc] init];
 }
 
 - (IBAction)setTagsForFile:(id)sender {

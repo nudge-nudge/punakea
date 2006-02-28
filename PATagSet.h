@@ -9,11 +9,15 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface PATagSet : NSObject {
+@interface PATagSet : NSObject <NSCoding> {
 	NSString *name;
 	NSArray *tags;
 }
 
 -(id)initWithTags:(NSArray*)newTags name:(NSString*)aName;
+
+//NSCoding
+- (id)initWithCoder:(NSCoder*)coder;
+- (void)encodeWithCoder:(NSCoder*)coder;
 
 @end

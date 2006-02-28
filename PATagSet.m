@@ -42,4 +42,13 @@
 	[super dealloc];
 }
 
+//NSCoding
+- (id)initWithCoder:(NSCoder*)coder {
+	//TODO
+}
+
+- (void)encodeWithCoder:(NSCoder*)coder {
+	//TODO
+}
+
 @end

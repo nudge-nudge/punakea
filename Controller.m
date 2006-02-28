@@ -1,6 +1,6 @@
 #import "Controller.h"
 #import "SubViewController.h"
-#import "PATaggerInterface.h"
+#import "PATagger.h"
 #import "FileGroup.h"
 
 @implementation Controller

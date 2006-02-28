@@ -1,7 +1,7 @@
 /* PARelatedTagsController */
 
 #import <Cocoa/Cocoa.h>
-#import "PATaggerInterface.h"
+#import "PATagger.h"
 
 @interface PARelatedTagsController : NSArrayController {
 	NSNotificationCenter *nf;

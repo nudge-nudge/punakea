@@ -1,7 +1,7 @@
 /* Controller */
 
 #import <Cocoa/Cocoa.h>
-#import "PATaggerInterface.h"
+#import "PATagger.h"
 #import "PASelectedTagsController.h"
 #import "PARelatedTagsController.h"
 
@@ -14,7 +14,7 @@
 	IBOutlet PARelatedTagsController *relatedTagsController;
 	
 	NSView *sidebarNibView;
-	PATaggerInterface *ti;
+	PATagger *tagger;
 	
 	// For OutlineView Bindings
 	NSMutableArray *fileGroups;

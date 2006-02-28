@@ -9,7 +9,7 @@
     self = [super init];
     if(self)
 	{
-			_owner = owner;  // Here we store a pointer to the object's owner.  
+		_owner = owner;  // Here we store a pointer to the object's owner.  
 						 // This is normally not done because it hinders
 						 // code reusability but this class is for a specific 
 						 // purpose.

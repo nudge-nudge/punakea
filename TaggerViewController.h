@@ -1,13 +1,13 @@
 /* TaggerViewController */
 
 #import <Cocoa/Cocoa.h>
-#import "PATaggerInterface.h"
+#import "PATagger.h"
 #import "PATag.h"
 
 @interface TaggerViewController : NSWindowController {
     IBOutlet NSTextField *filePath;
     IBOutlet NSTextField *tagList;
-	PATaggerInterface *ti;
+	PATagger *tagger;
 }
 - (IBAction)setTagsForFile:(id)sender;
 @end
