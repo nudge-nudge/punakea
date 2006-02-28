@@ -5,6 +5,23 @@
 
 @implementation Controller
 
+// For OutlineView Bindings
+- (id) init
+{
+    if (self = [super init])
+    {
+		_query = [[NSMetadataQuery alloc] init];
+		[_query setNotificationBatchingInterval:0.3];
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
+		
+		NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
+        [nf addObserver:self selector:@selector(queryNote:) name:nil object:_query];
+		
+		myString = @"My String";
+    }
+    return self;
+}
+
 - (void)awakeFromNib
 {
 	[self setupToolbar];
@@ -12,12 +29,7 @@
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
 	//[drawer toggle:self];
-
-	relatedTags = [[PARelatedTags alloc] initWithQuery:_query];
-	selectedTags = [[PASelectedTags alloc] init];
-	
-	//hoffart test code
-	ti = [PATaggerInterface new];
+	[relatedTagsController setupWithQuery:_query];
 }
 
 - (void)setupToolbar
@@ -41,9 +53,9 @@
 }
 
 -(IBAction)hoffartTest:(id)sender {
-	PATag *tag = [[PATag alloc] initWithName:@"test_tag" query:[NSString stringWithFormat:@"kMDItemKeywords = '%@'",[textfieldJohannes stringValue]]];
-	[selectedTags addTagToTags:tag];
-	[tag release];
+	//PATag *tag = [[PATag alloc] initWithName:@"test_tag" query:[NSString stringWithFormat:@"kMDItemKeywords = '%@'",[textfieldJohannes stringValue]]];
+	//[selectedTags addTagToTags:tag];
+	//[tag release];
 	[self selectedTagsHaveChanged];
 }
 
@@ -51,35 +63,10 @@
 	return _query;
 }
 
-- (PASelectedTags *)selectedTags {
-	return selectedTags;
-}
-
-- (PARelatedTags *)relatedTags {
-	return relatedTags;
-}
-
 //returns the path to file instead of the NSMetadataItem ... important for binding
 /*- (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result {
 	return [result valueForKey:@"kMDItemPath"];
 }*/
-
-// For OutlineView Bindings
-- (id) init
-{
-    if (self = [super init])
-    {
-		_query = [[NSMetadataQuery alloc] init];
-		[_query setNotificationBatchingInterval:0.3];
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
-		
-		NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
-        [nf addObserver:self selector:@selector(queryNote:) name:nil object:_query];
-		
-		myString = @"My String";
-    }
-    return self;
-}
 
 - (void)queryNote:(NSNotification *)note {
         NSLog([note name]);
@@ -87,10 +74,7 @@
 
 - (void) dealloc
 {
-    [_query release];
-    [relatedTags release];
-	[selectedTags release];
-	
+    [_query release];	
     [super dealloc];
 }
 
@@ -107,10 +91,9 @@
 	NSMutableString *queryString = [NSMutableString stringWithString:@""];
 	
 	//append all the tags queries to the string
-	NSEnumerator *e = [selectedTags objectEnumerator];
+	NSEnumerator *e = [[selectedTagsController arrangedObjects] objectEnumerator];
 	PATag *tag;
 	
-	//TODO hack, only looks for the first tag
 	if (tag = [e nextObject]) {
 		NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
 		[queryString appendString:anotherTagQuery];

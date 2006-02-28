@@ -67,6 +67,9 @@
 	[aName retain];
 	[name release];
 	name = aName;
+	
+	//does this make sense? - TODO
+	[self setQuery:[NSString stringWithFormat:@"kMDItemKeywords = '%@'",name]];
 }
 
 - (void)setQuery:(NSString*)aQuery {

@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import <CoreServices/CoreServices.h>
-#import "PASelectedTags.h"
 #import "PATag.h"
 
 @interface PATaggerInterface : NSObject

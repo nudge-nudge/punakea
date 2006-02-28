@@ -4,11 +4,27 @@
             ACTIONS = {danielTest = id; hoffartTest = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
-            OUTLETS = {drawer = id; textfieldDaniel = NSTextField; textfieldJohannes = NSTextField; }; 
+            OUTLETS = {
+                drawer = id; 
+                relatedTagsController = PARelatedTagsController; 
+                selectedTagsController = PASelectedTagsController; 
+                textfieldDaniel = NSTextField; 
+                textfieldJohannes = NSTextField; 
+            }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = PAFileViewTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
+        {
+            CLASS = PARelatedTagsController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSArrayController; 
+        }, 
+        {
+            CLASS = PASelectedTagsController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSArrayController; 
+        }, 
         {
             ACTIONS = {setTagsForFile = id; }; 
             CLASS = TaggerViewController; 
