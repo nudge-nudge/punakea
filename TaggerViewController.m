@@ -3,7 +3,7 @@
 @implementation TaggerViewController
 
 - (void)awakeFromNib {
-	ti = [[PATagger alloc] init];
+	tagger = [PATagger sharedInstance];
 }
 
 - (IBAction)setTagsForFile:(id)sender {
@@ -20,7 +20,7 @@
 	}		
 	
 	NSLog(@"trying to write %@ to %@",tags,[filePath stringValue]);
-	[ti addTagsToFile:tags filePath:[filePath stringValue]];
+	[tagger addTagsToFile:tags filePath:[filePath stringValue]];
 }
 
 @end

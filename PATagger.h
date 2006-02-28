@@ -10,10 +10,10 @@
 #import <CoreServices/CoreServices.h>
 #import "PATag.h"
 
-@interface PATaggerInterface : NSObject
+@interface PATagger : NSObject
 
 //get instance
-+(PATaggerInterface*)sharedInstance;
++(PATagger*)sharedInstance;
 
 //write tags
 -(void)addTagToFile:(PATag*)tag filePath:(NSString*)path;

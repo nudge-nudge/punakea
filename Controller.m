@@ -53,20 +53,12 @@
 }
 
 -(IBAction)hoffartTest:(id)sender {
-	//PATag *tag = [[PATag alloc] initWithName:@"test_tag" query:[NSString stringWithFormat:@"kMDItemKeywords = '%@'",[textfieldJohannes stringValue]]];
-	//[selectedTags addTagToTags:tag];
-	//[tag release];
 	[self selectedTagsHaveChanged];
 }
 
 - (NSMetadataQuery *)query {
 	return _query;
 }
-
-//returns the path to file instead of the NSMetadataItem ... important for binding
-/*- (id)metadataQuery:(NSMetadataQuery *)query replacementObjectForResultObject:(NSMetadataItem *)result {
-	return [result valueForKey:@"kMDItemPath"];
-}*/
 
 - (void)queryNote:(NSNotification *)note {
         NSLog([note name]);

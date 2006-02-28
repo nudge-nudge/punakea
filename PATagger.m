@@ -7,19 +7,19 @@
 //
 
 #import <CoreServices/CoreServices.h>
-#import "PATaggerInterface.h"
+#import "PATagger.h"
 #import "Matador.h"
 
 //private stuff
-@interface PATaggerInterface (PrivateAPI)
+@interface PATagger (PrivateAPI)
 -(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 
 @end
 
-@implementation PATaggerInterface
+@implementation PATagger
 
 //this is where the sharedInstance is held
-static PATaggerInterface *sharedInstance = nil;
+static PATagger *sharedInstance = nil;
 
 //constructor - only called by sharedInstance
 -(id)sharedInstanceInit {
@@ -98,7 +98,7 @@ static PATaggerInterface *sharedInstance = nil;
 }
 
 //---- BEGIN singleton stuff ----
-+(PATaggerInterface*)sharedInstance {
++(PATagger*)sharedInstance {
 	@synchronized(self) {
         if (sharedInstance == nil) {
             sharedInstance = [[self alloc] sharedInstanceInit];

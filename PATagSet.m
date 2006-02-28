@@ -44,11 +44,16 @@
 
 //NSCoding
 - (id)initWithCoder:(NSCoder*)coder {
-	//TODO
+	self = [super init];
+	if (self) {
+		//TODO
+	}
+	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder*)coder {
-	//TODO
+	[coder encodeObject:name forKey:@"name"];
+	[coder encodeObject:tags forKey:@"tags"];
 }
 
 @end

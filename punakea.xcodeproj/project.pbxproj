@@ -122,8 +122,8 @@
 		4825446C09B474A700DAA25A /* PARelatedTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTagsController.m; sourceTree = "<group>"; };
 		486D7C4D09A9B082009833BC /* PASystemTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASystemTag.h; sourceTree = "<group>"; };
 		486D7C4E09A9B082009833BC /* PASystemTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASystemTag.m; sourceTree = "<group>"; };
-		48AA6BF5099B78E300D8F70B /* PATagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = PATagger.h; sourceTree = "<group>"; };
-		48AA6BF6099B78E300D8F70B /* PATagger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = PATagger.m; sourceTree = "<group>"; };
+		48AA6BF5099B78E300D8F70B /* PATagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagger.h; sourceTree = "<group>"; };
+		48AA6BF6099B78E300D8F70B /* PATagger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagger.m; sourceTree = "<group>"; };
 		48C0C18B09B46D79004E16EA /* PASelectedTagsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagsController.h; sourceTree = "<group>"; };
 		48C0C18C09B46D79004E16EA /* PASelectedTagsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTagsController.m; sourceTree = "<group>"; };
 		48C93614099742D800699265 /* Matador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matador.h; sourceTree = "<group>"; };
@@ -477,11 +477,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS)",
-					"$(SRCROOT)/../../../../Shared/daniel/Products/Release",
-					"$(SRCROOT)/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(FRAMEWORK_SEARCH_PATHS)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -501,11 +497,7 @@
 					ppc,
 					i386,
 				);
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS)",
-					"$(SRCROOT)/../../../../Shared/daniel/Products/Release",
-					"$(SRCROOT)/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(FRAMEWORK_SEARCH_PATHS)";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;

@@ -17,7 +17,6 @@
 
 @implementation Controller (FileOutlineViewDelegateCategory)
 - (IBAction)danielTest:(id)sender {
-	int i;
 	
 	NSMutableString *queryString = [NSMutableString stringWithString:@"kMDItemTextContent == '"];
 	[queryString appendString:[textfieldDaniel stringValue]];
