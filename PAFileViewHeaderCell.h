@@ -2,7 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PAFileViewHeaderCell : NSCell
+@interface PAFileViewHeaderCell : NSActionCell
 {
 }
 @end
