@@ -1,7 +1,7 @@
 /* PAFileViewTableColumn */
 
 #import <Cocoa/Cocoa.h>
-#import "PAFileViewHeaderCell.h"
+#import "PASpotlightTypeCell.h"
 
 @interface PAFileViewTableColumn : NSTableColumn
 {
