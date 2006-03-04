@@ -26,8 +26,6 @@
 		6510E0DD09A734E800E0F73A /* PAFileViewTableColumn.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */; };
 		6510E0DE09A734E800E0F73A /* PAFileViewTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */; };
 		6510E0E409A7356D00E0F73A /* File.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6510E0E209A7356D00E0F73A /* File.h */; };
-		6510E0F209A7369600E0F73A /* FileGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6510E0F009A7369600E0F73A /* FileGroup.h */; };
-		6510E0F309A7369600E0F73A /* FileGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6510E0F109A7369600E0F73A /* FileGroup.m */; };
 		6510E14D09A739CC00E0F73A /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 6510E14B09A739CC00E0F73A /* File.m */; };
 		651B29E109B9ADB8002299FB /* PAFileViewHeaderCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651B29DF09B9ADB8002299FB /* PAFileViewHeaderCell.h */; };
 		651B29E209B9ADB8002299FB /* PAFileViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 651B29E009B9ADB8002299FB /* PAFileViewHeaderCell.m */; };
@@ -41,8 +39,6 @@
 		6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */; };
 		6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20409963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff */; };
 		6562A20909963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20509963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff */; };
-		657D79DB099B7D5700101A0E /* PAFileOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 657D79D9099B7D5700101A0E /* PAFileOutlineView.h */; };
-		657D79DC099B7D5700101A0E /* PAFileOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 657D79DA099B7D5700101A0E /* PAFileOutlineView.m */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
@@ -90,7 +86,6 @@
 				48C9362E099743F200699265 /* NSObject.h in CopyFiles */,
 				65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */,
 				48AA6BF7099B78E300D8F70B /* PATagger.h in CopyFiles */,
-				657D79DB099B7D5700101A0E /* PAFileOutlineView.h in CopyFiles */,
 				651CF1A0099B9F98007E48DD /* SidebarDelegateCategory.h in CopyFiles */,
 				651CF1D1099BA213007E48DD /* FileOutlineViewDelegateCategory.h in CopyFiles */,
 				481BF27809A3128600EBD7BA /* PATag.h in CopyFiles */,
@@ -98,7 +93,6 @@
 				48E9C2F709A5C27600415AC7 /* TaggerViewController.h in CopyFiles */,
 				6510E0DD09A734E800E0F73A /* PAFileViewTableColumn.h in CopyFiles */,
 				6510E0E409A7356D00E0F73A /* File.h in CopyFiles */,
-				6510E0F209A7369600E0F73A /* FileGroup.h in CopyFiles */,
 				486D7C4F09A9B082009833BC /* PASystemTag.h in CopyFiles */,
 				48C0C18D09B46D79004E16EA /* PASelectedTagsController.h in CopyFiles */,
 				4825446D09B474A700DAA25A /* PARelatedTagsController.h in CopyFiles */,
@@ -136,8 +130,6 @@
 		6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAFileViewTableColumn.h; sourceTree = "<group>"; };
 		6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileViewTableColumn.m; sourceTree = "<group>"; };
 		6510E0E209A7356D00E0F73A /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
-		6510E0F009A7369600E0F73A /* FileGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileGroup.h; sourceTree = "<group>"; };
-		6510E0F109A7369600E0F73A /* FileGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileGroup.m; sourceTree = "<group>"; };
 		6510E14B09A739CC00E0F73A /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
 		651B29DF09B9ADB8002299FB /* PAFileViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAFileViewHeaderCell.h; sourceTree = "<group>"; };
 		651B29E009B9ADB8002299FB /* PAFileViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileViewHeaderCell.m; sourceTree = "<group>"; };
@@ -151,8 +143,6 @@
 		6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sidebarSelectionBackgroundFocus.tiff; path = Resources/sidebarSelectionBackgroundFocus.tiff; sourceTree = SOURCE_ROOT; };
 		6562A20409963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = sidebarSelectionBackgroundFocusSmall.tiff; sourceTree = "<group>"; };
 		6562A20509963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = sidebarSelectionBackgroundSmall.tiff; sourceTree = "<group>"; };
-		657D79D9099B7D5700101A0E /* PAFileOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAFileOutlineView.h; sourceTree = "<group>"; };
-		657D79DA099B7D5700101A0E /* PAFileOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileOutlineView.m; sourceTree = "<group>"; };
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
@@ -311,8 +301,6 @@
 		65AAA754099B724500F14C52 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				657D79D9099B7D5700101A0E /* PAFileOutlineView.h */,
-				657D79DA099B7D5700101A0E /* PAFileOutlineView.m */,
 				6510E0E209A7356D00E0F73A /* File.h */,
 				6510E14B09A739CC00E0F73A /* File.m */,
 				651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */,
@@ -321,8 +309,6 @@
 				651B29E009B9ADB8002299FB /* PAFileViewHeaderCell.m */,
 				6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */,
 				6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */,
-				6510E0F009A7369600E0F73A /* FileGroup.h */,
-				6510E0F109A7369600E0F73A /* FileGroup.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -435,14 +421,12 @@
 				65C341BD0996107300C3B5AC /* PASidebarCell.m in Sources */,
 				65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */,
 				48AA6BF8099B78E300D8F70B /* PATagger.m in Sources */,
-				657D79DC099B7D5700101A0E /* PAFileOutlineView.m in Sources */,
 				651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */,
 				651CF1D2099BA213007E48DD /* FileOutlineViewDelegateCategory.m in Sources */,
 				481BF27909A3128700EBD7BA /* PATag.m in Sources */,
 				481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */,
 				48E9C2F609A5C27600415AC7 /* TaggerViewController.m in Sources */,
 				6510E0DE09A734E800E0F73A /* PAFileViewTableColumn.m in Sources */,
-				6510E0F309A7369600E0F73A /* FileGroup.m in Sources */,
 				6510E14D09A739CC00E0F73A /* File.m in Sources */,
 				486D7C5009A9B082009833BC /* PASystemTag.m in Sources */,
 				48C0C18E09B46D79004E16EA /* PASelectedTagsController.m in Sources */,
