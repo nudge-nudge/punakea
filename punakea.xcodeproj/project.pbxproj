@@ -29,6 +29,8 @@
 		6510E0F209A7369600E0F73A /* FileGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6510E0F009A7369600E0F73A /* FileGroup.h */; };
 		6510E0F309A7369600E0F73A /* FileGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6510E0F109A7369600E0F73A /* FileGroup.m */; };
 		6510E14D09A739CC00E0F73A /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 6510E14B09A739CC00E0F73A /* File.m */; };
+		651B29E109B9ADB8002299FB /* PAFileViewHeaderCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651B29DF09B9ADB8002299FB /* PAFileViewHeaderCell.h */; };
+		651B29E209B9ADB8002299FB /* PAFileViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 651B29E009B9ADB8002299FB /* PAFileViewHeaderCell.m */; };
 		651CF1A0099B9F98007E48DD /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */; };
 		651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */; };
 		651CF1D1099BA213007E48DD /* FileOutlineViewDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */; };
@@ -100,6 +102,7 @@
 				486D7C4F09A9B082009833BC /* PASystemTag.h in CopyFiles */,
 				48C0C18D09B46D79004E16EA /* PASelectedTagsController.h in CopyFiles */,
 				4825446D09B474A700DAA25A /* PARelatedTagsController.h in CopyFiles */,
+				651B29E109B9ADB8002299FB /* PAFileViewHeaderCell.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +139,8 @@
 		6510E0F009A7369600E0F73A /* FileGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileGroup.h; sourceTree = "<group>"; };
 		6510E0F109A7369600E0F73A /* FileGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileGroup.m; sourceTree = "<group>"; };
 		6510E14B09A739CC00E0F73A /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
+		651B29DF09B9ADB8002299FB /* PAFileViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAFileViewHeaderCell.h; sourceTree = "<group>"; };
+		651B29E009B9ADB8002299FB /* PAFileViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileViewHeaderCell.m; sourceTree = "<group>"; };
 		651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
 		651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
 		651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOutlineViewDelegateCategory.h; sourceTree = "<group>"; };
@@ -308,12 +313,14 @@
 			children = (
 				657D79D9099B7D5700101A0E /* PAFileOutlineView.h */,
 				657D79DA099B7D5700101A0E /* PAFileOutlineView.m */,
-				651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */,
-				651CF1D0099BA213007E48DD /* FileOutlineViewDelegateCategory.m */,
-				6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */,
-				6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */,
 				6510E0E209A7356D00E0F73A /* File.h */,
 				6510E14B09A739CC00E0F73A /* File.m */,
+				651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */,
+				651CF1D0099BA213007E48DD /* FileOutlineViewDelegateCategory.m */,
+				651B29DF09B9ADB8002299FB /* PAFileViewHeaderCell.h */,
+				651B29E009B9ADB8002299FB /* PAFileViewHeaderCell.m */,
+				6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */,
+				6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */,
 				6510E0F009A7369600E0F73A /* FileGroup.h */,
 				6510E0F109A7369600E0F73A /* FileGroup.m */,
 			);
@@ -440,6 +447,7 @@
 				486D7C5009A9B082009833BC /* PASystemTag.m in Sources */,
 				48C0C18E09B46D79004E16EA /* PASelectedTagsController.m in Sources */,
 				4825446E09B474A700DAA25A /* PARelatedTagsController.m in Sources */,
+				651B29E209B9ADB8002299FB /* PAFileViewHeaderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

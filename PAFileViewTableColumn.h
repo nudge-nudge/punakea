@@ -4,5 +4,6 @@
 
 @interface PAFileViewTableColumn : NSTableColumn
 {
+	PAFileViewHeaderCell* headerCell;
 }
 @end
