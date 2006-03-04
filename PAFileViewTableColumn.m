@@ -6,10 +6,8 @@
 {
    if(!typeCell)
    {
-      typeCell = [[NSButtonCell alloc] initTextCell:@"hallo"];
-      [typeCell setButtonType:NSSwitchButton];
+      typeCell = [[PASpotlightTypeCell alloc] initTextCell:@"hallo"];
       [typeCell setControlSize:NSSmallControlSize];
-      [typeCell setImagePosition:NSImageOnly];
    }
    return typeCell;
 }

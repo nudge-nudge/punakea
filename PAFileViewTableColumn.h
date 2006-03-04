@@ -5,6 +5,6 @@
 
 @interface PAFileViewTableColumn : NSTableColumn
 {
-	PAFileViewHeaderCell* typeCell;
+	PASpotlightTypeCell* typeCell;
 }
 @end
