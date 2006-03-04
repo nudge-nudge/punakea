@@ -4,5 +4,6 @@
 
 @interface PASpotlightTypeCell : NSActionCell
 {
+	NSString* text;
 }
 @end

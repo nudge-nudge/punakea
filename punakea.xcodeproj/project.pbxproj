@@ -42,6 +42,7 @@
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
+		65A4079709B9D6BA00B151F4 /* MD0-0-Middle-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65A4079609B9D6BA00B151F4 /* MD0-0-Middle-1.tiff */; };
 		65B172F4099562A700B10322 /* PASidebarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B172F2099562A700B10322 /* PASidebarView.h */; };
 		65B172F5099562A700B10322 /* PASidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B172F3099562A700B10322 /* PASidebarView.m */; };
 		65C341BC0996107300C3B5AC /* PASidebarCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C341BA0996107300C3B5AC /* PASidebarCell.h */; };
@@ -146,6 +147,7 @@
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
+		65A4079609B9D6BA00B151F4 /* MD0-0-Middle-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MD0-0-Middle-1.tiff"; sourceTree = "<group>"; };
 		65B172F2099562A700B10322 /* PASidebarView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarView.h; sourceTree = "<group>"; };
 		65B172F3099562A700B10322 /* PASidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarView.m; sourceTree = "<group>"; };
 		65C341BA0996107300C3B5AC /* PASidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarCell.h; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		6562A1D40996399100DBE7DB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				65A4079109B9D53200B151F4 /* FileView */,
 				6562A1FF09963BD000DBE7DB /* Sidebar */,
 			);
 			name = Images;
@@ -296,6 +299,14 @@
 				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		65A4079109B9D53200B151F4 /* FileView */ = {
+			isa = PBXGroup;
+			children = (
+				65A4079609B9D6BA00B151F4 /* MD0-0-Middle-1.tiff */,
+			);
+			name = FileView;
 			sourceTree = "<group>";
 		};
 		65AAA754099B724500F14C52 /* Views */ = {
@@ -403,6 +414,7 @@
 				6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */,
 				6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */,
 				6562A20909963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff in Resources */,
+				65A4079709B9D6BA00B151F4 /* MD0-0-Middle-1.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
