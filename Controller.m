@@ -1,7 +1,6 @@
 #import "Controller.h"
 #import "SubViewController.h"
 #import "PATagger.h"
-#import "FileGroup.h"
 
 @implementation Controller
 
@@ -16,8 +15,6 @@
 		
 		NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
         [nf addObserver:self selector:@selector(queryNote:) name:nil object:_query];
-		
-		myString = @"My String";
     }
     return self;
 }
@@ -30,6 +27,8 @@
 	[drawer setContentView:sidebarNibView];
 	//[drawer toggle:self];
 	[relatedTagsController setupWithQuery:_query];
+	
+	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
 }
 
 - (void)setupToolbar

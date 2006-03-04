@@ -8,17 +8,12 @@
 @interface Controller : NSWindowController
 {
     IBOutlet id drawer;
-    IBOutlet NSTextField *textfieldDaniel;
-    IBOutlet NSTextField *textfieldJohannes;
+    IBOutlet NSOutlineView *outlineView;
 	IBOutlet PASelectedTagsController *selectedTagsController;
 	IBOutlet PARelatedTagsController *relatedTagsController;
 	
 	NSView *sidebarNibView;
 	PATagger *tagger;
-	
-	// For OutlineView Bindings
-	NSMutableArray *fileGroups;
-	NSMutableString *myString;
 	
 	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
 	NSMetadataQuery *_query;

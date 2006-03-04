@@ -29,6 +29,8 @@
 		6510E14D09A739CC00E0F73A /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 6510E14B09A739CC00E0F73A /* File.m */; };
 		651B2AC109B9B5FB002299FB /* PASpotlightTypeCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651B2ABF09B9B5FB002299FB /* PASpotlightTypeCell.h */; };
 		651B2AC209B9B5FB002299FB /* PASpotlightTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 651B2AC009B9B5FB002299FB /* PASpotlightTypeCell.m */; };
+		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
+		651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */; };
 		651CF1A0099B9F98007E48DD /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */; };
 		651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */; };
 		651CF1D1099BA213007E48DD /* FileOutlineViewDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */; };
@@ -134,6 +136,8 @@
 		6510E14B09A739CC00E0F73A /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
 		651B2ABF09B9B5FB002299FB /* PASpotlightTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASpotlightTypeCell.h; sourceTree = "<group>"; };
 		651B2AC009B9B5FB002299FB /* PASpotlightTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASpotlightTypeCell.m; sourceTree = "<group>"; };
+		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
+		651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
 		651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
 		651CF1CF099BA213007E48DD /* FileOutlineViewDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileOutlineViewDelegateCategory.h; sourceTree = "<group>"; };
@@ -304,6 +308,8 @@
 		65A4079109B9D53200B151F4 /* FileView */ = {
 			isa = PBXGroup;
 			children = (
+				651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */,
+				651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */,
 				65A4079609B9D6BA00B151F4 /* MD0-0-Middle-1.tiff */,
 			);
 			name = FileView;
@@ -415,6 +421,8 @@
 				6562A20809963C5100DBE7DB /* sidebarSelectionBackgroundFocusSmall.tiff in Resources */,
 				6562A20909963C5100DBE7DB /* sidebarSelectionBackgroundSmall.tiff in Resources */,
 				65A4079709B9D6BA00B151F4 /* MD0-0-Middle-1.tiff in Resources */,
+				651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */,
+				651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

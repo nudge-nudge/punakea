@@ -1,7 +1,3 @@
-/*
-	D E P R E C A T E D
-*/
-
 //
 //  FileOutlineViewDelegateCategory.h
 //  Punakea

@@ -6,10 +6,9 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 drawer = id; 
+                outlineView = NSOutlineView; 
                 relatedTagsController = PARelatedTagsController; 
                 selectedTagsController = PASelectedTagsController; 
-                textfieldDaniel = NSTextField; 
-                textfieldJohannes = NSTextField; 
             }; 
             SUPERCLASS = NSWindowController; 
         }, 
