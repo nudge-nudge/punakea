@@ -31,6 +31,6 @@
 
 
 - (void)queryNote:(NSNotification *)note {
-        NSLog(@"queryNote received");
+        NSLog(@"fileMatrix: note received");
 }
 @end

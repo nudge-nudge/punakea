@@ -12,8 +12,6 @@
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setNotificationBatchingInterval:0.3];
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
-		
-		[fileMatrix initWithMetadataQuery:_query];
     }
     return self;
 }
@@ -26,6 +24,7 @@
 	[drawer setContentView:sidebarNibView];
 	//[drawer toggle:self];
 	[relatedTagsController setupWithQuery:_query];
+	[fileMatrix initWithMetadataQuery:_query];
 	
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
 }
