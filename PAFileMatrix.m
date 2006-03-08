@@ -7,6 +7,7 @@
 //
 
 #import "PAFileMatrix.h"
+#import "PASpotlightTypeCell.h"
 
 
 @implementation PAFileMatrix
@@ -27,10 +28,26 @@
 	query = aQuery;
 	NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
     [nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
+	
+	[self addSampleCells];
 }
 
+- (void)addSampleCells {
+	PASpotlightTypeCell* typeCell = [[PASpotlightTypeCell alloc] initTextCell:@"hallo"];
+	[self insertRow:1];
+	[self insertColumn:1];
+	[self putCell:typeCell atRow:0 column:0];
+}
+
+- (void)updateView {
+	
+}
 
 - (void)queryNote:(NSNotification *)note {
-        NSLog(@"fileMatrix: note received");
+	NSLog(@"fileMatrix: note received");
+	
+	if ([[note name] isEqualToString:@"NSMetadataQueryGatheringProgressNotification"]) {
+		[self updateView];
+	}
 }
 @end
