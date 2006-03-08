@@ -4,6 +4,7 @@
 #import "PATagger.h"
 #import "PASelectedTagsController.h"
 #import "PARelatedTagsController.h"
+#import "PAFileMatrix.h"
 
 @interface Controller : NSWindowController
 {
@@ -11,6 +12,7 @@
     IBOutlet NSOutlineView *outlineView;
 	IBOutlet PASelectedTagsController *selectedTagsController;
 	IBOutlet PARelatedTagsController *relatedTagsController;
+	IBOutlet PAFileMatrix *fileMatrix;
 	
 	NSView *sidebarNibView;
 	PATagger *tagger;

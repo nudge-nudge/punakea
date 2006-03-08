@@ -13,8 +13,7 @@
 		[_query setNotificationBatchingInterval:0.3];
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
 		
-		NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
-        [nf addObserver:self selector:@selector(queryNote:) name:nil object:_query];
+		[fileMatrix initWithMetadataQuery:_query];
     }
     return self;
 }
@@ -57,10 +56,6 @@
 
 - (NSMetadataQuery *)query {
 	return _query;
-}
-
-- (void)queryNote:(NSNotification *)note {
-        NSLog([note name]);
 }
 
 - (void) dealloc
