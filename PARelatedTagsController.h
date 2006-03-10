@@ -6,6 +6,8 @@
 @interface PARelatedTagsController : NSArrayController {
 	NSNotificationCenter *nf;
 	NSMetadataQuery *query;
+	NSMutableArray *tags;
+	NSMutableArray *relatedTags;
 }
 
 - (void)setupWithQuery:(NSMetadataQuery*)aQuery;

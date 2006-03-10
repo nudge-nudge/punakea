@@ -27,18 +27,22 @@
 - (IBAction)hoffartTest:(id)sender;
 
 //saving and loading
-- (NSString*) pathForDataFile;
-- (void) saveDataToDisk;
-- (void) loadDataFromDisk;
+- (NSString*)pathForDataFile;
+- (void)saveDataToDisk;
+- (void)loadDataFromDisk;
 
-- (void) applicationWillTerminate: (NSNotification *) note;
+- (void)applicationWillTerminate: (NSNotification *) note;
 
-- (NSMutableArray*) tags;
-- (void) setTags: (NSMutableArray*) otherTags;
+- (NSMutableArray*)tags;
+- (void)setTags:(NSMutableArray*)otherTags;
 
 //for NSMetadataQuery
 - (NSMetadataQuery *)query;
 - (void)selectedTagsHaveChanged;
+
+//for adding to selected
+- (void)addToSelectedTags;
+- (IBAction)clearSelectedTags:(id)sender;
 
 // For OutlineView Bindings
 // - (NSMutableArray *) fileGroups;

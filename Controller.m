@@ -26,7 +26,7 @@
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
 	//[drawer toggle:self];
-	[relatedTagsController setupWithQuery:_query];
+	[relatedTagsController setupWithQuery:_query tags:tags];
 	[fileMatrix initWithMetadataQuery:_query];
 	
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
@@ -81,7 +81,7 @@
     [super dealloc];
 }
 
-- (NSString *) pathForDataFile 
+- (NSString *)pathForDataFile 
 { 
 	NSFileManager *fileManager = [NSFileManager defaultManager]; 
 	NSString *folder = @"~/Library/Application Support/Punakea/"; 
@@ -96,7 +96,7 @@
 	return [folder stringByAppendingPathComponent: fileName]; 
 }
 
-- (void) saveDataToDisk 
+- (void)saveDataToDisk 
 {
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
@@ -104,26 +104,45 @@
 	[NSKeyedArchiver archiveRootObject:rootObject toFile:path]; 
 }
 
-- (void) loadDataFromDisk 
+- (void)loadDataFromDisk 
 {
 	NSString *path = [self pathForDataFile];
 	NSDictionary *rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
 	NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
 	
-	if ([loadedTags count] == 0) {
+	if ([loadedTags count] == 0) 
+	{
 		[self setTags:[[NSMutableArray alloc] init]];
-	} 	else {
+	} 	
+	else 
+	{
 		[self setTags:loadedTags];
 	}
 }	
 
 //---- BEGIN tag stuff ----
+- (void)addToSelectedTags
+{
+	NSArray *selection = [relatedTagsController selectedObjects];
+	if ([selection count] > 0)
+	{
+		[selectedTagsController addObject:[selection objectAtIndex:0]];
+	}
+}
+
+- (IBAction)clearSelectedTags:(id)sender
+{
+	[selectedTagsController removeObjects:[selectedTagsController arrangedObjects]];
+}
+
 //needs to be called whenever the active tags have been changed
-- (void)selectedTagsHaveChanged {
+- (void)selectedTagsHaveChanged 
+{
 	NSLog(@"%i",[_query resultCount]);
 
 	//stop an active query
-	if ([_query isStarted]) {
+	if ([_query isStarted]) 
+	{
 		[_query stopQuery];
 	}
 
@@ -133,12 +152,14 @@
 	NSEnumerator *e = [[selectedTagsController arrangedObjects] objectEnumerator];
 	PATag *tag;
 	
-	if (tag = [e nextObject]) {
+	if (tag = [e nextObject]) 
+	{
 		NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
 		[queryString appendString:anotherTagQuery];
 	}
 	
-	while (tag = [e nextObject]) {
+	while (tag = [e nextObject]) 
+	{
 		NSString *anotherTagQuery = [NSString stringWithFormat:@" && (%@)",[tag query]];
 		[queryString appendString:anotherTagQuery];
 	}
@@ -148,7 +169,8 @@
 	[_query setPredicate:predicate];
 	
 	//only start if query isn't empty
-	if (![queryString isEqualToString:@""]) {
+	if (![queryString isEqualToString:@""]) 
+	{
 		[_query startQuery];
 	}
 }
