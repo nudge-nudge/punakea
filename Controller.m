@@ -4,7 +4,6 @@
 
 @implementation Controller
 
-// For OutlineView Bindings
 - (id) init
 {
     if (self = [super init])
@@ -12,12 +11,16 @@
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setNotificationBatchingInterval:0.3];
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
+		
+		tags = [[NSMutableArray alloc] init];
+		[self loadDataFromDisk];
     }
     return self;
 }
 
 - (void)awakeFromNib
 {
+	[NSApp setDelegate: self]; 
 	[self setupToolbar];
 	
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
@@ -28,6 +31,11 @@
 	
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
 }
+
+- (void) applicationWillTerminate: (NSNotification *)note 
+{ 
+	[self saveDataToDisk]; 
+} 
 
 - (void)setupToolbar
 {
@@ -53,8 +61,18 @@
 	[self selectedTagsHaveChanged];
 }
 
-- (NSMetadataQuery *)query {
+- (NSMetadataQuery *) query {
 	return _query;
+}
+
+- (NSMutableArray *) tags {
+	return tags;
+}
+
+- (void) setTags:(NSMutableArray*)otherTags {
+	[otherTags retain];
+	[tags release];
+	tags = otherTags;
 }
 
 - (void) dealloc
@@ -62,6 +80,42 @@
     [_query release];	
     [super dealloc];
 }
+
+- (NSString *) pathForDataFile 
+{ 
+	NSFileManager *fileManager = [NSFileManager defaultManager]; 
+	NSString *folder = @"~/Library/Application Support/Punakea/"; 
+	folder = [folder stringByExpandingTildeInPath]; 
+	
+	if ([fileManager fileExistsAtPath: folder] == NO) 
+	{ 
+		[fileManager createDirectoryAtPath: folder attributes: nil]; 
+	} 
+	
+	NSString *fileName = @"tags.papk"; 
+	return [folder stringByAppendingPathComponent: fileName]; 
+}
+
+- (void) saveDataToDisk 
+{
+	NSString *path  = [self pathForDataFile];
+	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
+	[rootObject setValue:[self tags] forKey:@"tags"];
+	[NSKeyedArchiver archiveRootObject:rootObject toFile:path]; 
+}
+
+- (void) loadDataFromDisk 
+{
+	NSString *path = [self pathForDataFile];
+	NSDictionary *rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+	NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
+	
+	if ([loadedTags count] == 0) {
+		[self setTags:[[NSMutableArray alloc] init]];
+	} 	else {
+		[self setTags:loadedTags];
+	}
+}	
 
 //---- BEGIN tag stuff ----
 //needs to be called whenever the active tags have been changed
