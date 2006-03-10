@@ -6,7 +6,7 @@
 
 @interface TaggerViewController : NSWindowController {
     IBOutlet NSTextField *filePath;
-    IBOutlet NSTextField *tagList;
+    IBOutlet NSArrayController *tagController;
 	PATagger *tagger;
 }
 - (IBAction)setTagsForFile:(id)sender;
