@@ -14,6 +14,7 @@
 	IBOutlet PAFileMatrix *fileMatrix;
 	IBOutlet NSArrayController *relatedTagsController;
 	IBOutlet NSArrayController *selectedTagsController;
+	IBOutlet NSArrayController *resultController;
 	
 	NSView *sidebarNibView;
 	
@@ -42,6 +43,8 @@
 //for adding to selected
 - (void)addToSelectedTags;
 - (IBAction)clearSelectedTags:(id)sender;
+
+- (void)openFile;
 
 // For OutlineView Bindings
 // - (NSMutableArray *) fileGroups;

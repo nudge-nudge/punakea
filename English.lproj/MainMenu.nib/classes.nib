@@ -9,6 +9,7 @@
                 fileMatrix = PAFileMatrix; 
                 outlineView = NSOutlineView; 
                 relatedTagsController = NSArrayController; 
+                resultController = NSArrayController; 
                 selectedTagsController = NSArrayController; 
             }; 
             SUPERCLASS = NSWindowController; 

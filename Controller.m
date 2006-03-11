@@ -94,6 +94,20 @@
     [super dealloc];
 }
 
+- (void)openFile
+{
+	NSArray *selection = [resultController selectedObjects];
+	
+	if ([selection count] > 0)
+	{
+		NSString *path = [[selection objectAtIndex:0] valueForKey:@"kMDItemPath"];
+		NSURL *fileURL = [NSURL fileURLWithPath: path];
+		
+		NSWorkspace * ws = [NSWorkspace sharedWorkspace];
+		[ws openURL: fileURL];
+	}
+}
+
 - (NSString *)pathForDataFile 
 { 
 	NSFileManager *fileManager = [NSFileManager defaultManager]; 
@@ -157,9 +171,7 @@
 {
 	//stop an active query
 	if ([_query isStarted]) 
-	{
 		[_query stopQuery];
-	}
 	
 	//append all the tags queries to the string - if there are any
 	//this way the query is only started, if there are any tags to look for
