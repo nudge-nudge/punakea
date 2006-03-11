@@ -10,18 +10,17 @@
 
 @implementation PATag 
 
-- (id)initWithName:(NSString*)aName {
-	return [self initWithName:aName query:nil];
+- (id)init 
+{
+	return [self initWithName:NSLocalizedString(@"default tag name",@"tag")];
 }
 
 //designated initializer
-- (id)initWithName:(NSString*)aName query:(NSString*)aQuery {
-	self = [super init];
-	if (self) {
-		if (!aQuery) aQuery = NSLocalizedString(@"default tag name","new Tag");
-
-		name = [aName copy];
-		query = [aQuery copy];
+- (id)initWithName:(NSString*)aName 
+{
+	if (self = [super init]) 
+	{
+		[self setName:aName];
 		lastClicked = [[NSCalendarDate alloc] init];
 		lastUsed = [[NSCalendarDate alloc] init];
 		
@@ -32,9 +31,11 @@
 }
 
 //NSCoding
-- (id)initWithCoder:(NSCoder*)coder {
+- (id)initWithCoder:(NSCoder*)coder 
+{
 	self = [super init];
-	if (self) {
+	if (self) 
+	{
 		[self setName:[coder decodeObjectForKey:@"name"]];
 		[self setQuery:[coder decodeObjectForKey:@"query"]];
 		lastClicked = [[coder decodeObjectForKey:@"lastClicked"] retain];
@@ -45,7 +46,8 @@
 	return self;
 }
 
-- (void)encodeWithCoder:(NSCoder*)coder {
+- (void)encodeWithCoder:(NSCoder*)coder 
+{
 	[coder encodeObject:name forKey:@"name"];
 	[coder encodeObject:query forKey:@"query"];
 	[coder encodeObject:lastClicked forKey:@"lastClicked"];
@@ -54,7 +56,8 @@
 	[coder encodeValueOfObjCType:@encode(unsigned long) at:&useCount];
 }
 
-- (void)dealloc {
+- (void)dealloc 
+{
 	[name release];
 	[query release];
 	[lastUsed release];
@@ -63,7 +66,8 @@
 }
 
 //accessors
-- (void)setName:(NSString*)aName {
+- (void)setName:(NSString*)aName 
+{
 	[aName retain];
 	[name release];
 	name = aName;
@@ -72,54 +76,65 @@
 	[self setQuery:[NSString stringWithFormat:@"kMDItemKeywords = '%@'",name]];
 }
 
-- (void)setQuery:(NSString*)aQuery {
+- (void)setQuery:(NSString*)aQuery 
+{
 	[aQuery retain];
 	[query release];
 	query = aQuery;
 }
 
-- (void)incrementClickCount {
+- (void)incrementClickCount 
+{
 	clickCount++;
 	[lastClicked release];
 	lastClicked = [[NSCalendarDate alloc] init];
 }
 
-- (void)incrementUseCount {
+- (void)incrementUseCount 
+{
 	useCount++;
 	[lastUsed release];
 	lastUsed = [[NSCalendarDate alloc] init];
 }
 
-- (NSString*)name {
+- (NSString*)name 
+{
 	return name;
 }
 
-- (NSString*)query {
+- (NSString*)query 
+{
 	return query;
 }
 
-- (NSCalendarDate*)lastClicked {
+- (NSCalendarDate*)lastClicked 
+{
 	return lastClicked;
 }
 
-- (NSCalendarDate*)lastUsed {
+- (NSCalendarDate*)lastUsed 
+{
 	return lastUsed;
 }
 
-- (unsigned long)clickCount {
+- (unsigned long)clickCount 
+{
 	return clickCount;
 }
 
-- (unsigned long)useCount {
+- (unsigned long)useCount 
+{
 	return useCount;
 }
 
-- (NSString*)description {
+- (NSString*)description 
+{
 	return [NSString stringWithFormat:@"tag: %@",name];
 }
 
 //---- BEGIN isEqual: stuff ----
-- (BOOL)isEqual:(id)other {
+- (BOOL)isEqual:(id)other 
+{
 	if (!other || ![other isKindOfClass:[self class]]) 
         return NO;
     if (other == self)
@@ -127,15 +142,16 @@
     return [self isEqualToTag:other];
 }
 
-- (BOOL)isEqualToTag:(PATag*)otherTag {
-	if ([name isEqual:[otherTag name]] && [query isEqual:[otherTag query]]) {
+- (BOOL)isEqualToTag:(PATag*)otherTag 
+{
+	if ([name isEqual:[otherTag name]] && [query isEqual:[otherTag query]])
 		return YES;
-	} else {
+	else
 		return NO;
-	}
 }
 
-- (unsigned)hash {
+- (unsigned)hash 
+{
 	return [name hash] ^ [query hash];
 }
 //---- END isEqual: stuff ----

@@ -1,6 +1,4 @@
 #import "Controller.h"
-#import "SubViewController.h"
-#import "PATagger.h"
 
 @implementation Controller
 
@@ -8,15 +6,12 @@
 {
     if (self = [super init])
     {
+		[self loadDataFromDisk];
+		
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setNotificationBatchingInterval:0.3];
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
-		
-		relatedTags = [[PARelatedTags alloc] init];
-		selectedTags = [[NSMutableArray alloc] init];
-		
-		[self loadDataFromDisk];
-    }
+	}
     return self;
 }
 
@@ -28,13 +23,14 @@
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
 	//[drawer toggle:self];
-	[relatedTags setupWithQuery:_query tags:tags];
 	[fileMatrix initWithMetadataQuery:_query];
 	
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
+	
+	relatedTags = [[PARelatedTags alloc] initWithQuery:_query tags:tags controller:relatedTagsController];
 }
 
-- (void) applicationWillTerminate: (NSNotification *)note 
+- (void) applicationWillTerminate:(NSNotification *)note 
 { 
 	[self saveDataToDisk]; 
 } 
@@ -75,11 +71,6 @@
 	[otherTags retain];
 	[tags release];
 	tags = otherTags;
-}
-
-//exposing the array ... HACK TODO
-- (PARelatedTags*)relatedTags {
-	return relatedTags;
 }
 
 - (void)dealloc

@@ -17,16 +17,6 @@
         {CLASS = PAFileMatrix; LANGUAGE = ObjC; SUPERCLASS = NSMatrix; }, 
         {CLASS = PAFileViewHeaderCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PAFileViewTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
-        {
-            CLASS = PARelatedTagsController; 
-            LANGUAGE = ObjC; 
-            SUPERCLASS = NSArrayController; 
-        }, 
-        {
-            CLASS = PASelectedTagsController; 
-            LANGUAGE = ObjC; 
-            SUPERCLASS = NSArrayController; 
-        }, 
         {CLASS = PASpotlightTypeCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {
             ACTIONS = {setTagsForFile = id; }; 

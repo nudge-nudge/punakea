@@ -19,7 +19,6 @@
 }
 
 - (id)initWithName:(NSString*)aName;
-- (id)initWithName:(NSString*)aName query:(NSString*)aQuery;
 
 //NSCoding
 - (id)initWithCoder:(NSCoder*)coder;

@@ -4,6 +4,8 @@
 #import "PATagger.h"
 #import "PARelatedTags.h"
 #import "PAFileMatrix.h"
+#import "SubViewController.h"
+#import "PATagger.h"
 
 @interface Controller : NSWindowController
 {
@@ -19,25 +21,21 @@
 	
 	NSMutableArray *tags;
 	PARelatedTags *relatedTags;
-	NSMutableArray *selectedTags;
 	
 	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
 	NSMetadataQuery *_query;
 }
 
-- (IBAction)danielTest:(id)sender;
 - (IBAction)hoffartTest:(id)sender;
 
 //saving and loading
 - (NSString*)pathForDataFile;
 - (void)saveDataToDisk;
 - (void)loadDataFromDisk;
-
 - (void)applicationWillTerminate:(NSNotification *)note;
 
+//accessors
 - (NSMutableArray*)tags;
-- (void)setTags:(NSMutableArray*)otherTags;
-- (PARelatedTags*)relatedTags;
 
 //for NSMetadataQuery
 - (NSMetadataQuery *)query;
