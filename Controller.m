@@ -34,8 +34,16 @@
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
 	
 	//instantiate relatedTags and register as an observer to changes in selectedTags
-	relatedTags = [[PARelatedTags alloc] initWithQuery:_query tags:tags controller:relatedTagsController];
+	relatedTags = [[PARelatedTags alloc] initWithQuery:_query 
+												  tags:tags 
+								 relatedTagsController:relatedTagsController];
+	
 	[selectedTagsController addObserver:self
+							 forKeyPath:@"arrangedObjects"
+								options:0
+								context:NULL];
+	
+	[selectedTagsController addObserver:relatedTags
 							 forKeyPath:@"arrangedObjects"
 								options:0
 								context:NULL];
@@ -147,39 +155,36 @@
 //needs to be called whenever the active tags have been changed
 - (void)selectedTagsHaveChanged 
 {
-	NSLog(@"%i",[_query resultCount]);
-
 	//stop an active query
 	if ([_query isStarted]) 
 	{
 		[_query stopQuery];
 	}
-
-	NSMutableString *queryString = [NSMutableString stringWithString:@""];
 	
-	//append all the tags queries to the string
-	NSEnumerator *e = [[selectedTagsController arrangedObjects] objectEnumerator];
-	PATag *tag;
-	
-	if (tag = [e nextObject]) 
+	//append all the tags queries to the string - if there are any
+	//this way the query is only started, if there are any tags to look for
+	if ([[selectedTagsController arrangedObjects] count] > 0)
 	{
-		NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
-		[queryString appendString:anotherTagQuery];
-	}
-	
-	while (tag = [e nextObject]) 
-	{
-		NSString *anotherTagQuery = [NSString stringWithFormat:@" && (%@)",[tag query]];
-		[queryString appendString:anotherTagQuery];
-	}
-	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
-	NSLog(@"predicate: %@",predicate);
-	[_query setPredicate:predicate];
-	
-	//only start if query isn't empty
-	if (![queryString isEqualToString:@""]) 
-	{
+		NSMutableString *queryString = [NSMutableString stringWithString:@""];
+		
+		NSEnumerator *e = [[selectedTagsController arrangedObjects] objectEnumerator];
+		PATag *tag;
+		
+		if (tag = [e nextObject]) 
+		{
+			NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
+			[queryString appendString:anotherTagQuery];
+		}
+		
+		while (tag = [e nextObject]) 
+		{
+			NSString *anotherTagQuery = [NSString stringWithFormat:@" && (%@)",[tag query]];
+			[queryString appendString:anotherTagQuery];
+		}
+		
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
+		NSLog(@"predicate: %@",predicate);
+		[_query setPredicate:predicate];
 		[_query startQuery];
 	}
 }
