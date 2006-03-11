@@ -26,8 +26,6 @@
 	NSMetadataQuery *_query;
 }
 
-- (IBAction)hoffartTest:(id)sender;
-
 //saving and loading
 - (NSString*)pathForDataFile;
 - (void)saveDataToDisk;
@@ -39,7 +37,7 @@
 
 //for NSMetadataQuery
 - (NSMetadataQuery *)query;
-- (void)selectedTagsHaveChanged;
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 //for adding to selected
 - (void)addToSelectedTags;

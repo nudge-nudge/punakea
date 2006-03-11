@@ -1,5 +1,11 @@
 #import "Controller.h"
 
+@interface Controller (PrivateAPI)
+
+- (void)selectedTagsHaveChanged;
+
+@end
+
 @implementation Controller
 
 - (id) init
@@ -27,7 +33,12 @@
 	
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
 	
+	//instantiate relatedTags and register as an observer to changes in selectedTags
 	relatedTags = [[PARelatedTags alloc] initWithQuery:_query tags:tags controller:relatedTagsController];
+	[selectedTagsController addObserver:self
+							 forKeyPath:@"arrangedObjects"
+								options:0
+								context:NULL];
 }
 
 - (void) applicationWillTerminate:(NSNotification *)note 
@@ -53,10 +64,6 @@
     [subViewController initWithNibName:nibName andOwner:self];
     newView = [subViewController view];
     return newView;
-}
-
--(IBAction)hoffartTest:(id)sender {
-	[self selectedTagsHaveChanged];
 }
 
 - (NSMetadataQuery*)query {
@@ -122,9 +129,19 @@
 	}
 }
 
+//TODO
 - (IBAction)clearSelectedTags:(id)sender
 {
 	[selectedTagsController removeObjects:[selectedTagsController arrangedObjects]];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object 
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+	if ([keyPath isEqual:@"arrangedObjects"]) 
+		[self selectedTagsHaveChanged];
 }
 
 //needs to be called whenever the active tags have been changed

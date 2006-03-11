@@ -1,7 +1,7 @@
 {
     IBClasses = (
         {
-            ACTIONS = {clearSelectedTags = id; danielTest = id; hoffartTest = id; }; 
+            ACTIONS = {clearSelectedTags = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
             OUTLETS = {
