@@ -77,6 +77,7 @@
 	tags = otherTags;
 }
 
+//exposing the array ... HACK TODO
 - (PARelatedTags*)relatedTags {
 	return relatedTags;
 }
