@@ -2,22 +2,24 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATagger.h"
-#import "PASelectedTagsController.h"
-#import "PARelatedTagsController.h"
+#import "PARelatedTags.h"
 #import "PAFileMatrix.h"
 
 @interface Controller : NSWindowController
 {
     IBOutlet id drawer;
     IBOutlet NSOutlineView *outlineView;
-	IBOutlet PASelectedTagsController *selectedTagsController;
-	IBOutlet PARelatedTagsController *relatedTagsController;
 	IBOutlet PAFileMatrix *fileMatrix;
+	IBOutlet NSArrayController *relatedTagsController;
+	IBOutlet NSArrayController *selectedTagsController;
 	
 	NSView *sidebarNibView;
 	
 	PATagger *tagger;
+	
 	NSMutableArray *tags;
+	PARelatedTags *relatedTags;
+	NSMutableArray *selectedTags;
 	
 	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
 	NSMetadataQuery *_query;
@@ -31,10 +33,11 @@
 - (void)saveDataToDisk;
 - (void)loadDataFromDisk;
 
-- (void)applicationWillTerminate: (NSNotification *) note;
+- (void)applicationWillTerminate:(NSNotification *)note;
 
 - (NSMutableArray*)tags;
 - (void)setTags:(NSMutableArray*)otherTags;
+- (PARelatedTags*)relatedTags;
 
 //for NSMetadataQuery
 - (NSMetadataQuery *)query;

@@ -8,8 +8,8 @@
                 drawer = id; 
                 fileMatrix = PAFileMatrix; 
                 outlineView = NSOutlineView; 
-                relatedTagsController = PARelatedTagsController; 
-                selectedTagsController = PASelectedTagsController; 
+                relatedTagsController = NSArrayController; 
+                selectedTagsController = NSArrayController; 
             }; 
             SUPERCLASS = NSWindowController; 
         }, 

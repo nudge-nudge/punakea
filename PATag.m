@@ -115,7 +115,7 @@
 }
 
 - (NSString*)description {
-	return [NSString stringWithString:name];
+	return [NSString stringWithFormat:@"tag: %@",name];
 }
 
 //---- BEGIN isEqual: stuff ----

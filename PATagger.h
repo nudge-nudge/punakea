@@ -13,13 +13,14 @@
 @interface PATagger : NSObject
 
 //get instance
-+(PATagger*)sharedInstance;
++ (PATagger*)sharedInstance;
 
 //write tags
--(void)addTagToFile:(PATag*)tag filePath:(NSString*)path;
--(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+- (void)addTagToFile:(PATag*)tag filePath:(NSString*)path;
+- (void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+- (void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 
 //get tags
--(NSArray*)getTagsForFile:(NSString*)path;
+- (NSArray*)getTagsForFile:(NSString*)path;
 
 @end

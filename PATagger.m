@@ -10,12 +10,6 @@
 #import "PATagger.h"
 #import "Matador.h"
 
-//private stuff
-@interface PATagger (PrivateAPI)
--(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
-
-@end
-
 @implementation PATagger
 
 //this is where the sharedInstance is held

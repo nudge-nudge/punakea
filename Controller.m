@@ -12,7 +12,9 @@
 		[_query setNotificationBatchingInterval:0.3];
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
 		
-		tags = [[NSMutableArray alloc] init];
+		relatedTags = [[PARelatedTags alloc] init];
+		selectedTags = [[NSMutableArray alloc] init];
+		
 		[self loadDataFromDisk];
     }
     return self;
@@ -26,7 +28,7 @@
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
 	//[drawer toggle:self];
-	[relatedTagsController setupWithQuery:_query tags:tags];
+	[relatedTags setupWithQuery:_query tags:tags];
 	[fileMatrix initWithMetadataQuery:_query];
 	
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
@@ -61,21 +63,25 @@
 	[self selectedTagsHaveChanged];
 }
 
-- (NSMetadataQuery *) query {
+- (NSMetadataQuery*)query {
 	return _query;
 }
 
-- (NSMutableArray *) tags {
+- (NSMutableArray*)tags {
 	return tags;
 }
 
-- (void) setTags:(NSMutableArray*)otherTags {
+- (void)setTags:(NSMutableArray*)otherTags {
 	[otherTags retain];
 	[tags release];
 	tags = otherTags;
 }
 
-- (void) dealloc
+- (PARelatedTags*)relatedTags {
+	return relatedTags;
+}
+
+- (void)dealloc
 {
     [_query release];	
     [super dealloc];
@@ -88,9 +94,7 @@
 	folder = [folder stringByExpandingTildeInPath]; 
 	
 	if ([fileManager fileExistsAtPath: folder] == NO) 
-	{ 
-		[fileManager createDirectoryAtPath: folder attributes: nil]; 
-	} 
+		[fileManager createDirectoryAtPath: folder attributes: nil];
 	
 	NSString *fileName = @"tags.papk"; 
 	return [folder stringByAppendingPathComponent: fileName]; 
@@ -111,13 +115,9 @@
 	NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
 	
 	if ([loadedTags count] == 0) 
-	{
 		[self setTags:[[NSMutableArray alloc] init]];
-	} 	
 	else 
-	{
 		[self setTags:loadedTags];
-	}
 }	
 
 //---- BEGIN tag stuff ----
