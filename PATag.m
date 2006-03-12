@@ -62,6 +62,7 @@
 	[query release];
 	[lastUsed release];
 	[lastClicked release];
+	[currentBestTag release];
 	[super dealloc];
 }
 
@@ -97,6 +98,18 @@
 	lastUsed = [[NSCalendarDate alloc] init];
 }
 
+- (void)setCurrentBestTag:(PATag*)aTag
+{
+	[aTag retain];
+	[currentBestTag release];
+	currentBestTag = aTag;
+}
+
+- (PATag*)currentBestTag 
+{
+	return currentBestTag;
+}
+
 - (NSString*)name 
 {
 	return name;
@@ -130,6 +143,30 @@
 - (NSString*)description 
 {
 	return [NSString stringWithFormat:@"tag: %@",name];
+}
+
+//TODO?
+- (float)absoluteRating
+{
+	return  (clickCount + useCount);
+}
+
+//returns between 0 and 1 - this can be made faster if we cache the value ... TODO
+- (float)relativeRating
+{	
+	//TODO make quicker implementation, this is for readability
+	float relClickCount = [self clickCount] / [currentBestTag clickCount];
+	float relUseCount = [self useCount] / [currentBestTag useCount];
+	
+	float weightClickCount = 0.5;
+	float weightUseCount = 0.5;
+	
+	float weightedClickCount = weightClickCount * relClickCount;
+	float weightedUseCount = weightUseCount * relUseCount;
+	
+	float result = weightedClickCount + weightedUseCount;
+	
+	return result;
 }
 
 //---- BEGIN isEqual: stuff ----

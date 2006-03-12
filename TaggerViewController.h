@@ -9,5 +9,7 @@
     IBOutlet NSArrayController *tagController;
 	PATagger *tagger;
 }
+
 - (IBAction)setTagsForFile:(id)sender;
+
 @end

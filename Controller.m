@@ -126,13 +126,29 @@
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
 	[rootObject setValue:[self tags] forKey:@"tags"];
-	[NSKeyedArchiver archiveRootObject:rootObject toFile:path]; 
+	
+	NSMutableData *data = [NSMutableData data];
+	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+	[archiver setOutputFormat:NSPropertyListXMLFormat_v1_0];
+	[archiver encodeObject:rootObject];
+	[archiver finishEncoding];
+	[data writeToFile:path atomically:YES];
+	
+	//[NSKeyedArchiver archiveRootObject:rootObject toFile:path]; 
 }
 
 - (void)loadDataFromDisk 
 {
 	NSString *path = [self pathForDataFile];
-	NSDictionary *rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+	
+	NSMutableData *data = [NSData dataWithContentsOfFile:path];
+	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+	NSMutableDictionary *rootObject = [unarchiver decodeObject];
+	[unarchiver finishDecoding];
+	[unarchiver release];
+
+	//NSDictionary *rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+	
 	NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
 	
 	if ([loadedTags count] == 0) 

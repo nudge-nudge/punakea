@@ -18,6 +18,8 @@
 //write tags
 - (void)addTagToFile:(PATag*)tag filePath:(NSString*)path;
 - (void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+
+//TODO make this private!
 - (void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 
 //get tags

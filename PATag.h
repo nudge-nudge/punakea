@@ -16,6 +16,7 @@
 	NSCalendarDate *lastUsed;
 	unsigned long clickCount;
 	unsigned long useCount;
+	PATag *currentBestTag;
 }
 
 - (id)initWithName:(NSString*)aName;
@@ -35,6 +36,12 @@
 - (void)setQuery:(NSString*)aQuery;
 - (void)incrementClickCount;
 - (void)incrementUseCount;
+
+- (void)setCurrentBestTag:(PATag*)aTag;
+- (PATag*)currentBestTag;
+
+- (float)absoluteRating;
+- (float)relativeRating;
 
 - (BOOL)isEqualToTag:(PATag*)otherTag;
 

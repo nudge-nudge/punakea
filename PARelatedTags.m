@@ -8,6 +8,12 @@
 
 #import "PARelatedTags.h"
 
+@interface PARelatedTags (PrivateAPI)
+
+- (PATag*)getTagWithBestAbsoluteRatingOf:(NSArray*)tags;
+
+@end
+
 //will use nsarraycontroller for managing the content array
 @implementation PARelatedTags
 
@@ -25,6 +31,7 @@
 		nf = [NSNotificationCenter defaultCenter];
 		[nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
 		
+		//reset content, show default view
 		[self resetRelatedTags];
 	}
 	return self;
@@ -53,7 +60,7 @@
 	[super dealloc];
 }
 
-//receives notification from [selectedTags arrangedObjects]
+//receives notification from [selectedTags arrangedObjects] - reset the view if selected Tags are empty
 - (void)observeValueForKeyPath:(NSString *)keyPath
 					  ofObject:(id)object 
                         change:(NSDictionary *)change
@@ -95,15 +102,14 @@
 	if (i > 0)
 	//get the related tags to the current results
 	{
-
 		//disable updates, parse files, continue -- TODO make more efficient, performance will SUCK
-		[controller removeObjects:[controller arrangedObjects]];
-		
 		while (i--) 
 		{
 			//get keywords for result
 			NSMetadataItem *mditem =  [query resultAtIndex:i];
 			NSArray *keywords = [[PATagger sharedInstance] getTagsForFile:[mditem valueForKey:@"kMDItemPath"]];
+			
+			NSMutableArray *tmpTags = [[NSMutableArray alloc] init];
 			
 			int j = [keywords count];
 
@@ -111,13 +117,42 @@
 			{
 				PATag *tag = [keywords objectAtIndex:j];
 				
-				if (![[controller arrangedObjects] containsObject:tag]) 
-					[controller addObject:tag];
+				if (![tmpTags containsObject:tag])
+					[tmpTags addObject:tag];
 			}
+			
+			PATag *bestTag = [self getTagWithBestAbsoluteRatingOf:tmpTags];
+			
+			NSEnumerator *e = [tmpTags objectEnumerator];
+			PATag *tag;
+			
+			while (tag = [e nextObject])
+				[tag setCurrentBestTag:bestTag];
+			
+			[controller removeObjects:[controller arrangedObjects]];
+			[controller addObjects:tmpTags];
 		}
 	}
 	
 	[query enableUpdates];
-}	
+}
+
+- (PATag*)getTagWithBestAbsoluteRatingOf:(NSArray*)tagSet
+{
+	NSEnumerator *e = [tagSet objectEnumerator];
+	PATag *tag;
+	PATag *maxTag;
+	
+	if (tag = [e nextObject])
+		maxTag = tag;
+	
+	while (tag = [e nextObject])
+	{
+		if ([tag absoluteRating] > [maxTag absoluteRating])
+			maxTag = tag;
+	}	
+	
+	return maxTag;
+}
 
 @end
