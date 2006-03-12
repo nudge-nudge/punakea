@@ -13,6 +13,8 @@
 		481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 481BF2F109A31B9B00EBD7BA /* PATagSet.m */; };
 		48AA6BF7099B78E300D8F70B /* PATagger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48AA6BF5099B78E300D8F70B /* PATagger.h */; };
 		48AA6BF8099B78E300D8F70B /* PATagger.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AA6BF6099B78E300D8F70B /* PATagger.m */; };
+		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
+		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
 		48C93615099742D800699265 /* Matador.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C93614099742D800699265 /* Matador.h */; };
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		48E9C2F609A5C27600415AC7 /* TaggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E9C2F409A5C27600415AC7 /* TaggerViewController.m */; };
@@ -97,6 +99,7 @@
 				651B2AC109B9B5FB002299FB /* PASpotlightTypeCell.h in CopyFiles */,
 				65765BCF09BEE8C200977A34 /* PAFileMatrix.h in CopyFiles */,
 				48EB614409C2D4A40071D654 /* PARelatedTags.h in CopyFiles */,
+				48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +120,8 @@
 		481BF2F109A31B9B00EBD7BA /* PATagSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSet.m; sourceTree = "<group>"; };
 		48AA6BF5099B78E300D8F70B /* PATagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagger.h; sourceTree = "<group>"; };
 		48AA6BF6099B78E300D8F70B /* PATagger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagger.m; sourceTree = "<group>"; };
+		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
+		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
 		48C93614099742D800699265 /* Matador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matador.h; sourceTree = "<group>"; };
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		48E9C2F409A5C27600415AC7 /* TaggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerViewController.m; sourceTree = "<group>"; };
@@ -176,6 +181,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				48BDCECE09C4A1EE00A57165 /* TagCloud */,
 				65B17321099564A800B10322 /* Controllers */,
 				65851FFF099780E0009C3CA7 /* Main */,
 				48F6A9F40996423000AA118D /* Tagging */,
@@ -251,6 +257,15 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		48BDCECE09C4A1EE00A57165 /* TagCloud */ = {
+			isa = PBXGroup;
+			children = (
+				48BDCEE409C4A4E300A57165 /* PATagCloud.h */,
+				48BDCEE509C4A4E300A57165 /* PATagCloud.m */,
+			);
+			name = TagCloud;
 			sourceTree = "<group>";
 		};
 		48F6A9F40996423000AA118D /* Tagging */ = {
@@ -444,6 +459,7 @@
 				651B2AC209B9B5FB002299FB /* PASpotlightTypeCell.m in Sources */,
 				65765BD009BEE8C300977A34 /* PAFileMatrix.m in Sources */,
 				48EB614509C2D4A40071D654 /* PARelatedTags.m in Sources */,
+				48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

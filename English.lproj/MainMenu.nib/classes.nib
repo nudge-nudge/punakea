@@ -20,6 +20,12 @@
         {CLASS = PAFileViewTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {CLASS = PASpotlightTypeCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {
+            CLASS = PATagCloud; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controller = NSArrayController; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
             ACTIONS = {setTagsForFile = id; }; 
             CLASS = TaggerViewController; 
             LANGUAGE = ObjC; 

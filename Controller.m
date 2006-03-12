@@ -64,7 +64,8 @@
     [[self window] setToolbar:[toolbar autorelease]];
 }
 
-- (NSView*)viewFromNibWithName:(NSString*)nibName{
+- (NSView*)viewFromNibWithName:(NSString*)nibName
+{
     NSView * 		newView;
     SubViewController *	subViewController;
     
@@ -75,15 +76,18 @@
     return newView;
 }
 
-- (NSMetadataQuery*)query {
+- (NSMetadataQuery*)query 
+{
 	return _query;
 }
 
-- (NSMutableArray*)tags {
+- (NSMutableArray*)tags 
+{
 	return tags;
 }
 
-- (void)setTags:(NSMutableArray*)otherTags {
+- (void)setTags:(NSMutableArray*)otherTags 
+{
 	[otherTags retain];
 	[tags release];
 	tags = otherTags;
