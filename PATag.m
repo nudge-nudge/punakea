@@ -155,8 +155,8 @@
 - (float)relativeRating
 {	
 	//TODO make quicker implementation, this is for readability
-	float relClickCount = [self clickCount] / [currentBestTag clickCount];
-	float relUseCount = [self useCount] / [currentBestTag useCount];
+	float relClickCount = (float) [self clickCount] / (float) [currentBestTag clickCount];
+	float relUseCount = (float) [self useCount] / (float) [currentBestTag useCount];
 	
 	float weightClickCount = 0.5;
 	float weightUseCount = 0.5;

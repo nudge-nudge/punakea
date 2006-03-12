@@ -10,7 +10,8 @@
 
 @interface PARelatedTags (PrivateAPI)
 
-- (PATag*)getTagWithBestAbsoluteRatingOf:(NSArray*)tags;
+- (void)updateTagRating:(NSArray*)tagSet;
+- (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tags;
 
 @end
 
@@ -77,6 +78,7 @@
 
 - (void)resetRelatedTags
 {
+	[self updateTagRating:tags];
 	[controller removeObjects:[controller arrangedObjects]];
 	[controller addObjects:tags];
 }
@@ -121,13 +123,7 @@
 					[tmpTags addObject:tag];
 			}
 			
-			PATag *bestTag = [self getTagWithBestAbsoluteRatingOf:tmpTags];
-			
-			NSEnumerator *e = [tmpTags objectEnumerator];
-			PATag *tag;
-			
-			while (tag = [e nextObject])
-				[tag setCurrentBestTag:bestTag];
+			[self updateTagRating:tmpTags];
 			
 			[controller removeObjects:[controller arrangedObjects]];
 			[controller addObjects:tmpTags];
@@ -137,7 +133,18 @@
 	[query enableUpdates];
 }
 
-- (PATag*)getTagWithBestAbsoluteRatingOf:(NSArray*)tagSet
+- (void)updateTagRating:(NSArray*)tagSet
+{
+	PATag *bestTag = [self getTagWithBestAbsoluteRating:tagSet];
+
+	NSEnumerator *e = [tagSet objectEnumerator];
+	PATag *tag;
+
+	while (tag = [e nextObject])
+		[tag setCurrentBestTag:bestTag];
+}
+
+- (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tagSet
 {
 	NSEnumerator *e = [tagSet objectEnumerator];
 	PATag *tag;

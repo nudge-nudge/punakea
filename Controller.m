@@ -6,6 +6,7 @@
 
 @end
 
+//TODO add and remove tags needs to be overwritten!
 @implementation Controller
 
 - (id) init
@@ -133,8 +134,6 @@
 	[archiver encodeObject:rootObject];
 	[archiver finishEncoding];
 	[data writeToFile:path atomically:YES];
-	
-	//[NSKeyedArchiver archiveRootObject:rootObject toFile:path]; 
 }
 
 - (void)loadDataFromDisk 
@@ -146,8 +145,6 @@
 	NSMutableDictionary *rootObject = [unarchiver decodeObject];
 	[unarchiver finishDecoding];
 	[unarchiver release];
-
-	//NSDictionary *rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
 	
 	NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
 	
