@@ -7,5 +7,6 @@
 @interface PATagCloud : NSView
 {
     IBOutlet NSArrayController *controller;
+	NSPoint pointForTagRect;
 }
 @end
