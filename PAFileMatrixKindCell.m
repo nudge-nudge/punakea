@@ -30,7 +30,7 @@
 	[fontAttributes setObject:[NSColor textColor] forKey:NSForegroundColorAttributeName];
 	[fontAttributes setObject:[NSFont systemFontOfSize:11] forKey:NSFontAttributeName];
 	
-	[cellTitle drawAtPoint:NSMakePoint(cellFrame.origin.x + 10, 2) withAttributes:fontAttributes];
+	[cellTitle drawAtPoint:NSMakePoint(cellFrame.origin.x + 10, cellFrame.origin.y + 2) withAttributes:fontAttributes];
 }
 
 - (void)initTextCell:(NSString*)aText

@@ -7,7 +7,7 @@
 //
 
 #import "PAFileMatrix.h"
-#import "PASpotlightTypeCell.h"
+#import "PAFileMatrixKindCell.h"
 
 
 @implementation PAFileMatrix
@@ -50,7 +50,7 @@
 		if (![dictKind valueForKey:kind])
 		{
 			int tag = [dictKind count];
-			PASpotlightTypeCell* kindCell = [[PASpotlightTypeCell alloc] initTextCell:kind];
+			PAFileMatrixKindCell* kindCell = [[PAFileMatrixKindCell alloc] initTextCell:kind];
 			[kindCell setTag:tag];
 			[self putCell:kindCell atRow:tag column:0];
 			[dictKind setValue:@"ja" forKey:kind];

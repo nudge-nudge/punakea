@@ -30,7 +30,7 @@
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
 	//[drawer toggle:self];
-	[fileMatrix initWithMetadataQuery:_query];
+	[fileMatrix setQuery:_query];
 	
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
 	
