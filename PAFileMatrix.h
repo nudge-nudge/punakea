@@ -10,8 +10,9 @@
 
 
 @interface PAFileMatrix : NSMatrix {
-	NSMetadataQuery* query;
-	NSMutableDictionary* dictKind;
+	NSMetadataQuery *query;
+	NSMutableDictionary *dictItemKind;
+	NSMutableDictionary *dictItemPath;
 }
 
 @end

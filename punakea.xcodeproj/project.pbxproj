@@ -288,7 +288,7 @@
 		6562A1D40996399100DBE7DB /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				65A4079109B9D53200B151F4 /* FileView */,
+				65A4079109B9D53200B151F4 /* FileMatrix */,
 				6562A1FF09963BD000DBE7DB /* Sidebar */,
 			);
 			name = Images;
@@ -315,14 +315,14 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		65A4079109B9D53200B151F4 /* FileView */ = {
+		65A4079109B9D53200B151F4 /* FileMatrix */ = {
 			isa = PBXGroup;
 			children = (
 				651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */,
 				651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */,
 				65A4079609B9D6BA00B151F4 /* MD0-0-Middle-1.tiff */,
 			);
-			name = FileView;
+			name = FileMatrix;
 			sourceTree = "<group>";
 		};
 		65AAA754099B724500F14C52 /* FileMatrix */ = {

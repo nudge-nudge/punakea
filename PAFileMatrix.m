@@ -26,10 +26,11 @@
 
 - (void)awakeFromNib{
 	[self setCellClass:[NSTextFieldCell class]];
-	[self renewRows:10 columns:1];
-	[self setCellSize:NSMakeSize(200,30)];
+	[self renewRows:0 columns:1];
+	[self setCellSize:NSMakeSize(400,20)];
 	
-	dictKind = [[NSMutableDictionary alloc] init];	
+	dictItemKind = [[NSMutableDictionary alloc] init];	
+	dictItemPath = [[NSMutableDictionary alloc] init];
 }
 
 - (void)setQuery:(NSMetadataQuery*)aQuery
@@ -42,23 +43,41 @@
 - (void)updateView {
 	int i;
 	
-	// Add rows für kMDItemKind
 	for (i = 0; i < [query resultCount]; i++)
 	{
 		NSMetadataItem* item = [query resultAtIndex:i];
+		
+		// Check for item kind cell
 		NSString* kind = [item valueForAttribute:@"kMDItemKind"];
-		if (![dictKind valueForKey:kind])
+		if (![dictItemKind objectForKey:kind])
 		{
-			int tag = [dictKind count];
+			int tag = [self numberOfRows];
 			PAFileMatrixKindCell* kindCell = [[PAFileMatrixKindCell alloc] initTextCell:kind];
 			[kindCell setTag:tag];
+			
+			[self insertRow:tag];
 			[self putCell:kindCell atRow:tag column:0];
-			[dictKind setValue:@"ja" forKey:kind];
+			
+			[dictItemKind setObject:[NSNumber numberWithInt:tag] forKey:kind];
+		}
+		
+		// Check for file cell
+		NSString* path = [item valueForAttribute:@"kMDItemPath"];
+		if(![dictItemPath objectForKey:path]) {
+			int tag = [[dictItemKind objectForKey:kind] intValue] + 1;
+			NSTextFieldCell* itemCell = [[NSTextFieldCell alloc] initTextCell:path];
+			[itemCell setTag:tag];
+			
+			[self insertRow:tag];
+			[self putCell:itemCell atRow:tag column:0];
+			
+			[dictItemPath setObject:[NSNumber numberWithInt:tag] forKey:path];
 		}
 	}
 }
 
-- (void)queryNote:(NSNotification *)note {
+- (void)queryNote:(NSNotification *)note
+{
 	NSLog(@"fileMatrix: note received");
 	
 	if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification] ||
@@ -70,8 +89,8 @@
 
 - (void)dealloc
 {
-   if(dictKind)
-      [dictKind release];
+   if(dictItemKind) { [dictItemKind release]; }
+   if(dictItemPath) { [dictItemPath release]; }
    [super release];
 }
 @end
