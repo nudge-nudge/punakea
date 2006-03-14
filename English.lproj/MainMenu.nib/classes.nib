@@ -22,7 +22,10 @@
         {
             CLASS = PATagCloud; 
             LANGUAGE = ObjC; 
-            OUTLETS = {controller = NSArrayController; }; 
+            OUTLETS = {
+                relatedTagsController = NSArrayController; 
+                selectedTagsController = NSArrayController; 
+            }; 
             SUPERCLASS = NSView; 
         }, 
         {

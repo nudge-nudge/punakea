@@ -2,22 +2,41 @@
 
 @interface PATagCloud (PrivateAPI)
 
-- (void)drawBackground:(NSRect)rect;
-- (void)drawTags:(NSRect)rect;
-- (void)drawTag:(PATag*)tag inMainRect:(NSRect)rect;
-- (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
+- (void)drawBackground:(NSRect*)rect;
+- (void)drawTags:(NSRect*)rect;
+- (void)drawTag:(PATag*)tag inMainRect:(NSRect*)rect;
+- (NSRect*)nextRectFor:(PATag*)tag inMainRect:(NSRect*)rect withAttributes:(NSDictionary*)attribs;
 
 @end
 
-
+//todo make tagcloud observer of relatedTags
+//todo mh, do structs need memory management?!
 @implementation PATagCloud
 
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-		//init here ...
+		activeTag = [[PATag alloc] init];
 	}
 	return self;
+}
+
+- (void)dealloc
+{
+	[activeTag release];
+	[super dealloc];
+}
+
+- (PATag*)activeTag
+{
+	return activeTag;
+}
+
+- (void)setActiveTag:(PATag*)aTag
+{
+	[activeTag release];
+	[aTag retain];
+	activeTag = aTag;
 }
 
 - (void)drawRect:(NSRect)rect
@@ -25,28 +44,30 @@
 	//TODO externalize values
 	pointForTagRect = NSMakePoint(10,rect.size.height-30);
 	
-	[self drawBackground:rect];
-	[self drawTags:rect];
+	NSRect *pRect = &rect;
+	
+	[self drawBackground:pRect];
+	[self drawTags:pRect];
 }
 
-- (void)drawBackground:(NSRect)rect
+- (void)drawBackground:(NSRect*)rect
 {
 	NSRect bounds = [self bounds];
 	[[NSColor whiteColor] set];
 	[NSBezierPath fillRect:bounds];
 }
 
-- (void)drawTags:(NSRect)rect
+- (void)drawTags:(NSRect*)rect
 {
-	NSEnumerator *e = [[controller arrangedObjects] objectEnumerator];
+	NSEnumerator *e = [[relatedTagsController arrangedObjects] objectEnumerator];
 	
 	PATag *tag;
 	
 	while (tag = [e nextObject]) 
-		[self drawTag:tag inMainRect:rect];		
+		[self drawTag:tag inMainRect:rect];
 }
 
-- (void)drawTag:(PATag*)tag inMainRect:(NSRect)rect
+- (void)drawTag:(PATag*)tag inMainRect:(NSRect*)rect
 {
 	NSMutableDictionary *attribs = [[NSMutableDictionary alloc] init];
 	
@@ -56,14 +77,16 @@
 	[attribs setObject:c forKey:NSForegroundColorAttributeName];
 	[attribs setObject:fnt forKey:NSFontAttributeName];
 		
-	NSRect tagRect = [self nextRectFor:tag inMainRect:rect withAttributes:attribs];
+	NSRect *tagRect = [self nextRectFor:tag inMainRect:rect withAttributes:attribs];
 	
-	[[tag name] drawInRect:tagRect withAttributes:attribs];
+	[[tag name] drawInRect:*tagRect withAttributes:attribs];
+	//add tracking
+	[self addTrackingRect:*tagRect owner:self userData:tag assumeInside:NO];
 	
 	[attribs release];
 }
 
-- (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs
+- (NSRect*)nextRectFor:(PATag*)tag inMainRect:(NSRect*)rect withAttributes:(NSDictionary*)attribs
 {
 	//TODO externalize spacing and padding and ...
 	int height = 25;
@@ -75,16 +98,37 @@
 	
 	int xValue = pointForTagRect.x + tagSize.width + padding;
 	
-	if (xValue > rect.size.width)
+	if (xValue > rect->size.width)
+	{
 		pointForTagRect = NSMakePoint(padding,pointForTagRect.y-height);
-	
-	NSRect tagRect = NSMakeRect(pointForTagRect.x,pointForTagRect.y,tagSize.width,tagSize.height);
+	}
+		
+	NSRect newRectForTag =  NSMakeRect(pointForTagRect.x,pointForTagRect.y,tagSize.width,tagSize.height);
+	NSRect *tagRect = &newRectForTag;
 	
 	//then calc the point for the next tag 
-	NSPoint newPoint = NSMakePoint(pointForTagRect.x + tagSize.width + spacing,pointForTagRect.y);
-	pointForTagRect = newPoint;
+	pointForTagRect = NSMakePoint(pointForTagRect.x + tagSize.width + spacing,pointForTagRect.y);
 	
 	return tagRect;
+}
+
+//EVENT HANDLING
+- (void)mouseEntered:(NSEvent*)event
+{
+	[self setActiveTag:[event userData]];
+}
+
+- (void)mouseExited:(NSEvent*)event
+{
+	[self setActiveTag:NULL];
+}
+
+- (void)mouseUp:(NSEvent*)event
+{
+	NSLog(@"clicked tag %@",activeTag);
+	
+	if (activeTag != nil)
+		[selectedTagsController addObject:activeTag];
 }
 
 @end

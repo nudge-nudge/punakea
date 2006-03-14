@@ -6,7 +6,13 @@
 
 @interface PATagCloud : NSView
 {
-    IBOutlet NSArrayController *controller;
+    IBOutlet NSArrayController *relatedTagsController;
+	IBOutlet NSArrayController *selectedTagsController;
 	NSPoint pointForTagRect;
+	PATag *activeTag;
 }
+
+- (PATag*)activeTag;
+- (void)setActiveTag:(PATag*)aTag;
+
 @end
