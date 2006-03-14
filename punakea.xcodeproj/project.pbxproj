@@ -25,8 +25,8 @@
 		6510E0DE09A734E800E0F73A /* PAFileViewTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */; };
 		6510E0E409A7356D00E0F73A /* File.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6510E0E209A7356D00E0F73A /* File.h */; };
 		6510E14D09A739CC00E0F73A /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 6510E14B09A739CC00E0F73A /* File.m */; };
-		651B2AC109B9B5FB002299FB /* PASpotlightTypeCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651B2ABF09B9B5FB002299FB /* PASpotlightTypeCell.h */; };
-		651B2AC209B9B5FB002299FB /* PASpotlightTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 651B2AC009B9B5FB002299FB /* PASpotlightTypeCell.m */; };
+		651B2AC109B9B5FB002299FB /* PAFileMatrixKindCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651B2ABF09B9B5FB002299FB /* PAFileMatrixKindCell.h */; };
+		651B2AC209B9B5FB002299FB /* PAFileMatrixKindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 651B2AC009B9B5FB002299FB /* PAFileMatrixKindCell.m */; };
 		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
 		651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */; };
 		651CF1A0099B9F98007E48DD /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */; };
@@ -96,7 +96,7 @@
 				48E9C2F709A5C27600415AC7 /* TaggerViewController.h in CopyFiles */,
 				6510E0DD09A734E800E0F73A /* PAFileViewTableColumn.h in CopyFiles */,
 				6510E0E409A7356D00E0F73A /* File.h in CopyFiles */,
-				651B2AC109B9B5FB002299FB /* PASpotlightTypeCell.h in CopyFiles */,
+				651B2AC109B9B5FB002299FB /* PAFileMatrixKindCell.h in CopyFiles */,
 				65765BCF09BEE8C200977A34 /* PAFileMatrix.h in CopyFiles */,
 				48EB614409C2D4A40071D654 /* PARelatedTags.h in CopyFiles */,
 				48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */,
@@ -132,8 +132,8 @@
 		6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileViewTableColumn.m; sourceTree = "<group>"; };
 		6510E0E209A7356D00E0F73A /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		6510E14B09A739CC00E0F73A /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
-		651B2ABF09B9B5FB002299FB /* PASpotlightTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASpotlightTypeCell.h; sourceTree = "<group>"; };
-		651B2AC009B9B5FB002299FB /* PASpotlightTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASpotlightTypeCell.m; sourceTree = "<group>"; };
+		651B2ABF09B9B5FB002299FB /* PAFileMatrixKindCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PAFileMatrixKindCell.h; sourceTree = "<group>"; };
+		651B2AC009B9B5FB002299FB /* PAFileMatrixKindCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PAFileMatrixKindCell.m; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
@@ -336,8 +336,8 @@
 				65765BCE09BEE8C200977A34 /* PAFileMatrix.m */,
 				6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */,
 				6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */,
-				651B2ABF09B9B5FB002299FB /* PASpotlightTypeCell.h */,
-				651B2AC009B9B5FB002299FB /* PASpotlightTypeCell.m */,
+				651B2ABF09B9B5FB002299FB /* PAFileMatrixKindCell.h */,
+				651B2AC009B9B5FB002299FB /* PAFileMatrixKindCell.m */,
 			);
 			name = FileMatrix;
 			sourceTree = "<group>";
@@ -456,7 +456,7 @@
 				48E9C2F609A5C27600415AC7 /* TaggerViewController.m in Sources */,
 				6510E0DE09A734E800E0F73A /* PAFileViewTableColumn.m in Sources */,
 				6510E14D09A739CC00E0F73A /* File.m in Sources */,
-				651B2AC209B9B5FB002299FB /* PASpotlightTypeCell.m in Sources */,
+				651B2AC209B9B5FB002299FB /* PAFileMatrixKindCell.m in Sources */,
 				65765BD009BEE8C300977A34 /* PAFileMatrix.m in Sources */,
 				48EB614509C2D4A40071D654 /* PARelatedTags.m in Sources */,
 				48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */,
