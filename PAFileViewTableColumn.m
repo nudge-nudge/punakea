@@ -1,3 +1,9 @@
+/*
+ *	DEPRECATED!
+ */
+ 
+ 
+
 #import "PAFileViewTableColumn.h"
 
 @implementation PAFileViewTableColumn

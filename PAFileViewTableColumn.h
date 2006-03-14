@@ -1,3 +1,9 @@
+/*
+ *	DEPRECATED!
+ */
+
+
+
 /* PAFileViewTableColumn */
 
 #import <Cocoa/Cocoa.h>
