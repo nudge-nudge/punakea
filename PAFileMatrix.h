@@ -11,6 +11,7 @@
 
 @interface PAFileMatrix : NSMatrix {
 	NSMetadataQuery* query;
+	NSMutableDictionary* dictKind;
 }
 
 @end

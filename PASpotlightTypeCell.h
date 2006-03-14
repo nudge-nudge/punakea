@@ -2,7 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PASpotlightTypeCell : NSActionCell
+@interface PAFileMatrixKindCell : NSActionCell
 {
 	NSString* text;
 }

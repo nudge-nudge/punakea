@@ -1,6 +1,6 @@
-#import "PASpotlightTypeCell.h"
+#import "PAFileMatrixKindCell.h"
 
-@implementation PASpotlightTypeCell
+@implementation PAFileMatrixKindCell
 
 /*- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {

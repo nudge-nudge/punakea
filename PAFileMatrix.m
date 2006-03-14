@@ -24,36 +24,54 @@
     // Drawing code here.
 } */
 
-- (void)initWithMetadataQuery:(NSMetadataQuery*)aQuery {
+- (void)awakeFromNib{
+	[self setCellClass:[NSTextFieldCell class]];
+	[self renewRows:10 columns:1];
+	[self setCellSize:NSMakeSize(200,30)];
+	
+	dictKind = [[NSMutableDictionary alloc] init];	
+}
+
+- (void)setQuery:(NSMetadataQuery*)aQuery
+{
 	query = aQuery;
 	NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
     [nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
-	
-	[self addSampleCells];
-}
-
-- (void)addSampleCells {
-	NSTextFieldCell* textCell1 = [[NSTextFieldCell alloc] initTextCell:@"huhu1"];
-	NSTextFieldCell* textCell2 = [[NSTextFieldCell alloc] initTextCell:@"huhu2"];
-	NSTextFieldCell* textCell3 = [[NSTextFieldCell alloc] initTextCell:@"huhu3"];
-	
-	[self insertRow:0];
-	[self putCell:textCell1 atRow:0 column:0];
-	[self insertRow:1];
-	[self putCell:textCell2 atRow:1 column:0];
-	[self insertRow:2];
-	[self putCell:textCell3 atRow:2 column:0];
 }
 
 - (void)updateView {
+	int i;
 	
+	// Add rows für kMDItemKind
+	for (i = 0; i < [query resultCount]; i++)
+	{
+		NSMetadataItem* item = [query resultAtIndex:i];
+		NSString* kind = [item valueForAttribute:@"kMDItemKind"];
+		if (![dictKind valueForKey:kind])
+		{
+			int tag = [dictKind count];
+			PASpotlightTypeCell* kindCell = [[PASpotlightTypeCell alloc] initTextCell:kind];
+			[kindCell setTag:tag];
+			[self putCell:kindCell atRow:tag column:0];
+			[dictKind setValue:@"ja" forKey:kind];
+		}
+	}
 }
 
 - (void)queryNote:(NSNotification *)note {
 	NSLog(@"fileMatrix: note received");
 	
-	if ([[note name] isEqualToString:@"NSMetadataQueryGatheringProgressNotification"]) {
+	if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification] ||
+		[[note name] isEqualToString:NSMetadataQueryDidUpdateNotification] ||
+		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification]) {
 		[self updateView];
 	}
+}
+
+- (void)dealloc
+{
+   if(dictKind)
+      [dictKind release];
+   [super release];
 }
 @end
