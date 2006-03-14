@@ -55,7 +55,9 @@
 			PAFileMatrixKindCell* kindCell = [[PAFileMatrixKindCell alloc] initTextCell:kind];
 			[kindCell setTag:tag];
 			
+			// TODO When inserting row, update shift all other dict values!
 			[self insertRow:tag];
+			
 			[self putCell:kindCell atRow:tag column:0];
 			
 			[dictItemKind setObject:[NSNumber numberWithInt:tag] forKey:kind];
@@ -68,7 +70,9 @@
 			NSTextFieldCell* itemCell = [[NSTextFieldCell alloc] initTextCell:path];
 			[itemCell setTag:tag];
 			
+			// TODO Like above!
 			[self insertRow:tag];
+			
 			[self putCell:itemCell atRow:tag column:0];
 			
 			[dictItemPath setObject:[NSNumber numberWithInt:tag] forKey:path];
