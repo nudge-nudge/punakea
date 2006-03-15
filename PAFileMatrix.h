@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAFileMatrixHeaderCell.h"
+#import "PAFileMatrixGroupCell.h"
 #import "PAFileMatrixItemCell.h"
 
 @interface PAFileMatrix : NSMatrix {

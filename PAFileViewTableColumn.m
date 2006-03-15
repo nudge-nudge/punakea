@@ -12,7 +12,7 @@
 {
    if(!typeCell)
    {
-      typeCell = [[PAFileMatrixHeaderCell alloc] initTextCell:@"hallo"];
+      typeCell = [[PAFileMatrixGroupCell alloc] initTextCell:@"hallo"];
       [typeCell setControlSize:NSSmallControlSize];
    }
    return typeCell;

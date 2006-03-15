@@ -10,8 +10,8 @@
 
 @interface PAFileMatrix (PrivateAPI)
 
-- (int)rowForHeaderCell:(PAFileMatrixHeaderCell *)cell;
-- (int)rowForItemCell:(PAFileMatrixItemCell *)cell;
+- (void)insertHeaderCell:(PAFileMatrixGroupCell *)cell;
+- (void)insertItemCell:(PAFileMatrixItemCell *)cell;
 
 @end
 
@@ -53,12 +53,14 @@
 	for (i = 0; i < [groupedResults count]; i++)
 	{
 		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
+		
 		NSLog([group value]);
+		
 		NSArray *subgroups = [group subgroups];
 		for (j = 0; j < [subgroups count]; j++)
 		{
 			NSMetadataQueryResultGroup *thisGroup = [subgroups objectAtIndex:j];
-			NSLog([[thisGroup value] stringValue]);
+			//NSLog([[thisGroup value] stringValue]);
 			for (k = 0; k < [thisGroup resultCount]; k++)
 			{
 				NSMetadataItem *item = [thisGroup resultAtIndex:k];
@@ -76,7 +78,7 @@
 		if (![dictItemKind objectForKey:kind])
 		{
 			int tag = [self numberOfRows];
-			PAFileMatrixHeaderCell* kindCell = [[PAFileMatrixHeaderCell alloc] initTextCell:kind];
+			PAFileMatrixGroupCell* kindCell = [[PAFileMatrixGroupCell alloc] initTextCell:kind];
 			[kindCell setTag:tag];
 			
 			// TODO When inserting row, update shift all other dict values!
@@ -104,12 +106,12 @@
 	}
 }
 
-- (int)rowForHeaderCell:(PAFileMatrixHeaderCell *)cell
+- (void)insertHeaderCell:(PAFileMatrixGroupCell *)cell
 {
 	return 0;
 }
 
-- (int)rowForItemCell:(PAFileMatrixItemCell *)cell
+- (void)insertItemCell:(PAFileMatrixItemCell *)cell
 {
 	return 0;
 }
@@ -129,6 +131,6 @@
 {
    if(dictItemKind) { [dictItemKind release]; }
    if(dictItemPath) { [dictItemPath release]; }
-   [super release];
+   [super dealloc];
 }
 @end

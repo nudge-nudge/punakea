@@ -1,7 +1,8 @@
 #import <Cocoa/Cocoa.h>
 
-@interface PAFileMatrixHeaderCell : NSActionCell
+@interface PAFileMatrixGroupCell : NSActionCell
 {
-	NSString* value;
+	NSString *value;
+	NSMetadataItem *item;
 }
 @end
