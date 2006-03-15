@@ -20,8 +20,27 @@
 }
 
 - (void)initTextCell:(NSString*)aText
-{
+{	
+	[aText retain];
+	[value release];
 	value = aText;
+}
+
+- (NSString*)value
+{
+	return value;
+}
+
+- (NSMetadataItem*)metadataItem
+{
+	return metadataItem;
+}
+
+- (void)setMetadataItem:(NSMetadataItem*)item
+{
+	[item retain];
+	[metadataItem release];
+	metadataItem = item;
 }
 
 @end

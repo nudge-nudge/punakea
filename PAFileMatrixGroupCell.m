@@ -33,6 +33,11 @@
 	[cellTitle drawAtPoint:NSMakePoint(cellFrame.origin.x + 10, cellFrame.origin.y + 2) withAttributes:fontAttributes];
 }
 
+- (NSString*)value
+{
+	return value;
+}
+
 - (void)initTextCell:(NSString*)aText
 {
 	value = aText;

@@ -2,6 +2,7 @@
 
 @interface PAFileMatrixItemCell : NSActionCell
 {
-	NSString* value;
+	NSString *value;
+	NSMetadataItem *metadataItem;
 }
 @end

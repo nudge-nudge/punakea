@@ -10,7 +10,7 @@
 
 @interface PAFileMatrix (PrivateAPI)
 
-- (void)insertHeaderCell:(PAFileMatrixGroupCell *)cell;
+- (void)insertGroupCell:(PAFileMatrixGroupCell *)cell;
 - (void)insertItemCell:(PAFileMatrixItemCell *)cell;
 
 @end
@@ -54,66 +54,59 @@
 	{
 		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
 		
-		NSLog([group value]);
+		PAFileMatrixGroupCell* groupCell = [[PAFileMatrixGroupCell alloc] initTextCell:[group value]];
+		[self insertGroupCell:groupCell];
 		
 		NSArray *subgroups = [group subgroups];
 		for (j = 0; j < [subgroups count]; j++)
 		{
 			NSMetadataQueryResultGroup *thisGroup = [subgroups objectAtIndex:j];
-			//NSLog([[thisGroup value] stringValue]);
+
 			for (k = 0; k < [thisGroup resultCount]; k++)
 			{
 				NSMetadataItem *item = [thisGroup resultAtIndex:k];
-				NSLog([item valueForAttribute:@"kMDItemPath"]);
+				NSString *displayName = [item valueForAttribute:@"kMDItemDisplayName"];
+				PAFileMatrixItemCell* itemCell = [[PAFileMatrixItemCell alloc] initTextCell:displayName];
+				[itemCell setMetadataItem:item];
+				[self insertItemCell:itemCell];
 			}
-		}
-	}
-	
-	for (i = 0; i < [query resultCount]; i++)
-	{
-		NSMetadataItem* item = [query resultAtIndex:i];
-		
-		// Check for item kind cell
-		NSString* kind = [item valueForAttribute:@"kMDItemKind"];
-		if (![dictItemKind objectForKey:kind])
-		{
-			int tag = [self numberOfRows];
-			PAFileMatrixGroupCell* kindCell = [[PAFileMatrixGroupCell alloc] initTextCell:kind];
-			[kindCell setTag:tag];
-			
-			// TODO When inserting row, update shift all other dict values!
-			[self insertRow:tag];
-			
-			[self putCell:kindCell atRow:tag column:0];
-			
-			[dictItemKind setObject:[NSNumber numberWithInt:tag] forKey:kind];
-		}
-		
-		// Check for file cell
-		NSString* path = [item valueForAttribute:@"kMDItemPath"];
-		if(![dictItemPath objectForKey:path]) {
-			int tag = [[dictItemKind objectForKey:kind] intValue] + 1;
-			NSTextFieldCell* itemCell = [[NSTextFieldCell alloc] initTextCell:path];
-			[itemCell setTag:tag];
-			
-			// TODO Like above!
-			[self insertRow:tag];
-			
-			[self putCell:itemCell atRow:tag column:0];
-			
-			[dictItemPath setObject:[NSNumber numberWithInt:tag] forKey:path];
 		}
 	}
 }
 
-- (void)insertHeaderCell:(PAFileMatrixGroupCell *)cell
+- (void)insertGroupCell:(PAFileMatrixGroupCell *)cell
 {
-	return 0;
+	if (![dictItemKind objectForKey:[cell value]])
+	{
+		int tag = [self numberOfRows];
+		[cell setTag:tag];
+		
+		// TODO When inserting row, update shift all other dict values!
+		[self insertRow:tag];
+		
+		[self putCell:cell atRow:tag column:0];
+		
+		[dictItemKind setObject:[NSNumber numberWithInt:tag] forKey:[cell value]];
+	}
 }
 
 - (void)insertItemCell:(PAFileMatrixItemCell *)cell
 {
-	return 0;
+	NSMetadataItem *item = [cell metadataItem];
+	NSString *path = [item valueForAttribute:@"kMDItemPath"];
+	NSString *kind = [item valueForAttribute:@"kMDItemKind"];
+	NSLog(kind);
+	if(![dictItemPath objectForKey:path]) {
+		int tag = [[dictItemKind objectForKey:kind] intValue] + 1;
+		[cell setTag:tag];
+		
+		// TODO Like above!
+		[self insertRow:tag];
+		
+		[self putCell:cell atRow:tag column:0];
+		
+		[dictItemPath setObject:[NSNumber numberWithInt:tag] forKey:path];
+	}
 }
 
 - (void)queryNote:(NSNotification *)note
