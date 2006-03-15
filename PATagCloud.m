@@ -9,8 +9,6 @@
 
 @end
 
-//todo make tagcloud observer of relatedTags
-//todo mh, do structs need memory management?!
 @implementation PATagCloud
 
 - (id)initWithFrame:(NSRect)frameRect
@@ -19,6 +17,14 @@
 		activeTag = [[PATag alloc] init];
 	}
 	return self;
+}
+
+- (void)awakeFromNib
+{
+	[relatedTagsController addObserver:self
+							forKeyPath:@"arrangedObjects"
+							   options:0
+							   context:NULL];
 }
 
 - (void)dealloc
@@ -37,6 +43,15 @@
 	[activeTag release];
 	[aTag retain];
 	activeTag = aTag;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object 
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+	if ([keyPath isEqual:@"arrangedObjects"]) 
+		[self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)rect
@@ -115,11 +130,13 @@
 //EVENT HANDLING
 - (void)mouseEntered:(NSEvent*)event
 {
+	NSLog(@"entered %@",[event userData]);
 	[self setActiveTag:[event userData]];
 }
 
 - (void)mouseExited:(NSEvent*)event
 {
+	NSLog(@"left %@",activeTag);
 	[self setActiveTag:NULL];
 }
 
@@ -127,7 +144,7 @@
 {
 	NSLog(@"clicked tag %@",activeTag);
 	
-	if (activeTag != nil)
+	if (activeTag != NULL)
 		[selectedTagsController addObject:activeTag];
 }
 
