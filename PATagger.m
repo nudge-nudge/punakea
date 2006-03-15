@@ -6,9 +6,7 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import <CoreServices/CoreServices.h>
 #import "PATagger.h"
-#import "Matador.h"
 
 @implementation PATagger
 

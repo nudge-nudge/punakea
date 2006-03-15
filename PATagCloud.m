@@ -2,6 +2,8 @@
 
 @interface PATagCloud (PrivateAPI)
 
+- (NSPoint)firstPointForNextLineIn:(NSRect)rect;
+- (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth;
 - (void)drawBackground:(NSRect)rect;
 - (void)drawTags:(NSRect)rect;
 - (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
@@ -55,20 +57,70 @@
 		[self setNeedsDisplay:YES];
 }
 
+#pragma mark drawing
 - (void)drawRect:(NSRect)rect
 {	
+	pointForNextTagRect = NSMakePoint(0,rect.size.height);
+	
 	//if there are registered trackingRects, remove them before redrawing
 	NSEnumerator *e = [rectTags objectEnumerator];
 	NSTrackingRectTag rectTag;
+	
+	//get the tags to be displayed
+	currentTags = [relatedTagsController arrangedObjects];
 	
 	while (rectTag = [[e nextObject] intValue])
 		[self removeTrackingRect:rectTag];
 	
 	//TODO externalize values
-	pointForTagRect = NSMakePoint(10,rect.size.height-35);
+	pointForNextTagRect = [self firstPointForNextLineIn:rect];
 	
 	[self drawBackground:rect];
 	[self drawTags:rect];
+}
+
+- (NSPoint)firstPointForNextLineIn:(NSRect)rect;
+{
+	int padding = 10;
+	
+	NSEnumerator *e = [currentTags objectEnumerator];
+	PATag *tag;
+	
+	int lineWidth = 0;
+	NSMutableString *oneLine = [NSMutableString stringWithString:@""];
+	
+	while (tag = [e nextObject])
+	{
+		NSSize tagSize = [tag sizeWithAttributes:[tag viewAttributes]];
+		lineWidth = padding + tagSize.width;
+		[oneLine appendString:[tag name]];
+		
+		if (lineWidth + padding > rect.size.width)
+			break;
+	}
+	
+	float height = [self heightForStringDrawing:oneLine font:[NSFont fontWithName:@"Geneva" size:50] width:lineWidth];
+		
+	return NSMakePoint(padding,pointForNextTagRect.y-height);
+}	
+
+- (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth
+{
+	//TODO kein bock mehr eh
+	return 35;
+	
+	NSTextStorage *textStorage = [[[NSTextStorage alloc] initWithString:myString] autorelease];
+	NSTextContainer *textContainer = [[[NSTextContainer alloc] initWithContainerSize: NSMakeSize(myWidth, FLT_MAX)] autorelease];
+	NSLayoutManager *layoutManager = [[[NSLayoutManager alloc] init] autorelease];
+	
+	[layoutManager addTextContainer:textContainer];
+	[textStorage addLayoutManager:layoutManager];
+
+	[textStorage addAttribute:NSFontAttributeName value:myFont range:NSMakeRange(0, [textStorage length])];
+	[textContainer setLineFragmentPadding:0.0];
+	[layoutManager glyphRangeForTextContainer:textContainer];
+	
+	return [layoutManager usedRectForTextContainer:textContainer].size.height;
 }
 
 - (void)drawBackground:(NSRect)rect
@@ -80,7 +132,7 @@
 
 - (void)drawTags:(NSRect)rect
 {
-	NSEnumerator *e = [[relatedTagsController arrangedObjects] objectEnumerator];
+	NSEnumerator *e = [currentTags objectEnumerator];
 	
 	PATag *tag;
 	
@@ -106,17 +158,17 @@
 	//first get the tag size for the tag to draw
 	NSSize tagSize = [tag sizeWithAttributes:attribs];
 	
-	int xValue = pointForTagRect.x + tagSize.width + padding;
+	int xValue = pointForNextTagRect.x + tagSize.width + padding;
 	
 	if (xValue > rect.size.width)
 	{
-		pointForTagRect = NSMakePoint(padding,pointForTagRect.y-height);
+		pointForNextTagRect = NSMakePoint(padding,pointForNextTagRect.y-height);
 	}
 		
-	NSRect tagRect =  NSMakeRect(pointForTagRect.x,pointForTagRect.y,tagSize.width,tagSize.height);
+	NSRect tagRect =  NSMakeRect(pointForNextTagRect.x,pointForNextTagRect.y,tagSize.width,tagSize.height);
 	
 	//then calc the point for the next tag 
-	pointForTagRect = NSMakePoint(pointForTagRect.x + tagSize.width + spacing,pointForTagRect.y);
+	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + tagSize.width + spacing,pointForNextTagRect.y);
 	
 	return tagRect;
 }
@@ -132,16 +184,13 @@
 
 - (void)mouseExited:(NSEvent*)event
 {
-	NSLog(@"left %@",activeTag);
 	[[self activeTag] setHighlight:NO];
 	[self setActiveTag:NULL];
 	[self setNeedsDisplay:YES];
 }
 
 - (void)mouseUp:(NSEvent*)event
-{
-	NSLog(@"clicked tag %@",activeTag);
-	
+{	
 	if (activeTag != NULL)
 	{
 		[selectedTagsController addObject:activeTag];

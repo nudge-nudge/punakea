@@ -10,7 +10,8 @@
 
 @implementation PATag 
 
-- (id)init 
+#pragma mark init
+- (id)init
 {
 	return [self initWithName:NSLocalizedString(@"default tag name",@"tag")];
 }
@@ -68,7 +69,7 @@
 	[super dealloc];
 }
 
-//accessors
+#pragma mark accessors
 - (void)setName:(NSString*)aName 
 {
 	[aName retain];
@@ -177,14 +178,14 @@
 	return result;
 }
 
-//---- DRAWING STUFF ----
+#pragma mark drawing
 - (NSMutableDictionary*)viewAttributes
 {
 	NSMutableDictionary *attribs = [NSMutableDictionary dictionary];
 	
 	NSColor *c = [NSColor redColor];
 	//externalize sizes
-	int size = 100 * [self relativeRating];
+	int size = 50 * [self relativeRating];
 	if (size < 10)
 		size = 10;
 	
@@ -204,11 +205,6 @@
 
 - (void)drawInRect:(NSRect)rect withAttributes:(NSDictionary*)attributes
 {
-	//debug
-	[[NSColor blackColor] set];
-	[NSBezierPath strokeRect:rect];
-	//dend
-	
 	rectInView = rect;
 	[name drawInRect:rect withAttributes:attributes];
 }
@@ -223,7 +219,7 @@
 	highlight = flag;
 }
 
-//---- BEGIN isEqual: stuff ----
+#pragma mark euality testing
 - (BOOL)isEqual:(id)other 
 {
 	if (!other || ![other isKindOfClass:[self class]]) 
@@ -245,6 +241,5 @@
 {
 	return [name hash] ^ [query hash];
 }
-//---- END isEqual: stuff ----
 
 @end

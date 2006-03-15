@@ -8,7 +8,10 @@
 {
     IBOutlet NSArrayController *relatedTagsController;
 	IBOutlet NSArrayController *selectedTagsController;
-	NSPoint pointForTagRect;
+
+	NSArray *currentTags;
+	
+	NSPoint pointForNextTagRect;
 	
 	PATag *activeTag;
 	NSMutableArray *rectTags;

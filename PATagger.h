@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <CoreServices/CoreServices.h>
 #import "PATag.h"
+#import "Matador.h"
 
 @interface PATagger : NSObject
 
