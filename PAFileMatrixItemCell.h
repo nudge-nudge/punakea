@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
 
-@interface PAFileMatrixHeaderCell : NSActionCell
+@interface PAFileMatrixItemCell : NSActionCell
 {
 	NSString* value;
 }

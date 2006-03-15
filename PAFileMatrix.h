@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "PAFileMatrixHeaderCell.h"
+#import "PAFileMatrixItemCell.h"
 
 @interface PAFileMatrix : NSMatrix {
 	NSMetadataQuery *query;

@@ -7,8 +7,13 @@
 //
 
 #import "PAFileMatrix.h"
-#import "PAFileMatrixHeaderCell.h"
 
+@interface PAFileMatrix (PrivateAPI)
+
+- (int)rowForHeaderCell:(PAFileMatrixHeaderCell *)cell;
+- (int)rowForItemCell:(PAFileMatrixItemCell *)cell;
+
+@end
 
 @implementation PAFileMatrix
 
@@ -97,6 +102,16 @@
 			[dictItemPath setObject:[NSNumber numberWithInt:tag] forKey:path];
 		}
 	}
+}
+
+- (int)rowForHeaderCell:(PAFileMatrixHeaderCell *)cell
+{
+	return 0;
+}
+
+- (int)rowForItemCell:(PAFileMatrixItemCell *)cell
+{
+	return 0;
 }
 
 - (void)queryNote:(NSNotification *)note
