@@ -7,10 +7,10 @@
 /* PAFileViewTableColumn */
 
 #import <Cocoa/Cocoa.h>
-#import "PAFileMatrixKindCell.h"
+#import "PAFileMatrixGroupCell.h"
 
 @interface PAFileViewTableColumn : NSTableColumn
 {
-	PAFileMatrixHeaderCell* typeCell;
+	PAFileMatrixGroupCell* typeCell;
 }
 @end
