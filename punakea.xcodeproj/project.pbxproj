@@ -135,8 +135,8 @@
 		6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileViewTableColumn.m; sourceTree = "<group>"; };
 		6510E0E209A7356D00E0F73A /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		6510E14B09A739CC00E0F73A /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
-		651B2ABF09B9B5FB002299FB /* PAFileMatrixGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PAFileMatrixGroupCell.h; sourceTree = "<group>"; };
-		651B2AC009B9B5FB002299FB /* PAFileMatrixGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = PAFileMatrixGroupCell.m; sourceTree = "<group>"; };
+		651B2ABF09B9B5FB002299FB /* PAFileMatrixGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAFileMatrixGroupCell.h; sourceTree = "<group>"; };
+		651B2AC009B9B5FB002299FB /* PAFileMatrixGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileMatrixGroupCell.m; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
@@ -355,10 +355,10 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				65E7B0690994D5AA00565251 /* Controller.h */,
 				65E7B06A0994D5AA00565251 /* Controller.m */,
+				48E9C2F409A5C27600415AC7 /* TaggerViewController.m */,
 				65E7B43C0994E3D000565251 /* SubViewController.h */,
 				65E7B43D0994E3D000565251 /* SubViewController.m */,
 				48E9C2F509A5C27600415AC7 /* TaggerViewController.h */,
-				48E9C2F409A5C27600415AC7 /* TaggerViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

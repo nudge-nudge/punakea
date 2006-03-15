@@ -17,6 +17,10 @@
 	unsigned long clickCount;
 	unsigned long useCount;
 	PATag *currentBestTag;
+	
+	//position in view
+	NSRect rectInView;
+	BOOL highlight;
 }
 
 - (id)initWithName:(NSString*)aName;
@@ -42,6 +46,11 @@
 
 - (float)absoluteRating;
 - (float)relativeRating;
+
+- (NSMutableDictionary*)viewAttributes;
+- (void)drawInRect:(NSRect)rect withAttributes:(NSDictionary*)attributes;
+- (NSSize)sizeWithAttributes:(NSDictionary*)attributes;
+- (void)setHighlight:(BOOL)flag;
 
 - (BOOL)isEqualToTag:(PATag*)otherTag;
 

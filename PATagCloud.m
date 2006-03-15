@@ -2,10 +2,9 @@
 
 @interface PATagCloud (PrivateAPI)
 
-- (void)drawBackground:(NSRect*)rect;
-- (void)drawTags:(NSRect*)rect;
-- (void)drawTag:(PATag*)tag inMainRect:(NSRect*)rect;
-- (NSRect*)nextRectFor:(PATag*)tag inMainRect:(NSRect*)rect withAttributes:(NSDictionary*)attribs;
+- (void)drawBackground:(NSRect)rect;
+- (void)drawTags:(NSRect)rect;
+- (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
 
 @end
 
@@ -15,6 +14,7 @@
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
 		activeTag = [[PATag alloc] init];
+		rectTags = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -30,6 +30,7 @@
 - (void)dealloc
 {
 	[activeTag release];
+	[rectTags release];
 	[super dealloc];
 }
 
@@ -56,70 +57,63 @@
 
 - (void)drawRect:(NSRect)rect
 {	
+	//if there are registered trackingRects, remove them before redrawing
+	NSEnumerator *e = [rectTags objectEnumerator];
+	NSTrackingRectTag rectTag;
+	
+	while (rectTag = [[e nextObject] intValue])
+		[self removeTrackingRect:rectTag];
+	
 	//TODO externalize values
-	pointForTagRect = NSMakePoint(10,rect.size.height-30);
+	pointForTagRect = NSMakePoint(10,rect.size.height-35);
 	
-	NSRect *pRect = &rect;
-	
-	[self drawBackground:pRect];
-	[self drawTags:pRect];
+	[self drawBackground:rect];
+	[self drawTags:rect];
 }
 
-- (void)drawBackground:(NSRect*)rect
+- (void)drawBackground:(NSRect)rect
 {
 	NSRect bounds = [self bounds];
 	[[NSColor whiteColor] set];
 	[NSBezierPath fillRect:bounds];
 }
 
-- (void)drawTags:(NSRect*)rect
+- (void)drawTags:(NSRect)rect
 {
 	NSEnumerator *e = [[relatedTagsController arrangedObjects] objectEnumerator];
 	
 	PATag *tag;
 	
-	while (tag = [e nextObject]) 
-		[self drawTag:tag inMainRect:rect];
-}
-
-- (void)drawTag:(PATag*)tag inMainRect:(NSRect*)rect
-{
-	NSMutableDictionary *attribs = [[NSMutableDictionary alloc] init];
-	
-	NSColor *c = [NSColor redColor];
-	NSFont *fnt = [NSFont fontWithName:@"Geneva" size:24];
-	
-	[attribs setObject:c forKey:NSForegroundColorAttributeName];
-	[attribs setObject:fnt forKey:NSFontAttributeName];
+	while (tag = [e nextObject])
+	{
+		NSDictionary *attributes = [tag viewAttributes];
+		NSRect tagRect = [self nextRectFor:tag inMainRect:rect withAttributes:attributes];
+		[tag drawInRect:tagRect withAttributes:attributes];
 		
-	NSRect *tagRect = [self nextRectFor:tag inMainRect:rect withAttributes:attribs];
-	
-	[[tag name] drawInRect:*tagRect withAttributes:attribs];
-	//add tracking
-	[self addTrackingRect:*tagRect owner:self userData:tag assumeInside:NO];
-	
-	[attribs release];
+		//add tracking - keep track of the trackingRects so that the can be removed on redraw
+		NSTrackingRectTag rectTag = [self addTrackingRect:tagRect owner:self userData:tag assumeInside:NO];
+		[rectTags addObject:[NSNumber numberWithInt:rectTag]];
+	}
 }
 
-- (NSRect*)nextRectFor:(PATag*)tag inMainRect:(NSRect*)rect withAttributes:(NSDictionary*)attribs
+- (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs
 {
 	//TODO externalize spacing and padding and ...
-	int height = 25;
+	int height = 35;
 	int spacing = 10;
 	int padding = 10;
 	
-	//first get the tagRect for the current tag
-	NSSize tagSize = [[tag name] sizeWithAttributes:attribs];
+	//first get the tag size for the tag to draw
+	NSSize tagSize = [tag sizeWithAttributes:attribs];
 	
 	int xValue = pointForTagRect.x + tagSize.width + padding;
 	
-	if (xValue > rect->size.width)
+	if (xValue > rect.size.width)
 	{
 		pointForTagRect = NSMakePoint(padding,pointForTagRect.y-height);
 	}
 		
-	NSRect newRectForTag =  NSMakeRect(pointForTagRect.x,pointForTagRect.y,tagSize.width,tagSize.height);
-	NSRect *tagRect = &newRectForTag;
+	NSRect tagRect =  NSMakeRect(pointForTagRect.x,pointForTagRect.y,tagSize.width,tagSize.height);
 	
 	//then calc the point for the next tag 
 	pointForTagRect = NSMakePoint(pointForTagRect.x + tagSize.width + spacing,pointForTagRect.y);
@@ -132,12 +126,16 @@
 {
 	NSLog(@"entered %@",[event userData]);
 	[self setActiveTag:[event userData]];
+	[[self activeTag] setHighlight:YES];
+	[self setNeedsDisplay:YES];
 }
 
 - (void)mouseExited:(NSEvent*)event
 {
 	NSLog(@"left %@",activeTag);
+	[[self activeTag] setHighlight:NO];
 	[self setActiveTag:NULL];
+	[self setNeedsDisplay:YES];
 }
 
 - (void)mouseUp:(NSEvent*)event
@@ -145,7 +143,10 @@
 	NSLog(@"clicked tag %@",activeTag);
 	
 	if (activeTag != NULL)
+	{
 		[selectedTagsController addObject:activeTag];
+		[activeTag incrementClickCount];
+	}
 }
 
 @end

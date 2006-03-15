@@ -26,6 +26,8 @@
 		
 		clickCount = 0;
 		useCount = 0;
+		
+		[self setHighlight:NO];
 	}
 	return self;
 }
@@ -154,9 +156,15 @@
 //returns between 0 and 1 - this can be made faster if we cache the value ... TODO
 - (float)relativeRating
 {	
+	float relClickCount = 0.0;
+	float relUseCount = 0.0;
+	
 	//TODO make quicker implementation, this is for readability
-	float relClickCount = (float) [self clickCount] / (float) [currentBestTag clickCount];
-	float relUseCount = (float) [self useCount] / (float) [currentBestTag useCount];
+	if ([currentBestTag clickCount])
+		relClickCount = (float) [self clickCount] / (float) [currentBestTag clickCount];
+	
+	if ([currentBestTag useCount])
+		relUseCount = (float) [self useCount] / (float) [currentBestTag useCount];
 	
 	float weightClickCount = 0.5;
 	float weightUseCount = 0.5;
@@ -167,6 +175,52 @@
 	float result = weightedClickCount + weightedUseCount;
 	
 	return result;
+}
+
+//---- DRAWING STUFF ----
+- (NSMutableDictionary*)viewAttributes
+{
+	NSMutableDictionary *attribs = [NSMutableDictionary dictionary];
+	
+	NSColor *c = [NSColor redColor];
+	//externalize sizes
+	int size = 100 * [self relativeRating];
+	if (size < 10)
+		size = 10;
+	
+	NSFont *fnt = [NSFont fontWithName:@"Geneva" size:size];
+	
+	[attribs setObject:c forKey:NSForegroundColorAttributeName];
+	[attribs setObject:fnt forKey:NSFontAttributeName];
+	
+	if (highlight)
+	{
+		NSColor *bgcolor = [NSColor blueColor];
+		[attribs setObject:bgcolor forKey:NSBackgroundColorAttributeName];
+	}
+	
+	return attribs;
+}
+
+- (void)drawInRect:(NSRect)rect withAttributes:(NSDictionary*)attributes
+{
+	//debug
+	[[NSColor blackColor] set];
+	[NSBezierPath strokeRect:rect];
+	//dend
+	
+	rectInView = rect;
+	[name drawInRect:rect withAttributes:attributes];
+}
+
+- (NSSize)sizeWithAttributes:(NSDictionary*)attributes
+{
+	return [name sizeWithAttributes:attributes];
+}
+
+- (void)setHighlight:(BOOL)flag 
+{	
+	highlight = flag;
 }
 
 //---- BEGIN isEqual: stuff ----
