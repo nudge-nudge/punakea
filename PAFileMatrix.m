@@ -40,8 +40,27 @@
     [nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
 }
 
-- (void)updateView {
-	int i;
+- (void)updateView
+{
+	int i, j, k;
+	
+	NSArray *groupedResults = [query groupedResults];
+	for (i = 0; i < [groupedResults count]; i++)
+	{
+		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
+		NSLog([group value]);
+		NSArray *subgroups = [group subgroups];
+		for (j = 0; j < [subgroups count]; j++)
+		{
+			NSMetadataQueryResultGroup *thisGroup = [subgroups objectAtIndex:j];
+			NSLog([[thisGroup value] stringValue]);
+			for (k = 0; k < [thisGroup resultCount]; k++)
+			{
+				NSMetadataItem *item = [thisGroup resultAtIndex:k];
+				NSLog([item valueForAttribute:@"kMDItemPath"]);
+			}
+		}
+	}
 	
 	for (i = 0; i < [query resultCount]; i++)
 	{

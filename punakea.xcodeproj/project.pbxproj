@@ -334,10 +334,10 @@
 				651CF1D0099BA213007E48DD /* FileOutlineViewDelegateCategory.m */,
 				65765BCD09BEE8C200977A34 /* PAFileMatrix.h */,
 				65765BCE09BEE8C200977A34 /* PAFileMatrix.m */,
-				6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */,
-				6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */,
 				651B2ABF09B9B5FB002299FB /* PAFileMatrixKindCell.h */,
 				651B2AC009B9B5FB002299FB /* PAFileMatrixKindCell.m */,
+				6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */,
+				6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */,
 			);
 			name = FileMatrix;
 			sourceTree = "<group>";
