@@ -7,7 +7,7 @@
 //
 
 #import "PAFileMatrix.h"
-#import "PAFileMatrixKindCell.h"
+#import "PAFileMatrixHeaderCell.h"
 
 
 @implementation PAFileMatrix
@@ -71,7 +71,7 @@
 		if (![dictItemKind objectForKey:kind])
 		{
 			int tag = [self numberOfRows];
-			PAFileMatrixKindCell* kindCell = [[PAFileMatrixKindCell alloc] initTextCell:kind];
+			PAFileMatrixHeaderCell* kindCell = [[PAFileMatrixHeaderCell alloc] initTextCell:kind];
 			[kindCell setTag:tag];
 			
 			// TODO When inserting row, update shift all other dict values!

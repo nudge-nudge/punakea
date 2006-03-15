@@ -11,6 +11,6 @@
 
 @interface PAFileViewTableColumn : NSTableColumn
 {
-	PAFileMatrixKindCell* typeCell;
+	PAFileMatrixHeaderCell* typeCell;
 }
 @end

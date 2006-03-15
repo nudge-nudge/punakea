@@ -1,8 +1,6 @@
-/* PASpotlightTypeCell */
-
 #import <Cocoa/Cocoa.h>
 
-@interface PAFileMatrixKindCell : NSActionCell
+@interface PAFileMatrixHeaderCell : NSActionCell
 {
 	NSString* text;
 }
