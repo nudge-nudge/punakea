@@ -79,6 +79,13 @@
 	}
 }
 
+- (void)clearView
+{
+	[self renewRows:0 columns:1];
+	dictItemKind = [[NSMutableDictionary alloc] init];	
+	dictItemPath = [[NSMutableDictionary alloc] init];
+}
+
 - (void)insertGroupCell:(PAFileMatrixGroupCell *)cell
 {
 	if (![dictItemKind objectForKey:[cell value]])
@@ -120,8 +127,13 @@
 	
 	if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification] ||
 		[[note name] isEqualToString:NSMetadataQueryDidUpdateNotification] ||
-		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification]) {
+		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification])
+	{
 		[self updateView];
+	}
+	if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification])
+	{
+		[self clearView];
 	}
 }
 

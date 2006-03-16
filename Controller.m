@@ -221,8 +221,14 @@
 
 
 #pragma Temp
-- (void)setGroupingAttributes
+- (void)setGroupingAttributes:(id)sender;
 {
-	NSLog([[segmentedControl selectedTag] stringValue]);
+	NSSegmentedControl *sc = sender;
+	if([sc selectedSegment] == 0) {
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, nil]];
+	}
+	if([sc selectedSegment] == 1) {
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemFSName, nil]];
+	}
 }
 @end
