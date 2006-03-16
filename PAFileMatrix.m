@@ -25,9 +25,14 @@
     return self;
 }
 
-/* - (void)drawRect:(NSRect)rect {
-    // Drawing code here.
-} */
+- (void)drawRect:(NSRect)rect {
+	// Draw background
+	NSRect bounds = [self bounds];
+	[[NSColor whiteColor] set];
+	[NSBezierPath fillRect:bounds];
+	
+	[super drawRect:rect];
+}
 
 - (void)awakeFromNib{
 	[self setCellClass:[NSTextFieldCell class]];
@@ -57,20 +62,20 @@
 		PAFileMatrixGroupCell* groupCell = [[PAFileMatrixGroupCell alloc] initTextCell:[group value]];
 		[self insertGroupCell:groupCell];
 		
-		NSArray *subgroups = [group subgroups];
-		for (j = 0; j < [subgroups count]; j++)
-		{
-			NSMetadataQueryResultGroup *thisGroup = [subgroups objectAtIndex:j];
+		//NSArray *subgroups = [group subgroups];
+		//for (j = 0; j < [subgroups count]; j++)
+		//{
+		//	NSMetadataQueryResultGroup *thisGroup = [subgroups objectAtIndex:j];
 
-			for (k = 0; k < [thisGroup resultCount]; k++)
+			for (k = 0; k < [group resultCount]; k++)
 			{
-				NSMetadataItem *item = [thisGroup resultAtIndex:k];
+				NSMetadataItem *item = [group resultAtIndex:k];
 				NSString *displayName = [item valueForAttribute:@"kMDItemDisplayName"];
 				PAFileMatrixItemCell* itemCell = [[PAFileMatrixItemCell alloc] initTextCell:displayName];
 				[itemCell setMetadataItem:item];
 				[self insertItemCell:itemCell];
 			}
-		}
+		//}
 	}
 }
 

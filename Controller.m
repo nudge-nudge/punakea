@@ -17,7 +17,7 @@
 		
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setNotificationBatchingInterval:0.3];
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, nil]];
 	}
     return self;
 }
@@ -218,4 +218,11 @@
 	}
 }
 //---- END tag stuff ----
+
+
+#pragma Temp
+- (void)setGroupingAttributes
+{
+	NSLog([[segmentedControl selectedTag] stringValue]);
+}
 @end

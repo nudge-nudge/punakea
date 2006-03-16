@@ -12,6 +12,7 @@
     IBOutlet id drawer;
     IBOutlet NSOutlineView *outlineView;
 	IBOutlet PAFileMatrix *fileMatrix;
+	IBOutlet NSSegmentedControl *segmentedControl;
 	IBOutlet NSArrayController *relatedTagsController;
 	IBOutlet NSArrayController *selectedTagsController;
 	IBOutlet NSArrayController *resultController;
