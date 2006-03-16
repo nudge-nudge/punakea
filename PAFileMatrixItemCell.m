@@ -10,7 +10,7 @@
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {						   
 	// Draw text
-	NSString *cellTitle = [NSString stringWithString:value];
+	NSString *cellTitle = [NSString stringWithString:key];
 
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	[fontAttributes setObject:[NSColor textColor] forKey:NSForegroundColorAttributeName];
@@ -21,14 +21,14 @@
 
 - (void)initTextCell:(NSString*)aText
 {	
-	[value release];
-	value = [aText retain];
+	[key release];
+	key = [aText retain];
 	[super initTextCell:aText];
 }
 
-- (NSString*)value
+- (NSString*)key
 {
-	return value;
+	return key;
 }
 
 - (NSMetadataItem*)metadataItem
@@ -44,7 +44,7 @@
 
 - (void)dealloc
 {
-	if(value) { [value release]; }
+	if(key) { [key release]; }
 	if(metadataItem) { [metadataItem release]; }
 	[super dealloc];
 }

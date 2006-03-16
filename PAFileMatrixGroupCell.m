@@ -30,7 +30,7 @@
 			    fraction:1.0];
 					   
 	// Draw text
-	NSString *cellTitle = [NSString stringWithString:value];
+	NSString *cellTitle = [NSString stringWithString:key];
 
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
@@ -39,20 +39,20 @@
 	[cellTitle drawAtPoint:NSMakePoint(cellFrame.origin.x + 20, cellFrame.origin.y + 4) withAttributes:fontAttributes];
 }
 
-- (NSString*)value
+- (NSString*)key
 {
-	return value;
+	return key;
 }
 
 - (void)initTextCell:(NSString*)aText
 {
-	value = aText;
+	key = aText;
 	[super initTextCell:aText];
 }
 
 - (void)dealloc
 {
-	if(value) { [value release]; }
+	if(key) { [key release]; }
 	[super dealloc];
 }
 @end

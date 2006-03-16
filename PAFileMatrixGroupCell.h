@@ -2,6 +2,6 @@
 
 @interface PAFileMatrixGroupCell : NSActionCell
 {
-	NSString *value;
+	NSString *key;
 }
 @end

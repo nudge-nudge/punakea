@@ -18,6 +18,7 @@
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setNotificationBatchingInterval:0.3];
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, nil]];
+		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 	}
     return self;
 }

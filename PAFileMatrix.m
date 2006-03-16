@@ -10,8 +10,8 @@
 
 @interface PAFileMatrix (PrivateAPI)
 
-- (void)insertGroupCell:(PAFileMatrixGroupCell *)cell;
-- (void)insertItemCell:(PAFileMatrixItemCell *)cell;
+- (void)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row;
+- (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row;
 
 @end
 
@@ -37,10 +37,7 @@
 - (void)awakeFromNib{
 	[self setCellClass:[NSTextFieldCell class]];
 	[self renewRows:0 columns:1];
-	[self setCellSize:NSMakeSize(400,20)];
-	
-	dictItemKind = [[NSMutableDictionary alloc] init];	
-	dictItemPath = [[NSMutableDictionary alloc] init];
+	[self setCellSize:NSMakeSize(400,20)];	
 }
 
 - (void)setQuery:(NSMetadataQuery*)aQuery
@@ -52,82 +49,58 @@
 
 - (void)updateView
 {
-	int i, j, k;
+	int i, j;
+	int row = -1;
 	
 	NSArray *groupedResults = [query groupedResults];
 	for (i = 0; i < [groupedResults count]; i++)
 	{
+		row++;
 		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
 		
 		PAFileMatrixGroupCell* groupCell = [[PAFileMatrixGroupCell alloc] initTextCell:[group value]];
-		[self insertGroupCell:groupCell];
-		
-		//NSArray *subgroups = [group subgroups];
-		//for (j = 0; j < [subgroups count]; j++)
-		//{
-		//	NSMetadataQueryResultGroup *thisGroup = [subgroups objectAtIndex:j];
+		[self insertGroupCell:groupCell atRow:row];
 
-			for (k = 0; k < [group resultCount]; k++)
-			{
-				NSMetadataItem *item = [group resultAtIndex:k];
-				NSString *displayName = [item valueForAttribute:@"kMDItemDisplayName"];
-				PAFileMatrixItemCell* itemCell = [[PAFileMatrixItemCell alloc] initTextCell:displayName];
-				[itemCell setMetadataItem:item];
-				[self insertItemCell:itemCell];
-			}
-		//}
+		for (j = 0; j < [group resultCount]; j++)
+		{
+			row++;
+			NSMetadataItem *item = [group resultAtIndex:j];
+			NSString *itemPath = [item valueForAttribute:@"kMDItemPath"];
+			PAFileMatrixItemCell* itemCell = [[PAFileMatrixItemCell alloc] initTextCell:itemPath];
+			[itemCell setMetadataItem:item];
+			[self insertItemCell:itemCell atRow:row];
+		}
 	}
 }
 
 - (void)clearView
 {
-	// DEPRECATED
-	// Do not delete the items, but move and delete rows in updateView: - like Spotlight does :) 
 	
-	[self renewRows:0 columns:1];
-	dictItemKind = [[NSMutableDictionary alloc] init];	
-	dictItemPath = [[NSMutableDictionary alloc] init];
+	[self renewRows:0 columns:1];	
 }
 
-- (void)insertGroupCell:(PAFileMatrixGroupCell *)cell
+- (void)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row
 {
-	if (![dictItemKind objectForKey:[cell value]])
-	{
-		int tag = [self numberOfRows];
-		[cell setTag:tag];
-		
-		// TODO When inserting row, update shift all other dict values!
-		[self insertRow:tag];
-		
-		[self putCell:cell atRow:tag column:0];
-		
-		[dictItemKind setObject:[NSNumber numberWithInt:tag] forKey:[cell value]];
+	if ([self numberOfRows] <= row ||
+	    ![[cell key] isEqualTo:[[self cellAtRow:row column:0] key]])
+	{		
+		[self insertRow:row];
+		[self putCell:cell atRow:row column:0];
 	}
 }
 
-- (void)insertItemCell:(PAFileMatrixItemCell *)cell
+- (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row
 {
-	NSMetadataItem *item = [cell metadataItem];
-	NSString *path = [item valueForAttribute:@"kMDItemPath"];
-	NSString *kind = [item valueForAttribute:@"kMDItemKind"];
-	NSLog(kind);
-	if(![dictItemPath objectForKey:path]) {
-		int tag = [[dictItemKind objectForKey:kind] intValue] + 1;
-		[cell setTag:tag];
-		
-		// TODO Like above!
-		[self insertRow:tag];
-		
-		[self putCell:cell atRow:tag column:0];
-		
-		[dictItemPath setObject:[NSNumber numberWithInt:tag] forKey:path];
+	if ([self numberOfRows] <= row ||
+	    ![[cell key] isEqualTo:[[self cellAtRow:row column:0] key]])
+	{		
+		[self insertRow:row];
+		[self putCell:cell atRow:row column:0];
 	}
 }
 
 - (void)queryNote:(NSNotification *)note
-{
-	NSLog(@"fileMatrix: note received");
-	
+{	
 	if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification] ||
 		[[note name] isEqualToString:NSMetadataQueryDidUpdateNotification] ||
 		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification])
@@ -142,8 +115,6 @@
 
 - (void)dealloc
 {
-   if(dictItemKind) { [dictItemKind release]; }
-   if(dictItemPath) { [dictItemPath release]; }
    [super dealloc];
 }
 @end
