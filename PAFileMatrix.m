@@ -81,6 +81,9 @@
 
 - (void)clearView
 {
+	// DEPRECATED
+	// Do not delete the items, but move and delete rows in updateView: - like Spotlight does :) 
+	
 	[self renewRows:0 columns:1];
 	dictItemKind = [[NSMutableDictionary alloc] init];	
 	dictItemPath = [[NSMutableDictionary alloc] init];
