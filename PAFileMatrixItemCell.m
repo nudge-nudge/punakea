@@ -21,9 +21,9 @@
 
 - (void)initTextCell:(NSString*)aText
 {	
-	[aText retain];
 	[value release];
-	value = aText;
+	value = [aText retain];
+	[super initTextCell:aText];
 }
 
 - (NSString*)value
@@ -38,9 +38,14 @@
 
 - (void)setMetadataItem:(NSMetadataItem*)item
 {
-	[item retain];
 	[metadataItem release];
-	metadataItem = item;
+	metadataItem = [item retain];
 }
 
+- (void)dealloc
+{
+	if(value) { [value release]; }
+	if(metadataItem) { [metadataItem release]; }
+	[super dealloc];
+}
 @end

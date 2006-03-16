@@ -41,6 +41,12 @@
 - (void)initTextCell:(NSString*)aText
 {
 	value = aText;
+	[super initTextCell:aText];
 }
 
+- (void)dealloc
+{
+	if(value) { [value release]; }
+	[super dealloc];
+}
 @end
