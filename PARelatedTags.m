@@ -86,7 +86,6 @@
 //act on query notifications -- relatedTags need to be kept in sync with files
 - (void)queryNote:(NSNotification*)note 
 {
-	NSLog(@"received note");
 	if ([[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification] 
 		|| [[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]
 		|| [[note name] isEqualToString:NSMetadataQueryDidUpdateNotification]) 

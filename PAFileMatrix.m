@@ -20,24 +20,22 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
+		[self setCellClass:[NSTextFieldCell class]];
+		[self renewRows:0 columns:1];
     }
     return self;
 }
 
 - (void)drawRect:(NSRect)rect {
+	// Update cell size
+	[self setCellSize:NSMakeSize(rect.size.width,20)];
+
 	// Draw background
 	NSRect bounds = [self bounds];
 	[[NSColor whiteColor] set];
 	[NSBezierPath fillRect:bounds];
 	
 	[super drawRect:rect];
-}
-
-- (void)awakeFromNib{
-	[self setCellClass:[NSTextFieldCell class]];
-	[self renewRows:0 columns:1];
-	[self setCellSize:NSMakeSize(400,20)];	
 }
 
 - (void)setQuery:(NSMetadataQuery*)aQuery
@@ -71,12 +69,8 @@
 			[self insertItemCell:itemCell atRow:row];
 		}
 	}
-}
-
-- (void)clearView
-{
 	
-	[self renewRows:0 columns:1];	
+	[self renewRows:(row+1) columns:1];	
 }
 
 - (void)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row
@@ -106,10 +100,6 @@
 		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification])
 	{
 		[self updateView];
-	}
-	if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification])
-	{
-		[self clearView];
 	}
 }
 

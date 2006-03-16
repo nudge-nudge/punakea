@@ -10,13 +10,13 @@
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {						   
 	// Draw text
-	NSString *cellTitle = [NSString stringWithString:key];
+	NSString *cellTitle = [NSString stringWithString:[metadataItem valueForAttribute:(id)kMDItemDisplayName]];
 
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	[fontAttributes setObject:[NSColor textColor] forKey:NSForegroundColorAttributeName];
 	[fontAttributes setObject:[NSFont systemFontOfSize:11] forKey:NSFontAttributeName];
 	
-	[cellTitle drawAtPoint:NSMakePoint(cellFrame.origin.x + 10, cellFrame.origin.y + 2) withAttributes:fontAttributes];
+	[cellTitle drawAtPoint:NSMakePoint(cellFrame.origin.x + 20, cellFrame.origin.y + 2) withAttributes:fontAttributes];
 }
 
 - (void)initTextCell:(NSString*)aText
