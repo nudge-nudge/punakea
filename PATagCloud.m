@@ -87,28 +87,32 @@
 	PATag *tag;
 	
 	int lineWidth = 0;
+	float maxHeight = 0;;
 	NSMutableString *oneLine = [NSMutableString stringWithString:@""];
 	
 	while (tag = [e nextObject])
 	{
-		NSSize tagSize = [tag sizeWithAttributes:[tag viewAttributes]];
-		lineWidth = padding + tagSize.width;
-		[oneLine appendString:[tag name]];
+		NSDictionary *attributes = [tag viewAttributes];
+		NSSize tagSize = [tag sizeWithAttributes:attributes];
 		
+		//if the tag fills the line, stop adding tags
+		lineWidth += padding + tagSize.width;
 		if (lineWidth + padding > rect.size.width)
 			break;
+
+		float realTagHeight = [self heightForStringDrawing:[tag name] font:[attributes valueForKey:NSFontAttributeName] width:tagSize.width];
+		if (realTagHeight > maxHeight)
+			maxHeight = realTagHeight;
+	
+		[oneLine appendString:[tag name]];
 	}
 	
-	float height = [self heightForStringDrawing:oneLine font:[NSFont fontWithName:@"Geneva" size:50] width:lineWidth];
-		
-	return NSMakePoint(padding,pointForNextTagRect.y-height);
+	return NSMakePoint(padding,pointForNextTagRect.y-maxHeight-padding);
 }	
 
+//make more efficient
 - (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth
-{
-	//TODO kein bock mehr eh
-	return 35;
-	
+{	
 	NSTextStorage *textStorage = [[[NSTextStorage alloc] initWithString:myString] autorelease];
 	NSTextContainer *textContainer = [[[NSTextContainer alloc] initWithContainerSize: NSMakeSize(myWidth, FLT_MAX)] autorelease];
 	NSLayoutManager *layoutManager = [[[NSLayoutManager alloc] init] autorelease];
