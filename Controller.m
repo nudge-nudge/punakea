@@ -199,7 +199,7 @@
 		NSMutableString *queryString = [NSMutableString stringWithString:@""];
 		
 		NSEnumerator *e = [[selectedTagsController arrangedObjects] objectEnumerator];
-		PATag *tag;
+		id <PATag> tag;
 		
 		if (tag = [e nextObject]) 
 		{

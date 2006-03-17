@@ -1,14 +1,14 @@
 //
-//  PATag.m
+//  PASimpleTag.m
 //  punakea
 //
 //  Created by Johannes Hoffart on 15.02.06.
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "PATag.h"
+#import "PASimpleTag.h"
 
-@implementation PATag 
+@implementation PASimpleTag 
 
 #pragma mark init
 - (id)init
@@ -101,14 +101,14 @@
 	lastUsed = [[NSCalendarDate alloc] init];
 }
 
-- (void)setCurrentBestTag:(PATag*)aTag
+- (void)setCurrentBestTag:(id <PATag>)aTag
 {
 	[aTag retain];
 	[currentBestTag release];
 	currentBestTag = aTag;
 }
 
-- (PATag*)currentBestTag 
+- (id <PATag>)currentBestTag 
 {
 	return currentBestTag;
 }
@@ -229,7 +229,7 @@
     return [self isEqualToTag:other];
 }
 
-- (BOOL)isEqualToTag:(PATag*)otherTag 
+- (BOOL)isEqualToTag:(PASimpleTag*)otherTag 
 {
 	if ([name isEqual:[otherTag name]] && [query isEqual:[otherTag query]])
 		return YES;

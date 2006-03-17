@@ -13,11 +13,11 @@
 	
 	NSPoint pointForNextTagRect;
 	
-	PATag *activeTag;
+	id <PATag> activeTag;
 	NSMutableArray *rectTags;
 }
 
-- (PATag*)activeTag;
-- (void)setActiveTag:(PATag*)aTag;
+- (id <PATag>)activeTag;
+- (void)setActiveTag:(id <PATag>)aTag;
 
 @end

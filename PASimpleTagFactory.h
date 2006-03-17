@@ -1,0 +1,15 @@
+//
+//  PASimpleTagFactory.h
+//  punakea
+//
+//  Created by Johannes Hoffart on 17.03.06.
+//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//
+
+#import <Cocoa/Cocoa.h>
+#import "PATagFactory.h"
+#import "PASimpleTag.h"
+
+@interface PASimpleTagFactory : PATagFactory
+
+@end

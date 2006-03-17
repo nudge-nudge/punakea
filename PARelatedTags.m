@@ -11,7 +11,7 @@
 @interface PARelatedTags (PrivateAPI)
 
 - (void)updateTagRating:(NSArray*)tagSet;
-- (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tags;
+- (id <PATag>)getTagWithBestAbsoluteRating:(NSArray*)tags;
 
 @end
 
@@ -116,7 +116,7 @@
 
 			while (j--) 
 			{
-				PATag *tag = [keywords objectAtIndex:j];
+				id <PATag> tag = [keywords objectAtIndex:j];
 				
 				if (![tmpTags containsObject:tag])
 					[tmpTags addObject:tag];
@@ -134,20 +134,20 @@
 
 - (void)updateTagRating:(NSArray*)tagSet
 {
-	PATag *bestTag = [self getTagWithBestAbsoluteRating:tagSet];
+	id <PATag> bestTag = [self getTagWithBestAbsoluteRating:tagSet];
 
 	NSEnumerator *e = [tagSet objectEnumerator];
-	PATag *tag;
+	id <PATag> tag;
 
 	while (tag = [e nextObject])
 		[tag setCurrentBestTag:bestTag];
 }
 
-- (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tagSet
+- (id <PATag>)getTagWithBestAbsoluteRating:(NSArray*)tagSet
 {
 	NSEnumerator *e = [tagSet objectEnumerator];
-	PATag *tag;
-	PATag *maxTag;
+	id <PATag> tag;
+	id <PATag> maxTag;
 	
 	if (tag = [e nextObject])
 		maxTag = tag;

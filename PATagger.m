@@ -16,11 +16,15 @@ static PATagger *sharedInstance = nil;
 //constructor - only called by sharedInstance
 -(id)sharedInstanceInit {
 	self = [super init];
+	if (self)
+	{
+		tagFactory = [[PASimpleTagFactory alloc] init];
+	}
 	return self;
 }
 
 //write tags
--(void)addTagToFile:(PATag*)tag filePath:(NSString*)path {
+-(void)addTagToFile:(id <PATag>)tag filePath:(NSString*)path {
 	[self addTagsToFile:[NSArray arrayWithObject:tag] filePath:path];
 }
 
@@ -54,7 +58,7 @@ static PATagger *sharedInstance = nil;
 	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
 	
 	NSEnumerator *e = [tags objectEnumerator];
-	PATag *tag;
+	id <PATag> tag;
 	
 	while (tag = [e nextObject]) {
 		[keywordArray addObject:[tag name]];
@@ -76,7 +80,7 @@ static PATagger *sharedInstance = nil;
 	NSString *tagName;
 
 	while (tagName = [e nextObject]) {
-		PATag *tag = [[PATag alloc] initWithName:tagName];
+		id <PATag> tag = [tagFactory createTagWithName:tagName];
 		[tags addObject:tag];
 		[tag release];
 	}				

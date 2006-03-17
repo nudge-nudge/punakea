@@ -10,7 +10,7 @@
 	NSArray* tags = [tagController selectedObjects];
 
 	NSEnumerator *e = [tags objectEnumerator];
-	PATag *tag;
+	id <PATag> tag;
 	
 	while (tag = [e nextObject])
 		[tag incrementUseCount];	

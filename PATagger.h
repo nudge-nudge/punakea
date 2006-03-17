@@ -10,14 +10,17 @@
 #import <CoreServices/CoreServices.h>
 #import "PATag.h"
 #import "Matador.h"
+#import "PASimpleTagFactory.h"
 
-@interface PATagger : NSObject
+@interface PATagger : NSObject {
+	PATagFactory *tagFactory;
+}
 
 //get instance
 + (PATagger*)sharedInstance;
 
 //write tags
-- (void)addTagToFile:(PATag*)tag filePath:(NSString*)path;
+- (void)addTagToFile:(id <PATag>)tag filePath:(NSString*)path;
 - (void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 
 //TODO make this private!
