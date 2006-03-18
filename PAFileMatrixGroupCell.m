@@ -21,13 +21,21 @@
 	[backgroundImage drawInRect:cellFrame fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 					   
 	// Draw triangle
-	NSImage *triangle = [NSImage imageNamed:@"ExpandedTriangleWhite"];
+	/*NSImage *triangle = [NSImage imageNamed:@"ExpandedTriangleWhite"];
 	[triangle setFlipped:YES];
 	imageRect.size = NSMakeSize(16,16);
 	[triangle drawAtPoint:NSMakePoint(cellFrame.origin.x + 3, cellFrame.origin.y + 2)
 				fromRect:imageRect
 			   operation:NSCompositeSourceOver
-			    fraction:1.0];
+			    fraction:1.0];*/
+				
+	// Draw triangle - v2
+	NSButton *triangle = [[NSButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
+	[triangle setTitle:@""];
+	[triangle setButtonType:NSOnOffButton];
+	[triangle setBezelStyle:NSDisclosureBezelStyle];
+	[controlView addSubview:triangle];  
+	[triangle release];
 					   
 	// Draw text
 	NSString *cellTitle = [NSString stringWithString:key];
