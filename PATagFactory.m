@@ -17,17 +17,17 @@
 	return self;
 }
 
-- (id <PATag>)createTag
+- (PATag*)createTag
 {
 	return nil;
 }
 
-- (id <PATag>)createTagWithName:(NSString*)name;
+- (PATag*)createTagWithName:(NSString*)name;
 {
 	return nil;
 }
 
-- (id <PATag>)createTagWithName:(NSString*)name query:(NSString*)query;
+- (PATag*)createTagWithName:(NSString*)name query:(NSString*)query;
 {
 	return nil;
 }

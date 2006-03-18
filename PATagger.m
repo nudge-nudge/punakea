@@ -24,7 +24,7 @@ static PATagger *sharedInstance = nil;
 }
 
 //write tags
--(void)addTagToFile:(id <PATag>)tag filePath:(NSString*)path {
+-(void)addTagToFile:(PATag*)tag filePath:(NSString*)path {
 	[self addTagsToFile:[NSArray arrayWithObject:tag] filePath:path];
 }
 
@@ -58,7 +58,7 @@ static PATagger *sharedInstance = nil;
 	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
 	
 	NSEnumerator *e = [tags objectEnumerator];
-	id <PATag> tag;
+	PATag *tag;
 	
 	while (tag = [e nextObject]) {
 		[keywordArray addObject:[tag name]];
@@ -80,7 +80,7 @@ static PATagger *sharedInstance = nil;
 	NSString *tagName;
 
 	while (tagName = [e nextObject]) {
-		id <PATag> tag = [tagFactory createTagWithName:tagName];
+		PATag *tag = [tagFactory createTagWithName:tagName];
 		[tags addObject:tag];
 		[tag release];
 	}				

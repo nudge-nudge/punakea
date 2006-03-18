@@ -101,14 +101,14 @@
 	lastUsed = [[NSCalendarDate alloc] init];
 }
 
-- (void)setCurrentBestTag:(id <PATag>)aTag
+- (void)setCurrentBestTag:(PATag*)aTag
 {
 	[aTag retain];
 	[currentBestTag release];
 	currentBestTag = aTag;
 }
 
-- (id <PATag>)currentBestTag 
+- (PATag*)currentBestTag 
 {
 	return currentBestTag;
 }

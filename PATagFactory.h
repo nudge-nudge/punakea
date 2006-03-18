@@ -19,14 +19,14 @@ This is the AbstractFactory, don't instantiate, use the subclasses - ObjC doesn'
 creates a tag with default values
  @return tag with default values
  */
-- (id <PATag>)createTag;
+- (PATag*)createTag;
 
 /**
 creates a tag with a specified name
  @param name new tag name
  @return tag with the given name
  */
-- (id <PATag>)createTagWithName:(NSString*)name;
+- (PATag*)createTagWithName:(NSString*)name;
 
 /**
 creates a tag with a specified name and query (useful for non-simple tags)
@@ -34,7 +34,7 @@ creates a tag with a specified name and query (useful for non-simple tags)
  @param query spotlight query the tag will execute when selected
  @return tag with the given name and query
  */
-- (id <PATag>)createTagWithName:(NSString*)name query:(NSString*)query;
+- (PATag*)createTagWithName:(NSString*)name query:(NSString*)query;
 
 
 @end

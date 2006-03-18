@@ -20,7 +20,7 @@
 + (PATagger*)sharedInstance;
 
 //write tags
-- (void)addTagToFile:(id <PATag>)tag filePath:(NSString*)path;
+- (void)addTagToFile:(PATag*)tag filePath:(NSString*)path;
 - (void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 
 //TODO make this private!

@@ -8,10 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol PATag <NSCoding>
+/**
+treat this class as the abstract superclass for all Tags,
+ no methods are implemented here, subclasses need to overwrite them all!
+ */
+@interface PATag : NSObject <NSCoding>
 
 //equal
-- (BOOL)isEqualToTag:(id <PATag>)otherTag;
+- (BOOL)isEqualToTag:(PATag*)otherTag;
 
 - (NSString*)name;
 - (NSString*)query;
@@ -25,8 +29,8 @@
 - (void)incrementClickCount;
 - (void)incrementUseCount;
 
-- (void)setCurrentBestTag:(id <PATag>)aTag;
-- (id <PATag>)currentBestTag;
+- (void)setCurrentBestTag:(PATag*)aTag;
+- (PATag*)currentBestTag;
 
 - (float)absoluteRating;
 - (float)relativeRating;

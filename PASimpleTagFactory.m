@@ -11,18 +11,18 @@
 
 @implementation PASimpleTagFactory
 
-- (id <PATag>)createTagWithName:(NSString*)name query:(NSString*)query;
+- (PATag*)createTagWithName:(NSString*)name query:(NSString*)query;
 {
 	NSLog(@"error: overriding fixed query in SimpleTag ... NO!");
 	return nil;
 }
 
-- (id <PATag>)createTag
+- (PATag*)createTag
 {
 	return [self createTagWithName:@"noname"];
 }
 
-- (id <PATag>)createTagWithName:(NSString*)name;
+- (PATag*)createTagWithName:(NSString*)name;
 {
 	PASimpleTag *simpleTag = [[PASimpleTag alloc] initWithName:name];
 	return simpleTag;

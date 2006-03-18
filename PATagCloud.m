@@ -6,7 +6,7 @@
 - (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth;
 - (void)drawBackground:(NSRect)rect;
 - (void)drawTags:(NSRect)rect;
-- (NSRect)nextRectFor:(id <PATag>)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
+- (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
 
 @end
 
@@ -35,12 +35,12 @@
 	[super dealloc];
 }
 
-- (id <PATag>)activeTag
+- (PATag*)activeTag
 {
 	return activeTag;
 }
 
-- (void)setActiveTag:(id <PATag>)aTag
+- (void)setActiveTag:(PATag*)aTag
 {
 	[activeTag release];
 	[aTag retain];
@@ -83,7 +83,7 @@
 	int padding = 10;
 	
 	NSEnumerator *e = [currentTags objectEnumerator];
-	id <PATag> tag;
+	PATag *tag;
 	
 	int lineWidth = 0;
 	float maxHeight = 0;;
@@ -137,7 +137,7 @@
 {
 	NSEnumerator *e = [currentTags objectEnumerator];
 	
-	id <PATag> tag;
+	PATag *tag;
 	
 	while (tag = [e nextObject])
 	{
@@ -151,7 +151,7 @@
 	}
 }
 
-- (NSRect)nextRectFor:(id <PATag>)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs
+- (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs
 {
 	//TODO externalize spacing and padding and ...
 	int height = 35;
