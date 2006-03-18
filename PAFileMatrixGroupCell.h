@@ -4,6 +4,9 @@
 {
 	NSString *key;
 	bool isExpanded;
+	
+	@private
+	NSButton *triangle;
 }
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;

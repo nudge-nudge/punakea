@@ -28,16 +28,22 @@
 				fromRect:imageRect
 			   operation:NSCompositeSourceOver
 			    fraction:1.0];*/
-				
-	// Draw triangle - v2
-	NSButton *triangle = [[NSButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
-	[triangle setTitle:@""];
-	[triangle setButtonType:NSOnOffButton];
-	[triangle setBezelStyle:NSDisclosureBezelStyle];
-	[controlView addSubview:triangle];  
-	[triangle release];
+
+	// Add triangle - v2
+	if([triangle superview] != controlView)
+	{
+		triangle = [[NSButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
+		[triangle setTitle:@""];
+		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"]];
+		[triangle setAlternateImage:[NSImage imageNamed:@"ExpandedTriangleWhite"]];
+		[triangle setButtonType:NSSwitchButton];
+		[triangle setBezelStyle:NSDisclosureBezelStyle];
+		[triangle setState:NSOffState];
+		[controlView addSubview:triangle];  
+		//[triangle release];
+	}
 					   
-	// Draw text
+	// Draw text	
 	NSString *cellTitle = [NSString stringWithString:key];
 
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
@@ -50,12 +56,14 @@
 - (void)initTextCell:(NSString*)aText
 {
 	key = aText;
+	
 	[super initTextCell:aText];
 }
 
 - (void)dealloc
 {
 	if(key) { [key release]; }
+	[triangle release];
 	[super dealloc];
 }
 
