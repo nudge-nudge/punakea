@@ -39,11 +39,6 @@
 	[cellTitle drawAtPoint:NSMakePoint(cellFrame.origin.x + 20, cellFrame.origin.y + 4) withAttributes:fontAttributes];
 }
 
-- (NSString*)key
-{
-	return key;
-}
-
 - (void)initTextCell:(NSString*)aText
 {
 	key = aText;
@@ -54,5 +49,38 @@
 {
 	if(key) { [key release]; }
 	[super dealloc];
+}
+
+- (void)toggle
+{
+	if (isExpanded) 
+	{
+		[self collapse];
+	} else {
+		[self expand];
+	}
+}
+
+- (void)expand
+{
+	isExpanded = YES;
+	// Todo: Send notification
+}
+
+- (void)collapse
+{
+	isExpanded = NO;
+	// TODO: Send notification
+}
+
+#pragma Accessors
+- (NSString*)key
+{
+	return key;
+}
+
+- (bool)isExpanded
+{
+	return isExpanded;
 }
 @end

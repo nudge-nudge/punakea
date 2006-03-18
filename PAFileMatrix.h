@@ -11,6 +11,7 @@
 #import "PAFileMatrixItemCell.h"
 
 @interface PAFileMatrix : NSMatrix {
+	/** Sample doxygen comment */
 	NSMetadataQuery *query;
 }
 
