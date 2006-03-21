@@ -14,12 +14,27 @@
 - (id)initImageCell:(NSImage *)anImage
 {	
 	images = [[NSMutableDictionary alloc] init];
+	if (anImage)
+	{
+		[self setImage:anImage forState:@"PAOffState"];
+	}
 	return [super initImageCell:anImage];
 }
 
-- (void)setImage:(NSImage *)image forState:(PAImageButtonState)state
+- (void)setImage:(NSImage *)image forState:(id)state
 {
-	[images setObject:image forKey:(id)state];
+	[images setObject:image forKey:state];
+}
+
+- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	NSImage *image = [images objectForKey:@"PAOffState"];
+	
+	NSRect imageRect;
+	imageRect.origin = NSZeroPoint;
+	imageRect.size = [image size];
+	
+	[image drawAtPoint:NSZeroPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }
 
 - (void)dealloc

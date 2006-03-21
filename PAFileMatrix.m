@@ -8,6 +8,7 @@
 
 #import "PAFileMatrix.h"
 
+
 @interface PAFileMatrix (PrivateAPI)
 
 - (void)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row;
