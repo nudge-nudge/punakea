@@ -39,6 +39,8 @@
 		651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */; };
 		6535E5030995F80F0067528D /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6535E5010995F80F0067528D /* PASidebarTableView.h */; };
 		6535E5040995F80F0067528D /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535E5020995F80F0067528D /* PASidebarTableView.m */; };
+		65461C9509D0418F0076778E /* PAImageButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65461C9309D0418F0076778E /* PAImageButtonCell.h */; };
+		65461C9609D0418F0076778E /* PAImageButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65461C9409D0418F0076778E /* PAImageButtonCell.m */; };
 		654DBC1B09C9D0620061BFA4 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 654DBC1A09C9D0620061BFA4 /* index.html */; };
 		6562A20609963C5100DBE7DB /* sidebarSelectionBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20209963C5100DBE7DB /* sidebarSelectionBackground.tiff */; };
 		6562A20709963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */; };
@@ -110,6 +112,7 @@
 				48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */,
 				48D66AFD09CB4C5A007B6B1D /* PATagFactory.h in CopyFiles */,
 				48D66B0709CB4E4B007B6B1D /* PASimpleTagFactory.h in CopyFiles */,
+				65461C9509D0418F0076778E /* PAImageButtonCell.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +159,8 @@
 		651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
 		6535E5010995F80F0067528D /* PASidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarTableView.h; sourceTree = "<group>"; };
 		6535E5020995F80F0067528D /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableView.m; sourceTree = "<group>"; };
+		65461C9309D0418F0076778E /* PAImageButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButtonCell.h; sourceTree = "<group>"; };
+		65461C9409D0418F0076778E /* PAImageButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButtonCell.m; sourceTree = "<group>"; };
 		654DBC1A09C9D0620061BFA4 /* index.html */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = index.html; path = html/index.html; sourceTree = "<group>"; };
 		6562A20209963C5100DBE7DB /* sidebarSelectionBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sidebarSelectionBackground.tiff; path = Resources/sidebarSelectionBackground.tiff; sourceTree = SOURCE_ROOT; };
 		6562A20309963C5100DBE7DB /* sidebarSelectionBackgroundFocus.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sidebarSelectionBackgroundFocus.tiff; path = Resources/sidebarSelectionBackgroundFocus.tiff; sourceTree = SOURCE_ROOT; };
@@ -341,6 +346,8 @@
 		65851FFF099780E0009C3CA7 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				65461C9309D0418F0076778E /* PAImageButtonCell.h */,
+				65461C9409D0418F0076778E /* PAImageButtonCell.m */,
 				65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */,
 				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
 			);
@@ -514,6 +521,7 @@
 				48D66AFE09CB4C5A007B6B1D /* PATagFactory.m in Sources */,
 				48D66B0809CB4E4B007B6B1D /* PASimpleTagFactory.m in Sources */,
 				48D8F01209CBE94C0011401F /* PATag.m in Sources */,
+				65461C9609D0418F0076778E /* PAImageButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

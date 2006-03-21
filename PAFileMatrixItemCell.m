@@ -19,11 +19,11 @@
 	[cellTitle drawAtPoint:NSMakePoint(cellFrame.origin.x + 20, cellFrame.origin.y + 2) withAttributes:fontAttributes];
 }
 
-- (void)initTextCell:(NSString*)aText
+- (id)initTextCell:(NSString*)aText
 {	
 	[key release];
 	key = [aText retain];
-	[super initTextCell:aText];
+	return [super initTextCell:aText];
 }
 
 - (NSString*)key

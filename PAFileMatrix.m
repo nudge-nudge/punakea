@@ -58,6 +58,7 @@
 		
 		PAFileMatrixGroupCell* groupCell = [[PAFileMatrixGroupCell alloc] initTextCell:[group value]];
 		[self insertGroupCell:groupCell atRow:row];
+		[groupCell release];
 
 		for (j = 0; j < [group resultCount]; j++)
 		{

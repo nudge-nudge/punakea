@@ -32,6 +32,7 @@
 	// Add triangle - v2
 	if([triangle superview] != controlView)
 	{
+		// TODO: Subclass NSButton for best results: More images needed (up, up-pressed, down, down-pressed)
 		triangle = [[NSButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
 		[triangle setTitle:@""];
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"]];
@@ -41,6 +42,10 @@
 		[triangle setState:NSOffState];
 		[controlView addSubview:triangle];  
 		//[triangle release];
+	} else {
+		// TODO: Move button with frame
+		// Problem: I need to delete old cells when view updates!
+		[triangle setFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
 	}
 					   
 	// Draw text	
@@ -53,17 +58,20 @@
 	[cellTitle drawAtPoint:NSMakePoint(cellFrame.origin.x + 20, cellFrame.origin.y + 4) withAttributes:fontAttributes];
 }
 
-- (void)initTextCell:(NSString*)aText
+- (id)initTextCell:(NSString*)aText
 {
 	key = aText;
 	
-	[super initTextCell:aText];
+	return [super initTextCell:aText];
 }
 
 - (void)dealloc
 {
 	if(key) { [key release]; }
-	[triangle release];
+	/*if(triangle)
+	{
+		[triangle removeFromSuperview];
+	}*/
 	[super dealloc];
 }
 
@@ -98,5 +106,10 @@
 - (bool)isExpanded
 {
 	return isExpanded;
+}
+
+- (NSButton*)triangle
+{
+	return triangle;
 }
 @end

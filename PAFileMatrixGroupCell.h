@@ -10,7 +10,7 @@
 }
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
-- (void)initTextCell:(NSString*)aText;
+- (id)initTextCell:(NSString*)aText;
 
 - (void)toggle;
 - (void)expand;
