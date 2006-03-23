@@ -108,7 +108,7 @@
 	return isExpanded;
 }
 
-- (NSButton*)triangle
+- (PAImageButton*)triangle
 {
 	return triangle;
 }

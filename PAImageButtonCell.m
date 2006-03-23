@@ -23,7 +23,7 @@
 
 - (void)setImage:(NSImage *)image forState:(id)state
 {
-	[images setObject:image forKey:[NSNumber numberWithInt:state]];
+	//[images setObject:image forKey:[NSNumber numberWithInt:state]];
 }
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView

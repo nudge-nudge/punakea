@@ -11,12 +11,13 @@
 
 @implementation PAImageButton
 
-- (id)initWithFrame:(NSRect)frameRect
-{
-	PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:[NSImage imageNamed:@"MDIconViewOff-1"]];
-	[self setCell:cell];
-	
-	return [super initWithFrame:frameRect];
+- (id)initWithFrame:(NSRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+		cell = [[PAImageButtonCell alloc] initImageCell:[NSImage imageNamed:@"MDIconViewOff-1"]];
+		[self setCell:cell];
+    }
+    return self;
 }
 
 @end

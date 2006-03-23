@@ -11,7 +11,7 @@
 
 
 @interface PAImageButton : NSControl {
-
+	PAImageButtonCell *cell;
 }
 
 @end
