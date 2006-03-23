@@ -14,10 +14,15 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-		cell = [[PAImageButtonCell alloc] initImageCell:[NSImage imageNamed:@"MDIconViewOff-1"]];
+		cell = [[PAImageButtonCell alloc] initImageCell:nil];
 		[self setCell:cell];
     }
     return self;
+}
+
+- (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState
+{
+	[cell setImage:anImage forState:aState];
 }
 
 @end

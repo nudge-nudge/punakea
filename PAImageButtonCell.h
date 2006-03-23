@@ -28,7 +28,8 @@ NSMutableDictionary *images;
 
 }
 
-- (void)setImage:(NSImage *)image forState:(id)state;
+- (id)initImageCell:(NSImage *)anImage;
+- (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState;
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 
 @end

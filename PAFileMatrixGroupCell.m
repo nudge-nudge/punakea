@@ -34,6 +34,7 @@
 	{
 		// TODO: Subclass NSButton for best results: More images needed (up, up-pressed, down, down-pressed)
 		triangle = [[PAImageButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
+		[triangle setImage:[NSImage imageNamed:@"MDIconViewOff-1"] forState:PAOffState];
 		/*[triangle setTitle:@""];
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"]];
 		[triangle setAlternateImage:[NSImage imageNamed:@"ExpandedTriangleWhite"]];
@@ -43,8 +44,6 @@
 		[controlView addSubview:triangle];  
 		//[triangle release];
 	} else {
-		// TODO: Move button with frame
-		// Problem: I need to delete old cells when view updates!
 		[triangle setFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
 	}
 					   

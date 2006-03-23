@@ -14,4 +14,6 @@
 	PAImageButtonCell *cell;
 }
 
+- (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState;
+
 @end

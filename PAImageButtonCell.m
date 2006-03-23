@@ -9,33 +9,48 @@
 #import "PAImageButtonCell.h"
 
 
+@interface PAImageButtonCell (PrivateAPI)
+
+- (NSString*)stringForState:(PAImageButtonState)aState;
+
+@end
+
+
 @implementation PAImageButtonCell
 
 - (id)initImageCell:(NSImage *)anImage
 {	
+	self = [super initImageCell:anImage];
+	
 	images = [[NSMutableDictionary alloc] init];
 	if (anImage)
 	{
-		[self setImage:anImage forState:(id)PAOffState];
+		[self setImage:anImage forState:PAOffState];
 	}
-	return [super initImageCell:anImage];
+	return self;
 }
 
-- (void)setImage:(NSImage *)image forState:(id)state
+- (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState
 {
-	//[images setObject:image forKey:[NSNumber numberWithInt:state]];
+	[images setObject:anImage forKey:[self stringForState:aState]];
 }
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	//NSImage *image = [images objectForKey:[NSNumber numberWithInt:PAOffState]];
-	NSImage *image = [NSImage imageNamed:@"MDIconViewOff-1"];
+	NSImage *image = [images objectForKey:[self stringForState:PAOffState]];
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [image size];
 	
 	[image drawAtPoint:NSZeroPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+}
+
+- (NSString*)stringForState:(PAImageButtonState)aState
+{
+	NSString *name;
+	if(aState == PAOffState) { name = @"PAOffState"; }
+	return name;
 }
 
 - (void)dealloc
