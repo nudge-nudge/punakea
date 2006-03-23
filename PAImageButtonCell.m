@@ -16,19 +16,20 @@
 	images = [[NSMutableDictionary alloc] init];
 	if (anImage)
 	{
-		[self setImage:anImage forState:@"PAOffState"];
+		[self setImage:anImage forState:(id)PAOffState];
 	}
 	return [super initImageCell:anImage];
 }
 
 - (void)setImage:(NSImage *)image forState:(id)state
 {
-	[images setObject:image forKey:state];
+	[images setObject:image forKey:[NSNumber numberWithInt:state]];
 }
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	NSImage *image = [images objectForKey:@"PAOffState"];
+	//NSImage *image = [images objectForKey:[NSNumber numberWithInt:PAOffState]];
+	NSImage *image = [NSImage imageNamed:@"MDIconViewOff-1"];
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;

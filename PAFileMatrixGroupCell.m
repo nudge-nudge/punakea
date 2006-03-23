@@ -33,13 +33,13 @@
 	if([triangle superview] != controlView)
 	{
 		// TODO: Subclass NSButton for best results: More images needed (up, up-pressed, down, down-pressed)
-		triangle = [[NSButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
-		[triangle setTitle:@""];
+		triangle = [[PAImageButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
+		/*[triangle setTitle:@""];
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"]];
 		[triangle setAlternateImage:[NSImage imageNamed:@"ExpandedTriangleWhite"]];
 		[triangle setButtonType:NSSwitchButton];
 		[triangle setBezelStyle:NSDisclosureBezelStyle];
-		[triangle setState:NSOffState];
+		[triangle setState:NSOffState];*/
 		[controlView addSubview:triangle];  
 		//[triangle release];
 	} else {

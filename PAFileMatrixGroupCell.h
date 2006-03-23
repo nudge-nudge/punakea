@@ -1,4 +1,5 @@
 #import <Cocoa/Cocoa.h>
+#import "PAImageButton.h"
 
 @interface PAFileMatrixGroupCell : NSActionCell
 {
@@ -6,7 +7,7 @@
 	bool isExpanded;
 	
 	@private
-	NSButton *triangle;
+	PAImageButton *triangle;
 }
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
