@@ -35,6 +35,7 @@
 		// TODO: Subclass NSButton for best results: More images needed (up, up-pressed, down, down-pressed)
 		triangle = [[PAImageButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
 		[triangle setImage:[NSImage imageNamed:@"MDIconViewOff-1"] forState:PAOffState];
+		[triangle setImage:[NSImage imageNamed:@"MDIconViewOn-1"] forState:PAOnState];
 		/*[triangle setTitle:@""];
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"]];
 		[triangle setAlternateImage:[NSImage imageNamed:@"ExpandedTriangleWhite"]];

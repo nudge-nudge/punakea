@@ -27,6 +27,9 @@
 	{
 		[self setImage:anImage forState:PAOffState];
 	}
+	state = PAOffState;
+	//[self trackMouse:(id)NSLeftMouseDown inRect:[self rect] ofView:self untilMouseUp:NO];
+	
 	return self;
 }
 
@@ -37,7 +40,8 @@
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	NSImage *image = [images objectForKey:[self stringForState:PAOffState]];
+	NSLog([self stringForState:state]);
+	NSImage *image = [images objectForKey:[self stringForState:state]];
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
@@ -46,11 +50,53 @@
 	[image drawAtPoint:NSZeroPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }
 
+- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
+{
+	/*BOOL keepOn = YES;
+	
+	while (keepOn)
+	{
+		switch ([theEvent type])
+		{
+			case NSLeftMouseDown:
+				[self setState:PAOnState];
+				keepOn = NO; 
+				break;
+			case NSLeftMouseUp:
+				[self setState:PAOffState];
+				keepOn = NO;
+				break;
+			default:
+				break;
+		}
+	}*/
+	if ([theEvent type] == NSLeftMouseDown) { [self setState:PAOnState]; }
+	
+	return YES;
+}
+
+- (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
+{
+	[self setState:PAOffState];
+}
+
+- (void)setButtonType:(NSButtonType)aType
+{
+	type = aType;
+}
+
 - (NSString*)stringForState:(PAImageButtonState)aState
 {
 	NSString *name;
+	if(aState == PAOnState) { name = @"PAOnState"; }
 	if(aState == PAOffState) { name = @"PAOffState"; }
+	// TODO: Add all states!
 	return name;
+}
+
+- (void)setState:(PAImageButtonState)aState
+{
+	state = aState;
 }
 
 - (void)dealloc

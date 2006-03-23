@@ -25,6 +25,12 @@
 	[cell setImage:anImage forState:aState];
 }
 
+- (void)setImageButtonType:(PAImageButtonType)aType
+{
+	[cell setImageButtonType:aType];
+	[self setNeedsDisplay];
+}
+
 - (void)dealloc
 {
 	if(cell) { [cell release]; }

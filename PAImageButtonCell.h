@@ -15,17 +15,24 @@ typedef enum _PAImageButtonState
 	PAOffState = 1,
 	PAOnPressedState = 2,
 	PAOffPressedState = 3,
-	PAOnDisabledState = 4,
-	PAOffDisabledState = 5
+	PAOnHighlightedState = 4,
+	PAOffHighlightedState = 5,
+	PAOnDisabledState = 6,
+	PAOffDisabledState = 7
 } PAImageButtonState;
 
-// TODO: enum for button type (push button, toggle button, ...)
+typedef enum _PAImageButtonType
+{
+	PAMomentaryLightButton = 0,
+	PASwitchButton = 1
+} PAImageButtonType;
 
 
 @interface PAImageButtonCell : NSActionCell {
 
 NSMutableDictionary *images;
-PAImageButtonState currentState;
+PAImageButtonState state;
+PAImageButtonType type;
 
 }
 
