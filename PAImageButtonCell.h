@@ -25,6 +25,7 @@ typedef enum _PAImageButtonState
 @interface PAImageButtonCell : NSActionCell {
 
 NSMutableDictionary *images;
+PAImageButtonState currentState;
 
 }
 

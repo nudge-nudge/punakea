@@ -25,4 +25,10 @@
 	[cell setImage:anImage forState:aState];
 }
 
+- (void)dealloc
+{
+	if(cell) { [cell release]; }
+	[super dealloc];
+}
+
 @end
