@@ -20,6 +20,7 @@
 
 @implementation PAImageButtonCell
 
+#pragma mark Init + Dealloc
 - (id)initImageCell:(NSImage *)anImage
 {	
 	self = [super initImageCell:anImage];
@@ -35,11 +36,24 @@
 	return self;
 }
 
+- (void)dealloc
+{
+	if(images) { [images release]; }
+	[super dealloc];
+}
+
+#pragma mark Data Source
 - (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState
 {
 	[images setObject:anImage forKey:[self stringForState:aState]];
 }
 
+- (void)setButtonType:(PAImageButtonType)aType
+{
+	type = aType;
+}
+
+#pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	NSImage *image = [images objectForKey:[self stringForState:state]];
@@ -51,6 +65,7 @@
 	[image drawAtPoint:NSZeroPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }
 
+#pragma mark Mouse Tracking
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
 {
 	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView untilMouseUp:YES];
@@ -113,11 +128,7 @@
 	}
 }
 
-- (void)setButtonType:(PAImageButtonType)aType
-{
-	type = aType;
-}
-
+#pragma mark Private Helpers
 /**
 	NSDictionary needs to get an object for key, so I can't use just the enum value...
 */
@@ -143,6 +154,7 @@
 	return name;
 }
 
+#pragma mark Accessors
 /** 
 	Important accessor! Doesn't work without it... 
 */
@@ -156,10 +168,18 @@
 	state = aState;
 }
 
-- (void)dealloc
+- (BOOL)isHighlighted
 {
-	if(images) { [images release]; }
-	[super dealloc];
+	return state == PAOnState ? YES : NO;
+}
+
+- (void)setHighlighted:(BOOL)flag
+{
+	if(!flag)
+	{
+		// TODO: Test if setNeedsDisplay is needed
+		[self setState:PAOffState];
+	}
 }
 
 @end

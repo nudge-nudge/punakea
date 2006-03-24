@@ -37,6 +37,8 @@ PAImageButtonType type;
 - (id)initImageCell:(NSImage *)anImage;
 - (void)setButtonType:(PAImageButtonType)aType;
 - (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState;
-- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
+
+- (BOOL)isHighlighted;
+- (void)setHighlighted:(BOOL)flag;
 
 @end
