@@ -50,28 +50,14 @@
 	[image drawAtPoint:NSZeroPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }
 
-- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
+- (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView
 {
-	/*BOOL keepOn = YES;
-	
-	while (keepOn)
-	{
-		switch ([theEvent type])
-		{
-			case NSLeftMouseDown:
-				[self setState:PAOnState];
-				keepOn = NO; 
-				break;
-			case NSLeftMouseUp:
-				[self setState:PAOffState];
-				keepOn = NO;
-				break;
-			default:
-				break;
-		}
-	}*/
-	if ([theEvent type] == NSLeftMouseDown) { [self setState:PAOnState]; }
-	
+	[self setState:PAOnState];
+	return YES;
+}
+
+- (BOOL)continueTracking:(NSPoint)lastPoint at:(NSPoint)currentPoint inView:(NSView *)controlView
+{
 	return YES;
 }
 
