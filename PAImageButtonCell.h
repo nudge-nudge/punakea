@@ -33,6 +33,7 @@ typedef enum _PAImageButtonType
 NSMutableDictionary *images;
 PAImageButtonState state;
 PAImageButtonType type;
+//NSView *controlView;
 
 }
 

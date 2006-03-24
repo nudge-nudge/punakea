@@ -28,7 +28,7 @@
 		[self setImage:anImage forState:PAOffState];
 	}
 	state = PAOffState;
-	//[self trackMouse:(id)NSLeftMouseDown inRect:[self rect] ofView:self untilMouseUp:NO];
+	type = PAMomentaryLightButton;
 	
 	return self;
 }
@@ -50,9 +50,43 @@
 	[image drawAtPoint:NSZeroPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }
 
+- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
+{
+	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView untilMouseUp:YES];
+}
+
 - (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView
 {
-	[self setState:PAOnState];
+	PAImageButtonState newHighlightedState;
+	PAImageButtonState newState;
+	
+	if(type == PAMomentaryLightButton)
+	{
+		newHighlightedState = PAOffHighlightedState;
+		newState = PAOnState;
+	}
+	else
+	{
+		if(state == PAOnState)
+		{
+			newHighlightedState = PAOnHighlightedState;
+			newState = PAOffState;
+		}
+		else
+		{
+			newHighlightedState = PAOffHighlightedState;
+			newState = PAOnState;
+		}
+	}
+	
+	if([images objectForKey:[self stringForState:newHighlightedState]])
+	{
+		[self setState:newHighlightedState];
+	}
+	else
+	{
+		[self setState:newState];
+	}
 	return YES;
 }
 
@@ -63,10 +97,22 @@
 
 - (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
 {
-	[self setState:PAOffState];
+	// all following states need to be the inverse ones?
+	
+	if(type == PAMomentaryLightButton)
+	{
+		[self setState:PAOnState];
+	}
+	else
+	{
+		PAImageButtonState newState;
+		if(state == PAOffState || state == PAOnHighlightedState) { newState = PAOnState; }
+		if(state == PAOnState || state == PAOffHighlightedState) { newState = PAOffState; }
+		[self setState:newState];
+	}
 }
 
-- (void)setButtonType:(NSButtonType)aType
+- (void)setButtonType:(PAImageButtonType)aType
 {
 	type = aType;
 }
@@ -74,16 +120,49 @@
 - (NSString*)stringForState:(PAImageButtonState)aState
 {
 	NSString *name;
-	if(aState == PAOnState) { name = @"PAOnState"; }
-	if(aState == PAOffState) { name = @"PAOffState"; }
-	// TODO: Add all states!
+	switch(aState)
+	{
+		case PAOnState:
+			name = @"PAOnState"; break;
+		case PAOffState:
+			name = @"PAOffState"; break;
+		case PAOnPressedState:
+			name = @"PAOnPressedState"; break;
+		case PAOffPressedState:
+			name = @"PAOffPressedState"; break;
+		case PAOnHighlightedState:
+			name = @"PAOnHighlightedState"; break;
+		case PAOffHighlightedState:
+			name = @"PAOffHighlightedState"; break;
+		case PAOnDisabledState:
+			name = @"PAOnDisabledState"; break;
+		case PAOffDisabledState:
+			name = @"PAOffDisabledState"; break;
+	}	
+	
 	return name;
+}
+
+- (PAImageButtonState)state
+{
+	return state;
 }
 
 - (void)setState:(PAImageButtonState)aState
 {
 	state = aState;
+	//[[self controlView] setNeedsDisplay];
 }
+
+/*- (NSView*)controlView
+{
+	return controlView;
+}
+
+- (void)setControlView:(NSView*)view
+{
+	controlView = [view retain];
+}*/
 
 - (void)dealloc
 {
