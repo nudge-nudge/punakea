@@ -13,12 +13,10 @@ typedef enum _PAImageButtonState
 {
 	PAOnState = 0,
 	PAOffState = 1,
-	PAOnPressedState = 2,
-	PAOffPressedState = 3,
-	PAOnHighlightedState = 4,
-	PAOffHighlightedState = 5,
-	PAOnDisabledState = 6,
-	PAOffDisabledState = 7
+	PAOnHighlightedState = 2,
+	PAOffHighlightedState = 3
+	//PAOnDisabledState = 4,
+	//PAOffDisabledState = 5
 } PAImageButtonState;
 
 typedef enum _PAImageButtonType
@@ -33,11 +31,11 @@ typedef enum _PAImageButtonType
 NSMutableDictionary *images;
 PAImageButtonState state;
 PAImageButtonType type;
-//NSView *controlView;
 
 }
 
 - (id)initImageCell:(NSImage *)anImage;
+- (void)setButtonType:(PAImageButtonType)aType;
 - (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState;
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 

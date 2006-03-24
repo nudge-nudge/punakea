@@ -11,6 +11,8 @@
 
 @interface PAImageButtonCell (PrivateAPI)
 
+- (PAImageButtonState)state;
+- (void)setState:(PAImageButtonState)aState;
 - (NSString*)stringForState:(PAImageButtonState)aState;
 
 @end
@@ -40,7 +42,6 @@
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	NSLog([self stringForState:state]);
 	NSImage *image = [images objectForKey:[self stringForState:state]];
 	
 	NSRect imageRect;
@@ -97,7 +98,7 @@
 
 - (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
 {
-	// all following states need to be the inverse ones?
+	// all following states need to be the inverse ones? seems so...
 	
 	if(type == PAMomentaryLightButton)
 	{
@@ -117,6 +118,9 @@
 	type = aType;
 }
 
+/**
+	NSDictionary needs to get an object for key, so I can't use just the enum value...
+*/
 - (NSString*)stringForState:(PAImageButtonState)aState
 {
 	NSString *name;
@@ -126,23 +130,22 @@
 			name = @"PAOnState"; break;
 		case PAOffState:
 			name = @"PAOffState"; break;
-		case PAOnPressedState:
-			name = @"PAOnPressedState"; break;
-		case PAOffPressedState:
-			name = @"PAOffPressedState"; break;
 		case PAOnHighlightedState:
 			name = @"PAOnHighlightedState"; break;
 		case PAOffHighlightedState:
 			name = @"PAOffHighlightedState"; break;
-		case PAOnDisabledState:
+		/*case PAOnDisabledState:
 			name = @"PAOnDisabledState"; break;
 		case PAOffDisabledState:
-			name = @"PAOffDisabledState"; break;
+			name = @"PAOffDisabledState"; break;*/
 	}	
 	
 	return name;
 }
 
+/** 
+	Important accessor! Doesn't work without it... 
+*/
 - (PAImageButtonState)state
 {
 	return state;
@@ -151,18 +154,7 @@
 - (void)setState:(PAImageButtonState)aState
 {
 	state = aState;
-	//[[self controlView] setNeedsDisplay];
 }
-
-/*- (NSView*)controlView
-{
-	return controlView;
-}
-
-- (void)setControlView:(NSView*)view
-{
-	controlView = [view retain];
-}*/
 
 - (void)dealloc
 {

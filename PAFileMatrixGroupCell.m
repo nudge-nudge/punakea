@@ -8,7 +8,21 @@
 }*/
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{	
+{					   
+	// Add or move triangle
+	if([triangle superview] != controlView)
+	{
+		triangle = [[PAImageButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y + 2, 16, 16)];
+		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"] forState:PAOffState];
+		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite"] forState:PAOnState];
+		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite_Pressed"] forState:PAOnHighlightedState];
+		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];
+		[triangle setButtonType:PASwitchButton];
+		[controlView addSubview:triangle];  
+	} else {
+		[triangle setFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y + 2, 16, 16)];
+	}
+	
 	// Draw background
 	NSImage *backgroundImage = [NSImage imageNamed:@"MD0-0-Middle-1"];
 	[backgroundImage setFlipped:YES];
@@ -19,37 +33,7 @@
 	imageRect.size = [backgroundImage size];
 		
 	[backgroundImage drawInRect:cellFrame fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
-					   
-	// Draw triangle
-	/*NSImage *triangle = [NSImage imageNamed:@"ExpandedTriangleWhite"];
-	[triangle setFlipped:YES];
-	imageRect.size = NSMakeSize(16,16);
-	[triangle drawAtPoint:NSMakePoint(cellFrame.origin.x + 3, cellFrame.origin.y + 2)
-				fromRect:imageRect
-			   operation:NSCompositeSourceOver
-			    fraction:1.0];*/
 
-	// Add triangle - v2
-	if([triangle superview] != controlView)
-	{
-		// TODO: Subclass NSButton for best results: More images needed (up, up-pressed, down, down-pressed)
-		triangle = [[PAImageButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
-		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"] forState:PAOffState];
-		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite"] forState:PAOnState];
-		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite_Pressed"] forState:PAOnHighlightedState];
-		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];
-		[triangle setButtonType:PASwitchButton];
-		/*[triangle setTitle:@""];
-		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"]];
-		[triangle setAlternateImage:[NSImage imageNamed:@"ExpandedTriangleWhite"]];
-		[triangle setButtonType:NSSwitchButton];
-		[triangle setBezelStyle:NSDisclosureBezelStyle];
-		[triangle setState:NSOffState];*/
-		[controlView addSubview:triangle];  
-		//[triangle release];
-	} else {
-		[triangle setFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 20, 20)];
-	}
 					   
 	// Draw text	
 	NSString *cellTitle = [NSString stringWithString:key];

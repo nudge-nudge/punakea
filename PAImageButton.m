@@ -15,7 +15,6 @@
     self = [super initWithFrame:frame];
     if (self) {
 		cell = [[PAImageButtonCell alloc] initImageCell:nil];
-		//[cell setControlView:self];
 		[self setCell:cell];
     }
     return self;
@@ -29,14 +28,7 @@
 - (void)setButtonType:(PAImageButtonType)aType
 {
 	[cell setButtonType:aType];
-	[self setNeedsDisplay];
 }
-
-/*- (void)setNeedsDisplay
-{
-	NSLog(@"huhu: %@", [cell stringForState:[cell state]]);
-	[super setNeedsDisplay];
-}*/
 
 - (void)dealloc
 {
