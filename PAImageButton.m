@@ -14,7 +14,7 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-		cell = [[PAImageButtonCell alloc] initImageCell:nil];
+		PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:nil];
 		[self setCell:cell];
     }
     return self;
@@ -22,17 +22,16 @@
 
 - (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState
 {
-	[cell setImage:anImage forState:aState];
+	[[self cell] setImage:anImage forState:aState];
 }
 
 - (void)setButtonType:(PAImageButtonType)aType
 {
-	[cell setButtonType:aType];
+	[[self cell] setButtonType:aType];
 }
 
 - (void)dealloc
 {
-	if(cell) { [cell release]; }
 	[super dealloc];
 }
 

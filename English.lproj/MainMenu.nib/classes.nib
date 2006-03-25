@@ -34,7 +34,13 @@
             ACTIONS = {setTagsForFile = id; }; 
             CLASS = TaggerViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {filePath = NSTextField; tagController = NSArrayController; }; 
+            OUTLETS = {
+                filePath = NSTextField; 
+                fileTags = NSArrayController; 
+                popularTags = NSArrayController; 
+                recentTags = NSArrayController; 
+                tags = NSArrayController; 
+            }; 
             SUPERCLASS = NSWindowController; 
         }
     ); 

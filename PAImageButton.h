@@ -10,9 +10,7 @@
 #import "PAImageButtonCell.h"
 
 
-@interface PAImageButton : NSControl {
-	PAImageButtonCell *cell;
-}
+@interface PAImageButton : NSControl
 
 - (void)setButtonType:(PAImageButtonType)aType;
 - (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState;

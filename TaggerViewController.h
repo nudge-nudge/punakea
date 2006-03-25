@@ -6,10 +6,15 @@
 
 @interface TaggerViewController : NSWindowController {
     IBOutlet NSTextField *filePath;
-    IBOutlet NSArrayController *tagController;
+    IBOutlet NSArrayController *tags;
+    IBOutlet NSArrayController *popularTags;
+    IBOutlet NSArrayController *recentTags;
+    IBOutlet NSArrayController *fileTags;
 	PATagger *tagger;
 }
 
-- (IBAction)setTagsForFile:(id)sender;
+- (void)addPopularTag;
+- (void)addRecentTag;
+- (void)removeTagFromFile;
 
 @end
