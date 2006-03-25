@@ -2,6 +2,7 @@
 
 @interface TaggerViewController (PrivateAPI)
 
+- (void)addTagToFileTags:(PATag*)tag;
 - (void)updateTagsOnFile;
 
 @end
@@ -11,6 +12,7 @@
 - (void)awakeFromNib 
 {
 	tagger = [PATagger sharedInstance];
+	factory = [[PASimpleTagFactory alloc] init];
 	
 	//TODO can be done from IB ... do this!
 	//init sorting
@@ -25,6 +27,17 @@
 }
 
 #pragma mark tag field delegates
+- (void)controlTextDidEndEditing:(NSNotification *)aNotification
+{
+	PATag *tag = [factory createTagWithName:[tagField stringValue]];
+	
+	//if the tag is new, add it to the global tag controller
+	if (![[tags arrangedObjects] containsObject:tag])
+		[tags addObject:tag];
+
+	[self addTagToFileTags:tag];
+	[self updateTagsOnFile];
+}
 
 #pragma mark click targets
 - (void)addPopularTag 
@@ -32,7 +45,7 @@
 	if ([[popularTags selectedObjects] count] > 0)
 	{
 		PATag *tag = [[popularTags selectedObjects] objectAtIndex:0];
-		[fileTags addObject:tag];
+		[self addTagToFileTags:tag];
 		[self updateTagsOnFile];
 	}
 }
@@ -42,7 +55,7 @@
 	if ([[recentTags selectedObjects] count] > 0)
 	{
 		PATag *tag = [[recentTags selectedObjects] objectAtIndex:0];
-		[fileTags addObject:tag];
+		[self addTagToFileTags:tag];
 		[self updateTagsOnFile];
 	}
 }
@@ -55,6 +68,12 @@
 		[fileTags removeObject:tag];
 		[self updateTagsOnFile];
 	}
+}
+
+- (void)addTagToFileTags:(PATag*)tag
+{
+	if (![[fileTags arrangedObjects] containsObject:tag])
+		[fileTags addObject:tag];
 }
 
 - (void)updateTagsOnFile 

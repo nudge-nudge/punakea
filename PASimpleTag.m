@@ -185,7 +185,7 @@
 	
 	NSColor *c = [NSColor redColor];
 	//externalize sizes
-	int size = 50 * [self relativeRating];
+	int size = 30 * [self relativeRating];
 	if (size < 10)
 		size = 10;
 	

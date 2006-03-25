@@ -31,7 +31,6 @@
             SUPERCLASS = NSView; 
         }, 
         {
-            ACTIONS = {setTagsForFile = id; }; 
             CLASS = TaggerViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
@@ -39,6 +38,7 @@
                 fileTags = NSArrayController; 
                 popularTags = NSArrayController; 
                 recentTags = NSArrayController; 
+                tagField = NSTextField; 
                 tags = NSArrayController; 
             }; 
             SUPERCLASS = NSWindowController; 
