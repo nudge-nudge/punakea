@@ -24,6 +24,8 @@
 	[recentTags setSortDescriptors:recentSortDescriptors];
 }
 
+#pragma mark tag field delegates
+
 #pragma mark click targets
 - (void)addPopularTag 
 {

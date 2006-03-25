@@ -6,7 +6,7 @@
 
 @interface TaggerViewController : NSWindowController {
     IBOutlet NSTextField *filePath;
-    IBOutlet NSArrayController *tags;
+    IBOutlet NSArrayController *tags; /**< tag controller for all tags */
     IBOutlet NSArrayController *popularTags;
     IBOutlet NSArrayController *recentTags;
     IBOutlet NSArrayController *fileTags;
