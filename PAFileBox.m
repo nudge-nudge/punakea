@@ -48,6 +48,8 @@
 
 - (void)setFileIcon:(NSImage*)newIcon 
 {
+	//TODO do the resize stuff here?
+	[newIcon setSize:NSMakeSize(64,64)];
 	[self setImage:newIcon];
 }
 
