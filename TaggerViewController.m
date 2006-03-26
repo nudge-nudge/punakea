@@ -76,21 +76,26 @@
 		[fileTags addObject:tag];
 }
 
+/**
+adds tags from fileTags to all files in the file box
+ */
 - (void)updateTagsOnFile 
 {
-	NSString *file = [filePath stringValue];
+	NSArray *files = [fileBox files];
 	
-	//only update if there is a file
-	if (![file isEqualToString:@""])
+	NSEnumerator *fileEnumerator = [files objectEnumerator];
+	NSString *file;
+	
+	while (file = [fileEnumerator nextObject])
 	{
 		NSEnumerator *e = [[fileTags arrangedObjects] objectEnumerator];
 		PATag *tag;
 		
 		while (tag = [e nextObject])
-			[tag incrementUseCount];	
+			[tag incrementUseCount];
 		
-		NSLog(@"trying to write %@ to %@",tags,[filePath stringValue]);
-		[tagger writeTagsToFile:[fileTags arrangedObjects] filePath:[filePath stringValue]];
+		NSLog(@"trying to write %@ to %@",tags,file);
+		[tagger writeTagsToFile:[fileTags arrangedObjects] filePath:file];
 	}
 }
 

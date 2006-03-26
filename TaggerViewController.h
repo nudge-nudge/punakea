@@ -5,9 +5,10 @@
 #import "PATagFactory.h"
 #import "PASimpleTagFactory.h"
 #import "PATag.h"
+#import "PAFileBox.h"
 
 @interface TaggerViewController : NSWindowController {
-    IBOutlet NSTextField *filePath;
+    IBOutlet PAFileBox *fileBox;
 	IBOutlet NSTextField *tagField;
 	
     IBOutlet NSArrayController *tags; /**< tag controller for all tags */

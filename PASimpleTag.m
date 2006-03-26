@@ -8,7 +8,7 @@
 
 #import "PASimpleTag.h"
 
-@implementation PASimpleTag 
+@implementation PASimpleTag
 
 #pragma mark init
 - (id)init
