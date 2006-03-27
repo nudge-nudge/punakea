@@ -19,6 +19,7 @@ calculates the starting point in the next line according to the height of all th
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
+		//TODO aren't removed correctly
 		rectTags = [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -64,21 +65,20 @@ calculates the starting point in the next line according to the height of all th
 - (void)drawRect:(NSRect)rect
 {	
 	pointForNextTagRect = NSMakePoint(0,rect.size.height);
+	tagPosition = 0;
 	
 	//if there are registered trackingRects, remove them before redrawing
 	NSEnumerator *e = [rectTags objectEnumerator];
 	NSTrackingRectTag rectTag;
 	
 	while (rectTag = [[e nextObject] intValue])
+	{
 		[self removeTrackingRect:rectTag];
+	}
 	
 	//get the tags to be displayed
 	currentTags = [relatedTagsController arrangedObjects];
 	
-	//needed for lineHeight calculation
-	tagPosition = 0;
-	
-	//TODO externalize
 	pointForNextTagRect = [self firstPointForNextLineIn:rect];
 	
 	[self drawBackground:rect];
@@ -87,42 +87,49 @@ calculates the starting point in the next line according to the height of all th
 
 - (NSPoint)firstPointForNextLineIn:(NSRect)rect;
 {
-	int padding = 1;
-
+	//TODO externalize
+	int vPadding = 1;
+	int spacing = 10;
+	
+	//values needed for calc
 	int lineWidth = 0;
-	float maxHeight = 0;;
-	NSMutableString *oneLine = [NSMutableString stringWithString:@""];
-		
-	NSEnumerator *e = [currentTags objectEnumerator];
+	float maxHeight = 0.0;
+	
+	/* while there are tags, compose a line and get the maximum height,
+		then keep the starting points for each one */
+	NSEnumerator *tagEnumerator = [currentTags objectEnumerator];
 	PATag *tag;
 	
-	int i=0;
-	//skip tags which are already drawn
-	for (;i<tagPosition;i++)
+	NSMutableString *oneLine = [NSMutableString string];
+	
+	int i;
+	for (i=0;i<tagPosition;i++)
 	{
-		[e nextObject];
+		[tagEnumerator nextObject];
 	}
 	
-	while (tag = [e nextObject])
+	while (tag = [tagEnumerator nextObject])
 	{
+		//get the size for the current tag
 		NSDictionary *attributes = [tag viewAttributes];
 		NSSize tagSize = [tag sizeWithAttributes:attributes];
 		
 		//if the tag fills the line, stop adding tags
-		lineWidth += padding + tagSize.width;
-		if (lineWidth + padding > rect.size.width)
-			break;
-
-		//float realTagHeight = [self heightForStringDrawing:[tag name] font:[attributes valueForKey:NSFontAttributeName] width:tagSize.width];
+		lineWidth += spacing + tagSize.width;
 		
+		if (lineWidth + spacing > rect.size.width)
+			break;
+		
+		//remember the maximum height
 		if (tagSize.height > maxHeight)
 			maxHeight = tagSize.height;
-	
-		[oneLine appendString:[tag name]];
+		
+		[oneLine appendFormat:@"%@ ",[tag name]];
 		tagPosition++;
 	}
 	
-	return NSMakePoint(padding,pointForNextTagRect.y-maxHeight-padding);
+	NSLog(@"line: %@",oneLine);
+	return NSMakePoint(spacing,pointForNextTagRect.y-maxHeight-vPadding);
 }	
 
 //NOT NEEDED ATM - deprecated
@@ -170,18 +177,17 @@ calculates the starting point in the next line according to the height of all th
 - (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs
 {
 	//TODO externalize spacing and padding and ...
-	int height = 30;
 	int spacing = 10;
-	int padding = 10;
 	
 	//first get the tag size for the tag to draw
 	NSSize tagSize = [tag sizeWithAttributes:attribs];
 	
-	int xValue = pointForNextTagRect.x + tagSize.width + padding;
+	int xValue = pointForNextTagRect.x + tagSize.width + spacing;
 	
+	//if the tag doesn't fit in this line, get first point in next line
 	if (xValue > rect.size.width)
 	{
-		pointForNextTagRect = NSMakePoint(padding,pointForNextTagRect.y-height);
+		pointForNextTagRect = [self firstPointForNextLineIn:rect];
 	}
 		
 	NSRect tagRect =  NSMakeRect(pointForNextTagRect.x,pointForNextTagRect.y,tagSize.width,tagSize.height);
