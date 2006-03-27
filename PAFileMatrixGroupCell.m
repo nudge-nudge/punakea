@@ -18,6 +18,7 @@
 		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite_Pressed"] forState:PAOnHighlightedState];
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];
 		[triangle setButtonType:PASwitchButton];
+		[triangle setTarget:self];
 		[controlView addSubview:triangle];  
 	} else {
 		[triangle setFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y + 2, 16, 16)];
@@ -84,7 +85,15 @@
 	// TODO: Send notification
 }
 
-#pragma Accessors
+#pragma mark Actions
+- (void)performClick:(id)sender
+{
+	NSString *state = @"off";
+	if ([sender isHighlighted]) { state = @"on"; }
+	NSLog(@"ImageButton clicked, state: %@", state);
+}
+
+#pragma mark Accessors
 - (NSString*)key
 {
 	return key;

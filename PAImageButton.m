@@ -30,6 +30,11 @@
 	[[self cell] setButtonType:aType];
 }
 
+- (BOOL)isHighlighted
+{
+	return [[self cell] isHighlighted];
+}
+
 - (void)dealloc
 {
 	[super dealloc];

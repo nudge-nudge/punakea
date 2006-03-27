@@ -113,6 +113,9 @@
 
 - (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
 {
+	// Action
+	[self setAction:@selector(performClick:)];
+	
 	// all following states need to be the inverse ones? seems so...
 	
 	if(type == PAMomentaryLightButton)

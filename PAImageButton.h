@@ -15,4 +15,6 @@
 - (void)setButtonType:(PAImageButtonType)aType;
 - (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState;
 
+- (BOOL)isHighlighted;
+
 @end
