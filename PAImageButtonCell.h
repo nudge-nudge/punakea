@@ -40,5 +40,6 @@ PAImageButtonType type;
 
 - (BOOL)isHighlighted;
 - (void)setHighlighted:(BOOL)flag;
-
+- (PAImageButtonState)state;
+- (void)setState:(PAImageButtonState)aState;
 @end

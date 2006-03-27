@@ -18,6 +18,7 @@
 		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite_Pressed"] forState:PAOnHighlightedState];
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];
 		[triangle setButtonType:PASwitchButton];
+		[triangle setState:PAOnState];
 		[triangle setTarget:self];
 		[controlView addSubview:triangle];  
 	} else {
@@ -49,6 +50,7 @@
 - (id)initTextCell:(NSString*)aText
 {
 	key = aText;
+	isExpanded = YES;
 	
 	return [super initTextCell:aText];
 }
@@ -76,13 +78,13 @@
 - (void)expand
 {
 	isExpanded = YES;
-	// Todo: Send notification
+	[[self controlView] expandGroupCell:self];
 }
 
 - (void)collapse
 {
 	isExpanded = NO;
-	// TODO: Send notification
+	[[self controlView] collapseGroupCell:self];
 }
 
 #pragma mark Actions
@@ -91,6 +93,8 @@
 	NSString *state = @"off";
 	if ([sender isHighlighted]) { state = @"on"; }
 	NSLog(@"ImageButton clicked, state: %@", state);
+	
+	[self toggle];
 }
 
 #pragma mark Accessors

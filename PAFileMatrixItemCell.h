@@ -5,4 +5,7 @@
 	NSString *key;
 	NSMetadataItem *metadataItem;
 }
+
+- (NSString*)key;
+
 @end
