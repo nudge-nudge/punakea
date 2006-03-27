@@ -86,7 +86,7 @@
 }
 
 #pragma mark Actions
-- (void)performClick:(id)sender
+- (void)action:(id)sender
 {
 	NSString *state = @"off";
 	if ([sender isHighlighted]) { state = @"on"; }

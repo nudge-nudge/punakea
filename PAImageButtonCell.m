@@ -114,7 +114,7 @@
 - (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
 {
 	// Action
-	[self setAction:@selector(performClick:)];
+	[self setAction:@selector(action:)];
 	
 	// all following states need to be the inverse ones? seems so...
 	
