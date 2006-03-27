@@ -1,7 +1,11 @@
 #import "PATagCloud.h"
 
 @interface PATagCloud (PrivateAPI)
-
+/**
+calculates the starting point in the next line according to the height of all the tags
+ @param rect the main rect in which all the stuff is drawn
+ @return origin point for next tag
+ */
 - (NSPoint)firstPointForNextLineIn:(NSRect)rect;
 - (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth;
 - (void)drawBackground:(NSRect)rect;
@@ -65,13 +69,16 @@
 	NSEnumerator *e = [rectTags objectEnumerator];
 	NSTrackingRectTag rectTag;
 	
-	//get the tags to be displayed
-	currentTags = [relatedTagsController arrangedObjects];
-	
 	while (rectTag = [[e nextObject] intValue])
 		[self removeTrackingRect:rectTag];
 	
-	//TODO externalize values
+	//get the tags to be displayed
+	currentTags = [relatedTagsController arrangedObjects];
+	
+	//needed for lineHeight calculation
+	tagPosition = 0;
+	
+	//TODO externalize
 	pointForNextTagRect = [self firstPointForNextLineIn:rect];
 	
 	[self drawBackground:rect];
@@ -80,14 +87,21 @@
 
 - (NSPoint)firstPointForNextLineIn:(NSRect)rect;
 {
-	int padding = 10;
-	
-	NSEnumerator *e = [currentTags objectEnumerator];
-	PATag *tag;
-	
+	int padding = 1;
+
 	int lineWidth = 0;
 	float maxHeight = 0;;
 	NSMutableString *oneLine = [NSMutableString stringWithString:@""];
+		
+	NSEnumerator *e = [currentTags objectEnumerator];
+	PATag *tag;
+	
+	int i=0;
+	//skip tags which are already drawn
+	for (;i<tagPosition;i++)
+	{
+		[e nextObject];
+	}
 	
 	while (tag = [e nextObject])
 	{
@@ -99,17 +113,19 @@
 		if (lineWidth + padding > rect.size.width)
 			break;
 
-		float realTagHeight = [self heightForStringDrawing:[tag name] font:[attributes valueForKey:NSFontAttributeName] width:tagSize.width];
-		if (realTagHeight > maxHeight)
-			maxHeight = realTagHeight;
+		//float realTagHeight = [self heightForStringDrawing:[tag name] font:[attributes valueForKey:NSFontAttributeName] width:tagSize.width];
+		
+		if (tagSize.height > maxHeight)
+			maxHeight = tagSize.height;
 	
 		[oneLine appendString:[tag name]];
+		tagPosition++;
 	}
 	
 	return NSMakePoint(padding,pointForNextTagRect.y-maxHeight-padding);
 }	
 
-//make more efficient
+//NOT NEEDED ATM - deprecated
 - (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth
 {	
 	NSTextStorage *textStorage = [[[NSTextStorage alloc] initWithString:myString] autorelease];
@@ -154,7 +170,7 @@
 - (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs
 {
 	//TODO externalize spacing and padding and ...
-	int height = 35;
+	int height = 30;
 	int spacing = 10;
 	int padding = 10;
 	

@@ -157,6 +157,10 @@
 //returns between 0 and 1 - this can be made faster if we cache the value ... TODO
 - (float)relativeRating
 {	
+	return [self absoluteRating] / [currentBestTag absoluteRating];
+	
+	//DEPRECATED
+	/*
 	float relClickCount = 0.0;
 	float relUseCount = 0.0;
 	
@@ -176,6 +180,7 @@
 	float result = weightedClickCount + weightedUseCount;
 	
 	return result;
+	 */
 }
 
 #pragma mark drawing

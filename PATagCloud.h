@@ -15,6 +15,8 @@
 	
 	PATag *activeTag;
 	NSMutableArray *rectTags;
+	
+	int tagPosition;
 }
 
 - (PATag*)activeTag;
