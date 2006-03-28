@@ -49,19 +49,20 @@
 
 - (id)initTextCell:(NSString*)aText
 {
+	self = [super initTextCell:aText];
+
 	key = aText;
 	isExpanded = YES;
 	
-	return [super initTextCell:aText];
+	return self;
 }
 
+// TODO: dealloc is never invoked!
 - (void)dealloc
 {
 	if(key) { [key release]; }
-	/*if(triangle)
-	{
-		[triangle removeFromSuperview];
-	}*/
+	[triangle removeFromSuperview];
+	[triangle release];
 	[super dealloc];
 }
 
@@ -90,10 +91,6 @@
 #pragma mark Actions
 - (void)action:(id)sender
 {
-	NSString *state = @"off";
-	if ([sender isHighlighted]) { state = @"on"; }
-	NSLog(@"ImageButton clicked, state: %@", state);
-	
 	[self toggle];
 }
 

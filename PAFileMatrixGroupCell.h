@@ -5,8 +5,6 @@
 {
 	NSString *key;
 	bool isExpanded;
-	
-	@private
 	PAImageButton *triangle;
 }
 

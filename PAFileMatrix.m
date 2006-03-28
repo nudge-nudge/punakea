@@ -11,7 +11,7 @@
 
 @interface PAFileMatrix (PrivateAPI)
 
-- (BOOL)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row;
+- (PAFileMatrixGroupCell *)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row;
 - (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row;
 
 @end
@@ -47,7 +47,7 @@
 }
 
 // DEPRECATED - TODO: insert grouprows and then expand each grouprow with expandGroupCell:
-- (void)updateView
+- (void)updateViewOLD
 {
 	int i, j;
 	int row = -1;
@@ -60,7 +60,7 @@
 		
 		PAFileMatrixGroupCell* groupCell = [[PAFileMatrixGroupCell alloc] initTextCell:[group value]];
 		PAFileMatrixGroupCell* thisCell = [self insertGroupCell:groupCell atRow:row];
-		[groupCell release];
+		//[groupCell release];
 
 		if([thisCell isExpanded]) {
 			for (j = 0; j < [group resultCount]; j++)
@@ -77,6 +77,20 @@
 	
 	[self renewRows:(row+1) columns:1];	
 	[self setNeedsDisplay];
+}
+
+- (void)resetView
+{
+	int i;	
+	for (i = 0; i < [self numberOfRows]; i++)
+	{
+		[self removeRow:i];
+	}
+}
+
+- (void)updateView
+{
+	[self updateViewOLD];
 }
 
 - (PAFileMatrixGroupCell *)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row
@@ -99,6 +113,8 @@
 	{		
 		[self insertRow:row];
 		[self putCell:cell atRow:row column:0];
+	} else {
+		//[cell release];
 	}
 }
 
@@ -171,6 +187,11 @@
 		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification])
 	{
 		[self updateView];
+	}
+	
+	if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification])
+	{
+		[self resetView];
 	}
 }
 
