@@ -11,6 +11,7 @@ calculates the starting point in the next line according to the height of all th
 - (void)drawBackground:(NSRect)rect;
 - (void)drawTags:(NSRect)rect;
 - (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
+- (PATagButton*)buttonForTag:(PATag*)tag inRect:(NSRect)rect;
 
 @end
 
@@ -19,8 +20,7 @@ calculates the starting point in the next line according to the height of all th
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-		//TODO aren't removed correctly
-		rectTags = [[NSMutableArray alloc] init];
+		tagButtonDict = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
@@ -35,21 +35,8 @@ calculates the starting point in the next line according to the height of all th
 
 - (void)dealloc
 {
-	[activeTag release];
-	[rectTags release];
+	[tagButtonDict release];
 	[super dealloc];
-}
-
-- (PATag*)activeTag
-{
-	return activeTag;
-}
-
-- (void)setActiveTag:(PATag*)aTag
-{
-	[activeTag release];
-	[aTag retain];
-	activeTag = aTag;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -65,16 +52,9 @@ calculates the starting point in the next line according to the height of all th
 - (void)drawRect:(NSRect)rect
 {	
 	pointForNextTagRect = NSMakePoint(0,rect.size.height);
+	
+	//needed for drawing in lines
 	tagPosition = 0;
-	
-	//if there are registered trackingRects, remove them before redrawing
-	NSEnumerator *e = [rectTags objectEnumerator];
-	NSTrackingRectTag rectTag;
-	
-	while (rectTag = [[e nextObject] intValue])
-	{
-		[self removeTrackingRect:rectTag];
-	}
 	
 	//get the tags to be displayed
 	currentTags = [relatedTagsController arrangedObjects];
@@ -127,12 +107,12 @@ calculates the starting point in the next line according to the height of all th
 		[oneLine appendFormat:@"%@ ",[tag name]];
 		tagPosition++;
 	}
-	
-	NSLog(@"line: %@",oneLine);
+
 	return NSMakePoint(spacing,pointForNextTagRect.y-maxHeight-vPadding);
 }	
 
 //NOT NEEDED ATM - deprecated
+/*
 - (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth
 {	
 	NSTextStorage *textStorage = [[[NSTextStorage alloc] initWithString:myString] autorelease];
@@ -148,6 +128,7 @@ calculates the starting point in the next line according to the height of all th
 	
 	return [layoutManager usedRectForTextContainer:textContainer].size.height;
 }
+*/
 
 - (void)drawBackground:(NSRect)rect
 {
@@ -166,11 +147,22 @@ calculates the starting point in the next line according to the height of all th
 	{
 		NSDictionary *attributes = [tag viewAttributes];
 		NSRect tagRect = [self nextRectFor:tag inMainRect:rect withAttributes:attributes];
-		[tag drawInRect:tagRect withAttributes:attributes];
 		
-		//add tracking - keep track of the trackingRects so that the can be removed on redraw
-		NSTrackingRectTag rectTag = [self addTrackingRect:tagRect owner:self userData:tag assumeInside:NO];
-		[rectTags addObject:[NSNumber numberWithInt:rectTag]];
+		PATagButton *tagButton;
+		
+		/* if the control isn't there yet, it needs to be created
+			otherwise just set the new position */
+		if (tagButton = [tagButtonDict objectForKey:[tag name]]) 
+		{
+			[tagButton setFrame:tagRect];
+		}
+		else
+		{
+			tagButton = [self buttonForTag:tag inRect:tagRect];
+			[tagButton setTarget:controller];
+			[tagButtonDict setObject:tagButton forKey:[tag name]];
+			[self addSubview:tagButton];
+		}
 	}
 }
 
@@ -198,28 +190,9 @@ calculates the starting point in the next line according to the height of all th
 	return tagRect;
 }
 
-//EVENT HANDLING
-- (void)mouseEntered:(NSEvent*)event
+- (PATagButton*)buttonForTag:(PATag*)tag inRect:(NSRect)rect
 {
-	[self setActiveTag:[event userData]];
-	[[self activeTag] setHighlight:YES];
-	[self setNeedsDisplay:YES];
+	PATagButton *tagButton = [[PATagButton alloc] initWithFrame:rect Tag:tag];
+	return [tagButton autorelease];
 }
-
-- (void)mouseExited:(NSEvent*)event
-{
-	[[self activeTag] setHighlight:NO];
-	[self setActiveTag:NULL];
-	[self setNeedsDisplay:YES];
-}
-
-- (void)mouseUp:(NSEvent*)event
-{	
-	if (activeTag != NULL)
-	{
-		[selectedTagsController addObject:activeTag];
-		[activeTag incrementClickCount];
-	}
-}
-
 @end

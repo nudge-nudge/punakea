@@ -1,7 +1,7 @@
 {
     IBClasses = (
         {
-            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
+            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; tagButtonClicked = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
             OUTLETS = {
@@ -10,7 +10,6 @@
                 outlineView = NSOutlineView; 
                 relatedTagsController = NSArrayController; 
                 resultController = NSArrayController; 
-                segmentedControl = NSSegmentedControl; 
                 selectedTagsController = NSArrayController; 
             }; 
             SUPERCLASS = NSWindowController; 
@@ -27,15 +26,18 @@
         {CLASS = PAFileViewHeaderCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PAFileViewTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {CLASS = PASpotlightTypeCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
+        {CLASS = PATagCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 
         {
             CLASS = PATagCloud; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                controller = Controller; 
                 relatedTagsController = NSArrayController; 
                 selectedTagsController = NSArrayController; 
             }; 
             SUPERCLASS = NSView; 
         }, 
+        {CLASS = PATagControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {
             CLASS = TaggerViewController; 
             LANGUAGE = ObjC; 
