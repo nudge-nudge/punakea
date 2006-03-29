@@ -46,7 +46,6 @@
     [nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
 }
 
-// DEPRECATED - TODO: insert grouprows and then expand each grouprow with expandGroupCell:
 - (void)updateView
 {
 	int i, j;
@@ -70,11 +69,8 @@
 				PAFileMatrixItemCell* itemCell = [[[PAFileMatrixItemCell alloc] initTextCell:itemPath] autorelease];
 				[itemCell setMetadataItem:item];
 				[self insertItemCell:itemCell atRow:row];
-				//[itemCell release];
 			}
 		}
-		
-		//[groupCell release];
 	}
 	
 	[self renewRows:(row+1) columns:1];	
@@ -90,7 +86,7 @@
 	}
 }
 
-- (void)updateViewNEW
+/*- (void)updateViewNEW
 {
 	int i;
 	
@@ -119,7 +115,7 @@
 			[[self cellAtRow:i column:0] expand];
 		}
 	}
-}
+} */
 
 - (PAFileMatrixGroupCell *)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row
 {
@@ -138,11 +134,10 @@
 	    ![[cell key] isEqualTo:[[self cellAtRow:row column:0] key]])
 	{		
 		[self insertRow:row];
-		[self putCell:[cell retain] atRow:row column:0];
+		[self putCell:cell atRow:row column:0];
 	}
 }
 
-// TODO AUTORELEASE
 - (void)expandGroupCell:(PAFileMatrixGroupCell *)cell
 {
 	int i, j, k;
@@ -165,7 +160,7 @@
 						{
 							NSMetadataItem *item = [group resultAtIndex:k];
 							NSString *itemPath = [item valueForAttribute:@"kMDItemPath"];
-							PAFileMatrixItemCell* itemCell = [[PAFileMatrixItemCell alloc] initTextCell:itemPath];
+							PAFileMatrixItemCell* itemCell = [[[PAFileMatrixItemCell alloc] initTextCell:itemPath] autorelease];
 							[itemCell setMetadataItem:item];
 							[self insertItemCell:itemCell atRow:(i+1+k)];
 						}
