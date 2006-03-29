@@ -47,7 +47,7 @@
 }
 
 // DEPRECATED - TODO: insert grouprows and then expand each grouprow with expandGroupCell:
-- (void)updateViewOLD
+- (void)updateView
 {
 	int i, j;
 	int row = -1;
@@ -58,9 +58,8 @@
 		row++;
 		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
 		
-		PAFileMatrixGroupCell* groupCell = [[PAFileMatrixGroupCell alloc] initTextCell:[group value]];
-		PAFileMatrixGroupCell* thisCell = [self insertGroupCell:groupCell atRow:row];
-		//[groupCell release];
+		PAFileMatrixGroupCell *groupCell = [[[PAFileMatrixGroupCell alloc] initTextCell:[group value]] autorelease];
+		PAFileMatrixGroupCell *thisCell = [self insertGroupCell:groupCell atRow:row];
 
 		if([thisCell isExpanded]) {
 			for (j = 0; j < [group resultCount]; j++)
@@ -68,11 +67,14 @@
 				row++;
 				NSMetadataItem *item = [group resultAtIndex:j];
 				NSString *itemPath = [item valueForAttribute:@"kMDItemPath"];
-				PAFileMatrixItemCell* itemCell = [[PAFileMatrixItemCell alloc] initTextCell:itemPath];
+				PAFileMatrixItemCell* itemCell = [[[PAFileMatrixItemCell alloc] initTextCell:itemPath] autorelease];
 				[itemCell setMetadataItem:item];
 				[self insertItemCell:itemCell atRow:row];
+				//[itemCell release];
 			}
 		}
+		
+		//[groupCell release];
 	}
 	
 	[self renewRows:(row+1) columns:1];	
@@ -81,17 +83,42 @@
 
 - (void)resetView
 {
-	int i;	
-	for (i = 0; i < [self numberOfRows]; i++)
+	int i;
+	for(i = 0; i < [self numberOfRows]; i++)
 	{
-		[[self cellAtRow:i column:0] rel];
 		[self removeRow:i];
 	}
 }
 
-- (void)updateView
+- (void)updateViewNEW
 {
-	[self updateViewOLD];
+	int i;
+	
+	NSArray *groupedResults = [query groupedResults];
+	for (i = 0; i < [groupedResults count]; i++)
+	{
+		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];	
+		
+		BOOL doInsert = YES;
+		if([[[self cellAtRow:i column:0] class] isEqualTo:[PAFileMatrixGroupCell class]])
+		{
+			if([[[self cellAtRow:i column:0] key] isEqualTo:[group value]]) {
+				doInsert = NO;
+			}
+		}
+		
+		if(doInsert) {
+			PAFileMatrixGroupCell *cell = [[[PAFileMatrixGroupCell alloc] initTextCell:[group value]] autorelease];
+			//NSButtonCell *cell = [[[NSButtonCell alloc] initTextCell:@"huhu"] autorelease];
+			[self insertRow:i];
+			[self putCell:cell atRow:i column:0];
+		}
+		
+		if([[self cellAtRow:i column:0] isExpanded])
+		{
+			[[self cellAtRow:i column:0] expand];
+		}
+	}
 }
 
 - (PAFileMatrixGroupCell *)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row
@@ -101,10 +128,8 @@
 	{		
 		[self insertRow:row];
 		[self putCell:cell atRow:row column:0];
-		return cell;
-	} else {
-		return [self cellAtRow:row column:0];
 	}
+	return [self cellAtRow:row column:0];
 }
 
 - (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row
@@ -113,12 +138,11 @@
 	    ![[cell key] isEqualTo:[[self cellAtRow:row column:0] key]])
 	{		
 		[self insertRow:row];
-		[self putCell:cell atRow:row column:0];
-	} else {
-		//[cell release];
+		[self putCell:[cell retain] atRow:row column:0];
 	}
 }
 
+// TODO AUTORELEASE
 - (void)expandGroupCell:(PAFileMatrixGroupCell *)cell
 {
 	int i, j, k;

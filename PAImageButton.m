@@ -16,6 +16,7 @@
     if (self) {
 		PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:nil];
 		[self setCell:cell];
+		[cell release];
     }
     return self;
 }

@@ -50,28 +50,21 @@
 - (id)initTextCell:(NSString*)aText
 {
 	self = [super initTextCell:aText];
-
-	key = aText;
-	isExpanded = YES;
-	
+	if (self) {
+		key = [aText retain];
+		isExpanded = YES;
+	}	
 	return self;
 }
 
-// TODO: dealloc is never invoked!
 - (void)dealloc
 {
 	if(key) { [key release]; }
-	[triangle removeFromSuperview];
-	[triangle release];
+	if (triangle) {
+		[triangle removeFromSuperview];
+		[triangle release];
+	}
 	[super dealloc];
-}
-
-
-// TEMP
-- (void)rel
-{
-	[triangle removeFromSuperview];
-	[triangle release];
 }
 
 - (void)toggle

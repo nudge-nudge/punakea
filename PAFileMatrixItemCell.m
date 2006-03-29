@@ -21,9 +21,11 @@
 
 - (id)initTextCell:(NSString*)aText
 {	
-	[key release];
-	key = [aText retain];
-	return [super initTextCell:aText];
+	self = [super initTextCell:aText];
+	if (self) {
+		key = [aText retain];
+	}
+	return self;
 }
 
 - (NSString*)key
