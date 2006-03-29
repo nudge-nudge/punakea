@@ -11,23 +11,33 @@
 
 @interface PAFileMatrix (PrivateAPI)
 
-- (PAFileMatrixGroupCell *)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row;
+//- (PAFileMatrixGroupCell *)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row;
 - (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row;
 
 @end
 
 @implementation PAFileMatrix
 
-- (id)initWithFrame:(NSRect)frame {
+#pragma mark Init + Dealloc
+- (id)initWithFrame:(NSRect)frame
+{
     self = [super initWithFrame:frame];
     if (self) {
 		[self setCellClass:[NSTextFieldCell class]];
 		[self renewRows:0 columns:1];
+		groupRowDict = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
-- (void)drawRect:(NSRect)rect {
+- (void)dealloc
+{
+	if(groupRowDict) { [groupRowDict release]; }
+	[super dealloc];
+}
+
+- (void)drawRect:(NSRect)rect
+{
 	// Update cell size
 	[self setCellSize:NSMakeSize(rect.size.width,20)];
 
@@ -57,10 +67,11 @@
 		row++;
 		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
 		
-		PAFileMatrixGroupCell *groupCell = [[[PAFileMatrixGroupCell alloc] initTextCell:[group value]] autorelease];
-		PAFileMatrixGroupCell *thisCell = [self insertGroupCell:groupCell atRow:row];
+		//PAFileMatrixGroupCell *groupCell = [[[PAFileMatrixGroupCell alloc] initTextCell:[group value]] autorelease];
+		//PAFileMatrixGroupCell *thisCell = [self insertGroupCell:groupCell atRow:row];
+		PAFileMatrixGroupCell *thisCell = [self insertGroupCell:[group value] atRow:row];
 
-		if([thisCell isExpanded]) {
+		/*if([thisCell isExpanded]) {
 			for (j = 0; j < [group resultCount]; j++)
 			{
 				row++;
@@ -70,10 +81,23 @@
 				[itemCell setMetadataItem:item];
 				[self insertItemCell:itemCell atRow:row];
 			}
+		}*/
+	}
+	
+	// Delete old rows
+	if((row+1) <  [self numberOfRows])
+	{
+		for(i = row+1; i < [self numberOfRows]; i++)
+		{
+			// Delete dict entry
+			if([[[self cellAtRow:i column:0] class] isEqualTo:[PAFileMatrixGroupCell class]])
+			{
+				[groupRowDict removeObjectForKey:[[self cellAtRow:i column:0] key]];
+			}
+			[self removeRow:i];
 		}
 	}
 	
-	[self renewRows:(row+1) columns:1];	
 	[self setNeedsDisplay];
 }
 
@@ -84,6 +108,7 @@
 	{
 		[self removeRow:i];
 	}
+	[groupRowDict removeAllObjects];
 }
 
 /*- (void)updateViewNEW
@@ -117,6 +142,43 @@
 	}
 } */
 
+- (PAFileMatrixGroupCell*)insertGroupCell:(NSString*)value atRow:(int)row
+{
+	if([groupRowDict objectForKey:value]) {
+		// This group already exists, as groups' values are unique
+		
+		// TODO: Move cell to specified row!
+		// Puh, indices vary if cell is collapsed/expanded...
+		
+		return [self cellAtRow:[[groupRowDict objectForKey:value] intValue] column:0];
+	}
+	else
+	{
+		// This group needs to be created at the specified row		
+		
+		// TODO Shift other dict values
+		NSArray *allKeys = [groupRowDict allKeys];
+		int i;
+		for (i = 0; i < [allKeys count]; i++)
+		{
+			NSNumber *thisRowNumber = [groupRowDict objectForKey:[allKeys objectAtIndex:i]];
+			int thisRow = [thisRowNumber intValue];
+			if(thisRow >= row)
+			{
+				[groupRowDict setObject:[NSNumber numberWithInt:(thisRow+1)] forKey:[allKeys objectAtIndex:i]];
+			}	
+		}	
+		
+		[groupRowDict setObject:[NSNumber numberWithInt:row] forKey:value];
+		
+		PAFileMatrixGroupCell *cell = [[[PAFileMatrixGroupCell alloc] initTextCell:value] autorelease];
+		[self insertRow:row];
+		[self putCell:cell atRow:row column:0];
+		return cell;
+	}
+}
+
+/* DEPRECATED
 - (PAFileMatrixGroupCell *)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row
 {
 	if ([self numberOfRows] <= row ||
@@ -126,7 +188,7 @@
 		[self putCell:cell atRow:row column:0];
 	}
 	return [self cellAtRow:row column:0];
-}
+} */
 
 - (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row
 {
@@ -209,14 +271,9 @@
 		[self updateView];
 	}
 	
-	if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification])
+	/*if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification])
 	{
 		[self resetView];
-	}
-}
-
-- (void)dealloc
-{
-   [super dealloc];
+	}*/
 }
 @end

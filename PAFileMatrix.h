@@ -11,8 +11,10 @@
 #import "PAFileMatrixItemCell.h"
 
 @interface PAFileMatrix : NSMatrix {
-	/** Sample doxygen comment */
 	NSMetadataQuery *query;
+	
+	/** Key: [group value] a la "PDF Dokumente", Object: row as NSNumber */
+	NSMutableDictionary *groupRowDict;
 }
 
 @end
