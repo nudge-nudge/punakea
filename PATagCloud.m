@@ -11,7 +11,6 @@ calculates the starting point in the next line according to the height of all th
 - (void)drawBackground:(NSRect)rect;
 - (void)drawTags:(NSRect)rect;
 - (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
-- (PATagButton*)buttonForTag:(PATag*)tag inRect:(NSRect)rect;
 
 @end
 
@@ -45,7 +44,9 @@ calculates the starting point in the next line according to the height of all th
                        context:(void *)context
 {
 	if ([keyPath isEqual:@"arrangedObjects"]) 
+	{
 		[self setNeedsDisplay:YES];
+	}
 }
 
 #pragma mark drawing
@@ -152,16 +153,18 @@ calculates the starting point in the next line according to the height of all th
 		
 		/* if the control isn't there yet, it needs to be created
 			otherwise just set the new position */
-		if (tagButton = [tagButtonDict objectForKey:[tag name]]) 
+		tagButton = [tagButtonDict objectForKey:[tag name]];
+		if (tagButton) 
 		{
 			[tagButton setFrame:tagRect];
 		}
 		else
 		{
-			tagButton = [self buttonForTag:tag inRect:tagRect];
+			tagButton = [[PATagButton alloc] initWithFrame:tagRect Tag:tag];
 			[tagButton setTarget:controller];
 			[tagButtonDict setObject:tagButton forKey:[tag name]];
 			[self addSubview:tagButton];
+			[tagButton release];
 		}
 	}
 }
@@ -190,9 +193,4 @@ calculates the starting point in the next line according to the height of all th
 	return tagRect;
 }
 
-- (PATagButton*)buttonForTag:(PATag*)tag inRect:(NSRect)rect
-{
-	PATagButton *tagButton = [[PATagButton alloc] initWithFrame:rect Tag:tag];
-	return [tagButton autorelease];
-}
 @end
