@@ -84,6 +84,7 @@
 	int i;	
 	for (i = 0; i < [self numberOfRows]; i++)
 	{
+		[[self cellAtRow:i column:0] rel];
 		[self removeRow:i];
 	}
 }

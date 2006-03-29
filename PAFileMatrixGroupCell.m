@@ -66,6 +66,14 @@
 	[super dealloc];
 }
 
+
+// TEMP
+- (void)rel
+{
+	[triangle removeFromSuperview];
+	[triangle release];
+}
+
 - (void)toggle
 {
 	if (isExpanded) 
