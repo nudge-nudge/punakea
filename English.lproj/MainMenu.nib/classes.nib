@@ -16,12 +16,7 @@
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
-        {
-            CLASS = PAFileBox; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {controller = TaggerViewController; fileTags = NSArrayController; }; 
-            SUPERCLASS = NSImageView; 
-        }, 
+        {CLASS = PAFileBox; LANGUAGE = ObjC; SUPERCLASS = NSImageView; }, 
         {CLASS = PAFileMatrix; LANGUAGE = ObjC; SUPERCLASS = NSMatrix; }, 
         {CLASS = PAFileViewHeaderCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PAFileViewTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 

@@ -2,13 +2,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATagger.h"
-#import "PATagFactory.h"
 #import "PASimpleTagFactory.h"
 #import "PATag.h"
 #import "PAFileBox.h"
 
 @interface TaggerViewController : NSWindowController {
-    IBOutlet PAFileBox *fileBox;
+	IBOutlet PAFileBox *fileBox;
 	IBOutlet NSTextField *tagField;
 	
     IBOutlet NSArrayController *tags; /**< tag controller for all tags */
@@ -21,6 +20,7 @@
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification;
+- (void)newFileHaveBeenDropped;
 
 - (void)addPopularTag;
 - (void)addRecentTag;

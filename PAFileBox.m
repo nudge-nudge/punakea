@@ -106,40 +106,16 @@
 	
 	[self setFileIcon:[[NSWorkspace sharedWorkspace] iconForFiles:files]];
 	
-	[self setNeedsDisplay:YES];    //redraw us with the new image
+	[self setNeedsDisplay:YES];
     return YES;
 }
 
+/**
+executes some interface stuff
+ */
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender
 {	
-	//TODO no good code, put this elsewhere
-	//clear fileTags
-	[fileTags removeObjects:[fileTags arrangedObjects]];
-	
-	PATagger *tagger = [PATagger sharedInstance];
-	NSMutableArray *tags = [NSMutableArray array];
-	
-	//TODO multiple files? hmmm ...
-	NSEnumerator *e = [files objectEnumerator];
-	NSString *file;
-	
-	while (file = [e nextObject])
-	{
-		NSArray *tmpTags = [tagger getTagsForFile:file];
-		
-		NSEnumerator *tagEnumerator = [tmpTags objectEnumerator];
-		PATag *tag;
-		
-		while (tag = [tagEnumerator nextObject])
-		{
-			if (![tags containsObject:tag])
-				[tags addObject:tag];
-		}
-	}
-	
-	[fileTags addObjects:tags];
-	
-    highlight = NO;
+	highlight = NO;
     [self setNeedsDisplay:YES];
 }
 

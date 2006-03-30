@@ -24,16 +24,33 @@
 	NSSortDescriptor *recentDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"lastUsed" ascending:NO] autorelease];
 	NSArray *recentSortDescriptors = [NSArray arrayWithObject:recentDescriptor];
 	[recentTags setSortDescriptors:recentSortDescriptors];
+	
+	//observe files on fileBox
+	[fileBox addObserver:self
+			  forKeyPath:@"files"
+				 options:0
+				 context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object 
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+	if ([keyPath isEqual:@"files"]) 
+		[self newFileHaveBeenDropped];
 }
 
 #pragma mark tag field delegates
 //TODO only on hitting enter!!!
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification
 {
+	NSString *tmpString = [tagField stringValue];
+	
 	//only if there is any text in the field
-	if ([tagField stringValue] != @"")
+	if (![tmpString isEqualToString:@""])
 	{
-		PATag *tag = [factory createTagWithName:[tagField stringValue]];
+		PATag *tag = [factory createTagWithName:tmpString];
 		
 		//if the tag is new, add it to the global tag controller
 		if (![[tags arrangedObjects] containsObject:tag])
@@ -82,7 +99,7 @@
 }
 
 /**
-adds tags from fileTags to all files in the file box
+adds tags from fileTags to all files in the file box TODO
  */
 - (void)updateTagsOnFile 
 {
@@ -104,4 +121,34 @@ adds tags from fileTags to all files in the file box
 	}
 }
 
+/**
+action called on dropping files to FileBox
+ */
+- (void)newFileHaveBeenDropped
+{
+	//clear fileTags
+	[fileTags removeObjects:[fileTags arrangedObjects]];
+	
+	NSMutableArray *newTags = [NSMutableArray array];
+	
+	//TODO multiple files? hmmm ...
+	NSEnumerator *e = [[fileBox files] objectEnumerator];
+	NSString *file;
+	
+	while (file = [e nextObject])
+	{
+		NSArray *tmpTags = [tagger getTagsForFile:file];
+		
+		NSEnumerator *tagEnumerator = [tmpTags objectEnumerator];
+		PATag *tag;
+		
+		while (tag = [tagEnumerator nextObject])
+		{
+			if (![newTags containsObject:tag])
+				[newTags addObject:tag];
+		}
+	}
+	
+	[fileTags addObjects:newTags];
+}
 @end
