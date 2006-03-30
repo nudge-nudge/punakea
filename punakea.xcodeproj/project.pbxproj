@@ -57,6 +57,10 @@
 		65765BD009BEE8C300977A34 /* PAFileMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 65765BCE09BEE8C200977A34 /* PAFileMatrix.m */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
+		6585A64C09DC3D5A00228C46 /* PAMetaMatrix.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6585A64A09DC3D5A00228C46 /* PAMetaMatrix.h */; };
+		6585A64D09DC3D5A00228C46 /* PAMetaMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6585A64B09DC3D5A00228C46 /* PAMetaMatrix.m */; };
+		6585A65009DC3DB300228C46 /* PAMetaMatrixController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6585A64E09DC3DB300228C46 /* PAMetaMatrixController.h */; };
+		6585A65109DC3DB300228C46 /* PAMetaMatrixController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6585A64F09DC3DB300228C46 /* PAMetaMatrixController.m */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
 		659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659EBB4109D2D78300879091 /* PAImageButton.h */; };
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
@@ -130,6 +134,8 @@
 				4842FC0F09DA801500C4A931 /* PATagButton.h in CopyFiles */,
 				4842FC1309DA804100C4A931 /* PATagButtonCell.h in CopyFiles */,
 				480FFF9B09DACF0900C1E6BA /* PATagCloudController.h in CopyFiles */,
+				6585A64C09DC3D5A00228C46 /* PAMetaMatrix.h in CopyFiles */,
+				6585A65009DC3DB300228C46 /* PAMetaMatrixController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +200,10 @@
 		65765BCE09BEE8C200977A34 /* PAFileMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileMatrix.m; sourceTree = "<group>"; };
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
+		6585A64A09DC3D5A00228C46 /* PAMetaMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMetaMatrix.h; sourceTree = "<group>"; };
+		6585A64B09DC3D5A00228C46 /* PAMetaMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAMetaMatrix.m; sourceTree = "<group>"; };
+		6585A64E09DC3DB300228C46 /* PAMetaMatrixController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMetaMatrixController.h; sourceTree = "<group>"; };
+		6585A64F09DC3DB300228C46 /* PAMetaMatrixController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAMetaMatrixController.m; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
@@ -238,6 +248,7 @@
 				65851FFF099780E0009C3CA7 /* Main */,
 				48F6A9F40996423000AA118D /* Tagging */,
 				65AAA754099B724500F14C52 /* FileMatrix */,
+				6585A64809DC3D3300228C46 /* MetaMatrix */,
 				65B17322099564C400B10322 /* Sidebar */,
 			);
 			name = Classes;
@@ -390,6 +401,17 @@
 				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		6585A64809DC3D3300228C46 /* MetaMatrix */ = {
+			isa = PBXGroup;
+			children = (
+				6585A64A09DC3D5A00228C46 /* PAMetaMatrix.h */,
+				6585A64B09DC3D5A00228C46 /* PAMetaMatrix.m */,
+				6585A64E09DC3DB300228C46 /* PAMetaMatrixController.h */,
+				6585A64F09DC3DB300228C46 /* PAMetaMatrixController.m */,
+			);
+			name = MetaMatrix;
 			sourceTree = "<group>";
 		};
 		65A4079109B9D53200B151F4 /* FileMatrix */ = {
@@ -574,6 +596,8 @@
 				4842FC1009DA801700C4A931 /* PATagButton.m in Sources */,
 				4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */,
 				480FFF9C09DACF0900C1E6BA /* PATagCloudController.m in Sources */,
+				6585A64D09DC3D5A00228C46 /* PAMetaMatrix.m in Sources */,
+				6585A65109DC3DB300228C46 /* PAMetaMatrixController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

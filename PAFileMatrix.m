@@ -67,6 +67,10 @@
 		row++;
 		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
 		
+		// Temp
+		NSLog([[NSNumber numberWithInt:row] stringValue]);
+		NSLog([group value]);
+		
 		//PAFileMatrixGroupCell *groupCell = [[[PAFileMatrixGroupCell alloc] initTextCell:[group value]] autorelease];
 		//PAFileMatrixGroupCell *thisCell = [self insertGroupCell:groupCell atRow:row];
 		PAFileMatrixGroupCell *thisCell = [self insertGroupCell:[group value] atRow:row];
@@ -103,11 +107,11 @@
 
 - (void)resetView
 {
-	int i;
+	/*int i;
 	for(i = 0; i < [self numberOfRows]; i++)
 	{
 		[self removeRow:i];
-	}
+	}*/
 	[groupRowDict removeAllObjects];
 }
 
@@ -149,6 +153,14 @@
 		
 		// TODO: Move cell to specified row!
 		// Puh, indices vary if cell is collapsed/expanded...
+		NSNumber *thisRowNumber = [groupRowDict objectForKey:value];
+		int thisRow = [thisRowNumber intValue];
+		if(thisRow != row)
+		{
+			[self insertRow:row];
+			[self putCell:[self cellAtRow:thisRow column:0] atRow:row column:0];
+			[self removeRow:thisRow+1];
+		}
 		
 		return [self cellAtRow:[[groupRowDict objectForKey:value] intValue] column:0];
 	}
@@ -271,9 +283,9 @@
 		[self updateView];
 	}
 	
-	/*if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification])
+	if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification])
 	{
 		[self resetView];
-	}*/
+	}
 }
 @end
