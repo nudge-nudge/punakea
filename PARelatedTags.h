@@ -21,10 +21,5 @@
 
 - (void)setQuery:(NSMetadataQuery*)aQuery;
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object 
-                        change:(NSDictionary *)change
-                       context:(void *)context;
-
 @end
 

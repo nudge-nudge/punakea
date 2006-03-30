@@ -5,6 +5,7 @@
 - (void)selectedTagsHaveChanged;
 - (void)relatedTagsHaveChanged;
 - (void)allTagsHaveChanged;
+- (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tagSet;
 
 @end
 

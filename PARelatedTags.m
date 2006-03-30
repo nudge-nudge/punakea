@@ -10,7 +10,7 @@
 
 @interface PARelatedTags (PrivateAPI)
 
-- (void)updateTagRating:(NSArray*)tagSet;
+- (void)updateRelatedTags;
 - (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tags;
 
 @end
