@@ -7,16 +7,17 @@
 
 @interface PATagCloud : NSView
 {
-    IBOutlet NSArrayController *relatedTagsController;
-	IBOutlet NSArrayController *selectedTagsController;
 	IBOutlet Controller *controller;
 
-	NSArray *currentTags;
 	NSMutableDictionary *tagButtonDict; /**< holds the current controls in the view */
+	NSArray *displayTags; /**< holds all the tags to be displayed */
 	
 	NSPoint pointForNextTagRect;
 	
 	int tagPosition;
 }
+
+- (NSArray*)displayTags;
+- (void)setDisplayTags:(NSArray*)otherTags;
 
 @end

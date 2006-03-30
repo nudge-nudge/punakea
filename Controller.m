@@ -3,12 +3,15 @@
 @interface Controller (PrivateAPI)
 
 - (void)selectedTagsHaveChanged;
+- (void)relatedTagsHaveChanged;
+- (void)allTagsHaveChanged;
 
 @end
 
 //TODO add and remove tags needs to be overwritten!
 @implementation Controller
 
+#pragma mark init + dealloc
 - (id) init
 {
     if (self = [super init])
@@ -29,16 +32,18 @@
 	[NSApp setDelegate: self]; 
 	[self setupToolbar];
 	
+	/* drawer code!!
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
-	//[drawer toggle:self];
+	[drawer toggle:self];
+	*/
+	
 	[fileMatrix setQuery:_query];
 	
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
 	
 	//instantiate relatedTags and register as an observer to changes in selectedTags
 	relatedTags = [[PARelatedTags alloc] initWithQuery:_query 
-												  tags:tags 
 								 relatedTagsController:relatedTagsController];
 	
 	[selectedTagsController addObserver:self
@@ -46,15 +51,23 @@
 								options:0
 								context:NULL];
 	
-	[selectedTagsController addObserver:relatedTags
+	[relatedTagsController addObserver:self
 							 forKeyPath:@"arrangedObjects"
 								options:0
 								context:NULL];
-	
+
 	[self addObserver:self
 		   forKeyPath:@"tags"
 			  options:0
 			  context:NULL];
+	
+	[self setVisibleTags:tags];
+}
+
+- (void)dealloc
+{
+    [_query release];	
+    [super dealloc];
 }
 
 - (void) applicationWillTerminate:(NSNotification *)note 
@@ -71,18 +84,7 @@
     [[self window] setToolbar:[toolbar autorelease]];
 }
 
-- (NSView*)viewFromNibWithName:(NSString*)nibName
-{
-    NSView * 		newView;
-    SubViewController *	subViewController;
-    
-    subViewController = [SubViewController alloc];
-    // Creates an instance of SubViewController which loads the specified nib.
-    [subViewController initWithNibName:nibName andOwner:self];
-    newView = [subViewController view];
-    return newView;
-}
-
+#pragma mark accessors
 - (NSMetadataQuery*)query 
 {
 	return _query;
@@ -100,10 +102,17 @@
 	tags = otherTags;
 }
 
-- (void)dealloc
+- (NSMutableArray*)visibleTags;
 {
-    [_query release];	
-    [super dealloc];
+	return visibleTags;
+}
+
+- (void)setVisibleTags:(NSMutableArray*)otherTags
+{
+	[otherTags retain];
+	[visibleTags release];
+	visibleTags = otherTags;
+	[self updateTagRating:visibleTags];
 }
 
 - (void)openFile
@@ -165,7 +174,36 @@
 		[self setTags:loadedTags];
 }	
 
-//---- BEGIN tag stuff ----
+#pragma mark tag stuff
+- (void)updateTagRating:(NSArray*)tagSet
+{
+	PATag *bestTag = [self getTagWithBestAbsoluteRating:tagSet];
+	
+	NSEnumerator *e = [tagSet objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+		[tag setCurrentBestTag:bestTag];
+}
+
+- (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tagSet
+{
+	NSEnumerator *e = [tagSet objectEnumerator];
+	PATag *tag;
+	PATag *maxTag;
+	
+	if (tag = [e nextObject])
+		maxTag = tag;
+	
+	while (tag = [e nextObject])
+	{
+		if ([tag absoluteRating] > [maxTag absoluteRating])
+			maxTag = tag;
+	}	
+	
+	return maxTag;
+}
+
 - (void)addToSelectedTags
 {
 	NSArray *selection = [relatedTagsController selectedObjects];
@@ -188,16 +226,21 @@
 {
 	if ([keyPath isEqual:@"arrangedObjects"]) 
 	{
-		[self selectedTagsHaveChanged];
+		//related or selected tags have changed
+		if ([object isEqual:selectedTagsController])
+		{
+			[self selectedTagsHaveChanged];
+		}
+		else
+		{
+			[self relatedTagsHaveChanged];
+		}
 	}
-	 //all tags have changed
-	 else if ([keyPath isEqual:@"tags"]) 
-	 {
-		 if ([[selectedTagsController arrangedObjects] count] == 0) 
-		 {
-			 [relatedTags resetRelatedTags];
-		 }
-	 }	
+	
+	if ([keyPath isEqual:@"tags"]) 
+	{
+		[self allTagsHaveChanged];
+	}
 }
 
 //needs to be called whenever the active tags have been changed
@@ -233,9 +276,27 @@
 		[_query setPredicate:predicate];
 		[_query startQuery];
 	}
+	else 
+	{
+		//there are no selected tags, reset all tags
+		[self setVisibleTags:tags];
+	}
 }
-//---- END tag stuff ----
 
+- (void)relatedTagsHaveChanged
+{
+	[self setVisibleTags:[NSArray arrayWithArray:[relatedTagsController arrangedObjects]]];
+}
+
+- (void)allTagsHaveChanged
+{
+	/*only do something if there are no selected tags,
+	because then the relatedTags are shown */
+	if ([[selectedTagsController arrangedObjects] count] == 0)
+	{
+		[self setVisibleTags:tags];
+	}
+}
 
 #pragma Temp
 - (void)setGroupingAttributes:(id)sender;
@@ -285,6 +346,18 @@
         return attrValue;
     }
     
+}
+
+- (NSView*)viewFromNibWithName:(NSString*)nibName
+{
+    NSView * 		newView;
+    SubViewController *	subViewController;
+    
+    subViewController = [SubViewController alloc];
+    // Creates an instance of SubViewController which loads the specified nib.
+    [subViewController initWithNibName:nibName andOwner:self];
+    newView = [subViewController view];
+    return newView;
 }
 
 @end

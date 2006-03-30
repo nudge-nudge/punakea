@@ -16,6 +16,7 @@ calculates the starting point in the next line according to the height of all th
 
 @implementation PATagCloud
 
+#pragma mark init
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
@@ -29,10 +30,12 @@ bind to relatedTags ... TagCloud always displays the content of relatedTags
  */
 - (void)awakeFromNib
 {
-	[relatedTagsController addObserver:self
-							forKeyPath:@"arrangedObjects"
-							   options:0
-							   context:NULL];
+	[controller addObserver:self
+				 forKeyPath:@"visibleTags"
+					options:0
+					context:NULL];
+	
+	[self setDisplayTags:[NSArray arrayWithArray:[controller visibleTags]]];
 }
 
 - (void)dealloc
@@ -49,8 +52,9 @@ bound to relatedTags
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if ([keyPath isEqual:@"arrangedObjects"]) 
+	if ([keyPath isEqual:@"visibleTags"]) 
 	{
+		[self setDisplayTags:[NSArray arrayWithArray:[controller visibleTags]]];
 		[self setNeedsDisplay:YES];
 	}
 }
@@ -62,10 +66,7 @@ bound to relatedTags
 	
 	//needed for drawing in lines
 	tagPosition = 0;
-	
-	//get the tags to be displayed
-	currentTags = [relatedTagsController arrangedObjects];
-	
+		
 	pointForNextTagRect = [self firstPointForNextLineIn:rect];
 	
 	[self drawBackground:rect];
@@ -84,7 +85,7 @@ bound to relatedTags
 	
 	/* while there are tags, compose a line and get the maximum height,
 		then keep the starting points for each one */
-	NSEnumerator *tagEnumerator = [currentTags objectEnumerator];
+	NSEnumerator *tagEnumerator = [displayTags objectEnumerator];
 	PATag *tag;
 	
 	NSMutableString *oneLine = [NSMutableString string];
@@ -136,7 +137,7 @@ bound to relatedTags
 		[subview removeFromSuperview];
 	}
 	
-	NSEnumerator *e = [currentTags objectEnumerator];
+	NSEnumerator *e = [displayTags objectEnumerator];
 	
 	PATag *tag;
 	
@@ -188,6 +189,19 @@ bound to relatedTags
 	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + tagSize.width + spacing,pointForNextTagRect.y);
 	
 	return tagRect;
+}
+
+#pragma mark accessors
+- (NSArray*)displayTags
+{
+	return displayTags;
+}
+
+- (void)setDisplayTags:(NSArray*)otherTags
+{
+	[otherTags retain];
+	[displayTags release];
+	displayTags = otherTags;
 }
 
 @end

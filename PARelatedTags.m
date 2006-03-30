@@ -19,21 +19,16 @@
 @implementation PARelatedTags
 
 - (id)initWithQuery:(NSMetadataQuery*)aQuery 
-			   tags:(NSMutableArray*)mainTags 
 		relatedTagsController:(NSArrayController*)aRelatedTagsController
 {
 	if (self = [super init])
 	{
 		[self setQuery:aQuery];
-		[self setTags:mainTags];
 		controller = [aRelatedTagsController retain];
 		
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
 		nf = [NSNotificationCenter defaultCenter];
 		[nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
-		
-		//reset content, show default view
-		[self resetRelatedTags];
 	}
 	return self;
 }
@@ -45,45 +40,12 @@
 	query = aQuery;
 }
 
-- (void)setTags:(NSMutableArray*)mainTags
-{
-	[mainTags retain];
-	[tags release];
-	tags = mainTags;
-}
-
 - (void)dealloc 
 {
 	[nf removeObserver:self];
 	[controller release];
 	[query release];
-	[tags release];
 	[super dealloc];
-}
-
-/**
-receives notifications from selectedTags - reset the view if selected Tags are empty
- */
-- (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object 
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-	//selected tags have changed
-	if ([keyPath isEqual:@"arrangedObjects"]) 
-	{
-		if ([[object arrangedObjects] count] == 0) 
-		{
-			[self resetRelatedTags];
-		}
-	}
-}
-
-- (void)resetRelatedTags
-{
-	[self updateTagRating:tags];
-	[controller removeObjects:[controller arrangedObjects]];
-	[controller addObjects:tags];
 }
 
 //act on query notifications -- relatedTags need to be kept in sync with files
@@ -125,43 +87,12 @@ receives notifications from selectedTags - reset the view if selected Tags are e
 					[tmpTags addObject:tag];
 			}
 			
-			[self updateTagRating:tmpTags];
-			
 			[controller removeObjects:[controller arrangedObjects]];
 			[controller addObjects:tmpTags];
 		}
 	}
 	
 	[query enableUpdates];
-}
-
-- (void)updateTagRating:(NSArray*)tagSet
-{
-	PATag *bestTag = [self getTagWithBestAbsoluteRating:tagSet];
-
-	NSEnumerator *e = [tagSet objectEnumerator];
-	PATag *tag;
-
-	while (tag = [e nextObject])
-		[tag setCurrentBestTag:bestTag];
-}
-
-- (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tagSet
-{
-	NSEnumerator *e = [tagSet objectEnumerator];
-	PATag *tag;
-	PATag *maxTag;
-	
-	if (tag = [e nextObject])
-		maxTag = tag;
-	
-	while (tag = [e nextObject])
-	{
-		if ([tag absoluteRating] > [maxTag absoluteRating])
-			maxTag = tag;
-	}	
-	
-	return maxTag;
 }
 
 @end

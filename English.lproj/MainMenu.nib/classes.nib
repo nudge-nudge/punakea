@@ -25,11 +25,7 @@
         {
             CLASS = PATagCloud; 
             LANGUAGE = ObjC; 
-            OUTLETS = {
-                controller = Controller; 
-                relatedTagsController = NSArrayController; 
-                selectedTagsController = NSArrayController; 
-            }; 
+            OUTLETS = {controller = Controller; }; 
             SUPERCLASS = NSView; 
         }, 
         {CLASS = PATagControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 

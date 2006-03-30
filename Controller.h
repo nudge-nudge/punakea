@@ -20,7 +20,9 @@
 	
 	PATagger *tagger;
 	
-	NSMutableArray *tags;
+	NSMutableArray *tags; /**< holds all tags */
+	NSMutableArray *visibleTags; /**< holds tags for TagCloud */
+	
 	PARelatedTags *relatedTags;
 	
 	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
@@ -35,6 +37,9 @@
 
 //accessors
 - (NSMutableArray*)tags;
+- (void)setTags:(NSMutableArray*)otherTags;
+- (NSMutableArray*)visibleTags;
+- (void)setVisibleTags:(NSMutableArray*)otherTags;
 
 //for NSMetadataQuery
 - (NSMetadataQuery *)query;
