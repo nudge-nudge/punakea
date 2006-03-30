@@ -27,8 +27,6 @@
 		
 		clickCount = 0;
 		useCount = 0;
-		
-		[self setHighlight:NO];
 	}
 	return self;
 }
@@ -188,7 +186,7 @@
 {
 	NSMutableDictionary *attribs = [NSMutableDictionary dictionary];
 	
-	NSColor *c = [NSColor redColor];
+	NSColor *c = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:128.0 alpha:1.0];
 	//externalize sizes
 	int size = 30 * [self relativeRating];
 	if (size < 10)
@@ -199,29 +197,12 @@
 	[attribs setObject:c forKey:NSForegroundColorAttributeName];
 	[attribs setObject:fnt forKey:NSFontAttributeName];
 	
-	if (highlight)
-	{
-		NSColor *bgcolor = [NSColor blueColor];
-		[attribs setObject:bgcolor forKey:NSBackgroundColorAttributeName];
-	}
-	
 	return attribs;
-}
-
-- (void)drawInRect:(NSRect)rect withAttributes:(NSDictionary*)attributes
-{
-	rectInView = rect;
-	[name drawInRect:rect withAttributes:attributes];
 }
 
 - (NSSize)sizeWithAttributes:(NSDictionary*)attributes
 {
 	return [name sizeWithAttributes:attributes];
-}
-
-- (void)setHighlight:(BOOL)flag 
-{	
-	highlight = flag;
 }
 
 #pragma mark euality testing

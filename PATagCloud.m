@@ -24,6 +24,9 @@ calculates the starting point in the next line according to the height of all th
 	return self;
 }
 
+/**
+bind to relatedTags ... TagCloud always displays the content of relatedTags
+ */
 - (void)awakeFromNib
 {
 	[relatedTagsController addObserver:self
@@ -38,6 +41,9 @@ calculates the starting point in the next line according to the height of all th
 	[super dealloc];
 }
 
+/**
+bound to relatedTags
+ */
 - (void)observeValueForKeyPath:(NSString *)keyPath
 					  ofObject:(id)object 
                         change:(NSDictionary *)change
@@ -109,27 +115,9 @@ calculates the starting point in the next line according to the height of all th
 		tagPosition++;
 	}
 
+	NSLog(@"line: %@",oneLine);
 	return NSMakePoint(spacing,pointForNextTagRect.y-maxHeight-vPadding);
 }	
-
-//NOT NEEDED ATM - deprecated
-/*
-- (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth
-{	
-	NSTextStorage *textStorage = [[[NSTextStorage alloc] initWithString:myString] autorelease];
-	NSTextContainer *textContainer = [[[NSTextContainer alloc] initWithContainerSize: NSMakeSize(myWidth, FLT_MAX)] autorelease];
-	NSLayoutManager *layoutManager = [[[NSLayoutManager alloc] init] autorelease];
-	
-	[layoutManager addTextContainer:textContainer];
-	[textStorage addLayoutManager:layoutManager];
-
-	[textStorage addAttribute:NSFontAttributeName value:myFont range:NSMakeRange(0, [textStorage length])];
-	[textContainer setLineFragmentPadding:0.0];
-	[layoutManager glyphRangeForTextContainer:textContainer];
-	
-	return [layoutManager usedRectForTextContainer:textContainer].size.height;
-}
-*/
 
 - (void)drawBackground:(NSRect)rect
 {
@@ -140,6 +128,15 @@ calculates the starting point in the next line according to the height of all th
 
 - (void)drawTags:(NSRect)rect
 {
+	//first remove all drawn tags
+	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
+	NSControl *subview;
+	
+	while (subview = [viewEnumerator nextObject])
+	{
+		[subview removeFromSuperview];
+	}
+	
 	NSEnumerator *e = [currentTags objectEnumerator];
 	
 	PATag *tag;
@@ -157,6 +154,7 @@ calculates the starting point in the next line according to the height of all th
 		if (tagButton) 
 		{
 			[tagButton setFrame:tagRect];
+			[self addSubview:tagButton];
 		}
 		else
 		{

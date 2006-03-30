@@ -36,8 +36,6 @@ treat this class as the abstract superclass for all Tags,
 - (float)relativeRating;
 
 - (NSMutableDictionary*)viewAttributes;
-- (void)drawInRect:(NSRect)rect withAttributes:(NSDictionary*)attributes;
 - (NSSize)sizeWithAttributes:(NSDictionary*)attributes;
-- (void)setHighlight:(BOOL)flag;
 
 @end

@@ -101,24 +101,15 @@
 }
 
 #pragma mark drawing
+//TODO not HERE!
 - (NSMutableDictionary*)viewAttributes
 {
 	return nil;
 }
 
-- (void)drawInRect:(NSRect)rect withAttributes:(NSDictionary*)attributes
-{
-
-}
-
 - (NSSize)sizeWithAttributes:(NSDictionary*)attributes
 {
 	return NSMakeSize(0,0);
-}
-
-- (void)setHighlight:(BOOL)flag 
-{	
-
 }
 
 #pragma mark euality testing

@@ -21,7 +21,6 @@
 	
 	//position in view
 	NSRect rectInView;
-	BOOL highlight;
 }
 
 - (id)initWithName:(NSString*)aName;

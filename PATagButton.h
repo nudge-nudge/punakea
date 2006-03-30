@@ -8,7 +8,7 @@
 
 - (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag;
 
-- (PATag*)tag;
+- (PATag*)fileTag;
 - (void)setFileTag:(PATag*)aTag;
 
 @end

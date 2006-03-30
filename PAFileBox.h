@@ -7,6 +7,8 @@
 @interface PAFileBox : NSImageView
 {
 	IBOutlet NSArrayController *fileTags;
+	IBOutlet TaggerViewController *controller;
+	
 	NSArray *files;
 	NSImage *fileIcon;
 	BOOL highlight;

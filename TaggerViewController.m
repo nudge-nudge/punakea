@@ -27,16 +27,21 @@
 }
 
 #pragma mark tag field delegates
+//TODO only on hitting enter!!!
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification
 {
-	PATag *tag = [factory createTagWithName:[tagField stringValue]];
-	
-	//if the tag is new, add it to the global tag controller
-	if (![[tags arrangedObjects] containsObject:tag])
-		[tags addObject:tag];
+	//only if there is any text in the field
+	if ([tagField stringValue] != @"")
+	{
+		PATag *tag = [factory createTagWithName:[tagField stringValue]];
+		
+		//if the tag is new, add it to the global tag controller
+		if (![[tags arrangedObjects] containsObject:tag])
+			[tags addObject:tag];
 
-	[self addTagToFileTags:tag];
-	[self updateTagsOnFile];
+		[self addTagToFileTags:tag];
+		[self updateTagsOnFile];
+	}
 }
 
 #pragma mark click targets

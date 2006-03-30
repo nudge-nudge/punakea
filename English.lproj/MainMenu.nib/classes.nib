@@ -19,7 +19,7 @@
         {
             CLASS = PAFileBox; 
             LANGUAGE = ObjC; 
-            OUTLETS = {fileTags = NSArrayController; }; 
+            OUTLETS = {controller = TaggerViewController; fileTags = NSArrayController; }; 
             SUPERCLASS = NSImageView; 
         }, 
         {CLASS = PAFileMatrix; LANGUAGE = ObjC; SUPERCLASS = NSMatrix; }, 
