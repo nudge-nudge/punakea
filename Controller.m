@@ -50,6 +50,11 @@
 							 forKeyPath:@"arrangedObjects"
 								options:0
 								context:NULL];
+	
+	[self addObserver:self
+		   forKeyPath:@"tags"
+			  options:0
+			  context:NULL];
 }
 
 - (void) applicationWillTerminate:(NSNotification *)note 
@@ -182,7 +187,17 @@
                        context:(void *)context
 {
 	if ([keyPath isEqual:@"arrangedObjects"]) 
+	{
 		[self selectedTagsHaveChanged];
+	}
+	 //all tags have changed
+	 else if ([keyPath isEqual:@"tags"]) 
+	 {
+		 if ([[selectedTagsController arrangedObjects] count] == 0) 
+		 {
+			 [relatedTags resetRelatedTags];
+		 }
+	 }	
 }
 
 //needs to be called whenever the active tags have been changed

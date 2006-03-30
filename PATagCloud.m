@@ -115,7 +115,6 @@ bound to relatedTags
 		tagPosition++;
 	}
 
-	NSLog(@"line: %@",oneLine);
 	return NSMakePoint(spacing,pointForNextTagRect.y-maxHeight-vPadding);
 }	
 

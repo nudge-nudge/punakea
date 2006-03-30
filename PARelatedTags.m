@@ -61,12 +61,15 @@
 	[super dealloc];
 }
 
-//receives notification from [selectedTags arrangedObjects] - reset the view if selected Tags are empty
+/**
+receives notifications from selectedTags - reset the view if selected Tags are empty
+ */
 - (void)observeValueForKeyPath:(NSString *)keyPath
 					  ofObject:(id)object 
                         change:(NSDictionary *)change
                        context:(void *)context
 {
+	//selected tags have changed
 	if ([keyPath isEqual:@"arrangedObjects"]) 
 	{
 		if ([[object arrangedObjects] count] == 0) 
