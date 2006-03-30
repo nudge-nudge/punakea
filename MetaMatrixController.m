@@ -6,9 +6,9 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "PAMetaMatrixController.h"
+#import "MetaMatrixController.h"
 
 
-@implementation PAMetaMatrixController
+@implementation MetaMatrixController
 
 @end

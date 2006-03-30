@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface PAMetaMatrixController : NSObject {
+@interface MetaMatrixController : NSObject {
 
 }
 

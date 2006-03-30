@@ -68,8 +68,8 @@
 		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
 		
 		// Temp
-		NSLog([[NSNumber numberWithInt:row] stringValue]);
-		NSLog([group value]);
+		//NSLog([[NSNumber numberWithInt:row] stringValue]);
+		//NSLog([group value]);
 		
 		//PAFileMatrixGroupCell *groupCell = [[[PAFileMatrixGroupCell alloc] initTextCell:[group value]] autorelease];
 		//PAFileMatrixGroupCell *thisCell = [self insertGroupCell:groupCell atRow:row];
