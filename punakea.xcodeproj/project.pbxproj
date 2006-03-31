@@ -63,6 +63,8 @@
 		6585A64D09DC3D5A00228C46 /* PAMetaMatrixView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6585A64B09DC3D5A00228C46 /* PAMetaMatrixView.m */; };
 		6585A65009DC3DB300228C46 /* MetaMatrixController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6585A64E09DC3DB300228C46 /* MetaMatrixController.h */; };
 		6585A65109DC3DB300228C46 /* MetaMatrixController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6585A64F09DC3DB300228C46 /* MetaMatrixController.m */; };
+		6588132409DDC9E400428B83 /* PAMetaOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6588132209DDC9E400428B83 /* PAMetaOutlineView.h */; };
+		6588132509DDC9E400428B83 /* PAMetaOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6588132309DDC9E400428B83 /* PAMetaOutlineView.m */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
 		659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659EBB4109D2D78300879091 /* PAImageButton.h */; };
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
@@ -136,6 +138,7 @@
 				657BC5BA09DD284200B0EB19 /* PAMetaMatrixGroupCell.h in CopyFiles */,
 				489AE65509DD434600EB60EB /* SnappingWindow.h in CopyFiles */,
 				489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */,
+				6588132409DDC9E400428B83 /* PAMetaOutlineView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +209,8 @@
 		6585A64B09DC3D5A00228C46 /* PAMetaMatrixView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAMetaMatrixView.m; sourceTree = "<group>"; };
 		6585A64E09DC3DB300228C46 /* MetaMatrixController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaMatrixController.h; sourceTree = "<group>"; };
 		6585A64F09DC3DB300228C46 /* MetaMatrixController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaMatrixController.m; sourceTree = "<group>"; };
+		6588132209DDC9E400428B83 /* PAMetaOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAMetaOutlineView.h; sourceTree = "<group>"; };
+		6588132309DDC9E400428B83 /* PAMetaOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAMetaOutlineView.m; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
@@ -464,6 +469,8 @@
 				65E7B43D0994E3D000565251 /* SubViewController.m */,
 				480FFF9909DACF0900C1E6BA /* PATagCloudController.h */,
 				480FFF9A09DACF0900C1E6BA /* PATagCloudController.m */,
+				6588132209DDC9E400428B83 /* PAMetaOutlineView.h */,
+				6588132309DDC9E400428B83 /* PAMetaOutlineView.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -606,6 +613,7 @@
 				657BC5BB09DD284200B0EB19 /* PAMetaMatrixGroupCell.m in Sources */,
 				489AE65609DD434600EB60EB /* SnappingWindow.m in Sources */,
 				489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */,
+				6588132509DDC9E400428B83 /* PAMetaOutlineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
