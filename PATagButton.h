@@ -4,7 +4,7 @@
 #import "PATag.h"
 #import "PATagButtonCell.h"
 
-@interface PATagButton : NSButton
+@interface PATagButton : NSControl
 
 - (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag;
 
