@@ -9,9 +9,7 @@ designated initializer
 {
     self = [super initWithFrame:frame];
     if (self) {
-		PATagButtonCell *cell = [[PATagButtonCell alloc] initWithTag:tag];
-		[self setCell:cell];
-		[cell release];
+		[self setCell:[[PATagButtonCell alloc] initWithTag:tag]];
     }
     return self;	
 }
