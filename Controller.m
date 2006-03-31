@@ -39,9 +39,7 @@
 	[drawer toggle:self];
 	*/
 	
-	[metaMatrix setQuery:_query];
-	
-	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
+	//[metaMatrix setQuery:_query];
 	
 	//instantiate relatedTags and register as an observer to changes in selectedTags
 	relatedTags = [[PARelatedTags alloc] initWithQuery:_query 

@@ -228,11 +228,11 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6588132C09DDCA7300428B83 /* New Group */,
 				489AE71309DD4D7800EB60EB /* Custom Views */,
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
 				65B17321099564A800B10322 /* Controllers */,
 				65851FFF099780E0009C3CA7 /* Main */,
+				6588132C09DDCA7300428B83 /* MetaView */,
 				48F6A9F40996423000AA118D /* Tagging */,
 				65B17322099564C400B10322 /* Sidebar */,
 			);
@@ -399,11 +399,13 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		6588132C09DDCA7300428B83 /* New Group */ = {
+		6588132C09DDCA7300428B83 /* MetaView */ = {
 			isa = PBXGroup;
 			children = (
+				6588132209DDC9E400428B83 /* PAMetaOutlineView.h */,
+				6588132309DDC9E400428B83 /* PAMetaOutlineView.m */,
 			);
-			name = "New Group";
+			name = MetaView;
 			sourceTree = "<group>";
 		};
 		65A4079109B9D53200B151F4 /* FileMatrix */ = {
@@ -433,8 +435,6 @@
 				65E7B43D0994E3D000565251 /* SubViewController.m */,
 				480FFF9909DACF0900C1E6BA /* PATagCloudController.h */,
 				480FFF9A09DACF0900C1E6BA /* PATagCloudController.m */,
-				6588132209DDC9E400428B83 /* PAMetaOutlineView.h */,
-				6588132309DDC9E400428B83 /* PAMetaOutlineView.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

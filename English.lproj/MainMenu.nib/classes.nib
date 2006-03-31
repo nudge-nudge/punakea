@@ -6,7 +6,6 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 drawer = id; 
-                metaMatrix = PAMetaMatrixView; 
                 outlineView = NSOutlineView; 
                 relatedTagsController = NSArrayController; 
                 resultController = NSArrayController; 
