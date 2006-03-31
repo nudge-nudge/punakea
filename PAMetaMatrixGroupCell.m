@@ -110,4 +110,11 @@
 {
 	return triangle;
 }
+
+- (NSSize)cellSize
+{
+	NSSize size = [super cellSize];
+	size.height = 40;
+	return size;
+}
 @end

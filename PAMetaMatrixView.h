@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAMetaMatrixGroupCell.h"
-//#import "PAMetaMatrixItemCell.h"
+#import "PAMetaMatrixItemCell.h"
 
 
 @interface PAMetaMatrixView : NSMatrix {

@@ -19,8 +19,8 @@
 		[self setCellClass:[NSTextFieldCell class]];
 		[self renewRows:0 columns:1];
 
-		[self setCellSize:NSMakeSize(200,20)];
-		[self setAutosizesCells:YES];
+		//[self setCellSize:NSMakeSize(200,20)];
+		//[self setAutosizesCells:YES];
     }
     return self;
 }
@@ -64,11 +64,27 @@
 		}
 	}
 	
+	// TEMP
+	/*row++;
+	PAMetaMatrixItemCell *cell = [[[PAMetaMatrixItemCell alloc] initTextCell:@"hallo"] autorelease];
+	[self insertRow:row];
+	[self putCell:cell atRow:row column:0];
+	row++;
+	cell = [[[PAMetaMatrixItemCell alloc] initTextCell:@"hallo2"] autorelease];
+	[self insertRow:row];
+	[self putCell:cell atRow:row column:0];*/
+	
 	// Delete old rows
 	while([self cellAtRow:row+1 column:0])
 	{
 		[self removeRow:row+1];
 	}
+}
+
+// Temp
+- (NSRect)cellFrameAtRow:(int)row column:(int)column
+{
+	return NSMakeRect(0, 50, 200, 30);
 }
 
 - (BOOL)moveCellWithIdentifier:(NSString *)identifier toRow:(int)row

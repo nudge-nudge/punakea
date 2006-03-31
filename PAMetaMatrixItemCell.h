@@ -1,6 +1,6 @@
 #import <Cocoa/Cocoa.h>
 
-@interface PAFileMatrixItemCell : NSActionCell
+@interface PAMetaMatrixItemCell : NSActionCell
 {
 	NSString *identifier;
 	NSMetadataItem *metadataItem;

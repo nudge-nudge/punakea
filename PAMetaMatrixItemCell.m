@@ -1,6 +1,6 @@
-#import "PAFileMatrixItemCell.h"
+#import "PAMetaMatrixItemCell.h"
 
-@implementation PAFileMatrixItemCell
+@implementation PAMetaMatrixItemCell
 
 /*- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
@@ -49,5 +49,12 @@
 	if(identifier) { [identifier release]; }
 	if(metadataItem) { [metadataItem release]; }
 	[super dealloc];
+}
+
+- (NSSize)cellSize
+{
+	NSSize size = [super cellSize];
+	size.height = 20;
+	return size;
 }
 @end
