@@ -11,7 +11,7 @@
 //#import "PAMetaMatrixItemCell.h"
 
 
-@interface PAMetaMatrix : NSMatrix {
+@interface PAMetaMatrixView : NSMatrix {
 
 	id delegate;
 	NSMetadataQuery *query;
