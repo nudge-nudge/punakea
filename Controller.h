@@ -3,7 +3,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PATagger.h"
 #import "PARelatedTags.h"
-#import "PAFileMatrix.h"
+#import "PAMetaMatrixView.h"
 #import "SubViewController.h"
 #import "PATagger.h"
 
@@ -11,7 +11,7 @@
 {
     IBOutlet id drawer;
     IBOutlet NSOutlineView *outlineView;
-	IBOutlet PAFileMatrix *fileMatrix;
+	IBOutlet PAMetaMatrixView *metaMatrix;
 	IBOutlet NSArrayController *relatedTagsController;
 	IBOutlet NSArrayController *selectedTagsController;
 	IBOutlet NSArrayController *resultController;

@@ -39,7 +39,7 @@
 	[drawer toggle:self];
 	*/
 	
-	[fileMatrix setQuery:_query];
+	[metaMatrix setQuery:_query];
 	
 	//[outlineView setIntercellSpacing:NSMakeSize(0, 0)];
 	

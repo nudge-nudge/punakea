@@ -1,12 +1,12 @@
 {
     IBClasses = (
         {
-            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; tagButtonClicked = id; }; 
+            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 drawer = id; 
-                fileMatrix = PAFileMatrix; 
+                metaMatrix = PAMetaMatrixView; 
                 outlineView = NSOutlineView; 
                 relatedTagsController = NSArrayController; 
                 resultController = NSArrayController; 
@@ -15,11 +15,17 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {CLASS = PAFileBox; LANGUAGE = ObjC; SUPERCLASS = NSImageView; }, 
-        {CLASS = PAFileMatrix; LANGUAGE = ObjC; SUPERCLASS = NSMatrix; }, 
         {CLASS = PAFileViewHeaderCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PAFileViewTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
+        {
+            CLASS = PAMetaMatrixView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; }; 
+            SUPERCLASS = NSMatrix; 
+        }, 
         {CLASS = PASpotlightTypeCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PATagCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 
         {
