@@ -35,8 +35,6 @@
 		48E9C2F709A5C27600415AC7 /* TaggerViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48E9C2F509A5C27600415AC7 /* TaggerViewController.h */; };
 		48EB614409C2D4A40071D654 /* PARelatedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48EB614209C2D4A40071D654 /* PARelatedTags.h */; };
 		48EB614509C2D4A40071D654 /* PARelatedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB614309C2D4A40071D654 /* PARelatedTags.m */; };
-		6510E0DD09A734E800E0F73A /* PAFileViewTableColumn.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */; };
-		6510E0DE09A734E800E0F73A /* PAFileViewTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */; };
 		651B2AC109B9B5FB002299FB /* PAFileMatrixGroupCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651B2ABF09B9B5FB002299FB /* PAFileMatrixGroupCell.h */; };
 		651B2AC209B9B5FB002299FB /* PAFileMatrixGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 651B2AC009B9B5FB002299FB /* PAFileMatrixGroupCell.m */; };
 		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
@@ -119,7 +117,6 @@
 				481BF27809A3128600EBD7BA /* PATag.h in CopyFiles */,
 				481BF2F209A31B9B00EBD7BA /* PATagSet.h in CopyFiles */,
 				48E9C2F709A5C27600415AC7 /* TaggerViewController.h in CopyFiles */,
-				6510E0DD09A734E800E0F73A /* PAFileViewTableColumn.h in CopyFiles */,
 				651B2AC109B9B5FB002299FB /* PAFileMatrixGroupCell.h in CopyFiles */,
 				65765BCF09BEE8C200977A34 /* PAFileMatrix.h in CopyFiles */,
 				48EB614409C2D4A40071D654 /* PARelatedTags.h in CopyFiles */,
@@ -178,8 +175,6 @@
 		48E9C2F509A5C27600415AC7 /* TaggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerViewController.h; sourceTree = "<group>"; };
 		48EB614209C2D4A40071D654 /* PARelatedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARelatedTags.h; sourceTree = "<group>"; };
 		48EB614309C2D4A40071D654 /* PARelatedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTags.m; sourceTree = "<group>"; };
-		6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAFileViewTableColumn.h; sourceTree = "<group>"; };
-		6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileViewTableColumn.m; sourceTree = "<group>"; };
 		651B2ABF09B9B5FB002299FB /* PAFileMatrixGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAFileMatrixGroupCell.h; sourceTree = "<group>"; };
 		651B2AC009B9B5FB002299FB /* PAFileMatrixGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileMatrixGroupCell.m; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
@@ -438,8 +433,6 @@
 				65BC65EE09C857DA008945E4 /* PAFileMatrixItemCell.m */,
 				651B2ABF09B9B5FB002299FB /* PAFileMatrixGroupCell.h */,
 				651B2AC009B9B5FB002299FB /* PAFileMatrixGroupCell.m */,
-				6510E0DB09A734E800E0F73A /* PAFileViewTableColumn.h */,
-				6510E0DC09A734E800E0F73A /* PAFileViewTableColumn.m */,
 			);
 			name = FileMatrix;
 			sourceTree = "<group>";
@@ -580,7 +573,6 @@
 				651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */,
 				481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */,
 				48E9C2F609A5C27600415AC7 /* TaggerViewController.m in Sources */,
-				6510E0DE09A734E800E0F73A /* PAFileViewTableColumn.m in Sources */,
 				651B2AC209B9B5FB002299FB /* PAFileMatrixGroupCell.m in Sources */,
 				65765BD009BEE8C300977A34 /* PAFileMatrix.m in Sources */,
 				48EB614509C2D4A40071D654 /* PARelatedTags.m in Sources */,

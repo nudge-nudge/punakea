@@ -7,15 +7,28 @@
 //
 
 #import <Cocoa/Cocoa.h>
+//#import "PAMetaMatrixGroupCell.h"
+//#import "PAMetaMatrixItemCell.h"
 
 
 @interface PAMetaMatrix : NSMatrix {
 
-id delegate;
+	id delegate;
+	NSMetadataQuery *query;
 
 }
 
 - (id)delegate;
 - (void)setDelegate:(id)newDelegate;
+
+@end
+
+
+@interface NSObject (PAMetaMatrixDelegate)
+
+@end
+
+
+@interface NSObject (PAMetaMatrixDataSource)
 
 @end
