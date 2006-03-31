@@ -1,6 +1,6 @@
-#import "PAFileMatrixGroupCell.h"
+#import "PAMetaMatrixGroupCell.h"
 
-@implementation PAFileMatrixGroupCell
+@implementation PAMetaMatrixGroupCell
 
 /*- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {

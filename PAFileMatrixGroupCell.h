@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PAImageButton.h"
 
-@interface PAFileMatrixGroupCell : NSActionCell
+@interface PAMetaMatrixGroupCell : NSActionCell
 {
 	NSString *identifier;
 	bool isExpanded;

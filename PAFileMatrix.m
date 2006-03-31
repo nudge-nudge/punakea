@@ -12,7 +12,7 @@
 @interface PAFileMatrix (PrivateAPI)
 
 //- (PAFileMatrixGroupCell *)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row;
-- (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row;
+//- (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row;
 
 @end
 
@@ -58,14 +58,14 @@
 
 - (void)updateView
 {
-	int i, j;
+	/*int i, j;
 	int row = -1;
 	
 	NSArray *groupedResults = [query groupedResults];
 	for (i = 0; i < [groupedResults count]; i++)
 	{
 		row++;
-		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
+		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];*/
 		
 		// Temp
 		//NSLog([[NSNumber numberWithInt:row] stringValue]);
@@ -73,7 +73,7 @@
 		
 		//PAFileMatrixGroupCell *groupCell = [[[PAFileMatrixGroupCell alloc] initTextCell:[group value]] autorelease];
 		//PAFileMatrixGroupCell *thisCell = [self insertGroupCell:groupCell atRow:row];
-		PAFileMatrixGroupCell *thisCell = [self insertGroupCell:[group value] atRow:row];
+		//PAFileMatrixGroupCell *thisCell = [self insertGroupCell:[group value] atRow:row];
 
 		/*if([thisCell isExpanded]) {
 			for (j = 0; j < [group resultCount]; j++)
@@ -86,10 +86,10 @@
 				[self insertItemCell:itemCell atRow:row];
 			}
 		}*/
-	}
+	//}
 	
 	// Delete old rows
-	if((row+1) <  [self numberOfRows])
+	/*if((row+1) <  [self numberOfRows])
 	{
 		for(i = row+1; i < [self numberOfRows]; i++)
 		{
@@ -102,7 +102,7 @@
 		}
 	}
 	
-	[self setNeedsDisplay];
+	[self setNeedsDisplay];*/
 }
 
 - (void)resetView
@@ -146,7 +146,7 @@
 	}
 } */
 
-- (PAFileMatrixGroupCell*)insertGroupCell:(NSString*)value atRow:(int)row
+/*- (PAFileMatrixGroupCell*)insertGroupCell:(NSString*)value atRow:(int)row
 {
 	if([groupRowDict objectForKey:value]) {
 		// This group already exists, as groups' values are unique
@@ -188,7 +188,7 @@
 		[self putCell:cell atRow:row column:0];
 		return cell;
 	}
-}
+}*/
 
 /* DEPRECATED
 - (PAFileMatrixGroupCell *)insertGroupCell:(PAFileMatrixGroupCell *)cell atRow:(int)row
@@ -202,7 +202,7 @@
 	return [self cellAtRow:row column:0];
 } */
 
-- (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row
+/*- (void)insertItemCell:(PAFileMatrixItemCell *)cell atRow:(int)row
 {
 	if ([self numberOfRows] <= row ||
 	    ![[cell key] isEqualTo:[[self cellAtRow:row column:0] key]])
@@ -287,5 +287,5 @@
 	{
 		[self resetView];
 	}
-}
+}*/
 @end

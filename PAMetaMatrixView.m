@@ -43,6 +43,34 @@
 }
 
 
+#pragma mark Actions
+- (void)updateView
+{
+	int i, j;
+	int row = -1;
+	
+	NSArray *groupedResults = [query groupedResults];
+	for (i = 0; i < [groupedResults count]; i++)
+	{
+		row++;
+		NSMetadataQueryResultGroup *group = [groupedResults objectAtIndex:i];
+		
+		BOOL cellWasMoved = [self moveCellWithIdentifier:[group value] toRow:row];
+		if(!cellWasMoved)
+		{
+			PAMetaMatrixGroupCell *cell = [[[PAMetaMatrixGroupCell alloc] initTextCell:[group value]] autorelease];
+			[self insertRow:row];
+			[self putCell:cell atRow:row column:0];
+		}
+	}
+}
+
+- (BOOL)moveCellWithIdentifier:(NSString *)identifier toRow:(int)row
+{
+	return NO;
+}
+
+
 #pragma mark Notifications
 - (void)queryNote:(NSNotification *)note
 {	

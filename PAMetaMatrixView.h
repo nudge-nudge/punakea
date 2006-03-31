@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-//#import "PAMetaMatrixGroupCell.h"
+#import "PAMetaMatrixGroupCell.h"
 //#import "PAMetaMatrixItemCell.h"
 
 
