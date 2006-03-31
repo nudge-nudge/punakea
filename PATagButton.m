@@ -32,4 +32,10 @@ should be overridden according to apple docs
 	[[self cell] setFileTag:aTag];
 }
 
+// TODO this is a hack, so that the view behind doesn't get redrawn
+- (BOOL)isOpaque
+{
+	return YES;
+}
+
 @end

@@ -26,6 +26,12 @@
             OUTLETS = {delegate = id; }; 
             SUPERCLASS = NSMatrix; 
         }, 
+        {
+            CLASS = PASelectedTagsView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {selectedTagsController = NSArrayController; }; 
+            SUPERCLASS = NSView; 
+        }, 
         {CLASS = PASpotlightTypeCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PATagCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 
         {

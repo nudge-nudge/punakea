@@ -25,6 +25,7 @@
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
+	//TODO is drawing multiple times
 	NSDictionary *attributes = [fileTag viewAttributes];
 	[[fileTag name] drawInRect:cellFrame withAttributes:attributes];
 }

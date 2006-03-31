@@ -8,7 +8,7 @@ calculates the starting point in the next line according to the height of all th
  */
 - (NSPoint)firstPointForNextLineIn:(NSRect)rect;
 - (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth;
-- (void)drawBackground:(NSRect)rect;
+- (void)drawBackground;
 - (void)drawTags:(NSRect)rect;
 - (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
 
@@ -69,7 +69,7 @@ bound to relatedTags
 		
 	pointForNextTagRect = [self firstPointForNextLineIn:rect];
 	
-	[self drawBackground:rect];
+	[self drawBackground];
 	[self drawTags:rect];
 }
 
@@ -119,7 +119,7 @@ bound to relatedTags
 	return NSMakePoint(spacing,pointForNextTagRect.y-maxHeight-vPadding);
 }	
 
-- (void)drawBackground:(NSRect)rect
+- (void)drawBackground
 {
 	NSRect bounds = [self bounds];
 	[[NSColor whiteColor] set];
