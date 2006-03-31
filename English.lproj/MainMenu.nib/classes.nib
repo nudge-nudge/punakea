@@ -35,6 +35,7 @@
             SUPERCLASS = NSView; 
         }, 
         {CLASS = PATagControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = SnappingWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {
             CLASS = TaggerViewController; 
             LANGUAGE = ObjC; 
