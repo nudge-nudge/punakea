@@ -51,8 +51,8 @@
 		656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */; };
 		65765BCF09BEE8C200977A34 /* PAFileMatrix.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65765BCD09BEE8C200977A34 /* PAFileMatrix.h */; };
 		65765BD009BEE8C300977A34 /* PAFileMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 65765BCE09BEE8C200977A34 /* PAFileMatrix.m */; };
-		657BC5BA09DD284200B0EB19 /* PAFileMatrixGroupCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 657BC5B809DD284200B0EB19 /* PAFileMatrixGroupCell.h */; };
-		657BC5BB09DD284200B0EB19 /* PAFileMatrixGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 657BC5B909DD284200B0EB19 /* PAFileMatrixGroupCell.m */; };
+		657BC5BA09DD284200B0EB19 /* PAMetaMatrixGroupCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 657BC5B809DD284200B0EB19 /* PAMetaMatrixGroupCell.h */; };
+		657BC5BB09DD284200B0EB19 /* PAMetaMatrixGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 657BC5B909DD284200B0EB19 /* PAMetaMatrixGroupCell.m */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		6585A64C09DC3D5A00228C46 /* PAMetaMatrixView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6585A64A09DC3D5A00228C46 /* PAMetaMatrixView.h */; };
@@ -132,7 +132,7 @@
 				480FFF9B09DACF0900C1E6BA /* PATagCloudController.h in CopyFiles */,
 				6585A64C09DC3D5A00228C46 /* PAMetaMatrixView.h in CopyFiles */,
 				6585A65009DC3DB300228C46 /* MetaMatrixController.h in CopyFiles */,
-				657BC5BA09DD284200B0EB19 /* PAFileMatrixGroupCell.h in CopyFiles */,
+				657BC5BA09DD284200B0EB19 /* PAMetaMatrixGroupCell.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,8 +191,8 @@
 		656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOn-1.tiff"; sourceTree = "<group>"; };
 		65765BCD09BEE8C200977A34 /* PAFileMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileMatrix.h; sourceTree = "<group>"; };
 		65765BCE09BEE8C200977A34 /* PAFileMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileMatrix.m; sourceTree = "<group>"; };
-		657BC5B809DD284200B0EB19 /* PAFileMatrixGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAFileMatrixGroupCell.h; sourceTree = "<group>"; };
-		657BC5B909DD284200B0EB19 /* PAFileMatrixGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAFileMatrixGroupCell.m; sourceTree = "<group>"; };
+		657BC5B809DD284200B0EB19 /* PAMetaMatrixGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAMetaMatrixGroupCell.h; sourceTree = "<group>"; };
+		657BC5B909DD284200B0EB19 /* PAMetaMatrixGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAMetaMatrixGroupCell.m; sourceTree = "<group>"; };
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
 		6585A64A09DC3D5A00228C46 /* PAMetaMatrixView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMetaMatrixView.h; sourceTree = "<group>"; };
@@ -401,8 +401,8 @@
 		6585A64809DC3D3300228C46 /* MetaMatrix */ = {
 			isa = PBXGroup;
 			children = (
-				657BC5B809DD284200B0EB19 /* PAFileMatrixGroupCell.h */,
-				657BC5B909DD284200B0EB19 /* PAFileMatrixGroupCell.m */,
+				657BC5B809DD284200B0EB19 /* PAMetaMatrixGroupCell.h */,
+				657BC5B909DD284200B0EB19 /* PAMetaMatrixGroupCell.m */,
 				6585A64A09DC3D5A00228C46 /* PAMetaMatrixView.h */,
 				6585A64B09DC3D5A00228C46 /* PAMetaMatrixView.m */,
 				6585A64E09DC3DB300228C46 /* MetaMatrixController.h */,
@@ -589,7 +589,7 @@
 				480FFF9C09DACF0900C1E6BA /* PATagCloudController.m in Sources */,
 				6585A64D09DC3D5A00228C46 /* PAMetaMatrixView.m in Sources */,
 				6585A65109DC3DB300228C46 /* MetaMatrixController.m in Sources */,
-				657BC5BB09DD284200B0EB19 /* PAFileMatrixGroupCell.m in Sources */,
+				657BC5BB09DD284200B0EB19 /* PAMetaMatrixGroupCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

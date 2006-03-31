@@ -46,7 +46,7 @@
 #pragma mark Actions
 - (void)updateView
 {
-	int i, j;
+	int i;
 	int row = -1;
 	
 	NSArray *groupedResults = [query groupedResults];
@@ -63,10 +63,32 @@
 			[self putCell:cell atRow:row column:0];
 		}
 	}
+	
+	// Delete old rows
+	while([self cellAtRow:row+1 column:0])
+	{
+		[self removeRow:row+1];
+	}
 }
 
 - (BOOL)moveCellWithIdentifier:(NSString *)identifier toRow:(int)row
 {
+	int i;
+
+	for (i = 0; i < [self numberOfRows]; i++)
+	{
+		NSActionCell *cell = [self cellAtRow:i column:0];
+		if([[cell identifier] isEqualTo:identifier])
+		{
+			[cell retain];
+			[self removeRow:i];
+			[self insertRow:i];
+			[self putCell:cell atRow:i column:0];
+			[cell release];
+			return YES;
+		}
+	}
+
 	return NO;
 }
 
