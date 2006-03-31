@@ -23,14 +23,14 @@
 {	
 	self = [super initTextCell:aText];
 	if (self) {
-		key = [aText retain];
+		identifier = [aText retain];
 	}
 	return self;
 }
 
-- (NSString*)key
+- (NSString*)identifier
 {
-	return key;
+	return identifier;
 }
 
 - (NSMetadataItem*)metadataItem
@@ -46,7 +46,7 @@
 
 - (void)dealloc
 {
-	if(key) { [key release]; }
+	if(identifier) { [identifier release]; }
 	if(metadataItem) { [metadataItem release]; }
 	[super dealloc];
 }

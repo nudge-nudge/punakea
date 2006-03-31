@@ -38,7 +38,7 @@
 
 					   
 	// Draw text	
-	NSString *cellTitle = [NSString stringWithString:key];
+	NSString *cellTitle = [NSString stringWithString:identifier];
 
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
@@ -51,7 +51,7 @@
 {
 	self = [super initTextCell:aText];
 	if (self) {
-		key = [aText retain];
+		identifier = [aText retain];
 		isExpanded = YES;
 	}	
 	return self;
@@ -59,7 +59,7 @@
 
 - (void)dealloc
 {
-	if(key) { [key release]; }
+	if(identifier) { [identifier release]; }
 	if (triangle) {
 		[triangle removeFromSuperview];
 		[triangle release];
@@ -96,9 +96,9 @@
 }
 
 #pragma mark Accessors
-- (NSString*)key
+- (NSString*)identifier
 {
-	return key;
+	return identifier;
 }
 
 - (bool)isExpanded

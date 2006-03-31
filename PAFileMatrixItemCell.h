@@ -2,10 +2,10 @@
 
 @interface PAFileMatrixItemCell : NSActionCell
 {
-	NSString *key;
+	NSString *identifier;
 	NSMetadataItem *metadataItem;
 }
 
-- (NSString*)key;
+- (NSString*)identifier;
 
 @end

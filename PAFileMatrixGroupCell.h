@@ -3,7 +3,7 @@
 
 @interface PAFileMatrixGroupCell : NSActionCell
 {
-	NSString *key;
+	NSString *identifier;
 	bool isExpanded;
 	PAImageButton *triangle;
 }
@@ -15,6 +15,6 @@
 - (void)expand;
 - (void)collapse;
 
-- (NSString*)key;
+- (NSString*)identifier;
 - (bool)isExpanded;
 @end
