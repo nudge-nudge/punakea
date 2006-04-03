@@ -223,7 +223,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				489AE71309DD4D7800EB60EB /* Custom Views */,
+				489AE71309DD4D7800EB60EB /* Views */,
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
 				65B17321099564A800B10322 /* Controllers */,
 				65851FFF099780E0009C3CA7 /* Main */,
@@ -303,13 +303,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		489AE71309DD4D7800EB60EB /* Custom Views */ = {
+		489AE71309DD4D7800EB60EB /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */,
 				489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */,
+				486EBA4409D68F16000C154C /* PAFileBox.h */,
+				486EBA4309D68F16000C154C /* PAFileBox.m */,
 			);
-			name = "Custom Views";
+			name = Views;
 			sourceTree = "<group>";
 		};
 		48BDCECE09C4A1EE00A57165 /* TagCloud */ = {
@@ -328,8 +330,6 @@
 		48F6A9F40996423000AA118D /* Tagging */ = {
 			isa = PBXGroup;
 			children = (
-				486EBA4409D68F16000C154C /* PAFileBox.h */,
-				486EBA4309D68F16000C154C /* PAFileBox.m */,
 				48AA6BF5099B78E300D8F70B /* PATagger.h */,
 				48AA6BF6099B78E300D8F70B /* PATagger.m */,
 				48C93614099742D800699265 /* Matador.h */,
