@@ -9,8 +9,14 @@
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
 
+/**
+view for the selected tags
+ */
 @interface PASelectedTagsView : NSMatrix {
 	IBOutlet NSArrayController *selectedTagsController;
+	
+	int cellWidth;
+	int cellHeight;
 }
 
 @end

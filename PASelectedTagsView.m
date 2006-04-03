@@ -17,13 +17,21 @@
 
 @implementation PASelectedTagsView
 
+#pragma mark init
 - (id)initWithFrame:(NSRect)frame 
 {
     self = [super initWithFrame:frame];
     if (self) {
+		cellWidth = 100;
+		cellHeight = 20;
+
 		[self setCellClass:[NSTextFieldCell class]];
 		
-		[self setCellSize:NSMakeSize(200,20)];
+		//settings
+		[self setMode:NSHighlightModeMatrix];
+		[self setSelectionByRect:NO];
+		
+		[self setCellSize:NSMakeSize(cellMinWidth,cellMinHeight)];
 		[self setAutosizesCells:YES];
     }
     return self;
@@ -36,44 +44,54 @@
 								options:0
 								context:NULL];
 }
-	
 
+#pragma mark drawing
 - (void)drawRect:(NSRect)rect 
 {
-	[self drawBackground];
 	[super drawRect:rect];
 }
 
-- (void)drawBackground
-{
-	NSRect bounds = [self bounds];
-	[[NSColor colorWithDeviceRed:204 green:255 blue:102 alpha:1.0] set];
-	[NSBezierPath fillRect:bounds];
-}
-
-//TODO hack
+//TODO no this is not the way i want it ;)
 - (void)updateView
 {
-	if ([self numberOfRows] == 1)
-		[self removeRow:0];
-	
+	//get some useful values
 	int tagCount = [[selectedTagsController arrangedObjects] count];
-	[self renewRows:0 columns:tagCount];
 	
-	NSMutableArray *cells = [[NSMutableArray alloc] init];
+	NSRect bounds = [self bounds];
+	float boundsWith = bounds.size.width;
+	float boundsHeight = bounds.size.height;
 	
-    NSEnumerator *e = [[selectedTagsController arrangedObjects] objectEnumerator];
-	PATag *tag;
+	//calc values
+	int maxColumnCount = boundsWith / cellWidth;
+	int maxRowCount = boundsHeight / cellHeight;
 	
-	while (tag = [e nextObject])
+	//adjust matrix accordingly
+	[self renewRows:maxRowCount columns:maxColumnCount];
+	
+	//TODO
+	if (tagCount > (maxRowCount * maxColumnCount))
 	{
-		NSCell *cell = [[NSCell alloc] initTextCell:[tag name]];
-		[cells addObject:cell];
-		[cell release];
+		NSLog(@"matrix too small!! fix me!!");
 	}
-
-	[self addRowWithCells:cells];
-	[cells release];
+	else
+	{
+	//fill matrix
+		int i;
+		int j;
+		int counter = 0;
+		
+		for (i = 0;i< maxRowCount;i++)
+		{
+			for (j = 0;j < maxColumnCount;j++)
+			{
+				PATag *tag = [[selectedTagsController arrangedObjects] objectAtIndex:counter];
+				NSCell *cell = [[NSCell alloc] initTextCell:[tag name]];
+				[self putCell:cell atRow:i column:j];
+				[cell release];
+				counter++;
+			}
+		}
+	}
 }
 
 /**
