@@ -204,15 +204,4 @@ bound to relatedTags
 	displayTags = otherTags;
 }
 
-#pragma mark temp
-- (void)mouseDown:(NSEvent *)theEvent
-{
-	NSLog(@"argl!!");
-}
-
-- (void)mouseUp:(NSEvent *)theEvent
-{
-	NSLog(@"urgl!!");
-}
-
 @end

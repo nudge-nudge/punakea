@@ -18,6 +18,7 @@
 		
 		//looks
 		[self setBordered:NO];
+		//[self setBezelStyle:NSRecessedBezelStyle];
 	}
 	return self;
 }
