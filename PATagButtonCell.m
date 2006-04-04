@@ -3,31 +3,23 @@
 @implementation PATagButtonCell
 
 #pragma mark init
-
 - (id)initWithTag:(PATag*)aTag
 {
 	if (self = [super init])
 	{
 		[self setAction:@selector(tagButtonClicked:)];
 		[self setFileTag:aTag];
+
+		//title
+		NSDictionary *attributes = [fileTag viewAttributes];
+		NSAttributedString *titleString = [[NSAttributedString alloc] initWithString:[fileTag name] attributes:attributes];
+		[self setAttributedTitle:titleString];
+		[titleString release];
+		
+		//looks
+		[self setBordered:NO];
 	}
 	return self;
-}
-
-#pragma mark drawing
-/*
-- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-	NSLog(@"%@: draw main",fileTag);
-	[super drawWithFrame:cellFrame inView:controlView];
-}
-*/
-
-- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-	//TODO is drawing multiple times
-	NSDictionary *attributes = [fileTag viewAttributes];
-	[[fileTag name] drawInRect:cellFrame withAttributes:attributes];
 }
 
 #pragma mark accessors

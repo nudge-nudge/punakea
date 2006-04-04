@@ -6,7 +6,7 @@
 /**
 cell for the tagcloud, displays the given tag and interacts with the user
  */
-@interface PATagButtonCell : NSActionCell
+@interface PATagButtonCell : NSButtonCell
 {
 	PATag *fileTag;
 }
