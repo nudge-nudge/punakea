@@ -53,12 +53,14 @@
 		NSString *path = [bundle pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
 		NSDictionary *simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
 		
+		// TODO: Add and sortindex like "1 PROGRAMS"!
+		
 		NSString *replacementValue;
 		if(replacementValue = [simpleGrouping objectForKey:attrValue])
 		{
-			return replacementValue;
+			return [bundle localizedStringForKey:replacementValue value:replacementValue table:@"MDSimpleGrouping"];
 		} else {
-			return [NSString stringWithString:@"DOCUMENTS"];
+			return [bundle localizedStringForKey:@"DOCUMENTS" value:@"DOCUMENTS" table:@"MDSimpleGrouping"];
 		}
     }
 	// Default
