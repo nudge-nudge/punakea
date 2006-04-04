@@ -31,7 +31,7 @@
 		[self setMode:NSHighlightModeMatrix];
 		[self setSelectionByRect:NO];
 		
-		[self setCellSize:NSMakeSize(cellMinWidth,cellMinHeight)];
+		//[self setCellSize:NSMakeSize(cellMinWidth,cellMinHeight)];
 		[self setAutosizesCells:YES];
     }
     return self;

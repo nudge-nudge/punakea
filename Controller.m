@@ -305,7 +305,7 @@
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, nil]];
 	}
 	if([sc selectedSegment] == 1) {
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemFSSize, nil]];
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
 	}
 }
 

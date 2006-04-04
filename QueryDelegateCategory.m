@@ -12,7 +12,8 @@
 @implementation Controller (QueryDelegateCategory)
 
 - (id)metadataQuery:(NSMetadataQuery *)query replacementValueForAttribute:(NSString *)attrName value:(id)attrValue {
-    if ([attrName isEqualToString:(id)kMDItemFSSize]) {
+	// kMDItemFSSize
+	if ([attrName isEqualToString:(id)kMDItemFSSize]) {
         int fsSize = [attrValue intValue];
         // Here is a special case for small files
         if (fsSize == 0) {
@@ -43,9 +44,26 @@
         } else {
             return NSLocalizedString(@"Unknown", @"Kind to display for other unknown values"); 
         }
-    } else {
+    } 
+	// kMDItemContentType
+	else if([attrName isEqualToString:(id)kMDItemContentType])
+	{
+		NSLog(@"group by kMDItemContentType");
+		/*NSDictionary *simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:@"MDSimpleGrouping.plist"];
+		NSEnumerator *enumerator = [simpleGrouping keyEnumerator];
+		NSString *key;
+		while(key = [enumerator nextObject])
+		{
+			NSLog([simpleGrouping objectForKey:key]);
+		}*/
+		
         return attrValue;
     }
+	// Default
+	else
+	{
+		return attrValue;
+	}
     
 }
 

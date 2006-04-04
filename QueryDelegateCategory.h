@@ -10,8 +10,6 @@
 #import "Controller.h"
 
 
-@interface Controller (QueryDelegateCategory) {
-
-}
+@interface Controller (QueryDelegateCategory) 
 
 @end
