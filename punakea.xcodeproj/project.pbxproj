@@ -55,6 +55,11 @@
 		656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
+		658DCD0909E2581F008FBC2C /* ResultsOutlineViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 658DCD0709E2581F008FBC2C /* ResultsOutlineViewController.h */; };
+		658DCD0A09E2581F008FBC2C /* ResultsOutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DCD0809E2581F008FBC2C /* ResultsOutlineViewController.m */; };
+		658DCD0F09E25908008FBC2C /* QueryDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */; };
+		658DCD1009E25908008FBC2C /* QueryDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */; };
+		658DCD1A09E25A4F008FBC2C /* MDSimpleGrouping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
 		659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659EBB4109D2D78300879091 /* PAImageButton.h */; };
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
@@ -124,6 +129,8 @@
 				480FFF9B09DACF0900C1E6BA /* PATagCloudController.h in CopyFiles */,
 				489AE65509DD434600EB60EB /* SnappingWindow.h in CopyFiles */,
 				489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */,
+				658DCD0909E2581F008FBC2C /* ResultsOutlineViewController.h in CopyFiles */,
+				658DCD0F09E25908008FBC2C /* QueryDelegateCategory.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +193,11 @@
 		656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOn-1.tiff"; sourceTree = "<group>"; };
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
+		658DCD0709E2581F008FBC2C /* ResultsOutlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsOutlineViewController.h; sourceTree = "<group>"; };
+		658DCD0809E2581F008FBC2C /* ResultsOutlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsOutlineViewController.m; sourceTree = "<group>"; };
+		658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryDelegateCategory.h; sourceTree = "<group>"; };
+		658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryDelegateCategory.m; sourceTree = "<group>"; };
+		658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = MDSimpleGrouping.plist; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
@@ -289,6 +301,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				65E7B0190994D02E00565251 /* MainMenu.nib */,
+				658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */,
 				65E7B01E0994D0AE00565251 /* Sidebar.nib */,
 			);
 			name = Resources;
@@ -424,10 +437,14 @@
 				65E7B06A0994D5AA00565251 /* Controller.m */,
 				48E9C2F509A5C27600415AC7 /* TaggerViewController.h */,
 				48E9C2F409A5C27600415AC7 /* TaggerViewController.m */,
-				65E7B43C0994E3D000565251 /* SubViewController.h */,
-				65E7B43D0994E3D000565251 /* SubViewController.m */,
 				480FFF9909DACF0900C1E6BA /* PATagCloudController.h */,
 				480FFF9A09DACF0900C1E6BA /* PATagCloudController.m */,
+				658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */,
+				658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */,
+				658DCD0709E2581F008FBC2C /* ResultsOutlineViewController.h */,
+				658DCD0809E2581F008FBC2C /* ResultsOutlineViewController.m */,
+				65E7B43C0994E3D000565251 /* SubViewController.h */,
+				65E7B43D0994E3D000565251 /* SubViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -514,6 +531,7 @@
 				65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */,
 				65F9B96309D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff in Resources */,
 				65F9B96409D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff in Resources */,
+				658DCD1A09E25A4F008FBC2C /* MDSimpleGrouping.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +584,8 @@
 				480FFF9C09DACF0900C1E6BA /* PATagCloudController.m in Sources */,
 				489AE65609DD434600EB60EB /* SnappingWindow.m in Sources */,
 				489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */,
+				658DCD0A09E2581F008FBC2C /* ResultsOutlineViewController.m in Sources */,
+				658DCD1009E25908008FBC2C /* QueryDelegateCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
