@@ -48,16 +48,18 @@
 	// kMDItemContentType
 	else if([attrName isEqualToString:(id)kMDItemContentType])
 	{
-		NSLog(@"group by kMDItemContentType");
-		/*NSDictionary *simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:@"MDSimpleGrouping.plist"];
-		NSEnumerator *enumerator = [simpleGrouping keyEnumerator];
-		NSString *key;
-		while(key = [enumerator nextObject])
-		{
-			NSLog([simpleGrouping objectForKey:key]);
-		}*/
+		//NSLog(@"group by kMDItemContentType");
+		NSBundle *bundle = [NSBundle mainBundle];
+		NSString *path = [bundle pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
+		NSDictionary *simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
 		
-        return attrValue;
+		NSString *replacementValue;
+		if(replacementValue = [simpleGrouping objectForKey:attrValue])
+		{
+			return replacementValue;
+		} else {
+			return [NSString stringWithString:@"DOCUMENTS"];
+		}
     }
 	// Default
 	else

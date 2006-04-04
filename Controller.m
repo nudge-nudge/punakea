@@ -302,10 +302,10 @@
 {
 	NSSegmentedControl *sc = sender;
 	if([sc selectedSegment] == 0) {
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, nil]];
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
 	}
 	if([sc selectedSegment] == 1) {
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemFSSize, nil]];
 	}
 }
 
