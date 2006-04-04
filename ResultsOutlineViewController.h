@@ -9,8 +9,11 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface ResultsOutlineViewController : NSObject {
-
+@interface ResultsOutlineViewController : NSObject
+{
+	NSMetadataQuery *query;
 }
 
+- (NSMetadataQuery *)query;
+- (void)setQuery:(NSMetadataQuery *)aQuery;
 @end

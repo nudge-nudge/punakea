@@ -39,7 +39,7 @@
 	[drawer toggle:self];
 	*/
 	
-	//[metaMatrix setQuery:_query];
+	[outlineView setQuery:_query];
 	
 	//instantiate relatedTags and register as an observer to changes in selectedTags
 	relatedTags = [[PARelatedTags alloc] initWithQuery:_query 

@@ -5,11 +5,12 @@
 #import "PARelatedTags.h"
 #import "SubViewController.h"
 #import "PATagger.h"
+#import "PAResultsOutlineView.h"
 
 @interface Controller : NSWindowController
 {
     IBOutlet id drawer;
-    IBOutlet NSOutlineView *outlineView;
+    IBOutlet PAResultsOutlineView *outlineView;
 	IBOutlet NSArrayController *relatedTagsController;
 	IBOutlet NSArrayController *selectedTagsController;
 	IBOutlet NSArrayController *resultController;

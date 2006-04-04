@@ -6,7 +6,7 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 drawer = id; 
-                outlineView = NSOutlineView; 
+                outlineView = PAResultsOutlineView; 
                 relatedTagsController = NSArrayController; 
                 resultController = NSArrayController; 
                 selectedTagsController = NSArrayController; 
@@ -19,6 +19,7 @@
         {CLASS = PAFileBox; LANGUAGE = ObjC; SUPERCLASS = NSImageView; }, 
         {CLASS = PAFileViewHeaderCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PAFileViewTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
+        {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {
             CLASS = PASelectedTagsView; 
             LANGUAGE = ObjC; 
@@ -34,6 +35,11 @@
             SUPERCLASS = NSView; 
         }, 
         {CLASS = PATagControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {
+            CLASS = ResultsOutlineViewController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
         {CLASS = SnappingWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {
             CLASS = TaggerViewController; 
