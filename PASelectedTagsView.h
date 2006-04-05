@@ -16,7 +16,9 @@ view for the selected tags
 	IBOutlet NSArrayController *selectedTagsController;
 	
 	int cellWidth;
+	int cellMaxWidth;
 	int cellHeight;
+	int cellMaxHeight;
 }
 
 @end

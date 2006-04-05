@@ -113,7 +113,9 @@
 	[visibleTags release];
 	visibleTags = otherTags;
 	
-	[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
+	//TODO fix me!!
+	if ([visibleTags count] > 0)
+		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
 }
 
 - (PATag*)currentBestTag
