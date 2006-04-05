@@ -64,7 +64,7 @@
 #pragma mark Delegate
 - (float)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
 {
-	return ([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) ? 30 : 20;
+	return ([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) ? 20 : 19;
 	
 }
 

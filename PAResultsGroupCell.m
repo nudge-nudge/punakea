@@ -46,6 +46,9 @@
 	}*/
 	
 	// Draw background
+	
+	// TODO: Change image if window doesn't have focus
+	
 	NSImage *backgroundImage = [NSImage imageNamed:@"MD0-0-Middle-1"];
 	[backgroundImage setFlipped:YES];
 	[backgroundImage setScalesWhenResized:YES];
@@ -62,9 +65,9 @@
 	
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
-	[fontAttributes setObject:[NSFont systemFontOfSize:11] forKey:NSFontAttributeName];
+	[fontAttributes setObject:[NSFont boldSystemFontOfSize:12] forKey:NSFontAttributeName];
 	
-	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + 20, cellFrame.origin.y + 4) withAttributes:fontAttributes];
+	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + 20, cellFrame.origin.y + 1) withAttributes:fontAttributes];
 }
 
 
