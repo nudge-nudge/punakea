@@ -66,6 +66,8 @@
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
 		659EBBB109D2DC3D00879091 /* MDIconViewOff-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */; };
 		65A4079709B9D6BA00B151F4 /* MD0-0-Middle-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65A4079609B9D6BA00B151F4 /* MD0-0-Middle-1.tiff */; };
+		65A74ABB09E3AA23001131A8 /* PAResultsTableColumn.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */; };
+		65A74ABC09E3AA23001131A8 /* PAResultsTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */; };
 		65B172F4099562A700B10322 /* PASidebarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B172F2099562A700B10322 /* PASidebarView.h */; };
 		65B172F5099562A700B10322 /* PASidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B172F3099562A700B10322 /* PASidebarView.m */; };
 		65C341BC0996107300C3B5AC /* PASidebarCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C341BA0996107300C3B5AC /* PASidebarCell.h */; };
@@ -135,6 +137,7 @@
 				658DCD0909E2581F008FBC2C /* ResultsOutlineViewController.h in CopyFiles */,
 				658DCD0F09E25908008FBC2C /* QueryDelegateCategory.h in CopyFiles */,
 				65C4890609E2C30F00A45A17 /* PAResultsOutlineView.h in CopyFiles */,
+				65A74ABB09E3AA23001131A8 /* PAResultsTableColumn.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +211,8 @@
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
 		659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOff-1.tiff"; sourceTree = "<group>"; };
 		65A4079609B9D6BA00B151F4 /* MD0-0-Middle-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MD0-0-Middle-1.tiff"; sourceTree = "<group>"; };
+		65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsTableColumn.h; sourceTree = "<group>"; };
+		65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsTableColumn.m; sourceTree = "<group>"; };
 		65B172F2099562A700B10322 /* PASidebarView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarView.h; sourceTree = "<group>"; };
 		65B172F3099562A700B10322 /* PASidebarView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarView.m; sourceTree = "<group>"; };
 		65C341BA0996107300C3B5AC /* PASidebarCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarCell.h; sourceTree = "<group>"; };
@@ -420,6 +425,8 @@
 			children = (
 				65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */,
 				65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */,
+				65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */,
+				65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */,
 				658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */,
 				658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */,
 				658DCD0709E2581F008FBC2C /* ResultsOutlineViewController.h */,
@@ -598,6 +605,7 @@
 				658DCD0A09E2581F008FBC2C /* ResultsOutlineViewController.m in Sources */,
 				658DCD1009E25908008FBC2C /* QueryDelegateCategory.m in Sources */,
 				65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */,
+				65A74ABC09E3AA23001131A8 /* PAResultsTableColumn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

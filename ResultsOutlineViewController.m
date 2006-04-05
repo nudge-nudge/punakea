@@ -28,7 +28,7 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
 {
-	// TODO: Do I retain too much??
+	// TODO: When do I have to release them?
 
 	if(item == nil) return [[[query groupedResults] objectAtIndex:index] retain];
 	
@@ -57,6 +57,32 @@
 	}
 	
 	return 0;
+}
+
+
+#pragma mark Delegate
+- (float)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+{
+	return ([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) ? 30 : 20;
+	
+}
+
+- (id)tableColumn:(NSTableColumn *)column inTableView:(NSTableView *)tableView dataCellForRow:(int)row
+{
+	NSOutlineView *outlineView = tableView;
+	id item = [outlineView itemAtRow:row];
+	
+	NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:@"hallo"];
+	[cell setDrawsBackground:YES];
+	
+	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
+	{
+		[cell setBackgroundColor:[NSColor yellowColor]];
+	} else {
+		[cell setBackgroundColor:[NSColor grayColor]];
+	}
+	
+	return cell;
 }
 
 
