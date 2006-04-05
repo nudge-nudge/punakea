@@ -22,6 +22,12 @@
 - (void)dealloc
 {
 	if(group) [group release];
+	if(triangle)
+	{
+		[triangle removeFromSuperview];
+		[triangle release];
+		//NSLog(@"removing");
+	}
 	[super dealloc];
 }
 
@@ -41,6 +47,7 @@
 		[triangle setState:PAOnState];
 		[triangle setTarget:self];
 		[controlView addSubview:triangle];  
+		//NSLog(@"adding");
 	} else {
 		[triangle setFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y + 2, 16, 16)];
 	}*/
@@ -68,6 +75,13 @@
 	[fontAttributes setObject:[NSFont boldSystemFontOfSize:12] forKey:NSFontAttributeName];
 	
 	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + 23, cellFrame.origin.y + 1) withAttributes:fontAttributes];
+}
+
+
+#pragma mark Actions
+- (void)action:(id)sender
+{
+	NSLog(@"action");
 }
 
 

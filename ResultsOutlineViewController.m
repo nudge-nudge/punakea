@@ -68,7 +68,9 @@
 	
 }
 
-- (id)tableColumn:(NSTableColumn *)column inTableView:(NSTableView *)tableView dataCellForRow:(int)row
+- (id)tableColumn:(NSTableColumn *)column
+	  inTableView:(NSTableView *)tableView
+   dataCellForRow:(int)row
 {
 	NSOutlineView *outlineView = tableView;
 	id item = [outlineView itemAtRow:row];
@@ -87,8 +89,8 @@
 
 - (void)outlineView:(NSOutlineView *)outlineView
   willDisplayOutlineCell:(id)cell
-  forTableColumn:(NSTableColumn *)tableColumn
-  item:(id)item
+	 forTableColumn:(NSTableColumn *)tableColumn
+               item:(id)item
 {
 	// Hide default triangle
 	[cell setImage:[NSImage imageNamed:@"transparent"]];
