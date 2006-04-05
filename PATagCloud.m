@@ -80,6 +80,7 @@ creates buttons for tags held in displayTags. created buttons can be accessed in
 		PATagButton *button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag]];
 		[button sizeToFit];
 		[tagButtonDict setObject:button forKey:[tag name]];
+		[button release];
 	}
 }
 
