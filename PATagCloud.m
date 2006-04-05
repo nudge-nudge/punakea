@@ -7,9 +7,11 @@ calculates the starting point in the next line according to the height of all th
  @return origin point for next tag
  */
 - (NSPoint)firstPointForNextLineIn:(NSRect)rect;
+- (void)createButtonsForTags;
 - (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth;
 - (void)drawBackground;
 - (void)drawTags:(NSRect)rect;
+- (NSPoint)nextPointForTag:(PATag*)tag inRect:(NSRect)rect;
 - (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
 - (NSSize)sizeWithAttributes:(NSDictionary*)attributes forTag:(PATag*)tag;
 
@@ -45,6 +47,7 @@ bind to relatedTags ... TagCloud always displays the content of relatedTags
 	[super dealloc];
 }
 
+#pragma mark observer and important stuff
 /**
 bound to relatedTags
  */
@@ -56,7 +59,27 @@ bound to relatedTags
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
 		[self setDisplayTags:[NSArray arrayWithArray:[controller visibleTags]]];
+		[self createButtonsForTags];
 		[self setNeedsDisplay:YES];
+	}
+}
+
+/**
+creates buttons for tags held in displayTags. created buttons can be accessed in
+ tagButtonDict afterwards
+ */
+- (void)createButtonsForTags
+{
+	[tagButtonDict removeAllObjects];
+	
+	NSEnumerator *tagEnumerator = [displayTags objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [tagEnumerator nextObject])
+	{
+		PATagButton *button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag]];
+		[button sizeToFit];
+		[tagButtonDict setObject:button forKey:[tag name]];
 	}
 }
 
@@ -100,8 +123,9 @@ bound to relatedTags
 	while (tag = [tagEnumerator nextObject])
 	{
 		//get the size for the current tag
-		NSDictionary *attributes = [controller viewAttributesForTag:tag];
-		NSSize tagSize = [self sizeWithAttributes:attributes forTag:tag];
+		PATagButton *button = [tagButtonDict objectForKey:[tag name]];
+		NSRect frame = [button frame];
+		NSSize tagSize = frame.size;
 		
 		//if the tag fills the line, stop adding tags
 		lineWidth += spacing + tagSize.width;
@@ -144,30 +168,42 @@ bound to relatedTags
 	
 	while (tag = [e nextObject])
 	{
-		NSDictionary *attributes = [controller viewAttributesForTag:tag];
-		NSRect tagRect = [self nextRectFor:tag inMainRect:rect withAttributes:attributes];
+		NSPoint origin = [self nextPointForTag:(PATag*)tag inRect:(NSRect)rect];
 		
-		PATagButton *tagButton;
-		
-		/* if the control isn't there yet, it needs to be created
-			otherwise just set the new position */
-		tagButton = [tagButtonDict objectForKey:[tag name]];
-		if (tagButton) 
-		{
-			[tagButton setFrame:tagRect];
-			[self addSubview:tagButton];
-		}
-		else
-		{
-			tagButton = [[PATagButton alloc] initWithFrame:tagRect Tag:tag attributes:attributes];
-			[tagButton setTarget:controller];
-			[tagButtonDict setObject:tagButton forKey:[tag name]];
-			[self addSubview:tagButton];
-			[tagButton release];
-		}
+		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
+		[tagButton setFrameOrigin:origin];
+		[self addSubview:tagButton];
 	}
 }
 
+//TODO if this works, pass control instead of tag
+- (NSPoint)nextPointForTag:(PATag*)tag inRect:(NSRect)rect
+{
+	//TODO externalize spacing and padding and ...
+	int spacing = 10;
+	
+	PATagButton *button = [tagButtonDict objectForKey:[tag name]];
+	NSRect frame = [button frame];
+	float width = frame.size.width;
+	
+	float xValue = pointForNextTagRect.x + width + spacing;
+	
+	//if the tag doesn't fit in this line, get first point in next line
+	if (xValue > rect.size.width)
+	{
+		pointForNextTagRect = [self firstPointForNextLineIn:rect];
+	}
+	
+	//save this value
+	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x,pointForNextTagRect.y);
+	
+	//then calc the point for the next tag 
+	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + spacing,pointForNextTagRect.y);
+	
+	return newOrigin;
+}
+
+//deprecated
 - (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs
 {
 	//TODO externalize spacing and padding and ...

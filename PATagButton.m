@@ -1,6 +1,11 @@
 #import "PATagButton.h"
 
 @implementation PATagButton
+- (id)initWithTag:(PATag*)tag attributes:(NSDictionary*)attributes
+{
+	NSRect nilRect = NSMakeRect(0,0,0,0);
+	return [self initWithFrame:nilRect Tag:tag attributes:attributes];
+}
 
 /**
 designated initializer
