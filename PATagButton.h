@@ -6,7 +6,7 @@
 
 @interface PATagButton : NSButton
 
-- (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag;
+- (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag attributes:(NSDictionary*)attributes;
 
 - (PATag*)fileTag;
 - (void)setFileTag:(PATag*)aTag;

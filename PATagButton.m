@@ -5,11 +5,12 @@
 /**
 designated initializer
  */
-- (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag 
+- (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag attributes:(NSDictionary*)attributes
 {
     self = [super initWithFrame:frame];
-    if (self) {
-		[self setCell:[[PATagButtonCell alloc] initWithTag:tag]];
+    if (self) 
+	{
+		[self setCell:[[PATagButtonCell alloc] initWithTag:tag attributes:attributes]];
     }
     return self;	
 }

@@ -3,7 +3,7 @@
 @implementation PATagButtonCell
 
 #pragma mark init
-- (id)initWithTag:(PATag*)aTag
+- (id)initWithTag:(PATag*)aTag attributes:(NSDictionary*)attributes
 {
 	if (self = [super init])
 	{
@@ -11,7 +11,6 @@
 		[self setFileTag:aTag];
 
 		//title
-		NSDictionary *attributes = [fileTag viewAttributes];
 		NSAttributedString *titleString = [[NSAttributedString alloc] initWithString:[fileTag name] attributes:attributes];
 		[self setAttributedTitle:titleString];
 		[titleString release];

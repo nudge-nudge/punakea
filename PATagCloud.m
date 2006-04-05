@@ -11,6 +11,7 @@ calculates the starting point in the next line according to the height of all th
 - (void)drawBackground;
 - (void)drawTags:(NSRect)rect;
 - (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
+- (NSSize)sizeWithAttributes:(NSDictionary*)attributes forTag:(PATag*)tag;
 
 @end
 
@@ -99,8 +100,8 @@ bound to relatedTags
 	while (tag = [tagEnumerator nextObject])
 	{
 		//get the size for the current tag
-		NSDictionary *attributes = [tag viewAttributes];
-		NSSize tagSize = [tag sizeWithAttributes:attributes];
+		NSDictionary *attributes = [controller viewAttributesForTag:tag];
+		NSSize tagSize = [self sizeWithAttributes:attributes forTag:tag];
 		
 		//if the tag fills the line, stop adding tags
 		lineWidth += spacing + tagSize.width;
@@ -143,7 +144,7 @@ bound to relatedTags
 	
 	while (tag = [e nextObject])
 	{
-		NSDictionary *attributes = [tag viewAttributes];
+		NSDictionary *attributes = [controller viewAttributesForTag:tag];
 		NSRect tagRect = [self nextRectFor:tag inMainRect:rect withAttributes:attributes];
 		
 		PATagButton *tagButton;
@@ -158,7 +159,7 @@ bound to relatedTags
 		}
 		else
 		{
-			tagButton = [[PATagButton alloc] initWithFrame:tagRect Tag:tag];
+			tagButton = [[PATagButton alloc] initWithFrame:tagRect Tag:tag attributes:attributes];
 			[tagButton setTarget:controller];
 			[tagButtonDict setObject:tagButton forKey:[tag name]];
 			[self addSubview:tagButton];
@@ -173,7 +174,7 @@ bound to relatedTags
 	int spacing = 10;
 	
 	//first get the tag size for the tag to draw
-	NSSize tagSize = [tag sizeWithAttributes:attribs];
+	NSSize tagSize = [self sizeWithAttributes:attribs forTag:tag];
 	
 	int xValue = pointForNextTagRect.x + tagSize.width + spacing;
 	
@@ -189,6 +190,11 @@ bound to relatedTags
 	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + tagSize.width + spacing,pointForNextTagRect.y);
 	
 	return tagRect;
+}
+
+- (NSSize)sizeWithAttributes:(NSDictionary*)attributes forTag:(PATag*)tag
+{
+	return [[tag name] sizeWithAttributes:attributes];
 }
 
 #pragma mark accessors

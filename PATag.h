@@ -13,29 +13,34 @@ treat this class as the abstract superclass for all Tags,
  no methods are implemented here, subclasses need to overwrite them all!
  */
 @interface PATag : NSObject <NSCoding>
+{
+	NSString *name;
+	NSString *query;
+	NSCalendarDate *lastClicked;
+	NSCalendarDate *lastUsed;
+	unsigned long clickCount;
+	unsigned long useCount;
+}
 
-//equal
-- (BOOL)isEqualToTag:(PATag*)otherTag;
+// these functions need to be implemented by subclass
+- (BOOL)isEqual:(id)other; /**< must overwrite */
+- (float)absoluteRating; /**< must overwrite */
+- (float)relativeRatingToTag:(PATag*)otherTag; /**< must overwrite */
 
-- (NSString*)name;
-- (NSString*)query;
-- (NSCalendarDate*)lastClicked;
-- (NSCalendarDate*)lastUsed;
-- (unsigned long)clickCount;
-- (unsigned long)useCount;
+// these functions have been implemented, but
+// subclasses may overwrite
+- (id)initWithName:(NSString*)aName; /**< may overwrite */
 
-- (void)setName:(NSString*)aName;
-- (void)setQuery:(NSString*)aQuery;
-- (void)incrementClickCount;
-- (void)incrementUseCount;
+- (NSString*)name; /**< may overwrite */
+- (NSString*)query; /**< may overwrite */
+- (NSCalendarDate*)lastClicked; /**< may overwrite */
+- (NSCalendarDate*)lastUsed; /**< may overwrite */
+- (unsigned long)clickCount; /**< may overwrite */
+- (unsigned long)useCount; /**< may overwrite */
 
-- (void)setCurrentBestTag:(PATag*)aTag;
-- (PATag*)currentBestTag;
-
-- (float)absoluteRating;
-- (float)relativeRating;
-
-- (NSMutableDictionary*)viewAttributes;
-- (NSSize)sizeWithAttributes:(NSDictionary*)attributes;
+- (void)setName:(NSString*)aName; /**< may overwrite */
+- (void)setQuery:(NSString*)aQuery; /**< may overwrite */
+- (void)incrementClickCount; /**< may overwrite */
+- (void)incrementUseCount; /**< may overwrite */
 
 @end

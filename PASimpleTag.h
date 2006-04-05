@@ -10,19 +10,9 @@
 #import "PATag.h"
 
 
-@interface PASimpleTag : PATag {
-	NSString *name;
-	NSString *query;
-	NSCalendarDate *lastClicked;
-	NSCalendarDate *lastUsed;
-	unsigned long clickCount;
-	unsigned long useCount;
-	PATag* currentBestTag;
-	
-	//position in view
-	NSRect rectInView;
-}
+@interface PASimpleTag : PATag 
+{
 
-- (id)initWithName:(NSString*)aName;
+}
 
 @end

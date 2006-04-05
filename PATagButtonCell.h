@@ -11,7 +11,7 @@ cell for the tagcloud, displays the given tag and interacts with the user
 	PATag *fileTag;
 }
 
-- (id)initWithTag:(PATag*)aTag;
+- (id)initWithTag:(PATag*)aTag attributes:(NSDictionary*)attributes;
 
 - (PATag*)fileTag;
 - (void)setFileTag:(PATag*)aTag;

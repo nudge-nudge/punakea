@@ -5,7 +5,8 @@
 - (void)selectedTagsHaveChanged;
 - (void)relatedTagsHaveChanged;
 - (void)allTagsHaveChanged;
-- (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tagSet;
+- (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
+- (void)setupToolbar;
 
 @end
 
@@ -111,7 +112,20 @@
 	[otherTags retain];
 	[visibleTags release];
 	visibleTags = otherTags;
-	[self updateTagRating:visibleTags];
+	
+	[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
+}
+
+- (PATag*)currentBestTag
+{
+	return currentBestTag;
+}
+
+- (void)setCurrentBestTag:(PATag*)otherTag
+{
+	[otherTag retain];
+	[currentBestTag release];
+	currentBestTag = otherTag;
 }
 
 - (void)openFile
@@ -174,18 +188,25 @@
 }	
 
 #pragma mark tag stuff
-- (void)updateTagRating:(NSArray*)tagSet
+- (NSDictionary*)viewAttributesForTag:(PATag*)tag
 {
-	PATag *bestTag = [self getTagWithBestAbsoluteRating:tagSet];
+	NSMutableDictionary *attribs = [NSMutableDictionary dictionary];
 	
-	NSEnumerator *e = [tagSet objectEnumerator];
-	PATag *tag;
+	NSColor *c = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:128.0 alpha:1.0];
+	//externalize sizes
+	int size = 30 * [tag relativeRatingToTag:[self currentBestTag]];
+	if (size < 10)
+		size = 10;
 	
-	while (tag = [e nextObject])
-		[tag setCurrentBestTag:bestTag];
+	NSFont *fnt = [NSFont fontWithName:@"Geneva" size:size];
+	
+	[attribs setObject:c forKey:NSForegroundColorAttributeName];
+	[attribs setObject:fnt forKey:NSFontAttributeName];
+	
+	return attribs;
 }
 
-- (PATag*)getTagWithBestAbsoluteRating:(NSArray*)tagSet
+- (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
 {
 	NSEnumerator *e = [tagSet objectEnumerator];
 	PATag *tag;

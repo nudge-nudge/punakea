@@ -11,11 +11,33 @@
 @implementation PATag 
 
 #pragma mark init
+- (id)init
+{
+	return [self initWithName:NSLocalizedString(@"default tag name",@"tag")];
+}
 
 //designated initializer
 - (id)initWithName:(NSString*)aName 
 {
-	return nil;
+	if (self = [super init]) 
+	{
+		[self setName:aName];
+		lastClicked = [[NSCalendarDate alloc] init];
+		lastUsed = [[NSCalendarDate alloc] init];
+		
+		clickCount = 0;
+		useCount = 0;
+	}
+	return self;
+}
+
+- (void)dealloc 
+{
+	[name release];
+	[query release];
+	[lastUsed release];
+	[lastClicked release];
+	[super dealloc];
 }
 
 //NSCoding
@@ -26,68 +48,66 @@
 
 - (void)encodeWithCoder:(NSCoder*)coder 
 {
-
+	//nothing
 }
 
 #pragma mark accessors
 - (void)setName:(NSString*)aName 
 {
-
+	[aName retain];
+	[name release];
+	name = aName;
 }
 
 - (void)setQuery:(NSString*)aQuery 
 {
-
+	[aQuery retain];
+	[query release];
+	query = aQuery;
 }
 
 - (void)incrementClickCount 
 {
-
+	clickCount++;
+	[lastClicked release];
+	lastClicked = [[NSCalendarDate alloc] init];
 }
 
 - (void)incrementUseCount 
 {
-
-}
-
-- (void)setCurrentBestTag:(PATag*)aTag
-{
-
-}
-
-- (PATag*)currentBestTag 
-{
-	return nil;
+	useCount++;
+	[lastUsed release];
+	lastUsed = [[NSCalendarDate alloc] init];
 }
 
 - (NSString*)name 
 {
-	return nil;
+	return name;
 }
 
 - (NSString*)query 
 {
-	return nil;
+	return query;
 }
 
 - (NSCalendarDate*)lastClicked 
 {
-	return nil;
+	return lastClicked;
 }
 
 - (NSCalendarDate*)lastUsed 
 {
-	return nil;
+	return lastUsed;
 }
 
 - (unsigned long)clickCount 
 {
-	return 0;
+	return clickCount;
 }
 
 - (unsigned long)useCount 
 {
-	return 0;
+	return useCount;
 }
 
 - (float)absoluteRating
@@ -95,30 +115,19 @@
 	return 0;
 }
 
-- (float)relativeRating
+- (float)relativeRatingToTag:(PATag*)otherTag
 {	
 	return 0;
 }
 
 #pragma mark drawing
-//TODO not HERE!
 - (NSMutableDictionary*)viewAttributes
 {
 	return nil;
 }
 
-- (NSSize)sizeWithAttributes:(NSDictionary*)attributes
-{
-	return NSMakeSize(0,0);
-}
-
 #pragma mark euality testing
-- (BOOL)isEqual:(id)other 
-{
-	return NO;
-}
-
-- (BOOL)isEqualToTag:(PATag*)otherTag 
+- (BOOL)isEqual:(id)other
 {
 	return NO;
 }
