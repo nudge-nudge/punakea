@@ -79,8 +79,8 @@
 		[cell setGroup:[(NSMetadataQueryResultGroup *)item retain]];
 		return cell;
 	} else {
-		NSTextFieldCell *cell = [[[NSTextFieldCell alloc] initTextCell:@"hallo"] autorelease];
-		[cell setBackgroundColor:[NSColor grayColor]];
+		PAResultsItemCell *cell = [[[PAResultsItemCell alloc] initTextCell:@"hallo"] autorelease];
+		[cell setItem:[(NSMetadataItem *)item retain]];
 		return cell;
 	}
 }

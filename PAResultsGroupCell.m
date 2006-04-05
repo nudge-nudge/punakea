@@ -67,7 +67,7 @@
 	[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 	[fontAttributes setObject:[NSFont boldSystemFontOfSize:12] forKey:NSFontAttributeName];
 	
-	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + 20, cellFrame.origin.y + 1) withAttributes:fontAttributes];
+	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + 23, cellFrame.origin.y + 1) withAttributes:fontAttributes];
 }
 
 

@@ -39,6 +39,12 @@
 		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification])
 	{
 		[self reloadData];
+		
+		int i;
+		for(i = 0; i < [self numberOfRows]; i++)
+		{
+			if([self levelForRow:i] == 0) [self expandItem:[self itemAtRow:i]];
+		}
 	}
 }
 

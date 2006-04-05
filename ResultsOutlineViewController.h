@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAResultsGroupCell.h"
+#import "PAResultsItemCell.h"
 
 
 @interface ResultsOutlineViewController : NSObject
