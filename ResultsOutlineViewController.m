@@ -72,7 +72,7 @@
 	NSOutlineView *outlineView = tableView;
 	id item = [outlineView itemAtRow:row];
 	
-	NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:@"hallo"];
+	NSTextFieldCell *cell = [[[NSTextFieldCell alloc] initTextCell:@"hallo"] autorelease];
 	[cell setDrawsBackground:YES];
 	
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
@@ -83,6 +83,14 @@
 	}
 	
 	return cell;
+}
+
+- (void)outlineView:(NSOutlineView *)outlineView
+  willDisplayOutlineCell:(id)cell
+  forTableColumn:(NSTableColumn *)tableColumn
+  item:(id)item
+{
+	// TODO
 }
 
 
