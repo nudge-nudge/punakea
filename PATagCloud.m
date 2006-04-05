@@ -2,21 +2,36 @@
 
 @interface PATagCloud (PrivateAPI)
 /**
+creates buttons for tags held in displayTags. created buttons can be accessed in
+ tagButtonDict afterwards. called by setDisplayTags
+ */
+- (void)createButtonsForTags;
+
+/**
+draws the background
+ */
+- (void)drawBackground;
+/**
+draws all the tags in displayTags
+ @param rect view rect in which to draw
+ */
+- (void)drawTags:(NSRect)rect;
+
+/**
+determines the oigin point for the next tag button to display;
+ needs to be accessed sequentially for every tag
+ 
+ @param tagButton button to display
+ @param rect rect of main view
+ @return origin point for next tagButton
+ */
+- (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect;
+/**
 calculates the starting point in the next line according to the height of all the tags
  @param rect the main rect in which all the stuff is drawn
  @return origin point for next tag
  */
 - (NSPoint)firstPointForNextLineIn:(NSRect)rect;
-
-/**
-creates buttons for tags held in displayTags. created buttons can be accessed in
- tagButtonDict afterwards. called by setDisplayTags
- */
-- (void)createButtonsForTags;
-- (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth;
-- (void)drawBackground;
-- (void)drawTags:(NSRect)rect;
-- (NSPoint)nextPointForTag:(PATag*)tag inRect:(NSRect)rect;
 
 @end
 
@@ -98,6 +113,38 @@ bound to visibleTags
 	[self drawTags:rect];
 }
 
+- (void)drawTags:(NSRect)rect
+{
+	//first remove all drawn tags
+	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
+	NSControl *subview;
+	
+	while (subview = [viewEnumerator nextObject])
+	{
+		[subview removeFromSuperview];
+	}
+	
+	NSEnumerator *e = [displayTags objectEnumerator];
+	
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
+		NSPoint origin = [self nextPointForTagButton:tagButton inRect:(NSRect)rect];
+		[tagButton setFrameOrigin:origin];
+		[self addSubview:tagButton];
+	}
+}
+
+- (void)drawBackground
+{
+	NSRect bounds = [self bounds];
+	[[NSColor whiteColor] set];
+	[NSBezierPath fillRect:bounds];
+}
+
+#pragma mark calculation
 - (NSPoint)firstPointForNextLineIn:(NSRect)rect;
 {
 	//TODO externalize
@@ -135,53 +182,19 @@ bound to visibleTags
 		//remember the maximum height
 		if (tagSize.height > maxHeight)
 			maxHeight = tagSize.height;
-
+		
 		tagPosition++;
 	}
-
+	
 	return NSMakePoint(spacing,pointForNextTagRect.y-maxHeight-vPadding);
 }	
 
-- (void)drawBackground
-{
-	NSRect bounds = [self bounds];
-	[[NSColor whiteColor] set];
-	[NSBezierPath fillRect:bounds];
-}
-
-- (void)drawTags:(NSRect)rect
-{
-	//first remove all drawn tags
-	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
-	NSControl *subview;
-	
-	while (subview = [viewEnumerator nextObject])
-	{
-		[subview removeFromSuperview];
-	}
-	
-	NSEnumerator *e = [displayTags objectEnumerator];
-	
-	PATag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		NSPoint origin = [self nextPointForTag:(PATag*)tag inRect:(NSRect)rect];
-		
-		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
-		[tagButton setFrameOrigin:origin];
-		[self addSubview:tagButton];
-	}
-}
-
-#pragma mark calculation
-- (NSPoint)nextPointForTag:(PATag*)tag inRect:(NSRect)rect
+- (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect
 {
 	//TODO externalize spacing and padding and ...
 	int spacing = 10;
 	
-	PATagButton *button = [tagButtonDict objectForKey:[tag name]];
-	NSRect frame = [button frame];
+	NSRect frame = [tagButton frame];
 	float width = frame.size.width;
 	
 	float xValue = pointForNextTagRect.x + width + spacing;
