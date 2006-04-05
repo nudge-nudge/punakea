@@ -14,7 +14,7 @@
 #pragma mark Data Source
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) 
+	/*if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) 
 	{
 		NSMetadataQueryResultGroup *group = item;
 		return [group value];
@@ -23,7 +23,8 @@
 		return [mditem valueForKey:@"kMDItemDisplayName"];
 	}
 	
-	return nil;
+	return nil;*/
+	return @"hallo";
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
@@ -72,17 +73,16 @@
 	NSOutlineView *outlineView = tableView;
 	id item = [outlineView itemAtRow:row];
 	
-	NSTextFieldCell *cell = [[[NSTextFieldCell alloc] initTextCell:@"hallo"] autorelease];
-	[cell setDrawsBackground:YES];
-	
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
 	{
-		[cell setBackgroundColor:[NSColor yellowColor]];
+		PAResultsGroupCell *cell = [[[PAResultsGroupCell alloc] initTextCell:@"hallo"] autorelease];
+		[cell setGroup:[(NSMetadataQueryResultGroup *)item retain]];
+		return cell;
 	} else {
+		NSTextFieldCell *cell = [[[NSTextFieldCell alloc] initTextCell:@"hallo"] autorelease];
 		[cell setBackgroundColor:[NSColor grayColor]];
+		return cell;
 	}
-	
-	return cell;
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView
@@ -90,7 +90,9 @@
   forTableColumn:(NSTableColumn *)tableColumn
   item:(id)item
 {
-	// TODO
+	// Hide default triangle
+	[cell setImage:[NSImage imageNamed:@"transparent"]];
+	[cell setAlternateImage:[NSImage imageNamed:@"transparent"]];
 }
 
 
