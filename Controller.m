@@ -190,24 +190,6 @@
 }	
 
 #pragma mark tag stuff
-- (NSDictionary*)viewAttributesForTag:(PATag*)tag
-{
-	NSMutableDictionary *attribs = [NSMutableDictionary dictionary];
-	
-	NSColor *c = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:128.0 alpha:1.0];
-	//externalize sizes
-	int size = 30 * [tag relativeRatingToTag:[self currentBestTag]];
-	if (size < 10)
-		size = 10;
-	
-	NSFont *fnt = [NSFont fontWithName:@"Geneva" size:size];
-	
-	[attribs setObject:c forKey:NSForegroundColorAttributeName];
-	[attribs setObject:fnt forKey:NSFontAttributeName];
-	
-	return attribs;
-}
-
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
 {
 	NSEnumerator *e = [tagSet objectEnumerator];

@@ -7,13 +7,16 @@ calculates the starting point in the next line according to the height of all th
  @return origin point for next tag
  */
 - (NSPoint)firstPointForNextLineIn:(NSRect)rect;
+
+/**
+creates buttons for tags held in displayTags. created buttons can be accessed in
+ tagButtonDict afterwards. called by setDisplayTags
+ */
 - (void)createButtonsForTags;
 - (float)heightForStringDrawing:(NSString*)myString font:(NSFont*)myFont width:(float) myWidth;
 - (void)drawBackground;
 - (void)drawTags:(NSRect)rect;
 - (NSPoint)nextPointForTag:(PATag*)tag inRect:(NSRect)rect;
-- (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs;
-- (NSSize)sizeWithAttributes:(NSDictionary*)attributes forTag:(PATag*)tag;
 
 @end
 
@@ -29,7 +32,7 @@ calculates the starting point in the next line according to the height of all th
 }
 
 /**
-bind to relatedTags ... TagCloud always displays the content of relatedTags
+bind to visibleTags
  */
 - (void)awakeFromNib
 {
@@ -49,7 +52,7 @@ bind to relatedTags ... TagCloud always displays the content of relatedTags
 
 #pragma mark observer and important stuff
 /**
-bound to relatedTags
+bound to visibleTags
  */
 - (void)observeValueForKeyPath:(NSString *)keyPath
 					  ofObject:(id)object 
@@ -59,15 +62,10 @@ bound to relatedTags
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
 		[self setDisplayTags:[NSArray arrayWithArray:[controller visibleTags]]];
-		[self createButtonsForTags];
 		[self setNeedsDisplay:YES];
 	}
 }
 
-/**
-creates buttons for tags held in displayTags. created buttons can be accessed in
- tagButtonDict afterwards
- */
 - (void)createButtonsForTags
 {
 	[tagButtonDict removeAllObjects];
@@ -87,11 +85,13 @@ creates buttons for tags held in displayTags. created buttons can be accessed in
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect
 {	
+	//initial point, from here all other points are calculated
 	pointForNextTagRect = NSMakePoint(0,rect.size.height);
 	
-	//needed for drawing in lines
+	//needed for drawing in rows
 	tagPosition = 0;
-		
+	
+	//get the point for the very first tag
 	pointForNextTagRect = [self firstPointForNextLineIn:rect];
 	
 	[self drawBackground];
@@ -112,8 +112,6 @@ creates buttons for tags held in displayTags. created buttons can be accessed in
 		then keep the starting points for each one */
 	NSEnumerator *tagEnumerator = [displayTags objectEnumerator];
 	PATag *tag;
-	
-	NSMutableString *oneLine = [NSMutableString string];
 	
 	int i;
 	for (i=0;i<tagPosition;i++)
@@ -137,8 +135,7 @@ creates buttons for tags held in displayTags. created buttons can be accessed in
 		//remember the maximum height
 		if (tagSize.height > maxHeight)
 			maxHeight = tagSize.height;
-		
-		[oneLine appendFormat:@"%@ ",[tag name]];
+
 		tagPosition++;
 	}
 
@@ -177,7 +174,7 @@ creates buttons for tags held in displayTags. created buttons can be accessed in
 	}
 }
 
-//TODO if this works, pass control instead of tag
+#pragma mark calculation
 - (NSPoint)nextPointForTag:(PATag*)tag inRect:(NSRect)rect
 {
 	//TODO externalize spacing and padding and ...
@@ -204,36 +201,6 @@ creates buttons for tags held in displayTags. created buttons can be accessed in
 	return newOrigin;
 }
 
-//deprecated
-- (NSRect)nextRectFor:(PATag*)tag inMainRect:(NSRect)rect withAttributes:(NSDictionary*)attribs
-{
-	//TODO externalize spacing and padding and ...
-	int spacing = 10;
-	
-	//first get the tag size for the tag to draw
-	NSSize tagSize = [self sizeWithAttributes:attribs forTag:tag];
-	
-	int xValue = pointForNextTagRect.x + tagSize.width + spacing;
-	
-	//if the tag doesn't fit in this line, get first point in next line
-	if (xValue > rect.size.width)
-	{
-		pointForNextTagRect = [self firstPointForNextLineIn:rect];
-	}
-		
-	NSRect tagRect =  NSMakeRect(pointForNextTagRect.x,pointForNextTagRect.y,tagSize.width,tagSize.height);
-	
-	//then calc the point for the next tag 
-	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + tagSize.width + spacing,pointForNextTagRect.y);
-	
-	return tagRect;
-}
-
-- (NSSize)sizeWithAttributes:(NSDictionary*)attributes forTag:(PATag*)tag
-{
-	return [[tag name] sizeWithAttributes:attributes];
-}
-
 #pragma mark accessors
 - (NSArray*)displayTags
 {
@@ -245,6 +212,8 @@ creates buttons for tags held in displayTags. created buttons can be accessed in
 	[otherTags retain];
 	[displayTags release];
 	displayTags = otherTags;
+	
+	[self createButtonsForTags];
 }
 
 @end

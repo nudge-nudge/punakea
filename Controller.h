@@ -48,7 +48,6 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 //for adding to selected
-- (NSDictionary*)viewAttributesForTag:(PATag*)tag;
 - (void)addToSelectedTags;
 - (IBAction)clearSelectedTags:(id)sender;
 
