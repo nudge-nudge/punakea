@@ -10,7 +10,6 @@
 
 @end
 
-//TODO add and remove tags needs to be overwritten!
 @implementation Controller
 
 #pragma mark init + dealloc

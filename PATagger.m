@@ -8,13 +8,19 @@
 
 #import "PATagger.h"
 
+@interface PATagger (PrivateAPI)
+
+- (void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+
+@end
+
 @implementation PATagger
 
 //this is where the sharedInstance is held
 static PATagger *sharedInstance = nil;
 
 //constructor - only called by sharedInstance
--(id)sharedInstanceInit {
+- (id)sharedInstanceInit {
 	self = [super init];
 	if (self)
 	{
@@ -24,12 +30,12 @@ static PATagger *sharedInstance = nil;
 }
 
 //write tags
--(void)addTagToFile:(PATag*)tag filePath:(NSString*)path {
+- (void)addTagToFile:(PASimpleTag*)tag filePath:(NSString*)path {
 	[self addTagsToFile:[NSArray arrayWithObject:tag] filePath:path];
 }
 
 //adds the specified tags, doesn't overwrite - TODO check if works with PATag
--(void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path {
+- (void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path {
 	NSMutableArray *resultTags = [NSMutableArray arrayWithArray:tags];
 	
 	//existing tags must be kept - only if there are any
@@ -52,8 +58,37 @@ static PATagger *sharedInstance = nil;
 	[self writeTagsToFile:resultTags filePath:path];
 }
 
+- (void)removeTag:(PASimpleTag*)tag fromFiles:(NSArray*)files
+{
+	NSEnumerator *fileEnumerator = [files objectEnumerator];
+	NSString *path;
+	
+	while (path = [fileEnumerator nextObject])
+	{
+		// get all tags, remove the specified one, write back to file
+		NSMutableArray *tags = [self getTagsForFile:path];
+		[tags removeObject:tag];
+		[self writeTagsToFile:tags filePath:path];
+	}
+}
+
+- (void)renameTag:(PASimpleTag*)tag toTag:(PASimpleTag*)newTag onFiles:(NSArray*)files
+{
+	NSEnumerator *fileEnumerator = [files objectEnumerator];
+	NSString *path;
+	
+	while (path = [fileEnumerator nextObject])
+	{
+		// get all tags, rename the specified one (delete/add), write back to file
+		NSMutableArray *tags = [self getTagsForFile:path];
+		[tags removeObject:tag];
+		[tags addObject:newTag];
+		[self writeTagsToFile:tags filePath:path];
+	}
+}
+
 //sets the tags, overwrites current ones
--(void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path {
+- (void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path {
 	//only the names of the tags are written, create tmp array with names only
 	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
 	
@@ -69,7 +104,7 @@ static PATagger *sharedInstance = nil;
 }
 
 //read tags - TODO there could be a lot of mem-leaks in here ... check if file exists!!
--(NSArray*)getTagsForFile:(NSString*)path {
+- (NSMutableArray*)getTagsForFile:(NSString*)path {
 	//carbon api ... can be treated as cocoa objects - TODO check warnings
 	MDItemRef *item = MDItemCreate(NULL,path);
 	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
@@ -89,12 +124,12 @@ static PATagger *sharedInstance = nil;
 }
 
 //TODO might never be called - check if needed
--(void)dealloc {
+- (void)dealloc {
 	[super dealloc];
 }
 
-//---- BEGIN singleton stuff ----
-+(PATagger*)sharedInstance {
+#pragma mark singleton stuff
++ (PATagger*)sharedInstance {
 	@synchronized(self) {
         if (sharedInstance == nil) {
             sharedInstance = [[self alloc] sharedInstanceInit];
@@ -103,7 +138,7 @@ static PATagger *sharedInstance = nil;
     return sharedInstance;
 }
 
-+(id)allocWithZone:(NSZone *)zone {
++ (id)allocWithZone:(NSZone *)zone {
     @synchronized(self) {
         if (sharedInstance == nil) {
             sharedInstance = [super allocWithZone:zone];
@@ -112,21 +147,20 @@ static PATagger *sharedInstance = nil;
     return sharedInstance;
 }
 
--(id)retain {
+- (id)retain {
     return self;
 }
 
--(unsigned)retainCount {
+- (unsigned)retainCount {
     return UINT_MAX;  //denotes an object that cannot be released
 }
 
--(void)release {
+- (void)release {
     //do nothing
 }
 
 - (id)autorelease {
     return self;
 }
-//---- END singleton stuff ----
 
 @end
