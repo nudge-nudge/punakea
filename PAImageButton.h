@@ -10,12 +10,17 @@
 #import "PAImageButtonCell.h"
 
 
-@interface PAImageButton : NSControl
+@interface PAImageButton : NSControl 
+{
+	NSMutableDictionary *tag;
+}
 
 - (void)setButtonType:(PAImageButtonType)aType;
 - (void)setState:(PAImageButtonState)aState;
 - (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState;
 
 - (BOOL)isHighlighted;
+
+- (NSMutableDictionary *)tag;
 
 @end

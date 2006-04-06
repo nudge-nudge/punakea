@@ -7,6 +7,7 @@
 {
 	[self setIndentationPerLevel:0.0];
 	[self setIntercellSpacing:NSMakeSize(0,1)];
+	[[self delegate] setOutlineView:self];
 }
 
 
@@ -28,6 +29,18 @@
 	}*/
 	
 	return [super frameOfCellAtColumn:columnIndex row:rowIndex];
+}
+
+
+#pragma mark Actions
+- (void)reloadData
+{
+    while ([[self subviews] count] > 0)
+    {
+		[[[self subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
+    }
+    
+    [super reloadData];
 }
 
 

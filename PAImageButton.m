@@ -17,6 +17,7 @@
 		PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:nil];
 		[self setCell:cell];
 		[cell release];
+		tag = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -41,8 +42,14 @@
 	return [[self cell] isHighlighted];
 }
 
+- (NSMutableDictionary *)tag
+{
+	return tag;
+}
+
 - (void)dealloc
 {
+	if(tag) [tag release];
 	[super dealloc];
 }
 

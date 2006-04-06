@@ -14,8 +14,12 @@
 @interface ResultsOutlineViewController : NSObject
 {
 	NSMetadataQuery *query;
+	NSOutlineView *outlineView;
 }
 
 - (NSMetadataQuery *)query;
 - (void)setQuery:(NSMetadataQuery *)aQuery;
+- (NSOutlineView *)outlineView;
+- (void)setOutlineView:(NSOutlineView *)anOutlineView;
+
 @end

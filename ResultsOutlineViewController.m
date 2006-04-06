@@ -76,14 +76,10 @@
 	id item = [outlineView itemAtRow:row];
 	
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
-	{
-		PAResultsGroupCell *cell = [[[PAResultsGroupCell alloc] initTextCell:@"hallo"] autorelease];
-		[cell setGroup:[(NSMetadataQueryResultGroup *)item retain]];
-		return cell;
+	{		
+		return [[[PAResultsGroupCell alloc] initTextCell:@"hallo"] autorelease];
 	} else {
-		PAResultsItemCell *cell = [[[PAResultsItemCell alloc] initTextCell:@"hallo"] autorelease];
-		[cell setItem:[(NSMetadataItem *)item retain]];
-		return cell;
+		return [[[PAResultsItemCell alloc] initTextCell:@"hallo"] autorelease];
 	}
 }
 
@@ -97,6 +93,58 @@
 	[cell setAlternateImage:[NSImage imageNamed:@"transparent"]];
 }
 
+- (void)outlineView:(NSOutlineView *)outlineView
+	willDisplayCell:(id)cell
+	 forTableColumn:(NSTableColumn *)tableColumn
+	           item:(id)item
+{
+	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
+	{
+		[(PAResultsGroupCell *)cell setGroup:[(NSMetadataQueryResultGroup *)item retain]];
+	}
+	else
+	{
+		[(PAResultsItemCell *)cell setItem:[(NSMetadataItem *)item retain]];
+	}
+}
+
+/*- (void)outlineViewItemDidCollapse:(NSNotification *)notification
+{
+	[self updateSubviews];
+}
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification
+{
+	[self updateSubviews];
+}*/
+
+
+#pragma mark Actions
+- (void)action:(id)sender
+{
+	id item = [(NSDictionary *)[sender tag] objectForKey:@"group"];
+	if([outlineView isItemExpanded:item])
+		[outlineView collapseItem:item];
+	else
+		[outlineView expandItem:item];
+}
+
+
+/*#pragma mark Temp
+- (void)updateSubviews
+{
+	while([[outlineView subviews] count] > 0)
+    {
+		[[[outlineView subviews] lastObject] removeFromSuperview];
+    }
+	int i;
+	for(i = 0; i < [outlineView numberOfRows]; i++)
+	{
+		if([outlineView levelForRow:i] == 0)
+			[outlineView reloadItem:[outlineView itemAtRow:i]];
+	}
+}*/
+
 
 #pragma mark Accessors
 - (NSMetadataQuery *)query
@@ -107,6 +155,16 @@
 - (void)setQuery:(NSMetadataQuery *)aQuery
 {
 	query = aQuery;
+}
+
+- (NSOutlineView *)outlineView
+{
+	return outlineView;
+}
+
+- (void)setOutlineView:(NSOutlineView *)anOutlineView
+{
+	outlineView = anOutlineView;
 }
 
 @end
