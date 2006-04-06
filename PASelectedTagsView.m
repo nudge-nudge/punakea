@@ -25,10 +25,9 @@
 		cellWidth = 80;
 		cellMaxWidth = 120;
 		cellHeight = 20;
-		cellMaxHeight = 40;
+		cellMaxHeight = [self bounds].size.height;
 		
 		//settings
-		[self setBackgroundColor:[NSColor whiteColor]];
 		[self setMode:NSHighlightModeMatrix];
 		[self setSelectionByRect:NO];
     }
@@ -68,25 +67,33 @@
 	float displayWidth, displayHeight;
 	int numberOfTagsInRow;
 		
+	float cellMaxWidthSum = tagCount * cellMaxWidth + (tagCount - 1) * [self intercellSpacing].width;
+	float cellWidthSum = tagCount * cellWidth + (tagCount - 1) * [self intercellSpacing].width;
+	
 	// if tags fit with their maxium width, draw them
-	if ( tagCount <= (bounds.width / cellMaxWidth) )
+	if ( cellMaxWidthSum <= bounds.width )
 	{
 		displayWidth = cellMaxWidth;
 		displayHeight = cellMaxHeight;
 		numberOfTagsInRow = tagCount;
 	}
 	// if the fit with their minimum width, stretch em
-	else if (tagCount <= (bounds.width / cellWidth) )
+	else if ( cellWidthSum <= bounds.width )
 	{
-		displayWidth = ( (float)bounds.width / (float)tagCount);
+		float spacingSum = tagCount * [self intercellSpacing].width;
+		float totalAvailableWidth = (float)bounds.width - spacingSum;
+		displayWidth = (totalAvailableWidth / (float)tagCount);
 		displayHeight = cellMaxHeight;
 		numberOfTagsInRow = tagCount;
 	}			 
 	// if they overflow (2+ rows needed), draw rest of rows with stretched width
 	else
 	{
-		numberOfTagsInRow = (bounds.width / cellWidth);
-		displayWidth = ( (float)bounds.width / (float)numberOfTagsInRow);
+		//TODO this isn't perfect but should do it ... improve!
+		numberOfTagsInRow = (bounds.width / cellMaxWidth);
+		float spacingSum = ( numberOfTagsInRow - 1 ) * [self intercellSpacing].width;
+		float totalAvailableWidth = (float)bounds.width - spacingSum;
+		displayWidth = ( totalAvailableWidth / (float)numberOfTagsInRow );
 		displayHeight = cellHeight;
 	}
 	

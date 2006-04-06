@@ -301,7 +301,24 @@
 	}
 }
 
-#pragma Temp
+#pragma mark working with tags
+- (void)removeTag:(PASimpleTag*)tag
+{
+	NSArray *files;
+	//TODO get all files into files
+	
+	[tagger removeTag:tag fromFiles:files];
+}
+
+- (void)renameFromTag:(PASimpleTag*)fromTag to:(PATag*)toTag
+{
+	NSArray *files;
+	//TODO get all files into files
+	
+	[tagger renameTag:fromTag toTag:toTag onFiles:files];
+}
+		
+#pragma mark Temp
 - (void)setGroupingAttributes:(id)sender;
 {
 	NSSegmentedControl *sc = sender;
