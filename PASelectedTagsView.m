@@ -22,8 +22,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-		cellWidth = 100;
-		cellMaxWidth = 150;
+		cellWidth = 80;
+		cellMaxWidth = 120;
 		cellHeight = 20;
 		cellMaxHeight = 40;
 		
@@ -65,30 +65,34 @@
 	
 	int tagCount = [[selectedTagsController arrangedObjects] count];
 	
-	float displayWidth = cellWidth;
-	float displayHeight = cellHeight;
-	
+	float displayWidth, displayHeight;
+	int numberOfTagsInRow;
+		
 	// if tags fit with their maxium width, draw them
 	if ( tagCount <= (bounds.width / cellMaxWidth) )
 	{
 		displayWidth = cellMaxWidth;
 		displayHeight = cellMaxHeight;
+		numberOfTagsInRow = tagCount;
 	}
-	
 	// if the fit with their minimum width, stretch em
-	// if they overflow, draw rest of rows with stretched width
+	else if (tagCount <= (bounds.width / cellWidth) )
+	{
+		displayWidth = ( (float)bounds.width / (float)tagCount);
+		displayHeight = cellMaxHeight;
+		numberOfTagsInRow = tagCount;
+	}			 
+	// if they overflow (2+ rows needed), draw rest of rows with stretched width
 	else
 	{
-		int numberOfTagsInRow = (bounds.width / cellWidth);
-		displayWidth = (bounds.width / numberOfTagsInRow);
+		numberOfTagsInRow = (bounds.width / cellWidth);
+		displayWidth = ( (float)bounds.width / (float)numberOfTagsInRow);
+		displayHeight = cellHeight;
 	}
 	
 	// set cell size
 	[self setCellSize:NSMakeSize(displayWidth,displayHeight)];
-	
-	// add as much rows as needed
-	int numberOfTagsInRow = (bounds.width / displayWidth);
-	
+		
 	int rowCount;
 		
 	if (tagCount % numberOfTagsInRow > 0)
