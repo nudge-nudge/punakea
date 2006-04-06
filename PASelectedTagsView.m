@@ -23,16 +23,14 @@
     self = [super initWithFrame:frame];
     if (self) {
 		cellWidth = 100;
+		cellMaxWidth = 150;
 		cellHeight = 20;
-
-		[self setCellClass:[NSTextFieldCell class]];
+		cellMaxHeight = 40;
 		
 		//settings
+		[self setBackgroundColor:[NSColor whiteColor]];
 		[self setMode:NSHighlightModeMatrix];
 		[self setSelectionByRect:NO];
-		
-		[self setCellSize:NSMakeSize(cellWidth,cellHeight)];
-		[self setAutosizesCells:YES];
     }
     return self;
 }
@@ -48,48 +46,86 @@
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect 
 {
+	[self updateView];
 	[super drawRect:rect];
 }
 
-//TODO no this is not the way i want it ;)
 - (void)updateView
-{
-	//get some useful values
+{ 
+	// remove all content
+	int rows = [self numberOfRows];
+	for (rows;rows>0;rows--)
+	{
+		int removeRow = rows - 1;
+		[self removeRow:removeRow];
+	}	
+
+	// get some useful values
+	NSSize bounds = [self bounds].size;
+	
 	int tagCount = [[selectedTagsController arrangedObjects] count];
 	
-	NSRect bounds = [self bounds];
-	float boundsWith = bounds.size.width;
-	float boundsHeight = bounds.size.height;
+	float displayWidth = cellWidth;
+	float displayHeight = cellHeight;
 	
-	//calc values
-	int maxColumnCount = boundsWith / cellWidth;
-	int maxRowCount = boundsHeight / cellHeight;
-	
-	//adjust matrix accordingly
-	[self renewRows:maxRowCount columns:maxColumnCount];
-	
-	//TODO
-	if (tagCount > (maxRowCount * maxColumnCount))
+	// if tags fit with their maxium width, draw them
+	if ( tagCount <= (bounds.width / cellMaxWidth) )
 	{
-		NSLog(@"matrix too small!! fix me!!");
+		displayWidth = cellMaxWidth;
+		displayHeight = cellMaxHeight;
+	}
+	
+	// if the fit with their minimum width, stretch em
+	// if they overflow, draw rest of rows with stretched width
+	else
+	{
+		int numberOfTagsInRow = (bounds.width / cellWidth);
+		displayWidth = (bounds.width / numberOfTagsInRow);
+	}
+	
+	// set cell size
+	[self setCellSize:NSMakeSize(displayWidth,displayHeight)];
+	
+	// add as much rows as needed
+	int numberOfTagsInRow = (bounds.width / displayWidth);
+	
+	int rowCount;
+		
+	if (tagCount % numberOfTagsInRow > 0)
+	{
+		rowCount = (tagCount / numberOfTagsInRow) + 1;
 	}
 	else
 	{
-	//fill matrix
-		int i;
-		int j;
-		int counter = 0;
-		
-		for (i = 0;i< maxRowCount;i++)
+		rowCount = (tagCount / numberOfTagsInRow);
+	}
+	
+	// if the tags don't fill the entire row, lower numberOfTagsInRow
+	if (tagCount < numberOfTagsInRow)
+	{
+		numberOfTagsInRow = tagCount;
+	}
+	
+	[self renewRows:rowCount columns:numberOfTagsInRow];
+	
+	int i; //rows
+	int j; //columns
+	int counter = 0;
+	
+	for (i=0;i<rowCount;i++)
+	{
+		for (j=0;j<numberOfTagsInRow;j++)
 		{
-			for (j = 0;j < maxColumnCount;j++)
-			{
-				PATag *tag = [[selectedTagsController arrangedObjects] objectAtIndex:counter];
-				NSCell *cell = [[NSCell alloc] initTextCell:[tag name]];
-				[self putCell:cell atRow:i column:j];
-				[cell release];
-				counter++;
-			}
+			// the last line may not be filled
+			if (counter == tagCount)
+				break;
+			
+			PATag *tag = [[selectedTagsController arrangedObjects] objectAtIndex:counter];
+			NSButtonCell *cell = [[NSButtonCell alloc] initTextCell:[tag name]];
+			[cell setBezelStyle:NSRecessedBezelStyle];
+			[self putCell:cell atRow:i column:j];
+			[cell release];
+			counter++;
 		}
 	}
 }
