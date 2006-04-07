@@ -142,6 +142,9 @@ bound to visibleTags
 	NSRect bounds = [self bounds];
 	[[NSColor whiteColor] set];
 	[NSBezierPath fillRect:bounds];
+	
+	[[NSColor lightGrayColor] set];
+	[NSBezierPath strokeRect:bounds];
 }
 
 #pragma mark calculation
