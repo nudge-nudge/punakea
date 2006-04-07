@@ -310,7 +310,7 @@
 	[tagger removeTag:tag fromFiles:files];
 }
 
-- (void)renameFromTag:(PASimpleTag*)fromTag to:(PATag*)toTag
+- (void)renameFromTag:(PASimpleTag*)fromTag to:(PASimpleTag*)toTag
 {
 	NSArray *files;
 	//TODO get all files into files

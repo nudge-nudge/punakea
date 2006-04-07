@@ -10,8 +10,8 @@
 
 @interface PASelectedTagsView (PrivateAPI)
 
-- (void)drawBackground;
-- (void)updateView;
+- (NSRect)drawBorder:(NSRect)rect;
+- (void)updateView:(NSRect)innerRect;
 
 @end
 
@@ -45,11 +45,23 @@
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect 
 {
-	[self updateView];
+	NSRect innerRect = [self drawBorder:rect];
+	[self updateView:innerRect];
 	[super drawRect:rect];
 }
 
-- (void)updateView
+- (NSRect)drawBorder:(NSRect)rect
+{
+	NSRect bounds = [self bounds];
+	[[NSColor whiteColor] set];
+	[NSBezierPath fillRect:bounds];
+	
+	[[NSColor lightGrayColor] set];
+	[NSBezierPath strokeRect:bounds];
+	return rect;
+}
+
+- (void)updateView:(NSRect)innerRect
 { 
 	// remove all content
 	int rows = [self numberOfRows];
@@ -57,10 +69,9 @@
 	{
 		int removeRow = rows - 1;
 		[self removeRow:removeRow];
-	}	
-
-	// get some useful values
-	NSSize bounds = [self bounds].size;
+	}
+	
+	NSSize bounds = innerRect.size;
 	
 	int tagCount = [[selectedTagsController arrangedObjects] count];
 	
@@ -151,7 +162,7 @@ bound to selectedTags
 {
 	if ([keyPath isEqual:@"arrangedObjects"]) 
 	{
-		[self updateView];
+		[self setNeedsDisplay];
 	}
 }
 @end
