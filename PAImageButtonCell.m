@@ -61,9 +61,15 @@
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [image size];
-	
-	[image drawAtPoint:NSZeroPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+		
+	[image drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }
+
+- (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	[self drawInteriorWithFrame:cellFrame inView:controlView];
+}
+
 
 #pragma mark Mouse Tracking
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
@@ -72,7 +78,7 @@
 }
 
 - (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView
-{
+{	
 	PAImageButtonState newHighlightedState;
 	PAImageButtonState newState;
 	
@@ -116,8 +122,7 @@
 	// Action
 	[self setAction:@selector(action:)];
 	
-	// all following states need to be the inverse ones? seems so...
-	
+	// all following states need to be the inverse ones? seems so...	
 	if(type == PAMomentaryLightButton)
 	{
 		[self setState:PAOnState];
@@ -169,20 +174,31 @@
 - (void)setState:(PAImageButtonState)aState
 {
 	state = aState;
+	[[self controlView] setNeedsDisplay:YES];
 }
 
 - (BOOL)isHighlighted
-{
-	return state == PAOnState ? YES : NO;
+{	
+	// Always return NO, so we can handle all drawing ourselves!
+	return NO;
 }
 
 - (void)setHighlighted:(BOOL)flag
 {
 	if(!flag)
-	{
-		// TODO: Test if setNeedsDisplay is needed
 		[self setState:PAOffState];
-	}
+	else
+		[self setState:PAOnState];
+}
+
+- (NSString *)tempValue
+{
+	return tempValue;
+}
+
+- (void)setTempValue:(NSString *)aString
+{
+	tempValue = aString;
 }
 
 @end

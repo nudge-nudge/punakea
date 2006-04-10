@@ -86,9 +86,36 @@
 	{
 		segmentedControl = [[PASegmentedImageControl alloc] initWithFrame:cellFrame];
 		
-		NSImage *image = [NSImage imageNamed:@"MDIconViewOff-1"];
+		NSImage *image = [NSImage imageNamed:@"MDListViewOff-1"];
 		[image setFlipped:YES];
+		//NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:@"eins"];
 		PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:image];
+		image = [NSImage imageNamed:@"MDListViewOn-1"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnState];	
+		image = [NSImage imageNamed:@"MDListViewPressed-1"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnHighlightedState];
+		[cell setImage:image forState:PAOffHighlightedState];
+		[cell setTempValue:@"eins"];	
+		[cell setState:PAOnState];
+		[cell setButtonType:PASwitchButton];
+		[segmentedControl addSegment:cell];
+		
+		image = [NSImage imageNamed:@"MDIconViewOff-1"];
+		[image setFlipped:YES];
+		//cell = [[NSTextFieldCell alloc] initTextCell:@"zwei"];
+		cell = [[PAImageButtonCell alloc] initImageCell:image];
+		image = [NSImage imageNamed:@"MDIconViewOn-1"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnState];
+		image = [NSImage imageNamed:@"MDIconViewPressed-1"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnHighlightedState];
+		[cell setImage:image forState:PAOffHighlightedState];
+		[cell setTempValue:@"zwei"];
+		[cell setState:PAOffState];
+		[cell setButtonType:PASwitchButton];
 		[segmentedControl addSegment:cell];
 		
 		// Add references to PASegmentedImageControl's tag for later usage

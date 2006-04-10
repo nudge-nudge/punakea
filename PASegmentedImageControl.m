@@ -18,6 +18,9 @@
     if (self) {
 		[self setCellClass:[NSTextFieldCell class]];
 		[self renewRows:1 columns:0];
+		[self setIntercellSpacing:NSMakeSize(0,0)];
+		[self setCellSize:NSMakeSize(21,20)];
+		[self setMode:NSHighlightModeMatrix];
 		tag = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -33,18 +36,21 @@
 #pragma mark Actions
 - (void)addSegment:(PAImageButtonCell *)imageButtonCell
 {
-	[imageButtonCell setTarget:self];
-	/*NSNumber *pos = [NSNumber numberWithInt:[self numberOfColumns]]] - 1;
-	[valueDict setObject:imageButton forKey:pos];
-	[self setNeedsDisplay];*/
 	int col = [self numberOfColumns];
+	
+	[imageButtonCell setTarget:self];
+
 	[self insertColumn:col];
 	[self putCell:imageButtonCell atRow:0 column:col];
 	
-	// Renew frame
+	// First cell determines the cells' size
+	/*if(col == 0)
+	{
+		NSSize cellSize = [imageButtonCell cellSize];
+		[self setCellSize:cellSize];
+	}*/
 	NSRect rect = [self frame];
-	NSSize cellSize = [imageButtonCell cellSize];
-	[self setCellSize:cellSize];
+	NSSize cellSize = [self cellSize];
 	rect.size.width = cellSize.width * [self numberOfColumns];
 	[self setFrame:rect];
 }
@@ -53,7 +59,20 @@
 #pragma mark Notifications
 - (void)action:(id)sender
 {
+	// Deselect all cells except the one the user clicked on (RadioMode)
+	int i;
+	BOOL allCellsAreDeselected = YES;
+	for(i = 0; i < [self numberOfColumns]; i++)
+	{
+		if([[self cellAtRow:0 column:i] isHighlighted]) allCellsAreDeselected = NO;
+	}
+	if(allCellsAreDeselected) [[self selectedCell] setHighlighted:YES];
 	
+	for(i = 0; i < [self numberOfColumns]; i++)
+	{
+		NSCell *cell = [self cellAtRow:0 column:i];
+		if([cell isNotEqualTo:[self selectedCell]]) [cell setHighlighted:NO];
+	}
 }
 
 
@@ -71,12 +90,5 @@
 {
 	tag = [aTag retain];
 }
-
-/*- (NSRect)frame
-{
-	NSRect frame = [super frame];
-	frame.size.width = frame.size.width * [self numberOfColumns];
-	return frame;
-}*/
 
 @end

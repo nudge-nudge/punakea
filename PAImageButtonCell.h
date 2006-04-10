@@ -28,9 +28,11 @@ typedef enum _PAImageButtonType
 
 @interface PAImageButtonCell : NSActionCell {
 
-NSMutableDictionary *images;
-PAImageButtonState state;
-PAImageButtonType type;
+	NSMutableDictionary *images;
+	PAImageButtonState state;
+	PAImageButtonType type;
+	
+	NSString *tempValue;
 
 }
 
