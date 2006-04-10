@@ -35,8 +35,8 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {					   
-	// Check if this triangle already exists in controlView
-	// Reference is not kept because cells are autoreleased
+	// Check if subviews already exist in controlView
+	// References are not kept because cells are autoreleased
 	int i;
 	NSArray *subviews = [controlView subviews];
 	for(i = 0; i < [subviews count]; i++)
@@ -47,6 +47,14 @@
 			if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
 			{
 				triangle = [subviews objectAtIndex:i];
+			}
+		}
+		if([[[subviews objectAtIndex:i] class] isEqualTo:[PASegmentedImageControl class]])
+		{
+			NSDictionary *tag = [[subviews objectAtIndex:i] tag];
+			if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
+			{
+				segmentedControl = [subviews objectAtIndex:i];
 			}
 		}
 	}
@@ -72,6 +80,32 @@
 	} else {
 		[triangle setFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y + 2, 16, 16)];
 	}
+	
+	// Add segmented control if neccessary
+	if([segmentedControl superview] != controlView)
+	{
+		segmentedControl = [[PASegmentedImageControl alloc] initWithFrame:cellFrame];
+		
+		NSImage *image = [NSImage imageNamed:@"MDIconViewOff-1"];
+		[image setFlipped:YES];
+		PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:image];
+		[segmentedControl addSegment:cell];
+		
+		// Add references to PASegmentedImageControl's tag for later usage
+		NSMutableDictionary *tag = [segmentedControl tag];
+		[tag setObject:[group value] forKey:@"identifier"];
+		[tag setObject:group forKey:@"group"];
+		
+		[controlView addSubview:segmentedControl];
+	}
+	// Refresh frame after all segments have been added
+	NSRect scFrame = [segmentedControl frame];
+	NSRect rect = NSMakeRect(cellFrame.origin.x + cellFrame.size.width - scFrame.size.width,
+							  cellFrame.origin.y,
+							  scFrame.size.width,
+							  20);
+	[segmentedControl setFrame:rect];
+	
 	
 	// Draw background
 	

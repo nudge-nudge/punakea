@@ -43,6 +43,8 @@
 		651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */; };
 		651CF1A0099B9F98007E48DD /* SidebarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */; };
 		651CF1A1099B9F98007E48DD /* SidebarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */; };
+		6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */; };
+		6525F34F09EA3C2B006E1FB7 /* PASegmentedImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */; };
 		6535E5030995F80F0067528D /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6535E5010995F80F0067528D /* PASidebarTableView.h */; };
 		6535E5040995F80F0067528D /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535E5020995F80F0067528D /* PASidebarTableView.m */; };
 		653DCE1809E295C8009175E5 /* MDSimpleGrouping.strings in Resources */ = {isa = PBXBuildFile; fileRef = 653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */; };
@@ -145,6 +147,7 @@
 				65A74ABB09E3AA23001131A8 /* PAResultsTableColumn.h in CopyFiles */,
 				65C0E04309E3EF11006C5A7C /* PAResultsGroupCell.h in CopyFiles */,
 				6563884B09E419D300BE59AE /* PAResultsItemCell.h in CopyFiles */,
+				6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +198,8 @@
 		651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarDelegateCategory.h; sourceTree = "<group>"; };
 		651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarDelegateCategory.m; sourceTree = "<group>"; };
+		6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASegmentedImageControl.h; sourceTree = "<group>"; };
+		6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASegmentedImageControl.m; sourceTree = "<group>"; };
 		6535E5010995F80F0067528D /* PASidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarTableView.h; sourceTree = "<group>"; };
 		6535E5020995F80F0067528D /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableView.m; sourceTree = "<group>"; };
 		653DCE1409E295A1009175E5 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/MDSimpleGrouping.strings; sourceTree = "<group>"; };
@@ -429,6 +434,8 @@
 				65461C9409D0418F0076778E /* PAImageButtonCell.m */,
 				65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */,
 				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
+				6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */,
+				6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -626,6 +633,7 @@
 				65A74ABC09E3AA23001131A8 /* PAResultsTableColumn.m in Sources */,
 				65C0E04409E3EF11006C5A7C /* PAResultsGroupCell.m in Sources */,
 				6563884C09E419D300BE59AE /* PAResultsItemCell.m in Sources */,
+				6525F34F09EA3C2B006E1FB7 /* PASegmentedImageControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

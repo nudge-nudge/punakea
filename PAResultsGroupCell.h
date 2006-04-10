@@ -8,11 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAImageButton.h"
+#import "PASegmentedImageControl.h"
 
 
 @interface PAResultsGroupCell : NSTextFieldCell {
 
 	PAImageButton *triangle;
+	PASegmentedImageControl *segmentedControl;
 	NSMetadataQueryResultGroup *group;
 
 }
