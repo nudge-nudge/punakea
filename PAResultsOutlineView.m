@@ -8,9 +8,6 @@
 	[self setIndentationPerLevel:0.0];
 	[self setIntercellSpacing:NSMakeSize(0,1)];
 	[[self delegate] setOutlineView:self];
-	
-	userDefaultsFile = @"Results.plist";
-	[self loadUserDefaults];
 }
 
 
@@ -42,40 +39,28 @@
     {
 		[[[self subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
     }
+	
+	//NSArray *collapsedGroups = [[userDefaults objectForKey:@"GroupItems"] objectForKey:@"CollapsedGroups"];
+	
+	/*int i, j;
+	for(i = 0; i < [self numberOfRows]; i++)
+	{			
+		if([self levelForRow:i] == 0)
+		{
+			BOOL isCollapsed = NO;
+			for(j = 0; j < [collapsedGroups count]; j++)
+			{
+				if([[collapsedGroups objectAtIndex:j] isEqualToString:[[self itemAtRow:i] value]])
+				{
+					isCollapsed = YES;		
+					break;
+				}
+			}				
+			if(!isCollapsed) [self expandItem:[self itemAtRow:i]];
+		}
+	}*/
     
     [super reloadData];
-}
-
-- (void)loadUserDefaults
-{
-	// Create preferences folder if it doesn't exists yet
-	NSFileManager *fileManager = [NSFileManager defaultManager]; 
-	NSString *folder = @"~/Library/Application Support/Punakea/"; 
-	folder = [folder stringByExpandingTildeInPath]; 
-	
-	if (![fileManager fileExistsAtPath: folder]) 
-		[fileManager createDirectoryAtPath: folder attributes: nil];
-	
-	NSString *fileName = [folder stringByAppendingPathComponent:userDefaultsFile]; 
-	
-	// If no plist exists, use the default one from Resources bundle
-	if(![fileManager fileExistsAtPath:fileName])
-	{
-		NSBundle *bundle = [NSBundle mainBundle];
-		NSString *path = [bundle pathForResource:@"Results" ofType:@"plist"];
-		userDefaults = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-	} else {
-		userDefaults = [[NSMutableDictionary alloc] initWithContentsOfFile:fileName];
-	}
-}
-
-- (void)saveUserDefaults
-{
-	NSString *folder = @"~/Library/Application Support/Punakea/"; 
-	folder = [folder stringByExpandingTildeInPath]; 
-	
-	NSString *fileName = [folder stringByAppendingPathComponent:userDefaultsFile]; 
-	[userDefaults writeToFile:fileName atomically:YES];
 }
 
 
@@ -87,12 +72,6 @@
 		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification])
 	{
 		[self reloadData];
-		
-		int i;
-		for(i = 0; i < [self numberOfRows]; i++)
-		{
-			if([self levelForRow:i] == 0) [self expandItem:[self itemAtRow:i]];
-		}
 	}
 }
 
@@ -109,16 +88,6 @@
 	NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
     [nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
 	[[self delegate] setQuery:query];
-}
-
-- (NSMutableDictionary *)userDefaults
-{
-	return userDefaults;
-}
-
-- (NSString *)userDefaultsFile
-{
-	return userDefaultsFile;
 }
 
 @end

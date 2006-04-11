@@ -129,7 +129,7 @@
 		[outlineView expandItem:item];
 	
 	// Save userDefaults
-	[outlineView saveUserDefaults];
+	
 }
 
 

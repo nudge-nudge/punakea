@@ -55,13 +55,18 @@
 		
 		// TODO: Add and sortindex like "1 PROGRAMS"!
 		
-		NSString *replacementValue;
+		/*NSString *replacementValue;
 		if(replacementValue = [simpleGrouping objectForKey:attrValue])
 		{
 			return [bundle localizedStringForKey:replacementValue value:replacementValue table:@"MDSimpleGrouping"];
 		} else {
 			return [bundle localizedStringForKey:@"DOCUMENTS" value:@"DOCUMENTS" table:@"MDSimpleGrouping"];
-		}
+		}*/
+		NSString *replacementValue;
+		if(replacementValue = [simpleGrouping objectForKey:attrValue])
+			return replacementValue;
+		else
+			return @"DOCUMENTS";
     }
 	// Default
 	else

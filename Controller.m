@@ -39,6 +39,15 @@
 	[drawer toggle:self];
 	*/
 	
+	if([[NSUserDefaults standardUserDefaults] objectForKey:@"Version"] == nil)
+	{
+		NSString *path = [[NSBundle mainBundle] pathForResource:@"default" ofType:@"plist"];
+		NSLog(path);
+		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+		[[NSUserDefaults standardUserDefaults] registerDefaults:dict];
+	}
+	//[[NSUserDefaults standardUserDefaults] setObject:@"hallo" forKey:@"muh"];
+	
 	[outlineView setQuery:_query];
 	
 	//instantiate relatedTags and register as an observer to changes in selectedTags
@@ -69,8 +78,9 @@
     [super dealloc];
 }
 
-- (void) applicationWillTerminate:(NSNotification *)note 
+- (void)applicationWillTerminate:(NSNotification *)note 
 { 
+	[[NSUserDefaults standardUserDefaults] synchronize];
 	[self saveDataToDisk]; 
 } 
 
