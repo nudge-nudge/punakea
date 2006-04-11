@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>GroupItems</key>
+	<array>
+		<dict>
+			<key>collapsed</key>
+			<true/>
+			<key>identifier</key>
+			<string>APPLICATIONS</string>
+		</dict>
+		<dict>
+			<key>collapsed</key>
+			<false/>
+			<key>identifier</key>
+			<string>PDF</string>
+			<key>mode</key>
+			<string>IconMode</string>
+		</dict>
+	</array>
+	<key>Modes</key>
+	<array>
+		<dict>
+			<key>members</key>
+			<array>
+				<string>IMAGES</string>
+				<string>PDF</string>
+			</array>
+			<key>name</key>
+			<string>IconMode</string>
+		</dict>
+		<dict>
+			<key>members</key>
+			<array>
+				<string>MUSIC</string>
+			</array>
+			<key>name</key>
+			<string>AlbumMode</string>
+		</dict>
+	</array>
+</dict>
+</plist>

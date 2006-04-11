@@ -5,6 +5,8 @@
 @interface PAResultsOutlineView : NSOutlineView
 {
 	NSMetadataQuery *query;
+	NSMutableDictionary *userDefaults;
+	NSString *userDefaultsFile;
 
 }
 

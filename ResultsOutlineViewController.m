@@ -127,6 +127,9 @@
 		[outlineView collapseItem:item];
 	else
 		[outlineView expandItem:item];
+	
+	// Save userDefaults
+	[outlineView saveUserDefaults];
 }
 
 
