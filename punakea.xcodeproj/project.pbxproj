@@ -48,7 +48,7 @@
 		6525F46E09EA4FBD006E1FB7 /* MDListViewOff-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6525F46B09EA4FBD006E1FB7 /* MDListViewOff-1.tiff */; };
 		6525F46F09EA4FBD006E1FB7 /* MDListViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6525F46C09EA4FBD006E1FB7 /* MDListViewOn-1.tiff */; };
 		6525F47009EA4FBD006E1FB7 /* MDListViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6525F46D09EA4FBD006E1FB7 /* MDListViewPressed-1.tiff */; };
-		65346B4F09EB9EDD00CFC8C1 /* Results.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65346B4E09EB9EDD00CFC8C1 /* Results.plist */; };
+		65346B4F09EB9EDD00CFC8C1 /* default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65346B4E09EB9EDD00CFC8C1 /* default.plist */; };
 		6535E5030995F80F0067528D /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6535E5010995F80F0067528D /* PASidebarTableView.h */; };
 		6535E5040995F80F0067528D /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535E5020995F80F0067528D /* PASidebarTableView.m */; };
 		653DCE1809E295C8009175E5 /* MDSimpleGrouping.strings in Resources */ = {isa = PBXBuildFile; fileRef = 653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */; };
@@ -207,7 +207,7 @@
 		6525F46B09EA4FBD006E1FB7 /* MDListViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDListViewOff-1.tiff"; sourceTree = "<group>"; };
 		6525F46C09EA4FBD006E1FB7 /* MDListViewOn-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDListViewOn-1.tiff"; sourceTree = "<group>"; };
 		6525F46D09EA4FBD006E1FB7 /* MDListViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDListViewPressed-1.tiff"; sourceTree = "<group>"; };
-		65346B4E09EB9EDD00CFC8C1 /* Results.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = Results.plist; sourceTree = "<group>"; };
+		65346B4E09EB9EDD00CFC8C1 /* default.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = default.plist; sourceTree = "<group>"; };
 		6535E5010995F80F0067528D /* PASidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PASidebarTableView.h; sourceTree = "<group>"; };
 		6535E5020995F80F0067528D /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableView.m; sourceTree = "<group>"; };
 		653DCE1409E295A1009175E5 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/MDSimpleGrouping.strings; sourceTree = "<group>"; };
@@ -405,7 +405,7 @@
 		65346B4D09EB9D6500CFC8C1 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
-				65346B4E09EB9EDD00CFC8C1 /* Results.plist */,
+				65346B4E09EB9EDD00CFC8C1 /* default.plist */,
 			);
 			name = UserDefaults;
 			sourceTree = "<group>";
@@ -598,7 +598,7 @@
 				6525F46E09EA4FBD006E1FB7 /* MDListViewOff-1.tiff in Resources */,
 				6525F46F09EA4FBD006E1FB7 /* MDListViewOn-1.tiff in Resources */,
 				6525F47009EA4FBD006E1FB7 /* MDListViewPressed-1.tiff in Resources */,
-				65346B4F09EB9EDD00CFC8C1 /* Results.plist in Resources */,
+				65346B4F09EB9EDD00CFC8C1 /* default.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
