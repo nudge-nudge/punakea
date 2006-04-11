@@ -39,27 +39,7 @@
     {
 		[[[self subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
     }
-	
-	//NSArray *collapsedGroups = [[userDefaults objectForKey:@"GroupItems"] objectForKey:@"CollapsedGroups"];
-	
-	/*int i, j;
-	for(i = 0; i < [self numberOfRows]; i++)
-	{			
-		if([self levelForRow:i] == 0)
-		{
-			BOOL isCollapsed = NO;
-			for(j = 0; j < [collapsedGroups count]; j++)
-			{
-				if([[collapsedGroups objectAtIndex:j] isEqualToString:[[self itemAtRow:i] value]])
-				{
-					isCollapsed = YES;		
-					break;
-				}
-			}				
-			if(!isCollapsed) [self expandItem:[self itemAtRow:i]];
-		}
-	}*/
-    
+	    
     [super reloadData];
 }
 
@@ -72,6 +52,15 @@
 		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification])
 	{
 		[self reloadData];
+		
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
+		
+		int i, j;
+		for(i = 0; i < [self numberOfRows]; i++)
+			if([self levelForRow:i] == 0)
+				if(![collapsedGroups containsObject:[[self itemAtRow:i] value]])
+					[self expandItem:[self itemAtRow:i]];
 	}
 }
 

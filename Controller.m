@@ -13,6 +13,15 @@
 @implementation Controller
 
 #pragma mark init + dealloc
++ (void)initialize
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"default" ofType:@"plist"];
+	NSDictionary *appDefaults = [NSDictionary dictionaryWithContentsOfFile:path];
+	[defaults registerDefaults:appDefaults];
+}
+
 - (id) init
 {
     if (self = [super init])
@@ -33,20 +42,11 @@
 	[NSApp setDelegate: self]; 
 	[self setupToolbar];
 	
-	/* drawer code!!
+	/* // Drawer
 	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
 	[drawer setContentView:sidebarNibView];
 	[drawer toggle:self];
 	*/
-	
-	if([[NSUserDefaults standardUserDefaults] objectForKey:@"Version"] == nil)
-	{
-		NSString *path = [[NSBundle mainBundle] pathForResource:@"default" ofType:@"plist"];
-		NSLog(path);
-		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-		[[NSUserDefaults standardUserDefaults] registerDefaults:dict];
-	}
-	//[[NSUserDefaults standardUserDefaults] setObject:@"hallo" forKey:@"muh"];
 	
 	[outlineView setQuery:_query];
 	

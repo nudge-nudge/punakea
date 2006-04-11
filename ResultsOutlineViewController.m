@@ -108,16 +108,6 @@
 	}
 }
 
-/*- (void)outlineViewItemDidCollapse:(NSNotification *)notification
-{
-	[self updateSubviews];
-}
-
-- (void)outlineViewItemDidExpand:(NSNotification *)notification
-{
-	[self updateSubviews];
-}*/
-
 
 #pragma mark Actions
 - (void)action:(id)sender
@@ -129,7 +119,18 @@
 		[outlineView expandItem:item];
 	
 	// Save userDefaults
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
+	NSMutableArray *collapsedGroups = [NSMutableArray arrayWithArray:[results objectForKey:@"CollapsedGroups"]];
 	
+	if([outlineView isItemExpanded:item])
+		[collapsedGroups removeObject:[item value]];
+	else
+		[collapsedGroups addObject:[item value]];
+			
+	[results setObject:collapsedGroups forKey:@"CollapsedGroups"];		
+	[defaults setObject:results forKey:@"Results"];
+	[defaults synchronize];
 }
 
 
