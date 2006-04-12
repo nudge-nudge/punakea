@@ -9,8 +9,9 @@
 	[self setIntercellSpacing:NSMakeSize(0,1)];
 	[[self delegate] setOutlineView:self];
 	
+	// Auto-size first column
 	NSRect bounds = [self bounds];
-	[[[self tableColumns] objectAtIndex:0] setWidth:bounds.size.width];
+	[[[self tableColumns] objectAtIndex:0] setWidth:bounds.size.width];	
 }
 
 

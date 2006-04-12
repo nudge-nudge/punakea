@@ -133,6 +133,11 @@
 	[defaults synchronize];
 }
 
+- (void)segmentedControlAction:(id)sender
+{
+	NSLog(@"action");
+}
+
 
 /*#pragma mark Temp
 - (void)updateSubviews

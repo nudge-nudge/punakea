@@ -73,6 +73,8 @@
 		NSCell *cell = [self cellAtRow:0 column:i];
 		if([cell isNotEqualTo:[self selectedCell]]) [cell setHighlighted:NO];
 	}
+	
+	[self sendAction:[self action] to:[self target]];
 }
 
 

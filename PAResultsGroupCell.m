@@ -89,6 +89,7 @@
 			[triangle setState:PAOffState];
 	
 	// Add segmented control if neccessary
+	// TODO: CLEANUP
 	if([segmentedControl superview] != controlView)
 	{
 		segmentedControl = [[PASegmentedImageControl alloc] initWithFrame:cellFrame];
@@ -124,6 +125,9 @@
 		[cell setState:PAOffState];
 		[cell setButtonType:PASwitchButton];
 		[segmentedControl addSegment:cell];
+		
+		[segmentedControl setAction:@selector(segmentedControlAction:)];
+		[segmentedControl setTarget:[[self controlView] delegate]];
 		
 		// Add references to PASegmentedImageControl's tag for later usage
 		NSMutableDictionary *tag = [segmentedControl tag];
