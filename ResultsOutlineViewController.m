@@ -42,9 +42,9 @@
 	return nil;
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+- (BOOL)outlineView:(NSOutlineView *)ov isItemExpandable:(id)item
 {
-	return (item == nil) ? YES : ([self outlineView:outlineView numberOfChildrenOfItem:item] != 0);
+	return (item == nil) ? YES : ([self outlineView:ov numberOfChildrenOfItem:item] != 0);
 }
 
 - (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
@@ -72,8 +72,8 @@
 	  inTableView:(NSTableView *)tableView
    dataCellForRow:(int)row
 {
-	NSOutlineView *outlineView = tableView;
-	id item = [outlineView itemAtRow:row];
+	NSOutlineView *ov = (NSOutlineView *)tableView;
+	id item = [ov itemAtRow:row];
 	
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
 	{		
@@ -135,7 +135,8 @@
 
 - (void)segmentedControlAction:(id)sender
 {
-	NSLog(@"action");
+	//id item = [[(PASegmentedImageControl *)sender tag] objectForKey:@"group"];
+	NSLog([[(PAImageButtonCell *)[(PASegmentedImageControl *)sender selectedCell] tag] objectForKey:@"identifier"]);
 }
 
 

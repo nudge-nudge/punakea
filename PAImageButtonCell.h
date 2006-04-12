@@ -31,9 +31,8 @@ typedef enum _PAImageButtonType
 	NSMutableDictionary *images;
 	PAImageButtonState state;
 	PAImageButtonType type;
+	NSMutableDictionary *tag;
 	
-	NSString *tempValue;
-
 }
 
 - (id)initImageCell:(NSImage *)anImage;
@@ -44,4 +43,7 @@ typedef enum _PAImageButtonType
 - (void)setHighlighted:(BOOL)flag;
 - (PAImageButtonState)state;
 - (void)setState:(PAImageButtonState)aState;
+- (NSMutableDictionary *)tag;
+- (void)setTag:(NSMutableDictionary *)aTag;
+
 @end

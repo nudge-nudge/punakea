@@ -22,12 +22,6 @@
 - (void)dealloc
 {
 	if(group) [group release];
-	/*if(triangle)
-	{
-		[triangle removeFromSuperview];
-		[triangle release];
-		NSLog(@"removing");
-	}*/
 	[super dealloc];
 }
 
@@ -43,19 +37,15 @@
 	{
 		if([[[subviews objectAtIndex:i] class] isEqualTo:[PAImageButton class]])
 		{
-			NSDictionary *tag = [[subviews objectAtIndex:i] tag];
+			NSDictionary *tag = [(PAImageButton *)[subviews objectAtIndex:i] tag];
 			if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
-			{
 				triangle = [subviews objectAtIndex:i];
-			}
 		}
 		if([[[subviews objectAtIndex:i] class] isEqualTo:[PASegmentedImageControl class]])
 		{
-			NSDictionary *tag = [[subviews objectAtIndex:i] tag];
+			NSDictionary *tag = [(PASegmentedImageControl *)[subviews objectAtIndex:i] tag];
 			if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
-			{
 				segmentedControl = [subviews objectAtIndex:i];
-			}
 		}
 	}
 	
@@ -69,7 +59,7 @@
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];
 		[triangle setButtonType:PASwitchButton];
 		[triangle setState:PAOnState];
-		[triangle setTarget:[[self controlView] delegate]];
+		[triangle setTarget:[(PAResultsOutlineView *)[self controlView] delegate]];
 		
 		// Add references to PAImageButton's tag for later usage
 		NSMutableDictionary *tag = [triangle tag];
@@ -89,9 +79,11 @@
 			[triangle setState:PAOffState];
 	
 	// Add segmented control if neccessary
-	// TODO: CLEANUP
+	// TODO: CLEANUP - USE FACTORY!
 	if([segmentedControl superview] != controlView)
 	{
+		NSMutableDictionary *tag;
+		
 		segmentedControl = [[PASegmentedImageControl alloc] initWithFrame:cellFrame];
 		
 		NSImage *image = [NSImage imageNamed:@"MDListViewOff-1"];
@@ -105,9 +97,10 @@
 		[image setFlipped:YES];
 		[cell setImage:image forState:PAOnHighlightedState];
 		[cell setImage:image forState:PAOffHighlightedState];
-		[cell setTempValue:@"eins"];	
 		[cell setState:PAOnState];
 		[cell setButtonType:PASwitchButton];
+		tag = [cell tag];
+		[tag setObject:@"ListMode" forKey:@"identifier"];
 		[segmentedControl addSegment:cell];
 		
 		image = [NSImage imageNamed:@"MDIconViewOff-1"];
@@ -121,16 +114,17 @@
 		[image setFlipped:YES];
 		[cell setImage:image forState:PAOnHighlightedState];
 		[cell setImage:image forState:PAOffHighlightedState];
-		[cell setTempValue:@"zwei"];
 		[cell setState:PAOffState];
 		[cell setButtonType:PASwitchButton];
+		tag = [cell tag];
+		[tag setObject:@"IconMode" forKey:@"identifier"];
 		[segmentedControl addSegment:cell];
 		
 		[segmentedControl setAction:@selector(segmentedControlAction:)];
-		[segmentedControl setTarget:[[self controlView] delegate]];
+		[segmentedControl setTarget:[(PAResultsOutlineView *)[self controlView] delegate]];
 		
 		// Add references to PASegmentedImageControl's tag for later usage
-		NSMutableDictionary *tag = [segmentedControl tag];
+		tag = [segmentedControl tag];
 		[tag setObject:[group value] forKey:@"identifier"];
 		[tag setObject:group forKey:@"group"];
 		
@@ -172,6 +166,10 @@
 
 
 #pragma mark Accessors
+- (NSMetadataQueryResultGroup *)group
+{
+	return group;
+}
 - (void)setGroup:(NSMetadataQueryResultGroup *)aGroup
 {
 	group = [aGroup retain];

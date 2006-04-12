@@ -27,18 +27,18 @@
 	
 	images = [[NSMutableDictionary alloc] init];
 	if (anImage)
-	{
 		[self setImage:anImage forState:PAOffState];
-	}
 	state = PAOffState;
-	type = PAMomentaryLightButton;
+	type = PAMomentaryLightButton;	
+	tag = [[NSMutableDictionary alloc] init];
 	
 	return self;
 }
 
 - (void)dealloc
 {
-	if(images) { [images release]; }
+	if(images) [images release];
+	if(tag) [tag release];
 	[super dealloc];
 }
 
@@ -102,13 +102,10 @@
 	}
 	
 	if([images objectForKey:[self stringForState:newHighlightedState]])
-	{
 		[self setState:newHighlightedState];
-	}
 	else
-	{
 		[self setState:newState];
-	}
+
 	return YES;
 }
 
@@ -163,9 +160,6 @@
 }
 
 #pragma mark Accessors
-/** 
-	Important accessor! Doesn't work without it... 
-*/
 - (PAImageButtonState)state
 {
 	return state;
@@ -192,14 +186,14 @@
 		[self setState:PAOnState];
 }
 
-- (NSString *)tempValue
+- (NSMutableDictionary *)tag
 {
-	return tempValue;
+	return tag;
 }
 
-- (void)setTempValue:(NSString *)aString
+- (void)setTag:(NSMutableDictionary *)aTag
 {
-	tempValue = aString;
+	tag = [aTag retain];
 }
 
 @end

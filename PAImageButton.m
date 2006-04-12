@@ -37,11 +37,6 @@
 	return [[self cell] isHighlighted];
 }
 
-- (NSMutableDictionary *)tag
-{
-	return tag;
-}
-
 - (void)dealloc
 {
 	if(tag) [tag release];
@@ -58,5 +53,15 @@
 - (void)setState:(PAImageButtonState)aState
 {
 	[[self cell] setState:aState];
+}
+
+- (NSMutableDictionary *)tag
+{
+	return tag;
+}
+
+- (void)setTag:(NSMutableDictionary *)aTag
+{
+	tag = [aTag retain];
 }
 @end

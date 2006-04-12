@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PAImageButton.h"
 #import "PASegmentedImageControl.h"
+#import "PAResultsOutlineView.h"
 
 
 @interface PAResultsGroupCell : NSTextFieldCell {
@@ -18,5 +19,8 @@
 	NSMetadataQueryResultGroup *group;
 
 }
+
+- (NSMetadataQueryResultGroup *)group;
+- (void)setGroup:(NSMetadataQueryResultGroup *)aGroup;
 
 @end

@@ -16,6 +16,9 @@
 
 }
 
+- (void)addSegment:(PAImageButtonCell *)imageButtonCell;
+
 - (NSMutableDictionary *)tag;
+- (void)setTag:(NSMutableDictionary *)aTag;
 
 @end

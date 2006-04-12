@@ -59,6 +59,11 @@
 
 
 #pragma mark Accessors
+- (NSMetadataItem *)item
+{
+	return item;
+}
+
 - (void)setItem:(NSMetadataItem *)anItem
 {
 	item = [anItem retain];

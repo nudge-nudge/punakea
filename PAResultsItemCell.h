@@ -15,4 +15,7 @@
 
 }
 
+- (NSMetadataItem *)item;
+- (void)setItem:(NSMetadataItem *)anItem;
+
 @end

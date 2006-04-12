@@ -21,9 +21,9 @@
 
 - (BOOL)isHighlighted;
 
-- (NSMutableDictionary *)tag;
-
 - (PAImageButtonState)state;
 - (void)setState:(PAImageButtonState)aState;
+- (NSMutableDictionary *)tag;
+- (void)setTag:(NSMutableDictionary *)aTag;
 
 @end

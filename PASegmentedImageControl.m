@@ -28,7 +28,7 @@
 
 - (void)dealloc
 {
-	if(tag) { [tag release]; }
+	if(tag) [tag release];
 	[super dealloc];
 }
 
@@ -79,10 +79,6 @@
 
 
 #pragma mark Accessors
-/* Action messages from buttons are sent to this control, but forwarded afterwards
-- target
-- (void)setTarget: */
-
 - (NSMutableDictionary *)tag
 {
 	return tag;
