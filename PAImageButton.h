@@ -23,4 +23,7 @@
 
 - (NSMutableDictionary *)tag;
 
+- (PAImageButtonState)state;
+- (void)setState:(PAImageButtonState)aState;
+
 @end

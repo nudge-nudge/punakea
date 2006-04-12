@@ -5,10 +5,26 @@
 	<key>Results</key>
 	<dict>
 		<key>CollapsedGroups</key>
-		<array>
-			<string>PDF</string>
-			<string>APPLICATIONS</string>
-		</array>
+		<array/>
+		<key>DisplayModes</key>
+		<dict>
+			<key>AlbumMode</key>
+			<array>
+				<string>MUSIC</string>
+			</array>
+			<key>IconMode</key>
+			<array>
+				<string>PRESENTATIONS</string>
+				<string>PDF</string>
+				<string>IMAGES</string>
+			</array>
+			<key>VCardMode</key>
+			<array>
+				<string>CONTACT</string>
+			</array>
+		</dict>
 	</dict>
+	<key>Version</key>
+	<integer>1</integer>
 </dict>
 </plist>

@@ -32,11 +32,6 @@
 	[[self cell] setButtonType:aType];
 }
 
-- (void)setState:(PAImageButtonState)aState
-{
-	[[self cell] setState:aState];
-}
-
 - (BOOL)isHighlighted
 {
 	return [[self cell] isHighlighted];
@@ -53,4 +48,15 @@
 	[super dealloc];
 }
 
+
+#pragma mark Accessors
+- (PAImageButtonState)state
+{
+	return [[self cell] state];
+}
+
+- (void)setState:(PAImageButtonState)aState
+{
+	[[self cell] setState:aState];
+}
 @end

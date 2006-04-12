@@ -8,6 +8,9 @@
 	[self setIndentationPerLevel:0.0];
 	[self setIntercellSpacing:NSMakeSize(0,1)];
 	[[self delegate] setOutlineView:self];
+	
+	NSRect bounds = [self bounds];
+	[[[self tableColumns] objectAtIndex:0] setWidth:bounds.size.width];
 }
 
 

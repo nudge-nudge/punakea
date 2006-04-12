@@ -62,7 +62,7 @@
 	// Add triangle if neccessary
 	if([triangle superview] != controlView)
 	{
-		triangle = [[PAImageButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y + 2, 16, 16)];
+		triangle = [[PAImageButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x + 4, cellFrame.origin.y + 2, 16, 16)];
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"] forState:PAOffState];
 		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite"] forState:PAOnState];
 		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite_Pressed"] forState:PAOnHighlightedState];
@@ -78,8 +78,15 @@
 		
 		[controlView addSubview:triangle];  
 	} else {
-		[triangle setFrame:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y + 2, 16, 16)];
+		[triangle setFrame:NSMakeRect(cellFrame.origin.x + 4, cellFrame.origin.y + 2, 16, 16)];
 	}
+	
+	// Does triangle's current state match the cell's state?
+	if([triangle state] != PAOnHighlightedState && [triangle state] != PAOffHighlightedState)
+		if([(NSOutlineView *)[triangle superview] isItemExpanded:group])
+			[triangle setState:PAOnState];
+		else
+			[triangle setState:PAOffState];
 	
 	// Add segmented control if neccessary
 	if([segmentedControl superview] != controlView)
@@ -146,7 +153,7 @@
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [backgroundImage size];
 		
-	[backgroundImage drawInRect:cellFrame fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	[backgroundImage drawInRect:cellFrame fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
 
 					   
 	// Draw text	
