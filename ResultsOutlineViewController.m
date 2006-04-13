@@ -9,6 +9,14 @@
 #import "ResultsOutlineViewController.h"
 
 
+@interface ResultsOutlineViewController (PrivateAPI)
+
+- (void)triangleClicked:(id)sender;
+- (void)segmentedControlClicked:(id)sender;
+
+@end
+
+
 @implementation ResultsOutlineViewController
 
 #pragma mark Data Source
@@ -110,7 +118,7 @@
 
 
 #pragma mark Actions
-- (void)action:(id)sender
+- (void)triangleClicked:(id)sender
 {
 	id item = [(NSDictionary *)[sender tag] objectForKey:@"group"];
 	if([outlineView isItemExpanded:item])
@@ -132,7 +140,7 @@
 	[defaults setObject:results forKey:@"Results"];
 }
 
-- (void)segmentedControlAction:(id)sender
+- (void)segmentedControlClicked:(id)sender
 {
 	NSMetadataQueryResultGroup *item = [[(PASegmentedImageControl *)sender tag] objectForKey:@"group"];
 	NSString *mode = [[(PAImageButtonCell *)[(PASegmentedImageControl *)sender selectedCell] tag] objectForKey:@"identifier"];

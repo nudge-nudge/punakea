@@ -9,6 +9,15 @@
 #import "PAResultsGroupCell.h"
 
 
+@interface PAResultsGroupCell (PrivateAPI)
+
+- (NSString *)currentDisplayMode;
+- (NSArray *)availableDisplayModes;
+- (PAImageButtonCell *)segmentForDisplayMode:(NSString *)mode;
+
+@end
+
+
 @implementation PAResultsGroupCell
 
 #pragma mark Init + Dealloc
@@ -64,6 +73,7 @@
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];
 		[triangle setButtonType:PASwitchButton];
 		[triangle setState:PAOnState];
+		[triangle setAction:@selector(triangleClicked:)];
 		[triangle setTarget:[(PAResultsOutlineView *)[self controlView] delegate]];
 		
 		// Add references to PAImageButton's tag for later usage
@@ -88,63 +98,22 @@
 	if(hasMultipleDisplayModes)
 	{
 		if([segmentedControl superview] != controlView)
-		{
-			NSMutableDictionary *tag;
-			
-			NSArray *displayModes = [self availableDisplayModesForGroup:group];
-			NSString *currentDisplayMode = [self currentDisplayModeForGroup:group];
+		{			
+			NSArray *displayModes = [self availableDisplayModes];
 	
 			segmentedControl = [[PASegmentedImageControl alloc] initWithFrame:cellFrame];
 		
 			// ListMode applies for all groups
-			NSImage *image = [NSImage imageNamed:@"MDListViewOff-1"];
-			[image setFlipped:YES];
-			//NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:@"eins"];
-			PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:image];
-			image = [NSImage imageNamed:@"MDListViewOn-1"];
-			[image setFlipped:YES];
-			[cell setImage:image forState:PAOnState];	
-			image = [NSImage imageNamed:@"MDListViewPressed-1"];
-			[image setFlipped:YES];
-			[cell setImage:image forState:PAOnHighlightedState];
-			[cell setImage:image forState:PAOffHighlightedState];
-			if([currentDisplayMode isEqualToString:@"ListMode"])			
-				[cell setState:PAOnState];
-			else
-				[cell setState:PAOffState];
-			[cell setButtonType:PASwitchButton];
-			tag = [cell tag];
-			[tag setObject:@"ListMode" forKey:@"identifier"];
-			[segmentedControl addSegment:cell];
+			[segmentedControl addSegment:[self segmentForDisplayMode:@"ListMode"]];
 			
 			if([displayModes containsObject:@"IconMode"])
-			{
-				image = [NSImage imageNamed:@"MDIconViewOff-1"];
-				[image setFlipped:YES];
-				//cell = [[NSTextFieldCell alloc] initTextCell:@"zwei"];
-				cell = [[PAImageButtonCell alloc] initImageCell:image];
-				image = [NSImage imageNamed:@"MDIconViewOn-1"];
-				[image setFlipped:YES];
-				[cell setImage:image forState:PAOnState];
-				image = [NSImage imageNamed:@"MDIconViewPressed-1"];
-				[image setFlipped:YES];
-				[cell setImage:image forState:PAOnHighlightedState];
-				[cell setImage:image forState:PAOffHighlightedState];
-				if([currentDisplayMode isEqualToString:@"IconMode"])			
-					[cell setState:PAOnState];
-				else
-					[cell setState:PAOffState];
-				[cell setButtonType:PASwitchButton];
-				tag = [cell tag];
-				[tag setObject:@"IconMode" forKey:@"identifier"];
-				[segmentedControl addSegment:cell];
-			}
+				[segmentedControl addSegment:[self segmentForDisplayMode:@"IconMode"]];
 			
-			[segmentedControl setAction:@selector(segmentedControlAction:)];
+			[segmentedControl setAction:@selector(segmentedControlClicked:)];
 			[segmentedControl setTarget:[(PAResultsOutlineView *)[self controlView] delegate]];
 			
 			// Add references to PASegmentedImageControl's tag for later usage
-			tag = [segmentedControl tag];
+			NSMutableDictionary *tag = [segmentedControl tag];
 			[tag setObject:[group value] forKey:@"identifier"];
 			[tag setObject:group forKey:@"group"];
 			
@@ -187,7 +156,56 @@
 
 
 #pragma mark Helpers
-- (NSArray *)availableDisplayModesForGroup:(NSMetadataQueryResultGroup *)aGroup
+- (PAImageButtonCell *)segmentForDisplayMode:(NSString *)mode
+{
+	NSImage *image;
+	PAImageButtonCell *cell;
+	
+	if([mode isEqualToString:@"ListMode"])
+	{
+		image = [NSImage imageNamed:@"MDListViewOff-1"];
+		[image setFlipped:YES];
+		cell = [[PAImageButtonCell alloc] initImageCell:image];
+		
+		image = [NSImage imageNamed:@"MDListViewOn-1"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnState];	
+		
+		image = [NSImage imageNamed:@"MDListViewPressed-1"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnHighlightedState];		
+		[cell setImage:image forState:PAOffHighlightedState];
+	}
+	
+	if([mode isEqualToString:@"IconMode"])
+	{
+		image = [NSImage imageNamed:@"MDIconViewOff-1"];
+		[image setFlipped:YES];
+		cell = [[PAImageButtonCell alloc] initImageCell:image];
+		
+		image = [NSImage imageNamed:@"MDIconViewOn-1"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnState];
+		
+		image = [NSImage imageNamed:@"MDIconViewPressed-1"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnHighlightedState];
+		[cell setImage:image forState:PAOffHighlightedState];
+	}
+		
+	if([[self currentDisplayMode] isEqualToString:mode])			
+		[cell setState:PAOnState];
+	else
+		[cell setState:PAOffState];
+		
+	[cell setButtonType:PASwitchButton];
+	NSMutableDictionary *tag = [cell tag];
+	[tag setObject:mode forKey:@"identifier"];
+	
+	return cell;
+}
+
+- (NSArray *)availableDisplayModes
 {
 	NSMutableArray *modes = [NSMutableArray arrayWithCapacity:5];
 
@@ -197,18 +215,18 @@
 	NSEnumerator *enumerator = [displayModes keyEnumerator];
 	NSString *key;
 	while(key = [enumerator nextObject])
-		if([(NSArray *)[displayModes objectForKey:key] containsObject:[aGroup value]])
+		if([(NSArray *)[displayModes objectForKey:key] containsObject:[group value]])
 			[modes addObject:key];
 
 	return modes;
 }
 
-- (NSString *)currentDisplayModeForGroup:(NSMetadataQueryResultGroup *)aGroup
+- (NSString *)currentDisplayMode
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
 	NSString *mode;
-	if(mode = [currentDisplayModes objectForKey:[aGroup value]])
+	if(mode = [currentDisplayModes objectForKey:[group value]])
 		return mode;
 	else
 		return @"ListMode";
@@ -224,7 +242,7 @@
 {
 	group = [aGroup retain];
 	
-	if([[self availableDisplayModesForGroup:group] count] > 0)
+	if([[self availableDisplayModes] count] > 0)
 		hasMultipleDisplayModes = YES;
 }
 

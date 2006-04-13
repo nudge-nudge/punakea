@@ -31,6 +31,7 @@
 	state = PAOffState;
 	type = PAMomentaryLightButton;	
 	tag = [[NSMutableDictionary alloc] init];
+	[self setAction:@selector(action:)];
 	
 	return self;
 }
@@ -117,7 +118,7 @@
 - (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
 {
 	// Action
-	[self setAction:@selector(action:)];
+	[self setAction:[self action]];
 	
 	// all following states need to be the inverse ones? seems so...	
 	if(type == PAMomentaryLightButton)
