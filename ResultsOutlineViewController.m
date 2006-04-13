@@ -130,13 +130,20 @@
 			
 	[results setObject:collapsedGroups forKey:@"CollapsedGroups"];		
 	[defaults setObject:results forKey:@"Results"];
-	[defaults synchronize];
 }
 
 - (void)segmentedControlAction:(id)sender
 {
-	//id item = [[(PASegmentedImageControl *)sender tag] objectForKey:@"group"];
-	NSLog([[(PAImageButtonCell *)[(PASegmentedImageControl *)sender selectedCell] tag] objectForKey:@"identifier"]);
+	NSMetadataQueryResultGroup *item = [[(PASegmentedImageControl *)sender tag] objectForKey:@"group"];
+	NSString *mode = [[(PAImageButtonCell *)[(PASegmentedImageControl *)sender selectedCell] tag] objectForKey:@"identifier"];
+	
+	// Save userDefaults
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
+	NSMutableDictionary *currentDisplayModes = [NSMutableDictionary dictionaryWithDictionary:[results objectForKey:@"CurrentDisplayModes"]];
+	[currentDisplayModes setObject:mode forKey:[item value]];	
+	[results setObject:currentDisplayModes forKey:@"CurrentDisplayModes"];	
+	[defaults setObject:results forKey:@"Results"];
 }
 
 

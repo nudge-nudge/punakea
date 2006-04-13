@@ -17,6 +17,7 @@
 	PAImageButton *triangle;
 	PASegmentedImageControl *segmentedControl;
 	NSMetadataQueryResultGroup *group;
+	BOOL hasMultipleDisplayModes;
 
 }
 

@@ -15,7 +15,10 @@
 - (id)initTextCell:(NSString *)aText
 {
 	self = [super initTextCell:aText];
-	//if (self) {}	
+	if (self)
+	{
+		hasMultipleDisplayModes = NO;
+	}	
 	return self;
 }
 
@@ -41,12 +44,14 @@
 			if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
 				triangle = [subviews objectAtIndex:i];
 		}
-		if([[[subviews objectAtIndex:i] class] isEqualTo:[PASegmentedImageControl class]])
-		{
-			NSDictionary *tag = [(PASegmentedImageControl *)[subviews objectAtIndex:i] tag];
-			if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
-				segmentedControl = [subviews objectAtIndex:i];
-		}
+		
+		if(hasMultipleDisplayModes)
+			if([[[subviews objectAtIndex:i] class] isEqualTo:[PASegmentedImageControl class]])
+			{
+				NSDictionary *tag = [(PASegmentedImageControl *)[subviews objectAtIndex:i] tag];
+				if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
+					segmentedControl = [subviews objectAtIndex:i];
+			}
 	}
 	
 	// Add triangle if neccessary
@@ -80,63 +85,79 @@
 	
 	// Add segmented control if neccessary
 	// TODO: CLEANUP - USE FACTORY!
-	if([segmentedControl superview] != controlView)
+	if(hasMultipleDisplayModes)
 	{
-		NSMutableDictionary *tag;
+		if([segmentedControl superview] != controlView)
+		{
+			NSMutableDictionary *tag;
+			
+			NSArray *displayModes = [self availableDisplayModesForGroup:group];
+			NSString *currentDisplayMode = [self currentDisplayModeForGroup:group];
+	
+			segmentedControl = [[PASegmentedImageControl alloc] initWithFrame:cellFrame];
 		
-		segmentedControl = [[PASegmentedImageControl alloc] initWithFrame:cellFrame];
-		
-		NSImage *image = [NSImage imageNamed:@"MDListViewOff-1"];
-		[image setFlipped:YES];
-		//NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:@"eins"];
-		PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:image];
-		image = [NSImage imageNamed:@"MDListViewOn-1"];
-		[image setFlipped:YES];
-		[cell setImage:image forState:PAOnState];	
-		image = [NSImage imageNamed:@"MDListViewPressed-1"];
-		[image setFlipped:YES];
-		[cell setImage:image forState:PAOnHighlightedState];
-		[cell setImage:image forState:PAOffHighlightedState];
-		[cell setState:PAOnState];
-		[cell setButtonType:PASwitchButton];
-		tag = [cell tag];
-		[tag setObject:@"ListMode" forKey:@"identifier"];
-		[segmentedControl addSegment:cell];
-		
-		image = [NSImage imageNamed:@"MDIconViewOff-1"];
-		[image setFlipped:YES];
-		//cell = [[NSTextFieldCell alloc] initTextCell:@"zwei"];
-		cell = [[PAImageButtonCell alloc] initImageCell:image];
-		image = [NSImage imageNamed:@"MDIconViewOn-1"];
-		[image setFlipped:YES];
-		[cell setImage:image forState:PAOnState];
-		image = [NSImage imageNamed:@"MDIconViewPressed-1"];
-		[image setFlipped:YES];
-		[cell setImage:image forState:PAOnHighlightedState];
-		[cell setImage:image forState:PAOffHighlightedState];
-		[cell setState:PAOffState];
-		[cell setButtonType:PASwitchButton];
-		tag = [cell tag];
-		[tag setObject:@"IconMode" forKey:@"identifier"];
-		[segmentedControl addSegment:cell];
-		
-		[segmentedControl setAction:@selector(segmentedControlAction:)];
-		[segmentedControl setTarget:[(PAResultsOutlineView *)[self controlView] delegate]];
-		
-		// Add references to PASegmentedImageControl's tag for later usage
-		tag = [segmentedControl tag];
-		[tag setObject:[group value] forKey:@"identifier"];
-		[tag setObject:group forKey:@"group"];
-		
-		[controlView addSubview:segmentedControl];
+			// ListMode applies for all groups
+			NSImage *image = [NSImage imageNamed:@"MDListViewOff-1"];
+			[image setFlipped:YES];
+			//NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:@"eins"];
+			PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:image];
+			image = [NSImage imageNamed:@"MDListViewOn-1"];
+			[image setFlipped:YES];
+			[cell setImage:image forState:PAOnState];	
+			image = [NSImage imageNamed:@"MDListViewPressed-1"];
+			[image setFlipped:YES];
+			[cell setImage:image forState:PAOnHighlightedState];
+			[cell setImage:image forState:PAOffHighlightedState];
+			if([currentDisplayMode isEqualToString:@"ListMode"])			
+				[cell setState:PAOnState];
+			else
+				[cell setState:PAOffState];
+			[cell setButtonType:PASwitchButton];
+			tag = [cell tag];
+			[tag setObject:@"ListMode" forKey:@"identifier"];
+			[segmentedControl addSegment:cell];
+			
+			if([displayModes containsObject:@"IconMode"])
+			{
+				image = [NSImage imageNamed:@"MDIconViewOff-1"];
+				[image setFlipped:YES];
+				//cell = [[NSTextFieldCell alloc] initTextCell:@"zwei"];
+				cell = [[PAImageButtonCell alloc] initImageCell:image];
+				image = [NSImage imageNamed:@"MDIconViewOn-1"];
+				[image setFlipped:YES];
+				[cell setImage:image forState:PAOnState];
+				image = [NSImage imageNamed:@"MDIconViewPressed-1"];
+				[image setFlipped:YES];
+				[cell setImage:image forState:PAOnHighlightedState];
+				[cell setImage:image forState:PAOffHighlightedState];
+				if([currentDisplayMode isEqualToString:@"IconMode"])			
+					[cell setState:PAOnState];
+				else
+					[cell setState:PAOffState];
+				[cell setButtonType:PASwitchButton];
+				tag = [cell tag];
+				[tag setObject:@"IconMode" forKey:@"identifier"];
+				[segmentedControl addSegment:cell];
+			}
+			
+			[segmentedControl setAction:@selector(segmentedControlAction:)];
+			[segmentedControl setTarget:[(PAResultsOutlineView *)[self controlView] delegate]];
+			
+			// Add references to PASegmentedImageControl's tag for later usage
+			tag = [segmentedControl tag];
+			[tag setObject:[group value] forKey:@"identifier"];
+			[tag setObject:group forKey:@"group"];
+			
+			[controlView addSubview:segmentedControl];
+		}
+		// Refresh frame after all segments have been added
+		NSRect scFrame = [segmentedControl frame];
+		NSRect rect = NSMakeRect(cellFrame.origin.x + cellFrame.size.width - scFrame.size.width,
+								  cellFrame.origin.y,
+								  scFrame.size.width,
+								  20);
+		[segmentedControl setFrame:rect];
 	}
-	// Refresh frame after all segments have been added
-	NSRect scFrame = [segmentedControl frame];
-	NSRect rect = NSMakeRect(cellFrame.origin.x + cellFrame.size.width - scFrame.size.width,
-							  cellFrame.origin.y,
-							  scFrame.size.width,
-							  20);
-	[segmentedControl setFrame:rect];
 	
 	
 	// Draw background
@@ -165,6 +186,35 @@
 }
 
 
+#pragma mark Helpers
+- (NSArray *)availableDisplayModesForGroup:(NSMetadataQueryResultGroup *)aGroup
+{
+	NSMutableArray *modes = [NSMutableArray arrayWithCapacity:5];
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSDictionary *displayModes = [(NSDictionary *)[defaults objectForKey:@"Results"] objectForKey:@"DisplayModes"];
+	
+	NSEnumerator *enumerator = [displayModes keyEnumerator];
+	NSString *key;
+	while(key = [enumerator nextObject])
+		if([(NSArray *)[displayModes objectForKey:key] containsObject:[aGroup value]])
+			[modes addObject:key];
+
+	return modes;
+}
+
+- (NSString *)currentDisplayModeForGroup:(NSMetadataQueryResultGroup *)aGroup
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
+	NSString *mode;
+	if(mode = [currentDisplayModes objectForKey:[aGroup value]])
+		return mode;
+	else
+		return @"ListMode";
+}
+
+
 #pragma mark Accessors
 - (NSMetadataQueryResultGroup *)group
 {
@@ -173,6 +223,9 @@
 - (void)setGroup:(NSMetadataQueryResultGroup *)aGroup
 {
 	group = [aGroup retain];
+	
+	if([[self availableDisplayModesForGroup:group] count] > 0)
+		hasMultipleDisplayModes = YES;
 }
 
 @end
