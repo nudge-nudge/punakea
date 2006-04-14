@@ -311,7 +311,7 @@
 	}
 }
 
-#pragma mark working with tags
+#pragma mark working with tags (renaming and deleting)
 - (void)removeTag:(PASimpleTag*)tag
 {
 	NSArray *files;
