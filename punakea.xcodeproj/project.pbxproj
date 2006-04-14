@@ -35,6 +35,7 @@
 		48D66B0709CB4E4B007B6B1D /* PASimpleTagFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */; };
 		48D66B0809CB4E4B007B6B1D /* PASimpleTagFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */; };
 		48D8F01209CBE94C0011401F /* PATag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D8F01109CBE94C0011401F /* PATag.m */; };
+		48E093EC09EFD08F00497646 /* Tagger.nib in Resources */ = {isa = PBXBuildFile; fileRef = 48E093EB09EFD08F00497646 /* Tagger.nib */; };
 		48E9C2F609A5C27600415AC7 /* TaggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E9C2F409A5C27600415AC7 /* TaggerViewController.m */; };
 		48E9C2F709A5C27600415AC7 /* TaggerViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48E9C2F509A5C27600415AC7 /* TaggerViewController.h */; };
 		48EB614409C2D4A40071D654 /* PARelatedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48EB614209C2D4A40071D654 /* PARelatedTags.h */; };
@@ -194,6 +195,7 @@
 		48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleTagFactory.h; sourceTree = "<group>"; };
 		48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleTagFactory.m; sourceTree = "<group>"; };
 		48D8F01109CBE94C0011401F /* PATag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATag.m; sourceTree = "<group>"; };
+		48E093EB09EFD08F00497646 /* Tagger.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = Tagger.nib; sourceTree = "<group>"; };
 		48E9C2F409A5C27600415AC7 /* TaggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerViewController.m; sourceTree = "<group>"; };
 		48E9C2F509A5C27600415AC7 /* TaggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerViewController.h; sourceTree = "<group>"; };
 		48EB614209C2D4A40071D654 /* PARelatedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARelatedTags.h; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				65E7B0190994D02E00565251 /* MainMenu.nib */,
+				48E093EB09EFD08F00497646 /* Tagger.nib */,
 				658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */,
 				65E7B01E0994D0AE00565251 /* Sidebar.nib */,
 				653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */,
@@ -599,6 +602,7 @@
 				6525F46F09EA4FBD006E1FB7 /* MDListViewOn-1.tiff in Resources */,
 				6525F47009EA4FBD006E1FB7 /* MDListViewPressed-1.tiff in Resources */,
 				65346B4F09EB9EDD00CFC8C1 /* default.plist in Resources */,
+				48E093EC09EFD08F00497646 /* Tagger.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
