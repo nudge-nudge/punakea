@@ -18,6 +18,7 @@
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {CLASS = PAFileBox; LANGUAGE = ObjC; SUPERCLASS = NSImageView; }, 
         {CLASS = PAFileViewHeaderCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
+        {CLASS = PARelatedTags; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {

@@ -24,7 +24,8 @@
 	
 	NSColor *c = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:128.0 alpha:1.0];
 	//externalize sizes
-	int size = 30 * [tag relativeRatingToTag:[self currentBestTag]];
+	float tagRating = [tag relativeRatingToTag:[self currentBestTag]];
+	int size = 30 * tagRating;
 	if (size < 10)
 		size = 10;
 	

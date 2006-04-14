@@ -104,6 +104,7 @@ static PATagger *sharedInstance = nil;
 }
 
 //read tags - TODO there could be a lot of mem-leaks in here ... check if file exists!!
+//TODO BUG tags don't get all the proper values from the main array (controller tags)!!!
 - (NSMutableArray*)getTagsForFile:(NSString*)path {
 	//carbon api ... can be treated as cocoa objects - TODO check warnings
 	MDItemRef *item = MDItemCreate(NULL,path);

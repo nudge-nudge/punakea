@@ -42,13 +42,14 @@
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
 - (PATag*)currentBestTag;
 - (void)setCurrentBestTag:(PATag*)otherTag;
+- (PARelatedTags*)relatedTags;
+- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags;
 
 //for NSMetadataQuery
 - (NSMetadataQuery *)query;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 //for adding to selected
-- (void)addToSelectedTags;
 - (IBAction)clearSelectedTags:(id)sender;
 
 - (void)openFile;

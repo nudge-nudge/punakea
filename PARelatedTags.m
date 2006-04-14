@@ -18,13 +18,13 @@
 //will use nsarraycontroller for managing the content array
 @implementation PARelatedTags
 
-- (id)initWithQuery:(NSMetadataQuery*)aQuery 
-		relatedTagsController:(NSArrayController*)aRelatedTagsController
+#pragma mark init + dealloc
+- (id)initWithQuery:(NSMetadataQuery*)aQuery
 {
 	if (self = [super init])
 	{
 		[self setQuery:aQuery];
-		controller = [aRelatedTagsController retain];
+		content = [[NSMutableArray alloc] init];
 		
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
 		nf = [NSNotificationCenter defaultCenter];
@@ -33,6 +33,15 @@
 	return self;
 }
 
+- (void)dealloc 
+{
+	[nf removeObserver:self];
+	[content release];
+	[query release];
+	[super dealloc];
+}
+
+#pragma mark accessors ( KVC - compliant )
 - (void)setQuery:(NSMetadataQuery*)aQuery 
 {
 	[aQuery retain];
@@ -40,14 +49,30 @@
 	query = aQuery;
 }
 
-- (void)dealloc 
+- (NSMutableArray*)content;
 {
-	[nf removeObserver:self];
-	[controller release];
-	[query release];
-	[super dealloc];
+	return content;
 }
 
+- (void)setContent:(NSMutableArray*)otherTags
+{
+	[otherTags retain];
+	[content release];
+	content = otherTags;
+}
+
+- (void)insertObject:(PATag *)tag
+       inContentAtIndex:(unsigned int)i
+{
+	[content insertObject:tag atIndex:i];
+}
+
+- (void)removeObjectFromContentAtIndex:(unsigned int)i
+{
+	[content removeObjectAtIndex:i];
+}
+
+#pragma mark logic
 //act on query notifications -- relatedTags need to be kept in sync with files
 - (void)queryNote:(NSNotification*)note 
 {
@@ -59,6 +84,7 @@
 	}
 }
 
+//TODO needs to be emptied
 - (void)updateRelatedTags 
 {
 	[query disableUpdates];
@@ -75,20 +101,17 @@
 			NSMetadataItem *mditem =  [query resultAtIndex:i];
 			NSArray *keywords = [[PATagger sharedInstance] getTagsForFile:[mditem valueForKey:@"kMDItemPath"]];
 			
-			NSMutableArray *tmpTags = [[NSMutableArray alloc] init];
-			
 			int j = [keywords count];
 
 			while (j--) 
 			{
 				PATag *tag = [keywords objectAtIndex:j];
 				
-				if (![tmpTags containsObject:tag])
-					[tmpTags addObject:tag];
+				if (![content containsObject:tag])
+				{
+					[self insertObject:tag inContentAtIndex:[content count]];
+				}
 			}
-			
-			[controller removeObjects:[controller arrangedObjects]];
-			[controller addObjects:tmpTags];
 		}
 	}
 	

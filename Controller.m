@@ -27,12 +27,14 @@
     if (self = [super init])
     {
 		[self loadDataFromDisk];
-		
+	
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setDelegate:self];
 		[_query setNotificationBatchingInterval:0.3];
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
 		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
+		
+		relatedTags = [[PARelatedTags alloc] initWithQuery:_query];
 	}
     return self;
 }
@@ -50,19 +52,16 @@
 	
 	[outlineView setQuery:_query];
 	
-	//instantiate relatedTags and register as an observer to changes in selectedTags
-	relatedTags = [[PARelatedTags alloc] initWithQuery:_query 
-								 relatedTagsController:relatedTagsController];
-	
+	//register as an observer to changes in selectedTags and more
 	[selectedTagsController addObserver:self
 							 forKeyPath:@"arrangedObjects"
 								options:0
 								context:NULL];
 	
-	[relatedTagsController addObserver:self
-							 forKeyPath:@"arrangedObjects"
-								options:0
-								context:NULL];
+	[relatedTags addObserver:self
+				  forKeyPath:@"content"
+					 options:0
+					 context:NULL];
 
 	[self addObserver:self
 		   forKeyPath:@"tags"
@@ -74,7 +73,8 @@
 
 - (void)dealloc
 {
-    [_query release];	
+	[relatedTags release];
+    [_query release];
     [super dealloc];
 }
 
@@ -118,9 +118,11 @@
 
 - (void)setVisibleTags:(NSMutableArray*)otherTags
 {
-	[otherTags retain];
-	[visibleTags release];
-	visibleTags = otherTags;
+	if (visibleTags != otherTags)
+	{
+		[visibleTags release];
+		visibleTags = [otherTags retain];
+	}
 	
 	//TODO fix me!!
 	if ([visibleTags count] > 0)
@@ -139,6 +141,19 @@
 	currentBestTag = otherTag;
 }
 
+- (PARelatedTags*)relatedTags;
+{
+	return relatedTags;
+}
+
+- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags
+{
+	[otherRelatedTags retain];
+	[relatedTags release];
+	relatedTags = otherRelatedTags;
+}
+
+#pragma mark loading and saving tags
 - (void)openFile
 {
 	NSArray *selection = [resultController selectedObjects];
@@ -217,15 +232,6 @@
 	return maxTag;
 }
 
-- (void)addToSelectedTags
-{
-	NSArray *selection = [relatedTagsController selectedObjects];
-	if ([selection count] > 0)
-	{
-		[selectedTagsController addObject:[selection objectAtIndex:0]];
-	}
-}
-
 //TODO
 - (IBAction)clearSelectedTags:(id)sender
 {
@@ -239,15 +245,12 @@
 {
 	if ([keyPath isEqual:@"arrangedObjects"]) 
 	{
-		//related or selected tags have changed
-		if ([object isEqual:selectedTagsController])
-		{
-			[self selectedTagsHaveChanged];
-		}
-		else
-		{
-			[self relatedTagsHaveChanged];
-		}
+		[self selectedTagsHaveChanged];
+	}
+		
+	if ([keyPath isEqual:@"content"])
+	{
+		[self relatedTagsHaveChanged];
 	}
 	
 	if ([keyPath isEqual:@"tags"]) 
@@ -298,7 +301,7 @@
 
 - (void)relatedTagsHaveChanged
 {
-	[self setVisibleTags:[NSArray arrayWithArray:[relatedTagsController arrangedObjects]]];
+	[self setVisibleTags:[relatedTags content]];
 }
 
 - (void)allTagsHaveChanged
