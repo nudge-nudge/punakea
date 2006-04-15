@@ -17,7 +17,7 @@
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"default" ofType:@"plist"];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"];
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithContentsOfFile:path];
 	[defaults registerDefaults:appDefaults];
 }
