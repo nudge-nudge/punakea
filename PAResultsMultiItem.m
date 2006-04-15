@@ -39,4 +39,7 @@
 {
 	items = [NSMutableArray arrayWithArray:theItems];
 }
+
+// TODO: - (int)heightOfItem
+
 @end

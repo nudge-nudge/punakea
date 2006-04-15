@@ -70,7 +70,7 @@
 		
 		if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"])
 		{
-			int numberOfColumns = 2;	// TODO: Calculate dynamically
+			int numberOfColumns = 3;	// TODO: Calculate dynamically
 			int numberOfItemsInGroup = [group resultCount];
 			int numberOfRows = numberOfItemsInGroup / numberOfColumns;
 			if(numberOfItemsInGroup % numberOfColumns != 0) numberOfRows++;
@@ -166,8 +166,7 @@
 	[results setObject:currentDisplayModes forKey:@"CurrentDisplayModes"];	
 	[defaults setObject:results forKey:@"Results"];
 	
-	[outlineView collapseItem:item];
-	[outlineView expandItem:item];
+	[outlineView reloadItem:item reloadChildren:YES];
 }
 
 
