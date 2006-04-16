@@ -177,7 +177,7 @@
 	if ([fileManager fileExistsAtPath: folder] == NO) 
 		[fileManager createDirectoryAtPath: folder attributes: nil];
 	
-	NSString *fileName = @"tags.papk"; 
+	NSString *fileName = @"tags.plist"; 
 	return [folder stringByAppendingPathComponent: fileName]; 
 }
 
