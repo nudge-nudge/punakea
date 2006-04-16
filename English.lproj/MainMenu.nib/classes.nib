@@ -1,14 +1,12 @@
 {
     IBClasses = (
         {
-            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
+            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; tagButtonClicked = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 drawer = id; 
                 outlineView = PAResultsOutlineView; 
-                relatedTagsController = NSArrayController; 
-                resultController = NSArrayController; 
                 selectedTagsController = NSArrayController; 
             }; 
             SUPERCLASS = NSWindowController; 
@@ -40,6 +38,19 @@
             CLASS = ResultsOutlineViewController; 
             LANGUAGE = ObjC; 
             SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = SideViewController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                controller = Controller; 
+                fileBox = PAFileBox; 
+                fileTags = NSArrayController; 
+                popularTags = NSArrayController; 
+                recentTags = NSArrayController; 
+                tagField = NSTextField; 
+            }; 
+            SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = SnappingWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {

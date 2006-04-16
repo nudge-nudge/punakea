@@ -1,18 +1,17 @@
-#import "TaggerViewController.h"
+#import "SideViewController.h"
 
-@interface TaggerViewController (PrivateAPI)
+@interface SideViewController (PrivateAPI)
 
 - (void)addTagToFileTags:(PATag*)tag;
 - (void)updateTagsOnFile;
 
 @end
 
-@implementation TaggerViewController
+@implementation SideViewController
 
 - (void)awakeFromNib 
 {
 	tagger = [PATagger sharedInstance];
-	factory = [[PASimpleTagFactory alloc] init];
 	
 	//TODO can be done from IB ... do this!
 	//init sorting
@@ -50,11 +49,7 @@
 	//only if there is any text in the field
 	if (![tmpString isEqualToString:@""])
 	{
-		PATag *tag = [factory createTagWithName:tmpString];
-		
-		//if the tag is new, add it to the global tag controller
-		if (![[tags arrangedObjects] containsObject:tag])
-			[tags addObject:tag];
+		PASimpleTag *tag = [controller simpleTagForName:tmpString];
 
 		[self addTagToFileTags:tag];
 		[self updateTagsOnFile];
@@ -116,7 +111,7 @@ adds tags from fileTags to all files in the file box TODO
 		while (tag = [e nextObject])
 			[tag incrementUseCount];
 		
-		NSLog(@"trying to write %@ to %@",tags,file);
+		NSLog(@"trying to write %@ to %@",[controller tags],file);
 		[tagger writeTagsToFile:[fileTags arrangedObjects] filePath:file];
 	}
 }

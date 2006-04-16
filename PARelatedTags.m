@@ -15,7 +15,7 @@
 
 @end
 
-//will use nsarraycontroller for managing the content array
+//will use nsarraycontroller for managing the relatedTags array
 @implementation PARelatedTags
 
 #pragma mark init + dealloc
@@ -24,7 +24,7 @@
 	if (self = [super init])
 	{
 		[self setQuery:aQuery];
-		content = [[NSMutableArray alloc] init];
+		relatedTags = [[NSMutableArray alloc] init];
 		
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
 		nf = [NSNotificationCenter defaultCenter];
@@ -36,7 +36,7 @@
 - (void)dealloc 
 {
 	[nf removeObserver:self];
-	[content release];
+	[relatedTags release];
 	[query release];
 	[super dealloc];
 }
@@ -49,27 +49,27 @@
 	query = aQuery;
 }
 
-- (NSMutableArray*)content;
+- (NSMutableArray*)relatedTags;
 {
-	return content;
+	return relatedTags;
 }
 
-- (void)setContent:(NSMutableArray*)otherTags
+- (void)setRelatedTags:(NSMutableArray*)otherTags
 {
 	[otherTags retain];
-	[content release];
-	content = otherTags;
+	[relatedTags release];
+	relatedTags = otherTags;
 }
 
 - (void)insertObject:(PATag *)tag
-       inContentAtIndex:(unsigned int)i
+       inRelatedTagsAtIndex:(unsigned int)i
 {
-	[content insertObject:tag atIndex:i];
+	[relatedTags insertObject:tag atIndex:i];
 }
 
-- (void)removeObjectFromContentAtIndex:(unsigned int)i
+- (void)removeObjectFromRelatedTagsAtIndex:(unsigned int)i
 {
-	[content removeObjectAtIndex:i];
+	[relatedTags removeObjectAtIndex:i];
 }
 
 #pragma mark logic
@@ -107,9 +107,9 @@
 			{
 				PATag *tag = [keywords objectAtIndex:j];
 				
-				if (![content containsObject:tag])
+				if (![relatedTags containsObject:tag])
 				{
-					[self insertObject:tag inContentAtIndex:[content count]];
+					[self insertObject:tag inRelatedTagsAtIndex:[relatedTags count]];
 				}
 			}
 		}

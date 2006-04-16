@@ -1,22 +1,19 @@
-/* TaggerViewController */
-
 #import <Cocoa/Cocoa.h>
-#import "PATagger.h"
-#import "PASimpleTagFactory.h"
+#import "Controller.h"
 #import "PATag.h"
+#import "PATagger.h"
 #import "PAFileBox.h"
 
-@interface TaggerViewController : NSWindowController {
+@interface SideViewController : NSWindowController {
+	PATagger *tagger;
+	
 	IBOutlet PAFileBox *fileBox;
 	IBOutlet NSTextField *tagField;
 	
-    IBOutlet NSArrayController *tags; /**< tag controller for all tags */
+    IBOutlet Controller *controller; /**< tag controller for all tags */
     IBOutlet NSArrayController *popularTags;
     IBOutlet NSArrayController *recentTags;
     IBOutlet NSArrayController *fileTags;
-	
-	PATagger *tagger;
-	PATagFactory *factory;
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification;

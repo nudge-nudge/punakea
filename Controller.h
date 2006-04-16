@@ -11,16 +11,17 @@
 {
     IBOutlet id drawer;
     IBOutlet PAResultsOutlineView *outlineView;
-	IBOutlet NSArrayController *relatedTagsController;
+
 	IBOutlet NSArrayController *selectedTagsController;
-	IBOutlet NSArrayController *resultController;
 	
 	NSView *sidebarNibView;
 	
 	PATagger *tagger;
+	PASimpleTagFactory *simpleTagFactory;
 	
 	NSMutableArray *tags; /**< holds all tags */
 	NSMutableArray *visibleTags; /**< holds tags for TagCloud */
+	
 	PATag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
 	
 	PARelatedTags *relatedTags;
@@ -45,14 +46,14 @@
 - (PARelatedTags*)relatedTags;
 - (void)setRelatedTags:(PARelatedTags*)otherRelatedTags;
 
+- (PASimpleTag*)simpleTagForName:(NSString*)name;
+
 //for NSMetadataQuery
 - (NSMetadataQuery *)query;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 //for adding to selected
 - (IBAction)clearSelectedTags:(id)sender;
-
-- (void)openFile;
 
 // Temp
 - (IBAction)setGroupingAttributes:(id)sender;

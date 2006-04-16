@@ -13,15 +13,15 @@
 @interface PARelatedTags : NSObject {
 	NSNotificationCenter *nf;
 	NSMetadataQuery *query;
-	NSMutableArray *content;
+	NSMutableArray *relatedTags;
 }
 
 - (id)initWithQuery:(NSMetadataQuery*)aQuery;
 
 - (void)setQuery:(NSMetadataQuery*)aQuery;
 
-- (NSMutableArray*)content;
-- (void)setContent:(NSMutableArray*)otherTags;
+- (NSMutableArray*)relatedTags;
+- (void)setRelatedTags:(NSMutableArray*)otherTags;
 
 @end
 

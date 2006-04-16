@@ -35,6 +35,8 @@
 		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
 		relatedTags = [[PARelatedTags alloc] initWithQuery:_query];
+		
+		simpleTagFactory = [[PASimpleTagFactory alloc] init];
 	}
     return self;
 }
@@ -59,7 +61,7 @@
 								context:NULL];
 	
 	[relatedTags addObserver:self
-				  forKeyPath:@"content"
+				  forKeyPath:@"relatedTags"
 					 options:0
 					 context:NULL];
 
@@ -73,6 +75,7 @@
 
 - (void)dealloc
 {
+	[simpleTagFactory release];
 	[relatedTags release];
     [_query release];
     [super dealloc];
@@ -154,6 +157,7 @@
 }
 
 #pragma mark loading and saving tags
+/* TODO deprecated
 - (void)openFile
 {
 	NSArray *selection = [resultController selectedObjects];
@@ -167,6 +171,7 @@
 		[ws openURL: fileURL];
 	}
 }
+*/
 
 - (NSString *)pathForDataFile 
 { 
@@ -214,6 +219,14 @@
 }	
 
 #pragma mark tag stuff
+- (PASimpleTag*)simpleTagForName:(NSString*)name
+{
+	//TODO skel
+	PASimpleTag *tag = [simpleTagFactory createTagWithName:name];
+	[tags addObject:tag];
+	return tag;
+}
+
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
 {
 	NSEnumerator *e = [tagSet objectEnumerator];
@@ -301,7 +314,7 @@
 
 - (void)relatedTagsHaveChanged
 {
-	[self setVisibleTags:[relatedTags content]];
+	[self setVisibleTags:[relatedTags relatedTags]];
 }
 
 - (void)allTagsHaveChanged
