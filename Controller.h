@@ -9,17 +9,21 @@
 
 @interface Controller : NSWindowController
 {
+	//gui
     IBOutlet id drawer;
     IBOutlet PAResultsOutlineView *outlineView;
-
-	IBOutlet NSArrayController *selectedTagsController;
-	
 	NSView *sidebarNibView;
+
+	//model
+	IBOutlet NSArrayController *selectedTagsController;
+	IBOutlet NSArrayController *tagController;
+
+	NSMutableArray *tags; /**< holds all tags - needed for saving */
 	
+	//controller
 	PATagger *tagger;
 	PASimpleTagFactory *simpleTagFactory;
 	
-	NSMutableArray *tags; /**< holds all tags */
 	NSMutableArray *visibleTags; /**< holds tags for TagCloud */
 	
 	PATag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
