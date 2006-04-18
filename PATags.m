@@ -107,4 +107,37 @@
 	return resultArray;
 }
 
+- (NSArray*)simpleTagsForFileAtPath:(NSString*)path
+{
+	PATagger *tagger = [PATagger sharedInstance];
+	NSArray *keywords = [tagger keywordsForFile:path];
+	
+	return [self simpleTagsForNames:keywords];
+}
+
+- (NSArray*)simpleTagsForFilesAtPaths:(NSArray*)paths
+{
+	NSMutableArray *resultArray = [NSMutableArray array];
+	
+	NSEnumerator *e = [paths objectEnumerator];
+	NSString *path;
+	
+	while (path = [e nextObject])
+	{
+		NSArray *tmpTags = [self simpleTagsForFileAtPath:path];
+		NSEnumerator *tagEnum = [tmpTags objectEnumerator];
+		PASimpleTag *tag;
+		
+		while (tag = [tagEnum nextObject])
+		{
+			if (![resultArray containsObject:tag])
+			{
+				[resultArray addObject:tag];
+			}
+		}
+	}
+
+	return resultArray;
+}	
+
 @end

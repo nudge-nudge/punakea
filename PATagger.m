@@ -18,7 +18,7 @@ get tags as PASimpleTag array for file at path
  @param path file for which to get the tags
  @return array with PASimpleTags corresponding to the kMDItemKeywords on the file
  */
-- (NSMutableArray*)getTagsForFile:(NSString*)path;
+- (NSMutableArray*)tagsForFile:(NSString*)path;
 @end
 
 @implementation PATagger
@@ -46,8 +46,8 @@ static PATagger *sharedInstance = nil;
 	NSMutableArray *resultTags = [NSMutableArray arrayWithArray:tags];
 	
 	//existing tags must be kept - only if there are any
-	if ([[self getTagsForFile:path] count] > 0) {
-		NSArray *currentTags = [self getTagsForFile:path];
+	if ([[self tagsForFile:path] count] > 0) {
+		NSArray *currentTags = [self tagsForFile:path];
 
 		/* check if the file had tags which are not in the
 		   tags to be added - need to keep them */
@@ -73,7 +73,7 @@ static PATagger *sharedInstance = nil;
 	while (path = [fileEnumerator nextObject])
 	{
 		// get all tags, remove the specified one, write back to file
-		NSMutableArray *tags = [self getTagsForFile:path];
+		NSMutableArray *tags = [self tagsForFile:path];
 		[tags removeObject:tag];
 		[self writeTagsToFile:tags filePath:path];
 	}
@@ -87,7 +87,7 @@ static PATagger *sharedInstance = nil;
 	while (path = [fileEnumerator nextObject])
 	{
 		// get all tags, rename the specified one (delete/add), write back to file
-		NSMutableArray *tags = [self getTagsForFile:path];
+		NSMutableArray *tags = [self tagsForFile:path];
 		[tags removeObject:tag];
 		[tags addObject:newTag];
 		[self writeTagsToFile:tags filePath:path];
@@ -111,8 +111,8 @@ static PATagger *sharedInstance = nil;
 }
 
 //read tags - TODO there could be a lot of mem-leaks in here ... check if file exists!!
-- (NSMutableArray*)getTagsForFile:(NSString*)path {
-	NSArray *tagNames = [self getKeywordsForFile:path];
+- (NSMutableArray*)tagsForFile:(NSString*)path {
+	NSArray *tagNames = [self keywordsForFile:path];
 
 	NSMutableArray *tags = [NSMutableArray array];
 	NSEnumerator *e = [tagNames objectEnumerator];
@@ -126,7 +126,7 @@ static PATagger *sharedInstance = nil;
 	return tags;
 }
 
-- (NSArray*)getKeywordsForFile:(NSString*)path {
+- (NSArray*)keywordsForFile:(NSString*)path {
 	//carbon api ... can be treated as cocoa objects - TODO check warnings
 	MDItemRef *item = MDItemCreate(NULL,path);
 	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");

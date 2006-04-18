@@ -124,27 +124,7 @@ action called on dropping files to FileBox
 	//clear fileTags
 	[fileTags removeObjects:[fileTags arrangedObjects]];
 	
-	NSMutableArray *newTags = [NSMutableArray array];
-	
-	//TODO multiple files? hmmm ...
-	NSEnumerator *e = [[fileBox files] objectEnumerator];
-	NSString *file;
-	
-	while (file = [e nextObject])
-	{
-		NSArray *keywords = [tagger getKeywordsForFile:file];
-		NSArray *tmpTags = [[controller tags] simpleTagsForNames:keywords];
-		
-		NSEnumerator *tagEnumerator = [tmpTags objectEnumerator];
-		PATag *tag;
-		
-		while (tag = [tagEnumerator nextObject])
-		{
-			if (![newTags containsObject:tag])
-				[newTags addObject:tag];
-		}
-	}
-	
-	[fileTags addObjects:newTags];
+	NSArray *tags = [[controller tags] simpleTagsForFilesAtPaths:[fileBox files]];
+	[fileTags addObjects:tags];
 }
 @end

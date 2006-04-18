@@ -58,6 +58,6 @@ get keywords as NSString array for file at path
  @param path file for which to get the tags
  @return array with NSStrings corresponding to the kMDItemKeywords on the file
  */
-- (NSArray*)getKeywordsForFile:(NSString*)path;
+- (NSArray*)keywordsForFile:(NSString*)path;
 
 @end

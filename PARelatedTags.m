@@ -110,7 +110,7 @@
 		{
 			//get keywords for result
 			NSMetadataItem *mditem =  [query resultAtIndex:i];
-			NSArray *keywords = [[PATagger sharedInstance] getKeywordsForFile:[mditem valueForKey:@"kMDItemPath"]];
+			NSArray *keywords = [[PATagger sharedInstance] keywordsForFile:[mditem valueForKey:@"kMDItemPath"]];
 			
 			int j = [keywords count];
 

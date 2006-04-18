@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PATagger.h"
 #import "PATag.h"
 #import "PASimpleTag.h"
 #import "PASimpleTagFactory.h"
@@ -38,5 +39,19 @@ gets simple tags for all passed names
  @return NSArray containing simple tags
  */
 - (NSArray*)simpleTagsForNames:(NSArray*)names;
+
+/**
+gets simple tags for file at path
+ @param path path to file
+ @return array of simple tags on file
+ */
+- (NSArray*)simpleTagsForFileAtPath:(NSString*)path;
+
+/**
+gets simple tags for all files at the paths
+ @param paths NSArray of NSStrings with file paths
+ @return array of simple tags on files
+ */
+- (NSArray*)simpleTagsForFilesAtPaths:(NSArray*)paths;
 
 @end
