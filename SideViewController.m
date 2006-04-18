@@ -49,7 +49,7 @@
 	//only if there is any text in the field
 	if (![tmpString isEqualToString:@""])
 	{
-		PASimpleTag *tag = [controller simpleTagForName:tmpString];
+		PASimpleTag *tag = [[controller tags] simpleTagForName:tmpString];
 
 		[self addTagToFileTags:tag];
 		[self updateTagsOnFile];
@@ -132,7 +132,8 @@ action called on dropping files to FileBox
 	
 	while (file = [e nextObject])
 	{
-		NSArray *tmpTags = [tagger getTagsForFile:file];
+		NSArray *keywords = [tagger getKeywordsForFile:file];
+		NSArray *tmpTags = [[controller tags] simpleTagsForNames:keywords];
 		
 		NSEnumerator *tagEnumerator = [tmpTags objectEnumerator];
 		PATag *tag;

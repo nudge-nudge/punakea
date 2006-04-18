@@ -25,7 +25,7 @@
 - (PATag*)createTagWithName:(NSString*)name;
 {
 	PASimpleTag *simpleTag = [[PASimpleTag alloc] initWithName:name];
-	return simpleTag;
+	return [simpleTag autorelease];
 }
 
 @end

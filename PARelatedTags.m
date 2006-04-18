@@ -19,7 +19,7 @@
 @implementation PARelatedTags
 
 #pragma mark init + dealloc
-- (id)initWithQuery:(NSMetadataQuery*)aQuery
+- (id)initWithQuery:(NSMetadataQuery*)aQuery tags:(PATags*)otherTags;
 {
 	if (self = [super init])
 	{
@@ -29,12 +29,15 @@
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
 		nf = [NSNotificationCenter defaultCenter];
 		[nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
+		
+		[self setTags:otherTags];
 	}
 	return self;
 }
 
 - (void)dealloc 
 {
+	[tags release];
 	[nf removeObserver:self];
 	[relatedTags release];
 	[query release];
@@ -47,6 +50,13 @@
 	[aQuery retain];
 	[query release];
 	query = aQuery;
+}
+
+- (void)setTags:(PATags*)otherTags
+{
+	[otherTags retain];
+	[tags release];
+	tags = otherTags;
 }
 
 - (NSMutableArray*)relatedTags;
@@ -93,18 +103,20 @@
 	if (i > 0)
 	//get the related tags to the current results
 	{
+		//TODO hack
+		[self setRelatedTags:[NSMutableArray array]];
 		//disable updates, parse files, continue -- TODO make more efficient, performance will SUCK
 		while (i--) 
 		{
 			//get keywords for result
 			NSMetadataItem *mditem =  [query resultAtIndex:i];
-			NSArray *keywords = [[PATagger sharedInstance] getTagsForFile:[mditem valueForKey:@"kMDItemPath"]];
+			NSArray *keywords = [[PATagger sharedInstance] getKeywordsForFile:[mditem valueForKey:@"kMDItemPath"]];
 			
 			int j = [keywords count];
 
 			while (j--) 
 			{
-				PATag *tag = [keywords objectAtIndex:j];
+				PATag *tag = [tags simpleTagForName:[keywords objectAtIndex:j]];
 				
 				if (![relatedTags containsObject:tag])
 				{

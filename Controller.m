@@ -39,7 +39,7 @@
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
 		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
-		relatedTags = [[PARelatedTags alloc] initWithQuery:_query];
+		relatedTags = [[PARelatedTags alloc] initWithQuery:_query tags:tags];
 	}
     return self;
 }
@@ -241,14 +241,6 @@
 }	
 
 #pragma mark tag stuff
-- (PASimpleTag*)simpleTagForName:(NSString*)name
-{
-	//TODO skel
-	PASimpleTag *tag = [simpleTagFactory createTagWithName:name];
-	[tags addTag:tag];
-	return tag;
-}
-
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
 {
 	NSEnumerator *e = [tagSet objectEnumerator];

@@ -9,16 +9,20 @@
 #import <Cocoa/Cocoa.h>
 #import "PATagger.h"
 #import "PATag.h"
+#import "PATags.h"
 
 @interface PARelatedTags : NSObject {
 	NSNotificationCenter *nf;
 	NSMetadataQuery *query;
 	NSMutableArray *relatedTags;
+	
+	PATags *tags; /**<all tags*/
 }
 
-- (id)initWithQuery:(NSMetadataQuery*)aQuery;
+- (id)initWithQuery:(NSMetadataQuery*)aQuery tags:(PATags*)tags;
 
 - (void)setQuery:(NSMetadataQuery*)aQuery;
+- (void)setTags:(PATags*)otherTags;
 
 - (NSMutableArray*)relatedTags;
 - (void)setRelatedTags:(NSMutableArray*)otherTags;

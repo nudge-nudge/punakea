@@ -8,15 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import <CoreServices/CoreServices.h>
-#import "PATag.h"
-#import "Matador.h"
 #import "PASimpleTagFactory.h"
+#import "Matador.h"
 
 /**
 singleton class for working with spotlight kMDItemKeywords
  */
 @interface PATagger : NSObject {
-	PASimpleTagFactory *tagFactory; /**< for constructing tags from strings */
+	PASimpleTagFactory *tagFactory;
 }
 
 /**
@@ -55,10 +54,10 @@ renames the tag on all files
 - (void)renameTag:(PASimpleTag*)tag toTag:(PASimpleTag*)newTag onFiles:(NSArray*)files;
 
 /**
-get keywords as PASimpleTag array for file at path
+get keywords as NSString array for file at path
  @param path file for which to get the tags
- @return array with PASimpleTags corresponding to the kMDItemKeywords on the file
+ @return array with NSStrings corresponding to the kMDItemKeywords on the file
  */
-- (NSMutableArray*)getTagsForFile:(NSString*)path;
+- (NSArray*)getKeywordsForFile:(NSString*)path;
 
 @end

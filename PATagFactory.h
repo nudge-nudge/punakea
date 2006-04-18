@@ -11,7 +11,8 @@
 
 /**
 This is the AbstractFactory, don't instantiate, use the subclasses - ObjC doesn't
- support abstract classes
+ support abstract classes - actually, this is not a real factory pattern ... just
+ encapsulated tag creation
  */
 @interface PATagFactory : NSObject
 

@@ -4,6 +4,7 @@
 #import "PATags.h"
 #import "PARelatedTags.h"
 #import "PASelectedTags.h"
+#import "PASimpleTagFactory.h"
 #import "SubViewController.h"
 #import "PATagger.h"
 #import "PAResultsOutlineView.h"
@@ -49,8 +50,6 @@
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
 - (PATag*)currentBestTag;
 - (void)setCurrentBestTag:(PATag*)otherTag;
-
-- (PASimpleTag*)simpleTagForName:(NSString*)name;
 
 //for NSMetadataQuery
 - (NSMetadataQuery *)query;

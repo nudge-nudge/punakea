@@ -11,7 +11,14 @@
 @interface PATagger (PrivateAPI)
 
 - (void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
-
+/**
+get tags as PASimpleTag array for file at path
+ this function is for Tagger-internal use only, doesn't return the "real" tag,
+ only a placeholder without click and use count and stuff
+ @param path file for which to get the tags
+ @return array with PASimpleTags corresponding to the kMDItemKeywords on the file
+ */
+- (NSMutableArray*)getTagsForFile:(NSString*)path;
 @end
 
 @implementation PATagger
@@ -104,24 +111,27 @@ static PATagger *sharedInstance = nil;
 }
 
 //read tags - TODO there could be a lot of mem-leaks in here ... check if file exists!!
-//TODO BUG tags don't get all the proper values from the main array (controller tags)!!!
 - (NSMutableArray*)getTagsForFile:(NSString*)path {
-	//carbon api ... can be treated as cocoa objects - TODO check warnings
-	MDItemRef *item = MDItemCreate(NULL,path);
-	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
-	NSArray *tagNames = (NSArray*)keywords;
-	NSMutableArray* tags = [[NSMutableArray alloc] init];
+	NSArray *tagNames = [self getKeywordsForFile:path];
 
+	NSMutableArray *tags = [NSMutableArray array];
 	NSEnumerator *e = [tagNames objectEnumerator];
 	NSString *tagName;
 
 	while (tagName = [e nextObject]) {
 		PATag *tag = [tagFactory createTagWithName:tagName];
 		[tags addObject:tag];
-		[tag release];
 	}				
 	
-	return [tags autorelease];
+	return tags;
+}
+
+- (NSArray*)getKeywordsForFile:(NSString*)path {
+	//carbon api ... can be treated as cocoa objects - TODO check warnings
+	MDItemRef *item = MDItemCreate(NULL,path);
+	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
+	NSArray *tagNames = (NSArray*)keywords;
+	return [tagNames autorelease];
 }
 
 //TODO might never be called - check if needed
