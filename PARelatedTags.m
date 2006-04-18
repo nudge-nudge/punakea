@@ -24,7 +24,7 @@
 	if (self = [super init])
 	{
 		[self setQuery:aQuery];
-		relatedTags = [[NSMutableArray alloc] init];
+		[self setRelatedTags:[[NSMutableArray alloc] init]];
 		
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
 		nf = [NSNotificationCenter defaultCenter];
@@ -61,8 +61,7 @@
 	relatedTags = otherTags;
 }
 
-- (void)insertObject:(PATag *)tag
-       inRelatedTagsAtIndex:(unsigned int)i
+- (void)insertObject:(PATag *)tag inRelatedTagsAtIndex:(unsigned int)i
 {
 	[relatedTags insertObject:tag atIndex:i];
 }

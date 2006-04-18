@@ -26,6 +26,11 @@
 {
     if (self = [super init])
     {
+		tags = [[PATags alloc] init];
+		selectedTags = [[PASelectedTags alloc] init];
+		
+		simpleTagFactory = [[PASimpleTagFactory alloc] init];
+
 		[self loadDataFromDisk];
 	
 		_query = [[NSMetadataQuery alloc] init];
@@ -35,10 +40,18 @@
 		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
 		relatedTags = [[PARelatedTags alloc] initWithQuery:_query];
-		
-		simpleTagFactory = [[PASimpleTagFactory alloc] init];
 	}
     return self;
+}
+
+- (void)dealloc
+{
+	[relatedTags release];
+    [_query release];
+	[simpleTagFactory release];
+	[selectedTags release];
+	[tags release];
+    [super dealloc];
 }
 
 - (void)awakeFromNib
@@ -55,30 +68,22 @@
 	[outlineView setQuery:_query];
 	
 	//register as an observer to changes in selectedTags and more
-	[selectedTagsController addObserver:self
-							 forKeyPath:@"arrangedObjects"
-								options:0
-								context:NULL];
+	[selectedTags addObserver:self
+				   forKeyPath:@"selectedTags"
+					  options:0
+					  context:NULL];
 	
 	[relatedTags addObserver:self
 				  forKeyPath:@"relatedTags"
 					 options:0
 					 context:NULL];
 
-	[self addObserver:self
+	[tags addObserver:self
 		   forKeyPath:@"tags"
 			  options:0
 			  context:NULL];
 	
-	[self setVisibleTags:tags];
-}
-
-- (void)dealloc
-{
-	[simpleTagFactory release];
-	[relatedTags release];
-    [_query release];
-    [super dealloc];
+	[self setVisibleTags:[tags tags]];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)note 
@@ -102,17 +107,42 @@
 	return _query;
 }
 
-- (NSMutableArray*)tags 
+- (PATags*)tags 
 {
 	return tags;
 }
 
-- (void)setTags:(NSMutableArray*)otherTags 
+- (void)setTags:(PATags*)otherTags 
 {
 	[otherTags retain];
 	[tags release];
 	tags = otherTags;
 }
+
+- (PARelatedTags*)relatedTags;
+{
+	return relatedTags;
+}
+
+- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags
+{
+	[otherRelatedTags retain];
+	[relatedTags release];
+	relatedTags = otherRelatedTags;
+}
+
+- (PASelectedTags*)selectedTags;
+{
+	return selectedTags;
+}
+
+- (void)setSelectedTags:(PASelectedTags*)otherSelectedTags
+{
+	[otherSelectedTags retain];
+	[selectedTags release];
+	selectedTags = otherSelectedTags;
+}
+
 
 - (NSMutableArray*)visibleTags;
 {
@@ -142,18 +172,6 @@
 	[otherTag retain];
 	[currentBestTag release];
 	currentBestTag = otherTag;
-}
-
-- (PARelatedTags*)relatedTags;
-{
-	return relatedTags;
-}
-
-- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags
-{
-	[otherRelatedTags retain];
-	[relatedTags release];
-	relatedTags = otherRelatedTags;
 }
 
 #pragma mark loading and saving tags
@@ -190,7 +208,7 @@
 {
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
-	[rootObject setValue:[self tags] forKey:@"tags"];
+	[rootObject setValue:[tags tags] forKey:@"tags"];
 	
 	NSMutableData *data = [NSMutableData data];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -213,9 +231,13 @@
 	NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
 	
 	if ([loadedTags count] == 0) 
-		[self setTags:[[NSMutableArray alloc] init]];
+	{
+		[tags setTags:[[NSMutableArray alloc] init]];
+	}
 	else 
-		[self setTags:loadedTags];
+	{
+		[tags setTags:loadedTags];
+	}
 }	
 
 #pragma mark tag stuff
@@ -223,7 +245,7 @@
 {
 	//TODO skel
 	PASimpleTag *tag = [simpleTagFactory createTagWithName:name];
-	[tags addObject:tag];
+	[tags addTag:tag];
 	return tag;
 }
 
@@ -248,7 +270,7 @@
 //TODO
 - (IBAction)clearSelectedTags:(id)sender
 {
-	[selectedTagsController removeObjects:[selectedTagsController arrangedObjects]];
+	[selectedTags removeAllObjects];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -256,12 +278,12 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if ([keyPath isEqual:@"arrangedObjects"]) 
+	if ([keyPath isEqual:@"selectedTags"]) 
 	{
 		[self selectedTagsHaveChanged];
 	}
 		
-	if ([keyPath isEqual:@"content"])
+	if ([keyPath isEqual:@"relatedTags"])
 	{
 		[self relatedTagsHaveChanged];
 	}
@@ -281,11 +303,11 @@
 	
 	//append all the tags queries to the string - if there are any
 	//this way the query is only started, if there are any tags to look for
-	if ([[selectedTagsController arrangedObjects] count] > 0)
+	if ([selectedTags count] > 0)
 	{
 		NSMutableString *queryString = [NSMutableString stringWithString:@""];
 		
-		NSEnumerator *e = [[selectedTagsController arrangedObjects] objectEnumerator];
+		NSEnumerator *e = [selectedTags objectEnumerator];
 		PATag *tag;
 		
 		if (tag = [e nextObject]) 
@@ -308,7 +330,7 @@
 	else 
 	{
 		//there are no selected tags, reset all tags
-		[self setVisibleTags:tags];
+		[self setVisibleTags:[tags tags]];
 	}
 }
 
@@ -321,9 +343,9 @@
 {
 	/*only do something if there are no selected tags,
 	because then the relatedTags are shown */
-	if ([[selectedTagsController arrangedObjects] count] == 0)
+	if ([selectedTags count] == 0)
 	{
-		[self setVisibleTags:tags];
+		[self setVisibleTags:[tags tags]];
 	}
 }
 

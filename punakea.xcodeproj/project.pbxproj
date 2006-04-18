@@ -16,6 +16,10 @@
 		4842FC1009DA801700C4A931 /* PATagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC0E09DA801500C4A931 /* PATagButton.m */; };
 		4842FC1309DA804100C4A931 /* PATagButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC1109DA804100C4A931 /* PATagButtonCell.h */; };
 		4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC1209DA804100C4A931 /* PATagButtonCell.m */; };
+		485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA54B09F4EC38008D3214 /* PASelectedTags.h */; };
+		485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA54C09F4EC38008D3214 /* PASelectedTags.m */; };
+		485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA55309F4ECBC008D3214 /* PATags.h */; };
+		485DA55609F4ECBC008D3214 /* PATags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA55409F4ECBC008D3214 /* PATags.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
 		486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486EBA4409D68F16000C154C /* PAFileBox.h */; };
 		489AE65509DD434600EB60EB /* SnappingWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE65309DD434600EB60EB /* SnappingWindow.h */; };
@@ -159,6 +163,8 @@
 				6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */,
 				65D86D3809F154DC006BCC8D /* PAResultsMultiItem.h in CopyFiles */,
 				65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */,
+				485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */,
+				485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +188,10 @@
 		4842FC0E09DA801500C4A931 /* PATagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButton.m; sourceTree = "<group>"; };
 		4842FC1109DA804100C4A931 /* PATagButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButtonCell.h; sourceTree = "<group>"; };
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
+		485DA54B09F4EC38008D3214 /* PASelectedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTags.h; sourceTree = "<group>"; };
+		485DA54C09F4EC38008D3214 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
+		485DA55309F4ECBC008D3214 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
+		485DA55409F4ECBC008D3214 /* PATags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATags.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
 		486EBA4409D68F16000C154C /* PAFileBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileBox.h; sourceTree = "<group>"; };
 		489AE65309DD434600EB60EB /* SnappingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnappingWindow.h; sourceTree = "<group>"; };
@@ -284,9 +294,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				65B17321099564A800B10322 /* Controllers */,
+				485DA56609F4EF07008D3214 /* Models */,
 				489AE71309DD4D7800EB60EB /* Views */,
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
-				65B17321099564A800B10322 /* Controllers */,
 				65851FFF099780E0009C3CA7 /* Main */,
 				6588132C09DDCA7300428B83 /* ResultsView */,
 				48F6A9F40996423000AA118D /* Tagging */,
@@ -368,6 +379,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		485DA56609F4EF07008D3214 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				481BF27609A3128600EBD7BA /* PATag.h */,
+				48D8F01109CBE94C0011401F /* PATag.m */,
+				481BF2F009A31B9B00EBD7BA /* PATagSet.h */,
+				481BF2F109A31B9B00EBD7BA /* PATagSet.m */,
+				48EB614209C2D4A40071D654 /* PARelatedTags.h */,
+				48EB614309C2D4A40071D654 /* PARelatedTags.m */,
+				48D66A5D09CB3752007B6B1D /* PASimpleTag.h */,
+				48D66A5E09CB3752007B6B1D /* PASimpleTag.m */,
+				485DA54B09F4EC38008D3214 /* PASelectedTags.h */,
+				485DA54C09F4EC38008D3214 /* PASelectedTags.m */,
+				485DA55309F4ECBC008D3214 /* PATags.h */,
+				485DA55409F4ECBC008D3214 /* PATags.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		489AE71309DD4D7800EB60EB /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,14 +429,6 @@
 				48AA6BF6099B78E300D8F70B /* PATagger.m */,
 				48C93614099742D800699265 /* Matador.h */,
 				48C9362D099743F200699265 /* NSObject.h */,
-				481BF27609A3128600EBD7BA /* PATag.h */,
-				48D8F01109CBE94C0011401F /* PATag.m */,
-				481BF2F009A31B9B00EBD7BA /* PATagSet.h */,
-				481BF2F109A31B9B00EBD7BA /* PATagSet.m */,
-				48EB614209C2D4A40071D654 /* PARelatedTags.h */,
-				48EB614309C2D4A40071D654 /* PARelatedTags.m */,
-				48D66A5D09CB3752007B6B1D /* PASimpleTag.h */,
-				48D66A5E09CB3752007B6B1D /* PASimpleTag.m */,
 				48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */,
 				48D66AFC09CB4C5A007B6B1D /* PATagFactory.m */,
 				48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */,
@@ -670,6 +692,8 @@
 				6525F34F09EA3C2B006E1FB7 /* PASegmentedImageControl.m in Sources */,
 				65D86D3909F154DC006BCC8D /* PAResultsMultiItem.m in Sources */,
 				65D86D5C09F15BA8006BCC8D /* PAResultsMultiItemCell.m in Sources */,
+				485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */,
+				485DA55609F4ECBC008D3214 /* PATags.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

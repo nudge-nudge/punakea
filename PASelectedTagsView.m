@@ -35,12 +35,35 @@
     return self;
 }
 
+- (void)dealloc
+{
+	[selectedTags release];
+	[super dealloc];
+}
+
 - (void)awakeFromNib
 {
-	[selectedTagsController addObserver:self
-							 forKeyPath:@"arrangedObjects"
-								options:0
-								context:NULL];
+	selectedTags = [controller selectedTags];
+	[selectedTags retain];
+	
+	[selectedTags addObserver:self
+				   forKeyPath:@"selectedTags"
+					  options:0
+					  context:NULL];
+}
+
+/**
+bound to selectedTags
+ */
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object 
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+	if ([keyPath isEqual:@"selectedTags"]) 
+	{
+		[self updateView];
+	}
 }
 
 #pragma mark drawing
@@ -73,7 +96,7 @@
 	
 	NSSize bounds = [self bounds].size;
 	
-	int tagCount = [[selectedTagsController arrangedObjects] count];
+	int tagCount = [selectedTags count];
 	
 	float displayWidth, displayHeight;
 	int numberOfTagsInRow;
@@ -142,7 +165,7 @@
 			if (counter == tagCount)
 				break;
 			
-			PATag *tag = [[selectedTagsController arrangedObjects] objectAtIndex:counter];
+			PATag *tag = [selectedTags tagAtIndex:counter];
 			NSButtonCell *cell = [[NSButtonCell alloc] initTextCell:[tag name]];
 			[cell setBezelStyle:NSRecessedBezelStyle];
 			[self putCell:cell atRow:i column:j];
@@ -152,17 +175,4 @@
 	}
 }
 
-/**
-bound to selectedTags
- */
-- (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object 
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-	if ([keyPath isEqual:@"arrangedObjects"]) 
-	{
-		[self updateView];
-	}
-}
 @end

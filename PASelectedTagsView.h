@@ -7,13 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Controller.h"
 #import "PATag.h"
+#import "PASelectedTags.h"
 
 /**
 view for the selected tags
  */
 @interface PASelectedTagsView : NSMatrix {
-	IBOutlet NSArrayController *selectedTagsController;
+	IBOutlet Controller *controller;
+	
+	PASelectedTags *selectedTags;
 	
 	int cellWidth;
 	int cellMaxWidth;

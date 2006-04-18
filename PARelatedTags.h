@@ -22,6 +22,7 @@
 
 - (NSMutableArray*)relatedTags;
 - (void)setRelatedTags:(NSMutableArray*)otherTags;
+- (void)insertObject:(PATag *)tag inRelatedTagsAtIndex:(unsigned int)i;
+- (void)removeObjectFromRelatedTagsAtIndex:(unsigned int)i;
 
 @end
-

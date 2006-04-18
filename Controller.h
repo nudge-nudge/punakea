@@ -1,8 +1,9 @@
 /* Controller */
 
 #import <Cocoa/Cocoa.h>
-#import "PATagger.h"
+#import "PATags.h"
 #import "PARelatedTags.h"
+#import "PASelectedTags.h"
 #import "SubViewController.h"
 #import "PATagger.h"
 #import "PAResultsOutlineView.h"
@@ -15,20 +16,16 @@
 	NSView *sidebarNibView;
 
 	//model
-	IBOutlet NSArrayController *selectedTagsController;
-	IBOutlet NSArrayController *tagController;
-
-	NSMutableArray *tags; /**< holds all tags - needed for saving */
+	PATags *tags; /**< holds all tags - needed for saving */
+	PARelatedTags *relatedTags;
+	PASelectedTags *selectedTags;
 	
 	//controller
 	PATagger *tagger;
 	PASimpleTagFactory *simpleTagFactory;
-	
-	NSMutableArray *visibleTags; /**< holds tags for TagCloud */
-	
 	PATag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
 	
-	PARelatedTags *relatedTags;
+	NSMutableArray *visibleTags; /**< holds tags for TagCloud */
 	
 	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
 	NSMetadataQuery *_query;
@@ -41,14 +38,17 @@
 - (void)applicationWillTerminate:(NSNotification *)note;
 
 //accessors
-- (NSMutableArray*)tags;
-- (void)setTags:(NSMutableArray*)otherTags;
+- (PATags*)tags;
+- (void)setTags:(PATags*)otherTags;
+- (PARelatedTags*)relatedTags;
+- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags;
+- (PASelectedTags*)selectedTags;
+- (void)setSelectedTags:(PASelectedTags*)otherSelectedTags;
+
 - (NSMutableArray*)visibleTags;
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
 - (PATag*)currentBestTag;
 - (void)setCurrentBestTag:(PATag*)otherTag;
-- (PARelatedTags*)relatedTags;
-- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags;
 
 - (PASimpleTag*)simpleTagForName:(NSString*)name;
 

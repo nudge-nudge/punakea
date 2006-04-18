@@ -1,14 +1,10 @@
 {
     IBClasses = (
         {
-            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; tagButtonClicked = id; }; 
+            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = Controller; 
             LANGUAGE = ObjC; 
-            OUTLETS = {
-                drawer = id; 
-                outlineView = PAResultsOutlineView; 
-                selectedTagsController = NSArrayController; 
-            }; 
+            OUTLETS = {drawer = id; outlineView = PAResultsOutlineView; }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
@@ -22,8 +18,8 @@
         {
             CLASS = PASelectedTagsView; 
             LANGUAGE = ObjC; 
-            OUTLETS = {selectedTagsController = NSArrayController; }; 
-            SUPERCLASS = NSView; 
+            OUTLETS = {controller = Controller; }; 
+            SUPERCLASS = NSMatrix; 
         }, 
         {CLASS = PASpotlightTypeCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PATagCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 

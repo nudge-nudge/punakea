@@ -8,13 +8,12 @@
 
 #import "PATagCloudController.h"
 
-
 @implementation Controller (PATagCloudController)
 
 - (IBAction)tagButtonClicked:(id)sender
 {
 	PATag *tag = [sender fileTag];
-	[selectedTagsController addObject:tag];
+	[selectedTags addTag:tag];
 	[tag incrementClickCount];
 }
 
