@@ -21,27 +21,52 @@
 
 - (void)dealloc
 {
+	if(item) [item release];
+	if(matrix) [matrix release];
 	[super dealloc];
 }
 
 
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{				
-	// Draw text	
-	NSString *value = @"MultiItem";
+{	
+	/*NSEnumerator *enumerator = [[controlView subviews] objectEnumerator];
+	id anObject;
 	
-	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
-	
-	if([self isHighlighted]) 
-		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
+	while(anObject = [enumerator nextObject])
+	{
+		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
+		{
+			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject item];
+			if([item isEqualTo:thisItem])
+				matrix = anObject;
+				NSLog(@"exists");
+		}
+	}
+
+	if([matrix superview] != controlView)
+	{	
+		matrix = [[PAResultsMultiItemMatrix alloc] initWithFrame:cellFrame];
+		[matrix setItem:item];		
+		[[self controlView] addSubview:matrix];
+		NSLog(@"added");
+	}
 	else
-		[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-		
-	[fontAttributes setObject:[NSFont systemFontOfSize:11] forKey:NSFontAttributeName];
-	
-	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + 43, cellFrame.origin.y + 1)
-	    withAttributes:fontAttributes];
+	{
+		[matrix setFrame:cellFrame];
+	}*/
+}
+
+
+#pragma mark Accessors
+- (PAResultsMultiItem *)item
+{
+	return item;
+}
+
+- (void)setItem:(PAResultsMultiItem *)anItem
+{
+	item = [anItem retain];
 }
 
 @end

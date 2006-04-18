@@ -18,6 +18,7 @@
 	if (self)
 	{
 		items = [[NSMutableArray alloc] init];
+		tag = [[NSMutableDictionary alloc] init];
 	}	
 	return self;
 }
@@ -25,6 +26,7 @@
 - (void)dealloc
 {
 	if(items) [items release];
+	if(tag) [tag release];
 	[super dealloc];
 }
 
@@ -37,7 +39,17 @@
 
 - (void)setItems:(NSArray *)theItems
 {
-	items = [NSMutableArray arrayWithArray:theItems];
+	items = [theItems retain];
+}
+
+- (NSDictionary *)tag
+{
+	return tag;
+}
+
+- (void)setTag:(NSDictionary *)aTag
+{
+	tag = [aTag retain];
 }
 
 // TODO: - (int)heightOfItem

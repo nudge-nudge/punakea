@@ -1,20 +1,19 @@
 //
-//  PAResultsMultiItemCell.h
+//  PAResultsMultiItemMatrix.h
 //  punakea
 //
-//  Created by Daniel on 15.04.06.
+//  Created by Daniel on 17.04.06.
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
 #import "PAResultsMultiItem.h"
-#import "PAResultsMultiItemMatrix.h"
+#import "PASegmentedImageControl.h"
 
 
-@interface PAResultsMultiItemCell : NSTextFieldCell {
+@interface PAResultsMultiItemMatrix : NSMatrix {
 
 	PAResultsMultiItem *item;
-	PAResultsMultiItemMatrix *matrix;
 
 }
 

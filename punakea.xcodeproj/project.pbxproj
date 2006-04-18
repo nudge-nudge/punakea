@@ -74,6 +74,8 @@
 		658DCD1009E25908008FBC2C /* QueryDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */; };
 		658DCD1A09E25A4F008FBC2C /* MDSimpleGrouping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
+		6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */; };
+		6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */; };
 		659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659EBB4109D2D78300879091 /* PAImageButton.h */; };
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
 		659EBBB109D2DC3D00879091 /* MDIconViewOff-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */; };
@@ -165,6 +167,7 @@
 				65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */,
 				485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */,
 				485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */,
+				6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +249,8 @@
 		658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryDelegateCategory.m; sourceTree = "<group>"; };
 		658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = MDSimpleGrouping.plist; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
+		6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemMatrix.h; sourceTree = "<group>"; };
+		6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemMatrix.m; sourceTree = "<group>"; };
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
 		659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOff-1.tiff"; sourceTree = "<group>"; };
@@ -495,6 +500,8 @@
 				65D86D3709F154DC006BCC8D /* PAResultsMultiItem.m */,
 				65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */,
 				65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */,
+				6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */,
+				6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */,
 				65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */,
 				65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */,
 				65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */,
@@ -694,6 +701,7 @@
 				65D86D5C09F15BA8006BCC8D /* PAResultsMultiItemCell.m in Sources */,
 				485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */,
 				485DA55609F4ECBC008D3214 /* PATags.m in Sources */,
+				6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

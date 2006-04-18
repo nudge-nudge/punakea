@@ -42,6 +42,8 @@
 		if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"])
 		{
 			PAResultsMultiItem *multiItem = [[PAResultsMultiItem alloc] init];
+			NSMutableDictionary *tag = [multiItem tag];
+			[tag setObject:[group value] forKey:@"identifier"];
 			return multiItem;
 		}
 		
@@ -127,6 +129,14 @@
 		[(PAResultsGroupCell *)cell setGroup:(NSMetadataQueryResultGroup *)item];
 	if([[item class] isEqualTo:[NSMetadataItem class]])
 		[(PAResultsItemCell *)cell setItem:(NSMetadataItem *)item];
+	if([[item class] isEqualTo:[PAResultsMultiItem class]])
+		[(PAResultsMultiItemCell *)cell setItem:(PAResultsMultiItem *)item];
+}
+
+- (void)outlineViewItemDidCollapse:(NSNotification *)notification
+{
+	NSMetadataQueryResultGroup *item = (NSMetadataQueryResultGroup *)[[notification userInfo] objectForKey:@"NSObject"];
+	[self removeAllMultiItemSubviewsWithIdentifier:[item value]];
 }
 
 
@@ -135,7 +145,9 @@
 {
 	id item = [(NSDictionary *)[sender tag] objectForKey:@"group"];
 	if([outlineView isItemExpanded:item])
+	{
 		[outlineView collapseItem:item];
+	}
 	else
 		[outlineView expandItem:item];
 	
@@ -158,15 +170,44 @@
 	NSMetadataQueryResultGroup *item = [[(PASegmentedImageControl *)sender tag] objectForKey:@"group"];
 	NSString *mode = [[(PAImageButtonCell *)[(PASegmentedImageControl *)sender selectedCell] tag] objectForKey:@"identifier"];
 	
-	// Save userDefaults
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
-	NSMutableDictionary *currentDisplayModes = [NSMutableDictionary dictionaryWithDictionary:[results objectForKey:@"CurrentDisplayModes"]];
-	[currentDisplayModes setObject:mode forKey:[item value]];	
-	[results setObject:currentDisplayModes forKey:@"CurrentDisplayModes"];	
-	[defaults setObject:results forKey:@"Results"];
 	
-	[outlineView reloadItem:item reloadChildren:YES];
+	// Ignore this click if this state was already active
+	if([mode isNotEqualTo:
+			  [[[defaults objectForKey:@"Results"]
+				          objectForKey:@"CurrentDisplayModes"]
+						  objectForKey:[item value]]])
+	{
+		// Save userDefaults
+		NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
+		NSMutableDictionary *currentDisplayModes = [NSMutableDictionary dictionaryWithDictionary:[results objectForKey:@"CurrentDisplayModes"]];
+		[currentDisplayModes setObject:mode forKey:[item value]];	
+		[results setObject:currentDisplayModes forKey:@"CurrentDisplayModes"];	
+		[defaults setObject:results forKey:@"Results"];
+		
+		// Refresh the group's display
+		[outlineView collapseItem:item];
+		[outlineView expandItem:item];
+	}
+}
+
+- (void)removeAllMultiItemSubviewsWithIdentifier:(NSString *)identifier
+{
+	NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
+	id anObject;
+	while(anObject = [enumerator nextObject])
+	{
+		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
+		{
+			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject item];
+			NSString *thisIdentifier = [[thisItem tag] objectForKey:@"identifier"];
+			if([identifier isEqualToString:thisIdentifier])
+			{
+				[anObject removeFromSuperview];
+				NSLog(@"removed");
+			}
+		}
+	}
 }
 
 

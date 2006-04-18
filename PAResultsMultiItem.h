@@ -12,10 +12,13 @@
 @interface PAResultsMultiItem : NSObject {
 	
 	NSMutableArray *items;
+	NSMutableDictionary *tag;
 
 }
 
 - (NSArray *)items;
 - (void)setItems:(NSArray *)theItems;
+- (NSDictionary *)tag;
+- (void)setTag:(NSDictionary *)aTag;
 
 @end

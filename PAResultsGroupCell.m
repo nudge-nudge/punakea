@@ -43,23 +43,24 @@
 {					   
 	// Check if subviews already exist in controlView
 	// References are not kept because cells are autoreleased
-	int i;
-	NSArray *subviews = [controlView subviews];
-	for(i = 0; i < [subviews count]; i++)
+	NSEnumerator *enumerator = [[controlView subviews] objectEnumerator];
+	id anObject;
+	
+	while(anObject = [enumerator nextObject])
 	{
-		if([[[subviews objectAtIndex:i] class] isEqualTo:[PAImageButton class]])
+		if([[anObject class] isEqualTo:[PAImageButton class]])
 		{
-			NSDictionary *tag = [(PAImageButton *)[subviews objectAtIndex:i] tag];
+			NSDictionary *tag = [(PAImageButton *)anObject tag];
 			if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
-				triangle = [subviews objectAtIndex:i];
+				triangle = anObject;
 		}
 		
 		if(hasMultipleDisplayModes)
-			if([[[subviews objectAtIndex:i] class] isEqualTo:[PASegmentedImageControl class]])
+			if([[anObject class] isEqualTo:[PASegmentedImageControl class]])
 			{
-				NSDictionary *tag = [(PASegmentedImageControl *)[subviews objectAtIndex:i] tag];
+				NSDictionary *tag = [(PASegmentedImageControl *)anObject tag];
 				if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
-					segmentedControl = [subviews objectAtIndex:i];
+					segmentedControl = anObject;
 			}
 	}
 	
@@ -94,7 +95,6 @@
 			[triangle setState:PAOffState];
 	
 	// Add segmented control if neccessary
-	// TODO: CLEANUP - USE FACTORY!
 	if(hasMultipleDisplayModes)
 	{
 		if([segmentedControl superview] != controlView)
