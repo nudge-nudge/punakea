@@ -31,6 +31,13 @@
 }
 
 
+#pragma mark Actions
+- (void)addItem:(NSMetadataItem *)anItem
+{
+	[items addObject:anItem];
+}
+
+
 #pragma mark Accessors
 - (NSArray *)items
 {

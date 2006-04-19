@@ -42,8 +42,20 @@
 		if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"])
 		{
 			PAResultsMultiItem *multiItem = [[PAResultsMultiItem alloc] init];
+			
+			// Add items to MultiItem
+			int i;
+			int startIndex = index * 3;		// TODO: Number of items per row is variable number
+			int endIndex = (index + 1) * 3;
+			if (endIndex > [group resultCount]) endIndex = [group resultCount];
+			
+			for(i = startIndex; i < endIndex; i++)
+				[multiItem addItem:[group resultAtIndex:i]];
+			
+			// Set identifier
 			NSMutableDictionary *tag = [multiItem tag];
-			[tag setObject:[group value] forKey:@"identifier"];
+			[tag setObject:[group value] forKey:@"identifier"];			
+			
 			return multiItem;
 		}
 		
@@ -202,29 +214,10 @@
 			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject item];
 			NSString *thisIdentifier = [[thisItem tag] objectForKey:@"identifier"];
 			if([identifier isEqualToString:thisIdentifier])
-			{
 				[anObject removeFromSuperview];
-				NSLog(@"removed");
-			}
 		}
 	}
 }
-
-
-/*#pragma mark Temp
-- (void)updateSubviews
-{
-	while([[outlineView subviews] count] > 0)
-    {
-		[[[outlineView subviews] lastObject] removeFromSuperview];
-    }
-	int i;
-	for(i = 0; i < [outlineView numberOfRows]; i++)
-	{
-		if([outlineView levelForRow:i] == 0)
-			[outlineView reloadItem:[outlineView itemAtRow:i]];
-	}
-}*/
 
 
 #pragma mark Accessors

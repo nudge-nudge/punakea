@@ -17,8 +17,8 @@
     self = [super initWithFrame:frame];
     if (self) {
 		[self setCellClass:[NSTextFieldCell class]];
-		[self renewRows:1 columns:3];
-		[self setIntercellSpacing:NSMakeSize(14,0)];
+		[self renewRows:1 columns:0];
+		[self setIntercellSpacing:NSMakeSize(15,0)];
 		[self setMode:NSHighlightModeMatrix];
 		[self setTarget:self];
 		[self setAutosizesCells:YES];
@@ -33,6 +33,22 @@
 }
 
 
+#pragma mark Actions
+- (void)displayCellsForItems
+{
+	[self removeRow:0];
+	[self renewRows:1 columns:0];
+	
+	NSEnumerator *enumerator = [[item items] objectEnumerator];
+	NSMetadataItem *anObject;
+	
+	while(anObject = [enumerator nextObject])
+	{
+		NSTextFieldCell *cell = [[[NSTextFieldCell alloc] initTextCell:[anObject valueForAttribute:@"kMDItemDisplayName"]] autorelease];
+		[self addColumnWithCells:[NSArray arrayWithObject:cell]];
+	}
+}
+
 #pragma mark Accessors
 - (PAResultsMultiItem *)item
 {
@@ -42,6 +58,7 @@
 - (void)setItem:(PAResultsMultiItem *)anItem
 {
 	item = [anItem retain];
+	[self displayCellsForItems];
 }
 
 @end

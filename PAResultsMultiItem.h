@@ -16,6 +16,8 @@
 
 }
 
+- (void)addItem:(NSMetadataItem *)anItem;
+
 - (NSArray *)items;
 - (void)setItems:(NSArray *)theItems;
 - (NSDictionary *)tag;

@@ -22,7 +22,6 @@
 - (void)dealloc
 {
 	if(item) [item release];
-	if(matrix) [matrix release];
 	[super dealloc];
 }
 
@@ -30,7 +29,7 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {	
-	/*NSEnumerator *enumerator = [[controlView subviews] objectEnumerator];
+	NSEnumerator *enumerator = [[controlView subviews] objectEnumerator];
 	id anObject;
 	
 	while(anObject = [enumerator nextObject])
@@ -40,21 +39,24 @@
 			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject item];
 			if([item isEqualTo:thisItem])
 				matrix = anObject;
-				NSLog(@"exists");
 		}
 	}
+	
+	NSRect rect = NSMakeRect(cellFrame.origin.x + 15,
+							 cellFrame.origin.y,
+							 cellFrame.size.width - 30,
+							 cellFrame.size.height);
 
 	if([matrix superview] != controlView)
 	{	
-		matrix = [[PAResultsMultiItemMatrix alloc] initWithFrame:cellFrame];
+		matrix = [[PAResultsMultiItemMatrix alloc] initWithFrame:rect];
 		[matrix setItem:item];		
-		[[self controlView] addSubview:matrix];
-		NSLog(@"added");
+		[controlView addSubview:matrix];
 	}
 	else
 	{
-		[matrix setFrame:cellFrame];
-	}*/
+		[matrix setFrame:rect];
+	}
 }
 
 

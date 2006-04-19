@@ -11,7 +11,7 @@
 #import "PAResultsMultiItemMatrix.h"
 
 
-@interface PAResultsMultiItemCell : NSTextFieldCell {
+@interface PAResultsMultiItemCell : NSCell {
 
 	PAResultsMultiItem *item;
 	PAResultsMultiItemMatrix *matrix;
