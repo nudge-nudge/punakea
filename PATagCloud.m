@@ -134,6 +134,7 @@ bound to visibleTags
 		NSPoint origin = [self nextPointForTagButton:tagButton inRect:(NSRect)rect];
 		[tagButton setFrameOrigin:origin];
 		[self addSubview:tagButton];
+		[[tagButton cell] setShowsBorderOnlyWhileMouseInside:YES];
 	}
 }
 

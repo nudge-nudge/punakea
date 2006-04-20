@@ -61,6 +61,12 @@
 	[self insertObject:aTag inSelectedTagsAtIndex:[selectedTags count]];
 }
 
+- (void)removeTag:(PATag*)aTag
+{
+	unsigned int i = [selectedTags indexOfObject:aTag];
+	[self removeObjectFromSelectedTagsAtIndex:i];
+}
+
 - (void)removeAllObjects
 {
 	[self setSelectedTags:[NSMutableArray array]];

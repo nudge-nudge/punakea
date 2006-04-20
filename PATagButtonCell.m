@@ -17,9 +17,14 @@
 		
 		//looks
 		[self setBordered:NO];
-		//[self setBezelStyle:NSRecessedBezelStyle];
 	}
 	return self;
+}
+
+#pragma mark drawing
+- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	[self drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
 #pragma mark accessors
@@ -35,4 +40,14 @@
 	fileTag = aTag;
 }
 
+#pragma mark highlighting
+- (void)mouseEntered:(NSEvent *)event
+{
+	//TODO nothing yet
+}
+
+- (void)mouseExited:(NSEvent *)event
+{
+	//TODO nothing yet
+}
 @end

@@ -20,6 +20,7 @@
 
 - (unsigned int)count;
 - (void)addTag:(PATag*)aTag;
+- (void)removeTag:(PATag*)aTag;
 - (void)removeAllObjects;
 - (NSEnumerator*)objectEnumerator;
 - (PATag*)tagAtIndex:(unsigned int)i;
