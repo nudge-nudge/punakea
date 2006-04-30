@@ -56,8 +56,6 @@
 	
 	// Draw display name	
 	NSString *value = [item valueForAttribute:(id)kMDItemDisplayName];
-	//[value drawAtPoint:NSMakePoint(cellFrame.origin.x + 43, cellFrame.origin.y + 2)
-	//    withAttributes:fontAttributes];
 	
 	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 43,
 								  cellFrame.origin.y + 2,
@@ -65,34 +63,35 @@
 								  cellFrame.size.height - 2)
 	    withAttributes:fontAttributes];
 		
-	// Draw last used date + time
-	NSDate *lastUsedDate = [item valueForAttribute:(id)kMDItemLastUsedDate];
-	
+	// Draw last used date
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
 	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-	[dateFormatter setDateStyle:NSDateFormatterLongStyle];
-	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 	
-	/*NSDate *currentDate = [NSDate dateWithTimeIntervalSinceNow:0];
-	NSString *currentDateString = [dateFormatter stringFromDate:currentDate]; */
+	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+		
+	NSDate *lastUsedDate = [item valueForAttribute:(id)kMDItemLastUsedDate];
+	
+	// TODO: Support TODAY and YESTERDAY
+	if([lastUsedDate timeIntervalSinceNow] > [[NSNumber numberWithInt:-60*60*24*40] doubleValue])
+	{
+		[dateFormatter setDateStyle:NSDateFormatterLongStyle];
+		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+	} else {
+		[dateFormatter setDateFormat:@"MMMM yyyy"];
+	}
 	
 	value = [dateFormatter stringFromDate:lastUsedDate];
-	
-	/*if([[value substringFromIndex:[value length] - 4] isEqualToString:
-		[currentDateString substringFromIndex:[currentDateString length] - 4]])
-		value = ;*/		
 		
 	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 160, cellFrame.origin.y + 2)
 	    withAttributes:fontAttributes];
 		
-	dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-	[dateFormatter setDateStyle:NSDateFormatterNoStyle];
+	/*[dateFormatter setDateStyle:NSDateFormatterNoStyle];
 	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 	
 	value = [dateFormatter stringFromDate:lastUsedDate];	
 	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 40, cellFrame.origin.y + 2)
-	    withAttributes:fontAttributes];
+	    withAttributes:fontAttributes]; */
 }
 
 
