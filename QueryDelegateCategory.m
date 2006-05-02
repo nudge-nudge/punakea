@@ -48,25 +48,37 @@
 	// kMDItemContentType
 	else if([attrName isEqualToString:(id)kMDItemContentType])
 	{
-		//NSLog(@"group by kMDItemContentType");
 		NSBundle *bundle = [NSBundle mainBundle];
 		NSString *path = [bundle pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
 		NSDictionary *simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
 		
-		// TODO: Add and sortindex like "1 PROGRAMS"!
+		path = @"~/Library/Preferences/com.apple.spotlight.plist";
+		path = [path stringByExpandingTildeInPath];
+		NSDictionary *spotlightUserDefaults = [[NSDictionary alloc] initWithContentsOfFile:path];
+		NSArray *spotlightOrderedItems = [spotlightUserDefaults objectForKey:@"orderedItems"];
 		
-		/*NSString *replacementValue;
-		if(replacementValue = [simpleGrouping objectForKey:attrValue])
+		NSString *replacementValue = [simpleGrouping objectForKey:attrValue];
+		if(!replacementValue) replacementValue = @"DOCUMENTS";
+		
+		// Add and sort index like "00 APPLICATIONS"
+		int j;
+		for(j = 0; j < [spotlightOrderedItems count]; j++)
 		{
-			return [bundle localizedStringForKey:replacementValue value:replacementValue table:@"MDSimpleGrouping"];
-		} else {
-			return [bundle localizedStringForKey:@"DOCUMENTS" value:@"DOCUMENTS" table:@"MDSimpleGrouping"];
-		}*/
-		NSString *replacementValue;
-		if(replacementValue = [simpleGrouping objectForKey:attrValue])
-			return replacementValue;
-		else
-			return @"DOCUMENTS";
+			NSDictionary *spotlightOrderedItem = [spotlightOrderedItems objectAtIndex:j];
+			NSString *spotlightOrderedItemName = [spotlightOrderedItem objectForKey:@"name"];
+			if([spotlightOrderedItemName isEqualToString:replacementValue])
+			{
+				NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+				[numberFormatter setFormat:@"00"];
+				
+				NSString *indexString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:j]];
+				indexString = [indexString stringByAppendingString:@" "];
+				replacementValue = [indexString stringByAppendingString:replacementValue];
+				break;
+			}
+		}
+
+		return replacementValue;
     }
 	// Default
 	else

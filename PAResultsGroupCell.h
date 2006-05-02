@@ -21,6 +21,8 @@
 
 }
 
+- (NSString *)naturalLanguageGroupValue;
+
 - (NSMetadataQueryResultGroup *)group;
 - (void)setGroup:(NSMetadataQueryResultGroup *)aGroup;
 

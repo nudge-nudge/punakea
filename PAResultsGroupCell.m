@@ -131,7 +131,6 @@
 	
 	// Draw background
 	
-	// TODO: Change image if window doesn't have focus
 	NSImage *backgroundImage;
 	if ([[controlView window] isKeyWindow])
 		backgroundImage = [NSImage imageNamed:@"MD0-0-Middle-1"];
@@ -149,7 +148,7 @@
 
 					   
 	// Draw text	
-	NSString *value = [group value];
+	NSString *value = [self naturalLanguageGroupValue];
 	
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
@@ -165,6 +164,13 @@
 
 
 #pragma mark Helpers
+- (NSString *)naturalLanguageGroupValue
+{
+	NSBundle *bundle = [NSBundle mainBundle];
+	
+	return [bundle localizedStringForKey:[group value] value:[group value] table:@"MDSimpleGrouping"];
+}
+
 - (PAImageButtonCell *)segmentForDisplayMode:(NSString *)mode
 {
 	NSImage *image;
