@@ -11,28 +11,7 @@
 	
 	// Auto-size first column
 	NSRect bounds = [self bounds];
-	[[[self tableColumns] objectAtIndex:0] setWidth:bounds.size.width];	
-}
-
-
-#pragma mark Instance Methods
-- (NSRect)frameOfCellAtColumn:(int)columnIndex row:(int)rowIndex
-{
-	/*if([self levelForRow:rowIndex] == 0)
-	{
-		// Ignore intercell spacing for group cells
-		NSRect rect = [super frameOfCellAtColumn:columnIndex row:rowIndex];
-		NSSize intercellSpacing = [self intercellSpacing];
-		
-		rect.origin.x = rect.origin.x - intercellSpacing.width;
-		rect.origin.y = rect.origin.y - intercellSpacing.height;
-		rect.size.width = rect.size.width + 2 * intercellSpacing.width;
-		rect.size.height = rect.size.height + intercellSpacing.height;
-		
-		return rect;
-	}*/
-	
-	return [super frameOfCellAtColumn:columnIndex row:rowIndex];
+	[[[self tableColumns] objectAtIndex:0] setWidth:bounds.size.width];		
 }
 
 
@@ -45,6 +24,22 @@
     }
 	    
     [super reloadData];
+}
+
+- (void)viewWillMoveToWindow:(NSWindow *)newWindow
+{
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self name:NSWindowDidResignKeyNotification object:nil];
+	[nc addObserver:self
+		   selector:@selector(windowDidChangeKeyNotification:)
+			   name:NSWindowDidResignKeyNotification
+			 object:newWindow];
+	
+	[nc removeObserver:self name:NSWindowDidBecomeKeyNotification object:nil];
+	[nc addObserver:self
+		   selector:@selector(windowDidChangeKeyNotification:)
+			   name:NSWindowDidBecomeKeyNotification
+			 object:newWindow];
 }
 
 
@@ -60,12 +55,18 @@
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
 		
-		int i, j;
+		int i;
 		for(i = 0; i < [self numberOfRows]; i++)
 			if([self levelForRow:i] == 0)
 				if(![collapsedGroups containsObject:[[self itemAtRow:i] value]])
 					[self expandItem:[self itemAtRow:i]];
 	}
+}
+
+- (void)windowDidChangeKeyNotification:(NSNotification *)notification
+{
+	// Group rows need to change their background color
+	[self setNeedsDisplay];
 }
 
 
@@ -78,8 +79,8 @@
 - (void)setQuery:(NSMetadataQuery *)aQuery
 {
 	query = aQuery;
-	NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
-    [nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(queryNote:) name:nil object:query];
 	[[self delegate] setQuery:query];
 }
 

@@ -132,8 +132,12 @@
 	// Draw background
 	
 	// TODO: Change image if window doesn't have focus
+	NSImage *backgroundImage;
+	if ([[controlView window] isKeyWindow])
+		backgroundImage = [NSImage imageNamed:@"MD0-0-Middle-1"];
+	else
+		backgroundImage = [NSImage imageNamed:@"MD0-1-Middle-1"];
 	
-	NSImage *backgroundImage = [NSImage imageNamed:@"MD0-0-Middle-1"];
 	[backgroundImage setFlipped:YES];
 	[backgroundImage setScalesWhenResized:YES];
 	
@@ -152,6 +156,11 @@
 	[fontAttributes setObject:[NSFont boldSystemFontOfSize:12] forKey:NSFontAttributeName];
 	
 	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + 23, cellFrame.origin.y + 1) withAttributes:fontAttributes];
+}
+
+- (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	[self drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
 
@@ -175,6 +184,14 @@
 		[image setFlipped:YES];
 		[cell setImage:image forState:PAOnHighlightedState];		
 		[cell setImage:image forState:PAOffHighlightedState];
+		
+		image = [NSImage imageNamed:@"MDListViewOnDisabled"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnDisabledState];
+		
+		image = [NSImage imageNamed:@"MDListViewOffDisabled"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOffDisabledState];
 	}
 	
 	if([mode isEqualToString:@"IconMode"])
@@ -191,6 +208,14 @@
 		[image setFlipped:YES];
 		[cell setImage:image forState:PAOnHighlightedState];
 		[cell setImage:image forState:PAOffHighlightedState];
+		
+		image = [NSImage imageNamed:@"MDIconViewOnDisabled"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOnDisabledState];
+		
+		image = [NSImage imageNamed:@"MDIconViewOffDisabled"];
+		[image setFlipped:YES];
+		[cell setImage:image forState:PAOffDisabledState];
 	}
 		
 	if([[self currentDisplayMode] isEqualToString:mode])			

@@ -57,7 +57,18 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	NSImage *image = [images objectForKey:[self stringForState:state]];
+	PAImageButtonState thisState = [self state];
+	if(![[controlView window] isKeyWindow])
+	{
+		if([self state] == PAOnState) 
+			if([images objectForKey:[self stringForState:PAOnDisabledState]])
+				thisState = PAOnDisabledState;
+		if([self state] == PAOffState) 
+			if([images objectForKey:[self stringForState:PAOffDisabledState]])
+				thisState = PAOffDisabledState;
+	}
+
+	NSImage *image = [images objectForKey:[self stringForState:thisState]];
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
@@ -151,10 +162,10 @@
 			name = @"PAOnHighlightedState"; break;
 		case PAOffHighlightedState:
 			name = @"PAOffHighlightedState"; break;
-		/*case PAOnDisabledState:
+		case PAOnDisabledState:
 			name = @"PAOnDisabledState"; break;
 		case PAOffDisabledState:
-			name = @"PAOffDisabledState"; break;*/
+			name = @"PAOffDisabledState"; break;
 	}	
 	
 	return name;

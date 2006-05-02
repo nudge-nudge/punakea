@@ -14,9 +14,9 @@ typedef enum _PAImageButtonState
 	PAOnState = 0,
 	PAOffState = 1,
 	PAOnHighlightedState = 2,
-	PAOffHighlightedState = 3
-	//PAOnDisabledState = 4,
-	//PAOffDisabledState = 5
+	PAOffHighlightedState = 3,
+	PAOnDisabledState = 4,
+	PAOffDisabledState = 5
 } PAImageButtonState;
 
 typedef enum _PAImageButtonType
