@@ -29,6 +29,9 @@
 			  forKeyPath:@"files"
 				 options:0
 				 context:NULL];
+	
+	//drag & drop
+	[popularTagsTable registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -37,7 +40,7 @@
                        context:(void *)context
 {
 	if ([keyPath isEqual:@"files"]) 
-		[self newFileHaveBeenDropped];
+		[self newFilesHaveBeenDropped];
 }
 
 #pragma mark tag field delegates
@@ -119,12 +122,30 @@ adds tags from fileTags to all files in the file box TODO
 /**
 action called on dropping files to FileBox
  */
-- (void)newFileHaveBeenDropped
+- (void)newFilesHaveBeenDropped
 {
 	//clear fileTags
 	[fileTags removeObjects:[fileTags arrangedObjects]];
 	
 	NSArray *tags = [[controller tags] simpleTagsForFilesAtPaths:[fileBox files]];
 	[fileTags addObjects:tags];
+}
+
+#pragma mark drag & drop support
+- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard {
+    // No drag support
+   return NO;
+}
+
+- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)op {
+    // Add code here to validate the drop
+    NSLog(@"validate Drop");
+    return NSDragOperationEvery;
+}
+
+- (BOOL)tableView:(NSTableView*)tv acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)op {
+    NSLog(@"acceptDrop");
+    // Add code here to accept the drop
+    return YES;    
 }
 @end

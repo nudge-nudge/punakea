@@ -12,6 +12,8 @@
 		481BF27809A3128600EBD7BA /* PATag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF27609A3128600EBD7BA /* PATag.h */; };
 		481BF2F209A31B9B00EBD7BA /* PATagSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF2F009A31B9B00EBD7BA /* PATagSet.h */; };
 		481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 481BF2F109A31B9B00EBD7BA /* PATagSet.m */; };
+		483305930A0D13900055133C /* PATagCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 483305910A0D13900055133C /* PATagCell.h */; };
+		483305940A0D13900055133C /* PATagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 483305920A0D13900055133C /* PATagCell.m */; };
 		4842FC0F09DA801500C4A931 /* PATagButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC0D09DA801500C4A931 /* PATagButton.h */; };
 		4842FC1009DA801700C4A931 /* PATagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC0E09DA801500C4A931 /* PATagButton.m */; };
 		4842FC1309DA804100C4A931 /* PATagButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC1109DA804100C4A931 /* PATagButtonCell.h */; };
@@ -179,6 +181,7 @@
 				6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in CopyFiles */,
 				48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */,
 				4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */,
+				483305930A0D13900055133C /* PATagCell.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +201,8 @@
 		481BF27609A3128600EBD7BA /* PATag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATag.h; sourceTree = "<group>"; };
 		481BF2F009A31B9B00EBD7BA /* PATagSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagSet.h; sourceTree = "<group>"; };
 		481BF2F109A31B9B00EBD7BA /* PATagSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSet.m; sourceTree = "<group>"; };
+		483305910A0D13900055133C /* PATagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCell.h; sourceTree = "<group>"; };
+		483305920A0D13900055133C /* PATagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCell.m; sourceTree = "<group>"; };
 		4842FC0D09DA801500C4A931 /* PATagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButton.h; sourceTree = "<group>"; };
 		4842FC0E09DA801500C4A931 /* PATagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButton.m; sourceTree = "<group>"; };
 		4842FC1109DA804100C4A931 /* PATagButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButtonCell.h; sourceTree = "<group>"; };
@@ -515,6 +520,8 @@
 				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
 				6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */,
 				6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */,
+				483305910A0D13900055133C /* PATagCell.h */,
+				483305920A0D13900055133C /* PATagCell.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -746,6 +753,7 @@
 				6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */,
 				48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */,
 				4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */,
+				483305940A0D13900055133C /* PATagCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

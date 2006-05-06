@@ -14,10 +14,12 @@
     IBOutlet NSArrayController *popularTags;
     IBOutlet NSArrayController *recentTags;
     IBOutlet NSArrayController *fileTags;
+	
+	IBOutlet NSTableView *popularTagsTable;
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification;
-- (void)newFileHaveBeenDropped;
+- (void)newFilesHaveBeenDropped;
 
 - (void)addPopularTag;
 - (void)addRecentTag;

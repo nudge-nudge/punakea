@@ -43,6 +43,7 @@
                 fileBox = PAFileBox; 
                 fileTags = NSArrayController; 
                 popularTags = NSArrayController; 
+                popularTagsTable = NSTableView; 
                 recentTags = NSArrayController; 
                 tagField = NSTextField; 
             }; 
