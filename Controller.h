@@ -8,6 +8,7 @@
 #import "SubViewController.h"
 #import "PATagger.h"
 #import "PAResultsOutlineView.h"
+#import "PATypeAheadFind.h"
 
 @interface Controller : NSWindowController
 {
@@ -17,7 +18,7 @@
 	NSView *sidebarNibView;
 
 	//model
-	PATags *tags; /**< holds all tags - needed for saving */
+	PATags *tags; /**< holds all tags */
 	PARelatedTags *relatedTags;
 	PASelectedTags *selectedTags;
 	
@@ -27,6 +28,8 @@
 	PATag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
 	
 	NSMutableArray *visibleTags; /**< holds tags for TagCloud */
+	
+	PATypeAheadFind *typeAheadFind; /**< used for type ahead find */
 	
 	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
 	NSMetadataQuery *_query;

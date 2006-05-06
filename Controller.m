@@ -40,12 +40,15 @@
 		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
 		relatedTags = [[PARelatedTags alloc] initWithQuery:_query tags:tags];
+		
+		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:tags];
 	}
     return self;
 }
 
 - (void)dealloc
 {
+	[typeAheadFind release];
 	[relatedTags release];
     [_query release];
 	[simpleTagFactory release];
