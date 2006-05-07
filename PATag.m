@@ -137,4 +137,10 @@
 	return 0;
 }
 
+#pragma mark description
+- (NSString*)description 
+{
+	return [NSString stringWithFormat:@"tag:%@",name];
+}
+
 @end

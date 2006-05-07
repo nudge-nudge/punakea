@@ -42,12 +42,6 @@
 }
 
 #pragma mark functionality
-- (NSString*)description 
-{
-	return [NSString stringWithFormat:@"tag: %@",name];
-}
-
-
 // overwriting super-class methods
 - (void)setName:(NSString*)aName 
 {

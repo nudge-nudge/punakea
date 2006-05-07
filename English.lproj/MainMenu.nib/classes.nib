@@ -45,6 +45,7 @@
                 popularTags = NSArrayController; 
                 popularTagsTable = NSTableView; 
                 recentTags = NSArrayController; 
+                recentTagsTable = NSTableView; 
                 tagField = NSTextField; 
             }; 
             SUPERCLASS = NSWindowController; 

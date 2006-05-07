@@ -3,6 +3,7 @@
 #import "PATag.h"
 #import "PATagger.h"
 #import "PAFileBox.h"
+#import "PATableViewDropController.h"
 
 @interface SideViewController : NSWindowController {
 	PATagger *tagger;
@@ -16,6 +17,10 @@
     IBOutlet NSArrayController *fileTags;
 	
 	IBOutlet NSTableView *popularTagsTable;
+	IBOutlet NSTableView *recentTagsTable;
+	
+	PATableViewDropController *popularTagTableController;
+	PATableViewDropController *recentTagTableController;
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification;

@@ -39,6 +39,13 @@ add multiple tags to a file
 - (void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
 
 /**
+add tag to multiple files
+ @param tag tag
+ @param paths array with filepaths
+ */
+- (void)addTagToFiles:(PASimpleTag*)tag filePaths:(NSArray*)paths;
+
+/**
 removes the tag from all files
  @param tag tag to remove
  @param files files to remove tags from (array of path strings)

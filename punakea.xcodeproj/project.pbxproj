@@ -22,6 +22,8 @@
 		485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA54C09F4EC38008D3214 /* PASelectedTags.m */; };
 		485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA55309F4ECBC008D3214 /* PATags.h */; };
 		485DA55609F4ECBC008D3214 /* PATags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA55409F4ECBC008D3214 /* PATags.m */; };
+		485FAF2C0A0DE54C0088AC08 /* PATableViewDropController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485FAF2A0A0DE54C0088AC08 /* PATableViewDropController.h */; };
+		485FAF2D0A0DE54C0088AC08 /* PATableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PATableViewDropController.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
 		486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486EBA4409D68F16000C154C /* PAFileBox.h */; };
 		4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */; };
@@ -182,6 +184,7 @@
 				48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */,
 				4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */,
 				483305930A0D13900055133C /* PATagCell.h in CopyFiles */,
+				485FAF2C0A0DE54C0088AC08 /* PATableViewDropController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +214,8 @@
 		485DA54C09F4EC38008D3214 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
 		485DA55309F4ECBC008D3214 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
 		485DA55409F4ECBC008D3214 /* PATags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATags.m; sourceTree = "<group>"; };
+		485FAF2A0A0DE54C0088AC08 /* PATableViewDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATableViewDropController.h; sourceTree = "<group>"; };
+		485FAF2B0A0DE54C0088AC08 /* PATableViewDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATableViewDropController.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
 		486EBA4409D68F16000C154C /* PAFileBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileBox.h; sourceTree = "<group>"; };
 		4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadFind.h; sourceTree = "<group>"; };
@@ -588,6 +593,8 @@
 				65E7B43D0994E3D000565251 /* SubViewController.m */,
 				48D81DAB09F79C1C0075EE44 /* TaggerController.h */,
 				48D81DAC09F79C1C0075EE44 /* TaggerController.m */,
+				485FAF2A0A0DE54C0088AC08 /* PATableViewDropController.h */,
+				485FAF2B0A0DE54C0088AC08 /* PATableViewDropController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -754,6 +761,7 @@
 				48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */,
 				4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */,
 				483305940A0D13900055133C /* PATagCell.m in Sources */,
+				485FAF2D0A0DE54C0088AC08 /* PATableViewDropController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
