@@ -4,5 +4,6 @@
 
 @interface TaggerController : NSWindowController
 {
+	IBOutlet NSTokenField *tokenField;
 }
 @end

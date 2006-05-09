@@ -1,7 +1,12 @@
 {
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = TaggerController; LANGUAGE = ObjC; SUPERCLASS = NSWindowController; }
+        {
+            CLASS = TaggerController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {tokenField = NSTokenField; }; 
+            SUPERCLASS = NSWindowController; 
+        }
     ); 
     IBVersion = 1; 
 }
