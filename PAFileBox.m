@@ -34,14 +34,14 @@
 
 #pragma mark accessors
 
-- (void)setFiles:(NSArray*)fileArray
+- (void)setFiles:(NSMutableArray*)fileArray
 {
 	[fileArray retain];
 	[files release];
 	files = fileArray;
 }
 
-- (NSArray*)files
+- (NSMutableArray*)files
 {
 	return files;
 }

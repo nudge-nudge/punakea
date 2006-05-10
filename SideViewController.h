@@ -2,6 +2,7 @@
 #import "Controller.h"
 #import "PATag.h"
 #import "PATagger.h"
+#import "TaggerController.h"
 #import "PAFileBox.h"
 #import "PATableViewDropController.h"
 

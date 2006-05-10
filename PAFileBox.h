@@ -6,13 +6,13 @@
 
 @interface PAFileBox : NSImageView
 {
-	NSArray *files;
+	NSMutableArray *files;
 	NSImage *fileIcon;
 	BOOL highlight;
 }
 
-- (void)setFiles:(NSArray*)fileArray;
-- (NSArray*)files;
+- (void)setFiles:(NSMutableArray*)fileArray;
+- (NSMutableArray*)files;
 - (void)setFileIcon:(NSImage*)newIcon;
 - (NSImage*)fileIcon;
 

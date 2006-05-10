@@ -135,5 +135,10 @@ action called on dropping files to FileBox
 	
 	NSArray *tags = [[controller tags] simpleTagsForFilesAtPaths:[fileBox files]];
 	[fileTags addObjects:tags];
+	
+	//open tagger window
+	TaggerController *taggerController = [[TaggerController alloc] initWithWindowNibName:@"Tagger" tags:[controller tags]];
+	[taggerController setFiles:[fileBox files]];
+	[taggerController showWindow:nil];
 }
 @end
