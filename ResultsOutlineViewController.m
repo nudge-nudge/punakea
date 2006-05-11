@@ -22,6 +22,14 @@
 #pragma mark Data Source
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
+	if([[tableColumn identifier] isEqualToString:@"title"]) {
+		if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
+		{
+			NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:5];
+			[dict setValue:[item value] forKey:@"identifier"];
+			return dict;
+		}
+	}
 	return @"hi";
 }
 
@@ -137,8 +145,8 @@
 	 forTableColumn:(NSTableColumn *)tableColumn
 	           item:(id)item
 {
-	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
-		[(PAResultsGroupCell *)cell setGroup:(NSMetadataQueryResultGroup *)item];
+	//if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
+	//	[(PAResultsGroupCell *)cell setGroup:(NSMetadataQueryResultGroup *)item];
 	if([[item class] isEqualTo:[NSMetadataItem class]])
 		[(PAResultsItemCell *)cell setItem:(NSMetadataItem *)item];
 	if([[item class] isEqualTo:[PAResultsMultiItem class]])
@@ -151,15 +159,20 @@
 	[self removeAllMultiItemSubviewsWithIdentifier:[item value]];
 }
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
+{
+	return ([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) ? NO : YES;
+}
+
 
 #pragma mark Actions
 - (void)triangleClicked:(id)sender
 {
-	id item = [(NSDictionary *)[sender tag] objectForKey:@"group"];
+	NSString *identifier = [(NSDictionary *)[sender tag] objectForKey:@"identifier"];
+	id item = [outlineView groupForIdentifier:identifier];
+	
 	if([outlineView isItemExpanded:item])
-	{
 		[outlineView collapseItem:item];
-	}
 	else
 		[outlineView expandItem:item];
 	
@@ -179,7 +192,8 @@
 
 - (void)segmentedControlClicked:(id)sender
 {
-	NSMetadataQueryResultGroup *item = [[(PASegmentedImageControl *)sender tag] objectForKey:@"group"];
+	NSString *identifier = [(NSDictionary *)[sender tag] objectForKey:@"identifier"];
+	NSMetadataQueryResultGroup *item = [outlineView groupForIdentifier:identifier];
 	NSString *mode = [[(PAImageButtonCell *)[(PASegmentedImageControl *)sender selectedCell] tag] objectForKey:@"identifier"];
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

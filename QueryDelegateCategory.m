@@ -52,16 +52,16 @@
 		NSString *path = [bundle pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
 		NSDictionary *simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
 		
-		path = @"~/Library/Preferences/com.apple.spotlight.plist";
+		/*path = @"~/Library/Preferences/com.apple.spotlight.plist";
 		path = [path stringByExpandingTildeInPath];
 		NSDictionary *spotlightUserDefaults = [[NSDictionary alloc] initWithContentsOfFile:path];
-		NSArray *spotlightOrderedItems = [spotlightUserDefaults objectForKey:@"orderedItems"];
+		NSArray *spotlightOrderedItems = [spotlightUserDefaults objectForKey:@"orderedItems"];*/
 		
 		NSString *replacementValue = [simpleGrouping objectForKey:attrValue];
 		if(!replacementValue) replacementValue = @"DOCUMENTS";
 		
 		// Add and sort index like "00 APPLICATIONS"
-		int j;
+		/*int j;
 		for(j = 0; j < [spotlightOrderedItems count]; j++)
 		{
 			NSDictionary *spotlightOrderedItem = [spotlightOrderedItems objectAtIndex:j];
@@ -76,7 +76,7 @@
 				replacementValue = [indexString stringByAppendingString:replacementValue];
 				break;
 			}
-		}
+		}*/
 
 		return replacementValue;
     }

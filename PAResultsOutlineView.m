@@ -42,6 +42,16 @@
 			 object:newWindow];
 }
 
+- (id)groupForIdentifier:(NSString *)identifier
+{
+	int i;
+	for(i = 0; i < [self numberOfRows]; i++)
+		if([self levelForRow:i] == 0)
+			if([[[self itemAtRow:i] value] isEqualToString:identifier])
+				return [self itemAtRow:i];
+	return nil;
+}
+
 
 #pragma mark Notifications
 - (void)queryNote:(NSNotification *)note

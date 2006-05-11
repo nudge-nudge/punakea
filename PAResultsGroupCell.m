@@ -33,7 +33,9 @@
 
 - (void)dealloc
 {
-	if(group) [group release];
+	// Correct???
+	//if(group) [group release];
+	
 	[super dealloc];
 }
 
@@ -51,15 +53,17 @@
 		if([[anObject class] isEqualTo:[PAImageButton class]])
 		{
 			NSDictionary *tag = [(PAImageButton *)anObject tag];
-			if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
+			//if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
+			if([[tag objectForKey:@"identifier"] isEqualToString:[valueDict objectForKey:@"identifier"]])
 				triangle = anObject;
 		}
 		
-		if(hasMultipleDisplayModes)
+		if([[self availableDisplayModes] count] > 0)
 			if([[anObject class] isEqualTo:[PASegmentedImageControl class]])
 			{
 				NSDictionary *tag = [(PASegmentedImageControl *)anObject tag];
-				if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
+				//if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
+				if([[tag objectForKey:@"identifier"] isEqualToString:[valueDict objectForKey:@"identifier"]])
 					segmentedControl = anObject;
 			}
 	}
@@ -79,8 +83,9 @@
 		
 		// Add references to PAImageButton's tag for later usage
 		NSMutableDictionary *tag = [triangle tag];
-		[tag setObject:[group value] forKey:@"identifier"];
-		[tag setObject:group forKey:@"group"];
+		//[tag setObject:[group value] forKey:@"identifier"];
+		[tag setObject:[valueDict objectForKey:@"identifier"] forKey:@"identifier"];
+		//[tag setObject:group forKey:@"group"];
 		
 		[controlView addSubview:triangle];  
 	} else {
@@ -88,6 +93,7 @@
 	}
 	
 	// Does triangle's current state match the cell's state?
+	id group = [(PAResultsOutlineView *)controlView groupForIdentifier:[valueDict objectForKey:@"identifier"]];	
 	if([triangle state] != PAOnHighlightedState && [triangle state] != PAOffHighlightedState)
 		if([(NSOutlineView *)[triangle superview] isItemExpanded:group])
 			[triangle setState:PAOnState];
@@ -95,7 +101,7 @@
 			[triangle setState:PAOffState];
 	
 	// Add segmented control if neccessary
-	if(hasMultipleDisplayModes)
+	if([[self availableDisplayModes] count] > 0)
 	{
 		if([segmentedControl superview] != controlView)
 		{			
@@ -114,8 +120,8 @@
 			
 			// Add references to PASegmentedImageControl's tag for later usage
 			NSMutableDictionary *tag = [segmentedControl tag];
-			[tag setObject:[group value] forKey:@"identifier"];
-			[tag setObject:group forKey:@"group"];
+			[tag setObject:[valueDict objectForKey:@"identifier"] forKey:@"identifier"];
+			//[tag setObject:group forKey:@"group"];
 			
 			[controlView addSubview:segmentedControl];
 		}
@@ -165,10 +171,11 @@
 
 #pragma mark Helpers
 - (NSString *)naturalLanguageGroupValue
-{
+{	
 	NSBundle *bundle = [NSBundle mainBundle];
-	
-	return [bundle localizedStringForKey:[group value] value:[group value] table:@"MDSimpleGrouping"];
+	return [bundle localizedStringForKey:[valueDict objectForKey:@"identifier"]
+	                               value:[valueDict objectForKey:@"identifier"]
+								   table:@"MDSimpleGrouping"];
 }
 
 - (PAImageButtonCell *)segmentForDisplayMode:(NSString *)mode
@@ -239,14 +246,16 @@
 - (NSArray *)availableDisplayModes
 {
 	NSMutableArray *modes = [NSMutableArray arrayWithCapacity:5];
-
+	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *displayModes = [(NSDictionary *)[defaults objectForKey:@"Results"] objectForKey:@"DisplayModes"];
 	
+	NSString *identifier = [valueDict objectForKey:@"identifier"];
 	NSEnumerator *enumerator = [displayModes keyEnumerator];
 	NSString *key;
 	while(key = [enumerator nextObject])
-		if([(NSArray *)[displayModes objectForKey:key] containsObject:[group value]])
+		//if([(NSArray *)[displayModes objectForKey:key] containsObject:[group value]])
+		if([(NSArray *)[displayModes objectForKey:key] containsObject:identifier])
 			[modes addObject:key];
 
 	return modes;
@@ -257,24 +266,32 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
 	NSString *mode;
-	if(mode = [currentDisplayModes objectForKey:[group value]])
+	//if(mode = [currentDisplayModes objectForKey:[group value]])
+	if(mode = [currentDisplayModes objectForKey:[valueDict objectForKey:@"identifier"]])
 		return mode;
 	else
 		return @"ListMode";
 }
 
+- (void)setObjectValue:(id <NSCopying>)object
+{
+	valueDict = (NSDictionary *)object;
+}
+
 
 #pragma mark Accessors
+/* DEPRECATED
 - (NSMetadataQueryResultGroup *)group
 {
 	return group;
 }
+
 - (void)setGroup:(NSMetadataQueryResultGroup *)aGroup
 {
 	group = [aGroup retain];
 	
 	if([[self availableDisplayModes] count] > 0)
 		hasMultipleDisplayModes = YES;
-}
+} */
 
 @end

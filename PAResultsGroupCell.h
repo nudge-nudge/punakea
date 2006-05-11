@@ -16,14 +16,14 @@
 
 	PAImageButton *triangle;
 	PASegmentedImageControl *segmentedControl;
-	NSMetadataQueryResultGroup *group;
+	NSDictionary *valueDict;
 	BOOL hasMultipleDisplayModes;
 
 }
 
 - (NSString *)naturalLanguageGroupValue;
 
-- (NSMetadataQueryResultGroup *)group;
-- (void)setGroup:(NSMetadataQueryResultGroup *)aGroup;
+//- (NSMetadataQueryResultGroup *)group;
+//- (void)setGroup:(NSMetadataQueryResultGroup *)aGroup;
 
 @end
