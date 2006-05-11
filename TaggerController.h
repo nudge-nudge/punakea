@@ -5,8 +5,8 @@
 #import "PATypeAheadFind.h"
 
 @interface TaggerController : NSWindowController
-{
-	IBOutlet NSTokenField *tokenField;
+{	
+	IBOutlet NSTokenField *tagField;
 	
 	NSMutableArray *files;
 	PATags *tags;

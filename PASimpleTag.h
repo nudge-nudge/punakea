@@ -10,7 +10,7 @@
 #import "PATag.h"
 
 
-@interface PASimpleTag : PATag 
+@interface PASimpleTag : PATag
 {
 
 }

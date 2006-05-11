@@ -6,7 +6,6 @@
 {
 	if (self = [super initWithWindowNibName:windowNibName])
 	{
-		NSLog(@"blub");
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:newTags];
 	}
 	return self;
@@ -38,7 +37,6 @@ completionsForSubstring:(NSString *)substring
 		   indexOfToken:(int)tokenIndex 
 	indexOfSelectedItem:(int *)selectedIndex
 {
-	NSLog(@"called");
 	[typeAheadFind setPrefix:substring];
 	
 	NSMutableArray *results = [NSMutableArray array];
@@ -52,6 +50,17 @@ completionsForSubstring:(NSString *)substring
 	}
 	
 	return results;
+}
+
+- (NSArray *)tokenField:(NSTokenField *)tokenField shouldAddObjects:(NSArray *)tokens atIndex:(unsigned)index
+{
+	NSLog([tokens description]);
+	return tokens;
+}
+
+- (void)controlTextDidChange:(NSNotification *)aNotification
+{
+	NSLog(@"change: %@",[tagField objectValue]);
 }
 
 @end
