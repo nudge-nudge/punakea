@@ -7,12 +7,19 @@
 	if (self = [super initWithWindowNibName:windowNibName])
 	{
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:newTags];
+		tags = newTags;
 	}
 	return self;
 }
 
+- (void)awakeFromNib
+{
+	NSLog(@"im awake");
+}
+
 - (void)dealloc
 {
+	[tags release];
 	[typeAheadFind release];
 	[files release];
 	[super dealloc];
@@ -28,6 +35,21 @@
 	[newFiles retain];
 	[files release];
 	files = newFiles;
+	
+	//get tags for files and show them in the tagField
+	NSArray *fileTags = [tags simpleTagsForFilesAtPaths:newFiles];
+
+	NSMutableArray *tagsForTagField = [NSMutableArray array];
+	
+	NSEnumerator *e = [fileTags objectEnumerator];
+	PASimpleTag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		[tagsForTagField addObject:[tag name]];
+	}
+	
+	[tagField setObjectValue:tagsForTagField];
 }
 
 #pragma mark tokenField delegate

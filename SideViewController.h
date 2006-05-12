@@ -15,7 +15,6 @@
     IBOutlet Controller *controller; /**< tag controller for all tags */
     IBOutlet NSArrayController *popularTags;
     IBOutlet NSArrayController *recentTags;
-    IBOutlet NSArrayController *fileTags;
 	
 	IBOutlet NSTableView *popularTagsTable;
 	IBOutlet NSTableView *recentTagsTable;
@@ -26,9 +25,5 @@
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification;
 - (void)newFilesHaveBeenDropped;
-
-- (void)addPopularTag;
-- (void)addRecentTag;
-- (void)removeTagFromFile;
 
 @end

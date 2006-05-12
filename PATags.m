@@ -117,7 +117,7 @@
 
 - (NSArray*)simpleTagsForFilesAtPaths:(NSArray*)paths
 {
-	NSMutableArray *resultArray = [NSMutableArray array];
+	NSMutableArray *resultArray = [[NSMutableArray alloc] init];
 	
 	NSEnumerator *e = [paths objectEnumerator];
 	NSString *path;

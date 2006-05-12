@@ -65,6 +65,8 @@
 	}
 }
 
+/* deprecated - use taggerController instead
+
 #pragma mark click targets
 - (void)addPopularTag 
 {
@@ -102,9 +104,6 @@
 		[fileTags addObject:tag];
 }
 
-/**
-adds tags from fileTags to all files in the file box TODO
- */
 - (void)updateTagsOnFile 
 {
 	NSArray *files = [fileBox files];
@@ -124,21 +123,17 @@ adds tags from fileTags to all files in the file box TODO
 		[tagger writeTagsToFile:[fileTags arrangedObjects] filePath:file];
 	}
 }
+*/
 
 /**
 action called on dropping files to FileBox
  */
 - (void)newFilesHaveBeenDropped
 {
-	//clear fileTags
-	[fileTags removeObjects:[fileTags arrangedObjects]];
-	
-	NSArray *tags = [[controller tags] simpleTagsForFilesAtPaths:[fileBox files]];
-	[fileTags addObjects:tags];
-	
 	//open tagger window
 	TaggerController *taggerController = [[TaggerController alloc] initWithWindowNibName:@"Tagger" tags:[controller tags]];
-	[taggerController setFiles:[fileBox files]];
 	[taggerController showWindow:nil];
+	[taggerController setFiles:[fileBox files]];
 }
+
 @end
