@@ -24,6 +24,8 @@ get the singleton instance
  */
 + (PATagger*)sharedInstance;
 
+//TODO rename the addTag* methods
+
 /**
 adds a single tag to a file
  @param tag tag to add to file
@@ -44,6 +46,13 @@ add tag to multiple files
  @param paths array with filepaths
  */
 - (void)addTagToFiles:(PASimpleTag*)tag filePaths:(NSArray*)paths;
+
+/**
+add tags to multiple files
+ @param tags array with simpletags tag
+ @param paths array with filepaths
+ */
+- (void)addTagsToFiles:(NSArray*)tags filePaths:(NSArray*)paths;
 
 /**
 removes the tag from all files

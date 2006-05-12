@@ -2,6 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATags.h"
+#import "PATagger.h"
 #import "PATypeAheadFind.h"
 
 @interface TaggerController : NSWindowController
@@ -11,6 +12,7 @@
 	NSMutableArray *files;
 	PATags *tags;
 	
+	PATagger *tagger;
 	PATypeAheadFind *typeAheadFind;
 }
 

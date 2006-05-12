@@ -76,6 +76,17 @@ static PATagger *sharedInstance = nil;
 	}
 }
 
+- (void)addTagsToFiles:(NSArray*)tags filePaths:(NSArray*)paths
+{
+	NSEnumerator *e = [tags objectEnumerator];
+	PASimpleTag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		[self addTagToFiles:tag filePaths:paths];
+	}
+}
+
 - (void)removeTag:(PASimpleTag*)tag fromFiles:(NSArray*)files
 {
 	NSEnumerator *fileEnumerator = [files objectEnumerator];

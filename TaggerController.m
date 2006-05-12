@@ -8,13 +8,9 @@
 	{
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:newTags];
 		tags = newTags;
+		tagger = [PATagger sharedInstance];
 	}
 	return self;
-}
-
-- (void)awakeFromNib
-{
-	NSLog(@"im awake");
 }
 
 - (void)dealloc
@@ -76,7 +72,8 @@ completionsForSubstring:(NSString *)substring
 
 - (NSArray *)tokenField:(NSTokenField *)tokenField shouldAddObjects:(NSArray *)tokens atIndex:(unsigned)index
 {
-	NSLog([tokens description]);
+	NSArray *newTags = [tags simpleTagsForNames:tokens];
+	[tagger addTagsToFiles:newTags filePaths:files];
 	return tokens;
 }
 
