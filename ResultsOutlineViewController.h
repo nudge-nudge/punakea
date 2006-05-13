@@ -19,6 +19,8 @@
 	NSOutlineView *outlineView;
 }
 
+- (IBAction)doubleAction:(id)sender;
+
 - (NSMetadataQuery *)query;
 - (void)setQuery:(NSMetadataQuery *)aQuery;
 - (NSOutlineView *)outlineView;

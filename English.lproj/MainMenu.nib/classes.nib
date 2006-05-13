@@ -31,6 +31,7 @@
         }, 
         {CLASS = PATagControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {
+            ACTIONS = {doubleAction = id; }; 
             CLASS = ResultsOutlineViewController; 
             LANGUAGE = ObjC; 
             SUPERCLASS = NSObject; 
