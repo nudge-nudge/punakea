@@ -1,5 +1,8 @@
 #import "PAResultsOutlineView.h"
 
+
+static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
+
 @implementation PAResultsOutlineView
 
 #pragma mark Init
@@ -11,7 +14,11 @@
 	
 	// Auto-size first column
 	NSRect bounds = [self bounds];
-	[[[self tableColumns] objectAtIndex:0] setWidth:bounds.size.width];		
+	[[[self tableColumns] objectAtIndex:0] setWidth:bounds.size.width];	
+	
+	// TODO: Double-click
+	[self setTarget:[self delegate]];
+	[self setDoubleAction:@selector(doubleAction:)];
 }
 
 
@@ -77,6 +84,92 @@
 {
 	// Group rows need to change their background color
 	[self setNeedsDisplay];
+}
+
+
+#pragma mark Double-click Stuff
+- (int)mouseRowForEvent:(NSEvent *)theEvent
+{
+    NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    
+    return [self rowAtPoint:mouseLoc];
+}
+
+- (void)selectOnlyRowIndexes:(NSIndexSet *)rowIndexes
+{
+    [super selectRowIndexes:rowIndexes byExtendingSelection:NO];
+}
+
+- (void)selectRowIndexes:(NSIndexSet *)rowIndexes byExtendingSelection:(BOOL)flag
+{
+    NSEvent *theEvent     = [NSApp currentEvent];
+    int      mouseRow     = [self mouseRowForEvent:theEvent];
+    BOOL     modifierDown = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
+    
+    if ( [[self selectedRowIndexes] containsIndex:mouseRow] && (modifierDown == NO))
+    {
+        // this case is handled by selectOnlyRowIndexes
+    }
+    else
+    {
+        [super selectRowIndexes:rowIndexes byExtendingSelection:flag];
+    }
+}
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    static float doubleClickThreshold = 0.0;
+    
+    if ( 0.0 == doubleClickThreshold )
+    {
+		// TODO: CHANGE
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        doubleClickThreshold = [defaults floatForKey:@"com.apple.mouse.doubleClickThreshold"];
+        
+        // if we couldn't find the value in the user defaults, take a conservative estimate
+        if ( 0.0 == doubleClickThreshold ) doubleClickThreshold = 0.5;
+    }
+
+    BOOL    modifierDown    = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
+    BOOL    doubleClick     = ([theEvent clickCount] == 2);
+    
+    int mouseRow = [self mouseRowForEvent:theEvent];
+    
+    if ([[self selectedRowIndexes] containsIndex:mouseRow] && (modifierDown == NO) && (doubleClick == NO))
+    {
+        // wait to see if there is a double-click: if not, select the row as usual
+        [self performSelector:@selector(selectOnlyRowIndexes:)
+		           withObject:[NSIndexSet indexSetWithIndex:mouseRow]
+				   afterDelay:doubleClickThreshold];
+        
+        // we still need to pass the event to super, to handle things like dragging, but 
+        // we have disabled row deselection by overriding selectRowIndexes:byExtendingSelection:
+        [super mouseDown:theEvent]; 
+    }
+    else if (doubleClick == YES)
+    {		
+        // cancel the row-selection action
+        [NSObject cancelPreviousPerformRequestsWithTarget:self
+											     selector:@selector(selectOnlyRowIndexes:)
+												   object:[NSIndexSet indexSetWithIndex:mouseRow]];
+
+        // perform double action
+		if([[[self itemAtRow:mouseRow] class] isNotEqualTo:[NSMetadataQueryResultGroup class]])
+			[[self target] performSelector:[self doubleAction]];
+    }
+    else
+    {
+        [super mouseDown:theEvent];
+    }
+}
+
+- (void)dragImage:(NSImage *)anImage at:(NSPoint)imageLoc offset:(NSSize)mouseOffset event:(NSEvent *)theEvent pasteboard:(NSPasteboard *)pboard source:(id)sourceObject slideBack:(BOOL)slideBack
+{
+    // we are starting to drag a row(s), so cancel any pending call to change the row selection
+    int     mouseRow = [self mouseRowForEvent:theEvent];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(selectOnlyRowIndexes:) object:[NSIndexSet indexSetWithIndex:mouseRow]];
+    
+    [super dragImage:anImage at:imageLoc offset:mouseOffset event:theEvent pasteboard:pboard source:sourceObject slideBack:slideBack];
 }
 
 

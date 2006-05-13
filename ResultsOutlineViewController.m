@@ -227,6 +227,24 @@
 	}
 }
 
+- (void)doubleAction:(id)sender
+{
+	NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
+	unsigned row = [selectedRowIndexes firstIndex];
+	while(row != NSNotFound) 
+	{
+		id item = [outlineView itemAtRow:row];
+		
+		// TODO: If item is MultiItem, get selected cells and process them
+		if([[item class] isEqualTo:[NSMetadataItem class]])
+		{
+			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
+		}
+		
+		row = [selectedRowIndexes indexGreaterThanIndex:row];
+	}
+}
+
 - (void)removeAllMultiItemSubviewsWithIdentifier:(NSString *)identifier
 {
 	NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
