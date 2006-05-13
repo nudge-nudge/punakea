@@ -11,11 +11,8 @@
 
 @interface PAResultsItemCell : NSTextFieldCell {
 
-	NSMetadataItem *item;
+	NSDictionary *valueDict;
 
 }
-
-- (NSMetadataItem *)item;
-- (void)setItem:(NSMetadataItem *)anItem;
 
 @end

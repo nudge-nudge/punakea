@@ -22,6 +22,7 @@
 }
 
 - (NSString *)naturalLanguageGroupValue;
+- (BOOL)hasMultipleDisplayModes;
 
 //- (NSMetadataQueryResultGroup *)group;
 //- (void)setGroup:(NSMetadataQueryResultGroup *)aGroup;

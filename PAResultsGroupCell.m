@@ -33,9 +33,6 @@
 
 - (void)dealloc
 {
-	// Correct???
-	//if(group) [group release];
-	
 	[super dealloc];
 }
 
@@ -58,7 +55,7 @@
 				triangle = anObject;
 		}
 		
-		if([[self availableDisplayModes] count] > 0)
+		if([self hasMultipleDisplayModes])
 			if([[anObject class] isEqualTo:[PASegmentedImageControl class]])
 			{
 				NSDictionary *tag = [(PASegmentedImageControl *)anObject tag];
@@ -101,7 +98,7 @@
 			[triangle setState:PAOffState];
 	
 	// Add segmented control if neccessary
-	if([[self availableDisplayModes] count] > 0)
+	if([self hasMultipleDisplayModes])
 	{
 		if([segmentedControl superview] != controlView)
 		{			
@@ -254,7 +251,6 @@
 	NSEnumerator *enumerator = [displayModes keyEnumerator];
 	NSString *key;
 	while(key = [enumerator nextObject])
-		//if([(NSArray *)[displayModes objectForKey:key] containsObject:[group value]])
 		if([(NSArray *)[displayModes objectForKey:key] containsObject:identifier])
 			[modes addObject:key];
 
@@ -273,25 +269,26 @@
 		return @"ListMode";
 }
 
+
+#pragma mark Accessors
+- (id)objectValue
+{
+	return valueDict;
+}
+
 - (void)setObjectValue:(id <NSCopying>)object
 {
 	valueDict = (NSDictionary *)object;
 }
 
-
-#pragma mark Accessors
-/* DEPRECATED
-- (NSMetadataQueryResultGroup *)group
+- (BOOL)hasMultipleDisplayModes
 {
-	return group;
-}
-
-- (void)setGroup:(NSMetadataQueryResultGroup *)aGroup
-{
-	group = [aGroup retain];
+	if(hasMultipleDisplayModes) return hasMultipleDisplayModes;
 	
 	if([[self availableDisplayModes] count] > 0)
-		hasMultipleDisplayModes = YES;
-} */
+		return (hasMultipleDisplayModes = YES);
+	else
+		return (hasMultipleDisplayModes = NO);
+}
 
 @end

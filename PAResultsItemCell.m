@@ -15,13 +15,15 @@
 - (id)initTextCell:(NSString *)aText
 {
 	self = [super initTextCell:aText];
-	//if (self) {}	
+	if (self)
+	{
+		// Nothing
+	}	
 	return self;
 }
 
 - (void)dealloc
 {
-	if(item) [item release];
 	[super dealloc];
 }
 
@@ -30,7 +32,7 @@
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {				
 	// Draw icon
-	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[item valueForAttribute:(id)kMDItemPath]];
+	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[valueDict objectForKey:@"path"]];
 	[icon setFlipped:YES];
 	[icon setSize:NSMakeSize(16,16)];
 	
@@ -55,7 +57,7 @@
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];
 	
 	// Draw display name	
-	NSString *value = [item valueForAttribute:(id)kMDItemDisplayName];
+	NSString *value = [valueDict objectForKey:@"displayName"];
 	
 	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 43,
 								  cellFrame.origin.y + 2,
@@ -70,7 +72,7 @@
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 		
-	NSDate *lastUsedDate = [item valueForAttribute:(id)kMDItemLastUsedDate];
+	NSDate *lastUsedDate = [valueDict objectForKey:@"lastUsedDate"];
 	
 	// TODO: Support TODAY and YESTERDAY
 	if([lastUsedDate timeIntervalSinceNow] > [[NSNumber numberWithInt:-60*60*24*40] doubleValue])
@@ -96,14 +98,14 @@
 
 
 #pragma mark Accessors
-- (NSMetadataItem *)item
+- (id)objectValue
 {
-	return item;
+	return valueDict;
 }
 
-- (void)setItem:(NSMetadataItem *)anItem
+- (void)setObjectValue:(id <NSCopying>)object
 {
-	item = [anItem retain];
+	valueDict = (NSDictionary *)object;
 }
 
 @end

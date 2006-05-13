@@ -25,8 +25,16 @@
 	if([[tableColumn identifier] isEqualToString:@"title"]) {
 		if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
 		{
-			NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:5];
+			NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
 			[dict setValue:[item value] forKey:@"identifier"];
+			return dict;
+		}
+		if([[item class] isEqualTo:[NSMetadataItem class]])
+		{
+			NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
+			[dict setValue:[item valueForAttribute:(id)kMDItemPath] forKey:@"path"];
+			[dict setValue:[item valueForAttribute:(id)kMDItemDisplayName] forKey:@"displayName"];
+			[dict setValue:[item valueForAttribute:(id)kMDItemLastUsedDate] forKey:@"lastUsedDate"];
 			return dict;
 		}
 	}
@@ -147,8 +155,10 @@
 {
 	//if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
 	//	[(PAResultsGroupCell *)cell setGroup:(NSMetadataQueryResultGroup *)item];
-	if([[item class] isEqualTo:[NSMetadataItem class]])
-		[(PAResultsItemCell *)cell setItem:(NSMetadataItem *)item];
+	//if([[item class] isEqualTo:[NSMetadataItem class]])
+	//	[(PAResultsItemCell *)cell setItem:(NSMetadataItem *)item];
+	
+	// TODO Replace this by setObjectValue
 	if([[item class] isEqualTo:[PAResultsMultiItem class]])
 		[(PAResultsMultiItemCell *)cell setItem:(PAResultsMultiItem *)item];
 }
