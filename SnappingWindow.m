@@ -45,6 +45,16 @@
     [super dealloc];
 }
 
+#pragma mark Overriding
+- (BOOL)canBecomeKeyWindow
+{
+    return YES;
+}
+
+- (BOOL)canBecomeMainWindow
+{
+    return YES;
+}
 
 #pragma mark Mouse event handlers
 /* Since we don't have a titlebar, we handle window-dragging ourselves. */
@@ -138,7 +148,6 @@
 }
 
 #pragma mark Helper methods
-
 - (void)springCoordinate:(float *)start to:(float)dest inPoint:(NSPoint *)pt
 {
     *start = dest;
