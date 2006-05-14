@@ -90,7 +90,7 @@
 	}
 	
 	// Does triangle's current state match the cell's state?
-	id group = [(PAResultsOutlineView *)controlView groupForIdentifier:[valueDict objectForKey:@"identifier"]];	
+	id group = [controlView groupForIdentifier:[valueDict objectForKey:@"identifier"]];	
 	if([triangle state] != PAOnHighlightedState && [triangle state] != PAOffHighlightedState)
 		if([(NSOutlineView *)[triangle superview] isItemExpanded:group])
 			[triangle setState:PAOnState];

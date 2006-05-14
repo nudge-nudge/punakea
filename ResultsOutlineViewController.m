@@ -43,9 +43,9 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
 {
-	// TODO: When do I have to release them?
-
-	if(item == nil) return [[[query groupedResults] objectAtIndex:index] retain];
+	// TODO: MEM LEAK!!
+	
+	if(item == nil)	return [[[query groupedResults] objectAtIndex:index] retain];
 	
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
 	{
