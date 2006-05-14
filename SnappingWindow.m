@@ -27,7 +27,7 @@
                                              selector:@selector(windowMoved:)
                                                  name:NSWindowDidMoveNotification
                                                object:self];
-
+	
     [self setHasShadow:YES];
     
     [self setSnapsToEdges:YES];

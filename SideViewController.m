@@ -51,6 +51,7 @@
 
 #pragma mark tag field delegates
 //TODO only on hitting enter!!!
+/* deprecated - use taggerController instead
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification
 {
 	NSString *tmpString = [tagField stringValue];
@@ -64,8 +65,6 @@
 		[self updateTagsOnFile];
 	}
 }
-
-/* deprecated - use taggerController instead
 
 #pragma mark click targets
 - (void)addPopularTag 

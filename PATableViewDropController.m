@@ -46,7 +46,10 @@
 	}
 }
 
-- (BOOL)tableView:(NSTableView*)tv acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)op 
+- (BOOL)tableView:(NSTableView*)tv 
+	   acceptDrop:(id <NSDraggingInfo>)info 
+			  row:(int)row 
+	dropOperation:(NSTableViewDropOperation)op 
 {
 	PASimpleTag *tag = [[tags arrangedObjects] objectAtIndex:row];
 	
@@ -54,7 +57,7 @@
 	NSArray *files = [pboard propertyListForType:@"NSFilenamesPboardType"];
 	
 	PATagger *tagger = [PATagger sharedInstance];
-	[tagger addTagToFiles:tag filePaths:files];
+	[tagger addTag:tag ToFiles:files];
     return YES;    
 }
 

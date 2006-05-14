@@ -8,7 +8,8 @@
 @interface TaggerController : NSWindowController
 {	
 	IBOutlet NSTokenField *tagField;
-	
+	NSMutableArray *currentCompleteTagsInField;
+
 	NSMutableArray *files;
 	PATags *tags;
 	

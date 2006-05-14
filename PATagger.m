@@ -10,7 +10,7 @@
 
 @interface PATagger (PrivateAPI)
 
-- (void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+- (void)writeTags:(NSArray*)tags ToFile:(NSString*)path;
 /**
 get tags as PASimpleTag array for file at path
  this function is for Tagger-internal use only, doesn't return the "real" tag,
@@ -26,6 +26,7 @@ get tags as PASimpleTag array for file at path
 //this is where the sharedInstance is held
 static PATagger *sharedInstance = nil;
 
+#pragma mark init
 //constructor - only called by sharedInstance
 - (id)sharedInstanceInit {
 	self = [super init];
@@ -36,13 +37,14 @@ static PATagger *sharedInstance = nil;
 	return self;
 }
 
+#pragma mark tags and files
 //write tags
-- (void)addTagToFile:(PASimpleTag*)tag filePath:(NSString*)path {
-	[self addTagsToFile:[NSArray arrayWithObject:tag] filePath:path];
+- (void)addTag:(PASimpleTag*)tag ToFile:(NSString*)path {
+	[self addTags:[NSArray arrayWithObject:tag] ToFile:path];
 }
 
 //adds the specified tags, doesn't overwrite - TODO check if works with PATag
-- (void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path {
+- (void)addTags:(NSArray*)tags ToFile:(NSString*)path {
 	NSMutableArray *resultTags = [NSMutableArray arrayWithArray:tags];
 	
 	//existing tags must be kept - only if there are any
@@ -62,28 +64,28 @@ static PATagger *sharedInstance = nil;
 	}
 	
 	//write the tags to kMDItemKeywords - new and existing ones
-	[self writeTagsToFile:resultTags filePath:path];
+	[self writeTags:resultTags ToFile:path];
 }
 
-- (void)addTagToFiles:(PASimpleTag*)tag filePaths:(NSArray*)paths
+- (void)addTag:(PASimpleTag*)tag ToFiles:(NSArray*)paths
 {
 	NSEnumerator *e = [paths objectEnumerator];
 	NSString *path;
 	
 	while (path = [e nextObject])
 	{
-		[self addTagToFile:tag filePath:path];
+		[self addTag:tag ToFile:path];
 	}
 }
 
-- (void)addTagsToFiles:(NSArray*)tags filePaths:(NSArray*)paths
+- (void)addTags:(NSArray*)tags ToFiles:(NSArray*)paths
 {
 	NSEnumerator *e = [tags objectEnumerator];
 	PASimpleTag *tag;
 	
 	while (tag = [e nextObject])
 	{
-		[self addTagToFiles:tag filePaths:paths];
+		[self addTag:tag ToFiles:paths];
 	}
 }
 
@@ -97,7 +99,18 @@ static PATagger *sharedInstance = nil;
 		// get all tags, remove the specified one, write back to file
 		NSMutableArray *tags = [self tagsForFile:path];
 		[tags removeObject:tag];
-		[self writeTagsToFile:tags filePath:path];
+		[self writeTags:tags ToFile:path];
+	}
+}
+
+- (void)removeTags:(NSArray*)tags fromFiles:(NSArray*)files
+{
+	NSEnumerator *e = [tags objectEnumerator];
+	PASimpleTag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		[self removeTag:tag fromFiles:files];
 	}
 }
 
@@ -112,12 +125,12 @@ static PATagger *sharedInstance = nil;
 		NSMutableArray *tags = [self tagsForFile:path];
 		[tags removeObject:tag];
 		[tags addObject:newTag];
-		[self writeTagsToFile:tags filePath:path];
+		[self writeTags:tags ToFile:path];
 	}
 }
 
 //sets the tags, overwrites current ones
-- (void)writeTagsToFile:(NSArray*)tags filePath:(NSString*)path {
+- (void)writeTags:(NSArray*)tags ToFile:(NSString*)path {
 	//only the names of the tags are written, create tmp array with names only
 	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
 	
@@ -156,12 +169,11 @@ static PATagger *sharedInstance = nil;
 	return [tagNames autorelease];
 }
 
-//TODO might never be called - check if needed
+#pragma mark singleton stuff
 - (void)dealloc {
 	[super dealloc];
 }
 
-#pragma mark singleton stuff
 + (PATagger*)sharedInstance {
 	@synchronized(self) {
         if (sharedInstance == nil) {

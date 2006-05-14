@@ -10,7 +10,6 @@
 	PATagger *tagger;
 	
 	IBOutlet PAFileBox *fileBox;
-	IBOutlet NSTextField *tagField;
 	
     IBOutlet Controller *controller; /**< tag controller for all tags */
     IBOutlet NSArrayController *popularTags;
@@ -23,7 +22,6 @@
 	PATableViewDropController *recentTagTableController;
 }
 
-- (void)controlTextDidEndEditing:(NSNotification *)aNotification;
 - (void)newFilesHaveBeenDropped;
 
 @end

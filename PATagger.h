@@ -31,28 +31,28 @@ adds a single tag to a file
  @param tag tag to add to file
  @param path path to file
  */
-- (void)addTagToFile:(PASimpleTag*)tag filePath:(NSString*)path;
+- (void)addTag:(PASimpleTag*)tag ToFile:(NSString*)path;
 
 /**
 add multiple tags to a file
  @param tags array with tags
  @param path path to file
  */
-- (void)addTagsToFile:(NSArray*)tags filePath:(NSString*)path;
+- (void)addTags:(NSArray*)tags ToFile:(NSString*)path;
 
 /**
 add tag to multiple files
  @param tag tag
  @param paths array with filepaths
  */
-- (void)addTagToFiles:(PASimpleTag*)tag filePaths:(NSArray*)paths;
+- (void)addTag:(PASimpleTag*)tag ToFiles:(NSArray*)paths;
 
 /**
 add tags to multiple files
  @param tags array with simpletags tag
  @param paths array with filepaths
  */
-- (void)addTagsToFiles:(NSArray*)tags filePaths:(NSArray*)paths;
+- (void)addTags:(NSArray*)tags ToFiles:(NSArray*)paths;
 
 /**
 removes the tag from all files
@@ -60,6 +60,13 @@ removes the tag from all files
  @param files files to remove tags from (array of path strings)
  */
 - (void)removeTag:(PASimpleTag*)tag fromFiles:(NSArray*)files;
+
+/**
+removes the tags from all files
+ @param tags tag array with simpleTags to remove
+ @param files files to remove tags from (array of path strings)
+ */
+- (void)removeTags:(NSArray*)tags fromFiles:(NSArray*)files;
 
 /**
 renames the tag on all files
