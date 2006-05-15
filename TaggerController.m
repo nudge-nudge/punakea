@@ -1,5 +1,11 @@
 #import "TaggerController.h"
 
+@interface TaggerController (PrivateAPI)
+
+- (void)addTagToField:(PASimpleTag*)tag;
+
+@end
+
 @implementation TaggerController
 
 #pragma mark init + dealloc
@@ -11,12 +17,20 @@
 		tags = newTags;
 		tagger = [PATagger sharedInstance];
 		currentCompleteTagsInField = [[NSMutableArray alloc] init];
+		NSSortDescriptor *popularDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO] autorelease];
+		popularTagsSortDescriptors = [[NSArray alloc] initWithObjects:popularDescriptor,nil];
 	}
 	return self;
 }
 
+- (void)awakeFromNib
+{
+	//nothing yet
+}
+
 - (void)dealloc
 {
+	[popularTagsSortDescriptors release];
 	[currentCompleteTagsInField release];
 	[tags release];
 	[typeAheadFind release];
@@ -53,8 +67,20 @@
 	currentCompleteTagsInField = [[tagField objectValue] copy];
 }
 
-#pragma mark tokenField delegate
+#pragma mark functionality
+- (void)addTagToField:(PASimpleTag*)tag
+{
+	// when the user started typing some stuff, and a new tag is added,
+	// the temporary typing is discarded, and the new tag added instead.
+	// is this good behaviour? TODO
+	NSMutableArray *newContent = [[[tagField objectValue] mutableCopy] autorelease];
+	
+	// add tag to the last position
+	[newContent insertObject:[tag name] atIndex:[currentCompleteTagsInField count]];
+	[tagField setObjectValue:newContent];
+}
 
+#pragma mark tokenField delegate
 - (NSArray *)tokenField:(NSTokenField *)tokenField 
 completionsForSubstring:(NSString *)substring 
 		   indexOfToken:(int)tokenIndex 
@@ -111,4 +137,14 @@ completionsForSubstring:(NSString *)substring
 	}
 }
 
+#pragma mark clicks in table
+- (IBAction)addPopularTag
+{
+	NSArray *selection = [popularTags selectedObjects];
+	
+	if ([selection count] == 1)
+	{
+		[self addTagToField:[selection objectAtIndex:0]];
+	}
+}
 @end

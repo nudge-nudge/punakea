@@ -8,10 +8,15 @@
 @interface TaggerController : NSWindowController
 {	
 	IBOutlet NSTokenField *tagField;
+	IBOutlet NSArrayController *popularTags;
+	
 	NSMutableArray *currentCompleteTagsInField;
 
 	NSMutableArray *files;
+
 	PATags *tags;
+	
+	NSArray *popularTagsSortDescriptors;
 	
 	PATagger *tagger;
 	PATypeAheadFind *typeAheadFind;
