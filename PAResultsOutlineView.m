@@ -8,7 +8,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 #pragma mark Init
 - (void)awakeFromNib
 {
-	[self setIndentationPerLevel:0.0];
+	[self setIndentationPerLevel:10.0];
 	[self setIntercellSpacing:NSMakeSize(0,1)];
 	[[self delegate] setOutlineView:self];
 	
@@ -23,6 +23,20 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Actions
+- (NSRect)frameOfCellAtColumn:(int)column row:(int)row
+{
+	NSRect rect = [super frameOfCellAtColumn:column row:row];
+
+	if([self levelForRow:row] == 0)
+	{
+		// Skip indentation for level 0
+		rect.origin.x -= [self indentationPerLevel];
+		rect.size.width += [self indentationPerLevel];
+	}
+	
+	return rect;
+}
+
 - (void)reloadData
 {
     while ([[self subviews] count] > 0)
