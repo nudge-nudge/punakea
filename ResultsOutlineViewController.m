@@ -44,8 +44,12 @@
 - (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
 {
 	// TODO: MEM LEAK!!
-	
-	if(item == nil)	return [[[query groupedResults] objectAtIndex:index] retain];
+		
+	if(item == nil)	
+		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
+			return [[[query groupedResults] objectAtIndex:index] retain];
+		else
+			return [[query resultAtIndex:index] retain];
 	
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
 	{
@@ -83,12 +87,19 @@
 
 - (BOOL)outlineView:(NSOutlineView *)ov isItemExpandable:(id)item
 {
-	return (item == nil) ? YES : ([self outlineView:ov numberOfChildrenOfItem:item] != 0);
+	if(item == nil) return YES;
+	if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
+		return ([self outlineView:ov numberOfChildrenOfItem:item] != 0);
+	return NO;
 }
 
 - (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
-	if(item == nil) return [[query groupedResults] count];
+	if(item == nil)
+		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
+			return [[query groupedResults] count];
+		else
+			return [query resultCount];
 
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
 	{

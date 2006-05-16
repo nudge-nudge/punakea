@@ -72,11 +72,15 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
 		
-		int i;
-		for(i = 0; i < [self numberOfRows]; i++)
-			if([self levelForRow:i] == 0)
-				if(![collapsedGroups containsObject:[[self itemAtRow:i] value]])
-					[self expandItem:[self itemAtRow:i]];
+		// Restore group's state from user defaults
+		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
+		{
+			int i;
+			for(i = 0; i < [self numberOfRows]; i++)
+				if([self levelForRow:i] == 0)
+					if(![collapsedGroups containsObject:[[self itemAtRow:i] value]])
+						[self expandItem:[self itemAtRow:i]];
+		}
 	}
 }
 
@@ -122,12 +126,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     
     if ( 0.0 == doubleClickThreshold )
     {
-		// TODO: CHANGE
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         doubleClickThreshold = [defaults floatForKey:@"com.apple.mouse.doubleClickThreshold"];
         
         // if we couldn't find the value in the user defaults, take a conservative estimate
-        if ( 0.0 == doubleClickThreshold ) doubleClickThreshold = 0.5;
+        if ( 0.0 == doubleClickThreshold ) doubleClickThreshold = 0.8;
     }
 
     BOOL    modifierDown    = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
