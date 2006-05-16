@@ -25,10 +25,7 @@
 	[recentTags setSortDescriptors:recentSortDescriptors];
 	
 	//observe files on fileBox
-	[fileBox addObserver:self
-			  forKeyPath:@"files"
-				 options:0
-				 context:NULL];
+	[fileBox addObserver:self forKeyPath:@"files" options:0 context:NULL];
 	
 	//drag & drop
 	[popularTagsTable registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];

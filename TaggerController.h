@@ -22,6 +22,12 @@
 	PATagger *tagger;
 	PATypeAheadFind *typeAheadFind;
 	
+	/** helper for the delegate methods - this is needed
+		because shouldAddObjects is called when tags already on the files
+		are written in the tagField. when multiple files are dropped, this
+		behaviour is unwanted */
+	BOOL filesHaveChanged; 
+	
 	// stuff for related tags
 	NSMetadataQuery *query;
 	PARelatedTags *relatedTags;
@@ -31,7 +37,7 @@
 
 - (NSMutableArray*)files;
 - (void)setFiles:(NSMutableArray*)newFiles;
-- (NSArray*)currentCompleteTagsInField;
-- (void)setCurrentCompleteTagsInField:(NSArray*)newTags;
+- (NSMutableArray*)currentCompleteTagsInField;
+- (void)setCurrentCompleteTagsInField:(NSMutableArray*)newTags;
 
 @end

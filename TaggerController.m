@@ -29,6 +29,8 @@ called when tags have changed, updates query
 		NSSortDescriptor *popularDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO] autorelease];
 		popularTagsSortDescriptors = [[NSArray alloc] initWithObjects:popularDescriptor,nil];
 		
+		filesHaveChanged = NO;
+		
 		// related tags stuff
 		query = [[NSMetadataQuery alloc] init];
 		relatedTags = [[PARelatedTags alloc] initWithQuery:query tags:tags];
@@ -65,31 +67,22 @@ called when tags have changed, updates query
 	[files release];
 	files = newFiles;
 	
-	//get tags for files and show them in the tagField
+	// get tags for files and show them in the tagField
 	NSArray *fileTags = [tags simpleTagsForFilesAtPaths:newFiles];
-
-	/*
-	NSMutableArray *tagsForTagField = [NSMutableArray array];
-	
-	NSEnumerator *e = [fileTags objectEnumerator];
-	PASimpleTag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		[tagsForTagField addObject:[tag name]];
-	}
-	
-	*/
 	[tagField setObjectValue:fileTags];
 	[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
+	
+	// set helper flag so that shouldAddObjects
+	// doesn't write tags
+	filesHaveChanged = YES;
 }
 
-- (NSArray*)currentCompleteTagsInField
+- (NSMutableArray*)currentCompleteTagsInField
 {
 	return currentCompleteTagsInField;
 }
 
-- (void)setCurrentCompleteTagsInField:(NSArray*)newTags
+- (void)setCurrentCompleteTagsInField:(NSMutableArray*)newTags
 {
 	[newTags retain];
 	[currentCompleteTagsInField release];
@@ -106,7 +99,7 @@ called when tags have changed, updates query
 	NSMutableArray *newContent = [[[tagField objectValue] mutableCopy] autorelease];
 	
 	// add tag to the last position
-	[newContent insertObject:[tag name] atIndex:[currentCompleteTagsInField count]];
+	[newContent insertObject:tag atIndex:[currentCompleteTagsInField count]];
 	[tagField setObjectValue:newContent];
 }
 
@@ -169,9 +162,12 @@ completionsForSubstring:(NSString *)substring
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)index
 {
-	[tagger addTags:tokens ToFiles:files];
+	if (!filesHaveChanged)
+	{
+		[tagger addTags:tokens ToFiles:files];
+		filesHaveChanged = NO;
+	}
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
-	
 	// needs to be called manually because setter of currentCompleteTagsInField is not called
 	[self tagsHaveChanged];
 	return tokens;
@@ -201,20 +197,15 @@ completionsForSubstring:(NSString *)substring
 	
 	if (count > 1)
 	{
-		//NSLog(@"%@: %i => fat",representedObject,count);
-		return NSDefaultTokenStyle;
+		NSLog(@"%@: %i => fat",representedObject,count);
+		return NSRoundedTokenStyle;
 	}
 	else
 	{
-		//NSLog(@"%@: %i => slim",representedObject,count);
-		return NSDefaultTokenStyle;
+		NSLog(@"%@: %i => slim",representedObject,count);
+		return NSRoundedTokenStyle;
 	}		 
 }
-
-// - (BOOL)tokenField:(NSTokenField *)tokenField hasMenuForRepresentedObject:(id)representedObject
-
-// - (NSMenu *)tokenField:(NSTokenField *)tokenField menuForRepresentedObject:(id)representedObject
-
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
