@@ -2,7 +2,16 @@
 
 @interface TaggerController (PrivateAPI)
 
+/**
+adds tag to tagField (use from "outside")
+ @param tag tag to add 
+ */
 - (void)addTagToField:(PASimpleTag*)tag;
+
+/**
+called when tags have changed, updates query
+ */
+- (void)tagsHaveChanged;
 
 @end
 
@@ -19,6 +28,10 @@
 		currentCompleteTagsInField = [[NSMutableArray alloc] init];
 		NSSortDescriptor *popularDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO] autorelease];
 		popularTagsSortDescriptors = [[NSArray alloc] initWithObjects:popularDescriptor,nil];
+		
+		// related tags stuff
+		query = [[NSMetadataQuery alloc] init];
+		relatedTags = [[PARelatedTags alloc] initWithQuery:query tags:tags];
 	}
 	return self;
 }
@@ -30,6 +43,8 @@
 
 - (void)dealloc
 {
+	[relatedTags release];
+	[query release];
 	[popularTagsSortDescriptors release];
 	[currentCompleteTagsInField release];
 	[tags release];
@@ -64,7 +79,20 @@
 	}
 	
 	[tagField setObjectValue:tagsForTagField];
-	currentCompleteTagsInField = [[tagField objectValue] copy];
+	[self setCurrentCompleteTagsInField:[[tagField objectValue] copy]];
+}
+
+- (NSArray*)currentCompleteTagsInField
+{
+	return currentCompleteTagsInField;
+}
+
+- (void)setCurrentCompleteTagsInField:(NSArray*)newTags
+{
+	[newTags retain];
+	[currentCompleteTagsInField release];
+	currentCompleteTagsInField = newTags;
+	[self tagsHaveChanged];
 }
 
 #pragma mark functionality
@@ -78,6 +106,40 @@
 	// add tag to the last position
 	[newContent insertObject:[tag name] atIndex:[currentCompleteTagsInField count]];
 	[tagField setObjectValue:newContent];
+}
+
+//TODO same method as in controller .. put together!
+- (void)tagsHaveChanged
+{
+	//stop an active query
+	if ([query isStarted]) 
+		[query stopQuery];
+	
+	// construct NSPredicate
+	if ([currentCompleteTagsInField count] > 0)
+	{
+		NSMutableString *queryString = [NSMutableString stringWithString:@""];
+		
+		NSEnumerator *e = [currentCompleteTagsInField objectEnumerator];
+		PATag *tag;
+		
+		if (tag = [tags simpleTagForName:[e nextObject]]) 
+		{
+			NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
+			[queryString appendString:anotherTagQuery];
+		}
+		
+		while (tag = [e nextObject]) 
+		{
+			NSString *anotherTagQuery = [NSString stringWithFormat:@" && (%@)",[tag query]];
+			[queryString appendString:anotherTagQuery];
+		}
+		
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
+		NSLog(@"predicate: %@",predicate);
+		[query setPredicate:predicate];
+		[query startQuery];
+	}
 }
 
 #pragma mark tokenField delegate
@@ -107,7 +169,7 @@ completionsForSubstring:(NSString *)substring
 {
 	NSArray *newTags = [tags simpleTagsForNames:tokens];
 	[tagger addTags:newTags ToFiles:files];
-	currentCompleteTagsInField = [[tagField objectValue] copy];
+	[self setCurrentCompleteTagsInField:[[tagField objectValue] copy]];
 	return tokens;
 }
 
@@ -133,7 +195,7 @@ completionsForSubstring:(NSString *)substring
 		
 		// remove the deleted tags from all files
 		[tagger removeTags:deletedTags fromFiles:files];
-		currentCompleteTagsInField = [[tagField objectValue] copy];
+		[self setCurrentCompleteTagsInField:[[tagField objectValue] copy]];
 	}
 }
 
