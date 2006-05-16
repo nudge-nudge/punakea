@@ -68,6 +68,7 @@ called when tags have changed, updates query
 	//get tags for files and show them in the tagField
 	NSArray *fileTags = [tags simpleTagsForFilesAtPaths:newFiles];
 
+	/*
 	NSMutableArray *tagsForTagField = [NSMutableArray array];
 	
 	NSEnumerator *e = [fileTags objectEnumerator];
@@ -78,8 +79,9 @@ called when tags have changed, updates query
 		[tagsForTagField addObject:[tag name]];
 	}
 	
-	[tagField setObjectValue:tagsForTagField];
-	[self setCurrentCompleteTagsInField:[[tagField objectValue] copy]];
+	*/
+	[tagField setObjectValue:fileTags];
+	[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
 }
 
 - (NSArray*)currentCompleteTagsInField
@@ -123,7 +125,7 @@ called when tags have changed, updates query
 		NSEnumerator *e = [currentCompleteTagsInField objectEnumerator];
 		PATag *tag;
 		
-		if (tag = [tags simpleTagForName:[e nextObject]]) 
+		if (tag = [e nextObject])
 		{
 			NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
 			[queryString appendString:anotherTagQuery];
@@ -167,11 +169,52 @@ completionsForSubstring:(NSString *)substring
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)index
 {
-	NSArray *newTags = [tags simpleTagsForNames:tokens];
-	[tagger addTags:newTags ToFiles:files];
-	[self setCurrentCompleteTagsInField:[[tagField objectValue] copy]];
+	[tagger addTags:tokens ToFiles:files];
+	[currentCompleteTagsInField addObjectsFromArray:tokens];
+	
+	// needs to be called manually because setter of currentCompleteTagsInField is not called
+	[self tagsHaveChanged];
 	return tokens;
 }
+
+- (NSString *)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject
+{
+	return [representedObject name];
+}
+
+- (NSString *)tokenField:(NSTokenField *)tokenField editingStringForRepresentedObject:(id)representedObject
+{
+	return [representedObject name];
+}
+
+- (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString
+{
+	return [tags simpleTagForName:editingString];
+}
+
+- (NSTokenStyle)tokenField:(NSTokenField *)tokenField styleForRepresentedObject:(id)representedObject
+{
+	//TODO don't call this every time - cache it
+	NSDictionary *tagDict = [tags simpleTagNamesWithCountForFilesAtPaths:files];
+	
+	int count = [[tagDict objectForKey:[representedObject name]] intValue];
+	
+	if (count > 1)
+	{
+		//NSLog(@"%@: %i => fat",representedObject,count);
+		return NSDefaultTokenStyle;
+	}
+	else
+	{
+		//NSLog(@"%@: %i => slim",representedObject,count);
+		return NSDefaultTokenStyle;
+	}		 
+}
+
+// - (BOOL)tokenField:(NSTokenField *)tokenField hasMenuForRepresentedObject:(id)representedObject
+
+// - (NSMenu *)tokenField:(NSTokenField *)tokenField menuForRepresentedObject:(id)representedObject
+
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
@@ -189,13 +232,13 @@ completionsForSubstring:(NSString *)substring
 		{
 			if (![[tagField objectValue] containsObject:tag])
 			{
-				[deletedTags addObject:[tags simpleTagForName:tag]];
+				[deletedTags addObject:tag];
 			}
 		}
 		
 		// remove the deleted tags from all files
 		[tagger removeTags:deletedTags fromFiles:files];
-		[self setCurrentCompleteTagsInField:[[tagField objectValue] copy]];
+		[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
 	}
 }
 

@@ -136,8 +136,42 @@
 			}
 		}
 	}
-
+	
 	return resultArray;
+}	
+
+
+- (NSDictionary*)simpleTagNamesWithCountForFilesAtPaths:(NSArray*)paths;
+{
+	NSMutableDictionary *resultDict = [[NSMutableDictionary alloc] init];
+	
+	NSEnumerator *e = [paths objectEnumerator];
+	NSString *path;
+	
+	while (path = [e nextObject])
+	{
+		NSArray *tmpTags = [self simpleTagsForFileAtPath:path];
+		NSEnumerator *tagEnum = [tmpTags objectEnumerator];
+		PASimpleTag *tag;
+		
+		while (tag = [tagEnum nextObject])
+		{
+			if ([resultDict objectForKey:[tag name]])
+			{
+				NSNumber *count = [resultDict objectForKey:[tag name]];
+				int tmp = [count intValue]+1;
+				NSNumber *newCount = [NSNumber numberWithInt:tmp];
+				[resultDict setObject:newCount forKey:[tag name]];
+			}
+			else
+			{
+				NSNumber *newCount = [NSNumber numberWithInt:1];
+				[resultDict setObject:newCount forKey:[tag name]];
+			}
+		}
+	}
+
+	return resultDict;
 }	
 
 @end

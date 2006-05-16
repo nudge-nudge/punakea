@@ -54,4 +54,11 @@ gets simple tags for all files at the paths
  */
 - (NSArray*)simpleTagsForFilesAtPaths:(NSArray*)paths;
 
+/**
+gets tag names of simple tags for all files at the paths (with count)
+ @param paths NSArray of NSStrings with file paths
+ @return dict with simple tags (and occurrence count) of files at paths
+ */
+- (NSDictionary*)simpleTagNamesWithCountForFilesAtPaths:(NSArray*)paths;
+
 @end

@@ -11,7 +11,7 @@
 	IBOutlet NSTokenField *tagField;
 	IBOutlet NSArrayController *popularTags;
 	
-	NSArray *currentCompleteTagsInField;
+	NSMutableArray *currentCompleteTagsInField;
 
 	NSMutableArray *files;
 
