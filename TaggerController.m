@@ -165,12 +165,12 @@ completionsForSubstring:(NSString *)substring
 	if (!filesHaveChanged)
 	{
 		[tagger addTags:tokens ToFiles:files];
-		filesHaveChanged = NO;
 	}
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	// needs to be called manually because setter of currentCompleteTagsInField is not called
 	[self tagsHaveChanged];
 	return tokens;
+	filesHaveChanged = NO;
 }
 
 - (NSString *)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject
