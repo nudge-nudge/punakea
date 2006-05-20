@@ -4,7 +4,11 @@
         {
             CLASS = TaggerController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {popularTags = NSArrayController; tagField = NSTokenField; }; 
+            OUTLETS = {
+                fileController = NSArrayController; 
+                popularTagsController = NSArrayController; 
+                tagField = NSTokenField; 
+            }; 
             SUPERCLASS = NSWindowController; 
         }
     ); 

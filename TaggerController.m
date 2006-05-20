@@ -13,6 +13,11 @@ called when tags have changed, updates query
  */
 - (void)tagsHaveChanged;
 
+/**
+called when file selection has changed
+ */
+- (void)selectionHasChanged;
+
 @end
 
 @implementation TaggerController
@@ -29,8 +34,6 @@ called when tags have changed, updates query
 		NSSortDescriptor *popularDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO] autorelease];
 		popularTagsSortDescriptors = [[NSArray alloc] initWithObjects:popularDescriptor,nil];
 		
-		filesHaveChanged = NO;
-		
 		// related tags stuff
 		query = [[NSMetadataQuery alloc] init];
 		relatedTags = [[PARelatedTags alloc] initWithQuery:query tags:tags];
@@ -40,7 +43,8 @@ called when tags have changed, updates query
 
 - (void)awakeFromNib
 {
-	//nothing yet
+	// observe file selection
+	[fileController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
 }
 
 - (void)dealloc
@@ -51,30 +55,27 @@ called when tags have changed, updates query
 	[currentCompleteTagsInField release];
 	[tags release];
 	[typeAheadFind release];
-	[files release];
 	[super dealloc];
 }
 
-#pragma mark accessors
-- (NSMutableArray*)files
+#pragma mark observing
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object 
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
-	return files;
+	[self selectionHasChanged];
 }
 
+#pragma mark accessors
 - (void)setFiles:(NSMutableArray*)newFiles
 {
-	[newFiles retain];
-	[files release];
-	files = newFiles;
+	[fileController addObjects:newFiles];
 	
 	// get tags for files and show them in the tagField
 	NSArray *fileTags = [tags simpleTagsForFilesAtPaths:newFiles];
 	[tagField setObjectValue:fileTags];
 	[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
-	
-	// set helper flag so that shouldAddObjects
-	// doesn't write tags
-	filesHaveChanged = YES;
 }
 
 - (NSMutableArray*)currentCompleteTagsInField
@@ -162,15 +163,11 @@ completionsForSubstring:(NSString *)substring
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)index
 {
-	if (!filesHaveChanged)
-	{
-		[tagger addTags:tokens ToFiles:files];
-	}
+	[tagger addTags:tokens ToFiles:[fileController selectedObjects]];
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	// needs to be called manually because setter of currentCompleteTagsInField is not called
 	[self tagsHaveChanged];
 	return tokens;
-	filesHaveChanged = NO;
 }
 
 - (NSString *)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject
@@ -191,7 +188,7 @@ completionsForSubstring:(NSString *)substring
 - (NSTokenStyle)tokenField:(NSTokenField *)tokenField styleForRepresentedObject:(id)representedObject
 {
 	//TODO don't call this every time - cache it
-	NSDictionary *tagDict = [tags simpleTagNamesWithCountForFilesAtPaths:files];
+	NSDictionary *tagDict = [tags simpleTagNamesWithCountForFilesAtPaths:[fileController selectedObjects]];
 	
 	int count = [[tagDict objectForKey:[representedObject name]] intValue];
 	
@@ -228,19 +225,27 @@ completionsForSubstring:(NSString *)substring
 		}
 		
 		// remove the deleted tags from all files
-		[tagger removeTags:deletedTags fromFiles:files];
+		[tagger removeTags:deletedTags fromFiles:[fileController selectedObjects]];
 		[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
 	}
 }
 
-#pragma mark clicks in table
+#pragma mark gui change actions
 - (IBAction)addPopularTag
 {
-	NSArray *selection = [popularTags selectedObjects];
+	NSArray *selection = [popularTagsController selectedObjects];
 	
 	if ([selection count] == 1)
 	{
 		[self addTagToField:[selection objectAtIndex:0]];
 	}
+}
+
+- (IBAction)selectionHasChanged
+{
+	NSLog(@"%@",[fileController selectionIndexes]);
+	NSArray *fileTags = [tags simpleTagsForFilesAtPaths:[fileController selectedObjects]];
+	[tagField setObjectValue:fileTags];
+	[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
 }
 @end

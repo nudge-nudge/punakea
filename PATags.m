@@ -117,23 +117,20 @@
 
 - (NSArray*)simpleTagsForFilesAtPaths:(NSArray*)paths
 {
-	NSMutableArray *resultArray = [[NSMutableArray alloc] init];
+	NSMutableArray *resultArray = [NSMutableArray array];
+	NSDictionary *tagNamesWithCount = [self simpleTagNamesWithCountForFilesAtPaths:paths];
 	
-	NSEnumerator *e = [paths objectEnumerator];
-	NSString *path;
+	NSEnumerator *e = [[tagNamesWithCount allKeys] objectEnumerator];
+	NSString *tag;
 	
-	while (path = [e nextObject])
+	while (tag = [e nextObject])
 	{
-		NSArray *tmpTags = [self simpleTagsForFileAtPath:path];
-		NSEnumerator *tagEnum = [tmpTags objectEnumerator];
-		PASimpleTag *tag;
-		
-		while (tag = [tagEnum nextObject])
+		int useCount = [[tagNamesWithCount objectForKey:tag] intValue];
+	
+		// only add tags which are on all files
+		if (useCount == [paths count])
 		{
-			if (![resultArray containsObject:tag])
-			{
-				[resultArray addObject:tag];
-			}
+			[resultArray addObject:[self simpleTagForName:tag]];
 		}
 	}
 	
@@ -143,7 +140,7 @@
 
 - (NSDictionary*)simpleTagNamesWithCountForFilesAtPaths:(NSArray*)paths;
 {
-	NSMutableDictionary *resultDict = [[NSMutableDictionary alloc] init];
+	NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
 	
 	NSEnumerator *e = [paths objectEnumerator];
 	NSString *path;
