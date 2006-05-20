@@ -40,7 +40,7 @@
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [icon size];
 	
-	[icon drawAtPoint:NSMakePoint(cellFrame.origin.x + 23, cellFrame.origin.y + 1) fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	[icon drawAtPoint:NSMakePoint(cellFrame.origin.x + 5, cellFrame.origin.y + 1) fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	 
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
@@ -59,9 +59,9 @@
 	// Draw display name	
 	NSString *value = [valueDict objectForKey:@"displayName"];
 	
-	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 43,
+	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 25,
 								  cellFrame.origin.y + 2,
-								  cellFrame.size.width - 180 - 43,
+								  cellFrame.size.width - 180 - 25,
 								  cellFrame.size.height - 2)
 	    withAttributes:fontAttributes];
 		
