@@ -129,14 +129,14 @@ action called on dropping files to FileBox
 	// if the tagger is already open, add more files
 	if (taggerController)
 	{
-		[taggerController addFiles:[fileBox files]];
 		[taggerController showWindow:nil];
+		[taggerController addFiles:[fileBox files]];
 	}
 	// otherwise create new tagger window
 	else 
 	{
 		taggerController = [[TaggerController alloc] initWithWindowNibName:@"Tagger" tags:[controller tags]];
-		[taggerController showWindow:nil];
+		[taggerController window];
 		[taggerController addFiles:[fileBox files]];
 	}
 }
