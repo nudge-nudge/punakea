@@ -22,6 +22,9 @@ called when file selection has changed
 resets the tagger window (called when window is closed)
  */
 - (void)resetTaggerContent;
+
+- (void)displayRestTags:(NSArray*)restTags;
+
 @end
 
 @implementation TaggerController
@@ -232,10 +235,48 @@ completionsForSubstring:(NSString *)substring
 
 - (IBAction)selectionHasChanged
 {
-	NSLog(@"%@",[fileController selectionIndexes]);
-	NSArray *fileTags = [tags simpleTagsForFilesAtPaths:[fileController selectedObjects]];
-	[tagField setObjectValue:fileTags];
-	[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
+	NSDictionary *tagDictionary = [tags simpleTagNamesWithCountForFilesAtPaths:[fileController selectedObjects]];
+	int selectionCount = [[fileController selectedObjects] count];
+	
+	NSMutableArray *tagsOnAllFiles = [NSMutableArray array];
+	NSMutableArray *tagsOnSomeFiles = [NSMutableArray array];
+	
+	NSEnumerator *e = [[tagDictionary allKeys] objectEnumerator];
+	NSString *tagName;
+	
+	while (tagName = [e nextObject])
+	{
+		int count = [[tagDictionary objectForKey:tagName] intValue];
+		
+		if (count == selectionCount)
+		{
+			[tagsOnAllFiles addObject:[tags simpleTagForName:tagName]];
+		}
+		else
+		{
+			[tagsOnSomeFiles addObject:[tags simpleTagForName:tagName]];
+		}
+	}	
+	
+	[tagField setObjectValue:tagsOnAllFiles];
+	[self setCurrentCompleteTagsInField:tagsOnAllFiles];
+	
+	[self displayRestTags:tagsOnSomeFiles];
+}
+
+- (void)displayRestTags:(NSArray*)restTags
+{
+	NSMutableString *displayString = [NSMutableString stringWithFormat:@"%i tags are not on all selected files:",[restTags count]];
+	
+	NSEnumerator *e = [restTags objectEnumerator];
+	PASimpleTag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		[displayString appendFormat:@" %@",[tag name]];
+	}
+	
+	[restTagField setObjectValue:displayString];
 }
 
 #pragma mark window delegate

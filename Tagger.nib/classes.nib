@@ -7,6 +7,7 @@
             OUTLETS = {
                 fileController = NSArrayController; 
                 popularTagsController = NSArrayController; 
+                restTagField = NSTextField; 
                 tagField = NSTokenField; 
             }; 
             SUPERCLASS = NSWindowController; 

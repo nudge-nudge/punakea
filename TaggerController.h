@@ -8,7 +8,8 @@
 
 @interface TaggerController : NSWindowController
 {	
-	IBOutlet NSTokenField *tagField;
+	IBOutlet NSTokenField *tagField; /**< shows tags which are on all selected files */
+	IBOutlet NSTextField *restTagField; /**< shows tags which are on some selected files */
 	
 	IBOutlet NSArrayController *fileController;
 	IBOutlet NSArrayController *popularTagsController;
