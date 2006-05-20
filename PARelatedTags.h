@@ -29,4 +29,6 @@
 - (void)insertObject:(PATag *)tag inRelatedTagsAtIndex:(unsigned int)i;
 - (void)removeObjectFromRelatedTagsAtIndex:(unsigned int)i;
 
+- (void)removeAllObjects;
+
 @end

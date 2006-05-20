@@ -126,10 +126,19 @@ action called on dropping files to FileBox
  */
 - (void)newFilesHaveBeenDropped
 {
-	//open tagger window
-	TaggerController *taggerController = [[TaggerController alloc] initWithWindowNibName:@"Tagger" tags:[controller tags]];
-	[taggerController showWindow:nil];
-	[taggerController setFiles:[fileBox files]];
+	// if the tagger is already open, add more files
+	if (taggerController)
+	{
+		[taggerController addFiles:[fileBox files]];
+		[taggerController showWindow:nil];
+	}
+	// otherwise create new tagger window
+	else 
+	{
+		taggerController = [[TaggerController alloc] initWithWindowNibName:@"Tagger" tags:[controller tags]];
+		[taggerController showWindow:nil];
+		[taggerController addFiles:[fileBox files]];
+	}
 }
 
 @end

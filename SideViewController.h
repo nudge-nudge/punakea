@@ -20,6 +20,8 @@
 	
 	PATableViewDropController *popularTagTableController;
 	PATableViewDropController *recentTagTableController;
+	
+	TaggerController *taggerController; /**< there is at most one instance at any time */
 }
 
 - (void)newFilesHaveBeenDropped;

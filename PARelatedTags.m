@@ -81,6 +81,11 @@
 	[relatedTags removeObjectAtIndex:i];
 }
 
+- (void)removeAllObjects
+{
+	[self setRelatedTags:[NSMutableArray array]];
+}
+
 #pragma mark logic
 //act on query notifications -- relatedTags need to be kept in sync with files
 - (void)queryNote:(NSNotification*)note 

@@ -13,13 +13,12 @@
 	IBOutlet NSArrayController *fileController;
 	IBOutlet NSArrayController *popularTagsController;
 	
-	NSMutableArray *currentCompleteTagsInField;
+	NSMutableArray *currentCompleteTagsInField; /**< holds the relevant tags of tagField (as a copy) */
 
-	PATags *tags;
+	PATags *tags; /**< reference to all tags (same as in controller) */
 	
 	NSArray *popularTagsSortDescriptors;
 	
-	PATagger *tagger;
 	PATypeAheadFind *typeAheadFind;
 	
 	// stuff for related tags
@@ -29,7 +28,12 @@
 
 - (id)initWithWindowNibName:(NSString*)windowNibName tags:(PATags*)newTags;
 
-- (void)setFiles:(NSMutableArray*)newFiles;
+/**
+adds new files to the fileController
+ @param newFiles files to add
+ */
+- (void)addFiles:(NSMutableArray*)newFiles;
+
 - (NSMutableArray*)currentCompleteTagsInField;
 - (void)setCurrentCompleteTagsInField:(NSMutableArray*)newTags;
 

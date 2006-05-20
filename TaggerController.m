@@ -18,6 +18,10 @@ called when file selection has changed
  */
 - (void)selectionHasChanged;
 
+/**
+resets the tagger window (called when window is closed)
+ */
+- (void)resetTaggerContent;
 @end
 
 @implementation TaggerController
@@ -29,10 +33,12 @@ called when file selection has changed
 	{
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:newTags];
 		tags = newTags;
-		tagger = [PATagger sharedInstance];
 		currentCompleteTagsInField = [[NSMutableArray alloc] init];
-		NSSortDescriptor *popularDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO] autorelease];
+		
+		// create sort descriptor
+		NSSortDescriptor *popularDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO];
 		popularTagsSortDescriptors = [[NSArray alloc] initWithObjects:popularDescriptor,nil];
+		[popularDescriptor release];
 		
 		// related tags stuff
 		query = [[NSMetadataQuery alloc] init];
@@ -64,18 +70,14 @@ called when file selection has changed
                         change:(NSDictionary *)change
                        context:(void *)context
 {
+	// only the file selection is observed
 	[self selectionHasChanged];
 }
 
 #pragma mark accessors
-- (void)setFiles:(NSMutableArray*)newFiles
+- (void)addFiles:(NSMutableArray*)newFiles
 {
 	[fileController addObjects:newFiles];
-	
-	// get tags for files and show them in the tagField
-	NSArray *fileTags = [tags simpleTagsForFilesAtPaths:newFiles];
-	[tagField setObjectValue:fileTags];
-	[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
 }
 
 - (NSMutableArray*)currentCompleteTagsInField
@@ -163,13 +165,17 @@ completionsForSubstring:(NSString *)substring
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)index
 {
-	[tagger addTags:tokens ToFiles:[fileController selectedObjects]];
+	[[PATagger sharedInstance] addTags:tokens ToFiles:[fileController selectedObjects]];
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
+	
 	// needs to be called manually because setter of currentCompleteTagsInField is not called
 	[self tagsHaveChanged];
+	
+	// everything will be added
 	return tokens;
 }
 
+// the following methods are for 'translation' from tag to string and back (NSTokenField)
 - (NSString *)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject
 {
 	return [representedObject name];
@@ -183,25 +189,6 @@ completionsForSubstring:(NSString *)substring
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString
 {
 	return [tags simpleTagForName:editingString];
-}
-
-- (NSTokenStyle)tokenField:(NSTokenField *)tokenField styleForRepresentedObject:(id)representedObject
-{
-	//TODO don't call this every time - cache it
-	NSDictionary *tagDict = [tags simpleTagNamesWithCountForFilesAtPaths:[fileController selectedObjects]];
-	
-	int count = [[tagDict objectForKey:[representedObject name]] intValue];
-	
-	if (count > 1)
-	{
-		NSLog(@"%@: %i => fat",representedObject,count);
-		return NSRoundedTokenStyle;
-	}
-	else
-	{
-		NSLog(@"%@: %i => slim",representedObject,count);
-		return NSRoundedTokenStyle;
-	}		 
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
@@ -224,9 +211,11 @@ completionsForSubstring:(NSString *)substring
 			}
 		}
 		
+		// now remove the tags to be deleted from currentCompleteTagsInField - to keep in sync with tagField
+		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
+		
 		// remove the deleted tags from all files
-		[tagger removeTags:deletedTags fromFiles:[fileController selectedObjects]];
-		[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
+		[[PATagger sharedInstance] removeTags:deletedTags fromFiles:[fileController selectedObjects]];
 	}
 }
 
@@ -247,5 +236,25 @@ completionsForSubstring:(NSString *)substring
 	NSArray *fileTags = [tags simpleTagsForFilesAtPaths:[fileController selectedObjects]];
 	[tagField setObjectValue:fileTags];
 	[self setCurrentCompleteTagsInField:[[tagField objectValue] mutableCopy]];
+}
+
+#pragma mark window delegate
+- (BOOL)windowShouldClose:(id)sender
+{
+	// reset content before closing
+	[self resetTaggerContent];
+	return YES;
+}
+
+- (void)resetTaggerContent
+{
+	// files
+	[fileController removeObjects:[fileController arrangedObjects]];
+	
+	// tagField - cascades to currentCompleteTagsInField
+	[self setCurrentCompleteTagsInField:[NSMutableArray array]];
+	
+	// relatedTags
+	[relatedTags removeAllObjects];
 }
 @end
