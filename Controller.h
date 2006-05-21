@@ -34,6 +34,9 @@
 	
 	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
 	NSMetadataQuery *_query;
+	
+	// TEMP
+	PAQuery *paquery;
 }
 
 //saving and loading

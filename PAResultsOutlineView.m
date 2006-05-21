@@ -101,6 +101,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self setNeedsDisplay];
 }
 
+/*- (void)keyDown:(NSEvent *)theEvent
+{
+	if([[theEvent type] isEqualTo:NSKeyDown])
+		if([theEvent keyCode] == )
+}*/
+
 
 #pragma mark Double-click Stuff
 - (int)mouseRowForEvent:(NSEvent *)theEvent

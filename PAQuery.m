@@ -13,6 +13,7 @@ NSString * const PAQueryDidStartGatheringNotification = @"PAQueryDidStartGatheri
 NSString * const PAQueryDidUpdateNotification = @"PAQueryDidUpdateNotification";
 NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGatheringNotification";
 
+NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttributesDidChange";
 
 @implementation PAQuery
 
@@ -23,6 +24,13 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	{
 		mdquery = [[NSMetadataQuery alloc] init];
 		[mdquery setDelegate:self];
+		[mdquery setNotificationBatchingInterval:0.3];
+		
+		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self
+		       selector:@selector(metadataQueryNote:)
+			       name:nil
+				 object:mdquery];
 	}
 	return self;
 }
@@ -30,6 +38,8 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 - (void)dealloc
 {
 	if(mdquery) [mdquery release];
+	if(groupingAttributes) [groupingAttributes release];
+	if(predicate) [predicate release];
 	[super dealloc];
 }
 
@@ -37,12 +47,14 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 #pragma mark Actions
 - (BOOL)startQuery
 {
-	// TODO
+	// TODO: Smart caching!
+	
+	[mdquery setPredicate:predicate];
 	
 	// Finally, post notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryDidStartGatheringNotification
 														object:self];
-	return YES;
+	return [mdquery startQuery];
 }
 
 - (void)stopQuery
@@ -52,6 +64,55 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	// Finally, post notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryDidUpdateNotification
 														object:self];
+}
+
+- (unsigned)resultCount
+{
+	return [results count];
+}
+
+- (id)resultAtIndex:(unsigned)index
+{
+	return [results objectAtIndex:index];
+}
+
+/**
+	Synchronizes results of MetadataQuery
+*/
+- (void)synchronizeResults
+{
+	// TODO: Wrap NSMetadataQueryResultGroups and NSMetadataItems and create own results array
+
+	if(results) [results release];
+	results = [NSMutableArray arrayWithArray:[mdquery results]];
+}
+
+
+#pragma mark Notifications
+/**
+	Wrap, process and forward notifications of NSMetadataQuery
+*/
+- (void)metadataQueryNote:(NSNotification *)note
+{
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	
+	if([[note name] isEqualTo:NSMetadataQueryDidStartGatheringNotification])
+	{
+		[results removeAllObjects];
+		[nc postNotificationName:PAQueryDidStartGatheringNotification object:self];
+	}
+		
+	if([[note name] isEqualTo:NSMetadataQueryDidUpdateNotification])
+	{
+		[self synchronizeResults];
+		[nc postNotificationName:PAQueryDidUpdateNotification object:self];
+	}
+		
+	if([[note name] isEqualTo:NSMetadataQueryDidFinishGatheringNotification])
+	{
+		[self synchronizeResults];
+		[nc postNotificationName:PAQueryDidFinishGatheringNotification object:self];
+	}
 }
 
 
@@ -75,5 +136,19 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 {
 	predicate = aPredicate;
 	[mdquery setPredicate:aPredicate];
+}
+
+- (NSArray *)groupingAttributes
+{
+	return groupingAttributes;
+}
+
+- (void)setGroupingAttributes:(NSArray *)attributes
+{
+	groupingAttributes = attributes;
+	
+	// Post notification
+	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryGroupingAttributesDidChange
+														object:self];
 }
 @end

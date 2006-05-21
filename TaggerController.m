@@ -143,6 +143,7 @@ resets the tagger window (called when window is closed)
 	}
 }
 
+
 #pragma mark tokenField delegate
 - (NSArray *)tokenField:(NSTokenField *)tokenField 
 completionsForSubstring:(NSString *)substring 

@@ -87,19 +87,6 @@
 			  context:NULL];
 	
 	[self setVisibleTags:[tags tags]];
-	
-	
-	// TEMP for PAQuery tests
-	PAQuery *paquery = [[PAQuery alloc] init];
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(paqueryTest:) name:nil object:paquery];
-	[paquery startQuery];
-}
-
-// TEMP for PAQuery tests
-- (void)paqueryTest:(NSNotification *)notification
-{
-	NSLog([notification name]);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)note 
@@ -334,12 +321,34 @@
 		NSLog(@"predicate: %@",predicate);
 		[_query setPredicate:predicate];
 		[_query startQuery];
+		
+		// TEMP for testing PAQuery
+		paquery = [[PAQuery alloc] init];
+		[paquery setPredicate:predicate];
+		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self
+			   selector:@selector(paqueryFinished:)
+			       name:PAQueryDidFinishGatheringNotification
+			     object:paquery];
+		[paquery startQuery];
 	}
 	else 
 	{
 		//there are no selected tags, reset all tags
 		[self setVisibleTags:[tags tags]];
 	}
+}
+
+// TEMP for testing PAQuery
+- (void)paqueryFinished:(NSNotification *)note
+{
+	NSLog(@"Number of results in PAQuery: %d", [paquery resultCount]);
+	
+	/*int i;
+	for(i = 0; i < [paquery resultCount]; i++)
+	{
+		NSLog([[paquery resultAtIndex:i] valueForAttribute:(id)kMDItemDisplayName]);
+	}*/
 }
 
 - (void)relatedTagsHaveChanged
