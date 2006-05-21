@@ -87,6 +87,19 @@
 			  context:NULL];
 	
 	[self setVisibleTags:[tags tags]];
+	
+	
+	// TEMP for PAQuery tests
+	PAQuery *paquery = [[PAQuery alloc] init];
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self selector:@selector(paqueryTest:) name:nil object:paquery];
+	[paquery startQuery];
+}
+
+// TEMP for PAQuery tests
+- (void)paqueryTest:(NSNotification *)notification
+{
+	NSLog([notification name]);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)note 

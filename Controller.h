@@ -9,6 +9,7 @@
 #import "PATagger.h"
 #import "PAResultsOutlineView.h"
 #import "PATypeAheadFind.h"
+#import "PAQuery.h"
 
 @interface Controller : NSWindowController
 {

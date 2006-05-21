@@ -59,6 +59,12 @@
 	}
 }
 
+- (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	NSLog(@"hightlighting");
+	[self drawInteriorWithFrame:cellFrame inView:controlView];
+}
+
 
 #pragma mark Accessors
 - (PAResultsMultiItem *)item
