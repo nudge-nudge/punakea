@@ -19,6 +19,8 @@
 @implementation PARelatedTags
 
 #pragma mark init + dealloc
+
+
 - (id)initWithQuery:(NSMetadataQuery*)aQuery tags:(PATags*)otherTags;
 {
 	if (self = [super init])

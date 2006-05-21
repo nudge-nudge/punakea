@@ -130,13 +130,18 @@ action called on dropping files to FileBox
 	if (taggerController)
 	{
 		[taggerController showWindow:nil];
+		NSWindow *taggerWindow = [taggerController window];
+		[taggerWindow makeKeyAndOrderFront:nil];
+		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 		[taggerController addFiles:[fileBox files]];
 	}
 	// otherwise create new tagger window
 	else 
 	{
 		taggerController = [[TaggerController alloc] initWithWindowNibName:@"Tagger" tags:[controller tags]];
-		[taggerController window];
+		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+		NSWindow *taggerWindow = [taggerController window];
+		[taggerWindow makeKeyAndOrderFront:nil];
 		[taggerController addFiles:[fileBox files]];
 	}
 }
