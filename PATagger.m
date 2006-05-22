@@ -56,9 +56,15 @@ static PATagger *sharedInstance = nil;
 		NSEnumerator *e = [currentTags objectEnumerator];
 		id tag;
 		
-		while ( (tag = [e nextObject]) ) {
-			if (![resultTags containsObject:tag]) {
+		while ( (tag = [e nextObject]) ) 
+		{
+			if (![resultTags containsObject:tag]) 
+			{
 				[resultTags addObject:tag];
+				
+				// increment use count here, that way the other classes
+				// don't have to care
+				[tag incrementUseCount];
 			}
 		}
 	}
@@ -80,12 +86,12 @@ static PATagger *sharedInstance = nil;
 
 - (void)addTags:(NSArray*)tags ToFiles:(NSArray*)paths
 {
-	NSEnumerator *e = [tags objectEnumerator];
-	PASimpleTag *tag;
+	NSEnumerator *e = [paths objectEnumerator];
+	NSString *path;
 	
-	while (tag = [e nextObject])
+	while (path = [e nextObject])
 	{
-		[self addTag:tag ToFiles:paths];
+		[self addTags:tags ToFile:path];
 	}
 }
 
@@ -99,6 +105,10 @@ static PATagger *sharedInstance = nil;
 		// get all tags, remove the specified one, write back to file
 		NSMutableArray *tags = [self tagsForFile:path];
 		[tags removeObject:tag];
+		
+		// decrement use count here, that way the other classes
+		// don't have to care
+		[tag decrementUseCount];
 		[self writeTags:tags ToFile:path];
 	}
 }

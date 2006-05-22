@@ -42,5 +42,6 @@ treat this class as the abstract superclass for all Tags,
 - (void)setQuery:(NSString*)aQuery; /**< may overwrite */
 - (void)incrementClickCount; /**< may overwrite */
 - (void)incrementUseCount; /**< may overwrite */
+- (void)decrementUseCount; /**< may overwrite */
 
 @end

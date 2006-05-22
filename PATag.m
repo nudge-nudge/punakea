@@ -80,6 +80,11 @@
 	lastUsed = [[NSCalendarDate alloc] init];
 }
 
+- (void)decrementUseCount 
+{
+	useCount--;
+}
+
 - (NSString*)name 
 {
 	return name;
