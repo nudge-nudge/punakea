@@ -42,12 +42,10 @@
             OUTLETS = {
                 controller = Controller; 
                 fileBox = PAFileBox; 
-                fileTags = NSArrayController; 
                 popularTags = NSArrayController; 
                 popularTagsTable = NSTableView; 
                 recentTags = NSArrayController; 
                 recentTagsTable = NSTableView; 
-                tagField = NSTextField; 
             }; 
             SUPERCLASS = NSWindowController; 
         }, 

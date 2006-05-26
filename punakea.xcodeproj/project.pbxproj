@@ -26,6 +26,8 @@
 		486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486EBA4409D68F16000C154C /* PAFileBox.h */; };
 		4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */; };
 		4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */ = {isa = PBXBuildFile; fileRef = 4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */; };
+		488E18BD0A27231F009D2826 /* PASidebarTagCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488E18BB0A27231F009D2826 /* PASidebarTagCell.h */; };
+		488E18BE0A27231F009D2826 /* PASidebarTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E18BC0A27231F009D2826 /* PASidebarTagCell.m */; };
 		489AE65509DD434600EB60EB /* SnappingWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE65309DD434600EB60EB /* SnappingWindow.h */; };
 		489AE65609DD434600EB60EB /* SnappingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE65409DD434600EB60EB /* SnappingWindow.m */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
@@ -123,21 +125,6 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		4A9504CCFFE6A4B311CA0CBA /* Debug */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		4A9504CDFFE6A4B311CA0CBA /* Release */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-			};
-			name = Release;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		65E7B37C0994D97500565251 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -186,6 +173,7 @@
 				4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */,
 				485FAF2C0A0DE54C0088AC08 /* PATableViewDropController.h in CopyFiles */,
 				65035FCB0A20769500AD0597 /* PAQuery.h in CopyFiles */,
+				488E18BD0A27231F009D2826 /* PASidebarTagCell.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +207,8 @@
 		486EBA4409D68F16000C154C /* PAFileBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileBox.h; sourceTree = "<group>"; };
 		4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadFind.h; sourceTree = "<group>"; };
 		4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadFind.m; sourceTree = "<group>"; };
+		488E18BB0A27231F009D2826 /* PASidebarTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTagCell.h; sourceTree = "<group>"; };
+		488E18BC0A27231F009D2826 /* PASidebarTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTagCell.m; sourceTree = "<group>"; };
 		489AE65309DD434600EB60EB /* SnappingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnappingWindow.h; sourceTree = "<group>"; };
 		489AE65409DD434600EB60EB /* SnappingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnappingWindow.m; sourceTree = "<group>"; };
 		489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagsView.h; sourceTree = "<group>"; };
@@ -331,6 +321,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				488E18BA0A2722E5009D2826 /* Sidebar */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				65B17321099564A800B10322 /* Controllers */,
 				485DA56609F4EF07008D3214 /* Models */,
@@ -340,7 +331,7 @@
 				6588132C09DDCA7300428B83 /* ResultsView */,
 				65035FB70A20762F00AD0597 /* Query */,
 				48F6A9F40996423000AA118D /* Tagging */,
-				65B17322099564C400B10322 /* Sidebar */,
+				65B17322099564C400B10322 /* BrowserSidebar */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -444,6 +435,15 @@
 				4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */,
 			);
 			name = "Type-Ahead Find";
+			sourceTree = "<group>";
+		};
+		488E18BA0A2722E5009D2826 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				488E18BB0A27231F009D2826 /* PASidebarTagCell.h */,
+				488E18BC0A27231F009D2826 /* PASidebarTagCell.m */,
+			);
+			name = Sidebar;
 			sourceTree = "<group>";
 		};
 		489AE71309DD4D7800EB60EB /* Views */ = {
@@ -610,7 +610,7 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		65B17322099564C400B10322 /* Sidebar */ = {
+		65B17322099564C400B10322 /* BrowserSidebar */ = {
 			isa = PBXGroup;
 			children = (
 				65C341BA0996107300C3B5AC /* PASidebarCell.h */,
@@ -622,7 +622,7 @@
 				651CF19E099B9F98007E48DD /* SidebarDelegateCategory.h */,
 				651CF19F099B9F98007E48DD /* SidebarDelegateCategory.m */,
 			);
-			name = Sidebar;
+			name = BrowserSidebar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -640,8 +640,6 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-			};
 			dependencies = (
 			);
 			name = Punakea;
@@ -656,12 +654,6 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				4A9504CCFFE6A4B311CA0CBA /* Debug */,
-				4A9504CDFFE6A4B311CA0CBA /* Release */,
-			);
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Punakea */;
 			projectDirPath = "";
@@ -774,6 +766,7 @@
 				485FAF2D0A0DE54C0088AC08 /* PATableViewDropController.m in Sources */,
 				65035FCC0A20769500AD0597 /* PAQuery.m in Sources */,
 				650362520A2084BE00AD0597 /* PAQueryResultGroup.m in Sources */,
+				488E18BE0A27231F009D2826 /* PASidebarTagCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
