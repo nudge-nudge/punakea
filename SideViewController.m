@@ -153,15 +153,20 @@ action called on dropping files to FileBox
 	  inTableView:(NSTableView *)tableView
    dataCellForRow:(int)row
 {
-	if ([[column identifier] isEqualToString:@"recentTags"])
+	if ([[column identifier] isEqualToString:@"recentTags"] && row < [[recentTags arrangedObjects] count])
 	{
-		NSCell *cell = [[NSCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
+		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
+		return [cell autorelease];
+	}
+	else if ([[column identifier] isEqualToString:@"popularTags"] && row < [[popularTags arrangedObjects] count])
+	{
+		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
 		return [cell autorelease];
 	}
 	else
 	{
-		//popularTags
-		NSCell *cell = [[NSCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
+		//TODO ok with empty string?
+		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:@""];
 		return [cell autorelease];
 	}
 }
