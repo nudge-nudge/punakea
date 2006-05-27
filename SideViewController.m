@@ -155,13 +155,13 @@ action called on dropping files to FileBox
 {
 	if ([[column identifier] isEqualToString:@"recentTags"])
 	{
-		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
+		NSCell *cell = [[NSCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
 		return [cell autorelease];
 	}
 	else
 	{
 		//popularTags
-		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
+		NSCell *cell = [[NSCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
 		return [cell autorelease];
 	}
 }
