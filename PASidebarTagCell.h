@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface PASidebarTagCell : NSCell {
+@interface PASidebarTagCell : NSTextFieldCell {
 
 }
 
