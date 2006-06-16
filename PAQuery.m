@@ -83,7 +83,7 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 {
 	// TODO: Wrap NSMetadataQueryResultGroups and NSMetadataItems and create own results array
 
-	if(results) [results release];
+	//if(results) [results release];
 	results = [NSMutableArray arrayWithArray:[mdquery results]];
 }
 

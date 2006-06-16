@@ -101,11 +101,25 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self setNeedsDisplay];
 }
 
-/*- (void)keyDown:(NSEvent *)theEvent
+/**
+	Custom keyDown event allows opening files with CMD + ARROW-DOWN
+*/
+- (void)keyDown:(NSEvent *)theEvent
 {
-	if([[theEvent type] isEqualTo:NSKeyDown])
-		if([theEvent keyCode] == )
-}*/
+	if([theEvent type] == NSKeyDown)
+	{
+		 NSNumber *key = [NSNumber numberWithUnsignedInt:
+			[[theEvent characters] characterAtIndex:0]];
+	
+		if([key unsignedIntValue] == NSDownArrowFunctionKey &&
+		   ([theEvent modifierFlags] & NSCommandKeyMask) != 0)
+		{
+			[[self target] performSelector:[self doubleAction]];
+			return;
+		}
+	}
+	[super keyDown:theEvent];
+}
 
 
 #pragma mark Double-click Stuff
