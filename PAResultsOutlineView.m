@@ -22,6 +22,27 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 }
 
 
+#pragma mark Drawing
+- (id)_highlightColorForCell:(NSCell *)cell
+{
+	if([[cell class] isEqualTo:[PAResultsMultiItemCell class]])
+		return nil;
+	return [super _highlightColorForCell:cell];
+}
+
+- (void)highlightSelectionInClipRect:(NSRect)clipRect
+{
+	id selectedItem = [self itemAtRow:[self selectedRow]];
+	if([[selectedItem class] isEqualTo:[PAResultsMultiItem class]])
+	{
+		[[NSColor whiteColor] set];
+		NSRectFill([self rectOfRow:[self selectedRow]]);
+		return;
+	}
+	[super highlightSelectionInClipRect:clipRect];
+}
+
+
 #pragma mark Actions
 - (NSRect)frameOfCellAtColumn:(int)column row:(int)row
 {
