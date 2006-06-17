@@ -57,6 +57,16 @@
 	{
 		[matrix setFrame:rect];
 	}
+	
+	// Ensure at least one item of matrix is selected if cell is highlighted
+	/*if([self isHighlighted])
+	{
+		if([[matrix selectedCells] count] == 0) 
+		{
+			[matrix selectCellAtRow:0 column:0];
+			[matrix setNeedsDisplay];
+		}
+	}*/
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView

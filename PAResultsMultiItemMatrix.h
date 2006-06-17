@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PAResultsMultiItem.h"
 #import "PASegmentedImageControl.h"
+#import "PAResultsMultiItemThumbnailCell.h"
 
 
 @interface PAResultsMultiItemMatrix : NSMatrix {

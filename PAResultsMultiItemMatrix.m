@@ -16,10 +16,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-		[self setCellClass:[NSTextFieldCell class]];
+		[self setCellClass:[PAResultsMultiItemThumbnailCell class]];
 		[self renewRows:1 columns:0];
 		[self setIntercellSpacing:NSMakeSize(15,0)];
-		[self setMode:NSHighlightModeMatrix];
+		[self setMode:NSListModeMatrix];
 		[self setTarget:self];
 		[self setAutosizesCells:YES];
     }
@@ -44,7 +44,7 @@
 	
 	while(anObject = [enumerator nextObject])
 	{
-		NSTextFieldCell *cell = [[[NSTextFieldCell alloc] initTextCell:[anObject valueForAttribute:@"kMDItemDisplayName"]] autorelease];
+		PAResultsMultiItemThumbnailCell *cell = [[[PAResultsMultiItemThumbnailCell alloc] initTextCell:[anObject valueForAttribute:@"kMDItemDisplayName"]] autorelease];
 		[self addColumnWithCells:[NSArray arrayWithObject:cell]];
 	}
 }
