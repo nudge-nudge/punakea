@@ -15,12 +15,27 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 
 NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttributesDidChange";
 
+@interface PAQuery (PrivateAPI)
+
+- (void)tagsHaveChanged:(NSNotification *)note;
+- (void)updateQueryFromTags;
+
+- (NSPredicate *)predicate;
+- (void)setPredicate:(NSPredicate *)aPredicate;
+
+@end 
+
 @implementation PAQuery
 
 #pragma mark Init + Dealloc
 - (id)init
 {
-	if(self = [super init])
+	return [self initWithTags:[NSMutableArray array]];
+}
+
+- (id)initWithTags:(NSMutableArray*)otherTags
+{
+	if (self = [super init])
 	{
 		mdquery = [[NSMetadataQuery alloc] init];
 		[mdquery setDelegate:self];
@@ -31,6 +46,8 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 		       selector:@selector(metadataQueryNote:)
 			       name:nil
 				 object:mdquery];
+		
+		[self setTags:otherTags];
 	}
 	return self;
 }
@@ -43,13 +60,10 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	[super dealloc];
 }
 
-
 #pragma mark Actions
 - (BOOL)startQuery
 {
 	// TODO: Smart caching!
-	
-	[mdquery setPredicate:predicate];
 	
 	// Finally, post notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryDidStartGatheringNotification
@@ -87,6 +101,30 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	results = [NSMutableArray arrayWithArray:[mdquery results]];
 }
 
+- (void)updateQueryFromTags
+{
+	NSMutableString *queryString = [NSMutableString stringWithString:@""];
+	
+	NSEnumerator *e = [tags objectEnumerator];
+	PATag *tag;
+	
+	if (tag = [e nextObject]) 
+	{
+		NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
+		[queryString appendString:anotherTagQuery];
+	}
+	
+	while (tag = [e nextObject]) 
+	{
+		NSString *anotherTagQuery = [NSString stringWithFormat:@" && (%@)",[tag query]];
+		[queryString appendString:anotherTagQuery];
+	}
+	
+	if (![queryString isEqualToString:@""])
+	{
+		[mdquery setPredicate:[NSPredicate predicateWithFormat:queryString]];
+	}
+}
 
 #pragma mark Notifications
 /**
@@ -114,7 +152,6 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 		[nc postNotificationName:PAQueryDidFinishGatheringNotification object:self];
 	}
 }
-
 
 #pragma mark Accessors
 - (id)delegate
@@ -150,5 +187,31 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	// Post notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryGroupingAttributesDidChange
 														object:self];
+}
+
+- (NSMutableArray*)tags
+{
+	return tags;
+}
+
+- (void)setTags:(NSMutableArray*)otherTags
+{
+	[otherTags retain];
+	[tags release];
+	tags = otherTags;
+	
+	[self updateQueryFromTags];
+}
+
+- (void)insertObject:(PATag *)tag inTagsAtIndex:(unsigned int)i
+{
+	[tags insertObject:tag atIndex:i];
+	[self updateQueryFromTags];
+}
+
+- (void)removeObjectFromTagsAtIndex:(unsigned int)i
+{
+	[tags removeObjectAtIndex:i];
+	[self updateQueryFromTags];
 }
 @end

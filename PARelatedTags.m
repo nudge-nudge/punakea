@@ -19,8 +19,35 @@
 @implementation PARelatedTags
 
 #pragma mark init + dealloc
+/**
+use this init if you want an encapsulated way to get related tags for the
+ given selected tags
+ @param otherTags all tags
+ @param otherSelectedTags tags for which to find related tags
+ */
+- (id)initWithTags:(PATags*)otherTags selectedTags:(NSMutableArray*)otherSelectedTags 
+{
+	if (self = [super init])
+	{
+		[self setRelatedTags:[[NSMutableArray alloc] init]];
+	
+		[self setSelectedTags:otherSelectedTags];
+		[self setTags:otherTags];
+	
+		//create appropriate query
+		paquery = [[PAQuery alloc] initWithTags:otherSelectedTags];
+		nf = [NSNotificationCenter defaultCenter];
+		[nf addObserver:self selector:@selector(queryNote:) name:nil object:paquery];
+	}
+	return self;
+}
 
-
+/**
+use this init if you want performance, it uses a query passed from the outside
+ (i.e. from the browser)
+ @param aQuery find related tags to the query result
+ @param otherTags all tags
+ */
 - (id)initWithQuery:(NSMetadataQuery*)aQuery tags:(PATags*)otherTags;
 {
 	if (self = [super init])
@@ -46,7 +73,7 @@
 	[super dealloc];
 }
 
-#pragma mark accessors ( KVC - compliant )
+#pragma mark accessors
 - (void)setQuery:(NSMetadataQuery*)aQuery 
 {
 	[aQuery retain];
@@ -83,9 +110,31 @@
 	[relatedTags removeObjectAtIndex:i];
 }
 
-- (void)removeAllObjects
+- (void)removeAllObjectsFromRelatedTags
 {
 	[self setRelatedTags:[NSMutableArray array]];
+}
+
+- (NSMutableArray*)selectedTags
+{
+	return selectedTags;
+}
+
+- (void)setSelectedTags:(NSMutableArray*)otherTags
+{
+	[otherTags retain];
+	[selectedTags release];
+	selectedTags = otherTags;
+}
+
+- (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i
+{
+	[selectedTags insertObject:tag atIndex:i];
+}
+
+- (void)removeObjectFromSelectedTagsAtIndex:(unsigned int)i
+{
+	[selectedTags removeObjectAtIndex:i];
 }
 
 #pragma mark logic

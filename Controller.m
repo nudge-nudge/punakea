@@ -323,8 +323,7 @@
 		[_query startQuery];
 		
 		// TEMP for testing PAQuery
-		paquery = [[PAQuery alloc] init];
-		[paquery setPredicate:predicate];
+		paquery = [[PAQuery alloc] initWithTags:[selectedTags selectedTags]];
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self
 			   selector:@selector(paqueryFinished:)

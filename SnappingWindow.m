@@ -32,14 +32,14 @@
 	
     //Set the background color to clear so that (along with the setOpaque call below) we can see through the parts
     //of the window that we're not drawing into
-    [self setBackgroundColor: [NSColor clearColor]];
+    //[self setBackgroundColor: [NSColor clearColor]];
     //This next line pulls the window up to the front on top of other system windows.  This is how the Clock app behaves;
     //generally you wouldn't do this for windows unless you really wanted them to float above everything.
     [self setLevel: NSStatusWindowLevel];
     //Let's start with no transparency for all drawing into the window
-    [self setAlphaValue:0.8];
+    //[self setAlphaValue:0.8];
     //but let's turn off opaqueness so that we can see through the parts of the window that we're not drawing into
-    [self setOpaque:NO];
+    //[self setOpaque:NO];
 	
     [self setSnapsToEdges:YES];
     [self setSnapTolerance:50.0];

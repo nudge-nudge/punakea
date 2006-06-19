@@ -153,12 +153,12 @@ action called on dropping files to FileBox
 	  inTableView:(NSTableView *)tableView
    dataCellForRow:(int)row
 {
-	if ([[column identifier] isEqualToString:@"recentTags"] && row < [[recentTags arrangedObjects] count])
+	if (([[column identifier] isEqualToString:@"recentTags"]) && (row < [[recentTags arrangedObjects] count]))
 	{
 		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
 		return [cell autorelease];
 	}
-	else if ([[column identifier] isEqualToString:@"popularTags"] && row < [[popularTags arrangedObjects] count])
+	else if (([[column identifier] isEqualToString:@"popularTags"]) && (row < [[popularTags arrangedObjects] count]))
 	{
 		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
 		return [cell autorelease];

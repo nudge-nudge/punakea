@@ -22,8 +22,6 @@
 	
 	PATypeAheadFind *typeAheadFind;
 	
-	// stuff for related tags
-	NSMetadataQuery *query;
 	PARelatedTags *relatedTags;
 }
 

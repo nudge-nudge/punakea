@@ -43,9 +43,8 @@ resets the tagger window (called when window is closed)
 		popularTagsSortDescriptors = [[NSArray alloc] initWithObjects:popularDescriptor,nil];
 		[popularDescriptor release];
 		
-		// related tags stuff
-		query = [[NSMetadataQuery alloc] init];
-		relatedTags = [[PARelatedTags alloc] initWithQuery:query tags:tags];
+		// related tags with no current selection
+		relatedTags = [[PARelatedTags alloc] initWithTags:tags selectedTags:[NSMutableArray array]];
 	}
 	return self;
 }
@@ -59,7 +58,6 @@ resets the tagger window (called when window is closed)
 - (void)dealloc
 {
 	[relatedTags release];
-	[query release];
 	[popularTagsSortDescriptors release];
 	[currentCompleteTagsInField release];
 	[tags release];
@@ -107,40 +105,15 @@ resets the tagger window (called when window is closed)
 	// add tag to the last position
 	[newContent insertObject:tag atIndex:[currentCompleteTagsInField count]];
 	[tagField setObjectValue:newContent];
+	
+	// set first responder to tagField
+	[[tagField window] makeFirstResponder:tagField];
 }
 
 //TODO same method as in controller .. put together!
 - (void)tagsHaveChanged
 {
-	//stop an active query
-	if ([query isStarted]) 
-		[query stopQuery];
-	
-	// construct NSPredicate
-	if ([currentCompleteTagsInField count] > 0)
-	{
-		NSMutableString *queryString = [NSMutableString stringWithString:@""];
-		
-		NSEnumerator *e = [currentCompleteTagsInField objectEnumerator];
-		PATag *tag;
-		
-		if (tag = [e nextObject])
-		{
-			NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
-			[queryString appendString:anotherTagQuery];
-		}
-		
-		while (tag = [e nextObject]) 
-		{
-			NSString *anotherTagQuery = [NSString stringWithFormat:@" && (%@)",[tag query]];
-			[queryString appendString:anotherTagQuery];
-		}
-		
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
-		NSLog(@"predicate: %@",predicate);
-		[query setPredicate:predicate];
-		[query startQuery];
-	}
+	[relatedTags setSelectedTags:currentCompleteTagsInField];
 }
 
 
@@ -297,6 +270,6 @@ completionsForSubstring:(NSString *)substring
 	[self setCurrentCompleteTagsInField:[NSMutableArray array]];
 	
 	// relatedTags
-	[relatedTags removeAllObjects];
+	[relatedTags removeAllObjectsFromRelatedTags];
 }
 @end

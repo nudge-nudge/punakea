@@ -61,4 +61,11 @@ gets tag names of simple tags for all files at the paths (with count)
  */
 - (NSDictionary*)simpleTagNamesWithCountForFilesAtPaths:(NSArray*)paths;
 
+/**
+creates a query for the given tags
+ @param someTags tags for which to create the query
+ @return query configured to search for tags
+ */
+- (NSMetadataQuery*)queryForTags:(NSMutableArray*)someTags;
+
 @end
