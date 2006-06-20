@@ -15,9 +15,7 @@
 @interface PARelatedTags : NSObject {
 	NSNotificationCenter *nf;
 	
-	PAQuery *paquery;
-	//TODO switch to PAQuery
-	NSMetadataQuery *query;
+	PAQuery *query;
 	
 	NSMutableArray *selectedTags;
 	NSMutableArray *relatedTags;
@@ -26,9 +24,9 @@
 }
 
 - (id)initWithTags:(PATags*)otherTags selectedTags:(NSMutableArray*)otherSelectedTags;
-- (id)initWithQuery:(NSMetadataQuery*)aQuery tags:(PATags*)otherTags;
+- (id)initWithQuery:(PAQuery*)aQuery tags:(PATags*)otherTags;
 
-- (void)setQuery:(NSMetadataQuery*)aQuery;
+- (void)setQuery:(PAQuery*)aQuery;
 - (void)setTags:(PATags*)otherTags;
 
 - (NSMutableArray*)relatedTags;

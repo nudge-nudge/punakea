@@ -13,6 +13,9 @@
 /** Posted when the receiver begins with the initial result-gathering phase of the query. */
 extern NSString * const PAQueryDidStartGatheringNotification;
 
+/** Posted when new results have been found */
+extern NSString * const PAQueryGatheringProgressNotification;
+
 /** Posted when the receiver’s results have changed during the live-update phase of the query. */
 extern NSString * const PAQueryDidUpdateNotification;
 
@@ -49,14 +52,25 @@ initializer
 - (void)insertObject:(PATag *)tag inTagsAtIndex:(unsigned int)i;
 - (void)removeObjectFromTagsAtIndex:(unsigned int)i;
 
+//wrapper methods
 - (BOOL)startQuery;
 - (void)stopQuery;
+- (void)disableUpdates;
+- (void)enableUpdates;
+
+- (BOOL)isStarted;
 
 - (unsigned)resultCount;
 - (id)resultAtIndex:(unsigned)index;
+- (NSArray*)results;
+
+- (NSArray*)groupedResults;
 
 - (NSArray *)groupingAttributes;
 - (void)setGroupingAttributes:(NSArray *)attributes;
+
+- (NSArray *)sortDescriptors;
+- (void)setSortDescriptors:(NSArray *)descriptors;
 
 @end
 

@@ -11,18 +11,19 @@
 #import "PAResultsItemCell.h"
 #import "PAResultsMultiItem.h"
 #import "PAResultsMultiItemCell.h"
+#import "PAQuery.h"
 
 
 @interface ResultsOutlineViewController : NSObject
 {
-	NSMetadataQuery *query;
+	PAQuery *query;
 	NSOutlineView *outlineView;
 }
 
 - (IBAction)doubleAction:(id)sender;
 
-- (NSMetadataQuery *)query;
-- (void)setQuery:(NSMetadataQuery *)aQuery;
+- (PAQuery *)query;
+- (void)setQuery:(PAQuery *)aQuery;
 - (NSOutlineView *)outlineView;
 - (void)setOutlineView:(NSOutlineView *)anOutlineView;
 

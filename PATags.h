@@ -11,6 +11,7 @@
 #import "PATag.h"
 #import "PASimpleTag.h"
 #import "PASimpleTagFactory.h"
+#import "PAQuery.h"
 
 @interface PATags : NSObject {
 	NSMutableArray *tags;
@@ -66,6 +67,6 @@ creates a query for the given tags
  @param someTags tags for which to create the query
  @return query configured to search for tags
  */
-- (NSMetadataQuery*)queryForTags:(NSMutableArray*)someTags;
+- (PAQuery*)queryForTags:(NSMutableArray*)someTags;
 
 @end

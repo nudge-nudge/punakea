@@ -2,14 +2,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAResultsMultiItemCell.h"
+#import "PAQuery.h"
 
 @interface PAResultsOutlineView : NSOutlineView
 {
-	NSMetadataQuery *query;
-
+	PAQuery *query;
 }
 
-- (NSMetadataQuery *)query;
-- (void)setQuery:(NSMetadataQuery *)aQuery;
+- (PAQuery *)query;
+- (void)setQuery:(PAQuery *)aQuery;
 
 @end

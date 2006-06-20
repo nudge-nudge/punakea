@@ -95,9 +95,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 #pragma mark Notifications
 - (void)queryNote:(NSNotification *)note
 {	
-	if ([[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification] ||
-		[[note name] isEqualToString:NSMetadataQueryDidUpdateNotification] ||
-		[[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification])
+	if ([[note name] isEqualToString:PAQueryGatheringProgressNotification] ||
+		[[note name] isEqualToString:PAQueryDidUpdateNotification] ||
+		[[note name] isEqualToString:PAQueryDidFinishGatheringNotification])
 	{
 		[self reloadData];
 		
@@ -229,12 +229,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Accessors
-- (NSMetadataQuery *)query
+- (PAQuery *)query
 {
 	return query;
 }
 
-- (void)setQuery:(NSMetadataQuery *)aQuery
+- (void)setQuery:(PAQuery *)aQuery
 {
 	query = aQuery;
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];

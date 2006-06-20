@@ -35,9 +35,9 @@ use this init if you want an encapsulated way to get related tags for the
 		[self setTags:otherTags];
 	
 		//create appropriate query
-		paquery = [[PAQuery alloc] initWithTags:otherSelectedTags];
+		query = [[PAQuery alloc] initWithTags:otherSelectedTags];
 		nf = [NSNotificationCenter defaultCenter];
-		[nf addObserver:self selector:@selector(queryNote:) name:nil object:paquery];
+		[nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
 	}
 	return self;
 }
@@ -48,7 +48,7 @@ use this init if you want performance, it uses a query passed from the outside
  @param aQuery find related tags to the query result
  @param otherTags all tags
  */
-- (id)initWithQuery:(NSMetadataQuery*)aQuery tags:(PATags*)otherTags;
+- (id)initWithQuery:(PAQuery*)aQuery tags:(PATags*)otherTags;
 {
 	if (self = [super init])
 	{
@@ -74,7 +74,7 @@ use this init if you want performance, it uses a query passed from the outside
 }
 
 #pragma mark accessors
-- (void)setQuery:(NSMetadataQuery*)aQuery 
+- (void)setQuery:(PAQuery*)aQuery 
 {
 	[aQuery retain];
 	[query release];
@@ -125,25 +125,31 @@ use this init if you want performance, it uses a query passed from the outside
 	[otherTags retain];
 	[selectedTags release];
 	selectedTags = otherTags;
+	
+	[query setTags:selectedTags];
 }
 
 - (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i
 {
 	[selectedTags insertObject:tag atIndex:i];
+	
+	[query setTags:selectedTags];
 }
 
 - (void)removeObjectFromSelectedTagsAtIndex:(unsigned int)i
 {
 	[selectedTags removeObjectAtIndex:i];
+	
+	[query setTags:selectedTags];
 }
 
 #pragma mark logic
 //act on query notifications -- relatedTags need to be kept in sync with files
 - (void)queryNote:(NSNotification*)note 
 {
-	if ([[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification] 
-		|| [[note name] isEqualToString:NSMetadataQueryGatheringProgressNotification]
-		|| [[note name] isEqualToString:NSMetadataQueryDidUpdateNotification]) 
+	if ([[note name] isEqualToString:PAQueryDidFinishGatheringNotification] 
+		|| [[note name] isEqualToString:PAQueryGatheringProgressNotification]
+		|| [[note name] isEqualToString:PAQueryDidUpdateNotification]) 
 	{
 		[self updateRelatedTags];
 	}

@@ -11,7 +11,7 @@
 
 @implementation Controller (QueryDelegateCategory)
 
-- (id)metadataQuery:(NSMetadataQuery *)query replacementValueForAttribute:(NSString *)attrName value:(id)attrValue {
+- (id)metadataQuery:(PAQuery *)query replacementValueForAttribute:(NSString *)attrName value:(id)attrValue {
 	// kMDItemFSSize
 	if ([attrName isEqualToString:(id)kMDItemFSSize]) {
         int fsSize = [attrValue intValue];

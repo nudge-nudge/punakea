@@ -33,13 +33,11 @@
 
 		[self loadDataFromDisk];
 	
-		_query = [[NSMetadataQuery alloc] init];
-		[_query setDelegate:self];
-		[_query setNotificationBatchingInterval:0.3];
+		_query = [[PAQuery alloc] init];
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
 		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
-		relatedTags = [[PARelatedTags alloc] initWithQuery:_query tags:tags];
+		relatedTags = [[PARelatedTags alloc] initWithTags:tags selectedTags:[NSMutableArray array]];
 		
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:tags];
 	}
@@ -105,7 +103,7 @@
 }
 
 #pragma mark accessors
-- (NSMetadataQuery*)query 
+- (PAQuery*)query 
 {
 	return _query;
 }
@@ -296,58 +294,17 @@
 	if ([_query isStarted]) 
 		[_query stopQuery];
 	
-	//append all the tags queries to the string - if there are any
-	//this way the query is only started, if there are any tags to look for
+	//the query is only started, if there are any tags to look for
 	if ([selectedTags count] > 0)
 	{
-		NSMutableString *queryString = [NSMutableString stringWithString:@""];
-		
-		NSEnumerator *e = [selectedTags objectEnumerator];
-		PATag *tag;
-		
-		if (tag = [e nextObject]) 
-		{
-			NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
-			[queryString appendString:anotherTagQuery];
-		}
-		
-		while (tag = [e nextObject]) 
-		{
-			NSString *anotherTagQuery = [NSString stringWithFormat:@" && (%@)",[tag query]];
-			[queryString appendString:anotherTagQuery];
-		}
-		
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:queryString];
-		NSLog(@"predicate: %@",predicate);
-		[_query setPredicate:predicate];
+		[_query setTags:[selectedTags selectedTags]];
 		[_query startQuery];
-		
-		// TEMP for testing PAQuery
-		paquery = [[PAQuery alloc] initWithTags:[selectedTags selectedTags]];
-		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self
-			   selector:@selector(paqueryFinished:)
-			       name:PAQueryDidFinishGatheringNotification
-			     object:paquery];
-		[paquery startQuery];
 	}
 	else 
 	{
 		//there are no selected tags, reset all tags
 		[self setVisibleTags:[tags tags]];
 	}
-}
-
-// TEMP for testing PAQuery
-- (void)paqueryFinished:(NSNotification *)note
-{
-	NSLog(@"Number of results in PAQuery: %d", [paquery resultCount]);
-	
-	/*int i;
-	for(i = 0; i < [paquery resultCount]; i++)
-	{
-		NSLog([[paquery resultAtIndex:i] valueForAttribute:(id)kMDItemDisplayName]);
-	}*/
 }
 
 - (void)relatedTagsHaveChanged

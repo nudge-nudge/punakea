@@ -8,8 +8,8 @@
 
 #import "PAQuery.h"
 
-
 NSString * const PAQueryDidStartGatheringNotification = @"PAQueryDidStartGatheringNotification";
+NSString * const PAQueryGatheringProgressNotification = @"PAQueryGatheringProgressNotification";
 NSString * const PAQueryDidUpdateNotification = @"PAQueryDidUpdateNotification";
 NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGatheringNotification";
 
@@ -54,6 +54,7 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 
 - (void)dealloc
 {
+	if ([self isStarted]) [self stopQuery];	
 	if(mdquery) [mdquery release];
 	if(groupingAttributes) [groupingAttributes release];
 	if(predicate) [predicate release];
@@ -80,14 +81,39 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 														object:self];
 }
 
+- (void)disableUpdates
+{
+	[mdquery disableUpdates];
+}
+
+- (void)enableUpdates
+{
+	[mdquery enableUpdates];
+}
+
+- (BOOL)isStarted
+{
+	return [mdquery isStarted];
+}
+
 - (unsigned)resultCount
 {
-	return [results count];
+	return [mdquery resultCount];
 }
 
 - (id)resultAtIndex:(unsigned)index
 {
-	return [results objectAtIndex:index];
+	return [mdquery resultAtIndex:index];
+}
+
+- (NSArray*)results
+{
+	return [mdquery results];
+}
+
+- (NSArray*)groupedResults
+{
+	return [mdquery groupedResults];
 }
 
 /**
@@ -124,6 +150,11 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	{
 		[mdquery setPredicate:[NSPredicate predicateWithFormat:queryString]];
 	}
+	
+	if (![self isStarted])
+	{
+		[self startQuery];
+	}
 }
 
 #pragma mark Notifications
@@ -136,8 +167,15 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	
 	if([[note name] isEqualTo:NSMetadataQueryDidStartGatheringNotification])
 	{
-		[results removeAllObjects];
+		//TODO implement result wrapping
+		//[results removeAllObjects];
 		[nc postNotificationName:PAQueryDidStartGatheringNotification object:self];
+	}
+	
+	if([[note name] isEqualTo:NSMetadataQueryGatheringProgressNotification])
+	{
+		[self synchronizeResults];
+		[nc postNotificationName:PAQueryGatheringProgressNotification object:self];
 	}
 		
 	if([[note name] isEqualTo:NSMetadataQueryDidUpdateNotification])
@@ -177,16 +215,27 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 
 - (NSArray *)groupingAttributes
 {
-	return groupingAttributes;
+	return [mdquery groupingAttributes];
 }
 
 - (void)setGroupingAttributes:(NSArray *)attributes
 {
-	groupingAttributes = attributes;
+	[mdquery setGroupingAttributes:attributes];
 	
 	// Post notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryGroupingAttributesDidChange
 														object:self];
+}
+
+- (NSArray *)sortDescriptors
+{
+	return [mdquery sortDescriptors];
+}
+
+
+- (void)setSortDescriptors:(NSArray *)descriptors
+{
+	[mdquery setSortDescriptors:descriptors];
 }
 
 - (NSMutableArray*)tags
@@ -206,12 +255,14 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 - (void)insertObject:(PATag *)tag inTagsAtIndex:(unsigned int)i
 {
 	[tags insertObject:tag atIndex:i];
+	
 	[self updateQueryFromTags];
 }
 
 - (void)removeObjectFromTagsAtIndex:(unsigned int)i
 {
 	[tags removeObjectAtIndex:i];
+	
 	[self updateQueryFromTags];
 }
 @end

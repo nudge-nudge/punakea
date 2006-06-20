@@ -33,10 +33,7 @@
 	PATypeAheadFind *typeAheadFind; /**< used for type ahead find */
 	
 	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
-	NSMetadataQuery *_query;
-	
-	// TEMP
-	PAQuery *paquery;
+	PAQuery *_query;
 }
 
 //saving and loading
@@ -58,8 +55,8 @@
 - (PATag*)currentBestTag;
 - (void)setCurrentBestTag:(PATag*)otherTag;
 
-//for NSMetadataQuery
-- (NSMetadataQuery *)query;
+//for PAQuery
+- (PAQuery *)query;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
 //for adding to selected

@@ -282,12 +282,12 @@
 
 
 #pragma mark Accessors
-- (NSMetadataQuery *)query
+- (PAQuery *)query
 {
 	return query;
 }
 
-- (void)setQuery:(NSMetadataQuery *)aQuery
+- (void)setQuery:(PAQuery *)aQuery
 {
 	query = aQuery;
 }
