@@ -496,6 +496,8 @@
 				65035FC90A20769500AD0597 /* PAQuery.h */,
 				65035FCA0A20769500AD0597 /* PAQuery.m */,
 				650362500A2084BE00AD0597 /* PAQueryResultGroup.m */,
+				658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */,
+				658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */,
 			);
 			name = Query;
 			sourceTree = "<group>";
@@ -566,8 +568,6 @@
 				65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */,
 				65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */,
 				65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */,
-				658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */,
-				658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */,
 				658DCD0709E2581F008FBC2C /* ResultsOutlineViewController.h */,
 				658DCD0809E2581F008FBC2C /* ResultsOutlineViewController.m */,
 			);

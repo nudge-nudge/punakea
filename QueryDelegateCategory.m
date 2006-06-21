@@ -9,7 +9,7 @@
 #import "QueryDelegateCategory.h"
 
 
-@implementation Controller (QueryDelegateCategory)
+@implementation PAQuery (QueryDelegateCategory)
 
 - (id)metadataQuery:(PAQuery *)query replacementValueForAttribute:(NSString *)attrName value:(id)attrValue {
 	// kMDItemFSSize

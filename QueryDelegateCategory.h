@@ -7,9 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Controller.h"
+#import "PAQuery.h"
 
 
-@interface Controller (QueryDelegateCategory) 
+@interface PAQuery (QueryDelegateCategory) 
 
 @end
