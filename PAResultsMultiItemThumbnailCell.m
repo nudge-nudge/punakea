@@ -35,4 +35,9 @@
 	NSRectFill(cellFrame);
 }
 
+- (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	[self drawInteriorWithFrame:cellFrame inView:controlView];
+}
+
 @end

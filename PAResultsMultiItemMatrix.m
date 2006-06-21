@@ -19,7 +19,7 @@
 		[self setCellClass:[PAResultsMultiItemThumbnailCell class]];
 		[self renewRows:1 columns:0];
 		[self setIntercellSpacing:NSMakeSize(15,0)];
-		[self setMode:NSListModeMatrix];
+		[self setMode:NSHighlightModeMatrix];
 		[self setTarget:self];
 		[self setAutosizesCells:YES];
     }
@@ -48,6 +48,7 @@
 		[self addColumnWithCells:[NSArray arrayWithObject:cell]];
 	}
 }
+
 
 #pragma mark Accessors
 - (PAResultsMultiItem *)item

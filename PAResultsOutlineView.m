@@ -91,6 +91,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	return nil;
 }
 
+- (void)setFrameSize:(NSSize)newSize 
+{
+	// Todo: Smooth resizing of column
+	[super setFrameSize:newSize];
+}
+
 
 #pragma mark Notifications
 - (void)queryNote:(NSNotification *)note

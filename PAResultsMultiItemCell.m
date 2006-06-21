@@ -50,7 +50,8 @@
 	if([matrix superview] != controlView)
 	{	
 		matrix = [[PAResultsMultiItemMatrix alloc] initWithFrame:rect];
-		[matrix setItem:item];		
+		[matrix setItem:item];	
+		[matrix deselectAllCells];	
 		[controlView addSubview:matrix];
 	}
 	else
@@ -59,14 +60,22 @@
 	}
 	
 	// Ensure at least one item of matrix is selected if cell is highlighted
-	/*if([self isHighlighted])
+	if([self isHighlighted])
 	{
-		if([[matrix selectedCells] count] == 0) 
+		//NSLog(@"r %d", [matrix selectedColumn]);
+
+		if([matrix selectedColumn] == -1)
 		{
 			[matrix selectCellAtRow:0 column:0];
 			[matrix setNeedsDisplay];
+			//NSLog(@"ja");
 		}
-	}*/
+		//NSLog(@"highlighted");
+	} else {
+		//NSLog(@"not high");
+		[matrix deselectAllCells];
+		//[matrix setNeedsDisplay];
+	}
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView

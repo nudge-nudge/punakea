@@ -185,7 +185,7 @@
 	// Forward selection request to multiitem
 	if([[item class] isEqualTo:[PAResultsMultiItem class]])
 	{
-		NSLog(@"should select multiitem");
+		//NSLog(@"should select multiitem");
 	}
 
 	return ([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) ? NO : YES;
