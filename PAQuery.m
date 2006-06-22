@@ -148,7 +148,7 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	
 	if (![queryString isEqualToString:@""])
 	{
-		[mdquery setPredicate:[NSPredicate predicateWithFormat:queryString]];
+		[self setPredicate:[NSPredicate predicateWithFormat:queryString]];
 	}
 	
 	if (![self isStarted])
