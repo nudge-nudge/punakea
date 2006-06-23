@@ -133,7 +133,6 @@
 	
 	
 	// Draw background
-	
 	NSImage *backgroundImage;
 	if ([[controlView window] isKeyWindow])
 		backgroundImage = [NSImage imageNamed:@"MD0-0-Middle-1"];

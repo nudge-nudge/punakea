@@ -10,6 +10,7 @@
 #import "Controller.h"
 #import "PATag.h"
 #import "PASelectedTags.h"
+#import "PASelectedTagCell.h"
 
 /**
 view for the selected tags

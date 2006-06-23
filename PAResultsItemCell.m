@@ -105,7 +105,8 @@
 
 - (void)setObjectValue:(id <NSCopying>)object
 {
-	valueDict = (NSDictionary *)object;
+	[valueDict autorelease];
+	valueDict = [(NSDictionary *)object retain];
 }
 
 @end

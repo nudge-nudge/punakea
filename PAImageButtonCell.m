@@ -24,15 +24,30 @@
 - (id)initImageCell:(NSImage *)anImage
 {	
 	self = [super initImageCell:anImage];
+	if(self)
+	{
+		images = [[NSMutableDictionary alloc] init];
+		if (anImage) [self setImage:anImage forState:PAOffState];
+		state = PAOffState;
+		type = PAMomentaryLightButton;	
+		tag = [[NSMutableDictionary alloc] init];
+		[self setAction:@selector(action:)];
+	}
 	
-	images = [[NSMutableDictionary alloc] init];
-	if (anImage)
-		[self setImage:anImage forState:PAOffState];
-	state = PAOffState;
-	type = PAMomentaryLightButton;	
-	tag = [[NSMutableDictionary alloc] init];
-	[self setAction:@selector(action:)];
-	
+	return self;
+}
+
+- (id)initTextCell:(NSString *)aText
+{	
+	self = [super initTextCell:aText];
+	if(self)
+	{
+		images = [[NSMutableDictionary alloc] init];
+		state = PAOffState;
+		type = PAMomentaryLightButton;	
+		tag = [[NSMutableDictionary alloc] init];
+		[self setAction:@selector(action:)];
+	}
 	return self;
 }
 
@@ -41,6 +56,12 @@
 	if(images) [images release];
 	if(tag) [tag release];
 	[super dealloc];
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+	// TODO
+	return [super copyWithZone:zone];
 }
 
 #pragma mark Data Source
@@ -73,8 +94,11 @@
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [image size];
-		
-	[image drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	
+	if([image scalesWhenResized])
+		[image drawInRect:cellFrame fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	else
+		[image drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView

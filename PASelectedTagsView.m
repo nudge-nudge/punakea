@@ -31,6 +31,7 @@
 		//settings
 		[self setMode:NSHighlightModeMatrix];
 		[self setSelectionByRect:NO];
+		[self setIntercellSpacing:NSMakeSize(-1,-1)];
     }
     return self;
 }
@@ -131,6 +132,9 @@ bound to selectedTags
 		displayHeight = cellHeight;
 	}
 	
+	// SET FIX HEIGHT
+	displayHeight = 22;
+	
 	// set cell size
 	[self setCellSize:NSMakeSize(displayWidth,displayHeight)];
 		
@@ -166,10 +170,10 @@ bound to selectedTags
 				break;
 			
 			PATag *tag = [selectedTags tagAtIndex:counter];
-			NSButtonCell *cell = [[NSButtonCell alloc] initTextCell:[tag name]];
-			[cell setBezelStyle:NSRecessedBezelStyle];
+			PASelectedTagCell *cell = [[PASelectedTagCell alloc] initTextCell:[tag name]];
+			//[cell setBezelStyle:NSRecessedBezelStyle];
 			[self putCell:cell atRow:i column:j];
-			[cell release];
+			//[cell release];
 			counter++;
 		}
 	}
