@@ -52,8 +52,16 @@
 
 - (void)awakeFromNib
 {
+	// add tracking reckt for mouse enter and exit events
 	NSView *contentView = [self contentView];
 	[contentView addTrackingRect:[contentView bounds] owner:self userData:NULL assumeInside:NO];
+	
+	// move sidebar to right screen edge
+	NSRect screenRect = [[NSScreen mainScreen] frame];
+	NSRect newRect = [self frame];
+	newRect.origin.x = screenRect.size.width - 1;
+	newRect.origin.y = screenRect.size.height/2 - newRect.size.height/2;
+	[self setFrameOrigin:newRect.origin];
 }
 
 - (void)dealloc
@@ -109,17 +117,15 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent {
 	NSLog(@"enter");
-	/*
 	NSRect newRect = [self frame];
-	newRect.origin.x = newRect.origin.x - NSWidth(newRect) - 1;
+	newRect.origin.x = newRect.origin.x - NSWidth(newRect) + 1;
 	[self setFrame:newRect display:YES animate:YES];
-	*/
 }
 
 - (void)mouseExited:(NSEvent *)theEvent {
 	NSLog(@"exit");
 	NSRect newRect = [self frame];
-	newRect.origin.x = newRect.origin.x + NSWidth(newRect);
+	newRect.origin.x = newRect.origin.x + NSWidth(newRect) - 1;
 	[self setFrame:newRect display:YES animate:YES];
 }
 
