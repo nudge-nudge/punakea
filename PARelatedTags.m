@@ -15,7 +15,6 @@
 
 @end
 
-//will use nsarraycontroller for managing the relatedTags array
 @implementation PARelatedTags
 
 #pragma mark init + dealloc
@@ -48,7 +47,7 @@ use this init if you want performance, it uses a query passed from the outside
  @param aQuery find related tags to the query result
  @param otherTags all tags
  */
-- (id)initWithQuery:(PAQuery*)aQuery tags:(PATags*)otherTags;
+- (id)initWithTags:(PATags*)otherTags query:(PAQuery*)aQuery;
 {
 	if (self = [super init])
 	{

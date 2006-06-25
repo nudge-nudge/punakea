@@ -110,7 +110,6 @@ resets the tagger window (called when window is closed)
 	[[tagField window] makeFirstResponder:tagField];
 }
 
-//TODO same method as in controller .. put together!
 - (void)tagsHaveChanged
 {
 	[relatedTags setSelectedTags:currentCompleteTagsInField];

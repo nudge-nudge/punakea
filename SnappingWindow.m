@@ -45,7 +45,15 @@
     [self setSnapTolerance:50.0];
     [self setPadding:0.0];
 	
+	[self setAcceptsMouseMovedEvents:YES];
+	
     return self;
+}
+
+- (void)awakeFromNib
+{
+	NSView *contentView = [self contentView];
+	[contentView addTrackingRect:[contentView bounds] owner:self userData:NULL assumeInside:NO];
 }
 
 - (void)dealloc
@@ -97,6 +105,20 @@
             NSMakePoint(origin.x + newLocation.x - dragStartLocation.x,
                         origin.y + newLocation.y - dragStartLocation.y)];
     }
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent {
+	NSLog(@"enter");
+	NSRect newRect = [self frame];
+	newRect.origin.x = newRect.origin.x - NSWidth(newRect) - 1;
+	[self setFrame:newRect display:YES animate:YES];
+}
+
+- (void)mouseExited:(NSEvent *)theEvent {
+	NSLog(@"exit");
+	NSRect newRect = [self frame];
+	newRect.origin.x = newRect.origin.x + NSWidth(newRect) - 1;
+	[self setFrame:newRect display:YES animate:YES];
 }
 
 #pragma mark Notification handlers */
