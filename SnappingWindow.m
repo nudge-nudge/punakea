@@ -109,15 +109,17 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent {
 	NSLog(@"enter");
+	/*
 	NSRect newRect = [self frame];
 	newRect.origin.x = newRect.origin.x - NSWidth(newRect) - 1;
 	[self setFrame:newRect display:YES animate:YES];
+	*/
 }
 
 - (void)mouseExited:(NSEvent *)theEvent {
 	NSLog(@"exit");
 	NSRect newRect = [self frame];
-	newRect.origin.x = newRect.origin.x + NSWidth(newRect) - 1;
+	newRect.origin.x = newRect.origin.x + NSWidth(newRect);
 	[self setFrame:newRect display:YES animate:YES];
 }
 
