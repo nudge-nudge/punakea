@@ -41,7 +41,7 @@
     //but let's turn off opaqueness so that we can see through the parts of the window that we're not drawing into
     //[self setOpaque:NO];
 	
-    [self setSnapsToEdges:YES];
+    [self setSnapsToEdges:NO];
     [self setSnapTolerance:50.0];
     [self setPadding:0.0];
 	
