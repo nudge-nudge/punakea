@@ -29,7 +29,7 @@
 		cellMaxHeight = [self bounds].size.height;
 		
 		//settings
-		[self setMode:NSHighlightModeMatrix];
+		[self setMode:NSTrackModeMatrix];
 		[self setSelectionByRect:NO];
 		[self setIntercellSpacing:NSMakeSize(-1,-1)];
     }
@@ -71,7 +71,10 @@ bound to selectedTags
 - (void)drawRect:(NSRect)rect 
 {
 	[self drawBorder];
-	[self updateView];
+	
+	// Doesn't work like this. We can't add new cells for every drawing!
+	//[self updateView];
+
 	[super drawRect:rect];
 }
 

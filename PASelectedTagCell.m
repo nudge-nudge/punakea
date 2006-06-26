@@ -21,6 +21,7 @@
 		[valueDict setValue:aText forKey:@"value"];
 		
 		[self setImagesForStates];
+		[self setButtonType:PASwitchButton];
 	}	
 	return self;
 }
