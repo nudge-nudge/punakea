@@ -41,7 +41,7 @@
 
 - (void)notification:(NSNotification *)note
 {
-	NSLog(@"%@",note);
+	//NSLog(@"%@",note);
 }
 
 - (void)awakeFromNib
