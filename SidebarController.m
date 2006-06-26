@@ -1,13 +1,13 @@
-#import "SideViewController.h"
+#import "SidebarController.h"
 
-@interface SideViewController (PrivateAPI)
+@interface SidebarController (PrivateAPI)
 
 - (void)addTagToFileTags:(PATag*)tag;
 - (void)updateTagsOnFile;
 
 @end
 
-@implementation SideViewController
+@implementation SidebarController
 
 - (void)awakeFromNib 
 {

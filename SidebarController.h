@@ -7,7 +7,7 @@
 #import "PATableViewDropController.h"
 #import "PASidebarTagCell.h"
 
-@interface SideViewController : NSWindowController {
+@interface SidebarController : NSWindowController {
 	PATagger *tagger;
 	
 	IBOutlet PAFileBox *fileBox;
