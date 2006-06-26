@@ -12,6 +12,8 @@
 		481BF27809A3128600EBD7BA /* PATag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF27609A3128600EBD7BA /* PATag.h */; };
 		481BF2F209A31B9B00EBD7BA /* PATagSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF2F009A31B9B00EBD7BA /* PATagSet.h */; };
 		481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 481BF2F109A31B9B00EBD7BA /* PATagSet.m */; };
+		4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */; };
+		4840AC400A4FFEE50046484E /* PASidebarContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */; };
 		4842FC0F09DA801500C4A931 /* PATagButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC0D09DA801500C4A931 /* PATagButton.h */; };
 		4842FC1009DA801700C4A931 /* PATagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC0E09DA801500C4A931 /* PATagButton.m */; };
 		4842FC1309DA804100C4A931 /* PATagButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC1109DA804100C4A931 /* PATagButtonCell.h */; };
@@ -197,6 +199,7 @@
 				6557CAF40A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h in CopyFiles */,
 				65903EFF0A4BFE9900ADDC1D /* PASelectedTagCell.h in CopyFiles */,
 				4870213B0A4FC1EC00CD5E75 /* PASidebar.h in CopyFiles */,
+				4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +219,8 @@
 		481BF27609A3128600EBD7BA /* PATag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATag.h; sourceTree = "<group>"; };
 		481BF2F009A31B9B00EBD7BA /* PATagSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagSet.h; sourceTree = "<group>"; };
 		481BF2F109A31B9B00EBD7BA /* PATagSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSet.m; sourceTree = "<group>"; };
+		4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarContentView.h; sourceTree = "<group>"; };
+		4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarContentView.m; sourceTree = "<group>"; };
 		4842FC0D09DA801500C4A931 /* PATagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButton.h; sourceTree = "<group>"; };
 		4842FC0E09DA801500C4A931 /* PATagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButton.m; sourceTree = "<group>"; };
 		4842FC1109DA804100C4A931 /* PATagButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButtonCell.h; sourceTree = "<group>"; };
@@ -484,8 +489,16 @@
 		488E18BA0A2722E5009D2826 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				486EBA4409D68F16000C154C /* PAFileBox.h */,
+				486EBA4309D68F16000C154C /* PAFileBox.m */,
+				487021390A4FC1EC00CD5E75 /* PASidebar.h */,
+				4870213A0A4FC1EC00CD5E75 /* PASidebar.m */,
 				488E18BB0A27231F009D2826 /* PASidebarTagCell.h */,
 				488E18BC0A27231F009D2826 /* PASidebarTagCell.m */,
+				48E9C2F509A5C27600415AC7 /* SideViewController.h */,
+				48E9C2F409A5C27600415AC7 /* SideViewController.m */,
+				4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */,
+				4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */,
 			);
 			name = Sidebar;
 			sourceTree = "<group>";
@@ -575,14 +588,10 @@
 		65851FFF099780E0009C3CA7 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				486EBA4409D68F16000C154C /* PAFileBox.h */,
-				486EBA4309D68F16000C154C /* PAFileBox.m */,
 				489AE65309DD434600EB60EB /* SnappingWindow.h */,
 				489AE65409DD434600EB60EB /* SnappingWindow.m */,
 				65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */,
 				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
-				487021390A4FC1EC00CD5E75 /* PASidebar.h */,
-				4870213A0A4FC1EC00CD5E75 /* PASidebar.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -675,8 +684,6 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				65E7B0690994D5AA00565251 /* Controller.h */,
 				65E7B06A0994D5AA00565251 /* Controller.m */,
-				48E9C2F509A5C27600415AC7 /* SideViewController.h */,
-				48E9C2F409A5C27600415AC7 /* SideViewController.m */,
 				480FFF9909DACF0900C1E6BA /* PATagCloudController.h */,
 				480FFF9A09DACF0900C1E6BA /* PATagCloudController.m */,
 				65E7B43C0994E3D000565251 /* SubViewController.h */,
@@ -863,6 +870,7 @@
 				6557CAF50A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m in Sources */,
 				65903F000A4BFE9900ADDC1D /* PASelectedTagCell.m in Sources */,
 				4870213C0A4FC1EC00CD5E75 /* PASidebar.m in Sources */,
+				4840AC400A4FFEE50046484E /* PASidebarContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

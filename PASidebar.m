@@ -8,6 +8,12 @@
 
 #import "PASidebar.h"
 
+@interface PASidebar (PrivateAPI)
+
+- (void)show;
+- (void)recede;
+
+@end
 
 @implementation PASidebar
 
@@ -22,7 +28,20 @@
     [self setLevel: NSStatusWindowLevel];
 	[self setAcceptsMouseMovedEvents:YES];
 	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    appearance = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"Appearance"]];
+	
+	// DEBUG
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(notification:)
+                                                 name:0
+                                               object:nil];
     return self;
+}
+
+- (void)notification:(NSNotification *)note
+{
+	NSLog(@"%@",note);
 }
 
 - (void)awakeFromNib
@@ -30,9 +49,6 @@
 	// add tracking reckt for mouse enter and exit events
 	NSView *contentView = [self contentView];
 	[contentView addTrackingRect:[contentView bounds] owner:self userData:NULL assumeInside:NO];
-
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *appearance = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Appearance"]];
 	
 	// move sidebar to screen edge - according to prefs
 	NSRect screenRect = [[NSScreen mainScreen] frame];
@@ -52,21 +68,50 @@
 	[self setFrameOrigin:newRect.origin];
 }
 
+- (void)dealloc
+{
+	[appearance release];
+	[super dealloc];
+}
+
 #pragma mark events
-- (void)mouseEntered:(NSEvent *)theEvent {
-	//TODO redirect
+- (void)mouseEntered:(NSEvent *)theEvent 
+{
 	NSLog(@"enter");
-	NSRect newRect = [self frame];
-	newRect.origin.x = newRect.origin.x - NSWidth(newRect) + 1;
-	[self setFrame:newRect display:YES animate:YES];
+	[self show];
 }
 
-- (void)mouseExited:(NSEvent *)theEvent {
-	//TODO redirect
+- (void)mouseExited:(NSEvent *)theEvent 
+{
 	NSLog(@"exit");
+	[self recede];
+}
+
+- (void)show
+{
 	NSRect newRect = [self frame];
-	newRect.origin.x = newRect.origin.x + NSWidth(newRect) - 1;
+	if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])
+	{
+		newRect.origin.x = 0;
+	}
+	else
+	{
+		newRect.origin.x = newRect.origin.x - newRect.size.width + 1;
+	}
 	[self setFrame:newRect display:YES animate:YES];
 }
 
+- (void)recede
+{
+	NSRect newRect = [self frame];
+	if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])
+	{
+		newRect.origin.x = 0 - newRect.size.width + 1;
+	}
+	else
+	{
+		newRect.origin.x = newRect.origin.x + newRect.size.width - 1;
+	}	
+	[self setFrame:newRect display:YES animate:YES];
+}
 @end

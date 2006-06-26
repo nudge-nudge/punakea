@@ -8,9 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-
+/**
+TODO delay
+ */
 @interface PASidebar : NSWindow {
-
+	NSMutableDictionary *appearance;
 }
 
 @end
