@@ -39,7 +39,7 @@
             SUPERCLASS = NSObject; 
         }, 
         {
-            CLASS = SideViewController; 
+            CLASS = SidebarController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 controller = Controller; 
