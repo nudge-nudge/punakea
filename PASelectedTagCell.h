@@ -13,6 +13,8 @@
 @interface PASelectedTagCell : PAImageButtonCell {
 
 	NSDictionary *valueDict;
+	
+	PAImageButtonCell *stopCell;
 
 }
 

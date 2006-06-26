@@ -22,6 +22,13 @@
 		
 		[self setImagesForStates];
 		[self setButtonType:PASwitchButton];
+		
+		// Init stopCell
+		stopCell = [[PAImageButtonCell alloc] initImageCell:[NSImage imageNamed:@"stop.tif"]];
+		[stopCell setImage:[NSImage imageNamed:@"stopPressed"] forState:PAOnState];
+		[stopCell setImage:[NSImage imageNamed:@"stopRollover"] forState:PAOffHighlightedState];
+		
+		// TODO: Add tracking rect for getting notification of hovering over stop cell
 	}	
 	return self;
 }
@@ -98,11 +105,41 @@
 								  cellFrame.size.width,
 								  cellFrame.size.height)
 	    withAttributes:fontAttributes];
+		
+	// Draw stop cell
+	NSRect stopCellFrame = cellFrame;
+	stopCellFrame.origin.x = cellFrame.origin.x + cellFrame.size.width - 20;
+	stopCellFrame.origin.y = cellFrame.origin.y + 3;
+	[stopCell drawWithFrame:stopCellFrame inView:controlView];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	[self drawInteriorWithFrame:cellFrame inView:controlView];
+}
+
+
+#pragma mark Mouse Tracking
+- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame  
+ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
+{
+	NSPoint locationInCell = [theEvent locationInWindow];
+	locationInCell = [controlView convertPoint:locationInCell fromView:nil];
+	
+	NSRect stopCellFrame = cellFrame;
+	stopCellFrame.origin.x = cellFrame.origin.x + cellFrame.size.width - 20;
+	stopCellFrame.origin.y = cellFrame.origin.y + 3;
+	
+	if(NSPointInRect(locationInCell, stopCellFrame))
+	{
+		// Forward mouse tracking to stop cell
+		[stopCell highlight:YES withFrame:cellFrame inView:controlView];
+		return [stopCell trackMouse:theEvent inRect:cellFrame ofView:controlView  
+				untilMouseUp:untilMouseUp];		
+	}
+	
+	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView  
+				untilMouseUp:untilMouseUp];
 }
 
 
