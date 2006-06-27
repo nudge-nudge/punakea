@@ -11,7 +11,7 @@
 /**
 TODO delay
  */
-@interface PASidebar : NSWindow {
+@interface PASidebarWindow : NSWindow {
 	NSMutableDictionary *appearance;
 	
 	BOOL expanded;

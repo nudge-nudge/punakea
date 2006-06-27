@@ -22,8 +22,8 @@
             OUTLETS = {controller = Controller; }; 
             SUPERCLASS = NSMatrix; 
         }, 
-        {CLASS = PASidebar; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {CLASS = PASidebarContentView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = PASidebarWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {CLASS = PASpotlightTypeCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PATagCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 
         {

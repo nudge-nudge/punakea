@@ -6,16 +6,16 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "PASidebar.h"
+#import "PASidebarWindow.h"
 
-@interface PASidebar (PrivateAPI)
+@interface PASidebarWindow (PrivateAPI)
 
 - (void)show;
 - (void)recede;
 
 @end
 
-@implementation PASidebar
+@implementation PASidebarWindow
 
 #pragma mark init and dealloc
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(unsigned int)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
