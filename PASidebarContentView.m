@@ -11,16 +11,39 @@
 
 @implementation PASidebarContentView
 
-- (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
-    }
-    return self;
+- (void)awakeFromNib 
+{
+	[self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
 }
 
-- (void)drawRect:(NSRect)rect {
+- (void)drawRect:(NSRect)rect 
+{
     [super drawRect:rect];
 }
 
+#pragma mark drag'n'drop
+/**
+only works if parent window is a PASidebar
+ */
+- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender 
+{
+	NSLog(@"dragEnter");
+	[[self window] show];
+	return NSDragOperationNone;
+}
+
+/**
+only works if parent window is a PASidebar
+ */
+- (void)draggingExited:(id <NSDraggingInfo>)sender 
+{
+	NSLog(@"dragExit");
+	// only send recede if mouse pointer has left the view
+	NSPoint mouse = [sender draggingLocation];
+	if (!NSPointInRect(mouse,[self bounds]))
+	{
+		NSLog(@"dragLeft");
+		[[self window] recede];
+	}
+}
 @end

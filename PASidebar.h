@@ -13,6 +13,11 @@ TODO delay
  */
 @interface PASidebar : NSWindow {
 	NSMutableDictionary *appearance;
+	
+	BOOL expanded;
 }
 
+- (BOOL)isExpanded;
+- (void)setExpanded:(BOOL)isExpanded;
+	
 @end

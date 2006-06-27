@@ -4,7 +4,7 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
+	if (self = [super initWithFrame:frameRect]) {
 		[self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType,nil]];
 		highlight = NO;
 	}

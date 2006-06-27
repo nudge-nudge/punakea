@@ -8,7 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-
+/**
+this custom view is only needed so that the sidebar responds to dragged files
+ and shows itself
+ */
 @interface PASidebarContentView : NSView {
 
 }

@@ -31,17 +31,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     appearance = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"Appearance"]];
 	
-	// DEBUG
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(notification:)
-                                                 name:0
-                                               object:nil];
     return self;
-}
-
-- (void)notification:(NSNotification *)note
-{
-	//NSLog(@"%@",note);
 }
 
 - (void)awakeFromNib
@@ -66,6 +56,8 @@
 	
 	newRect.origin.y = screenRect.size.height/2 - newRect.size.height/2;
 	[self setFrameOrigin:newRect.origin];
+	
+	[self setExpanded:NO];
 }
 
 - (void)dealloc
@@ -89,29 +81,49 @@
 
 - (void)show
 {
-	NSRect newRect = [self frame];
-	if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])
+	if (![self isExpanded]) 
 	{
-		newRect.origin.x = 0;
+		NSRect newRect = [self frame];
+		if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])
+		{
+			newRect.origin.x = 0;
+		}
+		else
+		{
+			newRect.origin.x = newRect.origin.x - newRect.size.width + 1;
+		}
+		[self setFrame:newRect display:YES animate:YES];
+		[self setExpanded:YES];
 	}
-	else
-	{
-		newRect.origin.x = newRect.origin.x - newRect.size.width + 1;
-	}
-	[self setFrame:newRect display:YES animate:YES];
 }
 
 - (void)recede
 {
-	NSRect newRect = [self frame];
-	if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])
+	if ([self isExpanded])
 	{
-		newRect.origin.x = 0 - newRect.size.width + 1;
+		NSRect newRect = [self frame];
+		if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])
+		{
+			newRect.origin.x = 0 - newRect.size.width + 1;
+		}
+		else
+		{
+			newRect.origin.x = newRect.origin.x + newRect.size.width - 1;
+		}	
+		[self setFrame:newRect display:YES animate:YES];
+		[self setExpanded:NO];
 	}
-	else
-	{
-		newRect.origin.x = newRect.origin.x + newRect.size.width - 1;
-	}	
-	[self setFrame:newRect display:YES animate:YES];
 }
+
+#pragma mark accessors
+- (BOOL)isExpanded 
+{
+	return expanded;
+}
+
+- (void)setExpanded:(BOOL)flag 
+{
+	expanded = flag;
+}
+
 @end
