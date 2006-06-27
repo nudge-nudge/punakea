@@ -26,6 +26,7 @@ determines the oigin point for the next tag button to display;
  @return origin point for next tagButton
  */
 - (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect;
+
 /**
 calculates the starting point in the next line according to the height of all the tags
  @param rect the main rect in which all the stuff is drawn
@@ -212,7 +213,7 @@ bound to visibleTags
 	//save this value
 	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x,pointForNextTagRect.y);
 	
-	//then calc the point for the next tag 
+	//then calc the point for the next tag
 	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + spacing,pointForNextTagRect.y);
 	
 	return newOrigin;

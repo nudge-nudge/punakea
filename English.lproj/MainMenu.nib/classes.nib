@@ -10,6 +10,7 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = PABrowserWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {CLASS = PAFileBox; LANGUAGE = ObjC; SUPERCLASS = NSImageView; }, 
         {CLASS = PAFileViewHeaderCell; LANGUAGE = ObjC; SUPERCLASS = NSActionCell; }, 
         {CLASS = PARelatedTags; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
