@@ -32,6 +32,10 @@
 		type = PAMomentaryLightButton;	
 		tag = [[NSMutableDictionary alloc] init];
 		[self setAction:@selector(action:)];
+		
+		// For mouse move events
+		[self setBordered:NO];
+		[self setShowsBorderOnlyWhileMouseInside:YES];
 	}	
 	return self;
 }
@@ -46,6 +50,10 @@
 		type = PAMomentaryLightButton;	
 		tag = [[NSMutableDictionary alloc] init];
 		[self setAction:@selector(action:)];
+		
+		// For mouse move events
+		[self setBordered:NO];
+		[self setShowsBorderOnlyWhileMouseInside:YES];
 	}
 	return self;
 }

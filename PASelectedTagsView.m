@@ -12,10 +12,26 @@
 
 - (void)drawBorder;
 - (void)updateView;
-
 @end
 
 @implementation PASelectedTagsView
+
+/*- (id)initWithFrame:(NSRect)frame 
+{
+	self = [super initWithFrame:frame];
+	if(self)
+	{
+		PAImageButtonCell *stopButton = [[PAImageButtonCell alloc] initImageCell:[NSImage imageNamed:@"stop.tif"]];
+		[stopButton setImage:[NSImage imageNamed:@"stopPressed"] forState:PAOnState];
+		[stopButton setImage:[NSImage imageNamed:@"stopRollover"] forState:PAOffHighlightedState];
+		[stopButton setState:PAOffState];
+		
+		[self setCell:stopButton];
+		[stopButton release];
+	}
+	return self;
+}*/
+
 
 #pragma mark init
 - (id)initWithFrame:(NSRect)frame 

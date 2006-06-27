@@ -11,6 +11,7 @@
 #import "PATag.h"
 #import "PASelectedTags.h"
 #import "PASelectedTagCell.h"
+#import "PAImageButtonCell.h"
 
 /**
 view for the selected tags
