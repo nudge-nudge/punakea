@@ -79,6 +79,7 @@
 	[self recede];
 }
 
+#pragma mark functionality
 - (void)show
 {
 	if (![self isExpanded]) 

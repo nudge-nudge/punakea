@@ -12,7 +12,16 @@
 
 - (void)keyDown:(NSEvent*)event 
 {
-	NSLog(@"key");
+	NSLog(@"keyDown: %x", [[event characters] characterAtIndex:0]);
+	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
+	
+	if (key == NSDeleteCharacter) 
+	{
+		if ([selectedTags count] > 0)
+		{
+			[selectedTags removeObjectFromSelectedTagsAtIndex:[selectedTags count]-1];
+		}
+	}
 }
 
 @end

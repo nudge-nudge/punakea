@@ -20,8 +20,6 @@
 		4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC1209DA804100C4A931 /* PATagButtonCell.m */; };
 		48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48471FD90A4FFF90002B369A /* SidebarController.h */; };
 		48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48471FDA0A4FFF90002B369A /* SidebarController.m */; };
-		4856C6600A516CA800E1D568 /* PABrowserWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C65E0A516CA800E1D568 /* PABrowserWindow.h */; };
-		4856C6610A516CA800E1D568 /* PABrowserWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C65F0A516CA800E1D568 /* PABrowserWindow.m */; };
 		4856C6740A516D8300E1D568 /* PABrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C6720A516D8300E1D568 /* PABrowserController.h */; };
 		4856C6750A516D8300E1D568 /* PABrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C6730A516D8300E1D568 /* PABrowserController.m */; };
 		485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA54B09F4EC38008D3214 /* PASelectedTags.h */; };
@@ -206,7 +204,6 @@
 				4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */,
 				4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */,
 				48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */,
-				4856C6600A516CA800E1D568 /* PABrowserWindow.h in CopyFiles */,
 				4856C6740A516D8300E1D568 /* PABrowserController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,8 +232,6 @@
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
 		48471FD90A4FFF90002B369A /* SidebarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarController.h; sourceTree = "<group>"; };
 		48471FDA0A4FFF90002B369A /* SidebarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarController.m; sourceTree = "<group>"; };
-		4856C65E0A516CA800E1D568 /* PABrowserWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserWindow.h; sourceTree = "<group>"; };
-		4856C65F0A516CA800E1D568 /* PABrowserWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserWindow.m; sourceTree = "<group>"; };
 		4856C6720A516D8300E1D568 /* PABrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserController.h; sourceTree = "<group>"; };
 		4856C6730A516D8300E1D568 /* PABrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserController.m; sourceTree = "<group>"; };
 		485DA54B09F4EC38008D3214 /* PASelectedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTags.h; sourceTree = "<group>"; };
@@ -606,8 +601,6 @@
 				489AE65409DD434600EB60EB /* SnappingWindow.m */,
 				65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */,
 				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
-				4856C65E0A516CA800E1D568 /* PABrowserWindow.h */,
-				4856C65F0A516CA800E1D568 /* PABrowserWindow.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -893,7 +886,6 @@
 				4870213C0A4FC1EC00CD5E75 /* PASidebarWindow.m in Sources */,
 				4840AC400A4FFEE50046484E /* PASidebarContentView.m in Sources */,
 				48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */,
-				4856C6610A516CA800E1D568 /* PABrowserWindow.m in Sources */,
 				4856C6750A516D8300E1D568 /* PABrowserController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

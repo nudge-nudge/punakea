@@ -10,6 +10,7 @@
 
 /**
 TODO delay
+  TODO check if tracking rects are handled correctly
  */
 @interface PASidebarWindow : NSWindow {
 	NSMutableDictionary *appearance;
