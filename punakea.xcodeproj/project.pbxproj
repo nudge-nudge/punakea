@@ -239,8 +239,6 @@
 		4856C65F0A516CA800E1D568 /* PABrowserWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserWindow.m; sourceTree = "<group>"; };
 		4856C6720A516D8300E1D568 /* PABrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserController.h; sourceTree = "<group>"; };
 		4856C6730A516D8300E1D568 /* PABrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserController.m; sourceTree = "<group>"; };
-		4856C6B70A516E9600E1D568 /* PASidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebar.h; sourceTree = "<group>"; };
-		4856C6B80A516EA300E1D568 /* PASidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebar.m; sourceTree = "<group>"; };
 		485DA54B09F4EC38008D3214 /* PASelectedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTags.h; sourceTree = "<group>"; };
 		485DA54C09F4EC38008D3214 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
 		485DA55309F4ECBC008D3214 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
@@ -507,9 +505,7 @@
 			children = (
 				486EBA4409D68F16000C154C /* PAFileBox.h */,
 				486EBA4309D68F16000C154C /* PAFileBox.m */,
-				4856C6B70A516E9600E1D568 /* PASidebar.h */,
 				487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */,
-				4856C6B80A516EA300E1D568 /* PASidebar.m */,
 				4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */,
 				488E18BB0A27231F009D2826 /* PASidebarTagCell.h */,
 				488E18BC0A27231F009D2826 /* PASidebarTagCell.m */,
