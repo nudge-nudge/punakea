@@ -20,15 +20,9 @@
 		valueDict = [[NSMutableDictionary alloc] init];
 		[valueDict setValue:aText forKey:@"value"];
 		
+		// Temp for checking drawing stuff
 		[self setImagesForStates];
 		[self setButtonType:PASwitchButton];
-		
-		// Init stopCell
-		stopCell = [[PAImageButtonCell alloc] initImageCell:[NSImage imageNamed:@"stop.tif"]];
-		[stopCell setImage:[NSImage imageNamed:@"stopPressed"] forState:PAOnState];
-		[stopCell setImage:[NSImage imageNamed:@"stopRollover"] forState:PAOffHighlightedState];
-		
-		// TODO: Add tracking rect for getting notification of hovering over stop cell
 	}	
 	return self;
 }
@@ -53,9 +47,6 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {	
-	// TODO:
-	// Highlighting doesn't work as untilMouseUp seems to be ignored by superclass :'(
-
 	// Let superclass handle the main drawing stuff
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
 	
@@ -106,11 +97,23 @@
 								  cellFrame.size.height)
 	    withAttributes:fontAttributes];
 		
-	// Draw stop cell
-	NSRect stopCellFrame = cellFrame;
-	stopCellFrame.origin.x = cellFrame.origin.x + cellFrame.size.width - 20;
-	stopCellFrame.origin.y = cellFrame.origin.y + 3;
-	[stopCell drawWithFrame:stopCellFrame inView:controlView];
+	// Draw stop button
+	/*NSRect stopButtonFrame = cellFrame;
+	stopButtonFrame.origin.x = cellFrame.origin.x + cellFrame.size.width - 20;
+	stopButtonFrame.origin.y = cellFrame.origin.y + 3;
+		
+	if(!stopButton) {	
+		stopButton = [[PAImageButton alloc] initWithFrame:stopButtonFrame];
+		[stopButton setImage:[NSImage imageNamed:@"stop.tif"] forState:PAOffState];
+		[stopButton setImage:[NSImage imageNamed:@"stopPressed"] forState:PAOnState];
+		[stopButton setImage:[NSImage imageNamed:@"stopRollover"] forState:PAOffHighlightedState];
+		[stopButton setState:PAOffState];
+
+		[controlView addSubview:stopButton]; 
+		NSLog(@"adding");
+	} else {
+		[stopButton setFrame:stopButtonFrame];
+	}*/
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
@@ -120,8 +123,8 @@
 
 
 #pragma mark Mouse Tracking
-- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame  
-ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
+/*- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame  
+            ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
 {
 	NSPoint locationInCell = [theEvent locationInWindow];
 	locationInCell = [controlView convertPoint:locationInCell fromView:nil];
@@ -140,7 +143,7 @@ ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
 	
 	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView  
 				untilMouseUp:untilMouseUp];
-}
+} */
 
 
 #pragma mark Helpers

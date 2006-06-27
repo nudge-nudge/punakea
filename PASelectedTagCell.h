@@ -7,14 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAImageButtonCell.h"
+#import "PAImageButton.h"
 
 
 @interface PASelectedTagCell : PAImageButtonCell {
 
 	NSDictionary *valueDict;
 	
-	PAImageButtonCell *stopCell;
+	PAImageButton *stopButton;
 
 }
 

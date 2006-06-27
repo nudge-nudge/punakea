@@ -32,8 +32,7 @@
 		type = PAMomentaryLightButton;	
 		tag = [[NSMutableDictionary alloc] init];
 		[self setAction:@selector(action:)];
-	}
-	
+	}	
 	return self;
 }
 
@@ -63,6 +62,7 @@
 	// TODO
 	return [super copyWithZone:zone];
 }
+
 
 #pragma mark Data Source
 - (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState
@@ -108,6 +108,16 @@
 
 
 #pragma mark Mouse Tracking
+- (void)mouseEntered:(NSEvent *)event
+{
+	NSLog(@"rein");
+}
+
+- (void)mouseExited:(NSEvent *)event
+{
+	NSLog(@"raus");
+}
+
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
 {
 	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView untilMouseUp:YES];

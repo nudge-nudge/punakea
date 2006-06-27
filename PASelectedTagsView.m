@@ -29,7 +29,7 @@
 		cellMaxHeight = [self bounds].size.height;
 		
 		//settings
-		[self setMode:NSTrackModeMatrix];
+		[self setMode:NSHighlightModeMatrix];
 		[self setSelectionByRect:NO];
 		[self setIntercellSpacing:NSMakeSize(-1,-1)];
     }
