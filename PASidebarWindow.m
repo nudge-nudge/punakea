@@ -11,7 +11,9 @@
 @interface PASidebarWindow (PrivateAPI)
 
 - (void)show;
+- (void)show:(BOOL)animate;
 - (void)recede;
+- (void)recede:(BOOL)animate;
 
 @end
 
@@ -40,24 +42,9 @@
 	NSView *contentView = [self contentView];
 	[contentView addTrackingRect:[contentView bounds] owner:self userData:NULL assumeInside:NO];
 	
-	// move sidebar to screen edge - according to prefs
-	NSRect screenRect = [[NSScreen mainScreen] frame];
-	NSRect newRect = [self frame];
-	
-	if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"]) 
-	{
-		newRect.origin.x = 0 - newRect.size.width + 1;
-	}
-	else
-	{
-		// default position on the right side
-		newRect.origin.x = screenRect.size.width - 1;
-	}
-	
-	newRect.origin.y = screenRect.size.height/2 - newRect.size.height/2;
-	[self setFrameOrigin:newRect.origin];
-	
-	[self setExpanded:NO];
+	// move to screen edge - according to prefs
+	[self setExpanded:YES];
+	[self recede:NO];
 }
 
 - (void)dealloc
@@ -79,8 +66,19 @@
 	[self recede];
 }
 
+
 #pragma mark functionality
 - (void)show
+{
+	[self show:YES];
+}
+
+- (void)recede
+{
+	[self recede:YES];
+}
+
+- (void)show:(BOOL)animate
 {
 	if (![self isExpanded]) 
 	{
@@ -93,25 +91,29 @@
 		{
 			newRect.origin.x = newRect.origin.x - newRect.size.width + 1;
 		}
-		[self setFrame:newRect display:YES animate:YES];
+		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:YES];
 	}
 }
 
-- (void)recede
+- (void)recede:(BOOL)animate
 {
 	if ([self isExpanded])
 	{
 		NSRect newRect = [self frame];
+		NSRect screenRect = [[NSScreen mainScreen] frame];
+
 		if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])
 		{
 			newRect.origin.x = 0 - newRect.size.width + 1;
 		}
 		else
 		{
-			newRect.origin.x = newRect.origin.x + newRect.size.width - 1;
-		}	
-		[self setFrame:newRect display:YES animate:YES];
+			newRect.origin.x = screenRect.size.width - 1;
+		}
+		
+		newRect.origin.y = screenRect.size.height/2 - newRect.size.height/2;
+		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:NO];
 	}
 }
