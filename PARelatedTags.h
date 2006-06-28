@@ -11,6 +11,7 @@
 #import "PATag.h"
 #import "PATags.h"
 #import "PAQuery.h"
+#import "PASelectedTags.h"
 
 /**
 finds related tags for a given query or a given selection of tags.
@@ -18,13 +19,11 @@ use either initWithTags: selectedTags and set the selectedTags when needed (used
  OR initWithTags: query: and pass a query from the outside (used by the browser)
  */
 @interface PARelatedTags : NSObject {
-	NSNotificationCenter *nf;
-	
-	PAQuery *query;
-	
-	NSMutableArray *selectedTags;
 	NSMutableArray *relatedTags;
-	
+
+	NSNotificationCenter *nf;
+	PAQuery *query;
+	PASelectedTags *selectedTags;
 	PATags *tags; /**<all tags*/
 }
 
@@ -41,8 +40,8 @@ use either initWithTags: selectedTags and set the selectedTags when needed (used
 
 - (void)removeAllObjectsFromRelatedTags;
 
-- (NSMutableArray*)selectedTags;
-- (void)setSelectedTags:(NSMutableArray*)otherTags;
+- (PASelectedTags*)selectedTags;
+- (void)setSelectedTags:(PASelectedTags*)otherTags;
 - (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i;
 - (void)removeObjectFromSelectedTagsAtIndex:(unsigned int)i;
 

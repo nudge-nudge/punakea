@@ -14,7 +14,7 @@
 	IBOutlet NSArrayController *fileController;
 	IBOutlet NSArrayController *popularTagsController;
 	
-	NSMutableArray *currentCompleteTagsInField; /**< holds the relevant tags of tagField (as a copy) */
+	PASelectedTags *currentCompleteTagsInField; /**< holds the relevant tags of tagField (as a copy) */
 
 	PATags *tags; /**< reference to all tags (same as in controller) */
 	
@@ -33,7 +33,7 @@ adds new files to the fileController
  */
 - (void)addFiles:(NSMutableArray*)newFiles;
 
-- (NSMutableArray*)currentCompleteTagsInField;
-- (void)setCurrentCompleteTagsInField:(NSMutableArray*)newTags;
+- (PASelectedTags*)currentCompleteTagsInField;
+- (void)setCurrentCompleteTagsInField:(PASelectedTags*)newTags;
 
 @end

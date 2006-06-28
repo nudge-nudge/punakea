@@ -72,6 +72,28 @@
 	[self setSelectedTags:[NSMutableArray array]];
 }
 
+- (void)addObjectsFromArray:(NSArray*)array 
+{
+	NSEnumerator *e;
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		[self addTag:tag];
+	}
+}
+
+- (void)removeObjectsInArray:(NSArray*)array
+{
+	NSEnumerator *e;
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		[self removeTag:tag];
+	}
+}
+
 - (NSEnumerator*)objectEnumerator
 {
 	return [selectedTags objectEnumerator];

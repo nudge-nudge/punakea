@@ -24,7 +24,7 @@ use this init if you want an encapsulated way to get related tags for the
  @param otherTags all tags
  @param otherSelectedTags tags for which to find related tags
  */
-- (id)initWithTags:(PATags*)otherTags selectedTags:(NSMutableArray*)otherSelectedTags 
+- (id)initWithTags:(PATags*)otherTags selectedTags:(PASelectedTags*)otherSelectedTags 
 {
 	if (self = [super init])
 	{

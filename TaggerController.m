@@ -36,7 +36,7 @@ resets the tagger window (called when window is closed)
 	{
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:newTags];
 		tags = newTags;
-		currentCompleteTagsInField = [[NSMutableArray alloc] init];
+		currentCompleteTagsInField = [[PASelectedTags alloc] init];
 		
 		// create sort descriptor
 		NSSortDescriptor *popularDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO];
@@ -81,12 +81,12 @@ resets the tagger window (called when window is closed)
 	[fileController addObjects:newFiles];
 }
 
-- (NSMutableArray*)currentCompleteTagsInField
+- (PASelectedTags*)currentCompleteTagsInField
 {
 	return currentCompleteTagsInField;
 }
 
-- (void)setCurrentCompleteTagsInField:(NSMutableArray*)newTags
+- (void)setCurrentCompleteTagsInField:(PASelectedTags*)newTags
 {
 	[newTags retain];
 	[currentCompleteTagsInField release];
@@ -266,7 +266,7 @@ completionsForSubstring:(NSString *)substring
 	[fileController removeObjects:[fileController arrangedObjects]];
 	
 	// tagField - cascades to currentCompleteTagsInField
-	[self setCurrentCompleteTagsInField:[NSMutableArray array]];
+	[self setCurrentCompleteTagsInField:[[PASelectedTags alloc] init]];
 	
 	// relatedTags
 	[relatedTags removeAllObjectsFromRelatedTags];
