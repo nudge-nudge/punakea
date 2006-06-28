@@ -37,7 +37,7 @@
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
 		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
-		relatedTags = [[PARelatedTags alloc] initWithTags:tags selectedTags:[NSMutableArray array]];
+		relatedTags = [[PARelatedTags alloc] initWithTags:tags query:_query];
 		
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:tags];
 	}
@@ -297,7 +297,7 @@
 	//the query is only started, if there are any tags to look for
 	if ([selectedTags count] > 0)
 	{
-		[_query setTags:[selectedTags selectedTags]];
+		[_query setTags:selectedTags];
 		[_query startQuery];
 	}
 	else 
@@ -351,6 +351,7 @@
 	}
 }
 
+/*
 - (NSView*)viewFromNibWithName:(NSString*)nibName
 {
     NSView * 		newView;
@@ -362,5 +363,6 @@
     newView = [subViewController view];
     return newView;
 }
+*/
 
 @end

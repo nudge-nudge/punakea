@@ -27,7 +27,7 @@ use either initWithTags: selectedTags and set the selectedTags when needed (used
 	PATags *tags; /**<all tags*/
 }
 
-- (id)initWithTags:(PATags*)otherTags selectedTags:(NSMutableArray*)otherSelectedTags;
+- (id)initWithTags:(PATags*)otherTags selectedTags:(PASelectedTags*)otherSelectedTags;
 - (id)initWithTags:(PATags*)otherTags query:(PAQuery*)aQuery;
 
 - (void)setQuery:(PAQuery*)aQuery;
@@ -37,12 +37,9 @@ use either initWithTags: selectedTags and set the selectedTags when needed (used
 - (void)setRelatedTags:(NSMutableArray*)otherTags;
 - (void)insertObject:(PATag *)tag inRelatedTagsAtIndex:(unsigned int)i;
 - (void)removeObjectFromRelatedTagsAtIndex:(unsigned int)i;
-
-- (void)removeAllObjectsFromRelatedTags;
+- (void)removeAllObjects;
 
 - (PASelectedTags*)selectedTags;
 - (void)setSelectedTags:(PASelectedTags*)otherTags;
-- (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i;
-- (void)removeObjectFromSelectedTagsAtIndex:(unsigned int)i;
 
 @end

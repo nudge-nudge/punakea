@@ -14,9 +14,14 @@
 #pragma mark init + dealloc
 - (id)init
 {
+	return [self initWithTags:[NSMutableArray array]];
+}
+
+- (id)initWithTags:(NSArray*)tags
+{
 	if (self = [super init])
 	{
-		[self setSelectedTags:[[NSMutableArray alloc] init]];
+		[self setSelectedTags:[tags mutableCopy]];
 	}
 	return self;
 }

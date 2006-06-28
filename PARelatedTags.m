@@ -109,35 +109,21 @@ use this init if you want performance, it uses a query passed from the outside
 	[relatedTags removeObjectAtIndex:i];
 }
 
-- (void)removeAllObjectsFromRelatedTags
+- (void)removeAllObjects
 {
 	[self setRelatedTags:[NSMutableArray array]];
 }
 
-- (NSMutableArray*)selectedTags
+- (PASelectedTags*)selectedTags
 {
 	return selectedTags;
 }
 
-- (void)setSelectedTags:(NSMutableArray*)otherTags
+- (void)setSelectedTags:(PASelectedTags*)otherTags
 {
 	[otherTags retain];
 	[selectedTags release];
 	selectedTags = otherTags;
-	
-	[query setTags:selectedTags];
-}
-
-- (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i
-{
-	[selectedTags insertObject:tag atIndex:i];
-	
-	[query setTags:selectedTags];
-}
-
-- (void)removeObjectFromSelectedTagsAtIndex:(unsigned int)i
-{
-	[selectedTags removeObjectAtIndex:i];
 	
 	[query setTags:selectedTags];
 }

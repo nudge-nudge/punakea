@@ -13,6 +13,8 @@
 	NSMutableArray *selectedTags;
 }
 
+- (id)initWithTags:(NSArray*)tags;
+
 - (NSMutableArray*)selectedTags;
 - (void)setSelectedTags:(NSMutableArray*)otherTags;
 - (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i;

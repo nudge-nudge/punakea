@@ -30,10 +30,10 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 #pragma mark Init + Dealloc
 - (id)init
 {
-	return [self initWithTags:[NSMutableArray array]];
+	return [self initWithTags:[[PASelectedTags alloc] init]];
 }
 
-- (id)initWithTags:(NSMutableArray*)otherTags
+- (id)initWithTags:(PASelectedTags*)otherTags
 {
 	if (self = [super init])
 	{
@@ -238,12 +238,12 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	[mdquery setSortDescriptors:descriptors];
 }
 
-- (NSMutableArray*)tags
+- (PASelectedTags*)tags
 {
 	return tags;
 }
 
-- (void)setTags:(NSMutableArray*)otherTags
+- (void)setTags:(PASelectedTags*)otherTags
 {
 	[otherTags retain];
 	[tags release];

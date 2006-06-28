@@ -232,7 +232,7 @@ completionsForSubstring:(NSString *)substring
 	}	
 	
 	[tagField setObjectValue:tagsOnAllFiles];
-	[self setCurrentCompleteTagsInField:tagsOnAllFiles];
+	[self setCurrentCompleteTagsInField:[[PASelectedTags alloc] initWithTags:tagsOnAllFiles]];
 	
 	[self displayRestTags:tagsOnSomeFiles];
 }
@@ -269,6 +269,6 @@ completionsForSubstring:(NSString *)substring
 	[self setCurrentCompleteTagsInField:[[PASelectedTags alloc] init]];
 	
 	// relatedTags
-	[relatedTags removeAllObjectsFromRelatedTags];
+	[relatedTags removeAllObjects];
 }
 @end

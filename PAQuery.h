@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
+#import "PASelectedTags.h"
 
 
 /** Posted when the receiver begins with the initial result-gathering phase of the query. */
@@ -45,10 +46,10 @@ wrapper for NSMetadataQuery. searching for tags, no predicate needed
 initializer
  @param otherTags tags to search for
  */
-- (id)initWithTags:(NSMutableArray*)otherTags;
+- (id)initWithTags:(PASelectedTags*)otherTags;
 
-- (NSMutableArray*)tags;
-- (void)setTags:(NSMutableArray*)otherTags;
+- (PASelectedTags*)tags;
+- (void)setTags:(PASelectedTags*)otherTags;
 - (void)insertObject:(PATag *)tag inTagsAtIndex:(unsigned int)i;
 - (void)removeObjectFromTagsAtIndex:(unsigned int)i;
 
