@@ -40,17 +40,4 @@ tags matching the prefix
  */
 - (NSMutableArray*)matchingTags;
 
-/**
-find all PATags which match the prefixString -
- this method should be used where really needed only,
- setting the prefix and querying matchingTags is the
- preferred method
- 
- TODO ! NOT IMPLEMENTED - DO WE NEED THIS?
- 
- @param prefix prefix to match
- @return array of PATags which match the prefix
- */
-- (NSArray*)tagsForPrefix:(NSString*)prefix;
-
 @end

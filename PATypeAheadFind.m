@@ -72,9 +72,4 @@
 	}
 }
 
-- (NSArray*)tagsForPrefix:(NSString*)prefix
-{
-	return [NSArray array];
-}
-
 @end

@@ -34,6 +34,9 @@
 	
 	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
 	PAQuery *_query;
+	
+	// buffer for user input (browser)
+	NSMutableString *buffer;
 }
 
 //saving and loading

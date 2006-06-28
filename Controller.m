@@ -40,12 +40,15 @@
 		relatedTags = [[PARelatedTags alloc] initWithTags:tags query:_query];
 		
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:tags];
+		
+		buffer = [[NSMutableString alloc] init];
 	}
     return self;
 }
 
 - (void)dealloc
 {
+	[buffer release];
 	[typeAheadFind release];
 	[relatedTags release];
     [_query release];
