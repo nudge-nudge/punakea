@@ -25,12 +25,22 @@
 }
 
 #pragma mark drawing
-/*
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	[self drawInteriorWithFrame:cellFrame inView:controlView];
+	/*
+	if ([self isHovered])
+	{
+		[[NSColor redColor] set];
+		[NSBezierPath fillRect:cellFrame];
+	}
+	else
+	{
+		[[NSColor whiteColor] set];
+		[NSBezierPath fillRect:cellFrame];
+	}
+	 */
+	[super drawInteriorWithFrame:cellFrame inView:controlView];
 }
-*/
 
 #pragma mark accessors
 - (PATag*)fileTag
@@ -52,6 +62,10 @@
 
 - (void)setHovered:(BOOL)flag
 {
+	if (isHovered != flag)
+	{
+		[[self controlView] setNeedsDisplay:YES];
+	}
 	isHovered = flag;
 }
 
@@ -59,11 +73,13 @@
 - (void)mouseEntered:(NSEvent *)event
 {
 	[self setHovered:YES];
+	NSLog(@"enter");
 }
 
 - (void)mouseExited:(NSEvent *)event
 {
 	[self setHovered:NO];
+	NSLog(@"exit");
 }
 
 @end

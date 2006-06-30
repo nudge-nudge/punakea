@@ -122,6 +122,7 @@ bound to visibleTags
 	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
 	NSControl *subview;
 	
+	
 	while (subview = [viewEnumerator nextObject])
 	{
 		[subview removeFromSuperviewWithoutNeedingDisplay];
