@@ -51,7 +51,6 @@
 		if (!(visibleTags == [tags tags]))
 		{
 			[self setVisibleTags:[tags tags]];
-			NSLog(@"called");
 		}
 	}
 		

@@ -122,7 +122,7 @@ bound to visibleTags
 	
 	while (subview = [viewEnumerator nextObject])
 	{
-		[subview removeFromSuperview];
+		[subview removeFromSuperviewWithoutNeedingDisplay];
 	}
 	
 	NSEnumerator *e = [displayTags objectEnumerator];
@@ -135,6 +135,8 @@ bound to visibleTags
 		NSPoint origin = [self nextPointForTagButton:tagButton inRect:(NSRect)rect];
 		[tagButton setFrameOrigin:origin];
 		[self addSubview:tagButton];
+		
+		// needs to be set after adding as subview
 		[[tagButton cell] setShowsBorderOnlyWhileMouseInside:YES];
 	}
 }

@@ -46,13 +46,14 @@
 - (void)setName:(NSString*)aName 
 {
 	[super setName:aName];
-	
+
 	[self setQuery:[NSString stringWithFormat:@"kMDItemKeywords = '%@'",aName]];
 }
 
 // implementing needed super-class methods
 - (float)absoluteRating
 {
+	//TODO improve on this
 	return  (clickCount + useCount);
 }
 

@@ -17,7 +17,7 @@ designated initializer
 	{
 		[self setCell:[[PATagButtonCell alloc] initWithTag:tag attributes:attributes]];
     }
-    return self;	
+    return self;
 }
 
 /**
@@ -28,6 +28,7 @@ should be overridden according to apple docs
     return [PATagButtonCell class];
 }
 
+#pragma mark functionality
 - (PATag*)fileTag
 {
 	return [[self cell] fileTag];

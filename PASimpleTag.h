@@ -12,7 +12,7 @@
 
 @interface PASimpleTag : PATag
 {
-
+	
 }
 
 @end
