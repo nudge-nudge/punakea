@@ -17,15 +17,20 @@
 		
 		//looks
 		[self setBordered:NO];
+		
+		//state
+		[self setHovered:NO];
 	}
 	return self;
 }
 
 #pragma mark drawing
+/*
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	[self drawInteriorWithFrame:cellFrame inView:controlView];
 }
+*/
 
 #pragma mark accessors
 - (PATag*)fileTag
@@ -40,14 +45,25 @@
 	fileTag = aTag;
 }
 
+- (BOOL)isHovered
+{
+	return isHovered;
+}
+
+- (void)setHovered:(BOOL)flag
+{
+	isHovered = flag;
+}
+
 #pragma mark highlighting
 - (void)mouseEntered:(NSEvent *)event
 {
-	//TODO nothing yet
+	[self setHovered:YES];
 }
 
 - (void)mouseExited:(NSEvent *)event
 {
-	//TODO nothing yet
+	[self setHovered:NO];
 }
+
 @end

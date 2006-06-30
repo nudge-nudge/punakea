@@ -102,6 +102,7 @@ bound to visibleTags
 - (void)drawRect:(NSRect)rect
 {	
 	NSRect bounds = [self bounds];
+	
 	//initial point, from here all other points are calculated
 	pointForNextTagRect = NSMakePoint(0,bounds.size.height);
 	
