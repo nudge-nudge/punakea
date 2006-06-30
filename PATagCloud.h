@@ -1,7 +1,7 @@
 /* PATagCloud */
 
 #import <Cocoa/Cocoa.h>
-#import "Controller.h"
+#import "PATagCloudController.h"
 #import "PATag.h"
 #import "PATagButton.h"
 

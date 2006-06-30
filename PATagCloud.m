@@ -101,17 +101,18 @@ bound to visibleTags
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect
 {	
+	NSRect bounds = [self bounds];
 	//initial point, from here all other points are calculated
-	pointForNextTagRect = NSMakePoint(0,rect.size.height);
+	pointForNextTagRect = NSMakePoint(0,bounds.size.height);
 	
 	//needed for drawing in rows
 	tagPosition = 0;
 	
 	//get the point for the very first tag
-	pointForNextTagRect = [self firstPointForNextLineIn:rect];
+	pointForNextTagRect = [self firstPointForNextLineIn:bounds];
 	
 	[self drawBackground];
-	[self drawTags:rect];
+	[self drawTags:bounds];
 }
 
 - (void)drawTags:(NSRect)rect
