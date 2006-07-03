@@ -62,6 +62,7 @@ bind to visibleTags
 
 - (void)dealloc
 {
+	[activeTag release];
 	[tagButtonDict release];
 	[super dealloc];
 }
@@ -239,4 +240,31 @@ bound to visibleTags
 	[self createButtonsForTags];
 }
 
+- (PATagButton*)activeTag
+{
+	return activeTag;
+}
+
+- (void)setActiveTag:(PATagButton*)aTag
+{
+	[aTag retain];
+	[activeTag release];
+	activeTag = aTag;
+}
+
+#pragma mark key event handling
+- (void)keyDown:(NSEvent*)event 
+{
+	// get the pressed key
+	NSLog(@"keyDown: %x", [[event characters] characterAtIndex:0]);
+	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
+	
+	if (key == NSRightArrowFunctionKey)
+	{
+		if (!activeTag)
+		{
+			//TODO
+		}
+	}
+}
 @end

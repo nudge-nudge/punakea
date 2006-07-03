@@ -27,7 +27,6 @@
 #pragma mark drawing
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	/*
 	if ([self isHovered])
 	{
 		[[NSColor redColor] set];
@@ -38,7 +37,6 @@
 		[[NSColor whiteColor] set];
 		[NSBezierPath fillRect:cellFrame];
 	}
-	 */
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
@@ -64,7 +62,7 @@
 {
 	if (isHovered != flag)
 	{
-		[[self controlView] setNeedsDisplay:YES];
+		//TODO
 	}
 	isHovered = flag;
 }

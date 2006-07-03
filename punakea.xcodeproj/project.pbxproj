@@ -526,6 +526,8 @@
 		48BDCECE09C4A1EE00A57165 /* TagCloud */ = {
 			isa = PBXGroup;
 			children = (
+				480FFF9909DACF0900C1E6BA /* PATagCloudController.h */,
+				480FFF9A09DACF0900C1E6BA /* PATagCloudController.m */,
 				48BDCEE409C4A4E300A57165 /* PATagCloud.h */,
 				48BDCEE509C4A4E300A57165 /* PATagCloud.m */,
 				4842FC0D09DA801500C4A931 /* PATagButton.h */,
@@ -695,8 +697,6 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				65E7B0690994D5AA00565251 /* Controller.h */,
 				65E7B06A0994D5AA00565251 /* Controller.m */,
-				480FFF9909DACF0900C1E6BA /* PATagCloudController.h */,
-				480FFF9A09DACF0900C1E6BA /* PATagCloudController.m */,
 				65E7B43C0994E3D000565251 /* SubViewController.h */,
 				65E7B43D0994E3D000565251 /* SubViewController.m */,
 				48D81DAB09F79C1C0075EE44 /* TaggerController.h */,

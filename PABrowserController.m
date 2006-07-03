@@ -18,7 +18,7 @@
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	
 	// create character set for testing
-	NSCharacterSet *charSet = [NSCharacterSet alphanumericCharacterSet];
+	NSCharacterSet *alphanumericCharacterSet = [NSCharacterSet alphanumericCharacterSet];
 	
 	if (key == NSDeleteCharacter) 
 	{
@@ -33,7 +33,9 @@
 		{
 			[selectedTags removeObjectFromSelectedTagsAtIndex:[selectedTags count]-1];
 		}
-	} else if ([charSet characterIsMember:key]) {
+	}
+	else if ([alphanumericCharacterSet characterIsMember:key]) 
+	{
 		// TODO check if it is ok to append event instead of key
 		[buffer appendString:[event charactersIgnoringModifiers]];
 	}
