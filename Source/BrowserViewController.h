@@ -33,7 +33,7 @@
 	NSMutableString *buffer;
 }
 
-- (id)initWithNibName:(NSString*)nibName core:aCore;
+- (id)initWithNibName:(NSString*)nibName tags:allTags;
 
 // events
 - (void)keyDown:(NSEvent *)event;

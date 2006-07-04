@@ -22,12 +22,11 @@
 	[defaults registerDefaults:appDefaults];
 }
 
-- (id) init
+- (id)init
 {
     if (self = [super init])
     {
 		tags = [[PATags alloc] init];
-		
 		simpleTagFactory = [[PASimpleTagFactory alloc] init];
 
 		[self loadDataFromDisk];
@@ -163,19 +162,5 @@
 	
 	[tagger renameTag:fromTag toTag:toTag onFiles:files];
 }
-		
-/*
-- (NSView*)viewFromNibWithName:(NSString*)nibName
-{
-    NSView * 		newView;
-    SubViewController *	subViewController;
-    
-    subViewController = [SubViewController alloc];
-    // Creates an instance of SubViewController which loads the specified nib.
-    [subViewController initWithNibName:nibName andOwner:self];
-    newView = [subViewController view];
-    return newView;
-}
-*/
 
 @end

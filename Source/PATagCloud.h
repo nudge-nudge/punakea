@@ -10,7 +10,7 @@ displays all visibleTags in a nice tag cloud view
  */
 @interface PATagCloud : NSView
 {
-	IBOutlet BrowserViewController *browserViewController; /**< main controller */
+	IBOutlet BrowserViewController *browserViewController; /**< controller, holding tags and stuff */
 
 	NSMutableDictionary *tagButtonDict; /**< holds the current controls in the view */
 	NSArray *displayTags; /**< holds all the tags to be displayed */

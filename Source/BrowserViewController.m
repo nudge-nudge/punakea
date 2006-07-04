@@ -27,33 +27,26 @@
 		
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:tags];
 		
-		buffer = [[NSMutableString alloc] init];	
+		buffer = [[NSMutableString alloc] init];
+		
+		[selectedTags addObserver:self
+					   forKeyPath:@"selectedTags"
+						  options:0
+						  context:NULL];
+		
+		[relatedTags addObserver:self
+					  forKeyPath:@"relatedTags"
+						 options:0
+						 context:NULL];
+		
+		[tags addObserver:self
+			   forKeyPath:@"tags"
+				  options:0
+				  context:NULL];
+		
+		[self setVisibleTags:[tags tags]];
 	}
 	return self;
-}
-
-- (void)awakeFromNib
-{
-	//TODO
-	//[outlineView setQuery:_query];
-
-	//register as an observer to changes in selectedTags and more
-	[selectedTags addObserver:self
-				   forKeyPath:@"selectedTags"
-					  options:0
-					  context:NULL];
-
-	[relatedTags addObserver:self
-				  forKeyPath:@"relatedTags"
-					 options:0
-					 context:NULL];
-
-	[tags addObserver:self
-		   forKeyPath:@"tags"
-			  options:0
-			  context:NULL];
-	
-	[self setVisibleTags:[tags tags]];
 }
 
 - (void)dealloc
