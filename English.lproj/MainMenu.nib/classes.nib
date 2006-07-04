@@ -1,12 +1,6 @@
 {
     IBClasses = (
-        {
-            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
-            CLASS = Controller; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {drawer = id; outlineView = PAResultsOutlineView; }; 
-            SUPERCLASS = NSWindowController; 
-        }, 
+        {CLASS = Core; LANGUAGE = ObjC; SUPERCLASS = NSWindowController; }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 

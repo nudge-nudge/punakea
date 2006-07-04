@@ -49,6 +49,8 @@
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
+		48D1719A0A5A802D006C667B /* PASubViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D171980A5A802D006C667B /* PASubViewController.h */; };
+		48D1719B0A5A802D006C667B /* PASubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D171990A5A802D006C667B /* PASubViewController.m */; };
 		48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66A5D09CB3752007B6B1D /* PASimpleTag.h */; };
 		48D66A6009CB3752007B6B1D /* PASimpleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66A5E09CB3752007B6B1D /* PASimpleTag.m */; };
 		48D66AFD09CB4C5A007B6B1D /* PATagFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */; };
@@ -192,6 +194,7 @@
 				48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */,
 				4856C6740A516D8300E1D568 /* BrowserViewController.h in CopyFiles */,
 				48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */,
+				48D1719A0A5A802D006C667B /* PASubViewController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,9 +251,9 @@
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		48D16FED0A5A6468006C667B /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
 		48D16FEE0A5A6468006C667B /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
-		48D170510A5A68AD006C667B /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
-		48D170540A5A6926006C667B /* ontroller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ontroller.h; sourceTree = "<group>"; };
+		48D171980A5A802D006C667B /* PASubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASubViewController.h; sourceTree = "<group>"; };
+		48D171990A5A802D006C667B /* PASubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASubViewController.m; sourceTree = "<group>"; };
 		48D66A5D09CB3752007B6B1D /* PASimpleTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleTag.h; sourceTree = "<group>"; };
 		48D66A5E09CB3752007B6B1D /* PASimpleTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleTag.m; sourceTree = "<group>"; };
 		48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagFactory.h; sourceTree = "<group>"; };
@@ -473,6 +476,8 @@
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				65035FB70A20762F00AD0597 /* Query */,
+				48D171980A5A802D006C667B /* PASubViewController.h */,
+				48D171990A5A802D006C667B /* PASubViewController.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -605,8 +610,6 @@
 			isa = PBXGroup;
 			children = (
 				29B97316FDCFA39411CA2CEA /* main.m */,
-				48D170510A5A68AD006C667B /* Controller.h */,
-				48D170540A5A6926006C667B /* ontroller.h */,
 				48D170520A5A68BA006C667B /* Core.h */,
 				65E7B06A0994D5AA00565251 /* Core.m */,
 				65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */,
@@ -859,6 +862,7 @@
 				48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */,
 				4856C6750A516D8300E1D568 /* BrowserViewController.m in Sources */,
 				48D16FF00A5A6468006C667B /* BrowserController.m in Sources */,
+				48D1719B0A5A802D006C667B /* PASubViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

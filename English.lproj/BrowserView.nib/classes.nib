@@ -1,6 +1,5 @@
 {
     IBClasses = (
-        {CLASS = BrowserController; LANGUAGE = ObjC; SUPERCLASS = NSWindowController; }, 
         {
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = BrowserViewController; 
@@ -15,7 +14,6 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {
@@ -33,7 +31,7 @@
         {
             CLASS = PATagCloud; 
             LANGUAGE = ObjC; 
-            OUTLETS = {controller = Controller; }; 
+            OUTLETS = {browserViewController = BrowserViewController; }; 
             SUPERCLASS = NSView; 
         }, 
         {
