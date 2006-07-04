@@ -22,8 +22,8 @@
 		4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC1209DA804100C4A931 /* PATagButtonCell.m */; };
 		48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48471FD90A4FFF90002B369A /* SidebarController.h */; };
 		48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48471FDA0A4FFF90002B369A /* SidebarController.m */; };
-		4856C6740A516D8300E1D568 /* PABrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C6720A516D8300E1D568 /* PABrowserController.h */; };
-		4856C6750A516D8300E1D568 /* PABrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C6730A516D8300E1D568 /* PABrowserController.m */; };
+		4856C6740A516D8300E1D568 /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C6720A516D8300E1D568 /* BrowserController.h */; };
+		4856C6750A516D8300E1D568 /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C6730A516D8300E1D568 /* BrowserController.m */; };
 		485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA54B09F4EC38008D3214 /* PASelectedTags.h */; };
 		485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA54C09F4EC38008D3214 /* PASelectedTags.m */; };
 		485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA55309F4ECBC008D3214 /* PATags.h */; };
@@ -187,7 +187,7 @@
 				4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */,
 				4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */,
 				48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */,
-				4856C6740A516D8300E1D568 /* PABrowserController.h in CopyFiles */,
+				4856C6740A516D8300E1D568 /* BrowserController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,8 +217,8 @@
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
 		48471FD90A4FFF90002B369A /* SidebarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarController.h; sourceTree = "<group>"; };
 		48471FDA0A4FFF90002B369A /* SidebarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarController.m; sourceTree = "<group>"; };
-		4856C6720A516D8300E1D568 /* PABrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserController.h; sourceTree = "<group>"; };
-		4856C6730A516D8300E1D568 /* PABrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserController.m; sourceTree = "<group>"; };
+		4856C6720A516D8300E1D568 /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
+		4856C6730A516D8300E1D568 /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		485DA54B09F4EC38008D3214 /* PASelectedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTags.h; sourceTree = "<group>"; };
 		485DA54C09F4EC38008D3214 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
 		485DA55309F4ECBC008D3214 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
@@ -440,8 +440,8 @@
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
 				489AE71309DD4D7800EB60EB /* SelectedTagsView */,
 				6588132C09DDCA7300428B83 /* ResultsView */,
-				4856C6720A516D8300E1D568 /* PABrowserController.h */,
-				4856C6730A516D8300E1D568 /* PABrowserController.m */,
+				4856C6720A516D8300E1D568 /* BrowserController.h */,
+				4856C6730A516D8300E1D568 /* BrowserController.m */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -842,7 +842,7 @@
 				4870213C0A4FC1EC00CD5E75 /* PASidebarWindow.m in Sources */,
 				4840AC400A4FFEE50046484E /* PASidebarContentView.m in Sources */,
 				48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */,
-				4856C6750A516D8300E1D568 /* PABrowserController.m in Sources */,
+				4856C6750A516D8300E1D568 /* BrowserController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

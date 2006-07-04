@@ -1,14 +1,14 @@
 //
-//  PABrowserController.m
+//  BrowserController.m
 //  punakea
 //
 //  Created by Johannes Hoffart on 27.06.06.
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "PABrowserController.h"
+#import "BrowserController.h"
 
-@implementation PABrowserController
+@implementation BrowserController
 
 #pragma mark init + dealloc
 - (id)initWithWindowNibName:(NSString*)windowNibName mainController:aController
