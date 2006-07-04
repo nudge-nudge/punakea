@@ -1,5 +1,5 @@
 //
-//  BrowserController.h
+//  BrowserViewController.h
 //  punakea
 //
 //  Created by Johannes Hoffart on 27.06.06.
@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Controller.h"
 
-@interface BrowserController : NSWindowController {
+@interface BrowserViewController : NSWindowController {
 	Controller *contoller;
 	
 	PARelatedTags *relatedTags;

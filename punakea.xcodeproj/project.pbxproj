@@ -22,8 +22,8 @@
 		4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC1209DA804100C4A931 /* PATagButtonCell.m */; };
 		48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48471FD90A4FFF90002B369A /* SidebarController.h */; };
 		48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48471FDA0A4FFF90002B369A /* SidebarController.m */; };
-		4856C6740A516D8300E1D568 /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C6720A516D8300E1D568 /* BrowserController.h */; };
-		4856C6750A516D8300E1D568 /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C6730A516D8300E1D568 /* BrowserController.m */; };
+		4856C6740A516D8300E1D568 /* BrowserViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C6720A516D8300E1D568 /* BrowserViewController.h */; };
+		4856C6750A516D8300E1D568 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C6730A516D8300E1D568 /* BrowserViewController.m */; };
 		485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA54B09F4EC38008D3214 /* PASelectedTags.h */; };
 		485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA54C09F4EC38008D3214 /* PASelectedTags.m */; };
 		485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA55309F4ECBC008D3214 /* PATags.h */; };
@@ -36,6 +36,7 @@
 		4870213C0A4FC1EC00CD5E75 /* PASidebarWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */; };
 		4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */; };
 		4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */ = {isa = PBXBuildFile; fileRef = 4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */; };
+		4871792F0A5A619900A988DE /* BrowserView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4871792D0A5A619900A988DE /* BrowserView.nib */; };
 		488E18BD0A27231F009D2826 /* PASidebarTagCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488E18BB0A27231F009D2826 /* PASidebarTagCell.h */; };
 		488E18BE0A27231F009D2826 /* PASidebarTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E18BC0A27231F009D2826 /* PASidebarTagCell.m */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
@@ -187,7 +188,7 @@
 				4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */,
 				4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */,
 				48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */,
-				4856C6740A516D8300E1D568 /* BrowserController.h in CopyFiles */,
+				4856C6740A516D8300E1D568 /* BrowserViewController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,8 +218,8 @@
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
 		48471FD90A4FFF90002B369A /* SidebarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarController.h; sourceTree = "<group>"; };
 		48471FDA0A4FFF90002B369A /* SidebarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarController.m; sourceTree = "<group>"; };
-		4856C6720A516D8300E1D568 /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
-		4856C6730A516D8300E1D568 /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
+		4856C6720A516D8300E1D568 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
+		4856C6730A516D8300E1D568 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
 		485DA54B09F4EC38008D3214 /* PASelectedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTags.h; sourceTree = "<group>"; };
 		485DA54C09F4EC38008D3214 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
 		485DA55309F4ECBC008D3214 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
@@ -231,6 +232,7 @@
 		4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarWindow.m; sourceTree = "<group>"; };
 		4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadFind.h; sourceTree = "<group>"; };
 		4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadFind.m; sourceTree = "<group>"; };
+		4871792E0A5A619900A988DE /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/BrowserView.nib; sourceTree = "<group>"; };
 		488E18BB0A27231F009D2826 /* PASidebarTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTagCell.h; sourceTree = "<group>"; };
 		488E18BC0A27231F009D2826 /* PASidebarTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTagCell.m; sourceTree = "<group>"; };
 		489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagsView.h; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */,
 				65E7B01E0994D0AE00565251 /* Sidebar.nib */,
 				653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */,
+				4871792D0A5A619900A988DE /* BrowserView.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -440,8 +443,8 @@
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
 				489AE71309DD4D7800EB60EB /* SelectedTagsView */,
 				6588132C09DDCA7300428B83 /* ResultsView */,
-				4856C6720A516D8300E1D568 /* BrowserController.h */,
-				4856C6730A516D8300E1D568 /* BrowserController.m */,
+				4856C6720A516D8300E1D568 /* BrowserViewController.h */,
+				4856C6730A516D8300E1D568 /* BrowserViewController.m */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				655563A40A50672A0050104E /* stop.tif in Resources */,
 				481634140A5A48A1003B8EE4 /* Tagger.nib in Resources */,
 				4816341B0A5A4EEB003B8EE4 /* Browser.nib in Resources */,
+				4871792F0A5A619900A988DE /* BrowserView.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,7 +846,7 @@
 				4870213C0A4FC1EC00CD5E75 /* PASidebarWindow.m in Sources */,
 				4840AC400A4FFEE50046484E /* PASidebarContentView.m in Sources */,
 				48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */,
-				4856C6750A516D8300E1D568 /* BrowserController.m in Sources */,
+				4856C6750A516D8300E1D568 /* BrowserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -871,6 +875,14 @@
 				481634160A5A4EEB003B8EE4 /* English */,
 			);
 			name = Browser.nib;
+			sourceTree = "<group>";
+		};
+		4871792D0A5A619900A988DE /* BrowserView.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4871792E0A5A619900A988DE /* English */,
+			);
+			name = BrowserView.nib;
 			sourceTree = "<group>";
 		};
 		653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */ = {
