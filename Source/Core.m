@@ -96,7 +96,7 @@
 {
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
-	[rootObject setValue:[tagger tags] forKey:@"tags"];
+	[rootObject setValue:[[tagger tags] tags] forKey:@"tags"];
 	
 	NSMutableData *data = [NSMutableData data];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];

@@ -21,7 +21,7 @@
 {
 	if (self = [super init])
 	{
-		allTags = [tags retain];
+		allTags = [[PATagger sharedInstance] tags];
 		matchingTags = [[NSMutableArray alloc] init];
 	}
 	return self;

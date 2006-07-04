@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PATagger.h"
 #import "PATags.h"
 
 /**
@@ -18,8 +19,6 @@ simple type ahead find implementation, not the quickest, but works
 	NSString *prefix;
 	NSMutableArray *matchingTags; /**< all tags matching the current prefix */
 }
-
-- (id)initWithTags:(PATags*)tags;
 
 /**
 returns the prefix
