@@ -7,12 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Controller.h"
+#import "BrowserViewController.h"
 
 /**
 controller for the tagCloud
  */
-@interface Controller (PATagCloudController)
+@interface BrowserViewController (PATagCloudController)
 
 /**
 is called when a tag is clicked. increments the tag click count and

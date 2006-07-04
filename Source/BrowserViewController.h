@@ -9,7 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "Controller.h"
 
-@interface BrowserViewController : NSWindowController {
+@interface BrowserViewController : NSObject {
+	IBOutlet NSView *view;
+	
 	Controller *contoller;
 	
 	PARelatedTags *relatedTags;

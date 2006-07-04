@@ -5,11 +5,11 @@
 #import "PARelatedTags.h"
 #import "PASelectedTags.h"
 #import "PASimpleTagFactory.h"
-#import "SubViewController.h"
 #import "PATagger.h"
 #import "PAResultsOutlineView.h"
 #import "PATypeAheadFind.h"
 #import "PAQuery.h"
+#import "BrowserController.h"
 
 @interface Controller : NSWindowController
 {

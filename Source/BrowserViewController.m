@@ -11,7 +11,7 @@
 @implementation BrowserViewController
 
 #pragma mark init + dealloc
-- (id)initWithWindowNibName:(NSString*)windowNibName mainController:aController
+- (id)initWithMainController:aController
 {
 	if (self = [super init])
 	{
@@ -254,6 +254,18 @@
 	}
 		
 	NSLog(@"%@",buffer);
+}
+
+#pragma mark Temp
+- (void)setGroupingAttributes:(id)sender;
+{
+	NSSegmentedControl *sc = sender;
+	if([sc selectedSegment] == 0) {
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
+	}
+	if([sc selectedSegment] == 1) {
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:nil]];
+	}
 }
 
 @end

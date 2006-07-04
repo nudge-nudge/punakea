@@ -1,5 +1,6 @@
 {
     IBClasses = (
+        {CLASS = BrowserController; LANGUAGE = ObjC; SUPERCLASS = NSWindowController; }, 
         {
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = Controller; 

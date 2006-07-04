@@ -44,14 +44,12 @@
 
 - (void)awakeFromNib
 {
-	[NSApp setDelegate: self]; 
+	[NSApp setDelegate:self]; 
 	[self setupToolbar];
 	
-	/* // Drawer
-	sidebarNibView = [[self viewFromNibWithName:@"Sidebar"] retain];
-	[drawer setContentView:sidebarNibView];
-	[drawer toggle:self];
-	*/
+	BrowserController *browserController = [[BrowserController alloc] initWithWindowNibName:@"Browser" mainController:self];
+	NSWindow *browserWindow = [browserController window];
+	[browserWindow makeKeyAndOrderFront:nil];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)note 
@@ -165,18 +163,6 @@
 	[tagger renameTag:fromTag toTag:toTag onFiles:files];
 }
 		
-#pragma mark Temp
-- (void)setGroupingAttributes:(id)sender;
-{
-	NSSegmentedControl *sc = sender;
-	if([sc selectedSegment] == 0) {
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
-	}
-	if([sc selectedSegment] == 1) {
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:nil]];
-	}
-}
-
 /*
 - (NSView*)viewFromNibWithName:(NSString*)nibName
 {

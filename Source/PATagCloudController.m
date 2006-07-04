@@ -8,7 +8,7 @@
 
 #import "PATagCloudController.h"
 
-@implementation Controller (PATagCloudController)
+@implementation BrowserViewController (PATagCloudController)
 
 - (IBAction)tagButtonClicked:(id)sender
 {
