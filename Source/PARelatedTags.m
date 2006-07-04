@@ -21,17 +21,18 @@
 /**
 use this init if you want an encapsulated way to get related tags for the
  given selected tags
- @param otherTags all tags
  @param otherSelectedTags tags for which to find related tags
  */
-- (id)initWithTags:(PATags*)otherTags selectedTags:(PASelectedTags*)otherSelectedTags 
+- (id)initWithSelectedTags:(PASelectedTags*)otherSelectedTags 
 {
 	if (self = [super init])
 	{
+		tagger = [PATagger sharedInstance];
+		tags = [tagger tags];
+		
 		[self setRelatedTags:[[NSMutableArray alloc] init]];
 	
 		[self setSelectedTags:otherSelectedTags];
-		[self setTags:otherTags];
 	
 		//create appropriate query
 		query = [[PAQuery alloc] initWithTags:otherSelectedTags];
@@ -44,10 +45,9 @@ use this init if you want an encapsulated way to get related tags for the
 /**
 use this init if you want performance, it uses a query passed from the outside
  (i.e. from the browser)
- @param aQuery find related tags to the query result
  @param otherTags all tags
  */
-- (id)initWithTags:(PATags*)otherTags query:(PAQuery*)aQuery;
+- (id)initWithQuery:(PAQuery*)aQuery;
 {
 	if (self = [super init])
 	{
@@ -57,15 +57,12 @@ use this init if you want performance, it uses a query passed from the outside
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
 		nf = [NSNotificationCenter defaultCenter];
 		[nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
-		
-		[self setTags:otherTags];
 	}
 	return self;
 }
 
 - (void)dealloc 
 {
-	[tags release];
 	[nf removeObserver:self];
 	[relatedTags release];
 	[query release];
@@ -78,13 +75,6 @@ use this init if you want performance, it uses a query passed from the outside
 	[aQuery retain];
 	[query release];
 	query = aQuery;
-}
-
-- (void)setTags:(PATags*)otherTags
-{
-	[otherTags retain];
-	[tags release];
-	tags = otherTags;
 }
 
 - (NSMutableArray*)relatedTags;
@@ -163,7 +153,7 @@ use this init if you want performance, it uses a query passed from the outside
 
 			while (j--) 
 			{
-				PATag *tag = [tags simpleTagForName:[keywords objectAtIndex:j]];
+				PATag *tag = [tagger simpleTagForName:[keywords objectAtIndex:j]];
 				
 				if (![relatedTags containsObject:tag])
 				{

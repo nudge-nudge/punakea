@@ -26,7 +26,7 @@
 {
     if (self = [super init])
     {
-		tags = [[PATags alloc] init];
+		tagger = [PATagger sharedInstance];
 		[self loadDataFromDisk];
 	}
     return self;
@@ -34,7 +34,6 @@
 
 - (void)dealloc
 {
-	[tags release];
     [super dealloc];
 }
 
@@ -43,9 +42,8 @@
 	[NSApp setDelegate:self]; 
 	[self setupToolbar];
 	
-	BrowserController *browserController = [[BrowserController alloc] initWithWindowNibName:@"Browser" tags:tags];
+	BrowserController *browserController = [[BrowserController alloc] initWithWindowNibName:@"Browser"];
 	NSWindow *browserWindow = [browserController window];
-	//[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	[browserWindow makeKeyAndOrderFront:nil];
 }
 
@@ -62,19 +60,6 @@
     [toolbar setAllowsUserCustomization:YES];
     [toolbar setAutosavesConfiguration:YES];
     [[self window] setToolbar:[toolbar autorelease]];
-}
-
-#pragma mark accessors
-- (PATags*)tags 
-{
-	return tags;
-}
-
-- (void)setTags:(PATags*)otherTags 
-{
-	[otherTags retain];
-	[tags release];
-	tags = otherTags;
 }
 
 #pragma mark loading and saving tags
@@ -111,7 +96,7 @@
 {
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
-	[rootObject setValue:[tags tags] forKey:@"tags"];
+	[rootObject setValue:[tagger tags] forKey:@"tags"];
 	
 	NSMutableData *data = [NSMutableData data];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -135,11 +120,11 @@
 	
 	if ([loadedTags count] == 0) 
 	{
-		[tags setTags:[[NSMutableArray alloc] init]];
+		[[tagger tags] setTags:[[NSMutableArray alloc] init]];
 	}
 	else 
 	{
-		[tags setTags:loadedTags];
+		[[tagger tags] setTags:loadedTags];
 	}
 }	
 

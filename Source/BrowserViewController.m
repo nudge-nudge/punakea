@@ -8,14 +8,24 @@
 
 #import "BrowserViewController.h"
 
+@interface BrowserViewController (PrivateAPI)
+
+- (void)selectedTagsHaveChanged;
+- (void)relatedTagsHaveChanged;
+- (void)allTagsHaveChanged;
+- (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
+
+@end
+
 @implementation BrowserViewController
 
 #pragma mark init + dealloc
-- (id)initWithNibName:(NSString*)nibName tags:allTags
+- (id)initWithNibName:(NSString*)nibName
 {
 	if (self = [super initWithNibName:nibName])
 	{
-		tags = allTags;
+		tagger = [PATagger sharedInstance];
+		tags = [tagger tags];
 		
 		selectedTags = [[PASelectedTags alloc] init];
 		
@@ -23,9 +33,9 @@
 		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
 		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
-		relatedTags = [[PARelatedTags alloc] initWithTags:tags query:_query];
+		relatedTags = [[PARelatedTags alloc] initWithQuery:_query];
 		
-		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:tags];
+		typeAheadFind = [[PATypeAheadFind alloc] init];
 		
 		buffer = [[NSMutableString alloc] init];
 		
@@ -40,9 +50,9 @@
 						 context:NULL];
 		
 		[tags addObserver:self
-			   forKeyPath:@"tags"
-				  options:0
-				  context:NULL];
+						forKeyPath:@"tags"
+						   options:0
+						   context:NULL];
 		
 		[self setVisibleTags:[tags tags]];
 	}

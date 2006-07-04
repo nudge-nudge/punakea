@@ -7,14 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATags.h"
 #import "BrowserViewController.h"
 
 @interface BrowserController : NSWindowController 
 {
-	PATags *tags;
-}
 
-- (id)initWithWindowNibName:(NSString*)windowNibName tags:allTags;
+}
 
 @end

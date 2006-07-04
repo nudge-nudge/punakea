@@ -8,10 +8,6 @@
 
 @interface Core : NSWindowController
 {
-	//model
-	PATags *tags; /**< holds all tags */
-
-	//controller
 	PATagger *tagger;
 }
 
@@ -20,9 +16,5 @@
 - (void)saveDataToDisk;
 - (void)loadDataFromDisk;
 - (void)applicationWillTerminate:(NSNotification *)note;
-
-//accessors
-- (PATags*)tags;
-- (void)setTags:(PATags*)otherTags;
 
 @end

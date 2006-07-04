@@ -11,18 +11,9 @@
 
 @implementation BrowserController
 
-- (id)initWithWindowNibName:(NSString*)windowNibName tags:allTags
-{
-	if (self = [super initWithWindowNibName:windowNibName])
-	{
-		tags = allTags;
-	}
-	return self;
-}
-
 - (void)awakeFromNib
 {
-	BrowserViewController *browserViewController = [[BrowserViewController alloc] initWithNibName:@"BrowserView" tags:tags];
+	BrowserViewController *browserViewController = [[BrowserViewController alloc] initWithNibName:@"BrowserView"];
 	[[self window] setContentView:[browserViewController view]];
 }
 

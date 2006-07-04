@@ -19,27 +19,29 @@ use either initWithTags: selectedTags and set the selectedTags when needed (used
  OR initWithTags: query: and pass a query from the outside (used by the browser)
  */
 @interface PARelatedTags : NSObject {
+	PATagger *tagger;
+	PATags *tags;
+	
 	NSMutableArray *relatedTags;
 
 	NSNotificationCenter *nf;
 	PAQuery *query;
 	PASelectedTags *selectedTags;
-	PATags *tags; /**<all tags*/
 }
 
-- (id)initWithTags:(PATags*)otherTags selectedTags:(PASelectedTags*)otherSelectedTags;
-- (id)initWithTags:(PATags*)otherTags query:(PAQuery*)aQuery;
+- (id)initWithSelectedTags:(PASelectedTags*)otherSelectedTags;
+- (id)initWithQuery:(PAQuery*)aQuery;
+
+
+- (PASelectedTags*)selectedTags;
+- (void)setSelectedTags:(PASelectedTags*)otherTags;
 
 - (void)setQuery:(PAQuery*)aQuery;
-- (void)setTags:(PATags*)otherTags;
 
 - (NSMutableArray*)relatedTags;
 - (void)setRelatedTags:(NSMutableArray*)otherTags;
 - (void)insertObject:(PATag *)tag inRelatedTagsAtIndex:(unsigned int)i;
 - (void)removeObjectFromRelatedTagsAtIndex:(unsigned int)i;
 - (void)removeAllObjects;
-
-- (PASelectedTags*)selectedTags;
-- (void)setSelectedTags:(PASelectedTags*)otherTags;
 
 @end

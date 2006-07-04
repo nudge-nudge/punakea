@@ -138,7 +138,7 @@ action called on dropping files to FileBox
 	// otherwise create new tagger window
 	else 
 	{
-		taggerController = [[TaggerController alloc] initWithWindowNibName:@"Tagger" tags:[core tags]];
+		taggerController = [[TaggerController alloc] initWithWindowNibName:@"Tagger"];
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 		NSWindow *taggerWindow = [taggerController window];
 		[taggerWindow makeKeyAndOrderFront:nil];

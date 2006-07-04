@@ -252,17 +252,4 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	[self updateQueryFromTags];
 }
 
-- (void)insertObject:(PATag *)tag inTagsAtIndex:(unsigned int)i
-{
-	[tags insertObject:tag atIndex:i];
-	
-	[self updateQueryFromTags];
-}
-
-- (void)removeObjectFromTagsAtIndex:(unsigned int)i
-{
-	[tags removeObjectAtIndex:i];
-	
-	[self updateQueryFromTags];
-}
 @end

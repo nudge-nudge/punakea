@@ -8,14 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 #import <CoreServices/CoreServices.h>
-#import "PASimpleTagFactory.h"
 #import "Matador.h"
+#import "PATags.h"
+#import "PASimpleTagFactory.h"
 
 /**
 singleton class for working with spotlight kMDItemKeywords
  */
 @interface PATagger : NSObject {
-	PASimpleTagFactory *tagFactory;
+	PASimpleTagFactory *simpleTagFactory;
+	PATags *tags;
 }
 
 /**
@@ -23,8 +25,6 @@ get the singleton instance
  @return singleton instance of PATagger
  */
 + (PATagger*)sharedInstance;
-
-//TODO rename the addTag* methods
 
 /**
 adds a single tag to a file
@@ -82,5 +82,45 @@ get keywords as NSString array for file at path
  @return array with NSStrings corresponding to the kMDItemKeywords on the file
  */
 - (NSArray*)keywordsForFile:(NSString*)path;
+
+/**
+looks for the simple tag with the corresponding name -
+ if none exists, a new one is created and added
+ @param name the tag name
+ @return existing or newly created tag
+ */
+- (PASimpleTag*)simpleTagForName:(NSString*)name;
+
+/**
+gets simple tags for all passed names
+ @param names NSString array
+ @return NSArray containing simple tags
+ */
+- (NSArray*)simpleTagsForNames:(NSArray*)names;
+
+/**
+gets simple tags for file at path
+ @param path path to file
+ @return array of simple tags on file
+ */
+- (NSArray*)simpleTagsForFileAtPath:(NSString*)path;
+
+/**
+gets simple tags for all files at the paths
+ @param paths NSArray of NSStrings with file paths
+ @return array of simple tags on files
+ */
+- (NSArray*)simpleTagsForFilesAtPaths:(NSArray*)paths;
+
+/**
+gets tag names of simple tags for all files at the paths (with count)
+ @param paths NSArray of NSStrings with file paths
+ @return dict with simple tags (and occurrence count) of files at paths
+ */
+- (NSDictionary*)simpleTagNamesWithCountForFilesAtPaths:(NSArray*)paths;
+
+#pragma mark accessors
+- (PATags*)tags;
+- (void)setTags:(PATags*)allTags;
 
 @end

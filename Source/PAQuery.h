@@ -34,7 +34,7 @@ wrapper for NSMetadataQuery. searching for tags, no predicate needed
 	id delegate;
 	NSMetadataQuery *mdquery;
 	
-	NSMutableArray *tags;
+	PASelectedTags *tags;
 	
 	NSPredicate *predicate;
 	NSArray *groupingAttributes;
@@ -50,8 +50,6 @@ initializer
 
 - (PASelectedTags*)tags;
 - (void)setTags:(PASelectedTags*)otherTags;
-- (void)insertObject:(PATag *)tag inTagsAtIndex:(unsigned int)i;
-- (void)removeObjectFromTagsAtIndex:(unsigned int)i;
 
 //wrapper methods
 - (BOOL)startQuery;

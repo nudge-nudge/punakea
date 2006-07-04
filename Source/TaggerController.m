@@ -30,12 +30,13 @@ resets the tagger window (called when window is closed)
 @implementation TaggerController
 
 #pragma mark init + dealloc
-- (id)initWithWindowNibName:(NSString*)windowNibName tags:(PATags*)newTags
+- (id)initWithWindowNibName:(NSString*)windowNibName
 {
 	if (self = [super initWithWindowNibName:windowNibName])
 	{
-		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:newTags];
-		tags = newTags;
+		typeAheadFind = [[PATypeAheadFind alloc] init];
+		tagger = [PATagger sharedInstance];
+		tags = [tagger tags];
 		currentCompleteTagsInField = [[PASelectedTags alloc] init];
 		
 		// create sort descriptor
@@ -44,7 +45,7 @@ resets the tagger window (called when window is closed)
 		[popularDescriptor release];
 		
 		// related tags with no current selection
-		relatedTags = [[PARelatedTags alloc] initWithTags:tags selectedTags:[NSMutableArray array]];
+		relatedTags = [[PARelatedTags alloc] initWithSelectedTags:[NSMutableArray array]];
 	}
 	return self;
 }
@@ -60,7 +61,6 @@ resets the tagger window (called when window is closed)
 	[relatedTags release];
 	[popularTagsSortDescriptors release];
 	[currentCompleteTagsInField release];
-	[tags release];
 	[typeAheadFind release];
 	[super dealloc];
 }
@@ -164,7 +164,7 @@ completionsForSubstring:(NSString *)substring
 
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString
 {
-	return [tags simpleTagForName:editingString];
+	return [tagger simpleTagForName:editingString];
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
@@ -208,7 +208,7 @@ completionsForSubstring:(NSString *)substring
 
 - (IBAction)selectionHasChanged
 {
-	NSDictionary *tagDictionary = [tags simpleTagNamesWithCountForFilesAtPaths:[fileController selectedObjects]];
+	NSDictionary *tagDictionary = [tagger simpleTagNamesWithCountForFilesAtPaths:[fileController selectedObjects]];
 	int selectionCount = [[fileController selectedObjects] count];
 	
 	NSMutableArray *tagsOnAllFiles = [NSMutableArray array];
@@ -223,11 +223,11 @@ completionsForSubstring:(NSString *)substring
 		
 		if (count == selectionCount)
 		{
-			[tagsOnAllFiles addObject:[tags simpleTagForName:tagName]];
+			[tagsOnAllFiles addObject:[tagger simpleTagForName:tagName]];
 		}
 		else
 		{
-			[tagsOnSomeFiles addObject:[tags simpleTagForName:tagName]];
+			[tagsOnSomeFiles addObject:[tagger simpleTagForName:tagName]];
 		}
 	}	
 	

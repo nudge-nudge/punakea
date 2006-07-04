@@ -16,6 +16,7 @@
 	
 	PASelectedTags *currentCompleteTagsInField; /**< holds the relevant tags of tagField (as a copy) */
 
+	PATagger *tagger;
 	PATags *tags; /**< reference to all tags (same as in controller) */
 	
 	NSArray *popularTagsSortDescriptors;
@@ -25,7 +26,7 @@
 	PARelatedTags *relatedTags;
 }
 
-- (id)initWithWindowNibName:(NSString*)windowNibName tags:(PATags*)newTags;
+- (id)initWithWindowNibName:(NSString*)windowNibName;
 
 /**
 adds new files to the fileController
