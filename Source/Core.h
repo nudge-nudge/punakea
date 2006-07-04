@@ -13,7 +13,6 @@
 
 	//controller
 	PATagger *tagger;
-	PASimpleTagFactory *simpleTagFactory;
 }
 
 //saving and loading

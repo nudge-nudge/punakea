@@ -27,8 +27,6 @@
     if (self = [super init])
     {
 		tags = [[PATags alloc] init];
-		simpleTagFactory = [[PASimpleTagFactory alloc] init];
-
 		[self loadDataFromDisk];
 	}
     return self;
@@ -36,7 +34,6 @@
 
 - (void)dealloc
 {
-	[simpleTagFactory release];
 	[tags release];
     [super dealloc];
 }
