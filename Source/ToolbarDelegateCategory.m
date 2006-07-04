@@ -1,7 +1,7 @@
 #import "ToolbarDelegateCategory.h"
-#import "Controller.h"
+#import "Core.h"
 
-@implementation Controller (ToolbarDelegateCategory)
+@implementation Core (ToolbarDelegateCategory)
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar
     itemForItemIdentifier:(NSString *)itemIdentifier
     willBeInsertedIntoToolbar:(BOOL)flag

@@ -11,11 +11,11 @@
 @implementation BrowserViewController
 
 #pragma mark init + dealloc
-- (id)initWithMainController:aController
+- (id)initWithNibName:(NSString*)nibName tags:allTags
 {
-	if (self = [super init])
+	if (self = [super initWithNibName:nibName])
 	{
-		controller = aController;
+		tags = allTags;
 		
 		selectedTags = [[PASelectedTags alloc] init];
 		
@@ -27,13 +27,15 @@
 		
 		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:tags];
 		
-		buffer = [[NSMutableString alloc] init];		
+		buffer = [[NSMutableString alloc] init];	
 	}
+	return self;
 }
 
 - (void)awakeFromNib
 {
-	[outlineView setQuery:_query];
+	//TODO
+	//[outlineView setQuery:_query];
 
 	//register as an observer to changes in selectedTags and more
 	[selectedTags addObserver:self
@@ -46,11 +48,11 @@
 					 options:0
 					 context:NULL];
 
-	[tags addObserver:controller
+	[tags addObserver:self
 		   forKeyPath:@"tags"
 			  options:0
 			  context:NULL];
-
+	
 	[self setVisibleTags:[tags tags]];
 }
 

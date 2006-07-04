@@ -60,7 +60,7 @@
 
 - (void)awakeFromNib
 {
-	selectedTags = [controller selectedTags];
+	selectedTags = [browserViewController selectedTags];
 	[selectedTags retain];
 	
 	[selectedTags addObserver:self

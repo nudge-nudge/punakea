@@ -1,6 +1,6 @@
-#import "Controller.h"
+#import "Core.h"
 
-@interface Controller (PrivateAPI)
+@interface Core (PrivateAPI)
 
 - (void)selectedTagsHaveChanged;
 - (void)relatedTagsHaveChanged;
@@ -10,7 +10,7 @@
 
 @end
 
-@implementation Controller
+@implementation Core
 
 #pragma mark init + dealloc
 + (void)initialize
@@ -47,8 +47,9 @@
 	[NSApp setDelegate:self]; 
 	[self setupToolbar];
 	
-	BrowserController *browserController = [[BrowserController alloc] initWithWindowNibName:@"Browser" mainController:self];
+	BrowserController *browserController = [[BrowserController alloc] initWithWindowNibName:@"Browser" tags:tags];
 	NSWindow *browserWindow = [browserController window];
+	//[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	[browserWindow makeKeyAndOrderFront:nil];
 }
 

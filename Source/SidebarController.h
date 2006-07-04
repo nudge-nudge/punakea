@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "Controller.h"
+#import "Core.h"
 #import "PATag.h"
 #import "PATagger.h"
 #import "TaggerController.h"
@@ -12,7 +12,7 @@
 	
 	IBOutlet PAFileBox *fileBox;
 	
-    IBOutlet Controller *controller; /**< tag controller for all tags */
+    IBOutlet Core *core; /**< tag controller for all tags */
     IBOutlet NSArrayController *popularTags;
     IBOutlet NSArrayController *recentTags;
 	

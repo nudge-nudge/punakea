@@ -52,12 +52,12 @@ bind to visibleTags
  */
 - (void)awakeFromNib
 {
-	[controller addObserver:self
-				 forKeyPath:@"visibleTags"
-					options:0
-					context:NULL];
+	[browserViewController addObserver:self
+							forKeyPath:@"visibleTags"
+							   options:0
+							   context:NULL];
 	
-	[self setDisplayTags:[NSArray arrayWithArray:[controller visibleTags]]];
+	[self setDisplayTags:[NSArray arrayWithArray:[browserViewController visibleTags]]];
 }
 
 - (void)dealloc
@@ -78,7 +78,7 @@ bound to visibleTags
 {
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
-		[self setDisplayTags:[NSArray arrayWithArray:[controller visibleTags]]];
+		[self setDisplayTags:[NSArray arrayWithArray:[browserViewController visibleTags]]];
 		[self setNeedsDisplay:YES];
 	}
 }
@@ -92,7 +92,7 @@ bound to visibleTags
 	
 	while (tag = [tagEnumerator nextObject])
 	{
-		PATagButton *button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag]];
+		PATagButton *button = [[PATagButton alloc] initWithTag:tag attributes:[browserViewController viewAttributesForTag:tag]];
 		[button sizeToFit];
 		[tagButtonDict setObject:button forKey:[tag name]];
 		[button release];

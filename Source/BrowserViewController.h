@@ -7,12 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Controller.h"
+#import "PATags.h"
+#import "PASubViewController.h"
+#import "PARelatedTags.h"
+#import "PASelectedTags.h"
+#import "PAQuery.h"
+#import "PATypeAheadFind.h"
 
-@interface BrowserViewController : NSObject {
-	IBOutlet NSView *view;
-	
-	Controller *contoller;
+@interface BrowserViewController : PASubViewController {
+	PATags *tags;
 	
 	PARelatedTags *relatedTags;
 	PASelectedTags *selectedTags;
@@ -29,6 +32,8 @@
 	// buffer for user input (browser)
 	NSMutableString *buffer;
 }
+
+- (id)initWithNibName:(NSString*)nibName core:aCore;
 
 // events
 - (void)keyDown:(NSEvent *)event;

@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
-#import "Controller.h"
+#import "Core.h"
 
-@interface Controller (ToolbarDelegateCategory)
+@interface Core (ToolbarDelegateCategory)
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar
     itemForItemIdentifier:(NSString *)itemIdentifier
     willBeInsertedIntoToolbar:(BOOL)flag;

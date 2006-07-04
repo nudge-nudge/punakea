@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Controller.h"
+#import "BrowserViewController.h"
 #import "PATag.h"
 #import "PASelectedTags.h"
 #import "PASelectedTagCell.h"
@@ -17,7 +17,7 @@
 view for the selected tags
  */
 @interface PASelectedTagsView : NSMatrix {
-	IBOutlet Controller *controller;
+	IBOutlet BrowserViewController *browserViewController;
 	
 	PASelectedTags *selectedTags;
 	

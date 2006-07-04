@@ -2,16 +2,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATags.h"
-#import "PARelatedTags.h"
-#import "PASelectedTags.h"
 #import "PASimpleTagFactory.h"
 #import "PATagger.h"
-#import "PAResultsOutlineView.h"
-#import "PATypeAheadFind.h"
-#import "PAQuery.h"
 #import "BrowserController.h"
 
-@interface Controller : NSWindowController
+@interface Core : NSWindowController
 {
 	//model
 	PATags *tags; /**< holds all tags */
