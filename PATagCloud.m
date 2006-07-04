@@ -266,5 +266,6 @@ bound to visibleTags
 			//TODO
 		}
 	}
+	[super keyDown:event];
 }
 @end
