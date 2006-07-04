@@ -350,12 +350,12 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				4816346E0A5A52EA003B8EE4 /* Misc */,
+				65851FFF099780E0009C3CA7 /* Main */,
 				4816343D0A5A51E6003B8EE4 /* Tagger */,
 				4816343A0A5A51D2003B8EE4 /* Browser */,
 				488E18BA0A2722E5009D2826 /* Sidebar */,
-				65851FFF099780E0009C3CA7 /* Main */,
 				48F6A9F40996423000AA118D /* Tagging */,
+				4816346E0A5A52EA003B8EE4 /* Misc */,
 			);
 			path = Source;
 			sourceTree = "<group>";

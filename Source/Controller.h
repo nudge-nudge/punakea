@@ -13,30 +13,12 @@
 
 @interface Controller : NSWindowController
 {
-	//gui
-    IBOutlet id drawer;
-    IBOutlet PAResultsOutlineView *outlineView;
-	NSView *sidebarNibView;
-
 	//model
 	PATags *tags; /**< holds all tags */
-	PARelatedTags *relatedTags;
-	PASelectedTags *selectedTags;
-	
+
 	//controller
 	PATagger *tagger;
 	PASimpleTagFactory *simpleTagFactory;
-	PATag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
-	
-	NSMutableArray *visibleTags; /**< holds tags for TagCloud */
-	
-	PATypeAheadFind *typeAheadFind; /**< used for type ahead find */
-	
-	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
-	PAQuery *_query;
-	
-	// buffer for user input (browser)
-	NSMutableString *buffer;
 }
 
 //saving and loading
@@ -48,24 +30,5 @@
 //accessors
 - (PATags*)tags;
 - (void)setTags:(PATags*)otherTags;
-- (PARelatedTags*)relatedTags;
-- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags;
-- (PASelectedTags*)selectedTags;
-- (void)setSelectedTags:(PASelectedTags*)otherSelectedTags;
-
-- (NSMutableArray*)visibleTags;
-- (void)setVisibleTags:(NSMutableArray*)otherTags;
-- (PATag*)currentBestTag;
-- (void)setCurrentBestTag:(PATag*)otherTag;
-
-//for PAQuery
-- (PAQuery *)query;
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
-
-//for adding to selected
-- (IBAction)clearSelectedTags:(id)sender;
-
-// Temp
-- (IBAction)setGroupingAttributes:(id)sender;
 
 @end

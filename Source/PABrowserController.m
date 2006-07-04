@@ -8,8 +8,205 @@
 
 #import "PABrowserController.h"
 
-@implementation Controller (PABrowserController)
+@implementation PABrowserController
 
+#pragma mark init + dealloc
+- (id)initWithWindowNibName:(NSString*)windowNibName mainController:aController
+{
+	if (self = [super init])
+	{
+		controller = aController;
+		
+		selectedTags = [[PASelectedTags alloc] init];
+		
+		_query = [[PAQuery alloc] init];
+		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
+		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
+		
+		relatedTags = [[PARelatedTags alloc] initWithTags:tags query:_query];
+		
+		typeAheadFind = [[PATypeAheadFind alloc] initWithTags:tags];
+		
+		buffer = [[NSMutableString alloc] init];		
+	}
+}
+
+- (void)awakeFromNib
+{
+	[outlineView setQuery:_query];
+
+	//register as an observer to changes in selectedTags and more
+	[selectedTags addObserver:self
+				   forKeyPath:@"selectedTags"
+					  options:0
+					  context:NULL];
+
+	[relatedTags addObserver:self
+				  forKeyPath:@"relatedTags"
+					 options:0
+					 context:NULL];
+
+	[tags addObserver:controller
+		   forKeyPath:@"tags"
+			  options:0
+			  context:NULL];
+
+	[self setVisibleTags:[tags tags]];
+}
+
+- (void)dealloc
+{
+	[buffer release];
+	[typeAheadFind release];
+	[relatedTags release];
+    [_query release];
+	[selectedTags release];
+	[super dealloc];
+}
+
+#pragma mark accessors
+- (PAQuery*)query 
+{
+	return _query;
+}
+
+- (PARelatedTags*)relatedTags;
+{
+	return relatedTags;
+}
+
+- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags
+{
+	[otherRelatedTags retain];
+	[relatedTags release];
+	relatedTags = otherRelatedTags;
+}
+
+- (PASelectedTags*)selectedTags;
+{
+	return selectedTags;
+}
+
+- (void)setSelectedTags:(PASelectedTags*)otherSelectedTags
+{
+	[otherSelectedTags retain];
+	[selectedTags release];
+	selectedTags = otherSelectedTags;
+}
+
+
+- (NSMutableArray*)visibleTags;
+{
+	return visibleTags;
+}
+
+- (void)setVisibleTags:(NSMutableArray*)otherTags
+{
+	if (visibleTags != otherTags)
+	{
+		[visibleTags release];
+		visibleTags = [otherTags retain];
+	}
+	
+	//TODO fix me!!
+	if ([visibleTags count] > 0)
+		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
+}
+
+- (PATag*)currentBestTag
+{
+	return currentBestTag;
+}
+
+- (void)setCurrentBestTag:(PATag*)otherTag
+{
+	[otherTag retain];
+	[currentBestTag release];
+	currentBestTag = otherTag;
+}
+
+#pragma mark tag stuff
+- (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
+{
+	NSEnumerator *e = [tagSet objectEnumerator];
+	PATag *tag;
+	PATag *maxTag;
+	
+	if (tag = [e nextObject])
+		maxTag = tag;
+	
+	while (tag = [e nextObject])
+	{
+		if ([tag absoluteRating] > [maxTag absoluteRating])
+			maxTag = tag;
+	}	
+	
+	return maxTag;
+}
+
+//TODO
+- (IBAction)clearSelectedTags:(id)sender
+{
+	[selectedTags removeAllObjects];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object 
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+	if ([keyPath isEqual:@"selectedTags"]) 
+	{
+		[self selectedTagsHaveChanged];
+	}
+	
+	if ([keyPath isEqual:@"relatedTags"])
+	{
+		[self relatedTagsHaveChanged];
+	}
+	
+	if ([keyPath isEqual:@"tags"]) 
+	{
+		[self allTagsHaveChanged];
+	}
+}
+
+//needs to be called whenever the active tags have been changed
+- (void)selectedTagsHaveChanged 
+{
+	//stop an active query
+	if ([_query isStarted]) 
+		[_query stopQuery];
+	
+	//the query is only started, if there are any tags to look for
+	if ([selectedTags count] > 0)
+	{
+		[_query setTags:selectedTags];
+		[_query startQuery];
+	}
+	else 
+	{
+		//there are no selected tags, reset all tags
+		[self setVisibleTags:[tags tags]];
+	}
+}
+
+- (void)relatedTagsHaveChanged
+{
+	[self setVisibleTags:[relatedTags relatedTags]];
+}
+
+- (void)allTagsHaveChanged
+{
+	/*only do something if there are no selected tags,
+	because then the relatedTags are shown */
+	if ([selectedTags count] == 0)
+	{
+		[self setVisibleTags:[tags tags]];
+	}
+}
+
+#pragma mark events
 - (void)keyDown:(NSEvent*)event 
 {
 	//TODO exclude everything with modifier keys pressed!
