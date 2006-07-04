@@ -347,7 +347,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* Classes */ = {
+		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				4816346E0A5A52EA003B8EE4 /* Misc */,
@@ -357,7 +357,7 @@
 				65851FFF099780E0009C3CA7 /* Main */,
 				48F6A9F40996423000AA118D /* Tagging */,
 			);
-			name = Classes;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
@@ -390,7 +390,7 @@
 		29B97314FDCFA39411CA2CEA /* Punakea */ = {
 			isa = PBXGroup;
 			children = (
-				080E96DDFE201D6D7F000001 /* Classes */,
+				080E96DDFE201D6D7F000001 /* Source */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
