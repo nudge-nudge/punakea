@@ -29,11 +29,11 @@
 	
 	//drag & drop
 	[popularTagsTable registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
-	popularTagTableController = [[PATableViewDropController alloc] initWithTags:popularTags];
+	popularTagTableController = [[PASidebarTableViewDropController alloc] initWithTags:popularTags];
 	[popularTagsTable setDataSource:popularTagTableController];
 	
 	[recentTagsTable registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
-	recentTagTableController = [[PATableViewDropController alloc] initWithTags:recentTags];
+	recentTagTableController = [[PASidebarTableViewDropController alloc] initWithTags:recentTags];
 	[recentTagsTable setDataSource:recentTagTableController];
 }
 

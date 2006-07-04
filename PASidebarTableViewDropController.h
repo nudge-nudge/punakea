@@ -1,5 +1,5 @@
 //
-//  PATableViewDropController.h
+//  PASidebarTableViewDropController.h
 //  punakea
 //
 //  Created by Johannes Hoffart on 07.05.06.
@@ -10,7 +10,7 @@
 #import "PASimpleTag.h"
 #import "PATagger.h"
 
-@interface PATableViewDropController : NSObject {
+@interface PASidebarTableViewDropController : NSObject {
 	NSArrayController *tags;
 }
 

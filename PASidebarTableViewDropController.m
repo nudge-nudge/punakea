@@ -1,15 +1,15 @@
 //
-//  PATableViewDropController.m
+//  PASidebarTableViewDropController.m
 //  punakea
 //
 //  Created by Johannes Hoffart on 07.05.06.
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "PATableViewDropController.h"
+#import "PASidebarTableViewDropController.h"
 
 
-@implementation PATableViewDropController
+@implementation PASidebarTableViewDropController
 
 #pragma mark init + dealloc
 - (id)initWithTags:(NSArrayController*)usedTags

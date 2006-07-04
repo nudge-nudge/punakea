@@ -4,7 +4,7 @@
 #import "PATagger.h"
 #import "TaggerController.h"
 #import "PAFileBox.h"
-#import "PATableViewDropController.h"
+#import "PASidebarTableViewDropController.h"
 #import "PASidebarTagCell.h"
 
 @interface SidebarController : NSWindowController {
@@ -19,8 +19,8 @@
 	IBOutlet NSTableView *popularTagsTable;
 	IBOutlet NSTableView *recentTagsTable;
 	
-	PATableViewDropController *popularTagTableController;
-	PATableViewDropController *recentTagTableController;
+	PASidebarTableViewDropController *popularTagTableController;
+	PASidebarTableViewDropController *recentTagTableController;
 	
 	TaggerController *taggerController; /**< there is at most one instance at any time */
 }

@@ -28,8 +28,8 @@
 		485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA54C09F4EC38008D3214 /* PASelectedTags.m */; };
 		485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA55309F4ECBC008D3214 /* PATags.h */; };
 		485DA55609F4ECBC008D3214 /* PATags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA55409F4ECBC008D3214 /* PATags.m */; };
-		485FAF2C0A0DE54C0088AC08 /* PATableViewDropController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485FAF2A0A0DE54C0088AC08 /* PATableViewDropController.h */; };
-		485FAF2D0A0DE54C0088AC08 /* PATableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PATableViewDropController.m */; };
+		485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */; };
+		485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
 		486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486EBA4409D68F16000C154C /* PAFileBox.h */; };
 		4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */; };
@@ -179,7 +179,7 @@
 				6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in CopyFiles */,
 				48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */,
 				4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */,
-				485FAF2C0A0DE54C0088AC08 /* PATableViewDropController.h in CopyFiles */,
+				485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in CopyFiles */,
 				65035FCB0A20769500AD0597 /* PAQuery.h in CopyFiles */,
 				488E18BD0A27231F009D2826 /* PASidebarTagCell.h in CopyFiles */,
 				6557CAF40A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h in CopyFiles */,
@@ -223,8 +223,8 @@
 		485DA54C09F4EC38008D3214 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
 		485DA55309F4ECBC008D3214 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
 		485DA55409F4ECBC008D3214 /* PATags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATags.m; sourceTree = "<group>"; };
-		485FAF2A0A0DE54C0088AC08 /* PATableViewDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATableViewDropController.h; sourceTree = "<group>"; };
-		485FAF2B0A0DE54C0088AC08 /* PATableViewDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATableViewDropController.m; sourceTree = "<group>"; };
+		485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTableViewDropController.h; sourceTree = "<group>"; };
+		485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableViewDropController.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
 		486EBA4409D68F16000C154C /* PAFileBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileBox.h; sourceTree = "<group>"; };
 		487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarWindow.h; sourceTree = "<group>"; };
@@ -451,8 +451,6 @@
 			children = (
 				48D81DAB09F79C1C0075EE44 /* TaggerController.h */,
 				48D81DAC09F79C1C0075EE44 /* TaggerController.m */,
-				485FAF2A0A0DE54C0088AC08 /* PATableViewDropController.h */,
-				485FAF2B0A0DE54C0088AC08 /* PATableViewDropController.m */,
 			);
 			name = Tagger;
 			sourceTree = "<group>";
@@ -479,6 +477,8 @@
 		488E18BA0A2722E5009D2826 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */,
+				485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */,
 				486EBA4409D68F16000C154C /* PAFileBox.h */,
 				486EBA4309D68F16000C154C /* PAFileBox.m */,
 				487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */,
@@ -833,7 +833,7 @@
 				6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */,
 				48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */,
 				4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */,
-				485FAF2D0A0DE54C0088AC08 /* PATableViewDropController.m in Sources */,
+				485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */,
 				65035FCC0A20769500AD0597 /* PAQuery.m in Sources */,
 				650362520A2084BE00AD0597 /* PAQueryResultGroup.m in Sources */,
 				488E18BE0A27231F009D2826 /* PASidebarTagCell.m in Sources */,
