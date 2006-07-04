@@ -1,13 +1,30 @@
 {
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PAFileBox; LANGUAGE = ObjC; SUPERCLASS = NSImageView; }, 
+        {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {CLASS = PASidebarCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 
+        {CLASS = PASidebarContentView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {CLASS = PASidebarTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
         {
             CLASS = PASidebarView; 
             LANGUAGE = ObjC; 
             OUTLETS = {owner = id; tableView = id; }; 
             SUPERCLASS = NSView; 
+        }, 
+        {CLASS = PASidebarWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {
+            CLASS = SidebarController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                controller = Controller; 
+                fileBox = PAFileBox; 
+                popularTags = NSArrayController; 
+                popularTagsTable = NSTableView; 
+                recentTags = NSArrayController; 
+                recentTagsTable = NSTableView; 
+            }; 
+            SUPERCLASS = NSWindowController; 
         }, 
         {
             CLASS = SubViewController; 

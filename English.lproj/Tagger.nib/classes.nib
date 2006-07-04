@@ -1,0 +1,17 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = TaggerController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                fileController = NSArrayController; 
+                popularTagsController = NSArrayController; 
+                restTagField = NSTextField; 
+                tagField = NSTokenField; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

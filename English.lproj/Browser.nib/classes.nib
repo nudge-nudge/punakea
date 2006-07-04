@@ -1,0 +1,34 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
+            CLASS = Controller; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {drawer = id; outlineView = PAResultsOutlineView; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
+        {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
+        {
+            CLASS = PASelectedTagsView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controller = Controller; }; 
+            SUPERCLASS = NSMatrix; 
+        }, 
+        {
+            CLASS = PATagCloud; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controller = Controller; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            ACTIONS = {doubleAction = id; }; 
+            CLASS = ResultsOutlineViewController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
