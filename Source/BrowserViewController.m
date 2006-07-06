@@ -55,8 +55,11 @@
 						   context:NULL];
 		
 		[self setVisibleTags:[tags tags]];
-		
+			
 		[NSBundle loadNibNamed:nibName owner:self];
+		
+		// This has to be called after loading of the nib
+		[outlineView setQuery:query];
 	}
 	return self;
 }
@@ -70,6 +73,7 @@
 	[selectedTags release];
 	[super dealloc];
 }
+
 
 #pragma mark accessors
 - (PAQuery*)query 

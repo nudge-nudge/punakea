@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BrowserViewController.h"
+#import "PAQuery.h"
 
 @interface BrowserController : NSWindowController 
 {

@@ -245,7 +245,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	query = aQuery;
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(queryNote:) name:nil object:query];
-	[[self delegate] setQuery:query];
 }
 
 @end
