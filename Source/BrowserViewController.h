@@ -15,6 +15,9 @@
 #import "PATypeAheadFind.h"
 
 @interface BrowserViewController : PASubViewController {
+
+	IBOutlet NSOutlineView *outlineView;
+
 	PATagger *tagger;
 	PATags *tags;
 	
@@ -27,8 +30,7 @@
 	
 	PATypeAheadFind *typeAheadFind; /**< used for type ahead find */
 	
-	// Renamed from query to _query due to binding issues (like Spotlighter Sample does)
-	PAQuery *_query;
+	PAQuery *query;
 	
 	// buffer for user input (browser)
 	NSMutableString *buffer;

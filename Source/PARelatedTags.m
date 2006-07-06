@@ -45,7 +45,6 @@ use this init if you want an encapsulated way to get related tags for the
 /**
 use this init if you want performance, it uses a query passed from the outside
  (i.e. from the browser)
- @param otherTags all tags
  */
 - (id)initWithQuery:(PAQuery*)aQuery;
 {

@@ -137,6 +137,8 @@
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Core.m */; };
+		65E9C99A0A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */; };
+		65E9C99B0A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9C9990A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m */; };
 		65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */; };
 		65F9B96309D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */; };
 		65F9B96409D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */; };
@@ -195,6 +197,7 @@
 				4856C6740A516D8300E1D568 /* BrowserViewController.h in CopyFiles */,
 				48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */,
 				48D1719A0A5A802D006C667B /* PASubViewController.h in CopyFiles */,
+				65E9C99A0A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +342,8 @@
 		65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
+		65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewControllerResultsViewCategory.h; sourceTree = "<group>"; };
+		65E9C9990A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewControllerResultsViewCategory.m; sourceTree = "<group>"; };
 		65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewPressed-1.tiff"; sourceTree = "<group>"; };
 		65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
 		65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
@@ -453,10 +458,12 @@
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
 				489AE71309DD4D7800EB60EB /* SelectedTagsView */,
 				6588132C09DDCA7300428B83 /* ResultsView */,
-				4856C6720A516D8300E1D568 /* BrowserViewController.h */,
-				4856C6730A516D8300E1D568 /* BrowserViewController.m */,
 				48D16FED0A5A6468006C667B /* BrowserController.h */,
 				48D16FEE0A5A6468006C667B /* BrowserController.m */,
+				4856C6720A516D8300E1D568 /* BrowserViewController.h */,
+				4856C6730A516D8300E1D568 /* BrowserViewController.m */,
+				65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */,
+				65E9C9990A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -863,6 +870,7 @@
 				4856C6750A516D8300E1D568 /* BrowserViewController.m in Sources */,
 				48D16FF00A5A6468006C667B /* BrowserController.m in Sources */,
 				48D1719B0A5A802D006C667B /* PASubViewController.m in Sources */,
+				65E9C99B0A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

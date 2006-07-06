@@ -29,11 +29,11 @@
 		
 		selectedTags = [[PASelectedTags alloc] init];
 		
-		_query = [[PAQuery alloc] init];
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
-		[_query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
+		query = [[PAQuery alloc] init];
+		[query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
+		[query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
-		relatedTags = [[PARelatedTags alloc] initWithQuery:_query];
+		relatedTags = [[PARelatedTags alloc] initWithQuery:query];
 		
 		typeAheadFind = [[PATypeAheadFind alloc] init];
 		
@@ -64,7 +64,7 @@
 	[buffer release];
 	[typeAheadFind release];
 	[relatedTags release];
-    [_query release];
+    [query release];
 	[selectedTags release];
 	[super dealloc];
 }
@@ -72,7 +72,7 @@
 #pragma mark accessors
 - (PAQuery*)query 
 {
-	return _query;
+	return query;
 }
 
 - (PARelatedTags*)relatedTags;
@@ -180,14 +180,14 @@
 - (void)selectedTagsHaveChanged 
 {
 	//stop an active query
-	if ([_query isStarted]) 
-		[_query stopQuery];
+	if ([query isStarted]) 
+		[query stopQuery];
 	
 	//the query is only started, if there are any tags to look for
 	if ([selectedTags count] > 0)
 	{
-		[_query setTags:selectedTags];
-		[_query startQuery];
+		[query setTags:selectedTags];
+		[query startQuery];
 	}
 	else 
 	{
@@ -261,15 +261,28 @@
 	NSLog(@"%@",buffer);
 }
 
+
+#pragma mark Accessors
+- (NSOutlineView *)outlineView
+{
+	return outlineView;
+}
+
+- (void)setOutlineView:(NSOutlineView *)anOutlineView
+{
+	outlineView = anOutlineView;
+}
+
+
 #pragma mark Temp
 - (void)setGroupingAttributes:(id)sender;
 {
 	NSSegmentedControl *sc = sender;
 	if([sc selectedSegment] == 0) {
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
+		[query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
 	}
 	if([sc selectedSegment] == 1) {
-		[_query setGroupingAttributes:[NSArray arrayWithObjects:nil]];
+		[query setGroupingAttributes:[NSArray arrayWithObjects:nil]];
 	}
 }
 
