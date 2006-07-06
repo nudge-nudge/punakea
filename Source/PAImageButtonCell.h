@@ -16,7 +16,9 @@ typedef enum _PAImageButtonState
 	PAOnHighlightedState = 2,
 	PAOffHighlightedState = 3,
 	PAOnDisabledState = 4,
-	PAOffDisabledState = 5
+	PAOffDisabledState = 5,
+	PAOnHoveredState = 6,
+	PAOffHoveredState = 7
 } PAImageButtonState;
 
 typedef enum _PAImageButtonType
@@ -30,6 +32,7 @@ typedef enum _PAImageButtonType
 
 	NSMutableDictionary *images;
 	PAImageButtonState state;
+	PAImageButtonState previousState;
 	PAImageButtonType type;
 	NSMutableDictionary *tag;
 	

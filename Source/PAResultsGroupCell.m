@@ -50,7 +50,6 @@
 		if([[anObject class] isEqualTo:[PAImageButton class]])
 		{
 			NSDictionary *tag = [(PAImageButton *)anObject tag];
-			//if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
 			if([[tag objectForKey:@"identifier"] isEqualToString:[valueDict objectForKey:@"identifier"]])
 				triangle = anObject;
 		}
@@ -59,7 +58,6 @@
 			if([[anObject class] isEqualTo:[PASegmentedImageControl class]])
 			{
 				NSDictionary *tag = [(PASegmentedImageControl *)anObject tag];
-				//if([[tag objectForKey:@"identifier"] isEqualToString:[group value]])
 				if([[tag objectForKey:@"identifier"] isEqualToString:[valueDict objectForKey:@"identifier"]])
 					segmentedControl = anObject;
 			}
@@ -72,7 +70,8 @@
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"] forState:PAOffState];
 		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite"] forState:PAOnState];
 		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite_Pressed"] forState:PAOnHighlightedState];
-		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];
+		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];		
+		
 		[triangle setButtonType:PASwitchButton];
 		[triangle setState:PAOnState];
 		[triangle setAction:@selector(triangleClicked:)];
@@ -80,22 +79,28 @@
 		
 		// Add references to PAImageButton's tag for later usage
 		NSMutableDictionary *tag = [triangle tag];
-		//[tag setObject:[group value] forKey:@"identifier"];
 		[tag setObject:[valueDict objectForKey:@"identifier"] forKey:@"identifier"];
-		//[tag setObject:group forKey:@"group"];
 		
 		[controlView addSubview:triangle];  
+		
+		// needs to be set after adding as subview
+		[[triangle cell] setShowsBorderOnlyWhileMouseInside:YES];
 	} else {
 		[triangle setFrame:NSMakeRect(cellFrame.origin.x + 4, cellFrame.origin.y + 2, 16, 16)];
 	}
 	
 	// Does triangle's current state match the cell's state?
 	id group = [controlView groupForIdentifier:[valueDict objectForKey:@"identifier"]];	
-	if([triangle state] != PAOnHighlightedState && [triangle state] != PAOffHighlightedState)
+	if([triangle state] != PAOnHoveredState &&
+	   [triangle state] != PAOffHoveredState &&
+	   [triangle state] != PAOnHighlightedState &&
+	   [triangle state] != PAOffHighlightedState)
+	{
 		if([(NSOutlineView *)[triangle superview] isItemExpanded:group])
 			[triangle setState:PAOnState];
 		else
 			[triangle setState:PAOffState];
+	}
 	
 	// Add segmented control if neccessary
 	if([self hasMultipleDisplayModes])

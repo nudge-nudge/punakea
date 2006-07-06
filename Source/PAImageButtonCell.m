@@ -35,7 +35,7 @@
 		
 		// For mouse move events
 		[self setBordered:NO];
-		[self setShowsBorderOnlyWhileMouseInside:YES];
+		//[self setShowsBorderOnlyWhileMouseInside:YES];
 	}	
 	return self;
 }
@@ -53,7 +53,7 @@
 		
 		// For mouse move events
 		[self setBordered:NO];
-		[self setShowsBorderOnlyWhileMouseInside:YES];
+		//[self setShowsBorderOnlyWhileMouseInside:YES];
 	}
 	return self;
 }
@@ -106,7 +106,10 @@
 	if([image scalesWhenResized])
 		[image drawInRect:cellFrame fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	else
-		[image drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+		[image drawAtPoint:cellFrame.origin
+		          fromRect:imageRect
+				 operation:NSCompositeSourceOver
+				  fraction:1.0];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
@@ -116,14 +119,30 @@
 
 
 #pragma mark Mouse Tracking
+/**
+	Ensure to activate sending mouse moved events by setting
+	setShowsBorderOnlyWhileMouseInside:YES for self
+*/
 - (void)mouseEntered:(NSEvent *)event
 {
-	NSLog(@"rein");
+	previousState = state;
+	if([self state] == PAOnState ||
+	   [self state] == PAOnHighlightedState)
+	{
+		if([images objectForKey:[self stringForState:PAOnHoveredState]])
+			[self setState:PAOnHoveredState];
+	}
+	if([self state] == PAOffState ||
+	   [self state] == PAOffHighlightedState)
+	{
+		if([images objectForKey:[self stringForState:PAOffHoveredState]])
+			[self setState:PAOffHoveredState];
+	}
 }
 
 - (void)mouseExited:(NSEvent *)event
 {
-	NSLog(@"raus");
+	[self setState:previousState];		
 }
 
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
@@ -208,6 +227,10 @@
 			name = @"PAOnDisabledState"; break;
 		case PAOffDisabledState:
 			name = @"PAOffDisabledState"; break;
+		case PAOnHoveredState:
+			name = @"PAOnHoveredState"; break;
+		case PAOffHoveredState:
+			name = @"PAOffHoveredState"; break;
 	}	
 	
 	return name;
@@ -221,7 +244,7 @@
 
 - (void)setState:(PAImageButtonState)aState
 {
-	PAImageButtonState previousState = state;
+	PAImageButtonState previousState = [self state];
 	state = aState;
 	if(previousState != state) [[self controlView] setNeedsDisplay:YES];
 }

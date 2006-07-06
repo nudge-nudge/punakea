@@ -452,8 +452,6 @@
 				48D16FEE0A5A6468006C667B /* BrowserController.m */,
 				4856C6720A516D8300E1D568 /* BrowserViewController.h */,
 				4856C6730A516D8300E1D568 /* BrowserViewController.m */,
-				65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */,
-				65E9C9990A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -632,6 +630,8 @@
 				65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */,
 				65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */,
 				65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */,
+				65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */,
+				65E9C9990A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m */,
 			);
 			name = ResultsView;
 			sourceTree = "<group>";
