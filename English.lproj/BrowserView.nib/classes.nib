@@ -4,8 +4,8 @@
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = BrowserViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {outlineView = PAResultsOutlineView; }; 
-            SUPERCLASS = PASubViewController; 
+            OUTLETS = {mainView = NSView; outlineView = PAResultsOutlineView; }; 
+            SUPERCLASS = NSResponder; 
         }, 
         {
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 

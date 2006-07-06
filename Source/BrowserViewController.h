@@ -8,17 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATagger.h"
-#import "PASubViewController.h"
 #import "PARelatedTags.h"
 #import "PASelectedTags.h"
 #import "PAQuery.h"
 #import "PATypeAheadFind.h"
 #import "PAResultsOutlineView.h"
 
-@interface BrowserViewController : PASubViewController {
-
+@interface BrowserViewController : NSResponder {
+	IBOutlet NSView *mainView;
 	IBOutlet PAResultsOutlineView *outlineView;
-
+	
 	PATagger *tagger;
 	PATags *tags;
 	
@@ -41,6 +40,8 @@
 - (void)keyDown:(NSEvent *)event;
 
 // accessors
+- (NSView*)mainView;
+
 - (PARelatedTags*)relatedTags;
 - (void)setRelatedTags:(PARelatedTags*)otherRelatedTags;
 - (PASelectedTags*)selectedTags;

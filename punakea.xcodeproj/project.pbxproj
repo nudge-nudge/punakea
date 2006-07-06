@@ -49,8 +49,6 @@
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
-		48D1719A0A5A802D006C667B /* PASubViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D171980A5A802D006C667B /* PASubViewController.h */; };
-		48D1719B0A5A802D006C667B /* PASubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D171990A5A802D006C667B /* PASubViewController.m */; };
 		48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66A5D09CB3752007B6B1D /* PASimpleTag.h */; };
 		48D66A6009CB3752007B6B1D /* PASimpleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66A5E09CB3752007B6B1D /* PASimpleTag.m */; };
 		48D66AFD09CB4C5A007B6B1D /* PATagFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */; };
@@ -193,7 +191,6 @@
 				48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */,
 				4856C6740A516D8300E1D568 /* BrowserViewController.h in CopyFiles */,
 				48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */,
-				48D1719A0A5A802D006C667B /* PASubViewController.h in CopyFiles */,
 				65E9C99A0A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,8 +249,6 @@
 		48D16FED0A5A6468006C667B /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
 		48D16FEE0A5A6468006C667B /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
-		48D171980A5A802D006C667B /* PASubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASubViewController.h; sourceTree = "<group>"; };
-		48D171990A5A802D006C667B /* PASubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASubViewController.m; sourceTree = "<group>"; };
 		48D66A5D09CB3752007B6B1D /* PASimpleTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleTag.h; sourceTree = "<group>"; };
 		48D66A5E09CB3752007B6B1D /* PASimpleTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleTag.m; sourceTree = "<group>"; };
 		48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagFactory.h; sourceTree = "<group>"; };
@@ -424,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				481634150A5A4EEB003B8EE4 /* Browser.nib */,
+				4871792D0A5A619900A988DE /* BrowserView.nib */,
 				4816340E0A5A48A1003B8EE4 /* Tagger.nib */,
 				65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */,
 				6562A1D40996399100DBE7DB /* Images */,
@@ -433,7 +429,6 @@
 				658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */,
 				65E7B01E0994D0AE00565251 /* Sidebar.nib */,
 				653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */,
-				4871792D0A5A619900A988DE /* BrowserView.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -478,8 +473,6 @@
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				65035FB70A20762F00AD0597 /* Query */,
-				48D171980A5A802D006C667B /* PASubViewController.h */,
-				48D171990A5A802D006C667B /* PASubViewController.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -861,7 +854,6 @@
 				48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */,
 				4856C6750A516D8300E1D568 /* BrowserViewController.m in Sources */,
 				48D16FF00A5A6468006C667B /* BrowserController.m in Sources */,
-				48D1719B0A5A802D006C667B /* PASubViewController.m in Sources */,
 				65E9C99B0A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

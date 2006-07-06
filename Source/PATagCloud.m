@@ -58,6 +58,8 @@ bind to visibleTags
 							   context:NULL];
 	
 	[self setDisplayTags:[NSArray arrayWithArray:[browserViewController visibleTags]]];
+	
+	[[self window] setInitialFirstResponder:self];
 }
 
 - (void)dealloc
@@ -253,20 +255,34 @@ bound to visibleTags
 	activeTag = aTag;
 }
 
-#pragma mark key event handling
+#pragma mark event handling
+- (BOOL)acceptsFirstResponder
+{
+	return YES;
+}
+
+- (BOOL)becomeFirstResponder
+{
+	return YES;
+}
+
 - (void)keyDown:(NSEvent*)event 
 {
 	// get the pressed key
-	NSLog(@"keyDown: %x", [[event characters] characterAtIndex:0]);
+	NSLog(@"keyDown (cloud): %x", [[event characters] characterAtIndex:0]);
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	
-	if (key == NSRightArrowFunctionKey)
+	if (key == NSRightArrowFunctionKey || key == NSLeftArrowFunctionKey || key == NSUpArrowFunctionKey || key == NSDownArrowFunctionKey)
 	{
 		if (!activeTag)
 		{
 			//TODO
 		}
+	} 
+	else
+	{
+		// forward unhandled events
+		[[self nextResponder] keyDown:event];
 	}
-	[super keyDown:event];
 }
 @end

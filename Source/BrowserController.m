@@ -14,7 +14,11 @@
 - (void)awakeFromNib
 {
 	BrowserViewController *browserViewController = [[BrowserViewController alloc] initWithNibName:@"BrowserView"];
-	[[self window] setContentView:[browserViewController view]];
+	[[self window] setContentView:[browserViewController mainView]];
+	
+	//insert browserViewController in the responder chain
+	[browserViewController setNextResponder:self];
+	[[[self window] contentView] setNextResponder:browserViewController];
 }
 
 @end

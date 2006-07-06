@@ -22,7 +22,7 @@
 #pragma mark init + dealloc
 - (id)initWithNibName:(NSString*)nibName
 {
-	if (self = [super initWithNibName:nibName])
+	if (self = [super init])
 	{
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
@@ -56,6 +56,8 @@
 		
 		[self setVisibleTags:[tags tags]];
 			
+		
+		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
 		
 		// This has to be called after loading of the nib
@@ -76,6 +78,12 @@
 
 
 #pragma mark accessors
+// This method returns a pointer to the view in the nib loaded.
+-(NSView*)mainView
+{
+	return mainView;
+}
+
 - (PAQuery*)query 
 {
 	return query;
@@ -246,6 +254,11 @@
 	{
 		// TODO check if it is ok to append event instead of key
 		[buffer appendString:[event charactersIgnoringModifiers]];
+	}
+	else
+	{
+		// forward unhandled events
+		[[self nextResponder] keyDown:event];
 	}
 	
 	// if buffer has any content, display tags with corresponding prefix
