@@ -20,10 +20,18 @@ displays all visibleTags in a nice tag cloud view
 	int tagPosition; /**< holds the position where the new line starts */
 	
 	PATagButton *activeTag; /**< currently selected tag */
+	
+	int rowCount;
+	int columnCount;
+	
+	NSMutableArray *columnCountInRow;
 }
 
 - (NSArray*)displayTags;
 - (void)setDisplayTags:(NSArray*)otherTags;
+
+- (NSMutableArray*)columnCountInRow;
+- (void)setColumnCountInRow:(NSMutableArray*)array;
 
 - (PATagButton*)activeTag;
 - (void)setActiveTag:(PATagButton*)aTag;

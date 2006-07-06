@@ -16,7 +16,8 @@
 	BrowserViewController *browserViewController = [[BrowserViewController alloc] initWithNibName:@"BrowserView"];
 	[[self window] setContentView:[browserViewController mainView]];
 	
-	//insert browserViewController in the responder chain
+	// insert browserViewController in the responder chain
+	//TODO put this into browserviewcontroller to enable independet usage
 	[browserViewController setNextResponder:self];
 	[[[self window] contentView] setNextResponder:browserViewController];
 }

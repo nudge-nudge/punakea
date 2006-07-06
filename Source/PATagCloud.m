@@ -28,17 +28,18 @@ determines the oigin point for the next tag button to display;
 - (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect;
 
 /**
-calculates the starting point in the next line according to the height of all the tags
+calculates the starting point in the next row according to the height of all the tags
  @param rect the main rect in which all the stuff is drawn
  @return origin point for next tag
  */
-- (NSPoint)firstPointForNextLineIn:(NSRect)rect;
+- (NSPoint)firstPointForNextRowIn:(NSRect)rect;
 
 
 - (void)moveSelectionRight;
 - (void)moveSelectionLeft;
 - (void)moveSelectionUp;
 - (void)moveSelectionDown;
+- (PATagButton*)getTagForRow:(int)row column:(int)column;
 
 @end
 
@@ -47,8 +48,9 @@ calculates the starting point in the next line according to the height of all th
 #pragma mark init
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
+	if (self = [super initWithFrame:frameRect]) {
 		tagButtonDict = [[NSMutableDictionary alloc] init];
+		columnCountInRow = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -71,6 +73,7 @@ bind to visibleTags
 - (void)dealloc
 {
 	[activeTag release];
+	[columnCountInRow release];
 	[tagButtonDict release];
 	[super dealloc];
 }
@@ -118,9 +121,11 @@ bound to visibleTags
 	
 	//needed for drawing in rows
 	tagPosition = 0;
+	rowCount = -1;
+	[self setColumnCountInRow:[NSMutableArray array]];
 	
 	//get the point for the very first tag
-	pointForNextTagRect = [self firstPointForNextLineIn:bounds];
+	pointForNextTagRect = [self firstPointForNextRowIn:bounds];
 	
 	[self drawBackground];
 	[self drawTags:bounds];
@@ -147,11 +152,17 @@ bound to visibleTags
 		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
 		NSPoint origin = [self nextPointForTagButton:tagButton inRect:(NSRect)rect];
 		[tagButton setFrameOrigin:origin];
+		[tagButton setRow:rowCount column:columnCount];
+		
 		[self addSubview:tagButton];
 		
 		// needs to be set after adding as subview
 		[[tagButton cell] setShowsBorderOnlyWhileMouseInside:YES];
 	}
+	
+	// remember column Count after every tag has been drawn
+	NSNumber *count = [NSNumber numberWithInt:columnCount];
+	[columnCountInRow addObject:count];
 }
 
 - (void)drawBackground
@@ -165,17 +176,30 @@ bound to visibleTags
 }
 
 #pragma mark calculation
-- (NSPoint)firstPointForNextLineIn:(NSRect)rect;
+- (NSPoint)firstPointForNextRowIn:(NSRect)rect;
 {
+	// remeber column count in rows - after first row has been drawn
+	if (rowCount >= 0)
+	{
+		NSNumber *count = [NSNumber numberWithInt:columnCount];
+		[columnCountInRow addObject:count];
+	}		
+	
+	//increment rowCount
+	rowCount++;
+	
+	//reset columCount
+	columnCount = -1;
+	
 	//TODO externalize
 	int vPadding = 1;
 	int spacing = 10;
 	
 	//values needed for calc
-	int lineWidth = 0;
+	int rowWidth = 0;
 	float maxHeight = 0.0;
 	
-	/* while there are tags, compose a line and get the maximum height,
+	/* while there are tags, compose a row and get the maximum height,
 		then keep the starting points for each one */
 	NSEnumerator *tagEnumerator = [displayTags objectEnumerator];
 	PATag *tag;
@@ -193,10 +217,10 @@ bound to visibleTags
 		NSRect frame = [button frame];
 		NSSize tagSize = frame.size;
 		
-		//if the tag fills the line, stop adding tags
-		lineWidth += spacing + tagSize.width;
+		//if the tag fills the row, stop adding tags
+		rowWidth += spacing + tagSize.width;
 		
-		if (lineWidth + spacing > rect.size.width)
+		if (rowWidth + spacing > rect.size.width)
 			break;
 		
 		//remember the maximum height
@@ -219,11 +243,14 @@ bound to visibleTags
 	
 	float xValue = pointForNextTagRect.x + width + spacing;
 	
-	//if the tag doesn't fit in this line, get first point in next line
+	//if the tag doesn't fit in this row, get first point in next row
 	if (xValue > rect.size.width)
 	{
-		pointForNextTagRect = [self firstPointForNextLineIn:rect];
+		pointForNextTagRect = [self firstPointForNextRowIn:rect];
 	}
+	
+	//increment columnCount
+	columnCount++;
 	
 	//save this value
 	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x,pointForNextTagRect.y);
@@ -249,6 +276,18 @@ bound to visibleTags
 	[self createButtonsForTags];
 }
 
+- (NSMutableArray*)columnCountInRow
+{
+	return columnCountInRow;
+}
+
+- (void)setColumnCountInRow:(NSMutableArray*)array
+{
+	[array retain];
+	[columnCountInRow release];
+	columnCountInRow = array;
+}
+
 - (PATagButton*)activeTag
 {
 	return activeTag;
@@ -256,9 +295,15 @@ bound to visibleTags
 
 - (void)setActiveTag:(PATagButton*)aTag
 {
+	[activeTag setHovered:NO];
+	
 	[aTag retain];
 	[activeTag release];
 	activeTag = aTag;
+	
+	[activeTag setHovered:YES];
+	
+	[self setNeedsDisplay:YES];
 }
 
 #pragma mark event handling
@@ -301,22 +346,142 @@ bound to visibleTags
 #pragma mark moving selection
 - (void)moveSelectionRight
 {
-	NSLog(@"right");
+	if (!activeTag)
+	{
+		[self setActiveTag:[self getTagForRow:0 column:0]];
+	}
+	else
+	{
+		int column = [activeTag column];
+		int row = [activeTag row];
+		
+		// move right
+		column++;
+		
+		//check if needs to wrap
+		NSNumber *columnCountInCurrentRow = [columnCountInRow objectAtIndex:row];
+			
+		if (column > [columnCountInCurrentRow intValue])
+		{
+			column = 0;
+		}
+		
+		[self setActiveTag:[self getTagForRow:row column:column]];
+	}
 }
 
 - (void)moveSelectionLeft
 {
-	NSLog(@"left");
+	if (!activeTag)
+	{
+		int rowLength = [[columnCountInRow objectAtIndex:0] intValue];
+		[self setActiveTag:[self getTagForRow:0 column:rowLength]];
+	}
+	else
+	{
+		int column = [activeTag column];
+		int row = [activeTag row];
+		
+		// move left
+		column--;
+		
+		//check if needs to wrap
+		NSNumber *columnCountInCurrentRow = [columnCountInRow objectAtIndex:row];
+		
+		if (column < 0)
+		{
+			column = [columnCountInCurrentRow intValue];
+		}
+		
+		[self setActiveTag:[self getTagForRow:row column:column]];
+	}
 }
 
+//TODO check if this is best
 - (void)moveSelectionUp
 {
-	NSLog(@"up");
+	if (!activeTag)
+	{
+		int rows = [columnCountInRow count]-1;
+		[self setActiveTag:[self getTagForRow:rows column:0]];
+	}
+	else
+	{
+		int column = [activeTag column];
+		int row = [activeTag row];
+		
+		NSNumber *columnCountInOldRow = [columnCountInRow objectAtIndex:row];
+		
+		// move up
+		row--;
+		
+		//check if needs to wrap
+		if (row < 0)
+		{
+			row = [columnCountInRow count]-1;
+		}
+		
+		//calculate suitable column
+		NSNumber *columnCountInNewRow = [columnCountInRow objectAtIndex:row];
+		float ratio = (float) column / (float) [columnCountInOldRow intValue];
+		
+		// value will be truncated, this is intended
+		column = ratio * (float) [columnCountInNewRow intValue];
+		
+		[self setActiveTag:[self getTagForRow:row column:column]];
+	}
 }
 
 - (void)moveSelectionDown
 {
-	NSLog(@"down");
+	if (!activeTag)
+	{
+		[self setActiveTag:[self getTagForRow:0 column:0]];
+	}
+	else
+	{
+		int column = [activeTag column];
+		int row = [activeTag row];
+		
+		NSNumber *columnCountInOldRow = [columnCountInRow objectAtIndex:row];
+		
+		// move down
+		row++;
+		
+		//check if needs to wrap
+		if (row >= [columnCountInRow count])
+		{
+			row = 0;
+		}
+		
+		//calculate suitable column
+		NSNumber *columnCountInNewRow = [columnCountInRow objectAtIndex:row];
+		float ratio = (float) column / (float) [columnCountInOldRow intValue];
+		
+		// value will be truncated, this is intended
+		column = ratio * (float) [columnCountInNewRow intValue];
+		
+		[self setActiveTag:[self getTagForRow:row column:column]];
+	}
+}
+
+- (PATagButton*)getTagForRow:(int)row column:(int)column
+{
+	//TODO linear performance, needs optimization
+	NSEnumerator *e = [tagButtonDict objectEnumerator];
+	PATagButton *button;
+	
+	PATagButton *result;
+	
+	while (button = [e nextObject])
+	{
+		if ([button row] == row && [button column] == column)
+		{
+			result = button;
+		}
+	}
+	
+	return result;
 }
 
 @end

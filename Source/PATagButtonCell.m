@@ -27,6 +27,13 @@
 #pragma mark drawing
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
+	if (isHovered)
+	{
+		[[NSColor lightGrayColor] set];
+		NSBezierPath *path = [NSBezierPath bezierPathWithOvalInRect:cellFrame];
+		[path fill];
+	}	
+	
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
@@ -50,10 +57,6 @@
 
 - (void)setHovered:(BOOL)flag
 {
-	if (isHovered != flag)
-	{
-		//TODOs
-	}
 	isHovered = flag;
 }
 
