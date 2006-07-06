@@ -34,6 +34,12 @@ calculates the starting point in the next line according to the height of all th
  */
 - (NSPoint)firstPointForNextLineIn:(NSRect)rect;
 
+
+- (void)moveSelectionRight;
+- (void)moveSelectionLeft;
+- (void)moveSelectionUp;
+- (void)moveSelectionDown;
+
 @end
 
 @implementation PATagCloud
@@ -269,14 +275,20 @@ bound to visibleTags
 - (void)keyDown:(NSEvent*)event 
 {
 	// get the pressed key
-	NSLog(@"keyDown (cloud): %x", [[event characters] characterAtIndex:0]);
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	
 	if (key == NSRightArrowFunctionKey || key == NSLeftArrowFunctionKey || key == NSUpArrowFunctionKey || key == NSDownArrowFunctionKey)
 	{
-		if (!activeTag)
+		switch (key)
 		{
-			//TODO
+			case NSRightArrowFunctionKey: [self moveSelectionRight];
+				break;
+			case NSLeftArrowFunctionKey: [self moveSelectionLeft];
+				break;
+			case NSUpArrowFunctionKey: [self moveSelectionUp];
+				break;
+			case NSDownArrowFunctionKey: [self moveSelectionDown];
+				break;
 		}
 	} 
 	else
@@ -285,4 +297,26 @@ bound to visibleTags
 		[[self nextResponder] keyDown:event];
 	}
 }
+
+#pragma mark moving selection
+- (void)moveSelectionRight
+{
+	NSLog(@"right");
+}
+
+- (void)moveSelectionLeft
+{
+	NSLog(@"left");
+}
+
+- (void)moveSelectionUp
+{
+	NSLog(@"up");
+}
+
+- (void)moveSelectionDown
+{
+	NSLog(@"down");
+}
+
 @end
