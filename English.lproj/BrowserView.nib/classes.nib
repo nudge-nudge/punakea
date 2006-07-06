@@ -1,9 +1,10 @@
 {
     IBClasses = (
         {
-            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; tagButtonClicked = id; }; 
+            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = BrowserViewController; 
             LANGUAGE = ObjC; 
+            OUTLETS = {outlineView = PAResultsOutlineView; }; 
             SUPERCLASS = PASubViewController; 
         }, 
         {

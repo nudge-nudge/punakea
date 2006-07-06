@@ -13,10 +13,11 @@
 #import "PASelectedTags.h"
 #import "PAQuery.h"
 #import "PATypeAheadFind.h"
+#import "PAResultsOutlineView.h"
 
 @interface BrowserViewController : PASubViewController {
 
-	IBOutlet NSOutlineView *outlineView;
+	IBOutlet PAResultsOutlineView *outlineView;
 
 	PATagger *tagger;
 	PATags *tags;

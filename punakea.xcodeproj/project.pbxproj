@@ -94,8 +94,6 @@
 		6588EE170A07463D00082718 /* MDIconViewOnDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE130A07463D00082718 /* MDIconViewOnDisabled.tiff */; };
 		6588EE180A07463D00082718 /* MDListViewOffDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE140A07463D00082718 /* MDListViewOffDisabled.tiff */; };
 		6588EE190A07463D00082718 /* MDListViewOnDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE150A07463D00082718 /* MDListViewOnDisabled.tiff */; };
-		658DCD0909E2581F008FBC2C /* ResultsOutlineViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 658DCD0709E2581F008FBC2C /* ResultsOutlineViewController.h */; };
-		658DCD0A09E2581F008FBC2C /* ResultsOutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DCD0809E2581F008FBC2C /* ResultsOutlineViewController.m */; };
 		658DCD0F09E25908008FBC2C /* QueryDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */; };
 		658DCD1009E25908008FBC2C /* QueryDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */; };
 		658DCD1A09E25A4F008FBC2C /* MDSimpleGrouping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */; };
@@ -172,7 +170,6 @@
 				4842FC1309DA804100C4A931 /* PATagButtonCell.h in CopyFiles */,
 				480FFF9B09DACF0900C1E6BA /* PATagCloudController.h in CopyFiles */,
 				489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */,
-				658DCD0909E2581F008FBC2C /* ResultsOutlineViewController.h in CopyFiles */,
 				658DCD0F09E25908008FBC2C /* QueryDelegateCategory.h in CopyFiles */,
 				65C4890609E2C30F00A45A17 /* PAResultsOutlineView.h in CopyFiles */,
 				65A74ABB09E3AA23001131A8 /* PAResultsTableColumn.h in CopyFiles */,
@@ -300,8 +297,6 @@
 		6588EE130A07463D00082718 /* MDIconViewOnDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDIconViewOnDisabled.tiff; sourceTree = "<group>"; };
 		6588EE140A07463D00082718 /* MDListViewOffDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDListViewOffDisabled.tiff; sourceTree = "<group>"; };
 		6588EE150A07463D00082718 /* MDListViewOnDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDListViewOnDisabled.tiff; sourceTree = "<group>"; };
-		658DCD0709E2581F008FBC2C /* ResultsOutlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsOutlineViewController.h; sourceTree = "<group>"; };
-		658DCD0809E2581F008FBC2C /* ResultsOutlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsOutlineViewController.m; sourceTree = "<group>"; };
 		658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryDelegateCategory.h; sourceTree = "<group>"; };
 		658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryDelegateCategory.m; sourceTree = "<group>"; };
 		658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = MDSimpleGrouping.plist; sourceTree = "<group>"; };
@@ -644,8 +639,6 @@
 				65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */,
 				65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */,
 				65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */,
-				658DCD0709E2581F008FBC2C /* ResultsOutlineViewController.h */,
-				658DCD0809E2581F008FBC2C /* ResultsOutlineViewController.m */,
 			);
 			name = ResultsView;
 			sourceTree = "<group>";
@@ -844,7 +837,6 @@
 				4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */,
 				480FFF9C09DACF0900C1E6BA /* PATagCloudController.m in Sources */,
 				489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */,
-				658DCD0A09E2581F008FBC2C /* ResultsOutlineViewController.m in Sources */,
 				658DCD1009E25908008FBC2C /* QueryDelegateCategory.m in Sources */,
 				65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */,
 				65A74ABC09E3AA23001131A8 /* PAResultsTableColumn.m in Sources */,

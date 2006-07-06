@@ -10,7 +10,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	[self setIndentationPerLevel:16.0];
 	[self setIntercellSpacing:NSMakeSize(0,1)];
-	[[self delegate] setOutlineView:self];
+	//[[self delegate] setOutlineView:self];
 	
 	// Auto-size first column
 	NSRect bounds = [self bounds];
