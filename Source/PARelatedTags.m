@@ -49,7 +49,10 @@ use this init if you want performance, it uses a query passed from the outside
 - (id)initWithQuery:(PAQuery*)aQuery;
 {
 	if (self = [super init])
-	{
+	{	
+		tagger = [PATagger sharedInstance];
+		tags = [tagger tags];
+		
 		[self setQuery:aQuery];
 		[self setRelatedTags:[[NSMutableArray alloc] init]];
 		

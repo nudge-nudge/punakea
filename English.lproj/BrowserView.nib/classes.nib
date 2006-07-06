@@ -1,7 +1,7 @@
 {
     IBClasses = (
         {
-            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
+            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; tagButtonClicked = id; }; 
             CLASS = BrowserViewController; 
             LANGUAGE = ObjC; 
             SUPERCLASS = PASubViewController; 
@@ -19,7 +19,7 @@
         {
             CLASS = PASelectedTagsView; 
             LANGUAGE = ObjC; 
-            OUTLETS = {controller = Controller; }; 
+            OUTLETS = {browserViewController = BrowserViewController; }; 
             SUPERCLASS = NSMatrix; 
         }, 
         {

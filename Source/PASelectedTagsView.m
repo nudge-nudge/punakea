@@ -52,22 +52,22 @@
     return self;
 }
 
-- (void)dealloc
-{
-	[selectedTags release];
-	[super dealloc];
-}
 
 - (void)awakeFromNib
 {
 	selectedTags = [browserViewController selectedTags];
-	[selectedTags retain];
 	
 	[selectedTags addObserver:self
 				   forKeyPath:@"selectedTags"
 					  options:0
 					  context:NULL];
 }
+
+- (void)dealloc
+{
+	[super dealloc];
+}
+
 
 /**
 bound to selectedTags

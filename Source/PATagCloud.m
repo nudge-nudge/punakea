@@ -93,6 +93,7 @@ bound to visibleTags
 	while (tag = [tagEnumerator nextObject])
 	{
 		PATagButton *button = [[PATagButton alloc] initWithTag:tag attributes:[browserViewController viewAttributesForTag:tag]];
+		[button setTarget:browserViewController];
 		[button sizeToFit];
 		[tagButtonDict setObject:button forKey:[tag name]];
 		[button release];

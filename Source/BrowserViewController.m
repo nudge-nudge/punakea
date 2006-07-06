@@ -55,6 +55,8 @@
 						   context:NULL];
 		
 		[self setVisibleTags:[tags tags]];
+		
+		[NSBundle loadNibNamed:nibName owner:self];
 	}
 	return self;
 }

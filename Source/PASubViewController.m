@@ -15,7 +15,7 @@
 {
     if (self = [super init])
 	{
-		[NSBundle loadNibNamed:nibName owner:self];
+		//TODO init needs to be called before loading the nib.
 	}
     return self;
 }
