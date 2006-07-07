@@ -5,10 +5,6 @@
 #import "PATagButtonCell.h"
 
 @interface PATagButton : NSButton
-{
-	int row;
-	int column;
-}
 
 - (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag attributes:(NSDictionary*)attributes;
 
@@ -17,9 +13,5 @@
 
 - (BOOL)isHovered;
 - (void)setHovered:(BOOL)flag;
-
-- (void)setRow:(int)aRow column:(int)aColumn;
-- (int)row;
-- (int)column;
 
 @end

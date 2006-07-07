@@ -50,20 +50,4 @@ should be overridden according to apple docs
 	[[self cell] setHovered:flag];
 }
 
-- (void)setRow:(int)aRow column:(int)aColumn
-{
-	row = aRow;
-	column = aColumn;
-}
-
-- (int)row
-{
-	return row;
-}
-
-- (int)column
-{
-	return column;
-}
-
 @end

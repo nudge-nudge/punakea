@@ -1,6 +1,7 @@
 /* PATagCloud */
 
 #import <Cocoa/Cocoa.h>
+#import <math.h>
 #import "PATagCloudController.h"
 #import "PATag.h"
 #import "PATagButton.h"
@@ -19,21 +20,13 @@ displays all visibleTags in a nice tag cloud view
 	
 	int tagPosition; /**< holds the position where the new line starts */
 	
-	PATagButton *activeTag; /**< currently selected tag */
-	
-	int rowCount;
-	int columnCount;
-	
-	NSMutableArray *columnCountInRow;
+	PATagButton *activeButton; /**< currently selected tag */
 }
 
 - (NSArray*)displayTags;
 - (void)setDisplayTags:(NSArray*)otherTags;
 
-- (NSMutableArray*)columnCountInRow;
-- (void)setColumnCountInRow:(NSMutableArray*)array;
-
-- (PATagButton*)activeTag;
-- (void)setActiveTag:(PATagButton*)aTag;
+- (PATagButton*)activeButton;
+- (void)setactiveButton:(PATagButton*)aTag;
 
 @end
