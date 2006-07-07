@@ -86,22 +86,21 @@ bound to selectedTags
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect 
 {
-	[self drawBorder];
+	[[NSColor colorWithDeviceRed:(224.0/255.0) green:(224.0/255.0) blue:224 alpha:1.0] set];
+	NSRectFill([self bounds]);
+
+	[[NSColor colorWithDeviceRed:(104.0/255.0) green:(104.0/255.0) blue:(104.0/255.0) alpha:1.0] set];	
+	NSRect bounds = [self bounds];	
+	NSRect topLineRect = NSMakeRect(bounds.origin.x,
+									bounds.origin.y,
+									bounds.size.width,
+									1);
+	NSRectFill(topLineRect);
 	
 	// Doesn't work like this. We can't add new cells for every drawing!
 	//[self updateView];
 
 	[super drawRect:rect];
-}
-
-- (void)drawBorder
-{
-	NSRect bounds = [self bounds];
-	[[NSColor whiteColor] set];
-	[NSBezierPath fillRect:bounds];
-	
-	[[NSColor lightGrayColor] set];
-	[NSBezierPath strokeRect:bounds];
 }
 
 - (void)updateView
