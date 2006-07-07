@@ -285,6 +285,10 @@ bound to visibleTags
 }
 
 #pragma mark event handling
+/*
+
+TODO: ResultsView couldn't get focused any more!!
+
 - (BOOL)acceptsFirstResponder
 {
 	return YES;
@@ -299,7 +303,7 @@ bound to visibleTags
 {
 	[self setactiveButton:nil];
 	return NO;
-}
+}*/
 
 - (void)keyDown:(NSEvent*)event 
 {
