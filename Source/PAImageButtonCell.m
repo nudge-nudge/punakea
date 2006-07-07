@@ -142,7 +142,8 @@
 
 - (void)mouseExited:(NSEvent *)event
 {
-	[self setState:previousState];		
+	[self setState:previousState];	
+	[[self controlView] setNeedsDisplay:YES];	
 }
 
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp

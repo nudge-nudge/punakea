@@ -106,9 +106,11 @@ bound to selectedTags
 
 - (void)updateView
 { 
+	// TODO: Why do we remove ALL cells on every update??
+
 	// remove all content
 	int rows = [self numberOfRows];
-	for (rows;rows>0;rows--)
+	for (rows; rows>0; rows--)
 	{
 		int removeRow = rows - 1;
 		[self removeRow:removeRow];
@@ -191,7 +193,7 @@ bound to selectedTags
 			PATag *tag = [selectedTags tagAtIndex:counter];
 			PASelectedTagCell *cell = [[PASelectedTagCell alloc] initTextCell:[tag name]];
 			//[cell setBezelStyle:NSRecessedBezelStyle];
-			[self putCell:cell atRow:i column:j];
+			[self putCell:[cell autorelease] atRow:i column:j];
 			//[cell release];
 			counter++;
 		}

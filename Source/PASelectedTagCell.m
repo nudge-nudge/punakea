@@ -29,6 +29,11 @@
 
 - (void)dealloc
 {
+	if(stopButton)
+	{
+		[stopButton removeFromSuperview];
+		[stopButton release];
+	}
 	if(valueDict) [valueDict release];
 	[super dealloc];
 }
@@ -98,22 +103,27 @@
 	    withAttributes:fontAttributes];
 		
 	// Draw stop button
-	/*NSRect stopButtonFrame = cellFrame;
+	NSRect stopButtonFrame = cellFrame;
 	stopButtonFrame.origin.x = cellFrame.origin.x + cellFrame.size.width - 20;
-	stopButtonFrame.origin.y = cellFrame.origin.y + 3;
+	stopButtonFrame.origin.y = cellFrame.origin.y + 4;
+	NSSize imageSize = [[NSImage imageNamed:@"stop.tif"] size];
+	stopButtonFrame.size.width = imageSize.width;
+	stopButtonFrame.size.height = imageSize.height;
 		
 	if(!stopButton) {	
 		stopButton = [[PAImageButton alloc] initWithFrame:stopButtonFrame];
 		[stopButton setImage:[NSImage imageNamed:@"stop.tif"] forState:PAOffState];
 		[stopButton setImage:[NSImage imageNamed:@"stopPressed"] forState:PAOnState];
-		[stopButton setImage:[NSImage imageNamed:@"stopRollover"] forState:PAOffHighlightedState];
+		[stopButton setImage:[NSImage imageNamed:@"stopRollover"] forState:PAOffHoveredState];
 		[stopButton setState:PAOffState];
 
 		[controlView addSubview:stopButton]; 
-		NSLog(@"adding");
+		
+		[[stopButton cell] setShowsBorderOnlyWhileMouseInside:YES];
 	} else {
 		[stopButton setFrame:stopButtonFrame];
-	}*/
+		[stopButton setNeedsDisplay];
+	}
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView

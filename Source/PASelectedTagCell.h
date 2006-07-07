@@ -14,6 +14,7 @@
 
 	NSDictionary *valueDict;
 	
+	PAImageButton *contentButton;
 	PAImageButton *stopButton;
 
 }
