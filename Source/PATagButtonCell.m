@@ -1,5 +1,11 @@
 #import "PATagButtonCell.h"
 
+@interface PATagButtonCell (PrivateAPI)
+
+- (void)drawHoverEffectWithFrame:(NSRect)cellFrame;
+
+@end
+
 @implementation PATagButtonCell
 
 #pragma mark init
@@ -29,12 +35,17 @@
 {
 	if (isHovered)
 	{
-		[[NSColor lightGrayColor] set];
-		NSBezierPath *path = [NSBezierPath bezierPathWithOvalInRect:cellFrame];
-		[path fill];
+		[self drawHoverEffectWithFrame:cellFrame];
 	}	
 	
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
+}
+
+- (void)drawHoverEffectWithFrame:(NSRect)cellFrame
+{
+	
+	[[NSColor colorWithDeviceRed:0.0 green:0.0 blue:128.0 alpha:1.0] set];
+	[NSBezierPath strokeRect:cellFrame];
 }
 
 #pragma mark accessors
