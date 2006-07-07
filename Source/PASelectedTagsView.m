@@ -86,7 +86,7 @@ bound to selectedTags
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect 
 {
-	[[NSColor colorWithDeviceRed:(224.0/255.0) green:(224.0/255.0) blue:224 alpha:1.0] set];
+	[[NSColor colorWithDeviceRed:(224.0/255.0) green:(224.0/255.0) blue:(224.0/255.0) alpha:1.0] set];
 	NSRectFill([self bounds]);
 
 	[[NSColor colorWithDeviceRed:(104.0/255.0) green:(104.0/255.0) blue:(104.0/255.0) alpha:1.0] set];	
