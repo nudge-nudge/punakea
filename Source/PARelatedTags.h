@@ -17,6 +17,8 @@
 finds related tags for a given query or a given selection of tags.
 use either initWithTags: selectedTags and set the selectedTags when needed (used by the tagger)
  OR initWithTags: query: and pass a query from the outside (used by the browser)
+ 
+ TODO make related tags need to know which tags are selected. this class is far from perfect!!
  */
 @interface PARelatedTags : NSObject {
 	PATagger *tagger;
@@ -31,7 +33,6 @@ use either initWithTags: selectedTags and set the selectedTags when needed (used
 
 - (id)initWithSelectedTags:(PASelectedTags*)otherSelectedTags;
 - (id)initWithQuery:(PAQuery*)aQuery;
-
 
 - (PASelectedTags*)selectedTags;
 - (void)setSelectedTags:(PASelectedTags*)otherTags;

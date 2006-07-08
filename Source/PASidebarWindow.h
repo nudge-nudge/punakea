@@ -16,9 +16,13 @@ TODO delay
 	NSMutableDictionary *appearance;
 	
 	BOOL expanded;
+	BOOL dragMode;
 }
 
 - (BOOL)isExpanded;
-- (void)setExpanded:(BOOL)isExpanded;
+- (void)setExpanded:(BOOL)flag;
+
+- (BOOL)isDragMode;
+- (void)setDragMode:(BOOL)flag;
 	
 @end

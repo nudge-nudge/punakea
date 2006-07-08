@@ -157,7 +157,7 @@ use this init if you want performance, it uses a query passed from the outside
 			{
 				PATag *tag = [tagger simpleTagForName:[keywords objectAtIndex:j]];
 				
-				if (![relatedTags containsObject:tag])
+				if (![relatedTags containsObject:tag] && ![selectedTags containsObject:tag])
 				{
 					[self insertObject:tag inRelatedTagsAtIndex:[relatedTags count]];
 				}

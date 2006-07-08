@@ -44,6 +44,7 @@
 	
 	// move to screen edge - according to prefs
 	[self setExpanded:YES];
+	[self setDragMode:NO];
 	[self recede:NO];
 }
 
@@ -57,13 +58,19 @@
 - (void)mouseEntered:(NSEvent *)theEvent 
 {
 	NSLog(@"enter");
-	[self show];
+	if (!dragMode)
+	{
+		[self show];
+	}
 }
 
 - (void)mouseExited:(NSEvent *)theEvent 
 {
 	NSLog(@"exit");
-	[self recede];
+	if (!dragMode)
+	{
+		[self recede];
+	}
 }
 
 
@@ -127,6 +134,16 @@
 - (void)setExpanded:(BOOL)flag 
 {
 	expanded = flag;
+}
+
+- (BOOL)isDragMode
+{
+	return dragMode;
+}
+
+- (void)setDragMode:(BOOL)flag
+{
+	dragMode = flag;
 }
 
 @end

@@ -26,6 +26,7 @@
 - (void)removeAllObjects;
 - (void)addObjectsFromArray:(NSArray*)array;
 - (void)removeObjectsInArray:(NSArray*)array;
+- (BOOL)containsObject:(PATag*)aTag;
 - (NSEnumerator*)objectEnumerator;
 - (PATag*)tagAtIndex:(unsigned int)i;
 

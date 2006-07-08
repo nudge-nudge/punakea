@@ -99,6 +99,11 @@
 	}
 }
 
+- (BOOL)containsObject:(PATag*)aTag
+{
+	return [selectedTags containsObject:aTag];
+}
+
 - (NSEnumerator*)objectEnumerator
 {
 	return [selectedTags objectEnumerator];

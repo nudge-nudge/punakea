@@ -17,11 +17,11 @@
 @implementation PATypeAheadFind
 
 #pragma mark init + dealloc
-- (id)initWithTags:(PATags*)tags
+- (id)init
 {
 	if (self = [super init])
 	{
-		allTags = [[PATagger sharedInstance] tags];
+		tags = [[PATagger sharedInstance] tags];
 		matchingTags = [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -30,7 +30,7 @@
 - (void)dealloc
 {
 	[matchingTags release];
-	[allTags release];
+	[tags release];
 	[super dealloc];
 }
 
@@ -60,7 +60,7 @@
 	//TODO make more efficient
 	[matchingTags removeAllObjects];
 	
-	NSEnumerator *e = [allTags objectEnumerator];
+	NSEnumerator *e = [tags objectEnumerator];
 	PATag *tag;
 	
 	while (tag = [e nextObject])
