@@ -33,7 +33,7 @@
 		[query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
 		[query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
-		relatedTags = [[PARelatedTags alloc] initWithQuery:query];
+		relatedTags = [[PARelatedTags alloc] initWithSelectedTags:selectedTags query:query];
 		
 		typeAheadFind = [[PATypeAheadFind alloc] init];
 		

@@ -3,7 +3,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PATags.h"
 #import "PATagger.h"
-#import "PARelatedTags.h"
+#import "PARelatedTagsStandalone.h"
 #import "PATypeAheadFind.h"
 
 @interface TaggerController : NSWindowController
@@ -23,7 +23,7 @@
 	
 	PATypeAheadFind *typeAheadFind;
 	
-	PARelatedTags *relatedTags;
+	PARelatedTagsStandalone *relatedTags;
 }
 
 - (id)initWithWindowNibName:(NSString*)windowNibName;

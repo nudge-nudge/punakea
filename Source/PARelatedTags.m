@@ -18,35 +18,8 @@
 @implementation PARelatedTags
 
 #pragma mark init + dealloc
-/**
-use this init if you want an encapsulated way to get related tags for the
- given selected tags
- @param otherSelectedTags tags for which to find related tags
- */
-- (id)initWithSelectedTags:(PASelectedTags*)otherSelectedTags 
-{
-	if (self = [super init])
-	{
-		tagger = [PATagger sharedInstance];
-		tags = [tagger tags];
-		
-		[self setRelatedTags:[[NSMutableArray alloc] init]];
-	
-		[self setSelectedTags:otherSelectedTags];
-	
-		//create appropriate query
-		query = [[PAQuery alloc] initWithTags:otherSelectedTags];
-		nf = [NSNotificationCenter defaultCenter];
-		[nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
-	}
-	return self;
-}
 
-/**
-use this init if you want performance, it uses a query passed from the outside
- (i.e. from the browser)
- */
-- (id)initWithQuery:(PAQuery*)aQuery;
+- (id)initWithSelectedTags:(PASelectedTags*)otherSelectedTags query:(PAQuery*)aQuery;
 {
 	if (self = [super init])
 	{	
@@ -116,8 +89,6 @@ use this init if you want performance, it uses a query passed from the outside
 	[otherTags retain];
 	[selectedTags release];
 	selectedTags = otherTags;
-	
-	[query setTags:selectedTags];
 }
 
 #pragma mark logic
