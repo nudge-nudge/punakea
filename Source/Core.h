@@ -4,6 +4,8 @@
 #import "PATags.h"
 #import "PASimpleTagFactory.h"
 #import "PATagger.h"
+
+#import "SidebarController.h"
 #import "BrowserController.h"
 
 @interface Core : NSWindowController

@@ -45,6 +45,9 @@
 	BrowserController *browserController = [[BrowserController alloc] initWithWindowNibName:@"Browser"];
 	NSWindow *browserWindow = [browserController window];
 	[browserWindow makeKeyAndOrderFront:nil];
+	
+	SidebarController *sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
+	[sidebarController window];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)note 

@@ -47,7 +47,9 @@ calculates the starting point in the next row according to the height of all the
 - (PATagButton*)upperLeftButton;
 - (NSPoint)centerOfButton:(PATagButton*)button;
 
-- (PATagButton*)buttonNearestPoint:(NSPoint)center inButtons:(NSMutableArray*)buttons;
+- (PATagButton*)buttonNearestPoint:(NSPoint)center inButtons:(NSArray*)buttons;
+- (NSMutableArray*)buttonsWithOriginOnHorizontalLineWithPoint:(NSPoint)point;
+
 - (double)distanceFrom:(NSPoint)a to:(NSPoint)b;
 
 @end
@@ -345,7 +347,10 @@ bound to visibleTags
 	}
 	else
 	{
-		//TODO wrap
+		// wrap around
+		NSPoint point = NSMakePoint(0,frame.origin.y);
+		buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
+		[self setactiveButton:[self buttonNearestPoint:point inButtons:buttons]];
 	}
 }
 
@@ -362,24 +367,30 @@ bound to visibleTags
 	}
 	else
 	{
-		//TODO wrap
+		// wrap around
+		NSRect viewFrame = [self bounds];
+		NSPoint point = NSMakePoint(viewFrame.size.width,frame.origin.y);
+		buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
+		[self setactiveButton:[self buttonNearestPoint:point inButtons:buttons]];
 	}
 }
 
 - (void)moveSelectionUp
 {
 	NSRect frame = [activeButton frame];
-	NSMutableArray *buttons = [self buttonsAbove:frame.origin];
-	
 	NSPoint center = [self centerOfButton:activeButton];
-		
+	NSMutableArray *buttons = [self buttonsAbove:frame.origin];
+
 	if ([buttons count] > 0)
 	{
 		[self setactiveButton:[self buttonNearestPoint:center inButtons:buttons]];
 	}
 	else
 	{
-		//TODO wrap
+		// wrap around
+		NSPoint point = NSMakePoint(center.x,0);
+		NSArray *allButtons = [tagButtonDict allValues];
+		[self setactiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
 	}
 }
 
@@ -396,7 +407,11 @@ bound to visibleTags
 	}
 	else
 	{
-		//TODO wrap
+		// wrap around
+		NSRect viewFrame = [self bounds];
+		NSPoint point = NSMakePoint(center.x,viewFrame.size.height);
+		NSArray *allButtons = [tagButtonDict allValues];
+		[self setactiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
 	}
 }
 
@@ -487,7 +502,7 @@ bound to visibleTags
 	return center;
 }
 
-- (PATagButton*)buttonNearestPoint:(NSPoint)center inButtons:(NSMutableArray*)buttons
+- (PATagButton*)buttonNearestPoint:(NSPoint)center inButtons:(NSArray*)buttons
 {
 	NSEnumerator *e = [buttons objectEnumerator];
 	PATagButton *button;
@@ -532,6 +547,26 @@ bound to visibleTags
 	}
 	
 	return result;
+}
+
+- (NSMutableArray*)buttonsWithOriginOnHorizontalLineWithPoint:(NSPoint)point
+{
+	NSEnumerator *e = [tagButtonDict objectEnumerator];
+	PATagButton *button;
+	
+	NSMutableArray *tags = [NSMutableArray array];
+	
+	while (button = [e nextObject])
+	{
+		NSRect frame = [button frame];
+		
+		if (frame.origin.y == point.y)
+		{
+			[tags addObject:button];
+		}
+	}
+	
+	return tags;
 }
 
 - (double)distanceFrom:(NSPoint)a to:(NSPoint)b

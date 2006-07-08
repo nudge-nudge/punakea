@@ -21,7 +21,6 @@
 {
 	NSMutableDictionary *attribs = [NSMutableDictionary dictionary];
 	
-	NSColor *c = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:128.0 alpha:1.0];
 	//externalize sizes
 	float tagRating = [tag relativeRatingToTag:[self currentBestTag]];
 	int size = 30 * tagRating;
@@ -29,8 +28,9 @@
 		size = 10;
 	
 	NSFont *fnt = [NSFont fontWithName:@"Geneva" size:size];
+	NSColor *fgc = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:128.0 alpha:1.0];
 	
-	[attribs setObject:c forKey:NSForegroundColorAttributeName];
+	[attribs setObject:fgc forKey:NSForegroundColorAttributeName];
 	[attribs setObject:fnt forKey:NSFontAttributeName];
 	
 	return attribs;

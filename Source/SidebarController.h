@@ -1,5 +1,4 @@
 #import <Cocoa/Cocoa.h>
-#import "Core.h"
 #import "PATag.h"
 #import "PATagger.h"
 #import "TaggerController.h"
@@ -9,10 +8,10 @@
 
 @interface SidebarController : NSWindowController {
 	PATagger *tagger;
+	PATags *tags;
 	
 	IBOutlet PAFileBox *fileBox;
 	
-    IBOutlet Core *core; /**< tag controller for all tags */
     IBOutlet NSArrayController *popularTags;
     IBOutlet NSArrayController *recentTags;
 	

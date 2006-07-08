@@ -12,6 +12,7 @@
 - (void)awakeFromNib 
 {
 	tagger = [PATagger sharedInstance];
+	tags = [tagger tags];
 	
 	//TODO can be done from IB ... do this!
 	//init sorting
