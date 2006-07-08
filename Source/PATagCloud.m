@@ -285,10 +285,6 @@ bound to visibleTags
 }
 
 #pragma mark event handling
-/*
-
-TODO: ResultsView couldn't get focused any more!!
-
 - (BOOL)acceptsFirstResponder
 {
 	return YES;
@@ -302,8 +298,8 @@ TODO: ResultsView couldn't get focused any more!!
 - (BOOL)resignFirstResponder
 {
 	[self setactiveButton:nil];
-	return NO;
-}*/
+	return YES;
+}
 
 - (void)keyDown:(NSEvent*)event 
 {
