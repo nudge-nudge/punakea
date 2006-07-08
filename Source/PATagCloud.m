@@ -308,7 +308,10 @@ bound to visibleTags
 	// get the pressed key
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	
-	if (key == NSRightArrowFunctionKey || key == NSLeftArrowFunctionKey || key == NSUpArrowFunctionKey || key == NSDownArrowFunctionKey)
+	if (key == NSRightArrowFunctionKey || 
+		key == NSLeftArrowFunctionKey || 
+		key == NSUpArrowFunctionKey || 
+		key == NSDownArrowFunctionKey)
 	{
 		switch (key)
 		{
