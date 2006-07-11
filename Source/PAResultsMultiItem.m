@@ -19,6 +19,7 @@
 	{
 		items = [[NSMutableArray alloc] init];
 		tag = [[NSMutableDictionary alloc] init];
+		cellClass = [PAResultsMultiItemThumbnailCell class];
 	}	
 	return self;
 }
@@ -57,6 +58,26 @@
 - (void)setTag:(NSDictionary *)aTag
 {
 	tag = [aTag retain];
+}
+
+- (Class)cellClass
+{
+	return cellClass;
+}
+
+- (void)setCellClass:(Class)class
+{
+	cellClass = class;
+}
+
+- (int)numberOfItems
+{
+	return [items count];
+}
+
+- (id)objectAtIndex:(unsigned)index
+{
+	return [items objectAtIndex:index];
 }
 
 // TODO: - (int)heightOfItem

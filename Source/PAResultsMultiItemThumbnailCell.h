@@ -11,6 +11,8 @@
 
 @interface PAResultsMultiItemThumbnailCell : NSTextFieldCell {
 
+	NSString *value;
+
 }
 
 @end

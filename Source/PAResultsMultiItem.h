@@ -7,12 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PAResultsMultiItemThumbnailCell.h";
 
 
 @interface PAResultsMultiItem : NSObject {
 	
 	NSMutableArray *items;
 	NSMutableDictionary *tag;
+	Class cellClass;
 
 }
 
@@ -22,5 +24,6 @@
 - (void)setItems:(NSArray *)theItems;
 - (NSDictionary *)tag;
 - (void)setTag:(NSDictionary *)aTag;
+- (int)numberOfItems;
 
 @end

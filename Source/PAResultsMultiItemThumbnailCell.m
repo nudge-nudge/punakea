@@ -15,12 +15,16 @@
 - (id)initTextCell:(NSString *)aText
 {
 	self = [super initTextCell:aText];
-	//if (self) {}	
+	if (self)
+	{
+		value = aText;
+	}	
 	return self;
 }
 
 - (void)dealloc
 {
+	if(value) [value release];
 	[super dealloc];
 }
 
@@ -28,16 +32,26 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {	
-	if([self isHighlighted])
-		[[NSColor greenColor] set];
-	else
-		[[NSColor grayColor] set];
-	NSRectFill(cellFrame);
+	[[NSColor grayColor] set];
+	NSRectFill(cellFrame);	
+	
+	[[NSColor blueColor] set];
+	[value drawAtPoint:cellFrame.origin withAttributes:nil];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
+	NSLog(@"thumbnail highlight");
+	//[self setHighlighted:YES];
 	[self drawInteriorWithFrame:cellFrame inView:controlView];
+	[[NSColor greenColor] set];
+	NSRectFill(cellFrame);	
+}
+
+
++ (NSSize)cellSize
+{
+	return NSMakeSize(80, 80);
 }
 
 @end

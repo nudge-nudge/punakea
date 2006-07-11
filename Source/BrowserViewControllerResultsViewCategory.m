@@ -29,6 +29,11 @@
 			[dict setValue:[item valueForAttribute:(id)kMDItemLastUsedDate] forKey:@"lastUsedDate"];
 			return dict;
 		}
+		if([[item class] isEqualTo:[PAResultsMultiItem class]])
+		{
+			[(PAResultsMultiItem *)item setCellClass:[PAResultsMultiItemThumbnailCell class]];
+			return [item retain];
+		}
 	}
 	return @"hi";
 }
@@ -60,6 +65,10 @@
 			int startIndex = index * 3;		// TODO: Number of items per row is variable number
 			int endIndex = (index + 1) * 3;
 			if (endIndex > [group resultCount]) endIndex = [group resultCount];
+			
+			// TEMP - add ALL result items to MultiItem
+			startIndex = 0;
+			endIndex = [group resultCount];
 			
 			for(i = startIndex; i < endIndex; i++)
 				[multiItem addItem:[group resultAtIndex:i]];
@@ -108,7 +117,10 @@
 			int numberOfRows = numberOfItemsInGroup / numberOfColumns;
 			if(numberOfItemsInGroup % numberOfColumns != 0) numberOfRows++;
 			
-			return numberOfRows;
+			// TEMP return 1 item only
+			//return numberOfRows;
+			return 1;
+			
 		}
 		
 		return [group resultCount];
@@ -123,7 +135,11 @@
 {
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) return 20;
 	if([[item class] isEqualTo:[NSMetadataItem class]]) return 19;
-	return 40;	
+	
+	// Calc height of multi item dynamically
+	PAResultsMultiItem *multiItem = item;
+	NSSize cellSize = [[item cellClass] cellSize];
+	return ([multiItem numberOfItems] / 3 + 1) * cellSize.height;	
 }
 
 - (id)tableColumn:(NSTableColumn *)column
@@ -134,11 +150,11 @@
 	id item = [ov itemAtRow:row];
 	
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
-		return [[[PAResultsGroupCell alloc] initTextCell:@"hallo"] autorelease];
+		return [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
 	if([[item class] isEqualTo:[NSMetadataItem class]])
-		return [[[PAResultsItemCell alloc] initTextCell:@"hallo"] autorelease];
+		return [[[PAResultsItemCell alloc] initTextCell:@""] autorelease];
 	
-	return [[[PAResultsMultiItemCell alloc] initTextCell:@"hallo"] autorelease];
+	return [[[PAResultsMultiItemCell alloc] initTextCell:@""] autorelease];
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView
@@ -162,8 +178,8 @@
 	//	[(PAResultsItemCell *)cell setItem:(NSMetadataItem *)item];
 	
 	// TODO Replace this by setObjectValue
-	if([[item class] isEqualTo:[PAResultsMultiItem class]])
-		[(PAResultsMultiItemCell *)cell setItem:(PAResultsMultiItem *)item];
+	/*if([[item class] isEqualTo:[PAResultsMultiItem class]])
+		[(PAResultsMultiItemCell *)cell setItem:(PAResultsMultiItem *)item];*/
 }
 
 - (void)outlineViewItemDidCollapse:(NSNotification *)notification
