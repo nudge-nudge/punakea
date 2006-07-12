@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
+#import "PATagger.h"
 #import "PASelectedTags.h"
 
 
@@ -50,6 +51,9 @@ initializer
 
 - (PASelectedTags*)tags;
 - (void)setTags:(PASelectedTags*)otherTags;
+
+//synchronous searching
+- (NSArray*)filesForTag:(PASimpleTag*)tag;
 
 //wrapper methods
 - (BOOL)startQuery;

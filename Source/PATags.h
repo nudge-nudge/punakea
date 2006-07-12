@@ -7,10 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATag.h"
 #import "PASimpleTag.h"
 #import "PASimpleTagFactory.h"
-#import "PAQuery.h"
 
 @interface PATags : NSObject {
 	NSMutableArray *tags;

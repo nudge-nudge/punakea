@@ -66,22 +66,6 @@
 }
 
 #pragma mark loading and saving tags
-/* TODO deprecated
-- (void)openFile
-{
-	NSArray *selection = [resultController selectedObjects];
-	
-	if ([selection count] > 0)
-	{
-		NSString *path = [[selection objectAtIndex:0] valueForKey:@"kMDItemPath"];
-		NSURL *fileURL = [NSURL fileURLWithPath: path];
-		
-		NSWorkspace * ws = [NSWorkspace sharedWorkspace];
-		[ws openURL: fileURL];
-	}
-}
-*/
-
 - (NSString *)pathForDataFile 
 { 
 	NSFileManager *fileManager = [NSFileManager defaultManager]; 
@@ -134,16 +118,16 @@
 #pragma mark working with tags (renaming and deleting)
 - (void)removeTag:(PASimpleTag*)tag
 {
-	NSArray *files;
-	//TODO get all files into files
+	PAQuery *query = [[PAQuery alloc] init];
+	NSArray *files = [query filesForTag:tag];	
 	
 	[tagger removeTag:tag fromFiles:files];
 }
 
 - (void)renameFromTag:(PASimpleTag*)fromTag to:(PASimpleTag*)toTag
 {
-	NSArray *files;
-	//TODO get all files into files
+	PAQuery *query = [[PAQuery alloc] init];
+	NSArray *files = [query filesForTag:fromTag];	
 	
 	[tagger renameTag:fromTag toTag:toTag onFiles:files];
 }

@@ -19,6 +19,7 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 
 - (void)tagsHaveChanged:(NSNotification *)note;
 - (void)updateQueryFromTags;
+- (NSString*)queryStringForTags:(NSArray*)tags;
 
 - (NSPredicate *)predicate;
 - (void)setPredicate:(NSPredicate *)aPredicate;
@@ -59,6 +60,26 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	if(groupingAttributes) [groupingAttributes release];
 	if(predicate) [predicate release];
 	[super dealloc];
+}
+
+#pragma mark Synchronous Searching
+- (NSArray*)filesForTag:(PASimpleTag*)tag
+{
+	NSString *searchString = [self queryStringForTags:[NSArray arrayWithObjects:tag,nil]];
+	MDQueryRef *query = MDQueryCreate(NULL,searchString,NULL,NULL);
+	MDQueryExecute(query,kMDQuerySynchronous);
+	CFIndex resultCount = MDQueryGetResultCount(query);
+	
+	NSMutableArray *results = [NSMutableArray array];
+	
+	for (int i=0;i<resultCount;i++)
+	{
+		MDItemRef *mditem = MDQueryGetResultAtIndex(query,i);
+		NSString *fileName = MDItemCopyAttribute(mditem,@"kMDItemPath");
+		[results addObject:fileName];
+	}
+
+	return results;
 }
 
 #pragma mark Actions
@@ -129,6 +150,21 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 
 - (void)updateQueryFromTags
 {
+	NSMutableString *queryString = [self queryStringForTags:[tags selectedTags]];
+	
+	if (![queryString isEqualToString:@""])
+	{
+		[self setPredicate:[NSPredicate predicateWithFormat:queryString]];
+	}
+	
+	if (![self isStarted])
+	{
+		[self startQuery];
+	}
+}
+
+- (NSString*)queryStringForTags:(NSArray*)tags
+{
 	NSMutableString *queryString = [NSMutableString stringWithString:@""];
 	
 	NSEnumerator *e = [tags objectEnumerator];
@@ -146,16 +182,9 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 		[queryString appendString:anotherTagQuery];
 	}
 	
-	if (![queryString isEqualToString:@""])
-	{
-		[self setPredicate:[NSPredicate predicateWithFormat:queryString]];
-	}
-	
-	if (![self isStarted])
-	{
-		[self startQuery];
-	}
+	return queryString;
 }
+
 
 #pragma mark Notifications
 /**

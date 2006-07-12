@@ -27,6 +27,10 @@
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
 		
+		/* Debug */
+		PAQuery *q = [[PAQuery alloc] init];
+		[q filesForTag:[tagger simpleTagForName:@"test"]];
+		
 		selectedTags = [[PASelectedTags alloc] init];
 		
 		query = [[PAQuery alloc] init];
