@@ -48,80 +48,6 @@
 }
 
 #pragma mark tag field delegates
-//TODO only on hitting enter!!!
-/* deprecated - use taggerController instead
-- (void)controlTextDidEndEditing:(NSNotification *)aNotification
-{
-	NSString *tmpString = [tagField stringValue];
-	
-	//only if there is any text in the field
-	if (![tmpString isEqualToString:@""])
-	{
-		PASimpleTag *tag = [[controller tags] simpleTagForName:tmpString];
-
-		[self addTagToFileTags:tag];
-		[self updateTagsOnFile];
-	}
-}
-
-#pragma mark click targets
-- (void)addPopularTag 
-{
-	if ([[popularTags selectedObjects] count] > 0)
-	{
-		PATag *tag = [[popularTags selectedObjects] objectAtIndex:0];
-		[self addTagToFileTags:tag];
-		[self updateTagsOnFile];
-	}
-}
-	
-- (void)addRecentTag
-{
-	if ([[recentTags selectedObjects] count] > 0)
-	{
-		PATag *tag = [[recentTags selectedObjects] objectAtIndex:0];
-		[self addTagToFileTags:tag];
-		[self updateTagsOnFile];
-	}
-}
-
-- (void)removeTagFromFile
-{
-	if ([[fileTags selectedObjects] count] > 0)
-	{
-		PATag *tag = [[fileTags selectedObjects] objectAtIndex:0];
-		[fileTags removeObject:tag];
-		[self updateTagsOnFile];
-	}
-}
-
-- (void)addTagToFileTags:(PATag*)tag
-{
-	if (![[fileTags arrangedObjects] containsObject:tag])
-		[fileTags addObject:tag];
-}
-
-- (void)updateTagsOnFile 
-{
-	NSArray *files = [fileBox files];
-	
-	NSEnumerator *fileEnumerator = [files objectEnumerator];
-	NSString *file;
-	
-	while (file = [fileEnumerator nextObject])
-	{
-		NSEnumerator *e = [[fileTags arrangedObjects] objectEnumerator];
-		PATag *tag;
-		
-		while (tag = [e nextObject])
-			[tag incrementUseCount];
-		
-		NSLog(@"trying to write %@ to %@",[controller tags],file);
-		[tagger writeTagsToFile:[fileTags arrangedObjects] filePath:file];
-	}
-}
-*/
-
 /**
 action called on dropping files to FileBox
  */
@@ -148,7 +74,6 @@ action called on dropping files to FileBox
 }
 
 #pragma mark delegate stuff
-
 // TODO using resultColumn - change this
 - (id)tableColumn:(NSTableColumn *)column
 	  inTableView:(NSTableView *)tableView

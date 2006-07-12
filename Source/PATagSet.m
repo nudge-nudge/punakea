@@ -8,7 +8,6 @@
 
 #import "PATagSet.h"
 
-//TODO save nsrect where the tag is drawn
 @implementation PATagSet
 
 -(id)init {
