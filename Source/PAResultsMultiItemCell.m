@@ -24,12 +24,12 @@
 
 - (void)dealloc
 {
-	if(cellDict) [cellDict release];
+	//if(cellDict) [cellDict release];
 	if(multiItem) [multiItem release];
 	[super dealloc];
 }
 
-- (void)initSubcells
+/* - (void)initSubcells
 {
 	unsigned i;
 	for(i = 0; i < [multiItem numberOfItems]; i++)
@@ -37,11 +37,11 @@
 		NSCell *cell = [[[multiItem cellClass] alloc] initTextCell:[[multiItem objectAtIndex:i] valueForAttribute:(id)kMDItemDisplayName]];
 		[cellDict setValue:cell forKey:[[multiItem objectAtIndex:i] valueForAttribute:(id)kMDItemPath]];
 	}
-}
+}*/
 
 
 #pragma mark Drawing
-/* - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {	
 	NSEnumerator *enumerator = [[controlView subviews] objectEnumerator];
 	id anObject;
@@ -51,7 +51,7 @@
 		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
 		{
 			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject item];
-			if([item isEqualTo:thisItem])
+			if([multiItem isEqualTo:thisItem])
 				matrix = anObject;
 		}
 	}
@@ -64,8 +64,8 @@
 	if([matrix superview] != controlView)
 	{	
 		matrix = [[PAResultsMultiItemMatrix alloc] initWithFrame:rect];
-		[matrix setItem:item];	
-		[matrix deselectAllCells];	
+		[matrix setCellClass:[multiItem cellClass]];
+		[matrix setItem:multiItem];	
 		[controlView addSubview:matrix];
 	}
 	else
@@ -73,6 +73,7 @@
 		[matrix setFrame:rect];
 	}
 	
+	/*
 	// Ensure at least one item of matrix is selected if cell is highlighted
 	if([self isHighlighted])
 	{
@@ -89,10 +90,10 @@
 		//NSLog(@"not high");
 		[matrix deselectAllCells];
 		//[matrix setNeedsDisplay];
-	}
-} */
+	}*/
+}
 
-- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+/*- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	// Init subcells if they necessary
 	if(!cellDict) 
@@ -112,17 +113,17 @@
 		subCellFrame.size.width = 100;
 		[subCell drawWithFrame:subCellFrame inView:controlView];	
 	}
-}
+} */
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	NSLog(@"hightlighting");
+	//NSLog(@"hightlighting");
 	[self drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
 
 #pragma mark Mouse Tracking
-- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame  
+/*- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame  
             ofView:(NSView *)controlView untilMouseUp:(BOOL)flag
 {
 	BOOL result = NO;
@@ -130,8 +131,7 @@
 	NSPoint locationInCell = [theEvent locationInWindow];
 	locationInCell = [controlView convertPoint:locationInCell fromView:nil];
 	
-	unsigned i;
-	for(i = 0; i < [multiItem numberOfItems]; i++)
+	for(unsigned i = 0; i < [multiItem numberOfItems]; i++)
 	{
 		NSCell *subCell = [cellDict valueForKey:[(NSMetadataItem *)[multiItem objectAtIndex:i] valueForAttribute:(id)kMDItemPath]];
 		
@@ -149,7 +149,7 @@
 		}
 	}
 	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView untilMouseUp:flag];
-}
+} */
 
 
 #pragma mark Accessors

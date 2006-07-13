@@ -21,7 +21,7 @@
 		[self setIntercellSpacing:NSMakeSize(15,0)];
 		[self setMode:NSHighlightModeMatrix];
 		[self setTarget:self];
-		[self setAutosizesCells:YES];
+		[self setCellSize:[[self cellClass] cellSize]];
     }
     return self;
 }
@@ -42,10 +42,22 @@
 	NSEnumerator *enumerator = [[item items] objectEnumerator];
 	NSMetadataItem *anObject;
 	
+	int column = 0;
 	while(anObject = [enumerator nextObject])
 	{
 		PAResultsMultiItemThumbnailCell *cell = [[[PAResultsMultiItemThumbnailCell alloc] initTextCell:[anObject valueForAttribute:@"kMDItemDisplayName"]] autorelease];
-		[self addColumnWithCells:[NSArray arrayWithObject:cell]];
+		
+		if([self numberOfColumns] == 3)	[self addRow];
+		if(column == 2) column = 0;
+		
+		// Add columns when adding cells in first row
+		if([self numberOfRows] == 1)
+		{
+			[self addColumnWithCells:[NSArray arrayWithObject:cell]];
+		} else {
+			[self putCell:cell atRow:[self numberOfRows]-1 column:column];
+			column++;
+		}
 	}
 }
 

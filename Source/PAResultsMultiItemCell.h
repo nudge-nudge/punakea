@@ -14,8 +14,8 @@
 @interface PAResultsMultiItemCell : NSCell {
 
 	PAResultsMultiItem *multiItem;
-	//PAResultsMultiItemMatrix *matrix;
-	NSDictionary *cellDict;
+	PAResultsMultiItemMatrix *matrix;
+	//NSDictionary *cellDict;
 
 }
 

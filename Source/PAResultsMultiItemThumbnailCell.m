@@ -32,7 +32,10 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {	
-	[[NSColor grayColor] set];
+	if([self isHighlighted])
+		[[NSColor blueColor] set];
+	else
+		[[NSColor grayColor] set];
 	NSRectFill(cellFrame);	
 	
 	[[NSColor blueColor] set];
@@ -42,8 +45,7 @@
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	NSLog(@"thumbnail highlight");
-	//[self setHighlighted:YES];
-	[self drawInteriorWithFrame:cellFrame inView:controlView];
+	//[self drawInteriorWithFrame:cellFrame inView:controlView];
 	[[NSColor greenColor] set];
 	NSRectFill(cellFrame);	
 }
