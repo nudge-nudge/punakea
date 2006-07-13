@@ -54,28 +54,6 @@
 }
 
 
-#pragma mark Mouse Tracking
-/*- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
-{
-	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView untilMouseUp:YES];
-}
-
-- (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView
-{	
-	return YES;
-}
-
-- (BOOL)continueTracking:(NSPoint)lastPoint at:(NSPoint)currentPoint inView:(NSView *)controlView
-{
-	return YES;
-}
-
-- (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
-{
-	
-}*/
-
-
 #pragma mark Accessors
 - (NSString *)value
 {

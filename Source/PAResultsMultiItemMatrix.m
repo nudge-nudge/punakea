@@ -61,8 +61,6 @@
 	}
 }
 
-
-#pragma mark TEMP
 - (void)mouseDown:(NSEvent *)theEvent
 {		
 	NSPoint location = [theEvent locationInWindow];
