@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PAViewController.h"
+
 #import "PATagger.h"
 #import "PARelatedTags.h"
 #import "PASelectedTags.h"
@@ -14,8 +16,7 @@
 #import "PATypeAheadFind.h"
 #import "PAResultsOutlineView.h"
 
-@interface BrowserViewController : NSResponder {
-	IBOutlet NSView *mainView;
+@interface BrowserViewController : PAViewController {
 	IBOutlet PAResultsOutlineView *outlineView;
 	
 	PATagger *tagger;
@@ -36,11 +37,10 @@
 	NSMutableString *buffer;
 }
 
+- (id)initWithNibName:(NSString*)nibName;
+
 // events
 - (void)keyDown:(NSEvent *)event;
-
-// accessors
-- (NSView*)mainView;
 
 - (PARelatedTags*)relatedTags;
 - (void)setRelatedTags:(PARelatedTags*)otherRelatedTags;

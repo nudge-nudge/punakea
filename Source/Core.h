@@ -8,6 +8,8 @@
 #import "SidebarController.h"
 #import "BrowserController.h"
 
+#import "PATagManagementViewController.h"
+
 @interface Core : NSWindowController
 {
 	PATagger *tagger;
@@ -18,5 +20,8 @@
 - (void)saveDataToDisk;
 - (void)loadDataFromDisk;
 - (void)applicationWillTerminate:(NSNotification *)note;
+
+// mainmenu actions
+- (IBAction)manageTags:(id)sender;
 
 @end

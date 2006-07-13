@@ -63,11 +63,13 @@
 		
 		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
-		
-		// This has to be called after loading of the nib
-		[outlineView setQuery:query];
 	}
 	return self;
+}
+
+- (void)awakeFromNib
+{
+	[outlineView setQuery:query];
 }
 
 - (void)dealloc
