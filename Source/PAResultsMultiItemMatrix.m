@@ -62,6 +62,57 @@
 }
 
 
+#pragma mark TEMP
+- (void)mouseDown:(NSEvent *)theEvent
+{		
+	NSPoint location = [theEvent locationInWindow];
+	location = [self convertPoint:location fromView:nil];
+	
+	// Ensure the corresponding "supercell" is highlighted
+	NSOutlineView *outlineView = [self superview];
+	int row = [outlineView rowAtPoint:location];	
+	BOOL byExtendingSelection = ([theEvent modifierFlags] & NSShiftKeyMask) ||
+								([theEvent modifierFlags] & NSCommandKeyMask);	
+	[outlineView selectRow:row byExtendingSelection:byExtendingSelection];
+		
+	int column;
+	[self getRow:&row column:&column forPoint:location];
+	
+	NSCell *cell = [self cellAtRow:row column:column];
+	NSRect cellFrame = [self cellFrameAtRow:row column:column];
+	
+	// Ask cell to track the mouse and highlight
+	[cell trackMouse:theEvent inRect:cellFrame ofView:self untilMouseUp:YES];	
+	[self selectCellAtRow:row column:column];
+	[cell setHighlighted:YES];
+	[self setNeedsDisplayInRect:cellFrame];
+		
+	// Keep track of selection
+	if([theEvent modifierFlags] & NSCommandKeyMask)
+	{
+		// Extend selection to this cell
+		
+		// TODO: Deselect if the cell was already highlighted	
+		
+		// TODO: Support SHIFT key, only COMMAND works atm
+	} else {
+		// Clear all selections
+		NSEnumerator *enumerator = [[self cells] objectEnumerator];
+		NSCell *aCell;
+		
+		while(aCell = [enumerator nextObject])
+			if(cell != aCell)
+				[aCell setHighlighted:NO];
+	}
+	
+	NSEnumerator *enumerator = [[self selectedCells] objectEnumerator];
+	while(cell = [enumerator nextObject])
+	{
+		NSLog([cell value]);
+	}
+}
+
+
 #pragma mark Accessors
 - (PAResultsMultiItem *)item
 {
@@ -72,6 +123,22 @@
 {
 	item = [anItem retain];
 	[self displayCellsForItems];
+}
+
+- (NSCell *)multiItemCell
+{
+	return multiItemCell;
+}
+
+- (void)setMultiItemCell:(NSCell *)aCell
+{
+	multiItemCell = aCell;
+}
+
+- (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)column
+{
+	NSCell *cell = [self cellAtRow:row column:column];
+	[cell setHighlighted:flag];
 }
 
 @end

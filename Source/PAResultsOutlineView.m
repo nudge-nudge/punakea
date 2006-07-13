@@ -34,12 +34,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	id selectedItem = [self itemAtRow:[self selectedRow]];
 	// Clear MultiItem's hightlight color
-	/*if([[selectedItem class] isEqualTo:[PAResultsMultiItem class]])
+	if([[selectedItem class] isEqualTo:[PAResultsMultiItem class]])
 	{
 		[[NSColor whiteColor] set];
 		NSRectFill([self rectOfRow:[self selectedRow]]);
 		return;
-	}*/
+	}
 	[super highlightSelectionInClipRect:clipRect];
 }
 

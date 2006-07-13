@@ -15,11 +15,7 @@
 
 	PAResultsMultiItem *multiItem;
 	PAResultsMultiItemMatrix *matrix;
-	//NSDictionary *cellDict;
 
 }
-
-/*- (PAResultsMultiItem *)item;
-- (void)setItem:(PAResultsMultiItem *)anItem;*/
 
 @end

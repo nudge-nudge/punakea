@@ -44,13 +44,46 @@
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
+	// Not invoked for matrix mode NSTrackModeMatrix
+
 	NSLog(@"thumbnail highlight");
 	//[self drawInteriorWithFrame:cellFrame inView:controlView];
 	[[NSColor greenColor] set];
 	NSRectFill(cellFrame);	
+	[[self controlView] setNeedsDisplay:YES];
 }
 
 
+#pragma mark Mouse Tracking
+/*- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
+{
+	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView untilMouseUp:YES];
+}
+
+- (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView
+{	
+	return YES;
+}
+
+- (BOOL)continueTracking:(NSPoint)lastPoint at:(NSPoint)currentPoint inView:(NSView *)controlView
+{
+	return YES;
+}
+
+- (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
+{
+	
+}*/
+
+
+#pragma mark Accessors
+- (NSString *)value
+{
+	return value;
+}
+
+
+#pragma mark Class methods
 + (NSSize)cellSize
 {
 	return NSMakeSize(80, 80);

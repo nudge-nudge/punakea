@@ -12,6 +12,7 @@
 @interface PAResultsMultiItemThumbnailCell : NSTextFieldCell {
 
 	NSString *value;
+	BOOL singleSelection;
 
 }
 
