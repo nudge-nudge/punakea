@@ -21,14 +21,13 @@
 		[self setIntercellSpacing:NSMakeSize(15,0)];
 		[self setMode:NSHighlightModeMatrix];
 		[self setTarget:self];
-		[self setCellSize:[[self cellClass] cellSize]];
-    }
+	}
     return self;
 }
 
 - (void)dealloc
 {
-	if(item) [item release];
+	if(multiItem) [multiItem release];
 	[super dealloc];
 }
 
@@ -39,13 +38,15 @@
 	[self removeRow:0];
 	[self renewRows:1 columns:0];
 	
-	NSEnumerator *enumerator = [[item items] objectEnumerator];
-	NSMetadataItem *anObject;
+	NSEnumerator *enumerator = [[multiItem items] objectEnumerator];
+	NSDictionary *anObject;
 	
 	int column = 0;
 	while(anObject = [enumerator nextObject])
 	{
-		PAResultsMultiItemThumbnailCell *cell = [[[PAResultsMultiItemThumbnailCell alloc] initTextCell:[anObject valueForAttribute:@"kMDItemDisplayName"]] autorelease];
+		PAResultsMultiItemThumbnailCell *cell =
+			[[[PAResultsMultiItemThumbnailCell alloc]
+				initTextCell:[anObject valueForKey:@"displayName"]] autorelease];
 		
 		if([self numberOfColumns] == 3)	[self addRow];
 		if(column == 2) column = 0;
@@ -67,7 +68,7 @@
 	location = [self convertPoint:location fromView:nil];
 	
 	// Ensure the corresponding "supercell" is highlighted
-	NSOutlineView *outlineView = [self superview];
+	NSOutlineView *outlineView = (NSOutlineView *)[self superview];
 	int row = [outlineView rowAtPoint:location];	
 	BOOL byExtendingSelection = ([theEvent modifierFlags] & NSShiftKeyMask) ||
 								([theEvent modifierFlags] & NSCommandKeyMask);	
@@ -112,31 +113,27 @@
 
 
 #pragma mark Accessors
-- (PAResultsMultiItem *)item
+- (PAResultsMultiItem *)multiItem
 {
-	return item;
+	return multiItem;
 }
 
-- (void)setItem:(PAResultsMultiItem *)anItem
+- (void)setMultiItem:(PAResultsMultiItem *)anItem
 {
-	item = [anItem retain];
+	multiItem = [anItem retain];
 	[self displayCellsForItems];
-}
-
-- (NSCell *)multiItemCell
-{
-	return multiItemCell;
-}
-
-- (void)setMultiItemCell:(NSCell *)aCell
-{
-	multiItemCell = aCell;
 }
 
 - (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)column
 {
 	NSCell *cell = [self cellAtRow:row column:column];
 	[cell setHighlighted:flag];
+}
+
+- (void)setCellClass:(Class)aClass
+{
+	[super setCellClass:aClass];
+	[self setCellSize:[[self cellClass] cellSize]];
 }
 
 @end

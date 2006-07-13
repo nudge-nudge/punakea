@@ -31,7 +31,6 @@
 		}
 		if([[item class] isEqualTo:[PAResultsMultiItem class]])
 		{
-			[(PAResultsMultiItem *)item setCellClass:[PAResultsMultiItemThumbnailCell class]];
 			return [item retain];
 		}
 	}
@@ -70,8 +69,16 @@
 			startIndex = 0;
 			endIndex = [group resultCount];
 			
+			// Create this item as dictionary
 			for(i = startIndex; i < endIndex; i++)
-				[multiItem addItem:[group resultAtIndex:i]];
+			{
+				NSMetadataItem *currentItem = [group resultAtIndex:i];
+				NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
+				[dict setValue:[currentItem valueForAttribute:(id)kMDItemPath] forKey:@"path"];
+				[dict setValue:[currentItem valueForAttribute:(id)kMDItemDisplayName] forKey:@"displayName"];
+				[dict setValue:[currentItem valueForAttribute:(id)kMDItemLastUsedDate] forKey:@"lastUsedDate"];
+				[multiItem addItem:dict];
+			}
 			
 			// Set identifier
 			NSMutableDictionary *tag = [multiItem tag];
@@ -280,7 +287,7 @@
 	{
 		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
 		{
-			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject item];
+			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject multiItem];
 			NSString *thisIdentifier = [[thisItem tag] objectForKey:@"identifier"];
 			if([identifier isEqualToString:thisIdentifier])
 				[anObject removeFromSuperview];

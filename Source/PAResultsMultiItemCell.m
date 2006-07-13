@@ -39,7 +39,7 @@
 	{
 		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
 		{
-			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject item];
+			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject multiItem];
 			if([multiItem isEqualTo:thisItem])
 				matrix = anObject;
 		}
@@ -54,8 +54,7 @@
 	{	
 		matrix = [[PAResultsMultiItemMatrix alloc] initWithFrame:rect];
 		[matrix setCellClass:[multiItem cellClass]];
-		[matrix setMultiItemCell:self];
-		[matrix setItem:multiItem];	
+		[matrix setMultiItem:multiItem];	
 		[controlView addSubview:matrix];
 	}
 	else
