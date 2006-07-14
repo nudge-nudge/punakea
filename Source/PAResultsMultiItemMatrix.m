@@ -46,7 +46,8 @@
 	{
 		PAResultsMultiItemThumbnailCell *cell =
 			[[[PAResultsMultiItemThumbnailCell alloc]
-				initTextCell:[anObject valueForKey:@"displayName"]] autorelease];
+				initTextCell:[anObject valueForKey:@"displayName"]] autorelease];				
+		[cell setValueDict:anObject];
 		
 		if([self numberOfColumns] == 3)	[self addRow];
 		if(column == 2) column = 0;

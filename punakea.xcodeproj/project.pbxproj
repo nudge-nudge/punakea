@@ -93,6 +93,8 @@
 		6563884B09E419D300BE59AE /* PAResultsItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6563884909E419D300BE59AE /* PAResultsItemCell.h */; };
 		6563884C09E419D300BE59AE /* PAResultsItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6563884A09E419D300BE59AE /* PAResultsItemCell.m */; };
 		656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */; };
+		65823B840A67CCFF0004DC39 /* NSBezierPathCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */; };
+		65823B850A67CCFF0004DC39 /* NSBezierPathCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		6588EE160A07463D00082718 /* MDIconViewOffDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE120A07463D00082718 /* MDIconViewOffDisabled.tiff */; };
@@ -202,6 +204,7 @@
 				481F78BC0A5FE2BB0018DF6C /* PARelatedTagsStandalone.h in CopyFiles */,
 				484F71840A666E5B00D886E5 /* PATagManagementViewController.h in CopyFiles */,
 				484F71AD0A66722000D886E5 /* PAViewController.h in CopyFiles */,
+				65823B840A67CCFF0004DC39 /* NSBezierPathCategory.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +306,8 @@
 		6563884909E419D300BE59AE /* PAResultsItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsItemCell.h; sourceTree = "<group>"; };
 		6563884A09E419D300BE59AE /* PAResultsItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsItemCell.m; sourceTree = "<group>"; };
 		656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOn-1.tiff"; sourceTree = "<group>"; };
+		65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPathCategory.h; sourceTree = "<group>"; };
+		65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPathCategory.m; sourceTree = "<group>"; };
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
 		6588EE120A07463D00082718 /* MDIconViewOffDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDIconViewOffDisabled.tiff; sourceTree = "<group>"; };
@@ -489,6 +494,8 @@
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				65035FB70A20762F00AD0597 /* Query */,
+				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
+				65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */,
 				484F71AB0A66722000D886E5 /* PAViewController.h */,
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
 			);
@@ -891,6 +898,7 @@
 				481F78BD0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m in Sources */,
 				484F71850A666E5B00D886E5 /* PATagManagementViewController.m in Sources */,
 				484F71AE0A66722000D886E5 /* PAViewController.m in Sources */,
+				65823B850A67CCFF0004DC39 /* NSBezierPathCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

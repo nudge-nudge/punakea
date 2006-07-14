@@ -7,13 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NSBezierPathCategory.h"
 
 
 @interface PAResultsMultiItemThumbnailCell : NSTextFieldCell {
 
 	NSString *value;
-	BOOL singleSelection;
-
+	NSDictionary *valueDict;
+	
 }
 
 @end
