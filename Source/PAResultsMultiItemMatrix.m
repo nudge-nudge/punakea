@@ -16,9 +16,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-		[self setCellClass:[PAResultsMultiItemThumbnailCell class]];
+		[self setCellClass:[PAResultsMultiItemPlaceholderCell class]];
 		[self renewRows:1 columns:0];
-		[self setIntercellSpacing:NSMakeSize(15,0)];
+		[self setIntercellSpacing:NSMakeSize(3,3)];
 		[self setMode:NSHighlightModeMatrix];
 		[self setTarget:self];
 	}
@@ -44,12 +44,15 @@
 	int column = 0;
 	while(anObject = [enumerator nextObject])
 	{
-		PAResultsMultiItemThumbnailCell *cell =
-			[[[PAResultsMultiItemThumbnailCell alloc]
+		NSTextFieldCell *cell =
+			[[[[self cellClass] alloc]
 				initTextCell:[anObject valueForKey:@"displayName"]] autorelease];				
 		[cell setValueDict:anObject];
 		
-		if([self numberOfColumns] == 3)	[self addRow];
+		if([self numberOfColumns] == 3)
+		{
+			[self addRow];
+		}
 		if(column == 2) column = 0;
 		
 		// Add columns when adding cells in first row
@@ -64,16 +67,17 @@
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
-{		
-	NSPoint location = [theEvent locationInWindow];
-	location = [self convertPoint:location fromView:nil];
-	
+{			
 	// Ensure the corresponding "supercell" is highlighted
 	NSOutlineView *outlineView = (NSOutlineView *)[self superview];
-	int row = [outlineView rowAtPoint:location];	
+	NSPoint locationInOutlineView = [outlineView convertPoint:[theEvent locationInWindow] fromView:nil];
+	int row = [outlineView rowAtPoint:locationInOutlineView];	
 	BOOL byExtendingSelection = ([theEvent modifierFlags] & NSShiftKeyMask) ||
 								([theEvent modifierFlags] & NSCommandKeyMask);	
 	[outlineView selectRow:row byExtendingSelection:byExtendingSelection];
+	
+	NSPoint location = [theEvent locationInWindow];
+	location = [self convertPoint:location fromView:nil];
 		
 	int column;
 	[self getRow:&row column:&column forPoint:location];

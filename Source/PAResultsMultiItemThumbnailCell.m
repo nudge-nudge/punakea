@@ -71,6 +71,18 @@
 	valueLabelPoint.y += 1;
 	[valueLabel drawAtPoint:valueLabelPoint];
 	
+	// Draw thumbnail background rect
+	if([self isHighlighted])
+	{	
+		bezelFrame = cellFrame;
+		bezelFrame.origin.x += 5;
+		bezelFrame.size.height = 83;
+		bezelFrame.size.width = 83;
+	
+		[[NSColor gridColor] set];
+		[[NSBezierPath bezierPathWithRoundRectInRect:bezelFrame radius:10] fill];
+	}	
+	
 	// TEMP for thumbnail
 	/*NSString *path = [valueDict objectForKey:@"path"];
 	NSImage *thumbImage = [[[NSImage alloc] initWithContentsOfFile:path] autorelease];
@@ -106,7 +118,7 @@
 #pragma mark Class methods
 + (NSSize)cellSize
 {
-	return NSMakeSize(80, 80);
+	return NSMakeSize(93, 115);
 }
 
 @end

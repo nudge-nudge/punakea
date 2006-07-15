@@ -46,7 +46,7 @@
         }
     } 
 	// kMDItemContentType
-	else if([attrName isEqualToString:(id)kMDItemContentType])
+	else if([attrName isEqualToString:@"kMDItemContentTypeTree"])
 	{
 		NSBundle *bundle = [NSBundle mainBundle];
 		NSString *path = [bundle pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
@@ -57,7 +57,17 @@
 		NSDictionary *spotlightUserDefaults = [[NSDictionary alloc] initWithContentsOfFile:path];
 		NSArray *spotlightOrderedItems = [spotlightUserDefaults objectForKey:@"orderedItems"];*/
 		
-		NSString *replacementValue = [simpleGrouping objectForKey:attrValue];
+		NSArray *typeTreeArray = (NSArray *)attrValue;
+		NSEnumerator *enumerator = [typeTreeArray objectEnumerator];
+		NSString *aType, *replacementValue;
+		
+		while(aType = [enumerator nextObject])
+		{
+			replacementValue = [simpleGrouping objectForKey:aType];
+			if(replacementValue) break;
+		}
+		
+		//NSString *replacementValue = [simpleGrouping objectForKey:attrValue];
 		if(!replacementValue) replacementValue = @"DOCUMENTS";
 		
 		// Add and sort index like "00 APPLICATIONS"

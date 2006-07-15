@@ -34,7 +34,7 @@
 		selectedTags = [[PASelectedTags alloc] init];
 		
 		query = [[PAQuery alloc] init];
-		[query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
+		[query setGroupingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
 		[query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
 		relatedTags = [[PARelatedTags alloc] initWithSelectedTags:selectedTags query:query];
@@ -304,7 +304,7 @@
 {
 	NSSegmentedControl *sc = sender;
 	if([sc selectedSegment] == 0) {
-		[query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemContentType, nil]];
+		[query setGroupingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
 	}
 	if([sc selectedSegment] == 1) {
 		[query setGroupingAttributes:[NSArray arrayWithObjects:nil]];
