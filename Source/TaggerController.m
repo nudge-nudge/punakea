@@ -45,7 +45,7 @@ resets the tagger window (called when window is closed)
 		[popularDescriptor release];
 		
 		// related tags with no current selection
-		relatedTags = [[PARelatedTagsStandalone alloc] initWithSelectedTags:[NSMutableArray array]];
+		relatedTags = [[PARelatedTagsStandalone alloc] initWithSelectedTags:[[PASelectedTags alloc] init]];
 	}
 	return self;
 }
