@@ -7,6 +7,7 @@
 //
 
 #import "BrowserViewController.h"
+#import "PATagCloud.h"
 
 @interface BrowserViewController (PrivateAPI)
 
@@ -69,6 +70,8 @@
 
 - (void)awakeFromNib
 {
+	[[[self mainView] window] setInitialFirstResponder:tagCloud];
+	
 	[outlineView setQuery:query];
 }
 

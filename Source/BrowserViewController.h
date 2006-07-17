@@ -16,7 +16,10 @@
 #import "PATypeAheadFind.h"
 #import "PAResultsOutlineView.h"
 
+@class PATagCloud;
+
 @interface BrowserViewController : PAViewController {
+	IBOutlet PATagCloud *tagCloud;
 	IBOutlet PAResultsOutlineView *outlineView;
 	
 	PATagger *tagger;

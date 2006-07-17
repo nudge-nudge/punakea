@@ -4,8 +4,8 @@
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = BrowserViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {mainView = NSView; outlineView = PAResultsOutlineView; }; 
-            SUPERCLASS = NSResponder; 
+            OUTLETS = {outlineView = PAResultsOutlineView; tagCloud = PATagCloud; }; 
+            SUPERCLASS = PAViewController; 
         }, 
         {
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
@@ -32,8 +32,14 @@
         {
             CLASS = PATagCloud; 
             LANGUAGE = ObjC; 
-            OUTLETS = {browserViewController = BrowserViewController; }; 
+            OUTLETS = {controller = BrowserViewController; }; 
             SUPERCLASS = NSView; 
+        }, 
+        {
+            CLASS = PAViewController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {mainView = NSView; }; 
+            SUPERCLASS = NSResponder; 
         }, 
         {
             ACTIONS = {doubleAction = id; }; 

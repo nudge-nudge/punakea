@@ -5,17 +5,20 @@
 creates buttons for tags held in displayTags. created buttons can be accessed in
  tagButtonDict afterwards. called by setDisplayTags
  */
-- (void)createButtonsForTags;
+- (NSMutableDictionary*)createButtonsForTags:(NSMutableArray*)tags;
+
+- (void)calcInitialParametersInRect:(NSRect)rect;
 
 /**
 draws the background
  */
 - (void)drawBackground;
+
 /**
 draws all the tags in displayTags
  @param rect view rect in which to draw
  */
-- (void)drawTags:(NSRect)rect;
+- (void)drawTags:(NSMutableArray*)tags inRect:(NSRect)rect;
 
 /**
 determines the oigin point for the next tag button to display;
@@ -70,19 +73,22 @@ bind to visibleTags
  */
 - (void)awakeFromNib
 {
-	[browserViewController addObserver:self
-							forKeyPath:@"visibleTags"
-							   options:0
-							   context:NULL];
+	[controller addObserver:self
+				 forKeyPath:@"visibleTags"
+					options:0
+					context:NULL];
 	
-	[self setDisplayTags:[NSArray arrayWithArray:[browserViewController visibleTags]]];
-	
-	[[self window] setInitialFirstResponder:self];
+	// create initial tag buttons
+	[self setTagButtonDict:[self createButtonsForTags:[controller visibleTags]]];
 }
 
 - (void)dealloc
 {
-	[activeButton release];
+	if (activeButton)
+	{
+		[activeButton release];
+	}
+	
 	[tagButtonDict release];
 	[super dealloc];
 }
@@ -98,78 +104,41 @@ bound to visibleTags
 {
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
-		[self setDisplayTags:[NSArray arrayWithArray:[browserViewController visibleTags]]];
+		[self setTagButtonDict:[self createButtonsForTags:[controller visibleTags]]];
 		[self setNeedsDisplay:YES];
 	}
 }
 
-- (void)createButtonsForTags
+- (NSMutableDictionary*)createButtonsForTags:(NSMutableArray*)tags
 {
-	[tagButtonDict removeAllObjects];
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	NSEnumerator *tagEnumerator = [displayTags objectEnumerator];
+	NSEnumerator *tagEnumerator = [tags objectEnumerator];
 	PATag *tag;
 	
 	while (tag = [tagEnumerator nextObject])
 	{
-		PATagButton *button = [[PATagButton alloc] initWithTag:tag attributes:[browserViewController viewAttributesForTag:tag]];
-		[button setTarget:browserViewController];
+		PATagButton *button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag]];
+		[button setTarget:controller];
 		[button sizeToFit];
-		[tagButtonDict setObject:button forKey:[tag name]];
+		[dict setObject:button forKey:[tag name]];
 		[button release];
 	}
+	
+	return dict;
 }
 
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect
 {	
-	NSRect bounds = [self bounds];
-	
-	//initial point, from here all other points are calculated
-	pointForNextTagRect = NSMakePoint(0,bounds.size.height);
-	
-	//needed for drawing in rows
-	tagPosition = 0;
-
-	//get the point for the very first tag
-	pointForNextTagRect = [self firstPointForNextRowIn:bounds];
-	
+	[self calcInitialParametersInRect:[self bounds]];
 	[self drawBackground];
-	[self drawTags:bounds];
+	[self drawTags:[controller visibleTags] inRect:[self bounds]];
 	
 	//select initial tag
 	if (!activeButton)
 	{
-		[self setactiveButton:[self upperLeftButton]];
-	}
-}
-
-- (void)drawTags:(NSRect)rect
-{
-	//first remove all drawn tags
-	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
-	NSControl *subview;
-	
-	
-	while (subview = [viewEnumerator nextObject])
-	{
-		[subview removeFromSuperviewWithoutNeedingDisplay];
-	}
-	
-	NSEnumerator *e = [displayTags objectEnumerator];
-	
-	PATag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
-		NSPoint origin = [self nextPointForTagButton:tagButton inRect:(NSRect)rect];
-		[tagButton setFrameOrigin:origin];
-		
-		[self addSubview:tagButton];
-		
-		// needs to be set after adding as subview
-		[[tagButton cell] setShowsBorderOnlyWhileMouseInside:YES];
+		[self setActiveButton:[self upperLeftButton]];
 	}
 }
 
@@ -183,7 +152,46 @@ bound to visibleTags
 	[NSBezierPath strokeRect:bounds];
 }
 
+- (void)drawTags:(NSMutableArray*)tags inRect:(NSRect)rect
+{
+	//first remove all drawn tags
+	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
+	NSControl *subview;
+	
+	while (subview = [viewEnumerator nextObject])
+	{
+		[subview removeFromSuperviewWithoutNeedingDisplay];
+	}
+	
+	NSEnumerator *e = [tags objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
+		NSPoint origin = [self nextPointForTagButton:tagButton inRect:rect];
+		[tagButton setFrameOrigin:origin];
+		
+		[self addSubview:tagButton];
+		
+		// needs to be set after adding as subview
+		[[tagButton cell] setShowsBorderOnlyWhileMouseInside:YES];
+	}
+}
+
 #pragma mark calculation
+- (void)calcInitialParametersInRect:(NSRect)rect
+{
+	//initial point, from here all other points are calculated
+	pointForNextTagRect = NSMakePoint(0,rect.size.height);
+	
+	//needed for drawing in rows
+	tagPosition = 0;
+	
+	//get the point for the very first tag
+	pointForNextTagRect = [self firstPointForNextRowIn:rect];
+}
+
 - (NSPoint)firstPointForNextRowIn:(NSRect)rect;
 {
 	//TODO externalize
@@ -196,7 +204,7 @@ bound to visibleTags
 	
 	/* while there are tags, compose a row and get the maximum height,
 		then keep the starting points for each one */
-	NSEnumerator *tagEnumerator = [displayTags objectEnumerator];
+	NSEnumerator *tagEnumerator = [[controller visibleTags] objectEnumerator];
 	PATag *tag;
 	
 	int i;
@@ -254,18 +262,16 @@ bound to visibleTags
 }
 
 #pragma mark accessors
-- (NSArray*)displayTags
+- (void)setTagButtonDict:(NSMutableDictionary*)aDict
 {
-	return displayTags;
+	[aDict retain];
+	[tagButtonDict release];
+	tagButtonDict = aDict;
 }
 
-- (void)setDisplayTags:(NSArray*)otherTags
+- (NSMutableDictionary*)tagButtonDict
 {
-	[otherTags retain];
-	[displayTags release];
-	displayTags = otherTags;
-	
-	[self createButtonsForTags];
+	return tagButtonDict;
 }
 
 - (PATagButton*)activeButton
@@ -273,15 +279,14 @@ bound to visibleTags
 	return activeButton;
 }
 
-- (void)setactiveButton:(PATagButton*)aTag
+- (void)setActiveButton:(PATagButton*)aTag
 {
 	[activeButton setHovered:NO];
+	[aTag setHovered:YES];
 	
 	[aTag retain];
 	[activeButton release];
 	activeButton = aTag;
-	
-	[activeButton setHovered:YES];
 	
 	[self setNeedsDisplay:YES];
 }
@@ -299,7 +304,7 @@ bound to visibleTags
 
 - (BOOL)resignFirstResponder
 {
-	[self setactiveButton:nil];
+	[self setActiveButton:nil];
 	return YES;
 }
 
@@ -346,14 +351,14 @@ bound to visibleTags
 	
 	if ([buttons count] > 0)
 	{
-		[self setactiveButton:[self buttonNearestPoint:center inButtons:buttons]];
+		[self setActiveButton:[self buttonNearestPoint:center inButtons:buttons]];
 	}
 	else
 	{
 		// wrap around
 		NSPoint point = NSMakePoint(0,frame.origin.y);
 		buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
-		[self setactiveButton:[self buttonNearestPoint:point inButtons:buttons]];
+		[self setActiveButton:[self buttonNearestPoint:point inButtons:buttons]];
 	}
 }
 
@@ -366,7 +371,7 @@ bound to visibleTags
 		
 	if ([buttons count] > 0)
 	{
-		[self setactiveButton:[self buttonNearestPoint:center inButtons:buttons]];
+		[self setActiveButton:[self buttonNearestPoint:center inButtons:buttons]];
 	}
 	else
 	{
@@ -374,7 +379,7 @@ bound to visibleTags
 		NSRect viewFrame = [self bounds];
 		NSPoint point = NSMakePoint(viewFrame.size.width,frame.origin.y);
 		buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
-		[self setactiveButton:[self buttonNearestPoint:point inButtons:buttons]];
+		[self setActiveButton:[self buttonNearestPoint:point inButtons:buttons]];
 	}
 }
 
@@ -386,14 +391,14 @@ bound to visibleTags
 
 	if ([buttons count] > 0)
 	{
-		[self setactiveButton:[self buttonNearestPoint:center inButtons:buttons]];
+		[self setActiveButton:[self buttonNearestPoint:center inButtons:buttons]];
 	}
 	else
 	{
 		// wrap around
 		NSPoint point = NSMakePoint(center.x,0);
 		NSArray *allButtons = [tagButtonDict allValues];
-		[self setactiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
+		[self setActiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
 	}
 }
 
@@ -406,7 +411,7 @@ bound to visibleTags
 		
 	if ([buttons count] > 0)
 	{
-		[self setactiveButton:[self buttonNearestPoint:center inButtons:buttons]];
+		[self setActiveButton:[self buttonNearestPoint:center inButtons:buttons]];
 	}
 	else
 	{
@@ -414,7 +419,7 @@ bound to visibleTags
 		NSRect viewFrame = [self bounds];
 		NSPoint point = NSMakePoint(center.x,viewFrame.size.height);
 		NSArray *allButtons = [tagButtonDict allValues];
-		[self setactiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
+		[self setActiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
 	}
 }
 

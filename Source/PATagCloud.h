@@ -11,22 +11,20 @@ displays all visibleTags in a nice tag cloud view
  */
 @interface PATagCloud : NSView
 {
-	IBOutlet BrowserViewController *browserViewController; /**< controller, holding tags and stuff */
+	IBOutlet BrowserViewController *controller; /**< controller, holding tags and stuff */
 
 	NSMutableDictionary *tagButtonDict; /**< holds the current controls in the view */
 	NSArray *displayTags; /**< holds all the tags to be displayed */
+	PATagButton *activeButton; /**< currently selected tag */
 	
 	NSPoint pointForNextTagRect; /**< saves the point for the next tag to be displayed */
-	
 	int tagPosition; /**< holds the position where the new line starts */
 	
-	PATagButton *activeButton; /**< currently selected tag */
 }
 
-- (NSArray*)displayTags;
-- (void)setDisplayTags:(NSArray*)otherTags;
-
+- (void)setTagButtonDict:(NSMutableDictionary*)aDict;
+- (NSMutableDictionary*)tagButtonDict;
 - (PATagButton*)activeButton;
-- (void)setactiveButton:(PATagButton*)aTag;
+- (void)setActiveButton:(PATagButton*)aTag;
 
 @end

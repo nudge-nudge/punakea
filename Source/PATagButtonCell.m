@@ -43,7 +43,6 @@
 
 - (void)drawHoverEffectWithFrame:(NSRect)cellFrame
 {
-	
 	[[NSColor colorWithDeviceRed:255.0 green:128.0 blue:0.0 alpha:1.0] set];
 	[NSBezierPath fillRect:cellFrame];
 }

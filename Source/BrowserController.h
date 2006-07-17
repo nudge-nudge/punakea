@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "BrowserViewController.h"
 #import "PAQuery.h"
+#import "PATagCloud.h"
 
 @interface BrowserController : NSWindowController 
 {
