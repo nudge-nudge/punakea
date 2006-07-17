@@ -5,7 +5,7 @@
 creates buttons for tags held in displayTags. created buttons can be accessed in
  tagButtonDict afterwards. called by setDisplayTags
  */
-- (NSMutableDictionary*)createButtonsForTags:(NSMutableArray*)tags;
+- (NSMutableDictionary*)updateButtonsForTags:(NSMutableArray*)tags;
 
 - (void)calcInitialParametersInRect:(NSRect)rect;
 
@@ -79,7 +79,7 @@ bind to visibleTags
 					context:NULL];
 	
 	// create initial tag buttons
-	[self setTagButtonDict:[self createButtonsForTags:[controller visibleTags]]];
+	[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
 }
 
 - (void)dealloc
@@ -104,12 +104,12 @@ bound to visibleTags
 {
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
-		[self setTagButtonDict:[self createButtonsForTags:[controller visibleTags]]];
+		[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
 		[self setNeedsDisplay:YES];
 	}
 }
 
-- (NSMutableDictionary*)createButtonsForTags:(NSMutableArray*)tags
+- (NSMutableDictionary*)updateButtonsForTags:(NSMutableArray*)tags
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
@@ -118,11 +118,24 @@ bound to visibleTags
 	
 	while (tag = [tagEnumerator nextObject])
 	{
-		PATagButton *button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag]];
+		PATagButton *button;
+		
+		// if the button is already created, use it
+		if (button = [tagButtonDict objectForKey:[tag name]])
+		{
+			// TODO update attributes
+			[dict setObject:button forKey:[tag name]];
+		}
+		else
+		{
+			// create new button
+			button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag]];
+			[dict setObject:button forKey:[tag name]];
+			[button release];
+		}
+
 		[button setTarget:controller];
 		[button sizeToFit];
-		[dict setObject:button forKey:[tag name]];
-		[button release];
 	}
 	
 	return dict;
@@ -135,7 +148,7 @@ bound to visibleTags
 	[self drawBackground];
 	[self drawTags:[controller visibleTags] inRect:[self bounds]];
 	
-	//select initial tag
+	//select initial active tag button
 	if (!activeButton)
 	{
 		[self setActiveButton:[self upperLeftButton]];
@@ -337,6 +350,7 @@ bound to visibleTags
 	else
 	{
 		// forward unhandled events
+		// TODO check this, responder chain is not functional
 		[[self nextResponder] keyDown:event];
 	}
 }

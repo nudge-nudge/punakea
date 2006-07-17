@@ -145,5 +145,10 @@
 	[window makeKeyAndOrderFront:self];
 }
 
+#pragma mark debug
+- (void)keyDown:(NSEvent*)event 
+{
+	NSLog(@"NSApp keydown: %@",event);
+}
 
 @end
