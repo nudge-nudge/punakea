@@ -45,6 +45,9 @@
 		}
 	}
 	
+	// Ensure matrix isn't hidden
+	[matrix setHidden:NO];
+	
 	NSRect rect = NSMakeRect(cellFrame.origin.x + 15,
 							 cellFrame.origin.y,
 							 cellFrame.size.width - 30,

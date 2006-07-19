@@ -17,4 +17,7 @@
 	
 }
 
++ (NSSize)cellSize;
++ (NSSize)intercellSpacing;
+
 @end

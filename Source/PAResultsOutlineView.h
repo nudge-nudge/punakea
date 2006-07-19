@@ -2,6 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAResultsMultiItemCell.h"
+#import "PAResultsMultiItemThumbnailCell.h"
 #import "PAQuery.h"
 
 @interface PAResultsOutlineView : NSOutlineView

@@ -18,9 +18,16 @@
     if (self) {
 		[self setCellClass:[PAResultsMultiItemPlaceholderCell class]];
 		[self renewRows:1 columns:0];
-		[self setIntercellSpacing:NSMakeSize(3,3)];
+		[self setIntercellSpacing:NSMakeSize(3, 3)];
 		[self setMode:NSHighlightModeMatrix];
 		[self setTarget:self];
+		
+		// Get notification frameDidChange
+		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self
+			   selector:@selector(frameDidChange:)
+		           name:(id)NSViewFrameDidChangeNotification
+			     object:self];
 	}
     return self;
 }
@@ -32,15 +39,90 @@
 }
 
 
+#pragma mark Notifications
+- (void)frameDidChange:(NSNotification *)note
+{
+	// TODO: Performance!! :)
+	
+	if([self numberOfRows] <= 0) return;
+	
+	NSRect frame = [self frame];
+	NSSize cellSize = [[self cellClass] cellSize];
+	NSSize intercellSpacing = [[multiItem cellClass] intercellSpacing];
+	
+	int numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
+	
+	NSMutableArray *cellArray = [NSMutableArray arrayWithCapacity:100];
+	
+	for(int row = 0; row < [self numberOfRows]; row++)
+	{
+		for(int column = 0; column < [self numberOfColumns]; column++)
+		{
+			NSTextFieldCell *cell = [self cellAtRow:row column:column];
+			[cellArray addObject:[cell retain]];
+		}
+	}
+	
+	for(int i = 0; i < [self numberOfRows]; i++)
+	{
+		[self removeRow:i];
+	}
+	[self renewRows:1 columns:0];
+	
+	NSTextFieldCell *aCell;
+	NSEnumerator *enumerator = [cellArray objectEnumerator];
+	int row = 0;
+	int column = 0;
+	while(aCell = [enumerator nextObject])
+	{					
+		if(column == numberOfItemsPerRow) 
+		{
+			[self addRow];
+			
+			// Fill the new row with placeholder cells
+			for(int i = 0; i < column; i++)
+			{
+				NSTextFieldCell *cell = [[[PAResultsMultiItemPlaceholderCell alloc]
+										   initTextCell:@""] autorelease];
+				[self putCell:cell atRow:row+1 column:i];
+			}
+			
+			row++;
+			column = 0;
+		}
+		
+		// Add columns when adding cells in first row
+		if(row == 0)
+		{
+			[self addColumnWithCells:[NSArray arrayWithObject:aCell]];
+		} else {
+			[self putCell:aCell atRow:row column:column];
+		}
+		column++;
+		[aCell release];
+	}
+}
+
+
 #pragma mark Actions
 - (void)displayCellsForItems
 {
-	[self removeRow:0];
+	for(int i = 0; i < [self numberOfRows]; i++)
+	{
+		[self removeRow:i];
+	}
 	[self renewRows:1 columns:0];
+	
+	NSRect frame = [self frame];
+	NSSize cellSize = [[self cellClass] cellSize];
+	NSSize intercellSpacing = [[multiItem cellClass] intercellSpacing];
+	
+	int numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
 	
 	NSEnumerator *enumerator = [[multiItem items] objectEnumerator];
 	NSDictionary *anObject;
 	
+	int row = 0;
 	int column = 0;
 	while(anObject = [enumerator nextObject])
 	{
@@ -49,20 +131,31 @@
 				initTextCell:[anObject valueForKey:@"displayName"]] autorelease];				
 		[cell setValueDict:anObject];
 		
-		if([self numberOfColumns] == 3)
+		if(column == numberOfItemsPerRow) 
 		{
 			[self addRow];
+			
+			// Fill the new row with placeholder cells
+			for(int i = 0; i < column; i++)
+			{
+				NSTextFieldCell *cell = [[[PAResultsMultiItemPlaceholderCell alloc]
+										   initTextCell:@""] autorelease];
+				[self putCell:cell atRow:row+1 column:i];
+			}
+			
+			row++;
+			column = 0;
 		}
-		if(column == 2) column = 0;
 		
 		// Add columns when adding cells in first row
-		if([self numberOfRows] == 1)
+		//NSLog(@"%d,%d,%d", row, column, numberOfItemsPerRow);
+		if(row == 0)
 		{
 			[self addColumnWithCells:[NSArray arrayWithObject:cell]];
 		} else {
-			[self putCell:cell atRow:[self numberOfRows]-1 column:column];
-			column++;
+			[self putCell:cell atRow:row column:column];
 		}
+		column++;
 	}
 }
 
@@ -139,6 +232,7 @@
 {
 	[super setCellClass:aClass];
 	[self setCellSize:[[self cellClass] cellSize]];
+	[self setIntercellSpacing:[[self cellClass] intercellSpacing]];
 }
 
 @end

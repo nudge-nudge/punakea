@@ -121,4 +121,9 @@
 	return NSMakeSize(93, 115);
 }
 
++ (NSSize)intercellSpacing
+{
+	return NSMakeSize(3, 3);
+}
+
 @end

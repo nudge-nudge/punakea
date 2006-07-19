@@ -10,7 +10,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	[self setIndentationPerLevel:16.0];
 	[self setIntercellSpacing:NSMakeSize(0,1)];
-	//[[self delegate] setOutlineView:self];
+	//[[self delegate] setOutlineView:self];  <- this is done via outlet in IB!
 	
 	// Auto-size first column
 	NSRect bounds = [self bounds];
@@ -19,6 +19,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// TODO: Double-click
 	[self setTarget:[self delegate]];
 	[self setDoubleAction:@selector(doubleAction:)];
+	
+	// Get notification frameDidChange
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self
+	       selector:@selector(frameDidChange:)
+		       name:(id)NSViewFrameDidChangeNotification
+			 object:self];
 }
 
 
@@ -129,6 +136,23 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self setNeedsDisplay];
 }
 
+- (void)frameDidChange:(NSNotification *)note
+{
+	/* As NSTableView caches row heights, we need to notify self to use the uncached
+	 * new values after the frame did change
+	 */
+		
+	//NSRange range = [self rowsInRect:[self frame]];	
+	NSRange range = NSMakeRange(0,[self numberOfRows]);
+	[self noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:range]];
+	
+	// TEMP - seems to work quite well, with some flickering...
+	[[self delegate] hideAllSubviews];
+	[self setNeedsDisplay:YES];
+}
+
+
+#pragma mark Events
 /**
 	Custom keyDown event allows opening files with CMD + ARROW-DOWN
 */

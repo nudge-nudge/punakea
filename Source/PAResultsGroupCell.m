@@ -63,6 +63,10 @@
 			}
 	}
 	
+	// Ensure controls aren't hidden
+	[triangle setHidden:NO];
+	[segmentedControl setHidden:NO];
+	
 	// Add triangle if neccessary
 	if([triangle superview] != controlView)
 	{
@@ -152,8 +156,8 @@
 	imageRect.size = [backgroundImage size];
 		
 	[backgroundImage drawInRect:cellFrame fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
-
-					   
+	
+	
 	// Draw text	
 	NSString *value = [self naturalLanguageGroupValue];
 	

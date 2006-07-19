@@ -138,15 +138,25 @@
 
 
 #pragma mark Delegate
-- (float)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+- (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
 {
 	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) return 20;
 	if([[item class] isEqualTo:[NSMetadataItem class]]) return 19;
 	
-	// Calc height of multi item dynamically
+	// Get height of multi item dynamically	from outlineview
 	PAResultsMultiItem *multiItem = item;
-	NSSize cellSize = [[item cellClass] cellSize];
-	return ([multiItem numberOfItems] / 3 + 1) * cellSize.height;	
+	NSSize cellSize = [[multiItem cellClass] cellSize];
+	NSSize intercellSpacing = [[multiItem cellClass] intercellSpacing];
+	float indentationPerLevel = [outlineView indentationPerLevel];
+	NSRect frame = [outlineView frame];
+
+	// TODO: Also use intercellSpacing to calc this (as class method like cellSize)
+	int numberOfItemsPerRow = (frame.size.width - indentationPerLevel) / (cellSize.width + intercellSpacing.width);
+
+	int numberOfRows = [multiItem numberOfItems] / numberOfItemsPerRow;
+	if([multiItem numberOfItems] % numberOfItemsPerRow > 0) numberOfRows++;
+
+	return numberOfRows * cellSize.height;
 }
 
 - (id)tableColumn:(NSTableColumn *)column
@@ -276,7 +286,7 @@
 		row = [selectedRowIndexes indexGreaterThanIndex:row];
 	}
 	
-	// TODO: Why are all items deselected after using openFile but not when commenting this line???
+	// TODO: Why are all items deselected after using openFile but not when commenting that line???
 }
 
 - (void)removeAllMultiItemSubviewsWithIdentifier:(NSString *)identifier
@@ -292,6 +302,23 @@
 			if([identifier isEqualToString:thisIdentifier])
 				[anObject removeFromSuperview];
 		}
+	}
+}
+
+/* TEMP */
+- (void)hideAllSubviews
+{
+	/*NSRect frame = [outlineView frame];
+	frame.size = NSMakeSize(50,50);
+	frame.origin.x -= 100;
+	frame.origin.y -= 100;*/
+
+	NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
+	id anObject;
+	while(anObject = [enumerator nextObject])
+	{
+		//[anObject setFrame:frame];
+		[anObject setHidden:YES];
 	}
 }
 

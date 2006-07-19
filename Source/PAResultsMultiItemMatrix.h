@@ -15,7 +15,7 @@
 
 	PAResultsMultiItem *multiItem;
 	NSCell *multiItemCell;
-
+	
 }
 
 - (PAResultsMultiItem *)multiItem;
