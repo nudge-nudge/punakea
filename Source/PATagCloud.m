@@ -85,7 +85,10 @@ bind to visibleTags
 	[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
 
 	// set initial active button
-	[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
+	if ([[controller visibleTags] count] > 0)
+	{
+		[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
+	}
 }
 
 - (void)dealloc
@@ -111,7 +114,12 @@ bound to visibleTags
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
 		[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
-		[self setActiveButton:[self upperLeftButton]];
+		
+		if ([[controller visibleTags] count] > 0)
+		{
+			[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
+		}
+		
 		[self setNeedsDisplay:YES];
 	}
 }

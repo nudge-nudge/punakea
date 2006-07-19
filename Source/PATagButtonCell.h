@@ -2,6 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
+#import "PATagButton.h"
 
 /**
 cell for the tagcloud, displays the given tag and interacts with the user
