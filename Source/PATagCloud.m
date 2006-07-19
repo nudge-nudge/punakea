@@ -64,6 +64,9 @@ calculates the starting point in the next row according to the height of all the
 {
 	if (self = [super initWithFrame:frameRect]) {
 		tagButtonDict = [[NSMutableDictionary alloc] init];
+		
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
 	}
 	return self;
 }
@@ -80,6 +83,9 @@ bind to visibleTags
 	
 	// create initial tag buttons
 	[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
+
+	// set initial active button
+	[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
 }
 
 - (void)dealloc
@@ -105,6 +111,7 @@ bound to visibleTags
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
 		[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
+		[self setActiveButton:[self upperLeftButton]];
 		[self setNeedsDisplay:YES];
 	}
 }
@@ -123,7 +130,7 @@ bound to visibleTags
 		// if the button is already created, use it
 		if (button = [tagButtonDict objectForKey:[tag name]])
 		{
-			// TODO update attributes
+			// TODO update attributes!
 			[dict setObject:button forKey:[tag name]];
 		}
 		else
@@ -147,12 +154,6 @@ bound to visibleTags
 	[self calcInitialParametersInRect:[self bounds]];
 	[self drawBackground];
 	[self drawTags:[controller visibleTags] inRect:[self bounds]];
-	
-	//select initial active tag button
-	if (!activeButton)
-	{
-		[self setActiveButton:[self upperLeftButton]];
-	}
 }
 
 - (void)drawBackground
@@ -275,16 +276,16 @@ bound to visibleTags
 }
 
 #pragma mark accessors
+- (NSMutableDictionary*)tagButtonDict
+{
+	return tagButtonDict;
+}
+
 - (void)setTagButtonDict:(NSMutableDictionary*)aDict
 {
 	[aDict retain];
 	[tagButtonDict release];
 	tagButtonDict = aDict;
-}
-
-- (NSMutableDictionary*)tagButtonDict
-{
-	return tagButtonDict;
 }
 
 - (PATagButton*)activeButton
@@ -300,8 +301,6 @@ bound to visibleTags
 	[aTag retain];
 	[activeButton release];
 	activeButton = aTag;
-	
-	[self setNeedsDisplay:YES];
 }
 
 #pragma mark event handling
@@ -343,14 +342,13 @@ bound to visibleTags
 				break;
 		}
 	} 
-	else if (key == NSEnterCharacter)
+	else if (key == NSEnterCharacter || key == '\n')
 	{
 		[activeButton performClick:NULL];
 	}
 	else
 	{
 		// forward unhandled events
-		// TODO check this, responder chain is not functional
 		[[self nextResponder] keyDown:event];
 	}
 }
@@ -374,6 +372,8 @@ bound to visibleTags
 		buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
 		[self setActiveButton:[self buttonNearestPoint:point inButtons:buttons]];
 	}
+	
+	[self setNeedsDisplay:YES];
 }
 
 - (void)moveSelectionLeft
@@ -395,6 +395,8 @@ bound to visibleTags
 		buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
 		[self setActiveButton:[self buttonNearestPoint:point inButtons:buttons]];
 	}
+	
+	[self setNeedsDisplay:YES];
 }
 
 - (void)moveSelectionUp
@@ -414,6 +416,8 @@ bound to visibleTags
 		NSArray *allButtons = [tagButtonDict allValues];
 		[self setActiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
 	}
+
+	[self setNeedsDisplay:YES];
 }
 
 - (void)moveSelectionDown
@@ -435,6 +439,8 @@ bound to visibleTags
 		NSArray *allButtons = [tagButtonDict allValues];
 		[self setActiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
 	}
+
+	[self setNeedsDisplay:YES];	
 }
 
 - (NSMutableArray*)buttonsAbove:(NSPoint)point

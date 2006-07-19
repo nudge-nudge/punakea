@@ -72,9 +72,12 @@
 	[self removeObjectFromSelectedTagsAtIndex:i];
 }
 
-- (void)removeAllObjects
+- (void)removeAllObjectsFromSelectedTags
 {
-	[self setSelectedTags:[NSMutableArray array]];
+	for (int i=0;i<[selectedTags count];i++)
+	{
+		[self removeObjectFromSelectedTagsAtIndex:i];
+	}
 }
 
 - (void)addObjectsFromArray:(NSArray*)array 

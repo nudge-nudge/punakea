@@ -38,6 +38,8 @@
 	
 	// buffer for user input (browser)
 	NSMutableString *buffer;
+	
+	NSMutableDictionary *tagCloudSettings;
 }
 
 - (id)initWithNibName:(NSString*)nibName;

@@ -43,6 +43,7 @@ finds related tags for a given query or a given selection of tags.
 - (void)setRelatedTags:(NSMutableArray*)otherTags;
 - (void)insertObject:(PATag *)tag inRelatedTagsAtIndex:(unsigned int)i;
 - (void)removeObjectFromRelatedTagsAtIndex:(unsigned int)i;
-- (void)removeAllObjects;
+
+- (void)removeAllObjectsFromRelatedTags;
 
 @end

@@ -269,6 +269,6 @@ completionsForSubstring:(NSString *)substring
 	[self setCurrentCompleteTagsInField:[[PASelectedTags alloc] init]];
 	
 	// relatedTags
-	[relatedTags removeAllObjects];
+	[relatedTags removeAllObjectsFromRelatedTags];
 }
 @end

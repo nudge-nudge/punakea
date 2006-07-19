@@ -74,9 +74,12 @@
 	[relatedTags removeObjectAtIndex:i];
 }
 
-- (void)removeAllObjects
+- (void)removeAllObjectsFromRelatedTags
 {
-	[self setRelatedTags:[NSMutableArray array]];
+	for (int i=0;i<[relatedTags count];i++)
+	{
+		[self removeObjectFromRelatedTagsAtIndex:i];
+	}
 }
 
 - (PASelectedTags*)selectedTags

@@ -20,10 +20,10 @@
 - (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i;
 - (void)removeObjectFromSelectedTagsAtIndex:(unsigned int)i;
 
+- (void)removeAllObjectsFromSelectedTags;
 - (unsigned int)count;
 - (void)addTag:(PATag*)aTag;
 - (void)removeTag:(PATag*)aTag;
-- (void)removeAllObjects;
 - (void)addObjectsFromArray:(NSArray*)array;
 - (void)removeObjectsInArray:(NSArray*)array;
 - (BOOL)containsObject:(PATag*)aTag;

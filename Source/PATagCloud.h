@@ -20,6 +20,7 @@ displays all visibleTags in a nice tag cloud view
 	NSPoint pointForNextTagRect; /**< saves the point for the next tag to be displayed */
 	int tagPosition; /**< holds the position where the new line starts */
 	
+	NSMutableDictionary *tagCloudSettings; /**< holds user defaults for tag cloud */
 }
 
 - (void)setTagButtonDict:(NSMutableDictionary*)aDict;

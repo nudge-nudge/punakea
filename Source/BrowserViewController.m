@@ -28,10 +28,9 @@
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
 		
-		/* Debug */
-		PAQuery *q = [[PAQuery alloc] init];
-		[q filesForTag:[tagger simpleTagForName:@"test"]];
-		
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
+				
 		selectedTags = [[PASelectedTags alloc] init];
 		
 		query = [[PAQuery alloc] init];
@@ -61,7 +60,6 @@
 		
 		[self setVisibleTags:[tags tags]];
 			
-		
 		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
 	}
@@ -71,9 +69,8 @@
 - (void)awakeFromNib
 {
 	[[[self mainView] window] setInitialFirstResponder:tagCloud];
-	
 	[outlineView setQuery:query];
-}
+}	
 
 - (void)dealloc
 {
@@ -82,6 +79,7 @@
 	[relatedTags release];
     [query release];
 	[selectedTags release];
+	[tagCloudSettings release];
 	[super dealloc];
 }
 
@@ -133,10 +131,27 @@
 	if (visibleTags != otherTags)
 	{
 		[visibleTags release];
-		visibleTags = [otherTags retain];
+		
+		NSSortDescriptor *sortDescriptor;
+		
+		// sort otherTags accorings to userDefaults
+		if ([[tagCloudSettings objectForKey:@"sortKey"] isEqualToString:@"name"])
+		{
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+		}
+		else if ([[tagCloudSettings objectForKey:@"sortKey"] isEqualToString:@"rating"])
+		{
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO];
+		}
+		else
+		{
+			NSLog(@"fatal error, could not sort, specify sortKey in UserDefaults/TagCloud");
+		}
+		
+		NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+		visibleTags = [sortedArray mutableCopy];
 	}
 	
-	//TODO fix me!!
 	if ([visibleTags count] > 0)
 		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
 }
@@ -175,7 +190,7 @@
 //TODO
 - (IBAction)clearSelectedTags:(id)sender
 {
-	[selectedTags removeAllObjects];
+	[selectedTags removeAllObjectsFromSelectedTags];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -239,7 +254,7 @@
 {
 	//TODO exclude everything with modifier keys pressed!
 	// get the pressed key
-	NSLog(@"keyDown: %x", [[event characters] characterAtIndex:0]);
+	NSLog(@"BVC keyDown: %x", [[event characters] characterAtIndex:0]);
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	
 	// create character set for testing
