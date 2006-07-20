@@ -50,4 +50,9 @@ should be overridden according to apple docs
 	[[self cell] setHovered:flag];
 }
 
+- (void)setTitleAttributes:(NSDictionary*)attributes
+{
+	[[self cell] setTitleAttributes:attributes];
+}
+
 @end

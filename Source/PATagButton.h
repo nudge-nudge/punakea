@@ -14,4 +14,6 @@
 - (BOOL)isHovered;
 - (void)setHovered:(BOOL)flag;
 
+- (void)setTitleAttributes:(NSDictionary*)attributes;
+
 @end

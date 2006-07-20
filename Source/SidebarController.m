@@ -9,11 +9,18 @@
 
 @implementation SidebarController
 
-- (void)awakeFromNib 
+- (id)initWithWindowNibName:(NSString*)nibName
 {
-	tagger = [PATagger sharedInstance];
-	tags = [tagger tags];
-	
+	if (self = [super initWithWindowNibName:nibName])
+	{
+		tagger = [PATagger sharedInstance];
+		tags = [tagger tags];
+	}
+	return self;
+}
+
+- (void)awakeFromNib 
+{	
 	//TODO can be done from IB ... do this!
 	//init sorting
 	NSSortDescriptor *popularDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO] autorelease];
@@ -21,7 +28,7 @@
 	[popularTags setSortDescriptors:popularSortDescriptors];
 	
 	//TODO asc or desc?!
-	NSSortDescriptor *recentDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"lastUsed" ascending:NO] autorelease];
+	NSSortDescriptor *recentDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"lastUsed" ascending:YES] autorelease];
 	NSArray *recentSortDescriptors = [NSArray arrayWithObject:recentDescriptor];
 	[recentTags setSortDescriptors:recentSortDescriptors];
 	

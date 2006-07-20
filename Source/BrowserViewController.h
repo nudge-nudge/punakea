@@ -57,6 +57,9 @@
 - (PATag*)currentBestTag;
 - (void)setCurrentBestTag:(PATag*)otherTag;
 
+- (NSMutableString*)buffer;
+- (void)setBuffer:(NSMutableString*)string;
+
 //for PAQuery
 - (PAQuery *)query;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;

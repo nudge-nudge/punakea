@@ -35,6 +35,18 @@
 }
 
 #pragma mark accessors
+- (NSArray*)activeTags
+{
+	return activeTags;
+}
+
+- (void)setActiveTags:(NSArray*)someTags
+{
+	[someTags retain];
+	[activeTags release];
+	activeTags = someTags;
+}
+
 - (NSString*)prefix
 {
 	return prefix;
@@ -60,7 +72,18 @@
 	//TODO make more efficient
 	[matchingTags removeAllObjects];
 	
-	NSEnumerator *e = [tags objectEnumerator];
+	NSEnumerator *e;
+	
+	// if active tags are set, look there, otherwise check in all tags
+	if ([activeTags count] > 0)
+	{
+		e = [activeTags objectEnumerator];
+	}
+	else
+	{
+		e = [tags objectEnumerator];
+	}
+	
 	PATag *tag;
 	
 	while (tag = [e nextObject])
@@ -70,6 +93,34 @@
 			[matchingTags addObject:tag];
 		}
 	}
+}
+
+- (BOOL)hasTagsForPrefix:(NSString*)prefix
+{
+	NSEnumerator *e;
+	
+	// if active tags are set, look there, otherwise check in all tags
+	if ([activeTags count] > 0)
+	{
+		e = [activeTags objectEnumerator];
+	}
+	else
+	{
+		e = [tags objectEnumerator];
+	}
+	
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		if ([[tag name] hasPrefix:prefix])
+		{
+			return true;
+		}
+	}
+		
+	// returns false if no tag was matching
+	return false;
 }
 
 @end

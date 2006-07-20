@@ -19,16 +19,31 @@
 
 - (NSDictionary*)viewAttributesForTag:(PATag*)tag
 {
+	return [self viewAttributesForTag:tag hovered:NO];
+}
+
+- (NSDictionary*)viewAttributesForTag:(PATag*)tag hovered:(BOOL)isHovered
+{
 	NSMutableDictionary *attribs = [NSMutableDictionary dictionary];
 	
 	//externalize sizes
 	float tagRating = [tag relativeRatingToTag:[self currentBestTag]];
-	int size = 30 * tagRating;
-	if (size < 10)
-		size = 10;
+	int size = 25 * tagRating;
+	if (size < 12)
+		size = 12;
 	
 	NSFont *fnt = [NSFont fontWithName:@"Geneva" size:size];
-	NSColor *fgc = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:128.0 alpha:1.0];
+	
+	NSColor *fgc;
+	
+	if (isHovered)
+	{
+		fgc = [NSColor whiteColor];
+	}
+	else
+	{
+		fgc = [NSColor blueColor];
+	}
 	
 	[attribs setObject:fgc forKey:NSForegroundColorAttributeName];
 	[attribs setObject:fnt forKey:NSFontAttributeName];

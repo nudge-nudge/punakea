@@ -23,9 +23,10 @@ displays all visibleTags in a nice tag cloud view
 	NSMutableDictionary *tagCloudSettings; /**< holds user defaults for tag cloud */
 }
 
-- (void)setTagButtonDict:(NSMutableDictionary*)aDict;
 - (NSMutableDictionary*)tagButtonDict;
+- (void)setTagButtonDict:(NSMutableDictionary*)aDict;
 - (PATagButton*)activeButton;
 - (void)setActiveButton:(PATagButton*)aTag;
+- (BrowserViewController*)controller;
 
 @end

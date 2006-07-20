@@ -25,11 +25,11 @@
 {
 	if (self = [super init])
 	{
-		tagger = [PATagger sharedInstance];
-		tags = [tagger tags];
-		
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
+		
+		tagger = [PATagger sharedInstance];
+		tags = [tagger tags];
 				
 		selectedTags = [[PASelectedTags alloc] init];
 		
@@ -152,6 +152,9 @@
 		visibleTags = [sortedArray mutableCopy];
 	}
 	
+	// update type-ahead find
+	[typeAheadFind setActiveTags:visibleTags];
+	
 	if ([visibleTags count] > 0)
 		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
 }
@@ -166,6 +169,28 @@
 	[otherTag retain];
 	[currentBestTag release];
 	currentBestTag = otherTag;
+}
+
+- (NSMutableString*)buffer
+{
+	return buffer;
+}
+
+- (void)setBuffer:(NSMutableString*)string
+{
+	[string retain];
+	[buffer release];
+	buffer = string;
+}
+
+- (NSOutlineView *)outlineView
+{
+	return outlineView;
+}
+
+- (void)setOutlineView:(NSOutlineView *)anOutlineView
+{
+	outlineView = anOutlineView;
 }
 
 #pragma mark tag stuff
@@ -276,8 +301,20 @@
 	}
 	else if ([alphanumericCharacterSet characterIsMember:key]) 
 	{
-		// TODO check if it is ok to append event instead of key
-		[buffer appendString:[event charactersIgnoringModifiers]];
+		// only add to buffer if there are any tags, otherwise do nothing
+		NSMutableString *tmpBuffer = [buffer mutableCopy];
+		[tmpBuffer appendString:[event charactersIgnoringModifiers]];
+		
+		if ([typeAheadFind hasTagsForPrefix:tmpBuffer])
+		{
+			[buffer appendString:[event charactersIgnoringModifiers]];
+		}
+		else
+		{
+			// TODO give user negative feedback
+		}
+		
+		[tmpBuffer release];
 	}
 	else
 	{
@@ -301,21 +338,8 @@
 		}
 	}
 		
-	NSLog(@"%@",buffer);
+	NSLog(@"buffer: %@",buffer);
 }
-
-
-#pragma mark Accessors
-- (NSOutlineView *)outlineView
-{
-	return outlineView;
-}
-
-- (void)setOutlineView:(NSOutlineView *)anOutlineView
-{
-	outlineView = anOutlineView;
-}
-
 
 #pragma mark Temp
 - (void)setGroupingAttributes:(id)sender;

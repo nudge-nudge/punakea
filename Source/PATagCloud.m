@@ -138,7 +138,7 @@ bound to visibleTags
 		// if the button is already created, use it
 		if (button = [tagButtonDict objectForKey:[tag name]])
 		{
-			// TODO update attributes!
+			[button setTitleAttributes:[controller viewAttributesForTag:tag]];
 			[dict setObject:button forKey:[tag name]];
 		}
 		else
@@ -301,14 +301,22 @@ bound to visibleTags
 	return activeButton;
 }
 
-- (void)setActiveButton:(PATagButton*)aTag
+- (void)setActiveButton:(PATagButton*)aTagButton
 {
+	// TODO setting title string should be a part of setHovered, doesn't work because button doesn't know controller
 	[activeButton setHovered:NO];
-	[aTag setHovered:YES];
+	[activeButton setTitleAttributes:[controller viewAttributesForTag:[activeButton fileTag] hovered:NO]];
+	[aTagButton setHovered:YES];
+	[aTagButton setTitleAttributes:[controller viewAttributesForTag:[aTagButton fileTag] hovered:YES]];
 	
-	[aTag retain];
+	[aTagButton retain];
 	[activeButton release];
-	activeButton = aTag;
+	activeButton = aTagButton;
+}
+
+- (BrowserViewController*)controller
+{
+	return controller;
 }
 
 #pragma mark event handling

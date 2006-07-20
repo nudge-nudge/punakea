@@ -3,6 +3,7 @@
 @interface PATagButtonCell (PrivateAPI)
 
 - (void)drawHoverEffectWithFrame:(NSRect)cellFrame;
+- (void)setTitleColor:(NSColor*)color;
 
 @end
 
@@ -43,8 +44,8 @@
 
 - (void)drawHoverEffectWithFrame:(NSRect)cellFrame
 {
-	[[NSColor colorWithDeviceRed:255.0 green:128.0 blue:0.0 alpha:1.0] set];
-	[NSBezierPath fillRect:cellFrame];
+	[[NSColor blueColor] set];
+	[[NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:5.0] fill];
 }
 
 #pragma mark accessors
@@ -66,8 +67,15 @@
 }
 
 - (void)setHovered:(BOOL)flag
-{
+{	
 	isHovered = flag;
+}
+
+- (void)setTitleAttributes:(NSDictionary*)attributes;
+{
+	NSAttributedString *titleString = [[NSAttributedString alloc] initWithString:[fileTag name] attributes:attributes];
+	[self setAttributedTitle:titleString];
+	[titleString release];
 }
 
 #pragma mark highlighting

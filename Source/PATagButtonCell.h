@@ -22,4 +22,6 @@ cell for the tagcloud, displays the given tag and interacts with the user
 - (BOOL)isHovered;
 - (void)setHovered:(BOOL)flag;
 
+- (void)setTitleAttributes:(NSDictionary*)attributes;
+
 @end

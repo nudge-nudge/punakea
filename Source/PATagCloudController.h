@@ -27,4 +27,6 @@ determines the attributes for the tags appearance
  */
 - (NSDictionary*)viewAttributesForTag:(PATag*)tag;
 
+- (NSDictionary*)viewAttributesForTag:(PATag*)tag hovered:(BOOL)isHovered;
+
 @end
