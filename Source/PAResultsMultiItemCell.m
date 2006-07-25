@@ -69,12 +69,27 @@
 	{
 		[matrix deselectAllCells];
 	} else {
-		// TODO: Ensure at least one item is selected
-		/*if(![matrix selectedCell])
+		
+		if(![matrix selectedCell])
 		{
-			[matrix selectCellAtRow:0 column:0];
-			[matrix highlightCell:YES atRow:0 column:0];
-		}*/
+			// Select one item on highlighting
+			if([controlView lastUpDownArrowFunctionKey] == NSDownArrowFunctionKey)
+			{
+				// Select upper left item
+				[matrix selectCellAtRow:0 column:0];
+				[matrix highlightCell:YES atRow:0 column:0];
+			}
+			if([controlView lastUpDownArrowFunctionKey] == NSUpArrowFunctionKey)
+			{
+				// Select lower left item
+				[matrix selectCellAtRow:[matrix numberOfRows]-1 column:0];
+				[matrix highlightCell:YES atRow:[matrix numberOfRows]-1 column:0];
+			}
+		}
+		[controlView setLastUpDownArrowFunctionKey:0];
+		
+		// Make matrix the first responder
+		[controlView setResponder:matrix];
 	}
 }
 

@@ -205,12 +205,12 @@
 	[self removeAllMultiItemSubviewsWithIdentifier:[item value]];
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
+- (BOOL)outlineView:(NSOutlineView *)ov shouldSelectItem:(id)item
 {
-	// Forward selection request to multiitem
-	if([[item class] isEqualTo:[PAResultsMultiItem class]])
+	// Resign any matrix from being responder
+	if(![[item class] isEqualTo:[PAResultsMultiItem class]])
 	{
-		//NSLog(@"should select multiitem");
+		[outlineView setResponder:nil];
 	}
 
 	return ([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) ? NO : YES;

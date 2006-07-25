@@ -33,20 +33,34 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (id)_highlightColorForCell:(NSCell *)cell
 {
 	if([[cell class] isEqualTo:[PAResultsMultiItemCell class]])
-		return nil;
+		return [NSColor whiteColor];
+				
 	return [super _highlightColorForCell:cell];
 }
 
 - (void)highlightSelectionInClipRect:(NSRect)clipRect
 {
 	id selectedItem = [self itemAtRow:[self selectedRow]];
+	
 	// Clear MultiItem's hightlight color
 	if([[selectedItem class] isEqualTo:[PAResultsMultiItem class]])
-	{
+	{	
 		[[NSColor whiteColor] set];
 		NSRectFill([self rectOfRow:[self selectedRow]]);
 		return;
 	}
+	
+	/*if([[selectedItem class] isEqualTo:[NSMetadataItem class]])
+	{
+		if([[self window] isKeyWindow])
+			[[NSColor alternateSelectedControlColor] set];
+		else
+			[[NSColor grayColor] set];
+		
+		NSRectFill([self rectOfRow:[self selectedRow]]);
+		return;
+	}*/
+	
 	[super highlightSelectionInClipRect:clipRect];
 }
 
@@ -159,10 +173,24 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)keyDown:(NSEvent *)theEvent
 {
 	if([theEvent type] == NSKeyDown)
-	{
+	{	
 		 NSNumber *key = [NSNumber numberWithUnsignedInt:
 			[[theEvent characters] characterAtIndex:0]];
-	
+			
+		// Forward request to responder
+		if([self responder])
+		{
+			return [[self responder] keyDown:theEvent];
+		}
+			
+		// Store arrow key up/down value for use in multi items
+		lastUpDownArrowFunctionKey = 0;
+		if([key unsignedIntValue] == NSDownArrowFunctionKey)
+			lastUpDownArrowFunctionKey = NSDownArrowFunctionKey;
+		if([key unsignedIntValue] == NSUpArrowFunctionKey)
+			lastUpDownArrowFunctionKey = NSUpArrowFunctionKey;	
+			
+		// Respond to Command + Arrow-Down	
 		if([key unsignedIntValue] == NSDownArrowFunctionKey &&
 		   ([theEvent modifierFlags] & NSCommandKeyMask) != 0)
 		{
@@ -170,6 +198,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			return;
 		}
 	}
+	
 	[super keyDown:theEvent];
 }
 
@@ -205,6 +234,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
+	// Clear stored key down for multi items
+	lastUpDownArrowFunctionKey = 0;	
+
     static float doubleClickThreshold = 0.0;
     
     if ( 0.0 == doubleClickThreshold )
@@ -270,6 +302,26 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	query = aQuery;
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(queryNote:) name:nil object:query];
+}
+
+- (unsigned int)lastUpDownArrowFunctionKey;
+{
+	return lastUpDownArrowFunctionKey;
+}
+
+- (void)setLastUpDownArrowFunctionKey:(unsigned int)key
+{
+	lastUpDownArrowFunctionKey = key;
+}
+
+- (NSResponder *)responder
+{
+	return responder;
+}
+
+- (void)setResponder:(NSResponder *)aResponder
+{
+	responder = aResponder;
 }
 
 @end

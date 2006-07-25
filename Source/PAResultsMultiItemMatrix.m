@@ -101,6 +101,8 @@
 		column++;
 		[aCell release];
 	}
+	
+	[self deselectAllCells];
 }
 
 
@@ -156,6 +158,300 @@
 			[self putCell:cell atRow:row column:column];
 		}
 		column++;
+	}
+}
+
+- (void)moveSelectionUp:(NSEvent *)theEvent
+{
+	[self moveSelectionUp:theEvent byExtendingSelection:NO];
+}
+
+- (void)moveSelectionUp:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
+{	
+	NSCell *cell;
+	int row = [self numberOfRows] - 1;
+	int column = [self numberOfColumns] - 1;
+	int r, c;
+	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
+	
+	while(cell = [selCellsEnumerator nextObject])
+	{
+		[self getRow:&r column:&c ofCell:cell];
+		if(r < row)
+		{
+			row = r;
+			column = c;
+		}
+		if (r == row && c < column)
+		{
+			row = r;
+			column = c;
+		}
+	}
+	
+	if(row != 0) 
+	{
+		selCellsEnumerator = [[self selectedCells] objectEnumerator];
+		[self deselectAllCells];
+		
+		if(flag)
+		{
+			while(cell = [selCellsEnumerator nextObject])
+			{
+				int curRow, curCol;
+				[self getRow:&curRow column:&curCol ofCell:cell];
+				[self selectCellAtRow:curRow column:curCol];
+				[self highlightCell:YES atRow:curRow column:curCol];
+			}
+		}
+
+		[self selectCellAtRow:row-1 column:column];
+		[self highlightCell:YES atRow:row-1 column:column];
+	} else {
+		// If this is the topmost multi item cell, do nothing as we are at the topmost item
+		// in our OutlineView
+
+		NSOutlineView *outlineView = (NSOutlineView *)[self superview];
+		int rowInOutlineView = [outlineView rowForItem:multiItem];	
+	
+		if(rowInOutlineView > 1)
+		{
+			// Pass keyDown event back to OutlineView
+			[[self superview] setResponder:nil];
+			[[self superview] keyDown:theEvent];
+		}
+	}
+}
+
+- (void)moveSelectionDown:(NSEvent *)theEvent
+{
+	[self moveSelectionDown:theEvent byExtendingSelection:NO];
+}
+
+- (void)moveSelectionDown:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
+{	
+	NSCell *cell;
+	int row = 0;
+	int column = 0;
+	int r, c;
+	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
+	
+	while(cell = [selCellsEnumerator nextObject])
+	{
+		[self getRow:&r column:&c ofCell:cell];
+		if(r > row)
+		{
+			row = r;
+			column = c;
+		}
+		if (r == row && c > column)
+		{
+			row = r;
+			column = c;
+		}
+	}
+	
+	if(row != [self numberOfRows] - 1) 
+	{
+		selCellsEnumerator = [[self selectedCells] objectEnumerator];
+		[self deselectAllCells];
+		
+		if(flag)
+		{
+			while(cell = [selCellsEnumerator nextObject])
+			{
+				int curRow, curCol;
+				[self getRow:&curRow column:&curCol ofCell:cell];
+				[self selectCellAtRow:curRow column:curCol];
+				[self highlightCell:YES atRow:curRow column:curCol];
+			}
+		}
+		
+		[self selectCellAtRow:row+1 column:column];
+		[self highlightCell:YES atRow:row+1 column:column];
+	} else {
+		// If this is the lowermost multi item cell, do nothing as we are at the lowermost item
+		// in our OutlineView
+
+		NSOutlineView *outlineView = (NSOutlineView *)[self superview];
+		int rowInOutlineView = [outlineView rowForItem:multiItem];	
+	
+		if(rowInOutlineView < [outlineView numberOfRows] - 1)
+		{
+			// Pass keyDown event back to OutlineView
+			[[self superview] setResponder:nil];
+			[[self superview] keyDown:theEvent];
+		}
+	}
+}
+
+- (void)moveSelectionRight:(NSEvent *)theEvent
+{
+	[self moveSelectionRight:theEvent byExtendingSelection:NO];
+}
+
+- (void)moveSelectionRight:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
+{	
+	NSCell *cell;
+	int row = 0;
+	int column = 0;
+	int r, c;
+	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
+	
+	while(cell = [selCellsEnumerator nextObject])
+	{
+		[self getRow:&r column:&c ofCell:cell];
+		if(r > row)
+		{
+			row = r;
+			column = c;
+		}
+		if (r == row && c > column)
+		{
+			row = r;
+			column = c;
+		}
+	}
+	
+	column++;
+	if(column == [self numberOfColumns])
+	{
+		// Wrap selection into next line
+		column--;
+		row++;
+	}
+	
+	if(row != [self numberOfRows]) 
+	{
+		selCellsEnumerator = [[self selectedCells] objectEnumerator];
+		[self deselectAllCells];
+		
+		if(flag)
+		{
+			while(cell = [selCellsEnumerator nextObject])
+			{
+				int curRow, curCol;
+				[self getRow:&curRow column:&curCol ofCell:cell];
+				[self selectCellAtRow:curRow column:curCol];
+				[self highlightCell:YES atRow:curRow column:curCol];
+			}
+		}		
+		
+		[self selectCellAtRow:row column:column];
+		[self highlightCell:YES atRow:row column:column];
+	} else {		
+		// Modify event so that selection moves down instead of right (if possible)
+		unichar downArrowChar = NSDownArrowFunctionKey;
+		theEvent = [NSEvent keyEventWithType:[theEvent type]
+		                            location:[self convertPoint:[theEvent locationInWindow] fromView:nil]
+							   modifierFlags:[theEvent modifierFlags]
+							       timestamp:[theEvent timestamp]
+								windowNumber:[theEvent windowNumber]
+							         context:[theEvent context]
+								  characters:[NSString stringWithCharacters:&downArrowChar length:1]
+				 charactersIgnoringModifiers:[NSString stringWithCharacters:&downArrowChar length:1]
+								   isARepeat:[theEvent isARepeat]
+								     keyCode:125];
+		
+		[self moveSelectionDown:theEvent byExtendingSelection:flag];
+	}
+}
+
+- (void)moveSelectionLeft:(NSEvent *)theEvent
+{
+	[self moveSelectionLeft:theEvent byExtendingSelection:NO];
+}
+
+- (void)moveSelectionLeft:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
+{	
+	NSCell *cell;
+	int row = [self numberOfRows] - 1;
+	int column = [self numberOfColumns] - 1;
+	int r, c;
+	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
+	
+	while(cell = [selCellsEnumerator nextObject])
+	{
+		[self getRow:&r column:&c ofCell:cell];
+		if(r < row)
+		{
+			row = r;
+			column = c;
+		}
+		if (r == row && c < column)
+		{
+			row = r;
+			column = c;
+		}
+	}
+	
+	column--;
+	if(column == -1)
+	{
+		// Wrap selection into next line
+		column++;
+		row--;
+	}
+	
+	if(row != -1) 
+	{
+		selCellsEnumerator = [[self selectedCells] objectEnumerator];
+		[self deselectAllCells];
+		
+		if(flag)
+		{
+			while(cell = [selCellsEnumerator nextObject])
+			{
+				int curRow, curCol;
+				[self getRow:&curRow column:&curCol ofCell:cell];
+				[self selectCellAtRow:curRow column:curCol];
+				[self highlightCell:YES atRow:curRow column:curCol];
+			}
+		}		
+		
+		[self selectCellAtRow:row column:column];
+		[self highlightCell:YES atRow:row column:column];
+	} else {		
+		// Modify event so that selection moves up instead of left (if possible)
+		unichar upArrowChar = NSUpArrowFunctionKey;
+		theEvent = [NSEvent keyEventWithType:[theEvent type]
+		                            location:[self convertPoint:[theEvent locationInWindow] fromView:nil]
+							   modifierFlags:[theEvent modifierFlags]
+							       timestamp:[theEvent timestamp]
+								windowNumber:[theEvent windowNumber]
+							         context:[theEvent context]
+								  characters:[NSString stringWithCharacters:&upArrowChar length:1]
+				 charactersIgnoringModifiers:[NSString stringWithCharacters:&upArrowChar length:1]
+								   isARepeat:[theEvent isARepeat]
+								     keyCode:126];
+		
+		[self moveSelectionUp:theEvent byExtendingSelection:flag];
+	}
+}
+
+
+#pragma mark Events
+- (void)keyDown:(NSEvent *)theEvent
+{
+	if([theEvent type] == NSKeyDown)
+	{			
+		unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+		
+		BOOL shiftKey = ([theEvent modifierFlags] & NSShiftKeyMask) != 0;
+			
+		switch(key)
+		{
+			case NSRightArrowFunctionKey: [self moveSelectionRight:theEvent byExtendingSelection:shiftKey];
+				break;
+			case NSLeftArrowFunctionKey: [self moveSelectionLeft:theEvent byExtendingSelection:shiftKey];
+				break;
+			case NSUpArrowFunctionKey: [self moveSelectionUp:theEvent byExtendingSelection:shiftKey];
+				break;
+			case NSDownArrowFunctionKey: [self moveSelectionDown:theEvent byExtendingSelection:shiftKey];
+				break;
+			default:
+				break;
+		}
 	}
 }
 
