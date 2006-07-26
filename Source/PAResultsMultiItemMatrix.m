@@ -456,9 +456,16 @@
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
-{			
-	// Ensure the corresponding "supercell" is highlighted
+{		
 	NSOutlineView *outlineView = (NSOutlineView *)[self superview];
+	
+	// Make sure that the outlineView is the first responder
+	if([[[outlineView window] firstResponder] isNotEqualTo:outlineView])
+	{
+		[[outlineView window] makeFirstResponder:outlineView];
+	}
+	
+	// Make sure the corresponding "supercell" is highlighted
 	NSPoint locationInOutlineView = [outlineView convertPoint:[theEvent locationInWindow] fromView:nil];
 	int row = [outlineView rowAtPoint:locationInOutlineView];	
 	BOOL byExtendingSelection = ([theEvent modifierFlags] & NSShiftKeyMask) ||
