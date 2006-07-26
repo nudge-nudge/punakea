@@ -263,6 +263,12 @@
 	
 	if(row != [self numberOfRows] - 1) 
 	{
+		// If the cell that is to be selected represents a placeholder, we will ignore it
+		if([[[self cellAtRow:row+1 column:column] class] isEqualTo:[PAResultsMultiItemPlaceholderCell class]])
+		{
+			column = 0;
+		}
+	
 		selCellsEnumerator = [[self selectedCells] objectEnumerator];
 		[self deselectAllCells];
 		
@@ -329,6 +335,13 @@
 		// Wrap selection into next line
 		column--;
 		row++;
+	}
+	
+	// If the cell that is to be selected represents a placeholder, we will ignore it
+	// and directly send an arrow down event
+	if([[[self cellAtRow:row column:column] class] isEqualTo:[PAResultsMultiItemPlaceholderCell class]])
+	{
+		row = [self numberOfRows];
 	}
 	
 	if(row != [self numberOfRows]) 
