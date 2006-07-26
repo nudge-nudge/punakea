@@ -52,6 +52,9 @@
 	
 	int numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
 	
+	// Break if numberOfItemsPerRow hasn't changed
+	if([self numberOfColumns] == numberOfItemsPerRow) return;
+	
 	NSMutableArray *cellArray = [NSMutableArray arrayWithCapacity:100];
 	
 	for(int row = 0; row < [self numberOfRows]; row++)
