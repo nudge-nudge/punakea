@@ -107,6 +107,16 @@
 
 
 #pragma mark Actions
+- (void)scrollCellToVisibleAtRow:(int)row column:(int)column
+{	
+	NSRect rect = [self cellFrameAtRow:row column:column];
+	rect.origin.y -= 40;
+	if(rect.origin.y < 0) rect.origin.y = 0;
+	rect.size.height += 80;
+	
+	[[self superview] scrollRectToVisible:rect];
+}
+
 - (void)displayCellsForItems
 {
 	for(int i = 0; i < [self numberOfRows]; i++)
