@@ -148,15 +148,16 @@
 	NSSize cellSize = [[multiItem cellClass] cellSize];
 	NSSize intercellSpacing = [[multiItem cellClass] intercellSpacing];
 	float indentationPerLevel = [outlineView indentationPerLevel];
+	float offsetToRightBorder = 20;
 	NSRect frame = [outlineView frame];
 
-	// TODO: Also use intercellSpacing to calc this (as class method like cellSize)
-	int numberOfItemsPerRow = (frame.size.width - indentationPerLevel) / (cellSize.width + intercellSpacing.width);
+	int numberOfItemsPerRow = (frame.size.width - indentationPerLevel - offsetToRightBorder) /
+	                          (cellSize.width + intercellSpacing.width);
 
 	int numberOfRows = [multiItem numberOfItems] / numberOfItemsPerRow;
 	if([multiItem numberOfItems] % numberOfItemsPerRow > 0) numberOfRows++;
 
-	return numberOfRows * cellSize.height;
+	return numberOfRows * (cellSize.height + intercellSpacing.height);
 }
 
 - (id)tableColumn:(NSTableColumn *)column

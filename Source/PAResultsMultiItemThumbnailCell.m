@@ -54,6 +54,13 @@
 						   range:NSMakeRange(0, [valueLabel length])];
 	}
 	
+	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
+	[paraStyle setAlignment:NSCenterTextAlignment];
+	[valueLabel addAttribute:NSParagraphStyleAttributeName
+	                   value:paraStyle
+				       range:NSMakeRange(0, [valueLabel length])];
+
 	NSSize valueLabelSize = [valueLabel size];
 	
 	NSRect bezelFrame = cellFrame;
@@ -66,10 +73,15 @@
 		[[NSBezierPath bezierPathWithRoundRectInRect:bezelFrame radius:20] fill];
 	}
 	
-	NSPoint valueLabelPoint = bezelFrame.origin;
-	valueLabelPoint.x += (bezelFrame.size.width - valueLabelSize.width) / 2;
-	valueLabelPoint.y += 1;
-	[valueLabel drawAtPoint:valueLabelPoint];
+	NSSize padding = NSMakeSize(5,1);
+	
+	NSRect valueLabelFrame = bezelFrame;
+	valueLabelFrame.origin.x = bezelFrame.origin.x + padding.width;
+	valueLabelFrame.origin.y += padding.height;
+	valueLabelFrame.size.width = bezelFrame.size.width - 2 * padding.width;
+	valueLabelFrame.size.height = bezelFrame.size.height - 2 * padding.height;
+
+	[valueLabel drawInRect:valueLabelFrame];
 	
 	// Draw thumbnail background rect
 	if([self isHighlighted])
@@ -93,13 +105,6 @@
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	[self drawInteriorWithFrame:cellFrame inView:controlView];
-	// Not invoked for matrix mode NSTrackModeMatrix
-
-	/*NSLog(@"thumbnail highlight");
-	
-	[[NSColor greenColor] set];
-	NSRectFill(cellFrame);	
-	[[self controlView] setNeedsDisplay:YES];*/
 }
 
 

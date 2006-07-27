@@ -48,9 +48,10 @@
 	// Ensure matrix isn't hidden
 	[matrix setHidden:NO];
 	
+	float offsetToRightBorder = 20;
 	NSRect rect = NSMakeRect(cellFrame.origin.x + 15,
 							 cellFrame.origin.y,
-							 cellFrame.size.width - 30,
+							 cellFrame.size.width - offsetToRightBorder,
 							 cellFrame.size.height);
 
 	if([matrix superview] != controlView)
@@ -73,17 +74,18 @@
 		if(![matrix selectedCell])
 		{
 			// Select one item on highlighting
-			if([controlView lastUpDownArrowFunctionKey] == NSDownArrowFunctionKey)
+			if([controlView lastUpDownArrowFunctionKey] == NSDownArrowFunctionKey ||
+			   [controlView lastUpDownArrowFunctionKey] == NSUpArrowFunctionKey)
 			{
+				int row = 0;
+				int column = 0;
+
+				if([controlView lastUpDownArrowFunctionKey] == NSUpArrowFunctionKey)
+					row = [matrix numberOfRows] - 1;
+			
 				// Select upper left item
-				[matrix selectCellAtRow:0 column:0];
-				[matrix highlightCell:YES atRow:0 column:0];
-			}
-			if([controlView lastUpDownArrowFunctionKey] == NSUpArrowFunctionKey)
-			{
-				// Select lower left item
-				[matrix selectCellAtRow:[matrix numberOfRows]-1 column:0];
-				[matrix highlightCell:YES atRow:[matrix numberOfRows]-1 column:0];
+				[matrix selectCellAtRow:row column:column];
+				[matrix highlightCell:YES atRow:row column:column];
 			}
 		}
 		[controlView setLastUpDownArrowFunctionKey:0];

@@ -23,6 +23,7 @@
 		[self setTarget:self];
 		
 		// Get notification frameDidChange
+		[self setPostsFrameChangedNotifications:YES];
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self
 			   selector:@selector(frameDidChange:)
@@ -110,15 +111,22 @@
 
 
 #pragma mark Actions
+/* TODO
 - (void)scrollCellToVisibleAtRow:(int)row column:(int)column
 {	
-	NSRect rect = [self cellFrameAtRow:row column:column];
-	rect.origin.y -= 40;
-	if(rect.origin.y < 0) rect.origin.y = 0;
-	rect.size.height += 80;
+	NSRect cellFrame = [self cellFrameAtRow:row column:column];	
+	NSRect frame = [self frame];
+	
+	NSRect rect = NSMakeRect(frame.origin.x + cellFrame.origin.x,
+							 frame.origin.y + cellFrame.origin.y - 40,
+							 cellFrame.size.width,
+							 cellFrame.size.height + 80);
+		
+	//if(cellFrame.origin.y < 0) cellFrame.origin.y = 0;
 	
 	[[self superview] scrollRectToVisible:rect];
 }
+*/
 
 - (void)displayCellsForItems
 {
@@ -478,6 +486,9 @@
 			default:
 				break;
 		}
+		
+		// TODO: Too slow, but we need to invalidate our visibleRect if key was pressed for a while
+		//[[self superview] setNeedsDisplayInRect:[[self superview] visibleRect]];
 	}
 }
 
