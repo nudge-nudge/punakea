@@ -2,6 +2,7 @@
 
 /* TODO global
 check useCount increment
+empty related tags on selected tags change so taht they don't "flash" in
 */
 
 #import <Cocoa/Cocoa.h>

@@ -326,6 +326,7 @@
 	// else display all tags
 	if ([buffer length] > 0)
 	{
+		//TODO not working when deleting
 		[typeAheadFind setPrefix:buffer];
 		[self setVisibleTags:[typeAheadFind matchingTags]];
 	}
@@ -337,8 +338,6 @@
 			[self setVisibleTags:[tags tags]];
 		}
 	}
-		
-	NSLog(@"buffer: %@",buffer);
 }
 
 #pragma mark Temp

@@ -18,10 +18,7 @@
 		[self setFileTag:aTag];
 
 		//title
-		NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:[fileTag name] attributes:attributes];		
-		//TODO marking
-		[self setAttributedTitle:titleString];
-		[titleString release];
+		[self setTitleAttributes:attributes];
 		
 		//looks
 		[self setBordered:NO];
@@ -75,7 +72,16 @@
 - (void)setTitleAttributes:(NSDictionary*)attributes;
 {
 	NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:[fileTag name] attributes:attributes];
-	// TODO marking
+	BrowserViewController *controller = [[[self controlView] superview] controller];
+	
+	// if controller is set, check buffer for prefix coloring
+	if (controller && [[controller buffer] length] > 0)
+	{
+		// TODO externalize
+		NSColor *markColor = [NSColor redColor];
+		[titleString addAttribute:NSForegroundColorAttributeName value:markColor range:NSMakeRange(0,[[controller buffer] length])];
+	}
+	
 	[self setAttributedTitle:titleString];
 	[titleString release];
 }

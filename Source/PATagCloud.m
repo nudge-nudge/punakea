@@ -161,7 +161,6 @@ bound to visibleTags
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect
 {	
-	NSLog(@"drawing cloud");
 	[self drawBackground];
 
 	// only update tags when the visibleTags have changed
@@ -176,7 +175,8 @@ bound to visibleTags
 - (void)drawBackground
 {
 	NSRect bounds = [self bounds];
-	[[NSColor whiteColor] set];
+	//TODO externalize
+	[[NSColor colorWithCalibratedRed:231.0 green:237.0 blue:246.0 alpha:1.0] set];
 	[NSBezierPath fillRect:bounds];
 	
 	[[NSColor lightGrayColor] set];
