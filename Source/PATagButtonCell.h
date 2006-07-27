@@ -14,7 +14,7 @@ cell for the tagcloud, displays the given tag and interacts with the user
 	BOOL isHovered;
 }
 
-- (id)initWithTag:(PATag*)aTag attributes:(NSDictionary*)attributes markRange:(NSRange)range;
+- (id)initWithTag:(PATag*)aTag attributes:(NSDictionary*)attributes;
 
 - (PATag*)fileTag;
 - (void)setFileTag:(PATag*)aTag;
@@ -22,6 +22,6 @@ cell for the tagcloud, displays the given tag and interacts with the user
 - (BOOL)isHovered;
 - (void)setHovered:(BOOL)flag;
 
-- (void)setTitleAttributes:(NSDictionary*)attributes markRange:(NSRange)range;
+- (void)setTitleAttributes:(NSDictionary*)attributes;
 
 @end

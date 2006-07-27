@@ -138,7 +138,7 @@ bound to visibleTags
 		// if the button is already created, use it
 		if (button = [tagButtonDict objectForKey:[tag name]])
 		{
-			[button setTitleAttributes:[controller viewAttributesForTag:tag] markRange:NSMakeRange(0,[[controller buffer] length])];
+			[button setTitleAttributes:[controller viewAttributesForTag:tag]];
 			[dict setObject:button forKey:[tag name]];
 		}
 		else
@@ -306,9 +306,9 @@ bound to visibleTags
 {
 	// TODO setting title string should be a part of setHovered, doesn't work because button doesn't know controller
 	[activeButton setHovered:NO];
-	[activeButton setTitleAttributes:[controller viewAttributesForTag:[activeButton fileTag] hovered:NO] markRange:NSMakeRange(0,[[controller buffer] length])];
+	[activeButton setTitleAttributes:[controller viewAttributesForTag:[activeButton fileTag] hovered:NO]];
 	[aTagButton setHovered:YES];
-	[aTagButton setTitleAttributes:[controller viewAttributesForTag:[aTagButton fileTag] hovered:YES] markRange:NSMakeRange(0,[[controller buffer] length])];
+	[aTagButton setTitleAttributes:[controller viewAttributesForTag:[aTagButton fileTag] hovered:YES]];
 	
 	[aTagButton retain];
 	[activeButton release];

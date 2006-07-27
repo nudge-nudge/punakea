@@ -6,7 +6,7 @@
 
 @interface PATagButton : NSButton
 
-- (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag attributes:(NSDictionary*)attributes markRange:(NSRange)range;
+- (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag attributes:(NSDictionary*)attributes;
 
 - (PATag*)fileTag;
 - (void)setFileTag:(PATag*)aTag;
@@ -14,6 +14,6 @@
 - (BOOL)isHovered;
 - (void)setHovered:(BOOL)flag;
 
-- (void)setTitleAttributes:(NSDictionary*)attributes markRange:(NSRange)range;
+- (void)setTitleAttributes:(NSDictionary*)attributes;
 
 @end
