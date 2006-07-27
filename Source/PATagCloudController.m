@@ -42,7 +42,7 @@
 	}
 	else
 	{
-		fgc = [NSColor blueColor];
+		fgc = [NSColor selectedTextColor];
 	}
 	
 	[attribs setObject:fgc forKey:NSForegroundColorAttributeName];

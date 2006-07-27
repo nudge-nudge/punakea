@@ -49,7 +49,7 @@
 
 - (void)drawHoverEffectWithFrame:(NSRect)cellFrame
 {
-	[[NSColor blueColor] set];
+	[[NSColor selectedTextBackgroundColor] set];
 	[[NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:5.0] fill];
 }
 
