@@ -10,7 +10,7 @@
 @implementation PATagButtonCell
 
 #pragma mark init
-- (id)initWithTag:(PATag*)aTag attributes:(NSDictionary*)attributes
+- (id)initWithTag:(PATag*)aTag attributes:(NSDictionary*)attributes markRange:(NSRange)range
 {
 	if (self = [super init])
 	{
@@ -18,7 +18,12 @@
 		[self setFileTag:aTag];
 
 		//title
-		NSAttributedString *titleString = [[NSAttributedString alloc] initWithString:[fileTag name] attributes:attributes];
+		NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:[fileTag name] attributes:attributes];
+		
+		//mark typeAheadBuffer
+		//TODO externalize
+		NSColor *markColor = [NSColor redColor];
+		[titleString addAttribute:NSForegroundColorAttributeName value:markColor range:range];
 		[self setAttributedTitle:titleString];
 		[titleString release];
 		
@@ -71,9 +76,12 @@
 	isHovered = flag;
 }
 
-- (void)setTitleAttributes:(NSDictionary*)attributes;
+- (void)setTitleAttributes:(NSDictionary*)attributes  markRange:(NSRange)range;
 {
-	NSAttributedString *titleString = [[NSAttributedString alloc] initWithString:[fileTag name] attributes:attributes];
+	NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:[fileTag name] attributes:attributes];
+	// TODO externalize!
+	NSColor *markColor = [NSColor redColor];
+	[titleString addAttribute:NSForegroundColorAttributeName value:markColor range:range];
 	[self setAttributedTitle:titleString];
 	[titleString release];
 }

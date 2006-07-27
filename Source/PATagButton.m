@@ -1,21 +1,21 @@
 #import "PATagButton.h"
 
 @implementation PATagButton
-- (id)initWithTag:(PATag*)tag attributes:(NSDictionary*)attributes
+- (id)initWithTag:(PATag*)tag attributes:(NSDictionary*)attributes markRange:(NSRange)range
 {
 	NSRect nilRect = NSMakeRect(0,0,0,0);
-	return [self initWithFrame:nilRect Tag:tag attributes:attributes];
+	return [self initWithFrame:nilRect Tag:tag attributes:attributes markRange:range];
 }
 
 /**
 designated initializer
  */
-- (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag attributes:(NSDictionary*)attributes
+- (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag attributes:(NSDictionary*)attributes markRange:(NSRange)range
 {
     self = [super initWithFrame:frame];
     if (self) 
 	{
-		[self setCell:[[PATagButtonCell alloc] initWithTag:tag attributes:attributes]];
+		[self setCell:[[PATagButtonCell alloc] initWithTag:tag attributes:attributes markRange:range]];
     }
     return self;
 }
@@ -50,9 +50,9 @@ should be overridden according to apple docs
 	[[self cell] setHovered:flag];
 }
 
-- (void)setTitleAttributes:(NSDictionary*)attributes
+- (void)setTitleAttributes:(NSDictionary*)attributes markRange:(NSRange)range
 {
-	[[self cell] setTitleAttributes:attributes];
+	[[self cell] setTitleAttributes:attributes markRange:range];
 }
 
 @end

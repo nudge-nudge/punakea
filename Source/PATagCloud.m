@@ -138,13 +138,13 @@ bound to visibleTags
 		// if the button is already created, use it
 		if (button = [tagButtonDict objectForKey:[tag name]])
 		{
-			[button setTitleAttributes:[controller viewAttributesForTag:tag]];
+			[button setTitleAttributes:[controller viewAttributesForTag:tag] markRange:NSMakeRange(0,[[controller buffer] length])];
 			[dict setObject:button forKey:[tag name]];
 		}
 		else
 		{
 			// create new button
-			button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag]];
+			button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag] markRange:NSMakeRange(0,[[controller buffer] length])];
 			[dict setObject:button forKey:[tag name]];
 			[button release];
 		}
@@ -159,6 +159,7 @@ bound to visibleTags
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect
 {	
+	//TODO only redraw in rect
 	[self calcInitialParametersInRect:[self bounds]];
 	[self drawBackground];
 	[self drawTags:[controller visibleTags] inRect:[self bounds]];
@@ -305,9 +306,9 @@ bound to visibleTags
 {
 	// TODO setting title string should be a part of setHovered, doesn't work because button doesn't know controller
 	[activeButton setHovered:NO];
-	[activeButton setTitleAttributes:[controller viewAttributesForTag:[activeButton fileTag] hovered:NO]];
+	[activeButton setTitleAttributes:[controller viewAttributesForTag:[activeButton fileTag] hovered:NO] markRange:NSMakeRange(0,[[controller buffer] length])];
 	[aTagButton setHovered:YES];
-	[aTagButton setTitleAttributes:[controller viewAttributesForTag:[aTagButton fileTag] hovered:YES]];
+	[aTagButton setTitleAttributes:[controller viewAttributesForTag:[aTagButton fileTag] hovered:YES] markRange:NSMakeRange(0,[[controller buffer] length])];
 	
 	[aTagButton retain];
 	[activeButton release];
@@ -358,8 +359,9 @@ bound to visibleTags
 				break;
 		}
 	} 
-	else if (key == NSEnterCharacter || key == '\n')
+	else if (key == NSEnterCharacter)
 	{
+		// TODO return key
 		[activeButton performClick:NULL];
 	}
 	else

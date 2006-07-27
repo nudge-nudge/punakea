@@ -54,9 +54,9 @@
 						 context:NULL];
 		
 		[tags addObserver:self
-						forKeyPath:@"tags"
-						   options:0
-						   context:NULL];
+				forKeyPath:@"tags"
+				   options:0
+				   context:NULL];
 		
 		[self setVisibleTags:[tags tags]];
 			
