@@ -1,5 +1,9 @@
 /* Controller */
 
+/* TODO global
+check useCount increment
+*/
+
 #import <Cocoa/Cocoa.h>
 #import "PATags.h"
 #import "PASimpleTagFactory.h"

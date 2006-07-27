@@ -83,18 +83,13 @@
 #pragma mark highlighting
 - (void)mouseEntered:(NSEvent *)event
 {
-	//[self setHovered:YES];
-
-	/*
 	PATagButton *button = [self controlView];
 	[[button superview] setActiveButton:button];
-	[[button superview] setNeedsDisplay:YES];
-	 */
 }
 
 - (void)mouseExited:(NSEvent *)event
 {
-	//[self setHovered:NO];
+	//nothing
 }
 
 @end

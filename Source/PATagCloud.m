@@ -2,7 +2,7 @@
 
 @interface PATagCloud (PrivateAPI)
 /**
-creates buttons for tags held in displayTags. created buttons can be accessed in
+creates buttons for tags held in [controller visibleTags]. created buttons can be accessed in
  tagButtonDict afterwards. called by setDisplayTags
  */
 - (NSMutableDictionary*)updateButtonsForTags:(NSMutableArray*)tags;
@@ -15,7 +15,7 @@ draws the background
 - (void)drawBackground;
 
 /**
-draws all the tags in displayTags
+adds all the tags in [controller visibleTags]
  @param rect view rect in which to draw
  */
 - (void)drawTags:(NSMutableArray*)tags inRect:(NSRect)rect;
@@ -64,6 +64,7 @@ calculates the starting point in the next row according to the height of all the
 {
 	if (self = [super initWithFrame:frameRect]) {
 		tagButtonDict = [[NSMutableDictionary alloc] init];
+		visibleTagsHaveChanged = YES;
 		
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
@@ -114,6 +115,7 @@ bound to visibleTags
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
 		[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
+		visibleTagsHaveChanged = YES;
 		
 		if ([[controller visibleTags] count] > 0)
 		{
@@ -144,7 +146,7 @@ bound to visibleTags
 		else
 		{
 			// create new button
-			button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag] markRange:NSMakeRange(0,[[controller buffer] length])];
+			button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag]];
 			[dict setObject:button forKey:[tag name]];
 			[button release];
 		}
@@ -159,10 +161,16 @@ bound to visibleTags
 #pragma mark drawing
 - (void)drawRect:(NSRect)rect
 {	
-	//TODO only redraw in rect
-	[self calcInitialParametersInRect:[self bounds]];
+	NSLog(@"drawing cloud");
 	[self drawBackground];
-	[self drawTags:[controller visibleTags] inRect:[self bounds]];
+
+	// only update tags when the visibleTags have changed
+	if (visibleTagsHaveChanged)
+	{
+		[self calcInitialParametersInRect:[self bounds]];
+		[self drawTags:[controller visibleTags] inRect:[self bounds]];
+		visibleTagsHaveChanged = NO;
+	}
 }
 
 - (void)drawBackground
@@ -177,6 +185,7 @@ bound to visibleTags
 
 - (void)drawTags:(NSMutableArray*)tags inRect:(NSRect)rect
 {
+	//TODO do not remove all
 	//first remove all drawn tags
 	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
 	NSControl *subview;
@@ -307,8 +316,11 @@ bound to visibleTags
 	// TODO setting title string should be a part of setHovered, doesn't work because button doesn't know controller
 	[activeButton setHovered:NO];
 	[activeButton setTitleAttributes:[controller viewAttributesForTag:[activeButton fileTag] hovered:NO]];
+	[activeButton setNeedsDisplay:YES];
+	
 	[aTagButton setHovered:YES];
 	[aTagButton setTitleAttributes:[controller viewAttributesForTag:[aTagButton fileTag] hovered:YES]];
+	[aTagButton setNeedsDisplay:YES];
 	
 	[aTagButton retain];
 	[activeButton release];
@@ -390,8 +402,6 @@ bound to visibleTags
 		buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
 		[self setActiveButton:[self buttonNearestPoint:point inButtons:buttons]];
 	}
-	
-	[self setNeedsDisplay:YES];
 }
 
 - (void)moveSelectionLeft
@@ -413,8 +423,6 @@ bound to visibleTags
 		buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
 		[self setActiveButton:[self buttonNearestPoint:point inButtons:buttons]];
 	}
-	
-	[self setNeedsDisplay:YES];
 }
 
 - (void)moveSelectionUp
@@ -434,8 +442,6 @@ bound to visibleTags
 		NSArray *allButtons = [tagButtonDict allValues];
 		[self setActiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
 	}
-
-	[self setNeedsDisplay:YES];
 }
 
 - (void)moveSelectionDown
@@ -457,8 +463,6 @@ bound to visibleTags
 		NSArray *allButtons = [tagButtonDict allValues];
 		[self setActiveButton:[self buttonNearestPoint:point inButtons:allButtons]];
 	}
-
-	[self setNeedsDisplay:YES];	
 }
 
 - (NSMutableArray*)buttonsAbove:(NSPoint)point
