@@ -63,9 +63,7 @@ calculates the starting point in the next row according to the height of all the
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if (self = [super initWithFrame:frameRect]) {
-		tagButtonDict = [[NSMutableDictionary alloc] init];
-		visibleTagsHaveChanged = YES;
-		
+		tagButtonDict = [[NSMutableDictionary alloc] init];		
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
 	}
@@ -115,7 +113,6 @@ bound to visibleTags
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
 		[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
-		visibleTagsHaveChanged = YES;
 		
 		if ([[controller visibleTags] count] > 0)
 		{
@@ -161,28 +158,30 @@ bound to visibleTags
 }
 
 #pragma mark drawing
+// this is called, determining the frame
+- (void)setFrame:(NSRect)frameRect
+{
+	[super setFrame:frameRect];
+
+	// adjust the buttons, only update tags when the visibleTags have changed
+	[self calcInitialParametersInRect:frameRect];
+	[self addTags:[controller visibleTags] inRect:frameRect];
+}
+
 - (void)drawRect:(NSRect)rect
 {	
 	[self drawBackground];
-
-	// only update tags when the visibleTags have changed
-	if (visibleTagsHaveChanged)
-	{
-		[self calcInitialParametersInRect:[self bounds]];
-		[self addTags:[controller visibleTags] inRect:[self bounds]];
-		visibleTagsHaveChanged = NO;
-	}
+	[super drawRect:rect];
 }
 
 - (void)drawBackground
 {
-	NSRect bounds = [self bounds];
 	//TODO externalize
 	[[NSColor colorWithCalibratedRed:231.0 green:237.0 blue:246.0 alpha:1.0] set];
-	[NSBezierPath fillRect:bounds];
+	[NSBezierPath fillRect:[self bounds]];
 	
 	[[NSColor lightGrayColor] set];
-	[NSBezierPath strokeRect:bounds];
+	[NSBezierPath strokeRect:[self bounds]];
 }
 
 - (void)addTags:(NSMutableArray*)tags inRect:(NSRect)rect
@@ -370,9 +369,9 @@ bound to visibleTags
 				break;
 		}
 	} 
-	else if (key == NSEnterCharacter)
+	else if (key == NSEnterCharacter || key == '\r')
 	{
-		// TODO return key
+		// TODO buttons should handle this?
 		[activeButton performClick:NULL];
 	}
 	else
