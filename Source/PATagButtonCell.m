@@ -1,30 +1,33 @@
 #import "PATagButtonCell.h"
 
+int const MIN_FONT_SIZE = 12;
+int const MAX_FONT_SIZE = 25;
+
 @interface PATagButtonCell (PrivateAPI)
 
 - (void)drawHoverEffectWithFrame:(NSRect)cellFrame;
-- (void)setTitleColor:(NSColor*)color;
+- (void)buildTitle;
 
 @end
 
 @implementation PATagButtonCell
 
 #pragma mark init
-- (id)initWithTag:(PATag*)aTag attributes:(NSDictionary*)attributes
+- (id)initWithTag:(PATag*)aTag rating:(float)aRating
 {
 	if (self = [super init])
 	{
 		[self setAction:@selector(tagButtonClicked:)];
 		[self setFileTag:aTag];
-
-		//title
-		[self setTitleAttributes:attributes];
+		[self setRating:aRating];
 		
 		//looks
 		[self setBordered:NO];
 		
 		//state
 		[self setHovered:NO];
+		
+		[self buildTitle];
 	}
 	return self;
 }
@@ -32,17 +35,24 @@
 #pragma mark drawing
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	if (isHovered)
-	{
+	[self drawInteriorWithFrame:cellFrame inView:controlView];
+}
+
+
+- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView*)controlView
+{
+	if ([self isHovered])
+	{	
 		[self drawHoverEffectWithFrame:cellFrame];
-	}	
+	}
 	
-	[super drawInteriorWithFrame:cellFrame inView:controlView];
+	//TODO drawing error
+	[[self attributedTitle] drawInRect:cellFrame];
 }
 
 - (void)drawHoverEffectWithFrame:(NSRect)cellFrame
 {
-	[[NSColor selectedTextBackgroundColor] set];
+	[[NSColor selectedControlColor] set];
 	[[NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:5.0] fill];
 }
 
@@ -61,17 +71,55 @@
 
 - (BOOL)isHovered
 {
-	return isHovered;
+	return hovered;
 }
 
 - (void)setHovered:(BOOL)flag
 {	
-	isHovered = flag;
+	hovered = flag;
+	[self buildTitle];
 }
 
-- (void)setTitleAttributes:(NSDictionary*)attributes;
+- (float)rating
 {
-	NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:[fileTag name] attributes:attributes];
+	return rating;
+}
+
+- (void)setRating:(float)aRating
+{
+	rating = aRating;
+	[self buildTitle];
+}
+
+- (void)buildTitle
+{
+	NSString *tagName = [fileTag name];
+	
+	// Attributed string for value
+	NSMutableAttributedString *titleString = [[[NSMutableAttributedString alloc] initWithString:tagName] autorelease];
+	
+	// determine fontSize
+	int fontSize = MAX_FONT_SIZE * [self rating];
+	if (fontSize < MIN_FONT_SIZE)
+		fontSize = MIN_FONT_SIZE;
+	
+	[titleString addAttribute:NSFontAttributeName
+				  value:[NSFont systemFontOfSize:fontSize]
+				  range:NSMakeRange(0, [titleString length])];
+	
+	if ([self isHovered])
+	{
+		[titleString addAttribute:NSForegroundColorAttributeName
+					  value:[NSColor selectedTextColor]
+					  range:NSMakeRange(0, [titleString length])];
+	} 
+	else 
+	{
+		[titleString addAttribute:NSForegroundColorAttributeName
+					  value:[NSColor textColor]
+					  range:NSMakeRange(0, [titleString length])];
+	}
+	
 	BrowserViewController *controller = [[[self controlView] superview] controller];
 	
 	// if controller is set, check buffer for prefix coloring
@@ -82,8 +130,13 @@
 		[titleString addAttribute:NSForegroundColorAttributeName value:markColor range:NSMakeRange(0,[[controller buffer] length])];
 	}
 	
+	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+	[paraStyle setAlignment:NSCenterTextAlignment];
+	[titleString addAttribute:NSParagraphStyleAttributeName
+						value:paraStyle
+						range:NSMakeRange(0, [titleString length])];
+	
 	[self setAttributedTitle:titleString];
-	[titleString release];
 }
 
 #pragma mark highlighting

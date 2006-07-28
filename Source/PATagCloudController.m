@@ -17,6 +17,7 @@
 	[tag incrementClickCount];
 }
 
+//TODO deprecated
 - (NSDictionary*)viewAttributesForTag:(PATag*)tag
 {
 	return [self viewAttributesForTag:tag hovered:NO];

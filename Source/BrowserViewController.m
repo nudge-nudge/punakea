@@ -120,7 +120,6 @@
 	selectedTags = otherSelectedTags;
 }
 
-
 - (NSMutableArray*)visibleTags;
 {
 	return visibleTags;
@@ -251,6 +250,9 @@
 	{
 		[query setTags:selectedTags];
 		[query startQuery];
+		
+		// empty visible tags until new related tags are found
+		[self setVisibleTags:[NSMutableArray array]];
 	}
 	else 
 	{

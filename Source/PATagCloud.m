@@ -18,7 +18,7 @@ draws the background
 adds all the tags in [controller visibleTags]
  @param rect view rect in which to draw
  */
-- (void)drawTags:(NSMutableArray*)tags inRect:(NSRect)rect;
+- (void)addTags:(NSMutableArray*)tags inRect:(NSRect)rect;
 
 /**
 determines the oigin point for the next tag button to display;
@@ -135,23 +135,25 @@ bound to visibleTags
 	
 	while (tag = [tagEnumerator nextObject])
 	{
+		float tagRating = [tag relativeRatingToTag:[controller currentBestTag]];
 		PATagButton *button;
 		
 		// if the button is already created, use it
 		if (button = [tagButtonDict objectForKey:[tag name]])
 		{
-			[button setTitleAttributes:[controller viewAttributesForTag:tag]];
+			[button setRating:tagRating];
 			[dict setObject:button forKey:[tag name]];
 		}
 		else
 		{
 			// create new button
-			button = [[PATagButton alloc] initWithTag:tag attributes:[controller viewAttributesForTag:tag]];
+			button = [[PATagButton alloc] initWithTag:tag rating:tagRating];
 			[dict setObject:button forKey:[tag name]];
+			[button setTarget:controller];
 			[button release];
 		}
 
-		[button setTarget:controller];
+		// TODO needed?
 		[button sizeToFit];
 	}
 	
@@ -167,7 +169,7 @@ bound to visibleTags
 	if (visibleTagsHaveChanged)
 	{
 		[self calcInitialParametersInRect:[self bounds]];
-		[self drawTags:[controller visibleTags] inRect:[self bounds]];
+		[self addTags:[controller visibleTags] inRect:[self bounds]];
 		visibleTagsHaveChanged = NO;
 	}
 }
@@ -183,7 +185,7 @@ bound to visibleTags
 	[NSBezierPath strokeRect:bounds];
 }
 
-- (void)drawTags:(NSMutableArray*)tags inRect:(NSRect)rect
+- (void)addTags:(NSMutableArray*)tags inRect:(NSRect)rect
 {
 	//TODO do not remove all
 	//first remove all drawn tags
@@ -313,13 +315,10 @@ bound to visibleTags
 
 - (void)setActiveButton:(PATagButton*)aTagButton
 {
-	// TODO setting title string should be a part of setHovered, doesn't work because button doesn't know controller
 	[activeButton setHovered:NO];
-	[activeButton setTitleAttributes:[controller viewAttributesForTag:[activeButton fileTag] hovered:NO]];
 	[activeButton setNeedsDisplay:YES];
 	
 	[aTagButton setHovered:YES];
-	[aTagButton setTitleAttributes:[controller viewAttributesForTag:[aTagButton fileTag] hovered:YES]];
 	[aTagButton setNeedsDisplay:YES];
 	
 	[aTagButton retain];
