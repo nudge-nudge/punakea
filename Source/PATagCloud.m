@@ -258,7 +258,7 @@ bound to visibleTags
 - (void)calcInitialParametersInRect:(NSRect)rect
 {
 	//initial point, from here all other points are calculated
-	pointForNextTagRect = NSMakePoint(0,rect.size.height);
+	pointForNextTagRect = NSMakePoint(0,rect.size.height-5);
 	
 	//needed for drawing in rows
 	tagPosition = 0;
@@ -365,6 +365,24 @@ bound to visibleTags
 	[aTagButton retain];
 	[activeButton release];
 	activeButton = aTagButton;
+	
+	// check if scrolling is needed
+	float upperY = [activeButton frame].origin.y + [activeButton frame].size.height;
+	float lowerY = [activeButton frame].origin.y;
+	
+	NSClipView *clipView = [self superview];
+	
+	NSRect visibleRect = [clipView documentVisibleRect];
+	
+	if (upperY > (visibleRect.origin.y + visibleRect.size.height))
+	{
+		//TODO externalize padding
+		[clipView scrollToPoint:NSMakePoint(0,upperY - visibleRect.size.height + 5)];
+	}
+	else if (lowerY < visibleRect.origin.y)
+	{
+		[clipView scrollToPoint:NSMakePoint(0,lowerY - 5)];
+	}
 }
 
 - (BrowserViewController*)controller
