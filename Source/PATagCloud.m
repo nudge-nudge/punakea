@@ -5,9 +5,10 @@
 creates buttons for tags held in [controller visibleTags]. created buttons can be accessed in
  tagButtonDict afterwards. called by setDisplayTags
  */
-- (NSMutableDictionary*)updateButtonsForTags:(NSMutableArray*)tags;
+- (void)updateButtonsForTags:(NSMutableArray*)tags;
 
 - (void)calcInitialParametersInRect:(NSRect)rect;
+- (float)calcFrameHeightForTags:(NSMutableArray*)tags width:(float)width;
 
 /**
 draws the background
@@ -80,9 +81,11 @@ bind to visibleTags
 					options:0
 					context:NULL];
 	
+	//TODO put together see observeValueFOrKEy
+	
 	// create initial tag buttons
-	[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
-
+	[self updateButtonsForTags:[controller visibleTags]];
+	
 	// set initial active button
 	if ([[controller visibleTags] count] > 0)
 	{
@@ -112,7 +115,7 @@ bound to visibleTags
 {
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
-		[self setTagButtonDict:[self updateButtonsForTags:[controller visibleTags]]];
+		[self updateButtonsForTags:[controller visibleTags]];
 		
 		if ([[controller visibleTags] count] > 0)
 		{
@@ -123,7 +126,7 @@ bound to visibleTags
 	}
 }
 
-- (NSMutableDictionary*)updateButtonsForTags:(NSMutableArray*)tags
+- (void)updateButtonsForTags:(NSMutableArray*)tags
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
@@ -150,21 +153,58 @@ bound to visibleTags
 			[button release];
 		}
 
-		// TODO needed?
+		// TODO needed? - where?
 		[button sizeToFit];
 	}
 	
-	return dict;
+	[self setTagButtonDict:dict];
+}
+
+- (float)calcFrameHeightForTags:(NSMutableArray*)tags width:(float)width
+{
+	//TODO get minimum size somemwhere
+	NSRect tmpFrame = NSMakeRect(0,0,width,0);
+	[self calcInitialParametersInRect:tmpFrame];
+
+	NSEnumerator *e = [tags objectEnumerator];
+	PATag *tag;
+	
+	NSPoint buttonPoint;
+	
+	while (tag = [e nextObject])
+	{
+		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
+		buttonPoint = [self nextPointForTagButton:tagButton inRect:tmpFrame];
+		[tagButton setFrameOrigin:buttonPoint];
+	}
+	
+	//TODO externalize
+	float newHeight = 0 - buttonPoint.y + 5;
+	return newHeight;
 }
 
 #pragma mark drawing
 // this is called, determining the frame
 - (void)setFrame:(NSRect)frameRect
 {
+	// enlarge frame if neccessary
+	float newHeight = [self calcFrameHeightForTags:[controller visibleTags] width:frameRect.size.width];
+	
+	// don't reduce the height to less than the scrollview's height
+	NSRect scrollViewFrame = [[self superview] frame];
+	
+	if (newHeight < scrollViewFrame.size.height)
+	{
+		frameRect.size.height = scrollViewFrame.size.height;
+	}
+	else
+	{
+		frameRect.size.height = newHeight;
+	}
+	
 	[super setFrame:frameRect];
 
-	// adjust the buttons, only update tags when the visibleTags have changed
-	[self calcInitialParametersInRect:frameRect];
+	// adjust the buttons
 	[self addTags:[controller visibleTags] inRect:frameRect];
 }
 
@@ -186,6 +226,8 @@ bound to visibleTags
 
 - (void)addTags:(NSMutableArray*)tags inRect:(NSRect)rect
 {
+	[self calcInitialParametersInRect:rect];
+
 	//TODO do not remove all
 	//first remove all drawn tags
 	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
@@ -223,6 +265,31 @@ bound to visibleTags
 	
 	//get the point for the very first tag
 	pointForNextTagRect = [self firstPointForNextRowIn:rect];
+}
+
+- (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect
+{
+	//TODO externalize spacing and padding and ...
+	int spacing = 10;
+	
+	NSRect frame = [tagButton frame];
+	float width = frame.size.width;
+	
+	float xValue = pointForNextTagRect.x + width + spacing;
+	
+	//if the tag doesn't fit in this row, get first point in next row
+	if (xValue > rect.size.width)
+	{
+		pointForNextTagRect = [self firstPointForNextRowIn:rect];
+	}
+	
+	//save this value
+	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x,pointForNextTagRect.y);
+	
+	//then calc the point for the next tag
+	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + spacing,pointForNextTagRect.y);
+	
+	return newOrigin;
 }
 
 - (NSPoint)firstPointForNextRowIn:(NSRect)rect;
@@ -268,31 +335,6 @@ bound to visibleTags
 	
 	return NSMakePoint(spacing,pointForNextTagRect.y-maxHeight-vPadding);
 }	
-
-- (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect
-{
-	//TODO externalize spacing and padding and ...
-	int spacing = 10;
-	
-	NSRect frame = [tagButton frame];
-	float width = frame.size.width;
-	
-	float xValue = pointForNextTagRect.x + width + spacing;
-	
-	//if the tag doesn't fit in this row, get first point in next row
-	if (xValue > rect.size.width)
-	{
-		pointForNextTagRect = [self firstPointForNextRowIn:rect];
-	}
-	
-	//save this value
-	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x,pointForNextTagRect.y);
-	
-	//then calc the point for the next tag
-	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + spacing,pointForNextTagRect.y);
-	
-	return newOrigin;
-}
 
 #pragma mark accessors
 - (NSMutableDictionary*)tagButtonDict
