@@ -38,7 +38,7 @@ calculates the starting point in the next row according to the height of all the
  */
 - (NSPoint)firstPointForNextRowIn:(NSRect)rect;
 
-
+- (void)scrollToButton:(NSButton*)tagButton;
 - (void)moveSelectionRight;
 - (void)moveSelectionLeft;
 - (void)moveSelectionUp;
@@ -160,12 +160,40 @@ bound to visibleTags
 	[self setTagButtonDict:dict];
 }
 
+#pragma mark drawing
+// this is called, determining the frame
+- (void)setFrame:(NSRect)frameRect
+{
+	// enlarge frame if neccessary
+	float newHeight = [self calcFrameHeightForTags:[controller visibleTags] width:frameRect.size.width];
+	
+	// don't reduce the height to less than the clipview's height
+	NSRect clipViewFrame = [[self superview] frame];
+	
+	if (newHeight < clipViewFrame.size.height)
+	{
+		frameRect.size.height = clipViewFrame.size.height;
+	}
+	else
+	{
+		frameRect.size.height = newHeight;
+	}
+	
+	[super setFrame:frameRect];
+
+	// add the buttons
+	[self addTags:[controller visibleTags] inRect:frameRect];
+	
+	// scroll to the active button if not visible
+	[self scrollToButton:[self activeButton]];
+}
+
 - (float)calcFrameHeightForTags:(NSMutableArray*)tags width:(float)width
 {
 	//TODO get minimum size somemwhere
 	NSRect tmpFrame = NSMakeRect(0,0,width,0);
 	[self calcInitialParametersInRect:tmpFrame];
-
+	
 	NSEnumerator *e = [tags objectEnumerator];
 	PATag *tag;
 	
@@ -181,31 +209,6 @@ bound to visibleTags
 	//TODO externalize
 	float newHeight = 0 - buttonPoint.y + 5;
 	return newHeight;
-}
-
-#pragma mark drawing
-// this is called, determining the frame
-- (void)setFrame:(NSRect)frameRect
-{
-	// enlarge frame if neccessary
-	float newHeight = [self calcFrameHeightForTags:[controller visibleTags] width:frameRect.size.width];
-	
-	// don't reduce the height to less than the scrollview's height
-	NSRect scrollViewFrame = [[self superview] frame];
-	
-	if (newHeight < scrollViewFrame.size.height)
-	{
-		frameRect.size.height = scrollViewFrame.size.height;
-	}
-	else
-	{
-		frameRect.size.height = newHeight;
-	}
-	
-	[super setFrame:frameRect];
-
-	// adjust the buttons
-	[self addTags:[controller visibleTags] inRect:frameRect];
 }
 
 - (void)drawRect:(NSRect)rect
@@ -366,23 +369,7 @@ bound to visibleTags
 	[activeButton release];
 	activeButton = aTagButton;
 	
-	// check if scrolling is needed
-	float upperY = [activeButton frame].origin.y + [activeButton frame].size.height;
-	float lowerY = [activeButton frame].origin.y;
-	
-	NSClipView *clipView = [self superview];
-	
-	NSRect visibleRect = [clipView documentVisibleRect];
-	
-	if (upperY > (visibleRect.origin.y + visibleRect.size.height))
-	{
-		//TODO externalize padding
-		[clipView scrollToPoint:NSMakePoint(0,upperY - visibleRect.size.height + 5)];
-	}
-	else if (lowerY < visibleRect.origin.y)
-	{
-		[clipView scrollToPoint:NSMakePoint(0,lowerY - 5)];
-	}
+	[self scrollToButton:activeButton];
 }
 
 - (BrowserViewController*)controller
@@ -442,6 +429,32 @@ bound to visibleTags
 }
 
 #pragma mark moving selection
+- (void)scrollToButton:(NSButton*)tagButton
+{
+	//TODO improve with padding	
+	[self scrollRectToVisible:[tagButton frame]];
+	
+	/*
+	NSScrollView *scrollView = [self enclosingScrollView];
+	
+	// check if scrolling is needed
+	float upperY = [tagButton frame].origin.y + [activeButton frame].size.height;
+	float lowerY = [tagButton frame].origin.y;
+		
+	NSRect visibleRect = [scrollView documentVisibleRect];
+	
+	if (upperY > (visibleRect.origin.y + visibleRect.size.height))
+	{
+		//TODO externalize padding
+		[scrollView scrollToPoint:NSMakePoint(0,upperY - visibleRect.size.height + 5)];
+	}
+	else if (lowerY < visibleRect.origin.y)
+	{
+		[scrollView scrollToPoint:NSMakePoint(0,lowerY - 5)];
+	}
+	 */
+}
+
 - (void)moveSelectionRight
 {
 	NSRect frame = [activeButton frame];

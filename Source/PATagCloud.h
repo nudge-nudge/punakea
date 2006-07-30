@@ -6,6 +6,8 @@
 #import "PATag.h"
 #import "PATagButton.h"
 
+//TODO tracking rects are outside of scrollview!
+
 /**
 displays all [controller visibleTags] in a nice tag cloud view
  */
