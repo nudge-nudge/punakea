@@ -11,7 +11,6 @@
 #import "PATagger.h"
 #import "PASelectedTags.h"
 
-
 /** Posted when the receiver begins with the initial result-gathering phase of the query. */
 extern NSString * const PAQueryDidStartGatheringNotification;
 

@@ -1,5 +1,8 @@
 #import "PATagCloud.h"
 
+NSSize const padding = {10,5};
+int const spacing = 10;
+
 @interface PATagCloud (PrivateAPI)
 /**
 creates buttons for tags held in [controller visibleTags]. created buttons can be accessed in
@@ -91,6 +94,8 @@ bind to visibleTags
 	{
 		[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
 	}
+	
+	//adjust frameSize
 }
 
 - (void)dealloc
@@ -121,6 +126,12 @@ bound to visibleTags
 		{
 			[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
 		}
+		
+		// add the buttons
+		[self addTags:[controller visibleTags] inRect:[self frame]];
+		
+		// scroll to the active button if not visible
+		[self scrollToButton:[self activeButton]];
 		
 		[self setNeedsDisplay:YES];
 	}
@@ -161,28 +172,30 @@ bound to visibleTags
 }
 
 #pragma mark drawing
-// this is called, determining the frame
+// this is called, determine the needed frame
 - (void)setFrame:(NSRect)frameRect
 {
+	NSRect clipViewFrame = [[self superview] frame];
+	NSRect newRect = NSMakeRect(0,0,NSWidth(clipViewFrame),0);
+	
 	// enlarge frame if neccessary
-	float newHeight = [self calcFrameHeightForTags:[controller visibleTags] width:frameRect.size.width];
+	float newHeight = [self calcFrameHeightForTags:[controller visibleTags] width:NSWidth(clipViewFrame)];
 	
 	// don't reduce the height to less than the clipview's height
-	NSRect clipViewFrame = [[self superview] frame];
 	
 	if (newHeight < clipViewFrame.size.height)
 	{
-		frameRect.size.height = clipViewFrame.size.height;
+		newRect.size.height = clipViewFrame.size.height;
 	}
 	else
 	{
-		frameRect.size.height = newHeight;
+		newRect.size.height = newHeight;
 	}
 	
-	[super setFrame:frameRect];
+	[super setFrame:newRect];
 
 	// add the buttons
-	[self addTags:[controller visibleTags] inRect:frameRect];
+	[self addTags:[controller visibleTags] inRect:newRect];
 	
 	// scroll to the active button if not visible
 	[self scrollToButton:[self activeButton]];
@@ -220,8 +233,8 @@ bound to visibleTags
 - (void)drawBackground
 {
 	//TODO externalize
-	[[NSColor colorWithCalibratedRed:231.0 green:237.0 blue:246.0 alpha:1.0] set];
-	[NSBezierPath fillRect:[self bounds]];
+	[[NSColor colorWithDeviceRed:0.905 green:0.929 blue:0.98 alpha:1.0] set];
+	NSRectFill([self bounds]);
 	
 	[[NSColor lightGrayColor] set];
 	[NSBezierPath strokeRect:[self bounds]];
@@ -252,8 +265,9 @@ bound to visibleTags
 		
 		[self addSubview:tagButton];
 		
-		// needs to be set after adding as subview
-		[[tagButton cell] setShowsBorderOnlyWhileMouseInside:YES];
+		// needs to be called after adding to subview, else the mouseEntered/Exited events aren't
+		// send to the cells
+		[tagButton setShowsBorderOnlyWhileMouseInside:YES];
 	}
 }
 
@@ -431,28 +445,29 @@ bound to visibleTags
 #pragma mark moving selection
 - (void)scrollToButton:(NSButton*)tagButton
 {
-	//TODO improve with padding	
-	[self scrollRectToVisible:[tagButton frame]];
+	// check if we are in the top or bottom line
+	// scroll completely to the top or bottom then
 	
-	/*
-	NSScrollView *scrollView = [self enclosingScrollView];
+	NSRect buttonFrame = [tagButton frame];
+	NSSize viewSize = [self frame].size;
 	
-	// check if scrolling is needed
-	float upperY = [tagButton frame].origin.y + [activeButton frame].size.height;
-	float lowerY = [tagButton frame].origin.y;
-		
-	NSRect visibleRect = [scrollView documentVisibleRect];
-	
-	if (upperY > (visibleRect.origin.y + visibleRect.size.height))
+	float buttonMaxY = NSMaxY(buttonFrame);
+	float topSkip = viewSize.height - padding.height;
+	float bottomSkip = 0 + padding.height;
+
+	// check top - TODO why -1?!
+	if (buttonMaxY >= topSkip - 1)
 	{
-		//TODO externalize padding
-		[scrollView scrollToPoint:NSMakePoint(0,upperY - visibleRect.size.height + 5)];
+		buttonFrame.origin.y += padding.height;
 	}
-	else if (lowerY < visibleRect.origin.y)
+	
+	// check bottom
+	else if (buttonFrame.origin.y <= bottomSkip)
 	{
-		[scrollView scrollToPoint:NSMakePoint(0,lowerY - 5)];
+		buttonFrame.origin.y -= padding.height;
 	}
-	 */
+	
+	[self scrollRectToVisible:buttonFrame];
 }
 
 - (void)moveSelectionRight

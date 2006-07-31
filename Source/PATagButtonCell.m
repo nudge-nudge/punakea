@@ -142,8 +142,17 @@ int const MAX_FONT_SIZE = 25;
 #pragma mark highlighting
 - (void)mouseEntered:(NSEvent *)event
 {
+	NSLog(@"entered");
+	 /*
+	//TODO check if visible
+	NSScrollView *scrollView = [[self controlView] enclosingScrollView];
 	PATagButton *button = [self controlView];
-	[[button superview] setActiveButton:button];
+
+	if (scrollView && NSIntersectsRect([button frame],[scrollView documentVisibleRect]))
+	{
+		[[button superview] setActiveButton:button];
+	}
+	 */
 }
 
 - (void)mouseExited:(NSEvent *)event
