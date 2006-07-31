@@ -69,7 +69,6 @@
 		48EB614509C2D4A40071D654 /* PARelatedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB614309C2D4A40071D654 /* PARelatedTags.m */; };
 		65035FCB0A20769500AD0597 /* PAQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65035FC90A20769500AD0597 /* PAQuery.h */; };
 		65035FCC0A20769500AD0597 /* PAQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 65035FCA0A20769500AD0597 /* PAQuery.m */; };
-		650362520A2084BE00AD0597 /* PAQueryResultGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 650362500A2084BE00AD0597 /* PAQueryResultGroup.m */; };
 		6509FA420A7D27B5003D32D8 /* SearchSliceViewBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6509FA400A7D27B4003D32D8 /* SearchSliceViewBackground.tiff */; };
 		6509FA430A7D27B5003D32D8 /* SearchSliceViewSeperator.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6509FA410A7D27B4003D32D8 /* SearchSliceViewSeperator.tiff */; };
 		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
@@ -296,7 +295,6 @@
 		48EB614309C2D4A40071D654 /* PARelatedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTags.m; sourceTree = "<group>"; };
 		65035FC90A20769500AD0597 /* PAQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAQuery.h; sourceTree = "<group>"; };
 		65035FCA0A20769500AD0597 /* PAQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAQuery.m; sourceTree = "<group>"; };
-		650362500A2084BE00AD0597 /* PAQueryResultGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAQueryResultGroup.m; sourceTree = "<group>"; };
 		6509FA400A7D27B4003D32D8 /* SearchSliceViewBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SearchSliceViewBackground.tiff; sourceTree = "<group>"; };
 		6509FA410A7D27B4003D32D8 /* SearchSliceViewSeperator.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SearchSliceViewSeperator.tiff; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
@@ -629,7 +627,6 @@
 				65D43F4E0A7E3AC6008CC164 /* PAQueryBundle.m */,
 				65D43F510A7E3ADA008CC164 /* PAQueryItem.h */,
 				65D43F520A7E3ADA008CC164 /* PAQueryItem.m */,
-				650362500A2084BE00AD0597 /* PAQueryResultGroup.m */,
 				658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */,
 				658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */,
 			);
@@ -937,7 +934,6 @@
 				4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */,
 				485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */,
 				65035FCC0A20769500AD0597 /* PAQuery.m in Sources */,
-				650362520A2084BE00AD0597 /* PAQueryResultGroup.m in Sources */,
 				488E18BE0A27231F009D2826 /* PASidebarTagCell.m in Sources */,
 				6557CAF50A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m in Sources */,
 				65903F000A4BFE9900ADDC1D /* PASelectedTagCell.m in Sources */,
