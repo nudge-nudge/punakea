@@ -76,16 +76,3 @@ initializer
 - (void)setSortDescriptors:(NSArray *)descriptors;
 
 @end
-
-
-/** Posted when one of the receiver's result groups did update. The userInfo dictionary
-	contains the corresponding result group. */
-extern NSString * const PAQueryResultGroupDidUpdate;
-
-@interface PAQueryResultGroup : NSObject
-{
-	NSString *identifier;
-	NSArray *subgroups;
-}
-
-@end

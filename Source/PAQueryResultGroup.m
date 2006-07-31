@@ -9,7 +9,7 @@
 #import "PAQuery.h"
 
 
-NSString * const PAQueryResultGroupDidUpdate = @"PAQueryResultGroupDidUpdate";
+
 
 
 @implementation PAQueryResultGroup

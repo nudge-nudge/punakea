@@ -140,6 +140,10 @@
 		65C0E04409E3EF11006C5A7C /* PAResultsGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */; };
 		65C4890609E2C30F00A45A17 /* PAResultsOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */; };
 		65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */; };
+		65D43F4F0A7E3AC6008CC164 /* PAQueryBundle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D43F4D0A7E3AC6008CC164 /* PAQueryBundle.h */; };
+		65D43F500A7E3AC6008CC164 /* PAQueryBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D43F4E0A7E3AC6008CC164 /* PAQueryBundle.m */; };
+		65D43F530A7E3ADA008CC164 /* PAQueryItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D43F510A7E3ADA008CC164 /* PAQueryItem.h */; };
+		65D43F540A7E3ADA008CC164 /* PAQueryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D43F520A7E3ADA008CC164 /* PAQueryItem.m */; };
 		65D86D3809F154DC006BCC8D /* PAResultsMultiItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D86D3609F154DC006BCC8D /* PAResultsMultiItem.h */; };
 		65D86D3909F154DC006BCC8D /* PAResultsMultiItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D86D3709F154DC006BCC8D /* PAResultsMultiItem.m */; };
 		65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */; };
@@ -213,6 +217,8 @@
 				65823B840A67CCFF0004DC39 /* NSBezierPathCategory.h in CopyFiles */,
 				65AC736E0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h in CopyFiles */,
 				655D3BF50A7DD5CB009479F9 /* PAFilterSlice.h in CopyFiles */,
+				65D43F4F0A7E3AC6008CC164 /* PAQueryBundle.h in CopyFiles */,
+				65D43F530A7E3ADA008CC164 /* PAQueryItem.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +367,10 @@
 		65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsGroupCell.m; sourceTree = "<group>"; };
 		65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsOutlineView.h; sourceTree = "<group>"; };
 		65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsOutlineView.m; sourceTree = "<group>"; };
+		65D43F4D0A7E3AC6008CC164 /* PAQueryBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAQueryBundle.h; sourceTree = "<group>"; };
+		65D43F4E0A7E3AC6008CC164 /* PAQueryBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAQueryBundle.m; sourceTree = "<group>"; };
+		65D43F510A7E3ADA008CC164 /* PAQueryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAQueryItem.h; sourceTree = "<group>"; };
+		65D43F520A7E3ADA008CC164 /* PAQueryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAQueryItem.m; sourceTree = "<group>"; };
 		65D86D3609F154DC006BCC8D /* PAResultsMultiItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItem.h; sourceTree = "<group>"; };
 		65D86D3709F154DC006BCC8D /* PAResultsMultiItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItem.m; sourceTree = "<group>"; };
 		65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemCell.h; sourceTree = "<group>"; };
@@ -615,6 +625,10 @@
 			children = (
 				65035FC90A20769500AD0597 /* PAQuery.h */,
 				65035FCA0A20769500AD0597 /* PAQuery.m */,
+				65D43F4D0A7E3AC6008CC164 /* PAQueryBundle.h */,
+				65D43F4E0A7E3AC6008CC164 /* PAQueryBundle.m */,
+				65D43F510A7E3ADA008CC164 /* PAQueryItem.h */,
+				65D43F520A7E3ADA008CC164 /* PAQueryItem.m */,
 				650362500A2084BE00AD0597 /* PAQueryResultGroup.m */,
 				658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */,
 				658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */,
@@ -939,6 +953,8 @@
 				65823B850A67CCFF0004DC39 /* NSBezierPathCategory.m in Sources */,
 				65AC736F0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.m in Sources */,
 				655D3BF60A7DD5CB009479F9 /* PAFilterSlice.m in Sources */,
+				65D43F500A7E3AC6008CC164 /* PAQueryBundle.m in Sources */,
+				65D43F540A7E3ADA008CC164 /* PAQueryItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
