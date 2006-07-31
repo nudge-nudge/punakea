@@ -109,7 +109,7 @@
 
 - (void)setObjectValue:(id <NSCopying>)object
 {
-	multiItem = (PAResultsMultiItem *)object;
+	multiItem = [(PAResultsMultiItem *)object retain];
 }
 
 @end

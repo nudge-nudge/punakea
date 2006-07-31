@@ -79,11 +79,10 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)reloadData
 {
-    while ([[self subviews] count] > 0)
+    /*while ([[self subviews] count] > 0)
     {
 		[[[self subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
-    }
-	    
+    }*/
     [super reloadData];
 }
 
@@ -108,8 +107,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	int i;
 	for(i = 0; i < [self numberOfRows]; i++)
 		if([self levelForRow:i] == 0)
+		{
 			if([[[self itemAtRow:i] value] isEqualToString:identifier])
+			{
 				return [self itemAtRow:i];
+				//return [[self delegate] outlineView:self persistentObjectForItem:[self itemAtRow:i]];
+			}
+		}
 	return nil;
 }
 
@@ -123,9 +127,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 #pragma mark Notifications
 - (void)queryNote:(NSNotification *)note
 {	
-	if ([[note name] isEqualToString:PAQueryGatheringProgressNotification] ||
+	/*if ([[note name] isEqualToString:PAQueryGatheringProgressNotification] ||
 		[[note name] isEqualToString:PAQueryDidUpdateNotification] ||
 		[[note name] isEqualToString:PAQueryDidFinishGatheringNotification])
+	{*/
+	if([[note name] isEqualToString:PAQueryDidFinishGatheringNotification])
 	{
 		[self reloadData];
 		
@@ -135,11 +141,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		// Restore group's state from user defaults
 		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
 		{
-			int i;
+			/*int i;
 			for(i = 0; i < [self numberOfRows]; i++)
 				if([self levelForRow:i] == 0)
 					if(![collapsedGroups containsObject:[[self itemAtRow:i] value]])
-						[self expandItem:[self itemAtRow:i]];
+						[self expandItem:[self itemAtRow:i]];*/
 		}
 	}
 }
@@ -161,7 +167,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:range]];
 	
 	// TEMP - seems to work quite well, with some flickering...
-	[[self delegate] hideAllSubviews];
+	//[[self delegate] hideAllSubviews];
 	[self setNeedsDisplay:YES];
 }
 

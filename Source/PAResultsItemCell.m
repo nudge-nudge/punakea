@@ -24,6 +24,7 @@
 
 - (void)dealloc
 {
+	if(valueDict) [valueDict release];
 	[super dealloc];
 }
 
@@ -105,7 +106,7 @@
 
 - (void)setObjectValue:(id <NSCopying>)object
 {
-	[valueDict autorelease];
+	if(valueDict) [valueDict release];
 	valueDict = [(NSDictionary *)object retain];
 }
 

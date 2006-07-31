@@ -14,14 +14,16 @@
 #pragma mark Data Source
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
+	return item;
+	
 	if([[tableColumn identifier] isEqualToString:@"title"]) {
-		if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
+		if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
 		{
-			NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
-			[dict setValue:[item value] forKey:@"identifier"];
+			NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
+			[dict setValue:[item value] forKey:@"value"];
 			return dict;
 		}
-		if([[item class] isEqualTo:[NSMetadataItem class]])
+		if([item isKindOfClass:[NSMetadataItem class]])
 		{
 			NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
 			[dict setValue:[item valueForAttribute:(id)kMDItemPath] forKey:@"path"];
@@ -29,25 +31,31 @@
 			[dict setValue:[item valueForAttribute:(id)kMDItemLastUsedDate] forKey:@"lastUsedDate"];
 			return dict;
 		}
-		if([[item class] isEqualTo:[PAResultsMultiItem class]])
+		if([item isKindOfClass:[PAResultsMultiItem class]])
 		{
-			return [item retain];
+			return item;
 		}
 	}
-	return @"hi";
+	return @"";
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
-{
-	// TODO: MEM LEAK!!
-		
+{		
 	if(item == nil)	
+	{
+		// We're at top level of our results		
 		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
-			return [[[query groupedResults] objectAtIndex:index] retain];
-		else
-			return [[query resultAtIndex:index] retain];
+		{
+			//return [[query groupedResults] objectAtIndex:index];
+			return [[[query groupedResults] objectAtIndex:index] value];
+		} else {
+			return [query resultAtIndex:index];
+		}
+	} else {
+		return @"huhu"; //[[item resultAtIndex:index] valueForAttribute:(id)kMDItemDisplayName];
+	}
 	
-	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
+	if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
 	{
 		NSMetadataQueryResultGroup *group = item;
 		
@@ -59,18 +67,12 @@
 		{
 			PAResultsMultiItem *multiItem = [[PAResultsMultiItem alloc] init];
 			
-			// Add items to MultiItem
-			int i;
-			int startIndex = index * 3;		// TODO: Number of items per row is variable number
-			int endIndex = (index + 1) * 3;
-			if (endIndex > [group resultCount]) endIndex = [group resultCount];
-			
 			// TEMP - add ALL result items to MultiItem
-			startIndex = 0;
-			endIndex = [group resultCount];
+			unsigned startIndex = 0;
+			unsigned endIndex = [group resultCount];
 			
 			// Create this item as dictionary
-			for(i = startIndex; i < endIndex; i++)
+			for(unsigned i = startIndex; i < endIndex; i++)
 			{
 				NSMetadataItem *currentItem = [group resultAtIndex:i];
 				NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
@@ -86,16 +88,16 @@
 			
 			return multiItem;
 		}
-		
-		return [[group resultAtIndex:index] retain];
+
+		return [group resultAtIndex:index];
 	}
-	
-	return nil;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)ov isItemExpandable:(id)item
 {
 	if(item == nil) return YES;
+	return ([ov levelForItem:item] == 0) ? YES : NO;
+	
 	if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
 		return ([self outlineView:ov numberOfChildrenOfItem:item] != 0);
 	return NO;
@@ -104,12 +106,16 @@
 - (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
 	if(item == nil)
+	{
 		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
 			return [[query groupedResults] count];
 		else
 			return [query resultCount];
+	} else {
+		return 1;
+	}
 
-	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
+	if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
 	{
 		NSMetadataQueryResultGroup *group = item;
 		
@@ -118,17 +124,7 @@
 		NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
 		
 		if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"])
-		{
-			int numberOfColumns = 3;	// TODO: Calculate dynamically
-			int numberOfItemsInGroup = [group resultCount];
-			int numberOfRows = numberOfItemsInGroup / numberOfColumns;
-			if(numberOfItemsInGroup % numberOfColumns != 0) numberOfRows++;
-			
-			// TEMP return 1 item only
-			//return numberOfRows;
 			return 1;
-			
-		}
 		
 		return [group resultCount];
 	}
@@ -136,19 +132,26 @@
 	return 0;
 }
 
+/*- (id)outlineView:(NSOutlineView *)outlineView persistentObjectForItem:(id)item
+{
+	return [item observedObject];
+}*/
+
 
 #pragma mark Delegate
 - (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
-{
-	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) return 20;
-	if([[item class] isEqualTo:[NSMetadataItem class]]) return 19;
+{		
+	return 20;
+
+	if([item isKindOfClass:[NSMetadataQueryResultGroup class]]) return 20.0;
+	if([item isKindOfClass:[NSMetadataItem class]]) return 19.0;
 	
 	// Get height of multi item dynamically	from outlineview
 	PAResultsMultiItem *multiItem = item;
 	NSSize cellSize = [[multiItem cellClass] cellSize];
 	NSSize intercellSpacing = [[multiItem cellClass] intercellSpacing];
 	float indentationPerLevel = [outlineView indentationPerLevel];
-	float offsetToRightBorder = 20;
+	float offsetToRightBorder = 20.0;
 	NSRect frame = [outlineView frame];
 
 	int numberOfItemsPerRow = (frame.size.width - indentationPerLevel - offsetToRightBorder) /
@@ -164,12 +167,17 @@
 	  inTableView:(NSTableView *)tableView
    dataCellForRow:(int)row
 {
+	return [[[NSTextFieldCell alloc] initTextCell:@""] autorelease];
+
 	NSOutlineView *ov = (NSOutlineView *)tableView;
 	id item = [ov itemAtRow:row];
 	
-	if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
-		return [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
-	if([[item class] isEqualTo:[NSMetadataItem class]])
+	if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
+	{
+		return [[[NSTextFieldCell alloc] initTextCell:@""] autorelease];
+		//return [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
+	}
+	if([item isKindOfClass:[NSMetadataItem class]])
 		return [[[PAResultsItemCell alloc] initTextCell:@""] autorelease];
 	
 	return [[[PAResultsMultiItemCell alloc] initTextCell:@""] autorelease];
@@ -181,8 +189,8 @@
                item:(id)item
 {
 	// Hide default triangle
-	[cell setImage:[NSImage imageNamed:@"transparent"]];
-	[cell setAlternateImage:[NSImage imageNamed:@"transparent"]];
+	//[cell setImage:[NSImage imageNamed:@"transparent"]];
+	//[cell setAlternateImage:[NSImage imageNamed:@"transparent"]];
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView
@@ -190,8 +198,11 @@
 	 forTableColumn:(NSTableColumn *)tableColumn
 	           item:(id)item
 {
-	//if([[item class] isEqualTo:[NSMetadataQueryResultGroup class]])
-	//	[(PAResultsGroupCell *)cell setGroup:(NSMetadataQueryResultGroup *)item];
+	/*if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
+	{
+		[cell setObjectValue:item];
+		NSLog([item value]);
+	}*/
 	//if([[item class] isEqualTo:[NSMetadataItem class]])
 	//	[(PAResultsItemCell *)cell setItem:(NSMetadataItem *)item];
 	
@@ -202,35 +213,48 @@
 
 - (void)outlineViewItemDidCollapse:(NSNotification *)notification
 {
-	NSMetadataQueryResultGroup *item = (NSMetadataQueryResultGroup *)[[notification userInfo] objectForKey:@"NSObject"];
-	[self removeAllMultiItemSubviewsWithIdentifier:[item value]];
+	//NSMetadataQueryResultGroup *item = (NSMetadataQueryResultGroup *)[[notification userInfo] objectForKey:@"NSObject"];
+	//[self removeAllMultiItemSubviewsWithIdentifier:[item value]];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)ov shouldSelectItem:(id)item
 {
 	// Resign any matrix from being responder
-	if(![[item class] isEqualTo:[PAResultsMultiItem class]])
+	if(![item isKindOfClass:[PAResultsMultiItem class]])
 	{
 		[outlineView setResponder:nil];
 	}
 
-	return ([[item class] isEqualTo:[NSMetadataQueryResultGroup class]]) ? NO : YES;
+	return [item isKindOfClass:[NSMetadataQueryResultGroup class]] ? NO : YES;
 }
 
 
 #pragma mark Actions
 - (void)triangleClicked:(id)sender
 {
-	NSString *identifier = [(NSDictionary *)[sender tag] objectForKey:@"identifier"];
+	/*NSString *identifier = [(NSDictionary *)[sender tag] objectForKey:@"identifier"];
 	id item = [outlineView groupForIdentifier:identifier];
 	
+	NSLog(@"triangle clicked: %@", [item value]);
+	NSLog(@"at row: %d", [outlineView rowForItem:item]);
+	
+	//if([outlineView isItemExpanded:[outlineView itemAtRow:[outlineView rowForItem:item]]])
+	int row = [outlineView rowForItem:item] + 1;
+	while([outlineView levelForRow:row++] == [outlineView levelForItem:item])
+	{
+		[[outlineView itemAtRow:row] retain];
+	}
+	
 	if([outlineView isItemExpanded:item])
-		[outlineView collapseItem:item];
-	else
-		[outlineView expandItem:item];
+		NSLog(@"jo");*/
+	//[item setExpanded:NO];
+	//[outlineView reloadItem:item reloadChildren:YES];
+	
+	//else
+	//	[outlineView expandItem:item];
 	
 	// Save userDefaults
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
 	NSMutableArray *collapsedGroups = [NSMutableArray arrayWithArray:[results objectForKey:@"CollapsedGroups"]];
 	
@@ -240,7 +264,7 @@
 		[collapsedGroups addObject:[item value]];
 			
 	[results setObject:collapsedGroups forKey:@"CollapsedGroups"];		
-	[defaults setObject:results forKey:@"Results"];
+	[defaults setObject:results forKey:@"Results"];*/
 }
 
 - (void)segmentedControlClicked:(id)sender
@@ -264,9 +288,37 @@
 		[results setObject:currentDisplayModes forKey:@"CurrentDisplayModes"];	
 		[defaults setObject:results forKey:@"Results"];
 		
+		// TODO: Remember selected items
+		/*NSMutableIndexSet *selectedIndexes = [NSMutableIndexSet indexSet];
+		if([outlineView isItemExpanded:item])
+		{
+			int row = [outlineView rowForItem:item] + 1;
+			if([[[outlineView itemAtRow:row] class] isEqualTo:[PAResultsMultiItem class]])
+			{
+				
+			} else {
+				int level = [outlineView levelForItem:item];
+				NSIndexSet *indexSet = [outlineView selectedRowIndexes];
+				while([outlineView levelForRow:row] == level)
+				{
+					if([indexSet containsIndex:row])
+						[selectedIndexes addIndex:row];
+					row++;
+				}
+			}
+			NSLog(identifier);
+		}*/
+		
 		// Refresh the group's display
-		[outlineView collapseItem:item];
-		[outlineView expandItem:item];
+		[outlineView reloadItem:item reloadChildren:YES];
+		[self removeAllMultiItemSubviewsWithIdentifier:[item value]];
+		//[outlineView setNeedsDisplay];
+		
+		// TODO: Restore selection
+		/*for(int i = 0; i < [selectedIndexes count]; i++)
+		{
+			
+		}*/
 	}
 }
 

@@ -15,6 +15,12 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = PAFilterSlice; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controller = BrowserViewController; outlineView = NSOutlineView; }; 
+            SUPERCLASS = NSMatrix; 
+        }, 
         {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {

@@ -33,6 +33,7 @@
 
 - (void)dealloc
 {
+	if(valueDict) [valueDict release];
 	[super dealloc];
 }
 
@@ -50,7 +51,7 @@
 		if([[anObject class] isEqualTo:[PAImageButton class]])
 		{
 			NSDictionary *tag = [(PAImageButton *)anObject tag];
-			if([[tag objectForKey:@"identifier"] isEqualToString:[valueDict objectForKey:@"identifier"]])
+			if([[tag objectForKey:@"identifier"] isEqualToString:[valueDict objectForKey:@"value"]])
 				triangle = anObject;
 		}
 		
@@ -58,7 +59,7 @@
 			if([[anObject class] isEqualTo:[PASegmentedImageControl class]])
 			{
 				NSDictionary *tag = [(PASegmentedImageControl *)anObject tag];
-				if([[tag objectForKey:@"identifier"] isEqualToString:[valueDict objectForKey:@"identifier"]])
+				if([[tag objectForKey:@"identifier"] isEqualToString:[valueDict objectForKey:@"value"]])
 					segmentedControl = anObject;
 			}
 	}
@@ -83,18 +84,18 @@
 		
 		// Add references to PAImageButton's tag for later usage
 		NSMutableDictionary *tag = [triangle tag];
-		[tag setObject:[valueDict objectForKey:@"identifier"] forKey:@"identifier"];
+		[tag setObject:[valueDict objectForKey:@"value"] forKey:@"identifier"];
 		
-		[controlView addSubview:triangle];  
+		//[controlView addSubview:triangle];  
 		
 		// needs to be set after adding as subview
 		[[triangle cell] setShowsBorderOnlyWhileMouseInside:YES];
 	} else {
-		[triangle setFrame:NSMakeRect(cellFrame.origin.x + 4, cellFrame.origin.y + 2, 16, 16)];
+		//[triangle setFrame:NSMakeRect(cellFrame.origin.x + 4, cellFrame.origin.y + 2, 16, 16)];
 	}
 	
 	// Does triangle's current state match the cell's state?
-	id group = [controlView groupForIdentifier:[valueDict objectForKey:@"identifier"]];	
+	/*id group = [controlView groupForIdentifier:[valueDict objectForKey:@"value"]];	
 	if([triangle state] != PAOnHoveredState &&
 	   [triangle state] != PAOffHoveredState &&
 	   [triangle state] != PAOnHighlightedState &&
@@ -104,7 +105,7 @@
 			[triangle setState:PAOnState];
 		else
 			[triangle setState:PAOffState];
-	}
+	}*/
 	
 	// Add segmented control if neccessary
 	if([self hasMultipleDisplayModes])
@@ -126,10 +127,10 @@
 			
 			// Add references to PASegmentedImageControl's tag for later usage
 			NSMutableDictionary *tag = [segmentedControl tag];
-			[tag setObject:[valueDict objectForKey:@"identifier"] forKey:@"identifier"];
+			[tag setObject:[valueDict objectForKey:@"value"] forKey:@"identifier"];
 			//[tag setObject:group forKey:@"group"];
 			
-			[controlView addSubview:segmentedControl];
+			//[controlView addSubview:segmentedControl];
 		}
 		// Refresh frame after all segments have been added
 		NSRect scFrame = [segmentedControl frame];
@@ -137,7 +138,7 @@
 								  cellFrame.origin.y,
 								  scFrame.size.width,
 								  20);
-		[segmentedControl setFrame:rect];
+		//[segmentedControl setFrame:rect];
 	}
 	
 	
@@ -178,8 +179,8 @@
 - (NSString *)naturalLanguageGroupValue
 {	
 	NSBundle *bundle = [NSBundle mainBundle];
-	return [bundle localizedStringForKey:[valueDict objectForKey:@"identifier"]
-	                               value:[valueDict objectForKey:@"identifier"]
+	return [bundle localizedStringForKey:[valueDict objectForKey:@"value"]
+	                               value:[valueDict objectForKey:@"value"]
 								   table:@"MDSimpleGrouping"];
 }
 
@@ -255,7 +256,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *displayModes = [(NSDictionary *)[defaults objectForKey:@"Results"] objectForKey:@"DisplayModes"];
 	
-	NSString *identifier = [valueDict objectForKey:@"identifier"];
+	NSString *identifier = [valueDict objectForKey:@"value"];
 	NSEnumerator *enumerator = [displayModes keyEnumerator];
 	NSString *key;
 	while(key = [enumerator nextObject])
@@ -270,8 +271,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
 	NSString *mode;
-	//if(mode = [currentDisplayModes objectForKey:[group value]])
-	if(mode = [currentDisplayModes objectForKey:[valueDict objectForKey:@"identifier"]])
+	if(mode = [currentDisplayModes objectForKey:[valueDict objectForKey:@"value"]])
 		return mode;
 	else
 		return @"ListMode";
@@ -286,7 +286,8 @@
 
 - (void)setObjectValue:(id <NSCopying>)object
 {
-	valueDict = (NSDictionary *)object;
+	if(valueDict) [valueDict release];
+	valueDict = [object retain];
 }
 
 - (BOOL)hasMultipleDisplayModes
