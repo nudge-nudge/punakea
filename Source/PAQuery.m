@@ -140,7 +140,7 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 */
 - (void)synchronizeResults
 {
-	if(results) [results release];
+	//if(results) [results release];
 	results = [self bundleResults:[mdquery results] byAttributes:bundlingAttributes];	
 	
 	NSEnumerator *enumerator = [results objectEnumerator];
