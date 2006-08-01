@@ -134,13 +134,21 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	return results;
 }
 
+- (NSArray *)flatResults
+{
+	return flatResults;
+}
+
 
 /**
 	Synchronizes results of MetadataQuery
 */
 - (void)synchronizeResults
 {
-	//if(results) [results release];
+	if(flatResults) [flatResults release];
+	if(results) [results release];
+	
+	flatResults = [self bundleResults:[mdquery results] byAttributes:nil];
 	results = [self bundleResults:[mdquery results] byAttributes:bundlingAttributes];	
 	
 	/*NSEnumerator *enumerator = [results objectEnumerator];
@@ -156,16 +164,16 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	Bundles a flat list of results into a hierarchical structure
 	defined by the first item of bundlingAttributes
 */
-- (NSArray *)bundleResults:(NSArray *)results byAttributes:(NSArray *)bundlingAttributes
+- (NSArray *)bundleResults:(NSArray *)results byAttributes:(NSArray *)attributes
 {
 	NSMutableDictionary *bundleDict = [NSMutableDictionary dictionary];
 	
-	NSMutableArray *bundledResults = [NSMutableArray array];
+	NSMutableArray *bundledResults = [[NSMutableArray alloc] init];
 	
-	NSString *bundlingAttribute;
-	if(bundlingAttributes)
+	NSString *bundlingAttribute = nil;
+	if(attributes)
 	{
-		bundlingAttribute = [bundlingAttributes objectAtIndex:0];
+		bundlingAttribute = [attributes objectAtIndex:0];
 	}
 
 	NSEnumerator *resultsEnumerator = [results objectEnumerator];
@@ -193,6 +201,7 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 		// Wrap mdItem into PAQueryItem
 		PAQueryItem *item = [[PAQueryItem alloc] init];
 		[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:@"value"];
+		[item setValue:[mdItem valueForAttribute:(id)kMDItemPath] forAttribute:(id)kMDItemPath];
 		// TODO attributes of item
 		
 		if(bundlingAttribute)

@@ -112,9 +112,12 @@
 {
 	[query disableUpdates];
 	
-	/* TODO: [query results] or [query resultAtIndex:index] represent a tree structure! not a flat list anymore!
+	/* NOTE: [query results] or [query resultAtIndex:index] represent a tree structure!
+	   not a flat list anymore!
+	   Temporary solution: Ues [query flatResults]
+	*/
 
-	int i = [query resultCount];
+	int i = [[query flatResults] count];
 	
 	if (i > 0)
 	//get the related tags to the current results
@@ -125,8 +128,9 @@
 		while (i--) 
 		{
 			//get keywords for result
-			NSMetadataItem *mditem =  [query resultAtIndex:i];
-			NSArray *keywords = [[PATagger sharedInstance] keywordsForFile:[mditem valueForKey:@"kMDItemPath"]];
+			PAQueryItem *item = [[query flatResults] objectAtIndex:i];
+			NSString *path = [item valueForAttribute:(id)kMDItemPath];
+			NSArray *keywords = [[PATagger sharedInstance] keywordsForFile:path];
 			
 			int j = [keywords count];
 
@@ -141,7 +145,6 @@
 			}
 		}
 	}
-	*/
 	
 	[query enableUpdates];
 }
