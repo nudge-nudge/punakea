@@ -11,4 +11,40 @@
 
 @implementation PAQueryItem
 
+#pragma mark Init + Dealloc
+- (id)init
+{
+	self = [super init];
+	if(self)
+	{
+		valueDict = [[NSMutableDictionary alloc] init];
+	}
+	return self;
+}
+
+- (void)dealloc
+{
+	if(valueDict) [valueDict release];
+	[super dealloc];
+}
+
+
+#pragma mark Actions
+- (NSString *)stringValue
+{
+	return [valueDict objectForKey:@"value"];
+}
+
+
+#pragma mark Accessors
+- (NSString *)valueForAttribute:(NSString *)attribute
+{
+	[valueDict objectForKey:attribute];
+}
+
+- (void)setValue:(NSString *)value forAttribute:(NSString *)attribute
+{
+	[valueDict setObject:value forKey:attribute];
+}
+
 @end

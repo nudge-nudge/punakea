@@ -11,6 +11,8 @@
 
 @interface PAQueryItem : NSObject {
 
+	NSMutableDictionary			*valueDict;
+
 }
 
 @end

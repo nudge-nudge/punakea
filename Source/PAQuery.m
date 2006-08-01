@@ -13,7 +13,7 @@ NSString * const PAQueryGatheringProgressNotification = @"PAQueryGatheringProgre
 NSString * const PAQueryDidUpdateNotification = @"PAQueryDidUpdateNotification";
 NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGatheringNotification";
 
-NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttributesDidChange";
+//NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttributesDidChange";
 
 @interface PAQuery (PrivateAPI)
 
@@ -38,6 +38,8 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 {
 	if (self = [super init])
 	{
+		[self setDelegate:self];
+	
 		mdquery = [[NSMetadataQuery alloc] init];
 		[mdquery setDelegate:self];
 		[mdquery setNotificationBatchingInterval:0.3];
@@ -57,7 +59,7 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 {
 	if ([self isStarted]) [self stopQuery];	
 	if(mdquery) [mdquery release];
-	if(groupingAttributes) [groupingAttributes release];
+	if(bundlingAttributes) [bundlingAttributes release];
 	if(predicate) [predicate release];
 	[super dealloc];
 }
@@ -127,25 +129,104 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	return [mdquery resultAtIndex:index];
 }
 
-- (NSArray*)results
+- (NSArray *)results
 {
-	return [mdquery results];
+	return results;
 }
 
-- (NSArray*)groupedResults
-{
-	return [mdquery groupedResults];
-}
 
 /**
 	Synchronizes results of MetadataQuery
 */
 - (void)synchronizeResults
 {
-	// TODO: Wrap NSMetadataQueryResultGroups and NSMetadataItems and create own results array
+	if(results) [results release];
+	results = [self bundleResults:[mdquery results] byAttributes:bundlingAttributes];	
+	
+	NSEnumerator *enumerator = [results objectEnumerator];
+	id object;
+	while(object = [enumerator nextObject])
+	{
+		NSLog([object stringValue]);
+	}
+}
 
-	//if(results) [results release];
-	results = [NSMutableArray arrayWithArray:[mdquery results]];
+
+/**
+	Bundles a flat list of results into a hierarchical structure
+	defined by the first item of bundlingAttributes
+*/
+- (NSArray *)bundleResults:(NSArray *)results byAttributes:(NSArray *)bundlingAttributes
+{
+	NSMutableDictionary *bundleDict = [NSMutableDictionary dictionary];
+	
+	NSMutableArray *bundledResults = [NSMutableArray array];
+	
+	NSString *bundlingAttribute;
+	if(bundlingAttributes)
+	{
+		bundlingAttribute = [bundlingAttributes objectAtIndex:0];
+	}
+
+	NSEnumerator *resultsEnumerator = [results objectEnumerator];
+	NSMetadataItem *mdItem;
+	while(mdItem = [resultsEnumerator nextObject])
+	{	
+		PAQueryBundle *bundle;
+		
+		if(bundlingAttribute)
+		{
+			id valueToBeReplaced = [mdItem valueForAttribute:bundlingAttribute];
+			NSString *bundleValue = [delegate metadataQuery:self
+							   replacementValueForAttribute:bundlingAttribute
+							                          value:valueToBeReplaced];
+		
+			bundle = [bundleDict objectForKey:bundleValue];
+			if(!bundle)
+			{
+				bundle = [[PAQueryBundle alloc] init];
+				[bundle setValue:bundleValue];
+				[bundleDict setObject:bundle forKey:bundleValue];
+			}			
+		}
+		
+		// Wrap mdItem into PAQueryItem
+		PAQueryItem *item = [[PAQueryItem alloc] init];
+		[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:@"value"];
+		// TODO attributes of item
+		
+		if(bundlingAttribute)
+		{
+			[bundle addResultItem:item];
+		} else {
+			[bundledResults addObject:item];
+		}
+	}
+	
+	if(bundlingAttribute)
+	{
+		NSEnumerator *bundleEnumerator = [bundleDict objectEnumerator];
+		PAQueryBundle *bundle;
+		while(bundle = [bundleEnumerator nextObject])
+		{
+			// Bundle at next level if needed
+			NSMutableArray *nextBundlingAttributes = [bundlingAttributes mutableCopy];
+			[nextBundlingAttributes removeObjectAtIndex:0];
+			
+			if([nextBundlingAttributes count] > 0)
+			{
+				NSArray *subResults = [self bundleResults:[bundle results]
+											 byAttributes:nextBundlingAttributes];
+				[bundle setResults:subResults];
+			}
+		
+			[bundledResults addObject:bundle];
+			
+			[nextBundlingAttributes release];
+		}
+	}
+	
+	return bundledResults;
 }
 
 - (void)updateQueryFromTags
@@ -194,7 +275,7 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
-	if([[note name] isEqualTo:NSMetadataQueryDidStartGatheringNotification])
+	/*if([[note name] isEqualTo:NSMetadataQueryDidStartGatheringNotification])
 	{
 		//TODO implement result wrapping
 		//[results removeAllObjects];
@@ -211,7 +292,7 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	{
 		[self synchronizeResults];
 		[nc postNotificationName:PAQueryDidUpdateNotification object:self];
-	}
+	}*/
 		
 	if([[note name] isEqualTo:NSMetadataQueryDidFinishGatheringNotification])
 	{
@@ -242,18 +323,19 @@ NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttribute
 	[mdquery setPredicate:aPredicate];
 }
 
-- (NSArray *)groupingAttributes
+- (NSArray *)bundlingAttributes
 {
-	return [mdquery groupingAttributes];
+	return bundlingAttributes;
 }
 
-- (void)setGroupingAttributes:(NSArray *)attributes
+- (void)setBundlingAttributes:(NSArray *)attributes
 {
-	[mdquery setGroupingAttributes:attributes];
+	if(bundlingAttributes) [bundlingAttributes release];
+	bundlingAttributes = [attributes retain];
 	
 	// Post notification
-	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryGroupingAttributesDidChange
-														object:self];
+	//[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryGroupingAttributesDidChange
+	//													object:self];
 }
 
 - (NSArray *)sortDescriptors

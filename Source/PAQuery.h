@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PAQueryBundle.h"
+#import "PAQueryItem.h"
 #import "PATag.h"
 #import "PATagger.h"
 #import "PASelectedTags.h"
@@ -24,22 +26,23 @@ extern NSString * const PAQueryDidUpdateNotification;
 extern NSString * const PAQueryDidFinishGatheringNotification;
 
 /** Posted when the receiver's grouping attributes have changed. */
-extern NSString * const PAQueryGroupingAttributesDidChange;
+//extern NSString * const PAQueryGroupingAttributesDidChange;
 
 /**
 wrapper for NSMetadataQuery. searching for tags, no predicate needed
  */
 @interface PAQuery : NSObject
 {
-	id delegate;
-	NSMetadataQuery *mdquery;
+	id					delegate;
+	NSMetadataQuery		*mdquery;
 	
-	PASelectedTags *tags;
+	PASelectedTags		*tags;
 	
-	NSPredicate *predicate;
-	NSArray *groupingAttributes;
+	NSPredicate			*predicate;
 	
-	NSMutableArray *results;
+	NSArray				*bundlingAttributes;
+	
+	NSMutableArray		*results;
 }
 
 /**
@@ -68,8 +71,8 @@ initializer
 
 - (NSArray*)groupedResults;
 
-- (NSArray *)groupingAttributes;
-- (void)setGroupingAttributes:(NSArray *)attributes;
+- (NSArray *)bundlingAttributes;
+- (void)setBundlingAttributes:(NSArray *)attributes;
 
 - (NSArray *)sortDescriptors;
 - (void)setSortDescriptors:(NSArray *)descriptors;

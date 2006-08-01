@@ -16,6 +16,14 @@ extern NSString * const PAQueryBundleDidUpdate;
 
 @interface PAQueryBundle : NSObject {
 
+	NSMutableArray			*results;
+	NSString				*value;
+
 }
+
+- (void)addResultItem:(id)anItem;
+
+- (NSArray *)results;
+- (void)setResults:(NSArray *)newResults;
 
 @end

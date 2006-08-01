@@ -135,18 +135,18 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	{
 		[self reloadData];
 		
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
+		//NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		//NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
 		
 		// Restore group's state from user defaults
-		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
-		{
+		//if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
+		//{
 			/*int i;
 			for(i = 0; i < [self numberOfRows]; i++)
 				if([self levelForRow:i] == 0)
 					if(![collapsedGroups containsObject:[[self itemAtRow:i] value]])
 						[self expandItem:[self itemAtRow:i]];*/
-		}
+		//}
 	}
 }
 

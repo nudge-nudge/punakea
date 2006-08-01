@@ -105,6 +105,8 @@
 
 - (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
+	return 0;
+
 	if(item == nil)
 	{
 		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
