@@ -7,8 +7,8 @@
 #import "PATagButton.h"
 
 //TODO tracking rects are outside of scrollview!
-extern NSSize const padding;
-extern int const spacing;
+extern NSSize const PADDING;
+extern int const SPACING;
 
 /**
 displays all [controller visibleTags] in a nice tag cloud view
@@ -24,6 +24,8 @@ displays all [controller visibleTags] in a nice tag cloud view
 	int tagPosition; /**< holds the position where the new line starts */
 	
 	NSMutableDictionary *tagCloudSettings; /**< holds user defaults for tag cloud */
+	
+	NSMutableArray *viewAnimations; /**< animation cache */
 }
 
 - (NSMutableDictionary*)tagButtonDict;

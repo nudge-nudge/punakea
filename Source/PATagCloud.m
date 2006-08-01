@@ -1,17 +1,17 @@
 #import "PATagCloud.h"
 
-NSSize const padding = {10,5};
-int const spacing = 10;
+NSSize const PADDING = {10,5};
+int const SPACING = 10;
 
 @interface PATagCloud (PrivateAPI)
 /**
 creates buttons for tags held in [controller visibleTags]. created buttons can be accessed in
  tagButtonDict afterwards. called by setDisplayTags
  */
-- (void)updateButtonsForTags:(NSMutableArray*)tags;
+- (void)updateButtons;
 
 - (void)calcInitialParametersInRect:(NSRect)rect;
-- (float)calcFrameHeightForTags:(NSMutableArray*)tags width:(float)width;
+- (NSRect)calcFrame;
 
 /**
 draws the background
@@ -22,7 +22,7 @@ draws the background
 adds all the tags in [controller visibleTags]
  @param rect view rect in which to draw
  */
-- (void)addTags:(NSMutableArray*)tags inRect:(NSRect)rect;
+- (void)updateViewHierarchy;
 
 /**
 determines the oigin point for the next tag button to display;
@@ -70,6 +70,7 @@ calculates the starting point in the next row according to the height of all the
 		tagButtonDict = [[NSMutableDictionary alloc] init];		
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
+		viewAnimations = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -84,18 +85,15 @@ bind to visibleTags
 					options:0
 					context:NULL];
 	
-	//TODO put together see observeValueFOrKEy
+	// register for superview bounds change
+	NSScrollView *scrollView = [self enclosingScrollView];
+	[scrollView setPostsBoundsChangedNotifications:YES];
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(handleBoundsChange:) 
+												 name:nil 
+											   object:scrollView];
 	
-	// create initial tag buttons
-	[self updateButtonsForTags:[controller visibleTags]];
-	
-	// set initial active button
-	if ([[controller visibleTags] count] > 0)
-	{
-		[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
-	}
-	
-	//adjust frameSize
+	[self handleTagsChange];
 }
 
 - (void)dealloc
@@ -105,8 +103,39 @@ bind to visibleTags
 		[activeButton release];
 	}
 	
+	[viewAnimations release];
+	[tagCloudSettings release];
 	[tagButtonDict release];
 	[super dealloc];
+}
+
+#pragma mark handlers
+- (void)handleBoundsChange:(NSNotification*)note
+{
+	[self setFrame:[self calcFrame]];
+	[self updateViewHierarchy];
+	[self scrollToButton:[self activeButton]];
+}
+
+- (void)handleTagsChange
+{
+	[self updateButtons];
+	[self updateViewHierarchy:YES];
+	
+	if ([[controller visibleTags] count] > 0)
+	{
+		[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
+		[self scrollToButton:[self activeButton]];
+	}
+}
+
+- (void)handleTypeAheadFindChange
+{
+}
+
+- (void)handleActiveTagChange
+{
+	[self scrollToButton:[self activeButton]];
 }
 
 #pragma mark observer and important stuff
@@ -120,28 +149,15 @@ bound to visibleTags
 {
 	if ([keyPath isEqual:@"visibleTags"]) 
 	{
-		[self updateButtonsForTags:[controller visibleTags]];
-		
-		if ([[controller visibleTags] count] > 0)
-		{
-			[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
-		}
-		
-		// add the buttons
-		[self addTags:[controller visibleTags] inRect:[self frame]];
-		
-		// scroll to the active button if not visible
-		[self scrollToButton:[self activeButton]];
-		
-		[self setNeedsDisplay:YES];
+		[self handleTagsChange];
 	}
 }
 
-- (void)updateButtonsForTags:(NSMutableArray*)tags
+- (void)updateButtons
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	NSEnumerator *tagEnumerator = [tags objectEnumerator];
+	NSEnumerator *tagEnumerator = [[controller visibleTags] objectEnumerator];
 	PATag *tag;
 	
 	while (tag = [tagEnumerator nextObject])
@@ -173,6 +189,7 @@ bound to visibleTags
 
 #pragma mark drawing
 // this is called, determine the needed frame
+/*
 - (void)setFrame:(NSRect)frameRect
 {
 	NSRect clipViewFrame = [[self superview] frame];
@@ -200,14 +217,15 @@ bound to visibleTags
 	// scroll to the active button if not visible
 	[self scrollToButton:[self activeButton]];
 }
+*/
 
-- (float)calcFrameHeightForTags:(NSMutableArray*)tags width:(float)width
+- (NSRect)calcFrame
 {
-	//TODO get minimum size somemwhere
-	NSRect tmpFrame = NSMakeRect(0,0,width,0);
+	NSRect clipViewFrame = [[self superview] frame];
+	NSRect tmpFrame = NSMakeRect(0,0,NSWidth(clipViewFrame),0);
 	[self calcInitialParametersInRect:tmpFrame];
 	
-	NSEnumerator *e = [tags objectEnumerator];
+	NSEnumerator *e = [[controller visibleTags] objectEnumerator];
 	PATag *tag;
 	
 	NSPoint buttonPoint;
@@ -219,9 +237,14 @@ bound to visibleTags
 		[tagButton setFrameOrigin:buttonPoint];
 	}
 	
-	//TODO externalize
-	float newHeight = 0 - buttonPoint.y + 5;
-	return newHeight;
+	float newHeight = 0 - buttonPoint.y + PADDING.height;
+	
+	if (newHeight < NSHeight(clipViewFrame))
+	{
+		newHeight = NSHeight(clipViewFrame);
+	}
+	
+	return NSMakeRect(0,0,NSWidth(clipViewFrame),newHeight);
 }
 
 - (void)drawRect:(NSRect)rect
@@ -233,18 +256,30 @@ bound to visibleTags
 - (void)drawBackground
 {
 	//TODO externalize
-	[[NSColor colorWithDeviceRed:0.905 green:0.929 blue:0.98 alpha:1.0] set];
+	[[NSColor colorWithDeviceRed:(231.0/255.0) green:(237.0/255.0) blue:(250.0/255.0) alpha:1.0] set];
 	NSRectFill([self bounds]);
 	
 	[[NSColor lightGrayColor] set];
 	[NSBezierPath strokeRect:[self bounds]];
 }
 
-- (void)addTags:(NSMutableArray*)tags inRect:(NSRect)rect
+- (void)updateViewHierarchy
 {
+	[self updateViewHierarchy:NO];
+}
+
+- (void)updateViewHierarchy:(BOOL)animate
+{
+	// clear animation cache
+	if (animate)
+	{
+		[viewAnimations removeAllObjects];
+	}
+	
+	NSRect rect = [self bounds];
+	
 	[self calcInitialParametersInRect:rect];
 
-	NSMutableArray *viewsToRemove = [NSMutableArray array];
 	NSMutableArray *viewsToKeep = [NSMutableArray array];
 	
 	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
@@ -262,7 +297,7 @@ bound to visibleTags
 		}
 	}
 	
-	NSEnumerator *e = [tags objectEnumerator];
+	NSEnumerator *e = [[controller visibleTags] objectEnumerator];
 	PATag *tag;
 	
 	while (tag = [e nextObject])
@@ -272,37 +307,51 @@ bound to visibleTags
 		
 		if ([viewsToKeep containsObject:tagButton])
 		{
-			[self moveTagButton:tagButton toPoint:newOrigin];
+			[self moveTagButton:tagButton toPoint:newOrigin animate:animate];
 		}
 		else
 		{		
 			[self addTagButton:tagButton atPoint:newOrigin];
 		}
 	}
+	
+	if (animate)
+	{
+		NSViewAnimation *viewAnimation = [[NSViewAnimation alloc] initWithViewAnimations:viewAnimations];
+		// Set some additional attributes for the animation.
+		[viewAnimation setDuration:0.5];    // One and a half seconds. 
+		[viewAnimation setAnimationCurve:NSAnimationEaseInOut];
+		
+		[viewAnimation startAnimation];
+		[viewAnimation release];
+		[self setNeedsDisplay:YES];
+	}
 }
 
 - (void)removeTagButton:(PATagButton*)tagButton
 {
-	[tagButton removeFromSuperviewWithoutNeedingDisplay];
+	[tagButton removeFromSuperview];
 }
 
-- (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin
+- (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin animate:(BOOL)animate
 {
 	NSRect oldFrame = [tagButton frame];
 	NSRect newFrame = NSMakeRect(origin.x,origin.y,oldFrame.size.width,oldFrame.size.height);
 	
-	NSMutableDictionary *animationDict = [NSMutableDictionary dictionaryWithCapacity:3];
-	[animationDict setObject:tagButton forKey:NSViewAnimationTargetKey];
-	[animationDict setObject:[NSValue valueWithRect:oldFrame] forKey:NSViewAnimationStartFrameKey];
-	[animationDict setObject:[NSValue valueWithRect:newFrame] forKey:NSViewAnimationEndFrameKey];
-	
-	NSViewAnimation *viewAnimation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:animationDict]];
-	// Set some additional attributes for the animation.
-    [viewAnimation setDuration:0.5];    // One and a half seconds. 
-    [viewAnimation setAnimationCurve:NSAnimationEaseIn];
-	
-	[viewAnimation startAnimation];
-	[viewAnimation release];
+	if (animate)
+	{
+		NSMutableDictionary *animationDict = [NSMutableDictionary dictionaryWithCapacity:3];
+		[animationDict setObject:tagButton forKey:NSViewAnimationTargetKey];
+		[animationDict setObject:[NSValue valueWithRect:oldFrame] forKey:NSViewAnimationStartFrameKey];
+		[animationDict setObject:[NSValue valueWithRect:newFrame] forKey:NSViewAnimationEndFrameKey];
+		
+		[viewAnimations addObject:animationDict];
+	}
+	else
+	{
+		[tagButton setFrame:newFrame];
+		[self setNeedsDisplayInRect:oldFrame];
+	}	
 }
 
 - (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin
@@ -330,13 +379,13 @@ bound to visibleTags
 
 - (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect
 {
-	//TODO externalize spacing and padding and ...
-	int spacing = 10;
+	//TODO externalize SPACING and PADDING and ...
+	int SPACING = 10;
 	
 	NSRect frame = [tagButton frame];
 	float width = frame.size.width;
 	
-	float xValue = pointForNextTagRect.x + width + spacing;
+	float xValue = pointForNextTagRect.x + width + SPACING;
 	
 	//if the tag doesn't fit in this row, get first point in next row
 	if (xValue > rect.size.width)
@@ -348,7 +397,7 @@ bound to visibleTags
 	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x,pointForNextTagRect.y);
 	
 	//then calc the point for the next tag
-	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + spacing,pointForNextTagRect.y);
+	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + SPACING,pointForNextTagRect.y);
 	
 	return newOrigin;
 }
@@ -357,7 +406,7 @@ bound to visibleTags
 {
 	//TODO externalize
 	int vPadding = 1;
-	int spacing = 10;
+	int SPACING = 10;
 	
 	//values needed for calc
 	int rowWidth = 0;
@@ -382,9 +431,9 @@ bound to visibleTags
 		NSSize tagSize = frame.size;
 		
 		//if the tag fills the row, stop adding tags
-		rowWidth += spacing + tagSize.width;
+		rowWidth += SPACING + tagSize.width;
 		
-		if (rowWidth + spacing > rect.size.width)
+		if (rowWidth + SPACING > rect.size.width)
 			break;
 		
 		//remember the maximum height
@@ -394,7 +443,7 @@ bound to visibleTags
 		tagPosition++;
 	}
 	
-	return NSMakePoint(spacing,pointForNextTagRect.y-maxHeight-vPadding);
+	return NSMakePoint(SPACING,pointForNextTagRect.y-maxHeight-vPadding);
 }	
 
 #pragma mark accessors
@@ -427,7 +476,7 @@ bound to visibleTags
 	[activeButton release];
 	activeButton = aTagButton;
 	
-	[self scrollToButton:activeButton];
+	[self handleActiveTagChange];
 }
 
 - (BrowserViewController*)controller
@@ -448,6 +497,7 @@ bound to visibleTags
 
 - (BOOL)resignFirstResponder
 {
+	//TODO grey out button instead of nilling
 	[self setActiveButton:nil];
 	return YES;
 }
@@ -496,19 +546,19 @@ bound to visibleTags
 	NSSize viewSize = [self frame].size;
 	
 	float buttonMaxY = NSMaxY(buttonFrame);
-	float topSkip = viewSize.height - padding.height;
-	float bottomSkip = 0 + padding.height;
+	float topSkip = viewSize.height - PADDING.height;
+	float bottomSkip = 0 + PADDING.height;
 
 	// check top - TODO why -1?!
 	if (buttonMaxY >= topSkip - 1)
 	{
-		buttonFrame.origin.y += padding.height;
+		buttonFrame.origin.y += PADDING.height;
 	}
 	
 	// check bottom
 	else if (buttonFrame.origin.y <= bottomSkip)
 	{
-		buttonFrame.origin.y -= padding.height;
+		buttonFrame.origin.y -= PADDING.height;
 	}
 	
 	[self scrollRectToVisible:buttonFrame];

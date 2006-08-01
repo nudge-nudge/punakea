@@ -83,7 +83,6 @@
 	[super dealloc];
 }
 
-
 #pragma mark accessors
 // This method returns a pointer to the view in the nib loaded.
 -(NSView*)mainView
