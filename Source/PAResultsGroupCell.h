@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PAQueryBundle.h"
 #import "PAImageButton.h"
 #import "PASegmentedImageControl.h"
 #import "PAResultsOutlineView.h"
@@ -14,10 +15,12 @@
 
 @interface PAResultsGroupCell : NSTextFieldCell {
 
-	PAImageButton *triangle;
-	PASegmentedImageControl *segmentedControl;
-	NSDictionary *valueDict;
-	BOOL hasMultipleDisplayModes;
+	PAImageButton				*triangle;
+	PASegmentedImageControl		*segmentedControl;
+	
+	PAQueryBundle				*bundle;
+	
+	BOOL						hasMultipleDisplayModes;
 
 }
 

@@ -79,10 +79,10 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)reloadData
 {
-    /*while ([[self subviews] count] > 0)
+    while ([[self subviews] count] > 0)
     {
 		[[[self subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
-    }*/
+    }
     [super reloadData];
 }
 
@@ -100,21 +100,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		   selector:@selector(windowDidChangeKeyNotification:)
 			   name:NSWindowDidBecomeKeyNotification
 			 object:newWindow];
-}
-
-- (id)groupForIdentifier:(NSString *)identifier
-{
-	int i;
-	for(i = 0; i < [self numberOfRows]; i++)
-		if([self levelForRow:i] == 0)
-		{
-			if([[[self itemAtRow:i] value] isEqualToString:identifier])
-			{
-				return [self itemAtRow:i];
-				//return [[self delegate] outlineView:self persistentObjectForItem:[self itemAtRow:i]];
-			}
-		}
-	return nil;
 }
 
 - (void)setFrameSize:(NSSize)newSize 
@@ -135,18 +120,20 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	{
 		[self reloadData];
 		
-		//NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		//NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
 		
 		// Restore group's state from user defaults
-		//if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
-		//{
-			/*int i;
-			for(i = 0; i < [self numberOfRows]; i++)
-				if([self levelForRow:i] == 0)
-					if(![collapsedGroups containsObject:[[self itemAtRow:i] value]])
-						[self expandItem:[self itemAtRow:i]];*/
-		//}
+		int i;
+		for(i = 0; i < [self numberOfRows]; i++)
+		{
+			id item = [self itemAtRow:i];
+			if([item isKindOfClass:[PAQueryBundle class]])
+			{
+				if(![collapsedGroups containsObject:[item value]])
+					[self expandItem:item];
+			}
+		}
 	}
 }
 

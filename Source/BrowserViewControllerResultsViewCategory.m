@@ -12,58 +12,31 @@
 @implementation BrowserViewController (ResultsViewCategory)
 
 #pragma mark Data Source
-- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+- (id)          outlineView:(NSOutlineView *)ov 
+  objectValueForTableColumn:(NSTableColumn *)tableColumn
+					 byItem:(id)item
 {
-	return item;
+	//return @"";
 	
-	if([[tableColumn identifier] isEqualToString:@"title"]) {
-		if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
-		{
-			NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-			[dict setValue:[item value] forKey:@"value"];
-			return dict;
-		}
-		if([item isKindOfClass:[NSMetadataItem class]])
-		{
-			NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-			[dict setValue:[item valueForAttribute:(id)kMDItemPath] forKey:@"path"];
-			[dict setValue:[item valueForAttribute:(id)kMDItemDisplayName] forKey:@"displayName"];
-			[dict setValue:[item valueForAttribute:(id)kMDItemLastUsedDate] forKey:@"lastUsedDate"];
-			return dict;
-		}
-		if([item isKindOfClass:[PAResultsMultiItem class]])
-		{
-			return item;
-		}
-	}
-	return @"";
+	if([item isKindOfClass:[PAQueryBundle class]])
+		return item;
+	else 
+		return [item valueForAttribute:@"value"];
 }
 
-- (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
+- (id)outlineView:(NSOutlineView *)ov child:(int)index ofItem:(id)item
 {		
-	if(item == nil)	
-	{
-		// We're at top level of our results		
-		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
-		{
-			//return [[query groupedResults] objectAtIndex:index];
-			return [[[query groupedResults] objectAtIndex:index] value];
-		} else {
-			return [query resultAtIndex:index];
-		}
-	} else {
-		return @"huhu"; //[[item resultAtIndex:index] valueForAttribute:(id)kMDItemDisplayName];
-	}
+	if(item == nil)	return [query resultAtIndex:index];
 	
-	if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
+	if([item isKindOfClass:[PAQueryBundle class]])
 	{
-		NSMetadataQueryResultGroup *group = item;
+		PAQueryBundle *bundle = item;
 		
 		// Child depends on display mode
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
 		
-		if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"])
+		/*if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"])
 		{
 			PAResultsMultiItem *multiItem = [[PAResultsMultiItem alloc] init];
 			
@@ -87,66 +60,46 @@
 			[tag setObject:[group value] forKey:@"identifier"];			
 			
 			return multiItem;
-		}
+		}*/
 
-		return [group resultAtIndex:index];
+		return [bundle resultAtIndex:index];
 	}
 }
 
 - (BOOL)outlineView:(NSOutlineView *)ov isItemExpandable:(id)item
 {
 	if(item == nil) return YES;
-	return ([ov levelForItem:item] == 0) ? YES : NO;
-	
-	if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
-		return ([self outlineView:ov numberOfChildrenOfItem:item] != 0);
-	return NO;
+
+	return ([self outlineView:ov numberOfChildrenOfItem:item] != 0);
 }
 
 - (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
-	return 0;
-
-	if(item == nil)
+	if(item == nil) return [query resultCount];
+	
+	if([item isKindOfClass:[PAQueryBundle class]])
 	{
-		if([query groupingAttributes] && [[query groupingAttributes] count] > 0)
-			return [[query groupedResults] count];
-		else
-			return [query resultCount];
-	} else {
-		return 1;
-	}
-
-	if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
-	{
-		NSMetadataQueryResultGroup *group = item;
+		PAQueryBundle *bundle = item;
 		
-		// Number of childs depends on display mode
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		// Number of children depends on display mode
+		/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
 		
-		if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"])
-			return 1;
+		if([[currentDisplayModes objectForKey:[bundle value]] isEqualToString:@"IconMode"])
+			return 1;*/
 		
-		return [group resultCount];
+		return [bundle resultCount];
 	}
 	
 	return 0;
 }
-
-/*- (id)outlineView:(NSOutlineView *)outlineView persistentObjectForItem:(id)item
-{
-	return [item observedObject];
-}*/
 
 
 #pragma mark Delegate
 - (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
 {		
-	return 20;
-
-	if([item isKindOfClass:[NSMetadataQueryResultGroup class]]) return 20.0;
-	if([item isKindOfClass:[NSMetadataItem class]]) return 19.0;
+	if([item isKindOfClass:[PAQueryBundle class]]) return 20.0;
+	if([item isKindOfClass:[PAQueryItem class]]) return 19.0;
 	
 	// Get height of multi item dynamically	from outlineview
 	PAResultsMultiItem *multiItem = item;
@@ -169,30 +122,26 @@
 	  inTableView:(NSTableView *)tableView
    dataCellForRow:(int)row
 {
-	return [[[NSTextFieldCell alloc] initTextCell:@""] autorelease];
-
 	NSOutlineView *ov = (NSOutlineView *)tableView;
 	id item = [ov itemAtRow:row];
 	
-	if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
-	{
+	if([item isKindOfClass:[PAQueryBundle class]])
+		return [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
+		
+	if([item isKindOfClass:[PAQueryItem class]])
 		return [[[NSTextFieldCell alloc] initTextCell:@""] autorelease];
-		//return [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
-	}
-	if([item isKindOfClass:[NSMetadataItem class]])
-		return [[[PAResultsItemCell alloc] initTextCell:@""] autorelease];
 	
 	return [[[PAResultsMultiItemCell alloc] initTextCell:@""] autorelease];
 }
 
-- (void)outlineView:(NSOutlineView *)outlineView
+- (void)     outlineView:(NSOutlineView *)ov
   willDisplayOutlineCell:(id)cell
-	 forTableColumn:(NSTableColumn *)tableColumn
-               item:(id)item
+	      forTableColumn:(NSTableColumn *)tableColumn
+                    item:(id)item
 {
 	// Hide default triangle
-	//[cell setImage:[NSImage imageNamed:@"transparent"]];
-	//[cell setAlternateImage:[NSImage imageNamed:@"transparent"]];
+	[cell setImage:[NSImage imageNamed:@"transparent"]];
+	[cell setAlternateImage:[NSImage imageNamed:@"transparent"]];
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView
@@ -227,36 +176,42 @@
 		[outlineView setResponder:nil];
 	}
 
-	return [item isKindOfClass:[NSMetadataQueryResultGroup class]] ? NO : YES;
+	return [item isKindOfClass:[PAQueryBundle class]] ? NO : YES;
 }
 
 
 #pragma mark Actions
 - (void)triangleClicked:(id)sender
 {
-	/*NSString *identifier = [(NSDictionary *)[sender tag] objectForKey:@"identifier"];
-	id item = [outlineView groupForIdentifier:identifier];
+	PAQueryBundle *item = [(NSDictionary *)[sender tag] objectForKey:@"bundle"];
+	//id item = [outlineView groupForIdentifier:identifier];
 	
-	NSLog(@"triangle clicked: %@", [item value]);
-	NSLog(@"at row: %d", [outlineView rowForItem:item]);
+	//NSLog(@"triangle clicked: %@", [item value]);
+	//NSLog(@"at row: %d", [outlineView rowForItem:item]);
 	
 	//if([outlineView isItemExpanded:[outlineView itemAtRow:[outlineView rowForItem:item]]])
-	int row = [outlineView rowForItem:item] + 1;
+	/*int row = [outlineView rowForItem:item] + 1;
 	while([outlineView levelForRow:row++] == [outlineView levelForItem:item])
 	{
 		[[outlineView itemAtRow:row] retain];
-	}
+	}*/
 	
+	/*
 	if([outlineView isItemExpanded:item])
-		NSLog(@"jo");*/
+		NSLog(@"jo");
 	//[item setExpanded:NO];
 	//[outlineView reloadItem:item reloadChildren:YES];
 	
 	//else
 	//	[outlineView expandItem:item];
+	*/
+	if([outlineView isItemExpanded:item])
+		[outlineView collapseItem:item];
+	else
+		[outlineView expandItem:item];
 	
 	// Save userDefaults
-	/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
 	NSMutableArray *collapsedGroups = [NSMutableArray arrayWithArray:[results objectForKey:@"CollapsedGroups"]];
 	
@@ -266,7 +221,7 @@
 		[collapsedGroups addObject:[item value]];
 			
 	[results setObject:collapsedGroups forKey:@"CollapsedGroups"];		
-	[defaults setObject:results forKey:@"Results"];*/
+	[defaults setObject:results forKey:@"Results"];
 }
 
 - (void)segmentedControlClicked:(id)sender
@@ -326,20 +281,20 @@
 
 - (IBAction)doubleAction:(id)sender
 {
-	NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
+	/*NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
 	unsigned row = [selectedRowIndexes firstIndex];
 	while(row != NSNotFound) 
 	{
 		id item = [outlineView itemAtRow:row];
 		
 		// TODO: If item is MultiItem, get selected cells and process them
-		if([[item class] isEqualTo:[NSMetadataItem class]])
+		if([[item class] isEqualTo:[PAQueryItem class]])
 		{
 			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
 		}
 		
 		row = [selectedRowIndexes indexGreaterThanIndex:row];
-	}
+	}*/
 	
 	// TODO: Why are all items deselected after using openFile but not when commenting that line???
 }

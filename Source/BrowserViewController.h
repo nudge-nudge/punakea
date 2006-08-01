@@ -13,6 +13,8 @@
 #import "PARelatedTags.h"
 #import "PASelectedTags.h"
 #import "PAQuery.h"
+#import "PAQueryBundle.h"
+#import "PAQueryItem.h"
 #import "PATypeAheadFind.h"
 #import "PAResultsOutlineView.h"
 

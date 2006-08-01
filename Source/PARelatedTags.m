@@ -111,6 +111,8 @@
 - (void)updateRelatedTags 
 {
 	[query disableUpdates];
+	
+	/* TODO: [query results] or [query resultAtIndex:index] represent a tree structure! not a flat list anymore!
 
 	int i = [query resultCount];
 	
@@ -139,6 +141,7 @@
 			}
 		}
 	}
+	*/
 	
 	[query enableUpdates];
 }

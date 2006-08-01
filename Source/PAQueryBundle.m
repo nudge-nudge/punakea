@@ -55,6 +55,16 @@ NSString * const PAQueryBundleDidUpdate = @"PAQueryBundleDidUpdate";
 	return [str stringByAppendingString:@"]"];
 }
 
+- (unsigned)resultCount
+{
+	return [results count];
+}
+
+- (id)resultAtIndex:(unsigned)index
+{
+	return [results objectAtIndex:index];
+}
+
 
 #pragma mark Accessors
 - (NSArray *)results

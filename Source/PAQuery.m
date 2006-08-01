@@ -121,12 +121,12 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 
 - (unsigned)resultCount
 {
-	return [mdquery resultCount];
+	return [results count];
 }
 
 - (id)resultAtIndex:(unsigned)index
 {
-	return [mdquery resultAtIndex:index];
+	return [results objectAtIndex:index];
 }
 
 - (NSArray *)results
@@ -143,12 +143,12 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	//if(results) [results release];
 	results = [self bundleResults:[mdquery results] byAttributes:bundlingAttributes];	
 	
-	NSEnumerator *enumerator = [results objectEnumerator];
+	/*NSEnumerator *enumerator = [results objectEnumerator];
 	id object;
 	while(object = [enumerator nextObject])
 	{
 		NSLog([object stringValue]);
-	}
+	}*/
 }
 
 
