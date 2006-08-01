@@ -329,8 +329,7 @@
 	if ([buffer length] > 0)
 	{
 		//TODO not working when deleting
-		[typeAheadFind setPrefix:buffer];
-		[self setVisibleTags:[typeAheadFind matchingTags]];
+		[self setVisibleTags:[typeAheadFind tagsForPrefix:buffer]];
 	}
 	else
 	{

@@ -123,4 +123,27 @@
 	return false;
 }
 
+- (NSArray*)tagsForPrefix:(NSString*)prefix
+{
+	return [self tagsForPrefix:prefix inTags:tags];
+}
+
+- (NSArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)tags
+{
+	NSMutableArray *result = [NSMutableArray array];
+	
+	NSEnumerator *e = [tags objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		if ([[tag name] hasPrefix:prefix])
+		{
+			[result addObject:tag];
+		}
+	}
+	
+	return result;
+}
+
 @end

@@ -52,4 +52,7 @@ checks if there are any tags at all matching the prefix,
  */
 - (BOOL)hasTagsForPrefix:(NSString*)prefix;
 
+- (NSArray*)tagsForPrefix:(NSString*)prefix;
+- (NSArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)tags;
+
 @end

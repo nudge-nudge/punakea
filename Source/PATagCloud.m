@@ -244,14 +244,22 @@ bound to visibleTags
 {
 	[self calcInitialParametersInRect:rect];
 
-	//TODO do not remove all
-	//first remove all drawn tags
+	NSMutableArray *viewsToRemove = [NSMutableArray array];
+	NSMutableArray *viewsToKeep = [NSMutableArray array];
+	
 	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
 	NSControl *subview;
 	
 	while (subview = [viewEnumerator nextObject])
 	{
-		[subview removeFromSuperviewWithoutNeedingDisplay];
+		if ([[controller visibleTags] containsObject:[subview fileTag]])
+		{
+			[viewsToKeep addObject:subview];
+		}
+		else
+		{
+			[self removeTagButton:subview];
+		}
 	}
 	
 	NSEnumerator *e = [tags objectEnumerator];
@@ -260,15 +268,51 @@ bound to visibleTags
 	while (tag = [e nextObject])
 	{
 		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
-		NSPoint origin = [self nextPointForTagButton:tagButton inRect:rect];
-		[tagButton setFrameOrigin:origin];
+		NSPoint newOrigin = [self nextPointForTagButton:tagButton inRect:rect];
 		
-		[self addSubview:tagButton];
-		
-		// needs to be called after adding to subview, else the mouseEntered/Exited events aren't
-		// send to the cells
-		[tagButton setShowsBorderOnlyWhileMouseInside:YES];
+		if ([viewsToKeep containsObject:tagButton])
+		{
+			[self moveTagButton:tagButton toPoint:newOrigin];
+		}
+		else
+		{		
+			[self addTagButton:tagButton atPoint:newOrigin];
+		}
 	}
+}
+
+- (void)removeTagButton:(PATagButton*)tagButton
+{
+	[tagButton removeFromSuperviewWithoutNeedingDisplay];
+}
+
+- (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin
+{
+	NSRect oldFrame = [tagButton frame];
+	NSRect newFrame = NSMakeRect(origin.x,origin.y,oldFrame.size.width,oldFrame.size.height);
+	
+	NSMutableDictionary *animationDict = [NSMutableDictionary dictionaryWithCapacity:3];
+	[animationDict setObject:tagButton forKey:NSViewAnimationTargetKey];
+	[animationDict setObject:[NSValue valueWithRect:oldFrame] forKey:NSViewAnimationStartFrameKey];
+	[animationDict setObject:[NSValue valueWithRect:newFrame] forKey:NSViewAnimationEndFrameKey];
+	
+	NSViewAnimation *viewAnimation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:animationDict]];
+	// Set some additional attributes for the animation.
+    [viewAnimation setDuration:0.5];    // One and a half seconds. 
+    [viewAnimation setAnimationCurve:NSAnimationEaseIn];
+	
+	[viewAnimation startAnimation];
+	[viewAnimation release];
+}
+
+- (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin
+{
+	[tagButton setFrameOrigin:origin];
+	[self addSubview:tagButton];
+	
+	// needs to be called after adding to subview, else the mouseEntered/Exited events aren't
+	// send to the cells
+	[tagButton setShowsBorderOnlyWhileMouseInside:YES];
 }
 
 #pragma mark calculation

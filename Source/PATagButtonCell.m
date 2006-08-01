@@ -143,7 +143,7 @@ int const MAX_FONT_SIZE = 25;
 - (void)mouseEntered:(NSEvent *)event
 {
 	NSLog(@"entered");
-	 /*
+
 	//TODO check if visible
 	NSScrollView *scrollView = [[self controlView] enclosingScrollView];
 	PATagButton *button = [self controlView];
@@ -152,7 +152,6 @@ int const MAX_FONT_SIZE = 25;
 	{
 		[[button superview] setActiveButton:button];
 	}
-	 */
 }
 
 - (void)mouseExited:(NSEvent *)event
