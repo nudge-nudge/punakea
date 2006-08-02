@@ -26,6 +26,8 @@
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
 		
+		[self setUpdating:NO];
+		
 		[self setQuery:aQuery];
 		[self setRelatedTags:[[NSMutableArray alloc] init]];
 		[self setSelectedTags:otherSelectedTags];
@@ -46,6 +48,25 @@
 }
 
 #pragma mark accessors
+- (BOOL)isUpdating
+{
+	return updating;
+}
+
+- (void)setUpdating:(BOOL)flag
+{
+	updating = flag;
+	
+	if (updating)
+	{
+		NSLog(@"updating");
+	}
+	else
+	{
+		NSLog(@"finished");
+	}
+}
+
 - (void)setQuery:(PAQuery*)aQuery 
 {
 	[aQuery retain];
@@ -99,16 +120,19 @@
 //act on query notifications -- relatedTags need to be kept in sync with files
 - (void)queryNote:(NSNotification*)note 
 {
-	if ([[note name] isEqualToString:PAQueryDidFinishGatheringNotification] 
-		|| [[note name] isEqualToString:PAQueryGatheringProgressNotification]
-		|| [[note name] isEqualToString:PAQueryDidUpdateNotification]) 
+	if ([[note name] isEqualToString:PAQueryDidStartGatheringNotification])
+	{
+		[self setUpdating:YES];
+	}
+	else if ([[note name] isEqualToString:PAQueryDidFinishGatheringNotification] 
+		|| [[note name] isEqualToString:PAQueryGatheringProgressNotification]) 
 	{
 		[self updateRelatedTags];
 	}
 }
 
 //TODO needs to be emptied
-- (void)updateRelatedTags 
+- (void)updateRelatedTags
 {
 	[query disableUpdates];
 	
@@ -147,6 +171,11 @@
 	}
 	
 	[query enableUpdates];
+	
+	if (![query isGathering])
+	{
+		[self setUpdating:NO];
+	}
 }
 
 @end

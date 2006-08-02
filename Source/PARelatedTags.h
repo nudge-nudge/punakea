@@ -26,6 +26,7 @@ finds related tags for a given query or a given selection of tags.
 	PATags *tags;
 	
 	NSMutableArray *relatedTags;
+	BOOL updating;
 
 	NSNotificationCenter *nf;
 	PAQuery *query;
@@ -33,6 +34,9 @@ finds related tags for a given query or a given selection of tags.
 }
 
 - (id)initWithSelectedTags:(PASelectedTags*)otherSelectedTags query:(PAQuery*)aQuery;
+
+- (BOOL)isUpdating;
+- (void)setUpdating:(BOOL)flag;
 
 - (PASelectedTags*)selectedTags;
 - (void)setSelectedTags:(PASelectedTags*)otherTags;

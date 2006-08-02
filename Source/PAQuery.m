@@ -114,32 +114,6 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	[mdquery enableUpdates];
 }
 
-- (BOOL)isStarted
-{
-	return [mdquery isStarted];
-}
-
-- (unsigned)resultCount
-{
-	return [results count];
-}
-
-- (id)resultAtIndex:(unsigned)index
-{
-	return [results objectAtIndex:index];
-}
-
-- (NSArray *)results
-{
-	return results;
-}
-
-- (NSArray *)flatResults
-{
-	return flatResults;
-}
-
-
 /**
 	Synchronizes results of MetadataQuery
 */
@@ -371,5 +345,41 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	
 	[self updateQueryFromTags];
 }
+
+- (BOOL)isStarted
+{
+	return [mdquery isStarted];
+}
+
+- (BOOL)isGathering
+{
+	return [mdquery isGathering];
+}
+
+- (BOOL)isStopped
+{
+	return [mdquery isStopped];
+}
+
+- (unsigned)resultCount
+{
+	return [results count];
+}
+
+- (id)resultAtIndex:(unsigned)index
+{
+	return [results objectAtIndex:index];
+}
+
+- (NSArray *)results
+{
+	return results;
+}
+
+- (NSArray *)flatResults
+{
+	return flatResults;
+}
+
 
 @end

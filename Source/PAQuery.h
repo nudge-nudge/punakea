@@ -65,6 +65,8 @@ initializer
 - (void)enableUpdates;
 
 - (BOOL)isStarted;
+- (BOOL)isGathering;
+- (BOOL)isStopped;
 
 - (unsigned)resultCount;
 - (id)resultAtIndex:(unsigned)index;
