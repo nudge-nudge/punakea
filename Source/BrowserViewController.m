@@ -57,9 +57,10 @@
 				forKeyPath:@"tags"
 				   options:0
 				   context:NULL];
-		
+
 		[self setVisibleTags:[tags tags]];
-			
+		[typeAheadFind setActiveTags:[tags tags]];	
+		
 		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
 	}
@@ -74,6 +75,7 @@
 
 - (void)dealloc
 {
+	[visibleTags release];
 	[buffer release];
 	[typeAheadFind release];
 	[relatedTags release];
@@ -119,44 +121,6 @@
 	selectedTags = otherSelectedTags;
 }
 
-- (NSMutableArray*)visibleTags;
-{
-	return visibleTags;
-}
-
-- (void)setVisibleTags:(NSMutableArray*)otherTags
-{
-	if (visibleTags != otherTags)
-	{
-		[visibleTags release];
-		
-		NSSortDescriptor *sortDescriptor;
-		
-		// sort otherTags accorings to userDefaults
-		if ([[tagCloudSettings objectForKey:@"sortKey"] isEqualToString:@"name"])
-		{
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-		}
-		else if ([[tagCloudSettings objectForKey:@"sortKey"] isEqualToString:@"rating"])
-		{
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO];
-		}
-		else
-		{
-			NSLog(@"fatal error, could not sort, specify sortKey in UserDefaults/TagCloud");
-		}
-		
-		NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-		visibleTags = [sortedArray mutableCopy];
-	}
-	
-	// update type-ahead find
-	[typeAheadFind setActiveTags:visibleTags];
-	
-	if ([visibleTags count] > 0)
-		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
-}
-
 - (PATag*)currentBestTag
 {
 	return currentBestTag;
@@ -191,6 +155,42 @@
 	outlineView = anOutlineView;
 }
 
+- (NSMutableArray*)visibleTags;
+{
+	return visibleTags;
+}
+
+- (void)setVisibleTags:(NSMutableArray*)otherTags
+{
+	if (visibleTags != otherTags)
+	{
+		[visibleTags release];
+		
+		NSSortDescriptor *sortDescriptor;
+		
+		// sort otherTags accorings to userDefaults
+		if ([[tagCloudSettings objectForKey:@"sortKey"] isEqualToString:@"name"])
+		{
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+		}
+		else if ([[tagCloudSettings objectForKey:@"sortKey"] isEqualToString:@"rating"])
+		{
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO];
+		}
+		else
+		{
+			NSLog(@"fatal error, could not sort, specify sortKey in UserDefaults/TagCloud");
+		}
+		
+		NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+		visibleTags = [sortedArray mutableCopy];
+	}
+	
+	if ([visibleTags count] > 0)
+		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
+}
+
+
 #pragma mark tag stuff
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
 {
@@ -209,8 +209,6 @@
 	
 	return maxTag;
 }
-
-//TODO
 - (IBAction)clearSelectedTags:(id)sender
 {
 	[selectedTags removeAllObjectsFromSelectedTags];
@@ -237,12 +235,33 @@
 	}
 }
 
-//needs to be called whenever the active tags have been changed
+- (void)bufferHasChanged
+{
+	// if buffer has any content, display tags with corresponding prefix
+	// else display all tags
+	if ([buffer length] > 0)
+	{
+		[self setVisibleTags:[typeAheadFind tagsForPrefix:buffer]];
+	}
+	else
+	{
+		[self setVisibleTags:[typeAheadFind activeTags]];
+	}
+}
+
+//needs to be called whenever the selected tags have been changed
 - (void)selectedTagsHaveChanged 
 {
+	if ([buffer length] > 0)
+	{
+		[self resetBuffer];
+	}
+	
 	//stop an active query
-	if ([query isStarted]) 
+	if ([query isStarted])
+	{
 		[query stopQuery];
+	}
 	
 	//the query is only started, if there are any tags to look for
 	if ([selectedTags count] > 0)
@@ -255,24 +274,42 @@
 	}
 	else 
 	{
-		//there are no selected tags, reset all tags
+		// there are no selected tags, reset all tags
 		[self setVisibleTags:[tags tags]];
+		[typeAheadFind setActiveTags:[tags tags]];
 	}
 }
 
 - (void)relatedTagsHaveChanged
 {
+	if ([buffer length] > 0)
+	{
+		[self resetBuffer];
+	}
+	
 	[self setVisibleTags:[relatedTags relatedTags]];
+	[typeAheadFind setActiveTags:[relatedTags relatedTags]];
 }
 
 - (void)allTagsHaveChanged
 {
+	if ([buffer length] > 0)
+	{
+		[self resetBuffer];
+	}
+	
 	/*only do something if there are no selected tags,
 	because then the relatedTags are shown */
 	if ([selectedTags count] == 0)
 	{
 		[self setVisibleTags:[tags tags]];
+		[typeAheadFind setActiveTags:[tags tags]];
 	}
+}
+
+- (void)resetBuffer
+{
+	[self setBuffer:[[NSMutableString alloc] initWithString:@""]];
 }
 
 #pragma mark events
@@ -293,6 +330,7 @@
 		{
 			NSRange range = NSMakeRange([buffer length] - 1,1);
 			[buffer deleteCharactersInRange:range];
+			[self bufferHasChanged];
 		}
 		else if ([selectedTags count] > 0)
 		// else delete the last selected tag
@@ -309,6 +347,7 @@
 		if ([typeAheadFind hasTagsForPrefix:tmpBuffer])
 		{
 			[buffer appendString:[event charactersIgnoringModifiers]];
+			[self bufferHasChanged];
 		}
 		else
 		{
@@ -321,22 +360,6 @@
 	{
 		// forward unhandled events
 		[[self nextResponder] keyDown:event];
-	}
-	
-	// if buffer has any content, display tags with corresponding prefix
-	// else display all tags
-	if ([buffer length] > 0)
-	{
-		//TODO not working when deleting
-		[self setVisibleTags:[typeAheadFind tagsForPrefix:buffer]];
-	}
-	else
-	{
-		// only set if not already set
-		if (!(visibleTags == [tags tags]))
-		{
-			[self setVisibleTags:[tags tags]];
-		}
 	}
 }
 

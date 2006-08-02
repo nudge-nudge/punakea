@@ -22,79 +22,29 @@
 	if (self = [super init])
 	{
 		tags = [[PATagger sharedInstance] tags];
-		matchingTags = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[matchingTags release];
-	[tags release];
 	[super dealloc];
 }
 
 #pragma mark accessors
-- (NSArray*)activeTags
+- (NSMutableArray*)activeTags
 {
 	return activeTags;
 }
 
-- (void)setActiveTags:(NSArray*)someTags
+- (void)setActiveTags:(NSMutableArray*)someTags
 {
 	[someTags retain];
 	[activeTags release];
 	activeTags = someTags;
 }
 
-- (NSString*)prefix
-{
-	return prefix;
-}
-
-- (void)setPrefix:(NSString*)newPrefix
-{
-	[newPrefix retain];
-	[prefix release];
-	prefix = newPrefix;
-	
-	[self updateMatchingTags];
-}
-
-- (NSMutableArray*)matchingTags
-{
-	return matchingTags;
-}
-
 #pragma mark functionality
-- (void)updateMatchingTags
-{
-	//TODO make more efficient
-	[matchingTags removeAllObjects];
-	
-	NSEnumerator *e;
-	
-	// if active tags are set, look there, otherwise check in all tags
-	if ([activeTags count] > 0)
-	{
-		e = [activeTags objectEnumerator];
-	}
-	else
-	{
-		e = [tags objectEnumerator];
-	}
-	
-	PATag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		if ([[tag name] hasPrefix:prefix])
-		{
-			[matchingTags addObject:tag];
-		}
-	}
-}
-
 - (BOOL)hasTagsForPrefix:(NSString*)prefix
 {
 	NSEnumerator *e;
@@ -123,12 +73,19 @@
 	return false;
 }
 
-- (NSArray*)tagsForPrefix:(NSString*)prefix
+- (NSMutableArray*)tagsForPrefix:(NSString*)prefix
 {
-	return [self tagsForPrefix:prefix inTags:tags];
+	if ([activeTags count] > 0)
+	{
+		return [self tagsForPrefix:prefix inTags:activeTags];
+	}
+	else
+	{
+		return [self tagsForPrefix:prefix inTags:tags];
+	}
 }
 
-- (NSArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)tags
+- (NSMutableArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)tags
 {
 	NSMutableArray *result = [NSMutableArray array];
 	

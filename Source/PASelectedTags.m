@@ -93,7 +93,7 @@
 
 - (void)removeObjectsInArray:(NSArray*)array
 {
-	NSEnumerator *e;
+	NSEnumerator *e = [array objectEnumerator];
 	PATag *tag;
 	
 	while (tag = [e nextObject])

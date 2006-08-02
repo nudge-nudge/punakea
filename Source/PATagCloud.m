@@ -70,7 +70,8 @@ calculates the starting point in the next row according to the height of all the
 		tagButtonDict = [[NSMutableDictionary alloc] init];		
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
-		viewAnimations = [[NSMutableArray alloc] init];
+		viewAnimation = [[NSViewAnimation alloc] init];
+		viewAnimationCache = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -103,7 +104,8 @@ bind to visibleTags
 		[activeButton release];
 	}
 	
-	[viewAnimations release];
+	[viewAnimationCache release];
+	[viewAnimation release];
 	[tagCloudSettings release];
 	[tagButtonDict release];
 	[super dealloc];
@@ -188,37 +190,6 @@ bound to visibleTags
 }
 
 #pragma mark drawing
-// this is called, determine the needed frame
-/*
-- (void)setFrame:(NSRect)frameRect
-{
-	NSRect clipViewFrame = [[self superview] frame];
-	NSRect newRect = NSMakeRect(0,0,NSWidth(clipViewFrame),0);
-	
-	// enlarge frame if neccessary
-	float newHeight = [self calcFrameHeightForTags:[controller visibleTags] width:NSWidth(clipViewFrame)];
-	
-	// don't reduce the height to less than the clipview's height
-	
-	if (newHeight < clipViewFrame.size.height)
-	{
-		newRect.size.height = clipViewFrame.size.height;
-	}
-	else
-	{
-		newRect.size.height = newHeight;
-	}
-	
-	[super setFrame:newRect];
-
-	// add the buttons
-	[self addTags:[controller visibleTags] inRect:newRect];
-	
-	// scroll to the active button if not visible
-	[self scrollToButton:[self activeButton]];
-}
-*/
-
 - (NSRect)calcFrame
 {
 	NSRect clipViewFrame = [[self superview] frame];
@@ -273,7 +244,11 @@ bound to visibleTags
 	// clear animation cache
 	if (animate)
 	{
-		[viewAnimations removeAllObjects];
+		if ([viewAnimation isAnimating])
+		{
+			[viewAnimation stopAnimation];
+		}
+		[viewAnimationCache removeAllObjects];
 	}
 	
 	NSRect rect = [self bounds];
@@ -317,13 +292,13 @@ bound to visibleTags
 	
 	if (animate)
 	{
-		NSViewAnimation *viewAnimation = [[NSViewAnimation alloc] initWithViewAnimations:viewAnimations];
+		[viewAnimation setViewAnimations:viewAnimationCache];
 		// Set some additional attributes for the animation.
-		[viewAnimation setDuration:0.5];    // One and a half seconds. 
-		[viewAnimation setAnimationCurve:NSAnimationEaseInOut];
-		
+		[viewAnimation setDuration:0.2];    // One and a half seconds. 
+		[viewAnimation setAnimationCurve:NSAnimationEaseInOut];		
 		[viewAnimation startAnimation];
-		[viewAnimation release];
+		
+		// TODO get dirty screen to redraw correcty
 		[self setNeedsDisplay:YES];
 	}
 }
@@ -345,7 +320,7 @@ bound to visibleTags
 		[animationDict setObject:[NSValue valueWithRect:oldFrame] forKey:NSViewAnimationStartFrameKey];
 		[animationDict setObject:[NSValue valueWithRect:newFrame] forKey:NSViewAnimationEndFrameKey];
 		
-		[viewAnimations addObject:animationDict];
+		[viewAnimationCache addObject:animationDict];
 	}
 	else
 	{

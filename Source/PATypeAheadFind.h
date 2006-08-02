@@ -15,34 +15,15 @@ simple type ahead find implementation, not the quickest, but works
  */
 @interface PATypeAheadFind : NSObject {
 	PATags *tags; /**< all tags currently known */
-	NSArray *activeTags;
+	NSMutableArray *activeTags;
 	
 	NSString *prefix;
 	NSMutableArray *matchingTags; /**< all tags matching the current prefix */
 }
 
 
-- (NSArray*)activeTags;
-- (void)setActiveTags:(NSArray*)someTags;
-
-/**
-returns the prefix
- @return prefix current prefix
- */
-- (NSString*)prefix;
-
-/**
-changes the current prefix to the given one -
- automatically updates matchingTags
- @param newPrefix new prefix
- */
-- (void)setPrefix:(NSString*)newPrefix;
-
-/**
-tags matching the prefix
- @return matchingTags tags matching the current prefix
- */
-- (NSMutableArray*)matchingTags;
+- (NSMutableArray*)activeTags;
+- (void)setActiveTags:(NSMutableArray*)someTags;
 
 /**
 checks if there are any tags at all matching the prefix,
@@ -52,7 +33,7 @@ checks if there are any tags at all matching the prefix,
  */
 - (BOOL)hasTagsForPrefix:(NSString*)prefix;
 
-- (NSArray*)tagsForPrefix:(NSString*)prefix;
-- (NSArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)tags;
+- (NSMutableArray*)tagsForPrefix:(NSString*)prefix;
+- (NSMutableArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)tags;
 
 @end

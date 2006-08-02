@@ -25,7 +25,8 @@ displays all [controller visibleTags] in a nice tag cloud view
 	
 	NSMutableDictionary *tagCloudSettings; /**< holds user defaults for tag cloud */
 	
-	NSMutableArray *viewAnimations; /**< animation cache */
+	NSViewAnimation *viewAnimation; /**< only one animation concurrently */
+	NSMutableArray *viewAnimationCache; /**< animation cache */
 }
 
 - (NSMutableDictionary*)tagButtonDict;
