@@ -321,15 +321,8 @@ bound to visibleTags
 
 - (void)removeTagButton:(PATagButton*)tagButton
 {
-	if (animate && [[tagCloudSettings objectForKey:@"eyeCandy"] isEqual:[NSNumber numberWithBool:YES]])
-	{
-		// TODO 
-		[tagButton removeFromSuperview];
-	}
-	else
-	{
-		[tagButton removeFromSuperview];
-	}
+	// TODO animate
+	[tagButton removeFromSuperview];
 }
 
 - (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin animate:(BOOL)animate
