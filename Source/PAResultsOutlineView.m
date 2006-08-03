@@ -83,7 +83,23 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     {
 		[[[self subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
     }
-    [super reloadData];
+    
+	[super reloadData];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
+	
+	// Restore group's state from user defaults
+	int i;
+	for(i = 0; i < [self numberOfRows]; i++)
+	{
+		id item = [self itemAtRow:i];
+		if([item isKindOfClass:[PAQueryBundle class]])
+		{
+			if(![collapsedGroups containsObject:[item value]])
+				[self expandItem:item];
+		}
+	}
 }
 
 - (void)viewWillMoveToWindow:(NSWindow *)newWindow
@@ -119,21 +135,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	if([[note name] isEqualToString:PAQueryDidFinishGatheringNotification])
 	{
 		[self reloadData];
-		
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
-		
-		// Restore group's state from user defaults
-		int i;
-		for(i = 0; i < [self numberOfRows]; i++)
-		{
-			id item = [self itemAtRow:i];
-			if([item isKindOfClass:[PAQueryBundle class]])
-			{
-				if(![collapsedGroups containsObject:[item value]])
-					[self expandItem:item];
-			}
-		}
 	}
 }
 

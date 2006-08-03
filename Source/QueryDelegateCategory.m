@@ -90,6 +90,19 @@
 
 		return replacementValue;
     }
+	// kMDItemArtists (Wrap NSArray into NSString)
+	else if ([attrName isEqualToString:(id)kMDItemAuthors])
+	{
+		NSArray *artists = attrValue;
+		NSEnumerator *artistEnumerator = [artists objectEnumerator];
+		NSMutableString *replacementValue = [NSMutableString string];
+		NSString *artist;
+		while(artist = [artistEnumerator nextObject])
+		{
+			replacementValue = [replacementValue stringByAppendingString:artist];
+		}
+		return replacementValue;
+	}
 	// Default
 	else
 	{

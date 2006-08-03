@@ -18,6 +18,7 @@ extern NSString * const PAQueryBundleDidUpdate;
 
 	NSMutableArray			*results;
 	NSString				*value;
+	NSString				*bundlingAttribute;
 
 }
 
@@ -25,5 +26,9 @@ extern NSString * const PAQueryBundleDidUpdate;
 
 - (NSArray *)results;
 - (void)setResults:(NSArray *)newResults;
+- (NSString *)value;
+- (void)setValue:(NSString *)newValue;
+- (NSString *)bundlingAttribute;
+- (void)setBundlingAttribute:(NSString *)attribute;
 
 @end

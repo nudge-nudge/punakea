@@ -36,6 +36,7 @@
 {
 	[buttons removeAllObjects];
 	int x = 10;
+	unsigned buttonIndex = 0;
 
 	/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *spotlightDict = [defaults persistentDomainForName:@"com.apple.spotlight"];
@@ -94,6 +95,7 @@
 		[button setTarget:self];
 		[button setButtonType:NSPushOnPushOffButton];
 		[button setBezelStyle:NSRecessedBezelStyle];
+		[button setTag:buttonIndex++];
 		[button sizeToFit];
 		
 		// Activate first button
@@ -127,6 +129,24 @@
 			[button setBordered:YES];
 		}
 	}
+	
+	PAQuery *query = [controller query];
+	
+	// Bundlings attributes that we set here need to be wrapped into an PAQueryItem in 
+	// PAQuery's bundleResults:byAttributes:objectWrapping!! Only a few are there yet! TODO!
+	switch([sender tag])
+	{
+		case 0:
+			[query filterResults:NO usingValues:nil forBundlingAttribute:nil
+					      newBundlingAttributes:nil];
+			break;
+		case 1:
+			[query filterResults:YES usingValues:[NSArray arrayWithObject:@"MUSIC"]
+			                forBundlingAttribute:@"kMDItemContentTypeTree"
+						   newBundlingAttributes:[NSArray arrayWithObjects:(id)kMDItemAuthors, (id)kMDItemAlbum, nil]];
+	}
+	
+	[outlineView reloadData];
 }
 
 

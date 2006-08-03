@@ -44,6 +44,8 @@ wrapper for NSMetadataQuery. searching for tags, no predicate needed
 	
 	NSMutableArray		*results;
 	NSArray				*flatResults;
+	NSMutableArray		*filteredResults;
+	NSMutableArray		*flatFilteredResults;
 }
 
 /**

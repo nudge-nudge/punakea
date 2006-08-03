@@ -122,8 +122,8 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	if(flatResults) [flatResults release];
 	if(results) [results release];
 	
-	flatResults = [self bundleResults:[mdquery results] byAttributes:nil];
-	results = [self bundleResults:[mdquery results] byAttributes:bundlingAttributes];	
+	flatResults = [self bundleResults:[mdquery results] byAttributes:nil objectWrapping:YES];
+	results = [self bundleResults:[mdquery results] byAttributes:bundlingAttributes objectWrapping:YES];	
 	
 	/*NSEnumerator *enumerator = [results objectEnumerator];
 	id object;
@@ -138,7 +138,9 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	Bundles a flat list of results into a hierarchical structure
 	defined by the first item of bundlingAttributes
 */
-- (NSArray *)bundleResults:(NSArray *)results byAttributes:(NSArray *)attributes
+- (NSArray *)bundleResults:(NSArray *)theResults
+              byAttributes:(NSArray *)attributes
+			objectWrapping:(BOOL)wrapping
 {
 	NSMutableDictionary *bundleDict = [NSMutableDictionary dictionary];
 	
@@ -150,33 +152,68 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 		bundlingAttribute = [attributes objectAtIndex:0];
 	}
 
-	NSEnumerator *resultsEnumerator = [results objectEnumerator];
-	NSMetadataItem *mdItem;
-	while(mdItem = [resultsEnumerator nextObject])
+	NSEnumerator *resultsEnumerator = [theResults objectEnumerator];
+	//NSMetadataItem *mdItem;
+	id theItem;
+	while(theItem = [resultsEnumerator nextObject])
 	{	
 		PAQueryBundle *bundle;
 		
 		if(bundlingAttribute)
 		{
-			id valueToBeReplaced = [mdItem valueForAttribute:bundlingAttribute];
-			NSString *bundleValue = [delegate metadataQuery:self
-							   replacementValueForAttribute:bundlingAttribute
-							                          value:valueToBeReplaced];
+			NSString *bundleValue;
+			
+			if(wrapping)
+			{
+				// theItem is a NSMetadataItem
+				id valueToBeReplaced = [theItem valueForAttribute:bundlingAttribute];
+				bundleValue = [delegate metadataQuery:self
+						 replacementValueForAttribute:bundlingAttribute
+						                        value:valueToBeReplaced];
+			} else {
+				// theItem is a PAQueryItem
+				bundleValue = [theItem valueForAttribute:bundlingAttribute];
+			}
 		
 			bundle = [bundleDict objectForKey:bundleValue];
 			if(!bundle)
 			{
 				bundle = [[PAQueryBundle alloc] init];
 				[bundle setValue:bundleValue];
+				[bundle setBundlingAttribute:bundlingAttribute];
 				[bundleDict setObject:bundle forKey:bundleValue];
 			}			
 		}
 		
-		// Wrap mdItem into PAQueryItem
-		PAQueryItem *item = [[PAQueryItem alloc] init];
-		[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:@"value"];
-		[item setValue:[mdItem valueForAttribute:(id)kMDItemPath] forAttribute:(id)kMDItemPath];
-		// TODO attributes of item
+		// TODO: DEFINE MACRO FOR REPLACEMENTVALUEFORATTRIBUTE!
+		PAQueryItem *item;
+		if(wrapping)
+		{
+			// Wrap theItem (a NSMetadataItem) into PAQueryItem
+			NSMetadataItem *mdItem = theItem;
+			id value;
+			item = [[PAQueryItem alloc] init];
+			[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:@"value"];
+			[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:(id)kMDItemDisplayName];
+			[item setValue:[mdItem valueForAttribute:(id)kMDItemPath] forAttribute:(id)kMDItemPath];
+			[item setValue:[mdItem valueForAttribute:(id)kMDItemContentType] forAttribute:(id)kMDItemContentType];
+			
+			// AUDIO
+			value = [mdItem valueForAttribute:(id)kMDItemAlbum];
+			if(value) [item setValue:value forAttribute:(id)kMDItemAlbum];
+			value = [delegate metadataQuery:self
+			   replacementValueForAttribute:(id)kMDItemAuthors
+									  value:[mdItem valueForAttribute:(id)kMDItemAuthors]];
+			if(value) [item setValue:value forAttribute:(id)kMDItemAuthors];
+			
+			value = [delegate metadataQuery:self
+			   replacementValueForAttribute:@"kMDItemContentTypeTree"
+									  value:[mdItem valueForAttribute:@"kMDItemContentTypeTree"]];
+			[item setValue:value forAttribute:@"kMDItemContentTypeTree"];
+			// TODO more attributes of item, use replacementValueForAttribute for each value!!
+		} else {
+			item = theItem;
+		}
 		
 		if(bundlingAttribute)
 		{
@@ -193,13 +230,14 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 		while(bundle = [bundleEnumerator nextObject])
 		{
 			// Bundle at next level if needed
-			NSMutableArray *nextBundlingAttributes = [bundlingAttributes mutableCopy];
+			NSMutableArray *nextBundlingAttributes = [attributes mutableCopy];
 			[nextBundlingAttributes removeObjectAtIndex:0];
 			
 			if([nextBundlingAttributes count] > 0)
 			{
 				NSArray *subResults = [self bundleResults:[bundle results]
-											 byAttributes:nextBundlingAttributes];
+											 byAttributes:nextBundlingAttributes
+										   objectWrapping:wrapping];
 				[bundle setResults:subResults];
 			}
 		
@@ -210,6 +248,53 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	}
 	
 	return bundledResults;
+}
+
+-   (void)filterResults:(BOOL)flag
+			usingValues:(NSArray *)filterValues
+   forBundlingAttribute:(NSString *)attribute
+  newBundlingAttributes:(NSArray *)newAttributes
+{	
+	if(!flag)
+	{
+		[filteredResults release];
+		filteredResults = nil;
+		[flatFilteredResults release];
+		flatFilteredResults = nil;
+		return;
+	}
+
+	[flatFilteredResults release];
+	flatFilteredResults = nil;
+	flatFilteredResults = [[NSMutableArray alloc] init];
+
+	NSEnumerator *enumerator = [flatResults objectEnumerator];
+	PAQueryItem *item;
+	while(item = [enumerator nextObject])
+	{		
+		id valueForAttribute = [item valueForAttribute:attribute];
+		
+		if([valueForAttribute isKindOfClass:[NSString class]])
+		{
+			if([filterValues containsObject:valueForAttribute])
+			{
+				[flatFilteredResults addObject:item];
+			}
+		} else {
+			NSLog(@"couldn't properly filter results");
+		}
+	}
+	
+	[filteredResults release];
+	filteredResults = nil;
+	filteredResults = [self bundleResults:flatFilteredResults byAttributes:newAttributes objectWrapping:NO];
+	
+	/*NSEnumerator *enume = [filteredResults objectEnumerator];
+	PAQueryBundle *b;
+	while(b = [enume nextObject])
+	{
+		NSLog([b value]);
+	}*/
 }
 
 - (void)updateQueryFromTags
@@ -363,22 +448,22 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 
 - (unsigned)resultCount
 {
-	return [results count];
+	return filteredResults ? [filteredResults count] : [results count];
 }
 
 - (id)resultAtIndex:(unsigned)index
 {
-	return [results objectAtIndex:index];
+	return filteredResults ? [filteredResults objectAtIndex:index] : [results objectAtIndex:index];
 }
 
 - (NSArray *)results
 {
-	return results;
+	return filteredResults ? filteredResults : results;
 }
 
 - (NSArray *)flatResults
 {
-	return flatResults;
+	return flatFilteredResults ? flatFilteredResults : flatResults;
 }
 
 
