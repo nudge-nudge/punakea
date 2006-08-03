@@ -199,8 +199,11 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemContentType] forAttribute:(id)kMDItemContentType];
 			
 			// AUDIO
-			value = [mdItem valueForAttribute:(id)kMDItemAlbum];
+			value = [delegate metadataQuery:self
+			   replacementValueForAttribute:(id)kMDItemAlbum
+									  value:[mdItem valueForAttribute:(id)kMDItemAlbum]];
 			if(value) [item setValue:value forAttribute:(id)kMDItemAlbum];
+			
 			value = [delegate metadataQuery:self
 			   replacementValueForAttribute:(id)kMDItemAuthors
 									  value:[mdItem valueForAttribute:(id)kMDItemAuthors]];
@@ -210,7 +213,9 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 			   replacementValueForAttribute:@"kMDItemContentTypeTree"
 									  value:[mdItem valueForAttribute:@"kMDItemContentTypeTree"]];
 			[item setValue:value forAttribute:@"kMDItemContentTypeTree"];
+			
 			// TODO more attributes of item, use replacementValueForAttribute for each value!!
+		
 		} else {
 			item = theItem;
 		}
