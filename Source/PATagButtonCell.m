@@ -51,9 +51,18 @@ int const MAX_FONT_SIZE = 25;
 }
 
 - (void)drawHoverEffectWithFrame:(NSRect)cellFrame
-{
-	[[NSColor selectedControlColor] set];
+{	
+	if ([[self controlView] superview] == [[[self controlView] window] firstResponder])
+	{
+		[[NSColor selectedControlColor] set];
+	}
+	else
+	{
+		[[NSColor lightGrayColor] set];
+	}
+	
 	[[NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:5.0] fill];
+	
 }
 
 #pragma mark accessors

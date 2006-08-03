@@ -1,7 +1,7 @@
 #import "PATagCloud.h"
 
 NSSize const PADDING = {10,5};
-int const SPACING = 10;
+NSSize const SPACING = {10,1};
 
 @interface PATagCloud (PrivateAPI)
 /**
@@ -67,10 +67,13 @@ calculates the starting point in the next row according to the height of all the
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if (self = [super initWithFrame:frameRect]) {
-		tagButtonDict = [[NSMutableDictionary alloc] init];		
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
+		
+		tagButtonDict = [[NSMutableDictionary alloc] init];	
 		viewAnimation = [[NSViewAnimation alloc] init];
+		// TODO activate this and code correctly
+		//[viewAnimation setAnimationBlockingMode:NSAnimationNonblockingThreaded];
 		viewAnimationCache = [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -227,11 +230,24 @@ bound to visibleTags
 - (void)drawBackground
 {
 	//TODO externalize
-	[[NSColor colorWithDeviceRed:(231.0/255.0) green:(237.0/255.0) blue:(250.0/255.0) alpha:1.0] set];
+	[[NSColor colorWithDeviceRed:(236.0/255.0) green:(242.0/255.0) blue:(251.0/255.0) alpha:1.0] set];
+
 	NSRectFill([self bounds]);
 	
-	[[NSColor lightGrayColor] set];
-	[NSBezierPath strokeRect:[self bounds]];
+	if ([[self window] firstResponder] == self)
+	{
+		[[NSColor selectedControlColor] set];
+	}
+	else
+	{
+		[[NSColor lightGrayColor] set];
+	}
+	
+	NSRect clipRect = [[self enclosingScrollView] documentVisibleRect];
+	
+	NSBezierPath *bezierPath = [NSBezierPath bezierPathWithRect:clipRect];
+	[bezierPath setLineWidth:2.0];
+	[bezierPath stroke];
 }
 
 - (void)updateViewHierarchy
@@ -240,9 +256,9 @@ bound to visibleTags
 }
 
 - (void)updateViewHierarchy:(BOOL)animate
-{
+{	
 	// clear animation cache
-	if (animate)
+	if (animate && [[tagCloudSettings objectForKey:@"eyeCandy"] isEqual:[NSNumber numberWithBool:YES]])
 	{
 		if ([viewAnimation isAnimating])
 		{
@@ -290,22 +306,30 @@ bound to visibleTags
 		}
 	}
 	
-	if (animate)
+	if (animate && [[tagCloudSettings objectForKey:@"eyeCandy"] isEqual:[NSNumber numberWithBool:YES]])
 	{
 		[viewAnimation setViewAnimations:viewAnimationCache];
 		// Set some additional attributes for the animation.
 		[viewAnimation setDuration:0.2];    // One and a half seconds. 
 		[viewAnimation setAnimationCurve:NSAnimationEaseInOut];		
 		[viewAnimation startAnimation];
-		
-		// TODO get dirty screen to redraw correcty
-		[self setNeedsDisplay:YES];
 	}
+	
+	// TODO get dirty screen to redraw correcty
+	[self setNeedsDisplay:YES];
 }
 
 - (void)removeTagButton:(PATagButton*)tagButton
 {
-	[tagButton removeFromSuperview];
+	if (animate && [[tagCloudSettings objectForKey:@"eyeCandy"] isEqual:[NSNumber numberWithBool:YES]])
+	{
+		// TODO 
+		[tagButton removeFromSuperview];
+	}
+	else
+	{
+		[tagButton removeFromSuperview];
+	}
 }
 
 - (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin animate:(BOOL)animate
@@ -313,7 +337,7 @@ bound to visibleTags
 	NSRect oldFrame = [tagButton frame];
 	NSRect newFrame = NSMakeRect(origin.x,origin.y,oldFrame.size.width,oldFrame.size.height);
 	
-	if (animate)
+	if (animate && [[tagCloudSettings objectForKey:@"eyeCandy"] isEqual:[NSNumber numberWithBool:YES]])
 	{
 		NSMutableDictionary *animationDict = [NSMutableDictionary dictionaryWithCapacity:3];
 		[animationDict setObject:tagButton forKey:NSViewAnimationTargetKey];
@@ -331,6 +355,7 @@ bound to visibleTags
 
 - (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin
 {
+	// TODO animate
 	[tagButton setFrameOrigin:origin];
 	[self addSubview:tagButton];
 	
@@ -354,13 +379,10 @@ bound to visibleTags
 
 - (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect
 {
-	//TODO externalize SPACING and PADDING and ...
-	int SPACING = 10;
-	
 	NSRect frame = [tagButton frame];
 	float width = frame.size.width;
 	
-	float xValue = pointForNextTagRect.x + width + SPACING;
+	float xValue = pointForNextTagRect.x + width + SPACING.width;
 	
 	//if the tag doesn't fit in this row, get first point in next row
 	if (xValue > rect.size.width)
@@ -372,17 +394,13 @@ bound to visibleTags
 	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x,pointForNextTagRect.y);
 	
 	//then calc the point for the next tag
-	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + SPACING,pointForNextTagRect.y);
+	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + SPACING.width,pointForNextTagRect.y);
 	
 	return newOrigin;
 }
 
 - (NSPoint)firstPointForNextRowIn:(NSRect)rect;
 {
-	//TODO externalize
-	int vPadding = 1;
-	int SPACING = 10;
-	
 	//values needed for calc
 	int rowWidth = 0;
 	float maxHeight = 0.0;
@@ -406,9 +424,9 @@ bound to visibleTags
 		NSSize tagSize = frame.size;
 		
 		//if the tag fills the row, stop adding tags
-		rowWidth += SPACING + tagSize.width;
+		rowWidth += SPACING.width + tagSize.width;
 		
-		if (rowWidth + SPACING > rect.size.width)
+		if (rowWidth + SPACING.width > rect.size.width)
 			break;
 		
 		//remember the maximum height
@@ -418,7 +436,7 @@ bound to visibleTags
 		tagPosition++;
 	}
 	
-	return NSMakePoint(SPACING,pointForNextTagRect.y-maxHeight-vPadding);
+	return NSMakePoint(SPACING.width,pointForNextTagRect.y-maxHeight-SPACING.height);
 }	
 
 #pragma mark accessors
@@ -467,13 +485,13 @@ bound to visibleTags
 
 - (BOOL)becomeFirstResponder
 {
+	[self setNeedsDisplay:YES];
 	return YES;
 }
 
 - (BOOL)resignFirstResponder
 {
-	//TODO grey out button instead of nilling
-	[self setActiveButton:nil];
+	[self setNeedsDisplay:YES];
 	return YES;
 }
 

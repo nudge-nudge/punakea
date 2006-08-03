@@ -6,9 +6,8 @@
 #import "PATag.h"
 #import "PATagButton.h"
 
-//TODO tracking rects are outside of scrollview!
 extern NSSize const PADDING;
-extern int const SPACING;
+extern NSSize const SPACING;
 
 /**
 displays all [controller visibleTags] in a nice tag cloud view
