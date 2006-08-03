@@ -6,6 +6,20 @@
 	objectVersion = 42;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		488A52E80A81D9DC005B54A8 /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 488A52EB0A81D9FA005B54A8 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				488A52E70A81D9DC005B54A8 /* Run Doxygen */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		480FFF9B09DACF0900C1E6BA /* PATagCloudController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 480FFF9909DACF0900C1E6BA /* PATagCloudController.h */; };
 		480FFF9C09DACF0900C1E6BA /* PATagCloudController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480FFF9A09DACF0900C1E6BA /* PATagCloudController.m */; };
@@ -792,7 +806,6 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				65E7B37C0994D97500565251 /* CopyFiles */,
-				654DBC2009C9D1230061BFA4 /* Create Documentation */,
 			);
 			buildRules = (
 			);
@@ -815,6 +828,7 @@
 			projectDirPath = "";
 			targets = (
 				8D1107260486CEB800E47090 /* Punakea */,
+				488A52E80A81D9DC005B54A8 /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -880,14 +894,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		654DBC2009C9D1230061BFA4 /* Create Documentation */ = {
+		488A52E70A81D9DC005B54A8 /* Run Doxygen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Create Documentation";
+			name = "Run Doxygen";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1024,6 +1038,28 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		488A52EC0A81D9FA005B54A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = Documentation;
+			};
+			name = Debug;
+		};
+		488A52ED0A81D9FA005B54A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = Documentation;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1091,6 +1127,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		488A52EB0A81D9FA005B54A8 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				488A52EC0A81D9FA005B54A8 /* Debug */,
+				488A52ED0A81D9FA005B54A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Punakea" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
