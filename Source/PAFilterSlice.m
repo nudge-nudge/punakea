@@ -136,14 +136,25 @@
 	// PAQuery's bundleResults:byAttributes:objectWrapping!! Only a few are there yet! TODO!
 	switch([sender tag])
 	{
-		case 0:
+		case 0:		// All
 			[query filterResults:NO usingValues:nil forBundlingAttribute:nil
 					      newBundlingAttributes:nil];
 			break;
-		case 1:
+		case 1:		// Music
 			[query filterResults:YES usingValues:[NSArray arrayWithObject:@"MUSIC"]
 			                forBundlingAttribute:@"kMDItemContentTypeTree"
 						   newBundlingAttributes:[NSArray arrayWithObjects:(id)kMDItemAuthors, (id)kMDItemAlbum, nil]];
+			break;
+		case 3:		// PDF
+			[query filterResults:YES usingValues:[NSArray arrayWithObject:@"PDF"]
+			                forBundlingAttribute:@"kMDItemContentTypeTree"
+						   newBundlingAttributes:nil];
+			break;
+		case 4:		// Images
+			[query filterResults:YES usingValues:[NSArray arrayWithObject:@"IMAGES"]
+			                forBundlingAttribute:@"kMDItemContentTypeTree"
+						   newBundlingAttributes:nil];
+			break;
 	}
 	
 	[outlineView reloadData];

@@ -60,6 +60,7 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	if ([self isStarted]) [self stopQuery];	
 	if(mdquery) [mdquery release];
 	if(bundlingAttributes) [bundlingAttributes release];
+	if(filterDict) [filterDict release];
 	if(predicate) [predicate release];
 	[super dealloc];
 }
@@ -122,15 +123,16 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	if(flatResults) [flatResults release];
 	if(results) [results release];
 	
-	flatResults = [self bundleResults:[mdquery results] byAttributes:nil objectWrapping:YES];
-	results = [self bundleResults:[mdquery results] byAttributes:bundlingAttributes objectWrapping:YES];	
+	flatResults = [self bundleResults:[mdquery results] byAttributes:nil];
+	results = [self bundleResults:flatResults byAttributes:bundlingAttributes];	
 	
-	/*NSEnumerator *enumerator = [results objectEnumerator];
-	id object;
-	while(object = [enumerator nextObject])
+	// Apply filter, if active
+	if(filterDict)
 	{
-		NSLog([object stringValue]);
-	}*/
+		[self filterResults:YES usingValues:[[[filterDict objectForKey:@"values"] retain] autorelease]
+		               forBundlingAttribute:[[[filterDict objectForKey:@"bundlingAttribute"] retain] autorelease]
+					  newBundlingAttributes:[[[filterDict objectForKey:@"newBundlingAttributes"] retain] autorelease]];
+	}
 }
 
 
@@ -138,9 +140,7 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	Bundles a flat list of results into a hierarchical structure
 	defined by the first item of bundlingAttributes
 */
-- (NSArray *)bundleResults:(NSArray *)theResults
-              byAttributes:(NSArray *)attributes
-			objectWrapping:(BOOL)wrapping
+- (NSArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes
 {
 	NSMutableDictionary *bundleDict = [NSMutableDictionary dictionary];
 	
@@ -151,6 +151,9 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	{
 		bundlingAttribute = [attributes objectAtIndex:0];
 	}
+	
+	BOOL wrapping = NO;
+	if([theResults count] > 0) wrapping = [[theResults objectAtIndex:0] isKindOfClass:[NSMetadataItem class]];
 
 	NSEnumerator *resultsEnumerator = [theResults objectEnumerator];
 	//NSMetadataItem *mdItem;
@@ -241,8 +244,7 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 			if([nextBundlingAttributes count] > 0)
 			{
 				NSArray *subResults = [self bundleResults:[bundle results]
-											 byAttributes:nextBundlingAttributes
-										   objectWrapping:wrapping];
+											 byAttributes:nextBundlingAttributes];
 				[bundle setResults:subResults];
 			}
 		
@@ -260,13 +262,43 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
    forBundlingAttribute:(NSString *)attribute
   newBundlingAttributes:(NSArray *)newAttributes
 {	
-	if(!flag)
-	{
-		[filteredResults release];
-		filteredResults = nil;
-		[flatFilteredResults release];
-		flatFilteredResults = nil;
+	if(!flag) 
+	{		
+		[filterDict release];
+		filterDict = nil;
 		return;
+	}
+	
+	// If there is already a filter applied, we may check if it's the right one
+	BOOL isSameFilter = NO;
+	if(filterDict)
+	{
+		isSameFilter = YES;
+		if(![[filterDict objectForKey:@"values"] isEqualTo:filterValues]) isSameFilter = NO;
+		if(![[filterDict objectForKey:@"bundlingAttribute"] isEqualTo:attribute]) isSameFilter = NO;
+		if([filterDict objectForKey:@"newBundlingAttributes"] &&
+		   ![[filterDict objectForKey:@"newBundlingAttributes"] isEqualTo:newAttributes]) isSameFilter = NO;
+		
+		if(isSameFilter)
+		{
+			NSLog(@"same filter as before");
+		} else {
+			NSLog(@"new filter");
+		}
+	}
+	
+	// Return if we already have results for this filter
+	if(isSameFilter && flatFilteredResults) return;
+	
+	// Store current filter values for later use
+	
+	[filterDict release];
+	if(attribute)
+	{
+		filterDict = [[NSMutableDictionary alloc] initWithCapacity:3];
+		if(filterValues) [filterDict setObject:filterValues forKey:@"values"];
+		if(attribute) [filterDict setObject:attribute forKey:@"bundlingAttribute"];
+		if(newAttributes) [filterDict setObject:newAttributes forKey:@"newBundlingAttributes"];
 	}
 
 	[flatFilteredResults release];
@@ -292,14 +324,7 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	
 	[filteredResults release];
 	filteredResults = nil;
-	filteredResults = [self bundleResults:flatFilteredResults byAttributes:newAttributes objectWrapping:NO];
-	
-	/*NSEnumerator *enume = [filteredResults objectEnumerator];
-	PAQueryBundle *b;
-	while(b = [enume nextObject])
-	{
-		NSLog([b value]);
-	}*/
+	filteredResults = [self bundleResults:flatFilteredResults byAttributes:newAttributes];
 }
 
 - (void)updateQueryFromTags
@@ -348,14 +373,16 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
-	/*if([[note name] isEqualTo:NSMetadataQueryDidStartGatheringNotification])
+	if([[note name] isEqualTo:NSMetadataQueryDidStartGatheringNotification])
 	{
-		//TODO implement result wrapping
-		//[results removeAllObjects];
+		[flatFilteredResults release];
+		flatFilteredResults = nil;
+		[filteredResults release];
+		filteredResults = nil;
 		[nc postNotificationName:PAQueryDidStartGatheringNotification object:self];
 	}
 	
-	if([[note name] isEqualTo:NSMetadataQueryGatheringProgressNotification])
+	/*if([[note name] isEqualTo:NSMetadataQueryGatheringProgressNotification])
 	{
 		[self synchronizeResults];
 		[nc postNotificationName:PAQueryGatheringProgressNotification object:self];
@@ -453,22 +480,22 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 
 - (unsigned)resultCount
 {
-	return filteredResults ? [filteredResults count] : [results count];
+	return filterDict ? [filteredResults count] : [results count];
 }
 
 - (id)resultAtIndex:(unsigned)index
 {
-	return filteredResults ? [filteredResults objectAtIndex:index] : [results objectAtIndex:index];
+	return filterDict ? [filteredResults objectAtIndex:index] : [results objectAtIndex:index];
 }
 
 - (NSArray *)results
 {
-	return filteredResults ? filteredResults : results;
+	return filterDict ? filteredResults : results;
 }
 
 - (NSArray *)flatResults
 {
-	return flatFilteredResults ? flatFilteredResults : flatResults;
+	return filterDict ? flatFilteredResults : flatResults;
 }
 
 
