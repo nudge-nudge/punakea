@@ -81,8 +81,8 @@
 		NSRect frame = [self frame];
 		frame.origin.x = x;
 		frame.origin.y = 3;
-		frame.size.height = 19;
-		frame.size.width = 50;
+		frame.size.height = 16;
+		frame.size.width = 70;
 		
 		// Determine button's title
 		NSString *title = [[NSBundle mainBundle] localizedStringForKey:[item objectForKey:@"title"]
@@ -94,15 +94,15 @@
 		[button setTitle:title];
 		[button setAction:@selector(buttonClick:)];
 		[button setTarget:self];
-		//[button setButtonType:PA];
-		//[button setBezelStyle:NSRecessedBezelStyle];
+		[button setButtonType:PASwitchButton];
+		[button setBezelStyle:PARecessedBezelStyle];
 		[button setTag:buttonIndex++];
 		//[button sizeToFit];
 		
 		// Activate first button
 		if(x == 10)
 		{
-			[button setBordered:YES];
+			[button highlight:YES];
 			[button setState:PAOnState];
 		}
 		
@@ -125,10 +125,11 @@
 		if(button != sender)
 		{
 			[button setState:PAOffState];
-			[button setBordered:NO];
+			[button highlight:NO];
 		} else {
-			[button setBordered:YES];
+			[button highlight:YES];
 		}
+		[button setNeedsDisplay];
 	}
 	
 	PAQuery *query = [controller query];

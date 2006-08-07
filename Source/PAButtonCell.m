@@ -38,10 +38,11 @@
 
 - (void)commonInit
 {
-	state = PAOffState;
-	buttonType = PAMomentaryLightButton;	
-	bezelType = PARecessedBezelType;
-	bordered = NO;
+	[self setState:PAOffState];
+	[self setButtonType:PAMomentaryLightButton];	
+	[self setBezelStyle:PARecessedBezelStyle];
+	[self setBordered:YES];
+	[self setControlSize:NSSmallControlSize];
 	
 	tag = [[NSMutableDictionary alloc] init];
 	
@@ -60,17 +61,71 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	if(hovered)
+	// Clear all drawings
+	[[NSColor clearColor] set];
+	[[NSBezierPath bezierPathWithRect:cellFrame] fill];
+
+	if(bordered)
 	{
-		NSString *str = @"___";
-		[str drawAtPoint:cellFrame.origin withAttributes:nil];
+		[self drawTextButtonWithFrame:cellFrame inView:controlView];
+	} else {
+		if(hovered)
+		{
+			NSString *str = @"___";
+			[str drawAtPoint:cellFrame.origin withAttributes:nil];
+		}
+		[title drawAtPoint:cellFrame.origin withAttributes:nil];
 	}
-	[title drawAtPoint:cellFrame.origin withAttributes:nil];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	[self drawInteriorWithFrame:cellFrame inView:controlView];
+}
+
+- (void)drawTextButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	// Attributed string for title
+	NSMutableAttributedString *label = [[NSMutableAttributedString alloc] initWithString:title];
+	[label addAttribute:NSFontAttributeName
+				  value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[self controlSize]]]
+				  range:NSMakeRange(0, [label length])];
+	
+	if([self isHighlighted] || [self isHovered])
+	{
+		[label addAttribute:NSForegroundColorAttributeName
+					  value:[NSColor alternateSelectedControlTextColor]
+					  range:NSMakeRange(0, [label length])];
+	} else {
+		[label addAttribute:NSForegroundColorAttributeName
+					  value:[NSColor textColor]
+					  range:NSMakeRange(0, [label length])];
+	}
+	
+	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
+	[paraStyle setAlignment:NSCenterTextAlignment];
+	[label addAttribute:NSParagraphStyleAttributeName
+				  value:paraStyle
+				  range:NSMakeRange(0, [label length])];
+	
+	NSSize padding = NSMakeSize(5,1);
+	
+	NSRect bezelFrame = cellFrame;
+	
+	if([self state] == PAOnState || [self isHovered])
+	{
+		[[NSColor grayColor] set];
+		[[NSBezierPath bezierPathWithRoundRectInRect:bezelFrame radius:20] fill];
+	}
+		
+	NSRect labelFrame = bezelFrame;
+	labelFrame.origin.x = bezelFrame.origin.x + padding.width;
+	labelFrame.origin.y += padding.height;
+	labelFrame.size.width = bezelFrame.size.width - 2 * padding.width;
+	labelFrame.size.height = bezelFrame.size.height - 2 * padding.height;
+
+	[label drawInRect:labelFrame];
 }
 
 
@@ -115,14 +170,24 @@
 	state = aState;
 }
 
-- (PABezelType)bezelType
+- (PABezelStyle)bezelStyle
 {
-	return bezelType;
+	return bezelStyle;
 }
 
-- (void)setBezelType:(PABezelType)aBezelType
+- (void)setBezelStyle:(PABezelStyle)aBezelStyle
 {
-	bezelType = aBezelType;
+	bezelStyle = aBezelStyle;
+}
+
+- (PAButtonType)buttonType
+{
+	return buttonType;
+}
+
+- (void)setButtonType:(PAButtonType)type
+{
+	buttonType = type;
 }
 
 @end

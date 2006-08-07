@@ -57,6 +57,11 @@
 	trackingRectTag = [[self superview] addTrackingRect:trackingRect owner:self userData:NULL assumeInside:NO];
 }
 
+- (void)highlight:(BOOL)flag
+{
+	[[self cell] setHighlighted:flag];
+}
+
 
 #pragma mark Events
 - (void)mouseEntered:(NSEvent *)theEvent
@@ -103,14 +108,24 @@
 	[[self cell] setState:aState];
 }
 
-- (PABezelType)bezelType
+- (PABezelStyle)bezelStyle
 {
-	return [[self cell] bezelType];
+	return [[self cell] bezelStyle];
 }
 
-- (void)setBezelType:(PABezelType)bezelType
+- (void)setBezelStyle:(PABezelStyle)bezelStyle
 {
-	[[self cell] setBezelType:bezelType];
+	[[self cell] setBezelStyle:bezelStyle];
+}
+
+- (PAButtonType)buttonType
+{
+	return [[self cell] buttonType];
+}
+
+- (void)setButtonType:(PAButtonType)buttonType
+{
+	[[self cell] setButtonType:buttonType];
 }
 
 - (int)tag
@@ -142,4 +157,15 @@
 {
 	[[self cell] setTarget:target];
 }
+
+- (NSControlSize)controlSize
+{
+	return [[self cell] controlSize];
+}
+
+- (void)setControlSize:(NSControlSize)size
+{
+	[[self cell] setControlSize:size];
+}
+
 @end

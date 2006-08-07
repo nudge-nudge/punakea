@@ -18,19 +18,25 @@
 
 }
 
+- (void)highlight:(BOOL)flag;
+
 - (NSString *)title;
 - (void)setTitle:(NSString *)title;
 - (BOOL)isBordered;
 - (void)setBordered:(BOOL)flag;
 - (PAButtonState)state;
 - (void)setState:(PAButtonState)aState;
-- (PABezelType)bezelType;
-- (void)setBezelType:(PABezelType)bezelType;
+- (PABezelStyle)bezelStyle;
+- (void)setBezelStyle:(PABezelStyle)bezelStyle;
+- (PAButtonType)buttonType;
+- (void)setButtonType:(PAButtonType)buttonType;
 - (int)tag;
 - (void)setTag:(int)aTag;
 - (SEL)action;
 - (void)setAction:(SEL)action;
 - (id)target;
 - (void)setTarget:(id)target;
+- (NSControlSize)controlSize;
+- (void)setControlSize:(NSControlSize)size;
 
 @end

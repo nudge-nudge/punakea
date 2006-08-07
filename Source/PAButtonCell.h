@@ -27,11 +27,11 @@ typedef enum _PAButtonType
 	PASwitchButton = 1
 } PAButtonType;
 
-typedef enum _PABezelType
+typedef enum _PABezelStyle
 {
-	PARecessedBezelType = 0,
-	PATokenBezelType = 1
-} PABezelType;
+	PARecessedBezelStyle = 0,
+	PATokenBezelStyle = 1
+} PABezelStyle;
 
 
 @interface PAButtonCell : NSActionCell {
@@ -42,7 +42,7 @@ typedef enum _PABezelType
 	BOOL						bordered;
 	BOOL						hovered;
 	PAButtonState				state;
-	PABezelType					bezelType;
+	PABezelStyle				bezelStyle;
 	PAButtonType				buttonType;
 	
 
@@ -56,7 +56,9 @@ typedef enum _PABezelType
 - (void)setHovered:(BOOL)flag;
 - (PAButtonState)state;
 - (void)setState:(PAButtonState)aState;
-- (PABezelType)bezelType;
-- (void)setBezelType:(PABezelType)aBezelType;
+- (PABezelStyle)bezelStyle;
+- (void)setBezelStyle:(PABezelStyle)aBezelStyle;
+- (PAButtonType)buttonType;
+- (void)setButtonType:(PAButtonType)type;
 
 @end
