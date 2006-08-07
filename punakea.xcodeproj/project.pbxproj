@@ -139,6 +139,10 @@
 		659040E00A4C058400ADDC1D /* pane_key-favoriteIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659040CC0A4C058400ADDC1D /* pane_key-favoriteIcon.tiff */; };
 		6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */; };
 		6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */; };
+		65988C6B0A875A11000270E6 /* PAButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65988C690A875A11000270E6 /* PAButton.h */; };
+		65988C6C0A875A11000270E6 /* PAButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65988C6A0A875A11000270E6 /* PAButton.m */; };
+		65988C810A875C53000270E6 /* PAButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65988C7F0A875C53000270E6 /* PAButtonCell.h */; };
+		65988C820A875C53000270E6 /* PAButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65988C800A875C53000270E6 /* PAButtonCell.m */; };
 		659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659EBB4109D2D78300879091 /* PAImageButton.h */; };
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
 		659EBBB109D2DC3D00879091 /* MDIconViewOff-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */; };
@@ -232,6 +236,8 @@
 				655D3BF50A7DD5CB009479F9 /* PAFilterSlice.h in CopyFiles */,
 				65D43F4F0A7E3AC6008CC164 /* PAQueryBundle.h in CopyFiles */,
 				65D43F530A7E3ADA008CC164 /* PAQueryItem.h in CopyFiles */,
+				65988C6B0A875A11000270E6 /* PAButton.h in CopyFiles */,
+				65988C810A875C53000270E6 /* PAButtonCell.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +371,10 @@
 		659040CC0A4C058400ADDC1D /* pane_key-favoriteIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "pane_key-favoriteIcon.tiff"; sourceTree = "<group>"; };
 		6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemMatrix.h; sourceTree = "<group>"; };
 		6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemMatrix.m; sourceTree = "<group>"; };
+		65988C690A875A11000270E6 /* PAButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAButton.h; sourceTree = "<group>"; };
+		65988C6A0A875A11000270E6 /* PAButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAButton.m; sourceTree = "<group>"; };
+		65988C7F0A875C53000270E6 /* PAButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAButtonCell.h; sourceTree = "<group>"; };
+		65988C800A875C53000270E6 /* PAButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAButtonCell.m; sourceTree = "<group>"; };
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
 		659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOff-1.tiff"; sourceTree = "<group>"; };
@@ -739,6 +749,10 @@
 		65903EF20A4BFDF000ADDC1D /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
+				65988C690A875A11000270E6 /* PAButton.h */,
+				65988C6A0A875A11000270E6 /* PAButton.m */,
+				65988C7F0A875C53000270E6 /* PAButtonCell.h */,
+				65988C800A875C53000270E6 /* PAButtonCell.m */,
 				659EBB4109D2D78300879091 /* PAImageButton.h */,
 				659EBB4209D2D78300879091 /* PAImageButton.m */,
 				65461C9309D0418F0076778E /* PAImageButtonCell.h */,
@@ -965,6 +979,8 @@
 				655D3BF60A7DD5CB009479F9 /* PAFilterSlice.m in Sources */,
 				65D43F500A7E3AC6008CC164 /* PAQueryBundle.m in Sources */,
 				65D43F540A7E3ADA008CC164 /* PAQueryItem.m in Sources */,
+				65988C6C0A875A11000270E6 /* PAButton.m in Sources */,
+				65988C820A875C53000270E6 /* PAButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

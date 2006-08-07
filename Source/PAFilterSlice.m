@@ -82,6 +82,7 @@
 		frame.origin.x = x;
 		frame.origin.y = 3;
 		frame.size.height = 19;
+		frame.size.width = 50;
 		
 		// Determine button's title
 		NSString *title = [[NSBundle mainBundle] localizedStringForKey:[item objectForKey:@"title"]
@@ -89,20 +90,20 @@
 																 table:@"MDSimpleGrouping"];
 	
 		// TODO: Replace by PAButton!
-		NSButton *button = [[NSButton alloc] initWithFrame:frame];
+		PAButton *button = [[PAButton alloc] initWithFrame:frame];
 		[button setTitle:title];
 		[button setAction:@selector(buttonClick:)];
 		[button setTarget:self];
-		[button setButtonType:NSPushOnPushOffButton];
-		[button setBezelStyle:NSRecessedBezelStyle];
+		//[button setButtonType:PA];
+		//[button setBezelStyle:NSRecessedBezelStyle];
 		[button setTag:buttonIndex++];
-		[button sizeToFit];
+		//[button sizeToFit];
 		
 		// Activate first button
 		if(x == 10)
 		{
 			[button setBordered:YES];
-			[button setState:NSOnState];
+			[button setState:PAOnState];
 		}
 		
 		NSRect buttonFrame = [button frame];
@@ -111,7 +112,7 @@
 		[self addSubview:button];
 		[buttons addObject:button];
 		
-		[button setShowsBorderOnlyWhileMouseInside:YES];
+		//[button setShowsBorderOnlyWhileMouseInside:YES];
 	}
 }
 
@@ -123,7 +124,7 @@
 	{
 		if(button != sender)
 		{
-			[button setState:NSOffState];
+			[button setState:PAOffState];
 			[button setBordered:NO];
 		} else {
 			[button setBordered:YES];
