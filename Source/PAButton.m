@@ -62,6 +62,14 @@
 	[[self cell] setHighlighted:flag];
 }
 
+- (void)sizeToFit
+{
+	NSRect frame = [self frame];
+	frame.size = [[self cell] cellSize];
+	
+	[self setFrame:frame];
+}
+
 
 #pragma mark Events
 - (void)mouseEntered:(NSEvent *)theEvent

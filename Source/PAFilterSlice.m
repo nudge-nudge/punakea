@@ -80,8 +80,8 @@
 	{
 		NSRect frame = [self frame];
 		frame.origin.x = x;
-		frame.origin.y = 3;
-		frame.size.height = 16;
+		frame.origin.y = 5;
+		frame.size.height = 30;
 		frame.size.width = 70;
 		
 		// Determine button's title
@@ -97,7 +97,7 @@
 		[button setButtonType:PASwitchButton];
 		[button setBezelStyle:PARecessedBezelStyle];
 		[button setTag:buttonIndex++];
-		//[button sizeToFit];
+		[button sizeToFit];
 		
 		// Activate first button
 		if(x == 10)
@@ -107,7 +107,7 @@
 		}
 		
 		NSRect buttonFrame = [button frame];
-		x += buttonFrame.size.width + 7;
+		x += buttonFrame.size.width + 3;
 		
 		[self addSubview:button];
 		[buttons addObject:button];

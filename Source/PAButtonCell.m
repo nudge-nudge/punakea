@@ -9,6 +9,12 @@
 #import "PAButtonCell.h"
 
 
+NSSize const PADDING_RECESSEDBEZELSTYLE = {8,0};
+//NSSize const PADDING_TOKENBEZELSTYLE = {5,1};
+
+int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
+
+
 @implementation PAButtonCell
 
 #pragma mark Init + Dealloc
@@ -91,16 +97,32 @@
 				  value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[self controlSize]]]
 				  range:NSMakeRange(0, [label length])];
 	
+	// Set colors
+	NSColor *shadowColor;
+	
 	if([self isHighlighted] || [self isHovered])
 	{
 		[label addAttribute:NSForegroundColorAttributeName
 					  value:[NSColor alternateSelectedControlTextColor]
 					  range:NSMakeRange(0, [label length])];
+					  
+		shadowColor = [NSColor colorWithDeviceWhite:0.2 alpha:0.6];	
 	} else {
 		[label addAttribute:NSForegroundColorAttributeName
 					  value:[NSColor textColor]
 					  range:NSMakeRange(0, [label length])];
+		
+		shadowColor = [NSColor colorWithDeviceWhite:0.92 alpha:0.6];	
 	}
+	
+	// Add shadow
+	NSShadow *shadow = [[NSShadow alloc] init];
+	[shadow setShadowOffset:NSMakeSize(1,-1.5)];
+	[shadow setShadowColor:shadowColor];
+	[label addAttribute:NSShadowAttributeName
+				  value:shadow
+				  range:NSMakeRange(0, [label length])];
+	[shadow release];
 	
 	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
@@ -109,7 +131,8 @@
 				  value:paraStyle
 				  range:NSMakeRange(0, [label length])];
 	
-	NSSize padding = NSMakeSize(5,1);
+	// TODO: use external vars
+	NSSize padding = PADDING_RECESSEDBEZELSTYLE;
 	
 	NSRect bezelFrame = cellFrame;
 	
@@ -188,6 +211,35 @@
 - (void)setButtonType:(PAButtonType)type
 {
 	buttonType = type;
+}
+
+- (NSSize)cellSize
+{
+	NSSize size = NSMakeSize(0,0);
+	
+	if([self isBordered])
+	{	
+		switch([self bezelStyle])
+		{
+			case PARecessedBezelStyle:;
+				NSMutableAttributedString *label = [[NSMutableAttributedString alloc] initWithString:[self title]];
+				[label addAttribute:NSFontAttributeName
+							  value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[self controlSize]]]
+							  range:NSMakeRange(0, [label length])];
+				NSSize labelSize = [label size];
+				
+				size.width = labelSize.width + 2 * PADDING_RECESSEDBEZELSTYLE.width;
+				
+				size.height = HEIGHT_RECESSEDBEZELSTYLE_SMALL;
+				
+				break;
+			// TODO: Add token style
+		}
+	} else {
+		// TODO: Set size to image size
+	}
+	
+	return size;
 }
 
 @end

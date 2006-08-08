@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NSBezierPathCategory.h"
 
 
 typedef enum _PAButtonState
@@ -32,6 +33,14 @@ typedef enum _PABezelStyle
 	PARecessedBezelStyle = 0,
 	PATokenBezelStyle = 1
 } PABezelStyle;
+
+
+extern NSSize const PADDING_RECESSEDBEZELSTYLE;
+extern NSSize const PADDING_TOKENBEZELSTYLE;
+
+extern int const FRAME_HEIGHT_MINI;
+extern int const FRAME_HEIGHT_SMALL;
+extern int const FRAME_HEIGHT_REGULAR;
 
 
 @interface PAButtonCell : NSActionCell {
