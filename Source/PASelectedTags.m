@@ -47,7 +47,10 @@
 
 - (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i
 {
-	[selectedTags insertObject:tag atIndex:i];
+	if (![selectedTags containsObject:tag])
+	{
+		[selectedTags insertObject:tag atIndex:i];
+	}
 }
 
 - (void)removeObjectFromSelectedTagsAtIndex:(unsigned int)i

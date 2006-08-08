@@ -40,15 +40,30 @@
 	[super dealloc];
 }
 
-//NSCoding
+#pragma mark nscoding
 - (id)initWithCoder:(NSCoder*)coder 
 {
-	return nil;
+	self = [super init];
+	if (self) 
+	{
+		[self setName:[coder decodeObjectForKey:@"name"]];
+		[self setQuery:[coder decodeObjectForKey:@"query"]];
+		lastClicked = [[coder decodeObjectForKey:@"lastClicked"] retain];
+		lastUsed = [[coder decodeObjectForKey:@"lastUsed"] retain];
+		[coder decodeValueOfObjCType:@encode(unsigned long)	at:&clickCount];
+		[coder decodeValueOfObjCType:@encode(unsigned long)	at:&useCount];
+	}
+	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder*)coder 
 {
-	//nothing
+	[coder encodeObject:name forKey:@"name"];
+	[coder encodeObject:query forKey:@"query"];
+	[coder encodeObject:lastClicked forKey:@"lastClicked"];
+	[coder encodeObject:lastUsed forKey:@"lastUsed"];
+	[coder encodeValueOfObjCType:@encode(unsigned long) at:&clickCount];
+	[coder encodeValueOfObjCType:@encode(unsigned long) at:&useCount];
 }
 
 #pragma mark accessors

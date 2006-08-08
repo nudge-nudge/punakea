@@ -10,11 +10,13 @@
 #import "PAViewController.h"
 
 #import "PATagger.h"
-
+#import "PAQuery.h"
 
 @interface PATagManagementViewController : PAViewController {
 	PATagger *tagger;
 	PATags *tags;
+	
+	PAQuery *query;
 }
 
 - (id)initWithNibName:(NSString*)nibName;

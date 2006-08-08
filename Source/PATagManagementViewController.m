@@ -18,10 +18,17 @@
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
 		
+		query = [[PAQuery alloc] init];
+		
 		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
 	}
 	return self;
+}
+
+- (void)dealloc
+{
+	[query release];
 }
 
 @end
