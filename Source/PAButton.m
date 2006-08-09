@@ -33,28 +33,28 @@
 #pragma mark Actions
 - (void)resetTrackingRect
 {
-	trackingRect = [self frame];
+	trackingRect = [self bounds];
 }
 
 - (void)setFrame:(NSRect)frame
 {
     [super setFrame:frame];
-    [[self superview] removeTrackingRect:trackingRectTag];
+    [self removeTrackingRect:trackingRectTag];
     [self resetTrackingRect];
-    trackingRectTag = [[self superview] addTrackingRect:trackingRect owner:self userData:NULL assumeInside:NO];
+    trackingRectTag = [self addTrackingRect:trackingRect owner:self userData:NULL assumeInside:NO];
 }
 
 - (void)viewWillMoveToWindow:(NSWindow *)newWindow
 {
     if ([self window] && trackingRectTag) {
-        [[self superview] removeTrackingRect:trackingRectTag];
+        [self removeTrackingRect:trackingRectTag];
     }
 }
 
 - (void)viewDidMoveToWindow
 {
 	[self resetTrackingRect];
-	trackingRectTag = [[self superview] addTrackingRect:trackingRect owner:self userData:NULL assumeInside:NO];
+	trackingRectTag = [self addTrackingRect:trackingRect owner:self userData:NULL assumeInside:NO];
 }
 
 - (void)highlight:(BOOL)flag

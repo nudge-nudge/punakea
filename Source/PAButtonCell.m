@@ -73,14 +73,17 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
 	if(bordered)
 	{
-		[self drawTextButtonWithFrame:cellFrame inView:controlView];
-	} else {
-		if(hovered)
+		switch(bezelStyle)
 		{
-			NSString *str = @"___";
-			[str drawAtPoint:cellFrame.origin withAttributes:nil];
+			case PARecessedBezelStyle:
+				[self drawRecessedButtonWithFrame:cellFrame inView:controlView]; break;
+			case PATokenBezelStyle:
+				// TODO
+				break;
 		}
-		[title drawAtPoint:cellFrame.origin withAttributes:nil];
+		
+	} else {
+		// TODO: Draw image-only button
 	}
 }
 
@@ -89,7 +92,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	[self drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
-- (void)drawTextButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+- (void)drawRecessedButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	// Attributed string for title
 	NSMutableAttributedString *label = [[NSMutableAttributedString alloc] initWithString:title];
@@ -131,24 +134,77 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 				  value:paraStyle
 				  range:NSMakeRange(0, [label length])];
 	
-	// TODO: use external vars
-	NSSize padding = PADDING_RECESSEDBEZELSTYLE;
-	
-	NSRect bezelFrame = cellFrame;
-	
-	if([self state] == PAOnState || [self isHovered])
-	{
-		[[NSColor grayColor] set];
-		[[NSBezierPath bezierPathWithRoundRectInRect:bezelFrame radius:20] fill];
-	}
-		
-	NSRect labelFrame = bezelFrame;
-	labelFrame.origin.x = bezelFrame.origin.x + padding.width;
-	labelFrame.origin.y += padding.height;
-	labelFrame.size.width = bezelFrame.size.width - 2 * padding.width;
-	labelFrame.size.height = bezelFrame.size.height - 2 * padding.height;
+	// TODO: padding depends on controlsize or throw error when applying controlsize other than smallsize
+	NSSize padding = PADDING_RECESSEDBEZELSTYLE;	
 
-	[label drawInRect:labelFrame];
+	NSImage *bezelImage = nil;
+	if([self isHovered] && ![self isHighlighted] && ![self isPressed])
+		bezelImage = [NSImage imageNamed:@"TabHover"];
+	else if([self isHighlighted] && ![self isPressed])
+		bezelImage = [NSImage imageNamed:@"TabSelected"];
+	else if([self isPressed])
+	{
+		NSLog(@"active");
+		bezelImage = [NSImage imageNamed:@"TabActive"];
+	}
+	
+	if(bezelImage)
+	{
+		[bezelImage setScalesWhenResized:YES];
+		
+		NSRect imgRect;
+		NSRect destRect = cellFrame;
+		
+		// Draw left edge
+		imgRect.origin = NSZeroPoint;
+		imgRect.size = NSMakeSize(7,15);		
+		destRect = cellFrame;
+		destRect.size.width = 7;		
+		[bezelImage drawInRect:destRect fromRect:imgRect operation:NSCompositeSourceOver fraction:1.0];
+		
+		// Draw scaled background
+		imgRect.origin = NSMakePoint(7,0);
+		imgRect.size = NSMakeSize(1,15);
+		destRect = cellFrame;
+		destRect.origin.x += 7;
+		destRect.size.width -= 16;
+		[bezelImage drawInRect:destRect fromRect:imgRect operation:NSCompositeSourceOver fraction:1.0];
+		
+		// Draw right edge
+		imgRect.origin = NSMakePoint(8,0);
+		imgRect.size = NSMakeSize(7,15);
+		destRect = cellFrame;
+		destRect.origin.x = destRect.size.width - 8;
+		destRect.size.width = 7;
+		[bezelImage drawInRect:destRect fromRect:imgRect operation:NSCompositeSourceOver fraction:1.0];
+	}
+	
+	[label drawInRect:NSInsetRect(cellFrame, padding.width, padding.height)];
+}
+
+
+#pragma mark Mouse Tracking
+- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
+{
+	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView untilMouseUp:NO];
+}
+
+- (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView
+{	
+	[self setPressed:YES];
+	[[self controlView] setNeedsDisplay:YES];
+	return YES;
+}
+
+- (BOOL)continueTracking:(NSPoint)lastPoint at:(NSPoint)currentPoint inView:(NSView *)controlView
+{
+	return YES;
+}
+
+- (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
+{
+	[self setPressed:NO];
+	[[self controlView] setNeedsDisplay:YES];
 }
 
 
@@ -181,6 +237,16 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 - (void)setHovered:(BOOL)flag
 {
 	hovered = flag;
+}
+
+- (BOOL)isPressed
+{
+	return pressed;
+}
+
+- (void)setPressed:(BOOL)flag
+{
+	pressed = flag;
 }
 
 - (PAButtonState)state

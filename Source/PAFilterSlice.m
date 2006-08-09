@@ -167,7 +167,7 @@
 - (void)drawRect:(NSRect)aRect
 {
 	// Draw background
-	NSImage *backgroundImage = [NSImage imageNamed:@"SearchSliceViewBackground"];
+	NSImage *backgroundImage = [NSImage imageNamed:@"BlueGradient24"];
 	
 	[backgroundImage setFlipped:YES];
 	[backgroundImage setScalesWhenResized:YES];
