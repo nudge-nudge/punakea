@@ -143,10 +143,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	else if([self isHighlighted] && ![self isPressed])
 		bezelImage = [NSImage imageNamed:@"TabSelected"];
 	else if([self isPressed])
-	{
-		NSLog(@"active");
 		bezelImage = [NSImage imageNamed:@"TabActive"];
-	}
 	
 	if(bezelImage)
 	{
