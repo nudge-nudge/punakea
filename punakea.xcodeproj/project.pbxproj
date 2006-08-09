@@ -83,8 +83,6 @@
 		48EB614509C2D4A40071D654 /* PARelatedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB614309C2D4A40071D654 /* PARelatedTags.m */; };
 		65035FCB0A20769500AD0597 /* PAQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65035FC90A20769500AD0597 /* PAQuery.h */; };
 		65035FCC0A20769500AD0597 /* PAQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 65035FCA0A20769500AD0597 /* PAQuery.m */; };
-		6509FA420A7D27B5003D32D8 /* SearchSliceViewBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6509FA400A7D27B4003D32D8 /* SearchSliceViewBackground.tiff */; };
-		6509FA430A7D27B5003D32D8 /* SearchSliceViewSeperator.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6509FA410A7D27B4003D32D8 /* SearchSliceViewSeperator.tiff */; };
 		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
 		651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */; };
 		6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */; };
@@ -319,8 +317,6 @@
 		48EB614309C2D4A40071D654 /* PARelatedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTags.m; sourceTree = "<group>"; };
 		65035FC90A20769500AD0597 /* PAQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAQuery.h; sourceTree = "<group>"; };
 		65035FCA0A20769500AD0597 /* PAQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAQuery.m; sourceTree = "<group>"; };
-		6509FA400A7D27B4003D32D8 /* SearchSliceViewBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SearchSliceViewBackground.tiff; sourceTree = "<group>"; };
-		6509FA410A7D27B4003D32D8 /* SearchSliceViewSeperator.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SearchSliceViewSeperator.tiff; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite.tiff; sourceTree = "<group>"; };
 		6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASegmentedImageControl.h; sourceTree = "<group>"; };
@@ -669,8 +665,6 @@
 			isa = PBXGroup;
 			children = (
 				65D6ACD30A89E25800FDAC8A /* BlueGradient24.png */,
-				6509FA400A7D27B4003D32D8 /* SearchSliceViewBackground.tiff */,
-				6509FA410A7D27B4003D32D8 /* SearchSliceViewSeperator.tiff */,
 			);
 			name = "Filter Slice";
 			sourceTree = "<group>";
@@ -928,8 +922,6 @@
 				4816341B0A5A4EEB003B8EE4 /* Browser.nib in Resources */,
 				4871792F0A5A619900A988DE /* BrowserView.nib in Resources */,
 				484F71920A666F5A00D886E5 /* TagManagementView.nib in Resources */,
-				6509FA420A7D27B5003D32D8 /* SearchSliceViewBackground.tiff in Resources */,
-				6509FA430A7D27B5003D32D8 /* SearchSliceViewSeperator.tiff in Resources */,
 				65D6ACBD0A89E1E800FDAC8A /* TabActive.png in Resources */,
 				65D6ACBE0A89E1E800FDAC8A /* TabHover.png in Resources */,
 				65D6ACBF0A89E1E800FDAC8A /* TabSelected.png in Resources */,
