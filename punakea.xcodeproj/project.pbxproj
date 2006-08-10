@@ -30,6 +30,8 @@
 		481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 481BF2F109A31B9B00EBD7BA /* PATagSet.m */; };
 		481F78BC0A5FE2BB0018DF6C /* PARelatedTagsStandalone.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481F78BA0A5FE2BB0018DF6C /* PARelatedTagsStandalone.h */; };
 		481F78BD0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m in Sources */ = {isa = PBXBuildFile; fileRef = 481F78BB0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m */; };
+		482248340A886DE1008C8CB9 /* PATempTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482248320A886DE1008C8CB9 /* PATempTag.h */; };
+		482248350A886DE1008C8CB9 /* PATempTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 482248330A886DE1008C8CB9 /* PATempTag.m */; };
 		4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */; };
 		4840AC400A4FFEE50046484E /* PASidebarContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */; };
 		4842FC0F09DA801500C4A931 /* PATagButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC0D09DA801500C4A931 /* PATagButton.h */; };
@@ -240,6 +242,7 @@
 				65D43F530A7E3ADA008CC164 /* PAQueryItem.h in CopyFiles */,
 				65988C6B0A875A11000270E6 /* PAButton.h in CopyFiles */,
 				65988C810A875C53000270E6 /* PAButtonCell.h in CopyFiles */,
+				482248340A886DE1008C8CB9 /* PATempTag.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +266,8 @@
 		481BF2F109A31B9B00EBD7BA /* PATagSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSet.m; sourceTree = "<group>"; };
 		481F78BA0A5FE2BB0018DF6C /* PARelatedTagsStandalone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARelatedTagsStandalone.h; sourceTree = "<group>"; };
 		481F78BB0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTagsStandalone.m; sourceTree = "<group>"; };
+		482248320A886DE1008C8CB9 /* PATempTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATempTag.h; sourceTree = "<group>"; };
+		482248330A886DE1008C8CB9 /* PATempTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATempTag.m; sourceTree = "<group>"; };
 		4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarContentView.h; sourceTree = "<group>"; };
 		4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarContentView.m; sourceTree = "<group>"; };
 		4842FC0D09DA801500C4A931 /* PATagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButton.h; sourceTree = "<group>"; };
@@ -642,6 +647,8 @@
 				48D66AFC09CB4C5A007B6B1D /* PATagFactory.m */,
 				48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */,
 				48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */,
+				482248320A886DE1008C8CB9 /* PATempTag.h */,
+				482248330A886DE1008C8CB9 /* PATempTag.m */,
 			);
 			name = Tagging;
 			sourceTree = "<group>";
@@ -1005,6 +1012,7 @@
 				65D43F540A7E3ADA008CC164 /* PAQueryItem.m in Sources */,
 				65988C6C0A875A11000270E6 /* PAButton.m in Sources */,
 				65988C820A875C53000270E6 /* PAButtonCell.m in Sources */,
+				482248350A886DE1008C8CB9 /* PATempTag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,25 +29,39 @@
 		[self setUpdating:NO];
 		
 		[self setQuery:aQuery];
-		[self setRelatedTags:[[NSMutableArray alloc] init]];
+		[self setRelatedTags:[[NSMutableDictionary alloc] init]];
 		[self setSelectedTags:otherSelectedTags];
 		
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
-		nf = [NSNotificationCenter defaultCenter];
-		[nf addObserver:self selector:@selector(queryNote:) name:nil object:query];
+		nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(queryNote:) name:nil object:query];
 	}
 	return self;
 }
 
 - (void)dealloc 
 {
-	[nf removeObserver:self];
+	[nc removeObserver:self];
 	[relatedTags release];
 	[query release];
 	[super dealloc];
 }
 
 #pragma mark accessors
+- (void)addTag:(PATag*)aTag
+{
+	[relatedTags setObject:aTag forKey:[aTag name]];
+	
+	[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
+}
+
+- (void)removeTag:(PATag*)aTag
+{
+	[relatedTags removeObjectForKey:[aTag name]];
+	
+	[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
+}
+
 - (BOOL)isUpdating
 {
 	return updating;
@@ -67,6 +81,11 @@
 	}
 }
 
+- (BOOL)containsTag:(PATag*)aTag
+{
+	return ([relatedTags objectForKey:[aTag name]] != nil);
+}
+
 - (void)setQuery:(PAQuery*)aQuery 
 {
 	[aQuery retain];
@@ -74,34 +93,31 @@
 	query = aQuery;
 }
 
-- (NSMutableArray*)relatedTags;
+- (NSArray*)relatedTagArray
+{
+	return [relatedTags allValues];
+}
+
+
+- (NSMutableDictionary*)relatedTags;
 {
 	return relatedTags;
 }
 
-- (void)setRelatedTags:(NSMutableArray*)otherTags
+- (void)setRelatedTags:(NSMutableDictionary*)otherTags
 {
 	[otherTags retain];
 	[relatedTags release];
 	relatedTags = otherTags;
+	
+	[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
 }
 
-- (void)insertObject:(PATag *)tag inRelatedTagsAtIndex:(unsigned int)i
+- (void)removeAllObjects
 {
-	[relatedTags insertObject:tag atIndex:i];
-}
+	[relatedTags removeAllObjects];
 
-- (void)removeObjectFromRelatedTagsAtIndex:(unsigned int)i
-{
-	[relatedTags removeObjectAtIndex:i];
-}
-
-- (void)removeAllObjectsFromRelatedTags
-{
-	for (int i=0;i<[relatedTags count];i++)
-	{
-		[self removeObjectFromRelatedTagsAtIndex:i];
-	}
+	[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
 }
 
 - (PASelectedTags*)selectedTags
@@ -147,7 +163,7 @@
 	//get the related tags to the current results
 	{
 		//TODO hack
-		[self setRelatedTags:[NSMutableArray array]];
+		[self removeAllObjects];
 		//disable updates, parse files, continue -- TODO make more efficient, performance will SUCK
 		while (i--) 
 		{
@@ -160,11 +176,13 @@
 
 			while (j--) 
 			{
+				// tag may be nil if there is no simple tag for the given name
+				// others apps may edit kMDItemKeywords as well!
 				PATag *tag = [tagger simpleTagForName:[keywords objectAtIndex:j]];
 				
-				if (![relatedTags containsObject:tag] && ![selectedTags containsObject:tag])
+				if (![tag isKindOfClass:[PATempTag class]] && ![self containsObject:tag] && ![selectedTags containsObject:tag])
 				{
-					[self insertObject:tag inRelatedTagsAtIndex:[relatedTags count]];
+					[self addTag:tag];
 				}
 			}
 		}

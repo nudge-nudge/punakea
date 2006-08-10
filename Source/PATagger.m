@@ -39,6 +39,145 @@ static PATagger *sharedInstance = nil;
 }
 
 #pragma mark tags and files
+// ----------------------------- NEW -------------------------
+- (NSArray*)tagsOnFiles:(NSArray*)filePaths
+{
+	return [self tagsOnFiles:filePaths includeTempTags:NO];
+}
+
+- (NSArray*)tagsOnFiles:(NSArray*)filePaths includeTempTags:(BOOL)includeTempTags
+{
+	NSMutableArray *keywords = [NSMutableArray array];
+	
+	NSEnumerator *e = [filePaths objectEnumerator];
+	NSString *keyword;
+	
+	while (keyword = [e nextObject])
+	{
+		[keywords addObject:keyword];
+	}
+	
+	NSArray *resultTags = [self tagsForNames:keywords includeTempTags:includeTempTags];
+	
+	return resultTags;	
+}
+
+- (PATag*)tagForName:(NSString*)tagName
+{
+	return [self tagForName:tagName includeTempTag:NO];
+}
+
+- (PATag*)tagForName:(NSString*)tagName includeTempTag:(BOOL)includeTempTag
+{
+	PATag *tag = [tags tagForName:tagName];
+	
+	if (!tag && includeTempTag)
+	{
+		tag = [[PATempTag alloc] init];
+	}
+	
+	return tag;
+}
+
+- (NSArray*)tagsForNames:(NSArray*)tagNames includeTempTags:(BOOL)includeTempTags
+{
+	NSMutableArray *result = [NSMutableArray array];
+	
+	NSEnumerator *e = [tagNames objectEnumerator];
+	NSString *tagName;
+	
+	while (tagName = [e nextObject])
+	{
+		PATag *tag = [tags tagForName:tagName];
+		
+		if (!tag && includeTempTags)
+		{
+			tag = [[PATempTag alloc] initWithName:tagName];
+		}
+		
+		if (tag && ![result containsObject:tag])
+		{
+			[result addObject:tag];
+		}
+	}
+	
+	return result;
+}
+
+- (PATag*)createTagForName:(NSString*)tagName
+{
+	PATag *tag = [self tagForName:tagName];
+	
+	if (!tag)
+	{
+		tag = [simpleTagFactory createTagWithName:tagName];
+		[tags addTag:tag];
+	}
+
+	return tag;
+}
+
+- (NSArray*)createTagsForNames:(NSArray*)tagNames
+{
+	NSMutableArray *result = [NSMutableArray array];
+	
+	NSEnumerator *e = [tagNames objectEnumerator];
+	NSString *tagName;
+	
+	while (tagName = [e nextObject])
+	{
+		PATag *tag = [self tagForName:tagName];
+		
+		if (!tag)
+		{
+			tag = [simpleTagFactory createTagWithName:tagName];
+			[tags addTag:tag];
+		}
+		
+		if (![result containsObject:tag])
+		{
+			[result addObject:tag];
+		}
+	}
+	
+	return result;
+}
+
+- (void)addTags:(NSArray*)tags toFile:(NSString*)filePath
+{
+	NSArray *tagsOnFile = [self tagsOnFiles:[NSArray arrayWithObject:filePath] includeTempTags:YES];
+	
+	NSEnumerator *e = [tags objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		if (![tagsOnFile containsObject:tag])
+		{
+			[tagsOnFile addObject:tag];
+		}
+	}
+	
+	[self writeTags:tagsOnFile ToFile:filePath];
+}
+
+- (void)addKeywords:(NSArray*)keywords toFile:(NSString*)filePath createSimpleTags:(BOOL)createSimpleTags
+{
+	NSArray *tags;
+	
+	if (createSimpleTags)
+	{
+		tags = [self createTagsForNames:keywords];
+	}
+	else
+	{
+		tags = [self tagsForNames:keywords];
+	}
+	
+	[self addTags:tags ToFile:filePath];
+}
+
+//  ---------------------------- OLD -------------------------
 //write tags
 - (void)addTag:(PASimpleTag*)tag ToFile:(NSString*)path {
 	[self addTags:[NSArray arrayWithObject:tag] ToFile:path];
@@ -182,6 +321,11 @@ static PATagger *sharedInstance = nil;
 
 - (PASimpleTag*)simpleTagForName:(NSString*)name
 {
+	return [self simpleTagForName:name createNewTags:NO];
+}
+
+- (PASimpleTag*)simpleTagForName:(NSString*)name createNewTags:(BOOL)createTags
+{
 	BOOL found = NO;
 	PASimpleTag *newTag;
 	
@@ -189,6 +333,7 @@ static PATagger *sharedInstance = nil;
 	NSEnumerator *e = [tags objectEnumerator];
 	PATag *tag;
 	
+	//TODO hash needed for better performance
 	while (tag = [e nextObject])
 	{
 		if ([tag isKindOfClass:[PASimpleTag class]] && [name isEqualToString:[tag name]])
@@ -199,11 +344,16 @@ static PATagger *sharedInstance = nil;
 		}
 	}
 	
-	//if the tag wasn't found, create a new one
-	if (!found)
+	//if the tag wasn't found, create a new one - depends on createTags
+	if (!found && createTags) 
 	{
 		newTag = [simpleTagFactory createTagWithName:name];
 		[tags addTag:newTag];
+	}
+	else if (!found && !createTags)
+	{
+		// there is no tag for the given name - create tempTag
+		newTag = [[[PATempTag alloc] init] autorelease];
 	}
 	
 	return newTag;

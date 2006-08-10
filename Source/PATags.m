@@ -16,46 +16,57 @@
 {
 	if (self = [super init])
 	{
-		[self setTags:[[NSMutableArray alloc] init]];
-		simpleTagFactory = [[PASimpleTagFactory alloc] init];
+		[self setTags:[NSMutableDictionary dictionary]];
+		
+		nc = [NSNotificationCenter defaultCenter];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[simpleTagFactory release];
 	[tags release];
 	[super dealloc];
 }
 
 #pragma mark accessors
-- (NSMutableArray*)tags
+- (NSArray*)tagArray
+{
+	return [tags allValues];
+}
+
+- (PATag*)tagForName:(NSString*)tagName
+{
+	return [tags objectForKey:tagName];
+}
+
+- (NSMutableDictionary*)tags
 {
 	return tags;
 }
 
-- (void)setTags:(NSMutableArray*)otherTags
+- (void)setTags:(NSMutableDictionary*)otherTags
 {
 	[otherTags retain];
 	[tags release];
 	tags = otherTags;
-}
-
-- (void)insertObject:(PATag *)tag inTagsAtIndex:(unsigned int)i
-{
-	[tags insertObject:tag atIndex:i];
-}
-
-- (void)removeObjectFromTagsAtIndex:(unsigned int)i
-{
-	[tags removeObjectAtIndex:i];
+	
+	[nc postNotificationName:@"PATagsHaveChanged" object:self];
 }
 
 #pragma mark additional
 - (void)addTag:(PATag*)aTag
 {
-	[self insertObject:aTag inTagsAtIndex:[tags count]];
+	[tags setObject:aTag forKey:[aTag name]];
+	
+	[nc postNotificationName:@"PATagsHaveChanged" object:self];
+}
+
+- (void)removeTag:(PATag*)aTag
+{
+	[tags removeObjectForKey:[aTag name]];
+	
+	[nc postNotificationName:@"PATagsHaveChanged" object:self];
 }
 
 - (NSEnumerator*)objectEnumerator

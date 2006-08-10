@@ -22,6 +22,7 @@
 	if (self = [super init]) 
 	{
 		[self setName:aName];
+		[self setQuery:@""];
 		lastClicked = [[NSCalendarDate alloc] init];
 		lastUsed = [[NSCalendarDate alloc] init];
 		

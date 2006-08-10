@@ -19,11 +19,7 @@
 	PATagger *tagger;
 	PATags *tags; /**< reference to all tags (same as in controller) */
 	
-	NSArray *popularTagsSortDescriptors;
-	
 	PATypeAheadFind *typeAheadFind;
-	
-	PARelatedTagsStandalone *relatedTags;
 }
 
 - (id)initWithWindowNibName:(NSString*)windowNibName;

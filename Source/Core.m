@@ -103,13 +103,9 @@
 	[unarchiver finishDecoding];
 	[unarchiver release];
 	
-	NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
+	NSMutableDictionary *loadedTags = [rootObject valueForKey:@"tags"];
 	
-	if ([loadedTags count] == 0) 
-	{
-		[[tagger tags] setTags:[[NSMutableArray alloc] init]];
-	}
-	else 
+	if ([loadedTags count] > 0)
 	{
 		[[tagger tags] setTags:loadedTags];
 	}

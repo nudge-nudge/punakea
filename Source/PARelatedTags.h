@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PATagger.h"
 #import "PATag.h"
+#import "PATempTag.h"
 #import "PATags.h"
 #import "PAQuery.h"
 #import "PASelectedTags.h"
@@ -25,10 +26,10 @@ finds related tags for a given query or a given selection of tags.
 	PATagger *tagger;
 	PATags *tags;
 	
-	NSMutableArray *relatedTags;
+	NSMutableDictionary *relatedTags;
 	BOOL updating;
 
-	NSNotificationCenter *nf;
+	NSNotificationCenter *nc;
 	PAQuery *query;
 	PASelectedTags *selectedTags;
 }
@@ -38,16 +39,17 @@ finds related tags for a given query or a given selection of tags.
 - (BOOL)isUpdating;
 - (void)setUpdating:(BOOL)flag;
 
+- (BOOL)containsTag:(PATag*)aTag;
+
 - (PASelectedTags*)selectedTags;
 - (void)setSelectedTags:(PASelectedTags*)otherTags;
 
 - (void)setQuery:(PAQuery*)aQuery;
 
-- (NSMutableArray*)relatedTags;
-- (void)setRelatedTags:(NSMutableArray*)otherTags;
-- (void)insertObject:(PATag *)tag inRelatedTagsAtIndex:(unsigned int)i;
-- (void)removeObjectFromRelatedTagsAtIndex:(unsigned int)i;
+- (NSArray*)relatedTagArray;
+- (NSMutableDictionary*)relatedTags;
+- (void)setRelatedTags:(NSMutableDictionary*)otherTags;
 
-- (void)removeAllObjectsFromRelatedTags;
+- (void)removeAllObjects;
 
 @end

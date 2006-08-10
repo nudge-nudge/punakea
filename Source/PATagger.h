@@ -11,6 +11,7 @@
 #import "Matador.h"
 #import "PATags.h"
 #import "PASimpleTagFactory.h"
+#import "PATempTag.h"
 
 /**
 singleton class for working with spotlight kMDItemKeywords
@@ -118,6 +119,18 @@ gets tag names of simple tags for all files at the paths (with count)
  @return dict with simple tags (and occurrence count) of files at paths
  */
 - (NSDictionary*)simpleTagNamesWithCountForFilesAtPaths:(NSArray*)paths;
+
+
+// NEW
+- (NSArray*)tagsOnFiles:(NSArray*)filePaths;
+- (NSArray*)tagsOnFiles:(NSArray*)filePaths includeTempTags:(BOOL)includeTempTags;
+- (PATag*)tagForName:(NSString*)tagName;
+- (PATag*)tagForName:(NSString*)tagName includeTempTag:(BOOL)includeTempTag;
+- (NSArray*)tagsForNames:(NSArray*)tagNames includeTempTags:(BOOL)includeTempTags;
+- (PATag*)createTagForName:(NSString*)tagName;
+- (NSArray*)createTagsForNames:(NSArray*)tagNames;
+- (void)addTags:(NSArray*)tags toFile:(NSString*)filePath;
+- (void)addKeywords:(NSArray*)keywords toFile:(NSString*)filePath createSimpleTags:(BOOL)createSimpleTags;
 
 #pragma mark accessors
 - (PATags*)tags;

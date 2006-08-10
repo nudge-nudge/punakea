@@ -13,7 +13,8 @@
 
 - (void)selectedTagsHaveChanged;
 - (void)relatedTagsHaveChanged;
-- (void)allTagsHaveChanged;
+- (void)tagsHaveChanged;
+
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
 
 @end
@@ -43,23 +44,25 @@
 		
 		buffer = [[NSMutableString alloc] init];
 		
-		[selectedTags addObserver:self
-					   forKeyPath:@"selectedTags"
-						  options:0
-						  context:NULL];
+		nc = [NSNotificationCenter defaultCenter];
 		
-		[relatedTags addObserver:self
-					  forKeyPath:@"relatedTags"
-						 options:0
-						 context:NULL];
+		[nc addObserver:self 
+			   selector:@selector(selectedTagsHaveChanged:) 
+				   name:@"PASelectedTagsHaveChanged" 
+				 object:selectedTags];
 		
-		[tags addObserver:self
-				forKeyPath:@"tags"
-				   options:0
-				   context:NULL];
-
-		[self setVisibleTags:[tags tags]];
-		[typeAheadFind setActiveTags:[tags tags]];	
+		[nc addObserver:self 
+			   selector:@selector(relatedTagsHaveChanged:) 
+				   name:@"PARelatedTagsHaveChanged" 
+				 object:relatedTags];
+		
+		[nc addObserver:self 
+			   selector:@selector(tagsHaveChanged:) 
+				   name:@"PATagsHaveChanged" 
+				 object:tags];
+		
+		[self setVisibleTags:[tags tagArray]];
+		[typeAheadFind setActiveTags:[tags tagArray]];	
 		
 		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
@@ -75,6 +78,7 @@
 
 - (void)dealloc
 {
+	[nc removeObserver:self];
 	[visibleTags release];
 	[buffer release];
 	[typeAheadFind release];
@@ -211,28 +215,7 @@
 }
 - (IBAction)clearSelectedTags:(id)sender
 {
-	[selectedTags removeAllObjectsFromSelectedTags];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object 
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-	if ([keyPath isEqual:@"selectedTags"]) 
-	{
-		[self selectedTagsHaveChanged];
-	}
-	
-	if ([keyPath isEqual:@"relatedTags"])
-	{
-		[self relatedTagsHaveChanged];
-	}
-	
-	if ([keyPath isEqual:@"tags"]) 
-	{
-		[self allTagsHaveChanged];
-	}
+	[selectedTags removeAllObjects];
 }
 
 - (void)bufferHasChanged
@@ -250,7 +233,7 @@
 }
 
 //needs to be called whenever the selected tags have been changed
-- (void)selectedTagsHaveChanged 
+- (void)selectedTagsHaveChanged:(NSNotification*)notification
 {
 	if ([buffer length] > 0)
 	{
@@ -275,12 +258,12 @@
 	else 
 	{
 		// there are no selected tags, reset all tags
-		[self setVisibleTags:[tags tags]];
-		[typeAheadFind setActiveTags:[tags tags]];
+		[self setVisibleTags:[tags tagArray]];
+		[typeAheadFind setActiveTags:[tags tagArray]];
 	}
 }
 
-- (void)relatedTagsHaveChanged
+- (void)relatedTagsHaveChanged:(NSNotification*)notification
 {
 	if ([buffer length] > 0)
 	{
@@ -291,7 +274,7 @@
 	[typeAheadFind setActiveTags:[relatedTags relatedTags]];
 }
 
-- (void)allTagsHaveChanged
+- (void)tagsHaveChanged:(NSNotification*)notification
 {
 	if ([buffer length] > 0)
 	{
@@ -302,8 +285,8 @@
 	because then the relatedTags are shown */
 	if ([selectedTags count] == 0)
 	{
-		[self setVisibleTags:[tags tags]];
-		[typeAheadFind setActiveTags:[tags tags]];
+		[self setVisibleTags:[tags tagArray]];
+		[typeAheadFind setActiveTags:[tags tagArray]];
 	}
 }
 

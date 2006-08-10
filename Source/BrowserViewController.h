@@ -42,6 +42,8 @@
 	NSMutableString *buffer;
 	
 	NSMutableDictionary *tagCloudSettings;
+	
+	NSNotificationCenter *nc;
 }
 
 - (id)initWithNibName:(NSString*)nibName;

@@ -10,24 +10,25 @@
 #import "PATag.h"
 
 @interface PASelectedTags : NSObject {
-	NSMutableArray *selectedTags;
+	NSMutableDictionary *selectedTags;
+	
+	NSNotificationCenter *nc;
 }
 
-- (id)initWithTags:(NSArray*)tags;
+- (id)initWithTags:(NSDictionary*)tags;
 
-- (NSMutableArray*)selectedTags;
-- (void)setSelectedTags:(NSMutableArray*)otherTags;
-- (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i;
-- (void)removeObjectFromSelectedTagsAtIndex:(unsigned int)i;
+- (NSArray*)selectedTagArray;
+- (NSMutableDictionary*)selectedTags;
+- (void)setSelectedTags:(NSMutableDictionary*)otherTags;
 
-- (void)removeAllObjectsFromSelectedTags;
+- (void)removeAllObjects;
 - (unsigned int)count;
 - (void)addTag:(PATag*)aTag;
 - (void)removeTag:(PATag*)aTag;
+- (BOOL)containsTag:(PATag*)aTag;
+- (NSEnumerator*)objectEnumerator;
+
 - (void)addObjectsFromArray:(NSArray*)array;
 - (void)removeObjectsInArray:(NSArray*)array;
-- (BOOL)containsObject:(PATag*)aTag;
-- (NSEnumerator*)objectEnumerator;
-- (PATag*)tagAtIndex:(unsigned int)i;
 
 @end

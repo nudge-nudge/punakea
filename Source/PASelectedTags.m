@@ -14,14 +14,15 @@
 #pragma mark init + dealloc
 - (id)init
 {
-	return [self initWithTags:[NSMutableArray array]];
+	return [self initWithTags:[NSDictionary dictionary]];
 }
 
-- (id)initWithTags:(NSArray*)tags
+- (id)initWithTags:(NSDictionary*)tags
 {
 	if (self = [super init])
 	{
 		[self setSelectedTags:[tags mutableCopy]];
+		nc = [NSNotificationCenter defaultCenter];
 	}
 	return self;
 }
@@ -33,29 +34,23 @@
 }
 
 #pragma mark accessors
-- (NSMutableArray*)selectedTags
+- (NSArray*)selectedTagArray
+{
+	return [selectedTags allValues];
+}
+
+- (NSMutableDictionary*)selectedTags
 {
 	return selectedTags;
 }
 
-- (void)setSelectedTags:(NSMutableArray*)otherTags
+- (void)setSelectedTags:(NSMutableDictionary*)otherTags
 {
 	[otherTags retain];
 	[selectedTags release];
 	selectedTags = otherTags;
-}
-
-- (void)insertObject:(PATag *)tag inSelectedTagsAtIndex:(unsigned int)i
-{
-	if (![selectedTags containsObject:tag])
-	{
-		[selectedTags insertObject:tag atIndex:i];
-	}
-}
-
-- (void)removeObjectFromSelectedTagsAtIndex:(unsigned int)i
-{
-	[selectedTags removeObjectAtIndex:i];
+	
+	[nc postNotificationName:@"PASelectedTagsHaveChanged" object:self];
 }
 
 #pragma mark additional
@@ -66,21 +61,23 @@
 	
 - (void)addTag:(PATag*)aTag
 {
-	[self insertObject:aTag inSelectedTagsAtIndex:[selectedTags count]];
+	[selectedTags setObject:aTag forKey:[aTag name]];
+	
+	[nc postNotificationName:@"PASelectedTagsHaveChanged" object:self];
 }
 
 - (void)removeTag:(PATag*)aTag
 {
-	unsigned int i = [selectedTags indexOfObject:aTag];
-	[self removeObjectFromSelectedTagsAtIndex:i];
+	[selectedTags removeObjectForKey:[aTag name]];
+	
+	[nc postNotificationName:@"PASelectedTagsHaveChanged" object:self];
 }
 
-- (void)removeAllObjectsFromSelectedTags
+- (void)removeAllObjects
 {
-	for (int i=0;i<[selectedTags count];i++)
-	{
-		[self removeObjectFromSelectedTagsAtIndex:i];
-	}
+	[selectedTags removeAllObjects];
+	
+	[nc postNotificationName:@"PASelectedTagsHaveChanged" object:self];
 }
 
 - (void)addObjectsFromArray:(NSArray*)array 
@@ -105,19 +102,14 @@
 	}
 }
 
-- (BOOL)containsObject:(PATag*)aTag
+- (BOOL)containsTag:(PATag*)aTag
 {
-	return [selectedTags containsObject:aTag];
+	return ([selectedTags objectForKey:[aTag name]] != nil);
 }
 
 - (NSEnumerator*)objectEnumerator
 {
 	return [selectedTags objectEnumerator];
-}
-
-- (PATag*)tagAtIndex:(unsigned int)i
-{
-	return [selectedTags objectAtIndex:i];
 }
 
 @end

@@ -7,18 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PASimpleTag.h"
-#import "PASimpleTagFactory.h"
+#import "PATag.h"
 
 @interface PATags : NSObject {
-	NSMutableArray *tags;
-	PASimpleTagFactory *simpleTagFactory;
+	NSMutableDictionary *tags;
+	
+	NSNotificationCenter *nc;
 }
 
-- (NSMutableArray*)tags;
-- (void)setTags:(NSMutableArray*)otherTags;
-- (void)insertObject:(PATag *)tag inTagsAtIndex:(unsigned int)i;
-- (void)removeObjectFromTagsAtIndex:(unsigned int)i;
+- (NSArray*)tagArray;
+- (PATag*)tagForName:(NSString*)tagName;
+
+- (NSMutableDictionary*)tags;
+- (void)setTags:(NSMutableDictionary*)otherTags;
 
 - (void)addTag:(PATag*)aTag;
 - (NSEnumerator*)objectEnumerator;

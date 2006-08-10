@@ -29,6 +29,7 @@
 - (void)dealloc
 {
 	[query release];
+	[super dealloc];
 }
 
 @end

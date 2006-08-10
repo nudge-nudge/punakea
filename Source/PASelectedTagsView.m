@@ -57,30 +57,13 @@
 {
 	selectedTags = [browserViewController selectedTags];
 	
-	[selectedTags addObserver:self
-				   forKeyPath:@"selectedTags"
-					  options:0
-					  context:NULL];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateView:) name:@"PASelectedTagsHaveChanged" object:selectedTags];
 }
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
-}
-
-
-/**
-bound to selectedTags
- */
-- (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object 
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-	if ([keyPath isEqual:@"selectedTags"]) 
-	{
-		[self updateView];
-	}
 }
 
 #pragma mark drawing
@@ -103,7 +86,7 @@ bound to selectedTags
 	[super drawRect:rect];
 }
 
-- (void)updateView
+- (void)updateView:(NSNotification*)notification
 { 
 	// TODO: Why do we remove ALL cells on every update??
 
@@ -181,6 +164,8 @@ bound to selectedTags
 	int j; //columns
 	int counter = 0;
 	
+	NSEnumerator *e = [selectedTags objectEnumerator];
+	
 	for (i=0;i<rowCount;i++)
 	{
 		for (j=0;j<numberOfTagsInRow;j++)
@@ -189,7 +174,7 @@ bound to selectedTags
 			if (counter == tagCount)
 				break;
 			
-			PATag *tag = [selectedTags tagAtIndex:counter];
+			PATag *tag = [e nextObject];
 			PASelectedTagCell *cell = [[PASelectedTagCell alloc] initTextCell:[tag name]];
 			//[cell setBezelStyle:NSRecessedBezelStyle];
 			[self putCell:[cell autorelease] atRow:i column:j];

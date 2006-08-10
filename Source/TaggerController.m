@@ -9,11 +9,6 @@ adds tag to tagField (use from "outside")
 - (void)addTagToField:(PASimpleTag*)tag;
 
 /**
-called when tags have changed, updates query
- */
-- (void)tagsHaveChanged;
-
-/**
 called when file selection has changed
  */
 - (void)selectionHasChanged;
@@ -38,14 +33,6 @@ resets the tagger window (called when window is closed)
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
 		currentCompleteTagsInField = [[PASelectedTags alloc] init];
-		
-		// create sort descriptor
-		NSSortDescriptor *popularDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO];
-		popularTagsSortDescriptors = [[NSArray alloc] initWithObjects:popularDescriptor,nil];
-		[popularDescriptor release];
-		
-		// related tags with no current selection
-		relatedTags = [[PARelatedTagsStandalone alloc] initWithSelectedTags:[[PASelectedTags alloc] init]];
 	}
 	return self;
 }
@@ -58,8 +45,8 @@ resets the tagger window (called when window is closed)
 
 - (void)dealloc
 {
-	[relatedTags release];
-	[popularTagsSortDescriptors release];
+	[fileController removeObserver:self forKeyPath:@"selectionIndexes"];
+
 	[currentCompleteTagsInField release];
 	[typeAheadFind release];
 	[super dealloc];
@@ -91,7 +78,6 @@ resets the tagger window (called when window is closed)
 	[newTags retain];
 	[currentCompleteTagsInField release];
 	currentCompleteTagsInField = newTags;
-	[self tagsHaveChanged];
 }
 
 #pragma mark functionality
@@ -110,23 +96,15 @@ resets the tagger window (called when window is closed)
 	[[tagField window] makeFirstResponder:tagField];
 }
 
-- (void)tagsHaveChanged
-{
-	[relatedTags setSelectedTags:currentCompleteTagsInField];
-}
-
-
 #pragma mark tokenField delegate
 - (NSArray *)tokenField:(NSTokenField *)tokenField 
 completionsForSubstring:(NSString *)substring 
 		   indexOfToken:(int)tokenIndex 
 	indexOfSelectedItem:(int *)selectedIndex
 {
-	[typeAheadFind setPrefix:substring];
-	
 	NSMutableArray *results = [NSMutableArray array];
 	
-	NSEnumerator *e = [[typeAheadFind matchingTags] objectEnumerator];
+	NSEnumerator *e = [[typeAheadFind tagsForPrefix:substring] objectEnumerator];
 	PASimpleTag *tag;
 	
 	while (tag = [e nextObject])
@@ -143,9 +121,6 @@ completionsForSubstring:(NSString *)substring
 {
 	[[PATagger sharedInstance] addTags:tokens ToFiles:[fileController selectedObjects]];
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
-	
-	// needs to be called manually because setter of currentCompleteTagsInField is not called
-	[self tagsHaveChanged];
 	
 	// everything will be added
 	return tokens;
@@ -164,7 +139,7 @@ completionsForSubstring:(NSString *)substring
 
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString
 {
-	return [tagger simpleTagForName:editingString];
+	return [tagger createTagForName:editingString];
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
@@ -196,16 +171,7 @@ completionsForSubstring:(NSString *)substring
 }
 
 #pragma mark gui change actions
-- (IBAction)addPopularTag
-{
-	NSArray *selection = [popularTagsController selectedObjects];
-	
-	if ([selection count] == 1)
-	{
-		[self addTagToField:[selection objectAtIndex:0]];
-	}
-}
-
+//TODO!
 - (IBAction)selectionHasChanged
 {
 	NSDictionary *tagDictionary = [tagger simpleTagNamesWithCountForFilesAtPaths:[fileController selectedObjects]];
@@ -220,19 +186,21 @@ completionsForSubstring:(NSString *)substring
 	while (tagName = [e nextObject])
 	{
 		int count = [[tagDictionary objectForKey:tagName] intValue];
+		PATag *tag = [tagger tagForName:tagName];
 		
-		if (count == selectionCount)
+		if (count == selectionCount && tag)
 		{
-			[tagsOnAllFiles addObject:[tagger simpleTagForName:tagName]];
+			[tagsOnAllFiles addObject:tag];
 		}
-		else
+		else if (tag)
 		{
-			[tagsOnSomeFiles addObject:[tagger simpleTagForName:tagName]];
+			[tagsOnSomeFiles addObject:tag];
 		}
 	}	
 	
 	[tagField setObjectValue:tagsOnAllFiles];
-	[self setCurrentCompleteTagsInField:[[PASelectedTags alloc] initWithTags:tagsOnAllFiles]];
+	[currentCompleteTagsInField removeAllObjects];
+	[currentCompleteTagsInField addObjectsFromArray:tagsOnAllFiles];
 	
 	[self displayRestTags:tagsOnSomeFiles];
 }
@@ -267,8 +235,5 @@ completionsForSubstring:(NSString *)substring
 	
 	// tagField - cascades to currentCompleteTagsInField
 	[self setCurrentCompleteTagsInField:[[PASelectedTags alloc] init]];
-	
-	// relatedTags
-	[relatedTags removeAllObjectsFromRelatedTags];
 }
 @end
