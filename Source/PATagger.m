@@ -96,24 +96,16 @@ static PATagger *sharedInstance = nil;
 	return result;
 }
 
-- (NSArray*)keywordsForFile:(NSString*)path {
-	//carbon api ... can be treated as cocoa objects - TODO check warnings
-	MDItemRef *item = MDItemCreate(NULL,path);
-	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
-	NSArray *tagNames = (NSArray*)keywords;
-	return [tagNames autorelease];
-}
-
 - (PATag*)createTagForName:(NSString*)tagName
 {
-	PATag *tag = [self tagForName:tagName];
+	PATag *tag = [self tagForName:tagName includeTempTags:NO];
 	
 	if (!tag)
 	{
 		tag = [simpleTagFactory createTagWithName:tagName];
 		[tags addTag:tag];
 	}
-
+	
 	return tag;
 }
 
@@ -126,7 +118,7 @@ static PATagger *sharedInstance = nil;
 	
 	while (tagName = [e nextObject])
 	{
-		PATag *tag = [self tagForName:tagName];
+		PATag *tag = [self tagForName:tagName includeTempTags:NO];
 		
 		if (!tag)
 		{
@@ -141,6 +133,14 @@ static PATagger *sharedInstance = nil;
 	}
 	
 	return result;
+}
+
+- (NSArray*)keywordsForFile:(NSString*)path {
+	//carbon api ... can be treated as cocoa objects - TODO check warnings
+	MDItemRef *item = MDItemCreate(NULL,path);
+	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
+	NSArray *tagNames = (NSArray*)keywords;
+	return [tagNames autorelease];
 }
 
 - (void)addTags:(NSArray*)someTags toFiles:(NSArray*)filePaths
