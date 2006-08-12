@@ -270,8 +270,8 @@
 		[self resetBuffer];
 	}
 	
-	[self setVisibleTags:[relatedTags relatedTags]];
-	[typeAheadFind setActiveTags:[relatedTags relatedTags]];
+	[self setVisibleTags:[relatedTags relatedTagArray]];
+	[typeAheadFind setActiveTags:[relatedTags relatedTagArray]];
 }
 
 - (void)tagsHaveChanged:(NSNotification*)notification
@@ -318,7 +318,7 @@
 		else if ([selectedTags count] > 0)
 		// else delete the last selected tag
 		{
-			[selectedTags removeObjectFromSelectedTagsAtIndex:[selectedTags count]-1];
+			[selectedTags removeLastTag];
 		}
 	}
 	else if ([alphanumericCharacterSet characterIsMember:key]) 

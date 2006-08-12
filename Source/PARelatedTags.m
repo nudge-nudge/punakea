@@ -180,7 +180,7 @@
 				// others apps may edit kMDItemKeywords as well!
 				PATag *tag = [tagger simpleTagForName:[keywords objectAtIndex:j]];
 				
-				if (![tag isKindOfClass:[PATempTag class]] && ![self containsObject:tag] && ![selectedTags containsObject:tag])
+				if (![tag isKindOfClass:[PATempTag class]] && ![self containsTag:tag] && ![selectedTags containsTag:tag])
 				{
 					[self addTag:tag];
 				}

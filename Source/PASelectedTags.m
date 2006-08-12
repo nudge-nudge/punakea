@@ -34,6 +34,18 @@
 }
 
 #pragma mark accessors
+- (PATag*)lastTag
+{
+	return lastTag;
+}
+
+- (void)setLastTag:(PATag*)aTag
+{
+	[aTag retain];
+	[lastTag release];
+	lastTag = aTag;
+}
+
 - (NSArray*)selectedTagArray
 {
 	return [selectedTags allValues];
@@ -62,6 +74,7 @@
 - (void)addTag:(PATag*)aTag
 {
 	[selectedTags setObject:aTag forKey:[aTag name]];
+	[self setLastTag:aTag];
 	
 	[nc postNotificationName:@"PASelectedTagsHaveChanged" object:self];
 }
@@ -73,7 +86,15 @@
 	[nc postNotificationName:@"PASelectedTagsHaveChanged" object:self];
 }
 
-- (void)removeAllObjects
+- (void)removeLastTag
+{
+	if (lastTag && [selectedTags count] > 0)
+	{
+		[self removeTag:lastTag];
+	}
+}
+
+- (void)removeAllTags
 {
 	[selectedTags removeAllObjects];
 	

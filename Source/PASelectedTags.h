@@ -11,6 +11,7 @@
 
 @interface PASelectedTags : NSObject {
 	NSMutableDictionary *selectedTags;
+	PATag *lastTag;
 	
 	NSNotificationCenter *nc;
 }
@@ -18,10 +19,13 @@
 - (id)initWithTags:(NSDictionary*)tags;
 
 - (NSArray*)selectedTagArray;
+- (PATag*)lastTag;
+- (void)setLastTag:(PATag*)aTag;
 - (NSMutableDictionary*)selectedTags;
 - (void)setSelectedTags:(NSMutableDictionary*)otherTags;
 
-- (void)removeAllObjects;
+- (void)removeLastTag;
+- (void)removeAllTags;
 - (unsigned int)count;
 - (void)addTag:(PATag*)aTag;
 - (void)removeTag:(PATag*)aTag;

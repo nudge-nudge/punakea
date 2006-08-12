@@ -21,8 +21,8 @@
 {
 	if (self = [super init]) 
 	{
-		[self setName:aName];
 		[self setQuery:@""];
+		[self setName:aName];
 		lastClicked = [[NSCalendarDate alloc] init];
 		lastUsed = [[NSCalendarDate alloc] init];
 		
@@ -34,10 +34,10 @@
 
 - (void)dealloc 
 {
-	[name release];
-	[query release];
 	[lastUsed release];
 	[lastClicked release];
+	[name release];
+	[query release];
 	[super dealloc];
 }
 
