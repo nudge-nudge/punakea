@@ -215,7 +215,7 @@
 }
 - (IBAction)clearSelectedTags:(id)sender
 {
-	[selectedTags removeAllObjects];
+	[selectedTags removeAllTags];
 }
 
 - (void)bufferHasChanged

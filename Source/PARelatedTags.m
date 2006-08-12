@@ -113,7 +113,7 @@
 	[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
 }
 
-- (void)removeAllObjects
+- (void)removeAllTags
 {
 	[relatedTags removeAllObjects];
 
@@ -163,7 +163,7 @@
 	//get the related tags to the current results
 	{
 		//TODO hack
-		[self removeAllObjects];
+		[self removeAllTags];
 		//disable updates, parse files, continue -- TODO make more efficient, performance will SUCK
 		while (i--) 
 		{
@@ -178,7 +178,7 @@
 			{
 				// tag may be nil if there is no simple tag for the given name
 				// others apps may edit kMDItemKeywords as well!
-				PATag *tag = [tagger simpleTagForName:[keywords objectAtIndex:j]];
+				PATag *tag = [tagger tagForName:[keywords objectAtIndex:j]];
 				
 				if (![tag isKindOfClass:[PATempTag class]] && ![self containsTag:tag] && ![selectedTags containsTag:tag])
 				{

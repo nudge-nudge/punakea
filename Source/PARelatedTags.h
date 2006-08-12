@@ -50,6 +50,6 @@ finds related tags for a given query or a given selection of tags.
 - (NSMutableDictionary*)relatedTags;
 - (void)setRelatedTags:(NSMutableDictionary*)otherTags;
 
-- (void)removeAllObjects;
+- (void)removeAllTags;
 
 @end

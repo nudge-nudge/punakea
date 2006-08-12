@@ -11,14 +11,7 @@
 @interface PATagger (PrivateAPI)
 
 - (void)writeTags:(NSArray*)tags ToFile:(NSString*)path;
-/**
-get tags as PASimpleTag array for file at path
- this function is for Tagger-internal use only, doesn't return the "real" tag,
- only a placeholder without click and use count and stuff
- @param path file for which to get the tags
- @return array with PASimpleTags corresponding to the kMDItemKeywords on the file
- */
-- (NSMutableArray*)tagsForFile:(NSString*)path;
+
 @end
 
 @implementation PATagger
@@ -39,22 +32,21 @@ static PATagger *sharedInstance = nil;
 }
 
 #pragma mark tags and files
-// ----------------------------- NEW -------------------------
 - (NSArray*)tagsOnFiles:(NSArray*)filePaths
 {
-	return [self tagsOnFiles:filePaths includeTempTags:NO];
+	return [self tagsOnFiles:filePaths includeTempTags:YES];
 }
 
 - (NSArray*)tagsOnFiles:(NSArray*)filePaths includeTempTags:(BOOL)includeTempTags
 {
 	NSMutableArray *keywords = [NSMutableArray array];
 	
-	NSEnumerator *e = [filePaths objectEnumerator];
-	NSString *keyword;
+	NSEnumerator *filePathEnumerator = [filePaths objectEnumerator];
+	NSString *filePath;
 	
-	while (keyword = [e nextObject])
+	while (filePath = [filePathEnumerator nextObject])
 	{
-		[keywords addObject:keyword];
+		[keywords addObjectsFromArray:[self keywordsForFile:filePath]];
 	}
 	
 	NSArray *resultTags = [self tagsForNames:keywords includeTempTags:includeTempTags];
@@ -64,7 +56,7 @@ static PATagger *sharedInstance = nil;
 
 - (PATag*)tagForName:(NSString*)tagName
 {
-	return [self tagForName:tagName includeTempTag:NO];
+	return [self tagForName:tagName includeTempTag:YES];
 }
 
 - (PATag*)tagForName:(NSString*)tagName includeTempTag:(BOOL)includeTempTag
@@ -102,6 +94,14 @@ static PATagger *sharedInstance = nil;
 	}
 	
 	return result;
+}
+
+- (NSArray*)keywordsForFile:(NSString*)path {
+	//carbon api ... can be treated as cocoa objects - TODO check warnings
+	MDItemRef *item = MDItemCreate(NULL,path);
+	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
+	NSArray *tagNames = (NSArray*)keywords;
+	return [tagNames autorelease];
 }
 
 - (PATag*)createTagForName:(NSString*)tagName
@@ -143,99 +143,47 @@ static PATagger *sharedInstance = nil;
 	return result;
 }
 
-- (void)addTags:(NSArray*)tags toFile:(NSString*)filePath
+- (void)addTags:(NSArray*)someTags toFiles:(NSArray*)filePaths
 {
-	NSArray *tagsOnFile = [self tagsOnFiles:[NSArray arrayWithObject:filePath] includeTempTags:YES];
+	NSEnumerator *filePathEnumerator = [filePaths objectEnumerator];
+	NSString *filePath;
 	
-	NSEnumerator *e = [tags objectEnumerator];
-	PATag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		if (![tagsOnFile containsObject:tag])
-		{
-			[tagsOnFile addObject:tag];
-		}
-	}
-	
-	[self writeTags:tagsOnFile ToFile:filePath];
+	while (filePath = [filePathEnumerator nextObject])
+   {
+	   NSMutableArray *tagsOnFile = [[[self tagsOnFiles:[NSArray arrayWithObject:filePath] includeTempTags:YES] mutableCopy] autorelease];
+	   NSEnumerator *e = [someTags objectEnumerator];
+	   PATag *tag;
+
+	   while (tag = [e nextObject])
+	   {
+		   if (![tagsOnFile containsObject:tag])
+		   {
+			   [tagsOnFile addObject:tag];
+			   [tag incrementUseCount];
+		   }
+	   }
+
+	   [self writeTags:tagsOnFile ToFile:filePath];
+   }
 }
 
-- (void)addKeywords:(NSArray*)keywords toFile:(NSString*)filePath createSimpleTags:(BOOL)createSimpleTags
+- (void)addKeywords:(NSArray*)keywords toFiles:(NSArray*)filePaths createSimpleTags:(BOOL)createSimpleTags
 {
-	NSArray *tags;
+	NSArray *tagArray;
 	
 	if (createSimpleTags)
 	{
-		tags = [self createTagsForNames:keywords];
+		tagArray = [self createTagsForNames:keywords];
 	}
 	else
 	{
-		tags = [self tagsForNames:keywords];
+		tagArray = [self tagsForNames:keywords includeTempTags:NO];
 	}
 	
-	[self addTags:tags ToFile:filePath];
+	[self addTags:tagArray toFiles:filePaths];
 }
 
-//  ---------------------------- OLD -------------------------
-//write tags
-- (void)addTag:(PASimpleTag*)tag ToFile:(NSString*)path {
-	[self addTags:[NSArray arrayWithObject:tag] ToFile:path];
-}
-
-//adds the specified tags, doesn't overwrite - TODO check if works with PATag
-- (void)addTags:(NSArray*)someTags ToFile:(NSString*)path {
-	NSMutableArray *resultTags = [NSMutableArray arrayWithArray:someTags];
-	
-	//existing tags must be kept - only if there are any
-	if ([[self tagsForFile:path] count] > 0) {
-		NSArray *currentTags = [self tagsForFile:path];
-
-		/* check if the file had tags which are not in the
-		   tags to be added - need to keep them */
-		NSEnumerator *e = [currentTags objectEnumerator];
-		id tag;
-		
-		while ( (tag = [e nextObject]) ) 
-		{
-			if (![resultTags containsObject:tag]) 
-			{
-				[resultTags addObject:tag];
-				
-				// increment use count here, that way the other classes
-				// don't have to care
-				[tag incrementUseCount];
-			}
-		}
-	}
-	
-	//write the tags to kMDItemKeywords - new and existing ones
-	[self writeTags:resultTags ToFile:path];
-}
-
-- (void)addTag:(PASimpleTag*)tag ToFiles:(NSArray*)paths
-{
-	NSEnumerator *e = [paths objectEnumerator];
-	NSString *path;
-	
-	while (path = [e nextObject])
-	{
-		[self addTag:tag ToFile:path];
-	}
-}
-
-- (void)addTags:(NSArray*)someTags ToFiles:(NSArray*)paths
-{
-	NSEnumerator *e = [paths objectEnumerator];
-	NSString *path;
-	
-	while (path = [e nextObject])
-	{
-		[self addTags:someTags ToFile:path];
-	}
-}
-
-- (void)removeTag:(PASimpleTag*)tag fromFiles:(NSArray*)files
+- (void)removeTag:(PATag*)tag fromFiles:(NSArray*)files
 {
 	NSEnumerator *fileEnumerator = [files objectEnumerator];
 	NSString *path;
@@ -243,7 +191,7 @@ static PATagger *sharedInstance = nil;
 	while (path = [fileEnumerator nextObject])
 	{
 		// get all tags, remove the specified one, write back to file
-		NSMutableArray *someTags = [self tagsForFile:path];
+		NSMutableArray *someTags = [[[self tagsOnFiles:[NSArray arrayWithObject:path]] mutableCopy] autorelease];
 		[someTags removeObject:tag];
 		
 		// decrement use count here, that way the other classes
@@ -264,7 +212,7 @@ static PATagger *sharedInstance = nil;
 	}
 }
 
-- (void)renameTag:(PASimpleTag*)tag toTag:(PASimpleTag*)newTag onFiles:(NSArray*)files
+- (void)renameTag:(PATag*)tag toTag:(PATag*)newTag onFiles:(NSArray*)files
 {
 	NSEnumerator *fileEnumerator = [files objectEnumerator];
 	NSString *path;
@@ -272,7 +220,7 @@ static PATagger *sharedInstance = nil;
 	while (path = [fileEnumerator nextObject])
 	{
 		// get all tags, rename the specified one (delete/add), write back to file
-		NSMutableArray *someTags = [self tagsForFile:path];
+		NSMutableArray *someTags = [[[self tagsOnFiles:[NSArray arrayWithObject:path]] mutableCopy] autorelease];
 		[someTags removeObject:tag];
 		[someTags addObject:newTag];
 		[self writeTags:someTags ToFile:path];
@@ -295,149 +243,32 @@ static PATagger *sharedInstance = nil;
 	[keywordArray release];
 }
 
-//read tags - TODO there could be a lot of mem-leaks in here ... check if file exists!!
-- (NSMutableArray*)tagsForFile:(NSString*)path {
-	NSArray *tagNames = [self keywordsForFile:path];
-
-	NSMutableArray *result = [NSMutableArray array];
-	NSEnumerator *e = [tagNames objectEnumerator];
-	NSString *tagName;
-
-	while (tagName = [e nextObject]) {
-		PATag *tag = [simpleTagFactory createTagWithName:tagName];
-		[result addObject:tag];
-	}				
-	
-	return result;
-}
-
-- (NSArray*)keywordsForFile:(NSString*)path {
-	//carbon api ... can be treated as cocoa objects - TODO check warnings
-	MDItemRef *item = MDItemCreate(NULL,path);
-	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
-	NSArray *tagNames = (NSArray*)keywords;
-	return [tagNames autorelease];
-}
-
-- (PASimpleTag*)simpleTagForName:(NSString*)name
-{
-	return [self simpleTagForName:name createNewTags:NO];
-}
-
-- (PASimpleTag*)simpleTagForName:(NSString*)name createNewTags:(BOOL)createTags
-{
-	BOOL found = NO;
-	PASimpleTag *newTag;
-	
-	//first look through all tags for the specified one
-	NSEnumerator *e = [tags objectEnumerator];
-	PATag *tag;
-	
-	//TODO hash needed for better performance
-	while (tag = [e nextObject])
-	{
-		if ([tag isKindOfClass:[PASimpleTag class]] && [name isEqualToString:[tag name]])
-		{
-			//the tag was found
-			found = YES;
-			newTag = tag;
-		}
-	}
-	
-	//if the tag wasn't found, create a new one - depends on createTags
-	if (!found && createTags) 
-	{
-		newTag = [simpleTagFactory createTagWithName:name];
-		[tags addTag:newTag];
-	}
-	else if (!found && !createTags)
-	{
-		// there is no tag for the given name - create tempTag
-		newTag = [[[PATempTag alloc] init] autorelease];
-	}
-	
-	return newTag;
-}
-
-- (NSArray*)simpleTagsForNames:(NSArray*)names
-{
-	NSMutableArray *resultArray = [NSMutableArray array];
-	
-	NSEnumerator *e = [names objectEnumerator];
-	NSString *name;
-	
-	while (name = [e nextObject])
-	{
-		[resultArray addObject:[self simpleTagForName:name]];
-	}
-	
-	return resultArray;
-}
-
-- (NSArray*)simpleTagsForFileAtPath:(NSString*)path
-{
-	NSArray *keywords = [self keywordsForFile:path];
-	
-	return [self simpleTagsForNames:keywords];
-}
-
-- (NSArray*)simpleTagsForFilesAtPaths:(NSArray*)paths
-{
-	NSMutableArray *resultArray = [NSMutableArray array];
-	NSDictionary *tagNamesWithCount = [self simpleTagNamesWithCountForFilesAtPaths:paths];
-	
-	NSEnumerator *e = [[tagNamesWithCount allKeys] objectEnumerator];
-	NSString *tag;
-	
-	while (tag = [e nextObject])
-	{
-		int useCount = [[tagNamesWithCount objectForKey:tag] intValue];
-		
-		// only add tags which are on all files
-		if (useCount == [paths count])
-		{
-			[resultArray addObject:[self simpleTagForName:tag]];
-		}
-	}
-	
-	return resultArray;
-}	
-
-
-- (NSDictionary*)simpleTagNamesWithCountForFilesAtPaths:(NSArray*)paths;
+- (NSDictionary*)tagNamesWithCountForFilesAtPaths:(NSArray*)paths;
 {
 	NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
 	
-	NSEnumerator *e = [paths objectEnumerator];
-	NSString *path;
+	NSArray *tmpTags = [self tagsOnFiles:paths];
+	NSEnumerator *tagEnum = [tmpTags objectEnumerator];
+	PATag *tag;
 	
-	while (path = [e nextObject])
+	while (tag = [tagEnum nextObject])
 	{
-		NSArray *tmpTags = [self simpleTagsForFileAtPath:path];
-		NSEnumerator *tagEnum = [tmpTags objectEnumerator];
-		PASimpleTag *tag;
-		
-		while (tag = [tagEnum nextObject])
+		if ([resultDict objectForKey:[tag name]])
 		{
-			if ([resultDict objectForKey:[tag name]])
-			{
-				NSNumber *count = [resultDict objectForKey:[tag name]];
-				int tmp = [count intValue]+1;
-				NSNumber *newCount = [NSNumber numberWithInt:tmp];
-				[resultDict setObject:newCount forKey:[tag name]];
-			}
-			else
-			{
-				NSNumber *newCount = [NSNumber numberWithInt:1];
-				[resultDict setObject:newCount forKey:[tag name]];
-			}
+			NSNumber *count = [resultDict objectForKey:[tag name]];
+			int tmp = [count intValue]+1;
+			NSNumber *newCount = [NSNumber numberWithInt:tmp];
+			[resultDict setObject:newCount forKey:[tag name]];
+		}
+		else
+		{
+			NSNumber *newCount = [NSNumber numberWithInt:1];
+			[resultDict setObject:newCount forKey:[tag name]];
 		}
 	}
 	
 	return resultDict;
 }
-
-
 
 #pragma mark accessors
 - (PATags*)tags

@@ -119,7 +119,7 @@ completionsForSubstring:(NSString *)substring
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)index
 {
-	[[PATagger sharedInstance] addTags:tokens ToFiles:[fileController selectedObjects]];
+	[[PATagger sharedInstance] addTags:tokens toFiles:[fileController selectedObjects]];
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	
 	// everything will be added
@@ -174,7 +174,7 @@ completionsForSubstring:(NSString *)substring
 //TODO!
 - (IBAction)selectionHasChanged
 {
-	NSDictionary *tagDictionary = [tagger simpleTagNamesWithCountForFilesAtPaths:[fileController selectedObjects]];
+	NSDictionary *tagDictionary = [tagger tagNamesWithCountForFilesAtPaths:[fileController selectedObjects]];
 	int selectionCount = [[fileController selectedObjects] count];
 	
 	NSMutableArray *tagsOnAllFiles = [NSMutableArray array];
@@ -199,7 +199,7 @@ completionsForSubstring:(NSString *)substring
 	}	
 	
 	[tagField setObjectValue:tagsOnAllFiles];
-	[currentCompleteTagsInField removeAllObjects];
+	[currentCompleteTagsInField removeAllTags];
 	[currentCompleteTagsInField addObjectsFromArray:tagsOnAllFiles];
 	
 	[self displayRestTags:tagsOnSomeFiles];

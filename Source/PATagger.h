@@ -27,40 +27,40 @@ get the singleton instance
  */
 + (PATagger*)sharedInstance;
 
-/**
-adds a single tag to a file
- @param tag tag to add to file
- @param path path to file
- */
-- (void)addTag:(PASimpleTag*)tag ToFile:(NSString*)path;
+- (NSArray*)tagsOnFiles:(NSArray*)filePaths;
+- (NSArray*)tagsOnFiles:(NSArray*)filePaths includeTempTags:(BOOL)includeTempTags;
+
+- (PATag*)tagForName:(NSString*)tagName;
+- (PATag*)tagForName:(NSString*)tagName includeTempTag:(BOOL)includeTempTag;
+
+- (NSArray*)tagsForNames:(NSArray*)tagNames includeTempTags:(BOOL)includeTempTags;
 
 /**
 add multiple tags to a file
  @param tags array with tags
  @param path path to file
  */
-- (void)addTags:(NSArray*)tags ToFile:(NSString*)path;
+- (void)addTags:(NSArray*)tags toFiles:(NSArray*)filePaths;
+
+- (PATag*)createTagForName:(NSString*)tagName;
+
+- (NSArray*)createTagsForNames:(NSArray*)tagNames;
+
+- (void)addKeywords:(NSArray*)keywords toFiles:(NSArray*)filePaths createSimpleTags:(BOOL)createSimpleTags;
 
 /**
-add tag to multiple files
- @param tag tag
- @param paths array with filepaths
+get keywords as NSString array for file at path
+ @param path file for which to get the tags
+ @return array with NSStrings corresponding to the kMDItemKeywords on the file
  */
-- (void)addTag:(PASimpleTag*)tag ToFiles:(NSArray*)paths;
-
-/**
-add tags to multiple files
- @param tags array with simpletags tag
- @param paths array with filepaths
- */
-- (void)addTags:(NSArray*)tags ToFiles:(NSArray*)paths;
+- (NSArray*)keywordsForFile:(NSString*)path;
 
 /**
 removes the tag from all files
  @param tag tag to remove
  @param files files to remove tags from (array of path strings)
  */
-- (void)removeTag:(PASimpleTag*)tag fromFiles:(NSArray*)files;
+- (void)removeTag:(PATag*)tag fromFiles:(NSArray*)files;
 
 /**
 removes the tags from all files
@@ -75,62 +75,14 @@ renames the tag on all files
  @param newTag new name
  @param files files to rename in (array of path strings)
  */
-- (void)renameTag:(PASimpleTag*)tag toTag:(PASimpleTag*)newTag onFiles:(NSArray*)files;
-
-/**
-get keywords as NSString array for file at path
- @param path file for which to get the tags
- @return array with NSStrings corresponding to the kMDItemKeywords on the file
- */
-- (NSArray*)keywordsForFile:(NSString*)path;
-
-/**
-looks for the simple tag with the corresponding name -
- if none exists, a new one is created and added
- @param name the tag name
- @return existing or newly created tag
- */
-- (PASimpleTag*)simpleTagForName:(NSString*)name;
-
-/**
-gets simple tags for all passed names
- @param names NSString array
- @return NSArray containing simple tags
- */
-- (NSArray*)simpleTagsForNames:(NSArray*)names;
-
-/**
-gets simple tags for file at path
- @param path path to file
- @return array of simple tags on file
- */
-- (NSArray*)simpleTagsForFileAtPath:(NSString*)path;
-
-/**
-gets simple tags for all files at the paths
- @param paths NSArray of NSStrings with file paths
- @return array of simple tags on files
- */
-- (NSArray*)simpleTagsForFilesAtPaths:(NSArray*)paths;
+- (void)renameTag:(PATag*)tag toTag:(PATag*)newTag onFiles:(NSArray*)files;
 
 /**
 gets tag names of simple tags for all files at the paths (with count)
  @param paths NSArray of NSStrings with file paths
  @return dict with simple tags (and occurrence count) of files at paths
  */
-- (NSDictionary*)simpleTagNamesWithCountForFilesAtPaths:(NSArray*)paths;
-
-
-// NEW
-- (NSArray*)tagsOnFiles:(NSArray*)filePaths;
-- (NSArray*)tagsOnFiles:(NSArray*)filePaths includeTempTags:(BOOL)includeTempTags;
-- (PATag*)tagForName:(NSString*)tagName;
-- (PATag*)tagForName:(NSString*)tagName includeTempTag:(BOOL)includeTempTag;
-- (NSArray*)tagsForNames:(NSArray*)tagNames includeTempTags:(BOOL)includeTempTags;
-- (PATag*)createTagForName:(NSString*)tagName;
-- (NSArray*)createTagsForNames:(NSArray*)tagNames;
-- (void)addTags:(NSArray*)tags toFile:(NSString*)filePath;
-- (void)addKeywords:(NSArray*)keywords toFile:(NSString*)filePath createSimpleTags:(BOOL)createSimpleTags;
+- (NSDictionary*)tagNamesWithCountForFilesAtPaths:(NSArray*)paths;
 
 #pragma mark accessors
 - (PATags*)tags;
