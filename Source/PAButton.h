@@ -28,6 +28,8 @@
 - (void)setState:(PAButtonState)aState;
 - (PABezelStyle)bezelStyle;
 - (void)setBezelStyle:(PABezelStyle)bezelStyle;
+- (NSColor *)bezelColor;	/**< Sets the background color of the rounded rect bezel, if style is PATokenBezelStyle */
+- (void)setBezelColor:(NSColor *)bezelColor;
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)buttonType;
 - (int)tag;
@@ -36,7 +38,5 @@
 - (void)setAction:(SEL)action;
 - (id)target;
 - (void)setTarget:(id)target;
-- (NSControlSize)controlSize;
-- (void)setControlSize:(NSControlSize)size;
 
 @end

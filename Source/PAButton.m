@@ -126,6 +126,16 @@
 	[[self cell] setBezelStyle:bezelStyle];
 }
 
+- (NSColor *)bezelColor
+{
+	return [[self cell] bezelColor];
+}
+
+- (void)setBezelColor:(NSColor *)bezelColor
+{
+	[[self cell] setBezelColor:bezelColor];
+}
+
 - (PAButtonType)buttonType
 {
 	return [[self cell] buttonType];
@@ -164,16 +174,6 @@
 - (void)setTarget:(id)target
 {
 	[[self cell] setTarget:target];
-}
-
-- (NSControlSize)controlSize
-{
-	return [[self cell] controlSize];
-}
-
-- (void)setControlSize:(NSControlSize)size
-{
-	[[self cell] setControlSize:size];
 }
 
 @end

@@ -107,13 +107,26 @@
 		}
 		
 		NSRect buttonFrame = [button frame];
-		x += buttonFrame.size.width + 3;
+		x += buttonFrame.size.width + 2;
 		
 		[self addSubview:button];
 		[buttons addObject:button];
-		
-		//[button setShowsBorderOnlyWhileMouseInside:YES];
 	}
+	
+	// Add a token test button
+	NSRect frame = [self frame];
+	frame.origin.x = frame.size.width - 100;
+	frame.origin.y = 2;
+	frame.size.height = 30;
+	frame.size.width = 70;
+		
+	PAButton *button = [[PAButton alloc] initWithFrame:frame];
+	[button setTitle:@"Tagbutton"];
+	[button setButtonType:PAMomentaryLightButton];
+	[button setBezelStyle:PATokenBezelStyle];
+	[button setBezelColor:[NSColor colorWithDeviceRed:(222.0/255.0) green:(231.0/255.0) blue:(248.0/255.0) alpha:1.0]];
+	[button sizeToFit];
+	[self addSubview:button];
 }
 
 - (void)buttonClick:(id)sender

@@ -10,7 +10,7 @@
 
 
 NSSize const PADDING_RECESSEDBEZELSTYLE = {8,0};
-//NSSize const PADDING_TOKENBEZELSTYLE = {5,1};
+NSSize const PADDING_TOKENBEZELSTYLE = {5,1};
 
 int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
@@ -57,6 +57,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
 - (void)dealloc
 {
+	if(bezelColor) [bezelColor release];
 	if(title) [title release];
 	if(images) [images release];
 	if(tag) [tag release];
@@ -78,8 +79,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 			case PARecessedBezelStyle:
 				[self drawRecessedButtonWithFrame:cellFrame inView:controlView]; break;
 			case PATokenBezelStyle:
-				// TODO
-				break;
+				[self drawTokenButtonWithFrame:cellFrame inView:controlView]; break;
 		}
 		
 	} else {
@@ -97,7 +97,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	// Attributed string for title
 	NSMutableAttributedString *label = [[NSMutableAttributedString alloc] initWithString:title];
 	[label addAttribute:NSFontAttributeName
-				  value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[self controlSize]]]
+				  value:[NSFont boldSystemFontOfSize:11]
 				  range:NSMakeRange(0, [label length])];
 	
 	// Set colors
@@ -112,15 +112,16 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 		shadowColor = [NSColor colorWithDeviceWhite:0.2 alpha:0.6];	
 	} else {
 		[label addAttribute:NSForegroundColorAttributeName
-					  value:[NSColor textColor]
+					  value:[NSColor colorWithDeviceWhite:0.1 alpha:0.9]
 					  range:NSMakeRange(0, [label length])];
 		
-		shadowColor = [NSColor colorWithDeviceWhite:0.92 alpha:0.6];	
+		//shadowColor = [NSColor colorWithDeviceWhite:0.92 alpha:0.8];	
+		shadowColor = [NSColor whiteColor];
 	}
 	
 	// Add shadow
 	NSShadow *shadow = [[NSShadow alloc] init];
-	[shadow setShadowOffset:NSMakeSize(1,-1.5)];
+	[shadow setShadowOffset:NSMakeSize(0,-1.5)];
 	[shadow setShadowColor:shadowColor];
 	[label addAttribute:NSShadowAttributeName
 				  value:shadow
@@ -134,7 +135,6 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 				  value:paraStyle
 				  range:NSMakeRange(0, [label length])];
 	
-	// TODO: padding depends on controlsize or throw error when applying controlsize other than smallsize
 	NSSize padding = PADDING_RECESSEDBEZELSTYLE;	
 
 	NSImage *bezelImage = nil;
@@ -175,6 +175,26 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 		destRect.size.width = 7;
 		[bezelImage drawInRect:destRect fromRect:imgRect operation:NSCompositeSourceOver fraction:1.0];
 	}
+	
+	[label drawInRect:NSInsetRect(cellFrame, padding.width, padding.height)];
+}
+
+- (void)drawTokenButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	// Attributed string for title
+	NSMutableAttributedString *label = [[NSMutableAttributedString alloc] initWithString:title];
+	[label addAttribute:NSFontAttributeName
+				  value:[NSFont boldSystemFontOfSize:11]
+				  range:NSMakeRange(0, [label length])];
+	
+	NSSize padding = PADDING_TOKENBEZELSTYLE;
+	
+	// Add bezel
+	NSBezierPath *bezel = [NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:10.0];
+	[bezelColor set];
+	[bezel fill];
+	[[NSColor blueColor] set];
+	[bezel stroke];
 	
 	[label drawInRect:NSInsetRect(cellFrame, padding.width, padding.height)];
 }
@@ -266,6 +286,17 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	bezelStyle = aBezelStyle;
 }
 
+- (NSColor *)bezelColor
+{
+	return bezelColor;
+}
+
+- (void)setBezelColor:(NSColor *)aBezelColor
+{
+	if(bezelColor) [bezelColor release];
+	bezelColor = [aBezelColor retain];
+}
+
 - (PAButtonType)buttonType
 {
 	return buttonType;
@@ -287,7 +318,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 			case PARecessedBezelStyle:;
 				NSMutableAttributedString *label = [[NSMutableAttributedString alloc] initWithString:[self title]];
 				[label addAttribute:NSFontAttributeName
-							  value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[self controlSize]]]
+							  value:[NSFont boldSystemFontOfSize:11]
 							  range:NSMakeRange(0, [label length])];
 				NSSize labelSize = [label size];
 				
@@ -296,7 +327,12 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 				size.height = HEIGHT_RECESSEDBEZELSTYLE_SMALL;
 				
 				break;
-			// TODO: Add token style
+			
+			// TODO: Add correct token style
+			case PATokenBezelStyle:;
+				size.width = 80;
+				size.height = 20;
+				break;
 		}
 	} else {
 		// TODO: Set size to image size
