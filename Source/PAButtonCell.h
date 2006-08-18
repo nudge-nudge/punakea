@@ -54,6 +54,7 @@ extern int const FRAME_HEIGHT_REGULAR;
 	PAButtonState				state;
 	PABezelStyle				bezelStyle;
 	NSColor						*bezelColor;
+	NSColor						*bezelBorderColor;
 	PAButtonType				buttonType;
 	
 
@@ -69,10 +70,14 @@ extern int const FRAME_HEIGHT_REGULAR;
 - (void)setPressed:(BOOL)flag;
 - (PAButtonState)state;
 - (void)setState:(PAButtonState)aState;
+
 - (PABezelStyle)bezelStyle;
 - (void)setBezelStyle:(PABezelStyle)aBezelStyle;
 - (NSColor *)bezelColor;
 - (void)setBezelColor:(NSColor *)aBezelColor;
+- (NSColor *)bezelBorderColor;
+- (void)setBezelBorderColor:(NSColor *)aBorderColor;
+
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)type;
 

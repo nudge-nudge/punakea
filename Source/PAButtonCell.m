@@ -10,7 +10,7 @@
 
 
 NSSize const PADDING_RECESSEDBEZELSTYLE = {8,0};
-NSSize const PADDING_TOKENBEZELSTYLE = {5,1};
+NSSize const PADDING_TOKENBEZELSTYLE = {5,0};
 
 int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
@@ -48,16 +48,17 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	[self setButtonType:PAMomentaryLightButton];	
 	[self setBezelStyle:PARecessedBezelStyle];
 	[self setBordered:YES];
-	[self setControlSize:NSSmallControlSize];
+	
+	[self setBezelColor:[NSColor colorWithDeviceRed:(222.0/255.0) green:(231.0/255.0) blue:(248.0/255.0) alpha:1.0]];
+	[self setBezelBorderColor:[NSColor colorWithDeviceRed:(164.0/255.0) green:(189.0/255.0) blue:(236.0/255.0) alpha:1.0]];
 	
 	tag = [[NSMutableDictionary alloc] init];
-	
-	//[self setAction:@selector(action:)];
 }
 
 - (void)dealloc
 {
 	if(bezelColor) [bezelColor release];
+	if(bezelBorderColor) [bezelBorderColor release];
 	if(title) [title release];
 	if(images) [images release];
 	if(tag) [tag release];
@@ -181,20 +182,35 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
 - (void)drawTokenButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
+	// TEMP for testing in front of white background
+	[[NSColor whiteColor] set];
+	NSRectFill(cellFrame);
+
 	// Attributed string for title
 	NSMutableAttributedString *label = [[NSMutableAttributedString alloc] initWithString:title];
 	[label addAttribute:NSFontAttributeName
-				  value:[NSFont boldSystemFontOfSize:11]
+				  value:[NSFont systemFontOfSize:12]
+				  range:NSMakeRange(0, [label length])];
+				
+	// Set paragraph style
+	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
+	[paraStyle setAlignment:NSCenterTextAlignment];
+	[label addAttribute:NSParagraphStyleAttributeName
+				  value:paraStyle
 				  range:NSMakeRange(0, [label length])];
 	
 	NSSize padding = PADDING_TOKENBEZELSTYLE;
 	
 	// Add bezel
-	NSBezierPath *bezel = [NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:10.0];
+	NSBezierPath *bezel = [NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:20.0];
+	[bezel setLineWidth:1.1];
+	[bezelBorderColor set];
+	[bezel fill];
+	
+	bezel = [NSBezierPath bezierPathWithRoundRectInRect:NSInsetRect(cellFrame, 1.0, 1.0) radius:20.0];
 	[bezelColor set];
 	[bezel fill];
-	[[NSColor blueColor] set];
-	[bezel stroke];
 	
 	[label drawInRect:NSInsetRect(cellFrame, padding.width, padding.height)];
 }
@@ -297,6 +313,17 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	bezelColor = [aBezelColor retain];
 }
 
+- (NSColor *)bezelBorderColor
+{
+	return bezelBorderColor;
+}
+
+- (void)setBezelBorderColor:(NSColor *)aBorderColor
+{
+	if(bezelBorderColor) [bezelBorderColor release];
+	bezelBorderColor = [aBorderColor retain];
+}
+
 - (PAButtonType)buttonType
 {
 	return buttonType;
@@ -331,7 +358,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 			// TODO: Add correct token style
 			case PATokenBezelStyle:;
 				size.width = 80;
-				size.height = 20;
+				size.height = 18;
 				break;
 		}
 	} else {

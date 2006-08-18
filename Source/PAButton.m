@@ -136,6 +136,16 @@
 	[[self cell] setBezelColor:bezelColor];
 }
 
+- (NSColor *)bezelBorderColor
+{
+	return [[self cell] bezelBorderColor];
+}
+
+- (void)setBezelBorderColor:(NSColor *)borderColor
+{
+	[[self cell] setBezelBorderColor:borderColor];
+}
+
 - (PAButtonType)buttonType
 {
 	return [[self cell] buttonType];

@@ -26,10 +26,14 @@
 - (void)setBordered:(BOOL)flag;
 - (PAButtonState)state;
 - (void)setState:(PAButtonState)aState;
+
 - (PABezelStyle)bezelStyle;
 - (void)setBezelStyle:(PABezelStyle)bezelStyle;
 - (NSColor *)bezelColor;	/**< Sets the background color of the rounded rect bezel, if style is PATokenBezelStyle */
 - (void)setBezelColor:(NSColor *)bezelColor;
+- (NSColor *)bezelBorderColor;	/**< Sets the border color of the rounded rect bezel, if style is PATokenBezelStyle */
+- (void)setBezelBorderColor:(NSColor *)borderColor;
+
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)buttonType;
 - (int)tag;

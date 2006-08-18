@@ -124,7 +124,6 @@
 	[button setTitle:@"Tagbutton"];
 	[button setButtonType:PAMomentaryLightButton];
 	[button setBezelStyle:PATokenBezelStyle];
-	[button setBezelColor:[NSColor colorWithDeviceRed:(222.0/255.0) green:(231.0/255.0) blue:(248.0/255.0) alpha:1.0]];
 	[button sizeToFit];
 	[self addSubview:button];
 }
