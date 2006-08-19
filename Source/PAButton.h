@@ -36,8 +36,13 @@
 
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)buttonType;
+- (int)fontSize;
+- (void)setFontSize:(int)fontSize;	/**< Sets the font size for the title being displayed. Ignored if style is not PATokenBezelStyle. */
+// TODO: - (void)setAlpha:(float)alpha;
+
 - (int)tag;
 - (void)setTag:(int)aTag;
+
 - (SEL)action;
 - (void)setAction:(SEL)action;
 - (id)target;

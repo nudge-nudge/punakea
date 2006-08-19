@@ -156,6 +156,16 @@
 	[[self cell] setButtonType:buttonType];
 }
 
+- (int)fontSize
+{
+	return [[self cell] fontSize];
+}
+
+- (void)setFontSize:(int)fontSize
+{
+	[[self cell] setFontSize:fontSize];
+}
+
 - (int)tag
 {
 	return [[self cell] tag];

@@ -46,6 +46,7 @@ extern int const FRAME_HEIGHT_REGULAR;
 @interface PAButtonCell : NSActionCell {
 
 	NSString					*title;
+	NSMutableAttributedString	*attributedTitle;
 	NSMutableDictionary			*images;
 	NSMutableDictionary			*tag;
 	BOOL						bordered;
@@ -56,6 +57,7 @@ extern int const FRAME_HEIGHT_REGULAR;
 	NSColor						*bezelColor;
 	NSColor						*bezelBorderColor;
 	PAButtonType				buttonType;
+	int							fontSize;
 	
 
 }
@@ -80,5 +82,7 @@ extern int const FRAME_HEIGHT_REGULAR;
 
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)type;
+- (int)fontSize;
+- (void)setFontSize:(int)aFontSize;
 
 @end

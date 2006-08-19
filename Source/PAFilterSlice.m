@@ -124,6 +124,7 @@
 	[button setTitle:@"Tagbutton"];
 	[button setButtonType:PAMomentaryLightButton];
 	[button setBezelStyle:PATokenBezelStyle];
+	//[button setFontSize:15];
 	[button sizeToFit];
 	[self addSubview:button];
 }
