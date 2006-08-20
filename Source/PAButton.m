@@ -131,19 +131,19 @@
 	return [[self cell] bezelColor];
 }
 
-- (void)setBezelColor:(NSColor *)bezelColor
+- (void)setBezelColor:(NSColor *)color
 {
-	[[self cell] setBezelColor:bezelColor];
+	[[self cell] setBezelColor:color];
 }
 
-- (NSColor *)bezelBorderColor
+- (NSColor *)selectedBezelColor
 {
-	return [[self cell] bezelBorderColor];
+	return [[self cell] selectedBezelColor];
 }
 
-- (void)setBezelBorderColor:(NSColor *)borderColor
+- (void)setSelectedBezelColor:(NSColor *)color
 {
-	[[self cell] setBezelBorderColor:borderColor];
+	[[self cell] setSelectedBezelColor:color];
 }
 
 - (PAButtonType)buttonType
@@ -161,9 +161,9 @@
 	return [[self cell] fontSize];
 }
 
-- (void)setFontSize:(int)fontSize
+- (void)setFontSize:(int)size
 {
-	[[self cell] setFontSize:fontSize];
+	[[self cell] setFontSize:size];
 }
 
 - (int)tag

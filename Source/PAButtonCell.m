@@ -50,7 +50,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	[self setBordered:YES];
 	
 	[self setBezelColor:[NSColor colorWithDeviceRed:(222.0/255.0) green:(231.0/255.0) blue:(248.0/255.0) alpha:1.0]];
-	[self setBezelBorderColor:[NSColor colorWithDeviceRed:(164.0/255.0) green:(189.0/255.0) blue:(236.0/255.0) alpha:1.0]];
+	[self setSelectedBezelColor:[NSColor alternateSelectedControlColor]];
 	[self setFontSize:11];
 	
 	tag = [[NSMutableDictionary alloc] init];
@@ -59,7 +59,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 - (void)dealloc
 {
 	if(bezelColor) [bezelColor release];
-	if(bezelBorderColor) [bezelBorderColor release];
+	//if(bezelBorderColor) [bezelBorderColor release];
 	if(title) [title release];
 	if(attributedTitle) [attributedTitle release];
 	if(images) [images release];
@@ -97,7 +97,6 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
 - (void)drawRecessedButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	// Attributed string for title
 	NSMutableAttributedString *label = [self attributedTitle];
 	
 	// Set colors
@@ -178,15 +177,9 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
 - (void)drawTokenButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	// TEMP for testing in front of white background
-	//[[NSColor whiteColor] set];
-	//NSRectFill(cellFrame);
-
-	// Attributed string for title
 	NSMutableAttributedString *label = [self attributedTitle];
 	
 	// Set colors
-	// TODO: Make accessor for textcolors (1. off-state, 2. on-state)
 	NSColor *textColor;	
 	if([self isHighlighted] || [self isPressed])
 	{
@@ -209,22 +202,28 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	NSSize padding = PADDING_TOKENBEZELSTYLE;
 	
 	// Add bezel
-	// TODO: Make accessor for selected bezel color + hovered bezel color + hovered bezel border color
 	NSColor *outerBezelColor;
 	if([self isHighlighted] || [self isPressed])
-		outerBezelColor = [NSColor alternateSelectedControlColor];
+		outerBezelColor = [self selectedBezelColor];
+	else if([self isHovered])
+		outerBezelColor = [bezelColor blendedColorWithFraction:0.55 ofColor:[self selectedBezelColor]];
 	else
-		outerBezelColor = bezelBorderColor;
+		outerBezelColor = [bezelColor blendedColorWithFraction:0.4 ofColor:[self selectedBezelColor]];
 	
 	NSBezierPath *bezel = [NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:20.0];
 	[bezel setLineWidth:1.1];
 	[outerBezelColor set];
 	[bezel fill];
 	
-	if(!([self isPressed] || [self isHighlighted]))
+	if(!([self isHighlighted] || [self isPressed]))
 	{
+		// Draw inner bezel
+		NSColor *innerBezelColor = bezelColor;
+		if([self isHovered])
+			innerBezelColor = [bezelColor blendedColorWithFraction:0.15 ofColor:[self selectedBezelColor]];
+		
 		bezel = [NSBezierPath bezierPathWithRoundRectInRect:NSInsetRect(cellFrame, 1.0, 1.0) radius:20.0];
-		[bezelColor set];
+		[innerBezelColor set];
 		[bezel fill];
 	}
 	
@@ -350,21 +349,21 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	return bezelColor;
 }
 
-- (void)setBezelColor:(NSColor *)aBezelColor
+- (void)setBezelColor:(NSColor *)color
 {
 	if(bezelColor) [bezelColor release];
-	bezelColor = [aBezelColor retain];
+	bezelColor = [color retain];
 }
 
-- (NSColor *)bezelBorderColor
+- (NSColor *)selectedBezelColor
 {
-	return bezelBorderColor;
+	return selectedBezelColor;
 }
 
-- (void)setBezelBorderColor:(NSColor *)aBorderColor
+- (void)setSelectedBezelColor:(NSColor *)color
 {
-	if(bezelBorderColor) [bezelBorderColor release];
-	bezelBorderColor = [aBorderColor retain];
+	if(selectedBezelColor) [selectedBezelColor release];
+	selectedBezelColor = [color retain];
 }
 
 - (PAButtonType)buttonType
@@ -382,9 +381,9 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	return fontSize;
 }
 
-- (void)setFontSize:(int)aFontSize
+- (void)setFontSize:(int)size
 {
-	fontSize = aFontSize;
+	fontSize = size;
 }
 
 - (NSSize)cellSize

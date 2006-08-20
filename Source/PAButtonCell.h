@@ -55,7 +55,7 @@ extern int const FRAME_HEIGHT_REGULAR;
 	PAButtonState				state;
 	PABezelStyle				bezelStyle;
 	NSColor						*bezelColor;
-	NSColor						*bezelBorderColor;
+	NSColor						*selectedBezelColor;
 	PAButtonType				buttonType;
 	int							fontSize;
 	
@@ -75,14 +75,14 @@ extern int const FRAME_HEIGHT_REGULAR;
 
 - (PABezelStyle)bezelStyle;
 - (void)setBezelStyle:(PABezelStyle)aBezelStyle;
-- (NSColor *)bezelColor;
-- (void)setBezelColor:(NSColor *)aBezelColor;
-- (NSColor *)bezelBorderColor;
-- (void)setBezelBorderColor:(NSColor *)aBorderColor;
+- (NSColor *)bezelColor;	/**< Sets the background color of the rounded rect bezel, if style is PATokenBezelStyle */
+- (void)setBezelColor:(NSColor *)color;
+- (NSColor *)selectedBezelColor;	/**< Sets the selected background color of the rounded rect bezel, if style is PATokenBezelStyle */
+- (void)setSelectedBezelColor:(NSColor *)color;
 
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)type;
 - (int)fontSize;
-- (void)setFontSize:(int)aFontSize;
+- (void)setFontSize:(int)size;	/**< Sets the font size for the title being displayed. Ignored if style is not PATokenBezelStyle. */
 
 @end
