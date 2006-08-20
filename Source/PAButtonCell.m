@@ -59,7 +59,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 - (void)dealloc
 {
 	if(bezelColor) [bezelColor release];
-	//if(bezelBorderColor) [bezelBorderColor release];
+	if(selectedBezelColor) [selectedBezelColor release];
 	if(title) [title release];
 	if(attributedTitle) [attributedTitle release];
 	if(images) [images release];
