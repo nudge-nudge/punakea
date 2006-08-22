@@ -38,14 +38,16 @@
 
 - (void)awakeFromNib
 {
+	[self setDelegate:self];
+	
 	// add tracking reckt for mouse enter and exit events
 	NSView *contentView = [self contentView];
 	[contentView addTrackingRect:[contentView bounds] owner:self userData:NULL assumeInside:NO];
 	
 	// move to screen edge - according to prefs
 	[self setExpanded:YES];
-	[self setDragMode:NO];
 	[self recede:NO];
+	
 }
 
 - (void)dealloc
@@ -58,19 +60,13 @@
 - (void)mouseEntered:(NSEvent *)theEvent 
 {
 	NSLog(@"enter");
-	if (!dragMode)
-	{
-		[self show];
-	}
+	[self show];
 }
 
 - (void)mouseExited:(NSEvent *)theEvent 
 {
 	NSLog(@"exit");
-	if (!dragMode)
-	{
-		[self recede];
-	}
+	[self recede];
 }
 
 
@@ -100,7 +96,7 @@
 		}
 		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:YES];
-	}
+	}	
 }
 
 - (void)recede:(BOOL)animate
@@ -134,16 +130,6 @@
 - (void)setExpanded:(BOOL)flag 
 {
 	expanded = flag;
-}
-
-- (BOOL)isDragMode
-{
-	return dragMode;
-}
-
-- (void)setDragMode:(BOOL)flag
-{
-	dragMode = flag;
 }
 
 @end

@@ -15,54 +15,16 @@ int const MAX_FONT_SIZE = 25;
 #pragma mark init
 - (id)initWithTag:(PATag*)aTag rating:(float)aRating
 {
-	if (self = [super init])
+	if (self = [super initTextCell:[aTag name]])
 	{
 		[self setAction:@selector(tagButtonClicked:)];
 		[self setFileTag:aTag];
 		[self setRating:aRating];
 		
-		//looks
-		[self setBordered:NO];
-		
 		//state
-		[self setHovered:NO];
-		
-		[self buildTitle];
+		[self setSelected:NO];
 	}
 	return self;
-}
-
-#pragma mark drawing
-- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-	[self drawInteriorWithFrame:cellFrame inView:controlView];
-}
-
-
-- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView*)controlView
-{
-	if ([self isHovered])
-	{	
-		[self drawHoverEffectWithFrame:cellFrame];
-	}
-	
-	//TODO drawing error
-	[[self attributedTitle] drawInRect:cellFrame];
-}
-
-- (void)drawHoverEffectWithFrame:(NSRect)cellFrame
-{	
-	if ([[self controlView] superview] == [[[self controlView] window] firstResponder])
-	{
-		[[NSColor selectedControlColor] set];
-	}
-	else
-	{
-		[[NSColor lightGrayColor] set];
-	}
-	
-	[[NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:5.0] fill];
-	
 }
 
 #pragma mark accessors
@@ -78,15 +40,14 @@ int const MAX_FONT_SIZE = 25;
 	fileTag = aTag;
 }
 
-- (BOOL)isHovered
+- (BOOL)isSelected
 {
-	return hovered;
+	return selected;
 }
 
-- (void)setHovered:(BOOL)flag
+- (void)setSelected:(BOOL)flag
 {	
-	hovered = flag;
-	[self buildTitle];
+	selected = flag;
 }
 
 - (float)rating
@@ -97,9 +58,17 @@ int const MAX_FONT_SIZE = 25;
 - (void)setRating:(float)aRating
 {
 	rating = aRating;
-	[self buildTitle];
+	
+	int newFontSize = MAX_FONT_SIZE * [self rating];
+	if (newFontSize < MIN_FONT_SIZE)
+		newFontSize = MIN_FONT_SIZE;
+	
+	[self setFontSize:newFontSize];
+	
+	// TODO [self buildTitle];
 }
 
+/*
 - (void)buildTitle
 {
 	NSString *tagName = [fileTag name];
@@ -147,23 +116,6 @@ int const MAX_FONT_SIZE = 25;
 	
 	[self setAttributedTitle:titleString];
 }
-
-#pragma mark highlighting
-- (void)mouseEntered:(NSEvent *)event
-{
-	//TODO check if visible
-	NSScrollView *scrollView = [[self controlView] enclosingScrollView];
-	PATagButton *button = [self controlView];
-
-	if (scrollView && NSIntersectsRect([button frame],[scrollView documentVisibleRect]))
-	{
-		[[button superview] setActiveButton:button];
-	}
-}
-
-- (void)mouseExited:(NSEvent *)event
-{
-	//nothing
-}
+*/
 
 @end

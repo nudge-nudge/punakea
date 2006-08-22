@@ -36,7 +36,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	self = [super initTextCell:aText];
 	if(self)
 	{
-		title = aText;
+		[self setTitle:aText];
 		[self commonInit];
 	}
 	return self;
@@ -291,7 +291,9 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
 - (void)setTitle:(NSString *)aTitle
 {
-	title = [aTitle retain];
+	[title release];
+	[aTitle retain];
+	title = aTitle;
 }
 
 - (BOOL)isBordered

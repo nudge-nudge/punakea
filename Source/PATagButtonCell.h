@@ -3,6 +3,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
 #import "PATagButton.h"
+#import "PAButtonCell.h"
 #import "BrowserViewController.h"
 
 extern int const MIN_FONT_SIZE;
@@ -11,11 +12,11 @@ extern int const MAX_FONT_SIZE;
 /**
 cell for the tagcloud, displays the given tag and interacts with the user
  */
-@interface PATagButtonCell : NSButtonCell
+@interface PATagButtonCell : PAButtonCell
 {
 	PATag *fileTag;
 	float rating;
-	BOOL hovered;
+	BOOL selected;
 }
 
 - (id)initWithTag:(PATag*)aTag rating:(float)aRating;
@@ -23,8 +24,8 @@ cell for the tagcloud, displays the given tag and interacts with the user
 - (PATag*)fileTag;
 - (void)setFileTag:(PATag*)aTag;
 
-- (BOOL)isHovered;
-- (void)setHovered:(BOOL)flag;
+- (BOOL)isSelected;
+- (void)setSelected:(BOOL)flag;
 
 - (float)rating;
 - (void)setRating:(float)aRating;

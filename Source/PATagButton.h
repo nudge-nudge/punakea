@@ -2,17 +2,18 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
+#import "PAButton.h"
 #import "PATagButtonCell.h"
 
-@interface PATagButton : NSButton
+@interface PATagButton : PAButton
 
-- (id)initWithFrame:(NSRect)frame Tag:(PATag*)tag rating:(float)rating;
+- (id)initWithTag:(PATag*)tag rating:(float)rating;
 
 - (PATag*)fileTag;
 - (void)setFileTag:(PATag*)aTag;
 
-- (BOOL)isHovered;
-- (void)setHovered:(BOOL)flag;
+- (BOOL)isSelected;
+- (void)setSelected:(BOOL)flag;
 
 - (void)setRating:(float)aRating;
 

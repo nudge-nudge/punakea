@@ -14,15 +14,15 @@ TODO delay
  */
 @interface PASidebarWindow : NSWindow {
 	NSMutableDictionary *appearance;
+	NSNotificationCenter *nc;
 	
 	BOOL expanded;
-	BOOL dragMode;
 }
 
 - (BOOL)isExpanded;
 - (void)setExpanded:(BOOL)flag;
 
-- (BOOL)isDragMode;
-- (void)setDragMode:(BOOL)flag;
+- (BOOL)isMoving;
+- (void)setMoving:(BOOL)flag;
 	
 @end

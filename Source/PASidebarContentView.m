@@ -28,7 +28,6 @@ only works if parent window is a PASidebar
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender 
 {
 	NSLog(@"dragEnter");
-	[[self window] setDragMode:YES];
 	[[self window] show];
 	return NSDragOperationNone;
 }
@@ -45,7 +44,6 @@ only works if parent window is a PASidebar
 	{
 		NSLog(@"dragLeft");
 		[[self window] recede];
-		[[self window] setDragMode:NO];
 	}
 }
 @end

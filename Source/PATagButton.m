@@ -1,12 +1,17 @@
 #import "PATagButton.h"
 
 @implementation PATagButton
-- (id)initWithTag:(PATag*)tag rating:(float)aRating
+- (id)initWithTag:(PATag*)aTag rating:(float)aRating
 {
     self = [super initWithFrame:NSMakeRect(0,0,0,0)];
     if (self) 
 	{
-		[self setCell:[[PATagButtonCell alloc] initWithTag:tag rating:aRating]];
+		PATagButtonCell *cell = [[PATagButtonCell alloc] initWithTag:aTag rating:aRating];
+		[self setCell:cell];
+		[cell release];
+		
+		[self setBezelStyle:PATokenBezelStyle];
+		[self setButtonType:PAMomentaryLightButton];
     }
     return self;
 }
@@ -31,14 +36,14 @@ should be overridden according to apple docs
 }
 
 #pragma mark accessors
-- (BOOL)isHovered
+- (BOOL)isSelected
 {
-	return [[self cell] isHovered];
+	return [[self cell] isSelected];
 }
 
-- (void)setHovered:(BOOL)flag
+- (void)setSelected:(BOOL)flag
 {
-	[[self cell] setHovered:flag];
+	[[self cell] setSelected:flag];
 }
 
 - (void)setRating:(float)aRating

@@ -11,6 +11,9 @@ extern NSSize const SPACING;
 
 /**
 displays all [controller visibleTags] in a nice tag cloud view
+ \todo buffer display
+ \todo mouse events
+ \todo animations not very pretty
  */
 @interface PATagCloud : NSView
 {

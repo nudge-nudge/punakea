@@ -20,7 +20,6 @@ draws the background
 
 /**
 adds all the tags in [controller visibleTags]
- @param rect view rect in which to draw
  */
 - (void)updateViewHierarchy;
 
@@ -351,10 +350,6 @@ bound to visibleTags
 	// TODO animate
 	[tagButton setFrameOrigin:origin];
 	[self addSubview:tagButton];
-	
-	// needs to be called after adding to subview, else the mouseEntered/Exited events aren't
-	// send to the cells
-	[tagButton setShowsBorderOnlyWhileMouseInside:YES];
 }
 
 #pragma mark calculation
@@ -452,10 +447,10 @@ bound to visibleTags
 
 - (void)setActiveButton:(PATagButton*)aTagButton
 {
-	[activeButton setHovered:NO];
+	[activeButton setSelected:NO];
 	[activeButton setNeedsDisplay:YES];
 	
-	[aTagButton setHovered:YES];
+	[aTagButton setSelected:YES];
 	[aTagButton setNeedsDisplay:YES];
 	
 	[aTagButton retain];

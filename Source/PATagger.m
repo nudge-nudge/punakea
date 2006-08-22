@@ -98,7 +98,7 @@ static PATagger *sharedInstance = nil;
 
 - (PATag*)createTagForName:(NSString*)tagName
 {
-	PATag *tag = [self tagForName:tagName includeTempTags:NO];
+	PATag *tag = [self tagForName:tagName includeTempTag:NO];
 	
 	if (!tag)
 	{
