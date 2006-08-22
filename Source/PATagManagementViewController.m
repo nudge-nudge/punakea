@@ -32,4 +32,32 @@
 	[super dealloc];
 }
 
+#pragma mark datasource
+- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+{
+	return [tags count];
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
+{
+	// TODO fixed order needed
+	return [[[tags tagArray] objectAtIndex:rowIndex] name];
+}
+
+#pragma mark actions
+- (IBAction)removeTag:(id)sender
+{
+	NSIndexSet *indexes = [tableView selectedRowIndexes];
+	NSArray *selectedTags = [[tags tagArray] objectsAtIndexes:indexes];
+	
+	NSEnumerator *selectedTagsEnumerator = [selectedTags objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [selectedTagsEnumerator nextObject])
+	{
+		[tagger removeTag:tag];
+		[tags removeTag:tag];
+	}
+}		
+	
 @end

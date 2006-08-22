@@ -2,8 +2,10 @@
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
+            ACTIONS = {removeTag = id; }; 
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
+            OUTLETS = {tableView = NSTableView; }; 
             SUPERCLASS = PAViewController; 
         }, 
         {

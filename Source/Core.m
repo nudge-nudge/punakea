@@ -111,23 +111,6 @@
 	}
 }	
 
-#pragma mark working with tags (renaming and deleting)
-- (void)removeTag:(PASimpleTag*)tag
-{
-	PAQuery *query = [[PAQuery alloc] init];
-	NSArray *files = [query filesForTag:tag];	
-	
-	[tagger removeTag:tag fromFiles:files];
-}
-
-- (void)renameFromTag:(PASimpleTag*)fromTag to:(PASimpleTag*)toTag
-{
-	PAQuery *query = [[PAQuery alloc] init];
-	NSArray *files = [query filesForTag:fromTag];	
-	
-	[tagger renameTag:fromTag toTag:toTag onFiles:files];
-}
-
 #pragma mark MainMenu actions
 - (IBAction)manageTags:(id)sender
 {

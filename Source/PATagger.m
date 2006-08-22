@@ -183,6 +183,23 @@ static PATagger *sharedInstance = nil;
 	[self addTags:tagArray toFiles:filePaths];
 }
 
+#pragma mark working with tags (renaming and deleting)
+- (void)removeTag:(PASimpleTag*)tag
+{
+	PAQuery *query = [[PAQuery alloc] init];
+	NSArray *files = [query filesForTag:tag];	
+	
+	[self removeTag:tag fromFiles:files];
+}
+
+- (void)renameFromTag:(PASimpleTag*)fromTag to:(PASimpleTag*)toTag
+{
+	PAQuery *query = [[PAQuery alloc] init];
+	NSArray *files = [query filesForTag:fromTag];	
+	
+	[self renameTag:fromTag toTag:toTag onFiles:files];
+}
+
 - (void)removeTag:(PATag*)tag fromFiles:(NSArray*)files
 {
 	NSEnumerator *fileEnumerator = [files objectEnumerator];

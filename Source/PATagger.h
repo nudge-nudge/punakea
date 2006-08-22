@@ -12,6 +12,7 @@
 #import "PATags.h"
 #import "PASimpleTagFactory.h"
 #import "PATempTag.h"
+#import "PAQuery.h"
 
 /**
 singleton class for working with spotlight kMDItemKeywords
@@ -109,21 +110,37 @@ get keywords as NSString array for file at path
 - (NSArray*)keywordsForFile:(NSString*)path;
 
 /**
-removes the tag from all files
+convenience method:
+ remove tags from all files
+ @param tag tag to remove
+ */
+- (void)removeTag:(PATag*)tag;
+
+/**
+removes the tag from files
  @param tag tag to remove
  @param files files to remove tags from (array of path strings)
  */
 - (void)removeTag:(PATag*)tag fromFiles:(NSArray*)files;
 
 /**
-removes the tags from all files
+removes the tags from files
  @param tags tag array with simpleTags to remove
  @param files files to remove tags from (array of path strings)
  */
 - (void)removeTags:(NSArray*)tags fromFiles:(NSArray*)files;
 
 /**
-renames the tag on all files
+convenience method:
+ rename tag on all files
+ @param tag tag to renam
+ @param tag new tag
+ TODO toTag better as string?
+ */
+- (void)renameTag:(PATag*)tag toTag:(PATag*)newTag;
+
+/**
+renames the tag on files
  @param tag tag to rename
  @param newTag new name
  @param files files to rename in (array of path strings)

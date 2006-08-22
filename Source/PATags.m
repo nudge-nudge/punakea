@@ -74,4 +74,9 @@
 	return [tags objectEnumerator];
 }
 
+- (int)count
+{
+	return [tags count];
+}
+
 @end

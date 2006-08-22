@@ -22,6 +22,8 @@
 - (void)setTags:(NSMutableDictionary*)otherTags;
 
 - (void)addTag:(PATag*)aTag;
+- (void)removeTag:(PATag*)aTag;
 - (NSEnumerator*)objectEnumerator;
+- (int)count;
 
 @end

@@ -13,6 +13,8 @@
 #import "PAQuery.h"
 
 @interface PATagManagementViewController : PAViewController {
+	IBOutlet NSTableView *tableView;
+	
 	PATagger *tagger;
 	PATags *tags;
 	
@@ -20,5 +22,7 @@
 }
 
 - (id)initWithNibName:(NSString*)nibName;
+
+- (IBAction)removeTag:(id)sender;
 
 @end
