@@ -15,6 +15,9 @@
 - (void)relatedTagsHaveChanged;
 - (void)tagsHaveChanged;
 
+- (void)showTypeAheadView;
+- (void)hideTypeAheadView;
+
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
 
 @end
@@ -238,14 +241,36 @@
 	// else display all tags
 	if ([buffer length] > 0)
 	{
+		if ([typeAheadView isHidden])
+		{
+			[self showTypeAheadView];
+		}
 		[self setVisibleTags:[typeAheadFind tagsForPrefix:buffer]];
-		[typeAheadFindPane setHidden:NO];
 	}
 	else
 	{
+		if (![typeAheadView isHidden])
+		{
+			[self hideTypeAheadView];
+		}
 		[self setVisibleTags:[typeAheadFind activeTags]];
-		[typeAheadFindPane setHidden:YES];
 	}
+}
+
+- (void)showTypeAheadView
+{
+	float height = NSHeight([typeAheadView frame]);
+	NSScrollView *sv = [tagCloud enclosingScrollView];
+	[sv setFrame:NSMakeRect(0,NSMinY([sv frame])+height,NSWidth([sv frame]),NSHeight([sv frame])-height)];
+	[typeAheadView setHidden:NO];	
+}
+
+- (void)hideTypeAheadView
+{
+	float height = NSHeight([typeAheadView frame]);
+	NSScrollView *sv = [tagCloud enclosingScrollView];
+	[sv setFrame:NSMakeRect(0,NSMinY([sv frame])-height,NSWidth([sv frame]),NSHeight([sv frame])+height)];
+	[typeAheadView setHidden:YES];	
 }
 
 //needs to be called whenever the selected tags have been changed

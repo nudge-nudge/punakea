@@ -32,6 +32,8 @@
 		481F78BD0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m in Sources */ = {isa = PBXBuildFile; fileRef = 481F78BB0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m */; };
 		482248340A886DE1008C8CB9 /* PATempTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482248320A886DE1008C8CB9 /* PATempTag.h */; };
 		482248350A886DE1008C8CB9 /* PATempTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 482248330A886DE1008C8CB9 /* PATempTag.m */; };
+		484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */; };
+		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
 		4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */; };
 		4840AC400A4FFEE50046484E /* PASidebarContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */; };
 		4842FC0F09DA801500C4A931 /* PATagButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC0D09DA801500C4A931 /* PATagButton.h */; };
@@ -243,6 +245,7 @@
 				65988C6B0A875A11000270E6 /* PAButton.h in CopyFiles */,
 				65988C810A875C53000270E6 /* PAButtonCell.h in CopyFiles */,
 				482248340A886DE1008C8CB9 /* PATempTag.h in CopyFiles */,
+				484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +271,8 @@
 		481F78BB0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTagsStandalone.m; sourceTree = "<group>"; };
 		482248320A886DE1008C8CB9 /* PATempTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATempTag.h; sourceTree = "<group>"; };
 		482248330A886DE1008C8CB9 /* PATempTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATempTag.m; sourceTree = "<group>"; };
+		484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadView.h; sourceTree = "<group>"; };
+		484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadView.m; sourceTree = "<group>"; };
 		4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarContentView.h; sourceTree = "<group>"; };
 		4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarContentView.m; sourceTree = "<group>"; };
 		4842FC0D09DA801500C4A931 /* PATagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButton.h; sourceTree = "<group>"; };
@@ -523,6 +528,7 @@
 		4816343A0A5A51D2003B8EE4 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
+				484003C90A9B3A6500C0AD99 /* TypeAheadView */,
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
 				489AE71309DD4D7800EB60EB /* SelectedTagsView */,
 				655D3BF20A7DD598009479F9 /* Filter Slice */,
@@ -556,6 +562,15 @@
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
 			);
 			name = Misc;
+			sourceTree = "<group>";
+		};
+		484003C90A9B3A6500C0AD99 /* TypeAheadView */ = {
+			isa = PBXGroup;
+			children = (
+				484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */,
+				484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */,
+			);
+			name = TypeAheadView;
 			sourceTree = "<group>";
 		};
 		484F717E0A666D4B00D886E5 /* Tag Management */ = {
@@ -1013,6 +1028,7 @@
 				65988C6C0A875A11000270E6 /* PAButton.m in Sources */,
 				65988C820A875C53000270E6 /* PAButtonCell.m in Sources */,
 				482248350A886DE1008C8CB9 /* PATempTag.m in Sources */,
+				484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

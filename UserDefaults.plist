@@ -34,7 +34,7 @@
 	<key>TagCloud</key>
 	<dict>
 		<key>eyeCandy</key>
-		<true/>
+		<false/>
 		<key>sortKey</key>
 		<string>name</string>
 	</dict>
