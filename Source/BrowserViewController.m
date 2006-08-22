@@ -61,6 +61,8 @@
 				   name:@"PATagsHaveChanged" 
 				 object:tags];
 		
+		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
+		
 		[self setVisibleTags:[tags tagArray]];
 		[typeAheadFind setActiveTags:[tags tagArray]];	
 		
@@ -87,6 +89,18 @@
 	[selectedTags release];
 	[tagCloudSettings release];
 	[super dealloc];
+}
+
+#pragma mark KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object 
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+	if ([keyPath isEqualToString:@"buffer"])
+	{
+		[self bufferHasChanged];
+	}
 }
 
 #pragma mark accessors
@@ -137,12 +151,12 @@
 	currentBestTag = otherTag;
 }
 
-- (NSMutableString*)buffer
+- (NSString*)buffer
 {
 	return buffer;
 }
 
-- (void)setBuffer:(NSMutableString*)string
+- (void)setBuffer:(NSString*)string
 {
 	[string retain];
 	[buffer release];
@@ -225,10 +239,12 @@
 	if ([buffer length] > 0)
 	{
 		[self setVisibleTags:[typeAheadFind tagsForPrefix:buffer]];
+		[typeAheadFindPane setHidden:NO];
 	}
 	else
 	{
 		[self setVisibleTags:[typeAheadFind activeTags]];
+		[typeAheadFindPane setHidden:YES];
 	}
 }
 
@@ -311,9 +327,8 @@
 		// if buffer has any content (i.e. user is using type-ahead-find), delete last char
 		if ([buffer length] > 0)
 		{
-			NSRange range = NSMakeRange([buffer length] - 1,1);
-			[buffer deleteCharactersInRange:range];
-			[self bufferHasChanged];
+			NSString *tmpBuffer = [buffer substringToIndex:[buffer length]-1];
+			[self setBuffer:tmpBuffer];
 		}
 		else if ([selectedTags count] > 0)
 		// else delete the last selected tag
@@ -329,8 +344,7 @@
 		
 		if ([typeAheadFind hasTagsForPrefix:tmpBuffer])
 		{
-			[buffer appendString:[event charactersIgnoringModifiers]];
-			[self bufferHasChanged];
+			[self setBuffer:tmpBuffer];
 		}
 		else
 		{

@@ -23,6 +23,7 @@
 @interface BrowserViewController : PAViewController {
 	IBOutlet PATagCloud *tagCloud;
 	IBOutlet PAResultsOutlineView *outlineView;
+	IBOutlet NSView *typeAheadFindPane;
 	
 	PATagger *tagger;
 	PATags *tags;
@@ -39,7 +40,7 @@
 	PAQuery *query;
 	
 	// buffer for user input (browser)
-	NSMutableString *buffer;
+	NSString *buffer;
 	
 	NSMutableDictionary *tagCloudSettings;
 	
@@ -61,8 +62,8 @@
 - (PATag*)currentBestTag;
 - (void)setCurrentBestTag:(PATag*)otherTag;
 
-- (NSMutableString*)buffer;
-- (void)setBuffer:(NSMutableString*)string;
+- (NSString*)buffer;
+- (void)setBuffer:(NSString*)string;
 
 //for PAQuery
 - (PAQuery *)query;

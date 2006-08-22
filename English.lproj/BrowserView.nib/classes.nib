@@ -4,7 +4,11 @@
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = BrowserViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {outlineView = PAResultsOutlineView; tagCloud = PATagCloud; }; 
+            OUTLETS = {
+                outlineView = PAResultsOutlineView; 
+                tagCloud = PATagCloud; 
+                typeAheadFindPane = NSView; 
+            }; 
             SUPERCLASS = PAViewController; 
         }, 
         {
