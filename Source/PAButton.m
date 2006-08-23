@@ -96,6 +96,11 @@
 	[[self cell] setTitle:title];
 }
 
+- (BOOL)isFlipped
+{
+	return NO;
+}
+
 - (BOOL)isBordered
 {
 	return [[self cell] isBordered];

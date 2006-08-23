@@ -10,21 +10,15 @@
 #import "BrowserViewController.h"
 #import "PATag.h"
 #import "PASelectedTags.h"
-#import "PASelectedTagCell.h"
-#import "PAImageButtonCell.h"
+#import "PAButton.h"
 
-/**
-view for the selected tags
- */
-@interface PASelectedTagsView : NSMatrix {
-	IBOutlet BrowserViewController *browserViewController;
+@interface PASelectedTagsView : NSView {
 	
-	PASelectedTags *selectedTags;
+	IBOutlet BrowserViewController		*browserViewController;
+	PASelectedTags						*selectedTags;
 	
-	int cellWidth;
-	int cellMaxWidth;
-	int cellHeight;
-	int cellMaxHeight;
+	NSMutableDictionary					*tagButtons;
+	
 }
 
 @end

@@ -114,7 +114,7 @@
 	}
 	
 	// Add a token test button
-	NSRect frame = [self frame];
+	/*NSRect frame = [self frame];
 	frame.origin.x = frame.size.width - 100;
 	frame.origin.y = 2;
 	frame.size.height = 30;
@@ -123,10 +123,10 @@
 	PAButton *button = [[PAButton alloc] initWithFrame:frame];
 	[button setTitle:@"Tagbutton"];
 	[button setButtonType:PAMomentaryLightButton];
-	[button setBezelStyle:PATokenBezelStyle];
+	[button setBezelStyle:PATagBezelStyle];
 	//[button setFontSize:15];
 	[button sizeToFit];
-	[self addSubview:button];
+	[self addSubview:button];*/
 }
 
 - (void)buttonClick:(id)sender

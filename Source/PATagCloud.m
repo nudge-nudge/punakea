@@ -1,7 +1,7 @@
 #import "PATagCloud.h"
 
 NSSize const PADDING = {10,5};
-NSSize const SPACING = {10,1};
+NSSize const SPACING = {0,1};
 
 @interface PATagCloud (PrivateAPI)
 /**
@@ -230,10 +230,9 @@ bound to visibleTags
 {
 	//TODO externalize
 	[[NSColor colorWithDeviceRed:(236.0/255.0) green:(242.0/255.0) blue:(251.0/255.0) alpha:1.0] set];
-
 	NSRectFill([self bounds]);
 	
-	if ([[self window] firstResponder] == self)
+	/*if ([[self window] firstResponder] == self)
 	{
 		[[NSColor selectedControlColor] set];
 	}
@@ -246,7 +245,7 @@ bound to visibleTags
 	
 	NSBezierPath *bezierPath = [NSBezierPath bezierPathWithRect:clipRect];
 	[bezierPath setLineWidth:2.0];
-	[bezierPath stroke];
+	[bezierPath stroke];*/
 }
 
 - (void)updateViewHierarchy

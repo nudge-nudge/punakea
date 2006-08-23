@@ -8,46 +8,22 @@
 
 #import "PASelectedTagsView.h"
 
+
 @interface PASelectedTagsView (PrivateAPI)
 
 - (void)drawBorder;
 - (void)updateView;
 @end
 
+
 @implementation PASelectedTagsView
 
-/*- (id)initWithFrame:(NSRect)frame 
-{
-	self = [super initWithFrame:frame];
-	if(self)
-	{
-		PAImageButtonCell *stopButton = [[PAImageButtonCell alloc] initImageCell:[NSImage imageNamed:@"stop.tif"]];
-		[stopButton setImage:[NSImage imageNamed:@"stopPressed"] forState:PAOnState];
-		[stopButton setImage:[NSImage imageNamed:@"stopRollover"] forState:PAOffHighlightedState];
-		[stopButton setState:PAOffState];
-		
-		[self setCell:stopButton];
-		[stopButton release];
-	}
-	return self;
-}*/
-
-
-#pragma mark init
+#pragma mark Init + Dealloc
 - (id)initWithFrame:(NSRect)frame 
 {
     self = [super initWithFrame:frame];
-    if (self) {
-		//TODO externalize
-		cellWidth = 80;
-		cellMaxWidth = 120;
-		cellHeight = 20;
-		cellMaxHeight = [self bounds].size.height;
-		
-		//settings
-		[self setMode:NSHighlightModeMatrix];
-		[self setSelectionByRect:NO];
-		[self setIntercellSpacing:NSMakeSize(-1,-1)];
+    if (self) {		
+		tagButtons = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -57,131 +33,103 @@
 {
 	selectedTags = [browserViewController selectedTags];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateView:) name:@"PASelectedTagsHaveChanged" object:selectedTags];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTagButtons:) name:@"PASelectedTagsHaveChanged" object:selectedTags];
 }
 
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	if(tagButtons) [tagButtons release];
+	
 	[super dealloc];
 }
 
-#pragma mark drawing
+
+#pragma mark Drawing
 - (void)drawRect:(NSRect)rect 
 {
-	[[NSColor colorWithDeviceRed:(224.0/255.0) green:(224.0/255.0) blue:(224.0/255.0) alpha:1.0] set];
+	// Draw background
+	[[NSColor colorWithDeviceRed:(236.0/255.0) green:(242.0/255.0) blue:(251.0/255.0) alpha:1.0] set];
 	NSRectFill([self bounds]);
 
-	[[NSColor colorWithDeviceRed:(104.0/255.0) green:(104.0/255.0) blue:(104.0/255.0) alpha:1.0] set];	
+	// Draw top and bottom borders
 	NSRect bounds = [self bounds];	
-	NSRect topLineRect = NSMakeRect(bounds.origin.x,
-									bounds.origin.y,
-									bounds.size.width,
-									1);
-	NSRectFill(topLineRect);
 	
-	// Doesn't work like this. We can't add new cells for every drawing!
-	//[self updateView];
+	NSBezierPath *path = [NSBezierPath bezierPath];
+	[path moveToPoint:NSMakePoint(0, bounds.size.height)];
+	[path lineToPoint:NSMakePoint(bounds.size.width, bounds.size.height)];
+	[path closePath];
+	[[NSColor grayColor] set];	
+	[path stroke];
+	
+	path = [NSBezierPath bezierPath];
+	[path moveToPoint:NSMakePoint(0, 0)];
+	[path lineToPoint:NSMakePoint(bounds.size.width, 0)];
+	[path closePath];
+	[[NSColor lightGrayColor] set];	
+	[path stroke];
 
 	[super drawRect:rect];
 }
 
-- (void)updateView:(NSNotification*)notification
-{ 
-	// TODO: Why do we remove ALL cells on every update??
-
-	// remove all content
-	int rows = [self numberOfRows];
-	for (rows; rows>0; rows--)
+- (void)updateTagButtons:(NSNotification*)notification
+{ 	
+	// Remove all old tags
+	NSArray *tagButtonKeys = [tagButtons allKeys];
+	
+	for(unsigned i = 0; i < [tagButtonKeys count]; i++)
 	{
-		int removeRow = rows - 1;
-		[self removeRow:removeRow];
-	}
-	
-	NSSize bounds = [self bounds].size;
-	
-	int tagCount = [selectedTags count];
-	
-	float displayWidth, displayHeight;
-	int numberOfTagsInRow;
+		NSString *tagName = [tagButtonKeys objectAtIndex:i];		
+		PATag *tag = [[PATagger sharedInstance] tagForName:tagName];
 		
-	float cellMaxWidthSum = tagCount * cellMaxWidth + (tagCount - 1) * [self intercellSpacing].width;
-	float cellWidthSum = tagCount * cellWidth + (tagCount - 1) * [self intercellSpacing].width;
-	
-	// if tags fit with their maxium width, draw them
-	if ( cellMaxWidthSum <= bounds.width )
-	{
-		displayWidth = cellMaxWidth;
-		displayHeight = cellMaxHeight;
-		numberOfTagsInRow = tagCount;
-	}
-	// if the fit with their minimum width, stretch em
-	else if ( cellWidthSum <= bounds.width )
-	{
-		float spacingSum = tagCount * [self intercellSpacing].width;
-		float totalAvailableWidth = (float)bounds.width - spacingSum;
-		displayWidth = (totalAvailableWidth / (float)tagCount);
-		displayHeight = cellMaxHeight;
-		numberOfTagsInRow = tagCount;
-	}			 
-	// if they overflow (2+ rows needed), draw rest of rows with stretched width
-	else
-	{
-		//TODO this isn't perfect but should do it ... improve!
-		numberOfTagsInRow = (bounds.width / cellMaxWidth);
-		float spacingSum = ( numberOfTagsInRow - 1 ) * [self intercellSpacing].width;
-		float totalAvailableWidth = (float)bounds.width - spacingSum;
-		displayWidth = ( totalAvailableWidth / (float)numberOfTagsInRow );
-		displayHeight = cellHeight;
-	}
-	
-	// SET FIX HEIGHT
-	displayHeight = 22;
-	
-	// set cell size
-	[self setCellSize:NSMakeSize(displayWidth,displayHeight)];
-		
-	int rowCount;
-		
-	if (tagCount % numberOfTagsInRow > 0)
-	{
-		rowCount = (tagCount / numberOfTagsInRow) + 1;
-	}
-	else
-	{
-		rowCount = (tagCount / numberOfTagsInRow);
-	}
-	
-	// if the tags don't fill the entire row, lower numberOfTagsInRow
-	if (tagCount < numberOfTagsInRow)
-	{
-		numberOfTagsInRow = tagCount;
-	}
-	
-	[self renewRows:rowCount columns:numberOfTagsInRow];
-	
-	int i; //rows
-	int j; //columns
-	int counter = 0;
-	
-	NSEnumerator *e = [selectedTags objectEnumerator];
-	
-	for (i=0;i<rowCount;i++)
-	{
-		for (j=0;j<numberOfTagsInRow;j++)
+		if(![selectedTags containsTag:tag])
 		{
-			// the last line may not be filled
-			if (counter == tagCount)
-				break;
-			
-			PATag *tag = [e nextObject];
-			PASelectedTagCell *cell = [[PASelectedTagCell alloc] initTextCell:[tag name]];
-			//[cell setBezelStyle:NSRecessedBezelStyle];
-			[self putCell:[cell autorelease] atRow:i column:j];
-			//[cell release];
-			counter++;
+			[[tagButtons objectForKey:tagName] removeFromSuperview];
+			[tagButtons removeObjectForKey:tagName];
 		}
 	}
+	
+	
+	// Add or update tags
+	int x = 10;
+	int y = 7;
+
+	NSEnumerator *enumerator = [selectedTags objectEnumerator];
+	
+	PATag *tag;
+	while(tag = [enumerator nextObject])
+	{			
+		PAButton *button;
+		
+		if(!(button = [tagButtons objectForKey:[tag name]]))
+		{	
+			button = [[PAButton alloc] initWithFrame:[self frame]];
+			[button setTitle:[tag name]];
+			[button setBezelStyle:PATagBezelStyle];
+			[button highlight:YES];
+			[button sizeToFit];
+			
+			[tagButtons setObject:button forKey:[tag name]];
+			
+			[self addSubview:button];
+		}
+		
+		NSRect buttonFrame = [button frame];
+		
+		NSRect newFrame = NSMakeRect(x, y, buttonFrame.size.width, buttonFrame.size.height);
+		
+		[button setFrame:newFrame];
+		
+		x += buttonFrame.size.width + 10;
+	}
+}
+
+
+#pragma mark Accessors
+- (BOOL)isFlipped
+{
+	return YES;
 }
 
 @end

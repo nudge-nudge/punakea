@@ -31,12 +31,12 @@ typedef enum _PAButtonType
 typedef enum _PABezelStyle
 {
 	PARecessedBezelStyle = 0,
-	PATokenBezelStyle = 1
+	PATagBezelStyle = 1
 } PABezelStyle;
 
 
 extern NSSize const PADDING_RECESSEDBEZELSTYLE;
-extern NSSize const PADDING_TOKENBEZELSTYLE;
+extern NSSize const PADDING_TAGBEZELSTYLE;
 
 extern int const FRAME_HEIGHT_MINI;
 extern int const FRAME_HEIGHT_SMALL;

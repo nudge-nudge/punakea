@@ -10,7 +10,7 @@
 		[self setCell:cell];
 		[cell release];
 		
-		[self setBezelStyle:PATokenBezelStyle];
+		[self setBezelStyle:PATagBezelStyle];
 		[self setButtonType:PAMomentaryLightButton];
     }
     return self;

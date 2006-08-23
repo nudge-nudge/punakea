@@ -10,7 +10,7 @@
 
 
 NSSize const PADDING_RECESSEDBEZELSTYLE = {8,0};
-NSSize const PADDING_TOKENBEZELSTYLE = {10,2};
+NSSize const PADDING_TAGBEZELSTYLE = {10,2};
 
 int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
@@ -81,8 +81,8 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 		{
 			case PARecessedBezelStyle:
 				[self drawRecessedButtonWithFrame:cellFrame inView:controlView]; break;
-			case PATokenBezelStyle:
-				[self drawTokenButtonWithFrame:cellFrame inView:controlView]; break;
+			case PATagBezelStyle:
+				[self drawTagButtonWithFrame:cellFrame inView:controlView]; break;
 		}
 		
 	} else {
@@ -175,7 +175,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	[label drawInRect:NSInsetRect(cellFrame, padding.width, padding.height)];
 }
 
-- (void)drawTokenButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+- (void)drawTagButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	NSMutableAttributedString *label = [self attributedTitle];
 	
@@ -199,32 +199,35 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 				  value:paraStyle
 				  range:NSMakeRange(0, [label length])];
 	
-	NSSize padding = PADDING_TOKENBEZELSTYLE;
+	NSSize padding = PADDING_TAGBEZELSTYLE;
 	
 	// Add bezel
-	NSColor *outerBezelColor;
-	if([self isHighlighted] || [self isPressed])
-		outerBezelColor = [self selectedBezelColor];
-	else if([self isHovered])
-		outerBezelColor = [bezelColor blendedColorWithFraction:0.55 ofColor:[self selectedBezelColor]];
-	else
-		outerBezelColor = [bezelColor blendedColorWithFraction:0.4 ofColor:[self selectedBezelColor]];
-	
-	NSBezierPath *bezel = [NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:20.0];
-	[bezel setLineWidth:1.1];
-	[outerBezelColor set];
-	[bezel fill];
-	
-	if(!([self isHighlighted] || [self isPressed]))
+	if([self isHighlighted] || [self isHovered] || [self isPressed])
 	{
-		// Draw inner bezel
-		NSColor *innerBezelColor = bezelColor;
-		if([self isHovered])
-			innerBezelColor = [bezelColor blendedColorWithFraction:0.15 ofColor:[self selectedBezelColor]];
+		NSColor *outerBezelColor;
+		if([self isHighlighted] || [self isPressed])
+			outerBezelColor = [self selectedBezelColor];
+		else if([self isHovered])
+			outerBezelColor = [bezelColor blendedColorWithFraction:0.55 ofColor:[self selectedBezelColor]];
+		else
+			outerBezelColor = [bezelColor blendedColorWithFraction:0.4 ofColor:[self selectedBezelColor]];
 		
-		bezel = [NSBezierPath bezierPathWithRoundRectInRect:NSInsetRect(cellFrame, 1.0, 1.0) radius:20.0];
-		[innerBezelColor set];
+		NSBezierPath *bezel = [NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:20.0];
+		[bezel setLineWidth:1.1];
+		[outerBezelColor set];
 		[bezel fill];
+		
+		if(!([self isHighlighted] || [self isPressed]))
+		{
+			// Draw inner bezel
+			NSColor *innerBezelColor = bezelColor;
+			if([self isHovered])
+				innerBezelColor = [bezelColor blendedColorWithFraction:0.15 ofColor:[self selectedBezelColor]];
+			
+			bezel = [NSBezierPath bezierPathWithRoundRectInRect:NSInsetRect(cellFrame, 1.0, 1.0) radius:20.0];
+			[innerBezelColor set];
+			[bezel fill];
+		}
 	}
 	
 	[label drawInRect:NSInsetRect(cellFrame, padding.width, padding.height)];
@@ -271,7 +274,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 						      value:[NSFont boldSystemFontOfSize:11]
 						      range:NSMakeRange(0, [attrTitle length])];
 			break;
-		case PATokenBezelStyle:;
+		case PATagBezelStyle:;
 			attrTitle = [[NSMutableAttributedString alloc] initWithString:[self title]];
 			[attrTitle addAttribute:NSFontAttributeName
 						      value:[NSFont systemFontOfSize:[self fontSize]]
@@ -401,9 +404,9 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 				size.width = labelSize.width + 2 * PADDING_RECESSEDBEZELSTYLE.width;				
 				size.height = HEIGHT_RECESSEDBEZELSTYLE_SMALL;				
 				break;			
-			case PATokenBezelStyle:;				
-				size.width = labelSize.width + 2 * PADDING_TOKENBEZELSTYLE.width;
-				size.height = labelSize.height + 2 * PADDING_TOKENBEZELSTYLE.height;
+			case PATagBezelStyle:;				
+				size.width = labelSize.width + 2 * PADDING_TAGBEZELSTYLE.width;
+				size.height = labelSize.height + 2 * PADDING_TAGBEZELSTYLE.height;
 				break;
 		}
 	} else {
