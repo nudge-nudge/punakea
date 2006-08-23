@@ -18,7 +18,15 @@
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
 		
+		[self setDisplayTags:[[tags tagArray] mutableCopy]];
+		
 		query = [[PAQuery alloc] init];
+		
+		[self setDeleting:NO];
+		[self setRenaming:NO];
+		
+		nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(tagsHaveChanged:) name:@"PATagsHaveChanged" object:tags];
 		
 		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
@@ -28,27 +36,71 @@
 
 - (void)dealloc
 {
+	[nc removeObserver:self];
+	[displayTags release];
 	[query release];
 	[super dealloc];
+}
+
+#pragma mark accessors
+- (BOOL)isDeleting
+{
+	return deleting;
+}
+
+- (void)setDeleting:(BOOL)flag
+{
+	deleting = flag;
+}
+
+- (BOOL)isRenaming
+{
+	return renaming;
+}
+
+- (void)setRenaming:(BOOL)flag
+{
+	renaming = flag;
+}
+
+- (NSMutableArray*)displayTags
+{
+	return displayTags;
+}
+
+- (void)setDisplayTags:(NSMutableArray*)someTags
+{
+	[displayTags release];
+	[someTags retain];
+	displayTags = someTags;
 }
 
 #pragma mark datasource
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [tags count];
+	return [displayTags count];
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {
-	// TODO fixed order needed
-	return [[[tags tagArray] objectAtIndex:rowIndex] name];
+	return [[displayTags objectAtIndex:rowIndex] name];
+}
+
+#pragma mark notifications
+- (void)tagsHaveChanged:(NSNotification*)notification
+{
+	//TODO add new tags if there have been any
 }
 
 #pragma mark actions
 - (IBAction)removeTag:(id)sender
 {
+	[self setDeleting:YES];
+	
 	NSIndexSet *indexes = [tableView selectedRowIndexes];
-	NSArray *selectedTags = [[tags tagArray] objectsAtIndexes:indexes];
+	NSArray *selectedTags = [displayTags objectsAtIndexes:indexes];
+	[displayTags removeObjectsAtIndexes:indexes];
+	[tableView reloadData];
 	
 	NSEnumerator *selectedTagsEnumerator = [selectedTags objectEnumerator];
 	PATag *tag;
@@ -58,6 +110,47 @@
 		[tagger removeTag:tag];
 		[tags removeTag:tag];
 	}
-}		
 	
+	[self setDeleting:NO];
+}
+
+#pragma mark text delegate
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
+{
+	PATag *tag = [tags tagForName:[fieldEditor string]];
+	
+	if (tag)
+	{
+		// there already is a tag with this name
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+- (void)tableView:(NSTableView *)aTableView 
+   setObjectValue:(id)anObject 
+   forTableColumn:(NSTableColumn *)aTableColumn 
+			  row:(int)rowIndex
+
+{
+	PATag *oldTag = [displayTags objectAtIndex:rowIndex];
+	PATag *newTag = [tagger createTagForName:anObject];
+
+	if ([[oldTag name] isEqualToString:[newTag name]])
+	{
+		return;
+	}
+	
+	[self setRenaming:YES];
+	
+	[tagger renameTag:oldTag toTag:newTag];
+	[tags removeTag:oldTag];
+	[displayTags replaceObjectAtIndex:rowIndex withObject:newTag];	
+	
+	[self setRenaming:NO];
+}
+
 @end

@@ -261,7 +261,11 @@
 {
 	float height = NSHeight([typeAheadView frame]);
 	NSScrollView *sv = [tagCloud enclosingScrollView];
-	[sv setFrame:NSMakeRect(0,NSMinY([sv frame])+height,NSWidth([sv frame]),NSHeight([sv frame])-height)];
+	// placed above
+	[sv setFrame:NSMakeRect(0,NSMinY([sv frame]),NSWidth([sv frame]),NSHeight([sv frame])-height)];
+	
+	// placed below
+	// [sv setFrame:NSMakeRect(0,NSMinY([sv frame])+height,NSWidth([sv frame]),NSHeight([sv frame])-height)];
 	[typeAheadView setHidden:NO];	
 }
 
@@ -269,7 +273,11 @@
 {
 	float height = NSHeight([typeAheadView frame]);
 	NSScrollView *sv = [tagCloud enclosingScrollView];
-	[sv setFrame:NSMakeRect(0,NSMinY([sv frame])-height,NSWidth([sv frame]),NSHeight([sv frame])+height)];
+	// placed above
+	[sv setFrame:NSMakeRect(0,NSMinY([sv frame]),NSWidth([sv frame]),NSHeight([sv frame])+height)];
+		
+	// placed below
+	// [sv setFrame:NSMakeRect(0,NSMinY([sv frame])-height,NSWidth([sv frame]),NSHeight([sv frame])+height)];
 	[typeAheadView setHidden:YES];	
 }
 

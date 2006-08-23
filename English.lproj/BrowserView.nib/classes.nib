@@ -7,7 +7,6 @@
             OUTLETS = {
                 outlineView = PAResultsOutlineView; 
                 tagCloud = PATagCloud; 
-                tagCloudScrollView = NSScrollView; 
                 typeAheadView = PATypeAheadView; 
             }; 
             SUPERCLASS = PAViewController; 

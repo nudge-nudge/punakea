@@ -192,7 +192,7 @@ static PATagger *sharedInstance = nil;
 	[self removeTag:tag fromFiles:files];
 }
 
-- (void)renameFromTag:(PASimpleTag*)fromTag to:(PASimpleTag*)toTag
+- (void)renameTag:(PASimpleTag*)fromTag toTag:(PASimpleTag*)toTag
 {
 	PAQuery *query = [[PAQuery alloc] init];
 	NSArray *files = [query filesForTag:fromTag];	
@@ -231,6 +231,12 @@ static PATagger *sharedInstance = nil;
 
 - (void)renameTag:(PATag*)tag toTag:(PATag*)newTag onFiles:(NSArray*)files
 {
+	if ([[tag name] isEqualToString:[newTag name]])
+	{
+		// no renaming needed
+		return;
+	}
+	
 	NSEnumerator *fileEnumerator = [files objectEnumerator];
 	NSString *path;
 	
