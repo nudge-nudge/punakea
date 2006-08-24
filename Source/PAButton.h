@@ -38,13 +38,16 @@
 - (void)setButtonType:(PAButtonType)buttonType;
 - (int)fontSize;
 - (void)setFontSize:(int)size;	/**< Sets the font size for the title being displayed. Ignored if style is not PATokenBezelStyle. */
-// TODO: - (void)setAlpha:(float)alpha;
-
+// TODO: - (void)setAlphaComponent:(float)alpha;
+- (BOOL)showsCloseIcon;
+- (void)setShowsCloseIcon:(BOOL)flag;	/**< Sets flag if a PATagButton shows a close icon */
 - (int)tag;
 - (void)setTag:(int)aTag;
 
 - (SEL)action;
 - (void)setAction:(SEL)action;
+- (SEL)closeAction;
+- (void)setCloseAction:(SEL)action;
 - (id)target;
 - (void)setTarget:(id)target;
 

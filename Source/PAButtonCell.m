@@ -11,6 +11,7 @@
 
 NSSize const PADDING_RECESSEDBEZELSTYLE = {8,0};
 NSSize const PADDING_TAGBEZELSTYLE = {10,2};
+NSSize const MARGIN_TAGBEZELSTYLE = {5,3};
 
 int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
@@ -117,7 +118,10 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	
 	// Add shadow
 	NSShadow *shadow = [[NSShadow alloc] init];
-	[shadow setShadowOffset:NSMakeSize(0,-1.5)];
+	
+	NSSize shadowOffset;
+	if([controlView isFlipped]) { shadowOffset = NSMakeSize(0,-1.5); } else { shadowOffset = NSMakeSize(0,1.5); }
+	[shadow setShadowOffset:shadowOffset];
 	[shadow setShadowColor:shadowColor];
 	[label addAttribute:NSShadowAttributeName
 				  value:shadow
@@ -144,6 +148,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	if(bezelImage)
 	{
 		[bezelImage setScalesWhenResized:YES];
+		if([controlView isFlipped]) [bezelImage setFlipped:YES];
 		
 		NSRect imgRect;
 		NSRect destRect = cellFrame;
@@ -201,6 +206,18 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	
 	NSSize padding = PADDING_TAGBEZELSTYLE;
 	
+	// Move cellFrame if showsCloseIcon
+	NSRect originalCellFrame = cellFrame;
+	if([self showsCloseIcon])
+	{
+		if([controlView isFlipped])
+			cellFrame.origin.y += MARGIN_TAGBEZELSTYLE.height;
+
+		cellFrame.origin.x += MARGIN_TAGBEZELSTYLE.width;
+		cellFrame.size.width -= MARGIN_TAGBEZELSTYLE.width;
+		cellFrame.size.height -= MARGIN_TAGBEZELSTYLE.height;
+	}
+	
 	// Add bezel
 	if([self isHighlighted] || [self isHovered] || [self isPressed])
 	{
@@ -231,12 +248,57 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	}
 	
 	[label drawInRect:NSInsetRect(cellFrame, padding.width, padding.height)];
+	
+	// Draw close icon
+	if([self showsCloseIcon] && ([self isHovered] || [self isPressed]))
+	{
+		NSImage *icon;
+		if([self isPressed] && trackingInsideCloseIcon)
+			icon = [NSImage imageNamed:@"sl-status_stop-pressed"];
+		else
+			icon = [NSImage imageNamed:@"sl-status_stop"];
+
+		if([controlView isFlipped]) [icon setFlipped:YES];
+		NSRect iconRect;
+		iconRect.origin = NSZeroPoint;
+		iconRect.size = [icon size];
+		
+		NSPoint targetPoint;
+		if([controlView isFlipped])
+			targetPoint = NSZeroPoint;
+		else
+			targetPoint = NSMakePoint(0, originalCellFrame.size.height - 1);
+		
+		[icon drawAtPoint:targetPoint fromRect:iconRect operation:NSCompositeSourceOver fraction:1.0];
+	}
 }
 
 
 #pragma mark Mouse Tracking
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
 {
+	if([self showsCloseIcon] && [self bezelStyle] == PATagBezelStyle)
+	{
+		NSPoint location = [controlView convertPoint:[theEvent locationInWindow] fromView:nil];
+		
+		NSRect iconRect;
+		if([controlView isFlipped])
+			iconRect.origin = NSZeroPoint;
+		else
+			iconRect.origin = NSMakePoint(0, cellFrame.size.height - 1);
+		iconRect.size = NSMakeSize(13, 13);
+		
+		if(NSPointInRect(location, iconRect))
+		{
+			if(!defaultAction) defaultAction = [self action];
+			[self setAction:closeAction];
+			trackingInsideCloseIcon = YES;
+		} else {
+			if(defaultAction) [self setAction:defaultAction];
+			trackingInsideCloseIcon = NO;
+		}
+	}
+
 	return [super trackMouse:theEvent inRect:cellFrame ofView:controlView untilMouseUp:NO];
 }
 
@@ -391,6 +453,31 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	fontSize = size;
 }
 
+- (BOOL)showsCloseIcon
+{
+	return showsCloseIcon;
+}
+
+- (void)setShowsCloseIcon:(BOOL)flag
+{
+	showsCloseIcon = flag;
+}
+
+- (void)setAction:(SEL)aSelector
+{
+	[super setAction:aSelector];
+}
+
+- (SEL)closeAction
+{
+	return closeAction;
+}
+
+- (void)setCloseAction:(SEL)action
+{
+	closeAction = action;
+}
+
 - (NSSize)cellSize
 {
 	NSSize size = NSMakeSize(0,0);
@@ -407,6 +494,14 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 			case PATagBezelStyle:;				
 				size.width = labelSize.width + 2 * PADDING_TAGBEZELSTYLE.width;
 				size.height = labelSize.height + 2 * PADDING_TAGBEZELSTYLE.height;
+				
+				// Enlarge cellFrame if showsCloseIcon
+				if([self showsCloseIcon])
+				{
+					size.width += MARGIN_TAGBEZELSTYLE.width;
+					size.height += MARGIN_TAGBEZELSTYLE.height;
+				}
+				
 				break;
 		}
 	} else {

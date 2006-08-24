@@ -98,7 +98,7 @@
 
 - (BOOL)isFlipped
 {
-	return NO;
+	return YES;
 }
 
 - (BOOL)isBordered
@@ -171,6 +171,16 @@
 	[[self cell] setFontSize:size];
 }
 
+- (BOOL)showsCloseIcon
+{
+	return [[self cell] showsCloseIcon];
+}
+
+- (void)setShowsCloseIcon:(BOOL)flag
+{
+	[[self cell] setShowsCloseIcon:flag];
+}
+	
 - (int)tag
 {
 	return [[self cell] tag];
@@ -189,6 +199,16 @@
 - (void)setAction:(SEL)action
 {
 	[[self cell] setAction:action];
+}
+
+- (SEL)closeAction
+{
+	return [[self cell] closeAction];
+}
+
+- (void)setCloseAction:(SEL)action
+{
+	[[self cell] setCloseAction:action];
 }
 
 - (id)target

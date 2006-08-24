@@ -107,6 +107,10 @@
 			button = [[PAButton alloc] initWithFrame:[self frame]];
 			[button setTitle:[tag name]];
 			[button setBezelStyle:PATagBezelStyle];
+			[button setShowsCloseIcon:YES];
+			[button setTarget:self];
+			[button setAction:@selector(tagClicked:)];
+			[button setCloseAction:@selector(tagClosed:)];
 			[button highlight:YES];
 			[button sizeToFit];
 			
@@ -121,8 +125,20 @@
 		
 		[button setFrame:newFrame];
 		
-		x += buttonFrame.size.width + 10;
+		x += buttonFrame.size.width + 3;
 	}
+}
+
+
+#pragma mark Actions
+- (void)tagClicked:(id)sender
+{
+	NSLog(@"tag clicked");
+}
+
+- (void)tagClosed:(id)sender
+{
+	NSLog(@"tag closed");
 }
 
 
