@@ -27,8 +27,7 @@ only works if parent window is a PASidebar
  */
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender 
 {
-	NSLog(@"dragEnter");
-	[[self window] show];
+	[[self window] mouseEvent];
 	return NSDragOperationNone;
 }
 
@@ -37,13 +36,6 @@ only works if parent window is a PASidebar
  */
 - (void)draggingExited:(id <NSDraggingInfo>)sender 
 {
-	NSLog(@"dragExit");
-	// only send recede if mouse pointer has left the view
-	NSPoint mouse = [sender draggingLocation];
-	if (!NSPointInRect(mouse,[self bounds]))
-	{
-		NSLog(@"dragLeft");
-		[[self window] recede];
-	}
+	[[self window] mouseEvent];
 }
 @end

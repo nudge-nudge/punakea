@@ -57,16 +57,34 @@
 }
 
 #pragma mark events
+- (void)mouseEvent
+{
+	NSPoint mouseLocation = [self mouseLocationOutsideOfEventStream];
+	NSPoint mouseLocationRelativeToWindow = [self convertBaseToScreen:mouseLocation];
+	
+	/*
+	NSLog(@"mouse: (%f,%f)",mouseLocationRelativeToWindow.x,mouseLocationRelativeToWindow.y);
+	NSLog(@"frame: (%f,%f,%f,%f)",[self frame].origin.x,[self frame].origin.y,[self frame].size.width,[self frame].size.height);
+	*/
+	
+	if (!NSPointInRect(mouseLocationRelativeToWindow,[self frame]) && !(mouseLocationRelativeToWindow.x == 0))
+	{
+		[self recede];
+	}
+	else
+	{
+		[self show];
+	}
+}
+
 - (void)mouseEntered:(NSEvent *)theEvent 
 {
-	NSLog(@"enter");
-	[self show];
+	[self mouseEvent];
 }
 
 - (void)mouseExited:(NSEvent *)theEvent 
 {
-	NSLog(@"exit");
-	[self recede];
+	[self mouseEvent];
 }
 
 

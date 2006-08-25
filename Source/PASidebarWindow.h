@@ -11,6 +11,7 @@
 /**
 TODO delay
   TODO check if tracking rects are handled correctly
+ TODO send all mouse events to window, let window decide what to do
  */
 @interface PASidebarWindow : NSWindow {
 	NSMutableDictionary *appearance;
@@ -24,5 +25,11 @@ TODO delay
 
 - (BOOL)isMoving;
 - (void)setMoving:(BOOL)flag;
+
+/** 
+should be called after a mouse event inside the sidebar
+- checks if it should be shown
+*/
+- (void)mouseEvent;
 	
 @end
