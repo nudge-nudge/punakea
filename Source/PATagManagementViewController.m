@@ -89,7 +89,15 @@
 #pragma mark notifications
 - (void)tagsHaveChanged:(NSNotification*)notification
 {
-	//TODO add new tags if there have been any
+	NSDictionary *userInfo = [notification userInfo];
+	PATagChangeOperation changeOperation = [[userInfo objectForKey:@"PATagChangeOperation"] intValue];
+	
+	if (changeOperation == PATagAddOperation)
+	{
+		PATag *tag = [userInfo objectForKey:@"tag"];
+		[displayTags addObject:tag];
+		[tableView reloadData];
+	}
 }
 
 #pragma mark actions

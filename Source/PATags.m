@@ -51,7 +51,9 @@
 	[tags release];
 	tags = otherTags;
 	
-	[nc postNotificationName:@"PATagsHaveChanged" object:self];
+	NSNumber *changeOperation = [NSNumber numberWithInt:PATagResetOperation];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:changeOperation forKey:@"PATagChangeOperation"];
+	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
 }
 
 #pragma mark additional
@@ -59,14 +61,20 @@
 {
 	[tags setObject:aTag forKey:[aTag name]];
 	
-	[nc postNotificationName:@"PATagsHaveChanged" object:self];
+	NSNumber *changeOperation = [NSNumber numberWithInt:PATagAddOperation];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,aTag,nil] 
+														 forKeys:[NSArray arrayWithObjects:@"PATagChangeOperation",@"tag",nil]];
+	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
 }
 
 - (void)removeTag:(PATag*)aTag
 {
 	[tags removeObjectForKey:[aTag name]];
 	
-	[nc postNotificationName:@"PATagsHaveChanged" object:self];
+	NSNumber *changeOperation = [NSNumber numberWithInt:PATagRemoveOperation];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,aTag,nil] 
+														 forKeys:[NSArray arrayWithObjects:@"PATagChangeOperation",@"tag",nil]];
+	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
 }
 
 - (NSEnumerator*)objectEnumerator

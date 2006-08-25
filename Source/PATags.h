@@ -9,6 +9,14 @@
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
 
+typedef enum _PATagChangeOperation
+{
+	PATagRemoveOperation = 0,
+	PATagAddOperation = 1,
+	PATagResetOperation = 2
+} PATagChangeOperation;
+
+
 @interface PATags : NSObject {
 	NSMutableDictionary *tags;
 	
