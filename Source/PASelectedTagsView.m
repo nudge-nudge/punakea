@@ -127,18 +127,20 @@
 		
 		x += buttonFrame.size.width + 3;
 	}
+	
+	[self setNeedsDisplay:YES];
 }
 
 
 #pragma mark Actions
 - (void)tagClicked:(id)sender
 {
-	NSLog(@"tag clicked");
+	// nothing yet
 }
 
 - (void)tagClosed:(id)sender
 {
-	NSLog(@"tag closed");
+	[selectedTags removeTag:[[PATagger sharedInstance] tagForName:[sender title]]];
 }
 
 
