@@ -18,6 +18,7 @@ tag management. at the moment the tags are not in sync with PATags, but
  */
 @interface PATagManagementViewController : PAViewController {
 	IBOutlet NSTableView *tableView;
+	NSSortDescriptor *nameSortDescriptor;
 	
 	PATagger *tagger;
 	PATags *tags;

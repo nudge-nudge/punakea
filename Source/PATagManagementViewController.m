@@ -19,6 +19,7 @@
 		tags = [tagger tags];
 		
 		[self setDisplayTags:[[tags tagArray] mutableCopy]];
+		[self sortDisplayTags];
 		
 		query = [[PAQuery alloc] init];
 		
@@ -75,15 +76,15 @@
 	displayTags = someTags;
 }
 
-#pragma mark datasource
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+- (void)sortDisplayTags
 {
-	return [displayTags count];
+	[self sortDisplayTags:YES];
 }
 
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
+- (void)sortDisplayTags:(BOOL)ascending
 {
-	return [[displayTags objectAtIndex:rowIndex] name];
+	//nameSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:ascending];
+	//[displayTags sortUsingDescriptors:[NSArray arrayWithObject:nameSortDescriptor]];
 }
 
 #pragma mark notifications
