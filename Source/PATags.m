@@ -16,7 +16,7 @@
 {
 	if (self = [super init])
 	{
-		[self setTags:[NSMutableDictionary dictionary]];
+		[self setTags:[NSMutableArray array]];
 		
 		nc = [NSNotificationCenter defaultCenter];
 	}
@@ -30,22 +30,31 @@
 }
 
 #pragma mark accessors
-- (NSArray*)tagArray
-{
-	return [tags allValues];
-}
-
 - (PATag*)tagForName:(NSString*)tagName
 {
-	return [tags objectForKey:tagName];
+	// TODO efficient with hash
+	NSEnumerator *e = [self objectEnumerator];
+	PATag *resultTag = nil;
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		if ([[tag name] isEqualToString:tagName])
+		{
+			resultTag = tag;
+		}
+	}
+	
+	return resultTag;
+	//return [tags objectForKey:tagName];
 }
 
-- (NSMutableDictionary*)tags
+- (NSMutableArray*)tags
 {
 	return tags;
 }
 
-- (void)setTags:(NSMutableDictionary*)otherTags
+- (void)setTags:(NSMutableArray*)otherTags
 {
 	[otherTags retain];
 	[tags release];
@@ -59,7 +68,7 @@
 #pragma mark additional
 - (void)addTag:(PATag*)aTag
 {
-	[tags setObject:aTag forKey:[aTag name]];
+	[tags addObject:aTag];
 	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagAddOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,aTag,nil] 
@@ -69,7 +78,7 @@
 
 - (void)removeTag:(PATag*)aTag
 {
-	[tags removeObjectForKey:[aTag name]];
+	[tags removeObject:aTag];
 	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagRemoveOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,aTag,nil] 

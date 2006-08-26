@@ -18,8 +18,7 @@
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
 		
-		[self setDisplayTags:[[tags tagArray] mutableCopy]];
-		[self sortDisplayTags];
+		[self setDisplayTags:[[tags tags] mutableCopy]];
 		
 		query = [[PAQuery alloc] init];
 		

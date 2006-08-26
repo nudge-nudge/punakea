@@ -103,7 +103,7 @@
 	[unarchiver finishDecoding];
 	[unarchiver release];
 	
-	NSMutableDictionary *loadedTags = [rootObject valueForKey:@"tags"];
+	NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
 	
 	if ([loadedTags count] > 0)
 	{

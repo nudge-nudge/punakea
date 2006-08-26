@@ -66,8 +66,8 @@
 		
 		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
 		
-		[self setVisibleTags:[tags tagArray]];
-		[typeAheadFind setActiveTags:[tags tagArray]];	
+		[self setVisibleTags:[tags tags]];
+		[typeAheadFind setActiveTags:[tags tags]];	
 		
 		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
@@ -307,8 +307,8 @@
 	else 
 	{
 		// there are no selected tags, reset all tags
-		[self setVisibleTags:[tags tagArray]];
-		[typeAheadFind setActiveTags:[tags tagArray]];
+		[self setVisibleTags:[tags tags]];
+		[typeAheadFind setActiveTags:[tags tags]];
 	}
 }
 
@@ -334,8 +334,8 @@
 	because then the relatedTags are shown */
 	if ([selectedTags count] == 0)
 	{
-		[self setVisibleTags:[tags tagArray]];
-		[typeAheadFind setActiveTags:[tags tagArray]];
+		[self setVisibleTags:[tags tags]];
+		[typeAheadFind setActiveTags:[tags tags]];
 	}
 }
 

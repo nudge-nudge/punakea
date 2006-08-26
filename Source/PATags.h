@@ -18,16 +18,15 @@ typedef enum _PATagChangeOperation
 
 
 @interface PATags : NSObject {
-	NSMutableDictionary *tags;
+	NSMutableArray *tags;
 	
 	NSNotificationCenter *nc;
 }
 
-- (NSArray*)tagArray;
 - (PATag*)tagForName:(NSString*)tagName;
 
-- (NSMutableDictionary*)tags;
-- (void)setTags:(NSMutableDictionary*)otherTags;
+- (NSMutableArray*)tags;
+- (void)setTags:(NSMutableArray*)otherTags;
 
 - (void)addTag:(PATag*)aTag;
 - (void)removeTag:(PATag*)aTag;
