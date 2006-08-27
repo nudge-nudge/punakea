@@ -2,10 +2,16 @@
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
+            CLASS = PATagManagementArrayController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controller = PATagManagementViewController; }; 
+            SUPERCLASS = NSArrayController; 
+        }, 
+        {
             ACTIONS = {removeTag = id; }; 
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {tableView = NSTableView; }; 
+            OUTLETS = {arrayController = NSArrayController; tableView = NSTableView; }; 
             SUPERCLASS = PAViewController; 
         }, 
         {

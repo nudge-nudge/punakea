@@ -43,6 +43,7 @@
         return NO;
     if (other == self)
         return YES;
+	
     return [self isEqualToTag:other];
 }
 
@@ -57,6 +58,15 @@
 - (unsigned)hash 
 {
 	return [name hash] ^ [query hash];
+}
+
+#pragma mark copying
+- (id)copyWithZone:(NSZone *)zone
+{
+	PASimpleTag *newTag = [[[PASimpleTag alloc] init] autorelease];
+	[newTag setName:[self name]];
+	//TODO complete this!!!!
+	return newTag;
 }
 
 @end

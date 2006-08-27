@@ -118,7 +118,7 @@ static PATagger *sharedInstance = nil;
 	
 	while (tagName = [e nextObject])
 	{
-		PATag *tag = [self tagForName:tagName includeTempTags:NO];
+		PATag *tag = [self tagForName:tagName includeTempTag:NO];
 		
 		if (!tag)
 		{
@@ -184,7 +184,7 @@ static PATagger *sharedInstance = nil;
 }
 
 #pragma mark working with tags (renaming and deleting)
-- (void)removeTag:(PASimpleTag*)tag
+- (void)removeTag:(PATag*)tag
 {
 	PAQuery *query = [[PAQuery alloc] init];
 	NSArray *files = [query filesForTag:tag];	
@@ -192,12 +192,12 @@ static PATagger *sharedInstance = nil;
 	[self removeTag:tag fromFiles:files];
 }
 
-- (void)renameTag:(PASimpleTag*)fromTag toTag:(PASimpleTag*)toTag
+- (void)renameTag:(NSString*)tagName toTag:(NSString*)newTagName
 {
 	PAQuery *query = [[PAQuery alloc] init];
-	NSArray *files = [query filesForTag:fromTag];	
+	NSArray *files = [query filesForTag:[self tagForName:tagName]];	
 	
-	[self renameTag:fromTag toTag:toTag onFiles:files];
+	[self renameTag:tagName toTag:newTagName onFiles:files];
 }
 
 - (void)removeTag:(PATag*)tag fromFiles:(NSArray*)files
@@ -229,9 +229,9 @@ static PATagger *sharedInstance = nil;
 	}
 }
 
-- (void)renameTag:(PATag*)tag toTag:(PATag*)newTag onFiles:(NSArray*)files
+- (void)renameTag:(NSString*)tagName toTag:(NSString*)newTagName onFiles:(NSArray*)files
 {
-	if ([[tag name] isEqualToString:[newTag name]])
+	if ([tagName isEqualToString:newTagName])
 	{
 		// no renaming needed
 		return;
@@ -243,10 +243,12 @@ static PATagger *sharedInstance = nil;
 	while (path = [fileEnumerator nextObject])
 	{
 		// get all tags, rename the specified one (delete/add), write back to file
-		NSMutableArray *someTags = [[[self tagsOnFiles:[NSArray arrayWithObject:path]] mutableCopy] autorelease];
-		[someTags removeObject:tag];
-		[someTags addObject:newTag];
-		[self writeTags:someTags ToFile:path];
+		NSMutableArray *keywords = [[self keywordsForFile:path] mutableCopy];
+		[keywords removeObject:tagName];
+		[keywords addObject:newTagName];
+		NSArray *newTags = [self createTagsForNames:keywords];
+		[self writeTags:newTags ToFile:path];
+		[keywords release];
 	}
 }
 

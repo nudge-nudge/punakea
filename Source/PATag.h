@@ -12,7 +12,7 @@
 treat this class as the abstract superclass for all Tags,
  no methods are implemented here, subclasses need to overwrite them all!
  */
-@interface PATag : NSObject <NSCoding>
+@interface PATag : NSObject <NSCoding, NSCopying>
 {
 	NSString *name;
 	NSString *query;
@@ -24,6 +24,7 @@ treat this class as the abstract superclass for all Tags,
 
 // these functions need to be implemented by subclass
 - (BOOL)isEqual:(id)other; /**< must overwrite */
+- (id)copyWithZone:(NSZone *)zone; /**< must overwrite */
 - (float)absoluteRating; /**< must overwrite */
 - (float)relativeRatingToTag:(PATag*)otherTag; /**< must overwrite */
 

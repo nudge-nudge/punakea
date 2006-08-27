@@ -13,21 +13,16 @@
 #import "PAQuery.h"
 
 /**
-tag management. at the moment the tags are not in sync with PATags, but
- changes are passed on to it (changes in PATags are not passed to displayTags)
+TODO monitor edits/removes with KVO. at the moment this is more like a hack
+ than anything else
  */
 @interface PATagManagementViewController : PAViewController {
 	IBOutlet NSTableView *tableView;
-	NSSortDescriptor *nameSortDescriptor;
+	IBOutlet NSArrayController *arrayController;
 	
 	PATagger *tagger;
 	PATags *tags;
-	NSMutableArray *displayTags;
-	
-	NSNotificationCenter *nc;
-	
 	PAQuery *query;
-	PATag *editedTag; /**< needed for table editing */
 	
 	BOOL deleting;
 	BOOL renaming;
@@ -40,9 +35,7 @@ tag management. at the moment the tags are not in sync with PATags, but
 - (BOOL)isRenaming;
 - (void)setRenaming:(BOOL)flag;
 
-- (NSMutableArray*)displayTags;
-- (void)setDisplayTags:(NSMutableArray*)someTags;
-
-- (IBAction)removeTag:(id)sender;
+- (void)removeTagsFromFiles:(NSArray*)tags;
+- (void)renameTag:(PATag*)oldTag toTag:(PATag*)newTag;
 
 @end

@@ -133,19 +133,18 @@ removes the tags from files
 /**
 convenience method:
  rename tag on all files
- @param tag tag to renam
- @param tag new tag
- TODO toTag better as string?
+ @param name tag to renam
+ @param neName new tag
  */
-- (void)renameTag:(PATag*)tag toTag:(PATag*)newTag;
+- (void)renameTag:(NSString*)tagName toTag:(NSString*)newTagName;
 
 /**
 renames the tag on files
- @param tag tag to rename
- @param newTag new name
+ @param tagName tag to rename
+ @param newTagName new name
  @param files files to rename in (array of path strings)
  */
-- (void)renameTag:(PATag*)tag toTag:(PATag*)newTag onFiles:(NSArray*)files;
+- (void)renameTag:(NSString*)tagName toTag:(NSString*)newTagName onFiles:(NSArray*)files;
 
 /**
 gets tag names of simple tags for all files at the paths (with count)

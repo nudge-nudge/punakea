@@ -66,7 +66,7 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 }
 
 #pragma mark Synchronous Searching
-- (NSArray*)filesForTag:(PASimpleTag*)tag
+- (NSArray*)filesForTag:(PATag*)tag
 {
 	NSString *searchString = [self queryStringForTags:[NSArray arrayWithObjects:tag,nil]];
 	MDQueryRef *query = MDQueryCreate(NULL,searchString,NULL,NULL);

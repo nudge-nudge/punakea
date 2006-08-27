@@ -53,6 +53,8 @@
 		485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA54C09F4EC38008D3214 /* PASelectedTags.m */; };
 		485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA55309F4ECBC008D3214 /* PATags.h */; };
 		485DA55609F4ECBC008D3214 /* PATags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA55409F4ECBC008D3214 /* PATags.m */; };
+		485F32710AA099DA004F91C1 /* PATagManagementArrayController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485F326F0AA099DA004F91C1 /* PATagManagementArrayController.h */; };
+		485F32720AA099DA004F91C1 /* PATagManagementArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F32700AA099DA004F91C1 /* PATagManagementArrayController.m */; };
 		485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */; };
 		485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */; };
 		486063DE0AA0553000D9E103 /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486063DC0AA0553000D9E103 /* PASidebarTableView.h */; };
@@ -252,6 +254,7 @@
 				482248340A886DE1008C8CB9 /* PATempTag.h in CopyFiles */,
 				484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */,
 				486063DE0AA0553000D9E103 /* PASidebarTableView.h in CopyFiles */,
+				485F32710AA099DA004F91C1 /* PATagManagementArrayController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +301,8 @@
 		485DA54C09F4EC38008D3214 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
 		485DA55309F4ECBC008D3214 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
 		485DA55409F4ECBC008D3214 /* PATags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATags.m; sourceTree = "<group>"; };
+		485F326F0AA099DA004F91C1 /* PATagManagementArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementArrayController.h; sourceTree = "<group>"; };
+		485F32700AA099DA004F91C1 /* PATagManagementArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementArrayController.m; sourceTree = "<group>"; };
 		485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTableViewDropController.h; sourceTree = "<group>"; };
 		485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableViewDropController.m; sourceTree = "<group>"; };
 		486063DC0AA0553000D9E103 /* PASidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTableView.h; sourceTree = "<group>"; };
@@ -589,6 +594,8 @@
 			children = (
 				484F71820A666E5B00D886E5 /* PATagManagementViewController.h */,
 				484F71830A666E5B00D886E5 /* PATagManagementViewController.m */,
+				485F326F0AA099DA004F91C1 /* PATagManagementArrayController.h */,
+				485F32700AA099DA004F91C1 /* PATagManagementArrayController.m */,
 			);
 			name = "Tag Management";
 			sourceTree = "<group>";
@@ -1049,6 +1056,7 @@
 				482248350A886DE1008C8CB9 /* PATempTag.m in Sources */,
 				484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */,
 				486063DF0AA0553000D9E103 /* PASidebarTableView.m in Sources */,
+				485F32720AA099DA004F91C1 /* PATagManagementArrayController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

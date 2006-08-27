@@ -157,6 +157,11 @@
 	return 0;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+	return nil;
+}
+
 #pragma mark description
 - (NSString*)description 
 {

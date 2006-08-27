@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
 
+//TODO wrapping in userInfo neccessary?!
 typedef enum _PATagChangeOperation
 {
 	PATagRemoveOperation = 0,
