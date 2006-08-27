@@ -8,6 +8,8 @@
 
 #import "PASidebarWindow.h"
 
+double const SHOW_DELAY = 0.2;
+
 @interface PASidebarWindow (PrivateAPI)
 
 - (void)show;
@@ -59,22 +61,27 @@
 #pragma mark events
 - (void)mouseEvent
 {
-	NSPoint mouseLocation = [self mouseLocationOutsideOfEventStream];
-	NSPoint mouseLocationRelativeToWindow = [self convertBaseToScreen:mouseLocation];
-	
-	/*
-	NSLog(@"mouse: (%f,%f)",mouseLocationRelativeToWindow.x,mouseLocationRelativeToWindow.y);
-	NSLog(@"frame: (%f,%f,%f,%f)",[self frame].origin.x,[self frame].origin.y,[self frame].size.width,[self frame].size.height);
-	*/
-	
-	if (!NSPointInRect(mouseLocationRelativeToWindow,[self frame]) && !(mouseLocationRelativeToWindow.x == 0))
+	if (![self mouseInWindow])
 	{
 		[self recede];
 	}
 	else
 	{
-		[self show];
+		[self performSelector:@selector(show) withObject:nil afterDelay:SHOW_DELAY];
 	}
+}
+
+- (BOOL)mouseInWindow
+{
+	NSPoint mouseLocation = [self mouseLocationOutsideOfEventStream];
+	NSPoint mouseLocationRelativeToWindow = [self convertBaseToScreen:mouseLocation];
+	
+	/* DEBUG
+	 NSLog(@"mouse: (%f,%f)",mouseLocationRelativeToWindow.x,mouseLocationRelativeToWindow.y);
+	 NSLog(@"frame: (%f,%f,%f,%f)",[self frame].origin.x,[self frame].origin.y,[self frame].size.width,[self frame].size.height);
+	 */
+	
+	return (NSPointInRect(mouseLocationRelativeToWindow,[self frame]) || (mouseLocationRelativeToWindow.x == 0));
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent 
@@ -101,7 +108,7 @@
 
 - (void)show:(BOOL)animate
 {
-	if (![self isExpanded]) 
+	if (![self isExpanded] && [self mouseInWindow]) 
 	{
 		NSRect newRect = [self frame];
 		if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])

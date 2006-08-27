@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+extern double const SHOW_DELAY;
+
 /**
 TODO delay
   TODO check if tracking rects are handled correctly
