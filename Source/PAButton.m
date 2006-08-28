@@ -18,43 +18,56 @@
 		PAButtonCell *cell = [[PAButtonCell alloc] initTextCell:@""];
 		[self setCell:cell];
 		[cell release];
-		tag = [[NSMutableDictionary alloc] init];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self 
+											     selector:@selector(frameDidChange:)
+												     name:NSViewFrameDidChangeNotification
+												   object:self];
     }
     return self;
 }
 
 - (void)dealloc
 {
-	if(tag) [tag release];
 	[super dealloc];
 }
 
 
 #pragma mark Actions
-- (void)resetTrackingRect
+- (void)resetCursorRects
 {
-	trackingRect = [self bounds];
+	if(trackingRect) [self removeTrackingRect:trackingRect];
+
+	NSRect clippedBounds = NSIntersectionRect([self visibleRect], [self bounds]);
+	
+	if (!NSIsEmptyRect(clippedBounds))
+	{
+		NSPoint localPoint = [self convertPoint:[[self window] convertScreenToBase:[NSEvent mouseLocation]]
+									   fromView:nil];
+		BOOL mouseInside = NSPointInRect(localPoint, clippedBounds);
+	
+		trackingRect = [self addTrackingRect:clippedBounds owner:self userData:NULL assumeInside:mouseInside];
+		
+		if(mouseInside) { [self mouseEntered:nil]; } else { [self mouseExited:nil]; }
+	}
 }
 
 - (void)setFrame:(NSRect)frame
 {
     [super setFrame:frame];
-    [self removeTrackingRect:trackingRectTag];
-    [self resetTrackingRect];
-    trackingRectTag = [self addTrackingRect:trackingRect owner:self userData:NULL assumeInside:NO];
+    [self resetCursorRects];
 }
 
 - (void)viewWillMoveToWindow:(NSWindow *)newWindow
 {
-    if ([self window] && trackingRectTag) {
-        [self removeTrackingRect:trackingRectTag];
+    if ([self window] && trackingRect) {
+        [self removeTrackingRect:trackingRect];
     }
 }
 
 - (void)viewDidMoveToWindow
 {
-	[self resetTrackingRect];
-	trackingRectTag = [self addTrackingRect:trackingRect owner:self userData:NULL assumeInside:NO];
+	[self resetCursorRects];
 }
 
 - (void)highlight:(BOOL)flag
@@ -68,6 +81,13 @@
 	frame.size = [[self cell] cellSize];
 	
 	[self setFrame:frame];
+}
+
+
+#pragma mark Notifications
+- (void)frameDidChange:(NSNotification *)notification
+{
+	[self resetCursorRects];
 }
 
 

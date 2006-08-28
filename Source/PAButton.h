@@ -12,8 +12,7 @@
 
 @interface PAButton : NSControl {
 
-	NSTrackingRectTag		trackingRectTag;
-	NSRect					trackingRect;
+	NSTrackingRectTag		trackingRect;
 	int						*tag;
 
 }
