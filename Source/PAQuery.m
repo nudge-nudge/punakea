@@ -200,6 +200,7 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:(id)kMDItemDisplayName];
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemPath] forAttribute:(id)kMDItemPath];
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemContentType] forAttribute:(id)kMDItemContentType];
+			[item setValue:[mdItem valueForAttribute:(id)kMDItemLastUsedDate] forAttribute:(id)kMDItemLastUsedDate];
 			
 			// AUDIO
 			value = [delegate metadataQuery:self

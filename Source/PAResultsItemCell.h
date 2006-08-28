@@ -7,11 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PAQueryItem.h"
 
 
 @interface PAResultsItemCell : NSTextFieldCell {
 
-	NSDictionary *valueDict;
+	PAQueryItem				*item;
 
 }
 

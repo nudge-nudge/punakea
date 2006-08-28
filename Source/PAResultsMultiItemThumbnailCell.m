@@ -96,10 +96,14 @@
 	}	
 	
 	// TEMP for thumbnail
-	/*NSString *path = [valueDict objectForKey:@"path"];
-	NSImage *thumbImage = [[[NSImage alloc] initWithContentsOfFile:path] autorelease];
-	[thumbImage setSize:NSMakeSize(32,32)];
-	[thumbImage compositeToPoint:NSZeroPoint operation:NSCompositeCopy];*/
+	NSString *path = [valueDict objectForKey:@"path"];
+	NSImage *thumbImage = [self thumbnailImageWithFile:path withSize:70 highQuality:NO];
+	
+	NSRect imageRect;
+	imageRect.origin = NSZeroPoint;
+	imageRect.size = [thumbImage size];
+	
+	[thumbImage drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
@@ -129,6 +133,43 @@
 + (NSSize)intercellSpacing
 {
 	return NSMakeSize(3, 3);
+}
+
+- (NSImage *)thumbnailImageWithFile:(NSString *)filePath withSize:(int)size highQuality:(BOOL)hires
+{
+	NSImage		*big_thumb;
+	NSImage		*thumbnail;
+	NSSize		thumbnailSize;
+
+	if (hires)
+	{
+		// create a double sized thumbnail
+		thumbnailSize = NSMakeSize(size*2, size*2);
+
+		// create the thumbnail using Epeg
+		big_thumb = [EpegWrapper imageWithPath:filePath boundingBox:thumbnailSize];
+
+		if ([big_thumb isValid])
+		{
+			// the real thumbnail should be half the Epeg thumbail
+			thumbnailSize = NSMakeSize([big_thumb size].width/2, [big_thumb size].height/2);
+
+			thumbnail = [[[NSImage alloc] initWithSize:thumbnailSize] autorelease];
+			NSRect oldRect = NSMakeRect(0.0, 0.0, [big_thumb size].width, [big_thumb size].height);
+			NSRect newRect = NSMakeRect(0.0, 0.0, [big_thumb size].width/2, [big_thumb size].height/2);
+
+			[thumbnail lockFocus];
+			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+			[big_thumb drawInRect:newRect fromRect:oldRect operation:NSCompositeCopy fraction:1.0];
+			[thumbnail unlockFocus];
+		}
+	}
+	else
+	{
+		thumbnailSize = NSMakeSize(size, size);
+		thumbnail = [EpegWrapper imageWithPath:filePath boundingBox:thumbnailSize];
+	}
+	return thumbnail;
 }
 
 @end

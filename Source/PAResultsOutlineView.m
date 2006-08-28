@@ -26,6 +26,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	       selector:@selector(frameDidChange:)
 		       name:(id)NSViewFrameDidChangeNotification
 			 object:self];
+	// Misc
+	[self setDisplayMode:PAListMode];
 }
 
 
@@ -316,6 +318,16 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)setResponder:(NSResponder *)aResponder
 {
 	responder = aResponder;
+}
+
+- (PAResultsDisplayMode)displayMode
+{
+	return displayMode;
+}
+
+- (void)setDisplayMode:(PAResultsDisplayMode)mode
+{
+	displayMode = mode;
 }
 
 @end

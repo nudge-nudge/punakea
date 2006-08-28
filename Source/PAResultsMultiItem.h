@@ -7,14 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PAQueryItem.h"
 #import "PAResultsMultiItemThumbnailCell.h";
 
 
 @interface PAResultsMultiItem : NSObject {
 	
-	NSMutableArray *items;
-	NSMutableDictionary *tag;
-	Class cellClass;
+	NSMutableArray			*items;
+	NSMutableDictionary		*tag;
+	Class					cellClass;
 
 }
 

@@ -33,7 +33,26 @@
 
 
 #pragma mark Actions
-- (void)addItem:(NSMetadataItem *)anItem
+- (BOOL)isEqual:(id)anObject
+{
+	return [self isEqualTo:anObject];
+}
+
+- (BOOL)isEqualTo:(id)anObject
+{
+	if(self == anObject)
+	{
+		return YES;
+	} else if([self isMemberOfClass:[anObject class]])
+	{
+		if([[self items] isEqualTo:[anObject items]])
+			return YES;
+	}
+	
+	return NO;
+}
+
+- (void)addItem:(PAQueryItem *)anItem
 {
 	[items addObject:anItem];
 }

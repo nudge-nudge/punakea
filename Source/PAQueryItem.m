@@ -29,6 +29,14 @@
 }
 
 
+#pragma mark NSCopying
+/*- (id)copyWithZone:(NSZone *)zone
+{
+	PAQueryItem *newItem = [[[self class] allocWithZone:zone] init];
+	newItem->valueDict = [valueDict retain];
+}*/
+
+
 #pragma mark Actions
 - (NSString *)stringValue
 {

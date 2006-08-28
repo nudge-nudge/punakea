@@ -9,15 +9,17 @@
 #import <Cocoa/Cocoa.h>
 #import "PAQuery.h"
 #import "PAButton.h"
+#import "PAResultsOutlineView.h"
 #import "BrowserViewController.h"
 
 
 @interface PAFilterSlice : NSView {
 
-	IBOutlet NSOutlineView				*outlineView;
+	IBOutlet PAResultsOutlineView		*outlineView;
 	IBOutlet BrowserViewController		*controller; 	
 	
 	NSMutableArray						*buttons;
+	NSMutableArray						*filters;
 
 }
 

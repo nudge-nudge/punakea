@@ -16,51 +16,37 @@
   objectValueForTableColumn:(NSTableColumn *)tableColumn
 					 byItem:(id)item
 {
-	//return @"";
+	return item;
 	
-	if([item isKindOfClass:[PAQueryBundle class]])
+	/*if([item isKindOfClass:[PAQueryBundle class]])
 		return item;
 	else 
-		return [item valueForAttribute:@"value"];
+		return [item valueForAttribute:@"value"];*/
 }
 
 - (id)outlineView:(NSOutlineView *)ov child:(int)index ofItem:(id)item
 {		
-	if(item == nil)	return [query resultAtIndex:index];
+	if(item == nil)
+	{
+		// Children depend on display mode	
+		if([outlineView displayMode] == PAThumbnailMode)
+			return [self multiItemForBundle:nil];
+	
+		return [query resultAtIndex:index];
+	}
 	
 	if([item isKindOfClass:[PAQueryBundle class]])
 	{
 		PAQueryBundle *bundle = item;
 		
-		// Child depends on display mode
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
+		// Children depend on display mode		
+		if([outlineView displayMode] == PAThumbnailMode)
+			return [self multiItemForBundle:bundle];
+			
+		//NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		//NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
 		
-		/*if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"])
-		{
-			PAResultsMultiItem *multiItem = [[PAResultsMultiItem alloc] init];
-			
-			// TEMP - add ALL result items to MultiItem
-			unsigned startIndex = 0;
-			unsigned endIndex = [group resultCount];
-			
-			// Create this item as dictionary
-			for(unsigned i = startIndex; i < endIndex; i++)
-			{
-				NSMetadataItem *currentItem = [group resultAtIndex:i];
-				NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-				[dict setValue:[currentItem valueForAttribute:(id)kMDItemPath] forKey:@"path"];
-				[dict setValue:[currentItem valueForAttribute:(id)kMDItemDisplayName] forKey:@"displayName"];
-				[dict setValue:[currentItem valueForAttribute:(id)kMDItemLastUsedDate] forKey:@"lastUsedDate"];
-				[multiItem addItem:dict];
-			}
-			
-			// Set identifier
-			NSMutableDictionary *tag = [multiItem tag];
-			[tag setObject:[group value] forKey:@"identifier"];			
-			
-			return multiItem;
-		}*/
+		/*if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"]) */
 
 		return [bundle resultAtIndex:index];
 	}
@@ -73,15 +59,23 @@
 	return ([self outlineView:ov numberOfChildrenOfItem:item] != 0);
 }
 
-- (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
+- (int)outlineView:(NSOutlineView *)ov numberOfChildrenOfItem:(id)item
 {
-	if(item == nil) return [query resultCount];
+	if(item == nil)
+	{
+		// Number of children depends on display mode
+		if([outlineView displayMode] == PAThumbnailMode) return 1;
+			
+		return [query resultCount];
+	}
 	
 	if([item isKindOfClass:[PAQueryBundle class]])
 	{
 		PAQueryBundle *bundle = item;
 		
 		// Number of children depends on display mode
+		if([outlineView displayMode] == PAThumbnailMode) return 1;
+			
 		/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
 		
@@ -100,6 +94,9 @@
 {		
 	if([item isKindOfClass:[PAQueryBundle class]]) return 20.0;
 	if([item isKindOfClass:[PAQueryItem class]]) return 19.0;
+	
+	// TEMP
+	//return 200.0;
 	
 	// Get height of multi item dynamically	from outlineview
 	PAResultsMultiItem *multiItem = item;
@@ -129,8 +126,8 @@
 		return [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
 		
 	if([item isKindOfClass:[PAQueryItem class]])
-		return [[[NSTextFieldCell alloc] initTextCell:@""] autorelease];
-	
+		return [[[PAResultsItemCell alloc] initTextCell:@""] autorelease];
+
 	return [[[PAResultsMultiItemCell alloc] initTextCell:@""] autorelease];
 }
 
@@ -330,6 +327,38 @@
 		//[anObject setFrame:frame];
 		[anObject setHidden:YES];
 	}
+}
+
+- (PAResultsMultiItem *)multiItemForBundle:(PAQueryBundle *)bundle
+{
+	PAResultsMultiItem *multiItem = [[PAResultsMultiItem alloc] init];
+			
+	// TEMP - add ALL result items to MultiItem
+	unsigned startIndex = 0;
+	unsigned endIndex = [bundle resultCount];
+	if(endIndex == 0) endIndex = [query resultCount];
+	
+	// Create this item as dictionary
+	for(unsigned i = startIndex; i < endIndex; i++)
+	{
+		PAQueryItem *currentItem;
+		if(bundle)
+			currentItem = [bundle resultAtIndex:i];
+		else
+			currentItem = [query resultAtIndex:i];
+		
+		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
+		[dict setValue:[currentItem valueForAttribute:(id)kMDItemPath] forKey:@"path"];
+		[dict setValue:[currentItem valueForAttribute:(id)kMDItemDisplayName] forKey:@"displayName"];
+		[dict setValue:[currentItem valueForAttribute:(id)kMDItemLastUsedDate] forKey:@"lastUsedDate"];
+		[multiItem addItem:dict];
+	}
+	
+	// Set identifier
+	NSMutableDictionary *tag = [multiItem tag];
+	[tag setObject:@"meinvalue" forKey:@"value"];		
+	
+	return multiItem;
 }
 
 @end

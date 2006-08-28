@@ -18,6 +18,7 @@
 	if(self)
 	{		
 		buttons = [[NSMutableArray alloc] init];
+		filters = [[NSMutableArray alloc] init];
 			
 		[self addFilterButtons];
 	}
@@ -26,6 +27,7 @@
 
 - (void)dealloc
 {
+	if(filters) [filters release];
 	if(buttons) [buttons release];
 	[super dealloc];
 }
@@ -43,9 +45,7 @@
 	
 	NSMutableArray *orderedItems = [[spotlightDict objectForKey:@"orderedItems"] mutableCopy];*/
 	
-	// Define filters
-	NSMutableArray *filters = [NSMutableArray array];
-	
+	// Define filters			
 	NSMutableDictionary *filter = [NSMutableDictionary dictionaryWithCapacity:2];
 	[filter setObject:@"All" forKey:@"title"];
 	[filters addObject:filter];
@@ -64,6 +64,7 @@
 	
 	filter = [NSMutableDictionary dictionaryWithCapacity:2];
 	[filter setObject:@"IMAGES" forKey:@"title"];
+	[filter setObject:[NSNumber numberWithInt:PAThumbnailMode] forKey:@"displayMode"];
 	[filters addObject:filter];
 	
 	filter = [NSMutableDictionary dictionaryWithCapacity:2];
@@ -131,6 +132,8 @@
 
 - (void)buttonClick:(id)sender
 {
+	NSDictionary *filter = [filters objectAtIndex:[sender tag]];
+
 	NSEnumerator *enumerator = [buttons objectEnumerator];
 	NSButton *button;
 	while(button = [enumerator nextObject])
@@ -170,6 +173,14 @@
 			                forBundlingAttribute:@"kMDItemContentTypeTree"
 						   newBundlingAttributes:nil];
 			break;
+	}
+	
+	// Set display mode
+	if([filter objectForKey:@"displayMode"])
+	{
+		[outlineView setDisplayMode:[[filter objectForKey:@"displayMode"] intValue]];
+	} else {
+		[outlineView setDisplayMode:PAListMode];
 	}
 	
 	[outlineView reloadData];
