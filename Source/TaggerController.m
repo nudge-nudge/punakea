@@ -186,7 +186,7 @@ completionsForSubstring:(NSString *)substring
 	while (tagName = [e nextObject])
 	{
 		int count = [[tagDictionary objectForKey:tagName] intValue];
-		PATag *tag = [tagger tagForName:tagName];
+		PATag *tag = [tagger tagForName:tagName includeTempTag:NO];
 		
 		if (count == selectionCount && tag)
 		{
