@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NSBezierPathCategory.h"
-#import "Epeg/EpegWrapperPublic.h"
+//#import "Epeg/EpegWrapperPublic.h"
 
 
 @interface PAResultsMultiItemThumbnailCell : NSTextFieldCell {

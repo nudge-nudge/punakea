@@ -96,14 +96,14 @@
 	}	
 	
 	// TEMP for thumbnail
-	NSString *path = [valueDict objectForKey:@"path"];
+	/*NSString *path = [valueDict objectForKey:@"path"];
 	NSImage *thumbImage = [self thumbnailImageWithFile:path withSize:70 highQuality:NO];
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [thumbImage size];
 	
-	[thumbImage drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
+	[thumbImage drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeCopy fraction:1.0];*/
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
@@ -135,7 +135,7 @@
 	return NSMakeSize(3, 3);
 }
 
-- (NSImage *)thumbnailImageWithFile:(NSString *)filePath withSize:(int)size highQuality:(BOOL)hires
+/*- (NSImage *)thumbnailImageWithFile:(NSString *)filePath withSize:(int)size highQuality:(BOOL)hires
 {
 	NSImage		*big_thumb;
 	NSImage		*thumbnail;
@@ -170,6 +170,6 @@
 		thumbnail = [EpegWrapper imageWithPath:filePath boundingBox:thumbnailSize];
 	}
 	return thumbnail;
-}
+}*/
 
 @end
