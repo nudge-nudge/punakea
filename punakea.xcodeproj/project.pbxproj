@@ -32,6 +32,11 @@
 		481F78BD0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m in Sources */ = {isa = PBXBuildFile; fileRef = 481F78BB0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m */; };
 		482248340A886DE1008C8CB9 /* PATempTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482248320A886DE1008C8CB9 /* PATempTag.h */; };
 		482248350A886DE1008C8CB9 /* PATempTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 482248330A886DE1008C8CB9 /* PATempTag.m */; };
+		4832722D0AA42D19003D98A6 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4832722B0AA42D19003D98A6 /* Preferences.nib */; };
+		483272340AA42DC6003D98A6 /* UKPrefsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 483272320AA42DC6003D98A6 /* UKPrefsPanel.h */; };
+		483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483272330AA42DC6003D98A6 /* UKPrefsPanel.m */; };
+		4832723D0AA42E8C003D98A6 /* PreferenceController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4832723B0AA42E8C003D98A6 /* PreferenceController.h */; };
+		4832723E0AA42E8C003D98A6 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832723C0AA42E8C003D98A6 /* PreferenceController.m */; };
 		484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */; };
 		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
 		4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */; };
@@ -255,6 +260,8 @@
 				486063DE0AA0553000D9E103 /* PASidebarTableView.h in CopyFiles */,
 				485F32710AA099DA004F91C1 /* PATagManagementArrayController.h in CopyFiles */,
 				485016A40AA423FC00579C92 /* PASidebarTableColumn.h in CopyFiles */,
+				483272340AA42DC6003D98A6 /* UKPrefsPanel.h in CopyFiles */,
+				4832723D0AA42E8C003D98A6 /* PreferenceController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +287,11 @@
 		481F78BB0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTagsStandalone.m; sourceTree = "<group>"; };
 		482248320A886DE1008C8CB9 /* PATempTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATempTag.h; sourceTree = "<group>"; };
 		482248330A886DE1008C8CB9 /* PATempTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATempTag.m; sourceTree = "<group>"; };
+		4832722C0AA42D19003D98A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
+		483272320AA42DC6003D98A6 /* UKPrefsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPrefsPanel.h; sourceTree = "<group>"; };
+		483272330AA42DC6003D98A6 /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
+		4832723B0AA42E8C003D98A6 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
+		4832723C0AA42E8C003D98A6 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
 		484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadView.h; sourceTree = "<group>"; };
 		484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadView.m; sourceTree = "<group>"; };
 		4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarContentView.h; sourceTree = "<group>"; };
@@ -528,6 +540,7 @@
 				65E7B01E0994D0AE00565251 /* Sidebar.nib */,
 				653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */,
 				484F71900A666F5A00D886E5 /* TagManagementView.nib */,
+				4832722B0AA42D19003D98A6 /* Preferences.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -569,6 +582,7 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				483272220AA42C7E003D98A6 /* Preferences */,
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				65035FB70A20762F00AD0597 /* Query */,
@@ -578,6 +592,17 @@
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
 			);
 			name = Misc;
+			sourceTree = "<group>";
+		};
+		483272220AA42C7E003D98A6 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				483272320AA42DC6003D98A6 /* UKPrefsPanel.h */,
+				483272330AA42DC6003D98A6 /* UKPrefsPanel.m */,
+				4832723B0AA42E8C003D98A6 /* PreferenceController.h */,
+				4832723C0AA42E8C003D98A6 /* PreferenceController.m */,
+			);
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 		484003C90A9B3A6500C0AD99 /* TypeAheadView */ = {
@@ -974,6 +999,7 @@
 				6589C5020A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff in Resources */,
 				6589C5030A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff in Resources */,
 				6589C5040A9DE6F600CA2CD1 /* sl-status_stop.tiff in Resources */,
+				4832722D0AA42D19003D98A6 /* Preferences.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,6 +1083,8 @@
 				486063DF0AA0553000D9E103 /* PASidebarTableView.m in Sources */,
 				485F32720AA099DA004F91C1 /* PATagManagementArrayController.m in Sources */,
 				485016A50AA423FC00579C92 /* PASidebarTableColumn.m in Sources */,
+				483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */,
+				4832723E0AA42E8C003D98A6 /* PreferenceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,6 +1113,14 @@
 				481634160A5A4EEB003B8EE4 /* English */,
 			);
 			name = Browser.nib;
+			sourceTree = "<group>";
+		};
+		4832722B0AA42D19003D98A6 /* Preferences.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4832722C0AA42D19003D98A6 /* English */,
+			);
+			name = Preferences.nib;
 			sourceTree = "<group>";
 		};
 		484F71900A666F5A00D886E5 /* TagManagementView.nib */ = {

@@ -63,6 +63,8 @@
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
+	[[self window] mouseEvent];
+	
     if ((NSDragOperationGeneric & [sender draggingSourceOperationMask]) 
 		== NSDragOperationGeneric)
     {
@@ -83,6 +85,8 @@
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender
 {
+	[[self window] mouseEvent];
+
 	highlight = NO;
 	[self setNeedsDisplay:YES];
 }

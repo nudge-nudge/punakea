@@ -12,12 +12,16 @@
 
 #import "SidebarController.h"
 #import "BrowserController.h"
+#import "PreferenceController.h"
 
 #import "PATagManagementViewController.h"
 
 @interface Core : NSWindowController
 {
 	PATagger *tagger;
+	PreferenceController *preferenceController;
+	
+	NSNotificationCenter *nc;
 }
 
 //saving and loading
@@ -28,5 +32,6 @@
 
 // mainmenu actions
 - (IBAction)manageTags:(id)sender;
+- (IBAction)showPreferences:(id)sender;
 
 @end

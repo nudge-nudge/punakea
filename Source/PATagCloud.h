@@ -25,7 +25,8 @@ displays all [controller visibleTags] in a nice tag cloud view
 	NSPoint pointForNextTagRect; /**< saves the point for the next tag to be displayed */
 	int tagPosition; /**< holds the position where the new line starts */
 	
-	NSMutableDictionary *tagCloudSettings; /**< holds user defaults for tag cloud */
+	NSUserDefaultsController *userDefaultsController; /**< holds user defaults for tag cloud */
+	BOOL eyeCandy;
 	
 	NSViewAnimation *viewAnimation; /**< only one animation concurrently */
 	NSMutableArray *viewAnimationCache; /**< animation cache */

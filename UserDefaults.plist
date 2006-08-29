@@ -2,11 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Appearance</key>
-	<dict>
-		<key>SidebarPosition</key>
-		<string>RIGHT</string>
-	</dict>
+	<key>AppearanceSidebarPosition</key>
+	<integer>1</integer>
 	<key>Results</key>
 	<dict>
 		<key>CollapsedGroups</key>
@@ -31,13 +28,10 @@
 			</array>
 		</dict>
 	</dict>
-	<key>TagCloud</key>
-	<dict>
-		<key>eyeCandy</key>
-		<false/>
-		<key>sortKey</key>
-		<string>name</string>
-	</dict>
+	<key>TagCloudEyeCandy</key>
+	<false/>
+	<key>TagCloudSortKey</key>
+	<string>name</string>
 	<key>Version</key>
 	<integer>1</integer>
 </dict>

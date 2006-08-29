@@ -10,6 +10,11 @@
 
 extern double const SHOW_DELAY;
 
+typedef enum _PASidebarPosition {
+	PASidebarPositionLeft = 0,
+	PASidebarPositionRight = 1
+} PASidebarPosition;
+
 /**
 TODO delay
   TODO check if tracking rects are handled correctly

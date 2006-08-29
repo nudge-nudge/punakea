@@ -200,7 +200,8 @@
 		}
 		else
 		{
-			NSLog(@"fatal error, could not sort, specify sortKey in UserDefaults/TagCloud");
+			// default to name
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
 		}
 		
 		NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];

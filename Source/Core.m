@@ -28,12 +28,17 @@
     {
 		tagger = [PATagger sharedInstance];
 		[self loadDataFromDisk];
+
+		nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(tagsHaveChanged) name:nil object:[tagger tags]];
 	}
     return self;
 }
 
 - (void)dealloc
 {
+	[preferenceController release];
+	[nc removeObserver:self];
     [super dealloc];
 }
 
@@ -81,6 +86,7 @@
 
 - (void)saveDataToDisk 
 {
+	NSLog(@"saving");
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
 	[rootObject setValue:[[tagger tags] tags] forKey:@"tags"];
@@ -111,6 +117,11 @@
 	}
 }	
 
+- (void)tagsHaveChanged
+{
+	[self saveDataToDisk];
+}
+
 #pragma mark MainMenu actions
 - (IBAction)manageTags:(id)sender
 {
@@ -122,6 +133,15 @@
 	PATagManagementViewController *tmvc = [[PATagManagementViewController alloc] initWithNibName:@"TagManagementView"];
 	[window setContentView:[tmvc mainView]];
 	[window makeKeyAndOrderFront:self];
+}
+
+- (IBAction)showPreferences:(id)sender
+{
+	if (!preferenceController)
+	{
+		preferenceController = [[PreferenceController alloc] init];
+	}
+	[preferenceController showWindow:self];
 }
 
 #pragma mark debug

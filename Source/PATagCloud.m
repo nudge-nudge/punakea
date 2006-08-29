@@ -67,7 +67,8 @@ calculates the starting point in the next row according to the height of all the
 {
 	if (self = [super initWithFrame:frameRect]) {
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
+		userDefaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+		[self bind:@"eyeCandy" toObject:userDefaultsController withKeyPath:@"values.TagCloudEyeCandy" options:nil];
 		
 		tagButtonDict = [[NSMutableDictionary alloc] init];	
 		viewAnimation = [[NSViewAnimation alloc] init];
@@ -101,14 +102,9 @@ bind to visibleTags
 
 - (void)dealloc
 {
-	if (activeButton)
-	{
-		[activeButton release];
-	}
-	
+	[activeButton release];
 	[viewAnimationCache release];
 	[viewAnimation release];
-	[tagCloudSettings release];
 	[tagButtonDict release];
 	[super dealloc];
 }
@@ -256,7 +252,7 @@ bound to visibleTags
 - (void)updateViewHierarchy:(BOOL)animate
 {	
 	// clear animation cache
-	if (animate && [[tagCloudSettings objectForKey:@"eyeCandy"] isEqual:[NSNumber numberWithBool:YES]])
+	if (animate && eyeCandy)
 	{
 		if ([viewAnimation isAnimating])
 		{
@@ -304,7 +300,7 @@ bound to visibleTags
 		}
 	}
 	
-	if (animate && [[tagCloudSettings objectForKey:@"eyeCandy"] isEqual:[NSNumber numberWithBool:YES]])
+	if (animate && eyeCandy)
 	{
 		[viewAnimation setViewAnimations:viewAnimationCache];
 		// Set some additional attributes for the animation.
@@ -328,7 +324,7 @@ bound to visibleTags
 	NSRect oldFrame = [tagButton frame];
 	NSRect newFrame = NSMakeRect(origin.x,origin.y,oldFrame.size.width,oldFrame.size.height);
 	
-	if (animate && [[tagCloudSettings objectForKey:@"eyeCandy"] isEqual:[NSNumber numberWithBool:YES]])
+	if (animate && eyeCandy)
 	{
 		NSMutableDictionary *animationDict = [NSMutableDictionary dictionaryWithCapacity:3];
 		[animationDict setObject:tagButton forKey:NSViewAnimationTargetKey];
