@@ -21,10 +21,10 @@ TODO delay
  TODO send all mouse events to window, let window decide what to do
  */
 @interface PASidebarWindow : NSWindow {
-	NSMutableDictionary *appearance;
-	NSNotificationCenter *nc;
-	
 	BOOL expanded;
+	PASidebarPosition sidebarPosition;
+	
+	NSNotificationCenter *nc;
 }
 
 - (BOOL)isExpanded;

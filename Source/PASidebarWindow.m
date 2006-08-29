@@ -42,9 +42,6 @@ double const SHOW_DELAY = 0.2;
 	
 	[self setAcceptsMouseMovedEvents:YES];
 	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    appearance = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"Appearance"]];
-	
     return self;
 }
 
@@ -56,17 +53,35 @@ double const SHOW_DELAY = 0.2;
 	NSView *contentView = [self contentView];
 	[contentView addTrackingRect:[contentView bounds] owner:self userData:NULL assumeInside:NO];
 	
+	[self bind:@"sidebarPosition" 
+	  toObject:[NSUserDefaultsController sharedUserDefaultsController] 
+   withKeyPath:@"values.Appearance.SidebarPosition" 
+	   options:nil];
+	
+	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
+															  forKeyPath:@"values.Appearance.SidebarPosition" 
+																 options:NULL 
+																 context:NULL];
+	
 	// move to screen edge - according to prefs
 	[self setExpanded:YES];
 	[self recede:NO];
-	
 }
 
 - (void)dealloc
 {
-	[appearance release];
+	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self];
 	[super dealloc];
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.Appearance.SidebarPosition"])
+	{
+		[self setExpanded:YES];
+		[self recede:NO];
+	}
+}			
 
 #pragma mark events
 - (void)mouseEvent
@@ -121,13 +136,15 @@ double const SHOW_DELAY = 0.2;
 	if (![self isExpanded] && [self mouseInWindow]) 
 	{
 		NSRect newRect = [self frame];
-		if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])
+		
+		switch (sidebarPosition)
 		{
-			newRect.origin.x = 0;
-		}
-		else
-		{
-			newRect.origin.x = newRect.origin.x - newRect.size.width + 1;
+			case PASidebarPositionLeft:	
+				newRect.origin.x = 0;
+				break;
+			case PASidebarPositionRight:
+				newRect.origin.x = newRect.origin.x - newRect.size.width + 1;
+				break;
 		}
 		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:YES];
@@ -141,13 +158,14 @@ double const SHOW_DELAY = 0.2;
 		NSRect newRect = [self frame];
 		NSRect screenRect = [[NSScreen mainScreen] frame];
 
-		if ([[appearance objectForKey:@"SidebarPosition"] isEqualToString:@"LEFT"])
+		switch (sidebarPosition)
 		{
-			newRect.origin.x = 0 - newRect.size.width + 1;
-		}
-		else
-		{
-			newRect.origin.x = screenRect.size.width - 1;
+			case PASidebarPositionLeft:	
+				newRect.origin.x = 0 - newRect.size.width + 1;
+				break;
+			case PASidebarPositionRight: 
+				newRect.origin.x = screenRect.size.width - 1;
+				break;
 		}
 		
 		newRect.origin.y = screenRect.size.height/2 - newRect.size.height/2;
