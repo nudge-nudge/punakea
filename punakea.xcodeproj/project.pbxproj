@@ -176,8 +176,6 @@
 		65D6ACBE0A89E1E800FDAC8A /* TabHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBB0A89E1E800FDAC8A /* TabHover.png */; };
 		65D6ACBF0A89E1E800FDAC8A /* TabSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBC0A89E1E800FDAC8A /* TabSelected.png */; };
 		65D6ACD40A89E25900FDAC8A /* BlueGradient24.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACD30A89E25800FDAC8A /* BlueGradient24.png */; };
-		65D86D3809F154DC006BCC8D /* PAResultsMultiItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D86D3609F154DC006BCC8D /* PAResultsMultiItem.h */; };
-		65D86D3909F154DC006BCC8D /* PAResultsMultiItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D86D3709F154DC006BCC8D /* PAResultsMultiItem.m */; };
 		65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */; };
 		65D86D5C09F15BA8006BCC8D /* PAResultsMultiItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */; };
 		65D86E3E09F15E1B006BCC8D /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */; };
@@ -225,7 +223,6 @@
 				65C0E04309E3EF11006C5A7C /* PAResultsGroupCell.h in CopyFiles */,
 				6563884B09E419D300BE59AE /* PAResultsItemCell.h in CopyFiles */,
 				6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */,
-				65D86D3809F154DC006BCC8D /* PAResultsMultiItem.h in CopyFiles */,
 				65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */,
 				485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */,
 				485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */,
@@ -428,8 +425,6 @@
 		65D6ACBB0A89E1E800FDAC8A /* TabHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabHover.png; sourceTree = "<group>"; };
 		65D6ACBC0A89E1E800FDAC8A /* TabSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabSelected.png; sourceTree = "<group>"; };
 		65D6ACD30A89E25800FDAC8A /* BlueGradient24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueGradient24.png; sourceTree = "<group>"; };
-		65D86D3609F154DC006BCC8D /* PAResultsMultiItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItem.h; sourceTree = "<group>"; };
-		65D86D3709F154DC006BCC8D /* PAResultsMultiItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItem.m; sourceTree = "<group>"; };
 		65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemCell.h; sourceTree = "<group>"; };
 		65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemCell.m; sourceTree = "<group>"; };
 		65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
@@ -779,8 +774,6 @@
 				65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */,
 				6563884909E419D300BE59AE /* PAResultsItemCell.h */,
 				6563884A09E419D300BE59AE /* PAResultsItemCell.m */,
-				65D86D3609F154DC006BCC8D /* PAResultsMultiItem.h */,
-				65D86D3709F154DC006BCC8D /* PAResultsMultiItem.m */,
 				65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */,
 				65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */,
 				6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */,
@@ -1032,7 +1025,6 @@
 				65C0E04409E3EF11006C5A7C /* PAResultsGroupCell.m in Sources */,
 				6563884C09E419D300BE59AE /* PAResultsItemCell.m in Sources */,
 				6525F34F09EA3C2B006E1FB7 /* PASegmentedImageControl.m in Sources */,
-				65D86D3909F154DC006BCC8D /* PAResultsMultiItem.m in Sources */,
 				65D86D5C09F15BA8006BCC8D /* PAResultsMultiItemCell.m in Sources */,
 				485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */,
 				485DA55609F4ECBC008D3214 /* PATags.m in Sources */,

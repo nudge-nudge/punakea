@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAResultsMultiItem.h"
 #import "PAResultsMultiItemPlaceholderCell.h"
+#import "PAResultsMultiItemThumbnailCell.h"
 
 
 @interface PAResultsMultiItemMatrix : NSMatrix {

@@ -39,7 +39,7 @@
 	{
 		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
 		{
-			PAResultsMultiItem *theseItems = [(PAResultsMultiItemMatrix *)anObject items];
+			NSArray *theseItems = [(PAResultsMultiItemMatrix *)anObject items];
 			if([items isEqualTo:theseItems])
 				matrix = anObject;
 		}

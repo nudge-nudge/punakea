@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAResultsMultiItem.h"
 #import "PAResultsMultiItemMatrix.h"
 
 

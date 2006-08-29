@@ -182,7 +182,7 @@
 - (BOOL)outlineView:(NSOutlineView *)ov shouldSelectItem:(id)item
 {
 	// Resign any matrix from being responder
-	if(![item isKindOfClass:[PAResultsMultiItem class]])
+	if(![item isKindOfClass:[NSArray class]])
 	{
 		[outlineView setResponder:nil];
 	}
