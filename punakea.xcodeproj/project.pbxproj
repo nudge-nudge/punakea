@@ -612,12 +612,12 @@
 		488E18BA0A2722E5009D2826 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */,
+				4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */,
 				485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */,
 				485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */,
 				486EBA4409D68F16000C154C /* PAFileBox.h */,
 				486EBA4309D68F16000C154C /* PAFileBox.m */,
-				487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */,
-				4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */,
 				488E18BB0A27231F009D2826 /* PASidebarTagCell.h */,
 				488E18BC0A27231F009D2826 /* PASidebarTagCell.m */,
 				4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */,
