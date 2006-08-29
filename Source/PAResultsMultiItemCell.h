@@ -13,8 +13,8 @@
 
 @interface PAResultsMultiItemCell : NSCell {
 
-	PAResultsMultiItem *multiItem;
-	PAResultsMultiItemMatrix *matrix;
+	NSArray						*items;
+	PAResultsMultiItemMatrix	*matrix;
 
 }
 

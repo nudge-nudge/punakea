@@ -35,7 +35,7 @@
 
 - (void)dealloc
 {
-	if(multiItem) [multiItem release];
+	if(items) [items release];
 	[super dealloc];
 }
 
@@ -48,8 +48,8 @@
 	if([self numberOfRows] <= 0) return;
 	
 	NSRect frame = [self frame];
-	NSSize cellSize = [[self cellClass] cellSize];
-	NSSize intercellSpacing = [[multiItem cellClass] intercellSpacing];
+	NSSize cellSize = [self cellSize];
+	NSSize intercellSpacing = [self intercellSpacing];
 	
 	int numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
 	
@@ -137,12 +137,12 @@
 	[self renewRows:1 columns:0];
 	
 	NSRect frame = [self frame];
-	NSSize cellSize = [[self cellClass] cellSize];
-	NSSize intercellSpacing = [[multiItem cellClass] intercellSpacing];
+	NSSize cellSize = [self cellSize];
+	NSSize intercellSpacing = [self intercellSpacing];
 	
 	int numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
 	
-	NSEnumerator *enumerator = [[multiItem items] objectEnumerator];
+	NSEnumerator *enumerator = [items objectEnumerator];
 	NSDictionary *anObject;
 	
 	int row = 0;
@@ -151,7 +151,7 @@
 	{
 		NSTextFieldCell *cell =
 			[[[[self cellClass] alloc]
-				initTextCell:[anObject valueForKey:@"displayName"]] autorelease];				
+				initTextCell:[anObject valueForAttribute:(id)kMDItemDisplayName]] autorelease];				
 		[cell setValueDict:anObject];
 		
 		if(column == numberOfItemsPerRow) 
@@ -233,7 +233,7 @@
 		// in our OutlineView
 
 		NSOutlineView *outlineView = (NSOutlineView *)[self superview];
-		int rowInOutlineView = [outlineView rowForItem:multiItem];	
+		int rowInOutlineView = [outlineView rowForItem:items];	
 	
 		if(rowInOutlineView > 1)
 		{
@@ -301,7 +301,7 @@
 		// in our OutlineView
 
 		NSOutlineView *outlineView = (NSOutlineView *)[self superview];
-		int rowInOutlineView = [outlineView rowForItem:multiItem];	
+		int rowInOutlineView = [outlineView rowForItem:items];	
 	
 		if(rowInOutlineView < [outlineView numberOfRows] - 1)
 		{
@@ -551,14 +551,15 @@
 
 
 #pragma mark Accessors
-- (PAResultsMultiItem *)multiItem
+- (NSArray *)items
 {
-	return multiItem;
+	return items;
 }
 
-- (void)setMultiItem:(PAResultsMultiItem *)anItem
+- (void)setItems:(NSArray *)theItems
 {
-	multiItem = [anItem retain];
+	if(items) [items release];
+	items = [theItems retain];
 	[self displayCellsForItems];
 }
 

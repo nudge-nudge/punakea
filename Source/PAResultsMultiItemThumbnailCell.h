@@ -13,8 +13,8 @@
 
 @interface PAResultsMultiItemThumbnailCell : NSTextFieldCell {
 
-	NSString *value;
-	NSDictionary *valueDict;
+	NSString				*value;
+	NSDictionary			*valueDict;
 	
 }
 

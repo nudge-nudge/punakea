@@ -13,12 +13,12 @@
 
 @interface PAResultsMultiItemMatrix : NSMatrix {
 
-	PAResultsMultiItem			*multiItem;
-	NSCell						*multiItemCell;
+	NSArray				*items;
+	NSCell				*multiItemCell;
 	
 }
 
-- (PAResultsMultiItem *)multiItem;
-- (void)setMultiItem:(PAResultsMultiItem *)anItem;
+- (NSArray *)items;
+- (void)setItems:(NSArray *)theItems;
 
 @end

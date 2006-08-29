@@ -99,4 +99,5 @@ NSString * const PAQueryBundleDidUpdate = @"PAQueryBundleDidUpdate";
 	[bundlingAttribute release];
 	bundlingAttribute = [attribute retain];
 }
+
 @end

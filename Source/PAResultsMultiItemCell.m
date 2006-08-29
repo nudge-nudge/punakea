@@ -24,7 +24,7 @@
 
 - (void)dealloc
 {
-	if(multiItem) [multiItem release];
+	if(items) [items release];
 	[super dealloc];
 }
 
@@ -39,8 +39,8 @@
 	{
 		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
 		{
-			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject multiItem];
-			if([multiItem isEqualTo:thisItem])
+			PAResultsMultiItem *theseItems = [(PAResultsMultiItemMatrix *)anObject items];
+			if([items isEqualTo:theseItems])
 				matrix = anObject;
 		}
 	}
@@ -57,8 +57,11 @@
 	if([matrix superview] != controlView)
 	{	
 		matrix = [[PAResultsMultiItemMatrix alloc] initWithFrame:rect];
-		[matrix setCellClass:[multiItem cellClass]];
-		[matrix setMultiItem:multiItem];	
+		
+		Class cellClass = [PAResultsMultiItemThumbnailCell class];
+		[matrix setCellClass:cellClass];
+		
+		[matrix setItems:items];	
 		[controlView addSubview:matrix];
 	}
 	else
@@ -104,12 +107,13 @@
 #pragma mark Accessors
 - (id)objectValue
 {
-	return multiItem;
+	return items;
 }
 
 - (void)setObjectValue:(id <NSCopying>)object
 {
-	multiItem = [(PAResultsMultiItem *)object retain];
+	if(items) [items release];
+	items = [object retain];
 }
 
 @end

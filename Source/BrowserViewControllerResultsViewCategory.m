@@ -28,9 +28,11 @@
 {		
 	if(item == nil)
 	{
-		// Children depend on display mode	
+		// Children depend on display mode		
 		if([outlineView displayMode] == PAThumbnailMode)
-			return [self multiItemForBundle:nil];
+		{
+			return [query results];
+		}
 	
 		return [query resultAtIndex:index];
 	}
@@ -41,7 +43,9 @@
 		
 		// Children depend on display mode		
 		if([outlineView displayMode] == PAThumbnailMode)
-			return [self multiItemForBundle:bundle];
+		{
+			return [bundle results];
+		}
 			
 		//NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		//NSDictionary *currentDisplayModes = [[defaults objectForKey:@"Results"] objectForKey:@"CurrentDisplayModes"];
@@ -99,9 +103,16 @@
 	//return 200.0;
 	
 	// Get height of multi item dynamically	from outlineview
-	PAResultsMultiItem *multiItem = item;
-	NSSize cellSize = [[multiItem cellClass] cellSize];
-	NSSize intercellSpacing = [[multiItem cellClass] intercellSpacing];
+	
+	Class cellClass = [PAResultsMultiItemPlaceholderCell class];
+	switch([outlineView displayMode])
+	{
+		case PAThumbnailMode:
+			cellClass = [PAResultsMultiItemThumbnailCell class]; break;
+	}
+	
+	NSSize cellSize = [cellClass cellSize];
+	NSSize intercellSpacing = [cellClass intercellSpacing];
 	float indentationPerLevel = [outlineView indentationPerLevel];
 	float offsetToRightBorder = 20.0;
 	NSRect frame = [outlineView frame];
@@ -109,10 +120,13 @@
 	int numberOfItemsPerRow = (frame.size.width - indentationPerLevel - offsetToRightBorder) /
 	                          (cellSize.width + intercellSpacing.width);
 
-	int numberOfRows = [multiItem numberOfItems] / numberOfItemsPerRow;
-	if([multiItem numberOfItems] % numberOfItemsPerRow > 0) numberOfRows++;
+	int numberOfRows = [item count] / numberOfItemsPerRow;
+	if([item count] % numberOfItemsPerRow > 0) numberOfRows++;
+	
+	int result = numberOfRows * (cellSize.height + intercellSpacing.height);
+	if(result == 0) result = 1;
 
-	return numberOfRows * (cellSize.height + intercellSpacing.height);
+	return result;
 }
 
 - (id)tableColumn:(NSTableColumn *)column
@@ -298,18 +312,19 @@
 
 - (void)removeAllMultiItemSubviewsWithIdentifier:(NSString *)identifier
 {
-	NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
+	NSLog(@"removing subviews commented");
+	/*NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
 	id anObject;
 	while(anObject = [enumerator nextObject])
 	{
 		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
 		{
-			PAResultsMultiItem *thisItem = [(PAResultsMultiItemMatrix *)anObject multiItem];
+			PAResultsMultiItem *theseItems = [(PAResultsMultiItemMatrix *)anObject items];
 			NSString *thisIdentifier = [[thisItem tag] objectForKey:@"identifier"];
 			if([identifier isEqualToString:thisIdentifier])
 				[anObject removeFromSuperview];
 		}
-	}
+	}*/
 }
 
 /* TEMP */
@@ -329,9 +344,9 @@
 	}
 }
 
-- (PAResultsMultiItem *)multiItemForBundle:(PAQueryBundle *)bundle
+/*- (PAResultsMultiItem *)multiItemForBundle:(PAQueryBundle *)bundle
 {
-	PAResultsMultiItem *multiItem = [[PAResultsMultiItem alloc] init];
+	PAResultsMultiItem *multiItem = [[[PAResultsMultiItem alloc] init] autorelease];
 			
 	// TEMP - add ALL result items to MultiItem
 	unsigned startIndex = 0;
@@ -359,6 +374,6 @@
 	[tag setObject:@"meinvalue" forKey:@"value"];		
 	
 	return multiItem;
-}
+}*/
 
 @end
