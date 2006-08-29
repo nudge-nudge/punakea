@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AppearanceSidebarPosition</key>
+	<key>Appearance.SidebarPosition</key>
 	<integer>1</integer>
 	<key>Results</key>
 	<dict>
@@ -28,9 +28,9 @@
 			</array>
 		</dict>
 	</dict>
-	<key>TagCloudEyeCandy</key>
+	<key>TagCloud.EyeCandy</key>
 	<false/>
-	<key>TagCloudSortKey</key>
+	<key>TagCloud.SortKey</key>
 	<string>name</string>
 	<key>Version</key>
 	<integer>1</integer>
