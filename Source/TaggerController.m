@@ -81,11 +81,12 @@ resets the tagger window (called when window is closed)
 }
 
 #pragma mark functionality
+/* not in use at the moment
 - (void)addTagToField:(PASimpleTag*)tag
 {
 	// when the user started typing some stuff, and a new tag is added,
 	// the temporary typing is discarded, and the new tag added instead.
-	// is this good behaviour? TODO
+	// is this good behaviour?
 	NSMutableArray *newContent = [[[tagField objectValue] mutableCopy] autorelease];
 	
 	// add tag to the last position
@@ -95,6 +96,7 @@ resets the tagger window (called when window is closed)
 	// set first responder to tagField
 	[[tagField window] makeFirstResponder:tagField];
 }
+*/
 
 #pragma mark tokenField delegate
 - (NSArray *)tokenField:(NSTokenField *)tokenField 

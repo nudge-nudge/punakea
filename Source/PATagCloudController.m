@@ -17,39 +17,4 @@
 	[tag incrementClickCount];
 }
 
-//TODO deprecated
-- (NSDictionary*)viewAttributesForTag:(PATag*)tag
-{
-	return [self viewAttributesForTag:tag hovered:NO];
-}
-
-- (NSDictionary*)viewAttributesForTag:(PATag*)tag hovered:(BOOL)isHovered
-{
-	NSMutableDictionary *attribs = [NSMutableDictionary dictionary];
-	
-	//externalize sizes
-	float tagRating = [tag relativeRatingToTag:[self currentBestTag]];
-	int size = 25 * tagRating;
-	if (size < 12)
-		size = 12;
-	
-	NSFont *fnt = [NSFont fontWithName:@"Geneva" size:size];
-	
-	NSColor *fgc;
-	
-	if (isHovered)
-	{
-		fgc = [NSColor whiteColor];
-	}
-	else
-	{
-		fgc = [NSColor selectedTextColor];
-	}
-	
-	[attribs setObject:fgc forKey:NSForegroundColorAttributeName];
-	[attribs setObject:fnt forKey:NSFontAttributeName];
-	
-	return attribs;
-}
-
 @end

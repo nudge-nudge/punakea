@@ -20,13 +20,4 @@ is called when a tag is clicked. increments the tag click count and
  */
 - (IBAction)tagButtonClicked:(id)sender;
 
-/**
-determines the attributes for the tags appearance
- @param tag the tag for which to determine the attributes
- @return dictionary containing the attributes
- */
-- (NSDictionary*)viewAttributesForTag:(PATag*)tag;
-
-- (NSDictionary*)viewAttributesForTag:(PATag*)tag hovered:(BOOL)isHovered;
-
 @end

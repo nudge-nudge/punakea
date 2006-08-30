@@ -69,7 +69,6 @@
 		[self setVisibleTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];	
 		
-		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
 	}
 	return self;
@@ -348,9 +347,8 @@
 #pragma mark events
 - (void)keyDown:(NSEvent*)event 
 {
-	//TODO exclude everything with modifier keys pressed!
 	// get the pressed key
-	NSLog(@"BVC keyDown: %x", [[event characters] characterAtIndex:0]);
+	// DEBUG NSLog(@"BVC keyDown: %x", [[event characters] characterAtIndex:0]);
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	
 	// create character set for testing
@@ -382,7 +380,7 @@
 		}
 		else
 		{
-			// TODO give user negative feedback
+				//TODO give negative feedback
 		}
 		
 		[tmpBuffer release];

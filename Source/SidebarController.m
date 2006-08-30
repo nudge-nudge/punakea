@@ -80,28 +80,4 @@ action called on dropping files to FileBox
 	}
 }
 
-#pragma mark delegate stuff
-// TODO using resultColumn - change this
-- (id)tableColumn:(NSTableColumn *)column
-	  inTableView:(NSTableView *)tableView
-   dataCellForRow:(int)row
-{
-	if (([[column identifier] isEqualToString:@"recentTags"]) && (row < [[recentTags arrangedObjects] count]))
-	{
-		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
-		return [cell autorelease];
-	}
-	else if (([[column identifier] isEqualToString:@"popularTags"]) && (row < [[popularTags arrangedObjects] count]))
-	{
-		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:[[[recentTags arrangedObjects] objectAtIndex:row] name]];
-		return [cell autorelease];
-	}
-	else
-	{
-		//TODO ok with empty string?
-		PASidebarTagCell *cell = [[PASidebarTagCell alloc] initTextCell:@""];
-		return [cell autorelease];
-	}
-}
-
 @end

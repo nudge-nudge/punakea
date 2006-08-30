@@ -15,11 +15,6 @@ typedef enum _PASidebarPosition {
 	PASidebarPositionRight = 1
 } PASidebarPosition;
 
-/**
-TODO delay
-  TODO check if tracking rects are handled correctly
- TODO send all mouse events to window, let window decide what to do
- */
 @interface PASidebarWindow : NSWindow {
 	BOOL expanded;
 	PASidebarPosition sidebarPosition;

@@ -75,6 +75,7 @@ calculates the starting point in the next row according to the height of all the
 		
 		tagButtonDict = [[NSMutableDictionary alloc] init];	
 		viewAnimation = [[NSViewAnimation alloc] init];
+		
 		// TODO activate this and code correctly
 		//[viewAnimation setAnimationBlockingMode:NSAnimationNonblockingThreaded];
 		viewAnimationCache = [[NSMutableArray alloc] init];
@@ -312,13 +313,11 @@ bound to visibleTags
 		[viewAnimation startAnimation];
 	}
 	
-	// TODO get dirty screen to redraw correcty
 	[self setNeedsDisplay:YES];
 }
 
 - (void)removeTagButton:(PATagButton*)tagButton
 {
-	// TODO animate
 	[tagButton removeFromSuperview];
 }
 
@@ -345,7 +344,6 @@ bound to visibleTags
 
 - (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin
 {
-	// TODO animate
 	[tagButton setFrameOrigin:origin];
 	[self addSubview:tagButton];
 }

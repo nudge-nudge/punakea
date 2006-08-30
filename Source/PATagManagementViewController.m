@@ -23,7 +23,6 @@
 		[self setDeleting:NO];
 		[self setRenaming:NO];
 		
-		//TODO this stuff should be in the superclass!
 		[NSBundle loadNibNamed:nibName owner:self];
 	}
 	return self;

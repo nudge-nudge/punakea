@@ -46,7 +46,6 @@
 	}
 	
 	return resultTag;
-	//return [tags objectForKey:tagName];
 }
 
 - (NSMutableArray*)tags

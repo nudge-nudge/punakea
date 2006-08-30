@@ -12,10 +12,6 @@
 #import "PATagger.h"
 #import "PAQuery.h"
 
-/**
-TODO monitor edits/removes with KVO. at the moment this is more like a hack
- than anything else
- */
 @interface PATagManagementViewController : PAViewController {
 	IBOutlet NSTableView *tableView;
 	IBOutlet NSArrayController *arrayController;
