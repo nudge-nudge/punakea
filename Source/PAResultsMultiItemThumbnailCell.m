@@ -17,7 +17,7 @@
 	self = [super initTextCell:aText];
 	if (self)
 	{
-		value = aText;		
+		value = aText;	
 	}	
 	return self;
 }
@@ -96,6 +96,17 @@
 	}	
 	
 	// TEMP for thumbnail
+	NSImage *thumbImage = [[PAThumbnailManager sharedInstance]
+				thumbnailWithContentsOfFile:[valueDict valueForAttribute:kMDItemPath]];
+	
+	NSRect imageRect;
+	imageRect.origin = NSZeroPoint;
+	imageRect.size = [thumbImage size];
+	
+	[thumbImage drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
+	
+	//NSLog(@"drawing %@", value);
+
 	/*NSString *path = [valueDict objectForKey:@"path"];
 	NSImage *thumbImage = [self thumbnailImageWithFile:path withSize:70 highQuality:NO];
 	
