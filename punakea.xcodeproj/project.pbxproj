@@ -84,6 +84,7 @@
 		48C93615099742D800699265 /* Matador.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C93614099742D800699265 /* Matador.h */; };
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		48CDF4970AA57924002E9E78 /* GeneralPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */; };
+		48CDF4A30AA57B98002E9E78 /* tagit.png in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4A20AA57B98002E9E78 /* tagit.png */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
 		48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66A5D09CB3752007B6B1D /* PASimpleTag.h */; };
@@ -340,6 +341,7 @@
 		48C93614099742D800699265 /* Matador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matador.h; sourceTree = "<group>"; };
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = GeneralPreferences.tiff; path = Resources/GeneralPreferences.tiff; sourceTree = "<group>"; };
+		48CDF4A20AA57B98002E9E78 /* tagit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tagit.png; sourceTree = "<group>"; };
 		48D16FED0A5A6468006C667B /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
 		48D16FEE0A5A6468006C667B /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				48CDF4A20AA57B98002E9E78 /* tagit.png */,
 				48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */,
 				481634150A5A4EEB003B8EE4 /* Browser.nib */,
 				4871792D0A5A619900A988DE /* BrowserView.nib */,
@@ -1004,6 +1007,7 @@
 				6589C5040A9DE6F600CA2CD1 /* sl-status_stop.tiff in Resources */,
 				4832722D0AA42D19003D98A6 /* Preferences.nib in Resources */,
 				48CDF4970AA57924002E9E78 /* GeneralPreferences.tiff in Resources */,
+				48CDF4A30AA57B98002E9E78 /* tagit.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

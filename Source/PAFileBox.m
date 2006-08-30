@@ -17,6 +17,7 @@
     [super dealloc];
 }
 
+/*
 - (void)drawRect:(NSRect)rect
 {
 	//draw the background
@@ -31,6 +32,7 @@
 	//draw the image, inherited
 	[super drawRect:rect];
 }
+*/
 
 #pragma mark accessors
 
