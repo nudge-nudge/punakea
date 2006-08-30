@@ -57,7 +57,7 @@
 	NSArray *files = [pboard propertyListForType:@"NSFilenamesPboardType"];
 	
 	PATagger *tagger = [PATagger sharedInstance];
-	[tagger addTag:tag ToFiles:files];
+	[tagger addTags:[NSArray arrayWithObject:tag] toFiles:files];
     return YES;    
 }
 
