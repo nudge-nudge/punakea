@@ -133,7 +133,7 @@ double const SHOW_DELAY = 0.2;
 
 - (void)show:(BOOL)animate
 {
-	if (![self isExpanded] && [self mouseInWindow]) 
+	if (![self isExpanded] && [self mouseInWindow])
 	{
 		NSRect newRect = [self frame];
 		
@@ -146,6 +146,9 @@ double const SHOW_DELAY = 0.2;
 				newRect.origin.x = newRect.origin.x - newRect.size.width + 1;
 				break;
 		}
+
+		[self setAlphaValue:1.0];
+
 		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:YES];
 	}	
@@ -171,6 +174,8 @@ double const SHOW_DELAY = 0.2;
 		newRect.origin.y = screenRect.size.height/2 - newRect.size.height/2;
 		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:NO];
+		
+		[self setAlphaValue:0.0];
 	}
 }
 
