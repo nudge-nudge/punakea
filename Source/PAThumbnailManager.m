@@ -95,7 +95,8 @@ static PAThumbnailManager *sharedInstance = nil;
 {
 	NSString *filename = [thumbnailItem filename];
 
-	NSImage *thumbnail = [self scaledImageFromFile:filename maxwidth:60 maxheight:60 quality:0.75];
+	//NSImage *thumbnail = [self scaledImageFromFile:filename maxwidth:60 maxheight:60 quality:0.75];
+	NSImage *thumbnail = [self scaledImageFromFileNew:filename];
 	if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
 	[thumbnails setObject:thumbnail forKey:filename];
@@ -112,7 +113,37 @@ static PAThumbnailManager *sharedInstance = nil;
 	//NSLog(@"finished %@", filename);
 }
 
--(NSImage *)scaledImageFromFile:(NSString *)source 
+- (NSImage *)scaledImageFromFileNew:(NSString *)filename
+{
+	NSDictionary        *imageOptions = [NSDictionary 
+				dictionaryWithObjectsAndKeys:
+                           (id)kCFBooleanTrue, (id)kCGImageSourceShouldCache,
+                           (id)kCFBooleanTrue, (id)kCGImageSourceShouldAllowFloat,
+                           nil];
+						   
+	NSURL                *urlOfImage = [[NSURL alloc] initFileURLWithPath:filename];
+	
+	CGImageSourceRef imageSourceRef = CGImageSourceCreateWithURL((CFURLRef)urlOfImage, 
+				NULL);
+
+	CGImageRef image = CGImageSourceCreateThumbnailAtIndex(imageSourceRef,
+		0,imageOptions);
+		
+	NSImage *img = [[NSImage alloc] initWithSize:NSMakeSize(60,60)];
+	
+	CGRect CGImgRect = CGRectMake(0,0,60,60);
+	
+	[img lockFocus];
+	
+	CGContextRef imageContext = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
+	CGContextDrawImage(imageContext, CGImgRect, image);
+	
+	[img unlockFocus];
+	
+	return img;
+}
+
+- (NSImage *)scaledImageFromFile:(NSString *)source 
 		               maxwidth:(int)width 
 		              maxheight:(int)height 
 		                quality:(float)quality
