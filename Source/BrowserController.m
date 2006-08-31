@@ -13,6 +13,8 @@
 
 - (void)awakeFromNib
 {
+	[[self window] setFrameAutosaveName:@"punakea.browser"];
+	
 	BrowserViewController *browserViewController = [[BrowserViewController alloc] initWithNibName:@"BrowserView"];
 	[[self window] setContentView:[browserViewController mainView]];
 	

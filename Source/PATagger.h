@@ -146,13 +146,6 @@ renames the tag on files
  */
 - (void)renameTag:(NSString*)tagName toTag:(NSString*)newTagName onFiles:(NSArray*)files;
 
-/**
-gets tag names of simple tags for all files at the paths (with count)
- @param paths NSArray of NSStrings with file paths
- @return dict with simple tags (and occurrence count) of files at paths
- */
-- (NSDictionary*)tagNamesWithCountForFilesAtPaths:(NSArray*)paths;
-
 #pragma mark accessors
 - (PATags*)tags;
 - (void)setTags:(PATags*)allTags;

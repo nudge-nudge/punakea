@@ -268,33 +268,6 @@ static PATagger *sharedInstance = nil;
 	[keywordArray release];
 }
 
-- (NSDictionary*)tagNamesWithCountForFilesAtPaths:(NSArray*)paths;
-{
-	NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-	
-	NSArray *tmpTags = [self tagsOnFiles:paths];
-	NSEnumerator *tagEnum = [tmpTags objectEnumerator];
-	PATag *tag;
-	
-	while (tag = [tagEnum nextObject])
-	{
-		if ([resultDict objectForKey:[tag name]])
-		{
-			NSNumber *count = [resultDict objectForKey:[tag name]];
-			int tmp = [count intValue]+1;
-			NSNumber *newCount = [NSNumber numberWithInt:tmp];
-			[resultDict setObject:newCount forKey:[tag name]];
-		}
-		else
-		{
-			NSNumber *newCount = [NSNumber numberWithInt:1];
-			[resultDict setObject:newCount forKey:[tag name]];
-		}
-	}
-	
-	return resultDict;
-}
-
 #pragma mark accessors
 - (PATags*)tags
 {

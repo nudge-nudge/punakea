@@ -43,7 +43,7 @@ Constructor:
 	{
 		tabView = nil;
 		itemsList = [[NSMutableDictionary alloc] init];
-		baseWindowName = [@"" retain];
+		baseWindowName = [@"punakea.pref" retain];
 		autosaveName = [@"punakea.pref" retain];
 	}
 	

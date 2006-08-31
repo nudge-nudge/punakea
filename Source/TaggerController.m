@@ -176,29 +176,43 @@ completionsForSubstring:(NSString *)substring
 //TODO!
 - (IBAction)selectionHasChanged
 {
-	NSDictionary *tagDictionary = [tagger tagNamesWithCountForFilesAtPaths:[fileController selectedObjects]];
-	int selectionCount = [[fileController selectedObjects] count];
-	
-	NSMutableArray *tagsOnAllFiles = [NSMutableArray array];
 	NSMutableArray *tagsOnSomeFiles = [NSMutableArray array];
+	NSMutableArray *tagsOnAllFiles = [NSMutableArray array];
+
+	NSArray *allTags = [tagger tagsOnFiles:[fileController selectedObjects]];
 	
-	NSEnumerator *e = [[tagDictionary allKeys] objectEnumerator];
-	NSString *tagName;
+	NSEnumerator *fileEnumerator = [[fileController selectedObjects] objectEnumerator];
+	NSString *file;
 	
-	while (tagName = [e nextObject])
+	// all files are checked for their tags,
+	// if a tag is not on a single file, it is not on all files, thus not shown in the tokenField
+	while (file = [fileEnumerator nextObject])
 	{
-		int count = [[tagDictionary objectForKey:tagName] intValue];
-		PATag *tag = [tagger tagForName:tagName includeTempTag:NO];
+		NSArray *tagsOnFile = [tagger tagsOnFiles:[NSArray arrayWithObject:file]];
 		
-		if (count == selectionCount && tag)
+		NSEnumerator *tagEnumerator = [allTags objectEnumerator];
+		PATag *tag;
+		
+		while (tag = [tagEnumerator nextObject])
+		{
+			if (![tagsOnFile containsObject:tag] && ![tagsOnSomeFiles containsObject:tag])
+			{
+				[tagsOnSomeFiles addObject:tag];
+			}
+		}
+	}
+	
+	NSEnumerator *allTagsEnumerator = [allTags objectEnumerator];
+	PATag *tag;
+	
+	// now all tags not in tagsOnSomeFiles but on allTags are on all files
+	while (tag = [allTagsEnumerator nextObject])
+	{
+		if (![tagsOnSomeFiles containsObject:tag] && ![tagsOnAllFiles containsObject:tag])
 		{
 			[tagsOnAllFiles addObject:tag];
 		}
-		else if (tag)
-		{
-			[tagsOnSomeFiles addObject:tag];
-		}
-	}	
+	}
 	
 	[tagField setObjectValue:tagsOnAllFiles];
 	[currentCompleteTagsInField removeAllTags];
@@ -209,7 +223,7 @@ completionsForSubstring:(NSString *)substring
 
 - (void)displayRestTags:(NSArray*)restTags
 {
-	NSMutableString *displayString = [NSMutableString stringWithFormat:@"%i tags are not on all selected files:",[restTags count]];
+	NSMutableString *displayString = [NSMutableString stringWithFormat:@"%i tags not shown:",[restTags count]];
 	
 	NSEnumerator *e = [restTags objectEnumerator];
 	PASimpleTag *tag;
@@ -219,7 +233,14 @@ completionsForSubstring:(NSString *)substring
 		[displayString appendFormat:@" %@",[tag name]];
 	}
 	
-	[restTagField setObjectValue:displayString];
+	[self setRestDisplayString:displayString];
+}
+
+- (void)setRestDisplayString:(NSString*)aString
+{
+	[restDisplayString release];
+	[aString retain];
+	restDisplayString = aString;
 }
 
 #pragma mark window delegate
