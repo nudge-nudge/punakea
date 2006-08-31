@@ -97,7 +97,9 @@
 	
 	// TEMP for thumbnail
 	NSImage *thumbImage = [[PAThumbnailManager sharedInstance]
-				thumbnailWithContentsOfFile:[valueDict valueForAttribute:kMDItemPath]];
+				thumbnailWithContentsOfFile:[valueDict valueForAttribute:kMDItemPath]
+				                     inView:controlView
+									  frame:cellFrame];
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;

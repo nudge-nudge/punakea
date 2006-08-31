@@ -40,7 +40,7 @@ static PAThumbnailManager *sharedInstance = nil;
 
 
 #pragma mark Actions
-- (NSImage *)thumbnailWithContentsOfFile:(NSString *)filename
+- (NSImage *)thumbnailWithContentsOfFile:(NSString *)filename inView:(NSView *)aView frame:(NSRect)aFrame
 {
 	NSImage *thumbnail = [thumbnails objectForKey:filename];
 	if(thumbnail)
@@ -49,7 +49,8 @@ static PAThumbnailManager *sharedInstance = nil;
 		return thumbnail;
 	} else {
 		// Add filename to queue						
-		[queue addObject:filename];
+		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame];		
+		[queue addObject:item];
 		[thumbnails setObject:dummyImage forKey:filename];
 		
 		if(!timer)
@@ -74,12 +75,12 @@ static PAThumbnailManager *sharedInstance = nil;
 	{
 		numberOfThumbsBeingProcessed++;
 		
-		NSString *filename = [queue objectAtIndex:0];
+		PAThumbnailItem *item = [queue objectAtIndex:0];		 
 		[queue removeObjectAtIndex:0];
 		
 		[ThreadWorker workOn:self
 				withSelector:@selector(generateThumbnailWithContentsOfFile:)
-				  withObject:filename
+				  withObject:item
 			  didEndSelector:nil];
 	}
 	
@@ -90,14 +91,25 @@ static PAThumbnailManager *sharedInstance = nil;
 	}
 }
 
-- (void)generateThumbnailWithContentsOfFile:(NSString *)filename
+- (void)generateThumbnailWithContentsOfFile:(PAThumbnailItem *)thumbnailItem
 {
+	NSString *filename = [thumbnailItem filename];
+
 	NSImage *thumbnail = [[NSImage alloc] initWithContentsOfFile:filename];
+	[thumbnail setScalesWhenResized:YES];
+	if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	[thumbnail setSize:NSMakeSize(50,50)];
 	
 	[thumbnails setObject:thumbnail forKey:filename];
 	
 	numberOfThumbsBeingProcessed--;
+	
+	// Refresh item's view
+	NSView *view = [thumbnailItem view];
+	NSRect frame = [thumbnailItem frame];
+	[view setNeedsDisplayInRect:frame];
+	
+	[thumbnailItem release];
 	
 	NSLog(@"finished %@", filename);
 }

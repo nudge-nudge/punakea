@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PAThumbnailItem.h"
 #import "ThreadWorker.h"
 
 
