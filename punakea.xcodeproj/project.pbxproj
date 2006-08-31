@@ -346,7 +346,7 @@
 		48C93614099742D800699265 /* Matador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matador.h; sourceTree = "<group>"; };
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GeneralPreferences.tiff; sourceTree = "<group>"; };
-		48CDF4A20AA57B98002E9E78 /* tagit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tagit.png; sourceTree = "<group>"; };
+		48CDF4A20AA57B98002E9E78 /* tagit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tagit.png; path = ../tagit.png; sourceTree = "<group>"; };
 		48D16FED0A5A6468006C667B /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
 		48D16FEE0A5A6468006C667B /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
@@ -539,7 +539,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				48CDF4A20AA57B98002E9E78 /* tagit.png */,
 				481634150A5A4EEB003B8EE4 /* Browser.nib */,
 				4871792D0A5A619900A988DE /* BrowserView.nib */,
 				4816340E0A5A48A1003B8EE4 /* Tagger.nib */,
@@ -773,7 +772,7 @@
 		6562A1D40996399100DBE7DB /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				65A981300AA737C6009F9E34 /* New Group */,
+				65A981300AA737C6009F9E34 /* Sidebar */,
 				65A9812F0AA73755009F9E34 /* Preferences */,
 				65D6ACC10A89E20300FDAC8A /* Custom Controls */,
 				6509FA390A7D2774003D32D8 /* Filter Slice */,
@@ -904,11 +903,12 @@
 			name = Preferences;
 			sourceTree = "<group>";
 		};
-		65A981300AA737C6009F9E34 /* New Group */ = {
+		65A981300AA737C6009F9E34 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				48CDF4A20AA57B98002E9E78 /* tagit.png */,
 			);
-			name = "New Group";
+			name = Sidebar;
 			sourceTree = "<group>";
 		};
 		65D6ACC10A89E20300FDAC8A /* Custom Controls */ = {

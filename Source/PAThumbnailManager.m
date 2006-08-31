@@ -95,7 +95,7 @@ static PAThumbnailManager *sharedInstance = nil;
 {
 	NSString *filename = [thumbnailItem filename];
 
-	NSImage *thumbnail = [self scaledImageFromFile:filename maxwidth:60 maxheight:60 quality:0.5];
+	NSImage *thumbnail = [self scaledImageFromFile:filename maxwidth:60 maxheight:60 quality:0.75];
 	if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
 	[thumbnails setObject:thumbnail forKey:filename];
@@ -186,7 +186,7 @@ static PAThumbnailManager *sharedInstance = nil;
     [scratch lockFocus];
 	[NSGraphicsContext saveGraphicsState];
 	
-    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationLow];
+    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
     
 	[rep drawInRect:NSMakeRect(0.0, 0.0, nw, nh)];
     output = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0,0,nw,nh)];
@@ -203,7 +203,7 @@ static PAThumbnailManager *sharedInstance = nil;
     };
     
     // save as JPEG - for Alternative 1
-    /*NSDictionary *properties =
+    NSDictionary *properties =
         [NSDictionary dictionaryWithObjectsAndKeys:
 	    [NSNumber numberWithFloat:quality],
 	    NSImageCompressionFactor, NULL];    
@@ -217,17 +217,17 @@ static PAThumbnailManager *sharedInstance = nil;
 		NSLog(@"Could not convert to JPEG");
 		[pool release];
 		return nil;
-    };*/
+    };
     
 	// Output to file
     //BOOL ret = [bitmapData writeToFile:dest atomically:YES];
 	
 	// Alternative 1
-	//NSImage *image = [[NSImage alloc] initWithData:bitmapData];
+	NSImage *image = [[NSImage alloc] initWithData:bitmapData];
 	
 	// Alternative 2
-	NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(nw,nh)];
-	[image addRepresentation:output];	
+	//NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(nw,nh)];
+	//[image addRepresentation:output];	
 	
 	[output release];
 	[pool release];
