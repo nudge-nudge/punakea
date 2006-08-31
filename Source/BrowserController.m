@@ -11,6 +11,12 @@
 
 @implementation BrowserController
 
+- (id)init
+{
+	self = [super initWithWindowNibName:@"Browser"];
+	return self;
+}
+
 - (void)awakeFromNib
 {
 	[[self window] setFrameAutosaveName:@"punakea.browser"];
@@ -19,8 +25,7 @@
 	[[self window] setContentView:[browserViewController mainView]];
 	
 	// insert browserViewController in the responder chain
-	//TODO put this into browserviewcontroller to enable independet usage
-	[browserViewController setNextResponder:self];
+	[browserViewController setNextResponder:[self window]];
 	[[[self window] contentView] setNextResponder:browserViewController];
 }
 

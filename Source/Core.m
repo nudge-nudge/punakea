@@ -47,9 +47,9 @@
 	[NSApp setDelegate:self]; 
 	[self setupToolbar];
 	
-	BrowserController *browserController = [[BrowserController alloc] initWithWindowNibName:@"Browser"];
+	browserController = [[BrowserController alloc] init];
 	NSWindow *browserWindow = [browserController window];
-	[browserWindow makeKeyAndOrderFront:nil];
+	[browserController showWindow:self];
 	
 	SidebarController *sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
 	[sidebarController window];
@@ -142,6 +142,18 @@
 		preferenceController = [[PreferenceController alloc] init];
 	}
 	[preferenceController showWindow:self];
+}
+
+- (IBAction)showBrowser:(id)sender
+{
+	[browserController showWindow:self];
+}
+
+#pragma mark NSApplication delegate
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
+{
+	[self showBrowser:self];
+	return YES;
 }
 
 #pragma mark debug

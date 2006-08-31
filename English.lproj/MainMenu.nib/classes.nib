@@ -1,7 +1,7 @@
 {
     IBClasses = (
         {
-            ACTIONS = {manageTags = id; showPreferences = id; }; 
+            ACTIONS = {closeBrowser = id; manageTags = id; showBrowser = id; showPreferences = id; }; 
             CLASS = Core; 
             LANGUAGE = ObjC; 
             SUPERCLASS = NSWindowController; 

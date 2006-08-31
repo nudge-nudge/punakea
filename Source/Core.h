@@ -19,6 +19,7 @@
 {
 	PATagger *tagger;
 
+	BrowserController *browserController;
 	PreferenceController *preferenceController;
 	
 	NSNotificationCenter *nc;
@@ -33,5 +34,8 @@
 // mainmenu actions
 - (IBAction)manageTags:(id)sender;
 - (IBAction)showPreferences:(id)sender;
+
+- (IBAction)showBrowser:(id)sender;
+- (IBAction)closeBrowser:(id)sender;
 
 @end
