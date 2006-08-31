@@ -16,6 +16,8 @@
 	IBOutlet NSTableView *tableView;
 	IBOutlet NSArrayController *arrayController;
 	
+	NSArray *sortDescriptors;
+	
 	PATagger *tagger;
 	PATags *tags;
 	PAQuery *query;

@@ -13,12 +13,12 @@
 #import "SidebarController.h"
 #import "BrowserController.h"
 #import "PreferenceController.h"
-
 #import "PATagManagementViewController.h"
 
 @interface Core : NSWindowController
 {
 	PATagger *tagger;
+
 	PreferenceController *preferenceController;
 	
 	NSNotificationCenter *nc;

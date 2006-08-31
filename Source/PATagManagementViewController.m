@@ -17,11 +17,14 @@
 	{
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
-		
 		query = [[PAQuery alloc] init];
 		
 		[self setDeleting:NO];
 		[self setRenaming:NO];
+		
+		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+		sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor,nil];
+		[sortDescriptor release];
 		
 		[NSBundle loadNibNamed:nibName owner:self];
 	}
@@ -30,6 +33,7 @@
 
 - (void)dealloc
 {
+	[sortDescriptors release];
 	[query release];
 	[super dealloc];
 }

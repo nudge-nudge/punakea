@@ -45,4 +45,7 @@ treat this class as the abstract superclass for all Tags,
 - (void)incrementUseCount; /**< may overwrite */
 - (void)decrementUseCount; /**< may overwrite */
 
+- (void)setUseCount:(int)count;
+- (void)setClickCount:(int)count;
+
 @end

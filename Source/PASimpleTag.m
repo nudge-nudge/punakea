@@ -65,10 +65,10 @@
 {
 	PASimpleTag *newTag = [[[PASimpleTag alloc] init] autorelease];
 	[newTag setName:[self name]];
-	[newTag setValue:[self useCount] forKey:@"useCount"];
-	[newTag setValue:[self clickCount] forKey:@"clickCount"];
-	[newTag setValue:[self lastClicked]  forKey:@"lastClicked"];
+	[newTag setUseCount:[self useCount]];
 	[newTag setValue:[self lastUsed] forKey:@"lastUsed"];
+	[newTag setClickCount:[self clickCount]];
+	[newTag setValue:[self lastClicked]  forKey:@"lastClicked"];
 	return newTag;
 }
 

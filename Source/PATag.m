@@ -100,6 +100,16 @@
 	useCount--;
 }
 
+- (void)setUseCount:(int)count
+{
+	useCount = count;
+}
+
+- (void)setClickCount:(int)count
+{
+	clickCount = count;
+}
+
 - (NSString*)name 
 {
 	return name;
