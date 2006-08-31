@@ -13,7 +13,7 @@
 
 @interface BrowserController : NSWindowController 
 {
-
+	BrowserViewController *browserViewController;
 }
 
 @end

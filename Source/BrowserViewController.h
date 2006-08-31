@@ -70,8 +70,8 @@
 - (PAQuery *)query;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
-//for adding to selected
 - (IBAction)clearSelectedTags:(id)sender;
+- (void)resetBuffer;
 
 // Temp
 - (IBAction)setGroupingAttributes:(id)sender;
