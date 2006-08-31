@@ -773,6 +773,7 @@
 		6562A1D40996399100DBE7DB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				65A981300AA737C6009F9E34 /* New Group */,
 				65A9812F0AA73755009F9E34 /* Preferences */,
 				65D6ACC10A89E20300FDAC8A /* Custom Controls */,
 				6509FA390A7D2774003D32D8 /* Filter Slice */,
@@ -901,6 +902,13 @@
 				48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		65A981300AA737C6009F9E34 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 		65D6ACC10A89E20300FDAC8A /* Custom Controls */ = {
