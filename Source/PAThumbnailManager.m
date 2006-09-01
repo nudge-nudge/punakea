@@ -82,13 +82,7 @@ static PAThumbnailManager *sharedInstance = nil;
 				withSelector:@selector(generateThumbnailFromFile:)
 				  withObject:item
 			  didEndSelector:nil];
-	}
-	
-	if(timer && [queue count] == 0)
-	{
-		[timer release];
-		timer = nil;
-	}
+	} 
 }
 
 - (void)generateThumbnailFromFile:(PAThumbnailItem *)thumbnailItem
@@ -96,9 +90,10 @@ static PAThumbnailManager *sharedInstance = nil;
 	NSString *filename = [thumbnailItem filename];
 
 	//NSImage *thumbnail = [self scaledImageFromFile:filename maxwidth:60 maxheight:60 quality:0.75];
-	NSImage *thumbnail = [self scaledImageFromFileNew:filename];
+	NSImage *thumbnail = [PAThumbnailManager scaledImageFromFileNew:filename];
 	if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
+	[thumbnails removeObjectForKey:filename];
 	[thumbnails setObject:thumbnail forKey:filename];
 	
 	numberOfThumbsBeingProcessed--;
@@ -113,7 +108,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	//NSLog(@"finished %@", filename);
 }
 
-- (NSImage *)scaledImageFromFileNew:(NSString *)filename
++ (NSImage *)scaledImageFromFileNew:(NSString *)filename
 {
 	NSDictionary        *imageOptions = [NSDictionary 
 				dictionaryWithObjectsAndKeys:
@@ -126,28 +121,47 @@ static PAThumbnailManager *sharedInstance = nil;
 	CGImageSourceRef imageSourceRef = CGImageSourceCreateWithURL((CFURLRef)urlOfImage, 
 				NULL);
 
+	// First, try getting thumbnail image
 	CGImageRef image = CGImageSourceCreateThumbnailAtIndex(imageSourceRef,
 		0,imageOptions);
+	
+	// If this doesn't work, get ImageAtIndex
+	if(image == NULL)
+	{
+		// This is the way it works
+		//image = CGImageSourceCreateImageAtIndex(imageSourceRef,
+		//	0,imageOptions);
 		
-	NSImage *img = [[NSImage alloc] initWithSize:NSMakeSize(60,60)];
-	
-	CGRect CGImgRect = CGRectMake(0,0,60,60);
-	
-	[img lockFocus];
-	
-	CGContextRef imageContext = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
-	CGContextDrawImage(imageContext, CGImgRect, image);
-	
-	[img unlockFocus];
-	
-	return img;
+		// This way of loading the whole file uses much less memory
+		NSImage *img = [PAThumbnailManager scaledImageFromFile:filename maxBounds:NSMakeSize(60,60) quality:0.8];
+		return img;			
+	} else {		
+		NSImage *img = [[NSImage alloc] initWithSize:NSMakeSize(60,60)];
+		
+		CGRect CGImgRect = CGRectMake(0,0,60,60);
+		
+		[img lockFocus];	
+		[NSGraphicsContext saveGraphicsState];
+		
+		CGContextRef imageContext = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
+		CGContextDrawImage(imageContext, CGImgRect, image);
+		
+		[NSGraphicsContext restoreGraphicsState];	
+		[img unlockFocus];
+		
+		CGImageRelease(image);
+		
+		return [img autorelease];
+	}
 }
 
-- (NSImage *)scaledImageFromFile:(NSString *)source 
-		               maxwidth:(int)width 
-		              maxheight:(int)height 
++ (NSImage *)scaledImageFromFile:(NSString *)source 
+		               maxBounds:(NSSize)maxBounds
 		                quality:(float)quality
 {
+	int width = maxBounds.width;
+	int height = maxBounds.height;
+
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSBitmapImageRep *rep = nil;
     NSBitmapImageRep *output = nil;
@@ -263,7 +277,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	[output release];
 	[pool release];
 	
-	return image;
+	return [image autorelease];
 }
 
 

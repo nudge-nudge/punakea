@@ -20,6 +20,7 @@
 	NSImage						*dummyImage;
 	
 	NSTimer						*timer;
+	BOOL						processingQueue;
 
 }
 
