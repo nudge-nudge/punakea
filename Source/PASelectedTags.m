@@ -14,10 +14,10 @@
 #pragma mark init + dealloc
 - (id)init
 {
-	return [self initWithTags:[NSDictionary dictionary]];
+	return [self initWithTags:[NSArray array]];
 }
 
-- (id)initWithTags:(NSDictionary*)tags
+- (id)initWithTags:(NSArray*)tags
 {
 	if (self = [super init])
 	{
@@ -46,17 +46,12 @@
 	lastTag = aTag;
 }
 
-- (NSArray*)selectedTagArray
-{
-	return [selectedTags allValues];
-}
-
-- (NSMutableDictionary*)selectedTags
+- (NSMutableArray*)selectedTags
 {
 	return selectedTags;
 }
 
-- (void)setSelectedTags:(NSMutableDictionary*)otherTags
+- (void)setSelectedTags:(NSMutableArray*)otherTags
 {
 	[otherTags retain];
 	[selectedTags release];
@@ -73,25 +68,23 @@
 	
 - (void)addTag:(PATag*)aTag
 {
-	[selectedTags setObject:aTag forKey:[aTag name]];
-	[self setLastTag:aTag];
+	[selectedTags addObject:aTag];
 	
 	[nc postNotificationName:@"PASelectedTagsHaveChanged" object:self];
 }
 
 - (void)removeTag:(PATag*)aTag
 {
-	[selectedTags removeObjectForKey:[aTag name]];
+	[selectedTags removeObject:aTag];
 	
 	[nc postNotificationName:@"PASelectedTagsHaveChanged" object:self];
 }
 
 - (void)removeLastTag
 {
-	if (lastTag && [selectedTags count] > 0)
-	{
-		[self removeTag:lastTag];
-	}
+	[selectedTags removeLastObject];
+	
+	[nc postNotificationName:@"PASelectedTagsHaveChanged" object:self];
 }
 
 - (void)removeAllTags
@@ -103,29 +96,17 @@
 
 - (void)addObjectsFromArray:(NSArray*)array 
 {
-	NSEnumerator *e = [array objectEnumerator];
-	PATag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		[self addTag:tag];
-	}
+	[selectedTags addObjectsFromArray:array];
 }
 
 - (void)removeObjectsInArray:(NSArray*)array
 {
-	NSEnumerator *e = [array objectEnumerator];
-	PATag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		[self removeTag:tag];
-	}
+	[selectedTags removeObjectsInArray:array];
 }
 
 - (BOOL)containsTag:(PATag*)aTag
 {
-	return ([selectedTags objectForKey:[aTag name]] != nil);
+	return [selectedTags containsObject:aTag];
 }
 
 - (NSEnumerator*)objectEnumerator
