@@ -70,15 +70,6 @@
 - (void)setUpdating:(BOOL)flag
 {
 	updating = flag;
-	
-	if (updating)
-	{
-		NSLog(@"updating");
-	}
-	else
-	{
-		NSLog(@"finished");
-	}
 }
 
 - (BOOL)containsTag:(PATag*)aTag
@@ -140,7 +131,7 @@
 	{
 		[self setUpdating:YES];
 	}
-	else if ([[note name] isEqualToString:PAQueryDidFinishGatheringNotification] 
+	else if ([[note name] isEqualToString:PAQueryDidFinishGatheringNotification]
 		|| [[note name] isEqualToString:PAQueryGatheringProgressNotification]) 
 	{
 		[self updateRelatedTags];

@@ -355,7 +355,7 @@ bound to visibleTags
 	pointForNextTagRect = NSMakePoint(0,rect.size.height-5);
 	
 	//needed for drawing in rows
-	tagPosition = 0;
+	tagPosition = -1;
 	
 	//get the point for the very first tag
 	pointForNextTagRect = [self firstPointForNextRowIn:rect];
@@ -363,6 +363,8 @@ bound to visibleTags
 
 - (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect
 {
+	tagPosition++;
+
 	NSRect frame = [tagButton frame];
 	float width = frame.size.width;
 	
@@ -416,12 +418,10 @@ bound to visibleTags
 		//remember the maximum height
 		if (tagSize.height > maxHeight)
 			maxHeight = tagSize.height;
-		
-		tagPosition++;
-	}
+		}
 	
 	return NSMakePoint(SPACING.width,pointForNextTagRect.y-maxHeight-SPACING.height);
-}	
+}
 
 #pragma mark accessors
 - (NSMutableDictionary*)tagButtonDict
