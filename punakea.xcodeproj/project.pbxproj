@@ -704,8 +704,6 @@
 			isa = PBXGroup;
 			children = (
 				484F717E0A666D4B00D886E5 /* Tag Management */,
-				48CF54FE0AAC4B230071C77A /* PAFileManager.h */,
-				48CF54FF0AAC4B230071C77A /* PAFileManager.m */,
 				48AA6BF5099B78E300D8F70B /* PATagger.h */,
 				48AA6BF6099B78E300D8F70B /* PATagger.m */,
 				481BF27609A3128600EBD7BA /* PATag.h */,
@@ -737,6 +735,8 @@
 		65035FB70A20762F00AD0597 /* Query */ = {
 			isa = PBXGroup;
 			children = (
+				48CF54FE0AAC4B230071C77A /* PAFileManager.h */,
+				48CF54FF0AAC4B230071C77A /* PAFileManager.m */,
 				65035FC90A20769500AD0597 /* PAQuery.h */,
 				65035FCA0A20769500AD0597 /* PAQuery.m */,
 				65D43F4D0A7E3AC6008CC164 /* PAQueryBundle.h */,

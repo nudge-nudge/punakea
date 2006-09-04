@@ -13,7 +13,6 @@
 #import "PASimpleTagFactory.h"
 #import "PATempTag.h"
 #import "PAQuery.h"
-#import "PAFileManager.h"
 
 /**
 singleton class for working with spotlight kMDItemKeywords
@@ -21,8 +20,6 @@ singleton class for working with spotlight kMDItemKeywords
 @interface PATagger : NSObject {
 	PASimpleTagFactory *simpleTagFactory;
 	PATags *tags;
-	
-	PAFileManager *fileManager;
 }
 
 /**

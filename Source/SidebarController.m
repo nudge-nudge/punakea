@@ -15,6 +15,7 @@
 	{
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
+		fileManager = [[PAFileManager alloc] init];
 	}
 	return self;
 }
@@ -45,6 +46,11 @@
 	[recentTagsTable setDataSource:recentTagTableController];
 }
 
+- (void)dealloc
+{
+	[fileManager release];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
 					  ofObject:(id)object 
                         change:(NSDictionary *)change
@@ -60,6 +66,8 @@ action called on dropping files to FileBox
  */
 - (void)newFilesHaveBeenDropped
 {
+	NSArray *files = [fileManager handleFiles:[fileBox files]];
+	
 	// if the tagger is already open, add more files
 	if (taggerController)
 	{
@@ -67,7 +75,7 @@ action called on dropping files to FileBox
 		NSWindow *taggerWindow = [taggerController window];
 		[taggerWindow makeKeyAndOrderFront:nil];
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-		[taggerController addFiles:[fileBox files]];
+		[taggerController addFiles:files];
 	}
 	// otherwise create new tagger window
 	else 
@@ -76,7 +84,7 @@ action called on dropping files to FileBox
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 		NSWindow *taggerWindow = [taggerController window];
 		[taggerWindow makeKeyAndOrderFront:nil];
-		[taggerController addFiles:[fileBox files]];
+		[taggerController addFiles:files];
 	}
 }
 

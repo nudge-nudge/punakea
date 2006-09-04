@@ -9,9 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import "PASimpleTag.h"
 #import "PATagger.h"
+#import "PAFileManager.h"
 
 @interface PASidebarTableViewDropController : NSObject {
 	NSArrayController *tags;
+	
+	PAFileManager *fileManager;
 }
 
 - (id)initWithTags:(NSArrayController*)usedTags;

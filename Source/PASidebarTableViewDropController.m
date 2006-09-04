@@ -17,12 +17,14 @@
 	if (self = [super init])
 	{
 		tags = [usedTags retain];
+		fileManager = [[PAFileManager alloc] init];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[fileManager release];
 	[tags release];
 	[super dealloc];
 }
@@ -58,6 +60,7 @@
 	
 	PATagger *tagger = [PATagger sharedInstance];
 	[tagger addTags:[NSArray arrayWithObject:tag] toFiles:files];
+	[fileManager handleFiles:files];
     return YES;    
 }
 

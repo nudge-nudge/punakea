@@ -15,7 +15,17 @@
 	NSFileManager *fileManager;
 }
 
-- (void)handleFile:(NSString*)filePath;
-- (void)handleFiles:(NSArray*)filePaths;
+/**
+if file management is active, the given file will be moved to an internal folder
+ the new location is returned
+ @param filePath path to file
+ @return path to new location
+ */
+- (NSString*)handleFile:(NSString*)filePath;
+
+/**
+convenience method, calls handleFile:
+ */
+- (NSArray*)handleFiles:(NSArray*)filePaths;
 
 @end

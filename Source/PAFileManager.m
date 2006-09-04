@@ -37,7 +37,7 @@
 }
 
 #pragma mark main methods
-- (void)handleFile:(NSString*)filePath
+- (NSString*)handleFile:(NSString*)filePath
 {
 	// only do something if managing files and if file not already in the managed file directory
 	if (!manageFiles || ([[filePath stringByDeletingLastPathComponent] isEqualToString:[self pathForFiles]]))
@@ -47,17 +47,22 @@
 	
 	NSString *newPath = [self destinationForNewFile:[filePath lastPathComponent]];
 	[fileManager movePath:filePath toPath:newPath handler:self];
+	return newPath;
 }
 
-- (void)handleFiles:(NSArray*)filePaths
+- (NSArray*)handleFiles:(NSArray*)filePaths
 {
 	NSEnumerator *e = [filePaths objectEnumerator];
 	NSString *filePath;
 	
+	NSMutableArray *newPaths = [NSMutableArray array];
+	
 	while (filePath = [e nextObject])
 	{
-		[self handleFile:filePath];
+		[newPaths addObject:[self handleFile:filePath]];
 	}
+	
+	return newPaths;
 }
 
 - (NSString*)destinationForNewFile:(NSString*)fileName
