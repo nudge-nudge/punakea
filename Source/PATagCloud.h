@@ -27,6 +27,8 @@ displays all [controller visibleTags] in a nice tag cloud view
 	
 	NSViewAnimation *viewAnimation; /**< only one animation concurrently */
 	NSMutableArray *viewAnimationCache; /**< animation cache */
+	
+	NSAttributedString *noRelatedTagsMessage;
 }
 
 - (NSMutableDictionary*)tagButtonDict;

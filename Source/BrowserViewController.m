@@ -160,9 +160,8 @@
 
 - (void)setBuffer:(NSString*)string
 {
-	[string retain];
 	[buffer release];
-	buffer = string;
+	buffer = [string mutableCopy];
 }
 
 - (NSOutlineView *)outlineView
@@ -263,9 +262,8 @@
 	NSScrollView *sv = [tagCloud enclosingScrollView];
 	// placed above
 	[sv setFrame:NSMakeRect(0,NSMinY([sv frame]),NSWidth([sv frame]),NSHeight([sv frame])-height)];
+	[tagCloud setNeedsDisplay:YES];
 	
-	// placed below
-	// [sv setFrame:NSMakeRect(0,NSMinY([sv frame])+height,NSWidth([sv frame]),NSHeight([sv frame])-height)];
 	[typeAheadView setHidden:NO];	
 }
 
@@ -275,9 +273,8 @@
 	NSScrollView *sv = [tagCloud enclosingScrollView];
 	// placed above
 	[sv setFrame:NSMakeRect(0,NSMinY([sv frame]),NSWidth([sv frame]),NSHeight([sv frame])+height)];
-		
-	// placed below
-	// [sv setFrame:NSMakeRect(0,NSMinY([sv frame])-height,NSWidth([sv frame]),NSHeight([sv frame])+height)];
+	[tagCloud setNeedsDisplay:YES];
+
 	[typeAheadView setHidden:YES];	
 }
 
@@ -341,7 +338,7 @@
 
 - (void)resetBuffer
 {
-	[self setBuffer:[[NSMutableString alloc] initWithString:@""]];
+	[self setBuffer:@""];
 }
 
 #pragma mark events

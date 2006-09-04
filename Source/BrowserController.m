@@ -34,6 +34,7 @@
 	[browserViewController resetBuffer];
 	[browserViewController clearSelectedTags:self];
 	//TODO waterjoe add reset for your stuff here
+	return YES;
 }
 
 @end

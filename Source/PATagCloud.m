@@ -79,6 +79,14 @@ calculates the starting point in the next row according to the height of all the
 		// TODO activate this and code correctly
 		//[viewAnimation setAnimationBlockingMode:NSAnimationNonblockingThreaded];
 		viewAnimationCache = [[NSMutableArray alloc] init];
+		
+		NSFont *font = [NSFont fontWithName:@"Arial" size:20.0];
+		NSColor *color = [NSColor lightGrayColor];
+		NSDictionary *attrsDictionary =
+			[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:font,color,nil]
+										forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,nil]];
+		
+		noRelatedTagsMessage = [[NSAttributedString alloc] initWithString:@"no related tags" attributes:attrsDictionary]; 
 	}
 	return self;
 }
@@ -106,6 +114,7 @@ bind to visibleTags
 
 - (void)dealloc
 {
+	[noRelatedTagsMessage release];
 	[activeButton release];
 	[viewAnimationCache release];
 	[viewAnimation release];
@@ -118,7 +127,11 @@ bind to visibleTags
 {
 	[self setFrame:[self calcFrame]];
 	[self updateViewHierarchy];
-	[self scrollToButton:[self activeButton]];
+	
+	if ([[controller visibleTags] count] > 0)
+	{
+		[self scrollToButton:[self activeButton]];
+	}	
 }
 
 - (void)handleTagsChange
@@ -223,6 +236,12 @@ bound to visibleTags
 - (void)drawRect:(NSRect)rect
 {	
 	[self drawBackground];
+	
+	if ([[controller visibleTags] count] == 0 && ![[controller relatedTags] isUpdating])
+	{
+		[self drawString:noRelatedTagsMessage centeredIn:rect];
+	}
+	
 	[super drawRect:rect];
 }
 
@@ -231,21 +250,18 @@ bound to visibleTags
 	//TODO externalize
 	[[NSColor colorWithDeviceRed:(236.0/255.0) green:(242.0/255.0) blue:(251.0/255.0) alpha:1.0] set];
 	NSRectFill([self bounds]);
+}
+
+- (void)drawString:(NSAttributedString*)string centeredIn:(NSRect)rect
+{
+	NSPoint stringOrigin;
+	NSSize stringSize;
 	
-	/*if ([[self window] firstResponder] == self)
-	{
-		[[NSColor selectedControlColor] set];
-	}
-	else
-	{
-		[[NSColor lightGrayColor] set];
-	}
+	stringSize = [string size];
+	stringOrigin.x = rect.origin.x + (rect.size.width - stringSize.width)/2;
+	stringOrigin.y = rect.origin.y + (rect.size.height - stringSize.height)/2;
 	
-	NSRect clipRect = [[self enclosingScrollView] documentVisibleRect];
-	
-	NSBezierPath *bezierPath = [NSBezierPath bezierPathWithRect:clipRect];
-	[bezierPath setLineWidth:2.0];
-	[bezierPath stroke];*/
+	[string drawAtPoint:stringOrigin];
 }
 
 - (void)updateViewHierarchy
@@ -509,7 +525,7 @@ bound to visibleTags
 	else
 	{
 		// forward unhandled events
-		[[self nextResponder] keyDown:event];
+		[super keyDown:event];
 	}
 }
 
