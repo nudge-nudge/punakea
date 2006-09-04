@@ -13,10 +13,9 @@
 
 - (void)awakeFromNib
 {
-	dataCell = [[PAButtonCell alloc] init];
-	[dataCell setBezelStyle:PATagBezelStyle];
+	dataCell = [[PASidebarTagCell alloc] init];
 	
-	//[self setDataCell:dataCell];
+	[self setDataCell:dataCell];
 }
 
 - (void)dealloc

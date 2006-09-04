@@ -7,10 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAButtonCell.h"
+#import "PASidebarTagCell.h"
 
 @interface PASidebarTableColumn : NSTableColumn {
-	PAButtonCell *dataCell;
+	PASidebarTagCell *dataCell;
 }
 
 @end

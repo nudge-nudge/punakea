@@ -528,7 +528,6 @@ bound to visibleTags
 		[super keyDown:event];
 	}
 }
-
 #pragma mark moving selection
 - (void)scrollToButton:(NSButton*)tagButton
 {
