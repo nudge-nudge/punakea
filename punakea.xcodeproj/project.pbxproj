@@ -73,8 +73,8 @@
 		4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */; };
 		4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */ = {isa = PBXBuildFile; fileRef = 4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */; };
 		4871792F0A5A619900A988DE /* BrowserView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4871792D0A5A619900A988DE /* BrowserView.nib */; };
-		488E18BD0A27231F009D2826 /* PASidebarTagCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488E18BB0A27231F009D2826 /* PASidebarTagCell.h */; };
-		488E18BE0A27231F009D2826 /* PASidebarTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E18BC0A27231F009D2826 /* PASidebarTagCell.m */; };
+		488E18BD0A27231F009D2826 /* PATagTextFieldCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */; };
+		488E18BE0A27231F009D2826 /* PATagTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
 		48AA6BF7099B78E300D8F70B /* PATagger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48AA6BF5099B78E300D8F70B /* PATagger.h */; };
@@ -85,6 +85,8 @@
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		48CDF4970AA57924002E9E78 /* GeneralPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */; };
 		48CDF4A30AA57B98002E9E78 /* tagit.png in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4A20AA57B98002E9E78 /* tagit.png */; };
+		48CF55000AAC4B230071C77A /* PAFileManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48CF54FE0AAC4B230071C77A /* PAFileManager.h */; };
+		48CF55010AAC4B230071C77A /* PAFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CF54FF0AAC4B230071C77A /* PAFileManager.m */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
 		48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66A5D09CB3752007B6B1D /* PASimpleTag.h */; };
@@ -240,7 +242,7 @@
 				4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */,
 				485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in CopyFiles */,
 				65035FCB0A20769500AD0597 /* PAQuery.h in CopyFiles */,
-				488E18BD0A27231F009D2826 /* PASidebarTagCell.h in CopyFiles */,
+				488E18BD0A27231F009D2826 /* PATagTextFieldCell.h in CopyFiles */,
 				6557CAF40A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h in CopyFiles */,
 				65903EFF0A4BFE9900ADDC1D /* PASelectedTagCell.h in CopyFiles */,
 				4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */,
@@ -269,6 +271,7 @@
 				65C8B58B0AA5869000DC36EA /* ThreadWorker.h in CopyFiles */,
 				657CBD770AA5C4A800701D47 /* PAThumbnailManager.h in CopyFiles */,
 				65AA051C0AA6DE31003E4E2F /* PAThumbnailItem.h in CopyFiles */,
+				48CF55000AAC4B230071C77A /* PAFileManager.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,8 +338,8 @@
 		4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadFind.h; sourceTree = "<group>"; };
 		4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadFind.m; sourceTree = "<group>"; };
 		4871792E0A5A619900A988DE /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/BrowserView.nib; sourceTree = "<group>"; };
-		488E18BB0A27231F009D2826 /* PASidebarTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTagCell.h; sourceTree = "<group>"; };
-		488E18BC0A27231F009D2826 /* PASidebarTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTagCell.m; sourceTree = "<group>"; };
+		488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagTextFieldCell.h; sourceTree = "<group>"; };
+		488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagTextFieldCell.m; sourceTree = "<group>"; };
 		489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagsView.h; sourceTree = "<group>"; };
 		489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTagsView.m; sourceTree = "<group>"; };
 		48AA6BF5099B78E300D8F70B /* PATagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagger.h; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GeneralPreferences.tiff; sourceTree = "<group>"; };
 		48CDF4A20AA57B98002E9E78 /* tagit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tagit.png; path = ../tagit.png; sourceTree = "<group>"; };
+		48CF54FE0AAC4B230071C77A /* PAFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileManager.h; sourceTree = "<group>"; };
+		48CF54FF0AAC4B230071C77A /* PAFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileManager.m; sourceTree = "<group>"; };
 		48D16FED0A5A6468006C667B /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
 		48D16FEE0A5A6468006C667B /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
@@ -657,8 +662,6 @@
 				485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */,
 				486EBA4409D68F16000C154C /* PAFileBox.h */,
 				486EBA4309D68F16000C154C /* PAFileBox.m */,
-				488E18BB0A27231F009D2826 /* PASidebarTagCell.h */,
-				488E18BC0A27231F009D2826 /* PASidebarTagCell.m */,
 				4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */,
 				4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */,
 				48471FD90A4FFF90002B369A /* SidebarController.h */,
@@ -701,6 +704,10 @@
 			isa = PBXGroup;
 			children = (
 				484F717E0A666D4B00D886E5 /* Tag Management */,
+				48CF54FE0AAC4B230071C77A /* PAFileManager.h */,
+				48CF54FF0AAC4B230071C77A /* PAFileManager.m */,
+				48AA6BF5099B78E300D8F70B /* PATagger.h */,
+				48AA6BF6099B78E300D8F70B /* PATagger.m */,
 				481BF27609A3128600EBD7BA /* PATag.h */,
 				48D8F01109CBE94C0011401F /* PATag.m */,
 				48D66A5D09CB3752007B6B1D /* PASimpleTag.h */,
@@ -715,8 +722,6 @@
 				485DA54C09F4EC38008D3214 /* PASelectedTags.m */,
 				485DA55309F4ECBC008D3214 /* PATags.h */,
 				485DA55409F4ECBC008D3214 /* PATags.m */,
-				48AA6BF5099B78E300D8F70B /* PATagger.h */,
-				48AA6BF6099B78E300D8F70B /* PATagger.m */,
 				48C93614099742D800699265 /* Matador.h */,
 				48C9362D099743F200699265 /* NSObject.h */,
 				48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */,
@@ -835,6 +840,8 @@
 		65903EF20A4BFDF000ADDC1D /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
+				488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */,
+				488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */,
 				65988C690A875A11000270E6 /* PAButton.h */,
 				65988C6A0A875A11000270E6 /* PAButton.m */,
 				65988C7F0A875C53000270E6 /* PAButtonCell.h */,
@@ -1088,7 +1095,7 @@
 				4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */,
 				485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */,
 				65035FCC0A20769500AD0597 /* PAQuery.m in Sources */,
-				488E18BE0A27231F009D2826 /* PASidebarTagCell.m in Sources */,
+				488E18BE0A27231F009D2826 /* PATagTextFieldCell.m in Sources */,
 				6557CAF50A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m in Sources */,
 				65903F000A4BFE9900ADDC1D /* PASelectedTagCell.m in Sources */,
 				4870213C0A4FC1EC00CD5E75 /* PASidebarWindow.m in Sources */,
@@ -1117,6 +1124,7 @@
 				65C8B58C0AA5869000DC36EA /* ThreadWorker.m in Sources */,
 				657CBD780AA5C4A800701D47 /* PAThumbnailManager.m in Sources */,
 				65AA051D0AA6DE31003E4E2F /* PAThumbnailItem.m in Sources */,
+				48CF55010AAC4B230071C77A /* PAFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

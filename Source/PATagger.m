@@ -27,6 +27,8 @@ static PATagger *sharedInstance = nil;
 	{
 		simpleTagFactory = [[PASimpleTagFactory alloc] init];
 		tags = [[PATags alloc] init];
+		
+		fileManager = [[PAFileManager alloc] init];
 	}
 	return self;
 }
@@ -266,6 +268,9 @@ static PATagger *sharedInstance = nil;
 	
 	[[Matador sharedInstance] setAttributeForFileAtPath:path name:@"kMDItemKeywords" value:keywordArray];
 	[keywordArray release];
+	
+	//now move file to managed area if neccessary
+	[fileManager handleFile:path];
 }
 
 #pragma mark accessors

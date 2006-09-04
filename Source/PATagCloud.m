@@ -531,6 +531,7 @@ bound to visibleTags
 #pragma mark moving selection
 - (void)scrollToButton:(NSButton*)tagButton
 {
+	// TODO not working
 	// check if we are in the top or bottom line
 	// scroll completely to the top or bottom then
 	

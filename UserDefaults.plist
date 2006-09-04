@@ -4,6 +4,8 @@
 <dict>
 	<key>Appearance.SidebarPosition</key>
 	<integer>1</integer>
+	<key>General.ManageFiles</key>
+	<false/>
 	<key>Results</key>
 	<dict>
 		<key>CollapsedGroups</key>

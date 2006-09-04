@@ -13,8 +13,7 @@
 
 - (void)awakeFromNib
 {
-	dataCell = [[PASidebarTagCell alloc] init];
-	
+	dataCell = [[PATagTextFieldCell alloc] init];
 	[self setDataCell:dataCell];
 }
 

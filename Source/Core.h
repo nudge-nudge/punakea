@@ -36,6 +36,5 @@
 - (IBAction)showPreferences:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
-- (IBAction)closeBrowser:(id)sender;
 
 @end

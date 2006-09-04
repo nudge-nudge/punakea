@@ -6,10 +6,10 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "PASidebarTagCell.h"
+#import "PATagTextFieldCell.h"
 
 
-@implementation PASidebarTagCell
+@implementation PATagTextFieldCell
 
 - (id)initTextCell:(NSString*)name
 {
