@@ -603,6 +603,9 @@
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				65035FB70A20762F00AD0597 /* Query */,
+				48CF54FE0AAC4B230071C77A /* PAFileManager.h */,
+				48CF54FF0AAC4B230071C77A /* PAFileManager.m */,
+				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
 				65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */,
 				484F71AB0A66722000D886E5 /* PAViewController.h */,
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
@@ -646,7 +649,6 @@
 		4870698B0A0C930700A3ADE2 /* Type-Ahead Find */ = {
 			isa = PBXGroup;
 			children = (
-				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
 				4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */,
 				4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */,
 			);
@@ -735,8 +737,6 @@
 		65035FB70A20762F00AD0597 /* Query */ = {
 			isa = PBXGroup;
 			children = (
-				48CF54FE0AAC4B230071C77A /* PAFileManager.h */,
-				48CF54FF0AAC4B230071C77A /* PAFileManager.m */,
 				65035FC90A20769500AD0597 /* PAQuery.h */,
 				65035FCA0A20769500AD0597 /* PAQuery.m */,
 				65D43F4D0A7E3AC6008CC164 /* PAQueryBundle.h */,

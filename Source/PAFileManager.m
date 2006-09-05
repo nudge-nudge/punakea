@@ -42,7 +42,7 @@
 	// only do something if managing files and if file not already in the managed file directory
 	if (!manageFiles || ([[filePath stringByDeletingLastPathComponent] isEqualToString:[self pathForFiles]]))
 	{
-		return;
+		return filePath;
 	}
 	
 	NSString *newPath = [self destinationForNewFile:[filePath lastPathComponent]];
@@ -76,7 +76,8 @@
 	{
 		NSString *name = [fileName stringByDeletingPathExtension];
 		NSString *newName = [name stringByAppendingString:suffix];
-		NSString *newFileName = [newName stringByAppendingString:[fileName pathExtension]];
+		NSString *extension = [@"." stringByAppendingString:[fileName pathExtension]];
+		NSString *newFileName = [newName stringByAppendingString:extension];
 		newDestination = [[self pathForFiles] stringByAppendingPathComponent:newFileName];
 	}
 		
@@ -89,7 +90,8 @@
 		//TODO delete -i!!
 		NSString *name = [fileName stringByDeletingPathExtension];
 		NSString *newName = [name stringByAppendingString:suffix];
-		NSString *newFileName = [newName stringByAppendingString:[fileName pathExtension]];
+		NSString *extension = [@"." stringByAppendingString:[fileName pathExtension]];
+		NSString *newFileName = [newName stringByAppendingString:extension];
 		newDestination = [[self pathForFiles] stringByAppendingPathComponent:newFileName];
 	}
 		
