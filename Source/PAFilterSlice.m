@@ -148,6 +148,10 @@
 		[button setNeedsDisplay];
 	}
 	
+	// Reset queue of ThumbnailManager. We don't need to process images that are not visible any more
+	[[PAThumbnailManager sharedInstance] removeAllQueuedItems];
+	
+	
 	PAQuery *query = [controller query];
 	
 	// Bundlings attributes that we set here need to be wrapped into an PAQueryItem in 

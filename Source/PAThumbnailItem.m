@@ -12,7 +12,7 @@
 @implementation PAThumbnailItem
 
 #pragma mark Init + Dealloc
-- (id)initForFile:(NSString *)path inView:(NSView *)aView frame:(NSRect)aFrame
+- (id)initForFile:(NSString *)path inView:(NSView *)aView frame:(NSRect)aFrame type:(PAThumbnailItemType)itemType
 {
 	self = [super init];
 	if(self)
@@ -20,6 +20,7 @@
 		filename = path;
 		view = aView;
 		frame = aFrame;
+		type = itemType;
 	}
 	return self;
 }
@@ -44,6 +45,11 @@
 - (NSRect)frame
 {
 	return frame;
+}
+
+- (PAThumbnailItemType)type
+{
+	return type;
 }
 
 @end

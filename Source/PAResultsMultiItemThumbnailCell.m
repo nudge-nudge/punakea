@@ -95,7 +95,7 @@
 		[[NSBezierPath bezierPathWithRoundRectInRect:bezelFrame radius:10] fill];
 	}	
 	
-	// TEMP for thumbnail
+	// Draw thumbnail
 	NSImage *thumbImage = [[PAThumbnailManager sharedInstance]
 				thumbnailWithContentsOfFile:[valueDict valueForAttribute:kMDItemPath]
 				                     inView:controlView
@@ -105,18 +105,10 @@
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [thumbImage size];
 	
-	[thumbImage drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
+	NSPoint targetPoint = NSMakePoint(cellFrame.origin.x + 8,
+									  cellFrame.origin.y + (77 - imageRect.size.height) / 2);
 	
-	//NSLog(@"drawing %@", value);
-
-	/*NSString *path = [valueDict objectForKey:@"path"];
-	NSImage *thumbImage = [self thumbnailImageWithFile:path withSize:70 highQuality:NO];
-	
-	NSRect imageRect;
-	imageRect.origin = NSZeroPoint;
-	imageRect.size = [thumbImage size];
-	
-	[thumbImage drawAtPoint:cellFrame.origin fromRect:imageRect operation:NSCompositeCopy fraction:1.0];*/
+	[thumbImage drawAtPoint:targetPoint fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView

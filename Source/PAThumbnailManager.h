@@ -13,6 +13,8 @@
 
 @interface PAThumbnailManager : NSObject {
 
+	NSMutableDictionary			*icons;
+	
 	NSMutableDictionary			*thumbnails;
 	NSMutableArray				*queue;
 	int							numberOfThumbsBeingProcessed;

@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAQueryItem.h"
+#import "PAThumbnailManager.h"
 
 
 @interface PAResultsItemCell : NSTextFieldCell {

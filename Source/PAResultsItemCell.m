@@ -30,9 +30,11 @@
 
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{				
+{		
 	// Draw icon
-	/*NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[item valueForAttribute:kMDItemPath]];
+	NSImage *icon = [[PAThumbnailManager sharedInstance] iconForFile:[item valueForAttribute:kMDItemPath]
+	                                                          inView:controlView
+															   frame:cellFrame];
 	[icon setFlipped:YES];
 	[icon setSize:NSMakeSize(16,16)];
 	
@@ -40,7 +42,7 @@
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [icon size];
 	
-	[icon drawAtPoint:NSMakePoint(cellFrame.origin.x + 5, cellFrame.origin.y + 1) fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];*/
+	[icon drawAtPoint:NSMakePoint(cellFrame.origin.x + 5, cellFrame.origin.y + 1) fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	 
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];

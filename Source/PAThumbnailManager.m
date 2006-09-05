@@ -23,6 +23,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	if(self)
 	{
 		numberOfThumbsBeingProcessed = 0;
+		icons = [[NSMutableDictionary alloc] init];
 		thumbnails = [[NSMutableDictionary alloc] init];
 		queue = [[NSMutableArray alloc] init];
 		dummyImage = [NSImage imageNamed:@"tagit"];
@@ -34,6 +35,7 @@ static PAThumbnailManager *sharedInstance = nil;
 {
 	if(queue) [queue release];
 	if(thumbnails) [thumbnails release];
+	if(icons) [icons release];
 	if(dummyImage) [dummyImage release];
 	[super dealloc];
 }
@@ -49,9 +51,48 @@ static PAThumbnailManager *sharedInstance = nil;
 		return thumbnail;
 	} else {
 		// Add filename to queue						
-		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame];		
+		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeThumbnail];		
 		[queue addObject:item];
 		[thumbnails setObject:dummyImage forKey:filename];
+		
+		if(!timer)
+		{
+			timer = [NSTimer scheduledTimerWithTimeInterval:0.2
+													 target:self
+												   selector:@selector(processQueue)
+												   userInfo:nil
+													repeats:YES];
+		}
+		
+		return dummyImage;
+	}
+}
+
+- (NSImage *)iconForFile:(NSString *)filename inView:(NSView *)aView frame:(NSRect)aFrame
+{
+	// Get extension
+	/*FSRef ref;
+	LSItemInfoRecord outInfo;
+	
+	NSURL *url = [[NSURL alloc] initFileURLWithPath:filename];
+	CFURLGetFSRef((CFURLRef)url, &ref);
+	LSCopyItemInfoForRef(&ref, kLSRequestExtension, &outInfo);
+	
+	NSString *extension = [[outInfo.extension copy] autorelease];
+	
+	CFRelease(outInfo.extension);
+	[url release];*/
+
+	// Get icon
+	NSImage *icon = [icons objectForKey:filename];
+	if(icon)
+	{
+		return icon;
+	} else {		
+		// Add filename to queue						
+		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeIcon];		
+		[queue addObject:item];
+		[icons setObject:dummyImage forKey:filename];
 		
 		if(!timer)
 		{
@@ -78,10 +119,18 @@ static PAThumbnailManager *sharedInstance = nil;
 		PAThumbnailItem *item = [queue objectAtIndex:0];		 
 		[queue removeObjectAtIndex:0];
 		
-		[ThreadWorker workOn:self
-				withSelector:@selector(generateThumbnailFromFile:)
-				  withObject:item
-			  didEndSelector:nil];
+		if([item type] == PAItemTypeThumbnail)
+		{
+			[ThreadWorker workOn:self
+					withSelector:@selector(generateThumbnailFromFile:)
+					  withObject:item
+				  didEndSelector:nil];
+		} else {
+			[ThreadWorker workOn:self
+					withSelector:@selector(generateIconForFile:)
+					  withObject:item
+				  didEndSelector:nil];
+		}
 	} 
 }
 
@@ -89,8 +138,7 @@ static PAThumbnailManager *sharedInstance = nil;
 {
 	NSString *filename = [thumbnailItem filename];
 
-	//NSImage *thumbnail = [self scaledImageFromFile:filename maxwidth:60 maxheight:60 quality:0.75];
-	NSImage *thumbnail = [PAThumbnailManager scaledImageFromFileNew:filename];
+	NSImage *thumbnail = [PAThumbnailManager thumbnailFromFileNew:filename maxBounds:NSMakeSize(77,77)];
 	if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
 	[thumbnails removeObjectForKey:filename];
@@ -108,7 +156,26 @@ static PAThumbnailManager *sharedInstance = nil;
 	//NSLog(@"finished %@", filename);
 }
 
-+ (NSImage *)scaledImageFromFileNew:(NSString *)filename
+- (void)generateIconForFile:(PAThumbnailItem *)thumbnailItem
+{
+	NSString *filename = [thumbnailItem filename];
+
+	NSImage *img = [[[NSWorkspace sharedWorkspace] iconForFile:filename] retain];
+		
+	[icons removeObjectForKey:filename];
+	[icons setObject:img forKey:filename];
+	
+	numberOfThumbsBeingProcessed--;
+	
+	// Refresh item's view
+	NSView *view = [thumbnailItem view];
+	NSRect frame = [thumbnailItem frame];
+	[view setNeedsDisplayInRect:frame];
+	
+	[img release];
+}
+
++ (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds
 {
 	NSDictionary        *imageOptions = [NSDictionary 
 				dictionaryWithObjectsAndKeys:
@@ -118,8 +185,8 @@ static PAThumbnailManager *sharedInstance = nil;
 						   
 	NSURL                *urlOfImage = [[NSURL alloc] initFileURLWithPath:filename];
 	
-	CGImageSourceRef imageSourceRef = CGImageSourceCreateWithURL((CFURLRef)urlOfImage, 
-				NULL);
+	CGImageSourceRef imageSourceRef = CGImageSourceCreateWithURL((CFURLRef)urlOfImage, NULL);
+	[urlOfImage release];
 
 	// First, try getting thumbnail image
 	CGImageRef image = CGImageSourceCreateThumbnailAtIndex(imageSourceRef,
@@ -133,12 +200,39 @@ static PAThumbnailManager *sharedInstance = nil;
 		//	0,imageOptions);
 		
 		// This way of loading the whole file uses much less memory
-		NSImage *img = [PAThumbnailManager scaledImageFromFile:filename maxBounds:NSMakeSize(60,60) quality:0.8];
+		NSImage *img = [PAThumbnailManager scaledImageFromFile:filename maxBounds:maxBounds quality:0.8];
 		return img;			
-	} else {		
-		NSImage *img = [[NSImage alloc] initWithSize:NSMakeSize(60,60)];
+	} else {				
+		// image size
+		int w, nw, h, nh;
+		w = nw = CGImageGetWidth(image);
+		h = nh = CGImageGetHeight(image);
 		
-		CGRect CGImgRect = CGRectMake(0,0,60,60);
+		if (w > maxBounds.width || h > maxBounds.height)
+		{
+			float wr, hr;
+			
+			// ratios
+			wr = w / maxBounds.width;
+			hr = h / maxBounds.height;
+			
+			
+			if (wr>hr) // landscape
+			{
+				nw = maxBounds.width;
+				nh = h/wr;
+			}
+			else // portrait
+			{
+				nh = maxBounds.height;
+				nw = w/hr;
+			};		
+		};
+		
+		NSImage *img = [[NSImage alloc] initWithSize:NSMakeSize(nw,nh)];
+		[img setFlipped:YES];
+		
+		CGRect CGImgRect = CGRectMake(0,0,nw,nh);
 		
 		[img lockFocus];	
 		[NSGraphicsContext saveGraphicsState];
@@ -278,6 +372,29 @@ static PAThumbnailManager *sharedInstance = nil;
 	[pool release];
 	
 	return [image autorelease];
+}
+
+- (void)removeAllQueuedItems
+{	
+	[queue removeAllObjects];
+
+	// Remove dummys from thumbnails
+	NSArray *keys = [thumbnails allKeys];
+	for(unsigned i = 0; i < [keys count]; i++)
+	{
+		NSImage *image =[thumbnails objectForKey:[keys objectAtIndex:i]];
+		if([image isEqualTo:dummyImage])
+			[thumbnails removeObjectForKey:[keys objectAtIndex:i]];
+	}
+	
+	// Remove dummys from icons
+	keys = [icons allKeys];
+	for(unsigned i = 0; i < [keys count]; i++)
+	{
+		NSImage *image =[icons objectForKey:[keys objectAtIndex:i]];
+		if([image isEqualTo:dummyImage])
+			[icons removeObjectForKey:[keys objectAtIndex:i]];
+	}
 }
 
 
