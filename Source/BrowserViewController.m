@@ -67,7 +67,7 @@
 		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
 		
 		[self setVisibleTags:[tags tags]];
-		[typeAheadFind setActiveTags:[tags tags]];	
+		[typeAheadFind setActiveTags:[tags tags]];
 		
 		[NSBundle loadNibNamed:nibName owner:self];
 	}

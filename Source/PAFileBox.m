@@ -109,7 +109,14 @@
 	
 	[self setFiles:[paste propertyListForType:@"NSFilenamesPboardType"]];
 	
-	[self setFileIcon:[[NSWorkspace sharedWorkspace] iconForFiles:files]];
+	if ([files count] > 1)
+	{
+		[self setFileIcon:[[NSWorkspace sharedWorkspace] iconForFileType:NSPlainFileType]];
+	}
+	else
+	{
+		[self setFileIcon:[[NSWorkspace sharedWorkspace] iconForFiles:files]];
+	}
 	
 	[self setNeedsDisplay:YES];
     return YES;

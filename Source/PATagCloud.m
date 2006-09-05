@@ -130,7 +130,11 @@ bind to visibleTags
 	if ([[controller visibleTags] count] > 0)
 	{
 		[self updateViewHierarchy];
-		[self scrollToButton:[self activeButton]];
+		
+		if ([self activeButton])
+		{
+			[self scrollToButton:[self activeButton]];
+		}
 	}	
 }
 
@@ -242,7 +246,7 @@ bound to visibleTags
 		[self drawString:noRelatedTagsMessage centeredIn:rect];
 	}
 	
-	//s[super drawRect:rect];
+	[super drawRect:rect];
 }
 
 - (void)drawBackground
@@ -531,21 +535,20 @@ bound to visibleTags
 #pragma mark moving selection
 - (void)scrollToButton:(NSButton*)tagButton
 {
-	// TODO not working
 	// check if we are in the top or bottom line
 	// scroll completely to the top or bottom then
 	
 	NSRect buttonFrame = [tagButton frame];
 	NSSize viewSize = [self frame].size;
 	
-	float buttonMaxY = NSMaxY(buttonFrame);
+	float buttonLineMaxY = NSMaxY([[self maximumButtonOnLineWithPoint:buttonFrame.origin] frame]);
 	float topSkip = viewSize.height - PADDING.height;
 	float bottomSkip = 0 + PADDING.height;
 
 	// check top - TODO why -1?!
-	if (buttonMaxY >= topSkip - 1)
+	if (buttonLineMaxY >= topSkip - 1)
 	{
-		buttonFrame.origin.y += PADDING.height;
+		buttonFrame.origin.y = viewSize.height - buttonFrame.size.height;
 	}
 	
 	// check bottom
@@ -770,6 +773,27 @@ bound to visibleTags
 	}
 	
 	return result;
+}
+
+- (PATagButton*)maximumButtonOnLineWithPoint:(NSPoint)point
+{
+	NSArray *buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
+	float maxHeight = 0.0;
+	PATagButton *maxButton;
+	
+	NSEnumerator *e = [buttons objectEnumerator];
+	PATagButton *button;
+	
+	while (button = [e nextObject])
+	{
+		if (NSMaxY([button frame]) > maxHeight)
+		{
+			maxHeight = NSMaxY([button frame]);
+			maxButton = button;
+		}
+	}
+	
+	return maxButton;	
 }
 
 - (NSMutableArray*)buttonsWithOriginOnHorizontalLineWithPoint:(NSPoint)point
