@@ -126,10 +126,10 @@ bind to visibleTags
 - (void)handleBoundsChange:(NSNotification*)note
 {
 	[self setFrame:[self calcFrame]];
-	[self updateViewHierarchy];
 	
 	if ([[controller visibleTags] count] > 0)
 	{
+		[self updateViewHierarchy];
 		[self scrollToButton:[self activeButton]];
 	}	
 }
@@ -214,7 +214,7 @@ bound to visibleTags
 	NSEnumerator *e = [[controller visibleTags] objectEnumerator];
 	PATag *tag;
 	
-	NSPoint buttonPoint;
+	NSPoint buttonPoint = NSMakePoint(0.0,0.0);
 	
 	while (tag = [e nextObject])
 	{
@@ -242,7 +242,7 @@ bound to visibleTags
 		[self drawString:noRelatedTagsMessage centeredIn:rect];
 	}
 	
-	[super drawRect:rect];
+	//s[super drawRect:rect];
 }
 
 - (void)drawBackground
