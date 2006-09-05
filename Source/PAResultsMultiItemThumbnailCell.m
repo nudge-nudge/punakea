@@ -84,13 +84,14 @@
 	[valueLabel drawInRect:valueLabelFrame];
 	
 	// Draw thumbnail background rect
+	bezelFrame = cellFrame;
+	bezelFrame.origin.x += 5;
+	bezelFrame.origin.y += 1;
+	bezelFrame.size.height = 83;
+	bezelFrame.size.width = 84;
+	
 	if([self isHighlighted])
 	{	
-		bezelFrame = cellFrame;
-		bezelFrame.origin.x += 5;
-		bezelFrame.size.height = 83;
-		bezelFrame.size.width = 83;
-	
 		[[NSColor gridColor] set];
 		[[NSBezierPath bezierPathWithRoundRectInRect:bezelFrame radius:10] fill];
 	}	
@@ -105,10 +106,11 @@
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [thumbImage size];
 	
-	NSPoint targetPoint = NSMakePoint(cellFrame.origin.x + 8,
-									  cellFrame.origin.y + (77 - imageRect.size.height) / 2);
+	NSPoint targetPoint = NSMakePoint(bezelFrame.origin.x + 4,
+									  bezelFrame.origin.y + 4 + (77 - imageRect.size.height) / 2);
+	//NSRect targetRect = NSInsetRect(bezelFrame, 4.0, 4.0);
 	
-	[thumbImage drawAtPoint:targetPoint fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
+	[thumbImage drawAtPoint:targetPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView

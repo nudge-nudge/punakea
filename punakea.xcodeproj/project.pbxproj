@@ -113,6 +113,8 @@
 		65461C9509D0418F0076778E /* PAImageButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65461C9309D0418F0076778E /* PAImageButtonCell.h */; };
 		65461C9609D0418F0076778E /* PAImageButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65461C9409D0418F0076778E /* PAImageButtonCell.m */; };
 		654DBC1B09C9D0620061BFA4 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 654DBC1A09C9D0620061BFA4 /* index.html */; };
+		655377CD0AAD8C5000C6376B /* dummyThumbSmall.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655377CB0AAD8C5000C6376B /* dummyThumbSmall.gif */; };
+		655377CE0AAD8C5000C6376B /* dummyThumbLarge.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655377CC0AAD8C5000C6376B /* dummyThumbLarge.gif */; };
 		655563A20A50672A0050104E /* stopRollover.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6555639F0A50672A0050104E /* stopRollover.tif */; };
 		655563A30A50672A0050104E /* stopPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655563A00A50672A0050104E /* stopPressed.tif */; };
 		655563A40A50672A0050104E /* stop.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655563A10A50672A0050104E /* stop.tif */; };
@@ -379,6 +381,8 @@
 		65461C9309D0418F0076778E /* PAImageButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButtonCell.h; sourceTree = "<group>"; };
 		65461C9409D0418F0076778E /* PAImageButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButtonCell.m; sourceTree = "<group>"; };
 		654DBC1A09C9D0620061BFA4 /* index.html */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = index.html; path = html/index.html; sourceTree = "<group>"; };
+		655377CB0AAD8C5000C6376B /* dummyThumbSmall.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dummyThumbSmall.gif; sourceTree = "<group>"; };
+		655377CC0AAD8C5000C6376B /* dummyThumbLarge.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dummyThumbLarge.gif; sourceTree = "<group>"; };
 		6555639F0A50672A0050104E /* stopRollover.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stopRollover.tif; sourceTree = "<group>"; };
 		655563A00A50672A0050104E /* stopPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stopPressed.tif; sourceTree = "<group>"; };
 		655563A10A50672A0050104E /* stop.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stop.tif; sourceTree = "<group>"; };
@@ -765,6 +769,15 @@
 			name = Documentation;
 			sourceTree = "<group>";
 		};
+		655377C50AAD8C3500C6376B /* Thumbnail Manager */ = {
+			isa = PBXGroup;
+			children = (
+				655377CB0AAD8C5000C6376B /* dummyThumbSmall.gif */,
+				655377CC0AAD8C5000C6376B /* dummyThumbLarge.gif */,
+			);
+			name = "Thumbnail Manager";
+			sourceTree = "<group>";
+		};
 		655D3BF20A7DD598009479F9 /* Filter Slice */ = {
 			isa = PBXGroup;
 			children = (
@@ -777,6 +790,7 @@
 		6562A1D40996399100DBE7DB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				655377C50AAD8C3500C6376B /* Thumbnail Manager */,
 				65A981300AA737C6009F9E34 /* Sidebar */,
 				65A9812F0AA73755009F9E34 /* Preferences */,
 				65D6ACC10A89E20300FDAC8A /* Custom Controls */,
@@ -1036,6 +1050,8 @@
 				4832722D0AA42D19003D98A6 /* Preferences.nib in Resources */,
 				48CDF4970AA57924002E9E78 /* GeneralPreferences.tiff in Resources */,
 				48CDF4A30AA57B98002E9E78 /* tagit.png in Resources */,
+				655377CD0AAD8C5000C6376B /* dummyThumbSmall.gif in Resources */,
+				655377CE0AAD8C5000C6376B /* dummyThumbLarge.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

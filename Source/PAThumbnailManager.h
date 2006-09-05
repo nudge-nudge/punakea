@@ -19,7 +19,8 @@
 	NSMutableArray				*queue;
 	int							numberOfThumbsBeingProcessed;
 	
-	NSImage						*dummyImage;
+	NSImage						*dummyImageThumbnail;
+	NSImage						*dummyImageIcon;
 	
 	NSTimer						*timer;
 	BOOL						processingQueue;

@@ -35,8 +35,8 @@
 	NSImage *icon = [[PAThumbnailManager sharedInstance] iconForFile:[item valueForAttribute:kMDItemPath]
 	                                                          inView:controlView
 															   frame:cellFrame];
-	[icon setFlipped:YES];
 	[icon setSize:NSMakeSize(16,16)];
+	[icon setFlipped:YES];
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;

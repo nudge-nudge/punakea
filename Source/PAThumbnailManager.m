@@ -26,7 +26,11 @@ static PAThumbnailManager *sharedInstance = nil;
 		icons = [[NSMutableDictionary alloc] init];
 		thumbnails = [[NSMutableDictionary alloc] init];
 		queue = [[NSMutableArray alloc] init];
-		dummyImage = [NSImage imageNamed:@"tagit"];
+		
+		dummyImageThumbnail = [NSImage imageNamed:@"dummyThumbLarge"];
+		[dummyImageThumbnail setFlipped:YES];
+		dummyImageIcon = [NSImage imageNamed:@"dummyThumbSmall"];
+		[dummyImageIcon setFlipped:YES];
 	}
 	return self;
 }
@@ -36,7 +40,8 @@ static PAThumbnailManager *sharedInstance = nil;
 	if(queue) [queue release];
 	if(thumbnails) [thumbnails release];
 	if(icons) [icons release];
-	if(dummyImage) [dummyImage release];
+	if(dummyImageThumbnail) [dummyImageThumbnail release];
+	if(dummyImageIcon) [dummyImageIcon release];
 	[super dealloc];
 }
 
@@ -53,7 +58,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		// Add filename to queue						
 		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeThumbnail];		
 		[queue addObject:item];
-		[thumbnails setObject:dummyImage forKey:filename];
+		[thumbnails setObject:dummyImageThumbnail forKey:filename];
 		
 		if(!timer)
 		{
@@ -64,7 +69,7 @@ static PAThumbnailManager *sharedInstance = nil;
 													repeats:YES];
 		}
 		
-		return dummyImage;
+		return dummyImageThumbnail;
 	}
 }
 
@@ -92,7 +97,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		// Add filename to queue						
 		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeIcon];		
 		[queue addObject:item];
-		[icons setObject:dummyImage forKey:filename];
+		[icons setObject:dummyImageIcon forKey:filename];
 		
 		if(!timer)
 		{
@@ -103,7 +108,7 @@ static PAThumbnailManager *sharedInstance = nil;
 													repeats:YES];
 		}
 		
-		return dummyImage;
+		return dummyImageIcon;
 	}
 }
 
@@ -138,7 +143,7 @@ static PAThumbnailManager *sharedInstance = nil;
 {
 	NSString *filename = [thumbnailItem filename];
 
-	NSImage *thumbnail = [PAThumbnailManager thumbnailFromFileNew:filename maxBounds:NSMakeSize(77,77)];
+	NSImage *thumbnail = [PAThumbnailManager thumbnailFromFileNew:filename maxBounds:NSMakeSize(76,75)];
 	if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
 	[thumbnails removeObjectForKey:filename];
@@ -383,7 +388,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	for(unsigned i = 0; i < [keys count]; i++)
 	{
 		NSImage *image =[thumbnails objectForKey:[keys objectAtIndex:i]];
-		if([image isEqualTo:dummyImage])
+		if([image isEqualTo:dummyImageThumbnail])
 			[thumbnails removeObjectForKey:[keys objectAtIndex:i]];
 	}
 	
@@ -392,7 +397,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	for(unsigned i = 0; i < [keys count]; i++)
 	{
 		NSImage *image =[icons objectForKey:[keys objectAtIndex:i]];
-		if([image isEqualTo:dummyImage])
+		if([image isEqualTo:dummyImageIcon])
 			[icons removeObjectForKey:[keys objectAtIndex:i]];
 	}
 }
