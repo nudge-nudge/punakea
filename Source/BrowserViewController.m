@@ -307,6 +307,7 @@
 		// there are no selected tags, reset all tags
 		[self setVisibleTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
+		[query setTags:selectedTags];
 	}
 }
 

@@ -12,6 +12,7 @@ NSString * const PAQueryDidStartGatheringNotification = @"PAQueryDidStartGatheri
 NSString * const PAQueryGatheringProgressNotification = @"PAQueryGatheringProgressNotification";
 NSString * const PAQueryDidUpdateNotification = @"PAQueryDidUpdateNotification";
 NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGatheringNotification";
+NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 
 //NSString * const PAQueryGroupingAttributesDidChange = @"PAQueryGroupingAttributesDidChange";
 
@@ -39,16 +40,7 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 	if (self = [super init])
 	{
 		[self setDelegate:self];
-	
-		mdquery = [[NSMetadataQuery alloc] init];
-		[mdquery setDelegate:self];
-		[mdquery setNotificationBatchingInterval:0.3];
-		
-		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self
-		       selector:@selector(metadataQueryNote:)
-			       name:nil
-				 object:mdquery];
+		[self createQuery];
 		
 		[self setTags:otherTags];
 	}
@@ -86,6 +78,30 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 }
 
 #pragma mark Actions
+- (void)createQuery
+{
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self];
+	
+	[self setMdquery:[[NSMetadataQuery alloc] init]];
+	[mdquery setDelegate:self];
+	[mdquery setNotificationBatchingInterval:0.3];
+	
+	[nc addObserver:self
+		   selector:@selector(metadataQueryNote:)
+			   name:nil
+			 object:mdquery];
+	
+	[nc postNotificationName:PAQueryDidResetNotification object:self];
+}
+
+- (void)setMdquery:(NSMetadataQuery*)query
+{
+	[query retain];
+	[mdquery release];
+	mdquery = query;
+}
+
 - (BOOL)startQuery
 {
 	// TODO: Smart caching!
@@ -332,14 +348,18 @@ NSString * const PAQueryDidFinishGatheringNotification = @"PAQueryDidFinishGathe
 {
 	NSMutableString *queryString = [self queryStringForTags:[tags selectedTags]];
 	
-	if (![queryString isEqualToString:@""])
+	if ([queryString isEqualToString:@""])
+	{
+		[self createQuery];
+	}
+	else
 	{
 		[self setPredicate:[NSPredicate predicateWithFormat:queryString]];
-	}
-	
-	if (![self isStarted])
-	{
-		[self startQuery];
+		
+		if (![self isStarted])
+		{
+			[self startQuery];
+		}
 	}
 }
 

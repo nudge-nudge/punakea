@@ -25,6 +25,9 @@ extern NSString * const PAQueryDidUpdateNotification;
 /** Posted when the receiver has finished with the initial result-gathering phase of the query. */
 extern NSString * const PAQueryDidFinishGatheringNotification;
 
+/** Posted when the query is reset - needed when results are emptied */
+extern NSString * const PAQueryDidResetNotification;
+
 /** Posted when the receiver's grouping attributes have changed. */
 //extern NSString * const PAQueryGroupingAttributesDidChange;
 
