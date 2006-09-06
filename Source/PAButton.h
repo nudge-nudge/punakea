@@ -18,6 +18,7 @@
 }
 
 - (void)highlight:(BOOL)flag;
+- (BOOL)isHighlighed;
 
 - (NSString *)title;
 - (void)setTitle:(NSString *)title;

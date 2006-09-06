@@ -75,6 +75,11 @@
 	[[self cell] setHighlighted:flag];
 }
 
+- (BOOL)isHighlighed
+{
+	return [[self cell] isHighlighted];
+}
+
 - (void)sizeToFit
 {
 	NSRect frame = [self frame];

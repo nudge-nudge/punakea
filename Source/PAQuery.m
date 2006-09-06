@@ -344,6 +344,29 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	filteredResults = [self bundleResults:flatFilteredResults byAttributes:newAttributes];
 }
 
+- (BOOL)hasResultsUsingFilterWithValues:(NSArray *)filterValues
+                   forBundlingAttribute:(NSArray *)attribute
+{
+	NSEnumerator *enumerator = [flatResults objectEnumerator];
+	PAQueryItem *item;
+	while(item = [enumerator nextObject])
+	{		
+		id valueForAttribute = [item valueForAttribute:attribute];
+		
+		if([valueForAttribute isKindOfClass:[NSString class]])
+		{
+			if([filterValues containsObject:valueForAttribute])
+			{
+				return YES;
+			}
+		} else {
+			NSLog(@"Error in hasResultsUsingFilterWithValues");
+		}
+	}
+	
+	return NO;
+}
+
 - (void)updateQueryFromTags
 {
 	NSMutableString *queryString = [self queryStringForTags:[tags selectedTags]];

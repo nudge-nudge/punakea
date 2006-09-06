@@ -9,6 +9,10 @@
 #import "PAFilterSlice.h"
 
 
+extern NSSize const PADDING = {10,5};
+extern unsigned const BUTTON_SPACING = 2;
+
+
 @implementation PAFilterSlice
 
 #pragma mark Init + Dealloc
@@ -18,122 +22,176 @@
 	if(self)
 	{		
 		buttons = [[NSMutableArray alloc] init];
-		filters = [[NSMutableArray alloc] init];
-			
-		[self addFilterButtons];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+		                                         selector:@selector(update)
+												     name:PAQueryDidUpdateNotification
+												   object:[controller query]];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+		                                         selector:@selector(update)
+												     name:PAQueryDidFinishGatheringNotification
+												   object:[controller query]];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+		                                         selector:@selector(update)
+												     name:PAQueryDidResetNotification
+												   object:[controller query]];
+												   
+		[self setupButtons];
+		[self update];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	if(filters) [filters release];
 	if(buttons) [buttons release];
 	[super dealloc];
 }
 
 
 #pragma mark Actions
-- (void)addFilterButtons
+- (void)setupButtons
 {
-	[buttons removeAllObjects];
-	int x = 10;
-	unsigned buttonIndex = 0;
+	for(unsigned i = 0; i < 8; i++)
+	{	
+		// Init button
+		PAFilterButton *button = [[PAFilterButton alloc] initWithFrame:[self frame]];
+		[button setAction:@selector(buttonClick:)];
+		[button setTarget:self];
+		[button setButtonType:PASwitchButton];
+		[button setBezelStyle:PARecessedBezelStyle];
+		
+		// Define filter
+		NSMutableDictionary *filter = [button filter];	
+		switch(i)
+		{
+			case 0:		// ALL
+				[filter setObject:@"All" forKey:@"title"];
+				break;
+			case 1:		// DOCUMENTS
+				[filter setObject:@"DOCUMENTS" forKey:@"title"];
+				[filter setObject:[NSArray arrayWithObject:@"DOCUMENTS"] forKey:@"filterValues"];
+				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
+				break;
+			case 2:		// MUSIC
+				[filter setObject:@"MUSIC" forKey:@"title"];
+				[filter setObject:[NSArray arrayWithObject:@"MUSIC"] forKey:@"filterValues"];
+				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
+				[filter setObject:[NSArray arrayWithObjects:(id)kMDItemAuthors, (id)kMDItemAlbum, nil] forKey:@"filterNewBundlingAttributes"];
+				break;
+			case 3:		// MOVIES	
+				[filter setObject:@"MOVIES" forKey:@"title"];
+				[filter setObject:[NSArray arrayWithObject:@"MOVIES"] forKey:@"filterValues"];
+				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
+				break;
+			case 4:		// PDF
+				[filter setObject:@"PDF" forKey:@"title"];
+				[filter setObject:[NSArray arrayWithObject:@"PDF"] forKey:@"filterValues"];
+				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
+				break;
+			case 5:		// IMAGES
+				[filter setObject:@"IMAGES" forKey:@"title"];
+				[filter setObject:[NSNumber numberWithInt:PAThumbnailMode] forKey:@"displayMode"];
+				[filter setObject:[NSArray arrayWithObject:@"IMAGES"] forKey:@"filterValues"];
+				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
+				break;
+			case 6:		// CONTACT
+				[filter setObject:@"CONTACT" forKey:@"title"];
+				[filter setObject:[NSArray arrayWithObject:@"CONTACT"] forKey:@"filterValues"];
+				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
+				break;
+			case 7:		// BOOKMARKS
+				[filter setObject:@"BOOKMARKS" forKey:@"title"];
+				[filter setObject:[NSArray arrayWithObject:@"BOOKMARKS"] forKey:@"filterValues"];
+				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
+				break;
+		}
+		
+		// Determine button's title
+		NSString *title = [[NSBundle mainBundle] localizedStringForKey:[filter objectForKey:@"title"]
+																 value:[filter objectForKey:@"title"]
+																 table:@"MDSimpleGrouping"];
+		if(!title) title = @"All";
+		[button setTitle:title];
+		[button sizeToFit];
+		
+		// Add button to array
+		[buttons addObject:button];
+	}
+}
+
+- (void)update
+{
+	// Show or hide buttons
+	[self updateButtons];
+	
+	NSEnumerator *enumerator = [buttons objectEnumerator];
+	PAButton *button;
+	PAButton *selectedButton = nil;
+	while(button = [enumerator nextObject])
+	{
+		if([button isHighlighed])
+		{
+			selectedButton = button;
+			break;
+		}
+	}
+	
+	if(!selectedButton || [selectedButton superview] != self)
+	{
+		// Select the ALL tab
+		button = [buttons objectAtIndex:0];
+		[self buttonClick:button];
+	}
+}
+
+- (void)updateButtons
+{
+	int x = PADDING.width;
 
 	/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *spotlightDict = [defaults persistentDomainForName:@"com.apple.spotlight"];
 	
 	NSMutableArray *orderedItems = [[spotlightDict objectForKey:@"orderedItems"] mutableCopy];*/
 	
-	// Define filters			
-	NSMutableDictionary *filter = [NSMutableDictionary dictionaryWithCapacity:2];
-	[filter setObject:@"All" forKey:@"title"];
-	[filters addObject:filter];
-	
-	filter = [NSMutableDictionary dictionaryWithCapacity:2];
-	[filter setObject:@"MUSIC" forKey:@"title"];
-	[filters addObject:filter];
-	
-	filter = [NSMutableDictionary dictionaryWithCapacity:2];
-	[filter setObject:@"MOVIES" forKey:@"title"];
-	[filters addObject:filter];
-	
-	filter = [NSMutableDictionary dictionaryWithCapacity:2];
-	[filter setObject:@"PDF" forKey:@"title"];
-	[filters addObject:filter];
-	
-	filter = [NSMutableDictionary dictionaryWithCapacity:2];
-	[filter setObject:@"IMAGES" forKey:@"title"];
-	[filter setObject:[NSNumber numberWithInt:PAThumbnailMode] forKey:@"displayMode"];
-	[filters addObject:filter];
-	
-	filter = [NSMutableDictionary dictionaryWithCapacity:2];
-	[filter setObject:@"CONTACT" forKey:@"title"];
-	[filters addObject:filter];
-	
-	filter = [NSMutableDictionary dictionaryWithCapacity:2];
-	[filter setObject:@"BOOKMARKS" forKey:@"title"];
-	[filters addObject:filter];	
-	
-	NSEnumerator *enumerator = [filters objectEnumerator];
-	NSDictionary *item;
-	while(item = [enumerator nextObject])
+	NSEnumerator *enumerator = [buttons objectEnumerator];
+	PAFilterButton *button;
+	while(button = [enumerator nextObject])
 	{
-		NSRect frame = [self frame];
-		frame.origin.x = x;
-		frame.origin.y = 5;
-		frame.size.height = 30;
-		frame.size.width = 70;
-		
-		// Determine button's title
-		NSString *title = [[NSBundle mainBundle] localizedStringForKey:[item objectForKey:@"title"]
-																 value:[item objectForKey:@"title"]
-																 table:@"MDSimpleGrouping"];
+		NSDictionary *filter = [button filter];
 	
-		// TODO: Replace by PAButton!
-		PAButton *button = [[PAButton alloc] initWithFrame:frame];
-		[button setTitle:title];
-		[button setAction:@selector(buttonClick:)];
-		[button setTarget:self];
-		[button setButtonType:PASwitchButton];
-		[button setBezelStyle:PARecessedBezelStyle];
-		[button setTag:buttonIndex++];
-		[button sizeToFit];
-		
-		// Activate first button
-		if(x == 10)
+		BOOL hasResults;
+		if(x == PADDING.width)
 		{
-			[button highlight:YES];
-			[button setState:PAOnState];
+			hasResults = YES;	// The ALL tab is always there
+		} else {
+			hasResults = [[controller query] hasResultsUsingFilterWithValues:[filter objectForKey:@"filterValues"]
+		                                                forBundlingAttribute:[filter objectForKey:@"filterBundlingAttribute"]];
 		}
+	
+		NSRect frame = [button frame];
+		frame.origin.x = x;
+		frame.origin.y = PADDING.height;
 		
-		NSRect buttonFrame = [button frame];
-		x += buttonFrame.size.width + 2;
+		if(hasResults)
+		{
+			NSRect buttonFrame = [button frame];
+			x += buttonFrame.size.width + BUTTON_SPACING;
 		
-		[self addSubview:button];
-		[buttons addObject:button];
+			if([button superview] != self) [self addSubview:button];
+			
+			[button setFrame:frame];
+		} else {
+			if([button superview] == self) [button removeFromSuperview];
+		}
 	}
 	
-	// Add a token test button
-	/*NSRect frame = [self frame];
-	frame.origin.x = frame.size.width - 100;
-	frame.origin.y = 2;
-	frame.size.height = 30;
-	frame.size.width = 70;
-		
-	PAButton *button = [[PAButton alloc] initWithFrame:frame];
-	[button setTitle:@"Tagbutton"];
-	[button setButtonType:PAMomentaryLightButton];
-	[button setBezelStyle:PATagBezelStyle];
-	//[button setFontSize:15];
-	[button sizeToFit];
-	[self addSubview:button];*/
+	[self setNeedsDisplay:YES];
 }
 
 - (void)buttonClick:(id)sender
 {
-	NSDictionary *filter = [filters objectAtIndex:[sender tag]];
-
+	// Highlight active filter button
 	NSEnumerator *enumerator = [buttons objectEnumerator];
 	NSButton *button;
 	while(button = [enumerator nextObject])
@@ -151,32 +209,19 @@
 	// Reset queue of ThumbnailManager. We don't need to process images that are not visible any more
 	[[PAThumbnailManager sharedInstance] removeAllQueuedItems];
 	
-	
 	PAQuery *query = [controller query];
+	NSDictionary *filter = [sender filter];
 	
 	// Bundlings attributes that we set here need to be wrapped into an PAQueryItem in 
 	// PAQuery's bundleResults:byAttributes:objectWrapping!! Only a few are there yet! TODO!
-	switch([sender tag])
+	if([[buttons objectAtIndex:0] isEqualTo:sender])
 	{
-		case 0:		// All
-			[query filterResults:NO usingValues:nil forBundlingAttribute:nil
-					      newBundlingAttributes:nil];
-			break;
-		case 1:		// Music
-			[query filterResults:YES usingValues:[NSArray arrayWithObject:@"MUSIC"]
-			                forBundlingAttribute:@"kMDItemContentTypeTree"
-						   newBundlingAttributes:[NSArray arrayWithObjects:(id)kMDItemAuthors, (id)kMDItemAlbum, nil]];
-			break;
-		case 3:		// PDF
-			[query filterResults:YES usingValues:[NSArray arrayWithObject:@"PDF"]
-			                forBundlingAttribute:@"kMDItemContentTypeTree"
-						   newBundlingAttributes:nil];
-			break;
-		case 4:		// Images
-			[query filterResults:YES usingValues:[NSArray arrayWithObject:@"IMAGES"]
-			                forBundlingAttribute:@"kMDItemContentTypeTree"
-						   newBundlingAttributes:nil];
-			break;
+		[query filterResults:NO usingValues:nil forBundlingAttribute:nil
+				      newBundlingAttributes:nil];
+	} else {
+		[query filterResults:YES usingValues:[filter objectForKey:@"filterValues"]
+						forBundlingAttribute:[filter objectForKey:@"filterBundlingAttribute"]
+					   newBundlingAttributes:[filter objectForKey:@"filterNewBundlingAttributes"]];
 	}
 	
 	// Set display mode

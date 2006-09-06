@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAQuery.h"
-#import "PAButton.h"
+#import "PAFilterButton.h"
 #import "PAResultsOutlineView.h"
 #import "BrowserViewController.h"
 
@@ -19,7 +19,6 @@
 	IBOutlet BrowserViewController		*controller; 	
 	
 	NSMutableArray						*buttons;
-	NSMutableArray						*filters;
 
 }
 
