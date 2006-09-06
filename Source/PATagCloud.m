@@ -135,19 +135,20 @@ bind to visibleTags
 		{
 			[self scrollToButton:[self activeButton]];
 		}
+		else
+		{
+			[self scrollToTop];
+		}
 	}	
 }
 
 - (void)handleTagsChange
 {
 	[self updateButtons];
+	[self setFrame:[self calcFrame]];
 	[self updateViewHierarchy:YES];
-	
-	if ([[controller visibleTags] count] > 0)
-	{
-		[self setActiveButton:[tagButtonDict objectForKey:[[[controller visibleTags] objectAtIndex:0] name]]];
-		[self scrollToButton:[self activeButton]];
-	}
+	[self setActiveButton:nil];
+	[self scrollToTop];
 }
 
 - (void)handleTypeAheadFindChange
@@ -156,7 +157,10 @@ bind to visibleTags
 
 - (void)handleActiveTagChange
 {
-	[self scrollToButton:[self activeButton]];
+	if ([self activeButton])
+	{
+		[self scrollToButton:[self activeButton]];
+	}
 }
 
 #pragma mark observer and important stuff
@@ -234,7 +238,8 @@ bound to visibleTags
 		newHeight = NSHeight(clipViewFrame);
 	}
 	
-	return NSMakeRect(0,0,NSWidth(clipViewFrame),newHeight);
+	NSRect newFrame = NSMakeRect(0.0,0.0,NSWidth(clipViewFrame),newHeight);
+	return newFrame;
 }
 
 - (void)drawRect:(NSRect)rect
@@ -509,22 +514,14 @@ bound to visibleTags
 		key == NSUpArrowFunctionKey || 
 		key == NSDownArrowFunctionKey)
 	{
-		switch (key)
-		{
-			case NSRightArrowFunctionKey: [self moveSelectionRight];
-				break;
-			case NSLeftArrowFunctionKey: [self moveSelectionLeft];
-				break;
-			case NSUpArrowFunctionKey: [self moveSelectionUp];
-				break;
-			case NSDownArrowFunctionKey: [self moveSelectionDown];
-				break;
-		}
-	} 
+		[self arrowEvent:key];
+	}
 	else if (key == NSEnterCharacter || key == '\r')
 	{
-		// TODO buttons should handle this?
-		[activeButton performClick:NULL];
+		if ([self activeButton])
+		{
+			[activeButton performClick:NULL];
+		}
 	}
 	else
 	{
@@ -532,7 +529,35 @@ bound to visibleTags
 		[super keyDown:event];
 	}
 }
+
+- (void)arrowEvent:(unichar)key
+{
+	// if no key has been pressed yet, the upper left button will be selected
+	if (![self activeButton])
+	{
+		[self setActiveButton:[self upperLeftButton]];
+		return;
+	}
+	
+	switch (key)
+	{
+		case NSRightArrowFunctionKey: [self moveSelectionRight];
+			break;
+		case NSLeftArrowFunctionKey: [self moveSelectionLeft];
+			break;
+		case NSUpArrowFunctionKey: [self moveSelectionUp];
+			break;
+		case NSDownArrowFunctionKey: [self moveSelectionDown];
+			break;
+	}
+}
 #pragma mark moving selection
+- (void)scrollToTop
+{
+	NSPoint upperLeftCorner = NSMakePoint(0.0,[self bounds].size.height);
+	[self scrollPoint:upperLeftCorner];
+}
+
 - (void)scrollToButton:(NSButton*)tagButton
 {
 	// check if we are in the top or bottom line
@@ -766,7 +791,7 @@ bound to visibleTags
 		NSRect newFrame = [button frame];
 		NSPoint new = newFrame.origin;
 		
-		if (new.x < old.x && new.y > old.y)
+		if (new.x <= old.x && new.y >= old.y)
 		{
 			result = button;
 		}

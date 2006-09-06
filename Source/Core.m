@@ -86,7 +86,6 @@
 
 - (void)saveDataToDisk 
 {
-	NSLog(@"saving");
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
 	[rootObject setValue:[[tagger tags] tags] forKey:@"tags"];
