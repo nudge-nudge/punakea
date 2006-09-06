@@ -36,5 +36,6 @@ displays all [controller visibleTags] in a nice tag cloud view
 - (PATagButton*)activeButton;
 - (void)setActiveButton:(PATagButton*)aTag;
 - (BrowserViewController*)controller;
+- (void)selectUpperLeftButton;
 
 @end

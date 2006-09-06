@@ -245,6 +245,7 @@
 			[self showTypeAheadView];
 		}
 		[self setVisibleTags:[typeAheadFind tagsForPrefix:buffer]];
+		[tagCloud selectUpperLeftButton];
 	}
 	else
 	{

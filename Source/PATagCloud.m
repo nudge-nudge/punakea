@@ -108,7 +108,7 @@ bind to visibleTags
 											 selector:@selector(handleBoundsChange:) 
 												 name:nil 
 											   object:scrollView];
-	
+
 	[self handleTagsChange];
 }
 
@@ -535,7 +535,7 @@ bound to visibleTags
 	// if no key has been pressed yet, the upper left button will be selected
 	if (![self activeButton])
 	{
-		[self setActiveButton:[self upperLeftButton]];
+		[self selectUpperLeftButton];
 		return;
 	}
 	
@@ -552,6 +552,11 @@ bound to visibleTags
 	}
 }
 #pragma mark moving selection
+- (void)selectUpperLeftButton
+{
+	[self setActiveButton:[self upperLeftButton]];
+}
+
 - (void)scrollToTop
 {
 	NSPoint upperLeftCorner = NSMakePoint(0.0,[self bounds].size.height);
