@@ -25,6 +25,7 @@
 - (void)dealloc
 {
 	if(filter) [filter release];
+	[super dealloc];
 }
 
 #pragma mark Accessors

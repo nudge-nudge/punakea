@@ -41,7 +41,7 @@ double const SHOW_DELAY = 0.2;
     //[self setOpaque:NO];	
 	
 	[self setAcceptsMouseMovedEvents:YES];
-	
+		
     return self;
 }
 

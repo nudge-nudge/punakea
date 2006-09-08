@@ -13,7 +13,14 @@
 
 - (void)awakeFromNib 
 {
-	[self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+	PADropManager *dropManager = [[PADropManager alloc] init];
+	[self registerForDraggedTypes:[dropManager handledPboardTypes]];
+	[dropManager release];
+}
+
+- (void)dealloc
+{
+	[self unregisterDraggedTypes];
 }
 
 - (void)drawRect:(NSRect)rect 

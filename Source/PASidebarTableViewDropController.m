@@ -53,6 +53,7 @@
 			  row:(int)row 
 	dropOperation:(NSTableViewDropOperation)op 
 {
+	//TODO handle URL drop
 	PASimpleTag *tag = [[tags arrangedObjects] objectAtIndex:row];
 	
 	NSPasteboard *pboard = [info draggingPasteboard];

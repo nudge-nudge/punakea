@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PADropManager.h"
 
 /**
 this custom view is only needed so that the sidebar responds to dragged files

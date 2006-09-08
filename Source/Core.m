@@ -48,7 +48,6 @@
 	[self setupToolbar];
 	
 	browserController = [[BrowserController alloc] init];
-	NSWindow *browserWindow = [browserController window];
 	[browserController showWindow:self];
 	
 	SidebarController *sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];

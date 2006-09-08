@@ -2,37 +2,20 @@
 
 @implementation PAFileBox
 
-- (id)initWithFrame:(NSRect)frameRect
+- (void)awakeFromNib
 {
-	if (self = [super initWithFrame:frameRect]) {
-		[self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType,nil]];
-		highlight = NO;
-	}
-	return self;
+	dropManager = [[PADropManager alloc] init];
+	
+	[self registerForDraggedTypes:[dropManager handledPboardTypes]];
+	highlight = NO;
 }
 
 - (void)dealloc
 {
     [self unregisterDraggedTypes];
+	[dropManager release];
     [super dealloc];
 }
-
-/*
-- (void)drawRect:(NSRect)rect
-{
-	//draw the background
-	if (highlight) 
-		[[NSColor lightGrayColor] set];
-	else
-		[[NSColor whiteColor] set];
-	
-	NSRect bounds = [self bounds];
-	[NSBezierPath fillRect:bounds];
-	
-	//draw the image, inherited
-	[super drawRect:rect];
-}
-*/
 
 #pragma mark accessors
 
@@ -105,19 +88,10 @@
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
-	NSPasteboard *paste = [sender draggingPasteboard];
-	
-	[self setFiles:[paste propertyListForType:@"NSFilenamesPboardType"]];
-	
-	if ([files count] > 1)
-	{
-		[self setFileIcon:[[NSWorkspace sharedWorkspace] iconForFileType:NSPlainFileType]];
-	}
-	else
-	{
-		[self setFileIcon:[[NSWorkspace sharedWorkspace] iconForFiles:files]];
-	}
-	
+	NSDictionary *dropResult = [dropManager handleDrop:[sender draggingPasteboard]];
+	[self setFiles:[dropResult objectForKey:@"files"]];
+	[self setFileIcon:[dropResult objectForKey:@"icon"]];
+			
 	[self setNeedsDisplay:YES];
     return YES;
 }
