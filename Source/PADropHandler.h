@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PADropDataHandler.h"
 
 /**
 abstract class for handling drops
@@ -14,6 +15,7 @@ abstract class for handling drops
 @interface PADropHandler : NSObject {
 	NSString *pboardType;
 	id content;
+	PADropDataHandler *dataHandler;
 }
 
 - (NSString*)pboardType;

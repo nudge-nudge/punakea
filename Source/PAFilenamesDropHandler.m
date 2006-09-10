@@ -16,13 +16,15 @@
 	if (self = [super init])
 	{
 		pboardType = [NSFilenamesPboardType retain];
+		dataHandler = [[PAFilenamesDropDataHandler alloc] init];
 	}
 	return self;
 }
 
 - (BOOL)handleDrop:(NSPasteboard*)pasteboard
 {
-	[self setContent:[pasteboard propertyListForType:pboardType]];
+	NSArray *droppedFiles = [pasteboard propertyListForType:pboardType];
+	[self setContent:droppedFiles];
 	
 	if ([content count] > 0)
 		return YES;
@@ -32,8 +34,7 @@
 
 - (NSArray*)contentFiles
 {
-	// NSFilenamesPboardType has array content
-	return content;
+	return [dataHandler fileDropDataObjects:content];
 }
 
 - (NSImage*)iconForContent

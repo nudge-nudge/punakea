@@ -8,13 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PADropHandler.h"
-#import "PAFileManager.h"
 #import "PAFilenamesDropHandler.h"
+#import "PAURLDropHandler.h"
 
 @interface PADropManager : NSObject {
 	NSMutableArray *dropHandlers;
-	
-	PAFileManager *fileManager;
 }
 
 - (void)registerDropHandler:(PADropHandler*)handler;

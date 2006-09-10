@@ -1,21 +1,15 @@
 //
-//  PAFileManager.m
+//  PAFileHandler.m
 //  punakea
 //
-//  Created by Johannes Hoffart on 04.09.06.
+//  Created by Johannes Hoffart on 10.09.06.
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "PAFileManager.h"
+#import "PADropDataHandler.h"
 
-@interface PAFileManager (PrivateAPI)
 
-- (NSString*)destinationForNewFile:(NSString*)fileName;
-- (NSString *)pathForFiles;
-
-@end
-
-@implementation PAFileManager
+@implementation PADropDataHandler
 
 - (id)init
 {
@@ -37,29 +31,16 @@
 }
 
 #pragma mark main methods
-- (NSString*)handleFile:(NSString*)filePath
+- (NSArray*)fileDropDataObjects:(NSArray*)dataObjects
 {
-	// only do something if managing files and if file not already in the managed file directory
-	if (!manageFiles || ([[filePath stringByDeletingLastPathComponent] isEqualToString:[self pathForFiles]]))
-	{
-		return filePath;
-	}
-	
-	NSString *newPath = [self destinationForNewFile:[filePath lastPathComponent]];
-	[fileManager movePath:filePath toPath:newPath handler:self];
-	return newPath;
-}
-
-- (NSArray*)handleFiles:(NSArray*)filePaths
-{
-	NSEnumerator *e = [filePaths objectEnumerator];
-	NSString *filePath;
+	NSEnumerator *e = [dataObjects objectEnumerator];
+	id data;
 	
 	NSMutableArray *newPaths = [NSMutableArray array];
 	
-	while (filePath = [e nextObject])
+	while (data = [e nextObject])
 	{
-		[newPaths addObject:[self handleFile:filePath]];
+		[newPaths addObject:[self fileDropData:data]];
 	}
 	
 	return newPaths;
@@ -80,8 +61,8 @@
 		NSString *newFileName = [newName stringByAppendingString:extension];
 		newDestination = [[self pathForFiles] stringByAppendingPathComponent:newFileName];
 	}
-		
-
+	
+	
 	while ([fileManager fileExistsAtPath:newDestination])
 	{
 		idx++;
@@ -94,7 +75,7 @@
 		NSString *newFileName = [newName stringByAppendingString:extension];
 		newDestination = [[self pathForFiles] stringByAppendingPathComponent:newFileName];
 	}
-		
+	
 	return newDestination;
 }
 
@@ -112,7 +93,7 @@
 #pragma mark filemanager methods
 - (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path
 {
-
+	
 }
 
 - (BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo

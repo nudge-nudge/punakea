@@ -16,18 +16,20 @@
 	if (self = [super init])
 	{
 		dropHandlers = [[NSMutableArray alloc] init];
-		fileManager = [[PAFileManager alloc] init];
 		
 		PAFilenamesDropHandler *filenamesDropHandler = [[PAFilenamesDropHandler alloc] init];
 		[self registerDropHandler:filenamesDropHandler];
 		[filenamesDropHandler release];
+		
+		PAURLDropHandler *URLDropHandler = [[PAURLDropHandler alloc] init];
+		[self registerDropHandler:URLDropHandler];
+		[URLDropHandler release];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[fileManager release];
 	[dropHandlers release];
 	[super dealloc];
 }
@@ -68,8 +70,7 @@
 	{
 		if ([dropHandler handleDrop:pasteboard])
 		{
-			NSArray *files = [fileManager handleFiles:[dropHandler contentFiles]];
-			[result setObject:files forKey:@"files"];
+			[result setObject:[dropHandler contentFiles] forKey:@"files"];
 			[result setObject:[dropHandler iconForContent] forKey:@"icon"];
 		}
 	}

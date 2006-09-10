@@ -14,6 +14,7 @@
 - (void)dealloc
 {
 	[content release];
+	[dataHandler release];
 	[pboardType release];
 	[super dealloc];
 }

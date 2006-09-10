@@ -17,14 +17,14 @@
 	if (self = [super init])
 	{
 		tags = [usedTags retain];
-		fileManager = [[PAFileManager alloc] init];
+		dropManager = [[PADropManager alloc] init];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[fileManager release];
+	[dropManager release];
 	[tags release];
 	[super dealloc];
 }
@@ -53,15 +53,11 @@
 			  row:(int)row 
 	dropOperation:(NSTableViewDropOperation)op 
 {
-	//TODO handle URL drop
-	PASimpleTag *tag = [[tags arrangedObjects] objectAtIndex:row];
-	
-	NSPasteboard *pboard = [info draggingPasteboard];
-	NSArray *files = [pboard propertyListForType:@"NSFilenamesPboardType"];
+	NSDictionary *dropResult = [dropManager handleDrop:[info draggingPasteboard]];
+	PATag *tag = [[tags arrangedObjects] objectAtIndex:row];
 	
 	PATagger *tagger = [PATagger sharedInstance];
-	[tagger addTags:[NSArray arrayWithObject:tag] toFiles:files];
-	[fileManager handleFiles:files];
+	[tagger addTags:[NSArray arrayWithObject:tag] toFiles:[dropResult objectForKey:@"files"]];
     return YES;    
 }
 

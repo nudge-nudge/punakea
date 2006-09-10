@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PADropHandler.h"
+#import "PAFilenamesDropDataHandler.h"
 
 @interface PAFilenamesDropHandler : PADropHandler {
 

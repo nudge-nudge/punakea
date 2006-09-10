@@ -72,6 +72,14 @@
 		485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */; };
 		486063DE0AA0553000D9E103 /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486063DC0AA0553000D9E103 /* PASidebarTableView.h */; };
 		486063DF0AA0553000D9E103 /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486063DD0AA0553000D9E103 /* PASidebarTableView.m */; };
+		486084190AB425D400CB0352 /* PAURLDropHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486084170AB425D400CB0352 /* PAURLDropHandler.h */; };
+		4860841A0AB425D400CB0352 /* PAURLDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 486084180AB425D400CB0352 /* PAURLDropHandler.m */; };
+		486084570AB435D900CB0352 /* PADropDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486084550AB435D900CB0352 /* PADropDataHandler.h */; };
+		486084580AB435D900CB0352 /* PADropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 486084560AB435D900CB0352 /* PADropDataHandler.m */; };
+		4860846D0AB4371200CB0352 /* PAFilenamesDropDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4860846B0AB4371200CB0352 /* PAFilenamesDropDataHandler.h */; };
+		4860846E0AB4371200CB0352 /* PAFilenamesDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */; };
+		4860851C0AB43A4500CB0352 /* PAURLDropDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */; };
+		4860851D0AB43A4500CB0352 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
 		486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486EBA4409D68F16000C154C /* PAFileBox.h */; };
 		4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */; };
@@ -91,8 +99,6 @@
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		48CDF4970AA57924002E9E78 /* GeneralPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */; };
 		48CDF4A30AA57B98002E9E78 /* tagit.png in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4A20AA57B98002E9E78 /* tagit.png */; };
-		48CF55000AAC4B230071C77A /* PAFileManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48CF54FE0AAC4B230071C77A /* PAFileManager.h */; };
-		48CF55010AAC4B230071C77A /* PAFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CF54FF0AAC4B230071C77A /* PAFileManager.m */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
 		48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66A5D09CB3752007B6B1D /* PASimpleTag.h */; };
@@ -281,11 +287,14 @@
 				65C8B58B0AA5869000DC36EA /* ThreadWorker.h in CopyFiles */,
 				657CBD770AA5C4A800701D47 /* PAThumbnailManager.h in CopyFiles */,
 				65AA051C0AA6DE31003E4E2F /* PAThumbnailItem.h in CopyFiles */,
-				48CF55000AAC4B230071C77A /* PAFileManager.h in CopyFiles */,
 				65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */,
 				48209CA90AB1BEED00F3CF21 /* PADropHandler.h in CopyFiles */,
 				48209CAB0AB1BEED00F3CF21 /* PADropManager.h in CopyFiles */,
 				48209CAD0AB1BEED00F3CF21 /* PAFilenamesDropHandler.h in CopyFiles */,
+				486084190AB425D400CB0352 /* PAURLDropHandler.h in CopyFiles */,
+				486084570AB435D900CB0352 /* PADropDataHandler.h in CopyFiles */,
+				4860846D0AB4371200CB0352 /* PAFilenamesDropDataHandler.h in CopyFiles */,
+				4860851C0AB43A4500CB0352 /* PAURLDropDataHandler.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +360,14 @@
 		485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableViewDropController.m; sourceTree = "<group>"; };
 		486063DC0AA0553000D9E103 /* PASidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTableView.h; sourceTree = "<group>"; };
 		486063DD0AA0553000D9E103 /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableView.m; sourceTree = "<group>"; };
+		486084170AB425D400CB0352 /* PAURLDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAURLDropHandler.h; sourceTree = "<group>"; };
+		486084180AB425D400CB0352 /* PAURLDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAURLDropHandler.m; sourceTree = "<group>"; };
+		486084550AB435D900CB0352 /* PADropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADropDataHandler.h; sourceTree = "<group>"; };
+		486084560AB435D900CB0352 /* PADropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADropDataHandler.m; sourceTree = "<group>"; };
+		4860846B0AB4371200CB0352 /* PAFilenamesDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilenamesDropDataHandler.h; sourceTree = "<group>"; };
+		4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilenamesDropDataHandler.m; sourceTree = "<group>"; };
+		4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAURLDropDataHandler.h; sourceTree = "<group>"; };
+		4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAURLDropDataHandler.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
 		486EBA4409D68F16000C154C /* PAFileBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileBox.h; sourceTree = "<group>"; };
 		487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarWindow.h; sourceTree = "<group>"; };
@@ -370,8 +387,6 @@
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GeneralPreferences.tiff; sourceTree = "<group>"; };
 		48CDF4A20AA57B98002E9E78 /* tagit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tagit.png; path = ../tagit.png; sourceTree = "<group>"; };
-		48CF54FE0AAC4B230071C77A /* PAFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileManager.h; sourceTree = "<group>"; };
-		48CF54FF0AAC4B230071C77A /* PAFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileManager.m; sourceTree = "<group>"; };
 		48D16FED0A5A6468006C667B /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
 		48D16FEE0A5A6468006C667B /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
@@ -641,14 +656,20 @@
 		48209C9E0AB1BEB300F3CF21 /* DropHandling */ = {
 			isa = PBXGroup;
 			children = (
-				48CF54FE0AAC4B230071C77A /* PAFileManager.h */,
-				48CF54FF0AAC4B230071C77A /* PAFileManager.m */,
-				48209CA30AB1BEED00F3CF21 /* PADropHandler.h */,
-				48209CA40AB1BEED00F3CF21 /* PADropHandler.m */,
 				48209CA50AB1BEED00F3CF21 /* PADropManager.h */,
 				48209CA60AB1BEED00F3CF21 /* PADropManager.m */,
+				48209CA30AB1BEED00F3CF21 /* PADropHandler.h */,
+				48209CA40AB1BEED00F3CF21 /* PADropHandler.m */,
+				486084550AB435D900CB0352 /* PADropDataHandler.h */,
+				486084560AB435D900CB0352 /* PADropDataHandler.m */,
 				48209CA70AB1BEED00F3CF21 /* PAFilenamesDropHandler.h */,
 				48209CA80AB1BEED00F3CF21 /* PAFilenamesDropHandler.m */,
+				4860846B0AB4371200CB0352 /* PAFilenamesDropDataHandler.h */,
+				4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */,
+				486084170AB425D400CB0352 /* PAURLDropHandler.h */,
+				486084180AB425D400CB0352 /* PAURLDropHandler.m */,
+				4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */,
+				4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */,
 			);
 			name = DropHandling;
 			sourceTree = "<group>";
@@ -698,8 +719,6 @@
 			children = (
 				487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */,
 				4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */,
-				485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */,
-				485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */,
 				486EBA4409D68F16000C154C /* PAFileBox.h */,
 				486EBA4309D68F16000C154C /* PAFileBox.m */,
 				4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */,
@@ -708,6 +727,8 @@
 				48471FDA0A4FFF90002B369A /* SidebarController.m */,
 				486063DC0AA0553000D9E103 /* PASidebarTableView.h */,
 				486063DD0AA0553000D9E103 /* PASidebarTableView.m */,
+				485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */,
+				485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */,
 				485016A20AA423FC00579C92 /* PASidebarTableColumn.h */,
 				485016A30AA423FC00579C92 /* PASidebarTableColumn.m */,
 			);
@@ -1176,11 +1197,14 @@
 				65C8B58C0AA5869000DC36EA /* ThreadWorker.m in Sources */,
 				657CBD780AA5C4A800701D47 /* PAThumbnailManager.m in Sources */,
 				65AA051D0AA6DE31003E4E2F /* PAThumbnailItem.m in Sources */,
-				48CF55010AAC4B230071C77A /* PAFileManager.m in Sources */,
 				65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */,
 				48209CAA0AB1BEED00F3CF21 /* PADropHandler.m in Sources */,
 				48209CAC0AB1BEED00F3CF21 /* PADropManager.m in Sources */,
 				48209CAE0AB1BEED00F3CF21 /* PAFilenamesDropHandler.m in Sources */,
+				4860841A0AB425D400CB0352 /* PAURLDropHandler.m in Sources */,
+				486084580AB435D900CB0352 /* PADropDataHandler.m in Sources */,
+				4860846E0AB4371200CB0352 /* PAFilenamesDropDataHandler.m in Sources */,
+				4860851D0AB43A4500CB0352 /* PAURLDropDataHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

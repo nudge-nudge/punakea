@@ -21,6 +21,7 @@
 - (void)dealloc
 {
 	[self unregisterDraggedTypes];
+	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect 
