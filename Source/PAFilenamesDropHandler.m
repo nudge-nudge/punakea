@@ -15,7 +15,7 @@
 {
 	if (self = [super init])
 	{
-		pboardType = [NSFilenamesPboardType retain];
+		[pboardTypes addObject:[NSFilenamesPboardType retain]];
 		dataHandler = [[PAFilenamesDropDataHandler alloc] init];
 	}
 	return self;
@@ -23,7 +23,7 @@
 
 - (BOOL)handleDrop:(NSPasteboard*)pasteboard
 {
-	NSArray *droppedFiles = [pasteboard propertyListForType:pboardType];
+	NSArray *droppedFiles = [pasteboard propertyListForType:[pboardTypes objectAtIndex:0]];
 	[self setContent:droppedFiles];
 	
 	if ([content count] > 0)

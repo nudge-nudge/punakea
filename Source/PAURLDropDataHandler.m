@@ -15,6 +15,7 @@
 - (NSString*)fileDropData:(id)data
 {
 	//TODO
+	return nil;
 }
 
 @end

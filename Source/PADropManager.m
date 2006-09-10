@@ -53,7 +53,7 @@
 	
 	while (dropHandler = [e nextObject])
 	{
-		[handledTypes addObject:[dropHandler pboardType]];
+		[handledTypes addObjectsFromArray:[dropHandler pboardTypes]];
 	}
 	
 	return handledTypes;

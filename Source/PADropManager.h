@@ -18,6 +18,11 @@
 - (void)registerDropHandler:(PADropHandler*)handler;
 - (void)removeDropHandler:(PADropHandler*)handler;
 
+/**
+returns an array of strings with all pboardTypes currently
+ handled by the dropManager
+ @return array of strings with handled pboard types
+ */
 - (NSArray*)handledPboardTypes;
 
 /**

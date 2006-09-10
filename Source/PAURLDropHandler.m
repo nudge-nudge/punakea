@@ -15,7 +15,7 @@
 {
 	if (self = [super init])
 	{
-		pboardType = [NSURLPboardType retain];
+		[pboardTypes addObject:[NSURLPboardType retain]];
 	}
 	return self;
 }

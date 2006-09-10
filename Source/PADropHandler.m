@@ -11,17 +11,26 @@
 
 @implementation PADropHandler
 
+- (id)init
+{
+	if (self = [super init])
+	{
+		pboardTypes = [[NSMutableArray alloc] init];
+	}
+	return self;
+}
+
 - (void)dealloc
 {
 	[content release];
 	[dataHandler release];
-	[pboardType release];
+	[pboardTypes release];
 	[super dealloc];
 }
 
-- (NSString*)pboardType
+- (NSArray*)pboardTypes
 {
-	return pboardType;
+	return pboardTypes;
 }
 
 - (void)setContent:(id)aContent

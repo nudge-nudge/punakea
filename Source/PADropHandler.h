@@ -13,12 +13,12 @@
 abstract class for handling drops
  */
 @interface PADropHandler : NSObject {
-	NSString *pboardType;
+	NSMutableArray *pboardTypes;
 	id content;
 	PADropDataHandler *dataHandler;
 }
 
-- (NSString*)pboardType;
+- (NSArray*)pboardTypes;
 
 - (NSArray*)contentFiles;
 - (void)setContent:(id)aContent;
