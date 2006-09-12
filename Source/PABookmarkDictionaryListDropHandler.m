@@ -23,19 +23,17 @@
 
 - (BOOL)handleDrop:(NSPasteboard*)pasteboard
 {
-	NSURL *url = [[pasteboard propertyListForType:pboardType] objectAtIndex:0];
-	[self setContent:url];
+	NSDictionary *bookmarkDictionary = [[pasteboard propertyListForType:pboardType] objectAtIndex:0];
+	NSDictionary *uriDictionary = [bookmarkDictionary objectForKey:@"URIDictionary"];
+	[self setContent:uriDictionary];
 	
 	return YES;
 }
 
 - (NSArray*)contentFiles
 {
-	/*
 	NSString *pathToFile = [dataHandler fileDropData:content];
 	return [NSArray arrayWithObject:pathToFile];
-	 */
-	return nil;
 }
 
 - (NSImage*)iconForContent

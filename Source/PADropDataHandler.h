@@ -29,5 +29,6 @@ convenience method, calls handleFile:
  */
 - (NSArray*)fileDropDataObjects:(NSArray*)dataObjects;
 
+- (NSString*)destinationForNewFile:(NSString*)fileName;
 
 @end
