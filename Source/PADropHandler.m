@@ -11,15 +11,6 @@
 
 @implementation PADropHandler
 
-- (id)init
-{
-	if (self = [super init])
-	{
-		pboardTypes = [[NSMutableArray alloc] init];
-	}
-	return self;
-}
-
 - (void)dealloc
 {
 	[content release];

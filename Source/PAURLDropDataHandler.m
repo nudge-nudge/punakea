@@ -14,7 +14,6 @@
 // data is NSURL 
 - (NSString*)fileDropData:(id)data
 {
-	//TODO
 	return nil;
 }
 

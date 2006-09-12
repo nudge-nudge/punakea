@@ -1,38 +1,47 @@
 //
-//  PAURLDropHandler.m
+//  PABookmarkDictionaryListDropHandler.m
 //  punakea
 //
 //  Created by Johannes Hoffart on 10.09.06.
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "PAURLDropHandler.h"
+#import "PABookmarkDictionaryListDropHandler.h"
 
 
-@implementation PAURLDropHandler
+@implementation PABookmarkDictionaryListDropHandler
 
 - (id)init
 {
 	if (self = [super init])
 	{
-		[pboardTypes addObject:[NSURLPboardType retain]];
+		[pboardTypes addObject:[@"BookmarkDictionaryListPboardType" retain]];
+		dataHandler = [[PAURLDropDataHandler alloc] init];
 	}
 	return self;
 }
 
 - (BOOL)handleDrop:(NSPasteboard*)pasteboard
 {
-	return NO;
+	NSURL *url = [[pasteboard propertyListForType:[pboardTypes objectAtIndex:0]] objectAtIndex:0];
+	[self setContent:url];
+	
+	return YES;
 }
 
 - (NSArray*)contentFiles
 {
+	/*
+	NSString *pathToFile = [dataHandler fileDropData:content];
+	return [NSArray arrayWithObject:pathToFile];
+	 */
 	return nil;
 }
 
 - (NSImage*)iconForContent
 {
-	return nil;
+	//TODO url image
+	return [[NSWorkspace sharedWorkspace] iconForFileType:NSPlainFileType];
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  PAURLDropHandler.h
+//  PABookmarkDictionaryListDropHandler.h
 //  punakea
 //
 //  Created by Johannes Hoffart on 10.09.06.
@@ -8,8 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PADropHandler.h"
+#import "PAURLDropDataHandler.h";
 
-@interface PAURLDropHandler : PADropHandler {
+@interface PABookmarkDictionaryListDropHandler : PADropHandler {
 
 }
 

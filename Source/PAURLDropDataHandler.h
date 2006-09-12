@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PADropDataHandler.h"
+#import "NDResourceFork.h"
 
 @interface PAURLDropDataHandler : PADropDataHandler {
 
