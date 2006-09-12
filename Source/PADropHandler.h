@@ -18,7 +18,7 @@ abstract class for handling drops
 	PADropDataHandler *dataHandler;
 }
 
-- (NSArray*)pboardTypes;
+- (NSString*)pboardType;
 
 - (NSArray*)contentFiles;
 - (void)setContent:(id)aContent;

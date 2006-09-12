@@ -68,18 +68,30 @@
 		485DA55609F4ECBC008D3214 /* PATags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA55409F4ECBC008D3214 /* PATags.m */; };
 		485F32710AA099DA004F91C1 /* PATagManagementArrayController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485F326F0AA099DA004F91C1 /* PATagManagementArrayController.h */; };
 		485F32720AA099DA004F91C1 /* PATagManagementArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F32700AA099DA004F91C1 /* PATagManagementArrayController.m */; };
+		485F402E0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485F402C0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.h */; };
+		485F402F0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F402D0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m */; };
 		485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */; };
 		485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */; };
 		486063DE0AA0553000D9E103 /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486063DC0AA0553000D9E103 /* PASidebarTableView.h */; };
 		486063DF0AA0553000D9E103 /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486063DD0AA0553000D9E103 /* PASidebarTableView.m */; };
-		486084190AB425D400CB0352 /* PAURLDropHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486084170AB425D400CB0352 /* PAURLDropHandler.h */; };
-		4860841A0AB425D400CB0352 /* PAURLDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 486084180AB425D400CB0352 /* PAURLDropHandler.m */; };
 		486084570AB435D900CB0352 /* PADropDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486084550AB435D900CB0352 /* PADropDataHandler.h */; };
 		486084580AB435D900CB0352 /* PADropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 486084560AB435D900CB0352 /* PADropDataHandler.m */; };
 		4860846D0AB4371200CB0352 /* PAFilenamesDropDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4860846B0AB4371200CB0352 /* PAFilenamesDropDataHandler.h */; };
 		4860846E0AB4371200CB0352 /* PAFilenamesDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */; };
 		4860851C0AB43A4500CB0352 /* PAURLDropDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */; };
 		4860851D0AB43A4500CB0352 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
+		486BD5870AB6A2F3003B9BAC /* NDResourceFork.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486BD57B0AB6A2F3003B9BAC /* NDResourceFork.h */; };
+		486BD5880AB6A2F3003B9BAC /* NDResourceFork.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD57C0AB6A2F3003B9BAC /* NDResourceFork.m */; };
+		486BD5890AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486BD57D0AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.h */; };
+		486BD58A0AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD57E0AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.m */; };
+		486BD58B0AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486BD57F0AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.h */; };
+		486BD58C0AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD5800AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.m */; };
+		486BD58D0AB6A2F3003B9BAC /* NDResourceInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486BD5810AB6A2F3003B9BAC /* NDResourceInfo.h */; };
+		486BD58E0AB6A2F3003B9BAC /* NDResourceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD5820AB6A2F3003B9BAC /* NDResourceInfo.m */; };
+		486BD58F0AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486BD5830AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.h */; };
+		486BD5900AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD5840AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.m */; };
+		486BD5910AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486BD5850AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.h */; };
+		486BD5920AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD5860AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
 		486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486EBA4409D68F16000C154C /* PAFileBox.h */; };
 		4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */; };
@@ -291,10 +303,16 @@
 				48209CA90AB1BEED00F3CF21 /* PADropHandler.h in CopyFiles */,
 				48209CAB0AB1BEED00F3CF21 /* PADropManager.h in CopyFiles */,
 				48209CAD0AB1BEED00F3CF21 /* PAFilenamesDropHandler.h in CopyFiles */,
-				486084190AB425D400CB0352 /* PAURLDropHandler.h in CopyFiles */,
 				486084570AB435D900CB0352 /* PADropDataHandler.h in CopyFiles */,
 				4860846D0AB4371200CB0352 /* PAFilenamesDropDataHandler.h in CopyFiles */,
 				4860851C0AB43A4500CB0352 /* PAURLDropDataHandler.h in CopyFiles */,
+				486BD5870AB6A2F3003B9BAC /* NDResourceFork.h in CopyFiles */,
+				486BD5890AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.h in CopyFiles */,
+				486BD58B0AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.h in CopyFiles */,
+				486BD58D0AB6A2F3003B9BAC /* NDResourceInfo.h in CopyFiles */,
+				486BD58F0AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.h in CopyFiles */,
+				486BD5910AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.h in CopyFiles */,
+				485F402E0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,18 +374,30 @@
 		485DA55409F4ECBC008D3214 /* PATags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATags.m; sourceTree = "<group>"; };
 		485F326F0AA099DA004F91C1 /* PATagManagementArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementArrayController.h; sourceTree = "<group>"; };
 		485F32700AA099DA004F91C1 /* PATagManagementArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementArrayController.m; sourceTree = "<group>"; };
+		485F402C0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABookmarkDictionaryListDropHandler.h; sourceTree = "<group>"; };
+		485F402D0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABookmarkDictionaryListDropHandler.m; sourceTree = "<group>"; };
 		485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTableViewDropController.h; sourceTree = "<group>"; };
 		485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableViewDropController.m; sourceTree = "<group>"; };
 		486063DC0AA0553000D9E103 /* PASidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTableView.h; sourceTree = "<group>"; };
 		486063DD0AA0553000D9E103 /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableView.m; sourceTree = "<group>"; };
-		486084170AB425D400CB0352 /* PAURLDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAURLDropHandler.h; sourceTree = "<group>"; };
-		486084180AB425D400CB0352 /* PAURLDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAURLDropHandler.m; sourceTree = "<group>"; };
 		486084550AB435D900CB0352 /* PADropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADropDataHandler.h; sourceTree = "<group>"; };
 		486084560AB435D900CB0352 /* PADropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADropDataHandler.m; sourceTree = "<group>"; };
 		4860846B0AB4371200CB0352 /* PAFilenamesDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilenamesDropDataHandler.h; sourceTree = "<group>"; };
 		4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilenamesDropDataHandler.m; sourceTree = "<group>"; };
 		4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAURLDropDataHandler.h; sourceTree = "<group>"; };
 		4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAURLDropDataHandler.m; sourceTree = "<group>"; };
+		486BD57B0AB6A2F3003B9BAC /* NDResourceFork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDResourceFork.h; sourceTree = "<group>"; };
+		486BD57C0AB6A2F3003B9BAC /* NDResourceFork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDResourceFork.m; sourceTree = "<group>"; };
+		486BD57D0AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NDResourceFork+OtherSorces.h"; sourceTree = "<group>"; };
+		486BD57E0AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NDResourceFork+OtherSorces.m"; sourceTree = "<group>"; };
+		486BD57F0AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NDResourceFork+PascalStrings.h"; sourceTree = "<group>"; };
+		486BD5800AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NDResourceFork+PascalStrings.m"; sourceTree = "<group>"; };
+		486BD5810AB6A2F3003B9BAC /* NDResourceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDResourceInfo.h; sourceTree = "<group>"; };
+		486BD5820AB6A2F3003B9BAC /* NDResourceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDResourceInfo.m; sourceTree = "<group>"; };
+		486BD5830AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NDCarbonUtilities.h"; sourceTree = "<group>"; };
+		486BD5840AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NDCarbonUtilities.m"; sourceTree = "<group>"; };
+		486BD5850AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+NDCarbonUtilities.h"; sourceTree = "<group>"; };
+		486BD5860AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+NDCarbonUtilities.m"; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
 		486EBA4409D68F16000C154C /* PAFileBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileBox.h; sourceTree = "<group>"; };
 		487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarWindow.h; sourceTree = "<group>"; };
@@ -638,6 +668,7 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				48DC82950AB69C0900DE0F16 /* File Handling */,
 				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
 				483272220AA42C7E003D98A6 /* Preferences */,
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
@@ -666,8 +697,8 @@
 				48209CA80AB1BEED00F3CF21 /* PAFilenamesDropHandler.m */,
 				4860846B0AB4371200CB0352 /* PAFilenamesDropDataHandler.h */,
 				4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */,
-				486084170AB425D400CB0352 /* PAURLDropHandler.h */,
-				486084180AB425D400CB0352 /* PAURLDropHandler.m */,
+				485F402C0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.h */,
+				485F402D0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m */,
 				4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */,
 				4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */,
 			);
@@ -703,6 +734,25 @@
 				485F32700AA099DA004F91C1 /* PATagManagementArrayController.m */,
 			);
 			name = "Tag Management";
+			sourceTree = "<group>";
+		};
+		486BD5780AB6A2DB003B9BAC /* Resource Fork */ = {
+			isa = PBXGroup;
+			children = (
+				486BD57B0AB6A2F3003B9BAC /* NDResourceFork.h */,
+				486BD57C0AB6A2F3003B9BAC /* NDResourceFork.m */,
+				486BD57D0AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.h */,
+				486BD57E0AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.m */,
+				486BD57F0AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.h */,
+				486BD5800AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.m */,
+				486BD5810AB6A2F3003B9BAC /* NDResourceInfo.h */,
+				486BD5820AB6A2F3003B9BAC /* NDResourceInfo.m */,
+				486BD5830AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.h */,
+				486BD5840AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.m */,
+				486BD5850AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.h */,
+				486BD5860AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.m */,
+			);
+			name = "Resource Fork";
 			sourceTree = "<group>";
 		};
 		4870698B0A0C930700A3ADE2 /* Type-Ahead Find */ = {
@@ -759,6 +809,14 @@
 				4842FC1209DA804100C4A931 /* PATagButtonCell.m */,
 			);
 			name = TagCloud;
+			sourceTree = "<group>";
+		};
+		48DC82950AB69C0900DE0F16 /* File Handling */ = {
+			isa = PBXGroup;
+			children = (
+				486BD5780AB6A2DB003B9BAC /* Resource Fork */,
+			);
+			name = "File Handling";
 			sourceTree = "<group>";
 		};
 		48F6A9F40996423000AA118D /* Tagging */ = {
@@ -1039,6 +1097,20 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				cs,
+				da,
+				Dutch,
+				Finnish,
+				Italian,
+				no,
+				Spanish,
+				Swedish,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Punakea */;
 			projectDirPath = "";
 			targets = (
@@ -1201,10 +1273,16 @@
 				48209CAA0AB1BEED00F3CF21 /* PADropHandler.m in Sources */,
 				48209CAC0AB1BEED00F3CF21 /* PADropManager.m in Sources */,
 				48209CAE0AB1BEED00F3CF21 /* PAFilenamesDropHandler.m in Sources */,
-				4860841A0AB425D400CB0352 /* PAURLDropHandler.m in Sources */,
 				486084580AB435D900CB0352 /* PADropDataHandler.m in Sources */,
 				4860846E0AB4371200CB0352 /* PAFilenamesDropDataHandler.m in Sources */,
 				4860851D0AB43A4500CB0352 /* PAURLDropDataHandler.m in Sources */,
+				486BD5880AB6A2F3003B9BAC /* NDResourceFork.m in Sources */,
+				486BD58A0AB6A2F3003B9BAC /* NDResourceFork+OtherSorces.m in Sources */,
+				486BD58C0AB6A2F3003B9BAC /* NDResourceFork+PascalStrings.m in Sources */,
+				486BD58E0AB6A2F3003B9BAC /* NDResourceInfo.m in Sources */,
+				486BD5900AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.m in Sources */,
+				486BD5920AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.m in Sources */,
+				485F402F0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PADropHandler.h"
 #import "PAFilenamesDropHandler.h"
-#import "PAURLDropHandler.h"
+#import "PABookmarkDictionaryListDropHandler.h"
 
 @interface PADropManager : NSObject {
 	NSMutableArray *dropHandlers;

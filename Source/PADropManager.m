@@ -21,9 +21,9 @@
 		[self registerDropHandler:filenamesDropHandler];
 		[filenamesDropHandler release];
 		
-		PAURLDropHandler *URLDropHandler = [[PAURLDropHandler alloc] init];
-		[self registerDropHandler:URLDropHandler];
-		[URLDropHandler release];
+		PABookmarkDictionaryListDropHandler *bookmarkDictionaryListDropHandler = [[PABookmarkDictionaryListDropHandler alloc] init];
+		[self registerDropHandler:bookmarkDictionaryListDropHandler];
+		[bookmarkDictionaryListDropHandler release];
 	}
 	return self;
 }
@@ -53,7 +53,7 @@
 	
 	while (dropHandler = [e nextObject])
 	{
-		[handledTypes addObjectsFromArray:[dropHandler pboardTypes]];
+		[handledTypes addObject:[dropHandler pboardType]];
 	}
 	
 	return handledTypes;

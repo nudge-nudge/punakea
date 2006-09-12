@@ -15,7 +15,7 @@
 {
 	if (self = [super init])
 	{
-		[pboardTypes addObject:[@"BookmarkDictionaryListPboardType" retain]];
+		pboardType = [@"BookmarkDictionaryListPboardType" retain];
 		dataHandler = [[PAURLDropDataHandler alloc] init];
 	}
 	return self;
@@ -23,7 +23,7 @@
 
 - (BOOL)handleDrop:(NSPasteboard*)pasteboard
 {
-	NSURL *url = [[pasteboard propertyListForType:[pboardTypes objectAtIndex:0]] objectAtIndex:0];
+	NSURL *url = [[pasteboard propertyListForType:pboardType] objectAtIndex:0];
 	[self setContent:url];
 	
 	return YES;

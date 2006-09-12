@@ -15,13 +15,13 @@
 {
 	[content release];
 	[dataHandler release];
-	[pboardTypes release];
+	[pboardType release];
 	[super dealloc];
 }
 
-- (NSArray*)pboardTypes
+- (NSString*)pboardType
 {
-	return pboardTypes;
+	return pboardType;
 }
 
 - (void)setContent:(id)aContent
