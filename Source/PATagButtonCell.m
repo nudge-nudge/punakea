@@ -48,7 +48,7 @@ int const MAX_FONT_SIZE = 25;
 - (void)setSelected:(BOOL)flag
 {	
 	selected = flag;
-	[self setHighlighted:flag];
+	[self setHovered:flag];
 }
 
 - (float)rating
