@@ -195,31 +195,25 @@
 - (void)triangleClicked:(id)sender
 {
 	PAQueryBundle *item = [(NSDictionary *)[sender tag] objectForKey:@"bundle"];
-	//id item = [outlineView groupForIdentifier:identifier];
-	
-	//NSLog(@"triangle clicked: %@", [item value]);
-	//NSLog(@"at row: %d", [outlineView rowForItem:item]);
-	
-	//if([outlineView isItemExpanded:[outlineView itemAtRow:[outlineView rowForItem:item]]])
-	/*int row = [outlineView rowForItem:item] + 1;
-	while([outlineView levelForRow:row++] == [outlineView levelForItem:item])
+
+	if([outlineView isItemExpanded:item])
 	{
-		[[outlineView itemAtRow:row] retain];
-	}*/
-	
-	/*
-	if([outlineView isItemExpanded:item])
-		NSLog(@"jo");
-	//[item setExpanded:NO];
-	//[outlineView reloadItem:item reloadChildren:YES];
-	
-	//else
-	//	[outlineView expandItem:item];
-	*/
-	if([outlineView isItemExpanded:item])
+		// Just toggle the item's state
 		[outlineView collapseItem:item];
-	else
+	} else {
+		// If we expand an item, we need to redraw all previously visible rows so that they
+		// can correctly (re-)move their subviews
+		
+		NSRange previousVisibleRowsRange = [outlineView rowsInRect:[outlineView visibleRect]];
+		
 		[outlineView expandItem:item];
+		
+		int numberOfChildrenOfItem = [[outlineView delegate] outlineView:outlineView numberOfChildrenOfItem:item];
+		for(unsigned i = 0; i < previousVisibleRowsRange.length; i++)
+		{
+			[outlineView drawRow:(numberOfChildrenOfItem + previousVisibleRowsRange.location + i) clipRect:[outlineView bounds]];
+		}
+	}
 	
 	// Save userDefaults
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
