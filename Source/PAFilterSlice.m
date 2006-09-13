@@ -232,6 +232,7 @@ extern unsigned const BUTTON_SPACING = 2;
 		[outlineView setDisplayMode:PAListMode];
 	}
 	
+	[outlineView scrollPoint:NSZeroPoint];
 	[outlineView reloadData];
 }
 
