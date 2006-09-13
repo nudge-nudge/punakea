@@ -217,8 +217,10 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemPath] forAttribute:(id)kMDItemPath];
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemContentType] forAttribute:(id)kMDItemContentType];
 			
-			//TODO gibt exception wenn das nie benutzt wurde ... check das mal auf nil bevor du setzt!! waterjoe!!
-			[item setValue:[mdItem valueForAttribute:(id)kMDItemLastUsedDate] forAttribute:(id)kMDItemLastUsedDate];
+			value = [delegate metadataQuery:self
+			   replacementValueForAttribute:(id)kMDItemLastUsedDate
+									  value:[mdItem valueForAttribute:(id)kMDItemLastUsedDate]];
+			if(value) [item setValue:value forAttribute:(id)kMDItemLastUsedDate];
 			
 			// AUDIO
 			value = [delegate metadataQuery:self
