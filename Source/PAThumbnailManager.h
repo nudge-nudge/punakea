@@ -13,10 +13,11 @@
 
 @interface PAThumbnailManager : NSObject {
 
-	NSMutableDictionary			*icons;
-	
+	NSMutableDictionary			*icons;	
 	NSMutableDictionary			*thumbnails;
+	
 	NSMutableArray				*queue;
+	NSMutableArray				*stack;
 	int							numberOfThumbsBeingProcessed;
 	
 	NSImage						*dummyImageThumbnail;

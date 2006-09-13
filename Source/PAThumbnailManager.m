@@ -10,6 +10,7 @@
 
 
 int const CONCURRENT_IMAGE_LOADING_MAX = 5;
+int const NUMBER_OF_CACHED_ITEMS_MAX = 300;
 
 
 @implementation PAThumbnailManager
@@ -26,6 +27,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		icons = [[NSMutableDictionary alloc] init];
 		thumbnails = [[NSMutableDictionary alloc] init];
 		queue = [[NSMutableArray alloc] init];
+		stack = [[NSMutableArray alloc] init];
 		
 		dummyImageThumbnail = [NSImage imageNamed:@"dummyThumbLarge"];
 		[dummyImageThumbnail setFlipped:YES];
@@ -37,11 +39,13 @@ static PAThumbnailManager *sharedInstance = nil;
 
 - (void)dealloc
 {
-	if(queue) [queue release];
-	if(thumbnails) [thumbnails release];
-	if(icons) [icons release];
-	if(dummyImageThumbnail) [dummyImageThumbnail release];
-	if(dummyImageIcon) [dummyImageIcon release];
+	if(stack)					[stack release];
+	if(queue)					[queue release];
+	if(thumbnails)				[thumbnails release];
+	if(icons)					[icons release];
+	if(dummyImageThumbnail)		[dummyImageThumbnail release];
+	if(dummyImageIcon)			[dummyImageIcon release];
+	
 	[super dealloc];
 }
 
@@ -137,6 +141,19 @@ static PAThumbnailManager *sharedInstance = nil;
 				  didEndSelector:nil];
 		}
 	} 
+	
+	// If number of cached images exceeds limit, remove first item of stack
+	if([stack count] > NUMBER_OF_CACHED_ITEMS_MAX)
+	{
+		NSString *filename = [stack objectAtIndex:0];
+		
+		[thumbnails removeObjectForKey:filename];
+		[icons removeObjectForKey:filename];
+		
+		[stack removeObjectAtIndex:0];
+		
+		//NSLog(@"removed: %@", filename);
+	}
 }
 
 - (void)generateThumbnailFromFile:(PAThumbnailItem *)thumbnailItem
@@ -148,6 +165,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	
 	[thumbnails removeObjectForKey:filename];
 	[thumbnails setObject:thumbnail forKey:filename];
+	[stack addObject:filename];
 	
 	numberOfThumbsBeingProcessed--;
 	
@@ -169,6 +187,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		
 	[icons removeObjectForKey:filename];
 	[icons setObject:img forKey:filename];
+	[stack addObject:filename];
 	
 	numberOfThumbsBeingProcessed--;
 	
