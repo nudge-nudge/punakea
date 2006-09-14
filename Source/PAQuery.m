@@ -236,6 +236,13 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			value = [delegate metadataQuery:self
 			   replacementValueForAttribute:@"kMDItemContentTypeTree"
 									  value:[mdItem valueForAttribute:@"kMDItemContentTypeTree"]];
+			if([value isEqualTo:@"DOCUMENTS"])
+			{
+				// Bookmarks that are stored as webloc file don't have the right content type,
+				// so we set it here
+				NSString *path = [mdItem valueForAttribute:(id)kMDItemPath];
+				if(path && [path hasSuffix:@"webloc"]) value = @"BOOKMARKS";
+			}
 			[item setValue:value forAttribute:@"kMDItemContentTypeTree"];
 			
 			// TODO more attributes of item, use replacementValueForAttribute for each value!!
