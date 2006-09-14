@@ -27,8 +27,7 @@
 // implementing needed super-class methods
 - (float)absoluteRating
 {
-	//TODO improve on this
-	return  (clickCount + useCount);
+	return log10(clickCount + useCount);
 }
 
 - (float)relativeRatingToTag:(PATag*)otherTag

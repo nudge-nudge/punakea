@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <math.h>
 #import "PATag.h"
-
 
 @interface PASimpleTag : PATag
 {
