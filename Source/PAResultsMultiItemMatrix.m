@@ -541,12 +541,6 @@
 			if(cell != aCell)
 				[aCell setHighlighted:NO];
 	}
-	
-	NSEnumerator *enumerator = [[self selectedCells] objectEnumerator];
-	while(cell = [enumerator nextObject])
-	{
-		NSLog([cell value]);
-	}
 }
 
 

@@ -76,19 +76,26 @@
 		
 	NSDate *lastUsedDate = [item valueForAttribute:kMDItemLastUsedDate];
 	
-	// TODO: Support TODAY and YESTERDAY
-	if([lastUsedDate timeIntervalSinceNow] > [[NSNumber numberWithInt:-60*60*24*40] doubleValue])
+	if(lastUsedDate)
 	{
-		[dateFormatter setDateStyle:NSDateFormatterLongStyle];
-		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-	} else {
-		[dateFormatter setDateFormat:@"MMMM yyyy"];
-	}
-	
-	value = [dateFormatter stringFromDate:lastUsedDate];
+		// TODO: Support TODAY and YESTERDAY
+		if([lastUsedDate timeIntervalSinceNow] > [[NSNumber numberWithInt:-60*60*24*40] doubleValue])
+		{
+			[dateFormatter setDateStyle:NSDateFormatterLongStyle];
+			[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+		} else {
+			[dateFormatter setDateFormat:@"MMMM yyyy"];
+		}
 		
+		value = [dateFormatter stringFromDate:lastUsedDate];
+	} else {
+		// TODO: Localize
+		value = @"Ohne Datum";
+	}
+			
 	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 160, cellFrame.origin.y + 2)
-	    withAttributes:fontAttributes];
+	  	withAttributes:fontAttributes];
+	
 		
 	/*[dateFormatter setDateStyle:NSDateFormatterNoStyle];
 	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];

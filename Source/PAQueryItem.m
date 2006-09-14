@@ -45,9 +45,9 @@
 
 
 #pragma mark Accessors
-- (NSString *)valueForAttribute:(NSString *)attribute
+- (id)valueForAttribute:(NSString *)attribute
 {
-	[valueDict objectForKey:attribute];
+	return [valueDict objectForKey:attribute];
 }
 
 - (void)setValue:(NSString *)value forAttribute:(NSString *)attribute

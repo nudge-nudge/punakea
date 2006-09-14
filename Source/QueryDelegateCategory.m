@@ -42,7 +42,8 @@
         if ([attrName isEqualToString:(id)kMDItemKind]) {
             return NSLocalizedString(@"Other", @"Kind to display for unknown file types");
         } else {
-            return NSLocalizedString(@"Unknown", @"Kind to display for other unknown values"); 
+            //return NSLocalizedString(@"Unknown", @"Kind to display for other unknown values"); 
+			return nil;
         }
     } 
 	// kMDItemContentType

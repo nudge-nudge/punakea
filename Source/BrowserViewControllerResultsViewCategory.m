@@ -136,13 +136,22 @@
 	NSOutlineView *ov = (NSOutlineView *)tableView;
 	id item = [ov itemAtRow:row];
 	
+	NSCell *cell;	
 	if([item isKindOfClass:[PAQueryBundle class]])
-		return [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
-		
-	if([item isKindOfClass:[PAQueryItem class]])
-		return [[[PAResultsItemCell alloc] initTextCell:@""] autorelease];
+	{
+		cell = [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
+	}
+	else if([item isKindOfClass:[PAQueryItem class]])
+	{
+		cell = [[[PAResultsItemCell alloc] initTextCell:@""] autorelease];
+		[cell setEditable:YES];
+	}
+	else 
+	{
+		cell = [[[PAResultsMultiItemCell alloc] initTextCell:@""] autorelease];
+	}		
 
-	return [[[PAResultsMultiItemCell alloc] initTextCell:@""] autorelease];
+	return cell;
 }
 
 - (void)     outlineView:(NSOutlineView *)ov
@@ -286,7 +295,7 @@
 
 - (IBAction)doubleAction:(id)sender
 {
-	/*NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
+	NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
 	unsigned row = [selectedRowIndexes firstIndex];
 	while(row != NSNotFound) 
 	{
@@ -299,7 +308,7 @@
 		}
 		
 		row = [selectedRowIndexes indexGreaterThanIndex:row];
-	}*/
+	}
 	
 	// TODO: Why are all items deselected after using openFile but not when commenting that line???
 }
@@ -321,53 +330,14 @@
 	}*/
 }
 
-/* TEMP */
 - (void)hideAllSubviews
 {
-	/*NSRect frame = [outlineView frame];
-	frame.size = NSMakeSize(50,50);
-	frame.origin.x -= 100;
-	frame.origin.y -= 100;*/
-
 	NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
 	id anObject;
 	while(anObject = [enumerator nextObject])
 	{
-		//[anObject setFrame:frame];
 		[anObject setHidden:YES];
 	}
 }
-
-/*- (PAResultsMultiItem *)multiItemForBundle:(PAQueryBundle *)bundle
-{
-	PAResultsMultiItem *multiItem = [[[PAResultsMultiItem alloc] init] autorelease];
-			
-	// TEMP - add ALL result items to MultiItem
-	unsigned startIndex = 0;
-	unsigned endIndex = [bundle resultCount];
-	if(endIndex == 0) endIndex = [query resultCount];
-	
-	// Create this item as dictionary
-	for(unsigned i = startIndex; i < endIndex; i++)
-	{
-		PAQueryItem *currentItem;
-		if(bundle)
-			currentItem = [bundle resultAtIndex:i];
-		else
-			currentItem = [query resultAtIndex:i];
-		
-		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-		[dict setValue:[currentItem valueForAttribute:(id)kMDItemPath] forKey:@"path"];
-		[dict setValue:[currentItem valueForAttribute:(id)kMDItemDisplayName] forKey:@"displayName"];
-		[dict setValue:[currentItem valueForAttribute:(id)kMDItemLastUsedDate] forKey:@"lastUsedDate"];
-		[multiItem addItem:dict];
-	}
-	
-	// Set identifier
-	NSMutableDictionary *tag = [multiItem tag];
-	[tag setObject:@"meinvalue" forKey:@"value"];		
-	
-	return multiItem;
-}*/
 
 @end

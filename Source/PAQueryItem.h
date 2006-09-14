@@ -15,4 +15,6 @@
 
 }
 
+- (id)valueForAttribute:(NSString *)attribute;
+
 @end

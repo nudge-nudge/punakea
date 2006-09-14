@@ -77,7 +77,7 @@ extern unsigned const BUTTON_SPACING = 2;
 				[filter setObject:@"MUSIC" forKey:@"title"];
 				[filter setObject:[NSArray arrayWithObject:@"MUSIC"] forKey:@"filterValues"];
 				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
-				[filter setObject:[NSArray arrayWithObjects:(id)kMDItemAuthors, (id)kMDItemAlbum, nil] forKey:@"filterNewBundlingAttributes"];
+				//[filter setObject:[NSArray arrayWithObjects:(id)kMDItemAuthors, (id)kMDItemAlbum, nil] forKey:@"filterNewBundlingAttributes"];
 				break;
 			case 3:		// MOVIES	
 				[filter setObject:@"MOVIES" forKey:@"title"];
