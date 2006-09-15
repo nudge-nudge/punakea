@@ -212,10 +212,9 @@ bound to visibleTags
 	[self setTagButtonDict:dict];
 }
 
-#pragma mark drawing
 - (NSRect)calcFrame
 {
-	NSRect clipViewFrame = [[self superview] frame];
+	NSRect clipViewFrame = [[self enclosingScrollView] documentVisibleRect];
 	NSRect tmpFrame = NSMakeRect(0,0,NSWidth(clipViewFrame),0);
 	[self calcInitialParametersInRect:tmpFrame];
 	
@@ -242,6 +241,7 @@ bound to visibleTags
 	return newFrame;
 }
 
+#pragma mark drawing
 - (void)drawRect:(NSRect)rect
 {	
 	[self drawBackground];

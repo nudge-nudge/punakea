@@ -25,9 +25,16 @@
 {
 	NSDictionary *bookmarkDictionary = [[pasteboard propertyListForType:pboardType] objectAtIndex:0];
 	NSDictionary *uriDictionary = [bookmarkDictionary objectForKey:@"URIDictionary"];
-	[self setContent:uriDictionary];
 	
-	return YES;
+	if (uriDictionary)
+	{
+		[self setContent:uriDictionary];
+		return YES;
+	}
+	else
+	{
+		return NO;
+	}
 }
 
 - (NSArray*)contentFiles

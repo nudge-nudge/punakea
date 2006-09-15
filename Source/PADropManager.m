@@ -24,6 +24,12 @@
 		PABookmarkDictionaryListDropHandler *bookmarkDictionaryListDropHandler = [[PABookmarkDictionaryListDropHandler alloc] init];
 		[self registerDropHandler:bookmarkDictionaryListDropHandler];
 		[bookmarkDictionaryListDropHandler release];
+		
+		/*
+		PAMailDropHandler *mailDropHandler = [[PAMailDropHandler alloc] init];
+		[self registerDropHandler:mailDropHandler];
+		[mailDropHandler release];	
+		 */
 	}
 	return self;
 }

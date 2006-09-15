@@ -131,10 +131,20 @@
 	{
 		[self setUpdating:YES];
 	}
-	else if ([[note name] isEqualToString:PAQueryDidFinishGatheringNotification]
-		|| [[note name] isEqualToString:PAQueryGatheringProgressNotification]) 
+	else if ([[note name]isEqualToString:PAQueryGatheringProgressNotification]) 
 	{
 		[self updateRelatedTags];
+	}
+	else if ([[note name] isEqualToString:PAQueryDidFinishGatheringNotification])
+	{
+		[self updateRelatedTags];
+		
+		// if no tags what so ever have been found, post notification so that tag cloud
+		// can update it's message
+		if ([[query flatResults] count] == 0)
+		{
+			[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
+		}
 	}
 }
 
