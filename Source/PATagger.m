@@ -32,21 +32,21 @@ static PATagger *sharedInstance = nil;
 }
 
 #pragma mark tags and files
-- (NSArray*)tagsOnFiles:(NSArray*)filePaths
+- (NSArray*)tagsOnFiles:(NSArray*)files
 {
-	return [self tagsOnFiles:filePaths includeTempTags:YES];
+	return [self tagsOnFiles:files includeTempTags:YES];
 }
 
-- (NSArray*)tagsOnFiles:(NSArray*)filePaths includeTempTags:(BOOL)includeTempTags
+- (NSArray*)tagsOnFiles:(NSArray*)files includeTempTags:(BOOL)includeTempTags
 {
 	NSMutableArray *keywords = [NSMutableArray array];
 	
-	NSEnumerator *filePathEnumerator = [filePaths objectEnumerator];
-	NSString *filePath;
+	NSEnumerator *fileEnumerator = [files objectEnumerator];
+	PAFile *file;
 	
-	while (filePath = [filePathEnumerator nextObject])
+	while (file = [fileEnumerator nextObject])
 	{
-		[keywords addObjectsFromArray:[self keywordsForFile:filePath]];
+		[keywords addObjectsFromArray:[self keywordsForFile:file]];
 	}
 	
 	NSArray *resultTags = [self tagsForNames:keywords includeTempTags:includeTempTags];
@@ -135,22 +135,22 @@ static PATagger *sharedInstance = nil;
 	return result;
 }
 
-- (NSArray*)keywordsForFile:(NSString*)path {
+- (NSArray*)keywordsForFile:(PAFile*)file {
 	//carbon api ... can be treated as cocoa objects - TODO check warnings
-	MDItemRef *item = MDItemCreate(NULL,path);
+	MDItemRef *item = MDItemCreate(NULL,[file path]);
 	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
 	NSArray *tagNames = (NSArray*)keywords;
 	return [tagNames autorelease];
 }
 
-- (void)addTags:(NSArray*)someTags toFiles:(NSArray*)filePaths
+- (void)addTags:(NSArray*)someTags toFiles:(NSArray*)files
 {
-	NSEnumerator *filePathEnumerator = [filePaths objectEnumerator];
-	NSString *filePath;
+	NSEnumerator *fileEnumerator = [files objectEnumerator];
+	PAFile *file;
 	
-	while (filePath = [filePathEnumerator nextObject])
+	while (file = [fileEnumerator nextObject])
    {
-	   NSMutableArray *tagsOnFile = [[[self tagsOnFiles:[NSArray arrayWithObject:filePath] includeTempTags:YES] mutableCopy] autorelease];
+	   NSMutableArray *tagsOnFile = [[[self tagsOnFiles:[NSArray arrayWithObject:file] includeTempTags:YES] mutableCopy] autorelease];
 	   NSEnumerator *e = [someTags objectEnumerator];
 	   PATag *tag;
 
@@ -163,11 +163,11 @@ static PATagger *sharedInstance = nil;
 		   }
 	   }
 
-	   [self writeTags:tagsOnFile ToFile:filePath];
+	   [self writeTags:tagsOnFile ToFile:file];
    }
 }
 
-- (void)addKeywords:(NSArray*)keywords toFiles:(NSArray*)filePaths createSimpleTags:(BOOL)createSimpleTags
+- (void)addKeywords:(NSArray*)keywords toFiles:(NSArray*)files createSimpleTags:(BOOL)createSimpleTags
 {
 	NSArray *tagArray;
 	
@@ -180,7 +180,7 @@ static PATagger *sharedInstance = nil;
 		tagArray = [self tagsForNames:keywords includeTempTags:NO];
 	}
 	
-	[self addTags:tagArray toFiles:filePaths];
+	[self addTags:tagArray toFiles:files];
 }
 
 #pragma mark working with tags (renaming and deleting)
@@ -203,18 +203,18 @@ static PATagger *sharedInstance = nil;
 - (void)removeTag:(PATag*)tag fromFiles:(NSArray*)files
 {
 	NSEnumerator *fileEnumerator = [files objectEnumerator];
-	NSString *path;
+	PAFile *file;
 	
-	while (path = [fileEnumerator nextObject])
+	while (file = [fileEnumerator nextObject])
 	{
 		// get all tags, remove the specified one, write back to file
-		NSMutableArray *someTags = [[[self tagsOnFiles:[NSArray arrayWithObject:path]] mutableCopy] autorelease];
+		NSMutableArray *someTags = [[[self tagsOnFiles:[NSArray arrayWithObject:[file path]]] mutableCopy] autorelease];
 		[someTags removeObject:tag];
 		
 		// decrement use count here, that way the other classes
 		// don't have to care
 		[tag decrementUseCount];
-		[self writeTags:someTags ToFile:path];
+		[self writeTags:someTags ToFile:file];
 	}
 }
 
@@ -238,22 +238,22 @@ static PATagger *sharedInstance = nil;
 	}
 	
 	NSEnumerator *fileEnumerator = [files objectEnumerator];
-	NSString *path;
+	PAFile *file;
 	
-	while (path = [fileEnumerator nextObject])
+	while (file = [fileEnumerator nextObject])
 	{
 		// get all tags, rename the specified one (delete/add), write back to file
-		NSMutableArray *keywords = [[self keywordsForFile:path] mutableCopy];
+		NSMutableArray *keywords = [[self keywordsForFile:file] mutableCopy];
 		[keywords removeObject:tagName];
 		[keywords addObject:newTagName];
 		NSArray *newTags = [self createTagsForNames:keywords];
-		[self writeTags:newTags ToFile:path];
+		[self writeTags:newTags ToFile:file];
 		[keywords release];
 	}
 }
 
 //sets the tags, overwrites current ones
-- (void)writeTags:(NSArray*)someTags ToFile:(NSString*)path {
+- (void)writeTags:(NSArray*)someTags ToFile:(PAFile*)file {
 	//only the names of the tags are written, create tmp array with names only
 	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
 	
@@ -264,7 +264,7 @@ static PATagger *sharedInstance = nil;
 		[keywordArray addObject:[tag name]];
 	}
 	
-	[[Matador sharedInstance] setAttributeForFileAtPath:path name:@"kMDItemKeywords" value:keywordArray];
+	[[Matador sharedInstance] setAttributeForFileAtPath:[file path] name:@"kMDItemKeywords" value:keywordArray];
 	[keywordArray release];
 }
 

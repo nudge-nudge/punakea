@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PADropHandler.h"
+#import "PAFile.h"
 #import "PAFilenamesDropHandler.h"
 #import "PABookmarkDictionaryListDropHandler.h"
 
@@ -28,10 +29,8 @@ returns an array of strings with all pboardTypes currently
 /**
 handles drop and returns file array for drop
  @param pasteboard drop pasteboard
- @return dictionary with keys: 
-	"files" resulting files
-	"icon" NSImage representing these files
+ @return new files for drop data
  */
-- (NSDictionary*)handleDrop:(NSPasteboard*)pasteboard;
+- (NSArray*)handleDrop:(NSPasteboard*)pasteboard;
 
 @end

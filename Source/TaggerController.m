@@ -182,7 +182,7 @@ completionsForSubstring:(NSString *)substring
 	NSArray *allTags = [tagger tagsOnFiles:[fileController selectedObjects]];
 	
 	NSEnumerator *fileEnumerator = [[fileController selectedObjects] objectEnumerator];
-	NSString *file;
+	PAFile *file;
 	
 	// all files are checked for their tags,
 	// if a tag is not on a single file, it is not on all files, thus not shown in the tokenField

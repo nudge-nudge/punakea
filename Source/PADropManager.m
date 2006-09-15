@@ -65,9 +65,9 @@
 	return handledTypes;
 }
 
-- (NSDictionary*)handleDrop:(NSPasteboard*)pasteboard
+- (PAFile*)handleDrop:(NSPasteboard*)pasteboard
 {
-	NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:2];
+	NSArray *result = nil;
 	
 	NSEnumerator *e = [dropHandlers objectEnumerator];
 	PADropHandler *dropHandler;
@@ -76,12 +76,11 @@
 	{
 		if ([dropHandler handleDrop:pasteboard])
 		{
-			[result setObject:[dropHandler contentFiles] forKey:@"files"];
-			[result setObject:[dropHandler iconForContent] forKey:@"icon"];
+			result = [dropHandler contentFiles];
 		}
 	}
 
-	return [result autorelease];
+	return result;
 }
 
 @end

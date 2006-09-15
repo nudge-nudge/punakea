@@ -118,6 +118,8 @@
 		48CDF4970AA57924002E9E78 /* GeneralPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
+		48D450090ABB037B00A13B45 /* PAFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D450070ABB037B00A13B45 /* PAFile.h */; };
+		48D4500A0ABB037B00A13B45 /* PAFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D450080ABB037B00A13B45 /* PAFile.m */; };
 		48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66A5D09CB3752007B6B1D /* PASimpleTag.h */; };
 		48D66A6009CB3752007B6B1D /* PASimpleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66A5E09CB3752007B6B1D /* PASimpleTag.m */; };
 		48D66AFD09CB4C5A007B6B1D /* PATagFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */; };
@@ -320,6 +322,7 @@
 				485F402E0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.h in CopyFiles */,
 				48494A1A0AB97A1900539D1E /* PAMailDropHandler.h in CopyFiles */,
 				48494A220AB97A7500539D1E /* PAMailDropDataHandler.h in CopyFiles */,
+				48D450090ABB037B00A13B45 /* PAFile.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +435,8 @@
 		48D16FED0A5A6468006C667B /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
 		48D16FEE0A5A6468006C667B /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
+		48D450070ABB037B00A13B45 /* PAFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFile.h; sourceTree = "<group>"; };
+		48D450080ABB037B00A13B45 /* PAFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFile.m; sourceTree = "<group>"; };
 		48D66A5D09CB3752007B6B1D /* PASimpleTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleTag.h; sourceTree = "<group>"; };
 		48D66A5E09CB3752007B6B1D /* PASimpleTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleTag.m; sourceTree = "<group>"; };
 		48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagFactory.h; sourceTree = "<group>"; };
@@ -692,6 +697,8 @@
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
 				65C8B5890AA5869000DC36EA /* ThreadWorker.h */,
 				65C8B58A0AA5869000DC36EA /* ThreadWorker.m */,
+				48D450070ABB037B00A13B45 /* PAFile.h */,
+				48D450080ABB037B00A13B45 /* PAFile.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -1303,6 +1310,7 @@
 				485F402F0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m in Sources */,
 				48494A1B0AB97A1900539D1E /* PAMailDropHandler.m in Sources */,
 				48494A230AB97A7500539D1E /* PAMailDropDataHandler.m in Sources */,
+				48D4500A0ABB037B00A13B45 /* PAFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

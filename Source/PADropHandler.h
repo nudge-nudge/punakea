@@ -24,6 +24,5 @@ abstract class for handling drops
 - (void)setContent:(id)aContent;
 
 - (BOOL)handleDrop:(NSPasteboard*)pasteboard; /**< must be overwritten */
-- (NSImage*)iconForContent; /**< must be overwritten */
 
 @end

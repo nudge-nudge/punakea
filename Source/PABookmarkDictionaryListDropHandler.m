@@ -39,14 +39,8 @@
 
 - (NSArray*)contentFiles
 {
-	NSString *pathToFile = [dataHandler fileDropData:content];
-	return [NSArray arrayWithObject:pathToFile];
-}
-
-- (NSImage*)iconForContent
-{
-	//TODO url image
-	return [[NSWorkspace sharedWorkspace] iconForFileType:NSPlainFileType];
+	PAFile *file = [dataHandler fileDropData:content];
+	return [NSArray arrayWithObject:file];
 }
 
 @end

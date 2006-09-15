@@ -13,6 +13,7 @@
 #import "PASimpleTagFactory.h"
 #import "PATempTag.h"
 #import "PAQuery.h"
+#import "PAFile.h"
 
 /**
 singleton class for working with spotlight kMDItemKeywords
@@ -31,19 +32,19 @@ get the singleton instance
 /**
 convenience method:
 calls tagsOnFiles: with includeTempTags:YES
- @param filePaths files to fetch tags for
+ @param files files to fetch tags for
  @return array of PATags
  */
-- (NSArray*)tagsOnFiles:(NSArray*)filePaths;
+- (NSArray*)tagsOnFiles:(NSArray*)files;
 
 /**
 returns an array of PATags, corresponding to the kMDItemKeywords on the files
  creates PATempTags for tags not in PATags
- @param filePaths files to fetch tags for
+ @param files files to fetch tags for
  @param includeTempTags flag controlling tempTag creation
  @return array of PATags
  */
-- (NSArray*)tagsOnFiles:(NSArray*)filePaths includeTempTags:(BOOL)includeTempTags;
+- (NSArray*)tagsOnFiles:(NSArray*)files includeTempTags:(BOOL)includeTempTags;
 
 /**
 convenience method: 
@@ -89,25 +90,25 @@ convenience method:
 /**
 add multiple tags to a file
  @param someTags array with tags
- @param filePaths array with paths to files
+ @param files array with paths to files
  */
-- (void)addTags:(NSArray*)someTags toFiles:(NSArray*)filePaths;
+- (void)addTags:(NSArray*)someTags toFiles:(NSArray*)files;
 
 /**
 convenience method:
  wraps addTags
  @param keywords NSString array with tag names - exisiting tags are used if found
- @param filePaths array with file paths
+ @param files array with file paths
  @param createSimpleTags flag controlling simpleTag creation for non-existant keywords
  */
-- (void)addKeywords:(NSArray*)keywords toFiles:(NSArray*)filePaths createSimpleTags:(BOOL)createSimpleTags;
+- (void)addKeywords:(NSArray*)keywords toFiles:(NSArray*)files createSimpleTags:(BOOL)createSimpleTags;
 
 /**
 get keywords as NSString array for file at path
- @param path file for which to get the tags
+ @param file file for which to get the tags
  @return array with NSStrings corresponding to the kMDItemKeywords on the file
  */
-- (NSArray*)keywordsForFile:(NSString*)path;
+- (NSArray*)keywordsForFile:(PAFile*)file;
 
 /**
 convenience method:

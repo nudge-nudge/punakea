@@ -93,9 +93,17 @@
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
-	NSDictionary *dropResult = [dropManager handleDrop:[sender draggingPasteboard]];
-	[self setFiles:[dropResult objectForKey:@"files"]];
-	[self setFileIcon:[dropResult objectForKey:@"icon"]];
+	NSArray *files = [dropManager handleDrop:[sender draggingPasteboard]];
+	[self setFiles:files];
+	
+	if ([files count] == 1)
+	{
+		[self setFileIcon:[[files objectAtIndex:0] icon]];
+	}
+	else
+	{
+		[self setFileIcon:[[NSWorkspace sharedWorkspace] iconForFileType:NSPlainFileType]];
+	}
 			
 	[self setNeedsDisplay:YES];
     return YES;

@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "PAFile.h"
 
 @interface PADropDataHandler : NSObject {
 	BOOL manageFiles;
@@ -22,7 +22,7 @@ if file management is active, the given file will be moved to an internal folder
  @param filePath path to file
  @return path to new location
  */
-- (NSString*)fileDropData:(id)data;
+- (PAFile*)fileDropData:(id)data;
 
 /**
 convenience method, calls handleFile:

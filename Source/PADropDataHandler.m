@@ -36,14 +36,14 @@
 	NSEnumerator *e = [dataObjects objectEnumerator];
 	id data;
 	
-	NSMutableArray *newPaths = [NSMutableArray array];
+	NSMutableArray *newFiles = [NSMutableArray array];
 	
 	while (data = [e nextObject])
 	{
-		[newPaths addObject:[self fileDropData:data]];
+		[newFiles addObject:[self fileDropData:data]];
 	}
 	
-	return newPaths;
+	return newFiles;
 }
 
 - (NSString*)destinationForNewFile:(NSString*)fileName

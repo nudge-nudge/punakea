@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATagger.h"
+#import "PAFile.h"
 #import "PATag.h"
 #import "PATempTag.h"
 #import "PATags.h"

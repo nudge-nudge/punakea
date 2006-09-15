@@ -102,7 +102,7 @@ data is NSDictionary with keys:
 	[resource addData:[self dragDataWithEntries:entryArray] type:kDragWeblocType Id:128 name:filename];
 	[resource release];
 	
-	return filePath;
+	return [PAFile fileWithPath:filePath];
 }
 
 - (NSData*)dragDataWithEntries:(NSArray*)entries

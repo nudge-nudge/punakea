@@ -37,12 +37,4 @@
 	return [dataHandler fileDropDataObjects:content];
 }
 
-- (NSImage*)iconForContent
-{
-	if ([content count] > 1)
-		return [[NSWorkspace sharedWorkspace] iconForFileType:NSPlainFileType];
-	else
-		return [[NSWorkspace sharedWorkspace] iconForFiles:content];
-}
-
 @end

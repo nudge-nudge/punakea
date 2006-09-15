@@ -171,7 +171,7 @@
 			//get keywords for result
 			PAQueryItem *item = [[query flatResults] objectAtIndex:i];
 			NSString *path = [item valueForAttribute:(id)kMDItemPath];
-			NSArray *keywords = [[PATagger sharedInstance] keywordsForFile:path];
+			NSArray *keywords = [[PATagger sharedInstance] keywordsForFile:[PAFile fileWithPath:path]];
 			
 			int j = [keywords count];
 

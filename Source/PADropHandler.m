@@ -36,9 +36,4 @@
 	return NO;
 }
 
-- (NSImage*)iconForContent
-{
-	return [[NSWorkspace sharedWorkspace] iconForFileType:NSPlainFileType];
-}
-
 @end
