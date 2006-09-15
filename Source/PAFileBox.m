@@ -49,7 +49,7 @@
 {
 	[[self window] mouseEvent];
 	
-	return NSDragOperationEvery;
+	return NSDragOperationCopy;
 	
 	/*
 	

@@ -150,7 +150,7 @@ double const SHOW_DELAY = 0.2;
 				break;
 		}
 
-		[self setAlphaValue:1.0];
+		[self setAlphaValue:0.85];
 
 		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:YES];
