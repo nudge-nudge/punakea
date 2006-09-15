@@ -26,6 +26,9 @@
 
 - (void)drawRect:(NSRect)rect 
 {
+	[[NSColor whiteColor] set];
+	NSRectFill(rect);
+	
     [super drawRect:rect];
 }
 

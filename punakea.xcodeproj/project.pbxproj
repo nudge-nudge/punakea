@@ -66,6 +66,8 @@
 		485016A50AA423FC00579C92 /* PASidebarTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 485016A30AA423FC00579C92 /* PASidebarTableColumn.m */; };
 		4856C6740A516D8300E1D568 /* BrowserViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C6720A516D8300E1D568 /* BrowserViewController.h */; };
 		4856C6750A516D8300E1D568 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C6730A516D8300E1D568 /* BrowserViewController.m */; };
+		485C09870ABAC830002CB2C2 /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = 485C09860ABAC830002CB2C2 /* drop.png */; };
+		485C098A0ABACE2A002CB2C2 /* drop_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 485C09890ABACE2A002CB2C2 /* drop_right.png */; };
 		485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA54B09F4EC38008D3214 /* PASelectedTags.h */; };
 		485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA54C09F4EC38008D3214 /* PASelectedTags.m */; };
 		485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA55309F4ECBC008D3214 /* PATags.h */; };
@@ -114,7 +116,6 @@
 		48C93615099742D800699265 /* Matador.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C93614099742D800699265 /* Matador.h */; };
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		48CDF4970AA57924002E9E78 /* GeneralPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */; };
-		48CDF4A30AA57B98002E9E78 /* tagit.png in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4A20AA57B98002E9E78 /* tagit.png */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
 		48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66A5D09CB3752007B6B1D /* PASimpleTag.h */; };
@@ -378,6 +379,8 @@
 		485016A30AA423FC00579C92 /* PASidebarTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableColumn.m; sourceTree = "<group>"; };
 		4856C6720A516D8300E1D568 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		4856C6730A516D8300E1D568 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
+		485C09860ABAC830002CB2C2 /* drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop.png; sourceTree = "<group>"; };
+		485C09890ABACE2A002CB2C2 /* drop_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop_right.png; sourceTree = "<group>"; };
 		485DA54B09F4EC38008D3214 /* PASelectedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTags.h; sourceTree = "<group>"; };
 		485DA54C09F4EC38008D3214 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
 		485DA55309F4ECBC008D3214 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
@@ -426,7 +429,6 @@
 		48C93614099742D800699265 /* Matador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matador.h; sourceTree = "<group>"; };
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GeneralPreferences.tiff; sourceTree = "<group>"; };
-		48CDF4A20AA57B98002E9E78 /* tagit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tagit.png; path = ../tagit.png; sourceTree = "<group>"; };
 		48D16FED0A5A6468006C667B /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
 		48D16FEE0A5A6468006C667B /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
@@ -781,14 +783,14 @@
 		488E18BA0A2722E5009D2826 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				48471FD90A4FFF90002B369A /* SidebarController.h */,
+				48471FDA0A4FFF90002B369A /* SidebarController.m */,
 				487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */,
 				4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */,
 				486EBA4409D68F16000C154C /* PAFileBox.h */,
 				486EBA4309D68F16000C154C /* PAFileBox.m */,
 				4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */,
 				4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */,
-				48471FD90A4FFF90002B369A /* SidebarController.h */,
-				48471FDA0A4FFF90002B369A /* SidebarController.m */,
 				486063DC0AA0553000D9E103 /* PASidebarTableView.h */,
 				486063DD0AA0553000D9E103 /* PASidebarTableView.m */,
 				485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */,
@@ -1056,7 +1058,8 @@
 		65A981300AA737C6009F9E34 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
-				48CDF4A20AA57B98002E9E78 /* tagit.png */,
+				485C09890ABACE2A002CB2C2 /* drop_right.png */,
+				485C09860ABAC830002CB2C2 /* drop.png */,
 			);
 			name = Sidebar;
 			sourceTree = "<group>";
@@ -1192,9 +1195,10 @@
 				6589C5040A9DE6F600CA2CD1 /* sl-status_stop.tiff in Resources */,
 				4832722D0AA42D19003D98A6 /* Preferences.nib in Resources */,
 				48CDF4970AA57924002E9E78 /* GeneralPreferences.tiff in Resources */,
-				48CDF4A30AA57B98002E9E78 /* tagit.png in Resources */,
 				655377CD0AAD8C5000C6376B /* dummyThumbSmall.gif in Resources */,
 				655377CE0AAD8C5000C6376B /* dummyThumbLarge.gif in Resources */,
+				485C09870ABAC830002CB2C2 /* drop.png in Resources */,
+				485C098A0ABACE2A002CB2C2 /* drop_right.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

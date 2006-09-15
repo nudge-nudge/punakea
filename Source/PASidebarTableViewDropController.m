@@ -40,7 +40,7 @@
 {
 	if (op == NSTableViewDropOn)
 	{
-		return NSDragOperationEvery;
+		return NSDragOperationCopy;
 	}
 	else
 	{
