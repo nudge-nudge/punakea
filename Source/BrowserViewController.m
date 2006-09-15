@@ -229,6 +229,7 @@
 	
 	return maxTag;
 }
+
 - (IBAction)clearSelectedTags:(id)sender
 {
 	[selectedTags removeAllTags];

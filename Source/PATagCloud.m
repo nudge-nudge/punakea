@@ -214,6 +214,8 @@ bound to visibleTags
 
 - (NSRect)calcFrame
 {
+	NSSize newSize;
+	
 	NSRect clipViewFrame = [[self enclosingScrollView] documentVisibleRect];
 	NSRect tmpFrame = NSMakeRect(0,0,NSWidth(clipViewFrame),0);
 	[self calcInitialParametersInRect:tmpFrame];
@@ -230,14 +232,19 @@ bound to visibleTags
 		[tagButton setFrameOrigin:buttonPoint];
 	}
 	
-	float newHeight = 0 - buttonPoint.y + PADDING.height;
+	newSize.height = 0 - buttonPoint.y + PADDING.height;
 	
-	if (newHeight < NSHeight(clipViewFrame))
+	if (newSize.height < NSHeight(clipViewFrame))
 	{
-		newHeight = NSHeight(clipViewFrame);
+		newSize.height = NSHeight(clipViewFrame);
 	}
 	
-	NSRect newFrame = NSMakeRect(0.0,0.0,NSWidth(clipViewFrame),newHeight);
+	if (!tag)
+	{
+		newSize.width = NSWidth([[self enclosingScrollView] frame]);
+	}
+	
+	NSRect newFrame = NSMakeRect(0.0,0.0,newSize.width,newSize.height);
 	return newFrame;
 }
 
