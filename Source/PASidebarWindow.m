@@ -38,7 +38,10 @@ double const SHOW_DELAY = 0.2;
     //Let's start with no transparency for all drawing into the window
     [self setAlphaValue:1.0];
     //but let's turn off opaqueness so that we can see through the parts of the window that we're not drawing into
-    //[self setOpaque:NO];	
+    [self setOpaque:NO];	
+	
+	// This makes the window semi-transparent, but not its subviews
+	[self setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:0.4]];
 	
 	[self setAcceptsMouseMovedEvents:YES];
 		
@@ -147,7 +150,7 @@ double const SHOW_DELAY = 0.2;
 				break;
 		}
 
-		[self setAlphaValue:0.75];
+		[self setAlphaValue:1.0];
 
 		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:YES];
