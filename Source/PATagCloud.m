@@ -530,6 +530,10 @@ bound to visibleTags
 			[activeButton performClick:NULL];
 		}
 	}
+	else if (key == NSTabCharacter)
+	{
+		[[self window] makeFirstResponder:[self nextKeyView]];
+	}
 	else
 	{
 		// forward unhandled events
