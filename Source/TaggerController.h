@@ -28,6 +28,7 @@ adds new files to the fileController
  @param newFiles files to add
  */
 - (void)addFiles:(NSMutableArray*)newFiles;
+- (NSArray*)files;
 
 - (void)setRestDisplayString:(NSString*)aString;
 

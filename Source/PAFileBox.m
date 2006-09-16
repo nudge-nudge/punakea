@@ -75,15 +75,11 @@
 - (void)draggingExited:(id <NSDraggingInfo>)sender
 {
 	[[self window] mouseEvent];
-
-	highlight = NO;
-	[self setNeedsDisplay:YES];
 }
 
 - (void)draggingEnded:(id <NSDraggingInfo>)sender
 {
-	highlight = NO;
-	[self setNeedsDisplay:YES];
+	//nothin
 }
 
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
@@ -96,6 +92,7 @@
 	NSArray *files = [dropManager handleDrop:[sender draggingPasteboard]];
 	[self setFiles:files];
 	
+	/* TODO file icons on sidebar? i don't think that is needed
 	if ([files count] == 1)
 	{
 		[self setFileIcon:[[files objectAtIndex:0] icon]];
@@ -106,6 +103,8 @@
 	}
 			
 	[self setNeedsDisplay:YES];
+	 */
+	
     return YES;
 }
 

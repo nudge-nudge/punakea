@@ -67,7 +67,23 @@ action called on dropping files to FileBox
 		NSWindow *taggerWindow = [taggerController window];
 		[taggerWindow makeKeyAndOrderFront:nil];
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-		[taggerController addFiles:[fileBox files]];
+		
+		NSArray *filesToBeAdded = [fileBox files];
+		NSArray *filesOnController = [taggerController files];
+		NSMutableArray *result = [NSMutableArray array];
+		
+		NSEnumerator *e = [filesToBeAdded objectEnumerator];
+		PAFile *file;
+		
+		while (file = [e nextObject])
+		{
+			if (![filesOnController containsObject:file])
+			{
+				[result addObject:file];
+			}
+		}
+		
+		[taggerController addFiles:result];
 	}
 	// otherwise create new tagger window
 	else 

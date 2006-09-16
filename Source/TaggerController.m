@@ -68,6 +68,11 @@ resets the tagger window (called when window is closed)
 	[fileController addObjects:newFiles];
 }
 
+- (NSArray*)files
+{
+	return [fileController arrangedObjects];
+}
+
 - (PASelectedTags*)currentCompleteTagsInField
 {
 	return currentCompleteTagsInField;
@@ -223,14 +228,21 @@ completionsForSubstring:(NSString *)substring
 
 - (void)displayRestTags:(NSArray*)restTags
 {
-	NSMutableString *displayString = [NSMutableString stringWithFormat:@"%i tags not shown:",[restTags count]];
+	NSMutableString *displayString = @"";
 	
 	NSEnumerator *e = [restTags objectEnumerator];
 	PASimpleTag *tag;
+
+	tag = [e nextObject];
+	
+	if (tag)
+	{
+		displayString = [NSMutableString stringWithFormat:@"%i tags not shown: %@",[restTags count],[tag name]];
+	}
 	
 	while (tag = [e nextObject])
 	{
-		[displayString appendFormat:@" %@",[tag name]];
+		[displayString appendFormat:@", %@",[tag name]];
 	}
 	
 	[self setRestDisplayString:displayString];

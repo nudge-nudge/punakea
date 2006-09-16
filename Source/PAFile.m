@@ -91,4 +91,24 @@
 	return path;
 }
 
+#pragma mark euality testing
+- (BOOL)isEqual:(id)other 
+{
+	if (!other || ![other isKindOfClass:[self class]]) 
+        return NO;
+    if (other == self)
+        return YES;
+	
+    return [self isEqualToFile:other];
+}
+
+- (BOOL)isEqualToFile:(PAFile*)otherFile 
+{
+	if ([path isEqual:[otherFile path]])
+		return YES;
+	else
+		return NO;
+}
+
+
 @end
