@@ -20,6 +20,7 @@
 - (id)initWithFileURL:(NSURL*)url;
 
 + (PAFile*)fileWithPath:(NSString*)aPath;
++ (NSArray*)filesWithFilepaths:(NSArray*)filepaths;
 + (PAFile*)fileWithFileURL:(NSURL*)url;
 
 - (NSString*)path;

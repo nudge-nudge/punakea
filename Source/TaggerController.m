@@ -39,6 +39,9 @@ resets the tagger window (called when window is closed)
 
 - (void)awakeFromNib
 {
+	// table view drop support
+	[tableView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+	
 	// observe file selection
 	[fileController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
 }
@@ -271,4 +274,48 @@ completionsForSubstring:(NSString *)substring
 	// tagField - cascades to currentCompleteTagsInField
 	[self setCurrentCompleteTagsInField:[[PASelectedTags alloc] init]];
 }
+
+#pragma mark tableview drop support
+- (NSDragOperation)tableView:(NSTableView*)tv 
+				validateDrop:(id <NSDraggingInfo>)info 
+				 proposedRow:(int)row 
+	   proposedDropOperation:(NSTableViewDropOperation)op
+{
+	int fileCount = [[self files] count];
+	
+	if (row < fileCount)
+	{
+		[tableView setDropRow:fileCount dropOperation:NSTableViewDropAbove];
+	}
+	
+	return NSDragOperationCopy;
+}
+	
+- (BOOL)tableView:(NSTableView*)tv 
+	   acceptDrop:(id <NSDraggingInfo>)info 
+			  row:(int)row 
+	dropOperation:(NSTableViewDropOperation)op
+{
+	NSPasteboard *pasteboard = [info draggingPasteboard];
+	NSArray *filepaths = [pasteboard propertyListForType:NSFilenamesPboardType];
+	NSArray *files = [PAFile filesWithFilepaths:filepaths];
+	
+	NSMutableArray *result = [NSMutableArray array];
+	
+	NSEnumerator *e = [files objectEnumerator];
+	PAFile *file;
+	
+	while (file = [e nextObject])
+	{
+		if (![[fileController arrangedObjects] containsObject:file])
+		{
+			[result addObject:file];
+		}
+	}
+	
+	[fileController addObjects:result];
+	
+	return YES;
+}
+
 @end

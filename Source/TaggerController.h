@@ -8,6 +8,7 @@
 
 @interface TaggerController : NSWindowController
 {	
+	IBOutlet NSTableView *tableView;
 	IBOutlet NSTokenField *tagField; /**< shows tags which are on all selected files */
 	
 	IBOutlet NSArrayController *fileController;

@@ -49,6 +49,21 @@
 	return [file autorelease];
 }
 
++ (NSArray*)filesWithFilepaths:(NSArray*)filepaths
+{
+	NSMutableArray *files = [NSMutableArray array];
+	
+	NSEnumerator *e = [filepaths objectEnumerator];
+	NSString *path;
+	
+	while (path = [e nextObject])
+	{
+		[files addObject:[self fileWithPath:path]];
+	}
+	
+	return files;
+}
+	
 + (PAFile*)fileWithFileURL:(NSURL*)url
 {
 	PAFile *file = [[PAFile alloc] initWithFileURL:url];
