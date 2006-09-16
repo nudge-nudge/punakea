@@ -29,4 +29,9 @@ only works if parent window is a PASidebar
 	[[self window] mouseEvent];
 }
 
+- (void)mouseDown:(NSEvent *)theEvent
+{
+	return;
+}
+
 @end
