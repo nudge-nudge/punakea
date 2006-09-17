@@ -44,8 +44,10 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	id selectedItem = [self itemAtRow:[self selectedRow]];
 	
-	// Clear MultiItem's hightlight color
-	if([selectedItem isKindOfClass:[NSArray class]])
+	// Clear row highlight color:
+	// a) for Arrays, b) if the selected row is currently being edited
+	if([selectedItem isKindOfClass:[NSArray class]] ||
+	   [self editedRow] == [self selectedRow])
 	{	
 		[[NSColor whiteColor] set];
 		NSRectFill([self rectOfRow:[self selectedRow]]);
@@ -228,7 +230,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     }
 }
 
-- (void)mouseDown:(NSEvent *)theEvent
+/*- (void)mouseDown:(NSEvent *)theEvent
 {
 	// Clear stored key down for multi items
 	lastUpDownArrowFunctionKey = 0;	
@@ -275,7 +277,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     {
         [super mouseDown:theEvent];
     }
-}
+}*/
 
 - (void)dragImage:(NSImage *)anImage at:(NSPoint)imageLoc offset:(NSSize)mouseOffset event:(NSEvent *)theEvent pasteboard:(NSPasteboard *)pboard source:(id)sourceObject slideBack:(BOOL)slideBack
 {

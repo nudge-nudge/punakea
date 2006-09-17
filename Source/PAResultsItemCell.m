@@ -117,4 +117,24 @@
 	item = object;
 }
 
+
+#pragma mark TEMP
+- (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent
+{
+	NSLog(@"editWithFrame");
+}
+
+- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
+{	
+	NSRect frame = aRect;
+	frame.origin.x += 25;
+	frame.size.width -= 25; 
+	
+	[super selectWithFrame:frame inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
+	
+	[textObj setFont:[NSFont systemFontOfSize:11]];
+	[textObj setString:[item valueForAttribute:(id)kMDItemDisplayName]];
+
+}
+
 @end
