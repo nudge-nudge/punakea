@@ -37,4 +37,14 @@
 	return YES;
 }
 
+- (id)windowWillReturnFieldEditor:(NSWindow *)sender toObject:(id)anObject
+{
+    if ([anObject isKindOfClass:[PAResultsOutlineView class]])
+    {
+        return [[[PAFinderFieldEditor alloc] init] autorelease];
+    }
+
+    return nil;
+}
+
 @end

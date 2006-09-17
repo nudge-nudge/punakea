@@ -225,6 +225,8 @@
 		65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */; };
 		65D86D5C09F15BA8006BCC8D /* PAResultsMultiItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */; };
 		65D86E3E09F15E1B006BCC8D /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */; };
+		65E233170ABD73B800C07A78 /* PAFinderFieldEditor.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E233150ABD73B800C07A78 /* PAFinderFieldEditor.h */; };
+		65E233180ABD73B800C07A78 /* PAFinderFieldEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E233160ABD73B800C07A78 /* PAFinderFieldEditor.m */; };
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Core.m */; };
@@ -323,6 +325,7 @@
 				48494A1A0AB97A1900539D1E /* PAMailDropHandler.h in CopyFiles */,
 				48494A220AB97A7500539D1E /* PAMailDropDataHandler.h in CopyFiles */,
 				48D450090ABB037B00A13B45 /* PAFile.h in CopyFiles */,
+				65E233170ABD73B800C07A78 /* PAFinderFieldEditor.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +545,8 @@
 		65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemCell.h; sourceTree = "<group>"; };
 		65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemCell.m; sourceTree = "<group>"; };
 		65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
+		65E233150ABD73B800C07A78 /* PAFinderFieldEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFinderFieldEditor.h; sourceTree = "<group>"; };
+		65E233160ABD73B800C07A78 /* PAFinderFieldEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFinderFieldEditor.m; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
 		65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewControllerResultsViewCategory.h; sourceTree = "<group>"; };
@@ -992,18 +997,20 @@
 		65903EF20A4BFDF000ADDC1D /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
-				488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */,
-				488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */,
 				65988C690A875A11000270E6 /* PAButton.h */,
 				65988C6A0A875A11000270E6 /* PAButton.m */,
 				65988C7F0A875C53000270E6 /* PAButtonCell.h */,
 				65988C800A875C53000270E6 /* PAButtonCell.m */,
+				65E233150ABD73B800C07A78 /* PAFinderFieldEditor.h */,
+				65E233160ABD73B800C07A78 /* PAFinderFieldEditor.m */,
 				659EBB4109D2D78300879091 /* PAImageButton.h */,
 				659EBB4209D2D78300879091 /* PAImageButton.m */,
 				65461C9309D0418F0076778E /* PAImageButtonCell.h */,
 				65461C9409D0418F0076778E /* PAImageButtonCell.m */,
 				6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */,
 				6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */,
+				488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */,
+				488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */,
 			);
 			name = "Custom Controls";
 			sourceTree = "<group>";
@@ -1311,6 +1318,7 @@
 				48494A1B0AB97A1900539D1E /* PAMailDropHandler.m in Sources */,
 				48494A230AB97A7500539D1E /* PAMailDropDataHandler.m in Sources */,
 				48D4500A0ABB037B00A13B45 /* PAFile.m in Sources */,
+				65E233180ABD73B800C07A78 /* PAFinderFieldEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

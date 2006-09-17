@@ -10,10 +10,14 @@
 #import "BrowserViewController.h"
 #import "PAQuery.h"
 #import "PATagCloud.h"
+#import "PAResultsOutlineView.h"
+#import "PAFinderFieldEditor.h"
 
 @interface BrowserController : NSWindowController 
 {
-	BrowserViewController *browserViewController;
+	BrowserViewController				*browserViewController;
+	IBOutlet PAFinderFieldEditor		*finderFieldEditor;
+	
 }
 
 @end
