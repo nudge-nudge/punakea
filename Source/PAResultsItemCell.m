@@ -32,9 +32,14 @@
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {		
 	// Draw icon
+	NSRect iconFrame = cellFrame;
+	iconFrame.origin.x += 5;
+	iconFrame.origin.y += 1;
+	iconFrame.size = NSMakeSize(16,16);
+	
 	NSImage *icon = [[PAThumbnailManager sharedInstance] iconForFile:[item valueForAttribute:kMDItemPath]
 	                                                          inView:controlView
-															   frame:cellFrame];
+															   frame:iconFrame];
 	[icon setSize:NSMakeSize(16,16)];
 	[icon setFlipped:YES];
 	
@@ -42,7 +47,7 @@
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [icon size];
 	
-	[icon drawAtPoint:NSMakePoint(cellFrame.origin.x + 5, cellFrame.origin.y + 1) fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	[icon drawAtPoint:iconFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	 
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
