@@ -12,9 +12,6 @@
 - (PATag*)fileTag;
 - (void)setFileTag:(PATag*)aTag;
 
-- (BOOL)isSelected;
-- (void)setSelected:(BOOL)flag;
-
 - (void)setRating:(float)aRating;
 
 @end

@@ -70,16 +70,6 @@
 	[self resetCursorRects];
 }
 
-- (void)highlight:(BOOL)flag
-{
-	[[self cell] setHighlighted:flag];
-}
-
-- (BOOL)isHighlighed
-{
-	return [[self cell] isHighlighted];
-}
-
 - (void)sizeToFit
 {
 	NSRect frame = [self frame];
@@ -134,6 +124,26 @@
 - (void)setBordered:(BOOL)flag
 {
 	[[self cell] setBordered:flag];
+}
+
+- (void)highlight:(BOOL)flag
+{
+	[[self cell] setHighlighted:flag];
+}
+
+- (BOOL)isHighlighed
+{
+	return [[self cell] isHighlighted];
+}
+
+- (void)select:(BOOL)flag
+{
+	[[self cell] select:flag];
+}
+
+- (BOOL)isSelected
+{
+	return [[self cell] isSelected];
 }
 
 - (PAButtonState)state

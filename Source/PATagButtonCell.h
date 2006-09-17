@@ -16,16 +16,12 @@ cell for the tagcloud, displays the given tag and interacts with the user
 {
 	PATag *fileTag;
 	float rating;
-	BOOL selected;
 }
 
 - (id)initWithTag:(PATag*)aTag rating:(float)aRating;
 
 - (PATag*)fileTag;
 - (void)setFileTag:(PATag*)aTag;
-
-- (BOOL)isSelected;
-- (void)setSelected:(BOOL)flag;
 
 - (float)rating;
 - (void)setRating:(float)aRating;

@@ -475,10 +475,10 @@ bound to visibleTags
 
 - (void)setActiveButton:(PATagButton*)aTagButton
 {
-	[activeButton setSelected:NO];
+	[activeButton select:NO];
 	[activeButton setNeedsDisplay:YES];
 	
-	[aTagButton setSelected:YES];
+	[aTagButton select:YES];
 	[aTagButton setNeedsDisplay:YES];
 	
 	[aTagButton retain];

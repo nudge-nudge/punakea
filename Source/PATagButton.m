@@ -36,16 +36,6 @@ should be overridden according to apple docs
 }
 
 #pragma mark accessors
-- (BOOL)isSelected
-{
-	return [[self cell] isSelected];
-}
-
-- (void)setSelected:(BOOL)flag
-{
-	[[self cell] setSelected:flag];
-}
-
 - (void)setRating:(float)aRating
 {
 	[[self cell] setRating:aRating];

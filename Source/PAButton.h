@@ -17,13 +17,14 @@
 
 }
 
-- (void)highlight:(BOOL)flag;
-- (BOOL)isHighlighed;
-
 - (NSString *)title;
 - (void)setTitle:(NSString *)title;
 - (BOOL)isBordered;
 - (void)setBordered:(BOOL)flag;
+- (void)highlight:(BOOL)flag;
+- (BOOL)isHighlighed;
+- (void)select:(BOOL)flag;
+- (BOOL)isSelected;
 - (PAButtonState)state;
 - (void)setState:(PAButtonState)aState;
 

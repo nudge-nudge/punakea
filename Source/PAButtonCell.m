@@ -219,7 +219,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	}
 	
 	// Add bezel
-	if([self isHighlighted] || [self isHovered] || [self isPressed])
+	if([self isHighlighted] || [self isHovered] || [self isPressed] || [self isSelected])
 	{
 		NSColor *outerBezelColor;
 		if([self isHighlighted] || [self isPressed])
@@ -389,6 +389,16 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 - (void)setPressed:(BOOL)flag
 {
 	pressed = flag;
+}
+
+- (void)select:(BOOL)flag
+{
+	selected = flag;
+}
+
+- (BOOL)isSelected
+{
+	return selected;
 }
 
 - (PAButtonState)state

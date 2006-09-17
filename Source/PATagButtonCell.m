@@ -20,9 +20,6 @@ int const MAX_FONT_SIZE = 25;
 		[self setAction:@selector(tagButtonClicked:)];
 		[self setFileTag:aTag];
 		[self setRating:aRating];
-		
-		//state
-		[self setSelected:NO];
 	}
 	return self;
 }
@@ -38,17 +35,6 @@ int const MAX_FONT_SIZE = 25;
 	[aTag retain];
 	[fileTag release];
 	fileTag = aTag;
-}
-
-- (BOOL)isSelected
-{
-	return selected;
-}
-
-- (void)setSelected:(BOOL)flag
-{	
-	selected = flag;
-	[self setHovered:flag];
 }
 
 - (float)rating

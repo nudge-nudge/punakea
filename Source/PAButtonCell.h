@@ -53,6 +53,7 @@ extern int const FRAME_HEIGHT_REGULAR;
 	BOOL						bordered;
 	BOOL						hovered;
 	BOOL						pressed;
+	BOOL						selected;
 	PAButtonState				state;
 	PABezelStyle				bezelStyle;
 	NSColor						*bezelColor;
@@ -76,6 +77,8 @@ extern int const FRAME_HEIGHT_REGULAR;
 - (void)setHovered:(BOOL)flag;
 - (BOOL)isPressed;
 - (void)setPressed:(BOOL)flag;
+- (void)select:(BOOL)flag;
+- (BOOL)isSelected;
 - (PAButtonState)state;
 - (void)setState:(PAButtonState)aState;
 
