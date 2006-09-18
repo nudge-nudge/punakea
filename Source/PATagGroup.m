@@ -22,7 +22,7 @@
 	if (self = [super init])
 	{
 		// TODO make user definable ... needs to adjust sidebar size and stuff ...
-		maxSize = 7;
+		maxSize = 8;
 		tags = [[PATagger sharedInstance] tags];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagsHaveChanged) name:nil object:tags];

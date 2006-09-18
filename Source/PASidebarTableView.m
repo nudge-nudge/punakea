@@ -11,6 +11,11 @@
 
 @implementation PASidebarTableView
 
+- (void)awakeFromNib
+{
+	[self setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:0.4]];
+}
+
 #pragma mark drag'n'drop
 /**
 only works if parent window is a PASidebar

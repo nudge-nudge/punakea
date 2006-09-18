@@ -24,14 +24,6 @@
 	[super dealloc];
 }
 
-- (void)drawRect:(NSRect)rect 
-{
-	[[NSColor whiteColor] set];
-	NSRectFill(rect);
-	
-    [super drawRect:rect];
-}
-
 #pragma mark drag'n'drop
 /**
 only works if parent window is a PASidebar
