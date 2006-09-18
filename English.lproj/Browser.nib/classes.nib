@@ -1,11 +1,6 @@
 {
     IBClasses = (
-        {
-            CLASS = BrowserController; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {finderFieldEditor = PAFinderFieldEditor; }; 
-            SUPERCLASS = NSWindowController; 
-        }, 
+        {CLASS = BrowserController; LANGUAGE = ObjC; SUPERCLASS = NSWindowController; }, 
         {
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = BrowserViewController; 
@@ -21,7 +16,6 @@
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
-        {CLASS = PAFinderFieldEditor; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
         {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {
