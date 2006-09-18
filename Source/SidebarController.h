@@ -5,10 +5,15 @@
 #import "PAFileBox.h"
 #import "PASidebarTableViewDropController.h"
 #import "PATagTextFieldCell.h"
+#import "PARecentTagGroup.h"
+#import "PAPopularTagGroup.h"
 
 @interface SidebarController : NSWindowController {
 	PATagger *tagger;
 	PATags *tags;
+	
+	PARecentTagGroup *recentTagGroup;
+	PAPopularTagGroup *popularTagGroup;
 	
 	IBOutlet PAFileBox *fileBox;
 	

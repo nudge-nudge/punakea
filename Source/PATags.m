@@ -8,6 +8,14 @@
 
 #import "PATags.h"
 
+@interface PATags (PrivateAPI)
+
+- (void)observeTag:(PATag*)tag;
+- (void)observeTags:(NSArray*)someTags;
+- (void)stopObservingTag:(PATag*)tag;
+- (void)stopObservingTags:(NSArray*)someTags;
+
+@end
 
 @implementation PATags
 
@@ -55,7 +63,9 @@
 
 - (void)setTags:(NSMutableArray*)otherTags
 {
+	[self observeTags:otherTags];
 	[otherTags retain];
+	[self stopObservingTags:tags];
 	[tags release];
 	tags = otherTags;
 	
@@ -67,6 +77,7 @@
 #pragma mark additional
 - (void)addTag:(PATag*)aTag
 {
+	[self observeTag:aTag];
 	[tags addObject:aTag];
 	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagAddOperation];
@@ -77,6 +88,7 @@
 
 - (void)removeTag:(PATag*)aTag
 {
+	[self stopObservingTag:aTag];
 	[tags removeObject:aTag];
 	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagRemoveOperation];
@@ -93,6 +105,49 @@
 - (int)count
 {
 	return [tags count];
+}
+
+#pragma mark tag observing
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	NSNumber *changeOperation = [NSNumber numberWithInt:PATagUpdateOperation];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,object,nil] 
+														 forKeys:[NSArray arrayWithObjects:@"PATagChangeOperation",@"tag",nil]];
+	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
+}
+
+- (void)observeTag:(PATag*)tag
+{
+	[tag addObserver:self forKeyPath:@"lastUsed" options:nil context:NULL];
+	[tag addObserver:self forKeyPath:@"lastClicked" options:nil context:NULL];
+}	
+
+- (void)observeTags:(NSArray*)someTags
+{
+	NSEnumerator *e = [someTags objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		[self observeTag:tag];
+	}
+}
+
+- (void)stopObservingTag:(PATag*)tag
+{
+	[tag removeObserver:self forKeyPath:@"lastUsed"];
+	[tag removeObserver:self forKeyPath:@"lastClicked"];
+}
+
+- (void)stopObservingTags:(NSArray*)someTags
+{
+	NSEnumerator *e = [someTags objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		[self stopObservingTag:tag];
+	}
 }
 
 @end

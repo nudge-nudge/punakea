@@ -65,7 +65,7 @@
 	return handledTypes;
 }
 
-- (PAFile*)handleDrop:(NSPasteboard*)pasteboard
+- (NSArray*)handleDrop:(NSPasteboard*)pasteboard
 {
 	NSArray *result = nil;
 	

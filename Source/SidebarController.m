@@ -9,29 +9,22 @@
 
 @implementation SidebarController
 
+#pragma mark init+dealloc
 - (id)initWithWindowNibName:(NSString*)nibName
 {
 	if (self = [super initWithWindowNibName:nibName])
 	{
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
+		
+		recentTagGroup = [[PARecentTagGroup alloc] init];
+		popularTagGroup = [[PAPopularTagGroup alloc] init];
 	}
 	return self;
 }
 
 - (void)awakeFromNib 
 {	
-	//TODO can be done from IB ... do this!
-	//init sorting
-	NSSortDescriptor *popularDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO] autorelease];
-	NSArray *popularSortDescriptors = [NSArray arrayWithObject:popularDescriptor];
-	[popularTags setSortDescriptors:popularSortDescriptors];
-	
-	//TODO asc or desc?!
-	NSSortDescriptor *recentDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"lastUsed" ascending:YES] autorelease];
-	NSArray *recentSortDescriptors = [NSArray arrayWithObject:recentDescriptor];
-	[recentTags setSortDescriptors:recentSortDescriptors];
-	
 	//observe files on fileBox
 	[fileBox addObserver:self forKeyPath:@"files" options:0 context:NULL];
 	
@@ -45,6 +38,14 @@
 	[recentTagsTable setDataSource:recentTagTableController];
 }
 
+- (void)dealloc
+{
+	[popularTagGroup release];
+	[recentTagGroup release];
+	[super dealloc];
+}
+
+#pragma mark observing
 - (void)observeValueForKeyPath:(NSString *)keyPath
 					  ofObject:(id)object 
                         change:(NSDictionary *)change

@@ -53,11 +53,11 @@
 			  row:(int)row 
 	dropOperation:(NSTableViewDropOperation)op 
 {
-	NSDictionary *dropResult = [dropManager handleDrop:[info draggingPasteboard]];
+	NSArray *files = [dropManager handleDrop:[info draggingPasteboard]];
 	PATag *tag = [[tags arrangedObjects] objectAtIndex:row];
 	
 	PATagger *tagger = [PATagger sharedInstance];
-	[tagger addTags:[NSArray arrayWithObject:tag] toFiles:[dropResult objectForKey:@"files"]];
+	[tagger addTags:[NSArray arrayWithObject:tag] toFiles:files];
     return YES;    
 }
 

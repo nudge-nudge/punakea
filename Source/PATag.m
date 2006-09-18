@@ -84,15 +84,13 @@
 - (void)incrementClickCount 
 {
 	clickCount++;
-	[lastClicked release];
-	lastClicked = [[NSCalendarDate alloc] init];
+	[self setLastClicked:[[NSCalendarDate alloc] init]];
 }
 
 - (void)incrementUseCount 
 {
 	useCount++;
-	[lastUsed release];
-	lastUsed = [[NSCalendarDate alloc] init];
+	[self setLastUsed:[[NSCalendarDate alloc] init]];
 }
 
 - (void)decrementUseCount 
@@ -125,9 +123,23 @@
 	return lastClicked;
 }
 
+- (void)setLastClicked:(NSCalendarDate*)clickDate
+{
+	[clickDate retain];
+	[lastClicked release];
+	lastClicked = clickDate;
+}
+
 - (NSCalendarDate*)lastUsed 
 {
 	return lastUsed;
+}
+
+- (void)setLastUsed:(NSCalendarDate*)useDate
+{
+	[useDate retain];
+	[lastUsed release];
+	lastUsed = useDate;
 }
 
 - (unsigned long)clickCount 

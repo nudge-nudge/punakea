@@ -25,6 +25,12 @@
 		480FFF9C09DACF0900C1E6BA /* PATagCloudController.m in Sources */ = {isa = PBXBuildFile; fileRef = 480FFF9A09DACF0900C1E6BA /* PATagCloudController.m */; };
 		481634140A5A48A1003B8EE4 /* Tagger.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4816340E0A5A48A1003B8EE4 /* Tagger.nib */; };
 		4816341B0A5A4EEB003B8EE4 /* Browser.nib in Resources */ = {isa = PBXBuildFile; fileRef = 481634150A5A4EEB003B8EE4 /* Browser.nib */; };
+		4817B29E0ABE849D00ACBBC6 /* PATagGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4817B29C0ABE849D00ACBBC6 /* PATagGroup.h */; };
+		4817B29F0ABE849D00ACBBC6 /* PATagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B29D0ABE849D00ACBBC6 /* PATagGroup.m */; };
+		4817B2B00ABE864B00ACBBC6 /* PARecentTagGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4817B2AE0ABE864B00ACBBC6 /* PARecentTagGroup.h */; };
+		4817B2B10ABE864B00ACBBC6 /* PARecentTagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B2AF0ABE864B00ACBBC6 /* PARecentTagGroup.m */; };
+		4817B3A60ABE8C4A00ACBBC6 /* PAPopularTagGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4817B3A40ABE8C4A00ACBBC6 /* PAPopularTagGroup.h */; };
+		4817B3A70ABE8C4A00ACBBC6 /* PAPopularTagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */; };
 		481BF27809A3128600EBD7BA /* PATag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF27609A3128600EBD7BA /* PATag.h */; };
 		481BF2F209A31B9B00EBD7BA /* PATagSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF2F009A31B9B00EBD7BA /* PATagSet.h */; };
 		481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 481BF2F109A31B9B00EBD7BA /* PATagSet.m */; };
@@ -326,6 +332,9 @@
 				48494A220AB97A7500539D1E /* PAMailDropDataHandler.h in CopyFiles */,
 				48D450090ABB037B00A13B45 /* PAFile.h in CopyFiles */,
 				65E233170ABD73B800C07A78 /* PAFinderFieldEditor.h in CopyFiles */,
+				4817B29E0ABE849D00ACBBC6 /* PATagGroup.h in CopyFiles */,
+				4817B2B00ABE864B00ACBBC6 /* PARecentTagGroup.h in CopyFiles */,
+				4817B3A60ABE8C4A00ACBBC6 /* PAPopularTagGroup.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +353,12 @@
 		480FFF9A09DACF0900C1E6BA /* PATagCloudController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloudController.m; sourceTree = "<group>"; };
 		4816340F0A5A48A1003B8EE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Tagger.nib; sourceTree = "<group>"; };
 		481634160A5A4EEB003B8EE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Browser.nib; sourceTree = "<group>"; };
+		4817B29C0ABE849D00ACBBC6 /* PATagGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagGroup.h; sourceTree = "<group>"; };
+		4817B29D0ABE849D00ACBBC6 /* PATagGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagGroup.m; sourceTree = "<group>"; };
+		4817B2AE0ABE864B00ACBBC6 /* PARecentTagGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARecentTagGroup.h; sourceTree = "<group>"; };
+		4817B2AF0ABE864B00ACBBC6 /* PARecentTagGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARecentTagGroup.m; sourceTree = "<group>"; };
+		4817B3A40ABE8C4A00ACBBC6 /* PAPopularTagGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPopularTagGroup.h; sourceTree = "<group>"; };
+		4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPopularTagGroup.m; sourceTree = "<group>"; };
 		481BF27609A3128600EBD7BA /* PATag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATag.h; sourceTree = "<group>"; };
 		481BF2F009A31B9B00EBD7BA /* PATagSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagSet.h; sourceTree = "<group>"; };
 		481BF2F109A31B9B00EBD7BA /* PATagSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSet.m; sourceTree = "<group>"; };
@@ -708,6 +723,19 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		4817B2990ABE844100ACBBC6 /* TagGroups */ = {
+			isa = PBXGroup;
+			children = (
+				4817B29C0ABE849D00ACBBC6 /* PATagGroup.h */,
+				4817B29D0ABE849D00ACBBC6 /* PATagGroup.m */,
+				4817B2AE0ABE864B00ACBBC6 /* PARecentTagGroup.h */,
+				4817B2AF0ABE864B00ACBBC6 /* PARecentTagGroup.m */,
+				4817B3A40ABE8C4A00ACBBC6 /* PAPopularTagGroup.h */,
+				4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */,
+			);
+			name = TagGroups;
+			sourceTree = "<group>";
+		};
 		48209C9E0AB1BEB300F3CF21 /* DropHandling */ = {
 			isa = PBXGroup;
 			children = (
@@ -795,6 +823,7 @@
 		488E18BA0A2722E5009D2826 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				4817B2990ABE844100ACBBC6 /* TagGroups */,
 				48471FD90A4FFF90002B369A /* SidebarController.h */,
 				48471FDA0A4FFF90002B369A /* SidebarController.m */,
 				487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */,
@@ -1319,6 +1348,9 @@
 				48494A230AB97A7500539D1E /* PAMailDropDataHandler.m in Sources */,
 				48D4500A0ABB037B00A13B45 /* PAFile.m in Sources */,
 				65E233180ABD73B800C07A78 /* PAFinderFieldEditor.m in Sources */,
+				4817B29F0ABE849D00ACBBC6 /* PATagGroup.m in Sources */,
+				4817B2B10ABE864B00ACBBC6 /* PARecentTagGroup.m in Sources */,
+				4817B3A70ABE8C4A00ACBBC6 /* PAPopularTagGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

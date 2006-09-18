@@ -35,7 +35,9 @@ treat this class as the abstract superclass for all Tags,
 - (NSString*)name; /**< may overwrite */
 - (NSString*)query; /**< may overwrite */
 - (NSCalendarDate*)lastClicked; /**< may overwrite */
+- (void)setLastClicked:(NSCalendarDate*)clickDate; /**< may overwrite */
 - (NSCalendarDate*)lastUsed; /**< may overwrite */
+- (void)setLastUsed:(NSCalendarDate*)useDate; /**< may overwrite */
 - (unsigned long)clickCount; /**< may overwrite */
 - (unsigned long)useCount; /**< may overwrite */
 

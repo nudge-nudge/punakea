@@ -14,7 +14,8 @@ typedef enum _PATagChangeOperation
 {
 	PATagRemoveOperation = 0,
 	PATagAddOperation = 1,
-	PATagResetOperation = 2
+	PATagResetOperation = 2,
+	PATagUpdateOperation = 3
 } PATagChangeOperation;
 
 

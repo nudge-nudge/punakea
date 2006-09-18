@@ -208,7 +208,7 @@ static PATagger *sharedInstance = nil;
 	while (file = [fileEnumerator nextObject])
 	{
 		// get all tags, remove the specified one, write back to file
-		NSMutableArray *someTags = [[[self tagsOnFiles:[NSArray arrayWithObject:[file path]]] mutableCopy] autorelease];
+		NSMutableArray *someTags = [[[self tagsOnFiles:[NSArray arrayWithObject:file]] mutableCopy] autorelease];
 		[someTags removeObject:tag];
 		
 		// decrement use count here, that way the other classes
