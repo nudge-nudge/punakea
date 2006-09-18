@@ -67,10 +67,13 @@
 	
 	for (int i=0;i<maxSize;i++)
 	{
-		[newGroup addObject:[tagsCopy objectAtIndex:i]];
+		PATag *tag = [tagsCopy objectAtIndex:i];
+		[newGroup addObject:[tags tagForName:[tag name]]];
 	}
 	
 	[self setGroupedTags:newGroup];
+	
+	[tagsCopy release];
 }
 
 @end

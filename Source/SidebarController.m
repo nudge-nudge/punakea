@@ -16,6 +16,7 @@
 	{
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
+		dropManager = [[PADropManager alloc] init];
 		
 		recentTagGroup = [[PARecentTagGroup alloc] init];
 		popularTagGroup = [[PAPopularTagGroup alloc] init];
@@ -29,11 +30,11 @@
 	[fileBox addObserver:self forKeyPath:@"files" options:0 context:NULL];
 	
 	//drag & drop
-	[popularTagsTable registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+	[popularTagsTable registerForDraggedTypes:[dropManager handledPboardTypes]];
 	popularTagTableController = [[PASidebarTableViewDropController alloc] initWithTags:popularTags];
 	[popularTagsTable setDataSource:popularTagTableController];
 	
-	[recentTagsTable registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+	[recentTagsTable registerForDraggedTypes:[dropManager handledPboardTypes]];
 	recentTagTableController = [[PASidebarTableViewDropController alloc] initWithTags:recentTags];
 	[recentTagsTable setDataSource:recentTagTableController];
 }
@@ -42,6 +43,7 @@
 {
 	[popularTagGroup release];
 	[recentTagGroup release];
+	[dropManager release];
 	[super dealloc];
 }
 

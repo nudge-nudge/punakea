@@ -74,7 +74,7 @@ data is NSDictionary with keys:
  "" : URL
  "title" : title
 */
-- (NSString*)fileDropData:(id)data
+- (PAFile*)fileDropData:(id)data
 {
 	NSString *url = [data objectForKey:@""];
 	NSString *filename = [[data objectForKey:@"title"] stringByAppendingString:@".webloc"];

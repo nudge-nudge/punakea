@@ -7,6 +7,7 @@
 #import "PATagTextFieldCell.h"
 #import "PARecentTagGroup.h"
 #import "PAPopularTagGroup.h"
+#import "PADropManager.h"
 
 @interface SidebarController : NSWindowController {
 	PATagger *tagger;
@@ -14,6 +15,8 @@
 	
 	PARecentTagGroup *recentTagGroup;
 	PAPopularTagGroup *popularTagGroup;
+	
+	PADropManager *dropManager;
 	
 	IBOutlet PAFileBox *fileBox;
 	

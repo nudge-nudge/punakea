@@ -23,12 +23,12 @@
 
 - (BOOL)handleDrop:(NSPasteboard*)pasteboard
 {
-	NSDictionary *bookmarkDictionary = [[pasteboard propertyListForType:pboardType] objectAtIndex:0];
-	NSDictionary *uriDictionary = [bookmarkDictionary objectForKey:@"URIDictionary"];
+	NSArray *bookmarkDictionaries = [pasteboard propertyListForType:pboardType];
+	NSDictionary *uriDictionary = [[bookmarkDictionaries objectAtIndex:0] objectForKey:@"URIDictionary"];
 	
 	if (uriDictionary)
 	{
-		[self setContent:uriDictionary];
+		[self setContent:bookmarkDictionaries];
 		return YES;
 	}
 	else
@@ -39,8 +39,17 @@
 
 - (NSArray*)contentFiles
 {
-	PAFile *file = [dataHandler fileDropData:content];
-	return [NSArray arrayWithObject:file];
+	NSMutableArray *files = [NSMutableArray array];
+	
+	NSEnumerator *e = [content objectEnumerator];
+	NSDictionary *uriDicitonary;
+	
+	while (uriDicitonary = [[e nextObject] objectForKey:@"URIDictionary"])
+	{
+		[files addObject:[dataHandler fileDropData:uriDicitonary]];
+	}
+	
+	return files;
 }
 
 @end
