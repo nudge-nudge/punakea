@@ -11,6 +11,8 @@
 
 @interface PAFinderFieldEditor : NSTextView {
 
+	BOOL				focused;
+
 }
 
 @end
