@@ -139,6 +139,8 @@
 	
 	[textObj setFont:[NSFont systemFontOfSize:11]];
 	[textObj setString:[item valueForAttribute:(id)kMDItemDisplayName]];
+	
+	[textObj setSelectedRange:NSMakeRange(0,[[textObj string] length])];
 
 }
 

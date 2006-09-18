@@ -92,6 +92,31 @@
 	return 0;
 }
 
+- (void)outlineView:(NSOutlineView *)ov
+     setObjectValue:(id)object
+	 forTableColumn:(NSTableColumn *)tableColumn
+	         byItem:(id)item
+{
+	PAQueryItem *queryItem = item;
+	NSString *value = object;
+	
+	PAFile *file = [PAFile fileWithPath:[queryItem valueForAttribute:(id)kMDItemPath]];
+	
+	NSString *source = [file path];
+	NSString *destination = [file directory];
+	destination = [destination stringByAppendingPathComponent:value];
+	
+	// TODO: Add error handler
+	[[NSFileManager defaultManager] movePath:source toPath:destination handler:nil];
+	
+	// TODO: Currently we set the displayName + path by hand in the following lines. Maybe we can
+	// do this with a query update automatically...
+	[item setValue:value forAttribute:(id)kMDItemDisplayName];
+	[item setValue:destination forAttribute:(id)kMDItemPath];
+	
+	[ov reloadItem:item];
+}
+
 
 #pragma mark Delegate
 - (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item

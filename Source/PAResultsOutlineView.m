@@ -332,4 +332,40 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	displayMode = mode;
 }
 
+
+#pragma mark Editing
+- (void)textDidChange:(NSNotification *)notification
+{
+	[super textDidChange:notification];
+}
+
+- (void)textDidEndEditing:(NSNotification *)notification
+{
+	// Force editing to end after pressing the Return key
+	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
+
+	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
+
+	if(textMovement == NSReturnTextMovement)
+	{
+		NSMutableDictionary *newUserInfo;
+		newUserInfo = [[NSMutableDictionary alloc] initWithDictionary:[notification userInfo]];
+		[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+
+		notification = [NSNotification notificationWithName:[notification name]
+													 object:[notification object]
+												   userInfo:newUserInfo];
+		
+		[super textDidEndEditing:notification];
+
+		[newUserInfo release];
+
+		[[self window] makeFirstResponder:self];
+	}
+	else
+	{
+		[super textDidEndEditing:notification];
+    }
+}
+
 @end

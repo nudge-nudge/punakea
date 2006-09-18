@@ -16,5 +16,6 @@
 }
 
 - (id)valueForAttribute:(NSString *)attribute;
+- (void)setValue:(NSString *)value forAttribute:(NSString *)attribute;
 
 @end
