@@ -368,6 +368,12 @@
 			[selectedTags removeLastTag];
 		}
 	}
+	// handle escape key (27)
+	else if (key == 27)
+	{
+		[self resetBuffer];
+		[self clearSelectedTags:self];
+	}
 	else if ([alphanumericCharacterSet characterIsMember:key]) 
 	{
 		// only add to buffer if there are any tags, otherwise do nothing
