@@ -532,7 +532,7 @@ bound to visibleTags
 	}
 	else if (key == NSTabCharacter)
 	{
-		[[self window] makeFirstResponder:[self nextKeyView]];
+		[[self window] makeFirstResponder:[controller outlineView]];
 	}
 	else
 	{

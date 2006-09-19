@@ -368,16 +368,4 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     }
 }
 
-#pragma mark debug
-- (BOOL)acceptsFirstResponder
-{
-	NSLog(@"accepts");
-	return YES;
-}
-
-- (BOOL)becomeFirstResponder
-{
-	NSLog(@"becomes");
-	return YES;
-}
 @end
