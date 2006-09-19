@@ -31,6 +31,8 @@
 		4817B2B10ABE864B00ACBBC6 /* PARecentTagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B2AF0ABE864B00ACBBC6 /* PARecentTagGroup.m */; };
 		4817B3A60ABE8C4A00ACBBC6 /* PAPopularTagGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4817B3A40ABE8C4A00ACBBC6 /* PAPopularTagGroup.h */; };
 		4817B3A70ABE8C4A00ACBBC6 /* PAPopularTagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */; };
+		481A64310ABFD16F005516E7 /* LoginItemsAE.c in Sources */ = {isa = PBXBuildFile; fileRef = 481A642F0ABFD16F005516E7 /* LoginItemsAE.c */; };
+		481A64320ABFD16F005516E7 /* LoginItemsAE.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481A64300ABFD16F005516E7 /* LoginItemsAE.h */; };
 		481BF27809A3128600EBD7BA /* PATag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF27609A3128600EBD7BA /* PATag.h */; };
 		481BF2F209A31B9B00EBD7BA /* PATagSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF2F009A31B9B00EBD7BA /* PATagSet.h */; };
 		481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 481BF2F109A31B9B00EBD7BA /* PATagSet.m */; };
@@ -332,6 +334,7 @@
 				4817B29E0ABE849D00ACBBC6 /* PATagGroup.h in CopyFiles */,
 				4817B2B00ABE864B00ACBBC6 /* PARecentTagGroup.h in CopyFiles */,
 				4817B3A60ABE8C4A00ACBBC6 /* PAPopularTagGroup.h in CopyFiles */,
+				481A64320ABFD16F005516E7 /* LoginItemsAE.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +359,8 @@
 		4817B2AF0ABE864B00ACBBC6 /* PARecentTagGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARecentTagGroup.m; sourceTree = "<group>"; };
 		4817B3A40ABE8C4A00ACBBC6 /* PAPopularTagGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPopularTagGroup.h; sourceTree = "<group>"; };
 		4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPopularTagGroup.m; sourceTree = "<group>"; };
+		481A642F0ABFD16F005516E7 /* LoginItemsAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LoginItemsAE.c; sourceTree = "<group>"; };
+		481A64300ABFD16F005516E7 /* LoginItemsAE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginItemsAE.h; sourceTree = "<group>"; };
 		481BF27609A3128600EBD7BA /* PATag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATag.h; sourceTree = "<group>"; };
 		481BF2F009A31B9B00EBD7BA /* PATagSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagSet.h; sourceTree = "<group>"; };
 		481BF2F109A31B9B00EBD7BA /* PATagSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSet.m; sourceTree = "<group>"; };
@@ -700,6 +705,7 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				481A64240ABFD153005516E7 /* Login Item */,
 				48DC82950AB69C0900DE0F16 /* File Handling */,
 				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
 				483272220AA42C7E003D98A6 /* Preferences */,
@@ -729,6 +735,15 @@
 				4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */,
 			);
 			name = TagGroups;
+			sourceTree = "<group>";
+		};
+		481A64240ABFD153005516E7 /* Login Item */ = {
+			isa = PBXGroup;
+			children = (
+				481A642F0ABFD16F005516E7 /* LoginItemsAE.c */,
+				481A64300ABFD16F005516E7 /* LoginItemsAE.h */,
+			);
+			name = "Login Item";
 			sourceTree = "<group>";
 		};
 		48209C9E0AB1BEB300F3CF21 /* DropHandling */ = {
@@ -1343,6 +1358,7 @@
 				4817B29F0ABE849D00ACBBC6 /* PATagGroup.m in Sources */,
 				4817B2B10ABE864B00ACBBC6 /* PARecentTagGroup.m in Sources */,
 				4817B3A70ABE8C4A00ACBBC6 /* PAPopularTagGroup.m in Sources */,
+				481A64310ABFD16F005516E7 /* LoginItemsAE.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

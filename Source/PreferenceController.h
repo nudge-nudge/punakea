@@ -7,10 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "LoginItemsAE.h"
 
 @interface PreferenceController : NSWindowController {
-
+	NSUserDefaultsController *userDefaultsController;
+	
+	BOOL startOnLogin;
 }
 
 @end

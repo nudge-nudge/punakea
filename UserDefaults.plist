@@ -6,6 +6,8 @@
 	<integer>1</integer>
 	<key>General.ManageFiles</key>
 	<false/>
+	<key>General.StartOnLogin</key>
+	<false/>
 	<key>Results</key>
 	<dict>
 		<key>CollapsedGroups</key>
