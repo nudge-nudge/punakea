@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "CSRegex.h"
 
 @interface PAFile : NSObject {
 	NSString *path;

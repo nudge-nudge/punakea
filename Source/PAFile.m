@@ -8,6 +8,11 @@
 
 #import "PAFile.h"
 
+@interface PAFile (PrivateAPI)
+
+- (void)setPath:(NSString*)path; /**< checks for illegal characters */
+
+@end
 
 @implementation PAFile
 
@@ -17,7 +22,7 @@
 {
 	if (self = [super init])
 	{
-		path = [aPath retain];
+		[self setPath:aPath];
 		workspace = [NSWorkspace sharedWorkspace];
 		fileManager = [NSFileManager defaultManager];
 	}
@@ -41,6 +46,18 @@
 {
 	[path release];
 	[super dealloc];
+}
+
+- (void)setPath:(NSString*)aPath
+{
+	// TODO replace illegal chars ':' and '/' with '_'
+	NSMutableString *copy = [aPath mutableCopy];
+	[copy replaceOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0,[path length])];
+	[copy replaceOccurrencesOfString:@"/" withString:@"_" options:0 range:NSMakeRange(0,[path length])];
+	
+	[path release];
+	path = [[NSString alloc] initWithString:copy];
+	[copy release];
 }
 
 + (PAFile*)fileWithPath:(NSString*)aPath

@@ -718,8 +718,6 @@
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
 				65C8B5890AA5869000DC36EA /* ThreadWorker.h */,
 				65C8B58A0AA5869000DC36EA /* ThreadWorker.m */,
-				48D450070ABB037B00A13B45 /* PAFile.h */,
-				48D450080ABB037B00A13B45 /* PAFile.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -881,6 +879,8 @@
 		48DC82950AB69C0900DE0F16 /* File Handling */ = {
 			isa = PBXGroup;
 			children = (
+				48D450070ABB037B00A13B45 /* PAFile.h */,
+				48D450080ABB037B00A13B45 /* PAFile.m */,
 				486BD5780AB6A2DB003B9BAC /* Resource Fork */,
 			);
 			name = "File Handling";

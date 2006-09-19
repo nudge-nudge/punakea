@@ -46,7 +46,7 @@
 	return newFiles;
 }
 
-- (NSString*)destinationForNewFile:(NSString*)fileName
+- (PAFile*)destinationForNewFile:(NSString*)fileName
 {
 	NSString *newDestination = [[self pathForFiles] stringByAppendingPathComponent:fileName];
 	
@@ -76,7 +76,7 @@
 		newDestination = [[self pathForFiles] stringByAppendingPathComponent:newFileName];
 	}
 	
-	return newDestination;
+	return [PAFile fileWithPath:newDestination];
 }
 
 - (NSString*)pathForFiles

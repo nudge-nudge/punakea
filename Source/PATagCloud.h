@@ -5,7 +5,6 @@
 #import "PATagCloudController.h"
 #import "PATag.h"
 #import "PATagButton.h"
-#import "PAResultsOutlineView.h"
 
 extern NSSize const PADDING;
 extern NSSize const SPACING;
