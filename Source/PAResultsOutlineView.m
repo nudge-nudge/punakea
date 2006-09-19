@@ -172,8 +172,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	if([theEvent type] == NSKeyDown)
 	{	
-		 NSNumber *key = [NSNumber numberWithUnsignedInt:
-			[[theEvent characters] characterAtIndex:0]];
+		 unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
 			
 		// Forward request to responder
 		if([self responder])
@@ -183,16 +182,23 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			
 		// Store arrow key up/down value for use in multi items
 		lastUpDownArrowFunctionKey = 0;
-		if([key unsignedIntValue] == NSDownArrowFunctionKey)
+		if(key == NSDownArrowFunctionKey)
 			lastUpDownArrowFunctionKey = NSDownArrowFunctionKey;
-		if([key unsignedIntValue] == NSUpArrowFunctionKey)
+		if(key == NSUpArrowFunctionKey)
 			lastUpDownArrowFunctionKey = NSUpArrowFunctionKey;	
 			
 		// Respond to Command + Arrow-Down	
-		if([key unsignedIntValue] == NSDownArrowFunctionKey &&
+		if(key == NSDownArrowFunctionKey &&
 		   ([theEvent modifierFlags] & NSCommandKeyMask) != 0)
 		{
 			[[self target] performSelector:[self doubleAction]];
+			return;
+		}
+		
+		// Begin editing on Return or Enter
+		if(key == NSEnterCharacter || key == '\r')
+		{
+			[self beginEditing];
 			return;
 		}
 	}
@@ -230,7 +236,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     }
 }
 
-/*- (void)mouseDown:(NSEvent *)theEvent
+- (void)mouseDown:(NSEvent *)theEvent
 {
 	// Clear stored key down for multi items
 	lastUpDownArrowFunctionKey = 0;	
@@ -277,7 +283,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     {
         [super mouseDown:theEvent];
     }
-}*/
+}
 
 - (void)dragImage:(NSImage *)anImage at:(NSPoint)imageLoc offset:(NSSize)mouseOffset event:(NSEvent *)theEvent pasteboard:(NSPasteboard *)pboard source:(id)sourceObject slideBack:(BOOL)slideBack
 {
@@ -334,6 +340,34 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Editing
+- (void)beginEditing
+{
+	if([self selectedRow])
+		[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
+}
+
+- (void)cancelOperation:(id)sender
+{	
+	NSText *textView = [[self window] fieldEditor:NO forObject:self];
+	[textView setString:[[self itemAtRow:[self selectedRow]] valueForAttribute:(id)kMDItemDisplayName]];
+	[textView setTextColor:[NSColor textColor]];
+
+	NSMutableDictionary *newUserInfo;
+	newUserInfo = [[NSMutableDictionary alloc] init];
+	[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+
+	NSNotification *notification;
+	notification = [NSNotification notificationWithName:NSTextDidEndEditingNotification
+												 object:textView
+											   userInfo:newUserInfo];
+		
+	[self textDidEndEditing:notification];
+	
+	[newUserInfo release];
+	
+	[[self window] makeFirstResponder:self];
+}
+
 - (void)textDidChange:(NSNotification *)notification
 {
 	[super textDidChange:notification];

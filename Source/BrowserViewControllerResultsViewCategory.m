@@ -365,7 +365,7 @@
 	}
 }
 
-/*- (IBAction)doubleAction:(id)sender
+- (IBAction)doubleAction:(id)sender
 {
 	NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
 	unsigned row = [selectedRowIndexes firstIndex];
@@ -381,9 +381,7 @@
 		
 		row = [selectedRowIndexes indexGreaterThanIndex:row];
 	}
-	
-	// TODO: Why are all items deselected after using openFile but not when commenting that line???
-}*/
+}
 
 - (void)removeAllMultiItemSubviewsWithIdentifier:(NSString *)identifier
 {
