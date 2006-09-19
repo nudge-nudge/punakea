@@ -294,10 +294,11 @@
 		[query stopQuery];
 	}
 	
+	[query setTags:selectedTags];
+	
 	//the query is only started, if there are any tags to look for
 	if ([selectedTags count] > 0)
 	{
-		[query setTags:selectedTags];
 		[query startQuery];
 		
 		// empty visible tags until new related tags are found
@@ -308,7 +309,6 @@
 		// there are no selected tags, reset all tags
 		[self setVisibleTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
-		[query setTags:selectedTags];
 	}
 }
 

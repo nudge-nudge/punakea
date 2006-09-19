@@ -138,6 +138,7 @@
 	else if ([[note name] isEqualToString:PAQueryDidFinishGatheringNotification])
 	{
 		[self updateRelatedTags];
+		[self setUpdating:NO];
 		
 		// if no tags what so ever have been found, post notification so that tag cloud
 		// can update it's message
@@ -190,11 +191,6 @@
 	}
 	
 	[query enableUpdates];
-	
-	if (![query isGathering])
-	{
-		[self setUpdating:NO];
-	}
 }
 
 @end

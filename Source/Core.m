@@ -47,8 +47,12 @@
 	[NSApp setDelegate:self]; 
 	[self setupToolbar];
 	
-	browserController = [[BrowserController alloc] init];
-	[browserController showWindow:self];
+	BOOL noBrowser = [[NSUserDefaults standardUserDefaults] boolForKey:@"noBrowser"];
+	
+	if (!noBrowser)
+	{
+		[self showBrowser:self];
+	}
 	
 	SidebarController *sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
 	[sidebarController window];
@@ -144,6 +148,10 @@
 
 - (IBAction)showBrowser:(id)sender
 {
+	if (!browserController)
+	{
+		browserController = [[BrowserController alloc] init];
+	}
 	[browserController showWindow:self];
 }
 

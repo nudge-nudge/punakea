@@ -117,7 +117,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	// TODO
 	
 	// Finally, post notification
-	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryDidUpdateNotification
+	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryDidFinishGatheringNotification
 														object:self];
 }
 

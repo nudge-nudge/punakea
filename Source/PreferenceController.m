@@ -82,7 +82,7 @@
 			LIAERemove(itemIndex); 
 		CFRelease(loginItems); 
     }
-	
+
 	if (startOnLogin) 
 		LIAEAddURLAtEnd(url, false); 
 	CFRelease(url);
