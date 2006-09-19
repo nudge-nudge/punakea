@@ -337,10 +337,35 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)textDidChange:(NSNotification *)notification
 {
 	[super textDidChange:notification];
+	
+	// Set text color to red if the new destination already exists
+	PAQueryItem *item = [self itemAtRow:[self selectedRow]];
+	PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
+	
+	NSText *textView = [notification object];
+	
+	NSString *newDestination = [[file directory] stringByAppendingPathComponent:[textView string]];
+	
+	if([[NSFileManager defaultManager] fileExistsAtPath:newDestination] &&
+	   [newDestination isNotEqualTo:[file path]])
+	{
+		[textView setTextColor:[NSColor redColor]];
+	} else {
+		[textView setTextColor:[NSColor textColor]];
+	}
 }
 
 - (void)textDidEndEditing:(NSNotification *)notification
 {
+	NSText *textView = [notification object];
+
+	// Force editing not to end if text color is red
+	if([[textView textColor] isEqualTo:[NSColor redColor]])
+	{
+		[[self window] makeFirstResponder:textView];
+		return;
+	}
+
 	// Force editing to end after pressing the Return key
 	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
 

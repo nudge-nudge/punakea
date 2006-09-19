@@ -92,6 +92,8 @@
 	return 0;
 }
 
+
+#pragma mark Set Object Value
 - (void)outlineView:(NSOutlineView *)ov
      setObjectValue:(id)object
 	 forTableColumn:(NSTableColumn *)tableColumn
@@ -106,15 +108,60 @@
 	NSString *destination = [file directory];
 	destination = [destination stringByAppendingPathComponent:value];
 	
+	// Return if source equals destination
+	if([source isEqualToString:destination]) return;
+	
 	// TODO: Add error handler
-	[[NSFileManager defaultManager] movePath:source toPath:destination handler:nil];
+	BOOL fileWasMoved = [[NSFileManager defaultManager] movePath:source toPath:destination handler:self];
 	
 	// TODO: Currently we set the displayName + path by hand in the following lines. Maybe we can
 	// do this with a query update automatically...
-	[item setValue:value forAttribute:(id)kMDItemDisplayName];
-	[item setValue:destination forAttribute:(id)kMDItemPath];
+	if(fileWasMoved)
+	{
+		[item setValue:value forAttribute:(id)kMDItemDisplayName];
+		[item setValue:destination forAttribute:(id)kMDItemPath];
 	
-	[ov reloadItem:item];
+		[ov reloadItem:item];
+	}
+}
+
+- (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path
+{
+	// nothing yet
+}
+
+-(BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
+{
+	NSString *informativeText;
+	informativeText = [NSString stringWithFormat:
+			NSLocalizedStringFromTable(@"ALREADY_EXISTS_INFORMATION", @"FileManager", @""),
+			[errorInfo objectForKey:@"ToPath"]];
+
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+
+	// TODO: Support correct error message text for more types of errors
+	if([[errorInfo objectForKey:@"Error"] isEqualTo:@"Already Exists"])
+	{
+		[alert setMessageText:NSLocalizedStringFromTable([errorInfo objectForKey:@"Error"], @"FileManager", @"")];
+		[alert setInformativeText:informativeText];
+	} else {
+		[alert setMessageText:NSLocalizedStringFromTable(@"Unknown Error", @"FileManager", @"")];
+	}
+
+	[alert addButtonWithTitle:@"OK"];
+	[alert setAlertStyle:NSWarningAlertStyle];  
+	
+	[alert beginSheetModalForWindow:[outlineView window]
+	                  modalDelegate:self
+					 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+					    contextInfo:nil];
+						
+	return NO;
+}
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	// nothing yet
 }
 
 
