@@ -67,7 +67,7 @@
 	
 	for (int i=0;i<maxSize;i++)
 	{
-		[newGroup addObject:[tags tagAtIndex:index]];
+		[newGroup addObject:[tags tagAtIndex:i]];
 	}
 	
 	[self setGroupedTags:newGroup];

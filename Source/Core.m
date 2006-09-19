@@ -72,7 +72,7 @@
 #pragma mark loading and saving tags
 - (NSString *)pathForDataFile 
 { 
-	NSFileManager *fileManager = [NSFileManager defaultManager]; 
+	NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSString *folder = @"~/Library/Application Support/Punakea/"; 
 	folder = [folder stringByExpandingTildeInPath]; 
 	

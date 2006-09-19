@@ -107,9 +107,14 @@
 	return [tags count];
 }
 
-- (PATag*)tagAtIndex:(unsigned int)index
+- (PATag*)tagAtIndex:(unsigned int)i
 {
-	return [tags objectAtIndex:index];
+	return [tags objectAtIndex:i];
+}
+
+- (void)sortUsingDescriptors:(NSArray *)sortDescriptors
+{
+	[tags sortUsingDescriptors:sortDescriptors];
 }
 
 #pragma mark tag observing

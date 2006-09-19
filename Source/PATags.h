@@ -35,5 +35,6 @@ typedef enum _PATagChangeOperation
 - (NSEnumerator*)objectEnumerator;
 - (int)count;
 - (PATag*)tagAtIndex:(unsigned int)index;
+- (void)sortUsingDescriptors:(NSArray *)sortDescriptors;
 
 @end
