@@ -51,7 +51,10 @@
 #pragma mark event handling
 - (void)startOnLoginHasChanged
 {
-	NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+	
+	// path leads to script calling punakea with -noBrowser YES
+	NSString *path = [bundlePath stringByAppendingString:@"/Contents/Resources/Scripts/Punakea"];
 	
 	OSStatus	status;
 	CFIndex 	itemCount;
@@ -59,7 +62,7 @@
 	Boolean		found;
 	
 	CFArrayRef loginItems = NULL; 
-	CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)path, kCFURLPOSIXPathStyle, true); 
+	CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)path, kCFURLPOSIXPathStyle, false); 
 	status = LIAECopyLoginItems(&loginItems); 
 	
 	if (status == noErr) {

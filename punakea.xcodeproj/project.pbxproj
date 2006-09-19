@@ -113,6 +113,7 @@
 		4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */; };
 		4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */ = {isa = PBXBuildFile; fileRef = 4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */; };
 		4871792F0A5A619900A988DE /* BrowserView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4871792D0A5A619900A988DE /* BrowserView.nib */; };
+		488CD5250AC0240E0038AB34 /* Punakea in Resources */ = {isa = PBXBuildFile; fileRef = 488CD5240AC0240E0038AB34 /* Punakea */; };
 		488E18BD0A27231F009D2826 /* PATagTextFieldCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */; };
 		488E18BE0A27231F009D2826 /* PATagTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
@@ -442,6 +443,7 @@
 		4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadFind.h; sourceTree = "<group>"; };
 		4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadFind.m; sourceTree = "<group>"; };
 		4871792E0A5A619900A988DE /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/BrowserView.nib; sourceTree = "<group>"; };
+		488CD5240AC0240E0038AB34 /* Punakea */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Punakea; sourceTree = "<group>"; };
 		488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagTextFieldCell.h; sourceTree = "<group>"; };
 		488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagTextFieldCell.m; sourceTree = "<group>"; };
 		489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagsView.h; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				488CD51F0AC023DF0038AB34 /* Scripts */,
 				481634150A5A4EEB003B8EE4 /* Browser.nib */,
 				4871792D0A5A619900A988DE /* BrowserView.nib */,
 				4816340E0A5A48A1003B8EE4 /* Tagger.nib */,
@@ -829,6 +832,15 @@
 				4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */,
 			);
 			name = "Type-Ahead Find";
+			sourceTree = "<group>";
+		};
+		488CD51F0AC023DF0038AB34 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				488CD5240AC0240E0038AB34 /* Punakea */,
+			);
+			name = Scripts;
+			path = Resources/Scripts;
 			sourceTree = "<group>";
 		};
 		488E18BA0A2722E5009D2826 /* Sidebar */ = {
@@ -1254,6 +1266,7 @@
 				485C09870ABAC830002CB2C2 /* drop.png in Resources */,
 				485C098A0ABACE2A002CB2C2 /* drop_right.png in Resources */,
 				655B2ABF0ABFE8AC000A3AA4 /* FileManager.strings in Resources */,
+				488CD5250AC0240E0038AB34 /* Punakea in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
