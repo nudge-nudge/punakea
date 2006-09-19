@@ -112,7 +112,12 @@
 	if([source isEqualToString:destination]) return;
 	
 	// TODO: Add error handler
-	BOOL fileWasMoved = [[NSFileManager defaultManager] movePath:source toPath:destination handler:self];
+	BOOL fileWasMoved;
+	
+	if([destination compare:source options:NSCaseInsensitiveSearch] == NSOrderedSame)
+		fileWasMoved = NO;
+	else
+		fileWasMoved = [[NSFileManager defaultManager] movePath:source toPath:destination handler:self];
 	
 	// TODO: Currently we set the displayName + path by hand in the following lines. Maybe we can
 	// do this with a query update automatically...

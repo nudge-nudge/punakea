@@ -259,17 +259,42 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     
     if ([[self selectedRowIndexes] containsIndex:mouseRow] && (modifierDown == NO) && (doubleClick == NO))
     {
-        // wait to see if there is a double-click: if not, select the row as usual
-        [self performSelector:@selector(selectOnlyRowIndexes:)
-		           withObject:[NSIndexSet indexSetWithIndex:mouseRow]
-				   afterDelay:doubleClickThreshold];
-        
-        // we still need to pass the event to super, to handle things like dragging, but 
-        // we have disabled row deselection by overriding selectRowIndexes:byExtendingSelection:
-        [super mouseDown:theEvent]; 
+		if([self selectedRow] == mouseRow)
+		{
+			// cancel any previous editing action
+			[NSObject cancelPreviousPerformRequestsWithTarget:self
+													 selector:@selector(beginEditing)
+										               object:nil];
+		
+			// perform editing like finder
+			[self performSelector:@selector(beginEditing)
+			           withObject:nil
+					   afterDelay:doubleClickThreshold];
+		}
+		else
+		{	
+			// cancel editing action
+			[NSObject cancelPreviousPerformRequestsWithTarget:self
+													 selector:@selector(beginEditing)
+													   object:nil];
+		
+			// wait to see if there is a double-click: if not, select the row as usual
+			[self performSelector:@selector(selectOnlyRowIndexes:)
+					   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
+					   afterDelay:doubleClickThreshold];
+			
+			// we still need to pass the event to super, to handle things like dragging, but 
+			// we have disabled row deselection by overriding selectRowIndexes:byExtendingSelection:
+			[super mouseDown:theEvent]; 
+		}
     }
     else if (doubleClick == YES)
     {		
+		// cancel editing action
+		[NSObject cancelPreviousPerformRequestsWithTarget:self
+										         selector:@selector(beginEditing)
+										           object:nil];
+	
         // cancel the row-selection action
         [NSObject cancelPreviousPerformRequestsWithTarget:self
 											     selector:@selector(selectOnlyRowIndexes:)
@@ -381,7 +406,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSString *newDestination = [[file directory] stringByAppendingPathComponent:[textView string]];
 	
 	if([[NSFileManager defaultManager] fileExistsAtPath:newDestination] &&
-	   [newDestination isNotEqualTo:[file path]])
+	   [newDestination compare:[file path] options:NSCaseInsensitiveSearch] != NSOrderedSame)
 	{
 		[textView setTextColor:[NSColor redColor]];
 	} else {
