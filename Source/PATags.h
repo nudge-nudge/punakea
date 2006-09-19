@@ -34,5 +34,6 @@ typedef enum _PATagChangeOperation
 - (void)removeTag:(PATag*)aTag;
 - (NSEnumerator*)objectEnumerator;
 - (int)count;
+- (PATag*)tagAtIndex:(unsigned int)index;
 
 @end

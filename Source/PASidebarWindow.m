@@ -63,6 +63,16 @@ double const SHOW_DELAY = 0.2;
 																 options:NULL 
 																 context:NULL];
 	
+	[self bind:@"sidebarColor"
+	  toObject:[NSUserDefaultsController sharedUserDefaultsController]
+   withKeyPath:@"values.Appearance.SidebarColor"
+	   options:nil];
+	
+	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+															  forKeyPath:@"values.Appearance.SidebarColor"
+																 options:NULL
+																 context:NULL];
+	
 	// move to screen edge - according to prefs
 	[self setExpanded:YES];
 	[self recede:NO];
@@ -80,6 +90,10 @@ double const SHOW_DELAY = 0.2;
 	{
 		[self setExpanded:YES];
 		[self recede:NO];
+	}
+	else if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.Appearance.SidebarColor"])
+	{
+		[self setBackgroundColor:sidebarColor];
 	}
 }			
 

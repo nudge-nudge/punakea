@@ -60,20 +60,17 @@
 #pragma mark functionality
 - (void)tagsHaveChanged
 {
-	NSMutableArray *tagsCopy = [[tags tags] mutableCopy];
-	[tagsCopy sortUsingDescriptors:sortDescriptors];
+	// this is not thread-safe!
+	[tags sortUsingDescriptors:sortDescriptors];
 	
 	NSMutableArray *newGroup = [NSMutableArray array];
 	
 	for (int i=0;i<maxSize;i++)
 	{
-		PATag *tag = [tagsCopy objectAtIndex:i];
-		[newGroup addObject:[tags tagForName:[tag name]]];
+		[newGroup addObject:[tags tagAtIndex:index]];
 	}
 	
 	[self setGroupedTags:newGroup];
-	
-	[tagsCopy release];
 }
 
 @end

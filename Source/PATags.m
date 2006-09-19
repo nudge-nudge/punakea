@@ -107,6 +107,11 @@
 	return [tags count];
 }
 
+- (PATag*)tagAtIndex:(unsigned int)index
+{
+	return [tags objectAtIndex:index];
+}
+
 #pragma mark tag observing
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
