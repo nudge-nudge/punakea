@@ -33,6 +33,7 @@
 
 - (void)dealloc
 {
+	[newTagName release];
 	[sortDescriptors release];
 	[query release];
 	[super dealloc];
@@ -59,8 +60,65 @@
 	renaming = flag;
 }
 
+- (NSString*)newTagName
+{
+	return newTagName;
+}
+
+- (void)setNewTagName:(NSString*)name
+{
+	[name retain];
+	[newTagName release];
+	newTagName = name;
+}
+
+#pragma mark delegate
+- (void)controlTextDidChange:(NSNotification *)aNotification
+{
+	NSLog(@"didChange");
+
+	NSString *editedTagName = [[[arrayController selectedObjects] objectAtIndex:0] name];
+	
+	NSDictionary *userInfo = [aNotification userInfo];
+	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
+	NSString *currentName = [fieldEditor string];
+	
+	if ([tags tagForName:currentName] && [currentName isNotEqualTo:editedTagName])
+	{
+		[fieldEditor setTextColor:[NSColor redColor]];
+	} 
+	else 
+	{
+		[fieldEditor setTextColor:[NSColor textColor]];
+	}
+}
+
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
+{
+	NSLog(@"shouldEnd");
+
+	[self setNewTagName:[[[arrayController selectedObjects] objectAtIndex:0] name]];
+	
+	NSString *currentName = [fieldEditor string];
+	return !([tags tagForName:currentName] && [currentName isNotEqualTo:newTagName]);
+}
+
+- (void)controlTextDidEndEditing:(NSNotification *)aNotification
+{
+	// TODO
+	NSLog(@"didEnd");
+
+	NSDictionary *userInfo = [aNotification userInfo];
+	NSString *newName = [[userInfo objectForKey:@"NSFieldEditor"] string];
+	
+	if ([newName isNotEqualTo:newTagName])
+	{
+		[self renameTag:[tags tagForName:newTagName] toTagName:newName];
+	}
+}
+
 #pragma mark actions
-- (void)removeTagsFromFiles:(NSArray*)tags
+- (void)removeTags:(NSArray*)tags
 {
 	[self setDeleting:YES];
 	
@@ -75,19 +133,12 @@
 	[self setDeleting:NO];
 }
 
-- (void)renameTag:(PATag*)oldTag toTag:(PATag*)newTag
+- (void)renameTag:(PATag*)oldTag toTagName:(NSString*)newTagName
 {
-	if ([[oldTag name] isEqualToString:[newTag name]])
-	{
-		return;
-	}
-	
 	[self setRenaming:YES];
 	
-	NSArray *files = [query filesForTag:oldTag];
-	[tagger renameTag:[oldTag name] toTag:[newTag name] onFiles:files];
+	[tagger renameTag:[oldTag name] toTag:newTagName];
 	
 	[self setRenaming:NO];
 }
-
 @end

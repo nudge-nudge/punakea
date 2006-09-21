@@ -8,10 +8,19 @@
             SUPERCLASS = NSArrayController; 
         }, 
         {
-            ACTIONS = {removeTag = id; }; 
+            CLASS = PATagManagementTableView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controller = PATagManagementViewController; }; 
+            SUPERCLASS = NSTableView; 
+        }, 
+        {
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {arrayController = NSArrayController; tableView = NSTableView; }; 
+            OUTLETS = {
+                arrayController = NSArrayController; 
+                tableView = NSTableView; 
+                textField = NSTextField; 
+            }; 
             SUPERCLASS = PAViewController; 
         }, 
         {

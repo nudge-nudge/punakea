@@ -13,7 +13,7 @@
 
 - (void)awakeFromNib 
 {
-	PADropManager *dropManager = [[PADropManager alloc] init];
+	PADropManager *dropManager = [PADropManager sharedInstance];
 	[self registerForDraggedTypes:[dropManager handledPboardTypes]];
 	[dropManager release];
 }

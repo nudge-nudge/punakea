@@ -4,7 +4,7 @@
 
 - (void)awakeFromNib
 {
-	dropManager = [[PADropManager alloc] init];
+	dropManager = [PADropManager sharedInstance];
 	
 	[self registerForDraggedTypes:[dropManager handledPboardTypes]];
 	highlight = NO;
@@ -13,7 +13,6 @@
 - (void)dealloc
 {
     [self unregisterDraggedTypes];
-	[dropManager release];
     [super dealloc];
 }
 
@@ -91,19 +90,6 @@
 {
 	NSArray *files = [dropManager handleDrop:[sender draggingPasteboard]];
 	[self setFiles:files];
-	
-	/* TODO file icons on sidebar? i don't think that is needed
-	if ([files count] == 1)
-	{
-		[self setFileIcon:[[files objectAtIndex:0] icon]];
-	}
-	else
-	{
-		[self setFileIcon:[[NSWorkspace sharedWorkspace] iconForFileType:NSPlainFileType]];
-	}
-			
-	[self setNeedsDisplay:YES];
-	 */
 	
     return YES;
 }

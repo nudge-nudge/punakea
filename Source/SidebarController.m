@@ -16,7 +16,7 @@
 	{
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
-		dropManager = [[PADropManager alloc] init];
+		dropManager = [PADropManager sharedInstance];
 		
 		recentTagGroup = [[PARecentTagGroup alloc] init];
 		popularTagGroup = [[PAPopularTagGroup alloc] init];

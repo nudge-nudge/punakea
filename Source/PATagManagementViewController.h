@@ -15,7 +15,9 @@
 @interface PATagManagementViewController : PAViewController {
 	IBOutlet NSTableView *tableView;
 	IBOutlet NSArrayController *arrayController;
+	IBOutlet NSTextField *textField;
 	
+	NSString *newTagName;
 	NSArray *sortDescriptors;
 	
 	PATagger *tagger;
@@ -32,8 +34,10 @@
 - (void)setDeleting:(BOOL)flag;
 - (BOOL)isRenaming;
 - (void)setRenaming:(BOOL)flag;
+- (NSString*)newTagName;
+- (void)setNewTagName:(NSString*)name;
 
-- (void)removeTagsFromFiles:(NSArray*)tags;
-- (void)renameTag:(PATag*)oldTag toTag:(PATag*)newTag;
+- (void)removeTags:(NSArray*)tags;
+- (void)renameTag:(PATag*)oldTag toTag:(NSString*)newTagName;
 
 @end

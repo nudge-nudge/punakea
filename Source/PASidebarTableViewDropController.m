@@ -17,14 +17,13 @@
 	if (self = [super init])
 	{
 		tags = [usedTags retain];
-		dropManager = [[PADropManager alloc] init];
+		dropManager = [PADropManager sharedInstance];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[dropManager release];
 	[tags release];
 	[super dealloc];
 }

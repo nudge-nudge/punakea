@@ -12,11 +12,6 @@
 
 @interface PATagManagementArrayController : NSArrayController {
 	IBOutlet PATagManagementViewController *controller;
-	
-	PATag *editedTag;
 }
-
-- (PATag*)editedTag;
-- (void)setEditedTag:(PATag*)aTag;
 
 @end

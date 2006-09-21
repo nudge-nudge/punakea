@@ -16,6 +16,12 @@
 	NSMutableArray *dropHandlers;
 }
 
+/**
+get the singleton instance
+ @return singleton instance of PADropManager
+ */
++ (PADropManager*)sharedInstance;
+
 - (void)registerDropHandler:(PADropHandler*)handler;
 - (void)removeDropHandler:(PADropHandler*)handler;
 

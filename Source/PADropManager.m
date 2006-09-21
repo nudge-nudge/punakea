@@ -8,28 +8,25 @@
 
 #import "PADropManager.h"
 
-
 @implementation PADropManager
 
-- (id)init
-{
+//this is where the sharedInstance is held
+static PADropManager *sharedInstance = nil;
+
+#pragma mark init
+//constructor - only called by sharedInstance
+- (id)sharedInstanceInit {
 	if (self = [super init])
 	{
 		dropHandlers = [[NSMutableArray alloc] init];
-		
+			
 		PAFilenamesDropHandler *filenamesDropHandler = [[PAFilenamesDropHandler alloc] init];
 		[self registerDropHandler:filenamesDropHandler];
 		[filenamesDropHandler release];
-		
+			
 		PABookmarkDictionaryListDropHandler *bookmarkDictionaryListDropHandler = [[PABookmarkDictionaryListDropHandler alloc] init];
 		[self registerDropHandler:bookmarkDictionaryListDropHandler];
 		[bookmarkDictionaryListDropHandler release];
-		
-		/*
-		PAMailDropHandler *mailDropHandler = [[PAMailDropHandler alloc] init];
-		[self registerDropHandler:mailDropHandler];
-		[mailDropHandler release];	
-		 */
 	}
 	return self;
 }
@@ -81,6 +78,41 @@
 	}
 
 	return result;
+}
+
+#pragma mark singleton stuff
++ (PADropManager*)sharedInstance {
+	@synchronized(self) {
+        if (sharedInstance == nil) {
+            sharedInstance = [[self alloc] sharedInstanceInit];
+        }
+    }
+    return sharedInstance;
+}
+
++ (id)allocWithZone:(NSZone *)zone {
+    @synchronized(self) {
+        if (sharedInstance == nil) {
+            sharedInstance = [super allocWithZone:zone];
+        }
+    }
+    return sharedInstance;
+}
+
+- (id)retain {
+    return self;
+}
+
+- (unsigned)retainCount {
+    return UINT_MAX;  //denotes an object that cannot be released
+}
+
+- (void)release {
+    //do nothing
+}
+
+- (id)autorelease {
+    return self;
 }
 
 @end

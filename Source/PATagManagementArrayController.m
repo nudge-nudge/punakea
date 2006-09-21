@@ -11,40 +11,10 @@
 
 @implementation PATagManagementArrayController
 
-- (void)dealloc
-{
-	if (editedTag) [editedTag release];
-	[super dealloc];
-}
-
-- (PATag*)editedTag
-{
-	return editedTag;
-}
-
-- (void)setEditedTag:(PATag*)aTag
-{
-	[aTag retain];
-	[editedTag release];
-	editedTag = aTag;
-}
-
-- (void)objectDidBeginEditing:(id)editor
-{
-	PATag *tag = [[self selectedObjects] objectAtIndex:0];
-	[self setEditedTag:[tag copy]];
-}
-
-- (void)objectDidEndEditing:(id)editor
-{
-	PATag *tag = [[self selectedObjects] objectAtIndex:0];
-	[controller renameTag:editedTag toTag:tag];
-}
-
 - (void)remove:(id)sender
 {
 	NSArray *tags = [self selectedObjects];
-	[controller removeTagsFromFiles:tags];
+	[controller removeTags:tags];
 	[super remove:sender];
 }
 

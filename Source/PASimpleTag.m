@@ -21,7 +21,7 @@
 {
 	[super setName:aName];
 
-	[self setQuery:[NSString stringWithFormat:@"kMDItemKeywords = '%@'",aName]];
+	[self setQuery:[NSString stringWithFormat:@"kMDItemKeywords == \"%@\"",aName]];
 }
 
 // implementing needed super-class methods
