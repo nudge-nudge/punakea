@@ -110,20 +110,7 @@
 	    withAttributes:fontAttributes]; */
 }
 
-
-#pragma mark Accessors
-- (id)objectValue
-{
-	return item;
-}
-
-- (void)setObjectValue:(id <NSCopying>)object
-{
-	item = object;
-}
-
-
-#pragma mark TEMP
+#pragma mark Renaming Stuff
 - (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent
 {
 	NSLog(@"editWithFrame");
@@ -142,6 +129,18 @@
 	
 	[textObj selectAll:self];
 
+}
+
+
+#pragma mark Accessors
+- (id)objectValue
+{
+	return item;
+}
+
+- (void)setObjectValue:(id <NSCopying>)object
+{
+	item = object;
 }
 
 @end

@@ -118,6 +118,33 @@
 }
 
 
+#pragma mark Renaming Stuff
+- (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent
+{
+	NSLog(@"editWithFrame");
+	
+	[self selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:0 length:0];
+}
+
+- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
+{	
+	NSLog(@"selectWithFrame");
+
+	NSRect frame = aRect;
+	//frame.origin.x += 25;
+	//frame.size.width -= 25; 
+	
+	[super selectWithFrame:frame inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
+	
+	[textObj setFont:[NSFont systemFontOfSize:11]];
+	[textObj setString:[self value]];
+	
+	[textObj selectAll:self];
+	
+	[[self controlView] setNeedsDisplay:YES];
+}
+
+
 #pragma mark Accessors
 - (NSString *)value
 {

@@ -9,12 +9,17 @@
 #import <Cocoa/Cocoa.h>
 #import "PAResultsMultiItemPlaceholderCell.h"
 #import "PAResultsMultiItemThumbnailCell.h"
+#import "PAQueryItem.h"
 
 
 @interface PAResultsMultiItemMatrix : NSMatrix {
 
-	NSArray				*items;
-	NSCell				*multiItemCell;
+	NSArray					*items;
+	NSCell					*multiItemCell;
+	
+	NSCell					*selectedCell;
+	NSMutableIndexSet		*selectedIndexes;
+	NSMutableArray			*selectedCells;
 	
 }
 

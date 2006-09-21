@@ -9,6 +9,8 @@
 #import "PAResultsMultiItemMatrix.h"
 
 
+static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
+
 @implementation PAResultsMultiItemMatrix
 
 #pragma mark Init + Dealloc
@@ -21,6 +23,9 @@
 		[self setIntercellSpacing:NSMakeSize(3, 3)];
 		[self setMode:NSHighlightModeMatrix];
 		[self setTarget:self];
+		
+		selectedIndexes = [[NSMutableIndexSet alloc] init];
+		selectedCells = [[NSMutableArray alloc] init];
 		
 		// Get notification frameDidChange
 		[self setPostsFrameChangedNotifications:YES];
@@ -35,6 +40,8 @@
 
 - (void)dealloc
 {
+	if(selectedCells) [selectedCells release];
+	if(selectedIndexes) [selectedIndexes release];
 	if(items) [items release];
 	[super dealloc];
 }
@@ -153,6 +160,7 @@
 			[[[[self cellClass] alloc]
 				initTextCell:[anObject valueForAttribute:(id)kMDItemDisplayName]] autorelease];				
 		[cell setValueDict:anObject];
+		//[cell setEditable:YES];
 		
 		if(column == numberOfItemsPerRow) 
 		{
@@ -179,6 +187,73 @@
 			[self putCell:cell atRow:row column:column];
 		}
 		column++;
+	}
+}
+
+- (void)doubleAction
+{	
+	unsigned index = [selectedIndexes firstIndex];
+		
+	while (index != NSNotFound)
+	{
+		PAQueryItem *item = [items objectAtIndex:index];
+		NSString *path = [item valueForAttribute:(id)kMDItemPath];
+		[[NSWorkspace sharedWorkspace] openFile:path];		
+		
+		index = [selectedIndexes indexGreaterThanIndex:index];
+	}
+}
+
+- (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)column
+{
+	NSCell *cell = [self cellAtRow:row column:column];
+	[cell setHighlighted:flag];
+	
+	unsigned int index = row * [self numberOfColumns] + column;
+	
+	if(flag)
+	{
+		selectedCell = cell;
+		[selectedIndexes addIndex:index];
+		[selectedCells addObject:cell];
+		
+		[self scrollCellToVisibleAtRow:row column:column];
+		
+	} else {
+		[selectedIndexes removeIndex:index];
+		[selectedCells removeObject:cell];
+	}
+}
+
+- (void)highlightOnlyCell:(NSCell *)cell
+{
+	[self deselectAllCellsButCell:cell];
+
+	int row, column;
+	[self getRow:&row column:&column ofCell:cell];
+
+	[cell setEditable:NO];
+	[self highlightCell:YES atRow:row column:column];
+}
+
+- (void)deselectAllCells
+{
+	[self deselectAllCellsButCell:nil];
+}
+
+- (void)deselectAllCellsButCell:(NSCell *)cell
+{
+	NSEnumerator *enumerator = [[self cells] objectEnumerator];
+	NSCell *aCell;
+	
+	while(aCell = [enumerator nextObject])
+	{
+		if(cell != aCell)
+		{
+			int r, c;
+			[self getRow:&r column:&c ofCell:aCell];
+			[self highlightCell:NO atRow:r column:c];
+		}
 	}
 }
 
@@ -221,12 +296,10 @@
 			{
 				int curRow, curCol;
 				[self getRow:&curRow column:&curCol ofCell:cell];
-				[self selectCellAtRow:curRow column:curCol];
 				[self highlightCell:YES atRow:curRow column:curCol];
 			}
 		}
 
-		[self selectCellAtRow:row-1 column:column];
 		[self highlightCell:YES atRow:row-1 column:column];
 	} else {
 		// If this is the topmost multi item cell, do nothing as we are at the topmost item
@@ -289,12 +362,10 @@
 			{
 				int curRow, curCol;
 				[self getRow:&curRow column:&curCol ofCell:cell];
-				[self selectCellAtRow:curRow column:curCol];
 				[self highlightCell:YES atRow:curRow column:curCol];
 			}
 		}
 		
-		[self selectCellAtRow:row+1 column:column];
 		[self highlightCell:YES atRow:row+1 column:column];
 	} else {
 		// If this is the lowermost multi item cell, do nothing as we are at the lowermost item
@@ -366,12 +437,10 @@
 			{
 				int curRow, curCol;
 				[self getRow:&curRow column:&curCol ofCell:cell];
-				[self selectCellAtRow:curRow column:curCol];
 				[self highlightCell:YES atRow:curRow column:curCol];
 			}
 		}		
 		
-		[self selectCellAtRow:row column:column];
 		[self highlightCell:YES atRow:row column:column];
 	} else {		
 		// Modify event so that selection moves down instead of right (if possible)
@@ -438,12 +507,10 @@
 			{
 				int curRow, curCol;
 				[self getRow:&curRow column:&curCol ofCell:cell];
-				[self selectCellAtRow:curRow column:curCol];
 				[self highlightCell:YES atRow:curRow column:curCol];
 			}
 		}		
 		
-		[self selectCellAtRow:row column:column];
 		[self highlightCell:YES atRow:row column:column];
 	} else {		
 		// Modify event so that selection moves up instead of left (if possible)
@@ -493,22 +560,32 @@
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
-{		
+{
 	NSOutlineView *outlineView = (NSOutlineView *)[self superview];
-	
-	// Make sure that the outlineView is the first responder
-	if([[[outlineView window] firstResponder] isNotEqualTo:outlineView])
-	{
-		[[outlineView window] makeFirstResponder:outlineView];
-	}
-	
-	// Make sure the corresponding "supercell" is highlighted
+
+	// Make sure the corresponding multiitemcell in our outlineView is highlighted
 	NSPoint locationInOutlineView = [outlineView convertPoint:[theEvent locationInWindow] fromView:nil];
 	int row = [outlineView rowAtPoint:locationInOutlineView];	
 	BOOL byExtendingSelection = ([theEvent modifierFlags] & NSShiftKeyMask) ||
 								([theEvent modifierFlags] & NSCommandKeyMask);	
 	[outlineView selectRow:row byExtendingSelection:byExtendingSelection];
+	[[self window] makeFirstResponder:outlineView];
 	
+	
+	// Now, perform click action	
+	static float doubleClickThreshold = 0.0;    
+    if (doubleClickThreshold == 0.0)
+    {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        doubleClickThreshold = [defaults floatForKey:@"com.apple.mouse.doubleClickThreshold"];
+        
+        // if we couldn't find the value in the user defaults, take a conservative estimate
+        if (doubleClickThreshold == 0.0) doubleClickThreshold = 0.8;
+    }
+
+    BOOL    modifierDown    = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
+    BOOL    doubleClick     = ([theEvent clickCount] == 2);
+    
 	NSPoint location = [theEvent locationInWindow];
 	location = [self convertPoint:location fromView:nil];
 		
@@ -516,31 +593,121 @@
 	[self getRow:&row column:&column forPoint:location];
 	
 	NSCell *cell = [self cellAtRow:row column:column];
-	NSRect cellFrame = [self cellFrameAtRow:row column:column];
-	
-	// Ask cell to track the mouse and highlight
-	[cell trackMouse:theEvent inRect:cellFrame ofView:self untilMouseUp:YES];	
-	[self selectCellAtRow:row column:column];
-	[cell setHighlighted:YES];
-	[self setNeedsDisplayInRect:cellFrame];
+	[cell setEditable:NO];
+    
+    if (modifierDown == NO && doubleClick == NO)
+    {
+		int count = [selectedIndexes count];
+		if([self selectedCell] == cell && count <= 1)
+		{
+			// cancel any previous editing action
+			[NSObject cancelPreviousPerformRequestsWithTarget:self
+													 selector:@selector(beginEditing)
+										               object:nil];
+													   
+			// Cancel any late highlighting
+			[NSObject cancelPreviousPerformRequestsWithTarget:self
+													 selector:@selector(highlightOnlyCell)
+										               object:cell];
 		
-	// Keep track of selection
-	if([theEvent modifierFlags] & NSCommandKeyMask)
+			// perform editing like finder
+			[self performSelector:@selector(beginEditing)
+			           withObject:nil
+					   afterDelay:doubleClickThreshold];
+		}
+		else
+		{	
+			// cancel editing action
+			[NSObject cancelPreviousPerformRequestsWithTarget:self
+													 selector:@selector(beginEditing)
+													   object:nil];
+			
+			unsigned cellIndex = row * [self numberOfColumns] + column;			
+			if([selectedIndexes count] > 1 && [selectedIndexes containsIndex:cellIndex])
+			{
+				// Select only this cell if the click becomes no double click
+				[self performSelector:@selector(highlightOnlyCell:)
+			           withObject:cell
+					   afterDelay:doubleClickThreshold];
+			} else {
+				// Select only this cell instantly
+				[self deselectAllCellsButCell:cell];	
+				[self highlightCell:YES atRow:row column:column];
+			}
+			
+			// we still need to pass the event to super, to handle things like dragging, but 
+			// we have disabled row deselection by overriding selectRowIndexes:byExtendingSelection:
+			//[super mouseDown:theEvent]; 
+		}
+    }
+    else if(doubleClick)
+    {		
+		// cancel editing action
+		[NSObject cancelPreviousPerformRequestsWithTarget:self
+										         selector:@selector(beginEditing)
+										           object:nil];
+												   
+		// Cancel any late highlighting
+		[NSObject cancelPreviousPerformRequestsWithTarget:self
+												 selector:@selector(highlightOnlyCell:)
+												   object:cell];
+
+        // perform double action
+		//if([[[self itemAtRow:mouseRow] class] isNotEqualTo:[NSMetadataQueryResultGroup class]])
+		//	[[self target] performSelector:[self doubleAction]];
+		[self doubleAction];
+    }
+	else if(modifierDown)
 	{
-		// Extend selection to this cell
-		
-		// TODO: Deselect if the cell was already highlighted	
-		
-		// TODO: Support SHIFT key, only COMMAND works atm
-	} else {
-		// Clear all selections
-		NSEnumerator *enumerator = [[self cells] objectEnumerator];
-		NSCell *aCell;
-		
-		while(aCell = [enumerator nextObject])
-			if(cell != aCell)
-				[aCell setHighlighted:NO];
+		// Select a range of cells with SHIFT
+		if([theEvent modifierFlags] & NSShiftKeyMask)
+		{
+			int firstRow = 0, firstColumn = 0;		
+			
+			if([self selectedCell])	
+				[self getRow:&firstRow column:&firstColumn ofCell:[self selectedCell]];	
+			
+			// Maybe swap first and last indexes if the first cell has a greater index that the
+			// last one
+			if(firstRow > row ||
+			   (firstRow == row && firstColumn > column))
+			{
+				int rTemp = firstRow, cTemp = firstColumn;
+				firstRow = row;
+				firstColumn = column;
+				row = rTemp;
+				column = cTemp;
+			}
+			
+			int c = firstColumn;
+			for(int r = firstRow; r <= row; r++)
+			{
+				while((r < row && c < [self numberOfColumns]) ||
+					  (r == row && c <= column))
+				{
+					[self highlightCell:YES atRow:r column:c];
+					c++;
+				}
+				c = 0;
+			}
+		}
+
+		// Select multiple cells independently with COMMAND
+		if([theEvent modifierFlags] & NSCommandKeyMask)
+		{
+			[self highlightCell:!([cell isHighlighted]) atRow:row column:column];
+		}
 	}
+}
+
+- (void)beginEditing
+{
+	int row, column;
+	[self getRow:&row column:&column ofCell:[self selectedCell]];
+
+	[self deselectAllCellsButCell:[self selectedCell]];
+	[[self selectedCell] setEditable:YES];
+	[self selectCellAtRow:row column:column];
 }
 
 
@@ -557,10 +724,14 @@
 	[self displayCellsForItems];
 }
 
-- (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)column
+- (NSCell *)selectedCell
 {
-	NSCell *cell = [self cellAtRow:row column:column];
-	[cell setHighlighted:flag];
+	return selectedCell;
+}
+
+- (NSArray *)selectedCells
+{
+	return selectedCells;
 }
 
 - (void)setCellClass:(Class)aClass
