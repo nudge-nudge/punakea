@@ -10,7 +10,7 @@
 
 @interface PATagger (PrivateAPI)
 
-- (void)writeTags:(NSArray*)tags ToFile:(NSString*)path;
+- (void)writeTags:(NSArray*)tags toFile:(PAFile*)file;
 
 @end
 
@@ -163,7 +163,7 @@ static PATagger *sharedInstance = nil;
 		   }
 	   }
 
-	   [self writeTags:tagsOnFile ToFile:file];
+	   [self writeTags:tagsOnFile toFile:file];
    }
 }
 
@@ -214,7 +214,7 @@ static PATagger *sharedInstance = nil;
 		// decrement use count here, that way the other classes
 		// don't have to care
 		[tag decrementUseCount];
-		[self writeTags:someTags ToFile:file];
+		[self writeTags:someTags toFile:file];
 	}
 }
 
@@ -247,13 +247,13 @@ static PATagger *sharedInstance = nil;
 		[keywords removeObject:tagName];
 		[keywords addObject:newTagName];
 		NSArray *newTags = [self createTagsForNames:keywords];
-		[self writeTags:newTags ToFile:file];
+		[self writeTags:newTags toFile:file];
 		[keywords release];
 	}
 }
 
 //sets the tags, overwrites current ones
-- (void)writeTags:(NSArray*)someTags ToFile:(PAFile*)file {
+- (void)writeTags:(NSArray*)someTags toFile:(PAFile*)file {
 	//only the names of the tags are written, create tmp array with names only
 	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
 	

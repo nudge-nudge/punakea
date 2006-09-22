@@ -120,7 +120,7 @@
 
 - (NSString *)description
 {
-	return path;
+	return [@"file:" stringByAppendingString:path];
 }
 
 #pragma mark euality testing

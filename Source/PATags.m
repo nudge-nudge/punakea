@@ -128,6 +128,7 @@
 
 - (void)observeTag:(PATag*)tag
 {
+	[tag addObserver:self forKeyPath:@"name" options:nil context:NULL];
 	[tag addObserver:self forKeyPath:@"lastUsed" options:nil context:NULL];
 	[tag addObserver:self forKeyPath:@"lastClicked" options:nil context:NULL];
 }	
@@ -145,6 +146,7 @@
 
 - (void)stopObservingTag:(PATag*)tag
 {
+	[tag removeObserver:self forKeyPath:@"name"];
 	[tag removeObserver:self forKeyPath:@"lastUsed"];
 	[tag removeObserver:self forKeyPath:@"lastClicked"];
 }
