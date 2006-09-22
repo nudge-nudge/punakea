@@ -17,8 +17,8 @@
 	IBOutlet NSArrayController *arrayController;
 	IBOutlet NSTextField *textField;
 	
-	NSString *newTagName;
 	NSArray *sortDescriptors;
+	NSString *editedTagName;
 	
 	PATagger *tagger;
 	PATags *tags;
@@ -34,10 +34,10 @@
 - (void)setDeleting:(BOOL)flag;
 - (BOOL)isRenaming;
 - (void)setRenaming:(BOOL)flag;
-- (NSString*)newTagName;
-- (void)setNewTagName:(NSString*)name;
+- (NSString*)editedTagName;
+- (void)setEditedTagName:(NSString*)name;
 
 - (void)removeTags:(NSArray*)tags;
-- (void)renameTag:(PATag*)oldTag toTag:(NSString*)newTagName;
+- (void)renameTag:(PATag*)oldTag toTagName:(NSString*)newTagName;
 
 @end

@@ -33,7 +33,7 @@
 
 - (void)dealloc
 {
-	[newTagName release];
+	[editedTagName release];
 	[sortDescriptors release];
 	[query release];
 	[super dealloc];
@@ -60,30 +60,43 @@
 	renaming = flag;
 }
 
-- (NSString*)newTagName
+- (NSString*)editedTagName
 {
-	return newTagName;
+	return editedTagName;
 }
 
-- (void)setNewTagName:(NSString*)name
+- (void)setEditedTagName:(NSString*)name
 {
 	[name retain];
-	[newTagName release];
-	newTagName = name;
+	[editedTagName release];
+	editedTagName = name;
 }
 
 #pragma mark delegate
+- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor
+{
+	NSLog(@"shouldBegin");
+	
+	[self setEditedTagName:[[fieldEditor string] copy]];
+	return YES;
+}
+
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
 	NSLog(@"didChange");
 
-	NSString *editedTagName = [[[arrayController selectedObjects] objectAtIndex:0] name];
-	
 	NSDictionary *userInfo = [aNotification userInfo];
 	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
 	NSString *currentName = [fieldEditor string];
+
+	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 	
-	if ([tags tagForName:currentName] && [currentName isNotEqualTo:editedTagName])
+	if ([tags tagForName:currentName] != nil)
+	{
+		NSLog(@"error: %@",[tags tagForName:currentName]);
+	}
+	
+	if ([tags tagForName:currentName] != nil && [currentName isNotEqualTo:editedTagName])
 	{
 		[fieldEditor setTextColor:[NSColor redColor]];
 	} 
@@ -97,24 +110,31 @@
 {
 	NSLog(@"shouldEnd");
 
-	[self setNewTagName:[[[arrayController selectedObjects] objectAtIndex:0] name]];
-	
 	NSString *currentName = [fieldEditor string];
-	return !([tags tagForName:currentName] && [currentName isNotEqualTo:newTagName]);
+	
+	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
+	
+	if ([tags tagForName:currentName] == nil)
+	{
+		[control setStringValue:currentName];
+		[control setEnabled:NO];
+		[self renameTag:[tags tagForName:editedTagName] toTagName:currentName];
+		[control setEnabled:YES];
+		return YES;
+	}
+	else if ([currentName isEqualTo:editedTagName])
+	{
+		return YES;
+	}
+	else
+	{
+		return NO;
+	}
 }
 
-- (void)controlTextDidEndEditing:(NSNotification *)aNotification
+- (void)cancelOperation:(id)sender
 {
-	// TODO
-	NSLog(@"didEnd");
-
-	NSDictionary *userInfo = [aNotification userInfo];
-	NSString *newName = [[userInfo objectForKey:@"NSFieldEditor"] string];
-	
-	if ([newName isNotEqualTo:newTagName])
-	{
-		[self renameTag:[tags tagForName:newTagName] toTagName:newName];
-	}
+	NSLog(@"cancel");
 }
 
 #pragma mark actions
