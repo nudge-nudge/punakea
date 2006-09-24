@@ -1,0 +1,26 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = PAFilterSlice; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controller = BrowserViewController; outlineView = NSOutlineView; }; 
+            SUPERCLASS = NSMatrix; 
+        }, 
+        {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
+        {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
+        {
+            CLASS = PASelectedTagsView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {browserViewController = BrowserViewController; }; 
+            SUPERCLASS = NSMatrix; 
+        }, 
+        {
+            CLASS = PATagCloud; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {datasource = id; delegate = id; }; 
+            SUPERCLASS = NSView; 
+        }
+    ); 
+    IBVersion = 1; 
+}
