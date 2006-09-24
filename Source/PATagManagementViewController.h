@@ -8,11 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAViewController.h"
-
+#import "PABrowserViewMainControllerProtocol.h"
 #import "PATagger.h"
 #import "PAQuery.h"
 
-@interface PATagManagementViewController : PAViewController {
+@interface PATagManagementViewController : PAViewController <PABrowserViewMainControllerProtocol> {
 	IBOutlet NSView *simpleTagManagementView;
 	
 	PATagger *tagger;
@@ -20,6 +20,8 @@
 	BOOL deleting;
 	BOOL renaming;
 }
+
+- (void)handleTagActivation:(PATag*)tag;
 
 - (NSView*)simpleTagManagementView;
 

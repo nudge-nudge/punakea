@@ -114,6 +114,11 @@
 */
 
 #pragma mark actions
+- (void)handleTagActivation:(PATag*)tag
+{
+	// TODO
+}
+
 - (void)removeTags:(NSArray*)tags
 {
 	[self setDeleting:YES];
