@@ -127,14 +127,7 @@
 #pragma mark MainMenu actions
 - (IBAction)manageTags:(id)sender
 {
-	NSWindow *window = [[NSWindow alloc] initWithContentRect:NSMakeRect(500.0,500.0,500.0,370.0) 
-												   styleMask:NSTitledWindowMask | NSClosableWindowMask
-													 backing:NSBackingStoreBuffered 
-													   defer:NO];
-	[window setHasShadow:YES];
-	PATagManagementViewController *tmvc = [[PATagManagementViewController alloc] initWithNibName:@"TagManagementView"];
-	[window setContentView:[tmvc mainView]];
-	[window makeKeyAndOrderFront:self];
+	[[browserController browserViewController] manageTags];
 }
 
 - (IBAction)showPreferences:(id)sender

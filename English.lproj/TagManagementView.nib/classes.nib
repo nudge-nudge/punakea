@@ -16,11 +16,7 @@
         {
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {
-                arrayController = NSArrayController; 
-                tableView = NSTableView; 
-                textField = NSTextField; 
-            }; 
+            OUTLETS = {simpleTagManagementView = NSView; }; 
             SUPERCLASS = PAViewController; 
         }, 
         {

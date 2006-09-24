@@ -13,31 +13,19 @@
 #import "PAQuery.h"
 
 @interface PATagManagementViewController : PAViewController {
-	IBOutlet NSTableView *tableView;
-	IBOutlet NSArrayController *arrayController;
-	IBOutlet NSTextField *textField;
-	
-	NSArray *sortDescriptors;
-	NSString *editedTagName;
+	IBOutlet NSView *simpleTagManagementView;
 	
 	PATagger *tagger;
-	PATags *tags;
-	PAQuery *query;
 	
 	BOOL deleting;
 	BOOL renaming;
 }
 
-- (id)initWithNibName:(NSString*)nibName;
+- (NSView*)simpleTagManagementView;
 
 - (BOOL)isDeleting;
 - (void)setDeleting:(BOOL)flag;
 - (BOOL)isRenaming;
 - (void)setRenaming:(BOOL)flag;
-- (NSString*)editedTagName;
-- (void)setEditedTagName:(NSString*)name;
-
-- (void)removeTags:(NSArray*)tags;
-- (void)renameTag:(PATag*)oldTag toTagName:(NSString*)newTagName;
 
 @end

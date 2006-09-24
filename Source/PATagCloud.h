@@ -2,7 +2,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import <math.h>
-#import "PATagCloudController.h"
 #import "PATag.h"
 #import "PATagButton.h"
 
@@ -10,11 +9,12 @@ extern NSSize const PADDING;
 extern NSSize const SPACING;
 
 /**
-displays all [controller visibleTags] in a nice tag cloud view
+displays all [datasource visibleTags] in a nice tag cloud view
  */
 @interface PATagCloud : NSView
 {
-	IBOutlet BrowserViewController *controller; /**< controller, holding tags and stuff */
+	id delegate;
+	id datasource;
 
 	NSMutableDictionary *tagButtonDict; /**< holds the current controls in the view */
 	PATagButton *activeButton; /**< currently selected tag */
@@ -30,6 +30,11 @@ displays all [controller visibleTags] in a nice tag cloud view
 	
 	NSAttributedString *noRelatedTagsMessage;
 }
+
+- (id)datasource;
+- (void)setDatasource:(id)ds;
+- (id)delegate;
+- (void)setDelegate:(id)del;
 
 - (NSMutableDictionary*)tagButtonDict;
 - (void)setTagButtonDict:(NSMutableDictionary*)aDict;

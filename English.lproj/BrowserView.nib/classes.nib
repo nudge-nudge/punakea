@@ -42,7 +42,7 @@
         {
             CLASS = PATagCloud; 
             LANGUAGE = ObjC; 
-            OUTLETS = {controller = BrowserViewController; }; 
+            OUTLETS = {datasource = id; delegate = id; }; 
             SUPERCLASS = NSView; 
         }, 
         {CLASS = PATypeAheadView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 

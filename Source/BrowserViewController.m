@@ -69,6 +69,8 @@
 		[self setVisibleTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
 		
+		tagManagementViewController = [[PATagManagementViewController alloc] init];
+		
 		[NSBundle loadNibNamed:nibName owner:self];
 	}
 	return self;
@@ -82,6 +84,7 @@
 
 - (void)dealloc
 {
+	[tagManagementViewController release];
 	[nc removeObserver:self];
 	[visibleTags release];
 	[buffer release];
@@ -210,8 +213,20 @@
 		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
 }
 
+- (void)manageTags
+{
+	NSScrollView *sv = [outlineView enclosingScrollView];
+	[sv setDocumentView:[tagManagementViewController simpleTagManagementView]];
+}
 
 #pragma mark tag stuff
+- (IBAction)tagButtonClicked:(id)sender
+{
+	PATag *tag = [sender fileTag];
+	[selectedTags addTag:tag];
+	[tag incrementClickCount];
+}
+
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
 {
 	NSEnumerator *e = [tagSet objectEnumerator];

@@ -96,7 +96,7 @@ bind to visibleTags
  */
 - (void)awakeFromNib
 {
-	[controller addObserver:self
+	[datasource addObserver:self
 				 forKeyPath:@"visibleTags"
 					options:0
 					context:NULL];
@@ -127,7 +127,7 @@ bind to visibleTags
 {
 	[self setFrame:[self calcFrame]];
 	
-	if ([[controller visibleTags] count] > 0)
+	if ([[datasource visibleTags] count] > 0)
 	{
 		[self updateViewHierarchy];
 		
@@ -182,12 +182,12 @@ bound to visibleTags
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	NSEnumerator *tagEnumerator = [[controller visibleTags] objectEnumerator];
+	NSEnumerator *tagEnumerator = [[datasource visibleTags] objectEnumerator];
 	PATag *tag;
 	
 	while (tag = [tagEnumerator nextObject])
 	{
-		float tagRating = [tag relativeRatingToTag:[controller currentBestTag]];
+		float tagRating = [tag relativeRatingToTag:[datasource currentBestTag]];
 		PATagButton *button;
 		
 		// if the button is already created, use it
@@ -201,7 +201,7 @@ bound to visibleTags
 			// create new button
 			button = [[PATagButton alloc] initWithTag:tag rating:tagRating];
 			[dict setObject:button forKey:[tag name]];
-			[button setTarget:controller];
+			[button setTarget:delegate];
 			[button release];
 		}
 
@@ -220,7 +220,7 @@ bound to visibleTags
 	NSRect tmpFrame = NSMakeRect(0,0,NSWidth(clipViewFrame),0);
 	[self calcInitialParametersInRect:tmpFrame];
 	
-	NSEnumerator *e = [[controller visibleTags] objectEnumerator];
+	NSEnumerator *e = [[datasource visibleTags] objectEnumerator];
 	PATag *tag;
 	
 	NSPoint buttonPoint = NSMakePoint(0.0,0.0);
@@ -253,7 +253,7 @@ bound to visibleTags
 {	
 	[self drawBackground];
 	
-	if ([[controller visibleTags] count] == 0 && ![[controller relatedTags] isUpdating])
+	if ([[datasource visibleTags] count] == 0 && ![[datasource relatedTags] isUpdating])
 	{
 		[self drawString:noRelatedTagsMessage centeredIn:rect];
 	}
@@ -308,7 +308,7 @@ bound to visibleTags
 	
 	while (subview = [viewEnumerator nextObject])
 	{
-		if ([[controller visibleTags] containsObject:[subview fileTag]])
+		if ([[datasource visibleTags] containsObject:[subview fileTag]])
 		{
 			[viewsToKeep addObject:subview];
 		}
@@ -318,7 +318,7 @@ bound to visibleTags
 		}
 	}
 	
-	NSEnumerator *e = [[controller visibleTags] objectEnumerator];
+	NSEnumerator *e = [[datasource visibleTags] objectEnumerator];
 	PATag *tag;
 	
 	while (tag = [e nextObject])
@@ -425,7 +425,7 @@ bound to visibleTags
 	
 	/* while there are tags, compose a row and get the maximum height,
 		then keep the starting points for each one */
-	NSEnumerator *tagEnumerator = [[controller visibleTags] objectEnumerator];
+	NSEnumerator *tagEnumerator = [[datasource visibleTags] objectEnumerator];
 	PATag *tag;
 	
 	int i;
@@ -456,6 +456,26 @@ bound to visibleTags
 }
 
 #pragma mark accessors
+- (id)datasource
+{
+	return datasource;
+}
+
+- (void)setDatasource:(id)ds
+{
+	datasource = ds;
+}
+
+- (id)delegate
+{
+	return delegate;
+}
+
+- (void)setDelegate:(id)del
+{
+	delegate = del;
+}
+
 - (NSMutableDictionary*)tagButtonDict
 {
 	return tagButtonDict;
@@ -486,11 +506,6 @@ bound to visibleTags
 	activeButton = aTagButton;
 	
 	[self handleActiveTagChange];
-}
-
-- (BrowserViewController*)controller
-{
-	return controller;
 }
 
 #pragma mark event handling
@@ -532,7 +547,7 @@ bound to visibleTags
 	}
 	else if (key == NSTabCharacter)
 	{
-		[[self window] makeFirstResponder:[controller outlineView]];
+		[[self window] makeFirstResponder:[delegate outlineView]];
 	}
 	else
 	{

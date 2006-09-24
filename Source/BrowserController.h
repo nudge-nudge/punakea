@@ -18,4 +18,6 @@
 	
 }
 
+- (BrowserViewController*)browserViewController;
+
 @end

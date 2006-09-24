@@ -11,35 +11,26 @@
 
 @implementation PATagManagementViewController
 
-- (id)initWithNibName:(NSString*)nibName
+- (id)init
 {
 	if (self = [super init])
 	{
 		tagger = [PATagger sharedInstance];
-		tags = [tagger tags];
-		query = [[PAQuery alloc] init];
 		
 		[self setDeleting:NO];
 		[self setRenaming:NO];
 		
-		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-		sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor,nil];
-		[sortDescriptor release];
-		
-		[NSBundle loadNibNamed:nibName owner:self];
+		[NSBundle loadNibNamed:@"TagManagementView" owner:self];
 	}
 	return self;
 }
 
-- (void)dealloc
+#pragma mark accessors
+- (NSView*)simpleTagManagementView
 {
-	[editedTagName release];
-	[sortDescriptors release];
-	[query release];
-	[super dealloc];
+	return simpleTagManagementView;
 }
 
-#pragma mark accessors
 - (BOOL)isDeleting
 {
 	return deleting;
@@ -60,18 +51,6 @@
 	renaming = flag;
 }
 
-- (NSString*)editedTagName
-{
-	return editedTagName;
-}
-
-- (void)setEditedTagName:(NSString*)name
-{
-	[name retain];
-	[editedTagName release];
-	editedTagName = name;
-}
-
 #pragma mark delegate
 - (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor
 {
@@ -81,6 +60,7 @@
 	return YES;
 }
 
+/*
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
 	NSLog(@"didChange");
@@ -131,11 +111,7 @@
 		return NO;
 	}
 }
-
-- (void)cancelOperation:(id)sender
-{
-	NSLog(@"cancel");
-}
+*/
 
 #pragma mark actions
 - (void)removeTags:(NSArray*)tags

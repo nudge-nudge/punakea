@@ -18,6 +18,7 @@
 #import "PATypeAheadFind.h"
 #import "PAResultsOutlineView.h"
 #import "PATypeAheadView.h"
+#import "PATagManagementViewController.h"
 
 @class PATagCloud;
 
@@ -25,6 +26,8 @@
 	IBOutlet PATagCloud *tagCloud;
 	IBOutlet PAResultsOutlineView *outlineView;
 	IBOutlet PATypeAheadView *typeAheadView;
+	
+	PATagManagementViewController *tagManagementViewController;
 	
 	PATagger *tagger;
 	PATags *tags;
@@ -70,10 +73,19 @@
 - (PAQuery *)query;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
+/**
+is called when a tag is clicked. increments the tag click count and
+ adds to selectedTags
+ */
+- (IBAction)tagButtonClicked:(id)sender;
 - (IBAction)clearSelectedTags:(id)sender;
+
 - (void)resetBuffer;
 
 // Temp
 - (IBAction)setGroupingAttributes:(id)sender;
+
+// tag management
+- (void)manageTags;
 
 @end

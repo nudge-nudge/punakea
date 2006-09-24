@@ -37,4 +37,9 @@
 	return YES;
 }
 
+- (BrowserViewController*)browserViewController
+{
+	return browserViewController;
+}
+
 @end
