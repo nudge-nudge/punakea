@@ -29,6 +29,7 @@
 	IBOutlet PATypeAheadView *typeAheadView;
 		
 	PAViewController <PABrowserViewMainControllerProtocol> *mainController;
+	NSView *mainView;
 	
 	PATagger *tagger;
 	PATags *tags;
@@ -69,6 +70,10 @@
 
 - (NSString*)buffer;
 - (void)setBuffer:(NSString*)string;
+- (id <PABrowserViewMainControllerProtocol>)mainController;
+- (void)setMainController:(id <PABrowserViewMainControllerProtocol>)aController;
+- (NSView*)mainView;
+- (void)setMainView:(NSView*)aView;
 
 //for PAQuery
 - (PAQuery *)query;
@@ -89,5 +94,7 @@ is called when a tag is clicked. increments the tag click count and
 
 // tag management
 - (void)manageTags;
+
+- (void)switchMainControllerTo:(id <PABrowserViewMainControllerProtocol>)controller;
 
 @end

@@ -210,9 +210,28 @@
 		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
 }
 
-- (void)manageTags
+- (id <PABrowserViewMainControllerProtocol>)mainController
 {
-	// TODO
+	return mainController;
+}
+
+- (void)setMainController:(id <PABrowserViewMainControllerProtocol>)aController
+{
+	[aController retain];
+	[mainController release];
+	mainController = aController;
+}
+
+- (NSView*)mainView
+{
+	return mainView;
+}
+
+- (void)setMainView:(NSView*)aView
+{
+	[aView retain];
+	[mainView release];
+	mainView = aView;
 }
 
 #pragma mark tag stuff
@@ -407,6 +426,25 @@
 		// forward unhandled events
 		[[self nextResponder] keyDown:event];
 	}
+}
+
+#pragma mark actions
+- (void)manageTags
+{
+	PATagManagementViewController *tmvController = [[PATagManagementViewController alloc] init];
+	[self switchMainControllerTo:tmvController];
+	[tmvController release];
+}
+
+- (void)showResults
+{
+	//TODO
+}
+
+- (void)switchMainControllerTo:(id <PABrowserViewMainControllerProtocol>)controller
+{
+	[self setMainController:controller];
+	[self setMainView:[mainController mainView]];
 }
 
 #pragma mark Temp

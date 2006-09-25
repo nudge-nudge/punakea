@@ -11,6 +11,7 @@
 
 @protocol PABrowserViewMainControllerProtocol
 
+- (NSView*)mainView;
 - (void)handleTagActivation:(PATag*)tag;
 - (BOOL)isWorking;
 
