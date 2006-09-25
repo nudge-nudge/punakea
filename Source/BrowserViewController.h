@@ -29,7 +29,6 @@
 	IBOutlet PATypeAheadView *typeAheadView;
 		
 	PAViewController <PABrowserViewMainController> *mainController;
-	NSView *mainView;
 	
 	PATagger *tagger;
 	PATags *tags;
@@ -72,8 +71,6 @@
 - (void)setBuffer:(NSString*)string;
 - (id <PABrowserViewMainController>)mainController;
 - (void)setMainController:(id <PABrowserViewMainController>)aController;
-- (NSView*)mainView;
-- (void)setMainView:(NSView*)aView;
 
 //for PAQuery
 - (PAQuery *)query;

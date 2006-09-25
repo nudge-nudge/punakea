@@ -348,7 +348,6 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* punakea_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = punakea_Prefix.pch; sourceTree = "<group>"; };
-		480A93ED0AC7DE1A00DD352D /* PABrowserViewMainControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserViewMainControllerProtocol.h; sourceTree = "<group>"; };
 		4816340F0A5A48A1003B8EE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Tagger.nib; sourceTree = "<group>"; };
 		481634160A5A4EEB003B8EE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Browser.nib; sourceTree = "<group>"; };
 		4817B29C0ABE849D00ACBBC6 /* PATagGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagGroup.h; sourceTree = "<group>"; };
@@ -693,7 +692,6 @@
 				48D16FEE0A5A6468006C667B /* BrowserController.m */,
 				4856C6720A516D8300E1D568 /* BrowserViewController.h */,
 				4856C6730A516D8300E1D568 /* BrowserViewController.m */,
-				480A93ED0AC7DE1A00DD352D /* PABrowserViewMainControllerProtocol.h */,
 				482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */,
 			);
 			name = Browser;

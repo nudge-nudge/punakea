@@ -222,18 +222,6 @@
 	mainController = aController;
 }
 
-- (NSView*)mainView
-{
-	return mainView;
-}
-
-- (void)setMainView:(NSView*)aView
-{
-	[aView retain];
-	[mainView release];
-	mainView = aView;
-}
-
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {

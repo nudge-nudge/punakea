@@ -11,10 +11,17 @@
 
 @implementation PAViewController
 
-// accessors
+#pragma mark accessors
 - (NSView*)mainView
 {
 	return mainView;
+}
+
+- (void)setMainView:(NSView*)aView
+{
+	[aView retain];
+	[mainView release];
+	mainView = aView;
 }
 
 @end

@@ -15,5 +15,6 @@
 
 // accessors
 - (NSView*)mainView;
+- (void)setMainView:(NSView*)aView;
 
 @end
