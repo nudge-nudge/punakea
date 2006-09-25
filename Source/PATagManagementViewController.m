@@ -15,6 +15,7 @@
 	if (self = [super init])
 	{
 		tagger = [PATagger sharedInstance];
+		tags = [tagger tags];
 		
 		[self setWorking:NO];
 		
@@ -27,6 +28,7 @@
 {
 	[currentEditedTag release];
 	[super dealloc];
+}
 
 #pragma mark accessors
 - (id)delegate
@@ -100,11 +102,8 @@
 	
 	if ([tags tagForName:currentName] == nil || [currentName isEqualTo:editedTagName])
 		return YES;
-	}
 	else
-	{
 		return NO;
-	}
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification
@@ -130,7 +129,7 @@
 	[self setWorking:YES];
 	
 	[tagger removeTag:currentEditedTag];
-	[[tagger tags] removeTag:currentEditedTag];
+	[tags removeTag:currentEditedTag];
 	
 	[self setWorking:NO];
 }

@@ -10,6 +10,7 @@
 #import "PAViewController.h"
 #import "PABrowserViewMainController.h"
 #import "PATagger.h"
+#import "PATags.h"
 
 @interface PATagManagementViewController : PAViewController <PABrowserViewMainController> {
 	id delegate;
@@ -18,6 +19,7 @@
 	PATag *currentEditedTag;
 	
 	PATagger *tagger;
+	PATags *tags;
 	
 	BOOL working;
 }

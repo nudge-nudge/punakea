@@ -20,6 +20,7 @@
 #import "PATypeAheadView.h"
 #import "PAViewController.h"
 #import "PABrowserViewMainController.h"
+#import "PATagManagementViewController.h"
 
 @class PATagCloud;
 
