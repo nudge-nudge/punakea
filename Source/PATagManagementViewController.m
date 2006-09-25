@@ -8,7 +8,6 @@
 
 #import "PATagManagementViewController.h"
 
-
 @implementation PATagManagementViewController
 
 - (id)init
@@ -17,50 +16,52 @@
 	{
 		tagger = [PATagger sharedInstance];
 		
-		[self setDeleting:NO];
-		[self setRenaming:NO];
+		[self setWorking:NO];
 		
 		[NSBundle loadNibNamed:@"TagManagementView" owner:self];
 	}
 	return self;
 }
 
+- (void)dealloc
+{
+	[currentEditedTag release];
+	[super dealloc];
+
 #pragma mark accessors
-- (NSView*)simpleTagManagementView
+- (id)delegate
 {
-	return simpleTagManagementView;
+	return delegate;
 }
 
-- (BOOL)isDeleting
+- (void)setDelegate:(id)anObject
 {
-	return deleting;
+	delegate = anObject;
 }
 
-- (void)setDeleting:(BOOL)flag
+- (PATag*)currentEditedTag
 {
-	deleting = flag;
+	return currentEditedTag;
 }
 
-- (BOOL)isRenaming
+- (void)setCurrentEditedTag:(PATag*)aTag
 {
-	return renaming;
+	[aTag retain];
+	[currentEditedTag release];
+	currentEditedTag = aTag;
 }
 
-- (void)setRenaming:(BOOL)flag
+- (BOOL)isWorking
 {
-	renaming = flag;
+	return working;
+}
+
+- (void)setWorking:(BOOL)flag
+{
+	working = flag;
 }
 
 #pragma mark delegate
-- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor
-{
-	NSLog(@"shouldBegin");
-	
-	[self setEditedTagName:[[fieldEditor string] copy]];
-	return YES;
-}
-
-/*
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
 	NSLog(@"didChange");
@@ -68,9 +69,11 @@
 	NSDictionary *userInfo = [aNotification userInfo];
 	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
 	NSString *currentName = [fieldEditor string];
+	NSString *editedTagName = [currentEditedTag name];
 
 	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
-	
+
+	// DEBUG
 	if ([tags tagForName:currentName] != nil)
 	{
 		NSLog(@"error: %@",[tags tagForName:currentName]);
@@ -91,19 +94,11 @@
 	NSLog(@"shouldEnd");
 
 	NSString *currentName = [fieldEditor string];
+	NSString *editedTagName = [currentEditedTag name];
 	
 	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 	
-	if ([tags tagForName:currentName] == nil)
-	{
-		[control setStringValue:currentName];
-		[control setEnabled:NO];
-		[self renameTag:[tags tagForName:editedTagName] toTagName:currentName];
-		[control setEnabled:YES];
-		return YES;
-	}
-	else if ([currentName isEqualTo:editedTagName])
-	{
+	if ([tags tagForName:currentName] == nil || [currentName isEqualTo:editedTagName])
 		return YES;
 	}
 	else
@@ -111,35 +106,42 @@
 		return NO;
 	}
 }
-*/
+
+- (void)controlTextDidEndEditing:(NSNotification *)aNotification
+{
+	NSLog(@"didEnd");
+	
+	NSDictionary *userInfo = [aNotification userInfo];
+	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
+	NSString *currentName = [fieldEditor string];
+		
+	[self renameTag:currentEditedTag toTagName:currentName];
+}
 
 #pragma mark actions
 - (void)handleTagActivation:(PATag*)tag
 {
-	// TODO
+	[tagNameField setEnabled:YES];
+	[self setCurrentEditedTag:tag];
 }
 
-- (void)removeTags:(NSArray*)tags
+- (IBAction)removeTag:(id)sender
 {
-	[self setDeleting:YES];
+	[self setWorking:YES];
 	
-	NSEnumerator *tagEnumerator = [tags objectEnumerator];
-	PATag *tag;
+	[tagger removeTag:currentEditedTag];
+	[[tagger tags] removeTag:currentEditedTag];
 	
-	while (tag = [tagEnumerator nextObject])
-	{
-		[tagger removeTag:tag];
-	}
-	
-	[self setDeleting:NO];
+	[self setWorking:NO];
 }
 
 - (void)renameTag:(PATag*)oldTag toTagName:(NSString*)newTagName
 {
-	[self setRenaming:YES];
+	[self setWorking:YES];
 	
 	[tagger renameTag:[oldTag name] toTag:newTagName];
-	
-	[self setRenaming:NO];
+	[currentEditedTag setName:newTagName];
+
+	[self setWorking:NO];
 }
 @end

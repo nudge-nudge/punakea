@@ -10,24 +10,27 @@
 #import "PAViewController.h"
 #import "PABrowserViewMainControllerProtocol.h"
 #import "PATagger.h"
-#import "PAQuery.h"
 
 @interface PATagManagementViewController : PAViewController <PABrowserViewMainControllerProtocol> {
-	IBOutlet NSView *simpleTagManagementView;
+	id delegate;
+	IBOutlet NSTextField *tagNameField;
+	
+	PATag *currentEditedTag;
 	
 	PATagger *tagger;
 	
-	BOOL deleting;
-	BOOL renaming;
+	BOOL working;
 }
 
 - (void)handleTagActivation:(PATag*)tag;
 
-- (NSView*)simpleTagManagementView;
+- (id)delegate;
+- (void)setDelegate:(id)anObject;
+- (PATag*)currentEditedTag;
+- (void)setCurrentEditedTag:(PATag*)aTag;
+- (BOOL)isWorking;
+- (void)setWorking:(BOOL)flag;
 
-- (BOOL)isDeleting;
-- (void)setDeleting:(BOOL)flag;
-- (BOOL)isRenaming;
-- (void)setRenaming:(BOOL)flag;
+- (IBAction)removeTag:(id)sender;
 
 @end

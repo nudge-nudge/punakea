@@ -14,9 +14,10 @@
             SUPERCLASS = NSTableView; 
         }, 
         {
+            ACTIONS = {removeTag = id; }; 
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {simpleTagManagementView = NSView; }; 
+            OUTLETS = {tagNameField = NSTextField; }; 
             SUPERCLASS = PAViewController; 
         }, 
         {
