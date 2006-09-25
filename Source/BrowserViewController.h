@@ -19,7 +19,7 @@
 #import "PAResultsOutlineView.h"
 #import "PATypeAheadView.h"
 #import "PAViewController.h"
-#import "PABrowserViewMainControllerProtocol.h"
+#import "PABrowserViewMainController.h"
 
 @class PATagCloud;
 
@@ -28,7 +28,7 @@
 	IBOutlet PAResultsOutlineView *outlineView;
 	IBOutlet PATypeAheadView *typeAheadView;
 		
-	PAViewController <PABrowserViewMainControllerProtocol> *mainController;
+	PAViewController <PABrowserViewMainController> *mainController;
 	NSView *mainView;
 	
 	PATagger *tagger;
@@ -70,8 +70,8 @@
 
 - (NSString*)buffer;
 - (void)setBuffer:(NSString*)string;
-- (id <PABrowserViewMainControllerProtocol>)mainController;
-- (void)setMainController:(id <PABrowserViewMainControllerProtocol>)aController;
+- (id <PABrowserViewMainController>)mainController;
+- (void)setMainController:(id <PABrowserViewMainController>)aController;
 - (NSView*)mainView;
 - (void)setMainView:(NSView*)aView;
 
@@ -95,6 +95,6 @@ is called when a tag is clicked. increments the tag click count and
 // tag management
 - (void)manageTags;
 
-- (void)switchMainControllerTo:(id <PABrowserViewMainControllerProtocol>)controller;
+- (void)switchMainControllerTo:(id <PABrowserViewMainController>)controller;
 
 @end

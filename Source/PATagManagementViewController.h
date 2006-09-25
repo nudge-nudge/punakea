@@ -8,10 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAViewController.h"
-#import "PABrowserViewMainControllerProtocol.h"
+#import "PABrowserViewMainController.h"
 #import "PATagger.h"
 
-@interface PATagManagementViewController : PAViewController <PABrowserViewMainControllerProtocol> {
+@interface PATagManagementViewController : PAViewController <PABrowserViewMainController> {
 	id delegate;
 	IBOutlet NSTextField *tagNameField;
 	

@@ -45,7 +45,7 @@
 		482248340A886DE1008C8CB9 /* PATempTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482248320A886DE1008C8CB9 /* PATempTag.h */; };
 		482248350A886DE1008C8CB9 /* PATempTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 482248330A886DE1008C8CB9 /* PATempTag.m */; };
 		482B31150AC6C70D0071C33B /* ResultsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 482B31130AC6C70D0071C33B /* ResultsView.nib */; };
-		482B314B0AC6D6DD0071C33B /* PABrowserViewMainControllerProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482B31490AC6D6DD0071C33B /* PABrowserViewMainControllerProtocol.h */; };
+		482B314B0AC6D6DD0071C33B /* PABrowserViewMainController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */; };
 		4832722D0AA42D19003D98A6 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4832722B0AA42D19003D98A6 /* Preferences.nib */; };
 		483272340AA42DC6003D98A6 /* UKPrefsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 483272320AA42DC6003D98A6 /* UKPrefsPanel.h */; };
 		483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483272330AA42DC6003D98A6 /* UKPrefsPanel.m */; };
@@ -333,7 +333,7 @@
 				4817B2B00ABE864B00ACBBC6 /* PARecentTagGroup.h in CopyFiles */,
 				4817B3A60ABE8C4A00ACBBC6 /* PAPopularTagGroup.h in CopyFiles */,
 				481A64320ABFD16F005516E7 /* LoginItemsAE.h in CopyFiles */,
-				482B314B0AC6D6DD0071C33B /* PABrowserViewMainControllerProtocol.h in CopyFiles */,
+				482B314B0AC6D6DD0071C33B /* PABrowserViewMainController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +348,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* punakea_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = punakea_Prefix.pch; sourceTree = "<group>"; };
+		480A93ED0AC7DE1A00DD352D /* PABrowserViewMainControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserViewMainControllerProtocol.h; sourceTree = "<group>"; };
 		4816340F0A5A48A1003B8EE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Tagger.nib; sourceTree = "<group>"; };
 		481634160A5A4EEB003B8EE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Browser.nib; sourceTree = "<group>"; };
 		4817B29C0ABE849D00ACBBC6 /* PATagGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagGroup.h; sourceTree = "<group>"; };
@@ -372,7 +373,7 @@
 		482248320A886DE1008C8CB9 /* PATempTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATempTag.h; sourceTree = "<group>"; };
 		482248330A886DE1008C8CB9 /* PATempTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATempTag.m; sourceTree = "<group>"; };
 		482B31140AC6C70D0071C33B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ResultsView.nib; sourceTree = "<group>"; };
-		482B31490AC6D6DD0071C33B /* PABrowserViewMainControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserViewMainControllerProtocol.h; sourceTree = "<group>"; };
+		482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserViewMainController.h; sourceTree = "<group>"; };
 		4832722C0AA42D19003D98A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		483272320AA42DC6003D98A6 /* UKPrefsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPrefsPanel.h; sourceTree = "<group>"; };
 		483272330AA42DC6003D98A6 /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
@@ -692,7 +693,8 @@
 				48D16FEE0A5A6468006C667B /* BrowserController.m */,
 				4856C6720A516D8300E1D568 /* BrowserViewController.h */,
 				4856C6730A516D8300E1D568 /* BrowserViewController.m */,
-				482B31490AC6D6DD0071C33B /* PABrowserViewMainControllerProtocol.h */,
+				480A93ED0AC7DE1A00DD352D /* PABrowserViewMainControllerProtocol.h */,
+				482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */,
 			);
 			name = Browser;
 			sourceTree = "<group>";

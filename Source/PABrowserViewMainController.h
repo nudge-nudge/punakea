@@ -1,5 +1,5 @@
 //
-//  PABrowserViewMainControllerProtocol.h
+//  PABrowserViewMainController.h
 //  punakea
 //
 //  Created by Johannes Hoffart on 24.09.06.
@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
 
-@protocol PABrowserViewMainControllerProtocol
+@protocol PABrowserViewMainController
 
 - (NSView*)mainView;
 - (void)handleTagActivation:(PATag*)tag;

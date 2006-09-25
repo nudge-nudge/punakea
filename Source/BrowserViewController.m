@@ -210,12 +210,12 @@
 		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
 }
 
-- (id <PABrowserViewMainControllerProtocol>)mainController
+- (id <PABrowserViewMainController>)mainController
 {
 	return mainController;
 }
 
-- (void)setMainController:(id <PABrowserViewMainControllerProtocol>)aController
+- (void)setMainController:(id <PABrowserViewMainController>)aController
 {
 	[aController retain];
 	[mainController release];
@@ -441,7 +441,7 @@
 	//TODO
 }
 
-- (void)switchMainControllerTo:(id <PABrowserViewMainControllerProtocol>)controller
+- (void)switchMainControllerTo:(id <PABrowserViewMainController>)controller
 {
 	[self setMainController:controller];
 	[self setMainView:[mainController mainView]];
