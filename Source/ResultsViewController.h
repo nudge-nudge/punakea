@@ -8,11 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAResultsOutlineView.h"
+#import "PAQuery.h"
+#import "PAResultsGroupCell.h"
+#import "PAResultsItemCell.h"
+#import "PAResultsMultiItemCell.h"
 
 
 @interface ResultsViewController : NSObject {
 
 	IBOutlet PAResultsOutlineView			*outlineView;
+
+	PAQuery									*query;
 
 }
 

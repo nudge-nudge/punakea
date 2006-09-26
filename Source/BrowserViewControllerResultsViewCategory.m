@@ -11,7 +11,7 @@
 
 @implementation BrowserViewController (ResultsViewCategory)
 
-#pragma mark Data Source
+#pragma mark ResultsOutlineView Data Source
 - (id)          outlineView:(NSOutlineView *)ov 
   objectValueForTableColumn:(NSTableColumn *)tableColumn
 					 byItem:(id)item
@@ -93,7 +93,7 @@
 }
 
 
-#pragma mark Set Object Value
+#pragma mark ResultsOutlineView Set Object Value
 - (void)outlineView:(NSOutlineView *)ov
      setObjectValue:(id)object
 	 forTableColumn:(NSTableColumn *)tableColumn
@@ -170,7 +170,7 @@
 }
 
 
-#pragma mark Delegate
+#pragma mark ResultsOutlineView Delegate
 - (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
 {		
 	if([item isKindOfClass:[PAQueryBundle class]]) return 20.0;
@@ -315,7 +315,7 @@
 	[defaults setObject:results forKey:@"Results"];
 }
 
-- (void)segmentedControlClicked:(id)sender
+/*- (void)segmentedControlClicked:(id)sender
 {
 	NSString *identifier = [(NSDictionary *)[sender tag] objectForKey:@"identifier"];
 	NSMetadataQueryResultGroup *item = [outlineView groupForIdentifier:identifier];
@@ -337,25 +337,25 @@
 		[defaults setObject:results forKey:@"Results"];
 		
 		// TODO: Remember selected items
-		/*NSMutableIndexSet *selectedIndexes = [NSMutableIndexSet indexSet];
-		if([outlineView isItemExpanded:item])
-		{
-			int row = [outlineView rowForItem:item] + 1;
-			if([[[outlineView itemAtRow:row] class] isEqualTo:[PAResultsMultiItem class]])
-			{
-				
-			} else {
-				int level = [outlineView levelForItem:item];
-				NSIndexSet *indexSet = [outlineView selectedRowIndexes];
-				while([outlineView levelForRow:row] == level)
-				{
-					if([indexSet containsIndex:row])
-						[selectedIndexes addIndex:row];
-					row++;
-				}
-			}
-			NSLog(identifier);
-		}*/
+		//NSMutableIndexSet *selectedIndexes = [NSMutableIndexSet indexSet];
+		//if([outlineView isItemExpanded:item])
+		//{
+		//	int row = [outlineView rowForItem:item] + 1;
+		//	if([[[outlineView itemAtRow:row] class] isEqualTo:[PAResultsMultiItem class]])
+		//	{
+		//		
+		//	} else {
+		//		int level = [outlineView levelForItem:item];
+		//		NSIndexSet *indexSet = [outlineView selectedRowIndexes];
+		//		while([outlineView levelForRow:row] == level)
+		//		{
+		//			if([indexSet containsIndex:row])
+		//				[selectedIndexes addIndex:row];
+		//			row++;
+		//		}
+		//	}
+		//	NSLog(identifier);
+		//}
 		
 		// Refresh the group's display
 		[outlineView reloadItem:item reloadChildren:YES];
@@ -363,12 +363,12 @@
 		//[outlineView setNeedsDisplay];
 		
 		// TODO: Restore selection
-		/*for(int i = 0; i < [selectedIndexes count]; i++)
-		{
-			
-		}*/
+		//for(int i = 0; i < [selectedIndexes count]; i++)
+		//{
+		//	
+		//}
 	}
-}
+} */
 
 - (IBAction)doubleAction:(id)sender
 {

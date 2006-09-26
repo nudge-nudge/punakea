@@ -16,15 +16,19 @@
 {
 	if(self = [super init])
 	{
-		// nothing
+		query = [[PAQuery alloc] init];
+		[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
+		[query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-
+	if(query) [query release];
 	[super dealloc];
 }
+
+// TODO: Copy data source and delegate methods from BrowserViewController
 
 @end
