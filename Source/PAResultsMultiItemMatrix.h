@@ -15,7 +15,7 @@
 
 @interface PAResultsMultiItemMatrix : NSMatrix {
 
-	NSArray					*items;
+	NSMutableArray			*items;
 	NSCell					*multiItemCell;
 	
 	NSCell					*selectedCell;

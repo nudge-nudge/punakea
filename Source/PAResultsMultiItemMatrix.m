@@ -749,12 +749,16 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[[self window] makeFirstResponder:self];
 }
 
-/*- (void)textDidChange:(NSNotification *)notification
+- (void)textDidChange:(NSNotification *)notification
 {
 	[super textDidChange:notification];
 	
+	int r, c;
+	[self getRow:&r column:&c ofCell:[self selectedCell]];
+	
 	// Set text color to red if the new destination already exists
-	PAQueryItem *item = [self itemAtRow:[self selectedRow]];
+	int index = r * [self numberOfColumns] + c;
+	PAQueryItem *item = [items objectAtIndex:index];
 	PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
 	
 	NSText *textView = [notification object];
@@ -768,7 +772,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	} else {
 		[textView setTextColor:[NSColor textColor]];
 	}
-}*/
+}
 
 - (void)textDidEndEditing:(NSNotification *)notification
 {
@@ -783,6 +787,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 	// Force editing to end after pressing the Return key
 	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
+	
+	int r, c;
+	[self getRow:&r column:&c ofCell:[self selectedCell]];
 
 	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
 
@@ -802,6 +809,31 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[newUserInfo release];
 
 		[[self window] makeFirstResponder:self];
+		
+		// Forward renaming request to our delegate (thats equal to the outlineView's delegate)		
+		int index = r * [self numberOfColumns] + c;
+		PAQueryItem *item = [items objectAtIndex:index];
+		PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
+		
+		PAFile *newFile = [[self delegate] renameFile:file to:[textView string]];
+		
+		if(newFile)
+		{
+			// Update the PAQueryItem
+			[item setValue:[textView string] forAttribute:(id)kMDItemDisplayName];
+			[item setValue:[newFile path] forAttribute:(id)kMDItemPath];
+			
+			// Update items collection
+			[items removeObjectAtIndex:index];
+			[items insertObject:item atIndex:index];
+			
+			// Update cell
+			NSTextFieldCell *cell =
+				[[[[self cellClass] alloc]
+					initTextCell:[item valueForAttribute:(id)kMDItemDisplayName]] autorelease];				
+			[cell setValueDict:item];
+			[self putCell:cell atRow:r column:c];
+		}		
 	}
 	else if(textMovement == NSIllegalTextMovement)
 	{		
@@ -809,6 +841,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[textView removeFromSuperview];		
 		[[self window] makeFirstResponder:self];
     }
+	
+	[self highlightCell:YES atRow:r column:c];
+	[self setNeedsDisplay:YES];
 }
 
 

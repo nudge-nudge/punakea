@@ -12,7 +12,7 @@
 
 @interface PAResultsMultiItemCell : NSCell {
 
-	NSArray						*items;
+	NSMutableArray				*items;
 	PAResultsMultiItemMatrix	*matrix;
 
 }

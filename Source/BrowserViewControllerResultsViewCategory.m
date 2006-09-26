@@ -104,30 +104,34 @@
 	
 	PAFile *file = [PAFile fileWithPath:[queryItem valueForAttribute:(id)kMDItemPath]];
 	
-	NSString *source = [file path];
-	NSString *destination = [file directory];
-	destination = [destination stringByAppendingPathComponent:value];
-	
-	// Return if source equals destination
-	if([source isEqualToString:destination]) return;
-	
-	// TODO: Add error handler
-	BOOL fileWasMoved;
-	
-	if([destination compare:source options:NSCaseInsensitiveSearch] == NSOrderedSame)
-		fileWasMoved = NO;
-	else
-		fileWasMoved = [[NSFileManager defaultManager] movePath:source toPath:destination handler:self];
+	PAFile *newFile = [self renameFile:file to:value];
 	
 	// TODO: Currently we set the displayName + path by hand in the following lines. Maybe we can
 	// do this with a query update automatically...
-	if(fileWasMoved)
+	if(newFile)
 	{
-		[item setValue:value forAttribute:(id)kMDItemDisplayName];
-		[item setValue:destination forAttribute:(id)kMDItemPath];
+		[queryItem setValue:value forAttribute:(id)kMDItemDisplayName];
+		[queryItem setValue:[newFile path] forAttribute:(id)kMDItemPath];
 	
 		[ov reloadItem:item];
 	}
+}
+
+- (PAFile *)renameFile:(PAFile *)file to:(NSString *)newName
+{
+	NSString *source = [file path];
+	NSString *destination = [file directory];
+	destination = [destination stringByAppendingPathComponent:newName];
+	
+	// Return NO if source equals destination
+	if([source isEqualToString:destination]) return nil;
+	
+	BOOL fileWasMoved = [[NSFileManager defaultManager] movePath:source toPath:destination handler:self];
+	
+	if(fileWasMoved)
+		return [PAFile fileWithPath:destination];
+	else
+		return nil;
 }
 
 - (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path

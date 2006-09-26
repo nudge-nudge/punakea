@@ -60,6 +60,7 @@
 		
 		Class cellClass = [PAResultsMultiItemThumbnailCell class];
 		[matrix setCellClass:cellClass];
+		[matrix setDelegate:[controlView delegate]];
 		
 		[matrix setItems:items];	
 		[controlView addSubview:matrix];

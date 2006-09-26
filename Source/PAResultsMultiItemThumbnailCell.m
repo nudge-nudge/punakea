@@ -147,6 +147,11 @@
 	return value;
 }
 
+- (void)setValue:(NSString *)string
+{
+	value = string;
+}
+
 - (void)setValueDict:(NSDictionary *)aDictionary
 {
 	valueDict = [aDictionary retain];
