@@ -233,6 +233,8 @@
 		65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */; };
 		65D86D5C09F15BA8006BCC8D /* PAResultsMultiItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */; };
 		65D86E3E09F15E1B006BCC8D /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */; };
+		65E3B4760AC9157E00E39CBB /* ResultsViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E3B4740AC9157E00E39CBB /* ResultsViewController.h */; };
+		65E3B4770AC9157E00E39CBB /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E3B4750AC9157E00E39CBB /* ResultsViewController.m */; };
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Core.m */; };
@@ -334,6 +336,7 @@
 				4817B3A60ABE8C4A00ACBBC6 /* PAPopularTagGroup.h in CopyFiles */,
 				481A64320ABFD16F005516E7 /* LoginItemsAE.h in CopyFiles */,
 				482B314B0AC6D6DD0071C33B /* PABrowserViewMainController.h in CopyFiles */,
+				65E3B4760AC9157E00E39CBB /* ResultsViewController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +564,8 @@
 		65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemCell.h; sourceTree = "<group>"; };
 		65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemCell.m; sourceTree = "<group>"; };
 		65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
+		65E3B4740AC9157E00E39CBB /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
+		65E3B4750AC9157E00E39CBB /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
 		65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewControllerResultsViewCategory.h; sourceTree = "<group>"; };
@@ -1019,6 +1024,8 @@
 		6588132C09DDCA7300428B83 /* ResultsView */ = {
 			isa = PBXGroup;
 			children = (
+				65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */,
+				65E9C9990A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m */,
 				65C0E04109E3EF11006C5A7C /* PAResultsGroupCell.h */,
 				65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */,
 				6563884909E419D300BE59AE /* PAResultsItemCell.h */,
@@ -1035,8 +1042,8 @@
 				65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */,
 				65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */,
 				65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */,
-				65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */,
-				65E9C9990A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m */,
+				65E3B4740AC9157E00E39CBB /* ResultsViewController.h */,
+				65E3B4750AC9157E00E39CBB /* ResultsViewController.m */,
 			);
 			name = ResultsView;
 			sourceTree = "<group>";
@@ -1368,6 +1375,7 @@
 				4817B2B10ABE864B00ACBBC6 /* PARecentTagGroup.m in Sources */,
 				4817B3A70ABE8C4A00ACBBC6 /* PAPopularTagGroup.m in Sources */,
 				481A64310ABFD16F005516E7 /* LoginItemsAE.c in Sources */,
+				65E3B4770AC9157E00E39CBB /* ResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

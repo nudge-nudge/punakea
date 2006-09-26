@@ -20,6 +20,12 @@
             LANGUAGE = ObjC; 
             OUTLETS = {datasource = id; delegate = id; }; 
             SUPERCLASS = NSView; 
+        }, 
+        {
+            CLASS = ResultsViewController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {outlineView = PAResultsOutlineView; }; 
+            SUPERCLASS = NSObject; 
         }
     ); 
     IBVersion = 1; 

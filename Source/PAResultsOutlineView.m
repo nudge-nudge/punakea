@@ -259,25 +259,21 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     
     if ([[self selectedRowIndexes] containsIndex:mouseRow] && (modifierDown == NO) && (doubleClick == NO))
     {
-		if([self selectedRow] == mouseRow)
+		// cancel any previous editing action
+		[NSObject cancelPreviousPerformRequestsWithTarget:self
+												 selector:@selector(beginEditing)
+												   object:nil];
+	
+		int count = [[self selectedRowIndexes] count];
+		if([self selectedRow] == mouseRow && count <= 1)
 		{
-			// cancel any previous editing action
-			[NSObject cancelPreviousPerformRequestsWithTarget:self
-													 selector:@selector(beginEditing)
-										               object:nil];
-		
 			// perform editing like finder
 			[self performSelector:@selector(beginEditing)
 			           withObject:nil
 					   afterDelay:doubleClickThreshold];
 		}
 		else
-		{	
-			// cancel editing action
-			[NSObject cancelPreviousPerformRequestsWithTarget:self
-													 selector:@selector(beginEditing)
-													   object:nil];
-		
+		{ 	
 			// wait to see if there is a double-click: if not, select the row as usual
 			[self performSelector:@selector(selectOnlyRowIndexes:)
 					   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
@@ -288,7 +284,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			[super mouseDown:theEvent]; 
 		}
     }
-    else if (doubleClick == YES)
+    else if(doubleClick)
     {		
 		// cancel editing action
 		[NSObject cancelPreviousPerformRequestsWithTarget:self
