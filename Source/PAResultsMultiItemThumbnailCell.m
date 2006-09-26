@@ -12,20 +12,19 @@
 @implementation PAResultsMultiItemThumbnailCell
 
 #pragma mark Init + Dealloc
-- (id)initTextCell:(NSString *)aText
+- (id)initTextCell:(PAQueryItem *)anItem
 {
-	self = [super initTextCell:aText];
+	self = [super initTextCell:@""];
 	if (self)
 	{
-		value = aText;	
+		item = [anItem retain];	
 	}	
 	return self;
 }
 
 - (void)dealloc
 {
-	if(valueDict) [valueDict release];
-	if(value) [value release];
+	if(item) [item release];
 	[super dealloc];
 }
 
@@ -38,6 +37,7 @@
 	NSRectFill(cellFrame);
 
 	// Attributed string for value
+	NSString *value = [item valueForAttribute:(id)kMDItemDisplayName];
 	NSMutableAttributedString *valueLabel = [[NSMutableAttributedString alloc] initWithString:value];
 	[valueLabel addAttribute:NSFontAttributeName
 					   value:[NSFont systemFontOfSize:11]
@@ -98,7 +98,7 @@
 	
 	// Draw thumbnail
 	NSImage *thumbImage = [[PAThumbnailManager sharedInstance]
-				thumbnailWithContentsOfFile:[valueDict valueForAttribute:kMDItemPath]
+				thumbnailWithContentsOfFile:[item valueForAttribute:(id)kMDItemPath]
 				                     inView:controlView
 									  frame:cellFrame];
 	
@@ -133,7 +133,7 @@
 	[super selectWithFrame:frame inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 	
 	[textObj setFont:[NSFont systemFontOfSize:11]];
-	[textObj setString:[self value]];
+	[textObj setString:[item valueForAttribute:(id)kMDItemDisplayName]];
 	
 	[textObj selectAll:self];
 	
@@ -142,19 +142,15 @@
 
 
 #pragma mark Accessors
-- (NSString *)value
+- (PAQueryItem *)item
 {
-	return value;
+	return item;
 }
 
-- (void)setValue:(NSString *)string
+- (void)setItem:(PAQueryItem *)anItem
 {
-	value = string;
-}
-
-- (void)setValueDict:(NSDictionary *)aDictionary
-{
-	valueDict = [aDictionary retain];
+	if(item) [item release];
+	item = [anItem retain];
 }
 
 

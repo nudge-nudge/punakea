@@ -9,16 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import "PAThumbnailManager.h"
 #import "NSBezierPathCategory.h"
-//#import "Epeg/EpegWrapperPublic.h"
+#import "PAQueryItem.h"
 
 
 @interface PAResultsMultiItemThumbnailCell : NSTextFieldCell {
-	
-	// TODO: Needed?
-	NSString				*value;
-	
-	// TODO: Replace valueDict by PAQueryItem (type and name change)
-	NSDictionary			*valueDict;
+
+	PAQueryItem			*item;
 	
 }
 

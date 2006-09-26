@@ -11,6 +11,17 @@
 
 @implementation PAResultsMultiItemPlaceholderCell
 
+#pragma mark Init + Dealloc
+- (id)initTextCell
+{
+	self = [super initTextCell:@""];
+	if (self)
+	{
+		// nothing
+	}	
+	return self;
+}
+
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
@@ -22,11 +33,6 @@
 	// Do nothing
 }
 
-#pragma mark Accessors
-- (NSString *)value
-{
-	return @"";
-}
 
 #pragma mark Class methods
 + (NSSize)cellSize

@@ -94,7 +94,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			for(int i = 0; i < column; i++)
 			{
 				NSTextFieldCell *cell = [[[PAResultsMultiItemPlaceholderCell alloc]
-										   initTextCell:@""] autorelease];
+										   initTextCell] autorelease];
 				[self putCell:cell atRow:row+1 column:i];
 			}
 			
@@ -150,7 +150,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	int numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
 	
 	NSEnumerator *enumerator = [items objectEnumerator];
-	NSDictionary *anObject;
+	PAQueryItem *anObject;
 	
 	int row = 0;
 	int column = 0;
@@ -158,9 +158,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	{
 		NSTextFieldCell *cell =
 			[[[[self cellClass] alloc]
-				initTextCell:[anObject valueForAttribute:(id)kMDItemDisplayName]] autorelease];				
-		[cell setValueDict:anObject];
-		//[cell setEditable:YES];
+				initTextCell:anObject] autorelease];				
 		
 		if(column == numberOfItemsPerRow) 
 		{
@@ -170,7 +168,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			for(int i = 0; i < column; i++)
 			{
 				NSTextFieldCell *cell = [[[PAResultsMultiItemPlaceholderCell alloc]
-										   initTextCell:@""] autorelease];
+										   initTextCell] autorelease];
 				[self putCell:cell atRow:row+1 column:i];
 			}
 			
@@ -830,8 +828,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			// Update cell
 			NSTextFieldCell *cell =
 				[[[[self cellClass] alloc]
-					initTextCell:[item valueForAttribute:(id)kMDItemDisplayName]] autorelease];				
-			[cell setValueDict:item];
+					initTextCell:item] autorelease];				
 			[self putCell:cell atRow:r column:c];
 		}		
 	}
