@@ -1,6 +1,7 @@
 /* PAResultsOutlineView */
 
 #import <Cocoa/Cocoa.h>
+#import "PAResultsGroupCell.h"
 #import "PAResultsItemCell.h"
 #import "PAResultsMultiItemCell.h"
 #import "PAResultsMultiItemThumbnailCell.h"

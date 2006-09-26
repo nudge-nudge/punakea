@@ -8,11 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
+#import "PAViewController.h"
 
-@protocol PABrowserViewMainController
+@interface PABrowserViewMainController : PAViewController {
+	id delegate;
+}
 
 - (NSView*)mainView;
 - (void)handleTagActivation:(PATag*)tag;
+- (id)delegate;
+- (void)setDelegate:(id)anObject;
 - (BOOL)isWorking;
 
 @end

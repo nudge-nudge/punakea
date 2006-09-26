@@ -7,45 +7,26 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-
-typedef enum _PAImageButtonState
-{
-	PAOnState = 0,
-	PAOffState = 1,
-	PAOnHighlightedState = 2,
-	PAOffHighlightedState = 3,
-	PAOnDisabledState = 4,
-	PAOffDisabledState = 5,
-	PAOnHoveredState = 6,
-	PAOffHoveredState = 7
-} PAImageButtonState;
-
-typedef enum _PAImageButtonType
-{
-	PAMomentaryLightButton = 0,
-	PASwitchButton = 1
-} PAImageButtonType;
-
+#import "PAButtonCell.h"
 
 @interface PAImageButtonCell : NSButtonCell {
 
 	NSMutableDictionary *images;
-	PAImageButtonState state;
-	PAImageButtonState previousState;
-	PAImageButtonType type;
+	PAButtonState state;
+	PAButtonState previousState;
+	PAButtonType type;
 	NSMutableDictionary *tag;
 	
 }
 
 - (id)initImageCell:(NSImage *)anImage;
-- (void)setButtonType:(PAImageButtonType)aType;
-- (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState;
+- (void)setButtonType:(PAButtonType)aType;
+- (void)setImage:(NSImage *)anImage forState:(PAButtonState)aState;
 
 - (BOOL)isHighlighted;
 - (void)setHighlighted:(BOOL)flag;
-- (PAImageButtonState)state;
-- (void)setState:(PAImageButtonState)aState;
+- (PAButtonState)state;
+- (void)setState:(PAButtonState)aState;
 - (NSMutableDictionary *)tag;
 - (void)setTag:(NSMutableDictionary *)aTag;
 

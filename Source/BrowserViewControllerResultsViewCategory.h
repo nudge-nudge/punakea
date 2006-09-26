@@ -7,12 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "BrowserViewController.h"
-#import "PAResultsGroupCell.h"
-#import "PAResultsItemCell.h"
-#import "PAResultsMultiItemCell.h"
+#import "PAResultsViewController.h"
 
-
-@interface BrowserViewController (ResultsViewCategory) 
+@interface PAResultsViewController (ResultsViewCategory) 
 
 @end

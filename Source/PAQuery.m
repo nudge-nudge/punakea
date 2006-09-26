@@ -50,10 +50,10 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (void)dealloc
 {
 	if ([self isStarted]) [self stopQuery];	
-	if(mdquery) [mdquery release];
-	if(bundlingAttributes) [bundlingAttributes release];
-	if(filterDict) [filterDict release];
-	if(predicate) [predicate release];
+	[mdquery release];
+	[bundlingAttributes release];
+	[filterDict release];
+	[predicate release];
 	[super dealloc];
 }
 

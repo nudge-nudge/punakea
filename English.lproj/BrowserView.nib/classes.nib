@@ -1,11 +1,11 @@
 {
     IBClasses = (
         {
-            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
+            ACTIONS = {tagButtonClicked = id; }; 
             CLASS = BrowserViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
-                outlineView = PAResultsOutlineView; 
+                controlledView = NSView; 
                 tagCloud = PATagCloud; 
                 typeAheadView = PATypeAheadView; 
             }; 

@@ -1,19 +1,37 @@
 {
     IBClasses = (
+        {
+            ACTIONS = {tagButtonClicked = id; }; 
+            CLASS = BrowserViewController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                controlledView = NSView; 
+                tagCloud = PATagCloud; 
+                typeAheadView = PATypeAheadView; 
+            }; 
+            SUPERCLASS = PAViewController; 
+        }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             CLASS = PAFilterSlice; 
             LANGUAGE = ObjC; 
-            OUTLETS = {controller = BrowserViewController; outlineView = NSOutlineView; }; 
-            SUPERCLASS = NSMatrix; 
+            OUTLETS = {controller = PAResultsViewController; outlineView = PAResultsOutlineView; }; 
+            SUPERCLASS = NSView; 
         }, 
         {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {
+            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
+            CLASS = PAResultsViewController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {outlineView = PAResultsOutlineView; }; 
+            SUPERCLASS = PAViewController; 
+        }, 
+        {
             CLASS = PASelectedTagsView; 
             LANGUAGE = ObjC; 
-            OUTLETS = {browserViewController = BrowserViewController; }; 
-            SUPERCLASS = NSMatrix; 
+            OUTLETS = {controller = PAResultsViewController; }; 
+            SUPERCLASS = NSView; 
         }, 
         {
             CLASS = PATagCloud; 
@@ -22,10 +40,10 @@
             SUPERCLASS = NSView; 
         }, 
         {
-            CLASS = ResultsViewController; 
+            CLASS = PAViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {outlineView = PAResultsOutlineView; }; 
-            SUPERCLASS = NSObject; 
+            OUTLETS = {mainView = NSView; }; 
+            SUPERCLASS = NSResponder; 
         }
     ); 
     IBVersion = 1; 

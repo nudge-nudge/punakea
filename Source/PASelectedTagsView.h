@@ -7,14 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "BrowserViewController.h"
+#import "PAResultsViewController.h"
 #import "PATag.h"
 #import "PASelectedTags.h"
 #import "PAButton.h"
 
 @interface PASelectedTagsView : NSView {
 	
-	IBOutlet BrowserViewController		*browserViewController;
+	IBOutlet PAResultsViewController	*controller;
 	PASelectedTags						*selectedTags;
 	
 	NSMutableDictionary					*tagButtons;

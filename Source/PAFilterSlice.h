@@ -10,13 +10,13 @@
 #import "PAQuery.h"
 #import "PAFilterButton.h"
 #import "PAResultsOutlineView.h"
-#import "BrowserViewController.h"
+#import "PAResultsViewController.h"
 
 
 @interface PAFilterSlice : NSView {
 
 	IBOutlet PAResultsOutlineView		*outlineView;
-	IBOutlet BrowserViewController		*controller; 	
+	IBOutlet PAResultsViewController	*controller; 	
 	
 	NSMutableArray						*buttons;
 

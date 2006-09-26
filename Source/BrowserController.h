@@ -10,7 +10,6 @@
 #import "BrowserViewController.h"
 #import "PAQuery.h"
 #import "PATagCloud.h"
-#import "PAResultsOutlineView.h"
 
 @interface BrowserController : NSWindowController 
 {

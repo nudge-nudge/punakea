@@ -7,13 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAViewController.h"
 #import "PABrowserViewMainController.h"
 #import "PATagger.h"
 #import "PATags.h"
 
-@interface PATagManagementViewController : PAViewController <PABrowserViewMainController> {
-	id delegate;
+@interface PATagManagementViewController : PABrowserViewMainController {
 	IBOutlet NSTextField *tagNameField;
 	
 	PATag *currentEditedTag;
@@ -25,14 +23,15 @@
 }
 
 - (void)handleTagActivation:(PATag*)tag;
-
 - (id)delegate;
 - (void)setDelegate:(id)anObject;
+
 - (PATag*)currentEditedTag;
 - (void)setCurrentEditedTag:(PATag*)aTag;
 - (BOOL)isWorking;
 - (void)setWorking:(BOOL)flag;
 
 - (IBAction)removeTag:(id)sender;
+- (void)renameTag:(PATag*)oldTag toTagName:(NSString*)newTagName;
 
 @end

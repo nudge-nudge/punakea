@@ -25,7 +25,7 @@
 @implementation BrowserViewController
 
 #pragma mark init + dealloc
-- (id)initWithNibName:(NSString*)nibName
+- (id)init
 {
 	if (self = [super init])
 	{
@@ -35,60 +35,31 @@
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
 				
-		selectedTags = [[PASelectedTags alloc] init];
-		
-		query = [[PAQuery alloc] init];
-		[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
-		[query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
-		
-		relatedTags = [[PARelatedTags alloc] initWithSelectedTags:selectedTags query:query];
-		
 		typeAheadFind = [[PATypeAheadFind alloc] init];
 		
 		buffer = [[NSMutableString alloc] init];
-		
-		nc = [NSNotificationCenter defaultCenter];
-		
-		[nc addObserver:self 
-			   selector:@selector(selectedTagsHaveChanged:) 
-				   name:@"PASelectedTagsHaveChanged" 
-				 object:selectedTags];
-		
-		[nc addObserver:self 
-			   selector:@selector(relatedTagsHaveChanged:) 
-				   name:@"PARelatedTagsHaveChanged" 
-				 object:relatedTags];
-		
-		[nc addObserver:self 
-			   selector:@selector(tagsHaveChanged:) 
-				   name:@"PATagsHaveChanged" 
-				 object:tags];
 		
 		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
 		
 		[self setVisibleTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
 
-		[NSBundle loadNibNamed:nibName owner:self];
+		[NSBundle loadNibNamed:@"BrowserView" owner:self];
 	}
 	return self;
 }
 
 - (void)awakeFromNib
 {
+	[self showResults];
 	[[[self mainView] window] setInitialFirstResponder:tagCloud];
-	[outlineView setQuery:query];
 }	
 
 - (void)dealloc
 {
-	[nc removeObserver:self];
 	[visibleTags release];
 	[buffer release];
 	[typeAheadFind release];
-	[relatedTags release];
-    [query release];
-	[selectedTags release];
 	[tagCloudSettings release];
 	[super dealloc];
 }
@@ -106,41 +77,6 @@
 }
 
 #pragma mark accessors
-// This method returns a pointer to the view in the nib loaded.
--(NSView*)mainView
-{
-	return mainView;
-}
-
-- (PAQuery*)query 
-{
-	return query;
-}
-
-- (PARelatedTags*)relatedTags;
-{
-	return relatedTags;
-}
-
-- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags
-{
-	[otherRelatedTags retain];
-	[relatedTags release];
-	relatedTags = otherRelatedTags;
-}
-
-- (PASelectedTags*)selectedTags;
-{
-	return selectedTags;
-}
-
-- (void)setSelectedTags:(PASelectedTags*)otherSelectedTags
-{
-	[otherSelectedTags retain];
-	[selectedTags release];
-	selectedTags = otherSelectedTags;
-}
-
 - (PATag*)currentBestTag
 {
 	return currentBestTag;
@@ -162,16 +98,6 @@
 {
 	[buffer release];
 	buffer = [string mutableCopy];
-}
-
-- (NSOutlineView *)outlineView
-{
-	return outlineView;
-}
-
-- (void)setOutlineView:(NSOutlineView *)anOutlineView
-{
-	outlineView = anOutlineView;
 }
 
 - (NSMutableArray*)visibleTags;
@@ -210,23 +136,32 @@
 		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
 }
 
-- (id <PABrowserViewMainController>)mainController
+- (PABrowserViewMainController*)mainController
 {
 	return mainController;
 }
 
-- (void)setMainController:(id <PABrowserViewMainController>)aController
+- (void)setMainController:(PABrowserViewMainController*)aController
 {
 	[aController retain];
 	[mainController release];
 	mainController = aController;
+	[mainController setDelegate:self];
+}
+
+- (BOOL)isWorking
+{
+	if (!mainController || ![mainController isWorking])
+		return NO;
+	else
+		return YES;
 }
 
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {
 	PATag *tag = [sender fileTag];
-	[selectedTags addTag:tag];
+	[mainController handleTagActivation:tag];
 	[tag incrementClickCount];
 }
 
@@ -246,11 +181,6 @@
 	}	
 	
 	return maxTag;
-}
-
-- (IBAction)clearSelectedTags:(id)sender
-{
-	[selectedTags removeAllTags];
 }
 
 - (void)bufferHasChanged
@@ -298,65 +228,6 @@
 	[typeAheadView setHidden:YES];	
 }
 
-//needs to be called whenever the selected tags have been changed
-- (void)selectedTagsHaveChanged:(NSNotification*)notification
-{
-	if ([buffer length] > 0)
-	{
-		[self resetBuffer];
-	}
-	
-	//stop an active query
-	if ([query isStarted])
-	{
-		[query stopQuery];
-	}
-	
-	[query setTags:selectedTags];
-	
-	//the query is only started, if there are any tags to look for
-	if ([selectedTags count] > 0)
-	{
-		[query startQuery];
-		
-		// empty visible tags until new related tags are found
-		[self setVisibleTags:[NSMutableArray array]];
-	}
-	else 
-	{
-		// there are no selected tags, reset all tags
-		[self setVisibleTags:[tags tags]];
-		[typeAheadFind setActiveTags:[tags tags]];
-	}
-}
-
-- (void)relatedTagsHaveChanged:(NSNotification*)notification
-{
-	if ([buffer length] > 0)
-	{
-		[self resetBuffer];
-	}
-	
-	[self setVisibleTags:[relatedTags relatedTagArray]];
-	[typeAheadFind setActiveTags:[relatedTags relatedTagArray]];
-}
-
-- (void)tagsHaveChanged:(NSNotification*)notification
-{
-	if ([buffer length] > 0)
-	{
-		[self resetBuffer];
-	}
-	
-	/*only do something if there are no selected tags,
-	because then the relatedTags are shown */
-	if ([selectedTags count] == 0)
-	{
-		[self setVisibleTags:[tags tags]];
-		[typeAheadFind setActiveTags:[tags tags]];
-	}
-}
-
 - (void)resetBuffer
 {
 	[self setBuffer:@""];
@@ -380,11 +251,13 @@
 			NSString *tmpBuffer = [buffer substringToIndex:[buffer length]-1];
 			[self setBuffer:tmpBuffer];
 		}
+		/* TODO
 		else if ([selectedTags count] > 0)
 		// else delete the last selected tag
 		{
 			[selectedTags removeLastTag];
 		}
+		*/
 	}
 	// handle escape key (27)
 	else if (key == 27)
@@ -426,25 +299,18 @@
 
 - (void)showResults
 {
-	//TODO
+	PAResultsViewController *rvController = [[PAResultsViewController alloc] init];
+	[self switchMainControllerTo:rvController];
+	[rvController release];
 }
 
-- (void)switchMainControllerTo:(id <PABrowserViewMainController>)controller
+- (void)switchMainControllerTo:(PABrowserViewMainController*)controller
 {
+	if (mainController)
+		[[mainController mainView] removeFromSuperview];
+
 	[self setMainController:controller];
-	[self setMainView:[mainController mainView]];
-}
-
-#pragma mark Temp
-- (void)setGroupingAttributes:(id)sender;
-{
-	NSSegmentedControl *sc = sender;
-	if([sc selectedSegment] == 0) {
-		[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
-	}
-	if([sc selectedSegment] == 1) {
-		[query setBundlingAttributes:[NSArray arrayWithObjects:nil]];
-	}
+	[controlledView addSubview:[mainController mainView]];
 }
 
 @end

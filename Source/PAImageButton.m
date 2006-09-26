@@ -22,12 +22,12 @@
     return self;
 }
 
-- (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState
+- (void)setImage:(NSImage *)anImage forState:(PAButtonState)aState
 {
 	[[self cell] setImage:anImage forState:aState];
 }
 
-- (void)setButtonType:(PAImageButtonType)aType
+- (void)setButtonType:(PAButtonType)aType
 {
 	[[self cell] setButtonType:aType];
 }
@@ -45,12 +45,12 @@
 
 
 #pragma mark Accessors
-- (PAImageButtonState)state
+- (PAButtonState)state
 {
 	return [[self cell] state];
 }
 
-- (void)setState:(PAImageButtonState)aState
+- (void)setState:(PAButtonState)aState
 {
 	[[self cell] setState:aState];
 }

@@ -11,9 +11,9 @@
 
 @interface PAImageButtonCell (PrivateAPI)
 
-- (PAImageButtonState)state;
-- (void)setState:(PAImageButtonState)aState;
-- (NSString*)stringForState:(PAImageButtonState)aState;
+- (PAButtonState)state;
+- (void)setState:(PAButtonState)aState;
+- (NSString*)stringForState:(PAButtonState)aState;
 
 @end
 
@@ -73,12 +73,12 @@
 
 
 #pragma mark Data Source
-- (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState
+- (void)setImage:(NSImage *)anImage forState:(PAButtonState)aState
 {
 	[images setObject:anImage forKey:[self stringForState:aState]];
 }
 
-- (void)setButtonType:(PAImageButtonType)aType
+- (void)setButtonType:(PAButtonType)aType
 {
 	type = aType;
 }
@@ -86,7 +86,7 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	PAImageButtonState thisState = [self state];
+	PAButtonState thisState = [self state];
 	if(![[controlView window] isKeyWindow])
 	{
 		if([self state] == PAOnState) 
@@ -153,8 +153,8 @@
 
 - (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView
 {	
-	PAImageButtonState newHighlightedState;
-	PAImageButtonState newState;
+	PAButtonState newHighlightedState;
+	PAButtonState newState;
 	
 	if(type == PAMomentaryLightButton)
 	{
@@ -200,7 +200,7 @@
 	}
 	else
 	{
-		PAImageButtonState newState;
+		PAButtonState newState;
 		if(state == PAOffState || state == PAOnHighlightedState) { newState = PAOnState; }
 		if(state == PAOnState || state == PAOffHighlightedState) { newState = PAOffState; }
 		[self setState:newState];
@@ -211,7 +211,7 @@
 /**
 	NSDictionary needs to get an object for key, so I can't use just the enum value...
 */
-- (NSString*)stringForState:(PAImageButtonState)aState
+- (NSString*)stringForState:(PAButtonState)aState
 {
 	NSString *name;
 	switch(aState)
@@ -238,14 +238,14 @@
 }
 
 #pragma mark Accessors
-- (PAImageButtonState)state
+- (PAButtonState)state
 {
 	return state;
 }
 
-- (void)setState:(PAImageButtonState)aState
+- (void)setState:(PAButtonState)aState
 {
-	PAImageButtonState previousState = [self state];
+	PAButtonState previousState = [self state];
 	state = aState;
 	if(previousState != state) [[self controlView] setNeedsDisplay:YES];
 }

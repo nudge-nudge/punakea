@@ -21,12 +21,18 @@
 {
 	[[self window] setFrameAutosaveName:@"punakea.browser"];
 	
-	browserViewController = [[BrowserViewController alloc] initWithNibName:@"BrowserView"];
+	browserViewController = [[BrowserViewController alloc] init];
 	[[self window] setContentView:[browserViewController mainView]];
 	
 	// insert browserViewController in the responder chain
 	[browserViewController setNextResponder:[self window]];
 	[[[self window] contentView] setNextResponder:browserViewController];
+}
+
+- (void)dealloc
+{
+	[browserViewController release];
+	[super dealloc];
 }
 
 - (BOOL)windowShouldClose:(id)sender

@@ -13,6 +13,7 @@
 
 - (void)drawBorder;
 - (void)updateView;
+
 @end
 
 
@@ -31,7 +32,7 @@
 
 - (void)awakeFromNib
 {
-	selectedTags = [browserViewController selectedTags];
+	selectedTags = [controller selectedTags];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTagButtons:) name:@"PASelectedTagsHaveChanged" object:selectedTags];
 }
@@ -39,9 +40,7 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	if(tagButtons) [tagButtons release];
-	
+	[tagButtons release];
 	[super dealloc];
 }
 

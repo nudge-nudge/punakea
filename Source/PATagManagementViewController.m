@@ -31,16 +31,6 @@
 }
 
 #pragma mark accessors
-- (id)delegate
-{
-	return delegate;
-}
-
-- (void)setDelegate:(id)anObject
-{
-	delegate = anObject;
-}
-
 - (PATag*)currentEditedTag
 {
 	return currentEditedTag;

@@ -15,14 +15,14 @@
 	NSMutableDictionary *tag;
 }
 
-- (void)setButtonType:(PAImageButtonType)aType;
+- (void)setButtonType:(PAButtonType)aType;
 
-- (void)setImage:(NSImage *)anImage forState:(PAImageButtonState)aState;
+- (void)setImage:(NSImage *)anImage forState:(PAButtonState)aState;
 
 - (BOOL)isHighlighted;
 
-- (PAImageButtonState)state;
-- (void)setState:(PAImageButtonState)aState;
+- (PAButtonState)state;
+- (void)setState:(PAButtonState)aState;
 - (NSMutableDictionary *)tag;
 - (void)setTag:(NSMutableDictionary *)aTag;
 
