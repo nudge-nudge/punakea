@@ -257,7 +257,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     
     int mouseRow = [self mouseRowForEvent:theEvent];
     
-    if ([[self selectedRowIndexes] containsIndex:mouseRow] && (modifierDown == NO) && (doubleClick == NO))
+    if ((modifierDown == NO) && (doubleClick == NO))
     {
 		// cancel any previous editing action
 		[NSObject cancelPreviousPerformRequestsWithTarget:self
@@ -363,8 +363,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 #pragma mark Editing
 - (void)beginEditing
 {
-	if([self selectedRow])
-		[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
+	[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
 }
 
 - (void)cancelOperation:(id)sender
