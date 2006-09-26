@@ -306,13 +306,6 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		if(![[filterDict objectForKey:@"bundlingAttribute"] isEqualTo:attribute]) isSameFilter = NO;
 		if([filterDict objectForKey:@"newBundlingAttributes"] &&
 		   ![[filterDict objectForKey:@"newBundlingAttributes"] isEqualTo:newAttributes]) isSameFilter = NO;
-		
-		if(isSameFilter)
-		{
-			NSLog(@"same filter as before");
-		} else {
-			NSLog(@"new filter");
-		}
 	}
 	
 	// Return if we already have results for this filter

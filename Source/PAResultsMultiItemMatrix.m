@@ -539,6 +539,21 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
 		
 		BOOL shiftKey = ([theEvent modifierFlags] & NSShiftKeyMask) != 0;
+		
+		// Respond to Command + Arrow-Down	
+		if(key == NSDownArrowFunctionKey &&
+		   ([theEvent modifierFlags] & NSCommandKeyMask) != 0)
+		{
+			[[self target] performSelector:@selector(doubleAction)];
+			return;
+		}
+		
+		// Begin editing on Return or Enter
+		if(key == NSEnterCharacter || key == '\r')
+		{
+			[self beginEditing];
+			return;
+		}
 			
 		switch(key)
 		{
@@ -700,6 +715,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	}
 }
 
+
+#pragma mark Editing
 - (void)beginEditing
 {
 	int row, column;
@@ -708,6 +725,90 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self deselectAllCellsButCell:[self selectedCell]];
 	[[self selectedCell] setEditable:YES];
 	[self selectCellAtRow:row column:column];
+}
+
+- (void)cancelOperation:(id)sender
+{		
+	NSText *textView = [[self window] fieldEditor:NO forObject:self];
+	//[textView setString:[[self itemAtRow:[self selectedRow]] valueForAttribute:(id)kMDItemDisplayName]];
+	[textView setTextColor:[NSColor textColor]];
+
+	NSMutableDictionary *newUserInfo;
+	newUserInfo = [[NSMutableDictionary alloc] init];
+	[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+
+	NSNotification *notification;
+	notification = [NSNotification notificationWithName:NSTextDidEndEditingNotification
+												 object:textView
+											   userInfo:newUserInfo];
+		
+	[self textDidEndEditing:notification];
+	
+	[newUserInfo release];
+	
+	[[self window] makeFirstResponder:self];
+}
+
+/*- (void)textDidChange:(NSNotification *)notification
+{
+	[super textDidChange:notification];
+	
+	// Set text color to red if the new destination already exists
+	PAQueryItem *item = [self itemAtRow:[self selectedRow]];
+	PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
+	
+	NSText *textView = [notification object];
+	
+	NSString *newDestination = [[file directory] stringByAppendingPathComponent:[textView string]];
+	
+	if([[NSFileManager defaultManager] fileExistsAtPath:newDestination] &&
+	   [newDestination compare:[file path] options:NSCaseInsensitiveSearch] != NSOrderedSame)
+	{
+		[textView setTextColor:[NSColor redColor]];
+	} else {
+		[textView setTextColor:[NSColor textColor]];
+	}
+}*/
+
+- (void)textDidEndEditing:(NSNotification *)notification
+{
+	NSText *textView = [notification object];
+
+	// Force editing not to end if text color is red
+	if([[textView textColor] isEqualTo:[NSColor redColor]])
+	{
+		[[self window] makeFirstResponder:textView];
+		return;
+	}
+
+	// Force editing to end after pressing the Return key
+	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
+
+	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
+
+	if(textMovement == NSReturnTextMovement)
+	{
+		NSMutableDictionary *newUserInfo;
+		newUserInfo = [[NSMutableDictionary alloc] initWithDictionary:[notification userInfo]];
+		[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+
+		notification = [NSNotification notificationWithName:[notification name]
+													 object:[notification object]
+												   userInfo:newUserInfo];
+		
+		[[self selectedCell] setEditable:NO];
+		[textView removeFromSuperview];		
+
+		[newUserInfo release];
+
+		[[self window] makeFirstResponder:self];
+	}
+	else if(textMovement == NSIllegalTextMovement)
+	{		
+		[[self selectedCell] setEditable:NO];
+		[textView removeFromSuperview];		
+		[[self window] makeFirstResponder:self];
+    }
 }
 
 
