@@ -49,6 +49,8 @@
 - (PABrowserViewMainController*)mainController;
 - (void)setMainController:(PABrowserViewMainController*)aController;
 
+- (NSView*)controlledView;
+
 //for PAQuery
 
 /**

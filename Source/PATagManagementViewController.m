@@ -8,8 +8,15 @@
 
 #import "PATagManagementViewController.h"
 
+@interface PATagManagementViewController (PrivateAPI)
+
+- (void)loadViewForTag:(PATag*)tag;
+
+@end
+
 @implementation PATagManagementViewController
 
+#pragma mark init
 - (id)init
 {
 	if (self = [super init])
@@ -22,6 +29,11 @@
 		[NSBundle loadNibNamed:@"TagManagementView" owner:self];
 	}
 	return self;
+}
+
+- (void)awakeFromNib
+{
+	currentView = mainView;
 }
 
 - (void)dealloc
@@ -41,6 +53,8 @@
 	[aTag retain];
 	[currentEditedTag release];
 	currentEditedTag = aTag;
+
+	[self loadViewForTag:currentEditedTag];
 }
 
 - (BOOL)isWorking
@@ -110,8 +124,21 @@
 #pragma mark actions
 - (void)handleTagActivation:(PATag*)tag
 {
-	[tagNameField setEnabled:YES];
 	[self setCurrentEditedTag:tag];
+}
+
+- (void)loadViewForTag:(PATag*)tag
+{
+	NSView *sv = [delegate controlledView]; 
+	[currentView removeFromSuperview];	
+	
+	if ([tag isKindOfClass:[PASimpleTag class]])
+		currentView = simpleTagManagementView;
+		
+	[sv addSubview:currentView];			
+			
+	// TODO this connection needs update
+	[tagNameField setObjectValue:[currentEditedTag name]];
 }
 
 - (IBAction)removeTag:(id)sender

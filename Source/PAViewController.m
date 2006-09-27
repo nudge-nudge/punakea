@@ -11,6 +11,12 @@
 
 @implementation PAViewController
 
+- (void)dealloc
+{
+	[mainView release];
+	[super dealloc];
+}
+
 #pragma mark accessors
 - (NSView*)mainView
 {

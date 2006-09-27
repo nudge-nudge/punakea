@@ -12,6 +12,7 @@
 
 @interface PABrowserViewMainController : PAViewController {
 	id delegate;
+	BOOL working;
 }
 
 - (NSView*)mainView;
@@ -19,5 +20,6 @@
 - (id)delegate;
 - (void)setDelegate:(id)anObject;
 - (BOOL)isWorking;
+- (void)setWorking:(BOOL)flag;
 
 @end

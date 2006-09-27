@@ -2,6 +2,12 @@
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
+            CLASS = PABrowserViewMainController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; }; 
+            SUPERCLASS = PAViewController; 
+        }, 
+        {
             CLASS = PATagManagementArrayController; 
             LANGUAGE = ObjC; 
             OUTLETS = {controller = PATagManagementViewController; }; 
@@ -17,8 +23,8 @@
             ACTIONS = {removeTag = id; }; 
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {tagNameField = NSTextField; }; 
-            SUPERCLASS = PAViewController; 
+            OUTLETS = {simpleTagManagementView = NSView; tagNameField = NSTextField; }; 
+            SUPERCLASS = PABrowserViewMainController; 
         }, 
         {
             CLASS = PAViewController; 

@@ -23,6 +23,7 @@ extern unsigned const BUTTON_SPACING = 2;
 	{		
 		buttons = [[NSMutableArray alloc] init];
 		
+		/* TODO not removed on controller change 
 		[[NSNotificationCenter defaultCenter] addObserver:self
 		                                         selector:@selector(update)
 												     name:PAQueryDidUpdateNotification
@@ -35,7 +36,8 @@ extern unsigned const BUTTON_SPACING = 2;
 		                                         selector:@selector(update)
 												     name:PAQueryDidResetNotification
 												   object:[controller query]];
-												   
+		*/										   
+		
 		[self setupButtons];
 		[self update];
 	}
@@ -44,7 +46,9 @@ extern unsigned const BUTTON_SPACING = 2;
 
 - (void)dealloc
 {
-	if(buttons) [buttons release];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[buttons release];
 	[super dealloc];
 }
 

@@ -149,6 +149,11 @@
 	[mainController setDelegate:self];
 }
 
+- (NSView*)controlledView
+{
+	return controlledView;
+}
+
 - (BOOL)isWorking
 {
 	if (!mainController || ![mainController isWorking])

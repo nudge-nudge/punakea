@@ -26,4 +26,14 @@
 	delegate = anObject;
 }
 
+- (BOOL)isWorking
+{
+	return working;
+}
+
+- (void)setWorking:(BOOL)flag
+{
+	working = flag;
+}
+
 @end

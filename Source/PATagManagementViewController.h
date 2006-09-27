@@ -10,26 +10,23 @@
 #import "PABrowserViewMainController.h"
 #import "PATagger.h"
 #import "PATags.h"
+#import "PATag.h"
 
 @interface PATagManagementViewController : PABrowserViewMainController {
 	IBOutlet NSTextField *tagNameField;
+	
+	IBOutlet NSView *simpleTagManagementView;
+	IBOutlet NSView *currentView;
 	
 	PATag *currentEditedTag;
 	
 	PATagger *tagger;
 	PATags *tags;
-	
-	BOOL working;
 }
-
-- (void)handleTagActivation:(PATag*)tag;
-- (id)delegate;
-- (void)setDelegate:(id)anObject;
 
 - (PATag*)currentEditedTag;
 - (void)setCurrentEditedTag:(PATag*)aTag;
 - (BOOL)isWorking;
-- (void)setWorking:(BOOL)flag;
 
 - (IBAction)removeTag:(id)sender;
 - (void)renameTag:(PATag*)oldTag toTagName:(NSString*)newTagName;
