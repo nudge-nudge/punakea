@@ -808,29 +808,19 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 		[[self window] makeFirstResponder:self];
 		
-		// Forward renaming request to our delegate (thats equal to the outlineView's delegate)		
-		int index = r * [self numberOfColumns] + c;
-		PAQueryItem *item = [items objectAtIndex:index];
-		PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
+		// Forward renaming request to our delegate's query (delegate is equal to the outlineView's delegate)		
+		int				index = r * [self numberOfColumns] + c;
+		PAQueryItem		*item = [items objectAtIndex:index];
+		NSString		*newName = [textView string];
 		
-		PAFile *newFile = [[self delegate] renameFile:file to:[textView string]];
+		BOOL wasMoved = [[[self superview] query] renameItem:item to:newName errorWindow:[self window]];
 		
-		if(newFile)
+		if(wasMoved)
 		{
-			// Update the PAQueryItem
-			[item setValue:[textView string] forAttribute:(id)kMDItemDisplayName];
-			[item setValue:[newFile path] forAttribute:(id)kMDItemPath];
+			//[items replaceObjectAtIndex:index withObject:item];
 			
-			// Update items collection
-			[items removeObjectAtIndex:index];
-			[items insertObject:item atIndex:index];
-			
-			// Update cell
-			NSTextFieldCell *cell =
-				[[[[self cellClass] alloc]
-					initTextCell:item] autorelease];				
-			[self putCell:cell atRow:r column:c];
-		}		
+			[self setNeedsDisplay:YES];
+		}
 	}
 	else if(textMovement == NSIllegalTextMovement)
 	{		
@@ -839,8 +829,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[[self window] makeFirstResponder:self];
     }
 	
-	[self highlightCell:YES atRow:r column:c];
-	[self setNeedsDisplay:YES];
+	//[self highlightCell:YES atRow:r column:c];
+	//[self setNeedsDisplay:YES];
 }
 
 

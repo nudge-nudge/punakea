@@ -371,6 +371,84 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	return NO;
 }
 
+- (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window
+{
+	errorWindow = window;
+
+	PAFile		*file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
+	NSString	*source = [file path];
+	NSString	*destination = [file directory];
+	destination = [destination stringByAppendingPathComponent:newName];
+	
+	// Return NO if source equals destination
+	if([source isEqualToString:destination]) return NO;
+	
+	BOOL fileWasMoved = [[NSFileManager defaultManager] movePath:source toPath:destination handler:self];
+	
+	if(fileWasMoved)
+	{
+		[item setValue:newName forAttribute:(id)kMDItemDisplayName];
+		[item setValue:destination forAttribute:(id)kMDItemPath];
+	
+		for(int i = 0; i < [flatResults count]; i++)
+		{
+			if([[flatResults objectAtIndex:i] isEqualTo:item])
+			{
+				[flatResults replaceObjectAtIndex:i withObject:item];
+				break;
+			}
+		}
+	
+		// Re-bundle results
+		if(filterDict)
+		{
+			[self filterResults:YES usingValues:[[[filterDict objectForKey:@"values"] retain] autorelease]
+		               forBundlingAttribute:[[[filterDict objectForKey:@"bundlingAttribute"] retain] autorelease]
+					  newBundlingAttributes:[[[filterDict objectForKey:@"newBundlingAttributes"] retain] autorelease]];
+		}
+	
+		return YES;
+	}
+	else
+	{
+		return NO;
+	}
+}
+
+- (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path
+{
+	// nothing yet
+}
+
+-(BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
+{
+	NSString *informativeText;
+	informativeText = [NSString stringWithFormat:
+		NSLocalizedStringFromTable(@"ALREADY_EXISTS_INFORMATION", @"FileManager", @""),
+		[errorInfo objectForKey:@"ToPath"]];
+	
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	
+	// TODO: Support correct error message text for more types of errors
+	if([[errorInfo objectForKey:@"Error"] isEqualTo:@"Already Exists"])
+	{
+		[alert setMessageText:NSLocalizedStringFromTable([errorInfo objectForKey:@"Error"], @"FileManager", @"")];
+		[alert setInformativeText:informativeText];
+	} else {
+		[alert setMessageText:NSLocalizedStringFromTable(@"Unknown Error", @"FileManager", @"")];
+	}
+	
+	[alert addButtonWithTitle:@"OK"];
+	[alert setAlertStyle:NSWarningAlertStyle];  
+	
+	[alert beginSheetModalForWindow:errorWindow
+	                  modalDelegate:self
+					 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+					    contextInfo:nil];
+	
+	return NO;
+}
+
 - (void)updateQueryFromTags
 {
 	NSMutableString *queryString = [self queryStringForTags:[tags selectedTags]];

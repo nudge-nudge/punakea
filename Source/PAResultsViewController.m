@@ -278,73 +278,9 @@
 	
 	PAFile *file = [PAFile fileWithPath:[queryItem valueForAttribute:(id)kMDItemPath]];
 	
-	PAFile *newFile = [self renameFile:file to:value];
+	BOOL wasMoved = [query renameItem:queryItem to:value errorWindow:[ov window]];
 	
-	// TODO: Currently we set the displayName + path by hand in the following lines. Maybe we can
-	// do this with a query update automatically...
-	if(newFile)
-	{
-		[queryItem setValue:value forAttribute:(id)kMDItemDisplayName];
-		[queryItem setValue:[newFile path] forAttribute:(id)kMDItemPath];
-		
-		[ov reloadItem:item];
-	}
-}
-
-- (PAFile *)renameFile:(PAFile *)file to:(NSString *)newName
-{
-	NSString *source = [file path];
-	NSString *destination = [file directory];
-	destination = [destination stringByAppendingPathComponent:newName];
-	
-	// Return NO if source equals destination
-	if([source isEqualToString:destination]) return nil;
-	
-	BOOL fileWasMoved = [[NSFileManager defaultManager] movePath:source toPath:destination handler:self];
-	
-	if(fileWasMoved)
-		return [PAFile fileWithPath:destination];
-	else
-		return nil;
-}
-
-- (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path
-{
-	// nothing yet
-}
-
--(BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
-{
-	NSString *informativeText;
-	informativeText = [NSString stringWithFormat:
-		NSLocalizedStringFromTable(@"ALREADY_EXISTS_INFORMATION", @"FileManager", @""),
-		[errorInfo objectForKey:@"ToPath"]];
-	
-    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-	
-	// TODO: Support correct error message text for more types of errors
-	if([[errorInfo objectForKey:@"Error"] isEqualTo:@"Already Exists"])
-	{
-		[alert setMessageText:NSLocalizedStringFromTable([errorInfo objectForKey:@"Error"], @"FileManager", @"")];
-		[alert setInformativeText:informativeText];
-	} else {
-		[alert setMessageText:NSLocalizedStringFromTable(@"Unknown Error", @"FileManager", @"")];
-	}
-	
-	[alert addButtonWithTitle:@"OK"];
-	[alert setAlertStyle:NSWarningAlertStyle];  
-	
-	[alert beginSheetModalForWindow:[outlineView window]
-	                  modalDelegate:self
-					 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
-					    contextInfo:nil];
-	
-	return NO;
-}
-
-- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
-{
-	// nothing yet
+	if(wasMoved) [ov reloadData];
 }
 
 

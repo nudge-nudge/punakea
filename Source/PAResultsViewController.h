@@ -20,16 +20,17 @@
 #import "PAResultsOutlineView.h"
 
 @interface PAResultsViewController : PABrowserViewMainController {
-	IBOutlet PAResultsOutlineView *outlineView;
 	
-	PATagger *tagger;
-	PATags *tags;
-	PARelatedTags *relatedTags;
-	PASelectedTags *selectedTags;
+	IBOutlet PAResultsOutlineView		*outlineView;
 	
-	PAQuery *query;
+	PATagger							*tagger;
+	PATags								*tags;
+	PARelatedTags						*relatedTags;
+	PASelectedTags						*selectedTags;
 	
-	NSNotificationCenter *nc;
+	PAQuery								*query;
+	
+	NSNotificationCenter				*nc;
 }
 
 - (void)handleTagActivation:(PATag*)tag;

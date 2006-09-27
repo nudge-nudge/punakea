@@ -49,9 +49,11 @@ wrapper for NSMetadataQuery. searching for tags, no predicate needed
 	NSDictionary		*filterDict;
 	
 	NSMutableArray		*results;
-	NSArray				*flatResults;
+	NSMutableArray		*flatResults;
 	NSMutableArray		*filteredResults;
 	NSMutableArray		*flatFilteredResults;
+	
+	NSWindow			*errorWindow;
 }
 
 /**
@@ -87,5 +89,7 @@ initializer
 
 - (NSArray *)sortDescriptors;
 - (void)setSortDescriptors:(NSArray *)descriptors;
+
+- (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window;
 
 @end
