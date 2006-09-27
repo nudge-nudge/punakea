@@ -146,7 +146,9 @@
 	[aController retain];
 	[mainController release];
 	mainController = aController;
+	
 	[mainController setDelegate:self];
+	[mainController setNextResponder:self];
 }
 
 - (NSView*)controlledView

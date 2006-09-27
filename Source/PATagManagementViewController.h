@@ -24,6 +24,9 @@
 	PATags *tags;
 }
 
+- (NSView*)currentView;
+- (void)setCurrentView:(NSView*)aView;
+
 - (PATag*)currentEditedTag;
 - (void)setCurrentEditedTag:(PATag*)aTag;
 - (BOOL)isWorking;

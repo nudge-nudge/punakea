@@ -11,6 +11,11 @@
 
 @implementation PAViewController
 
+- (void)awakeFromNib
+{
+	[mainView setNextResponder:self];
+}
+
 - (void)dealloc
 {
 	[mainView release];

@@ -33,7 +33,7 @@
 
 - (void)awakeFromNib
 {
-	currentView = mainView;
+	[self setCurrentView:mainView];
 }
 
 - (void)dealloc
@@ -67,6 +67,21 @@
 	working = flag;
 }
 
+- (NSView*)currentView
+{
+	return currentView;
+}
+
+/**
+not retained!
+ */
+- (void)setCurrentView:(NSView*)aView
+{
+	currentView = aView;
+	
+	[currentView setNextResponder:self];
+}
+
 #pragma mark delegate
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
@@ -79,12 +94,6 @@
 
 	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 
-	// DEBUG
-	if ([tags tagForName:currentName] != nil)
-	{
-		NSLog(@"error: %@",[tags tagForName:currentName]);
-	}
-	
 	if ([tags tagForName:currentName] != nil && [currentName isNotEqualTo:editedTagName])
 	{
 		[fieldEditor setTextColor:[NSColor redColor]];
@@ -121,6 +130,21 @@
 	[self renameTag:currentEditedTag toTagName:currentName];
 }
 
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command
+{
+    if (command == @selector(cancelOperation:)) {
+		[self cancelOperation:control];
+		return YES;
+    }
+    return NO;
+}
+
+- (void)cancelOperation:(id)sender
+{
+	NSLog(@"cancel");
+	[sender abortEditing];
+}
+
 #pragma mark actions
 - (void)handleTagActivation:(PATag*)tag
 {
@@ -133,12 +157,14 @@
 	[currentView removeFromSuperview];	
 	
 	if ([tag isKindOfClass:[PASimpleTag class]])
-		currentView = simpleTagManagementView;
+		[self setCurrentView:simpleTagManagementView];
 		
-	[sv addSubview:currentView];			
+	[sv addSubview:currentView];
 			
 	// TODO this connection needs update
 	[tagNameField setObjectValue:[currentEditedTag name]];
+	NSWindow *window = [[self currentView] window];
+	[window makeFirstResponder:tagNameField];
 }
 
 - (IBAction)removeTag:(id)sender
