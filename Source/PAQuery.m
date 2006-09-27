@@ -449,6 +449,11 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	return NO;
 }
 
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	// nothing yet
+}
+
 - (void)updateQueryFromTags
 {
 	NSMutableString *queryString = [self queryStringForTags:[tags selectedTags]];
