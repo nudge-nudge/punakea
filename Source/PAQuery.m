@@ -92,6 +92,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			   name:nil
 			 object:mdquery];
 	
+	[self synchronizeResults];
+	
 	[nc postNotificationName:PAQueryDidResetNotification object:self];
 }
 

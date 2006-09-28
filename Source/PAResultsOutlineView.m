@@ -132,12 +132,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 #pragma mark Notifications
 - (void)queryNote:(NSNotification *)note
 {	
-	/*if ([[note name] isEqualToString:PAQueryGatheringProgressNotification] ||
-		[[note name] isEqualToString:PAQueryDidUpdateNotification] ||
-		[[note name] isEqualToString:PAQueryDidFinishGatheringNotification])
-	{*/
 	if([[note name] isEqualToString:PAQueryDidFinishGatheringNotification] ||
-	   [[note name] isEqualToString:PAQueryDidUpdateNotification])
+	   [[note name] isEqualToString:PAQueryDidUpdateNotification] ||
+	   [[note name] isEqualToString:PAQueryDidResetNotification])
 	{
 		[self reloadData];
 	}
