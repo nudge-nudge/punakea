@@ -202,6 +202,14 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	}
 }
 
+- (void)highlightCell:(BOOL)flag cell:(NSCell *)cell
+{
+	int row, column;
+	[self getRow:&row column:&column ofCell:cell];
+	
+	[self highlightCell:flag atRow:row column:column];
+}
+
 - (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)column
 {
 	NSCell *cell = [self cellAtRow:row column:column];
@@ -811,16 +819,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		// Forward renaming request to our delegate's query (delegate is equal to the outlineView's delegate)		
 		int				index = r * [self numberOfColumns] + c;
 		PAQueryItem		*item = [items objectAtIndex:index];
-		NSString		*newName = [textView string];
+		NSString		*newName = [[textView string] copy];
 		
 		BOOL wasMoved = [[[self superview] query] renameItem:item to:newName errorWindow:[self window]];
 		
-		if(wasMoved)
-		{
-			//[items replaceObjectAtIndex:index withObject:item];
-			
-			[self setNeedsDisplay:YES];
-		}
+		if(wasMoved) [self setNeedsDisplayInRect:[self cellFrameAtRow:r column:c]];
 	}
 	else if(textMovement == NSIllegalTextMovement)
 	{		
@@ -828,9 +831,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[textView removeFromSuperview];		
 		[[self window] makeFirstResponder:self];
     }
-	
-	//[self highlightCell:YES atRow:r column:c];
-	//[self setNeedsDisplay:YES];
 }
 
 
