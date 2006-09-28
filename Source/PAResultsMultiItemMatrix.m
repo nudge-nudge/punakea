@@ -547,7 +547,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		BOOL shiftKey = ([theEvent modifierFlags] & NSShiftKeyMask) != 0;
 		BOOL commandKey = ([theEvent modifierFlags] & NSCommandKeyMask) != 0;
 		
-		// Respond to Command+Arrow-Down and Command+O
+		// Respond to Command+Arrow-Down
 		if(key == NSDownArrowFunctionKey && commandKey)
 		{
 			[[self target] performSelector:@selector(doubleAction)];
