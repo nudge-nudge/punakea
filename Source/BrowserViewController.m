@@ -318,6 +318,7 @@
 
 	[self setMainController:controller];
 	[controlledView addSubview:[mainController mainView]];
+	[[mainController mainView] setFrameSize:[controlledView frame].size];
 }
 
 @end

@@ -202,6 +202,7 @@ not retained!
 		[self setCurrentView:simpleTagManagementView];
 		
 	[sv addSubview:currentView];
+	[currentView setFrameSize:[sv frame].size];
 			
 	// TODO this connection needs update
 	[tagNameField setObjectValue:[currentEditedTag name]];
