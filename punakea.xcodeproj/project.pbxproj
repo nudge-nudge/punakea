@@ -121,6 +121,8 @@
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
 		48AA6BF7099B78E300D8F70B /* PATagger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48AA6BF5099B78E300D8F70B /* PATagger.h */; };
 		48AA6BF8099B78E300D8F70B /* PATagger.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AA6BF6099B78E300D8F70B /* PATagger.m */; };
+		48B0F1C30ACBFA6200738053 /* Tags.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1C20ACBFA6200738053 /* Tags.strings */; };
+		48B0F1D80ACC020800738053 /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1D70ACC020800738053 /* Global.strings */; };
 		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
 		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
 		48C93615099742D800699265 /* Matador.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C93614099742D800699265 /* Matador.h */; };
@@ -452,6 +454,8 @@
 		489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTagsView.m; sourceTree = "<group>"; };
 		48AA6BF5099B78E300D8F70B /* PATagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagger.h; sourceTree = "<group>"; };
 		48AA6BF6099B78E300D8F70B /* PATagger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagger.m; sourceTree = "<group>"; };
+		48B0F1C00ACBFA5200738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Tags.strings; sourceTree = "<group>"; };
+		48B0F1D50ACC020000738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Global.strings; sourceTree = "<group>"; };
 		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
 		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
 		48C93614099742D800699265 /* Matador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matador.h; sourceTree = "<group>"; };
@@ -673,6 +677,8 @@
 				484F71900A666F5A00D886E5 /* TagManagementView.nib */,
 				4832722B0AA42D19003D98A6 /* Preferences.nib */,
 				482B31130AC6C70D0071C33B /* ResultsView.nib */,
+				48B0F1C20ACBFA6200738053 /* Tags.strings */,
+				48B0F1D70ACC020800738053 /* Global.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1271,6 +1277,8 @@
 				655B2ABF0ABFE8AC000A3AA4 /* FileManager.strings in Resources */,
 				488CD5250AC0240E0038AB34 /* Punakea in Resources */,
 				482B31150AC6C70D0071C33B /* ResultsView.nib in Resources */,
+				48B0F1C30ACBFA6200738053 /* Tags.strings in Resources */,
+				48B0F1D80ACC020800738053 /* Global.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1440,6 +1448,22 @@
 				4871792E0A5A619900A988DE /* English */,
 			);
 			name = BrowserView.nib;
+			sourceTree = "<group>";
+		};
+		48B0F1C20ACBFA6200738053 /* Tags.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48B0F1C00ACBFA5200738053 /* English */,
+			);
+			name = Tags.strings;
+			sourceTree = "<group>";
+		};
+		48B0F1D70ACC020800738053 /* Global.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48B0F1D50ACC020000738053 /* English */,
+			);
+			name = Global.strings;
 			sourceTree = "<group>";
 		};
 		653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */ = {

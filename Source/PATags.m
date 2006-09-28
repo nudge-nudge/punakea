@@ -162,4 +162,9 @@
 	}
 }
 
+- (NSString*)description
+{
+	return [tags description];
+}
+
 @end

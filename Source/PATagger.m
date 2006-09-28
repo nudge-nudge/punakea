@@ -11,6 +11,7 @@
 @interface PATagger (PrivateAPI)
 
 - (void)writeTags:(NSArray*)tags toFile:(PAFile*)file;
+- (void)writeKeywords:(NSArray*)keywords toFile:(PAFile*)file;
 
 @end
 
@@ -246,8 +247,7 @@ static PATagger *sharedInstance = nil;
 		NSMutableArray *keywords = [[self keywordsForFile:file] mutableCopy];
 		[keywords removeObject:tagName];
 		[keywords addObject:newTagName];
-		NSArray *newTags = [self createTagsForNames:keywords];
-		[self writeTags:newTags toFile:file];
+		[self writeKeywords:keywords toFile:file];
 		[keywords release];
 	}
 }
@@ -266,6 +266,11 @@ static PATagger *sharedInstance = nil;
 	
 	[[Matador sharedInstance] setAttributeForFileAtPath:[file path] name:@"kMDItemKeywords" value:keywordArray];
 	[keywordArray release];
+}
+
+- (void)writeKeywords:(NSArray*)keywords toFile:(PAFile*)file
+{
+	[[Matador sharedInstance] setAttributeForFileAtPath:[file path] name:@"kMDItemKeywords" value:keywords];
 }
 
 #pragma mark accessors

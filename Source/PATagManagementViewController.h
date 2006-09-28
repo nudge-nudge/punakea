@@ -12,6 +12,10 @@
 #import "PATags.h"
 #import "PATag.h"
 
+extern NSString * const PATagManagementOperation;
+extern NSString * const PATagManagementRenameOperation;
+extern NSString * const PATagManagementRemoveOperation;
+
 @interface PATagManagementViewController : PABrowserViewMainController {
 	IBOutlet NSTextField *tagNameField;
 	
@@ -31,7 +35,10 @@
 - (void)setCurrentEditedTag:(PATag*)aTag;
 - (BOOL)isWorking;
 
-- (IBAction)removeTag:(id)sender;
-- (void)renameTag:(PATag*)oldTag toTagName:(NSString*)newTagName;
+- (IBAction)renameOperation:(id)sender;
+- (IBAction)removeOperation:(id)sender;
+
+- (void)removeEditedTag;
+- (void)renameEditedTagTo:(NSString*)newTagName;
 
 @end

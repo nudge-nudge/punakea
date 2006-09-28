@@ -8,6 +8,10 @@
 
 #import "PATagManagementViewController.h"
 
+NSString * const PATagManagementOperation = @"PATagManagementOperation";
+NSString * const PATagManagementRenameOperation = @"PATagManagementRenameOperation";
+NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperation";
+
 @interface PATagManagementViewController (PrivateAPI)
 
 - (void)loadViewForTag:(PATag*)tag;
@@ -94,6 +98,12 @@ not retained!
 
 	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 
+	// DEBUG 
+	if ([tags tagForName:currentName] != nil) 
+	{ 
+		NSLog(@"error: %@",[tags tagForName:currentName]); 
+	}
+	
 	if ([tags tagForName:currentName] != nil && [currentName isNotEqualTo:editedTagName])
 	{
 		[fieldEditor setTextColor:[NSColor redColor]];
@@ -119,15 +129,47 @@ not retained!
 		return NO;
 }
 
-- (void)controlTextDidEndEditing:(NSNotification *)aNotification
+- (IBAction)renameOperation:(id)sender
 {
-	NSLog(@"didEnd");
+	NSString *newTagName = [sender stringValue];
 	
-	NSDictionary *userInfo = [aNotification userInfo];
-	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
-	NSString *currentName = [fieldEditor string];
-		
-	[self renameTag:currentEditedTag toTagName:currentName];
+	if ([newTagName isEqualTo:[currentEditedTag name]])
+		return;
+	
+	NSDictionary *contextInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:PATagManagementRenameOperation,newTagName,nil]
+															forKeys:[NSArray arrayWithObjects:PATagManagementOperation,@"newTagName",nil]];
+	
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert setMessageText:NSLocalizedStringFromTable(@"TAG_RENAME_REQUEST",@"Tags",@"")];
+	[alert setInformativeText:NSLocalizedStringFromTable(@"TAG_RENAME_REQUEST_INFO",@"Tags",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OK",@"Global",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"CANCEL",@"Global",@"")];
+
+	[alert setAlertStyle:NSWarningAlertStyle];
+	
+	[alert beginSheetModalForWindow:[currentView window]
+					  modalDelegate:self 
+					 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+						contextInfo:[contextInfo retain]];
+}
+
+- (IBAction)removeOperation:(id)sender
+{	
+	NSDictionary *contextInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:PATagManagementRemoveOperation,nil]
+															forKeys:[NSArray arrayWithObjects:PATagManagementOperation,nil]];
+	
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert setMessageText:NSLocalizedStringFromTable(@"TAG_REMOVE_REQUEST",@"Tags",@"")];
+	[alert setInformativeText:NSLocalizedStringFromTable(@"TAG_REMOVE_REQUEST_INFO",@"Tags",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OK",@"Global",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"CANCEL",@"Global",@"")];
+
+	[alert setAlertStyle:NSWarningAlertStyle];
+	
+	[alert beginSheetModalForWindow:[currentView window]
+					  modalDelegate:self 
+					 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+						contextInfo:[contextInfo retain]];
 }
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command
@@ -167,8 +209,8 @@ not retained!
 	[window makeFirstResponder:tagNameField];
 }
 
-- (IBAction)removeTag:(id)sender
-{
+- (void)removeEditedTag
+{	
 	[self setWorking:YES];
 	
 	[tagger removeTag:currentEditedTag];
@@ -177,13 +219,31 @@ not retained!
 	[self setWorking:NO];
 }
 
-- (void)renameTag:(PATag*)oldTag toTagName:(NSString*)newTagName
+- (void)renameEditedTagTo:(NSString*)newTagName;
 {
 	[self setWorking:YES];
 	
-	[tagger renameTag:[oldTag name] toTag:newTagName];
+	[tagger renameTag:[currentEditedTag name] toTag:newTagName];
 	[currentEditedTag setName:newTagName];
 
 	[self setWorking:NO];
+}
+
+#pragma mark alerts
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	NSString *operation = [contextInfo objectForKey:PATagManagementOperation];
+	
+	if ([operation isEqualTo:PATagManagementRemoveOperation] && returnCode == NSAlertFirstButtonReturn)
+	{
+		[self removeEditedTag];
+	}
+	else if ([operation isEqualTo:PATagManagementRenameOperation] && returnCode == NSAlertFirstButtonReturn)
+	{
+		NSString *newTagName = [contextInfo objectForKey:@"newTagName"];
+		[self renameEditedTagTo:newTagName];
+	}
+	
+	[contextInfo release];
 }
 @end

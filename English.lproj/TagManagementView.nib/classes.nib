@@ -20,10 +20,14 @@
             SUPERCLASS = NSTableView; 
         }, 
         {
-            ACTIONS = {removeTag = id; }; 
+            ACTIONS = {removeOperation = id; renameOperation = id; }; 
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {simpleTagManagementView = NSView; tagNameField = NSTextField; }; 
+            OUTLETS = {
+                currentView = NSView; 
+                simpleTagManagementView = NSView; 
+                tagNameField = NSTextField; 
+            }; 
             SUPERCLASS = PABrowserViewMainController; 
         }, 
         {
