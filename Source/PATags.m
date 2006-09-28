@@ -8,6 +8,8 @@
 
 #import "PATags.h"
 
+NSString * const PATagOperation = @"PATagOperation";
+
 @interface PATags (PrivateAPI)
 
 - (void)observeTag:(PATag*)tag;
@@ -70,7 +72,7 @@
 	tags = otherTags;
 	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagResetOperation];
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:changeOperation forKey:@"PATagChangeOperation"];
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:changeOperation forKey:PATagOperation];
 	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
 }
 
@@ -82,7 +84,7 @@
 	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagAddOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,aTag,nil] 
-														 forKeys:[NSArray arrayWithObjects:@"PATagChangeOperation",@"tag",nil]];
+														 forKeys:[NSArray arrayWithObjects:PATagOperation,@"tag",nil]];
 	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
 }
 
@@ -93,7 +95,7 @@
 	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagRemoveOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,aTag,nil] 
-														 forKeys:[NSArray arrayWithObjects:@"PATagChangeOperation",@"tag",nil]];
+														 forKeys:[NSArray arrayWithObjects:PATagOperation,@"tag",nil]];
 	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
 }
 
@@ -122,7 +124,7 @@
 {
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagUpdateOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,object,nil] 
-														 forKeys:[NSArray arrayWithObjects:@"PATagChangeOperation",@"tag",nil]];
+														 forKeys:[NSArray arrayWithObjects:PATagOperation,@"tag",nil]];
 	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
 }
 

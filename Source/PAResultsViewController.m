@@ -92,6 +92,11 @@
 	selectedTags = otherSelectedTags;
 }
 
+- (BOOL)isWorking
+{
+	return [query isGathering];
+}
+
 #pragma mark actions
 - (void)handleTagActivation:(PATag*)tag
 {
@@ -121,7 +126,7 @@
 	
 	[query setTags:selectedTags];
 	
-	//the query is only started, if there are any tags to look for
+	//the query is only started if there are any tags to look for
 	if ([selectedTags count] > 0)
 	{
 		[query startQuery];

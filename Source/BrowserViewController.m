@@ -44,6 +44,11 @@
 		[self setVisibleTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
 
+		[[NSNotificationCenter defaultCenter] addObserver:self 
+												 selector:@selector(tagsHaveChanged:) 
+													 name:@"PATagsHaveChanged" 
+												   object:tags];
+		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
 	}
 	return self;
@@ -57,6 +62,7 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[visibleTags release];
 	[buffer release];
 	[typeAheadFind release];
@@ -149,6 +155,9 @@
 	
 	[mainController setDelegate:self];
 	[mainController setNextResponder:self];
+	
+	[controlledView addSubview:[mainController mainView]];
+	[[mainController mainView] setFrameSize:[controlledView frame].size];
 }
 
 - (NSView*)controlledView
@@ -296,6 +305,11 @@
 	}
 }
 
+- (void)tagsHaveChanged:(NSNotification*)notification
+{
+
+}
+
 #pragma mark actions
 - (void)manageTags
 {
@@ -317,8 +331,6 @@
 		[[mainController mainView] removeFromSuperview];
 
 	[self setMainController:controller];
-	[controlledView addSubview:[mainController mainView]];
-	[[mainController mainView] setFrameSize:[controlledView frame].size];
 }
 
 @end

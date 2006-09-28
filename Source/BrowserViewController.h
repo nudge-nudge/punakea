@@ -51,6 +51,7 @@
 
 - (NSView*)controlledView;
 
+- (void)resetBrowserView;
 //for PAQuery
 
 /**

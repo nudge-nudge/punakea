@@ -253,7 +253,7 @@ bound to visibleTags
 {	
 	[self drawBackground];
 	
-	if ([[datasource visibleTags] count] == 0) // TODO ![delegate isWorking])
+	if ([[datasource visibleTags] count] == 0 && ![delegate isWorking])
 	{
 		[self drawString:noRelatedTagsMessage centeredIn:rect];
 	}

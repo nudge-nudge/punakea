@@ -18,6 +18,7 @@ typedef enum _PATagChangeOperation
 	PATagUpdateOperation = 3
 } PATagChangeOperation;
 
+extern NSString * const PATagOperation;
 
 @interface PATags : NSObject {
 	NSMutableArray *tags;
