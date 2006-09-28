@@ -30,11 +30,28 @@
 
 
 #pragma mark NSCopying
-/*- (id)copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)zone
 {
 	PAQueryItem *newItem = [[[self class] allocWithZone:zone] init];
 	newItem->valueDict = [valueDict retain];
-}*/
+	
+	return newItem;
+}
+
+
+#pragma mark Comparing
+- (BOOL)isEqual:(id)object
+{
+	return [self isEqualTo:object];
+}
+
+- (BOOL)isEqualTo:(id)object
+{
+	if(self == object) return YES;
+	if(![object isMemberOfClass:[self class]]) return NO;
+
+	return [[self valueForAttribute:(id)kMDItemPath] isEqualTo:[object valueForAttribute:(id)kMDItemPath]];
+}
 
 
 #pragma mark Actions

@@ -133,10 +133,48 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)queryNote:(NSNotification *)note
 {	
 	if([[note name] isEqualToString:PAQueryDidFinishGatheringNotification] ||
-	   [[note name] isEqualToString:PAQueryDidUpdateNotification] ||
 	   [[note name] isEqualToString:PAQueryDidResetNotification])
 	{
 		[self reloadData];
+	}
+	
+	// Restore selection after query has been updated
+	if([[note name] isEqualToString:PAQueryDidUpdateNotification])
+	{
+		NSIndexSet *indexes = [self selectedRowIndexes];
+		NSMutableArray *items = [NSMutableArray array];
+		
+		unsigned row = [indexes firstIndex];
+		while(row != NSNotFound)
+		{
+			[items addObject:[self itemAtRow:row]];
+			row = [indexes indexGreaterThanIndex:row];
+		}
+		
+		[self reloadData];
+		
+		[self deselectAll:self];		
+		NSEnumerator *itemsEnumerator = [items objectEnumerator];
+		PAQueryItem *item;
+		while(item = [itemsEnumerator nextObject])
+		{
+			for(int i = 0; i < [self numberOfRows]; i++)
+			{
+				if([[self itemAtRow:i] isKindOfClass:[PAQueryItem class]])
+				{
+					PAQueryItem *thisItem = [self itemAtRow:i];
+					
+					if([thisItem isEqualTo:item])
+					{
+						if([self rowForItem:thisItem] != -1)
+						{
+							[self selectRow:[self rowForItem:thisItem] byExtendingSelection:YES];
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
