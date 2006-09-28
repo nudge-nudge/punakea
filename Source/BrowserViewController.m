@@ -307,7 +307,7 @@
 
 - (void)tagsHaveChanged:(NSNotification*)notification
 {
-
+	[self setVisibleTags:[tags tags]];
 }
 
 #pragma mark actions
