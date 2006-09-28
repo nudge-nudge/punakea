@@ -136,7 +136,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[[note name] isEqualToString:PAQueryDidUpdateNotification] ||
 		[[note name] isEqualToString:PAQueryDidFinishGatheringNotification])
 	{*/
-	if([[note name] isEqualToString:PAQueryDidFinishGatheringNotification])
+	if([[note name] isEqualToString:PAQueryDidFinishGatheringNotification] ||
+	   [[note name] isEqualToString:PAQueryDidUpdateNotification])
 	{
 		[self reloadData];
 	}

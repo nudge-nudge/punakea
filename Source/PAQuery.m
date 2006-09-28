@@ -299,14 +299,14 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	
 	// If there is already a filter applied, we may check if it's the right one
 	BOOL isSameFilter = NO;
-	if(filterDict)
+	/*if(filterDict)
 	{
 		isSameFilter = YES;
 		if(![[filterDict objectForKey:@"values"] isEqualTo:filterValues]) isSameFilter = NO;
 		if(![[filterDict objectForKey:@"bundlingAttribute"] isEqualTo:attribute]) isSameFilter = NO;
 		if([filterDict objectForKey:@"newBundlingAttributes"] &&
 		   ![[filterDict objectForKey:@"newBundlingAttributes"] isEqualTo:newAttributes]) isSameFilter = NO;
-	}
+	}*/
 	
 	// Return if we already have results for this filter
 	if(isSameFilter && flatFilteredResults) return;
@@ -374,6 +374,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window
 {
 	errorWindow = window;
+	
+	NSFileManager *fm = [NSFileManager defaultManager];
 
 	PAFile		*file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
 	NSString	*source = [file path];
@@ -383,7 +385,40 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	// Return NO if source equals destination
 	if([source isEqualToString:destination]) return NO;
 	
-	BOOL fileWasMoved = [[NSFileManager defaultManager] movePath:source toPath:destination handler:self];
+	BOOL fileWasMovedToTemp = NO;
+	NSString *tempDestination = nil;
+	NSArray *tags = nil;
+	
+	if([source compare:destination options:NSCaseInsensitiveSearch] == NSOrderedSame)
+	{
+		tempDestination = [file directory];
+		tempDestination = [tempDestination stringByAppendingPathComponent:@"~"];
+		tempDestination = [tempDestination stringByAppendingString:newName];
+		
+		tags = [[PATagger sharedInstance] tagsOnFiles:[NSArray arrayWithObject:file]];
+		
+		if([fm fileExistsAtPath:tempDestination])
+			[fm removeFileAtPath:tempDestination handler:nil];
+			
+		fileWasMovedToTemp = [fm movePath:source toPath:tempDestination handler:nil];
+	}
+	
+	BOOL fileWasMoved;
+	if(tempDestination && fileWasMovedToTemp)
+	{	
+		[fm removeFileAtPath:destination handler:nil];
+		fileWasMoved = [fm movePath:tempDestination toPath:destination handler:self];
+		
+		if(fileWasMoved)
+		{
+			[fm removeFileAtPath:tempDestination handler:nil];
+			
+			PAFile *newFile = [PAFile fileWithPath:destination];
+			[[PATagger sharedInstance] addTags:tags toFiles:[NSArray arrayWithObject:newFile]];
+		}
+	} else {
+		fileWasMoved = [fm movePath:source toPath:destination handler:self];
+	}
 	
 	if(fileWasMoved)
 	{
@@ -517,13 +552,13 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	{
 		[self synchronizeResults];
 		[nc postNotificationName:PAQueryGatheringProgressNotification object:self];
-	}
+	}*/
 		
 	if([[note name] isEqualTo:NSMetadataQueryDidUpdateNotification])
 	{
 		[self synchronizeResults];
 		[nc postNotificationName:PAQueryDidUpdateNotification object:self];
-	}*/
+	}
 		
 	if([[note name] isEqualTo:NSMetadataQueryDidFinishGatheringNotification])
 	{
