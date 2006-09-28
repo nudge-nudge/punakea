@@ -139,6 +139,16 @@
 	[preferenceController showWindow:self];
 }
 
+- (IBAction)openFiles:(id)sender
+{	
+	NSOutlineView *ov = [[[browserController browserViewController] mainController] outlineView];
+	
+	if([ov responder])
+		[[[ov responder] target] performSelector:@selector(doubleAction)];
+	else
+		[[ov target] performSelector:@selector(doubleAction:)];
+}
+
 - (IBAction)showBrowser:(id)sender
 {
 	if (!browserController)

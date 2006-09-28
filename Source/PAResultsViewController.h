@@ -46,4 +46,6 @@
 
 - (IBAction)setGroupingAttributes:(id)sender;
 
+- (PAResultsOutlineView *)outlineView;
+
 @end

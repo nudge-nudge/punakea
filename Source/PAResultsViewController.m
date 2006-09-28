@@ -390,4 +390,11 @@
 	return [item isKindOfClass:[PAQueryBundle class]] ? NO : YES;
 }
 
+
+#pragma mark Accessors
+- (PAResultsOutlineView *)outlineView
+{
+	return outlineView;
+}
+
 @end
