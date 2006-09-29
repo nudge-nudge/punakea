@@ -38,11 +38,6 @@
 				   name:@"PARelatedTagsHaveChanged" 
 				 object:relatedTags];
 		
-		[nc addObserver:self 
-			   selector:@selector(tagsHaveChanged:) 
-				   name:@"PATagsHaveChanged" 
-				 object:tags];
-		
 		[NSBundle loadNibNamed:@"ResultsView" owner:self];
 	}
 	return self;
@@ -63,7 +58,7 @@
 }
 
 #pragma mark accessors
-- (PAQuery*)query 
+- (PAQuery*)query
 {
 	return query;
 }
@@ -113,14 +108,15 @@
 	[selectedTags removeAllTags];
 }
 
-//needs to be called whenever the selected tags have been changed
+- (void)removeLastTag
+{
+	if ([selectedTags count] > 0)
+		[selectedTags removeLastTag];
+}
+
 - (void)selectedTagsHaveChanged:(NSNotification*)notification
 {
-	/* TODO
-
-	*/
-	
-	//stop an active query
+	// stop an active query
 	if ([query isStarted])
 	{
 		[query stopQuery];
@@ -128,56 +124,24 @@
 	
 	[query setTags:selectedTags];
 	
-	//the query is only started if there are any tags to look for
+	// the query is only started if there are any tags to look for
 	if ([selectedTags count] > 0)
 	{
 		[query startQuery];
 		
-		// empty visible tags until new related tags are found
-		[delegate resetDisplayTags];
+		// empty display tags until new related tags are found
+		[delegate setDisplayTags:[NSMutableArray array]];
 	}
 	else 
 	{
 		// there are no selected tags, reset all tags
-		[delegate setDisplayTags:[tags tags]];
-		/* TODO
-		[typeAheadFind setActiveTags:[tags tags]];
-		*/
+		[delegate resetDisplayTags];
 	}
 }
 
 - (void)relatedTagsHaveChanged:(NSNotification*)notification
 {
-	/* TODO
-	if ([buffer length] > 0)
-	{
-		[self resetBuffer];
-	}
-	*/
-	
 	[delegate setDisplayTags:[relatedTags relatedTagArray]];
-	/* TODO
-	[typeAheadFind setActiveTags:[relatedTags relatedTagArray]];
-	*/
-}
-
-- (void)tagsHaveChanged:(NSNotification*)notification
-{
-	/* TODO
-
-	if ([buffer length] > 0)
-	{
-		[self resetBuffer];
-	}
-	
-	// only do something if there are no selected tags,
-	// because then the relatedTags are shown
-	if ([selectedTags count] == 0)
-	{
-		[self setDisplayTags:[tags tags]];
-		[typeAheadFind setActiveTags:[tags tags]];
-	}
-	*/
 }
 
 #pragma mark Temp

@@ -247,7 +247,8 @@
 	[sv setFrame:NSMakeRect(0,NSMinY([sv frame]),NSWidth([sv frame]),NSHeight([sv frame])-height)];
 	[tagCloud setNeedsDisplay:YES];
 	
-	[typeAheadView setHidden:NO];	
+	[typeAheadView setHidden:NO];
+	[self setState:PABrowserViewControllerTypeAheadFindState];
 }
 
 - (void)hideTypeAheadView
@@ -259,6 +260,7 @@
 	[tagCloud setNeedsDisplay:YES];
 
 	[typeAheadView setHidden:YES];	
+	[self setState:PABrowserViewControllerNormalState];
 }
 
 - (void)resetBuffer
@@ -283,13 +285,11 @@
 			NSString *tmpBuffer = [buffer substringToIndex:[buffer length]-1];
 			[self setBuffer:tmpBuffer];
 		}
-		/* TODO
-		else if ([selectedTags count] > 0)
-		// else delete the last selected tag
+		else if ([mainController isKindOfClass:[PAResultsViewController class]])
+		// else delete the last selected tag (if resultsview is active)
 		{
-			[selectedTags removeLastTag];
+			[mainController removeLastTag];
 		}
-		*/
 	}
 	// handle escape key (27)
 	else if (key == 27)

@@ -98,12 +98,6 @@ not retained!
 
 	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 
-	// DEBUG 
-	if ([tags tagForName:currentName] != nil) 
-	{ 
-		NSLog(@"error: %@",[tags tagForName:currentName]); 
-	}
-	
 	if ([tags tagForName:currentName] != nil && [currentName isNotEqualTo:editedTagName])
 	{
 		[fieldEditor setTextColor:[NSColor redColor]];
@@ -174,7 +168,8 @@ not retained!
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command
 {
-    if (command == @selector(cancelOperation:)) {
+    if (command == @selector(cancelOperation:)) 
+	{
 		[self cancelOperation:control];
 		return YES;
     }
