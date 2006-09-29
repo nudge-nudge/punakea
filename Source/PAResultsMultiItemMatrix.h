@@ -15,6 +15,8 @@
 
 @interface PAResultsMultiItemMatrix : NSMatrix {
 
+	NSOutlineView			*outlineView;
+
 	NSMutableArray			*items;
 	NSCell					*multiItemCell;
 	

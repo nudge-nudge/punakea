@@ -48,6 +48,15 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Notifications
+- (void)viewDidMoveToSuperview
+{
+	outlineView = [self superview];
+	
+	// Ensure the corresponding cell in outlineview is highlighted
+	[[self window] makeFirstResponder:outlineView];
+	[outlineView selectRow:0 byExtendingSelection:NO];
+}
+
 - (void)frameDidChange:(NSNotification *)note
 {
 	// TODO: Performance!! :)
@@ -131,7 +140,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 	//if(cellFrame.origin.y < 0) cellFrame.origin.y = 0;
 	
-	[[self superview] scrollRectToVisible:rect];
+	[outlineView scrollRectToVisible:rect];
 }
 */
 
@@ -186,6 +195,18 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		}
 		column++;
 	}
+	
+	// Highlight cells if there are already some selected indexes
+	unsigned index = [selectedIndexes firstIndex];
+	while(index != NSNotFound)
+	{
+		int row = index / [self numberOfColumns];
+		int column = index - row * [self numberOfColumns];
+	
+		[self highlightCell:YES atRow:row column:column];
+		
+		index = [selectedIndexes indexGreaterThanIndex:index];
+	}
 }
 
 - (void)doubleAction
@@ -215,6 +236,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSCell *cell = [self cellAtRow:row column:column];
 	[cell setHighlighted:flag];
 	
+	// Return if this cell is a placeholder
+	if([cell isMemberOfClass:[PAResultsMultiItemPlaceholderCell class]]) return;
+	
 	unsigned int index = row * [self numberOfColumns] + column;
 	
 	if(flag)
@@ -223,11 +247,17 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[selectedIndexes addIndex:index];
 		[selectedCells addObject:cell];
 		
+		// Update selectedItems in OutlineView
+		[outlineView addSelectedQueryItem:[items objectAtIndex:index]];
+		
 		[self scrollCellToVisibleAtRow:row column:column];
 		
 	} else {
 		[selectedIndexes removeIndex:index];
 		[selectedCells removeObject:cell];
+		
+		// Update selectedItems in OutlineView
+		[outlineView removeSelectedQueryItem:[items objectAtIndex:index]];
 	}
 }
 
@@ -311,14 +341,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		// If this is the topmost multi item cell, do nothing as we are at the topmost item
 		// in our OutlineView
 
-		NSOutlineView *outlineView = (NSOutlineView *)[self superview];
 		int rowInOutlineView = [outlineView rowForItem:items];	
 	
 		if(rowInOutlineView > 1)
 		{
 			// Pass keyDown event back to OutlineView
-			[[self superview] setResponder:nil];
-			[[self superview] keyDown:theEvent];
+			[outlineView setResponder:nil];
+			[outlineView keyDown:theEvent];
 		}
 	}
 }
@@ -377,14 +406,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		// If this is the lowermost multi item cell, do nothing as we are at the lowermost item
 		// in our OutlineView
 
-		NSOutlineView *outlineView = (NSOutlineView *)[self superview];
 		int rowInOutlineView = [outlineView rowForItem:items];	
 	
 		if(rowInOutlineView < [outlineView numberOfRows] - 1)
 		{
 			// Pass keyDown event back to OutlineView
-			[[self superview] setResponder:nil];
-			[[self superview] keyDown:theEvent];
+			[outlineView setResponder:nil];
+			[outlineView keyDown:theEvent];
 		}
 	}
 }
@@ -576,14 +604,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		}
 		
 		// TODO: Too slow, but we need to invalidate our visibleRect if key was pressed for a while
-		//[[self superview] setNeedsDisplayInRect:[[self superview] visibleRect]];
+		//[outlineView setNeedsDisplayInRect:[outlineView visibleRect]];
 	}
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-	NSOutlineView *outlineView = (NSOutlineView *)[self superview];
-
 	// Make sure the corresponding multiitemcell in our outlineView is highlighted
 	NSPoint locationInOutlineView = [outlineView convertPoint:[theEvent locationInWindow] fromView:nil];
 	int row = [outlineView rowAtPoint:locationInOutlineView];	
@@ -821,7 +847,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		PAQueryItem		*item = [items objectAtIndex:index];
 		NSString		*newName = [[textView string] copy];
 		
-		BOOL wasMoved = [[[self superview] query] renameItem:item to:newName errorWindow:[self window]];
+		BOOL wasMoved = [[outlineView query] renameItem:item to:newName errorWindow:[self window]];
 		
 		if(wasMoved) [self setNeedsDisplayInRect:[self cellFrameAtRow:r column:c]];
 	}
@@ -844,6 +870,28 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	if(items) [items release];
 	items = [theItems retain];
+}
+
+- (void)setSelectedQueryItems:(NSMutableArray *)theSelectedItems
+{
+	NSEnumerator *enumerator = [theSelectedItems objectEnumerator];
+	PAQueryItem *item;
+	
+	[selectedIndexes removeAllIndexes];
+	
+	while(item = [enumerator nextObject])
+	{
+		for(int i = 0; i < [items count]; i++)
+		{
+			PAQueryItem *thisItem = [items objectAtIndex:i];
+			if([thisItem isEqualTo:item])
+			{
+				[selectedIndexes addIndex:i];
+				break;
+			}
+		}
+	}
+	
 	[self displayCellsForItems];
 }
 

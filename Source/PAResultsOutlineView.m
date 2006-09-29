@@ -5,7 +5,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 @implementation PAResultsOutlineView
 
-#pragma mark Init
+#pragma mark Init + Dealloc
 - (void)awakeFromNib
 {
 	[self setIndentationPerLevel:16.0];
@@ -26,8 +26,16 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	       selector:@selector(frameDidChange:)
 		       name:(id)NSViewFrameDidChangeNotification
 			 object:self];
+	
 	// Misc
 	[self setDisplayMode:PAListMode];
+	[self setSelectedQueryItems:[[NSMutableArray alloc] init]];
+}
+
+- (void)dealloc
+{
+	if(selectedQueryItems) [selectedQueryItems release];
+	[super dealloc];
 }
 
 
@@ -94,8 +102,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
 	
 	// Restore group's state from user defaults
-	int i;
-	for(i = 0; i < [self numberOfRows]; i++)
+	for(int i = 0; i < [self numberOfRows]; i++)
 	{
 		id item = [self itemAtRow:i];
 		if([item isKindOfClass:[PAQueryBundle class]])
@@ -307,14 +314,21 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		}
 		else
 		{ 	
-			// wait to see if there is a double-click: if not, select the row as usual
-			[self performSelector:@selector(selectOnlyRowIndexes:)
-					   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
-					   afterDelay:doubleClickThreshold];
+			if([[self selectedRowIndexes] containsIndex:mouseRow])
+			{
+				// wait to see if there is a double-click: if not, select the row as usual
+				[self performSelector:@selector(selectOnlyRowIndexes:)
+						   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
+						   afterDelay:doubleClickThreshold];
+			}
+			else
+			{
+				[super mouseDown:theEvent];
+			}
 			
 			// we still need to pass the event to super, to handle things like dragging, but 
 			// we have disabled row deselection by overriding selectRowIndexes:byExtendingSelection:
-			[super mouseDown:theEvent]; 
+			//[super mouseDown:theEvent]; 
 		}
     }
     else if(doubleClick)
@@ -390,6 +404,28 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)setDisplayMode:(PAResultsDisplayMode)mode
 {
 	displayMode = mode;
+}
+
+- (void)setSelectedQueryItems:(NSMutableArray *)theItems
+{
+	if(selectedQueryItems) [selectedQueryItems release];
+	selectedQueryItems = [theItems retain];
+}
+
+- (NSMutableArray *)selectedQueryItems
+{
+	return selectedQueryItems;
+}
+
+- (void)addSelectedQueryItem:(PAQueryItem *)anItem
+{
+	[selectedQueryItems addObject:anItem];
+}
+
+- (void)removeSelectedQueryItem:(PAQueryItem *)anItem
+{
+	if([selectedQueryItems containsObject:anItem])
+		[selectedQueryItems removeObject:anItem];
 }
 
 

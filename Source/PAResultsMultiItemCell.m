@@ -53,7 +53,7 @@
 							 cellFrame.origin.y,
 							 cellFrame.size.width - offsetToRightBorder,
 							 cellFrame.size.height);
-
+							 
 	if([matrix superview] != controlView)
 	{	
 		matrix = [[PAResultsMultiItemMatrix alloc] initWithFrame:rect];
@@ -63,6 +63,7 @@
 		[matrix setDelegate:[controlView delegate]];
 		
 		[matrix setItems:items];	
+		[matrix setSelectedQueryItems:[controlView selectedQueryItems]];
 		[controlView addSubview:matrix];
 	}
 	else
