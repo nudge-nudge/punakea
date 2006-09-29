@@ -194,6 +194,8 @@ extern unsigned const BUTTON_SPACING = 2;
 
 - (void)buttonClick:(id)sender
 {
+	[[self window] makeFirstResponder:self];
+
 	// Highlight active filter button
 	NSEnumerator *enumerator = [buttons objectEnumerator];
 	NSButton *button;
@@ -237,6 +239,9 @@ extern unsigned const BUTTON_SPACING = 2;
 	
 	[outlineView scrollPoint:NSZeroPoint];
 	[outlineView reloadData];
+	
+	[outlineView deselectAll:self];
+	[[self window] makeFirstResponder:outlineView];
 }
 
 

@@ -51,10 +51,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)viewDidMoveToSuperview
 {
 	outlineView = [self superview];
-	
-	// Ensure the corresponding cell in outlineview is highlighted
-	[[self window] makeFirstResponder:outlineView];
-	[outlineView selectRow:0 byExtendingSelection:NO];
 }
 
 - (void)frameDidChange:(NSNotification *)note

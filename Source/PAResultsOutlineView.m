@@ -89,6 +89,26 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	return rect;
 }
 
+- (BOOL)becomeFirstResponder
+{
+	// Make sure, at least one item is selected
+	unsigned count = [[self selectedRowIndexes] count];
+	if(count <= 0)
+	{
+		for(unsigned i = 0; i < [self numberOfRows]; i++)
+		{
+			if([[self itemAtRow:i] isKindOfClass:[PAQueryItem class]] ||
+			   [[self itemAtRow:i] isKindOfClass:[NSArray class]])
+			{
+				[self selectRow:i byExtendingSelection:NO];
+				break;
+			}				
+		}
+	}
+	
+	return YES;
+}
+
 - (void)reloadData
 {
     while ([[self subviews] count] > 0)
