@@ -160,17 +160,14 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		{
 			for(int i = 0; i < [self numberOfRows]; i++)
 			{
-				if([[self itemAtRow:i] isKindOfClass:[PAQueryItem class]])
+				id thisItem = [self itemAtRow:i];
+				
+				if([thisItem isEqualTo:item])
 				{
-					PAQueryItem *thisItem = [self itemAtRow:i];
-					
-					if([thisItem isEqualTo:item])
+					if([self rowForItem:thisItem] != -1)
 					{
-						if([self rowForItem:thisItem] != -1)
-						{
-							[self selectRow:[self rowForItem:thisItem] byExtendingSelection:YES];
-							break;
-						}
+						[self selectRow:[self rowForItem:thisItem] byExtendingSelection:YES];
+						break;
 					}
 				}
 			}
