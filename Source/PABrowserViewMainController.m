@@ -36,4 +36,9 @@
 	working = flag;
 }
 
+- (void)reset
+{
+	return;
+}
+
 @end

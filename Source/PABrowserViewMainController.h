@@ -22,4 +22,10 @@
 - (BOOL)isWorking;
 - (void)setWorking:(BOOL)flag;
 
+/** is called when reset is needed
+	(handle escape key reset here)
+	default does nothing
+	*/
+- (void)reset; 
+
 @end

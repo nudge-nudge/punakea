@@ -15,11 +15,21 @@
 #import "PATagManagementViewController.h"
 #import "PAResultsViewController.h"
 
+typedef enum _PABrowserViewControllerState
+{
+	PABrowserViewControllerNormalState = 0,
+	PABrowserViewControllerTypeAheadFindState = 1,
+	PABrowserViewControllerMainControllerState = 2
+} PABrowserViewControllerState;
+
+
 @class PATagCloud;
 
 @interface BrowserViewController : PAViewController {
 	IBOutlet PATagCloud *tagCloud;
 	IBOutlet NSView *controlledView;
+	
+	PABrowserViewControllerState state;
 		
 	PABrowserViewMainController *mainController;
 	
@@ -36,23 +46,30 @@
 	NSMutableDictionary *tagCloudSettings;
 }
 
-// events
-- (void)keyDown:(NSEvent *)event;
+/** 
+delegate method, used by browserViewMainController if it needs
+to set some tags
+@param someTags tags to be displayed
+*/
+- (void)setDisplayTags:(NSMutableArray*)someTags; 
 
-- (NSMutableArray*)visibleTags;
-- (void)setVisibleTags:(NSMutableArray*)otherTags;
-- (PATag*)currentBestTag;
-- (void)setCurrentBestTag:(PATag*)otherTag;
+/**
+use this method to tell bvc that mainController doesn't need to
+ display tags anymore
+ */
+- (void)resetDisplayTags;
+   
 
-- (NSString*)buffer;
-- (void)setBuffer:(NSString*)string;
 - (PABrowserViewMainController*)mainController;
-- (void)setMainController:(PABrowserViewMainController*)aController;
 
 - (NSView*)controlledView;
 
 - (void)resetBrowserView;
-//for PAQuery
+
+
+
+// events
+- (void)keyDown:(NSEvent *)event;
 
 /**
 is called when a tag is clicked. increments the tag click count and

@@ -11,14 +11,26 @@
 
 @interface BrowserViewController (PrivateAPI)
 
-- (void)selectedTagsHaveChanged;
-- (void)relatedTagsHaveChanged;
 - (void)tagsHaveChanged;
+
+- (NSMutableArray*)visibleTags;
+- (void)setVisibleTags:(NSMutableArray*)otherTags;
+
+- (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
+
+- (PATag*)currentBestTag;
+- (void)setCurrentBestTag:(PATag*)otherTag;
 
 - (void)showTypeAheadView;
 - (void)hideTypeAheadView;
 
-- (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
+- (NSString*)buffer;
+- (void)setBuffer:(NSString*)string;
+
+- (void)setMainController:(PABrowserViewMainController*)aController;
+
+- (PABrowserViewControllerState)state;
+- (void)setState:(PABrowserViewControllerState)aState;
 
 @end
 
@@ -31,6 +43,8 @@
 	{
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
+		
+		[self setState:PABrowserViewControllerNormalState];
 		
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
@@ -83,6 +97,16 @@
 }
 
 #pragma mark accessors
+- (PABrowserViewControllerState)state
+{
+	return state;
+}
+
+- (void)setState:(PABrowserViewControllerState)aState
+{
+	state = aState;
+}
+
 - (PATag*)currentBestTag
 {
 	return currentBestTag;
@@ -104,6 +128,32 @@
 {
 	[buffer release];
 	buffer = [string mutableCopy];
+}
+
+- (PABrowserViewMainController*)mainController
+{
+	return mainController;
+}
+
+- (void)setMainController:(PABrowserViewMainController*)aController
+{
+	[aController retain];
+	[mainController release];
+	mainController = aController;
+	
+	[mainController setDelegate:self];
+	[mainController setNextResponder:self];
+	
+	[controlledView addSubview:[mainController mainView]];
+	[[mainController mainView] setFrameSize:[controlledView frame].size];
+}
+
+- (BOOL)isWorking
+{
+	if (!mainController || ![mainController isWorking])
+		return NO;
+	else
+		return YES;
 }
 
 - (NSMutableArray*)visibleTags;
@@ -136,41 +186,30 @@
 		
 		NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 		visibleTags = [sortedArray mutableCopy];
+		
+		if ([visibleTags count] > 0)
+			[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
 	}
+}
+
+- (void)setDisplayTags:(NSMutableArray*)someTags
+{
+	if ([self state] == PABrowserViewControllerTypeAheadFindState)
+		[self resetBuffer];
 	
-	if ([visibleTags count] > 0)
-		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
+	[self setState:PABrowserViewControllerMainControllerState];
+	[self setVisibleTags:someTags];
+	[typeAheadFind setActiveTags:someTags];
 }
 
-- (PABrowserViewMainController*)mainController
+- (void)resetDisplayTags
 {
-	return mainController;
-}
-
-- (void)setMainController:(PABrowserViewMainController*)aController
-{
-	[aController retain];
-	[mainController release];
-	mainController = aController;
+	if ([self state] == PABrowserViewControllerTypeAheadFindState)
+		[self resetBuffer];
 	
-	[mainController setDelegate:self];
-	[mainController setNextResponder:self];
-	
-	[controlledView addSubview:[mainController mainView]];
-	[[mainController mainView] setFrameSize:[controlledView frame].size];
-}
-
-- (NSView*)controlledView
-{
-	return controlledView;
-}
-
-- (BOOL)isWorking
-{
-	if (!mainController || ![mainController isWorking])
-		return NO;
-	else
-		return YES;
+	[self setState:PABrowserViewControllerNormalState];
+	[self setVisibleTags:[tags tags]];
+	[typeAheadFind setActiveTags:[tags tags]];
 }
 
 #pragma mark tag stuff
@@ -199,29 +238,7 @@
 	return maxTag;
 }
 
-- (void)bufferHasChanged
-{
-	// if buffer has any content, display tags with corresponding prefix
-	// else display all tags
-	if ([buffer length] > 0)
-	{
-		if ([typeAheadView isHidden])
-		{
-			[self showTypeAheadView];
-		}
-		[self setVisibleTags:[typeAheadFind tagsForPrefix:buffer]];
-		[tagCloud selectUpperLeftButton];
-	}
-	else
-	{
-		if (![typeAheadView isHidden])
-		{
-			[self hideTypeAheadView];
-		}
-		[self setVisibleTags:[typeAheadFind activeTags]];
-	}
-}
-
+#pragma mark typeAheadFind
 - (void)showTypeAheadView
 {
 	float height = NSHeight([typeAheadView frame]);
@@ -253,7 +270,6 @@
 - (void)keyDown:(NSEvent*)event 
 {
 	// get the pressed key
-	// DEBUG NSLog(@"BVC keyDown: %x", [[event characters] characterAtIndex:0]);
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	
 	// create character set for testing
@@ -278,8 +294,7 @@
 	// handle escape key (27)
 	else if (key == 27)
 	{
-		[self resetBuffer];
-		[self clearSelectedTags:self];
+		[self reset];
 	}
 	else if ([alphanumericCharacterSet characterIsMember:key]) 
 	{
@@ -293,7 +308,8 @@
 		}
 		else
 		{
-				//TODO give negative feedback
+			//TODO give negative feedback
+			return;
 		}
 		
 		[tmpBuffer release];
@@ -305,9 +321,33 @@
 	}
 }
 
+- (void)bufferHasChanged
+{
+	// if buffer has any content, display tags with corresponding prefix
+	// else display all tags
+	if ([buffer length] > 0)
+	{
+		if ([typeAheadView isHidden])
+		{
+			[self showTypeAheadView];
+		}
+		[self setVisibleTags:[typeAheadFind tagsForPrefix:buffer]];
+		[tagCloud selectUpperLeftButton];
+	}
+	else
+	{
+		if (![typeAheadView isHidden])
+		{
+			[self hideTypeAheadView];
+		}
+		[self setVisibleTags:[typeAheadFind activeTags]];
+	}
+}
+
 - (void)tagsHaveChanged:(NSNotification*)notification
 {
-	[self setVisibleTags:[tags tags]];
+	if ([self state] == PABrowserViewControllerNormalState)
+		[self setVisibleTags:[tags tags]];
 }
 
 #pragma mark actions
@@ -331,6 +371,12 @@
 		[[mainController mainView] removeFromSuperview];
 
 	[self setMainController:controller];
+}
+
+- (void)reset
+{
+	[self resetBuffer];
+	[mainController reset];
 }
 
 @end

@@ -103,6 +103,11 @@
 	[selectedTags addTag:tag];
 }
 
+- (void)reset
+{
+	[self clearSelectedTags:self];
+}
+
 - (IBAction)clearSelectedTags:(id)sender
 {
 	[selectedTags removeAllTags];
@@ -112,10 +117,7 @@
 - (void)selectedTagsHaveChanged:(NSNotification*)notification
 {
 	/* TODO
-	if ([buffer length] > 0)
-	{
-		[self resetBuffer];
-	}
+
 	*/
 	
 	//stop an active query
@@ -132,12 +134,12 @@
 		[query startQuery];
 		
 		// empty visible tags until new related tags are found
-		[delegate setVisibleTags:[NSMutableArray array]];
+		[delegate resetDisplayTags];
 	}
 	else 
 	{
 		// there are no selected tags, reset all tags
-		[delegate setVisibleTags:[tags tags]];
+		[delegate setDisplayTags:[tags tags]];
 		/* TODO
 		[typeAheadFind setActiveTags:[tags tags]];
 		*/
@@ -153,7 +155,7 @@
 	}
 	*/
 	
-	[delegate setVisibleTags:[relatedTags relatedTagArray]];
+	[delegate setDisplayTags:[relatedTags relatedTagArray]];
 	/* TODO
 	[typeAheadFind setActiveTags:[relatedTags relatedTagArray]];
 	*/
@@ -172,7 +174,7 @@
 	// because then the relatedTags are shown
 	if ([selectedTags count] == 0)
 	{
-		[self setVisibleTags:[tags tags]];
+		[self setDisplayTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
 	}
 	*/
