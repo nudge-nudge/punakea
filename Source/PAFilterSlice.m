@@ -237,11 +237,22 @@ extern unsigned const BUTTON_SPACING = 2;
 		[outlineView setDisplayMode:PAListMode];
 	}
 	
-	[outlineView scrollPoint:NSZeroPoint];
-	
 	[outlineView saveSelection];
 	[outlineView reloadData];
 	[outlineView restoreSelection];
+	
+	// Scrolling - if item is an array, it handles scrolling itself
+	if(![[outlineView itemAtRow:[outlineView selectedRow]] isKindOfClass:[NSArray class]])
+	{
+		if([outlineView selectedRow])
+		{
+			[outlineView scrollRowToVisible:[outlineView selectedRow]];
+		} else {
+			[outlineView scrollPoint:NSZeroPoint];
+		}
+	} else {
+		[[outlineView responder] scrollToVisible];
+	}
 	
 	[[self window] makeFirstResponder:outlineView];
 }

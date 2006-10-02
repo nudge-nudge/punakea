@@ -117,6 +117,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     {
 		[[[self subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
     }
+	[self setResponder:nil];
     
 	[super reloadData];
 	
@@ -175,7 +176,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSEnumerator *itemsEnumerator = [selectedQueryItems objectEnumerator];
 	PAQueryItem *item;
 	while(item = [itemsEnumerator nextObject])
-	{
+	{	
 		for(int i = 0; i < [self numberOfRows]; i++)
 		{
 			id thisItem = [self itemAtRow:i];

@@ -560,6 +560,18 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	}
 }
 
+- (void)scrollToVisible
+{
+	// Scroll selected cell to visible
+	if([self selectedCell])
+	{
+		int row, column;
+		[self getRow:&row column:&column ofCell:[self selectedCell]];
+	
+		[self scrollRectToVisible:[self cellFrameAtRow:row column:column]];
+	}
+}
+
 
 #pragma mark Events
 - (void)keyDown:(NSEvent *)theEvent
@@ -889,6 +901,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	}
 	
 	[self displayCellsForItems];
+	
+	[self scrollToVisible];
 }
 
 - (NSCell *)selectedCell

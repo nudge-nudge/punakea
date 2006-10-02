@@ -73,10 +73,12 @@
 	
 	if(![self isHighlighted])
 	{
-		[matrix deselectAllCells];
+		// Buggy...
+		//[matrix deselectAllCells];
 	} else {
 		
-		if(![matrix selectedCell])
+		// Also buggy...
+		/*if(![matrix selectedCell])
 		{
 			// Select one item on highlighting
 			if([controlView lastUpDownArrowFunctionKey] == NSDownArrowFunctionKey ||
@@ -93,7 +95,7 @@
 				[matrix highlightCell:YES atRow:row column:column];
 			}
 		}
-		[controlView setLastUpDownArrowFunctionKey:0];
+		[controlView setLastUpDownArrowFunctionKey:0];*/
 		
 		// Make matrix the first responder
 		[controlView setResponder:matrix];
