@@ -363,6 +363,34 @@
 }
 
 
+#pragma mark Misc
+- (void)deleteFilesForSelectedQueryItems:(id)sender
+{
+	[outlineView saveSelection];
+	
+	[[outlineView query] disableUpdates];
+
+	NSArray *selectedQueryItems = [outlineView selectedQueryItems];
+
+	for(unsigned i = 0; i < [selectedQueryItems count]; i++)
+	{
+		PAQueryItem *item = [selectedQueryItems objectAtIndex:i];
+		NSString *path = [item valueForAttribute:(id)kMDItemPath];
+		
+		// Remove tags from file
+		// TODO!
+		
+		// Move to trash
+		[[NSFileManager defaultManager] trashFileAtPath:path];
+	}
+	
+	[selectedQueryItems release];
+	[outlineView setSelectedQueryItems:[[NSMutableArray alloc] init]];
+	
+	[[outlineView query] enableUpdates];
+}
+
+
 #pragma mark Accessors
 - (PAResultsOutlineView *)outlineView
 {

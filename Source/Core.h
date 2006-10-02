@@ -34,7 +34,9 @@
 // mainmenu actions
 - (IBAction)manageTags:(id)sender;
 - (IBAction)showPreferences:(id)sender;
+
 - (IBAction)openFiles:(id)sender;
+- (IBAction)deleteFiles:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
 

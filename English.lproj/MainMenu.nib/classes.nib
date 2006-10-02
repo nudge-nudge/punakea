@@ -3,6 +3,7 @@
         {
             ACTIONS = {
                 closeBrowser = id; 
+                deleteFiles = id; 
                 manageTags = id; 
                 openFiles = id; 
                 showBrowser = id; 

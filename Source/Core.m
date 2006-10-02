@@ -149,6 +149,13 @@
 		[[ov target] performSelector:@selector(doubleAction:)];
 }
 
+- (IBAction)deleteFiles:(id)sender
+{	
+	NSOutlineView *ov = [[[browserController browserViewController] mainController] outlineView];
+	
+	[[ov target] performSelector:@selector(deleteFilesForSelectedQueryItems:)];
+}
+
 - (IBAction)showBrowser:(id)sender
 {
 	if (!browserController)

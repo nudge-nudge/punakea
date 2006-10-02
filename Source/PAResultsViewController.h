@@ -10,6 +10,8 @@
 #import "PAViewController.h"
 #import "PABrowserViewMainController.h"
 
+#import "NSFileManager+TrashFile.h"
+
 #import "PATagger.h"
 #import "PATags.h"
 #import "PARelatedTags.h"
