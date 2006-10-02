@@ -33,6 +33,11 @@ static PATagger *sharedInstance = nil;
 }
 
 #pragma mark tags and files
+- (NSArray*)tagsOnFile:(PAFile*)file
+{
+	return [self tagsOnFiles:[NSArray arrayWithObject:file] includeTempTags:YES];
+}
+
 - (NSArray*)tagsOnFiles:(NSArray*)files
 {
 	return [self tagsOnFiles:files includeTempTags:YES];

@@ -31,6 +31,14 @@ get the singleton instance
 
 /**
 convenience method:
+ calls tagsOnFiles: with file as array content
+ @param file file to fetch tags for
+ @return array of PATags
+ */
+- (NSArray*)tagsOnFile:(PAFile*)file;
+
+/**
+convenience method:
 calls tagsOnFiles: with includeTempTags:YES
  @param files files to fetch tags for
  @return array of PATags
