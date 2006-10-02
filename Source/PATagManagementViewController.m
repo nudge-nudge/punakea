@@ -98,7 +98,8 @@ not retained!
 
 	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 
-	if ([tags tagForName:currentName] != nil && [currentName isNotEqualTo:editedTagName])
+	if ([tags tagForName:currentName] != nil 
+		&& [currentName caseInsensitiveCompare:editedTagName] != NSOrderedSame)
 	{
 		[fieldEditor setTextColor:[NSColor redColor]];
 	} 
@@ -117,7 +118,8 @@ not retained!
 	
 	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 	
-	if ([tags tagForName:currentName] == nil || [currentName isEqualTo:editedTagName])
+	if ([tags tagForName:currentName] == nil 
+		|| [currentName caseInsensitiveCompare:editedTagName] == NSOrderedSame)
 		return YES;
 	else
 		return NO;

@@ -76,7 +76,7 @@ is called when a tag is clicked. increments the tag click count and
  adds to selectedTags
  */
 - (IBAction)tagButtonClicked:(id)sender;
-
+- (IBAction)findFieldAction:(id)sender;
 
 - (void)resetBuffer;
 

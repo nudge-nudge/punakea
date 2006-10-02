@@ -49,7 +49,7 @@ NSString * const PATagOperation = @"PATagOperation";
 	
 	while (tag = [e nextObject])
 	{
-		if ([[tag name] isEqualToString:tagName])
+		if ([[tag name] caseInsensitiveCompare:tagName] == NSOrderedSame)
 		{
 			resultTag = tag;
 		}

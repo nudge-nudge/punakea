@@ -1,7 +1,7 @@
 {
     IBClasses = (
         {
-            ACTIONS = {tagButtonClicked = id; }; 
+            ACTIONS = {findFieldAction = id; tagButtonClicked = id; }; 
             CLASS = BrowserViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {

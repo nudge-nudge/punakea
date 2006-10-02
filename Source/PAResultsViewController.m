@@ -95,6 +95,7 @@
 #pragma mark actions
 - (void)handleTagActivation:(PATag*)tag
 {
+	[tag incrementClickCount];
 	[selectedTags addTag:tag];
 }
 

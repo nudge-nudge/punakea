@@ -30,6 +30,8 @@
             }; 
             SUPERCLASS = PABrowserViewMainController; 
         }, 
+        {CLASS = PATagManagementViewMainView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = PATagManagementViewTagView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {
             CLASS = PAViewController; 
             LANGUAGE = ObjC; 

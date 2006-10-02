@@ -21,7 +21,7 @@
 {
 	[super setName:aName];
 
-	[self setQuery:[NSString stringWithFormat:@"kMDItemKeywords == \"%@\"",aName]];
+	[self setQuery:[NSString stringWithFormat:@"kMDItemKeywords LIKE[cd] \"%@\"",aName]];
 }
 
 // implementing needed super-class methods
@@ -48,7 +48,8 @@
 
 - (BOOL)isEqualToTag:(PASimpleTag*)otherTag 
 {
-	if ([name isEqual:[otherTag name]] && [query isEqual:[otherTag query]])
+	if ([name caseInsensitiveCompare:[otherTag name]] == NSOrderedSame 
+		&& [query isEqual:[otherTag query]])
 		return YES;
 	else
 		return NO;

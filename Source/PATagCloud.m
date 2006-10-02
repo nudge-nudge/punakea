@@ -516,13 +516,11 @@ bound to visibleTags
 
 - (BOOL)becomeFirstResponder
 {
-	[self setNeedsDisplay:YES];
 	return YES;
 }
 
 - (BOOL)resignFirstResponder
 {
-	[self setNeedsDisplay:YES];
 	return YES;
 }
 

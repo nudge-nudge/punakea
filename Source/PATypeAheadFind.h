@@ -16,9 +16,6 @@ simple type ahead find implementation, not the quickest, but works
 @interface PATypeAheadFind : NSObject {
 	PATags *tags; /**< all tags currently known */
 	NSMutableArray *activeTags;
-	
-	NSString *prefix;
-	NSMutableArray *matchingTags; /**< all tags matching the current prefix */
 }
 
 

@@ -148,6 +148,11 @@
 	[[mainController mainView] setFrameSize:[controlledView frame].size];
 }
 
+- (NSView*)controlledView
+{
+	return controlledView;
+}
+
 - (BOOL)isWorking
 {
 	if (!mainController || ![mainController isWorking])
@@ -217,7 +222,16 @@
 {
 	PATag *tag = [sender fileTag];
 	[mainController handleTagActivation:tag];
-	[tag incrementClickCount];
+}
+
+- (IBAction)findFieldAction:(id)sender
+{
+	PATagButton *button = [tagCloud activeButton];
+	
+	if (button)
+	{
+		[self tagButtonClicked:button];
+	}
 }
 
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
@@ -241,6 +255,8 @@
 #pragma mark typeAheadFind
 - (void)showTypeAheadView
 {
+	NSLog(@"show");
+	
 	float height = NSHeight([typeAheadView frame]);
 	NSScrollView *sv = [tagCloud enclosingScrollView];
 	// placed above
@@ -253,12 +269,14 @@
 
 - (void)hideTypeAheadView
 {
+	NSLog(@"hide");
+	
 	float height = NSHeight([typeAheadView frame]);
 	NSScrollView *sv = [tagCloud enclosingScrollView];
 	// placed above
 	[sv setFrame:NSMakeRect(0,NSMinY([sv frame]),NSWidth([sv frame]),NSHeight([sv frame])+height)];
 	[tagCloud setNeedsDisplay:YES];
-
+	
 	[typeAheadView setHidden:YES];	
 	[self setState:PABrowserViewControllerNormalState];
 }
@@ -273,6 +291,7 @@
 {
 	// get the pressed key
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
+	NSLog(@"BVC keyDown: %x", [[event characters] characterAtIndex:0]);
 	
 	// create character set for testing
 	NSCharacterSet *alphanumericCharacterSet = [NSCharacterSet alphanumericCharacterSet];
@@ -336,10 +355,7 @@
 	}
 	else
 	{
-		if (![typeAheadView isHidden])
-		{
-			[self hideTypeAheadView];
-		}
+		[self hideTypeAheadView];
 		[self setVisibleTags:[typeAheadFind activeTags]];
 	}
 }
@@ -379,4 +395,17 @@
 	[mainController reset];
 }
 
+- (void)controlTextDidChange:(NSNotification *)aNotification
+{
+	NSDictionary *userInfo = [aNotification userInfo];
+	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
+	NSString *currentString = [fieldEditor string];
+	
+	if ([currentString isNotEqualTo:@""] && ![typeAheadFind hasTagsForPrefix:currentString])
+	{
+		NSString *newString = [currentString substringToIndex:[currentString length]-1];
+		[fieldEditor setString:newString];
+	}
+}
+	
 @end

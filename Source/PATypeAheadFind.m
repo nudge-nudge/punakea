@@ -47,6 +47,12 @@
 #pragma mark functionality
 - (BOOL)hasTagsForPrefix:(NSString*)prefix
 {
+	// handle nil/empty prefix
+	if (!prefix || [prefix isEqualToString:@""])
+	{
+		return YES;
+	}
+	
 	NSEnumerator *e;
 	
 	// if active tags are set, look there, otherwise check in all tags
@@ -63,7 +69,8 @@
 	
 	while (tag = [e nextObject])
 	{
-		if ([[tag name] hasPrefix:prefix])
+		if (!NSEqualRanges([[tag name] rangeOfString:prefix options:(NSCaseInsensitiveSearch | NSAnchoredSearch)],
+						   NSMakeRange(NSNotFound,0)))
 		{
 			return true;
 		}
@@ -94,7 +101,8 @@
 	
 	while (tag = [e nextObject])
 	{
-		if ([[tag name] hasPrefix:prefix])
+		if (!NSEqualRanges([[tag name] rangeOfString:prefix options:(NSCaseInsensitiveSearch | NSAnchoredSearch)],
+						   NSMakeRange(NSNotFound,0)))
 		{
 			[result addObject:tag];
 		}
