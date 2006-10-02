@@ -155,6 +155,12 @@ renames the tag on files
  */
 - (void)renameTag:(NSString*)tagName toTag:(NSString*)newTagName onFiles:(NSArray*)files;
 
+/**
+removes all tags from file
+ @param file file to remove tags from
+ */
+- (void)removeAllTagsFromFile:(PAFile *)file;
+
 #pragma mark accessors
 - (PATags*)tags;
 - (void)setTags:(PATags*)allTags;

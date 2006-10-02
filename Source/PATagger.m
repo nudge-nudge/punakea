@@ -257,7 +257,12 @@ static PATagger *sharedInstance = nil;
 	}
 }
 
-//sets the tags, overwrites current ones
+- (void)removeAllTagsFromFile:(PAFile *)file
+{
+	[self writeTags:[NSArray array] ToFile:file];
+}
+
+#pragma mark private
 - (void)writeTags:(NSArray*)someTags toFile:(PAFile*)file {
 	//only the names of the tags are written, create tmp array with names only
 	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];

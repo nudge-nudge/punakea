@@ -516,13 +516,11 @@ bound to visibleTags
 
 - (BOOL)becomeFirstResponder
 {
-	NSLog(@"bfr");
 	return YES;
 }
 
 - (BOOL)resignFirstResponder
 {
-	NSLog(@"rfr");
 	return YES;
 }
 
