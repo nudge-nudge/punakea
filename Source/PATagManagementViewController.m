@@ -118,6 +118,22 @@ not retained!
 	
 	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 	
+	if ([currentName isWhiteSpace])
+	{
+		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		[alert setMessageText:NSLocalizedStringFromTable(@"TAG_WHITESPACE_REQUEST",@"Tags",@"")];
+		[alert setInformativeText:NSLocalizedStringFromTable(@"TAG_WHITESPACE_REQUEST_INFO",@"Tags",@"")];
+		[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OK",@"Global",@"")];
+		
+		[alert setAlertStyle:NSInformationalAlertStyle];
+		
+		[alert beginSheetModalForWindow:[currentView window]
+						  modalDelegate:self 
+						 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+							contextInfo:nil];
+		return NO;
+	}
+	
 	if ([tags tagForName:currentName] == nil 
 		|| [currentName caseInsensitiveCompare:editedTagName] == NSOrderedSame)
 		return YES;

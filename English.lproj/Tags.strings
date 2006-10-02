@@ -2,3 +2,5 @@
 "TAG_RENAME_REQUEST_INFO" = "Tags on files will also be renamed.";
 "TAG_REMOVE_REQUEST" = "Remove the tag?";
 "TAG_REMOVE_REQUEST_INFO" = "Tags on files will also be removed.";
+"TAG_WHITESPACE_REQUEST" = "Please enter a tag name";
+"TAG_WHITESPACE_REQUEST_INFO" = "No whitespace-only tags allowed";

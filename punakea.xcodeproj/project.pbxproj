@@ -59,6 +59,8 @@
 		4842FC1009DA801700C4A931 /* PATagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC0E09DA801500C4A931 /* PATagButton.m */; };
 		4842FC1309DA804100C4A931 /* PATagButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC1109DA804100C4A931 /* PATagButtonCell.h */; };
 		4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC1209DA804100C4A931 /* PATagButtonCell.m */; };
+		48469B9E0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */; };
+		48469B9F0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */; };
 		48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48471FD90A4FFF90002B369A /* SidebarController.h */; };
 		48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48471FDA0A4FFF90002B369A /* SidebarController.m */; };
 		48494A1A0AB97A1900539D1E /* PAMailDropHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48494A180AB97A1900539D1E /* PAMailDropHandler.h */; };
@@ -346,6 +348,7 @@
 				488CBBE10AC9676C00F6D20E /* PAResultsViewController.h in CopyFiles */,
 				486DC7500ACD3B2D00BE0F54 /* PATagManagementViewMainView.h in CopyFiles */,
 				486DC7630ACD3BCD00BE0F54 /* PATagManagementViewTagView.h in CopyFiles */,
+				48469B9E0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +401,8 @@
 		4842FC0E09DA801500C4A931 /* PATagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButton.m; sourceTree = "<group>"; };
 		4842FC1109DA804100C4A931 /* PATagButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButtonCell.h; sourceTree = "<group>"; };
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
+		48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CharacterSetChecks.h"; sourceTree = "<group>"; };
+		48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CharacterSetChecks.m"; sourceTree = "<group>"; };
 		48471FD90A4FFF90002B369A /* SidebarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarController.h; sourceTree = "<group>"; };
 		48471FDA0A4FFF90002B369A /* SidebarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarController.m; sourceTree = "<group>"; };
 		48494A180AB97A1900539D1E /* PAMailDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMailDropHandler.h; sourceTree = "<group>"; };
@@ -739,6 +744,8 @@
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				65035FB70A20762F00AD0597 /* Query */,
+				48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */,
+				48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */,
 				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
 				65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */,
 				484F71AB0A66722000D886E5 /* PAViewController.h */,
@@ -1404,6 +1411,7 @@
 				488CBBE20AC9676C00F6D20E /* PAResultsViewController.m in Sources */,
 				486DC7510ACD3B2D00BE0F54 /* PATagManagementViewMainView.m in Sources */,
 				486DC7640ACD3BCD00BE0F54 /* PATagManagementViewTagView.m in Sources */,
+				48469B9F0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
