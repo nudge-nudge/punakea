@@ -733,7 +733,6 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				481A64240ABFD153005516E7 /* Login Item */,
 				48DC82950AB69C0900DE0F16 /* File Handling */,
 				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
 				483272220AA42C7E003D98A6 /* Preferences */,
@@ -800,6 +799,7 @@
 		483272220AA42C7E003D98A6 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				481A64240ABFD153005516E7 /* Login Item */,
 				483272320AA42DC6003D98A6 /* UKPrefsPanel.h */,
 				483272330AA42DC6003D98A6 /* UKPrefsPanel.m */,
 				4832723B0AA42E8C003D98A6 /* PreferenceController.h */,

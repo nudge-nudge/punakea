@@ -26,6 +26,7 @@
 
 - (NSString*)buffer;
 - (void)setBuffer:(NSString*)string;
+- (void)resetBuffer;
 
 - (void)setMainController:(PABrowserViewMainController*)aController;
 

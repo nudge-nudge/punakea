@@ -17,9 +17,9 @@
 
 typedef enum _PABrowserViewControllerState
 {
-	PABrowserViewControllerNormalState = 0,
-	PABrowserViewControllerTypeAheadFindState = 1,
-	PABrowserViewControllerMainControllerState = 2
+	PABrowserViewControllerNormalState = 1,
+	PABrowserViewControllerTypeAheadFindState = 2,
+	PABrowserViewControllerMainControllerState = 4
 } PABrowserViewControllerState;
 
 
@@ -66,21 +66,12 @@ use this method to tell bvc that mainController doesn't need to
 
 - (void)resetBrowserView;
 
-
-
-// events
-- (void)keyDown:(NSEvent *)event;
-
 /**
 is called when a tag is clicked. increments the tag click count and
  adds to selectedTags
  */
 - (IBAction)tagButtonClicked:(id)sender;
 - (IBAction)findFieldAction:(id)sender;
-
-- (void)resetBuffer;
-
-// Temp
 
 // tag management
 - (void)manageTags;

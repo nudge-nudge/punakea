@@ -112,8 +112,6 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryDidStartGatheringNotification
 														object:self];
 	
-	NSLog(@"%@",predicate);
-	
 	return [mdquery startQuery];
 }
 
