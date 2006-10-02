@@ -40,6 +40,7 @@ typedef enum _PABrowserViewControllerState
 	PATag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
 	
 	IBOutlet PATypeAheadView *typeAheadView;
+	IBOutlet NSSearchField *searchField;
 	PATypeAheadFind *typeAheadFind; /**< used for type ahead find */
 	NSString *buffer;
 		

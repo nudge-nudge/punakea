@@ -71,6 +71,7 @@
 
 - (void)awakeFromNib
 {
+	[searchField setEditable:NO];
 	[self showResults];
 	[[[self mainView] window] setInitialFirstResponder:tagCloud];
 }	
@@ -127,6 +128,9 @@
 
 - (void)setBuffer:(NSString*)string
 {
+	if (!string)
+		string = @"";
+	
 	[buffer release];
 	buffer = [string mutableCopy];
 }
@@ -322,6 +326,7 @@
 		NSMutableString *tmpBuffer = [buffer mutableCopy];
 		[tmpBuffer appendString:[event charactersIgnoringModifiers]];
 		
+		// TODO check this for typeaheadfind bug!!!
 		if ([typeAheadFind hasTagsForPrefix:tmpBuffer])
 		{
 			[self setBuffer:tmpBuffer];
@@ -356,15 +361,21 @@
 	}
 	else
 	{
-		[self hideTypeAheadView];
-		[self setVisibleTags:[typeAheadFind activeTags]];
+		if (![typeAheadView isHidden])
+		{
+			[self hideTypeAheadView];
+			[self setVisibleTags:[typeAheadFind activeTags]];
+			[[tagCloud window] makeFirstResponder:tagCloud];
+		}
 	}
 }
 
 - (void)tagsHaveChanged:(NSNotification*)notification
 {
 	if ([self state] == PABrowserViewControllerNormalState)
+	{
 		[self setVisibleTags:[tags tags]];
+	}
 }
 
 #pragma mark actions
@@ -408,5 +419,5 @@
 		[fieldEditor setString:newString];
 	}
 }
-	
+
 @end

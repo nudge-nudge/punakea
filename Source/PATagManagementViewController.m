@@ -237,8 +237,8 @@ not retained!
 {
 	[self setWorking:YES];
 	
-	[tagger renameTag:[currentEditedTag name] toTag:newTagName];
 	[currentEditedTag setName:newTagName];
+	[tagger renameTag:[currentEditedTag name] toTag:newTagName];
 
 	[self setWorking:NO];
 }

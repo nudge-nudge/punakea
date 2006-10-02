@@ -516,11 +516,13 @@ bound to visibleTags
 
 - (BOOL)becomeFirstResponder
 {
+	NSLog(@"bfr");
 	return YES;
 }
 
 - (BOOL)resignFirstResponder
 {
+	NSLog(@"rfr");
 	return YES;
 }
 
@@ -545,7 +547,7 @@ bound to visibleTags
 	}
 	else if (key == NSTabCharacter)
 	{
-		[[self window] makeFirstResponder:[delegate outlineView]];
+		[[self window] makeFirstResponder:[delegate controlledView]];
 	}
 	else
 	{

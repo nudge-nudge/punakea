@@ -6,6 +6,7 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 controlledView = NSView; 
+                searchField = NSSearchField; 
                 tagCloud = PATagCloud; 
                 typeAheadView = PATypeAheadView; 
             }; 
