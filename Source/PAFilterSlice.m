@@ -238,9 +238,11 @@ extern unsigned const BUTTON_SPACING = 2;
 	}
 	
 	[outlineView scrollPoint:NSZeroPoint];
-	[outlineView reloadData];
 	
-	[outlineView deselectAll:self];
+	[outlineView saveSelection];
+	[outlineView reloadData];
+	[outlineView restoreSelection];
+	
 	[[self window] makeFirstResponder:outlineView];
 }
 

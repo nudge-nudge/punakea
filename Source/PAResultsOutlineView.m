@@ -89,12 +89,14 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	return rect;
 }
 
-- (BOOL)becomeFirstResponder
+/*- (BOOL)becomeFirstResponder
 {
 	// Make sure, at least one item is selected
 	unsigned count = [[self selectedRowIndexes] count];
 	if(count <= 0)
 	{
+		[self deselectAll:self];
+		
 		for(unsigned i = 0; i < [self numberOfRows]; i++)
 		{
 			if([[self itemAtRow:i] isKindOfClass:[PAQueryItem class]] ||
@@ -107,7 +109,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	}
 	
 	return YES;
-}
+}*/
 
 - (void)reloadData
 {
@@ -118,10 +120,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     
 	[super reloadData];
 	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];
-	
 	// Restore group's state from user defaults
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];	
 	for(int i = 0; i < [self numberOfRows]; i++)
 	{
 		id item = [self itemAtRow:i];
@@ -155,50 +156,80 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[super setFrameSize:newSize];
 }
 
-
-#pragma mark Notifications
-- (void)queryNote:(NSNotification *)note
+- (void)saveSelection
 {	
-	if([[note name] isEqualToString:PAQueryDidFinishGatheringNotification] ||
-	   [[note name] isEqualToString:PAQueryDidResetNotification])
+	for(unsigned row = 0; row < [self numberOfRows]; row++)
 	{
-		[self reloadData];
+		id item = [self itemAtRow:row];
+		
+		if([[self selectedRowIndexes] containsIndex:row])
+			[selectedQueryItems addObject:item];
+		else
+			[selectedQueryItems removeObject:item];
 	}
-	
-	// Restore selection after query has been updated
-	if([[note name] isEqualToString:PAQueryDidUpdateNotification])
+}
+
+- (void)restoreSelection
+{
+	[self deselectAll:self];		
+	NSEnumerator *itemsEnumerator = [selectedQueryItems objectEnumerator];
+	PAQueryItem *item;
+	while(item = [itemsEnumerator nextObject])
 	{
-		NSIndexSet *indexes = [self selectedRowIndexes];
-		NSMutableArray *items = [NSMutableArray array];
-		
-		unsigned row = [indexes firstIndex];
-		while(row != NSNotFound)
+		for(int i = 0; i < [self numberOfRows]; i++)
 		{
-			[items addObject:[self itemAtRow:row]];
-			row = [indexes indexGreaterThanIndex:row];
-		}
-		
-		[self reloadData];
-		
-		[self deselectAll:self];		
-		NSEnumerator *itemsEnumerator = [items objectEnumerator];
-		PAQueryItem *item;
-		while(item = [itemsEnumerator nextObject])
-		{
-			for(int i = 0; i < [self numberOfRows]; i++)
+			id thisItem = [self itemAtRow:i];
+			
+			// If this is our item, select it
+			if([thisItem isEqualTo:item])
 			{
-				id thisItem = [self itemAtRow:i];
-				
-				if([thisItem isEqualTo:item])
+				int row = [self rowForItem:thisItem];
+				[self selectRow:row byExtendingSelection:YES];
+				break;
+			}
+			
+			// If this is an array, check if it contains our item
+			if([thisItem isKindOfClass:[NSArray class]])
+			{
+				NSEnumerator *arrayEnumerator = [thisItem objectEnumerator];
+				PAQueryItem *arrayItem;
+				while(arrayItem = [arrayEnumerator nextObject])
 				{
-					if([self rowForItem:thisItem] != -1)
+					if([item isEqualTo:arrayItem])
 					{
-						[self selectRow:[self rowForItem:thisItem] byExtendingSelection:YES];
+						int row = [self rowForItem:thisItem];
+						[self selectRow:row byExtendingSelection:YES];
 						break;
 					}
 				}
 			}
 		}
+	}
+}
+
+
+#pragma mark Notifications
+- (void)queryNote:(NSNotification *)note
+{	
+	if([[note name] isEqualToString:PAQueryDidStartGatheringNotification])
+	{
+		// Reset selectedQueryItems
+		if(selectedQueryItems) [selectedQueryItems release];
+		selectedQueryItems = [[NSMutableArray alloc] init];
+	}
+
+	if([[note name] isEqualToString:PAQueryDidStartGatheringNotification] ||
+	   [[note name] isEqualToString:PAQueryDidFinishGatheringNotification] ||
+	   [[note name] isEqualToString:PAQueryDidResetNotification])
+	{
+		[self reloadData];
+	}
+	
+	if([[note name] isEqualToString:PAQueryDidUpdateNotification])
+	{
+		[self saveSelection];
+		[self reloadData];
+		[self restoreSelection];
 	}
 }
 
