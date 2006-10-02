@@ -27,7 +27,7 @@ finds related tags for a given query or a given selection of tags.
 	PATagger *tagger;
 	PATags *tags;
 	
-	NSMutableDictionary *relatedTags;
+	NSMutableArray *relatedTags;
 	BOOL updating;
 
 	NSNotificationCenter *nc;
@@ -48,8 +48,8 @@ finds related tags for a given query or a given selection of tags.
 - (void)setQuery:(PAQuery*)aQuery;
 
 - (NSArray*)relatedTagArray;
-- (NSMutableDictionary*)relatedTags;
-- (void)setRelatedTags:(NSMutableDictionary*)otherTags;
+- (NSMutableArray*)relatedTags;
+- (void)setRelatedTags:(NSMutableArray*)otherTags;
 
 - (void)removeAllTags;
 

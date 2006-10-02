@@ -29,7 +29,7 @@
 		[self setUpdating:NO];
 		
 		[self setQuery:aQuery];
-		[self setRelatedTags:[[NSMutableDictionary alloc] init]];
+		[self setRelatedTags:[[NSMutableArray alloc] init]];
 		[self setSelectedTags:otherSelectedTags];
 		
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
@@ -50,14 +50,14 @@
 #pragma mark accessors
 - (void)addTag:(PATag*)aTag
 {
-	[relatedTags setObject:aTag forKey:[aTag name]];
+	[relatedTags addObject:aTag];
 	
 	[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
 }
 
 - (void)removeTag:(PATag*)aTag
 {
-	[relatedTags removeObjectForKey:[aTag name]];
+	[relatedTags removeObject:aTag];
 	
 	[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
 }
@@ -74,7 +74,7 @@
 
 - (BOOL)containsTag:(PATag*)aTag
 {
-	return ([relatedTags objectForKey:[aTag name]] != nil);
+	return [relatedTags containsObject:aTag];
 }
 
 - (void)setQuery:(PAQuery*)aQuery 
@@ -86,16 +86,15 @@
 
 - (NSArray*)relatedTagArray
 {
-	return [relatedTags allValues];
+	return relatedTags;
 }
 
-
-- (NSMutableDictionary*)relatedTags;
+- (NSMutableArray*)relatedTags;
 {
 	return relatedTags;
 }
 
-- (void)setRelatedTags:(NSMutableDictionary*)otherTags
+- (void)setRelatedTags:(NSMutableArray*)otherTags
 {
 	[otherTags retain];
 	[relatedTags release];
@@ -146,6 +145,10 @@
 		{
 			[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
 		}
+	}
+	else if ([[note name] isEqualToString:PAQueryDidResetNotification])
+	{
+		[self setRelatedTags:[NSMutableArray array]];
 	}
 }
 
