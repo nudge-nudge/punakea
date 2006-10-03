@@ -378,14 +378,14 @@
 		NSString *path = [item valueForAttribute:(id)kMDItemPath];
 		
 		// Remove tags from file
-		// TODO!
+		[[PATagger sharedInstance] removeAllTagsFromFile:[PAFile fileWithPath:path]];
 		
 		// Move to trash
 		[[NSFileManager defaultManager] trashFileAtPath:path];
 	}
 	
 	[selectedQueryItems release];
-	[outlineView setSelectedQueryItems:[[NSMutableArray alloc] init]];
+	selectedQueryItems = [[NSMutableArray alloc] init];
 	
 	[[outlineView query] enableUpdates];
 }

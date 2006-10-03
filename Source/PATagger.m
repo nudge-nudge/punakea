@@ -259,7 +259,7 @@ static PATagger *sharedInstance = nil;
 
 - (void)removeAllTagsFromFile:(PAFile *)file
 {
-	[self writeTags:[NSArray array] ToFile:file];
+	[self writeTags:[NSArray array] toFile:file];
 }
 
 #pragma mark private
