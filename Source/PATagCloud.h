@@ -43,4 +43,7 @@ displays all [datasource visibleTags] in a nice tag cloud view
 - (BrowserViewController*)controller;
 - (void)selectUpperLeftButton;
 
+// called from outside
+- (void)selectTag:(PATag*)tag;
+
 @end

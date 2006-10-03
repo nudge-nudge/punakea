@@ -59,7 +59,12 @@ use this method to tell bvc that mainController doesn't need to
  display tags anymore
  */
 - (void)resetDisplayTags;
-   
+
+/**
+highlights tag in tagcloud
+ @param tag tag to highligh
+ */
+- (void)displaySelectedTag:(PATag*)tag;
 
 - (PABrowserViewMainController*)mainController;
 

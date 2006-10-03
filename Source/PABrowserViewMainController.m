@@ -11,11 +11,28 @@
 
 @implementation PABrowserViewMainController
 
-- (NSView*)mainView
+#pragma mark init
+- (void)dealloc
 {
-	return mainView;
+	[currentView release];
+	[super dealloc];
 }
 
+#pragma mark accessors
+- (NSView*)currentView
+{
+	return currentView;
+}
+
+- (void)setCurrentView:(NSView*)aView
+{
+	[aView retain];
+	[currentView release];
+	currentView = aView;
+	
+	[currentView setNextResponder:self];
+}
+	
 - (id)delegate
 {
 	return delegate;

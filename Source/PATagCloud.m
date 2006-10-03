@@ -380,6 +380,12 @@ bound to visibleTags
 	[self addSubview:tagButton];
 }
 
+- (void)selectTag:(PATag*)tag
+{
+	PATagButton *button = [tagButtonDict objectForKey:[tag name]];
+	[self setActiveButton:button];
+}
+		
 #pragma mark calculation
 - (void)calcInitialParametersInRect:(NSRect)rect
 {

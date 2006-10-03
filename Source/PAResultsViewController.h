@@ -7,13 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAViewController.h"
 #import "PABrowserViewMainController.h"
 
 #import "NSFileManager+TrashFile.h"
 
 #import "PATagger.h"
 #import "PATags.h"
+#import "PATag.h"
 #import "PARelatedTags.h"
 #import "PASelectedTags.h"
 #import "PAQuery.h"

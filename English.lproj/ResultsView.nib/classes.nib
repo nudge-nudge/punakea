@@ -13,6 +13,12 @@
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
+            CLASS = PABrowserViewMainController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {currentView = NSView; delegate = id; mainView = NSView; }; 
+            SUPERCLASS = PAViewController; 
+        }, 
+        {
             CLASS = PAFilterSlice; 
             LANGUAGE = ObjC; 
             OUTLETS = {controller = PAResultsViewController; outlineView = PAResultsOutlineView; }; 
@@ -25,7 +31,7 @@
             CLASS = PAResultsViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {outlineView = PAResultsOutlineView; }; 
-            SUPERCLASS = PAViewController; 
+            SUPERCLASS = PABrowserViewMainController; 
         }, 
         {
             CLASS = PASelectedTagsView; 

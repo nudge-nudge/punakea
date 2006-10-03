@@ -17,20 +17,15 @@ extern NSString * const PATagManagementRenameOperation;
 extern NSString * const PATagManagementRemoveOperation;
 
 @interface PATagManagementViewController : PABrowserViewMainController {
-	IBOutlet NSBox *box;
 	IBOutlet NSTextField *tagNameField;
 	
 	IBOutlet NSView *simpleTagManagementView;
-	IBOutlet NSView *currentView;
 	
 	PATag *currentEditedTag;
 	
 	PATagger *tagger;
 	PATags *tags;
 }
-
-- (NSView*)currentView;
-- (void)setCurrentView:(NSView*)aView;
 
 - (PATag*)currentEditedTag;
 - (void)setCurrentEditedTag:(PATag*)aTag;

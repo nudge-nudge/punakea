@@ -76,16 +76,6 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	return currentView;
 }
 
-/**
-not retained!
- */
-- (void)setCurrentView:(NSView*)aView
-{
-	currentView = aView;
-	
-	[currentView setNextResponder:self];
-}
-
 #pragma mark delegate
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
@@ -204,6 +194,7 @@ not retained!
 - (void)handleTagActivation:(PATag*)tag
 {
 	[self setCurrentEditedTag:tag];
+	[delegate displaySelectedTag:tag];
 }
 
 - (void)loadViewForTag:(PATag*)tag
@@ -217,7 +208,7 @@ not retained!
 	[sv addSubview:currentView];
 	[currentView setFrameSize:[sv frame].size];
 			
-	// TODO this connection needs update
+	tagNameField = [currentView viewWithTag:1];
 	[tagNameField setObjectValue:[currentEditedTag name]];
 	NSWindow *window = [[self currentView] window];
 	[window makeFirstResponder:tagNameField];
@@ -231,6 +222,8 @@ not retained!
 	[tags removeTag:currentEditedTag];
 	
 	[self setWorking:NO];
+	
+	[self reset];
 }
 
 - (void)renameEditedTagTo:(NSString*)newTagName;
@@ -246,6 +239,14 @@ not retained!
 - (IBAction)endTagManagement:(id)sender
 {
 	[delegate showResults];
+}
+
+- (void)reset
+{
+	NSView *sv = [delegate controlledView]; 
+	[currentView removeFromSuperview];
+	[self setCurrentView:mainView];
+	[sv addSubview:currentView];
 }
 
 #pragma mark alerts

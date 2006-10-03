@@ -37,9 +37,7 @@
 
 - (BOOL)windowShouldClose:(id)sender
 {
-	[browserViewController resetBuffer];
-	[browserViewController clearSelectedTags:self];
-	//TODO waterjoe add reset for your stuff here
+	[browserViewController reset];
 	return YES;
 }
 

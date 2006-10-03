@@ -24,7 +24,6 @@
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
-                box = NSBox; 
                 currentView = NSView; 
                 simpleTagManagementView = NSView; 
                 tagNameField = NSTextField; 

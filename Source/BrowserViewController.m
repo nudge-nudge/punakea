@@ -222,6 +222,11 @@
 	[typeAheadFind setActiveTags:[tags tags]];
 }
 
+- (void)displaySelectedTag:(PATag*)tag
+{
+	[tagCloud selectTag:tag];
+}
+
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {
@@ -396,7 +401,10 @@
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller
 {
 	if (mainController)
-		[[mainController mainView] removeFromSuperview];
+	{
+		[[mainController currentView] removeFromSuperview];
+		[self reset];
+	}
 
 	[self setMainController:controller];
 }

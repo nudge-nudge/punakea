@@ -11,11 +11,16 @@
 #import "PAViewController.h"
 
 @interface PABrowserViewMainController : PAViewController {
+	IBOutlet NSView *currentView;
+	
 	id delegate;
 	BOOL working;
 }
 
 - (NSView*)mainView;
+- (NSView*)currentView;
+- (void)setCurrentView:(NSView*)aView;
+
 - (void)handleTagActivation:(PATag*)tag;
 - (id)delegate;
 - (void)setDelegate:(id)anObject;
