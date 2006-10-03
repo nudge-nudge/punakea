@@ -140,10 +140,19 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 */
 - (void)synchronizeResults
 {
+	[self disableUpdates];
+
 	if(flatResults) [flatResults release];
 	if(results) [results release];
 	
-	flatResults = [self bundleResults:[mdquery results] byAttributes:nil];
+	// We don't use [mdquery results] as this proxy array causes missing results during live update
+	NSMutableArray *mdQueryResults = [NSMutableArray array];
+	for(unsigned i = 0; i < [mdquery resultCount]; i++)
+	{
+		[mdQueryResults addObject:[mdquery resultAtIndex:i]];
+	}
+	
+	flatResults = [self bundleResults:mdQueryResults byAttributes:nil];
 	results = [self bundleResults:flatResults byAttributes:bundlingAttributes];	
 	
 	// Apply filter, if active
@@ -153,6 +162,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		               forBundlingAttribute:[[[filterDict objectForKey:@"bundlingAttribute"] retain] autorelease]
 					  newBundlingAttributes:[[[filterDict objectForKey:@"newBundlingAttributes"] retain] autorelease]];
 	}
+	
+	[self enableUpdates];
 }
 
 
