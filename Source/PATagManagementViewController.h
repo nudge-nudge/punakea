@@ -17,6 +17,7 @@ extern NSString * const PATagManagementRenameOperation;
 extern NSString * const PATagManagementRemoveOperation;
 
 @interface PATagManagementViewController : PABrowserViewMainController {
+	IBOutlet NSBox *box;
 	IBOutlet NSTextField *tagNameField;
 	
 	IBOutlet NSView *simpleTagManagementView;
@@ -40,5 +41,7 @@ extern NSString * const PATagManagementRemoveOperation;
 
 - (void)removeEditedTag;
 - (void)renameEditedTagTo:(NSString*)newTagName;
+
+- (IBAction)endTagManagement:(id)sender;
 
 @end

@@ -243,6 +243,11 @@ not retained!
 	[self setWorking:NO];
 }
 
+- (IBAction)endTagManagement:(id)sender
+{
+	[delegate showResults];
+}
+
 #pragma mark alerts
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
