@@ -227,6 +227,11 @@
 	[tagCloud selectTag:tag];
 }
 
+- (void)removeActiveTagButton
+{
+	[tagCloud removeActiveTagButton];
+}
+
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {

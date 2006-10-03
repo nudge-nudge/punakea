@@ -385,6 +385,14 @@ bound to visibleTags
 	PATagButton *button = [tagButtonDict objectForKey:[tag name]];
 	[self setActiveButton:button];
 }
+
+// TODO work around until tagcloud supports tag renaming correctly
+- (void)removeActiveTagButton
+{
+	PATag *activeTag = [activeButton fileTag];
+	[activeButton removeFromSuperview];
+	[tagButtonDict removeObjectForKey:[activeTag name]];
+}
 		
 #pragma mark calculation
 - (void)calcInitialParametersInRect:(NSRect)rect

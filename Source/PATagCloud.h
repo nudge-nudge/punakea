@@ -45,5 +45,6 @@ displays all [datasource visibleTags] in a nice tag cloud view
 
 // called from outside
 - (void)selectTag:(PATag*)tag;
+- (void)removeActiveTagButton;
 
 @end

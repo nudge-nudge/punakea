@@ -65,6 +65,7 @@ highlights tag in tagcloud
  @param tag tag to highligh
  */
 - (void)displaySelectedTag:(PATag*)tag;
+- (void)removeActiveTagButton;
 
 - (PABrowserViewMainController*)mainController;
 

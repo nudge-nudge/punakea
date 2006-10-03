@@ -230,7 +230,9 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 {
 	[self setWorking:YES];
 	
+	[delegate removeActiveTagButton];
 	[currentEditedTag setName:newTagName];
+	[delegate displaySelectedTag:currentEditedTag];
 	[tagger renameTag:[currentEditedTag name] toTag:newTagName];
 
 	[self setWorking:NO];
