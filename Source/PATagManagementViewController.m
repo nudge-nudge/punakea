@@ -79,14 +79,10 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 #pragma mark delegate
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
-	NSLog(@"didChange");
-
 	NSDictionary *userInfo = [aNotification userInfo];
 	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
 	NSString *currentName = [fieldEditor string];
 	NSString *editedTagName = [currentEditedTag name];
-
-	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 
 	if ([tags tagForName:currentName] != nil 
 		&& [currentName caseInsensitiveCompare:editedTagName] != NSOrderedSame)
@@ -101,12 +97,8 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
 {
-	NSLog(@"shouldEnd");
-
 	NSString *currentName = [fieldEditor string];
 	NSString *editedTagName = [currentEditedTag name];
-	
-	NSLog(@"edited: %@, current: %@",editedTagName,currentName);
 	
 	if ([currentName isWhiteSpace])
 	{
@@ -186,7 +178,6 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 
 - (void)cancelOperation:(id)sender
 {
-	NSLog(@"cancel");
 	[sender abortEditing];
 }
 
