@@ -405,8 +405,20 @@
 		 writeItems:(NSArray *)items 
 	   toPasteboard:(NSPasteboard *)pboard
 {
-    // No drag support
-	return NO;
+	NSMutableArray *fileList = [NSMutableArray array];
+	
+	NSEnumerator *e = [items objectEnumerator];
+	PAQueryItem *queryItem;
+	
+	while (queryItem = [e nextObject])
+	{
+		[fileList addObject:[queryItem valueForAttribute:kMDItemPath]];
+	}
+	
+	[pboard declareTypes:[NSArray arrayWithObject:NSFilenamesPboardType] owner:nil];
+	[pboard setPropertyList:fileList forType:NSFilenamesPboardType];
+	
+	return YES;
 }
 
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView 
