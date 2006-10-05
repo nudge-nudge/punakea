@@ -76,6 +76,30 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[super highlightSelectionInClipRect:clipRect];
 }
 
+-(void)_drawDropHighlightOnRow:(int)rowIndex
+{
+	NSSize offset = NSMakeSize(3.0, 3.0);
+
+	[self lockFocus];
+	
+	NSRect drawRect = [self visibleRect];
+	
+	drawRect.size.width -= offset.width;
+	drawRect.origin.x += offset.width / 2.0;
+
+	drawRect.size.height -= offset.height;
+	drawRect.origin.y += offset.height / 2.0;
+
+	[[NSColor colorWithDeviceRed:(185.0/255.0) green:(215.0/255.0) blue:(255.0/255.0) alpha:1.0] set];
+	float lineWidth = [NSBezierPath defaultLineWidth];
+	[NSBezierPath setDefaultLineWidth:3.0];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRoundRectInRect:drawRect radius:4.0];
+	[path stroke];
+	[NSBezierPath setDefaultLineWidth:lineWidth];
+
+	[self unlockFocus];
+}
+
 
 #pragma mark Actions
 - (NSRect)frameOfCellAtColumn:(int)column row:(int)row
