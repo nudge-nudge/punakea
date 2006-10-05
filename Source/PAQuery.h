@@ -14,6 +14,7 @@
 #import "PASelectedTags.h"
 #import "PAFile.h"
 #import "PAThumbnailManager.h"
+#import "NSFileManager+TrashFile.h"
 
 /** Posted when the receiver begins with the initial result-gathering phase of the query. */
 extern NSString * const PAQueryDidStartGatheringNotification;
@@ -91,6 +92,7 @@ initializer
 - (NSArray *)sortDescriptors;
 - (void)setSortDescriptors:(NSArray *)descriptors;
 
+- (void)trashItems:(NSArray *)items errorWindow:(NSWindow *)window;
 - (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window;
 
 @end

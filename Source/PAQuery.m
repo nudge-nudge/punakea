@@ -386,6 +386,45 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	return NO;
 }
 
+- (void)trashItems:(NSArray *)items errorWindow:(NSWindow *)window
+{
+	[self disableUpdates];
+
+	for(int i = 0; i < [items count]; i++)
+	{
+		PAQueryItem *item = [items objectAtIndex:i];
+		NSString *path = [item valueForAttribute:(id)kMDItemPath];
+		
+		// Remove tags from file
+		[[PATagger sharedInstance] removeAllTagsFromFile:[PAFile fileWithPath:path]];
+		
+		// Move to trash
+		[[NSFileManager defaultManager] trashFileAtPath:path];
+		
+		// Remove from flatresults
+		for(int k = 0; k < [flatResults count]; k++)
+		{
+			if([[flatResults objectAtIndex:k] isEqualTo:item])
+			{
+				[flatResults removeObjectAtIndex:k];
+				break;
+			}
+		}
+	}
+	
+	results = [self bundleResults:flatResults byAttributes:bundlingAttributes];	
+	
+	// Apply filter, if active
+	if(filterDict)
+	{
+		[self filterResults:YES usingValues:[[[filterDict objectForKey:@"values"] retain] autorelease]
+		               forBundlingAttribute:[[[filterDict objectForKey:@"bundlingAttribute"] retain] autorelease]
+					  newBundlingAttributes:[[[filterDict objectForKey:@"newBundlingAttributes"] retain] autorelease]];
+	}
+	
+	[self enableUpdates];
+}
+
 - (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window
 {
 	errorWindow = window;

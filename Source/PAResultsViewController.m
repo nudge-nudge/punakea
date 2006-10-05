@@ -370,27 +370,14 @@
 - (void)deleteFilesForSelectedQueryItems:(id)sender
 {
 	[outlineView saveSelection];
-	
-	[[outlineView query] disableUpdates];
 
-	NSArray *selectedQueryItems = [outlineView selectedQueryItems];
+	NSMutableArray *selectedQueryItems = [outlineView selectedQueryItems];
 
-	for(unsigned i = 0; i < [selectedQueryItems count]; i++)
-	{
-		PAQueryItem *item = [selectedQueryItems objectAtIndex:i];
-		NSString *path = [item valueForAttribute:(id)kMDItemPath];
-		
-		// Remove tags from file
-		[[PATagger sharedInstance] removeAllTagsFromFile:[PAFile fileWithPath:path]];
-		
-		// Move to trash
-		[[NSFileManager defaultManager] trashFileAtPath:path];
-	}
+	[[outlineView query] trashItems:selectedQueryItems errorWindow:[outlineView window]];
 	
-	[selectedQueryItems release];
-	selectedQueryItems = [[NSMutableArray alloc] init];
+	[selectedQueryItems removeAllObjects];
 	
-	[[outlineView query] enableUpdates];
+	[outlineView reloadData];
 }
 
 
