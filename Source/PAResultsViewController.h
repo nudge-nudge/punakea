@@ -20,6 +20,7 @@
 #import "PAQueryBundle.h"
 #import "PAQueryItem.h"
 #import "PAResultsOutlineView.h"
+#import "PADropManager.h"
 
 @interface PAResultsViewController : PABrowserViewMainController {
 	
@@ -30,6 +31,7 @@
 	PARelatedTags						*relatedTags;
 	PASelectedTags						*selectedTags;
 	
+	PADropManager						*dropManager;
 	PAQuery								*query;
 	
 	NSNotificationCenter				*nc;

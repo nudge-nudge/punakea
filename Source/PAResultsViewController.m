@@ -24,6 +24,8 @@
 		[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
 		[query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
+		dropManager = [PADropManager sharedInstance];
+		
 		relatedTags = [[PARelatedTags alloc] initWithSelectedTags:selectedTags query:query];
 		
 		nc = [NSNotificationCenter defaultCenter];
@@ -46,6 +48,7 @@
 - (void)awakeFromNib
 {
 	[outlineView setQuery:query];
+	[outlineView registerForDraggedTypes:[dropManager handledPboardTypes]];
 }
 
 - (void)dealloc
@@ -396,5 +399,38 @@
 {
 	return outlineView;
 }
+
+#pragma mark table drag & drop support
+- (BOOL)outlineView:(NSOutlineView *)outlineView
+		 writeItems:(NSArray *)items 
+	   toPasteboard:(NSPasteboard *)pboard
+{
+    // No drag support
+	return NO;
+}
+
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView 
+				  validateDrop:(id <NSDraggingInfo>)info 
+				  proposedItem:(id)item 
+			proposedChildIndex:(int)index
+{
+	// retarget to whole outlineview
+	[outlineView setDropItem:nil dropChildIndex:NSOutlineViewDropOnItemIndex];
+	
+	return NSDragOperationCopy;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView 
+		 acceptDrop:(id <NSDraggingInfo>)info 
+			   item:(id)item 
+		 childIndex:(int)index
+{
+	NSArray *files = [dropManager handleDrop:[info draggingPasteboard]];
+	NSArray *tags = [selectedTags selectedTags];
+	
+	[tagger addTags:tags toFiles:files];
+    return YES;    
+}
+
 
 @end
