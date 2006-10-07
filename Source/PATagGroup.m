@@ -65,7 +65,7 @@
 	
 	NSMutableArray *newGroup = [NSMutableArray array];
 	
-	for (int i=0;i<maxSize;i++)
+	for (int i=0;(i<maxSize && i<[tags count]);i++)
 	{
 		[newGroup addObject:[tags tagAtIndex:i]];
 	}
