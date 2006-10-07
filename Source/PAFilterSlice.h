@@ -12,6 +12,8 @@
 #import "PAResultsOutlineView.h"
 #import "PAResultsViewController.h"
 
+extern NSSize const FILTERSLICE_PADDING;
+extern unsigned const FILTERSLICE_BUTTON_SPACING;
 
 @interface PAFilterSlice : NSView {
 

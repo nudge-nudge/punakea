@@ -60,7 +60,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 #pragma mark Synchronous Searching
 - (NSArray*)filesForTag:(PATag*)tag
 {
-	// TODO this won't work for intelligent tags!!!
+	// this won't work for intelligent tags!!!
 	CFStringRef *searchString = [NSString stringWithFormat:@"kMDItemKeywords == \"%@\"cd",[tag name]];
 	MDQueryRef *query = MDQueryCreate(NULL,searchString,NULL,NULL);
 	MDQueryExecute(query,kMDQuerySynchronous);

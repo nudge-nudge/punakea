@@ -152,7 +152,6 @@
 	}
 }
 
-//TODO needs to be emptied
 - (void)updateRelatedTags
 {
 	[query disableUpdates];

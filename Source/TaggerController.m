@@ -182,7 +182,6 @@ completionsForSubstring:(NSString *)substring
 }
 
 #pragma mark gui change actions
-//TODO!
 - (IBAction)selectionHasChanged
 {
 	NSMutableArray *tagsOnSomeFiles = [NSMutableArray array];

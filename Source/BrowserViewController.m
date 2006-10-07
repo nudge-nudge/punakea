@@ -306,7 +306,6 @@
 {
 	// get the pressed key
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
-	NSLog(@"BVC keyDown: %x", [[event characters] characterAtIndex:0]);
 	
 	// create character set for testing
 	NSCharacterSet *alphanumericCharacterSet = [NSCharacterSet alphanumericCharacterSet];
@@ -336,15 +335,13 @@
 		NSMutableString *tmpBuffer = [buffer mutableCopy];
 		[tmpBuffer appendString:[event charactersIgnoringModifiers]];
 		
-		// TODO check this for typeaheadfind bug!!!
 		if ([typeAheadFind hasTagsForPrefix:tmpBuffer])
 		{
 			[self setBuffer:tmpBuffer];
 		}
 		else
 		{
-			//TODO give negative feedback
-			return;
+			[[self nextResponder] keyDown:event];
 		}
 		
 		[tmpBuffer release];

@@ -5,8 +5,8 @@
 #import "PATag.h"
 #import "PATagButton.h"
 
-extern NSSize const PADDING;
-extern NSSize const SPACING;
+extern NSSize const TAGCLOUD_PADDING;
+extern NSSize const TAGCLOUD_SPACING;
 
 /**
 displays all [datasource visibleTags] in a nice tag cloud view

@@ -68,7 +68,6 @@
 		idx++;
 		NSString *suffix = [NSString stringWithFormat:@"-%i",idx];
 		
-		//TODO delete -i!!
 		NSString *name = [fileName stringByDeletingPathExtension];
 		NSString *newName = [name stringByAppendingString:suffix];
 		NSString *extension = [@"." stringByAppendingString:[fileName pathExtension]];

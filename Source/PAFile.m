@@ -50,7 +50,6 @@
 
 - (void)setPath:(NSString*)aPath
 {
-	// TODO replace illegal chars ':' and '/' with '_'
 	NSMutableString *copy = [aPath mutableCopy];
 	[copy replaceOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0,[path length])];
 	[copy replaceOccurrencesOfString:@"/" withString:@"_" options:0 range:NSMakeRange(0,[path length])];

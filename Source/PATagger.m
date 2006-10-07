@@ -142,7 +142,6 @@ static PATagger *sharedInstance = nil;
 }
 
 - (NSArray*)keywordsForFile:(PAFile*)file {
-	//carbon api ... can be treated as cocoa objects - TODO check warnings
 	MDItemRef *item = MDItemCreate(NULL,[file path]);
 	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
 	NSArray *tagNames = (NSArray*)keywords;

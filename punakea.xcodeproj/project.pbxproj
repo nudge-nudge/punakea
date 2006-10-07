@@ -1623,7 +1623,7 @@
 				488A52ED0A81D9FA005B54A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Punakea" */ = {
 			isa = XCConfigurationList;
@@ -1632,7 +1632,7 @@
 				C01FCF4C08A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */ = {
 			isa = XCConfigurationList;
@@ -1641,7 +1641,7 @@
 				C01FCF5008A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

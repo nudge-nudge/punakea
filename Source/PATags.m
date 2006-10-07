@@ -42,7 +42,6 @@ NSString * const PATagOperation = @"PATagOperation";
 #pragma mark accessors
 - (PATag*)tagForName:(NSString*)tagName
 {
-	// TODO efficient with hash
 	NSEnumerator *e = [self objectEnumerator];
 	PATag *resultTag = nil;
 	PATag *tag;

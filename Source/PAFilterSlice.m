@@ -9,8 +9,8 @@
 #import "PAFilterSlice.h"
 
 
-extern NSSize const PADDING = {10,5};
-extern unsigned const BUTTON_SPACING = 2;
+NSSize const FILTERSLICE_PADDING = {10,5};
+unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 
 
 @implementation PAFilterSlice
@@ -150,7 +150,7 @@ extern unsigned const BUTTON_SPACING = 2;
 
 - (void)updateButtons
 {
-	int x = PADDING.width;
+	int x = FILTERSLICE_PADDING.width;
 
 	/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *spotlightDict = [defaults persistentDomainForName:@"com.apple.spotlight"];
@@ -164,7 +164,7 @@ extern unsigned const BUTTON_SPACING = 2;
 		NSDictionary *filter = [button filter];
 	
 		BOOL hasResults;
-		if(x == PADDING.width)
+		if(x == FILTERSLICE_PADDING.width)
 		{
 			hasResults = YES;	// The ALL tab is always there
 		} else {
@@ -174,12 +174,12 @@ extern unsigned const BUTTON_SPACING = 2;
 	
 		NSRect frame = [button frame];
 		frame.origin.x = x;
-		frame.origin.y = PADDING.height;
+		frame.origin.y = FILTERSLICE_PADDING.height;
 		
 		if(hasResults)
 		{
 			NSRect buttonFrame = [button frame];
-			x += buttonFrame.size.width + BUTTON_SPACING;
+			x += buttonFrame.size.width + FILTERSLICE_BUTTON_SPACING;
 		
 			if([button superview] != self) [self addSubview:button];
 			

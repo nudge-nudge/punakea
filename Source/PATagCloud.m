@@ -1,7 +1,7 @@
 #import "PATagCloud.h"
 
-NSSize const PADDING = {10,5};
-NSSize const SPACING = {0,1};
+NSSize const TAGCLOUD_PADDING = {10,5};
+NSSize const TAGCLOUD_SPACING = {0,1};
 
 @interface PATagCloud (PrivateAPI)
 /**
@@ -76,7 +76,6 @@ calculates the starting point in the next row according to the height of all the
 		tagButtonDict = [[NSMutableDictionary alloc] init];	
 		viewAnimation = [[NSViewAnimation alloc] init];
 		
-		// TODO activate this and code correctly
 		//[viewAnimation setAnimationBlockingMode:NSAnimationNonblockingThreaded];
 		viewAnimationCache = [[NSMutableArray alloc] init];
 		
@@ -205,7 +204,6 @@ bound to visibleTags
 			[button release];
 		}
 
-		// TODO needed? - where?
 		[button sizeToFit];
 	}
 	
@@ -232,7 +230,7 @@ bound to visibleTags
 		[tagButton setFrameOrigin:buttonPoint];
 	}
 	
-	newSize.height = 0 - buttonPoint.y + PADDING.height;
+	newSize.height = 0 - buttonPoint.y + TAGCLOUD_PADDING.height;
 	
 	if (newSize.height < NSHeight(clipViewFrame))
 	{
@@ -263,7 +261,6 @@ bound to visibleTags
 
 - (void)drawBackground
 {
-	//TODO externalize
 	[[NSColor colorWithDeviceRed:(236.0/255.0) green:(242.0/255.0) blue:(251.0/255.0) alpha:1.0] set];
 	NSRectFill([self bounds]);
 }
@@ -386,7 +383,7 @@ bound to visibleTags
 	[self setActiveButton:button];
 }
 
-// TODO work around until tagcloud supports tag renaming correctly
+// work around until tagcloud supports tag renaming correctly
 - (void)removeActiveTagButton
 {
 	PATag *activeTag = [activeButton fileTag];
@@ -414,7 +411,7 @@ bound to visibleTags
 	NSRect frame = [tagButton frame];
 	float width = frame.size.width;
 	
-	float xValue = pointForNextTagRect.x + width + SPACING.width;
+	float xValue = pointForNextTagRect.x + width + TAGCLOUD_SPACING.width;
 	
 	//if the tag doesn't fit in this row, get first point in next row
 	if (xValue > rect.size.width)
@@ -426,7 +423,7 @@ bound to visibleTags
 	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x,pointForNextTagRect.y);
 	
 	//then calc the point for the next tag
-	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + SPACING.width,pointForNextTagRect.y);
+	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + TAGCLOUD_SPACING.width,pointForNextTagRect.y);
 	
 	return newOrigin;
 }
@@ -456,9 +453,9 @@ bound to visibleTags
 		NSSize tagSize = frame.size;
 		
 		//if the tag fills the row, stop adding tags
-		rowWidth += SPACING.width + tagSize.width;
+		rowWidth += TAGCLOUD_SPACING.width + tagSize.width;
 		
-		if (rowWidth + SPACING.width > rect.size.width)
+		if (rowWidth + TAGCLOUD_SPACING.width > rect.size.width)
 			break;
 		
 		//remember the maximum height
@@ -466,7 +463,7 @@ bound to visibleTags
 			maxHeight = tagSize.height;
 		}
 	
-	return NSMakePoint(SPACING.width,pointForNextTagRect.y-maxHeight-SPACING.height);
+	return NSMakePoint(TAGCLOUD_SPACING.width,pointForNextTagRect.y-maxHeight-TAGCLOUD_SPACING.height);
 }
 
 #pragma mark accessors
@@ -610,8 +607,8 @@ bound to visibleTags
 	NSSize viewSize = [self frame].size;
 	
 	float buttonLineMaxY = NSMaxY([[self maximumButtonOnLineWithPoint:buttonFrame.origin] frame]);
-	float topSkip = viewSize.height - PADDING.height;
-	float bottomSkip = 0 + PADDING.height;
+	float topSkip = viewSize.height - TAGCLOUD_PADDING.height;
+	float bottomSkip = 0 + TAGCLOUD_PADDING.height;
 
 	// check top - TODO why -1?!
 	if (buttonLineMaxY >= topSkip - 1)
@@ -622,7 +619,7 @@ bound to visibleTags
 	// check bottom
 	else if (buttonFrame.origin.y <= bottomSkip)
 	{
-		buttonFrame.origin.y -= PADDING.height;
+		buttonFrame.origin.y -= TAGCLOUD_PADDING.height;
 	}
 	
 	[self scrollRectToVisible:buttonFrame];
