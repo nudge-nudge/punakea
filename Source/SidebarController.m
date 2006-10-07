@@ -41,6 +41,9 @@
 
 - (void)dealloc
 {
+	[recentTagsTable unregisterDraggedTypes];
+	[popularTagsTable unregisterDraggedTypes];
+	
 	[popularTagGroup release];
 	[recentTagGroup release];
 	[dropManager release];

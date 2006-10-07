@@ -35,6 +35,8 @@
 	PAQuery								*query;
 	
 	NSNotificationCenter				*nc;
+	
+	NSArray								*draggedItems;
 }
 
 - (void)handleTagActivation:(PATag*)tag;
@@ -43,6 +45,9 @@
 - (void)setRelatedTags:(PARelatedTags*)otherRelatedTags;
 - (PASelectedTags*)selectedTags;
 - (void)setSelectedTags:(PASelectedTags*)otherSelectedTags;
+
+- (NSArray*)draggedItems;
+- (void)setDraggedItems:(NSArray*)someItems;
 
 - (PAQuery *)query;
 

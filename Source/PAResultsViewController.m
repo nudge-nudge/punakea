@@ -30,6 +30,8 @@
 		
 		nc = [NSNotificationCenter defaultCenter];
 		
+		draggedItems = nil;
+		
 		[nc addObserver:self 
 			   selector:@selector(selectedTagsHaveChanged:) 
 				   name:@"PASelectedTagsHaveChanged" 
@@ -49,10 +51,14 @@
 {
 	[outlineView setQuery:query];
 	[outlineView registerForDraggedTypes:[dropManager handledPboardTypes]];
+	[outlineView setDraggingSourceOperationMask:NSDragOperationNone forLocal:YES];
+	[outlineView setDraggingSourceOperationMask:(NSDragOperationCopy | NSDragOperationDelete) forLocal:NO];
 }
 
 - (void)dealloc
 {
+	[draggedItems release];
+	[outlineView unregisterDraggedTypes];
 	[nc removeObserver:self];
 	[relatedTags release];
     [query release];
@@ -88,6 +94,18 @@
 	[otherSelectedTags retain];
 	[selectedTags release];
 	selectedTags = otherSelectedTags;
+}
+
+- (NSArray*)draggedItems
+{
+	return draggedItems;
+}
+
+- (void)setDraggedItems:(NSArray*)someItems
+{
+	[someItems retain];
+	[draggedItems release];
+	draggedItems = someItems;
 }
 
 - (BOOL)isWorking
@@ -367,6 +385,20 @@
 
 
 #pragma mark Misc
+- (void)deleteDraggedItems
+{
+	if (draggedItems)
+	{
+		[outlineView saveSelection];
+		
+		[[outlineView query] trashItems:draggedItems errorWindow:[outlineView window]];
+		
+		[self setDraggedItems:nil];
+		
+		[outlineView reloadData];
+	}
+}
+
 - (void)deleteFilesForSelectedQueryItems:(id)sender
 {
 	[outlineView saveSelection];
@@ -401,6 +433,8 @@
 	{
 		[fileList addObject:[queryItem valueForAttribute:kMDItemPath]];
 	}
+	
+	[self setDraggedItems:items];
 	
 	[pboard declareTypes:[NSArray arrayWithObject:NSFilenamesPboardType] owner:nil];
 	[pboard setPropertyList:fileList forType:NSFilenamesPboardType];

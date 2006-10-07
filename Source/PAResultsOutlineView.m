@@ -592,4 +592,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     }
 }
 
+/**
+needed for supporting dragging to trash
+ */
+- (void)draggedImage:(NSImage *)anImage endedAt:(NSPoint)aPoint operation:(NSDragOperation)operation
+{
+	if (operation == NSDragOperationDelete)
+		[[self delegate] deleteDraggedItems];
+}
+		
 @end

@@ -68,8 +68,8 @@
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
-	NSArray *files = [dropManager handleDrop:[sender draggingPasteboard]];
-	[self setFiles:files];
+	NSArray *newFiles = [dropManager handleDrop:[sender draggingPasteboard]];
+	[self setFiles:newFiles];
 	
     return YES;
 }

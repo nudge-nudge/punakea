@@ -50,7 +50,7 @@ resets the tagger window (called when window is closed)
 - (void)dealloc
 {
 	[fileController removeObserver:self forKeyPath:@"selectionIndexes"];
-
+	[tableView unregisterDraggedTypes];
 	[currentCompleteTagsInField release];
 	[typeAheadFind release];
 	[super dealloc];
