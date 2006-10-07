@@ -38,7 +38,7 @@ double const SHOW_DELAY = 0.2;
     [self setOpaque:NO];	
 	
 	// This makes the window semi-transparent, but not its subviews
-	[self setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:0.4]];
+	[self setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:0.75]];
 	
 	[self setAcceptsMouseMovedEvents:YES];
 		
@@ -189,7 +189,9 @@ double const SHOW_DELAY = 0.2;
 		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:NO];
 		
-		[self setAlphaValue:0.125];
+		// multiplied with backgroundcolor this has to be > 0.05, or else there
+		// won't be drop notifications
+		[self setAlphaValue:0.07];
 	}
 }
 

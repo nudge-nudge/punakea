@@ -24,6 +24,16 @@
 	[super dealloc];
 }
 
+#pragma mark drawing
+- (void)drawRect:(NSRect)rect
+{
+	// Draw border
+	NSRect bounds = [self bounds];	
+	
+	[[NSColor lightGrayColor] set];
+	[NSBezierPath strokeRect:bounds];
+}
+
 #pragma mark drag'n'drop
 /**
 only works if parent window is a PASidebar

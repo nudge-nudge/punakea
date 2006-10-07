@@ -11,6 +11,7 @@
 @interface PAFile (PrivateAPI)
 
 - (void)setPath:(NSString*)path; /**< checks for illegal characters */
+- (BOOL)isEqualToFile:(PAFile*)otherFile;
 
 @end
 
