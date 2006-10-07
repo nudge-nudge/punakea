@@ -5,6 +5,7 @@
 #import "PATagger.h"
 #import "PARelatedTagsStandalone.h"
 #import "PATypeAheadFind.h"
+#import "PADropManager.h"
 
 @interface TaggerController : NSWindowController
 {	
@@ -20,6 +21,7 @@
 	PATags *tags; /**< reference to all tags (same as in controller) */
 	
 	PATypeAheadFind *typeAheadFind;
+	PADropManager *dropManager;
 }
 
 - (id)initWithWindowNibName:(NSString*)windowNibName;

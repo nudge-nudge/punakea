@@ -416,7 +416,7 @@
 	// retarget to whole outlineview
 	[outlineView setDropItem:nil dropChildIndex:NSOutlineViewDropOnItemIndex];
 	
-	return NSDragOperationCopy;
+	return [dropManager performedDragOperation:[info draggingPasteboard]];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView 

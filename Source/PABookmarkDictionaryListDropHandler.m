@@ -21,35 +21,39 @@
 	return self;
 }
 
-- (BOOL)handleDrop:(NSPasteboard*)pasteboard
+- (BOOL)willHandleDrop:(NSPasteboard*)pasteboard
 {
 	NSArray *bookmarkDictionaries = [pasteboard propertyListForType:pboardType];
 	NSDictionary *uriDictionary = [[bookmarkDictionaries objectAtIndex:0] objectForKey:@"URIDictionary"];
 	
 	if (uriDictionary)
-	{
-		[self setContent:bookmarkDictionaries];
 		return YES;
-	}
 	else
-	{
 		return NO;
-	}
 }
 
-- (NSArray*)contentFiles
+- (NSArray*)handleDrop:(NSPasteboard*)pasteboard
 {
+	NSArray *bookmarkDictionaries = [pasteboard propertyListForType:pboardType];
 	NSMutableArray *files = [NSMutableArray array];
-	
-	NSEnumerator *e = [content objectEnumerator];
+		
+	NSEnumerator *e = [bookmarkDictionaries objectEnumerator];
 	NSDictionary *uriDicitonary;
-	
+		
 	while (uriDicitonary = [[e nextObject] objectForKey:@"URIDictionary"])
 	{
 		[files addObject:[dataHandler fileDropData:uriDicitonary]];
 	}
-	
+		
 	return files;
+}
+
+- (NSDragOperation)performedDragOperation:(NSPasteboard*)pasteboard
+{
+	if ([self willHandleDrop:pasteboard])
+		return [dataHandler performedDragOperation];
+	else
+		return NSDragOperationNone;
 }
 
 @end

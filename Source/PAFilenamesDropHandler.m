@@ -21,20 +21,35 @@
 	return self;
 }
 
-- (BOOL)handleDrop:(NSPasteboard*)pasteboard
+- (BOOL)willHandleDrop:(NSPasteboard*)pasteboard
 {
 	NSArray *droppedFiles = [pasteboard propertyListForType:pboardType];
-	[self setContent:droppedFiles];
 	
-	if ([content count] > 0)
+	if ([droppedFiles count] > 0)
 		return YES;
 	else
 		return NO;
 }
 
-- (NSArray*)contentFiles
+- (NSArray*)handleDrop:(NSPasteboard*)pasteboard
 {
-	return [dataHandler fileDropDataObjects:content];
+	if ([self willHandleDrop:pasteboard])
+	{
+		NSArray *droppedFiles = [pasteboard propertyListForType:pboardType];
+		return [dataHandler fileDropDataObjects:droppedFiles];
+	}
+	else
+	{
+		return [NSArray array];
+	}
+}
+
+- (NSDragOperation)performedDragOperation:(NSPasteboard*)pasteboard
+{
+	if ([self willHandleDrop:pasteboard])
+		return [dataHandler performedDragOperation];
+	else
+		return NSDragOperationNone;
 }
 
 @end

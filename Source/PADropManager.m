@@ -8,6 +8,12 @@
 
 #import "PADropManager.h"
 
+@interface PADropManager (PrivateAPI)
+
+
+
+@end
+
 @implementation PADropManager
 
 //this is where the sharedInstance is held
@@ -71,13 +77,29 @@ static PADropManager *sharedInstance = nil;
 	
 	while (dropHandler = [e nextObject])
 	{
-		if ([dropHandler handleDrop:pasteboard])
+		if ([dropHandler willHandleDrop:pasteboard])
 		{
-			result = [dropHandler contentFiles];
+			result = [dropHandler handleDrop:pasteboard];
 		}
 	}
 
 	return result;
+}
+
+- (NSDragOperation)performedDragOperation:(NSPasteboard*)pasteboard
+{
+	NSDragOperation op = NSDragOperationNone;
+	
+	NSEnumerator *e = [dropHandlers objectEnumerator];
+	PADropHandler *dropHandler;
+	
+	while (dropHandler = [e nextObject])
+	{
+		if ([dropHandler willHandleDrop:pasteboard])
+			op = [dropHandler performedDragOperation:pasteboard];
+	}
+	
+	return op;
 }
 
 #pragma mark singleton stuff

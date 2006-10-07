@@ -63,10 +63,6 @@
 		48469B9F0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */; };
 		48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48471FD90A4FFF90002B369A /* SidebarController.h */; };
 		48471FDC0A4FFF90002B369A /* SidebarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48471FDA0A4FFF90002B369A /* SidebarController.m */; };
-		48494A1A0AB97A1900539D1E /* PAMailDropHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48494A180AB97A1900539D1E /* PAMailDropHandler.h */; };
-		48494A1B0AB97A1900539D1E /* PAMailDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 48494A190AB97A1900539D1E /* PAMailDropHandler.m */; };
-		48494A220AB97A7500539D1E /* PAMailDropDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48494A200AB97A7500539D1E /* PAMailDropDataHandler.h */; };
-		48494A230AB97A7500539D1E /* PAMailDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 48494A210AB97A7500539D1E /* PAMailDropDataHandler.m */; };
 		484F71840A666E5B00D886E5 /* PATagManagementViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484F71820A666E5B00D886E5 /* PATagManagementViewController.h */; };
 		484F71850A666E5B00D886E5 /* PATagManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 484F71830A666E5B00D886E5 /* PATagManagementViewController.m */; };
 		484F71920A666F5A00D886E5 /* TagManagementView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 484F71900A666F5A00D886E5 /* TagManagementView.nib */; };
@@ -339,8 +335,6 @@
 				486BD58F0AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.h in CopyFiles */,
 				486BD5910AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.h in CopyFiles */,
 				485F402E0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.h in CopyFiles */,
-				48494A1A0AB97A1900539D1E /* PAMailDropHandler.h in CopyFiles */,
-				48494A220AB97A7500539D1E /* PAMailDropDataHandler.h in CopyFiles */,
 				48D450090ABB037B00A13B45 /* PAFile.h in CopyFiles */,
 				4817B29E0ABE849D00ACBBC6 /* PATagGroup.h in CopyFiles */,
 				4817B2B00ABE864B00ACBBC6 /* PARecentTagGroup.h in CopyFiles */,
@@ -408,10 +402,6 @@
 		48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CharacterSetChecks.m"; sourceTree = "<group>"; };
 		48471FD90A4FFF90002B369A /* SidebarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarController.h; sourceTree = "<group>"; };
 		48471FDA0A4FFF90002B369A /* SidebarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarController.m; sourceTree = "<group>"; };
-		48494A180AB97A1900539D1E /* PAMailDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMailDropHandler.h; sourceTree = "<group>"; };
-		48494A190AB97A1900539D1E /* PAMailDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAMailDropHandler.m; sourceTree = "<group>"; };
-		48494A200AB97A7500539D1E /* PAMailDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMailDropDataHandler.h; sourceTree = "<group>"; };
-		48494A210AB97A7500539D1E /* PAMailDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAMailDropDataHandler.m; sourceTree = "<group>"; };
 		484F71820A666E5B00D886E5 /* PATagManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementViewController.h; sourceTree = "<group>"; };
 		484F71830A666E5B00D886E5 /* PATagManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementViewController.m; sourceTree = "<group>"; };
 		484F71910A666F5A00D886E5 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/TagManagementView.nib; sourceTree = "<group>"; };
@@ -800,10 +790,6 @@
 				485F402D0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m */,
 				4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */,
 				4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */,
-				48494A180AB97A1900539D1E /* PAMailDropHandler.h */,
-				48494A190AB97A1900539D1E /* PAMailDropHandler.m */,
-				48494A200AB97A7500539D1E /* PAMailDropDataHandler.h */,
-				48494A210AB97A7500539D1E /* PAMailDropDataHandler.m */,
 			);
 			name = DropHandling;
 			sourceTree = "<group>";
@@ -1407,8 +1393,6 @@
 				486BD5900AB6A2F3003B9BAC /* NSString+NDCarbonUtilities.m in Sources */,
 				486BD5920AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.m in Sources */,
 				485F402F0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m in Sources */,
-				48494A1B0AB97A1900539D1E /* PAMailDropHandler.m in Sources */,
-				48494A230AB97A7500539D1E /* PAMailDropDataHandler.m in Sources */,
 				48D4500A0ABB037B00A13B45 /* PAFile.m in Sources */,
 				4817B29F0ABE849D00ACBBC6 /* PATagGroup.m in Sources */,
 				4817B2B10ABE864B00ACBBC6 /* PARecentTagGroup.m in Sources */,

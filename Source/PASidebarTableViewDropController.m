@@ -29,17 +29,22 @@
 }
 
 #pragma mark table drag & drop support
-- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard 
+- (BOOL)tableView:(NSTableView *)tv 
+writeRowsWithIndexes:(NSIndexSet *)rowIndexes 
+	 toPasteboard:(NSPasteboard*)pboard 
 {
     // No drag support
 	return NO;
 }
 
-- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)op 
+- (NSDragOperation)tableView:(NSTableView*)tv 
+				validateDrop:(id <NSDraggingInfo>)info 
+				 proposedRow:(int)row 
+	   proposedDropOperation:(NSTableViewDropOperation)op 
 {
 	if (op == NSTableViewDropOn)
 	{
-		return NSDragOperationCopy;
+		return [dropManager performedDragOperation:[info draggingPasteboard]];
 	}
 	else
 	{

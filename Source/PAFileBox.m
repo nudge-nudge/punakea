@@ -48,27 +48,7 @@
 {
 	[[self window] mouseEvent];
 	
-	return NSDragOperationCopy;
-	
-	/*
-	
-    if ((NSDragOperationGeneric & [sender draggingSourceOperationMask]) 
-		== NSDragOperationGeneric)
-    {
-        //this means that the sender is offering the type of operation we want
-        //return that we want the NSDragOperationGeneric operation that they 
-		//are offering
-		highlight = YES;
-		[self setNeedsDisplay:YES];
-        return NSDragOperationGeneric;
-    }
-    else
-    {
-        //since they aren't offering the type of operation we want, we have 
-		//to tell them we aren't interested
-        return NSDragOperationNone;
-    }
-	 */
+	return [dropManager performedDragOperation:[sender draggingPasteboard]];
 }
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender

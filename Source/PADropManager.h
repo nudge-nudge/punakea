@@ -39,4 +39,12 @@ handles drop and returns file array for drop
  */
 - (NSArray*)handleDrop:(NSPasteboard*)pasteboard;
 
+/**
+determines the NSDragOperation which will be performed on the
+ passed pasteboard
+ @param pasteboard pasteboard to check
+ @return NSDragOperation which will be performed on drop
+ */
+- (NSDragOperation)performedDragOperation:(NSPasteboard*)pasteboard;
+
 @end

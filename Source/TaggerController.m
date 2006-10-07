@@ -33,6 +33,7 @@ resets the tagger window (called when window is closed)
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
 		currentCompleteTagsInField = [[PASelectedTags alloc] init];
+		dropManager = [PADropManager sharedInstance];
 	}
 	return self;
 }
@@ -288,7 +289,7 @@ completionsForSubstring:(NSString *)substring
 		[tableView setDropRow:fileCount dropOperation:NSTableViewDropAbove];
 	}
 	
-	return NSDragOperationCopy;
+	return [dropManager performedDragOperation:[info draggingPasteboard]];
 }
 	
 - (BOOL)tableView:(NSTableView*)tv 
@@ -296,9 +297,7 @@ completionsForSubstring:(NSString *)substring
 			  row:(int)row 
 	dropOperation:(NSTableViewDropOperation)op
 {
-	NSPasteboard *pasteboard = [info draggingPasteboard];
-	NSArray *filepaths = [pasteboard propertyListForType:NSFilenamesPboardType];
-	NSArray *files = [PAFile filesWithFilepaths:filepaths];
+	NSArray *files = [dropManager handleDrop:[info draggingPasteboard]];
 	
 	NSMutableArray *result = [NSMutableArray array];
 	

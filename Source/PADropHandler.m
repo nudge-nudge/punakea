@@ -13,7 +13,6 @@
 
 - (void)dealloc
 {
-	[content release];
 	[dataHandler release];
 	[pboardType release];
 	[super dealloc];
@@ -24,16 +23,19 @@
 	return pboardType;
 }
 
-- (void)setContent:(id)aContent
-{
-	[aContent retain];
-	[content release];
-	content = aContent;
-}
-
-- (BOOL)handleDrop:(NSPasteboard*)pasteboard
+- (BOOL)willHandleDrop:(NSPasteboard*)pasteboard
 {
 	return NO;
+}
+
+- (NSArray*)handleDrop:(NSPasteboard*)pasteboard
+{
+	return nil;
+}
+
+- (NSDragOperation)performedDragOperation:(NSPasteboard*)pasteboard
+{
+	return NSDragOperationNone;
 }
 
 @end

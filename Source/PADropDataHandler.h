@@ -29,6 +29,15 @@ convenience method, calls handleFile:
  */
 - (NSArray*)fileDropDataObjects:(NSArray*)dataObjects;
 
+/**
+returns the performed NSDragOperation, depending on fileManager
+ @return NSDragOperation which will be performed by this dropDataHandler
+ */
+- (NSDragOperation)performedDragOperation;
+
+/**
+helper method
+ */
 - (PAFile*)destinationForNewFile:(NSString*)fileName;
 
 @end

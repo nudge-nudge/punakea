@@ -105,6 +105,11 @@ data is NSDictionary with keys:
 	return [PAFile fileWithPath:filePath];
 }
 
+- (NSDragOperation)performedDragOperation
+{
+		return NSDragOperationCopy;
+}
+
 - (NSData*)dragDataWithEntries:(NSArray*)entries
 {
     NSMutableData *result;

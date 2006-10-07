@@ -25,4 +25,12 @@
 	return [PAFile fileWithPath:newPath];
 }
 
+- (NSDragOperation)performedDragOperation
+{
+	if (manageFiles)
+		return NSDragOperationMove;
+	else
+		return NSDragOperationGeneric;
+}
+
 @end
