@@ -21,13 +21,11 @@ typedef enum _PASidebarPosition {
 	NSColor *sidebarColor;
 	
 	NSNotificationCenter *nc;
+	NSUserDefaultsController *defaultsController;
 }
 
 - (BOOL)isExpanded;
 - (void)setExpanded:(BOOL)flag;
-
-- (BOOL)isMoving;
-- (void)setMoving:(BOOL)flag;
 
 /** 
 should be called after a mouse event inside the sidebar

@@ -8,6 +8,15 @@
 
 #import "PASidebarWindow.h"
 
+// sticky window stuff
+typedef int CGSConnection;
+typedef int CGSWindow;
+extern CGSConnection _CGSDefaultConnection(void);
+extern OSStatus CGSGetWindowTags(const CGSConnection cid, const  
+								 CGSWindow wid, int *tags, int thirtyTwo);
+extern OSStatus CGSSetWindowTags(const CGSConnection cid, const  
+								 CGSWindow wid, int *tags, int thirtyTwo);
+
 double const SHOW_DELAY = 0.2;
 
 @interface PASidebarWindow (PrivateAPI)
@@ -16,6 +25,8 @@ double const SHOW_DELAY = 0.2;
 - (void)show:(BOOL)animate;
 - (void)recede;
 - (void)recede:(BOOL)animate;
+- (void)setSticky:(BOOL)flag;
+- (BOOL)mouseInWindow;
 
 @end
 
@@ -38,10 +49,14 @@ double const SHOW_DELAY = 0.2;
     [self setOpaque:NO];	
 	
 	// This makes the window semi-transparent, but not its subviews
-	[self setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:0.75]];
+	[self setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:0.85]];
 	
 	[self setAcceptsMouseMovedEvents:YES];
-		
+	
+	[self setSticky:YES];
+	
+	defaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+	
     return self;
 }
 
@@ -53,25 +68,19 @@ double const SHOW_DELAY = 0.2;
 	NSView *contentView = [self contentView];
 	[contentView addTrackingRect:[contentView bounds] owner:self userData:NULL assumeInside:NO];
 	
-	[self bind:@"sidebarPosition" 
-	  toObject:[NSUserDefaultsController sharedUserDefaultsController] 
-   withKeyPath:@"values.Appearance.SidebarPosition" 
-	   options:nil];
+	sidebarPosition = [[defaultsController valueForKeyPath:@"values.Appearance.SidebarPosition"] intValue];
 	
-	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
-															  forKeyPath:@"values.Appearance.SidebarPosition" 
-																 options:NULL 
-																 context:NULL];
+	[defaultsController addObserver:self 
+						 forKeyPath:@"values.Appearance.SidebarPosition" 
+							options:0 
+							context:NULL];
 	
-	[self bind:@"sidebarColor"
-	  toObject:[NSUserDefaultsController sharedUserDefaultsController]
-   withKeyPath:@"values.Appearance.SidebarColor"
-	   options:nil];
+	sidebarColor = [defaultsController valueForKeyPath:@"values.Appearance.SidebarColor"];
 	
-	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-															  forKeyPath:@"values.Appearance.SidebarColor"
-																 options:NULL
-																 context:NULL];
+	[defaultsController addObserver:self
+						 forKeyPath:@"values.Appearance.SidebarColor"
+							options:0
+							context:NULL];
 	
 	// move to screen edge - according to prefs
 	[self setExpanded:YES];
@@ -80,20 +89,21 @@ double const SHOW_DELAY = 0.2;
 
 - (void)dealloc
 {
-	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self];
+	[defaultsController removeObserver:self];
 	[super dealloc];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.Appearance.SidebarPosition"])
+	if ((object == defaultsController) && [keyPath isEqualToString:@"values.Appearance.SidebarPosition"])
 	{
+		sidebarPosition = [[defaultsController valueForKeyPath:@"values.Appearance.SidebarPosition"] intValue];
 		[self setExpanded:YES];
 		[self recede:NO];
 	}
-	else if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.Appearance.SidebarColor"])
+	else if ((object == defaultsController) && [keyPath isEqualToString:@"values.Appearance.SidebarColor"])
 	{
-		[self setBackgroundColor:sidebarColor];
+		[self setBackgroundColor:[defaultsController valueForKeyPath:@"values.Appearance.SidebarColor"]];
 	}
 }			
 
@@ -191,7 +201,7 @@ double const SHOW_DELAY = 0.2;
 		
 		// multiplied with backgroundcolor this has to be > 0.05, or else there
 		// won't be drop notifications
-		[self setAlphaValue:0.07];
+		[self setAlphaValue:0.06];
 	}
 }
 
@@ -204,6 +214,22 @@ double const SHOW_DELAY = 0.2;
 - (void)setExpanded:(BOOL)flag 
 {
 	expanded = flag;
+}
+
+#pragma mark anti-hide
+- (void)setSticky:(BOOL)flag
+{
+	CGSWindow wid = [self windowNumber];
+	CGSConnection cid = _CGSDefaultConnection();
+	int tags[2] = {0, 0};
+	if (CGSGetWindowTags(cid, wid, tags, 32) == noErr) {
+		if (flag) {
+			tags[0] |= 0x800;
+		} else {
+			tags[0] &= ~0x800;
+		}
+		CGSSetWindowTags(cid, wid, tags, 32);
+	}
 }
 
 @end
