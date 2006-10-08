@@ -201,7 +201,7 @@
 			return [query results];
 		}
 		
-		return [query resultAtIndex:index];
+		return [query resultAtIndex:idx];
 	}
 	
 	if([item isKindOfClass:[PAQueryBundle class]])
@@ -219,7 +219,7 @@
 		
 		/*if([[currentDisplayModes objectForKey:[group value]] isEqualToString:@"IconMode"]) */
 		
-		return [bundle resultAtIndex:index];
+		return [bundle resultAtIndex:idx];
 	}
 }
 
@@ -431,7 +431,7 @@
 	
 	while (queryItem = [e nextObject])
 	{
-		[fileList addObject:[queryItem valueForAttribute:kMDItemPath]];
+		[fileList addObject:[queryItem valueForAttribute:(id)kMDItemPath]];
 	}
 	
 	[self setDraggedItems:items];
