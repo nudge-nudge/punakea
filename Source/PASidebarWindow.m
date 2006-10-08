@@ -8,15 +8,6 @@
 
 #import "PASidebarWindow.h"
 
-// sticky window stuff
-typedef int CGSConnection;
-typedef int CGSWindow;
-extern CGSConnection _CGSDefaultConnection(void);
-extern OSStatus CGSGetWindowTags(const CGSConnection cid, const  
-								 CGSWindow wid, int *tags, int thirtyTwo);
-extern OSStatus CGSSetWindowTags(const CGSConnection cid, const  
-								 CGSWindow wid, int *tags, int thirtyTwo);
-
 double const SHOW_DELAY = 0.2;
 
 @interface PASidebarWindow (PrivateAPI)
@@ -52,10 +43,9 @@ double const SHOW_DELAY = 0.2;
 	[self setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:0.85]];
 	
 	[self setAcceptsMouseMovedEvents:YES];
-	
-	[self setSticky:YES];
-	
+		
 	defaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+	nc = [NSNotificationCenter defaultCenter];
 	
     return self;
 }
@@ -81,6 +71,11 @@ double const SHOW_DELAY = 0.2;
 						 forKeyPath:@"values.Appearance.SidebarColor"
 							options:0
 							context:NULL];
+	
+	[nc addObserver:self
+		   selector:@selector(windowDidHide:)
+			   name:NSApplicationDidHideNotification
+			 object:nil];
 	
 	// move to screen edge - according to prefs
 	[self setExpanded:YES];
@@ -216,20 +211,25 @@ double const SHOW_DELAY = 0.2;
 	expanded = flag;
 }
 
-#pragma mark anti-hide
-- (void)setSticky:(BOOL)flag
+#pragma mark event
+
+// unhide on hiding ;)
+- (void)windowDidHide:(NSNotification*)notification
 {
-	CGSWindow wid = [self windowNumber];
-	CGSConnection cid = _CGSDefaultConnection();
-	int tags[2] = {0, 0};
-	if (CGSGetWindowTags(cid, wid, tags, 32) == noErr) {
-		if (flag) {
-			tags[0] |= 0x800;
-		} else {
-			tags[0] &= ~0x800;
-		}
-		CGSSetWindowTags(cid, wid, tags, 32);
+	NSApplication *app = [NSApplication sharedApplication];
+	NSArray *windows = [app windows];
+	
+	NSEnumerator *e = [windows objectEnumerator];
+	NSWindow *window;
+	
+	while (window = [e nextObject])
+	{
+		// hide all other windows (TODO not close)
+		if (window != self)
+			[window close];
 	}
+	
+	[app unhideWithoutActivation];
 }
 
 @end
