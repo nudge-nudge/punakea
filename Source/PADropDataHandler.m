@@ -31,6 +31,11 @@
 }
 
 #pragma mark main methods
+- (PAFile*)fileDropData:(id)data
+{
+	return nil;
+}
+
 - (NSArray*)fileDropDataObjects:(NSArray*)dataObjects
 {
 	NSEnumerator *e = [dataObjects objectEnumerator];
@@ -44,6 +49,11 @@
 	}
 	
 	return newFiles;
+}
+
+- (NSDragOperation)performedDragOperation
+{
+	return NSDragOperationNone;
 }
 
 - (PAFile*)destinationForNewFile:(NSString*)fileName
@@ -66,10 +76,10 @@
 	while ([fileManager fileExistsAtPath:newDestination])
 	{
 		idx++;
-		NSString *suffix = [NSString stringWithFormat:@"-%i",idx];
+		NSString *newSuffix = [NSString stringWithFormat:@"-%i",idx];
 		
 		NSString *name = [fileName stringByDeletingPathExtension];
-		NSString *newName = [name stringByAppendingString:suffix];
+		NSString *newName = [name stringByAppendingString:newSuffix];
 		NSString *extension = [@"." stringByAppendingString:[fileName pathExtension]];
 		NSString *newFileName = [newName stringByAppendingString:extension];
 		newDestination = [[self pathForFiles] stringByAppendingPathComponent:newFileName];

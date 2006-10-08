@@ -22,4 +22,6 @@
 - (NSMutableArray*)groupedTags;
 - (void)tagsHaveChanged;
 
+- (void)setSortDescriptors:(NSArray*)someSortDescriptors;
+
 @end

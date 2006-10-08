@@ -11,7 +11,6 @@
 @interface PATagGroup (PrivateAPI)
 
 - (void)setGroupedTags:(NSMutableArray*)someTags;
-- (void)setSortDescriptors:(NSArray*)someSortDescriptors;
 
 @end
 

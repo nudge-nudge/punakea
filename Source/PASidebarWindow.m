@@ -84,7 +84,8 @@ double const SHOW_DELAY = 0.2;
 
 - (void)dealloc
 {
-	[defaultsController removeObserver:self];
+	[defaultsController removeObserver:self forKeyPath:@"values.Appearance.SidebarPosition"];
+	[defaultsController removeObserver:self forKeyPath:@"values.Appearance.SidebarColor"];
 	[super dealloc];
 }
 

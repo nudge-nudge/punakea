@@ -191,7 +191,7 @@
 	return [item valueForAttribute:@"value"];*/
 }
 
-- (id)outlineView:(NSOutlineView *)ov child:(int)index ofItem:(id)item
+- (id)outlineView:(NSOutlineView *)ov child:(int)idx ofItem:(id)item
 {		
 	if(item == nil)
 	{
@@ -459,9 +459,9 @@
 		 childIndex:(int)index
 {
 	NSArray *files = [dropManager handleDrop:[info draggingPasteboard]];
-	NSArray *tags = [selectedTags selectedTags];
+	NSArray *tagArray = [selectedTags selectedTags];
 	
-	[tagger addTags:tags toFiles:files];
+	[tagger addTags:tagArray toFiles:files];
     return YES;    
 }
 

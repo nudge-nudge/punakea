@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "PAFile.h"
 
+/**
+abstract class
+ */
 @interface PADropDataHandler : NSObject {
 	BOOL manageFiles;
 	
@@ -18,7 +21,7 @@
 /**
 if file management is active, the given file will be moved to an internal folder
  the new location is returned
- must be overwritten
+ must be overwritten - abstract
  @param filePath path to file
  @return path to new location
  */
@@ -31,13 +34,15 @@ convenience method, calls handleFile:
 
 /**
 returns the performed NSDragOperation, depending on fileManager
+ must be overwritten - abstract
  @return NSDragOperation which will be performed by this dropDataHandler
  */
 - (NSDragOperation)performedDragOperation;
 
 /**
-helper method
+helper methods
  */
 - (PAFile*)destinationForNewFile:(NSString*)fileName;
+- (NSString*)pathForFiles;
 
 @end

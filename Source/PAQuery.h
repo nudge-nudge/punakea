@@ -39,23 +39,23 @@ wrapper for NSMetadataQuery. searching for tags, no predicate needed
  */
 @interface PAQuery : NSObject
 {
-	id					delegate;
-	NSMetadataQuery		*mdquery;
+	id						delegate;
+	NSMetadataQuery			*mdquery;
 	
-	PASelectedTags		*tags;
+	PASelectedTags			*tags;
 	
-	NSPredicate			*predicate;
+	NSPredicate				*predicate;
 	
-	NSArray				*bundlingAttributes;
+	NSArray					*bundlingAttributes;
 	
-	NSDictionary		*filterDict;
+	NSMutableDictionary		*filterDict;
 	
-	NSMutableArray		*results;
-	NSMutableArray		*flatResults;
-	NSMutableArray		*filteredResults;
-	NSMutableArray		*flatFilteredResults;
+	NSMutableArray			*results;
+	NSMutableArray			*flatResults;
+	NSMutableArray			*filteredResults;
+	NSMutableArray			*flatFilteredResults;
 	
-	NSWindow			*errorWindow;
+	NSWindow				*errorWindow;
 }
 
 /**
@@ -83,8 +83,7 @@ initializer
 - (unsigned)resultCount;
 - (id)resultAtIndex:(unsigned)index;
 - (NSArray*)results;
-
-- (NSArray*)groupedResults;
+- (NSArray*)flatResults;
 
 - (NSArray *)bundlingAttributes;
 - (void)setBundlingAttributes:(NSArray *)attributes;
@@ -94,5 +93,8 @@ initializer
 
 - (void)trashItems:(NSArray *)items errorWindow:(NSWindow *)window;
 - (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window;
+
+- (id)delegate;
+- (void)setDelegate:(id)aDelegate;
 
 @end

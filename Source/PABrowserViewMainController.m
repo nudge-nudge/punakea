@@ -18,7 +18,18 @@
 	[super dealloc];
 }
 
+#pragma mark main
+- (void)handleTagActivation:(PATag*)tag
+{
+	return;
+}
+
 #pragma mark accessors
+- (NSView*)mainView
+{
+	return mainView;
+}
+
 - (NSView*)currentView
 {
 	return currentView;

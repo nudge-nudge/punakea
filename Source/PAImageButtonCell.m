@@ -245,9 +245,9 @@
 
 - (void)setState:(PAButtonState)aState
 {
-	PAButtonState previousState = [self state];
+	PAButtonState formerState = [self state];
 	state = aState;
-	if(previousState != state) [[self controlView] setNeedsDisplay:YES];
+	if(formerState != state) [[self controlView] setNeedsDisplay:YES];
 }
 
 - (BOOL)isHighlighted

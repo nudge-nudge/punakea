@@ -71,8 +71,6 @@ highlights tag in tagcloud
 
 - (NSView*)controlledView;
 
-- (void)resetBrowserView;
-
 /**
 is called when a tag is clicked. increments the tag click count and
  adds to selectedTags
@@ -80,9 +78,11 @@ is called when a tag is clicked. increments the tag click count and
 - (IBAction)tagButtonClicked:(id)sender;
 - (IBAction)findFieldAction:(id)sender;
 
-// tag management
 - (void)manageTags;
+- (void)showResults;
 
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller;
+
+- (void)reset;
 
 @end

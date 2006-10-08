@@ -9,6 +9,10 @@
 #import "PreferenceController.h"
 #import "PATagManagementViewController.h"
 
+#import "PABrowserViewMainController.h"
+#import "PAResultsViewController.h"
+#import "PAResultsOutlineView.h"
+
 @interface Core : NSWindowController
 {
 	PATagger *tagger;

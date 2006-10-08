@@ -88,7 +88,7 @@
 	}
 	else
 	{
-		return [self tagsForPrefix:prefix inTags:tags];
+		return [self tagsForPrefix:prefix inTags:[tags tags]];
 	}
 }
 

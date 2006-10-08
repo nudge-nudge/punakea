@@ -141,19 +141,28 @@
 
 - (IBAction)openFiles:(id)sender
 {	
-	NSOutlineView *ov = [[[browserController browserViewController] mainController] outlineView];
+	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
+
+	if ([mainController isKindOfClass:[PAResultsViewController class]])
+	{
+		PAResultsOutlineView *ov = [mainController outlineView];
 	
-	if([ov responder])
-		[[[ov responder] target] performSelector:@selector(doubleAction)];
-	else
-		[[ov target] performSelector:@selector(doubleAction:)];
+		if([ov responder])
+			[[[ov responder] target] performSelector:@selector(doubleAction)];
+		else
+			[[ov target] performSelector:@selector(doubleAction:)];
+	}
 }
 
 - (IBAction)deleteFiles:(id)sender
 {	
-	NSOutlineView *ov = [[[browserController browserViewController] mainController] outlineView];
+	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 	
-	[[ov target] performSelector:@selector(deleteFilesForSelectedQueryItems:)];
+	if ([mainController isKindOfClass:[PAResultsViewController class]])
+	{
+		PAResultsOutlineView *ov = [mainController outlineView];
+		[[ov target] performSelector:@selector(deleteFilesForSelectedQueryItems:)];
+	}
 }
 
 - (IBAction)showBrowser:(id)sender

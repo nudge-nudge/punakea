@@ -25,6 +25,13 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (NSPredicate *)predicate;
 - (void)setPredicate:(NSPredicate *)aPredicate;
 
+- (void)createQuery;
+- (void)setMdquery:(NSMetadataQuery*)query;
+
+- (void)synchronizeResults;
+- (NSArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes;
+- (void)filterResults:(BOOL)flag usingValues:(NSArray *)filterValues forBundlingAttribute:(NSString *)attribute newBundlingAttributes:(NSArray *)newAttributes;
+
 @end 
 
 @implementation PAQuery
@@ -66,16 +73,16 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	MDQueryExecute(query,kMDQuerySynchronous);
 	CFIndex resultCount = MDQueryGetResultCount(query);
 	
-	NSMutableArray *results = [NSMutableArray array];
+	NSMutableArray *resultArray = [NSMutableArray array];
 	
 	for (int i=0;i<resultCount;i++)
 	{
 		MDItemRef *mditem = MDQueryGetResultAtIndex(query,i);
 		NSString *fileName = MDItemCopyAttribute(mditem,@"kMDItemPath");
-		[results addObject:[PAFile fileWithPath:fileName]];
+		[resultArray addObject:[PAFile fileWithPath:fileName]];
 	}
 
-	return results;
+	return resultArray;
 }
 
 #pragma mark Actions
@@ -441,7 +448,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	
 	BOOL fileWasMovedToTemp = NO;
 	NSString *tempDestination = nil;
-	NSArray *tags = nil;
+	NSArray *tagsOnFiles = nil;
 	
 	if([source compare:destination options:NSCaseInsensitiveSearch] == NSOrderedSame)
 	{
@@ -449,7 +456,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		tempDestination = [tempDestination stringByAppendingPathComponent:@"~"];
 		tempDestination = [tempDestination stringByAppendingString:newName];
 		
-		tags = [[PATagger sharedInstance] tagsOnFiles:[NSArray arrayWithObject:file]];
+		tagsOnFiles = [[PATagger sharedInstance] tagsOnFiles:[NSArray arrayWithObject:file]];
 		
 		if([fm fileExistsAtPath:tempDestination])
 			[fm removeFileAtPath:tempDestination handler:nil];
@@ -468,7 +475,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			[fm removeFileAtPath:tempDestination handler:nil];
 			
 			PAFile *newFile = [PAFile fileWithPath:destination];
-			[[PATagger sharedInstance] addTags:tags toFiles:[NSArray arrayWithObject:newFile]];
+			[[PATagger sharedInstance] addTags:tagsOnFiles toFiles:[NSArray arrayWithObject:newFile]];
 		}
 	} else {
 		fileWasMoved = [fm movePath:source toPath:destination handler:self];
@@ -562,11 +569,11 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	}
 }
 
-- (NSString*)queryStringForTags:(NSArray*)tags
+- (NSString*)queryStringForTags:(NSArray*)someTags
 {
 	NSMutableString *queryString = [NSMutableString stringWithString:@""];
 	
-	NSEnumerator *e = [tags objectEnumerator];
+	NSEnumerator *e = [someTags objectEnumerator];
 	PATag *tag;
 	
 	if (tag = [e nextObject]) 

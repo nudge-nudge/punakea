@@ -81,7 +81,7 @@ If anybody knows how to fix this, you're welcome to tell me.
 -(void)	awakeFromNib
 {
 	NSString*		key;
-	int				index = 0;
+	int				idx = 0;
 	NSString*		wndTitle = nil;
 	
 	// Generate a string containing the window's title so we can display the original window title plus the selected pane:
@@ -97,8 +97,8 @@ If anybody knows how to fix this, you're welcome to tell me.
 	
 	// Select the preferences page the user last had selected when this window was opened:
 	key = [NSString stringWithFormat: @"%@.prefspanel.recentpage", autosaveName];
-	index = [[NSUserDefaults standardUserDefaults] integerForKey: key];
-	[tabView selectTabViewItemAtIndex: index];
+	idx = [[NSUserDefaults standardUserDefaults] integerForKey: key];
+	[tabView selectTabViewItemAtIndex: idx];
 	
 	// Actually hook up our toolbar and the tabs:
 	[self mapTabsToToolbar];

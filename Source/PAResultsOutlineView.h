@@ -41,4 +41,6 @@ typedef enum _PAResultsDisplayMode
 - (PAResultsDisplayMode)displayMode;
 - (void)setDisplayMode:(PAResultsDisplayMode)mode;
 
+- (void)saveSelection;
+
 @end

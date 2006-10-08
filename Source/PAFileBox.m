@@ -18,9 +18,9 @@
 
 #pragma mark accessors
 
-- (void)setFiles:(NSMutableArray*)fileArray
+- (void)setFiles:(NSArray*)fileArray
 {
-	[fileArray retain];
+	[fileArray mutableCopy];
 	[files release];
 	files = fileArray;
 }

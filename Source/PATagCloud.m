@@ -66,8 +66,8 @@ calculates the starting point in the next row according to the height of all the
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if (self = [super initWithFrame:frameRect]) {
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		userDefaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+		
 		[self bind:@"eyeCandy" 
 		  toObject:userDefaultsController 
 	   withKeyPath:@"values.TagCloud.EyeCandy" 

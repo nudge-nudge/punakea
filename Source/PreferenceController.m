@@ -35,7 +35,7 @@
 	
 	[userDefaultsController addObserver:self
 							 forKeyPath:@"values.General.StartOnLogin"
-								options:NULL
+								options:0
 								context:NULL];
 }
 

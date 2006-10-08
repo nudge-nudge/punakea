@@ -10,6 +10,10 @@
 #import "PATag.h"
 #import "PAViewController.h"
 
+/**
+abstract class, controller for everything except tagcloud in 
+ browserview
+ */
 @interface PABrowserViewMainController : PAViewController {
 	IBOutlet NSView *currentView;
 	
@@ -21,6 +25,9 @@
 - (NSView*)currentView;
 - (void)setCurrentView:(NSView*)aView;
 
+/**
+abstract, must overwrite
+ */
 - (void)handleTagActivation:(PATag*)tag;
 - (id)delegate;
 - (void)setDelegate:(id)anObject;

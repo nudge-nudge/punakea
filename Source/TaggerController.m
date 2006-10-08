@@ -128,7 +128,7 @@ completionsForSubstring:(NSString *)substring
 
 - (NSArray *)tokenField:(NSTokenField *)tokenField 
 	   shouldAddObjects:(NSArray *)tokens 
-				atIndex:(unsigned)index
+				atIndex:(unsigned)idx
 {
 	[[PATagger sharedInstance] addTags:tokens toFiles:[fileController selectedObjects]];
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
