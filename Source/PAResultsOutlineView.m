@@ -386,26 +386,19 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			// perform editing like finder
 			[self performSelector:@selector(beginEditing)
 			           withObject:nil
+					   afterDelay:doubleClickThreshold];   
+		}
+		else if([[self selectedRowIndexes] containsIndex:mouseRow])
+		{
+			// wait to see if there is a double-click: if not, select the row as usual
+			[self performSelector:@selector(selectOnlyRowIndexes:)
+					   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
 					   afterDelay:doubleClickThreshold];
 		}
-		else
-		{ 	
-			if([[self selectedRowIndexes] containsIndex:mouseRow])
-			{
-				// wait to see if there is a double-click: if not, select the row as usual
-				[self performSelector:@selector(selectOnlyRowIndexes:)
-						   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
-						   afterDelay:doubleClickThreshold];
-			}
-			else
-			{
-				[super mouseDown:theEvent];
-			}
-			
-			// we still need to pass the event to super, to handle things like dragging, but 
-			// we have disabled row deselection by overriding selectRowIndexes:byExtendingSelection:
-			//[super mouseDown:theEvent]; 
-		}
+		
+		// we still need to pass the event to super, to handle things like dragging, but 
+		// we have disabled row deselection by overriding selectRowIndexes:byExtendingSelection:
+		[super mouseDown:theEvent]; 
     }
     else if(doubleClick)
     {		
@@ -431,9 +424,19 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)dragImage:(NSImage *)anImage at:(NSPoint)imageLoc offset:(NSSize)mouseOffset event:(NSEvent *)theEvent pasteboard:(NSPasteboard *)pboard source:(id)sourceObject slideBack:(BOOL)slideBack
 {
-    // we are starting to drag a row(s), so cancel any pending call to change the row selection
-    int     mouseRow = [self mouseRowForEvent:theEvent];
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(selectOnlyRowIndexes:) object:[NSIndexSet indexSetWithIndex:mouseRow]];
+    // we are starting to drag one or more rows, so cancel any pending calls from our custom mouse down
+    
+	int     mouseRow = [self mouseRowForEvent:theEvent];
+    
+	// cancel editing action
+	[NSObject cancelPreviousPerformRequestsWithTarget:self
+											 selector:@selector(beginEditing)
+											   object:nil];
+											   
+	// cancel the row-selection action
+	[NSObject cancelPreviousPerformRequestsWithTarget:self
+											 selector:@selector(selectOnlyRowIndexes:)
+											   object:[NSIndexSet indexSetWithIndex:mouseRow]];
     
     [super dragImage:anImage at:imageLoc offset:mouseOffset event:theEvent pasteboard:pboard source:sourceObject slideBack:slideBack];
 }
