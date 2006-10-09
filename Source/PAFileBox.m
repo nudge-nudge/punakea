@@ -7,7 +7,6 @@
 	dropManager = [PADropManager sharedInstance];
 	
 	[self registerForDraggedTypes:[dropManager handledPboardTypes]];
-	highlight = NO;
 }
 
 - (void)dealloc
@@ -30,29 +29,20 @@
 	return files;
 }
 
-- (void)setFileIcon:(NSImage*)newIcon 
-{
-	[newIcon setSize:NSMakeSize(64,64)];
-	[self setImage:newIcon];
-}
-
-- (NSImage*)fileIcon
-{
-	return [self image];
-}
-
 #pragma mark drap & drop stuff
 //code of cocoadevcentral tutorial
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
 	[[self window] mouseEvent];
+	[self setImage:[NSImage imageNamed:@"drop_highlight"]];
 	
 	return [dropManager performedDragOperation:[sender draggingPasteboard]];
 }
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender
 {
+	[self setImage:[NSImage imageNamed:@"drop"]];
 	[[self window] mouseEvent];
 }
 
@@ -79,8 +69,7 @@ executes some interface stuff
  */
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender
 {	
-	highlight = NO;
-    [self setNeedsDisplay:YES];
+	[self setImage:[NSImage imageNamed:@"drop"]];
 }
 
 @end
