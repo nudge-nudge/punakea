@@ -54,9 +54,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 }
 
 - (void)frameDidChange:(NSNotification *)note
-{
-	// TODO: Performance!! :)
-	
+{	
 	if([self numberOfRows] <= 0) return;
 	
 	NSRect frame = [self frame];
@@ -118,7 +116,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[aCell release];
 	}
 	
-	[self deselectAllCells];
+	//[self deselectAllCells];
 }
 
 
@@ -229,6 +227,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)column
 {
+	if(row == -1 || column == -1) return;
+
 	NSCell *cell = [self cellAtRow:row column:column];
 	[cell setHighlighted:flag];
 	
