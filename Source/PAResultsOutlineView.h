@@ -24,7 +24,7 @@ typedef enum _PAResultsDisplayMode
 	unsigned int			lastUpDownArrowFunctionKey;
 	
 	// If not nil, forward keyboard events to responder
-	NSResponder				*responder;
+	NSView					*responder;
 	
 	// A collection of selected PAQueryItems. OutlineView stores them for various responders,
 	// so that they are able to restore their selection if necessary.

@@ -398,7 +398,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		}
 		
 		[self highlightCell:YES atRow:row+1 column:column];
-	} else {
+	} /*else {
 		// If this is the lowermost multi item cell, do nothing as we are at the lowermost item
 		// in our OutlineView
 
@@ -410,7 +410,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			[outlineView setResponder:nil];
 			[outlineView keyDown:theEvent];
 		}
-	}
+	}*/
 }
 
 - (void)moveSelectionRight:(NSEvent *)theEvent

@@ -323,7 +323,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 }
 
 
-#pragma mark Double-click Stuff
+#pragma mark Mouse Event Stuff
 - (int)mouseRowForEvent:(NSEvent *)theEvent
 {
     NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
@@ -439,6 +439,15 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 											   object:[NSIndexSet indexSetWithIndex:mouseRow]];
     
     [super dragImage:anImage at:imageLoc offset:mouseOffset event:theEvent pasteboard:pboard source:sourceObject slideBack:slideBack];
+}
+
+/**
+needed for supporting dragging to trash
+ */
+- (void)draggedImage:(NSImage *)anImage endedAt:(NSPoint)aPoint operation:(NSDragOperation)operation
+{
+	if (operation == NSDragOperationDelete)
+		[[self delegate] deleteDraggedItems];
 }
 
 
@@ -593,15 +602,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	{
 		[super textDidEndEditing:notification];
     }
-}
-
-/**
-needed for supporting dragging to trash
- */
-- (void)draggedImage:(NSImage *)anImage endedAt:(NSPoint)aPoint operation:(NSDragOperation)operation
-{
-	if (operation == NSDragOperationDelete)
-		[[self delegate] deleteDraggedItems];
 }
 		
 @end
