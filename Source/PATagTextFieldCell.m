@@ -15,7 +15,7 @@
 {
 	if (self = [super initTextCell:name])
 	{
-		//nothing yet
+		//nothin
 	}
 	return self;
 }
@@ -38,25 +38,6 @@
 	bezel = [NSBezierPath bezierPathWithRoundRectInRect:NSInsetRect(cellFrame, 1.0, 1.0) radius:20.0];
 	[innerBezelColor set];
 	[bezel fill];
-	
-	// Draw icon
-	/*
-	NSRect iconFrame = cellFrame;
-	iconFrame.origin.x = iconFrame.size.width - 28;
-	iconFrame.origin.y += 1;
-	iconFrame.size = NSMakeSize(24,24);
-	
-	NSImage *icon = [NSImage imageNamed:@"drop_right"];	
-	
-	[icon setSize:NSMakeSize(24,24)];
-	[icon setFlipped:YES];
-	
-	NSRect imageRect;
-	imageRect.origin = NSZeroPoint;
-	imageRect.size = [icon size];
-	
-	[icon drawAtPoint:iconFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
-	*/
 	
 	// Draw icon
 	NSRect iconFrame = cellFrame;
@@ -83,7 +64,7 @@
 		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 	else
 		[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-	
+		
 	[fontAttributes setObject:[NSFont systemFontOfSize:14] forKey:NSFontAttributeName];
 	
 	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
@@ -95,9 +76,15 @@
 	
 	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 6,
 								  cellFrame.origin.y + 2,
-								  cellFrame.size.width - 42,
+								  cellFrame.size.width - 44,
 								  cellFrame.size.height - 4)
 	    withAttributes:fontAttributes];
+}
+
+- (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
+{
+	NSLog(@"highlight");
+	[self drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
 @end
