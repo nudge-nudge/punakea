@@ -39,7 +39,65 @@
 	[innerBezelColor set];
 	[bezel fill];
 	
-	[super drawInteriorWithFrame:cellFrame inView:controlView];
+	// Draw icon
+	/*
+	NSRect iconFrame = cellFrame;
+	iconFrame.origin.x = iconFrame.size.width - 28;
+	iconFrame.origin.y += 1;
+	iconFrame.size = NSMakeSize(24,24);
+	
+	NSImage *icon = [NSImage imageNamed:@"drop_right"];	
+	
+	[icon setSize:NSMakeSize(24,24)];
+	[icon setFlipped:YES];
+	
+	NSRect imageRect;
+	imageRect.origin = NSZeroPoint;
+	imageRect.size = [icon size];
+	
+	[icon drawAtPoint:iconFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	*/
+	
+	// Draw icon
+	NSRect iconFrame = cellFrame;
+	iconFrame.origin.x += iconFrame.size.width - 36;
+	iconFrame.origin.y += 5;
+	iconFrame.size = NSMakeSize(24,16);
+	
+	NSImage *icon = [NSImage imageNamed:@"drop_tag"];
+	
+	[icon setSize:NSMakeSize(24,16)];
+	[icon setFlipped:YES];
+	
+	NSRect imageRect;
+	imageRect.origin = NSZeroPoint;
+	imageRect.size = [icon size];
+	
+	[icon drawAtPoint:iconFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	
+	
+	// Font attributes
+	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
+	
+	if([self isHighlighted]) 
+		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
+	else
+		[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+	
+	[fontAttributes setObject:[NSFont systemFontOfSize:14] forKey:NSFontAttributeName];
+	
+	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	[paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];
+	
+	// Draw display name	
+	NSString *value = [self stringValue];
+	
+	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 6,
+								  cellFrame.origin.y + 2,
+								  cellFrame.size.width - 42,
+								  cellFrame.size.height - 4)
+	    withAttributes:fontAttributes];
 }
 
 @end
