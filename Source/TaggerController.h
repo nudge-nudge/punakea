@@ -6,10 +6,13 @@
 #import "PARelatedTagsStandalone.h"
 #import "PATypeAheadFind.h"
 #import "PADropManager.h"
+#import "PAFileCell.h"
 
 @interface TaggerController : NSWindowController
 {	
 	IBOutlet NSTableView *tableView;
+	PAFileCell *fileCell;
+	
 	IBOutlet NSTokenField *tagField; /**< shows tags which are on all selected files */
 	
 	IBOutlet NSArrayController *fileController;

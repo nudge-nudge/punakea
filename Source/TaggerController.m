@@ -34,6 +34,8 @@ resets the tagger window (called when window is closed)
 		tags = [tagger tags];
 		currentCompleteTagsInField = [[PASelectedTags alloc] init];
 		dropManager = [PADropManager sharedInstance];
+		// custom data cell
+		fileCell = [[PAFileCell alloc] init];
 	}
 	return self;
 }
@@ -45,10 +47,15 @@ resets the tagger window (called when window is closed)
 	
 	// observe file selection
 	[fileController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
+
+	// set custom data cell
+	NSArray *columns = [tableView tableColumns];
+	[[columns objectAtIndex:0] setDataCell:fileCell];
 }
 
 - (void)dealloc
 {
+	[fileCell release];
 	[fileController removeObserver:self forKeyPath:@"selectionIndexes"];
 	[tableView unregisterDraggedTypes];
 	[currentCompleteTagsInField release];
