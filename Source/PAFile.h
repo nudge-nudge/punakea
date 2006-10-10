@@ -22,7 +22,7 @@
 + (NSArray*)filesWithFilepaths:(NSArray*)filepaths;
 + (PAFile*)fileWithFileURL:(NSURL*)url;
 
-- (NSString*)path;
+- (NSString*)path; /**< full path including file.extension */
 - (NSString*)name;
 - (NSString*)nameWithoutExtension;
 - (NSString*)extension;

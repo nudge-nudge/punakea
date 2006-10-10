@@ -42,7 +42,8 @@ returns the performed NSDragOperation, depending on fileManager
 /**
 helper methods
  */
-- (PAFile*)destinationForNewFile:(NSString*)fileName;
+- (NSString*)destinationForNewFile:(NSString*)fileName;
 - (NSString*)pathForFiles;
+- (BOOL)pathIsInManagedHierarchy:(NSString*)path;
 
 @end

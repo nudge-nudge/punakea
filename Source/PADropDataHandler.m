@@ -56,58 +56,48 @@
 	return NSDragOperationNone;
 }
 
-- (PAFile*)destinationForNewFile:(NSString*)fileName
+- (NSString*)destinationForNewFile:(NSString*)fileName
 {
-	NSString *newDestination = [[self pathForFiles] stringByAppendingPathComponent:fileName];
-	
-	int idx = 1;
-	NSString *suffix = [NSString stringWithFormat:@"-%i",idx];
-	
-	if ([fileManager fileExistsAtPath:newDestination])
+	// check if main directory folder contains file
+	// increment until directory is found/created where file can be place
+	NSString *managedRoot = [self pathForFiles];
+	NSString *destination;
+	int i = 1;
+
+	while (true)
 	{
-		NSString *name = [fileName stringByDeletingPathExtension];
-		NSString *newName = [name stringByAppendingString:suffix];
-		NSString *extension = [@"." stringByAppendingString:[fileName pathExtension]];
-		NSString *newFileName = [newName stringByAppendingString:extension];
-		newDestination = [[self pathForFiles] stringByAppendingPathComponent:newFileName];
-	}
-	
-	
-	while ([fileManager fileExistsAtPath:newDestination])
-	{
-		idx++;
-		NSString *newSuffix = [NSString stringWithFormat:@"-%i",idx];
+		NSString *directory = [managedRoot stringByAppendingFormat:@"/%i/",i];
 		
-		NSString *name = [fileName stringByDeletingPathExtension];
-		NSString *newName = [name stringByAppendingString:newSuffix];
-		NSString *extension = [@"." stringByAppendingString:[fileName pathExtension]];
-		NSString *newFileName = [newName stringByAppendingString:extension];
-		newDestination = [[self pathForFiles] stringByAppendingPathComponent:newFileName];
+		if ([fileManager fileExistsAtPath:directory] == NO) 
+			[fileManager createDirectoryAtPath:directory attributes:nil];
+		
+		destination = [directory stringByAppendingPathComponent:fileName];
+		
+		// if file doesn't exists in directory, use this one
+		if (![fileManager fileExistsAtPath:destination])
+			break;
+		
+		i++;
 	}
 	
-	return [PAFile fileWithPath:newDestination];
+	return destination;
 }
 
 - (NSString*)pathForFiles
 { 
-	NSString *folder = @"~/Library/Application Support/Punakea/managedFiles/"; 
-	folder = [folder stringByExpandingTildeInPath]; 
+	NSString *directory = @"~/Library/Application Support/Punakea/managedFiles/"; 
+	directory = [directory stringByExpandingTildeInPath]; 
 	
-	if ([fileManager fileExistsAtPath: folder] == NO) 
-		[fileManager createDirectoryAtPath: folder attributes: nil];
+	if ([fileManager fileExistsAtPath:directory] == NO) 
+		[fileManager createDirectoryAtPath:directory attributes: nil];
 	
-	return folder; 
+	return directory; 
 }
 
-#pragma mark filemanager methods
-- (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path
+- (BOOL)pathIsInManagedHierarchy:(NSString*)path
 {
-	
-}
-
-- (BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
-{
-	return NO;
+	NSString *managedRoot = [self pathForFiles];
+	return [path hasPrefix:managedRoot];
 }
 
 @end

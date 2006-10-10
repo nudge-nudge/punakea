@@ -15,14 +15,16 @@
 - (PAFile*)fileDropData:(id)data
 {
 	// only do something if managing files and if file not already in the managed file directory
-	if (!manageFiles || ([[data stringByDeletingLastPathComponent] isEqualToString:[self pathForFiles]]))
+	if (!manageFiles || [self pathIsInManagedHierarchy:data])
 	{
 		return [PAFile fileWithPath:data];
 	}
-
-	NSString *newPath = [self destinationForNewFile:[data lastPathComponent]];
-	[fileManager movePath:data toPath:newPath handler:self];
-	return [PAFile fileWithPath:newPath];
+	else
+	{
+		NSString *destination = [self destinationForNewFile:[data lastPathComponent]];
+		[fileManager movePath:data toPath:destination handler:self];
+		return [PAFile fileWithPath:destination];
+	}
 }
 
 - (NSDragOperation)performedDragOperation
