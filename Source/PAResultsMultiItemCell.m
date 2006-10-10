@@ -71,14 +71,14 @@
 		[matrix setFrame:rect];
 	}
 	
-	if(![self isHighlighted])
+	/*if(![self isHighlighted])
 	{
 		// Buggy...
 		//[matrix deselectAllCells];
 	} else {
 		
 		// Also buggy...
-		/*if(![matrix selectedCell])
+		if(![matrix selectedCell])
 		{
 			// Select one item on highlighting
 			if([controlView lastUpDownArrowFunctionKey] == NSDownArrowFunctionKey ||
@@ -95,11 +95,12 @@
 				[matrix highlightCell:YES atRow:row column:column];
 			}
 		}
-		[controlView setLastUpDownArrowFunctionKey:0];*/
+		[controlView setLastUpDownArrowFunctionKey:0];
 		
 		// Make matrix the first responder
 		[controlView setResponder:matrix];
-	}
+	}*/
+	[controlView setResponder:matrix];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView

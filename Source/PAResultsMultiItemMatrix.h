@@ -24,6 +24,8 @@
 	NSMutableIndexSet		*selectedIndexes;
 	NSMutableArray			*selectedCells;
 	
+	NSEvent					*mouseDownEvent;
+	
 }
 
 - (NSArray *)items;

@@ -33,8 +33,8 @@
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {		
 	// Clear all drawings
-	[[NSColor whiteColor] set];
-	NSRectFill(cellFrame);
+	[[NSColor clearColor] set];
+	[[NSBezierPath bezierPathWithRect:cellFrame] fill];
 
 	// Attributed string for value
 	NSString *value = [item valueForAttribute:(id)kMDItemDisplayName];

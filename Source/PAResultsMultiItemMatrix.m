@@ -618,6 +618,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
+	if(mouseDownEvent) [mouseDownEvent autorelease];
+	mouseDownEvent = [theEvent retain];
+
 	// Make sure the corresponding multiitemcell in our outlineView is highlighted
 	NSPoint locationInOutlineView = [outlineView convertPoint:[theEvent locationInWindow] fromView:nil];
 	int row = [outlineView rowAtPoint:locationInOutlineView];	
@@ -868,6 +871,172 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 }
 
 
+#pragma mark Drag'n'Drop Stuff
+- (void)mouseDragged:(NSEvent *)event
+{
+	int row, column; 
+
+    NSPoint point = [self convertPoint:[mouseDownEvent locationInWindow] fromView:nil];
+	
+	// cancel editing action
+	[NSObject cancelPreviousPerformRequestsWithTarget:self
+											 selector:@selector(beginEditing)
+											   object:nil];
+											   
+	[self getRow:&row column:&column forPoint:point];	
+	NSCell *cell = [self cellAtRow:row column:column];							   
+
+	// Cancel any late highlighting
+	[NSObject cancelPreviousPerformRequestsWithTarget:self
+											 selector:@selector(highlightOnlyCell:)
+											   object:cell];
+	
+    if(![cell isKindOfClass:[PAResultsMultiItemPlaceholderCell class]]) 
+        [self startDrag:mouseDownEvent]; 
+}
+
+- (void)startDrag:(NSEvent *)event
+{
+	// Create pasteboard contents
+	NSMutableArray *fileList = [NSMutableArray array];
+	
+	unsigned index = [selectedIndexes firstIndex];	
+	while (index != NSNotFound)
+	{
+		PAQueryItem *item = [items objectAtIndex:index];
+		
+		[fileList addObject:[item valueForAttribute:(id)kMDItemPath]];
+		
+		index = [selectedIndexes indexGreaterThanIndex:index];
+	}
+	
+	NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard]; 
+	[pboard declareTypes:[NSArray arrayWithObject:NSFilenamesPboardType] owner:nil];
+	[pboard setPropertyList:fileList forType:NSFilenamesPboardType];
+	
+	// Click point
+	NSPoint dragPoint = [self convertPoint:[event locationInWindow] fromView:nil];
+	
+	// Determine drag image
+	int offsetX, offsetY;
+	NSImage *image = [self dragImageForMouseDownAtPoint:dragPoint offsetX:&offsetX y:&offsetY];
+	
+	// Drag point
+	dragPoint.x -= offsetX;
+	dragPoint.y -= offsetY;
+
+	// we want to make the image a little bit transparent so the user can see where
+    // they're dragging to
+    NSImage *dragImage = [[[NSImage alloc] initWithSize:[image size]] autorelease]; 
+    [dragImage lockFocus]; 
+    [image dissolveToPoint:NSMakePoint(0,0) fraction:0.5]; 
+    [dragImage unlockFocus];
+
+    [self dragImage:dragImage 
+                 at:dragPoint 
+             offset:NSZeroSize
+              event:event 
+         pasteboard:pboard 
+             source:self 
+          slideBack:YES]; 
+}
+
+- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(int *)offsetX y:(int *)offsetY
+{
+	// First, determine the topmost and lowermost selected items in the visible rect to 
+	// calc the size of the image
+	NSRect selectedItemsRect = NSMakeRect(0,0,0,0);
+	int topRow = -1, bottomRow = -1, leftColumn = -1, rightColumn = -1;
+	
+	NSMutableArray *visibleCells = [NSMutableArray array];
+	
+	NSEnumerator *e = [selectedCells objectEnumerator];
+	NSTextFieldCell *cell;
+	while(cell = [e nextObject])
+	{
+		int row, column;
+		[self getRow:&row column:&column ofCell:cell];
+		
+		NSRect cellFrame = [self cellFrameAtRow:row column:column];
+		
+		if(NSIntersectsRect(cellFrame,[self visibleRect]))
+		{
+			// This cell is visible, so we need to create a drag image for it
+			[visibleCells addObject:cell];
+			
+			if(topRow == -1 || row < topRow)
+			{
+				topRow = row;
+				selectedItemsRect.origin.y = cellFrame.origin.y;
+			}
+			
+			if(bottomRow == -1 || row > bottomRow)
+			{
+				bottomRow = row;
+				selectedItemsRect.size.height = cellFrame.origin.y + cellFrame.size.height - selectedItemsRect.origin.y;
+			}
+			
+			if(leftColumn == -1 || column < leftColumn)
+			{
+				leftColumn = column;
+				selectedItemsRect.size.width += selectedItemsRect.origin.x - cellFrame.origin.x;
+				selectedItemsRect.origin.x = cellFrame.origin.x;
+			}
+			
+			if(rightColumn == -1 || column > rightColumn)
+			{
+				rightColumn = column;
+				selectedItemsRect.size.width = cellFrame.origin.x + cellFrame.size.width - selectedItemsRect.origin.x;
+			}
+		}
+	}
+
+	// Draw the image
+	NSImage *image = [[NSImage alloc] initWithSize:selectedItemsRect.size];
+	[image setFlipped:YES];
+	
+	[image lockFocus];
+	
+	//[[NSColor redColor] set];
+	//[[NSBezierPath bezierPathWithRect:NSMakeRect(0, 0, selectedItemsRect.size.width, selectedItemsRect.size.height)] fill];
+	
+	NSRect visibleRect = [self visibleRect];
+	
+	e = [visibleCells objectEnumerator];
+	while(cell = [e nextObject])
+	{
+		int row, column;
+		[self getRow:&row column:&column ofCell:cell];
+		
+		NSRect cellFrame = [self cellFrameAtRow:row column:column];
+		cellFrame.origin.x -= selectedItemsRect.origin.x;
+		cellFrame.origin.y -= selectedItemsRect.origin.y;
+		
+		// Determine offset
+		int r, c;
+		[self getRow:&r column:&c forPoint:point];
+		NSTextFieldCell *clickedCell = [self cellAtRow:r column:c];
+		
+		if([clickedCell isEqualTo:cell])
+		{
+			*offsetX = cellFrame.origin.x;
+			*offsetY = point.y - cellFrame.origin.y - selectedItemsRect.origin.y - cellFrame.size.height;
+			
+			*offsetX += point.x - cellFrame.origin.x - selectedItemsRect.origin.x;
+		}		
+	
+		// We want to draw the unhighlighted state of the cell
+		[cell setHighlighted:NO];
+		[cell drawWithFrame:cellFrame inView:nil];
+		[cell setHighlighted:YES];
+	}
+	
+	[image unlockFocus];
+	
+	return image;
+}
+
+
 #pragma mark Accessors
 - (NSArray *)items
 {
@@ -920,6 +1089,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[super setCellClass:aClass];
 	[self setCellSize:[[self cellClass] cellSize]];
 	[self setIntercellSpacing:[[self cellClass] intercellSpacing]];
+}
+
+- (BOOL)isOpaque
+{
+	return NO;
 }
 
 @end
