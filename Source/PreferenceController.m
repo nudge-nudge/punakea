@@ -11,6 +11,7 @@
 @interface PreferenceController (PrivateAPI)
 
 - (void)startOnLoginHasChanged;
+- (void)updateButtonToCurrentLocation;
 
 @end
 
@@ -37,6 +38,8 @@
 							 forKeyPath:@"values.General.StartOnLogin"
 								options:0
 								context:NULL];
+	
+	[self updateButtonToCurrentLocation];
 }
 
 #pragma mark observing
@@ -89,6 +92,91 @@
 	if (startOnLogin) 
 		LIAEAddURLAtEnd(url, false); 
 	CFRelease(url);
+}
+
+#pragma mark file location
+- (void)updateButtonToCurrentLocation
+{
+	id <NSMenuItem> location = [folderButton itemAtIndex:0];
+
+	NSString *dir = [userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"];
+	
+	NSString *title = [dir lastPathComponent];
+	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:dir];
+	[icon setSize:NSMakeSize(16.0,16.0)];
+	
+	[location setTitle:title];
+	[location setImage:icon];
+}
+
+- (IBAction)locateDirectory:(id)sender
+{
+	NSString *currentPath = [[userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"] retain];
+	
+	// create open panel with the needed settings
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	
+	[openPanel setAllowsMultipleSelection:NO];
+	[openPanel setCanChooseFiles:NO];
+	[openPanel setCanChooseDirectories:YES];
+	[openPanel setCanCreateDirectories:YES];
+	
+	[openPanel beginSheetForDirectory:currentPath
+								   file:nil
+								  types:[NSArray arrayWithObject:NSFileTypeDirectory]
+						 modalForWindow:[self window]
+						  modalDelegate:self
+						 didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) 
+							contextInfo:NULL];
+}
+
+- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo
+{
+	if (returnCode == NSOKButton)
+	{
+		NSString *oldPath = [userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"];
+		NSString *newPath = [[panel filenames] objectAtIndex:0];
+		
+		// move old files if there are any - 
+		// only copy the numbered folders!
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+		int i = 1;
+		
+		while (true)
+		{
+			NSString *currentNumberedDir = [NSString stringWithFormat:@"/%i/",i];
+			NSString *oldDirectory = [oldPath stringByAppendingPathComponent:currentNumberedDir];
+			
+			if ([fileManager fileExistsAtPath:oldDirectory])
+			{
+				NSString *newDirectory = [newPath stringByAppendingPathComponent:currentNumberedDir];
+				[fileManager movePath:oldDirectory toPath:newDirectory handler:self];
+				i++;
+			}
+			else
+			{
+				break;
+			}
+		}
+			
+		[userDefaultsController setValue:newPath forKeyPath:@"values.General.ManagedFilesLocation"];
+		[self updateButtonToCurrentLocation];
+		[folderButton selectItemAtIndex:0];
+	}
+	else if (returnCode == NSCancelButton)
+	{
+		[folderButton selectItemAtIndex:0];
+	}
+}
+
+- (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path
+{
+	// TODO
+}
+
+- (BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
+{
+	// TODO
 }
 
 @end

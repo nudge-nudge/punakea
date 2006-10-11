@@ -85,7 +85,7 @@
 
 - (NSString*)pathForFiles
 { 
-	NSString *directory = @"~/Library/Application Support/Punakea/managedFiles/"; 
+	NSString *directory = [[NSUserDefaults standardUserDefaults] objectForKey:@"General.ManagedFilesLocation"];
 	directory = [directory stringByExpandingTildeInPath]; 
 	
 	if ([fileManager fileExistsAtPath:directory] == NO) 

@@ -8,8 +8,10 @@
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
+            ACTIONS = {locateDirectory = id; }; 
             CLASS = PreferenceController; 
             LANGUAGE = ObjC; 
+            OUTLETS = {folderButton = NSPopUpButton; }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {
