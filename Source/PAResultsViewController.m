@@ -442,11 +442,16 @@
 	return YES;
 }
 
-- (NSDragOperation)outlineView:(NSOutlineView *)outlineView 
+- (NSDragOperation)outlineView:(NSOutlineView *)ov 
 				  validateDrop:(id <NSDraggingInfo>)info 
 				  proposedItem:(id)item 
 			proposedChildIndex:(int)index
 {
+	// Discard dragging on self
+	if([info draggingSource] == ov ||
+	   ([outlineView responder] && [info draggingSource] == [outlineView responder]))
+		return NSDragOperationNone;
+
 	// retarget to whole outlineview
 	[outlineView setDropItem:nil dropChildIndex:NSOutlineViewDropOnItemIndex];
 	
