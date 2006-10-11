@@ -18,5 +18,6 @@
 }
 
 - (IBAction)locateDirectory:(id)sender;
+- (IBAction)switchToDefaultDirectory:(id)sender;
 
 @end

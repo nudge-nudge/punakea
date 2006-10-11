@@ -12,6 +12,7 @@
 
 - (void)startOnLoginHasChanged;
 - (void)updateButtonToCurrentLocation;
+- (void)switchManagedLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath;
 
 @end
 
@@ -95,20 +96,6 @@
 }
 
 #pragma mark file location
-- (void)updateButtonToCurrentLocation
-{
-	id <NSMenuItem> location = [folderButton itemAtIndex:0];
-
-	NSString *dir = [userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"];
-	
-	NSString *title = [dir lastPathComponent];
-	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:dir];
-	[icon setSize:NSMakeSize(16.0,16.0)];
-	
-	[location setTitle:title];
-	[location setImage:icon];
-}
-
 - (IBAction)locateDirectory:(id)sender
 {
 	NSString *currentPath = [[userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"] retain];
@@ -130,6 +117,20 @@
 							contextInfo:NULL];
 }
 
+- (IBAction)switchToDefaultDirectory:(id)sender
+{
+	NSString *oldPath = [userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"];
+	
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"];
+	NSDictionary *appDefaults = [NSDictionary dictionaryWithContentsOfFile:path];
+	
+	// set path to default path
+	NSString *defaultPath = [appDefaults objectForKey:@"General.ManagedFilesLocation"];
+	
+	[self switchManagedLocationFromPath:oldPath toPath:defaultPath];
+	[folderButton selectItemAtIndex:0];
+}
+
 - (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo
 {
 	if (returnCode == NSOKButton)
@@ -137,30 +138,8 @@
 		NSString *oldPath = [userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"];
 		NSString *newPath = [[panel filenames] objectAtIndex:0];
 		
-		// move old files if there are any - 
-		// only copy the numbered folders!
-		NSFileManager *fileManager = [NSFileManager defaultManager];
-		int i = 1;
+		[self switchManagedLocationFromPath:oldPath toPath:newPath];
 		
-		while (true)
-		{
-			NSString *currentNumberedDir = [NSString stringWithFormat:@"/%i/",i];
-			NSString *oldDirectory = [oldPath stringByAppendingPathComponent:currentNumberedDir];
-			
-			if ([fileManager fileExistsAtPath:oldDirectory])
-			{
-				NSString *newDirectory = [newPath stringByAppendingPathComponent:currentNumberedDir];
-				[fileManager movePath:oldDirectory toPath:newDirectory handler:self];
-				i++;
-			}
-			else
-			{
-				break;
-			}
-		}
-			
-		[userDefaultsController setValue:newPath forKeyPath:@"values.General.ManagedFilesLocation"];
-		[self updateButtonToCurrentLocation];
 		[folderButton selectItemAtIndex:0];
 	}
 	else if (returnCode == NSCancelButton)
@@ -169,6 +148,7 @@
 	}
 }
 
+#pragma mark file handler
 - (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path
 {
 	// TODO
@@ -176,7 +156,56 @@
 
 - (BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
 {
-	// TODO
+	return NO;
+}
+
+#pragma mark helper
+- (void)updateButtonToCurrentLocation
+{
+	id <NSMenuItem> location = [folderButton itemAtIndex:0];
+	
+	NSString *dir = [userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"];
+	
+	NSString *title = [dir lastPathComponent];
+	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:dir];
+	[icon setSize:NSMakeSize(16.0,16.0)];
+	
+	[location setTitle:title];
+	[location setImage:icon];
+}
+
+- (void)switchManagedLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath
+{
+	NSString *standardizedOldPath = [oldPath stringByStandardizingPath];
+	NSString *standardizedNewPath = [newPath stringByStandardizingPath];
+	
+	if ([standardizedOldPath isEqualToString:standardizedNewPath])
+		return;
+		
+	// move old files if there are any - 
+	// only copy the numbered folders!
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	int i = 1;
+	
+	while (true)
+	{
+		NSString *currentNumberedDir = [NSString stringWithFormat:@"/%i/",i];
+		NSString *oldDirectory = [standardizedOldPath stringByAppendingPathComponent:currentNumberedDir];
+		
+		if ([fileManager fileExistsAtPath:oldDirectory])
+		{
+			NSString *newDirectory = [standardizedNewPath stringByAppendingPathComponent:currentNumberedDir];
+			[fileManager movePath:oldDirectory toPath:newDirectory handler:self];
+			i++;
+		}
+		else
+		{
+			break;
+		}
+	}
+	
+	[userDefaultsController setValue:newPath forKeyPath:@"values.General.ManagedFilesLocation"];
+	[self updateButtonToCurrentLocation];
 }
 
 @end
