@@ -227,13 +227,21 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)column
 {
-	if(row == -1 || column == -1) return;
+	if(row == -1 || column == -1)
+	{
+		if(flag) selectedCell = nil;
+		return;
+	}
 
 	NSCell *cell = [self cellAtRow:row column:column];
 	[cell setHighlighted:flag];
 	
 	// Return if this cell is a placeholder
-	if([cell isMemberOfClass:[PAResultsMultiItemPlaceholderCell class]]) return;
+	if([cell isMemberOfClass:[PAResultsMultiItemPlaceholderCell class]])
+	{
+		if(flag) selectedCell = nil;
+		return;
+	}
 	
 	unsigned int index = row * [self numberOfColumns] + column;
 	
@@ -253,7 +261,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[selectedCells removeObject:cell];
 		
 		// Update selectedItems in OutlineView
-		[outlineView removeSelectedQueryItem:[items objectAtIndex:index]];
+		if([items objectAtIndex:index])
+			[outlineView removeSelectedQueryItem:[items objectAtIndex:index]];
 	}
 }
 
@@ -266,6 +275,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 	[cell setEditable:NO];
 	[self highlightCell:YES atRow:row column:column];
+}
+
+- (void)deselectSelectedCell
+{
+	[self highlightCell:NO cell:[self selectedCell]];
 }
 
 - (void)deselectAllCells
@@ -918,12 +932,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSPoint dragPoint = [self convertPoint:[event locationInWindow] fromView:nil];
 	
 	// Determine drag image
-	int offsetX, offsetY;
+	float offsetX, offsetY;
 	NSImage *image = [self dragImageForMouseDownAtPoint:dragPoint offsetX:&offsetX y:&offsetY];
 	
 	// Drag point
 	dragPoint.x -= offsetX;
-	dragPoint.y -= offsetY;
+	dragPoint.y += offsetY;
 
 	// we want to make the image a little bit transparent so the user can see where
     // they're dragging to
@@ -941,11 +955,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
           slideBack:YES]; 
 }
 
-- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(int *)offsetX y:(int *)offsetY
+- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(float *)offsetX y:(float *)offsetY
 {
 	// First, determine the topmost and lowermost selected items in the visible rect to 
 	// calc the size of the image
 	NSRect selectedItemsRect = NSMakeRect(0,0,0,0);
+	NSSize intercellSpacing = [self intercellSpacing];
 	int topRow = -1, bottomRow = -1, leftColumn = -1, rightColumn = -1;
 	
 	NSMutableArray *visibleCells = [NSMutableArray array];
@@ -968,12 +983,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			{
 				topRow = row;
 				selectedItemsRect.origin.y = cellFrame.origin.y;
+				selectedItemsRect.size.height = (bottomRow - topRow + 1) * (cellFrame.size.height + intercellSpacing.height);
 			}
 			
 			if(bottomRow == -1 || row > bottomRow)
 			{
 				bottomRow = row;
-				selectedItemsRect.size.height = cellFrame.origin.y + cellFrame.size.height - selectedItemsRect.origin.y;
+				selectedItemsRect.size.height = (bottomRow - topRow + 1) * (cellFrame.size.height + intercellSpacing.height);
 			}
 			
 			if(leftColumn == -1 || column < leftColumn)
@@ -1019,10 +1035,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		if([clickedCell isEqualTo:cell])
 		{
-			*offsetX = cellFrame.origin.x;
-			*offsetY = point.y - cellFrame.origin.y - selectedItemsRect.origin.y - cellFrame.size.height;
-			
-			*offsetX += point.x - cellFrame.origin.x - selectedItemsRect.origin.x;
+			//NSLog(@"%@ %@", [[cell item] valueForAttribute:(id)kMDItemDisplayName], [[clickedCell item] valueForAttribute:(id)kMDItemDisplayName]);
+			//NSLog(@"point.y=%f, selItemsRect.origin.y=%f, cellFrame.origin.y=%f", point.y, selectedItemsRect.origin.y, cellFrame.origin.y);
+		
+			*offsetX = point.x - selectedItemsRect.origin.x;
+			*offsetY = selectedItemsRect.size.height - (point.y - selectedItemsRect.origin.y);
 		}		
 	
 		// We want to draw the unhighlighted state of the cell
