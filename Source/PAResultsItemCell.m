@@ -95,7 +95,7 @@
 		value = [dateFormatter stringFromDate:lastUsedDate];
 	} else {
 		// TODO: Localize
-		value = @"Ohne Datum";
+		value = @"No date";
 	}
 			
 	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 160, cellFrame.origin.y + 2)
@@ -120,15 +120,16 @@
 {	
 	NSRect frame = aRect;
 	frame.origin.x += 25;
-	frame.size.width -= 25; 
+	frame.origin.y += 1;
+	frame.size.width -= 180 + 25; 
+	frame.size.height -= 3;
 	
 	[super selectWithFrame:frame inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
-	
+
 	[textObj setFont:[NSFont systemFontOfSize:11]];
 	[textObj setString:[item valueForAttribute:(id)kMDItemDisplayName]];
 	
 	[textObj selectAll:self];
-
 }
 
 

@@ -547,7 +547,7 @@ needed for supporting dragging to trash
 
 - (void)textDidChange:(NSNotification *)notification
 {
-	[super textDidChange:notification];
+	//[super textDidChange:notification];
 	
 	// Set text color to red if the new destination already exists
 	PAQueryItem *item = [self itemAtRow:[self selectedRow]];
@@ -564,6 +564,8 @@ needed for supporting dragging to trash
 	} else {
 		[textView setTextColor:[NSColor textColor]];
 	}
+	
+	[self setNeedsDisplay:YES];
 }
 
 - (void)textDidEndEditing:(NSNotification *)notification

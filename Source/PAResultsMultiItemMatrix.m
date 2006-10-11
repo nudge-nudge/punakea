@@ -808,7 +808,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)textDidChange:(NSNotification *)notification
 {
-	[super textDidChange:notification];
+	//[super textDidChange:notification];
 	
 	int r, c;
 	[self getRow:&r column:&c ofCell:[self selectedCell]];
@@ -829,6 +829,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	} else {
 		[textView setTextColor:[NSColor textColor]];
 	}
+	
+	[self setNeedsDisplay:YES];
 }
 
 - (void)textDidEndEditing:(NSNotification *)notification

@@ -128,10 +128,14 @@
 {	
 	NSRect frame = aRect;
 	//frame.origin.x += 25;
+	frame.origin.y += frame.size.height - 30;
 	//frame.size.width -= 25; 
+	frame.size.height = 18;
 	
 	[super selectWithFrame:frame inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 	
+	[textObj setDrawsBackground:YES];
+	[textObj setBackgroundColor:[NSColor whiteColor]];
 	[textObj setFont:[NSFont systemFontOfSize:11]];
 	[textObj setString:[item valueForAttribute:(id)kMDItemDisplayName]];
 	
