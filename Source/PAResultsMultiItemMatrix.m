@@ -1061,7 +1061,13 @@ needed for supporting dragging to trash
 - (void)draggedImage:(NSImage *)anImage endedAt:(NSPoint)aPoint operation:(NSDragOperation)operation
 {
 	if (operation == NSDragOperationDelete)
-		[[[self superview] delegate] deleteFilesForSelectedQueryItems:[self superview]];
+	{
+		id controller = [[self superview] delegate];
+		
+		[controller setDraggedItems:[self selectedItems]];
+		
+		[controller deleteDraggedItems];
+	}
 }
 
 
@@ -1110,6 +1116,20 @@ needed for supporting dragging to trash
 - (NSArray *)selectedCells
 {
 	return selectedCells;
+}
+
+- (NSArray *)selectedItems
+{
+	NSMutableArray *selectedItems = [NSMutableArray array];
+		
+	unsigned index = [selectedIndexes firstIndex];
+	while(index != NSNotFound)
+	{
+		[selectedItems addObject:[items objectAtIndex:index]];
+		index = [selectedIndexes indexGreaterThanIndex:index];
+	}
+	
+	return selectedItems;
 }
 
 - (void)setCellClass:(Class)aClass

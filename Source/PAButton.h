@@ -22,7 +22,7 @@
 - (BOOL)isBordered;
 - (void)setBordered:(BOOL)flag;
 - (void)highlight:(BOOL)flag;
-- (BOOL)isHighlighed;
+- (BOOL)isHighlighted;
 - (void)select:(BOOL)flag;
 - (BOOL)isSelected;
 - (PAButtonState)state;

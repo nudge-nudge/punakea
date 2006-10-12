@@ -290,10 +290,10 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 */
 - (void)keyDown:(NSEvent *)theEvent
 {
+	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+
 	if([theEvent type] == NSKeyDown)
-	{	
-		 unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
-			
+	{				
 		// Forward request to responder
 		if([self responder])
 		{

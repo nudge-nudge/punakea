@@ -131,7 +131,7 @@
 	[[self cell] setHighlighted:flag];
 }
 
-- (BOOL)isHighlighed
+- (BOOL)isHighlighted
 {
 	return [[self cell] isHighlighted];
 }

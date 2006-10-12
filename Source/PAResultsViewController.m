@@ -171,6 +171,7 @@
 	[delegate setDisplayTags:[relatedTags relatedTagArray]];
 }
 
+
 #pragma mark Temp
 - (void)setGroupingAttributes:(id)sender;
 {
@@ -408,11 +409,34 @@
 {
 	[outlineView saveSelection];
 
-	NSMutableArray *selectedQueryItems = [outlineView selectedQueryItems];
-
-	[[outlineView query] trashItems:selectedQueryItems errorWindow:[outlineView window]];
+	NSMutableArray *selectedItems = [NSMutableArray array];
 	
-	[selectedQueryItems removeAllObjects];
+	for(unsigned row = 0; row < [outlineView numberOfRows]; row++)
+	{
+		id item = [outlineView itemAtRow:row];
+		
+		if([[outlineView selectedRowIndexes] containsIndex:row])
+		{
+			if([item isKindOfClass:[NSArray class]] && [outlineView responder])
+			{
+				NSArray *responderItems = [[outlineView responder] selectedItems];
+				[selectedItems addObjectsFromArray:responderItems];
+				
+				for(unsigned i = 0; i < [responderItems count]; i++)
+				{
+					id responderItem = [responderItems objectAtIndex:i];
+					if([[outlineView selectedQueryItems] containsObject:responderItem]) [[outlineView selectedQueryItems] removeObject:responderItem];
+				}
+			}
+			else
+			{
+				[selectedItems addObject:item];			
+				if([[outlineView selectedQueryItems] containsObject:item]) [[outlineView selectedQueryItems] removeObject:item];
+			}
+		}
+	}
+
+	[[outlineView query] trashItems:selectedItems errorWindow:[outlineView window]];
 	
 	[outlineView reloadData];
 }

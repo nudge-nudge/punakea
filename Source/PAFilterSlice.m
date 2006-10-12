@@ -133,7 +133,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	PAButton *selectedButton = nil;
 	while(button = [enumerator nextObject])
 	{
-		if([button isHighlighed])
+		if([button isHighlighted])
 		{
 			selectedButton = button;
 			break;
