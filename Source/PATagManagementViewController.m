@@ -229,7 +229,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	
 	[tagger renameTag:oldTagName toTag:newTagName];
 	[oldTagName release];
-	
+		
 	[self setWorking:NO];
 }
 

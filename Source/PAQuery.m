@@ -396,17 +396,22 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (void)trashItems:(NSArray *)items errorWindow:(NSWindow *)window
 {
 	[self disableUpdates];
+	
+	NSString *trashDir = [NSHomeDirectory() stringByAppendingPathComponent:@".Trash"];
+	
+	NSEnumerator *e = [items objectEnumerator];
+	PAQueryItem *item;
 
-	for(int i = 0; i < [items count]; i++)
+	while (item = [e nextObject])
 	{
-		PAQueryItem *item = [items objectAtIndex:i];
-		NSString *path = [item valueForAttribute:(id)kMDItemPath];
-		
-		// Remove tags from file
-		[[PATagger sharedInstance] removeAllTagsFromFile:[PAFile fileWithPath:path]];
+		PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
 		
 		// Move to trash
-		[[NSFileManager defaultManager] trashFileAtPath:path];
+		[[NSFileManager defaultManager] trashFileAtPath:[file path]];
+		
+		// Remove tags from trashed file to give spotlight enough time
+		PAFile *trashedFile = [trashDir stringByAppendingPathComponent:[file name]];
+		[[PATagger sharedInstance] removeAllTagsFromFile:file];
 		
 		// Remove from flatresults
 		for(int k = 0; k < [flatResults count]; k++)
