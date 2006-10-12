@@ -46,6 +46,7 @@
 		482248350A886DE1008C8CB9 /* PATempTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 482248330A886DE1008C8CB9 /* PATempTag.m */; };
 		482B31150AC6C70D0071C33B /* ResultsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 482B31130AC6C70D0071C33B /* ResultsView.nib */; };
 		482B314B0AC6D6DD0071C33B /* PABrowserViewMainController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */; };
+		482D81860ADE2AC300455635 /* drop_tag_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 482D81850ADE2AC300455635 /* drop_tag_small.png */; };
 		4832722D0AA42D19003D98A6 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4832722B0AA42D19003D98A6 /* Preferences.nib */; };
 		483272340AA42DC6003D98A6 /* UKPrefsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 483272320AA42DC6003D98A6 /* UKPrefsPanel.h */; };
 		483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483272330AA42DC6003D98A6 /* UKPrefsPanel.m */; };
@@ -72,7 +73,6 @@
 		485016A50AA423FC00579C92 /* PASidebarTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 485016A30AA423FC00579C92 /* PASidebarTableColumn.m */; };
 		48557AD70ADB8ADA0025CE9C /* PAFileCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48557AD50ADB8ADA0025CE9C /* PAFileCell.h */; };
 		48557AD80ADB8ADA0025CE9C /* PAFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48557AD60ADB8ADA0025CE9C /* PAFileCell.m */; };
-		48557C250ADB97A90025CE9C /* drop_tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 48557C240ADB97A90025CE9C /* drop_tag.png */; };
 		4856C6740A516D8300E1D568 /* BrowserViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C6720A516D8300E1D568 /* BrowserViewController.h */; };
 		4856C6750A516D8300E1D568 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C6730A516D8300E1D568 /* BrowserViewController.m */; };
 		485C09870ABAC830002CB2C2 /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = 485C09860ABAC830002CB2C2 /* drop.png */; };
@@ -389,6 +389,7 @@
 		482248330A886DE1008C8CB9 /* PATempTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATempTag.m; sourceTree = "<group>"; };
 		482B31140AC6C70D0071C33B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ResultsView.nib; sourceTree = "<group>"; };
 		482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserViewMainController.h; sourceTree = "<group>"; };
+		482D81850ADE2AC300455635 /* drop_tag_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop_tag_small.png; sourceTree = "<group>"; };
 		4832722C0AA42D19003D98A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		483272320AA42DC6003D98A6 /* UKPrefsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPrefsPanel.h; sourceTree = "<group>"; };
 		483272330AA42DC6003D98A6 /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
@@ -415,7 +416,6 @@
 		485016A30AA423FC00579C92 /* PASidebarTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableColumn.m; sourceTree = "<group>"; };
 		48557AD50ADB8ADA0025CE9C /* PAFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileCell.h; sourceTree = "<group>"; };
 		48557AD60ADB8ADA0025CE9C /* PAFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileCell.m; sourceTree = "<group>"; };
-		48557C240ADB97A90025CE9C /* drop_tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop_tag.png; sourceTree = "<group>"; };
 		4856C6720A516D8300E1D568 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		4856C6730A516D8300E1D568 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
 		485C09860ABAC830002CB2C2 /* drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop.png; sourceTree = "<group>"; };
@@ -1158,7 +1158,7 @@
 			children = (
 				489A603E0ADA4AF500C6CE36 /* drop_highlight.png */,
 				485C09860ABAC830002CB2C2 /* drop.png */,
-				48557C240ADB97A90025CE9C /* drop_tag.png */,
+				482D81850ADE2AC300455635 /* drop_tag_small.png */,
 			);
 			name = Sidebar;
 			sourceTree = "<group>";
@@ -1303,7 +1303,7 @@
 				48B0F1C30ACBFA6200738053 /* Tags.strings in Resources */,
 				48B0F1D80ACC020800738053 /* Global.strings in Resources */,
 				489A603F0ADA4AF500C6CE36 /* drop_highlight.png in Resources */,
-				48557C250ADB97A90025CE9C /* drop_tag.png in Resources */,
+				482D81860ADE2AC300455635 /* drop_tag_small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

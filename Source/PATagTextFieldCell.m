@@ -41,13 +41,13 @@
 	
 	// Draw icon
 	NSRect iconFrame = cellFrame;
-	iconFrame.origin.x += iconFrame.size.width - 36;
-	iconFrame.origin.y += 5;
-	iconFrame.size = NSMakeSize(24,16);
+	iconFrame.origin.x += iconFrame.size.width - 28;
+	iconFrame.origin.y += 7;
+	iconFrame.size = NSMakeSize(18,12);
 	
-	NSImage *icon = [NSImage imageNamed:@"drop_tag"];
+	NSImage *icon = [NSImage imageNamed:@"drop_tag_small"];
 	
-	[icon setSize:NSMakeSize(24,16)];
+	[icon setSize:NSMakeSize(18,12)];
 	[icon setFlipped:YES];
 	
 	NSRect imageRect;
