@@ -75,7 +75,7 @@
 	{
 		// Buggy...
 		//[matrix deselectAllCells];
-		[matrix deselectSelectedCell];
+		//[matrix deselectSelectedCell];
 	} else {
 		
 		// Also buggy...

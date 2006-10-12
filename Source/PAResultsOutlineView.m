@@ -253,7 +253,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	if([[note name] isEqualToString:PAQueryDidUpdateNotification])
 	{
 		[self saveSelection];
+		NSRect visibleRect = [self visibleRect];
+		
 		[self reloadData];
+		
+		[self scrollPoint:visibleRect.origin];
 		[self restoreSelection];
 	}
 }
