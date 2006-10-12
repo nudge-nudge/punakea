@@ -49,10 +49,15 @@
 
 - (void)awakeFromNib
 {
+	// if we are managing files, copy on drag
+	// else move
+	BOOL managingFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+	NSDragOperation dragOperation = managingFiles ? NSDragOperationCopy : NSDragOperationMove;
+	
 	[outlineView setQuery:query];
 	[outlineView registerForDraggedTypes:[dropManager handledPboardTypes]];
 	[outlineView setDraggingSourceOperationMask:NSDragOperationNone forLocal:YES];
-	[outlineView setDraggingSourceOperationMask:(NSDragOperationCopy | NSDragOperationDelete) forLocal:NO];
+	[outlineView setDraggingSourceOperationMask:(dragOperation | NSDragOperationDelete) forLocal:NO];
 }
 
 - (void)dealloc
