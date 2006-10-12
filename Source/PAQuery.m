@@ -411,7 +411,6 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		
 		// Remove tags from trashed file to give spotlight enough time
 		PAFile *trashedFile = [PAFile fileWithPath:[trashDir stringByAppendingPathComponent:[file name]]];
-		[[PATagger sharedInstance] removeAllTagsFromFile:file];
 		[[PATagger sharedInstance] removeAllTagsFromFile:trashedFile];
 		
 		// Remove from flatresults
