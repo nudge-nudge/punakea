@@ -776,6 +776,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 #pragma mark Editing
 - (void)beginEditing
 {
+	// If multiple items are selected, discard editing
+	if([selectedIndexes count] > 1) return;
+
 	int row, column;
 	[self getRow:&row column:&column ofCell:[self selectedCell]];
 

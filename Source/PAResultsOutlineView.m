@@ -524,6 +524,9 @@ needed for supporting dragging to trash
 #pragma mark Editing
 - (void)beginEditing
 {
+	// If multiple items are selected, discard editing
+	if([[self selectedRowIndexes] count] > 1) return;
+		
 	[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
 }
 
