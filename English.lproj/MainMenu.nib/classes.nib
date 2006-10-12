@@ -2,12 +2,12 @@
     IBClasses = (
         {
             ACTIONS = {
-                closeBrowser = id; 
                 deleteFiles = id; 
                 manageTags = id; 
                 openFiles = id; 
                 showBrowser = id; 
                 showPreferences = id; 
+                showTagger = id; 
             }; 
             CLASS = Core; 
             LANGUAGE = ObjC; 

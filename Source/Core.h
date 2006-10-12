@@ -7,6 +7,7 @@
 #import "SidebarController.h"
 #import "BrowserController.h"
 #import "PreferenceController.h"
+#import "TaggerController.h"
 #import "PATagManagementViewController.h"
 
 #import "PABrowserViewMainController.h"
@@ -37,5 +38,6 @@
 - (IBAction)deleteFiles:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
+- (IBAction)showTagger:(id)sender;
 
 @end

@@ -27,8 +27,6 @@
 	PADropManager *dropManager;
 }
 
-- (id)initWithWindowNibName:(NSString*)windowNibName;
-
 /**
 adds new files to the fileController
  @param newFiles files to add

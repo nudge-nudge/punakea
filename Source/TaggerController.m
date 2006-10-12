@@ -25,9 +25,9 @@ resets the tagger window (called when window is closed)
 @implementation TaggerController
 
 #pragma mark init + dealloc
-- (id)initWithWindowNibName:(NSString*)windowNibName
+- (id)init
 {
-	if (self = [super initWithWindowNibName:windowNibName])
+	if (self = [super initWithWindowNibName:@"Tagger"])
 	{
 		typeAheadFind = [[PATypeAheadFind alloc] init];
 		tagger = [PATagger sharedInstance];
@@ -42,6 +42,9 @@ resets the tagger window (called when window is closed)
 
 - (void)awakeFromNib
 {
+	// autosave name
+	[[self window] setFrameAutosaveName:@"punakea.tagger"];
+	
 	// table view drop support
 	[tableView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
 	
@@ -289,8 +292,12 @@ completionsForSubstring:(NSString *)substring
 	   proposedDropOperation:(NSTableViewDropOperation)op
 {
 	int fileCount = [[self files] count];
-	
-	if (row < fileCount)
+
+	if (fileCount == 0)
+	{
+		[tableView setDropRow:-1 dropOperation:NSTableViewDropOn];
+	} 
+	else if (fileCount > 0 && row < fileCount)
 	{
 		[tableView setDropRow:fileCount dropOperation:NSTableViewDropAbove];
 	}

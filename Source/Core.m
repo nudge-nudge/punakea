@@ -174,6 +174,14 @@
 	[browserController showWindow:self];
 }
 
+- (IBAction)showTagger:(id)sender
+{
+	TaggerController *taggerController = [[TaggerController alloc] init];
+	[taggerController showWindow:self];
+	NSWindow *taggerWindow = [taggerController window];
+	[taggerWindow makeKeyAndOrderFront:nil];
+}
+
 #pragma mark NSApplication delegate
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
