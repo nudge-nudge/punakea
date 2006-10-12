@@ -56,15 +56,10 @@
 	
 	[icon drawAtPoint:iconFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	
-	
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	
-	if([self isHighlighted]) 
-		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
-	else
-		[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-		
+	[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
 	[fontAttributes setObject:[NSFont systemFontOfSize:14] forKey:NSFontAttributeName];
 	
 	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];

@@ -40,11 +40,14 @@ only works if parent window is a PASidebar
 }
 
 #pragma mark drop highlighting
-/*
 -(void)_drawDropHighlightOnRow:(int)rowIndex 
 {
-	NSLog(@"column");
+	NSRect cellFrame = [self frameOfCellAtColumn:0 row:rowIndex];
+	
+	NSBezierPath *bezel = [NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:20.0];
+	[bezel setLineWidth:1.1];
+	[[NSColor blackColor] set];
+	[bezel stroke];
 }
-*/
 
 @end
