@@ -1055,6 +1055,15 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	return image;
 }
 
+/**
+needed for supporting dragging to trash
+ */
+- (void)draggedImage:(NSImage *)anImage endedAt:(NSPoint)aPoint operation:(NSDragOperation)operation
+{
+	if (operation == NSDragOperationDelete)
+		[[[self superview] delegate] deleteFilesForSelectedQueryItems:[self superview]];
+}
+
 
 #pragma mark Accessors
 - (NSArray *)items

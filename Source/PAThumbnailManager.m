@@ -225,6 +225,9 @@ static PAThumbnailManager *sharedInstance = nil;
 		
 		// This way of loading the whole file uses much less memory
 		NSImage *img = [PAThumbnailManager scaledImageFromFile:filename maxBounds:maxBounds quality:0.8];
+		
+		CFRelease(imageSourceRef);
+		
 		return img;			
 	} else {				
 		// image size
