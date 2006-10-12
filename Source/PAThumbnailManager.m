@@ -268,6 +268,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		[img unlockFocus];
 		
 		CGImageRelease(image);
+		CFRelease(imageSourceRef);
 		
 		return [img autorelease];
 	}
