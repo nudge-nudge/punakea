@@ -717,7 +717,7 @@
 				489AE71309DD4D7800EB60EB /* SelectedTagsView */,
 				655D3BF20A7DD598009479F9 /* Filter Slice */,
 				6588132C09DDCA7300428B83 /* ResultsView */,
-				484F717E0A666D4B00D886E5 /* Tag Management */,
+				484F717E0A666D4B00D886E5 /* TagManagement */,
 				48D16FED0A5A6468006C667B /* BrowserController.h */,
 				48D16FEE0A5A6468006C667B /* BrowserController.m */,
 				4856C6720A516D8300E1D568 /* BrowserViewController.h */,
@@ -822,7 +822,7 @@
 			name = TypeAheadView;
 			sourceTree = "<group>";
 		};
-		484F717E0A666D4B00D886E5 /* Tag Management */ = {
+		484F717E0A666D4B00D886E5 /* TagManagement */ = {
 			isa = PBXGroup;
 			children = (
 				484F71820A666E5B00D886E5 /* PATagManagementViewController.h */,
@@ -832,7 +832,7 @@
 				486DC7610ACD3BCD00BE0F54 /* PATagManagementViewTagView.h */,
 				486DC7620ACD3BCD00BE0F54 /* PATagManagementViewTagView.m */,
 			);
-			name = "Tag Management";
+			name = TagManagement;
 			sourceTree = "<group>";
 		};
 		486BD5780AB6A2DB003B9BAC /* Resource Fork */ = {

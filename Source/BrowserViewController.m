@@ -271,8 +271,6 @@
 #pragma mark typeAheadFind
 - (void)showTypeAheadView
 {
-	NSLog(@"show");
-	
 	float height = NSHeight([typeAheadView frame]);
 	NSScrollView *sv = [tagCloud enclosingScrollView];
 	// placed above
@@ -285,8 +283,6 @@
 
 - (void)hideTypeAheadView
 {
-	NSLog(@"hide");
-	
 	float height = NSHeight([typeAheadView frame]);
 	NSScrollView *sv = [tagCloud enclosingScrollView];
 	// placed above

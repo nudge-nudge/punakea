@@ -1,3 +1,7 @@
 "Already Exists" = "File Already Exists";
 "ALREADY_EXISTS_INFORMATION" = "The name \"%@\" is already taken. Please choose a different name.";
 "Unknown Error" = "Unknown Error";
+"DESTINATION_NOT_WRITABLE" = "The chosen folder is not writable. Please choose another one or make sure that you have permission to write.";
+"DESTINATION_CONTAINS_NEEDED_DIR" = "The chosen folder contains the folder '%@'. This folder name is needed for the managed tags. Please choose a different folder or delete '%@'.";
+"ERROR_MOVING_DIR" = "There was an error (%@) moving the folder '%@'. Please choose a different folder. Files already moved will be restored in the original folder.";
+"CRITICAL_MOVING_ERROR" = "There was an unhandled error while moving the files. Please check the new location and the old location for your files.";

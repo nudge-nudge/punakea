@@ -148,15 +148,61 @@
 	}
 }
 
-#pragma mark file handler
-- (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path
-{
-	// TODO
-}
-
+#pragma mark file error handler
 - (BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
 {
+	// there shouldn't be many errors, as the app
+	// checks before starting to move. still some possibility remains
+	NSString *oldPath = [errorInfo objectForKey:@"Path"];
+	NSString *error = [errorInfo objectForKey:@"Error"];
+	NSString *newPath = [errorInfo objectForKey:@"ToPath"];
+	
+	if (!newPath)
+	{
+		[self displayWarningWithMessage:NSLocalizedStringFromTable(@"CRITICAL_MOVING_ERROR",@"FileManager",@"")];
+	}
+	else
+	{
+		[self displayWarningWithMessage:[NSString stringWithFormat:
+			NSLocalizedStringFromTable(@"ERROR_MOVING_DIR",@"FileManager",@""),error,oldPath]];
+		
+		// move all dirs already moved back to original location
+		NSString *oldManagedPath = [oldPath stringByDeletingLastPathComponent];
+		NSString *newManagedPath = [newPath stringByDeletingLastPathComponent];
+		
+		NSString *dirName = [oldPath lastPathComponent];
+		int i = [dirName intValue];
+			
+		for (i;i>0;i--)
+		{
+			NSString *newDirName = [NSString stringWithFormat:@"%i",i];
+			[manager movePath:[newManagedPath stringByAppendingPathComponent:newDirName]
+						   toPath:[oldManagedPath stringByAppendingPathComponent:newDirName]
+						  handler:nil];
+		}
+	}
 	return NO;
+}
+
+- (void)displayWarningWithMessage:(NSString*)messageInfo
+{
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert setMessageText:NSLocalizedStringFromTable(@"ERROR",@"Global",@"")];
+	[alert setInformativeText:messageInfo];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OK",@"Global",@"")];
+	
+	[alert setAlertStyle:NSWarningAlertStyle];
+	
+	[alert beginSheetModalForWindow:nil
+					  modalDelegate:self 
+					 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+						contextInfo:nil];
+}
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	// noting
+	return;
 }
 
 #pragma mark helper
@@ -185,23 +231,71 @@
 	// move old files if there are any - 
 	// only copy the numbered folders!
 	NSFileManager *fileManager = [NSFileManager defaultManager];
+	
+	// first check if the destination is writable
+	if (![fileManager isWritableFileAtPath:standardizedNewPath])
+	{
+		[self displayWarningWithMessage:NSLocalizedStringFromTable(@"DESTINATION_NOT_WRITABLE",@"FileManager",@"")];
+		return;
+	}
+		
+	// then collect all dirs to move
+	NSMutableArray *directories = [NSMutableArray array];
 	int i = 1;
+	NSString *currentNumberedDir;
+	NSString *directory;
+	BOOL isDirectory;
 	
 	while (true)
 	{
-		NSString *currentNumberedDir = [NSString stringWithFormat:@"/%i/",i];
-		NSString *oldDirectory = [standardizedOldPath stringByAppendingPathComponent:currentNumberedDir];
-		
-		if ([fileManager fileExistsAtPath:oldDirectory])
+		currentNumberedDir = [NSString stringWithFormat:@"/%i/",i];
+		directory = [standardizedOldPath stringByAppendingPathComponent:currentNumberedDir];
+	
+		if ([fileManager fileExistsAtPath:directory isDirectory:&isDirectory])
 		{
-			NSString *newDirectory = [standardizedNewPath stringByAppendingPathComponent:currentNumberedDir];
-			[fileManager movePath:oldDirectory toPath:newDirectory handler:self];
-			i++;
+			if (isDirectory)
+			{
+				[directories addObject:directory];
+				i++;
+			}
 		}
 		else
 		{
 			break;
 		}
+	}
+	
+	// now all dirs are in directories 
+	// check if destination is void of all those dirnames
+	NSEnumerator *dirEnumerator = [directories objectEnumerator];
+	NSString *dirName;
+	NSString *newDir;
+	
+	while (directory = [dirEnumerator nextObject])
+	{
+		dirName = [directory lastPathComponent];
+		newDir = [standardizedNewPath stringByAppendingPathComponent:dirName];
+		
+		if ([fileManager fileExistsAtPath:newDir isDirectory:&isDirectory])
+		{
+			if (isDirectory)
+			{
+				[self displayWarningWithMessage:[NSString stringWithFormat:
+					NSLocalizedStringFromTable(@"DESTINATION_CONTAINS_NEEDED_DIR",@"FileManager",@""),dirName,dirName]];
+				return;
+			}
+		}
+	}
+	
+	// if everything is ok, move them
+	dirEnumerator = [directories objectEnumerator];
+	
+	while (directory = [dirEnumerator nextObject])
+	{
+		dirName = [directory lastPathComponent];
+		newDir = [standardizedNewPath stringByAppendingPathComponent:dirName];
+		
+		[fileManager movePath:directory toPath:newDir handler:self];
 	}
 	
 	[userDefaultsController setValue:newPath forKeyPath:@"values.General.ManagedFilesLocation"];
