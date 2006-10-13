@@ -47,6 +47,12 @@ int const PADDING_TO_RIGHT = 100;
 	       selector:@selector(frameDidChange:)
 		       name:(id)NSViewFrameDidChangeNotification
 			 object:self];
+			 
+	// Get notification frameDidChange of SuperView!!
+	[nc addObserver:self
+	       selector:@selector(frameDidChange:)
+		       name:(id)NSViewFrameDidChangeNotification
+			 object:[self superview]];
 }
 
 - (void)dealloc
@@ -170,11 +176,11 @@ int const PADDING_TO_RIGHT = 100;
 	NSRect frame = [self frame];
 	
 	// Break if frame height wasn't changed
-	if(frame.size.height == height)
+	/*if(frame.size.height == height)
 	{
 		ignoreFrameDidChange = NO;
 		return;
-	}
+	}*/
 	
 	frame.origin.y = superviewFrame.size.height - height;
 	frame.size.height = height;
@@ -213,12 +219,7 @@ int const PADDING_TO_RIGHT = 100;
 #pragma mark Notifications
 - (void)frameDidChange:(NSNotification *)notification
 {
-	if(!ignoreFrameDidChange)
-	{
-		ignoreFrameDidChange = YES;
-		[self updateTagButtons:notification];
-		ignoreFrameDidChange = NO;
-	}
+	if(!ignoreFrameDidChange) [self updateTagButtons:notification];
 }
 
 
