@@ -107,7 +107,7 @@
 	}
 	
 	// Add segmented control if neccessary
-	if([self hasMultipleDisplayModes])
+	/*if([self hasMultipleDisplayModes])
 	{
 		if([segmentedControl superview] != controlView)
 		{			
@@ -138,7 +138,7 @@
 								  scFrame.size.width,
 								  20);
 		//[segmentedControl setFrame:rect];
-	}
+	}*/
 	
 	
 	// Draw background
