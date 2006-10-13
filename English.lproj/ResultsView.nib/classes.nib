@@ -36,7 +36,11 @@
         {
             CLASS = PASelectedTagsView; 
             LANGUAGE = ObjC; 
-            OUTLETS = {controller = PAResultsViewController; }; 
+            OUTLETS = {
+                controller = PAResultsViewController; 
+                filterSlice = PAFilterSlice; 
+                outlineView = PAResultsOutlineView; 
+            }; 
             SUPERCLASS = NSView; 
         }, 
         {

@@ -17,6 +17,11 @@
 @end
 
 
+NSSize const PADDING = {10, 7};
+NSSize const INTERCELL_SPACING = {3, 3};
+int const PADDING_TO_RIGHT = 100;
+
+
 @implementation PASelectedTagsView
 
 #pragma mark Init + Dealloc
@@ -35,6 +40,13 @@
 	selectedTags = [controller selectedTags];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTagButtons:) name:@"PASelectedTagsHaveChanged" object:selectedTags];
+	
+	// Get notification frameDidChange
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self
+	       selector:@selector(frameDidChange:)
+		       name:(id)NSViewFrameDidChangeNotification
+			 object:self];
 }
 
 - (void)dealloc
@@ -72,8 +84,12 @@
 	[super drawRect:rect];
 }
 
-- (void)updateTagButtons:(NSNotification*)notification
+- (void)updateTagButtons:(NSNotification *)notification
 { 	
+	// Reset frame
+	NSRect frame = [self frame];
+	frame.size.height = 40.0;
+
 	// Remove all old tags
 	NSArray *tagButtonKeys = [tagButtons allKeys];
 	
@@ -91,8 +107,11 @@
 	
 	
 	// Add or update tags
-	int x = 10;
-	int y = 7;
+	int x = PADDING.width;
+	int y = PADDING.height;
+	
+	int numberOfRows = 1;
+	NSSize buttonSize = NSMakeSize(0, 0);
 
 	NSEnumerator *enumerator = [selectedTags objectEnumerator];
 	
@@ -120,15 +139,63 @@
 		
 		NSRect buttonFrame = [button frame];
 		
+		if(buttonSize.height == 0) buttonSize = buttonFrame.size;
+		
+		if(x + buttonFrame.size.width + INTERCELL_SPACING.width + PADDING_TO_RIGHT > frame.size.width)
+		{
+			// Wrap items to new row
+			x = PADDING.width;
+			y += buttonFrame.size.height + INTERCELL_SPACING.height;
+			
+			numberOfRows++;
+		}
+		
 		NSRect newFrame = NSMakeRect(x, y, buttonFrame.size.width, buttonFrame.size.height);
 		
 		[button setFrame:newFrame];
 		
-		x += buttonFrame.size.width + 3;
+		x += buttonFrame.size.width + INTERCELL_SPACING.width;
 	}
 	
-	[self setNeedsDisplay:YES];
+	float height = numberOfRows * (buttonSize.height + INTERCELL_SPACING.height) + 2 * PADDING.height;
+	if(height < frame.size.height) height = frame.size.height;
+	[self setFrameHeight:height];
 }
+
+- (void)setFrameHeight:(float)height
+{
+	ignoreFrameDidChange = YES;
+	
+	NSRect superviewFrame = [[self superview] frame];
+	NSRect frame = [self frame];
+	
+	// Break if frame height wasn't changed
+	if(frame.size.height == height)
+	{
+		ignoreFrameDidChange = NO;
+		return;
+	}
+	
+	frame.origin.y = superviewFrame.size.height - height;
+	frame.size.height = height;
+	[self setFrame:frame];
+	
+	NSRect fsFrame = [filterSlice frame];
+	fsFrame.origin.y = frame.origin.y - fsFrame.size.height;
+	[filterSlice setFrame:fsFrame];
+	
+	NSView *scrollView = [[outlineView superview] superview];
+	NSRect svFrame = [scrollView frame];
+	svFrame.size.height = fsFrame.origin.y;
+	[scrollView setFrame:svFrame];	
+	
+	[[self superview] setNeedsDisplay:YES];
+	[filterSlice setNeedsDisplay:YES];
+	[scrollView setNeedsDisplay:YES];
+	[self setNeedsDisplay:YES];
+	
+	ignoreFrameDidChange = NO;
+}	
 
 
 #pragma mark Actions
@@ -140,6 +207,18 @@
 - (void)tagClosed:(id)sender
 {
 	[selectedTags removeTag:[[PATagger sharedInstance] tagForName:[sender title]]];
+}
+
+
+#pragma mark Notifications
+- (void)frameDidChange:(NSNotification *)notification
+{
+	if(!ignoreFrameDidChange)
+	{
+		ignoreFrameDidChange = YES;
+		[self updateTagButtons:notification];
+		ignoreFrameDidChange = NO;
+	}
 }
 
 
