@@ -785,6 +785,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self deselectAllCellsButCell:[self selectedCell]];
 	[[self selectedCell] setEditable:YES];
 	[self selectCellAtRow:row column:column];
+	
+	/*NSTextView *textView = [[self window] fieldEditor:NO forObject:self];
+	[textView setHorizontallyResizable:NO];
+	[textView setVerticallyResizable:YES];
+	[[textView textContainer] setHeightTracksTextView:YES];*/
 }
 
 - (void)cancelOperation:(id)sender
@@ -832,6 +837,24 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	} else {
 		[textView setTextColor:[NSColor textColor]];
 	}
+	
+	// Fix frame to resize vertically
+	/*NSSize stringSize = [[self attributedStringValue] size];
+	
+	NSRect newFrame = [[textView superview] frame];
+	
+	if(stringSize.width - 7 > newFrame.size.width)
+	{
+		NSNumber *timesNumber = [NSNumber numberWithFloat:(stringSize.width / newFrame.size.width)];
+		int times = [timesNumber intValue] + 1;
+	
+		newFrame.size.height = times * 16;
+	
+		[[textView superview] setFrame:newFrame];
+		
+		[[textView superview] setNeedsDisplay:YES];
+		[textView setNeedsDisplay:YES];
+	}*/
 	
 	[self setNeedsDisplay:YES];
 }

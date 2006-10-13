@@ -94,6 +94,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	[self setMdquery:[[NSMetadataQuery alloc] init]];
 	[mdquery setDelegate:self];
 	[mdquery setNotificationBatchingInterval:0.3];
+	[mdquery setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 	
 	[nc addObserver:self
 		   selector:@selector(metadataQueryNote:)
