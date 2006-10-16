@@ -20,6 +20,8 @@ resets the tagger window (called when window is closed)
 
 - (void)displayRestTags:(NSArray*)restTags;
 
+- (void)resizeTokenField;
+
 @end
 
 @implementation TaggerController
@@ -54,6 +56,9 @@ resets the tagger window (called when window is closed)
 	// set custom data cell
 	NSArray *columns = [tableView tableColumns];
 	[[columns objectAtIndex:0] setDataCell:fileCell];
+	
+	// token field wrapping
+	[[tagField cell] setWraps:YES];
 }
 
 - (void)dealloc
@@ -99,24 +104,6 @@ resets the tagger window (called when window is closed)
 	currentCompleteTagsInField = newTags;
 }
 
-#pragma mark functionality
-/* not in use at the moment
-- (void)addTagToField:(PASimpleTag*)tag
-{
-	// when the user started typing some stuff, and a new tag is added,
-	// the temporary typing is discarded, and the new tag added instead.
-	// is this good behaviour?
-	NSMutableArray *newContent = [[[tagField objectValue] mutableCopy] autorelease];
-	
-	// add tag to the last position
-	[newContent insertObject:tag atIndex:[currentCompleteTagsInField count]];
-	[tagField setObjectValue:newContent];
-	
-	// set first responder to tagField
-	[[tagField window] makeFirstResponder:tagField];
-}
-*/
-
 #pragma mark tokenField delegate
 - (NSArray *)tokenField:(NSTokenField *)tokenField 
 completionsForSubstring:(NSString *)substring 
@@ -142,6 +129,9 @@ completionsForSubstring:(NSString *)substring
 {
 	[[PATagger sharedInstance] addTags:tokens toFiles:[fileController selectedObjects]];
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
+	
+	// resize field if neccessary
+	[self resizeTokenField];
 	
 	// everything will be added
 	return tokens;
@@ -189,6 +179,30 @@ completionsForSubstring:(NSString *)substring
 		// remove the deleted tags from all files
 		[[PATagger sharedInstance] removeTags:deletedTags fromFiles:[fileController selectedObjects]];
 	}
+	
+	// resize tokenfield if neccessary
+	[self resizeTokenField];
+}
+
+- (void)resizeTokenField
+{
+	NSRect oldTokenFieldFrame = [tagField frame];
+	NSSize cellSize = [[tagField cell] cellSizeForBounds:[tagField bounds]];
+	cellSize.height = (cellSize.height > 22) ? cellSize.height : 22;
+	
+	[tagField setFrame:NSMakeRect(oldTokenFieldFrame.origin.x,
+								  oldTokenFieldFrame.origin.y,
+								  oldTokenFieldFrame.size.width,
+								  cellSize.height)];
+	
+	NSRect oldTableViewFrame = [[tableView enclosingScrollView] frame];
+	NSRect windowFrame = [[[self window] contentView] frame];
+	float newTableViewHeight = windowFrame.size.height - cellSize.height;
+	float sizeDifference = oldTableViewFrame.size.height - newTableViewHeight;
+	[[tableView enclosingScrollView] setFrame:NSMakeRect(oldTableViewFrame.origin.x,
+														 oldTableViewFrame.origin.y + sizeDifference,
+														 oldTableViewFrame.size.width,
+														 newTableViewHeight)];
 }
 
 #pragma mark gui change actions
