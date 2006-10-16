@@ -19,9 +19,8 @@
 
 - (void)setFiles:(NSArray*)fileArray
 {
-	[fileArray mutableCopy];
 	[files release];
-	files = fileArray;
+	files = [fileArray mutableCopy];
 }
 
 - (NSMutableArray*)files
