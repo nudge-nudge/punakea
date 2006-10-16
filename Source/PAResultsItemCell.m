@@ -52,7 +52,9 @@
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	
-	if([self isHighlighted]) 
+	if([self isHighlighted] &&
+	   [[[controlView window] firstResponder] isDescendantOf:[controlView superview]] &&
+	   [[controlView window] isKeyWindow]) 
 		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 	else
 		[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];

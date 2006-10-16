@@ -44,7 +44,8 @@
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	
-	if([self isHighlighted]) 
+	if([self isHighlighted] &&
+	   [[[controlView window] firstResponder] isDescendantOf:[controlView superview]]) 
 		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 	else
 		[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
@@ -60,7 +61,7 @@
 	
 	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 25,
 								  cellFrame.origin.y + 2,
-								  cellFrame.size.width - 180 - 25,
+								  cellFrame.size.width - 25,
 								  cellFrame.size.height - 2)
 	    withAttributes:fontAttributes];
 }
