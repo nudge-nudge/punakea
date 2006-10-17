@@ -191,7 +191,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 - (void)loadViewForTag:(PATag*)tag
 {
 	NSView *sv = [delegate controlledView]; 
-	[currentView removeFromSuperview];	
+	[currentView removeFromSuperview];
 	
 	if ([tag isKindOfClass:[PASimpleTag class]])
 		[self setCurrentView:simpleTagManagementView];
@@ -235,6 +235,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 
 - (IBAction)endTagManagement:(id)sender
 {
+	[self reset];
 	[delegate showResults];
 }
 

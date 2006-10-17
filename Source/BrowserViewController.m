@@ -145,10 +145,21 @@
 {
 	[aController retain];
 	[mainController release];
+
 	mainController = aController;
 	
 	[mainController setDelegate:self];
 	[mainController setNextResponder:self];
+	
+	// remove all subviews
+	NSArray *subviews = [controlledView subviews];
+	NSEnumerator *e = [subviews objectEnumerator];
+	NSView *subview;
+
+	while (subview = [e nextObject])
+	{
+		[subview removeFromSuperview];
+	}
 	
 	[controlledView addSubview:[mainController mainView]];
 	[[mainController mainView] setFrameSize:[controlledView frame].size];
@@ -399,12 +410,11 @@
 
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller
 {
-	if (mainController)
-	{
-		[[mainController currentView] removeFromSuperview];
-		[self reset];
-	}
-
+	// only switch if controller is different
+	if ([controller isKindOfClass:[mainController class]])
+		return;
+	
+	[self reset];
 	[self setMainController:controller];
 }
 
