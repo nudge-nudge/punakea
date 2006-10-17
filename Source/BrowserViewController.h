@@ -28,7 +28,6 @@ typedef enum _PABrowserViewControllerState
 @interface BrowserViewController : PAViewController {
 	IBOutlet PATagCloud *tagCloud;
 	IBOutlet NSView *controlledView;
-	NSViewAnimation *viewAnimation;
 	
 	PABrowserViewControllerState state;
 		

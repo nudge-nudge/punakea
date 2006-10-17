@@ -46,9 +46,6 @@
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
 		
-		viewAnimation = [[NSViewAnimation alloc] init];
-		[viewAnimation setDuration:0.2]; 
-		
 		[self setState:PABrowserViewControllerNormalState];
 		
 		tagger = [PATagger sharedInstance];
@@ -86,7 +83,6 @@
 	[visibleTags release];
 	[buffer release];
 	[typeAheadFind release];
-	[viewAnimation release];
 	[tagCloudSettings release];
 	[super dealloc];
 }
@@ -419,16 +415,6 @@
 	[sv setFrame:newTagCloudFrame];
 	
 	// animate transition ?
-	/*
-	NSMutableDictionary *animationDict = [NSMutableDictionary dictionaryWithCapacity:3];
-	[animationDict setObject:sv forKey:NSViewAnimationTargetKey];
-	[animationDict setObject:[NSValue valueWithRect:oldTagCloudFrame] forKey:NSViewAnimationStartFrameKey];
-	[animationDict setObject:[NSValue valueWithRect:newTagCloudFrame] forKey:NSViewAnimationEndFrameKey];
-	
-	[viewAnimation setViewAnimations:[NSArray arrayWithObject:animationDict]];
-	[viewAnimation setAnimationCurve:NSAnimationEaseInOut];		
-	[viewAnimation startAnimation];
-	 */
 }
 
 #pragma mark actions
