@@ -46,6 +46,9 @@
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
 		
+		viewAnimation = [[NSViewAnimation alloc] init];
+		[viewAnimation setDuration:0.2]; 
+		
 		[self setState:PABrowserViewControllerNormalState];
 		
 		tagger = [PATagger sharedInstance];
@@ -83,6 +86,7 @@
 	[visibleTags release];
 	[buffer release];
 	[typeAheadFind release];
+	[viewAnimation release];
 	[tagCloudSettings release];
 	[super dealloc];
 }
@@ -162,7 +166,6 @@
 	}
 	
 	[controlledView addSubview:[mainController mainView]];
-	[[mainController mainView] setFrameSize:[controlledView frame].size];
 }
 
 - (NSView*)controlledView
@@ -391,6 +394,41 @@
 	{
 		[self setVisibleTags:[tags tags]];
 	}
+}
+
+- (void)controlledViewHasChanged
+{	
+	NSView *subview = [[controlledView subviews] objectAtIndex:0];
+	NSRect subviewFrame = [subview frame];
+	NSRect oldFrame = [controlledView frame];
+
+	[controlledView setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,subviewFrame.size.height)];
+	// subview is automatically resized, adjust to controlledview
+	[subview setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,subviewFrame.size.height)];
+	
+	// adjust values
+	float heightDifference = oldFrame.size.height - subviewFrame.size.height;
+	
+	NSScrollView *sv = [tagCloud enclosingScrollView];
+	NSRect oldTagCloudFrame = [sv frame];
+	NSRect newTagCloudFrame = NSMakeRect(oldTagCloudFrame.origin.x,
+										 oldTagCloudFrame.origin.y - heightDifference,
+										 oldTagCloudFrame.size.width,
+										 oldTagCloudFrame.size.height + heightDifference);
+	
+	[sv setFrame:newTagCloudFrame];
+	
+	// animate transition ?
+	/*
+	NSMutableDictionary *animationDict = [NSMutableDictionary dictionaryWithCapacity:3];
+	[animationDict setObject:sv forKey:NSViewAnimationTargetKey];
+	[animationDict setObject:[NSValue valueWithRect:oldTagCloudFrame] forKey:NSViewAnimationStartFrameKey];
+	[animationDict setObject:[NSValue valueWithRect:newTagCloudFrame] forKey:NSViewAnimationEndFrameKey];
+	
+	[viewAnimation setViewAnimations:[NSArray arrayWithObject:animationDict]];
+	[viewAnimation setAnimationCurve:NSAnimationEaseInOut];		
+	[viewAnimation startAnimation];
+	 */
 }
 
 #pragma mark actions

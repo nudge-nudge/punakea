@@ -21,6 +21,12 @@
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
+            CLASS = PAControlledView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
             CLASS = PAFilterSlice; 
             LANGUAGE = ObjC; 
             OUTLETS = {controller = BrowserViewController; outlineView = NSOutlineView; }; 
