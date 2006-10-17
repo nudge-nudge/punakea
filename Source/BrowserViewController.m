@@ -394,6 +394,7 @@
 
 - (void)controlledViewHasChanged
 {	
+	// resize controlledView to content subview
 	NSView *subview = [[controlledView subviews] objectAtIndex:0];
 	NSRect subviewFrame = [subview frame];
 	NSRect oldFrame = [controlledView frame];
@@ -401,20 +402,6 @@
 	[controlledView setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,subviewFrame.size.height)];
 	// subview is automatically resized, adjust to controlledview
 	[subview setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,subviewFrame.size.height)];
-	
-	// adjust values
-	float heightDifference = oldFrame.size.height - subviewFrame.size.height;
-	
-	NSScrollView *sv = [tagCloud enclosingScrollView];
-	NSRect oldTagCloudFrame = [sv frame];
-	NSRect newTagCloudFrame = NSMakeRect(oldTagCloudFrame.origin.x,
-										 oldTagCloudFrame.origin.y - heightDifference,
-										 oldTagCloudFrame.size.width,
-										 oldTagCloudFrame.size.height + heightDifference);
-	
-	[sv setFrame:newTagCloudFrame];
-	
-	// animate transition ?
 }
 
 #pragma mark actions
