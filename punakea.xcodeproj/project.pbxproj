@@ -52,6 +52,8 @@
 		483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483272330AA42DC6003D98A6 /* UKPrefsPanel.m */; };
 		4832723D0AA42E8C003D98A6 /* PreferenceController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4832723B0AA42E8C003D98A6 /* PreferenceController.h */; };
 		4832723E0AA42E8C003D98A6 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832723C0AA42E8C003D98A6 /* PreferenceController.m */; };
+		483F50CA0AE551EA00551B9D /* PABrowserSplitView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 483F50C80AE551EA00551B9D /* PABrowserSplitView.h */; };
+		483F50CB0AE551EA00551B9D /* PABrowserSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F50C90AE551EA00551B9D /* PABrowserSplitView.m */; };
 		484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */; };
 		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
 		4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */; };
@@ -354,6 +356,7 @@
 				65E5572B0AD1450E00AA2700 /* NSFileManager+TrashFile.h in CopyFiles */,
 				48557AD70ADB8ADA0025CE9C /* PAFileCell.h in CopyFiles */,
 				484C56AE0AE4D1FD0000EB7D /* PAControlledView.h in CopyFiles */,
+				483F50CA0AE551EA00551B9D /* PABrowserSplitView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +402,8 @@
 		483272330AA42DC6003D98A6 /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
 		4832723B0AA42E8C003D98A6 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
 		4832723C0AA42E8C003D98A6 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
+		483F50C80AE551EA00551B9D /* PABrowserSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserSplitView.h; sourceTree = "<group>"; };
+		483F50C90AE551EA00551B9D /* PABrowserSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserSplitView.m; sourceTree = "<group>"; };
 		484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadView.h; sourceTree = "<group>"; };
 		484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadView.m; sourceTree = "<group>"; };
 		4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarContentView.h; sourceTree = "<group>"; };
@@ -734,6 +739,8 @@
 				488CBBDD0AC9674400F6D20E /* PABrowserViewMainController.m */,
 				484C56AC0AE4D1FD0000EB7D /* PAControlledView.h */,
 				484C56AD0AE4D1FD0000EB7D /* PAControlledView.m */,
+				483F50C80AE551EA00551B9D /* PABrowserSplitView.h */,
+				483F50C90AE551EA00551B9D /* PABrowserSplitView.m */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -1428,6 +1435,7 @@
 				65E5572C0AD1450E00AA2700 /* NSFileManager+TrashFile.m in Sources */,
 				48557AD80ADB8ADA0025CE9C /* PAFileCell.m in Sources */,
 				484C56AF0AE4D1FD0000EB7D /* PAControlledView.m in Sources */,
+				483F50CB0AE551EA00551B9D /* PABrowserSplitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

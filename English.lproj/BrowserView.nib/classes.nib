@@ -20,6 +20,7 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PABrowserSplitView; LANGUAGE = ObjC; SUPERCLASS = NSSplitView; }, 
         {
             CLASS = PAControlledView; 
             LANGUAGE = ObjC; 
