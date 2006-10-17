@@ -612,5 +612,17 @@ needed for supporting dragging to trash
 		[super textDidEndEditing:notification];
     }
 }
+
+
+#pragma mark Live Resizing
+- (BOOL) _wantsLiveResizeToUseCachedImage;
+{
+    return NO;
+}
+
+- (BOOL) _shouldLiveResizeUseCachedImage;
+{
+    return NO;
+}
 		
 @end
