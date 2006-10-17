@@ -20,7 +20,6 @@
 {
 	if (self = [super init])
 	{
-		// TODO make user definable ... needs to adjust sidebar size and stuff ...
 		maxSize = 8;
 		tags = [[PATagger sharedInstance] tags];
 		

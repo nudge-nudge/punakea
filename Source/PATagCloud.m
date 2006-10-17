@@ -610,7 +610,6 @@ bound to visibleTags
 	float topSkip = viewSize.height - TAGCLOUD_PADDING.height;
 	float bottomSkip = 0 + TAGCLOUD_PADDING.height;
 
-	// check top - TODO why -1?!
 	if (buttonLineMaxY >= topSkip - 1)
 	{
 		buttonFrame.origin.y = viewSize.height - buttonFrame.size.height;

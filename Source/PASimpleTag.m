@@ -24,6 +24,11 @@
 	[self setQuery:[NSString stringWithFormat:@"kMDItemKeywords LIKE[cd] \"%@\"",aName]];
 }
 
+- (NSString*)queryInSpotlightSyntax
+{
+	return [NSString stringWithFormat:@"kMDItemKeywords == \"%@\"cd",[self name]];
+}
+
 // implementing needed super-class methods
 - (float)absoluteRating
 {

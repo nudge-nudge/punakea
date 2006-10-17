@@ -21,6 +21,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (void)tagsHaveChanged:(NSNotification *)note;
 - (void)updateQueryFromTags;
 - (NSString*)queryStringForTags:(NSArray*)tags;
+- (NSString*)queryInSpotlightSyntaxForTags:(NSArray*)someTags;
 
 - (NSPredicate *)predicate;
 - (void)setPredicate:(NSPredicate *)aPredicate;
@@ -67,8 +68,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 #pragma mark Synchronous Searching
 - (NSArray*)filesForTag:(PATag*)tag
 {
-	// this won't work for intelligent tags!!!
-	CFStringRef *searchString = [NSString stringWithFormat:@"kMDItemKeywords == \"%@\"cd",[tag name]];
+	CFStringRef *searchString = [self queryInSpotlightSyntaxForTags:[NSArray arrayWithObject:tag]];
 	MDQueryRef *query = MDQueryCreate(NULL,searchString,NULL,NULL);
 	MDQueryExecute(query,kMDQuerySynchronous);
 	CFIndex resultCount = MDQueryGetResultCount(query);
@@ -597,6 +597,27 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	return queryString;
 }
 
+- (NSString*)queryInSpotlightSyntaxForTags:(NSArray*)someTags
+{
+	NSMutableString *queryString = [NSMutableString stringWithString:@""];
+	
+	NSEnumerator *e = [someTags objectEnumerator];
+	PATag *tag;
+	
+	if (tag = [e nextObject]) 
+	{
+		NSString *anotherTagQuery = [NSString stringWithFormat:@"(%@)",[tag queryInSpotlightSyntax]];
+		[queryString appendString:anotherTagQuery];
+	}
+	
+	while (tag = [e nextObject]) 
+	{
+		NSString *anotherTagQuery = [NSString stringWithFormat:@" && (%@)",[tag queryInSpotlightSyntax]];
+		[queryString appendString:anotherTagQuery];
+	}
+	
+	return queryString;
+}
 
 #pragma mark Notifications
 /**
