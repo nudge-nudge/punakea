@@ -624,17 +624,5 @@ needed for supporting dragging to trash
 {
     return NO;
 }
-
-- (BOOL)acceptsFirstResponder
-{
-	NSLog(@"afr");
-	return YES;
-}
-
-- (BOOL)becomeFirstResponder
-{
-	NSLog(@"bfr");
-	return YES;
-}
 		
 @end

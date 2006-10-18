@@ -249,6 +249,7 @@ completionsForSubstring:(NSString *)substring
 	[tagField setObjectValue:tagsOnAllFiles];
 	[currentCompleteTagsInField removeAllTags];
 	[currentCompleteTagsInField addObjectsFromArray:tagsOnAllFiles];
+	[self resizeTokenField];
 	
 	[self displayRestTags:tagsOnSomeFiles];
 }
