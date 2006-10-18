@@ -27,8 +27,8 @@ int const PADDING_TO_RIGHT = 100;
 #pragma mark Init + Dealloc
 - (id)initWithFrame:(NSRect)frame 
 {
-    self = [super initWithFrame:frame];
-    if (self) {		
+    if(self = [super initWithFrame:frame])
+	{		
 		tagButtons = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -53,6 +53,8 @@ int const PADDING_TO_RIGHT = 100;
 	       selector:@selector(frameDidChange:)
 		       name:(id)NSViewFrameDidChangeNotification
 			 object:[self superview]];
+			 
+	[self addHomeButton];
 }
 
 - (void)dealloc
@@ -205,6 +207,26 @@ int const PADDING_TO_RIGHT = 100;
 
 
 #pragma mark Actions
+- (void)addHomeButton
+{
+	NSRect frame = [self frame];
+
+	NSRect rect;
+	rect.origin.x = frame.size.width - 50;
+	rect.origin.y = 4;
+	rect.size.width = 32;
+	rect.size.height = 32;
+
+	homeButton = [[PAImageButton alloc] initWithFrame:rect];
+	[homeButton setImage:[NSImage imageNamed:@"home.tif"] forState:PAOffState];
+	[homeButton setImage:[NSImage imageNamed:@"home_pressed.tif"] forState:PAOnState];
+	
+	[homeButton setTarget:controller];
+	[homeButton setAction:@selector(clearSelectedTags:)];
+	
+	[self addSubview:homeButton];
+}
+
 - (void)tagClicked:(id)sender
 {
 	// nothing yet
@@ -220,6 +242,16 @@ int const PADDING_TO_RIGHT = 100;
 - (void)frameDidChange:(NSNotification *)notification
 {
 	if(!ignoreFrameDidChange) [self updateTagButtons:notification];
+	
+	// Update home button's frame
+	NSRect frame = [self frame];
+	NSRect rect;
+	rect.origin.x = frame.size.width - 50;
+	rect.origin.y = 4;
+	rect.size.width = 32;
+	rect.size.height = 32;
+	
+	if(homeButton) [homeButton setFrame:rect];
 }
 
 

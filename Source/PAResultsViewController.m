@@ -135,7 +135,7 @@
 	[self clearSelectedTags:self];
 }
 
-- (IBAction)clearSelectedTags:(id)sender
+- (void)clearSelectedTags:(id)sender
 {
 	[selectedTags removeAllTags];
 }

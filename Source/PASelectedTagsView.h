@@ -13,6 +13,7 @@
 #import "PATag.h"
 #import "PASelectedTags.h"
 #import "PAButton.h"
+#import "PAImageButton.h"
 
 extern NSSize const PADDING;
 extern NSSize const INTERCELL_SPACING;
@@ -28,6 +29,8 @@ extern int const PADDING_TO_RIGHT;
 	NSMutableDictionary					*tagButtons;
 	
 	BOOL								ignoreFrameDidChange;
+	
+	PAImageButton						*homeButton;
 	
 }
 
