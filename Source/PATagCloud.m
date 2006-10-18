@@ -556,7 +556,7 @@ bound to visibleTags
 	}
 	else if (key == NSTabCharacter)
 	{
-		[[self window] makeFirstResponder:[delegate controlledView]];
+		[delegate makeControlledViewFirstResponder];
 	}
 	else
 	{

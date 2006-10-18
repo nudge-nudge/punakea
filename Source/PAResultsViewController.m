@@ -118,6 +118,11 @@
 	return [query isGathering];
 }
 
+- (NSResponder*)dedicatedFirstResponder
+{
+	return outlineView;
+}
+
 #pragma mark actions
 - (void)handleTagActivation:(PATag*)tag
 {

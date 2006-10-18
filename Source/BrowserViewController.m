@@ -398,10 +398,9 @@
 	NSView *subview = [[controlledView subviews] objectAtIndex:0];
 	NSRect subviewFrame = [subview frame];
 	NSRect oldFrame = [controlledView frame];
-
+	[subview setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,oldFrame.size.height)];
 	[controlledView setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,subviewFrame.size.height)];
-	// subview is automatically resized, adjust to controlledview
-	[subview setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,subviewFrame.size.height)];
+	[splitView adjustSubviews];
 }
 
 #pragma mark actions
@@ -433,6 +432,11 @@
 {
 	[self resetBuffer];
 	[mainController reset];
+}
+
+- (void)makeControlledViewFirstResponder
+{
+	[[[self mainView] window] makeFirstResponder:[mainController dedicatedFirstResponder]];
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification

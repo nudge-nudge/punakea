@@ -27,6 +27,7 @@ typedef enum _PABrowserViewControllerState
 
 @interface BrowserViewController : PAViewController {
 	IBOutlet PATagCloud *tagCloud;
+	IBOutlet NSSplitView *splitView;
 	IBOutlet NSView *controlledView;
 	
 	PABrowserViewControllerState state;
@@ -70,6 +71,7 @@ highlights tag in tagcloud
 - (PABrowserViewMainController*)mainController;
 
 - (NSView*)controlledView;
+- (void)makeControlledViewFirstResponder;
 
 /**
 is called when a tag is clicked. increments the tag click count and

@@ -43,6 +43,11 @@
 	
 	[currentView setNextResponder:self];
 }
+
+- (NSResponder*)dedicatedFirstResponder
+{
+	return currentView;
+}
 	
 - (id)delegate
 {
