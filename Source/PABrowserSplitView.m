@@ -11,6 +11,23 @@
 
 @implementation PABrowserSplitView
 
+#pragma mark Init + Dealloc
+- (id)initWithFrame:(NSRect)frameRect
+{
+	if(self = [super initWithFrame:frameRect])
+	{
+		// nothing yet
+	}
+	return self;
+}
+
+- (void)dealloc
+{
+	[super dealloc];
+}
+
+
+#pragma mark Drawing
 - (float)dividerThickness
 {
 	return 0.5;

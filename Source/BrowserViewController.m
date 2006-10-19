@@ -9,6 +9,10 @@
 #import "BrowserViewController.h"
 #import "PATagCloud.h"
 
+
+float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
+
+
 @interface BrowserViewController (PrivateAPI)
 
 - (void)tagsHaveChanged;
@@ -450,6 +454,19 @@
 		NSString *newString = [currentString substringToIndex:[currentString length]-1];
 		[fieldEditor setString:newString];
 	}
+}
+
+
+#pragma mark Split View
+- (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+{
+	return SPLITVIEW_PANEL_MIN_HEIGHT;
+}
+
+- (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
+{
+	NSRect frame = [sender frame];
+	return frame.size.height - SPLITVIEW_PANEL_MIN_HEIGHT;
 }
 
 @end

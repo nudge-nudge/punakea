@@ -25,6 +25,8 @@ typedef enum _PABrowserViewControllerState
 
 @class PATagCloud;
 
+extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
+
 @interface BrowserViewController : PAViewController {
 	IBOutlet PATagCloud *tagCloud;
 	IBOutlet NSSplitView *splitView;
