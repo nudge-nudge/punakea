@@ -19,7 +19,7 @@
 
 NSSize const PADDING = {10, 7};
 NSSize const INTERCELL_SPACING = {3, 3};
-int const PADDING_TO_RIGHT = 100;
+int const PADDING_TO_RIGHT = 60;
 
 
 @implementation PASelectedTagsView
@@ -39,10 +39,13 @@ int const PADDING_TO_RIGHT = 100;
 {
 	selectedTags = [controller selectedTags];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTagButtons:) name:@"PASelectedTagsHaveChanged" object:selectedTags];
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self 
+		   selector:@selector(updateTagButtons:)
+		       name:@"PASelectedTagsHaveChanged"
+		     object:selectedTags];
 	
 	// Get notification frameDidChange
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
 	       selector:@selector(frameDidChange:)
 		       name:(id)NSViewFrameDidChangeNotification
@@ -171,6 +174,8 @@ int const PADDING_TO_RIGHT = 100;
 	float height = numberOfRows * (buttonSize.height + INTERCELL_SPACING.height) + 2 * PADDING.height;
 	if(height < frame.size.height) height = frame.size.height;
 	[self setFrameHeight:height];
+	
+	[self refreshHomeButton];
 }
 
 - (void)setFrameHeight:(float)height
@@ -215,19 +220,40 @@ int const PADDING_TO_RIGHT = 100;
 	NSRect frame = [self frame];
 
 	NSRect rect;
-	rect.origin.x = frame.size.width - 50;
-	rect.origin.y = 4;
-	rect.size.width = 32;
-	rect.size.height = 32;
+	rect.size.width = 13;
+	rect.size.height = 13;
+	rect.origin.x = frame.size.width - 25;
+	rect.origin.y = floor((frame.size.height - rect.size.height) / 2);
 
 	homeButton = [[PAImageButton alloc] initWithFrame:rect];
-	[homeButton setImage:[NSImage imageNamed:@"home.tif"] forState:PAOffState];
-	[homeButton setImage:[NSImage imageNamed:@"home_pressed.tif"] forState:PAOnState];
+	[homeButton setImage:[NSImage imageNamed:@"SnapBack.tif"] forState:PAOffState];
+	[homeButton setImage:[NSImage imageNamed:@"SnapBackPressed.tif"] forState:PAOnState];
 	
 	[homeButton setTarget:controller];
 	[homeButton setAction:@selector(clearSelectedTags:)];
 	
+	[homeButton setHidden:YES];
+	
 	[self addSubview:homeButton];
+}
+
+- (void)refreshHomeButton
+{
+	if(homeButton)
+	{
+		if([selectedTags count] > 0)
+		{
+			NSRect frame = [self frame];
+			
+			NSRect rect = [homeButton frame];
+			rect.origin.x = frame.size.width - 25;
+			
+			[homeButton setFrame:rect];
+			[homeButton setHidden:NO];
+		} else {
+			[homeButton setHidden:YES];
+		}
+	}
 }
 
 - (void)tagClicked:(id)sender
@@ -245,16 +271,6 @@ int const PADDING_TO_RIGHT = 100;
 - (void)frameDidChange:(NSNotification *)notification
 {
 	if(!ignoreFrameDidChange) [self updateTagButtons:notification];
-	
-	// Update home button's frame
-	NSRect frame = [self frame];
-	NSRect rect;
-	rect.origin.x = frame.size.width - 50;
-	rect.origin.y = 4;
-	rect.size.width = 32;
-	rect.size.height = 32;
-	
-	if(homeButton) [homeButton setFrame:rect];
 }
 
 
