@@ -111,8 +111,6 @@
 		486BD5920AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 486BD5860AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.m */; };
 		486DC7500ACD3B2D00BE0F54 /* PATagManagementViewMainView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */; };
 		486DC7510ACD3B2D00BE0F54 /* PATagManagementViewMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */; };
-		486DC7630ACD3BCD00BE0F54 /* PATagManagementViewTagView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486DC7610ACD3BCD00BE0F54 /* PATagManagementViewTagView.h */; };
-		486DC7640ACD3BCD00BE0F54 /* PATagManagementViewTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486DC7620ACD3BCD00BE0F54 /* PATagManagementViewTagView.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
 		486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486EBA4409D68F16000C154C /* PAFileBox.h */; };
 		4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */; };
@@ -353,7 +351,6 @@
 				482B314B0AC6D6DD0071C33B /* PABrowserViewMainController.h in CopyFiles */,
 				488CBBE10AC9676C00F6D20E /* PAResultsViewController.h in CopyFiles */,
 				486DC7500ACD3B2D00BE0F54 /* PATagManagementViewMainView.h in CopyFiles */,
-				486DC7630ACD3BCD00BE0F54 /* PATagManagementViewTagView.h in CopyFiles */,
 				48469B9E0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h in CopyFiles */,
 				65E5572B0AD1450E00AA2700 /* NSFileManager+TrashFile.h in CopyFiles */,
 				48557AD70ADB8ADA0025CE9C /* PAFileCell.h in CopyFiles */,
@@ -463,8 +460,6 @@
 		486BD5860AB6A2F3003B9BAC /* NSURL+NDCarbonUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+NDCarbonUtilities.m"; sourceTree = "<group>"; };
 		486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementViewMainView.h; sourceTree = "<group>"; };
 		486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementViewMainView.m; sourceTree = "<group>"; };
-		486DC7610ACD3BCD00BE0F54 /* PATagManagementViewTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementViewTagView.h; sourceTree = "<group>"; };
-		486DC7620ACD3BCD00BE0F54 /* PATagManagementViewTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementViewTagView.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
 		486EBA4409D68F16000C154C /* PAFileBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileBox.h; sourceTree = "<group>"; };
 		487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarWindow.h; sourceTree = "<group>"; };
@@ -850,8 +845,6 @@
 				484F71830A666E5B00D886E5 /* PATagManagementViewController.m */,
 				486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */,
 				486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */,
-				486DC7610ACD3BCD00BE0F54 /* PATagManagementViewTagView.h */,
-				486DC7620ACD3BCD00BE0F54 /* PATagManagementViewTagView.m */,
 			);
 			name = TagManagement;
 			sourceTree = "<group>";
@@ -1438,7 +1431,6 @@
 				488CBBDE0AC9674400F6D20E /* PABrowserViewMainController.m in Sources */,
 				488CBBE20AC9676C00F6D20E /* PAResultsViewController.m in Sources */,
 				486DC7510ACD3B2D00BE0F54 /* PATagManagementViewMainView.m in Sources */,
-				486DC7640ACD3BCD00BE0F54 /* PATagManagementViewTagView.m in Sources */,
 				48469B9F0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m in Sources */,
 				65E5572C0AD1450E00AA2700 /* NSFileManager+TrashFile.m in Sources */,
 				48557AD80ADB8ADA0025CE9C /* PAFileCell.m in Sources */,

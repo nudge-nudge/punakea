@@ -13,7 +13,13 @@
 
 - (float)dividerThickness
 {
-	return 1.0;
+	return 0.5;
+}
+
+- (void)drawDividerInRect:(NSRect)aRect
+{
+	[[NSColor grayColor] set];
+	NSRectFill(aRect);
 }
 
 @end

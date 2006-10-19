@@ -411,7 +411,7 @@ bound to visibleTags
 	NSRect frame = [tagButton frame];
 	float width = frame.size.width;
 	
-	float xValue = pointForNextTagRect.x + width + TAGCLOUD_SPACING.width;
+	float xValue = pointForNextTagRect.x + width + TAGCLOUD_SPACING.width + TAGCLOUD_PADDING.width;
 	
 	//if the tag doesn't fit in this row, get first point in next row
 	if (xValue > rect.size.width)

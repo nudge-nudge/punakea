@@ -15,16 +15,6 @@
 {
 	[[NSColor whiteColor] set];
 	NSRectFill([self bounds]);
-	
-	// Draw top border
-	NSRect bounds = [self bounds];	
-	
-	NSBezierPath *path = [NSBezierPath bezierPath];
-	[path moveToPoint:NSMakePoint(0, bounds.size.height)];
-	[path lineToPoint:NSMakePoint(bounds.size.width, bounds.size.height)];
-	[path closePath];
-	[[NSColor grayColor] set];	
-	[path stroke];
 }
 
 @end

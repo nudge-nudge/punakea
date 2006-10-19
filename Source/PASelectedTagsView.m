@@ -75,6 +75,7 @@ int const PADDING_TO_RIGHT = 100;
 	// Draw top and bottom borders
 	NSRect bounds = [self bounds];	
 	
+	
 	NSBezierPath *path = [NSBezierPath bezierPath];
 	[path moveToPoint:NSMakePoint(0, bounds.size.height)];
 	[path lineToPoint:NSMakePoint(bounds.size.width, bounds.size.height)];
@@ -82,13 +83,15 @@ int const PADDING_TO_RIGHT = 100;
 	[[NSColor grayColor] set];	
 	[path stroke];
 	
+	/*
 	path = [NSBezierPath bezierPath];
 	[path moveToPoint:NSMakePoint(0, 0)];
 	[path lineToPoint:NSMakePoint(bounds.size.width, 0)];
 	[path closePath];
 	[[NSColor lightGrayColor] set];	
 	[path stroke];
-
+	 */
+	 
 	[super drawRect:rect];
 }
 
