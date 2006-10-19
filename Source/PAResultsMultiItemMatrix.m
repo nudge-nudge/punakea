@@ -605,7 +605,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		}
 		
 		// Begin editing on Return or Enter
-		if(key == NSEnterCharacter || key == '\r')
+		if((key == NSEnterCharacter || key == '\r') &&
+		   [selectedIndexes count] == 1)
 		{
 			[self beginEditing];
 			return;
@@ -628,6 +629,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		// TODO: Too slow, but we need to invalidate our visibleRect if key was pressed for a while
 		//[outlineView setNeedsDisplayInRect:[outlineView visibleRect]];
 	}
+	
+	//[super keyDown:theEvent];
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
@@ -777,7 +780,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)beginEditing
 {
 	// If multiple items are selected, discard editing
-	if([selectedIndexes count] > 1) return;
+	if(![selectedIndexes count] == 1) return;
 
 	int row, column;
 	[self getRow:&row column:&column ofCell:[self selectedCell]];

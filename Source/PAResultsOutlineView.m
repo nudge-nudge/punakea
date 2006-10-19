@@ -316,11 +316,15 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		}
 		
 		// Begin editing on Return or Enter
-		if(key == NSEnterCharacter || key == '\r')
+		if((key == NSEnterCharacter || key == '\r') &&
+		  [[self selectedRowIndexes] count] == 1)
 		{
 			[self beginEditing];
 			return;
 		}
+		
+		// Disable forwarding of alphanumeric keys to super (otherwise typeahead find starts)
+		if((key >= 48 && key <= 122) || key == 27) return;  
 	}
 	
 	[super keyDown:theEvent];
@@ -523,10 +527,9 @@ needed for supporting dragging to trash
 
 #pragma mark Editing
 - (void)beginEditing
-{
-	// If multiple items are selected, discard editing
-	if([[self selectedRowIndexes] count] > 1) return;
-		
+{		
+	if(![[self selectedRowIndexes] count] == 1) return;
+
 	[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
 }
 
