@@ -15,7 +15,11 @@
 
 - (NSString *)friendlyStringFromDate:(NSDate *)date
 {
-	if(!date) return @"No Date";
+	if(!date) return NSLocalizedStringFromTable(@"NO DATE",@"Global",@"");
+	
+	// Save current styles
+	NSDateFormatterStyle dateStyle = [self dateStyle];
+	NSDateFormatterStyle timeStyle = [self timeStyle];
 	
 	NSCalendarDate *cdate = [date dateWithCalendarFormat:nil timeZone:nil];
 	int today = [[NSCalendarDate calendarDate] dayOfCommonEra];
@@ -23,22 +27,18 @@
 	
 	NSString *value = nil;
 	
-	if(dateDay == today)		value = @"Today";
-	if(dateDay == (today - 1))	value = @"Yesterday";
+	if(dateDay == today)		value = NSLocalizedStringFromTable(@"TODAY",@"Global",@"");
+	if(dateDay == (today - 1))	value = NSLocalizedStringFromTable(@"YESTERDAY",@"Global",@"");
 	
 	if(value)
 	{
 		// Append time to our friendly string
-		
-		NSDateFormatterStyle style = [self dateStyle];
 		
 		[self setDateStyle:NSDateFormatterNoStyle];
 		[self setTimeStyle:NSDateFormatterShortStyle];
 		
 		value = [value stringByAppendingString:@" "];
 		value = [value stringByAppendingString:[self stringFromDate:date]];
-		
-		[self setDateStyle:style];
 	}
 	else
 	{
@@ -52,6 +52,10 @@
 		
 		value = [self stringFromDate:date];
 	}
+	
+	// Restore styles
+	[self setDateStyle:dateStyle];
+	[self setTimeStyle:timeStyle];
 
 	return value;
 }

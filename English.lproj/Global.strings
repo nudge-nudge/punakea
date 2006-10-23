@@ -1,3 +1,7 @@
 "OK" = "Ok";
 "CANCEL" = "Cancel";
 "ERROR" = "Error";
+
+"NO DATE" = "No Date";
+"TODAY" = "Today";
+"YESTERDAY" = "Yesterday";
