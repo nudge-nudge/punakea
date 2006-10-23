@@ -7,6 +7,7 @@
 - (void)allTagsHaveChanged;
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
 - (void)setupToolbar;
+- (void)displayWarningWithMessage:(NSString*)messageInfo;
 
 @end
 
@@ -56,6 +57,8 @@
 	
 	SidebarController *sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
 	[sidebarController window];
+	
+	[self createManagedFilesDirIfNeeded];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)note 
@@ -122,6 +125,35 @@
 - (void)tagsHaveChanged
 {
 	[self saveDataToDisk];
+}
+
+- (void)createManagedFilesDirIfNeeded
+{
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	
+	if (![userDefaults boolForKey:@"General.ManageFiles"])
+		return;
+	
+	// create managed files dir if needed
+	NSString *managedFilesDir = [userDefaults stringForKey:@"General.ManagedFilesLocation"];
+	NSString *standardizedDir = [managedFilesDir stringByStandardizingPath];
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	BOOL isDirectory;
+	
+	if ([fileManager fileExistsAtPath:standardizedDir isDirectory:&isDirectory])
+	{
+		if (!isDirectory)
+		{
+			[self displayWarningWithMessage:[NSString stringWithFormat:
+				NSLocalizedStringFromTable(@"MANAGED_FILES_DESTINATION_NOT_FOLDER_ERROR",@"FileManager",@""),standardizedDir]];
+		}
+	}
+	else
+	{
+		[fileManager createDirectoryAtPath:standardizedDir
+								attributes:nil];
+	}
 }
 
 #pragma mark MainMenu actions
@@ -193,6 +225,28 @@
 - (void)keyDown:(NSEvent*)event 
 {
 	NSLog(@"NSApp keydown: %@",event);
+}
+
+#pragma mark helper
+- (void)displayWarningWithMessage:(NSString*)messageInfo
+{
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert setMessageText:NSLocalizedStringFromTable(@"ERROR",@"Global",@"")];
+	[alert setInformativeText:messageInfo];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OK",@"Global",@"")];
+	
+	[alert setAlertStyle:NSWarningAlertStyle];
+	
+	[alert beginSheetModalForWindow:nil
+					  modalDelegate:self 
+					 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+						contextInfo:nil];
+}
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	// terminate app (no path was found)
+	[[NSApplication sharedApplication] terminate:self];
 }
 
 @end

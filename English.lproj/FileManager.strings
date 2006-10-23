@@ -5,3 +5,5 @@
 "DESTINATION_CONTAINS_NEEDED_DIR" = "The chosen folder contains the folder '%@'. This folder name is needed for the managed tags. Please choose a different folder or delete '%@'.";
 "ERROR_MOVING_DIR" = "There was an error (%@) moving the folder '%@'. Please choose a different folder. Files already moved will be restored in the original folder.";
 "CRITICAL_MOVING_ERROR" = "There was an unhandled error while moving the files. Please check the new location and the old location for your files.";
+"MANAGED_FILES_DESTINATION_NOT_FOLDER_ERROR" = "The managed files path ('%@') is no folder. Please make sure the path points to a folder or remove the file. Start this aplication again if this is corrected.";
+"MANAGED_FILES_DEFAULT_NOT_FOLDER_ERROR" = "The default path points to a file. Please remove this file or choose a different location for managed files.";

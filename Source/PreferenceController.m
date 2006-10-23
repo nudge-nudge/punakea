@@ -108,7 +108,7 @@
 	[openPanel setCanChooseDirectories:YES];
 	[openPanel setCanCreateDirectories:YES];
 	
-	[openPanel beginSheetForDirectory:currentPath
+	[openPanel beginSheetForDirectory:[currentPath stringByStandardizingPath]
 								   file:nil
 								  types:[NSArray arrayWithObject:NSFileTypeDirectory]
 						 modalForWindow:[self window]
@@ -126,6 +126,23 @@
 	
 	// set path to default path
 	NSString *defaultPath = [appDefaults objectForKey:@"General.ManagedFilesLocation"];
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	BOOL isDirectory;
+	
+	if ([fileManager fileExistsAtPath:[defaultPath stringByStandardizingPath] isDirectory:&isDirectory])
+	{
+		if (!isDirectory)
+		{
+			[self displayWarningWithMessage:NSLocalizedStringFromTable(@"MANAGED_FILES_DEFAULT_NOT_FOLDER_ERROR",@"FileManager",@"")];
+			[folderButton selectItemAtIndex:0];
+			return;
+		}
+	}
+	else
+	{
+		[fileManager createDirectoryAtPath:[defaultPath stringByStandardizingPath] attributes:nil];
+	}
 	
 	[self switchManagedLocationFromPath:oldPath toPath:defaultPath];
 	[folderButton selectItemAtIndex:0];
@@ -231,14 +248,14 @@
 	// move old files if there are any - 
 	// only copy the numbered folders!
 	NSFileManager *fileManager = [NSFileManager defaultManager];
-	
-	// first check if the destination is writable
-	if (![fileManager isWritableFileAtPath:standardizedNewPath])
+		
+	// first check if the destination is writable and a directory
+	if (![fileManager isWritableFileAtPath:standardizedNewPath ])
 	{
 		[self displayWarningWithMessage:NSLocalizedStringFromTable(@"DESTINATION_NOT_WRITABLE",@"FileManager",@"")];
 		return;
 	}
-		
+			
 	// then collect all dirs to move
 	NSMutableArray *directories = [NSMutableArray array];
 	int i = 1;
