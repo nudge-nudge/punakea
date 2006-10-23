@@ -10,6 +10,7 @@
 #import "PAThumbnailManager.h"
 #import "NSBezierPathCategory.h"
 #import "PAQueryItem.h"
+#import "NSDateFormatter+FriendlyFormat.h"
 
 
 @interface PAResultsMultiItemThumbnailCell : NSTextFieldCell {

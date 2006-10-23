@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PAQueryItem.h"
 #import "PAThumbnailManager.h"
+#import "NSDateFormatter+FriendlyFormat.h"
 
 
 @interface PAResultsItemCell : NSTextFieldCell {

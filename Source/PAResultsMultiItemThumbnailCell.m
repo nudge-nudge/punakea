@@ -110,6 +110,29 @@
 									  bezelFrame.origin.y + 4 + (77 - imageRect.size.height) / 2);
 
 	[thumbImage drawAtPoint:targetPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	
+	// Draw last used date
+	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+	[dateFormatter setDateStyle:NSDateFormatterShortStyle];		
+	NSDate *lastUsedDate = [item valueForAttribute:(id)kMDItemLastUsedDate];
+	
+	value = [dateFormatter friendlyStringFromDate:lastUsedDate];
+	
+	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
+	[fontAttributes setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];		
+	[fontAttributes setObject:[NSFont systemFontOfSize:10] forKey:NSFontAttributeName];	
+	paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
+	[paraStyle setAlignment:NSCenterTextAlignment];
+	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];	
+	
+	NSRect dateFrame = valueLabelFrame;
+	dateFrame.origin.x = cellFrame.origin.x;
+	dateFrame.origin.y += 16;
+	dateFrame.size.width = cellFrame.size.width;
+			
+	[value drawInRect:dateFrame withAttributes:fontAttributes];
 }
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
