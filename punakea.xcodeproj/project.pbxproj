@@ -89,6 +89,7 @@
 		485F402F0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F402D0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m */; };
 		485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */; };
 		485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */; };
+		4860293C0AEE0AF600B7DC6F /* SLA.r in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4860293B0AEE0AF600B7DC6F /* SLA.r */; };
 		486063DE0AA0553000D9E103 /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486063DC0AA0553000D9E103 /* PASidebarTableView.h */; };
 		486063DF0AA0553000D9E103 /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486063DD0AA0553000D9E103 /* PASidebarTableView.m */; };
 		486084570AB435D900CB0352 /* PADropDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486084550AB435D900CB0352 /* PADropDataHandler.h */; };
@@ -347,6 +348,7 @@
 				484C56AE0AE4D1FD0000EB7D /* PAControlledView.h in CopyFiles */,
 				483F50CA0AE551EA00551B9D /* PABrowserSplitView.h in CopyFiles */,
 				656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */,
+				4860293C0AEE0AF600B7DC6F /* SLA.r in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +431,7 @@
 		485F402D0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABookmarkDictionaryListDropHandler.m; sourceTree = "<group>"; };
 		485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTableViewDropController.h; sourceTree = "<group>"; };
 		485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableViewDropController.m; sourceTree = "<group>"; };
+		4860293B0AEE0AF600B7DC6F /* SLA.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; name = SLA.r; path = Resources/SLA.r; sourceTree = "<group>"; };
 		486063DC0AA0553000D9E103 /* PASidebarTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTableView.h; sourceTree = "<group>"; };
 		486063DD0AA0553000D9E103 /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableView.m; sourceTree = "<group>"; };
 		486084550AB435D900CB0352 /* PADropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADropDataHandler.h; sourceTree = "<group>"; };
@@ -671,6 +674,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4860293B0AEE0AF600B7DC6F /* SLA.r */,
 				488CD51F0AC023DF0038AB34 /* Scripts */,
 				481634150A5A4EEB003B8EE4 /* Browser.nib */,
 				4871792D0A5A619900A988DE /* BrowserView.nib */,
@@ -1547,6 +1551,7 @@
 				DMG_COMPRESSIONLEVEL = 9;
 				DMG_DELETEHEADERS = "";
 				DMG_FILESLIST = "$(BUILD_DIR)/$(CONFIGURATION)/Punakea.app";
+				DMG_SLA_RSRCFILE = "$(PROJECT_DIR)/Resources/SLA.r";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				PRODUCT_NAME = DMG;

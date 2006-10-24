@@ -19,11 +19,11 @@ abstract class for analyzing the data of a single pboardType. is used by PADropH
 }
 
 /**
-if file management is active, the given file will be moved to an internal folder
+if file management is active, the given data will be moved to an internal folder
  the new location is returned
  must be overwritten - abstract
- @param filePath path to file
- @return path to new location
+ @param data pdata to file
+ @return file with new location
  */
 - (PAFile*)fileDropData:(id)data;
 

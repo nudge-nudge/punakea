@@ -40,7 +40,7 @@ finds related tags for a given query or a given selection of tags.
 /**
 initializes related tags with some selected tags and a query
  @param otherSelectedTags is needed because related tags cannot contains tags from selected tags
- @param query the query passed from the outside is observed and related tags adjusted periodically
+ @param aQuery the query passed from the outside is observed and related tags adjusted periodically
  */
 - (id)initWithSelectedTags:(PASelectedTags*)otherSelectedTags query:(PAQuery*)aQuery;
 

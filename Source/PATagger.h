@@ -143,7 +143,7 @@ removes the tags from files
 convenience method:
  rename tag on all files
  @param name tag to renam
- @param neName new tag
+ @param newTagName new tag
  */
 - (void)renameTag:(NSString*)tagName toTag:(NSString*)newTagName;
 
