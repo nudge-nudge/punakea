@@ -285,13 +285,13 @@ static PAThumbnailManager *sharedInstance = nil;
 	int height = maxBounds.height;
 
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSBitmapImageRep *rep = nil;
-    NSBitmapImageRep *output = nil;
+    NSImageRep *rep = nil;
+    NSImageRep *output = nil;
     NSImage *scratch = nil;
     int w,h,nw,nh;
     NSData *bitmapData;
     
-    rep = [NSBitmapImageRep imageRepWithContentsOfFile:source];
+    rep = [NSImageRep imageRepWithContentsOfFile:source];
     
     // could not open file
     if (!rep)
@@ -349,17 +349,33 @@ static PAThumbnailManager *sharedInstance = nil;
 		return nil;
     };
     
-    // draw into image, to scale it
-    [scratch lockFocus];
-	[NSGraphicsContext saveGraphicsState];
+	// Handle PDFImageRep differently
+	if(![rep isKindOfClass:[NSPDFImageRep class]])
+	{
+		// draw into image to scale it   
+		
+		[scratch lockFocus];
+		[NSGraphicsContext saveGraphicsState];
 	
-    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-    
-	[rep drawInRect:NSMakeRect(0.0, 0.0, nw, nh)];
-    output = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0,0,nw,nh)];
+		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+		
+		[rep drawInRect:NSMakeRect(0.0, 0.0, nw, nh)];
+		
+		output = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0,0,nw,nh)];
 	
-	[NSGraphicsContext restoreGraphicsState];
-    [scratch unlockFocus];
+		[NSGraphicsContext restoreGraphicsState];
+		[scratch unlockFocus];
+	} else {
+		NSPDFImageRep *pdf = rep;
+		NSData *pdfData = [pdf PDFRepresentation];
+		
+		NSImage *pdfImage = [[NSImage alloc] initWithData:pdfData];
+		[pdfImage setScalesWhenResized:YES];
+		[pdfImage setSize:NSMakeSize(nw,nh)];
+		
+		return pdfImage;
+	}  
+	
     
     // could not get result
     if (!output)

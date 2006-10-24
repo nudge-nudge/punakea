@@ -89,6 +89,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 				break;
 			case 4:		// PDF
 				[filter setObject:@"PDF" forKey:@"title"];
+				[filter setObject:[NSNumber numberWithInt:PAThumbnailMode] forKey:@"displayMode"];
 				[filter setObject:[NSArray arrayWithObject:@"PDF"] forKey:@"filterValues"];
 				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
 				break;
