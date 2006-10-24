@@ -859,7 +859,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[textView setNeedsDisplay:YES];
 	}*/
 	
-	[self setNeedsDisplay:YES];
+	// This causes to make keyboard highlight rect around field editor thicker - at least sometimes...
+	//[self setNeedsDisplay:YES];
 }
 
 - (void)textDidEndEditing:(NSNotification *)notification
