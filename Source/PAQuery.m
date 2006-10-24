@@ -237,7 +237,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			item = [[PAQueryItem alloc] init];
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:@"value"];
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:(id)kMDItemDisplayName];
-			[item setValue:[mdItem valueForAttribute:(id)kMDItemPath] forAttribute:(id)kMDItemPath];
+			[item setValue:[mdItem valueForAttribute:(id)kMDItemPath] forAttribute:(id)kMDItemPath];			
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemContentType] forAttribute:(id)kMDItemContentType];
 			
 			value = [delegate metadataQuery:self
