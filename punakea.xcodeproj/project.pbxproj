@@ -708,8 +708,6 @@
 			children = (
 				484003C90A9B3A6500C0AD99 /* TypeAheadView */,
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
-				489AE71309DD4D7800EB60EB /* SelectedTagsView */,
-				655D3BF20A7DD598009479F9 /* Filter Slice */,
 				6588132C09DDCA7300428B83 /* ResultsView */,
 				484F717E0A666D4B00D886E5 /* TagManagement */,
 				48D16FED0A5A6468006C667B /* BrowserController.h */,
@@ -1052,6 +1050,8 @@
 		6588132C09DDCA7300428B83 /* ResultsView */ = {
 			isa = PBXGroup;
 			children = (
+				489AE71309DD4D7800EB60EB /* SelectedTagsView */,
+				655D3BF20A7DD598009479F9 /* Filter Slice */,
 				65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */,
 				65E9C9990A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m */,
 				65C0E04109E3EF11006C5A7C /* PAResultsGroupCell.h */,

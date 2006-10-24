@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
 
+/**
+used when kMDItemkeywords on a file are not found in PATags
+ */
 @interface PATempTag : PATag {
 
 }

@@ -10,6 +10,9 @@
 #import <math.h>
 #import "PATag.h"
 
+/**
+tag class for a single kMDItemKeyword
+ */
 @interface PASimpleTag : PATag
 {
 	

@@ -10,6 +10,9 @@
 #import "PADropHandler.h"
 #import "PAURLDropDataHandler.h";
 
+/**
+handles BookmarkDictionaryListPboardType drops (safari bookmarks and address-bar drops)
+ */
 @interface PABookmarkDictionaryListDropHandler : PADropHandler {
 
 }

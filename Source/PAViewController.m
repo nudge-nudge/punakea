@@ -13,26 +13,26 @@
 
 - (void)awakeFromNib
 {
-	[mainView setNextResponder:self];
+	[view setNextResponder:self];
 }
 
 - (void)dealloc
 {
-	[mainView release];
+	[view release];
 	[super dealloc];
 }
 
 #pragma mark accessors
-- (NSView*)mainView
+- (NSView*)view
 {
-	return mainView;
+	return view;
 }
 
 - (void)setMainView:(NSView*)aView
 {
 	[aView retain];
-	[mainView release];
-	mainView = aView;
+	[view release];
+	view = aView;
 }
 
 @end

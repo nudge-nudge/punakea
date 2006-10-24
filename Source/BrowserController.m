@@ -22,7 +22,7 @@
 	[[self window] setFrameAutosaveName:@"punakea.browser"];
 	
 	browserViewController = [[BrowserViewController alloc] init];
-	[[self window] setContentView:[browserViewController mainView]];
+	[[self window] setContentView:[browserViewController view]];
 	
 	// insert browserViewController in the responder chain
 	[browserViewController setNextResponder:[self window]];

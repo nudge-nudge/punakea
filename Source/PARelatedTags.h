@@ -18,10 +18,12 @@
 /**
 finds related tags for a given query or a given selection of tags.
 
- use this class if you want performance, it uses a query passed from the outside
+ use this class if you want performance, it uses a query passed from the outside and observes its changes
   (i.e. from the browser)
 
  for a version with integrated query use PARelatedTagsStandalone
+ 
+ posts PARelatedTagsHaveChanged notification on update
  */
 @interface PARelatedTags : NSObject {
 	PATagger *tagger;
@@ -35,6 +37,11 @@ finds related tags for a given query or a given selection of tags.
 	PASelectedTags *selectedTags;
 }
 
+/**
+initializes related tags with some selected tags and a query
+ @param otherSelectedTags is needed because related tags cannot contains tags from selected tags
+ @param query the query passed from the outside is observed and related tags adjusted periodically
+ */
 - (id)initWithSelectedTags:(PASelectedTags*)otherSelectedTags query:(PAQuery*)aQuery;
 
 - (BOOL)isUpdating;

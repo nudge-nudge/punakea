@@ -21,7 +21,6 @@ abstract class, controller for everything except tagcloud in
 	BOOL working;
 }
 
-- (NSView*)mainView;
 - (NSView*)currentView;
 - (void)setCurrentView:(NSView*)aView;
 - (NSResponder*)dedicatedFirstResponder;

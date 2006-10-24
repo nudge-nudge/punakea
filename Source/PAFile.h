@@ -8,8 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+/**
+represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally. Please use this for all methods which
+ access files
+ */
 @interface PAFile : NSObject {
-	NSString *path;
+	NSString *path; /**< full path including file.extension */
 	
 	NSWorkspace *workspace;
 	NSFileManager *fileManager;
@@ -23,10 +27,11 @@
 + (PAFile*)fileWithFileURL:(NSURL*)url;
 
 - (NSString*)path; /**< full path including file.extension */
-- (NSString*)name;
-- (NSString*)nameWithoutExtension;
-- (NSString*)extension;
-- (NSString*)directory;
-- (NSImage*)icon;
+- (NSString*)standardizedPath; /**< standardized path */
+- (NSString*)name; /**< file name including extension
+- (NSString*)nameWithoutExtension; /**< file name without extension */
+- (NSString*)extension; /**< file extension */
+- (NSString*)directory; /**< directory path the file is located in */
+- (NSImage*)icon; /**< icon representing file */
 
 @end

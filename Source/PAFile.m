@@ -93,6 +93,11 @@
 	return path;
 }
 
+- (NSString*)standardizedPath
+{
+	return [path stringByStandardizingPath];
+}
+
 - (NSString*)name
 {
 	return [path lastPathComponent];

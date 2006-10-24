@@ -26,6 +26,7 @@ static PADropManager *sharedInstance = nil;
 	{
 		dropHandlers = [[NSMutableArray alloc] init];
 			
+		// currently all the dropHandlers have to be created ... 
 		PAFilenamesDropHandler *filenamesDropHandler = [[PAFilenamesDropHandler alloc] init];
 		[self registerDropHandler:filenamesDropHandler];
 		[filenamesDropHandler release];
@@ -75,6 +76,7 @@ static PADropManager *sharedInstance = nil;
 	NSEnumerator *e = [dropHandlers objectEnumerator];
 	PADropHandler *dropHandler;
 	
+	// all dropHandlers are queried if they handle the needed pboardType
 	while (dropHandler = [e nextObject])
 	{
 		if ([dropHandler willHandleDrop:pasteboard])

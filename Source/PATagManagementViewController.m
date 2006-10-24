@@ -37,7 +37,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 
 - (void)awakeFromNib
 {
-	[self setCurrentView:mainView];
+	[self setCurrentView:view];
 }
 
 - (void)dealloc
@@ -243,7 +243,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 {
 	NSView *sv = [delegate controlledView]; 
 	[currentView removeFromSuperview];
-	[self setCurrentView:mainView];
+	[self setCurrentView:view];
 	[sv addSubview:currentView];
 }
 

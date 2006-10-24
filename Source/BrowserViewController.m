@@ -78,7 +78,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[searchField setEditable:NO];
 	[self showResults];
-	[[[self mainView] window] setInitialFirstResponder:tagCloud];
+	[[[self view] window] setInitialFirstResponder:tagCloud];
 }	
 
 - (void)dealloc
@@ -165,7 +165,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		[subview removeFromSuperview];
 	}
 	
-	[controlledView addSubview:[mainController mainView]];
+	[controlledView addSubview:[mainController view]];
 }
 
 - (NSView*)controlledView
@@ -235,6 +235,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setState:PABrowserViewControllerNormalState];
 	[self setVisibleTags:[tags tags]];
 	[typeAheadFind setActiveTags:[tags tags]];
+	[[[self view] window] makeFirstResponder:tagCloud];
 }
 
 - (void)displaySelectedTag:(PATag*)tag
@@ -436,11 +437,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[self resetBuffer];
 	[mainController reset];
+	[[[self view] window] makeFirstResponder:tagCloud];
 }
 
 - (void)makeControlledViewFirstResponder
 {
-	[[[self mainView] window] makeFirstResponder:[mainController dedicatedFirstResponder]];
+	[[[self view] window] makeFirstResponder:[mainController dedicatedFirstResponder]];
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification

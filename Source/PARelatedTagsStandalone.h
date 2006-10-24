@@ -12,6 +12,8 @@
 /**
 use this class if you want an encapsulated way to get related tags for the
  given selected tags
+ 
+ use setSelectedTags to update the related tags (asynchronously)
  */
 @interface PARelatedTagsStandalone : PARelatedTags
 

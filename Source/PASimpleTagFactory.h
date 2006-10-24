@@ -10,6 +10,9 @@
 #import "PATagFactory.h"
 #import "PASimpleTag.h"
 
+/**
+tag factory for simple tags
+ */
 @interface PASimpleTagFactory : PATagFactory
 
 @end

@@ -10,7 +10,7 @@
 #import "PADropDataHandler.h"
 
 /**
-abstract class for handling drops
+abstract class for handling drops of a single pboardType
  */
 @interface PADropHandler : NSObject {
 	NSString *pboardType;

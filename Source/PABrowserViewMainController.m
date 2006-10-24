@@ -25,11 +25,6 @@
 }
 
 #pragma mark accessors
-- (NSView*)mainView
-{
-	return mainView;
-}
-
 - (NSView*)currentView
 {
 	return currentView;

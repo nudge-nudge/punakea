@@ -10,6 +10,9 @@
 #import "PADropHandler.h"
 #import "PAFilenamesDropDataHandler.h"
 
+/**
+handles NSFilenamesPboardType drops (files)
+ */
 @interface PAFilenamesDropHandler : PADropHandler {
 
 }

@@ -110,6 +110,7 @@ data is NSDictionary with keys:
 		return NSDragOperationCopy;
 }
 
+#pragma mark helpers
 - (NSData*)dragDataWithEntries:(NSArray*)entries
 {
     NSMutableData *result;

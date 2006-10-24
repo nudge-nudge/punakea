@@ -10,7 +10,7 @@
 #import "PAFile.h"
 
 /**
-abstract class
+abstract class for analyzing the data of a single pboardType. is used by PADropHandler.
  */
 @interface PADropDataHandler : NSObject {
 	BOOL manageFiles;

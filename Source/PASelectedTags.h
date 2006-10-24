@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
 
+/**
+container class for selected tags
+ */
 @interface PASelectedTags : NSObject {
 	NSMutableArray *selectedTags;
 	PATag *lastTag;

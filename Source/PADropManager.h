@@ -12,6 +12,13 @@
 #import "PAFilenamesDropHandler.h"
 #import "PABookmarkDictionaryListDropHandler.h"
 
+/**
+this singleton class handles all drops from the outside.
+ it knows which file types are handled and what dragoperations will be performed on a specific file.
+ handleDrop: creates and/or moves the files according to the manage files preference and returns the new files as PAFile array.
+ tags have to be written to the files after drop
+ */
+ 
 @interface PADropManager : NSObject {
 	NSMutableArray *dropHandlers;
 }

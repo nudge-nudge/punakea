@@ -16,7 +16,7 @@
 #import "PAFile.h"
 
 /**
-singleton class for working with spotlight kMDItemKeywords
+singleton class for working with spotlight kMDItemKeywords (our simpleTags)
  */
 @interface PATagger : NSObject {
 	PASimpleTagFactory *simpleTagFactory;
