@@ -251,7 +251,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	}
 	
 	if([[note name] isEqualToString:PAQueryDidUpdateNotification])
-	{
+	{		
 		[self saveSelection];
 		NSRect visibleRect = [self visibleRect];
 		
@@ -259,6 +259,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		[self scrollPoint:visibleRect.origin];
 		[self restoreSelection];
+
+		[[self window] makeFirstResponder:self];
 	}
 }
 

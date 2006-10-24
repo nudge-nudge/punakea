@@ -896,8 +896,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[textView removeFromSuperview];		
 
 		[newUserInfo release];
-
-		[[self window] makeFirstResponder:self];
 		
 		// Forward renaming request to our delegate's query (delegate is equal to the outlineView's delegate)		
 		int				index = r * [self numberOfColumns] + c;
@@ -912,8 +910,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	{		
 		[[self selectedCell] setEditable:NO];
 		[textView removeFromSuperview];		
-		[[self window] makeFirstResponder:self];
-    }
+	}
+	
+	[[self window] makeFirstResponder:self];
 }
 
 
