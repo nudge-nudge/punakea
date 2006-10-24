@@ -1174,6 +1174,23 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXLegacyTarget section */
+		483F9BBB0AEE01A900F3CC7F /* DMG */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = /usr/local/bin/buildDMG.pl;
+			buildConfigurationList = 483F9BC30AEE01B300F3CC7F /* Build configuration list for PBXLegacyTarget "DMG" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/perl;
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = DMG;
+			passBuildSettingsInEnvironment = 1;
+			productName = DMG;
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
 		8D1107260486CEB800E47090 /* Punakea */ = {
 			isa = PBXNativeTarget;
@@ -1220,6 +1237,7 @@
 			targets = (
 				8D1107260486CEB800E47090 /* Punakea */,
 				488A52E80A81D9DC005B54A8 /* Documentation */,
+				483F9BBB0AEE01A900F3CC7F /* DMG */,
 			);
 		};
 /* End PBXProject section */
@@ -1511,6 +1529,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		483F9BC40AEE01B300F3CC7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = DMG;
+			};
+			name = Debug;
+		};
+		483F9BC50AEE01B300F3CC7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DMG_COMPRESSIONLEVEL = 9;
+				DMG_DELETEHEADERS = "";
+				DMG_FILESLIST = "$(BUILD_DIR)/$(CONFIGURATION)/Punakea.app";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = DMG;
+				SETTINGS_FILE = "$(BUILD_DIR)/$(CONFIGURATION)/Punakea.app/Contents/Info.plist";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		488A52EC0A81D9FA005B54A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1610,6 +1654,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		483F9BC30AEE01B300F3CC7F /* Build configuration list for PBXLegacyTarget "DMG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				483F9BC40AEE01B300F3CC7F /* Debug */,
+				483F9BC50AEE01B300F3CC7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		488A52EB0A81D9FA005B54A8 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

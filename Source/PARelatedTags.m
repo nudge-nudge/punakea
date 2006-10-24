@@ -140,7 +140,7 @@
 		[self setUpdating:NO];
 		
 		// if no tags what so ever have been found, post notification so that tag cloud
-		// can update it's message
+		// can update its message
 		if ([[query flatResults] count] == 0)
 		{
 			[nc postNotificationName:@"PARelatedTagsHaveChanged" object:self];
