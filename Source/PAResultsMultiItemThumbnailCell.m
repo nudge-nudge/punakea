@@ -99,7 +99,7 @@
 	NSImage *thumbImage = [[PAThumbnailManager sharedInstance]
 				thumbnailWithContentsOfFile:[item valueForAttribute:(id)kMDItemPath]
 				                     inView:controlView
-									  frame:cellFrame];
+									  frame:bezelFrame];
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
