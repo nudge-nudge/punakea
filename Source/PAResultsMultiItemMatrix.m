@@ -940,6 +940,21 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
         [self startDrag:mouseDownEvent]; 
 }
 
+- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)isLocal
+{
+	if(isLocal)
+	{
+		return NSDragOperationNone;
+	} else {
+		BOOL managingFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+		
+		if(managingFiles)
+			return NSDragOperationCopy | NSDragOperationDelete;
+		else
+			return NSDragOperationMove | NSDragOperationDelete;
+	}
+}
+
 - (void)startDrag:(NSEvent *)event
 {
 	// Create pasteboard contents
