@@ -36,6 +36,7 @@
 
 - (IBAction)openFiles:(id)sender;
 - (IBAction)deleteFiles:(id)sender;
+- (IBAction)editTagsOnFiles:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
 - (IBAction)showTagger:(id)sender;

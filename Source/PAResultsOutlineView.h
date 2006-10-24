@@ -43,5 +43,6 @@ typedef enum _PAResultsDisplayMode
 - (void)setDisplayMode:(PAResultsDisplayMode)mode;
 
 - (void)saveSelection;
+- (NSMutableArray *)selectedQueryItems;
 
 @end

@@ -3,6 +3,7 @@
         {
             ACTIONS = {
                 deleteFiles = id; 
+                editTagsOnFiles = id; 
                 manageTags = id; 
                 openFiles = id; 
                 showBrowser = id; 

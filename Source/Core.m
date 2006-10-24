@@ -197,6 +197,37 @@
 	}
 }
 
+- (IBAction)editTagsOnFiles:(id)sender
+{
+	TaggerController *taggerController = [[TaggerController alloc] init];
+	[taggerController showWindow:self];
+	NSWindow *taggerWindow = [taggerController window];
+	[taggerWindow makeKeyAndOrderFront:nil];
+	
+	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
+	
+	if ([mainController isKindOfClass:[PAResultsViewController class]])
+	{
+		PAResultsOutlineView *ov = [mainController outlineView];
+		[ov saveSelection];
+		NSArray *selectedQueryItems = [ov selectedQueryItems];
+		NSMutableArray *files = [NSMutableArray array];
+		
+		NSEnumerator *e = [selectedQueryItems objectEnumerator];
+		PAQueryItem *item;
+
+		while (item = [e nextObject])
+		{
+			NSString *filePath = [item valueForAttribute:(id)kMDItemPath];
+			[files addObject:[PAFile fileWithPath:filePath]];
+		}
+		
+		[taggerController addFiles:files];
+		[ov reloadData];
+	}
+	
+}
+
 - (IBAction)showBrowser:(id)sender
 {
 	if (!browserController)
