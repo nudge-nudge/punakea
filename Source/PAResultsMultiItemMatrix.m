@@ -88,7 +88,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	int row = 0;
 	int column = 0;
 	while(aCell = [enumerator nextObject])
-	{					
+	{				
 		if(column == numberOfItemsPerRow) 
 		{
 			[self addRow];
@@ -311,8 +311,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)moveSelectionUp:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
 {	
 	NSCell *cell;
-	int row = [self numberOfRows] - 1;
-	int column = [self numberOfColumns] - 1;
+	int row = [self numberOfRows];
+	int column = 0;
 	int r, c;
 	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
 	
@@ -347,7 +347,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		}
 
 		[self highlightCell:YES atRow:row-1 column:column];
-	} else {
+	} /*else {
 		// If this is the topmost multi item cell, do nothing as we are at the topmost item
 		// in our OutlineView
 
@@ -359,7 +359,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			[outlineView setResponder:nil];
 			[outlineView keyDown:theEvent];
 		}
-	}
+	}*/
 }
 
 - (void)moveSelectionDown:(NSEvent *)theEvent
@@ -370,7 +370,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)moveSelectionDown:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
 {	
 	NSCell *cell;
-	int row = 0;
+	int row = -1;
 	int column = 0;
 	int r, c;
 	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
@@ -436,7 +436,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {	
 	NSCell *cell;
 	int row = 0;
-	int column = 0;
+	int column = -1;
 	int r, c;
 	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
 	
