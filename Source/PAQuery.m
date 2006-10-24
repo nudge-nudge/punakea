@@ -457,7 +457,11 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	PAFile		*file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
 	NSString	*source = [file path];
 	NSString	*destination = [file directory];
+	
+	// Ignore case-sensitive changes to the extension - TEMP for now
+	newName = [newName substringToIndex:[newName length] - [[file extension] length]];
 	destination = [destination stringByAppendingPathComponent:newName];
+	destination = [destination stringByAppendingString:[file extension]];
 	
 	// Return NO if source equals destination
 	if([source isEqualToString:destination]) return NO;
