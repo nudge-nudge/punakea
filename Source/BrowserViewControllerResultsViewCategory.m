@@ -12,42 +12,7 @@
 @implementation PAResultsViewController (ResultsViewCategory)
 
 #pragma mark Actions
-- (void)triangleClicked:(id)sender
-{
-	PAQueryBundle *item = [(NSDictionary *)[sender tag] objectForKey:@"bundle"];
 
-	if([outlineView isItemExpanded:item])
-	{
-		// Just toggle the item's state
-		[outlineView collapseItem:item];
-	} else {
-		// If we expand an item, we need to redraw all previously visible rows so that they
-		// can correctly (re-)move their subviews
-		
-		NSRange previousVisibleRowsRange = [outlineView rowsInRect:[outlineView visibleRect]];
-		
-		[outlineView expandItem:item];
-		
-		int numberOfChildrenOfItem = [[outlineView delegate] outlineView:outlineView numberOfChildrenOfItem:item];
-		for(unsigned i = 0; i < previousVisibleRowsRange.length; i++)
-		{
-			[outlineView drawRow:(numberOfChildrenOfItem + previousVisibleRowsRange.location + i) clipRect:[outlineView bounds]];
-		}
-	}
-	
-	// Save userDefaults
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
-	NSMutableArray *collapsedGroups = [NSMutableArray arrayWithArray:[results objectForKey:@"CollapsedGroups"]];
-	
-	if([outlineView isItemExpanded:item])
-		[collapsedGroups removeObject:[item value]];
-	else
-		[collapsedGroups addObject:[item value]];
-			
-	[results setObject:collapsedGroups forKey:@"CollapsedGroups"];		
-	[defaults setObject:results forKey:@"Results"];
-}
 
 /*- (void)segmentedControlClicked:(id)sender
 {
@@ -104,49 +69,5 @@
 	}
 } */
 
-- (IBAction)doubleAction:(id)sender
-{
-	NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
-	unsigned row = [selectedRowIndexes firstIndex];
-	while(row != NSNotFound) 
-	{
-		id item = [outlineView itemAtRow:row];
-		
-		// TODO: If item is MultiItem, get selected cells and process them
-		if([[item class] isEqualTo:[PAQueryItem class]])
-		{
-			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
-		}
-		
-		row = [selectedRowIndexes indexGreaterThanIndex:row];
-	}
-}
-
-- (void)removeAllMultiItemSubviewsWithIdentifier:(NSString *)identifier
-{
-	NSLog(@"removing subviews commented");
-	/*NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
-	id anObject;
-	while(anObject = [enumerator nextObject])
-	{
-		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
-		{
-			PAResultsMultiItem *theseItems = [(PAResultsMultiItemMatrix *)anObject items];
-			NSString *thisIdentifier = [[thisItem tag] objectForKey:@"identifier"];
-			if([identifier isEqualToString:thisIdentifier])
-				[anObject removeFromSuperview];
-		}
-	}*/
-}
-
-- (void)hideAllSubviews
-{
-	NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
-	id anObject;
-	while(anObject = [enumerator nextObject])
-	{
-		[anObject setHidden:YES];
-	}
-}
 
 @end

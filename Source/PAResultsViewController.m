@@ -176,6 +176,69 @@
 	[delegate setDisplayTags:[relatedTags relatedTagArray]];
 }
 
+- (IBAction)doubleAction:(id)sender
+{
+	NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
+	unsigned row = [selectedRowIndexes firstIndex];
+	while(row != NSNotFound) 
+	{
+		id item = [outlineView itemAtRow:row];
+		
+		if([[item class] isEqualTo:[PAQueryItem class]])
+			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
+
+		row = [selectedRowIndexes indexGreaterThanIndex:row];
+	}
+}
+
+- (void)hideAllSubviews
+{
+	NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
+	id anObject;
+	while(anObject = [enumerator nextObject])
+	{
+		[anObject setHidden:YES];
+	}
+}
+
+- (void)triangleClicked:(id)sender
+{
+	NSDictionary *tag = (NSDictionary *)[sender tag];
+	PAQueryBundle *item = [tag objectForKey:@"bundle"];
+
+	if([outlineView isItemExpanded:item])
+	{
+		// Just toggle the item's state
+		[outlineView collapseItem:item];
+	} else {
+		// If we expand an item, we need to redraw all previously visible rows so that they
+		// can correctly (re-)move their subviews
+		
+		NSRange previousVisibleRowsRange = [outlineView rowsInRect:[outlineView visibleRect]];
+		
+		[outlineView expandItem:item];
+		
+		int numberOfChildrenOfItem = [[outlineView delegate] outlineView:outlineView numberOfChildrenOfItem:item];
+		for(unsigned i = 0; i < previousVisibleRowsRange.length; i++)
+		{
+			[outlineView drawRow:(numberOfChildrenOfItem + previousVisibleRowsRange.location + i) clipRect:[outlineView bounds]];
+		}
+	}
+	
+	// Save userDefaults
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
+	NSMutableArray *collapsedGroups = [NSMutableArray arrayWithArray:[results objectForKey:@"CollapsedGroups"]];
+	
+	if([outlineView isItemExpanded:item])
+		[collapsedGroups removeObject:[item value]];
+	else
+		[collapsedGroups addObject:[item value]];
+			
+	[results setObject:collapsedGroups forKey:@"CollapsedGroups"];		
+	[defaults setObject:results forKey:@"Results"];
+}
+
 
 #pragma mark Temp
 - (void)setGroupingAttributes:(id)sender;
