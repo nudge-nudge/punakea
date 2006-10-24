@@ -210,6 +210,7 @@
 	{
 		PAResultsOutlineView *ov = [mainController outlineView];
 		[ov saveSelection];
+
 		NSArray *selectedQueryItems = [ov selectedQueryItems];
 		NSMutableArray *files = [NSMutableArray array];
 		

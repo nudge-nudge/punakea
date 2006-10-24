@@ -188,9 +188,14 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		id item = [self itemAtRow:row];
 		
 		if([[self selectedRowIndexes] containsIndex:row])
-			[selectedQueryItems addObject:item];
-		else
+		{
+			if (![selectedQueryItems containsObject:item])
+				[selectedQueryItems addObject:item];
+		}
+		else 
+		{
 			[selectedQueryItems removeObject:item];
+		}
 	}
 }
 
