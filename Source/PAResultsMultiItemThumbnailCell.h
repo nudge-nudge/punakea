@@ -7,19 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PAResultsMultiItemGenericCell.h"
 #import "PAThumbnailManager.h"
 #import "NSBezierPathCategory.h"
-#import "PAQueryItem.h"
-#import "NSDateFormatter+FriendlyFormat.h"
 
 
-@interface PAResultsMultiItemThumbnailCell : NSTextFieldCell {
-
-	PAQueryItem			*item;
+@interface PAResultsMultiItemThumbnailCell : PAResultsMultiItemGenericCell {
 	
 }
-
-+ (NSSize)cellSize;
-+ (NSSize)intercellSpacing;
 
 @end

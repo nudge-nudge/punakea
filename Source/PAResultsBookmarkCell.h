@@ -1,8 +1,8 @@
 //
-//  PAResultsItemCell.h
+//  PAResultsBookmarkCell.h
 //  punakea
 //
-//  Created by Daniel on 05.04.06.
+//  Created by Daniel on 24.10.06.
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,9 +10,9 @@
 #import "PAQueryItem.h"
 #import "PAThumbnailManager.h"
 #import "NSDateFormatter+FriendlyFormat.h"
+#import "NDResourceFork.h"
 
-
-@interface PAResultsItemCell : NSTextFieldCell {
+@interface PAResultsBookmarkCell : NSTextFieldCell {
 
 	PAQueryItem				*item;
 

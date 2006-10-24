@@ -14,17 +14,16 @@
 #pragma mark Init + Dealloc
 - (id)initTextCell:(PAQueryItem *)anItem
 {
-	self = [super initTextCell:@""];
-	if (self)
+	self = [super initTextCell:anItem];
+	if(self)
 	{
-		item = [anItem retain];	
+		// nothing yet
 	}	
 	return self;
 }
 
 - (void)dealloc
 {
-	if(item) [item release];
 	[super dealloc];
 }
 
@@ -165,19 +164,6 @@
 	[textObj selectAll:self];
 	
 	[[self controlView] setNeedsDisplay:YES];
-}
-
-
-#pragma mark Accessors
-- (PAQueryItem *)item
-{
-	return item;
-}
-
-- (void)setItem:(PAQueryItem *)anItem
-{
-	if(item) [item release];
-	item = [anItem retain];
 }
 
 

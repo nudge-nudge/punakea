@@ -1,15 +1,15 @@
 //
-//  PAResultsItemCell.m
+//  PAResultsBookmarkCell.m
 //  punakea
 //
-//  Created by Daniel on 05.04.06.
+//  Created by Daniel on 24.10.06.
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
-#import "PAResultsItemCell.h"
+#import "PAResultsBookmarkCell.h"
 
 
-@implementation PAResultsItemCell
+@implementation PAResultsBookmarkCell
 
 #pragma mark Init + Dealloc
 - (id)initTextCell:(NSString *)aText
@@ -68,12 +68,40 @@
 	
 	// Draw display name	
 	NSString *value = [item valueForAttribute:kMDItemDisplayName];
+	value = [value substringToIndex:[value length] - 7];
 	
 	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 25,
 								  cellFrame.origin.y + 2,
 								  cellFrame.size.width - 190 - 25,
 								  cellFrame.size.height - 2)
 	    withAttributes:fontAttributes];
+		
+	// Draw bookmark url
+	NDResourceFork *resource = [[NDResourceFork alloc] initForReadingAtPath:[item valueForAttribute:(id)kMDItemPath]];
+	NSData *data = [resource dataForType:'url ' Id:256];
+	NSString *url = [[NSString alloc] initWithData:data encoding:[NSString defaultCStringEncoding]];
+	
+	NSMutableDictionary *urlFontAttributes = [[fontAttributes mutableCopy] autorelease];
+	
+	if([self isHighlighted] &&
+	   [[[controlView window] firstResponder] isDescendantOf:[controlView superview]] &&
+	   [[controlView window] isKeyWindow] &&
+	   ![[controlView itemAtRow:[controlView editedRow]] isEqualTo:item]) 
+	{
+		[urlFontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
+	} else {
+		[urlFontAttributes setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];
+	}
+	
+	[url	drawInRect:NSMakeRect(cellFrame.origin.x + 25,
+								  cellFrame.origin.y + 17,
+								  cellFrame.size.width - 190 - 25,
+								  cellFrame.size.height - 17)
+	    withAttributes:urlFontAttributes];
+		
+	[resource release];
+	[url release];
+	
 		
 	// Draw last used date
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];	
@@ -83,10 +111,11 @@
 	NSDate *lastUsedDate = [item valueForAttribute:(id)kMDItemLastUsedDate];
 	
 	value = [dateFormatter friendlyStringFromDate:lastUsedDate];
-			
+	
 	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 170, cellFrame.origin.y + 2)
 	  	withAttributes:fontAttributes];
 }
+
 
 #pragma mark Renaming Stuff
 - (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent
@@ -100,7 +129,7 @@
 	frame.origin.x += 25;
 	frame.origin.y += 1;
 	frame.size.width -= 180 + 25; 
-	frame.size.height -= 3;
+	frame.size.height -= 17;
 	
 	[super selectWithFrame:frame inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 
@@ -114,7 +143,7 @@
 #pragma mark Class Methods
 + (float)heightOfRow
 {
-	return 19.0;
+	return 33.0;
 }
 
 

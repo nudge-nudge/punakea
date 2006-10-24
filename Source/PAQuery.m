@@ -264,7 +264,17 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 				// Bookmarks that are stored as webloc file don't have the right content type,
 				// so we set it here
 				NSString *path = [mdItem valueForAttribute:(id)kMDItemPath];
-				if(path && [path hasSuffix:@"webloc"]) value = @"BOOKMARKS";
+				if(path && [path hasSuffix:@"webloc"])
+				{
+					// Set new value for Content Type Tree
+					value = @"BOOKMARKS";
+					
+					/*
+					// Set new value for Display Name
+					NSString *displayName = [item valueForAttribute:(id)kMDItemDisplayName];
+					[item setValue:[displayName substringToIndex:[displayName length]-7] forAttribute:(id)kMDItemDisplayName];
+					*/
+				}
 			}
 			[item setValue:value forAttribute:@"kMDItemContentTypeTree"];
 			
@@ -750,6 +760,11 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (NSArray *)flatResults
 {
 	return filterDict ? flatFilteredResults : flatResults;
+}
+
+- (BOOL)hasFilter
+{
+	return filterDict ? YES : NO;
 }
 
 

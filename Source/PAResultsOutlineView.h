@@ -3,6 +3,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PAResultsGroupCell.h"
 #import "PAResultsItemCell.h"
+#import "PAResultsBookmarkCell.h"
 #import "PAResultsMultiItemCell.h"
 #import "PAResultsMultiItemThumbnailCell.h"
 #import "PAQuery.h"

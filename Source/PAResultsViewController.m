@@ -291,14 +291,24 @@
 #pragma mark ResultsOutlineView Delegate
 - (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
 {		
+	// Bundles have a fix height
 	if([item isKindOfClass:[PAQueryBundle class]]) return 20.0;
-	if([item isKindOfClass:[PAQueryItem class]]) return 19.0;
 	
-	// TEMP
-	//return 200.0;
+	// Height of list items is determined by its content type
+	if([item isKindOfClass:[PAQueryItem class]])
+	{
+		NSString *contentType = [item valueForAttribute:@"kMDItemContentTypeTree"];		
+		if([contentType isEqualToString:@"BOOKMARKS"] &&
+		   [[outlineView query] hasFilter])
+			return [PAResultsBookmarkCell heightOfRow];
+		else
+			return [PAResultsItemCell heightOfRow];
+	}
+	
+	
 	
 	// Get height of multi item dynamically	from outlineview
-	
+
 	Class cellClass = [PAResultsMultiItemPlaceholderCell class];
 	switch([outlineView displayMode])
 	{
@@ -338,8 +348,16 @@
 	}
 	else if([item isKindOfClass:[PAQueryItem class]])
 	{
-		cell = [[[PAResultsItemCell alloc] initTextCell:@""] autorelease];
-		[cell setEditable:YES];
+		NSString *contentType = [item valueForAttribute:@"kMDItemContentTypeTree"];
+		if([contentType isEqualToString:@"BOOKMARKS"] &&
+		   [[outlineView query] hasFilter])
+		{
+			cell = [[[PAResultsBookmarkCell alloc] initTextCell:@""] autorelease];
+			[cell setEditable:YES];
+		} else {
+			cell = [[[PAResultsItemCell alloc] initTextCell:@""] autorelease];
+			[cell setEditable:YES];
+		}
 	}
 	else 
 	{

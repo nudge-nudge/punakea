@@ -97,4 +97,6 @@ initializer
 - (id)delegate;
 - (void)setDelegate:(id)aDelegate;
 
+- (BOOL)hasFilter;
+
 @end

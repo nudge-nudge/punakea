@@ -162,6 +162,10 @@
 		6525F46F09EA4FBD006E1FB7 /* MDListViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6525F46C09EA4FBD006E1FB7 /* MDListViewOn-1.tiff */; };
 		6525F47009EA4FBD006E1FB7 /* MDListViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6525F46D09EA4FBD006E1FB7 /* MDListViewPressed-1.tiff */; };
 		653DCE1809E295C8009175E5 /* MDSimpleGrouping.strings in Resources */ = {isa = PBXBuildFile; fileRef = 653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */; };
+		6540FA550AEE0F5100EF51F3 /* PAResultsBookmarkCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */; };
+		6540FA560AEE0F5100EF51F3 /* PAResultsBookmarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */; };
+		6540FA670AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6540FA650AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h */; };
+		6540FA680AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6540FA660AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m */; };
 		65461C9509D0418F0076778E /* PAImageButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65461C9309D0418F0076778E /* PAImageButtonCell.h */; };
 		65461C9609D0418F0076778E /* PAImageButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65461C9409D0418F0076778E /* PAImageButtonCell.m */; };
 		654DBC1B09C9D0620061BFA4 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 654DBC1A09C9D0620061BFA4 /* index.html */; };
@@ -349,6 +353,8 @@
 				483F50CA0AE551EA00551B9D /* PABrowserSplitView.h in CopyFiles */,
 				656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */,
 				4860293C0AEE0AF600B7DC6F /* SLA.r in CopyFiles */,
+				6540FA550AEE0F5100EF51F3 /* PAResultsBookmarkCell.h in CopyFiles */,
+				6540FA670AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +511,10 @@
 		6525F46C09EA4FBD006E1FB7 /* MDListViewOn-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDListViewOn-1.tiff"; sourceTree = "<group>"; };
 		6525F46D09EA4FBD006E1FB7 /* MDListViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDListViewPressed-1.tiff"; sourceTree = "<group>"; };
 		653DCE1409E295A1009175E5 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/MDSimpleGrouping.strings; sourceTree = "<group>"; };
+		6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsBookmarkCell.h; sourceTree = "<group>"; };
+		6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsBookmarkCell.m; sourceTree = "<group>"; };
+		6540FA650AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemGenericCell.h; sourceTree = "<group>"; };
+		6540FA660AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemGenericCell.m; sourceTree = "<group>"; };
 		65461C9309D0418F0076778E /* PAImageButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButtonCell.h; sourceTree = "<group>"; };
 		65461C9409D0418F0076778E /* PAImageButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButtonCell.m; sourceTree = "<group>"; };
 		654A74210AECFA420076E2EE /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Global.strings; sourceTree = "<group>"; };
@@ -984,6 +994,36 @@
 			name = "Filter Slice";
 			sourceTree = "<group>";
 		};
+		6540FA520AEE0F2800EF51F3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */,
+				6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */,
+				65C0E04109E3EF11006C5A7C /* PAResultsGroupCell.h */,
+				65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */,
+				6563884909E419D300BE59AE /* PAResultsItemCell.h */,
+				6563884A09E419D300BE59AE /* PAResultsItemCell.m */,
+				65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */,
+				65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		6540FA570AEE0F5C00EF51F3 /* MultiItem Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				6540FA650AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h */,
+				6540FA660AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m */,
+				6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */,
+				6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */,
+				65AC736C0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h */,
+				65AC736D0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.m */,
+				6557CAF20A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h */,
+				6557CAF30A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m */,
+			);
+			name = "MultiItem Stuff";
+			sourceTree = "<group>";
+		};
 		654DBC1709C9D0320061BFA4 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1056,20 +1096,10 @@
 			children = (
 				489AE71309DD4D7800EB60EB /* SelectedTagsView */,
 				655D3BF20A7DD598009479F9 /* Filter Slice */,
+				6540FA520AEE0F2800EF51F3 /* Cells */,
+				6540FA570AEE0F5C00EF51F3 /* MultiItem Stuff */,
 				65E9C9980A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.h */,
 				65E9C9990A5D03E000F32258 /* BrowserViewControllerResultsViewCategory.m */,
-				65C0E04109E3EF11006C5A7C /* PAResultsGroupCell.h */,
-				65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */,
-				6563884909E419D300BE59AE /* PAResultsItemCell.h */,
-				6563884A09E419D300BE59AE /* PAResultsItemCell.m */,
-				65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */,
-				65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */,
-				6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */,
-				6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */,
-				65AC736C0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h */,
-				65AC736D0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.m */,
-				6557CAF20A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h */,
-				6557CAF30A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m */,
 				65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */,
 				65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */,
 				65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */,
@@ -1419,6 +1449,8 @@
 				484C56AF0AE4D1FD0000EB7D /* PAControlledView.m in Sources */,
 				483F50CB0AE551EA00551B9D /* PABrowserSplitView.m in Sources */,
 				656C20030AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m in Sources */,
+				6540FA560AEE0F5100EF51F3 /* PAResultsBookmarkCell.m in Sources */,
+				6540FA680AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
