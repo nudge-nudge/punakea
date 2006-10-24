@@ -12,7 +12,7 @@
 
 @interface PAImageButton : NSControl 
 {
-	NSMutableDictionary *tag;
+	
 }
 
 - (void)setButtonType:(PAButtonType)aType;

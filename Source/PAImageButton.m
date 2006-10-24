@@ -17,7 +17,6 @@
 		PAImageButtonCell *cell = [[PAImageButtonCell alloc] initImageCell:nil];
 		[self setCell:cell];
 		[cell release];
-		tag = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -39,7 +38,6 @@
 
 - (void)dealloc
 {
-	if(tag) [tag release];
 	[super dealloc];
 }
 
@@ -57,11 +55,11 @@
 
 - (NSMutableDictionary *)tag
 {
-	return tag;
+	return [[self cell] tag];
 }
 
 - (void)setTag:(NSMutableDictionary *)aTag
 {
-	tag = [aTag retain];
+	[[self cell] setTag:aTag];
 }
 @end
