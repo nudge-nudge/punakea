@@ -45,6 +45,10 @@
 		482B31150AC6C70D0071C33B /* ResultsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 482B31130AC6C70D0071C33B /* ResultsView.nib */; };
 		482B314B0AC6D6DD0071C33B /* PABrowserViewMainController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */; };
 		482D81860ADE2AC300455635 /* drop_tag_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 482D81850ADE2AC300455635 /* drop_tag_small.png */; };
+		483184BD0AEF906900C3C672 /* PADropDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 483184B90AEF906900C3C672 /* PADropDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483184BE0AEF906900C3C672 /* PADropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 483184BA0AEF906900C3C672 /* PADropDataHandler.m */; };
+		483184BF0AEF906900C3C672 /* PADropHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 483184BB0AEF906900C3C672 /* PADropHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483184C00AEF906900C3C672 /* PADropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 483184BC0AEF906900C3C672 /* PADropHandler.m */; };
 		4832722D0AA42D19003D98A6 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4832722B0AA42D19003D98A6 /* Preferences.nib */; };
 		483272340AA42DC6003D98A6 /* UKPrefsPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 483272320AA42DC6003D98A6 /* UKPrefsPanel.h */; };
 		483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483272330AA42DC6003D98A6 /* UKPrefsPanel.m */; };
@@ -126,7 +130,6 @@
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
 		48AA6BF7099B78E300D8F70B /* PATagger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48AA6BF5099B78E300D8F70B /* PATagger.h */; };
 		48AA6BF8099B78E300D8F70B /* PATagger.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AA6BF6099B78E300D8F70B /* PATagger.m */; };
-		48AE57B10AEF52670052088B /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48AE57AC0AEF52670052088B /* PADropHandler.framework */; };
 		48B0F1C30ACBFA6200738053 /* Tags.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1C20ACBFA6200738053 /* Tags.strings */; };
 		48B0F1D80ACC020800738053 /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1D70ACC020800738053 /* Global.strings */; };
 		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
@@ -149,8 +152,6 @@
 		48D8F01209CBE94C0011401F /* PATag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D8F01109CBE94C0011401F /* PATag.m */; };
 		48EB614409C2D4A40071D654 /* PARelatedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48EB614209C2D4A40071D654 /* PARelatedTags.h */; };
 		48EB614509C2D4A40071D654 /* PARelatedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB614309C2D4A40071D654 /* PARelatedTags.m */; };
-		48F97FBB0AEF5482003BA2DC /* PADropHandler.framework in Resources */ = {isa = PBXBuildFile; fileRef = 48AE57AC0AEF52670052088B /* PADropHandler.framework */; };
-		48F97FF30AEF5690003BA2DC /* PADropHandler.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48AE57AC0AEF52670052088B /* PADropHandler.framework */; };
 		48F9807C0AEF5CAF003BA2DC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48F980760AEF5CAF003BA2DC /* Info.plist */; };
 		48F9807D0AEF5CAF003BA2DC /* FileDropHandler in Resources */ = {isa = PBXBuildFile; fileRef = 48F980780AEF5CAF003BA2DC /* FileDropHandler */; };
 		48F9807E0AEF5CAF003BA2DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48F9807A0AEF5CAF003BA2DC /* InfoPlist.strings */; };
@@ -258,6 +259,23 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		483184CE0AEF90D000C3C672 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 483184970AEF8D8600C3C672 /* PADropHandler */;
+			remoteInfo = PADropHandler;
+		};
+		483184E80AEF91AE00C3C672 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 483184970AEF8D8600C3C672 /* PADropHandler */;
+			remoteInfo = PADropHandler;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		48F97FEC0AEF5638003BA2DC /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -265,7 +283,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				48F97FF30AEF5690003BA2DC /* PADropHandler.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +428,14 @@
 		482B31140AC6C70D0071C33B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ResultsView.nib; sourceTree = "<group>"; };
 		482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserViewMainController.h; sourceTree = "<group>"; };
 		482D81850ADE2AC300455635 /* drop_tag_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop_tag_small.png; sourceTree = "<group>"; };
+		483184980AEF8D8600C3C672 /* PADropHandler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PADropHandler.framework; path = build/Debug/PADropHandler.framework; sourceTree = "<group>"; };
+		483184990AEF8D8600C3C672 /* PADropHandler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PADropHandler-Info.plist"; sourceTree = "<group>"; };
+		483184B90AEF906900C3C672 /* PADropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADropDataHandler.h; sourceTree = "<group>"; };
+		483184BA0AEF906900C3C672 /* PADropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADropDataHandler.m; sourceTree = "<group>"; };
+		483184BB0AEF906900C3C672 /* PADropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADropHandler.h; sourceTree = "<group>"; };
+		483184BC0AEF906900C3C672 /* PADropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADropHandler.m; sourceTree = "<group>"; };
+		483184E30AEF91A700C3C672 /* FilenamesDropHandler.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = FilenamesDropHandler.bundle; path = build/Debug/FilenamesDropHandler.bundle; sourceTree = "<group>"; };
+		483184E40AEF91A700C3C672 /* FilenamesDropHandler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "FilenamesDropHandler-Info.plist"; sourceTree = "<group>"; };
 		4832722C0AA42D19003D98A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		483272320AA42DC6003D98A6 /* UKPrefsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKPrefsPanel.h; sourceTree = "<group>"; };
 		483272330AA42DC6003D98A6 /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
@@ -492,7 +517,6 @@
 		489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTagsView.m; sourceTree = "<group>"; };
 		48AA6BF5099B78E300D8F70B /* PATagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagger.h; sourceTree = "<group>"; };
 		48AA6BF6099B78E300D8F70B /* PATagger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagger.m; sourceTree = "<group>"; };
-		48AE57AC0AEF52670052088B /* PADropHandler.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PADropHandler.framework; path = Source/Frameworks/PADropHandler/build/Release/PADropHandler.framework; sourceTree = "<group>"; };
 		48B0F1C00ACBFA5200738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Tags.strings; sourceTree = "<group>"; };
 		48B0F1D50ACC020000738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Global.strings; sourceTree = "<group>"; };
 		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
@@ -623,13 +647,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		483184960AEF8D8600C3C672 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483184E10AEF91A700C3C672 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072E0486CEB800E47090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				658EA77D099798A6005F13DE /* Message.framework in Frameworks */,
-				48AE57B10AEF52670052088B /* PADropHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +683,8 @@
 				48F6A9F40996423000AA118D /* Tagging */,
 				48209C9E0AB1BEB300F3CF21 /* DropHandling */,
 				4816346E0A5A52EA003B8EE4 /* Misc */,
+				4831849F0AEF8FD800C3C672 /* Frameworks */,
+				483184F20AEF91E100C3C672 /* Plugins */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -662,7 +701,6 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				48AE57AC0AEF52670052088B /* PADropHandler.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
@@ -674,6 +712,8 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* Punakea.app */,
+				483184980AEF8D8600C3C672 /* PADropHandler.framework */,
+				483184E30AEF91A700C3C672 /* FilenamesDropHandler.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -687,6 +727,8 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				654DBC1709C9D0320061BFA4 /* Documentation */,
+				483184990AEF8D8600C3C672 /* PADropHandler-Info.plist */,
+				483184E40AEF91A700C3C672 /* FilenamesDropHandler-Info.plist */,
 			);
 			name = Punakea;
 			sourceTree = "<group>";
@@ -826,6 +868,40 @@
 				4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */,
 			);
 			name = DropHandling;
+			sourceTree = "<group>";
+		};
+		4831849F0AEF8FD800C3C672 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				483184A20AEF8FE500C3C672 /* PADropHandler */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		483184A20AEF8FE500C3C672 /* PADropHandler */ = {
+			isa = PBXGroup;
+			children = (
+				483184B90AEF906900C3C672 /* PADropDataHandler.h */,
+				483184BA0AEF906900C3C672 /* PADropDataHandler.m */,
+				483184BB0AEF906900C3C672 /* PADropHandler.h */,
+				483184BC0AEF906900C3C672 /* PADropHandler.m */,
+			);
+			path = PADropHandler;
+			sourceTree = "<group>";
+		};
+		483184F20AEF91E100C3C672 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				483184F50AEF91F200C3C672 /* FilenamesDropHandler */,
+			);
+			path = Plugins;
+			sourceTree = "<group>";
+		};
+		483184F50AEF91F200C3C672 /* FilenamesDropHandler */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FilenamesDropHandler;
 			sourceTree = "<group>";
 		};
 		483272220AA42C7E003D98A6 /* Preferences */ = {
@@ -1263,6 +1339,18 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		483184930AEF8D8600C3C672 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				483184BD0AEF906900C3C672 /* PADropDataHandler.h in Headers */,
+				483184BF0AEF906900C3C672 /* PADropHandler.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXLegacyTarget section */
 		483F9BBB0AEE01A900F3CC7F /* DMG */ = {
 			isa = PBXLegacyTarget;
@@ -1281,6 +1369,42 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
+		483184970AEF8D8600C3C672 /* PADropHandler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4831849A0AEF8D8700C3C672 /* Build configuration list for PBXNativeTarget "PADropHandler" */;
+			buildPhases = (
+				483184930AEF8D8600C3C672 /* Headers */,
+				483184940AEF8D8600C3C672 /* Resources */,
+				483184950AEF8D8600C3C672 /* Sources */,
+				483184960AEF8D8600C3C672 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PADropHandler;
+			productName = PADropHandler;
+			productReference = 483184980AEF8D8600C3C672 /* PADropHandler.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		483184E20AEF91A700C3C672 /* FilenamesDropHandler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 483184E50AEF91A700C3C672 /* Build configuration list for PBXNativeTarget "FilenamesDropHandler" */;
+			buildPhases = (
+				483184DF0AEF91A700C3C672 /* Resources */,
+				483184E00AEF91A700C3C672 /* Sources */,
+				483184E10AEF91A700C3C672 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				483184E90AEF91AE00C3C672 /* PBXTargetDependency */,
+			);
+			name = FilenamesDropHandler;
+			productName = FilenamesDropHandler;
+			productReference = 483184E30AEF91A700C3C672 /* FilenamesDropHandler.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8D1107260486CEB800E47090 /* Punakea */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Punakea" */;
@@ -1295,6 +1419,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				483184CF0AEF90D000C3C672 /* PBXTargetDependency */,
 			);
 			name = Punakea;
 			productInstallPath = "$(HOME)/Applications";
@@ -1329,16 +1454,31 @@
 				8D1107260486CEB800E47090 /* Punakea */,
 				488A52E80A81D9DC005B54A8 /* Documentation */,
 				483F9BBB0AEE01A900F3CC7F /* DMG */,
+				483184970AEF8D8600C3C672 /* PADropHandler */,
+				483184E20AEF91A700C3C672 /* FilenamesDropHandler */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		483184940AEF8D8600C3C672 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483184DF0AEF91A700C3C672 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D1107290486CEB800E47090 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48F97FBB0AEF5482003BA2DC /* PADropHandler.framework in Resources */,
 				65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */,
@@ -1419,6 +1559,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		483184950AEF8D8600C3C672 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				483184BE0AEF906900C3C672 /* PADropDataHandler.m in Sources */,
+				483184C00AEF906900C3C672 /* PADropHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483184E00AEF91A700C3C672 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1513,6 +1669,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		483184CF0AEF90D000C3C672 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
+			targetProxy = 483184CE0AEF90D000C3C672 /* PBXContainerItemProxy */;
+		};
+		483184E90AEF91AE00C3C672 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
+			targetProxy = 483184E80AEF91AE00C3C672 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
@@ -1631,6 +1800,110 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4831849B0AEF8D8700C3C672 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PADropHandler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PADropHandler;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		4831849C0AEF8D8700C3C672 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PADropHandler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PADropHandler;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		483184E60AEF91A700C3C672 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "FilenamesDropHandler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = FilenamesDropHandler;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		483184E70AEF91A700C3C672 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "FilenamesDropHandler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = FilenamesDropHandler;
+				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		483F9BC40AEE01B300F3CC7F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1777,6 +2050,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4831849A0AEF8D8700C3C672 /* Build configuration list for PBXNativeTarget "PADropHandler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4831849B0AEF8D8700C3C672 /* Debug */,
+				4831849C0AEF8D8700C3C672 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		483184E50AEF91A700C3C672 /* Build configuration list for PBXNativeTarget "FilenamesDropHandler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				483184E60AEF91A700C3C672 /* Debug */,
+				483184E70AEF91A700C3C672 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		483F9BC30AEE01B300F3CC7F /* Build configuration list for PBXLegacyTarget "DMG" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
