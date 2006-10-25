@@ -7,16 +7,16 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>eu.nudgenudge.PADropHandler</string>
+	<string>com.yourcompany.SafariBookmarkDropHandler</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
-	<string>FMWK</string>
+	<string>BNDL</string>
 	<key>CFBundleSignature</key>
 	<string>NuNu</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>NSPrincipalClass</key>
-	<string>PADropHandler</string>
+	<string>PABookmarkDictionaryListDropHandler</string>
 </dict>
 </plist>

@@ -31,7 +31,7 @@
 }
 
 #pragma mark main methods
-- (PAFile*)fileDropData:(id)data
+- (NSString*)fileDropData:(id)data
 {
 	return nil;
 }

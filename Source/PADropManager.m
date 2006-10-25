@@ -90,7 +90,7 @@ NSString *appSupportSubpath = @"Application Support/ntags/PlugIns";
 		}
 	}
 
-	return result;
+	return [PAFile filesWithFilepaths:result];
 }
 
 - (NSDragOperation)performedDragOperation:(NSPasteboard*)pasteboard

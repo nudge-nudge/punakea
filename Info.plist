@@ -13,12 +13,20 @@
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>DropHandler Plugin</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>NuNu</string>
+			</array>
 			<key>CFBundleTypeRole</key>
-			<string>None</string>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>eu.nudgenudge.drophandlerplugin</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<true/>
 			<key>NSPersistentStoreTypeKey</key>
-			<string>InMemory</string>
+			<string>Binary</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -36,7 +44,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>alpha</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>NuNu</string>
 	<key>CFBundleVersion</key>
 	<string>758</string>
 	<key>NSMainNibFile</key>

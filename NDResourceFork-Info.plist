@@ -7,16 +7,14 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>eu.nudgenudge.PADropHandler</string>
+	<string>eu.nudgenudge.NDResourceFork</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleSignature</key>
-	<string>NuNu</string>
+	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-	<key>NSPrincipalClass</key>
-	<string>PADropHandler</string>
 </dict>
 </plist>

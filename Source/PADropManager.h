@@ -9,8 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "PADropHandler/PADropHandler.h"
 #import "PAFile.h"
-#import "PAFilenamesDropHandler.h"
-#import "PABookmarkDictionaryListDropHandler.h"
 
 /**
 this singleton class handles all drops from the outside.

@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAFile.h"
 
 /**
 abstract class for analyzing the data of a single pboardType. is used by PADropHandler.
@@ -25,7 +24,7 @@ if file management is active, the given data will be moved to an internal folder
  @param data pdata to file
  @return file with new location
  */
-- (PAFile*)fileDropData:(id)data;
+- (NSString*)fileDropData:(id)data;
 
 /**
 convenience method, calls handleFile:

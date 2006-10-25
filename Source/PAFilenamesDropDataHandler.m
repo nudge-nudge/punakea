@@ -12,18 +12,18 @@
 @implementation PAFilenamesDropDataHandler
 
 // data is NSString (filepath)
-- (PAFile*)fileDropData:(id)data
+- (NSString*)fileDropData:(id)data
 {
 	// only do something if managing files and if file not already in the managed file directory
 	if (!manageFiles || [self pathIsInManagedHierarchy:data])
 	{
-		return [PAFile fileWithPath:data];
+		return data;
 	}
 	else
 	{
 		NSString *destination = [self destinationForNewFile:[data lastPathComponent]];
 		[fileManager movePath:data toPath:destination handler:self];
-		return [PAFile fileWithPath:destination];
+		return destination;
 	}
 }
 
