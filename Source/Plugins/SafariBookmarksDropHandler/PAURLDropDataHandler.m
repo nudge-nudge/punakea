@@ -74,7 +74,7 @@ data is NSDictionary with keys:
  "" : URL
  "title" : title
 */
-- (PAFile*)fileDropData:(id)data
+- (NSString*)fileDropData:(id)data
 {
 	NSString *url = [data objectForKey:@""];
 	NSString *filename = [[data objectForKey:@"title"] stringByAppendingString:@".webloc"];
@@ -102,7 +102,7 @@ data is NSDictionary with keys:
 	[resource addData:[self dragDataWithEntries:entryArray] type:kDragWeblocType Id:128 name:filename];
 	[resource release];
 	
-	return [PAFile fileWithPath:filePath];
+	return filePath;
 }
 
 - (NSDragOperation)performedDragOperation
