@@ -18,6 +18,8 @@
 
 //this is where the sharedInstance is held
 static PADropManager *sharedInstance = nil;
+NSString *ext = @"ntagsdh";
+NSString *appSupportSubpath = @"Application Support/ntags/PlugIns";
 
 #pragma mark init
 //constructor - only called by sharedInstance
@@ -25,15 +27,18 @@ static PADropManager *sharedInstance = nil;
 	if (self = [super init])
 	{
 		dropHandlers = [[NSMutableArray alloc] init];
-			
-		// currently all the dropHandlers have to be created ... 
-		PAFilenamesDropHandler *filenamesDropHandler = [[PAFilenamesDropHandler alloc] init];
-		[self registerDropHandler:filenamesDropHandler];
-		[filenamesDropHandler release];
-			
-		PABookmarkDictionaryListDropHandler *bookmarkDictionaryListDropHandler = [[PABookmarkDictionaryListDropHandler alloc] init];
-		[self registerDropHandler:bookmarkDictionaryListDropHandler];
-		[bookmarkDictionaryListDropHandler release];
+		[self loadAllPlugins];
+		
+		// dropHandlers now contains all handlers
+		// register them
+		NSEnumerator *e = [dropHandlers objectEnumerator];
+		PADropHandler *dropHandler;
+		
+		while (dropHandler = [e nextObject])
+		{
+			NSLog(@"dropHandler %@ added",dropHandler);
+			[self registerDropHandler:dropHandler];
+		}
 	}
 	return self;
 }
@@ -103,6 +108,94 @@ static PADropManager *sharedInstance = nil;
 	
 	return op;
 }
+
+#pragma mark plugin stuff
+- (void)loadAllPlugins
+{
+    NSMutableArray *bundlePaths;
+    NSEnumerator *pathEnum;
+    NSString *currPath;
+    NSBundle *currBundle;
+    Class currPrincipalClass;
+    id currInstance;
+    
+    bundlePaths = [NSMutableArray array];
+   
+    [bundlePaths addObjectsFromArray:[self allBundles]];
+    
+    pathEnum = [bundlePaths objectEnumerator];
+    while(currPath = [pathEnum nextObject])
+    {
+        currBundle = [NSBundle bundleWithPath:currPath];
+        if(currBundle)
+        {
+            currPrincipalClass = [currBundle principalClass];
+            if(currPrincipalClass &&
+               [self plugInClassIsValid:currPrincipalClass])  // Validation
+            {
+                currInstance = [[currPrincipalClass alloc] init];
+                if(currInstance)
+                {
+                    [dropHandlers addObject:[currInstance autorelease]];
+                }
+            }
+        }
+    }
+}
+
+- (NSMutableArray *)allBundles
+{
+    NSArray *librarySearchPaths;
+    NSEnumerator *searchPathEnum;
+    NSString *currPath;
+    NSMutableArray *bundleSearchPaths = [NSMutableArray array];
+    NSMutableArray *allBundles = [NSMutableArray array];
+    
+    librarySearchPaths = NSSearchPathForDirectoriesInDomains(
+															 NSLibraryDirectory, NSAllDomainsMask - NSSystemDomainMask, YES);
+    
+    searchPathEnum = [librarySearchPaths objectEnumerator];
+    while(currPath = [searchPathEnum nextObject])
+    {
+        [bundleSearchPaths addObject:
+            [currPath stringByAppendingPathComponent:appSupportSubpath]];
+    }
+    [bundleSearchPaths addObject:
+        [[NSBundle mainBundle] builtInPlugInsPath]];
+    
+    searchPathEnum = [bundleSearchPaths objectEnumerator];
+    while(currPath = [searchPathEnum nextObject])
+    {
+        NSDirectoryEnumerator *bundleEnum;
+        NSString *currBundlePath;
+        bundleEnum = [[NSFileManager defaultManager]
+            enumeratorAtPath:currPath];
+        if(bundleEnum)
+        {
+            while(currBundlePath = [bundleEnum nextObject])
+            {
+                if([[currBundlePath pathExtension] isEqualToString:ext])
+                {
+					[allBundles addObject:[currPath
+                           stringByAppendingPathComponent:currBundlePath]];
+                }
+            }
+        }
+    }
+    
+    return allBundles;
+}
+
+- (BOOL)plugInClassIsValid:(Class)plugInClass
+{
+    if([plugInClass isSubclassOfClass:[PADropHandler class]])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
 
 #pragma mark singleton stuff
 + (PADropManager*)sharedInstance {
