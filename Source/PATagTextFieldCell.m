@@ -3,7 +3,7 @@
 //  punakea
 //
 //  Created by Johannes Hoffart on 26.05.06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 nudge:nudge. All rights reserved.
 //
 
 #import "PATagTextFieldCell.h"

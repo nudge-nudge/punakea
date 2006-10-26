@@ -3,7 +3,7 @@
 //  punakea
 //
 //  Created by Johannes Hoffart on 08.09.06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 nudge:nudge. All rights reserved.
 //
 
 #import "PADropManager.h"
@@ -36,8 +36,8 @@ NSString *appSupportSubpath = @"Application Support/ntags/PlugIns";
 		
 		while (dropHandler = [e nextObject])
 		{
-			NSLog(@"dropHandler %@ added",dropHandler);
 			[self registerDropHandler:dropHandler];
+			NSLog(@"dropHandler %@ registered",dropHandler);
 		}
 	}
 	return self;

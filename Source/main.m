@@ -3,7 +3,7 @@
 //  punakea
 //
 //  Created by Johannes Hoffart on 02.02.06.
-//  Copyright __MyCompanyName__ 2006. All rights reserved.
+//  Copyright nudge:nudge 2006. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

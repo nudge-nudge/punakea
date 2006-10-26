@@ -3,7 +3,7 @@
 //  punakea
 //
 //  Created by Johannes Hoffart on 08.09.06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 nudge:nudge. All rights reserved.
 //
 
 #import "PADropHandler.h"
@@ -36,6 +36,11 @@
 - (NSDragOperation)performedDragOperation:(NSPasteboard*)pasteboard
 {
 	return NSDragOperationNone;
+}
+
+- (NSString*)description
+{
+	return NSStringFromClass([self class]);
 }
 
 @end

@@ -3,7 +3,7 @@
 //  punakea
 //
 //  Created by Johannes Hoffart on 08.09.06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 nudge:nudge. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -31,7 +31,8 @@ checks pasteboard if it can be handled
 /**
 must be overwritten
  
-handles the pasteboard, returns contentfiles as array
+handles the pasteboard, returns contentfiles as array.
+ uses dropDataHandler to get a file for the pasteboard data
  @param pasteboard pasteboard to handle
  @return array of PAFiles
  */

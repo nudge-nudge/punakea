@@ -3,7 +3,7 @@
 //  punakea
 //
 //  Created by Daniel on 06.09.06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 nudge:nudge. All rights reserved.
 //
 
 #import "PAFilterButton.h"
