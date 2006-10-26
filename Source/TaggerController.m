@@ -199,10 +199,10 @@ completionsForSubstring:(NSString *)substring
 	NSRect windowFrame = [[[self window] contentView] frame];
 	float newTableViewHeight = windowFrame.size.height - cellSize.height;
 	float sizeDifference = oldTableViewFrame.size.height - newTableViewHeight;
-	[[tableView enclosingScrollView] setFrame:NSMakeRect(oldTableViewFrame.origin.x,
-														 oldTableViewFrame.origin.y + sizeDifference,
-														 oldTableViewFrame.size.width,
-														 newTableViewHeight)];
+//	[[tableView enclosingScrollView] setFrame:NSMakeRect(oldTableViewFrame.origin.x,
+//														 oldTableViewFrame.origin.y + sizeDifference,
+//														 oldTableViewFrame.size.width,
+//														 newTableViewHeight)];
 }
 
 #pragma mark gui change actions
