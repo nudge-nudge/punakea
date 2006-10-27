@@ -757,6 +757,7 @@
 			isa = PBXGroup;
 			children = (
 				65851FFF099780E0009C3CA7 /* Main */,
+				6531649B0AF2534B00928BEF /* Common */,
 				4816343D0A5A51E6003B8EE4 /* Tagger */,
 				4816343A0A5A51D2003B8EE4 /* Browser */,
 				488E18BA0A2722E5009D2826 /* Sidebar */,
@@ -920,11 +921,8 @@
 			isa = PBXGroup;
 			children = (
 				48DC82950AB69C0900DE0F16 /* File Handling */,
-				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
-				483272220AA42C7E003D98A6 /* Preferences */,
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
-				65035FB70A20762F00AD0597 /* Query */,
 				65B78F1A0AF0D8D400AF1102 /* CTGradient.h */,
 				65B78F1B0AF0D8D400AF1102 /* CTGradient.m */,
 				656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */,
@@ -988,8 +986,8 @@
 		483184F20AEF91E100C3C672 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				483185320AEF966B00C3C672 /* SafariBookmarksDropHandler */,
 				483184F50AEF91F200C3C672 /* FilenamesDropHandler */,
+				483185320AEF966B00C3C672 /* SafariBookmarksDropHandler */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -1216,6 +1214,16 @@
 				65D6ACD30A89E25800FDAC8A /* BlueGradient24.png */,
 			);
 			name = "Filter Slice";
+			sourceTree = "<group>";
+		};
+		6531649B0AF2534B00928BEF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				483272220AA42C7E003D98A6 /* Preferences */,
+				65035FB70A20762F00AD0597 /* Query */,
+				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		6540FA520AEE0F2800EF51F3 /* Cells */ = {
