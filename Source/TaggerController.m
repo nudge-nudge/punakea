@@ -381,12 +381,22 @@ completionsForSubstring:(NSString *)substring
 {
 	if(returnCode != NSOKButton) return;
 	
-	NSEnumerator *filenames = [[panel filenames] objectEnumerator];
+	NSMutableArray *results = [NSMutableArray array];
+	
+	NSEnumerator *e = [[panel filenames] objectEnumerator];
 	NSString *filename;
-	while(filename = [filenames nextObject])
+	
+	while(filename = [e nextObject])
 	{
-		NSLog(filename);
+		PAFile *file = [PAFile fileWithPath:filename];
+	
+		if (![[fileController arrangedObjects] containsObject:file])
+		{
+			[results addObject:file];
+		}
 	}
+	
+	[fileController addObjects:results];
 }
 
 @end
