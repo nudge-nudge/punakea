@@ -7,24 +7,27 @@
 #import "PATypeAheadFind.h"
 #import "PADropManager.h"
 #import "PAFileCell.h"
+#import "PATaggerHeaderCell.h"
 
 @interface TaggerController : NSWindowController
 {	
-	IBOutlet NSTableView *tableView;
-	PAFileCell *fileCell;
+	IBOutlet NSTableView		*tableView;
 	
-	IBOutlet NSTokenField *tagField; /**< shows tags which are on all selected files */
+	PAFileCell					*fileCell;
+	PATaggerHeaderCell			*headerCell;
 	
-	IBOutlet NSArrayController *fileController;
+	IBOutlet NSTokenField		*tagField; /**< shows tags which are on all selected files */
 	
-	PASelectedTags *currentCompleteTagsInField; /**< holds the relevant tags of tagField (as a copy) */
-	NSString *restDisplayString;
+	IBOutlet NSArrayController	*fileController;
+	
+	PASelectedTags				*currentCompleteTagsInField; /**< holds the relevant tags of tagField (as a copy) */
+	NSString					*restDisplayString;
 
-	PATagger *tagger;
-	PATags *tags; /**< reference to all tags (same as in controller) */
+	PATagger					*tagger;
+	PATags						*tags; /**< reference to all tags (same as in controller) */
 	
-	PATypeAheadFind *typeAheadFind;
-	PADropManager *dropManager;
+	PATypeAheadFind				*typeAheadFind;
+	PADropManager				*dropManager;
 }
 
 /**

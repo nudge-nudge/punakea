@@ -3,6 +3,13 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = PAFileCell; LANGUAGE = ObjC; SUPERCLASS = NSTextFieldCell; }, 
         {
+            CLASS = PATaggerBackgroundView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controller = TaggerController; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {CLASS = PATaggerTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
+        {
             CLASS = TaggerController; 
             LANGUAGE = ObjC; 
             OUTLETS = {

@@ -121,10 +121,12 @@
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	[fontAttributes setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];		
 	[fontAttributes setObject:[NSFont systemFontOfSize:10] forKey:NSFontAttributeName];	
+	
 	paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
 	[paraStyle setAlignment:NSCenterTextAlignment];
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];	
+	[paraStyle release];
 	
 	NSRect dateFrame = valueLabelFrame;
 	dateFrame.origin.x = cellFrame.origin.x;

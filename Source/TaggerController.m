@@ -36,6 +36,7 @@ resets the tagger window (called when window is closed)
 		tags = [tagger tags];
 		currentCompleteTagsInField = [[PASelectedTags alloc] init];
 		dropManager = [PADropManager sharedInstance];
+		
 		// custom data cell
 		fileCell = [[PAFileCell alloc] init];
 	}
@@ -53,9 +54,16 @@ resets the tagger window (called when window is closed)
 	// observe file selection
 	[fileController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
 
-	// set custom data cell
+	// set custom data + header cell
 	NSArray *columns = [tableView tableColumns];
 	[[columns objectAtIndex:0] setDataCell:fileCell];
+	
+	if(!headerCell)
+	{
+		NSString *title = [[[columns objectAtIndex:0] headerCell] stringValue];
+		headerCell = [[PATaggerHeaderCell alloc] initTextCell:title];
+	}	
+	[[columns objectAtIndex:0] setHeaderCell:headerCell];
 	
 	// token field wrapping
 	[[tagField cell] setWraps:YES];
@@ -63,6 +71,7 @@ resets the tagger window (called when window is closed)
 
 - (void)dealloc
 {
+	[headerCell release];
 	[fileCell release];
 	[fileController removeObserver:self forKeyPath:@"selectionIndexes"];
 	[tableView unregisterDraggedTypes];
@@ -343,6 +352,41 @@ completionsForSubstring:(NSString *)substring
 	[fileController addObjects:result];
 	
 	return YES;
+}
+
+
+#pragma mark Background View delegate
+- (void)addButtonClicked:(id)sender
+{
+	// create open panel with the needed settings
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	
+	[openPanel setAllowsMultipleSelection:YES];
+	[openPanel setCanChooseFiles:YES];
+	[openPanel setCanChooseDirectories:NO];
+	[openPanel setCanCreateDirectories:NO];
+	
+	NSString *path = @"~/Desktop";
+	
+	[openPanel beginSheetForDirectory:[path stringByExpandingTildeInPath]
+								   file:nil
+								  types:nil
+						 modalForWindow:[self window]
+						  modalDelegate:self
+						 didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) 
+							contextInfo:NULL];
+}
+
+- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+{
+	if(returnCode != NSOKButton) return;
+	
+	NSEnumerator *filenames = [[panel filenames] objectEnumerator];
+	NSString *filename;
+	while(filename = [filenames nextObject])
+	{
+		NSLog(filename);
+	}
 }
 
 @end
