@@ -32,6 +32,8 @@
 #pragma mark Drawing
 - (void)drawRect:(NSRect)aRect
 {	
+	aRect = [self bounds];
+
 	[[NSColor clearColor] set];
 	NSBezierPath *path = [NSBezierPath bezierPathWithRect:aRect];
 	[path fill];
