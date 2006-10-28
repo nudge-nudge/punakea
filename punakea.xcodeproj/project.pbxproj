@@ -131,6 +131,8 @@
 		488CD5250AC0240E0038AB34 /* Punakea in Resources */ = {isa = PBXBuildFile; fileRef = 488CD5240AC0240E0038AB34 /* Punakea */; };
 		488E18BD0A27231F009D2826 /* PATagTextFieldCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */; };
 		488E18BE0A27231F009D2826 /* PATagTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */; };
+		488E802C0AF3898400660B7B /* PACollectionNotEmpty.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */; };
+		488E802D0AF3898400660B7B /* PACollectionNotEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */; };
 		489A603F0ADA4AF500C6CE36 /* drop_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 489A603E0ADA4AF500C6CE36 /* drop_highlight.png */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
@@ -437,6 +439,7 @@
 				65B78F1C0AF0D8D400AF1102 /* CTGradient.h in CopyFiles */,
 				654B4CFB0AF1FD37001082BA /* PATaggerHeaderCell.h in CopyFiles */,
 				6530FF360AF2229400D7A79A /* PATaggerTableView.h in CopyFiles */,
+				488E802C0AF3898400660B7B /* PACollectionNotEmpty.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +564,8 @@
 		488CD5240AC0240E0038AB34 /* Punakea */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Punakea; sourceTree = "<group>"; };
 		488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagTextFieldCell.h; sourceTree = "<group>"; };
 		488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagTextFieldCell.m; sourceTree = "<group>"; };
+		488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACollectionNotEmpty.h; sourceTree = "<group>"; };
+		488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACollectionNotEmpty.m; sourceTree = "<group>"; };
 		489A603E0ADA4AF500C6CE36 /* drop_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop_highlight.png; sourceTree = "<group>"; };
 		489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagsView.h; sourceTree = "<group>"; };
 		489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTagsView.m; sourceTree = "<group>"; };
@@ -920,6 +925,7 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				488E80270AF3895800660B7B /* Value Transformers */,
 				48DC82950AB69C0900DE0F16 /* File Handling */,
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
@@ -1084,6 +1090,15 @@
 				485016A30AA423FC00579C92 /* PASidebarTableColumn.m */,
 			);
 			name = Sidebar;
+			sourceTree = "<group>";
+		};
+		488E80270AF3895800660B7B /* Value Transformers */ = {
+			isa = PBXGroup;
+			children = (
+				488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */,
+				488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */,
+			);
+			name = "Value Transformers";
 			sourceTree = "<group>";
 		};
 		489AE71309DD4D7800EB60EB /* SelectedTagsView */ = {
@@ -1863,6 +1878,7 @@
 				65B78F1D0AF0D8D400AF1102 /* CTGradient.m in Sources */,
 				654B4CFC0AF1FD37001082BA /* PATaggerHeaderCell.m in Sources */,
 				6530FF370AF2229400D7A79A /* PATaggerTableView.m in Sources */,
+				488E802D0AF3898400660B7B /* PACollectionNotEmpty.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

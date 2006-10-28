@@ -21,6 +21,11 @@
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"];
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithContentsOfFile:path];
 	[defaults registerDefaults:appDefaults];
+	
+	// register value transformers
+	PACollectionNotEmpty *collectionNotEmpty = [[[PACollectionNotEmpty alloc] init] autorelease];
+	[NSValueTransformer setValueTransformer:collectionNotEmpty
+									forName:@"PACollectionNotEmpty"];
 }
 
 - (id)init

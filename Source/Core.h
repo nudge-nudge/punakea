@@ -14,6 +14,8 @@
 #import "PAResultsViewController.h"
 #import "PAResultsOutlineView.h"
 
+#import "PACollectionNotEmpty.h"
+
 @interface Core : NSWindowController
 {
 	PATagger *tagger;

@@ -186,11 +186,20 @@ completionsForSubstring:(NSString *)substring
 	NSRect oldTokenFieldFrame = [tagField frame];
 	NSSize cellSize = [[tagField cell] cellSizeForBounds:[tagField bounds]];
 	cellSize.height = (cellSize.height > 22) ? cellSize.height : 22;
+	float sizeDifference = cellSize.height - oldTokenFieldFrame.size.height;
 	
 	[tagField setFrame:NSMakeRect(oldTokenFieldFrame.origin.x,
-								  oldTokenFieldFrame.origin.y,
+								  oldTokenFieldFrame.origin.y - sizeDifference,
 								  oldTokenFieldFrame.size.width,
 								  cellSize.height)];
+	
+	NSRect oldTableViewFrame = [[tableView enclosingScrollView] frame];
+	[[tableView enclosingScrollView] setFrame:NSMakeRect(oldTableViewFrame.origin.x,
+														 oldTableViewFrame.origin.y,
+														 oldTableViewFrame.size.width,
+														 oldTableViewFrame.size.height - sizeDifference)];
+	
+	[[[self window] contentView] setNeedsDisplay:YES];
 }
 
 #pragma mark gui change actions
@@ -238,6 +247,7 @@ completionsForSubstring:(NSString *)substring
 	[currentCompleteTagsInField removeAllTags];
 	[currentCompleteTagsInField addObjectsFromArray:tagsOnAllFiles];
 	[self resizeTokenField];
+	[[self window] makeFirstResponder:tagField];
 }
 
 #pragma mark window delegate
@@ -297,7 +307,7 @@ completionsForSubstring:(NSString *)substring
 		}
 	}
 	
-	[fileController addObjects:result];
+	[self addFiles:result];
 	
 	return YES;
 }
@@ -344,7 +354,7 @@ completionsForSubstring:(NSString *)substring
 		}
 	}
 	
-	[fileController addObjects:results];
+	[self addFiles:results];
 }
 
 @end
