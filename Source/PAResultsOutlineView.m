@@ -34,6 +34,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
 	if(selectedQueryItems) [selectedQueryItems release];
 	[super dealloc];
 }
