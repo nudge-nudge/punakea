@@ -55,5 +55,12 @@ returns the destination for a file to be written
  */ 
 - (NSString*)destinationForNewFile:(NSString*)fileName;
 
+/**
+helper method
+ 
+ checks if the given path is already located in the managed files directory (or a subdirectory).
+ if this returns NO, the dropData should not be moved again.
+ */
+- (BOOL)pathIsInManagedHierarchy:(NSString*)path;
 
 @end

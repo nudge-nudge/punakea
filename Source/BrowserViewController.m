@@ -38,6 +38,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (PABrowserViewControllerState)state;
 - (void)setState:(PABrowserViewControllerState)aState;
 
+- (void)updateSortDescriptor;
+
 @end
 
 @implementation BrowserViewController
@@ -60,6 +62,16 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		buffer = [[NSMutableString alloc] init];
 		
 		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
+	
+		NSUserDefaultsController *userDefaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+		
+		sortKey = [[userDefaultsController valueForKeyPath:@"values.TagCloud.SortKey"] intValue];
+		[self updateSortDescriptor];
+		
+		[userDefaultsController addObserver:self 
+								 forKeyPath:@"values.TagCloud.SortKey" 
+									options:0 
+									context:NULL];
 		
 		[self setVisibleTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
@@ -100,6 +112,14 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	if ([keyPath isEqualToString:@"buffer"])
 	{
 		[self bufferHasChanged];
+	}
+	else if ([keyPath isEqual:@"values.TagCloud.SortKey"])
+	{
+		sortKey = [[[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:@"values.TagCloud.SortKey"] intValue];
+		[self updateSortDescriptor];
+		NSMutableArray *currentVisibleTags = [visibleTags mutableCopy];
+		[self setVisibleTags:currentVisibleTags];
+		[currentVisibleTags release];
 	}
 }
 
@@ -188,33 +208,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setVisibleTags:(NSMutableArray*)otherTags
 {
-	if (visibleTags != otherTags)
-	{
-		[visibleTags release];
-		
-		NSSortDescriptor *sortDescriptor;
-		
-		// sort otherTags accorings to userDefaults
-		if ([[tagCloudSettings objectForKey:@"sortKey"] isEqualToString:@"name"])
-		{
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-		}
-		else if ([[tagCloudSettings objectForKey:@"sortKey"] isEqualToString:@"rating"])
-		{
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO];
-		}
-		else
-		{
-			// default to name
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-		}
-		
-		NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-		visibleTags = [sortedArray mutableCopy];
-		
-		if ([visibleTags count] > 0)
-			[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
-	}
+	[visibleTags release];
+			
+	NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+	visibleTags = [sortedArray mutableCopy];
+	
+	if ([visibleTags count] > 0)
+		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
 }
 
 - (void)setDisplayTags:(NSMutableArray*)someTags
@@ -471,4 +471,25 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	return frame.size.height - SPLITVIEW_PANEL_MIN_HEIGHT;
 }
 
+#pragma mark sorting
+- (void)updateSortDescriptor
+{
+	[sortDescriptor release];
+	
+	// sort otherTags accorings to userDefaults
+	if (sortKey == PATagCloudNameSortKey)
+	{
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+	}
+	else if (sortKey == PATagCloudRatingSortKey)
+	{
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"absoluteRating" ascending:NO];
+	}
+	else
+	{
+		// default to name
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+	}
+}
+	
 @end

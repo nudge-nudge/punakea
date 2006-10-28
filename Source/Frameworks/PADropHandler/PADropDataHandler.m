@@ -11,7 +11,6 @@
 @interface PADropDataHandler (PrivateAPI)
 
 - (NSString*)pathForFiles;
-- (BOOL)pathIsInManagedHierarchy:(NSString*)path;
 
 @end
 

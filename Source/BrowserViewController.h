@@ -15,13 +15,16 @@
 #import "PATagManagementViewController.h"
 #import "PAResultsViewController.h"
 
-typedef enum _PABrowserViewControllerState
-{
+typedef enum _PABrowserViewControllerState {
 	PABrowserViewControllerNormalState = 1,
 	PABrowserViewControllerTypeAheadFindState = 2,
 	PABrowserViewControllerMainControllerState = 4
 } PABrowserViewControllerState;
 
+typedef enum _PATagCloudSortKey {
+	PATagCloudNameSortKey = 0,
+	PATagCloudRatingSortKey = 1
+} PATagCloudSortKey;
 
 @class PATagCloud;
 
@@ -48,6 +51,9 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	NSString *buffer;
 		
 	NSMutableDictionary *tagCloudSettings;
+	
+	PATagCloudSortKey sortKey;
+	NSSortDescriptor *sortDescriptor;
 }
 
 /** 

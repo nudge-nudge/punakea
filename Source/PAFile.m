@@ -154,5 +154,10 @@
 		return NO;
 }
 
+#pragma mark comparison
+- (NSComparisonResult)compare:(PAFile*)aFile
+{
+	return [[self name] compare:[aFile name]];
+}
 
 @end
