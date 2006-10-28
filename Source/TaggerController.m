@@ -9,9 +9,9 @@ adds tag to tagField (use from "outside")
 - (void)addTagToField:(PASimpleTag*)tag;
 
 /**
-called when file selection has changed
+called when files have changed
  */
-- (void)selectionHasChanged;
+- (void)filesHaveChanged;
 
 /**
 resets the tagger window (called when window is closed)
@@ -51,9 +51,6 @@ resets the tagger window (called when window is closed)
 	// table view drop support
 	[tableView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
 	
-	// observe file selection
-	[fileController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:NULL];
-
 	// set custom data + header cell
 	NSArray *columns = [tableView tableColumns];
 	[[columns objectAtIndex:0] setDataCell:fileCell];
@@ -80,20 +77,11 @@ resets the tagger window (called when window is closed)
 	[super dealloc];
 }
 
-#pragma mark observing
-- (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object 
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-	// only the file selection is observed
-	[self selectionHasChanged];
-}
-
 #pragma mark accessors
 - (void)addFiles:(NSMutableArray*)newFiles
 {
 	[fileController addObjects:newFiles];
+	[self filesHaveChanged];
 }
 
 - (NSArray*)files
@@ -136,7 +124,7 @@ completionsForSubstring:(NSString *)substring
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)idx
 {
-	[[PATagger sharedInstance] addTags:tokens toFiles:[fileController selectedObjects]];
+	[[PATagger sharedInstance] addTags:tokens toFiles:[fileController arrangedObjects]];
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	
 	// resize field if neccessary
@@ -186,7 +174,7 @@ completionsForSubstring:(NSString *)substring
 		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
 		
 		// remove the deleted tags from all files
-		[[PATagger sharedInstance] removeTags:deletedTags fromFiles:[fileController selectedObjects]];
+		[[PATagger sharedInstance] removeTags:deletedTags fromFiles:[fileController arrangedObjects]];
 	}
 	
 	// resize tokenfield if neccessary
@@ -203,26 +191,17 @@ completionsForSubstring:(NSString *)substring
 								  oldTokenFieldFrame.origin.y,
 								  oldTokenFieldFrame.size.width,
 								  cellSize.height)];
-	
-	NSRect oldTableViewFrame = [[tableView enclosingScrollView] frame];
-	NSRect windowFrame = [[[self window] contentView] frame];
-	float newTableViewHeight = windowFrame.size.height - cellSize.height;
-	float sizeDifference = oldTableViewFrame.size.height - newTableViewHeight;
-//	[[tableView enclosingScrollView] setFrame:NSMakeRect(oldTableViewFrame.origin.x,
-//														 oldTableViewFrame.origin.y + sizeDifference,
-//														 oldTableViewFrame.size.width,
-//														 newTableViewHeight)];
 }
 
 #pragma mark gui change actions
-- (IBAction)selectionHasChanged
+- (void)filesHaveChanged
 {
 	NSMutableArray *tagsOnSomeFiles = [NSMutableArray array];
 	NSMutableArray *tagsOnAllFiles = [NSMutableArray array];
 
-	NSArray *allTags = [tagger tagsOnFiles:[fileController selectedObjects]];
+	NSArray *allTags = [tagger tagsOnFiles:[fileController arrangedObjects]];
 	
-	NSEnumerator *fileEnumerator = [[fileController selectedObjects] objectEnumerator];
+	NSEnumerator *fileEnumerator = [[fileController arrangedObjects] objectEnumerator];
 	PAFile *file;
 	
 	// all files are checked for their tags,
@@ -259,37 +238,6 @@ completionsForSubstring:(NSString *)substring
 	[currentCompleteTagsInField removeAllTags];
 	[currentCompleteTagsInField addObjectsFromArray:tagsOnAllFiles];
 	[self resizeTokenField];
-	
-	[self displayRestTags:tagsOnSomeFiles];
-}
-
-- (void)displayRestTags:(NSArray*)restTags
-{
-	NSMutableString *displayString = @"";
-	
-	NSEnumerator *e = [restTags objectEnumerator];
-	PASimpleTag *tag;
-
-	tag = [e nextObject];
-	
-	if (tag)
-	{
-		displayString = [NSMutableString stringWithFormat:@"%i tags not shown: %@",[restTags count],[tag name]];
-	}
-	
-	while (tag = [e nextObject])
-	{
-		[displayString appendFormat:@", %@",[tag name]];
-	}
-	
-	[self setRestDisplayString:displayString];
-}
-
-- (void)setRestDisplayString:(NSString*)aString
-{
-	[restDisplayString release];
-	[aString retain];
-	restDisplayString = aString;
 }
 
 #pragma mark window delegate

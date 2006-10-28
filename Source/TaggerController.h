@@ -37,8 +37,6 @@ adds new files to the fileController
 - (void)addFiles:(NSMutableArray*)newFiles;
 - (NSArray*)files;
 
-- (void)setRestDisplayString:(NSString*)aString;
-
 - (PASelectedTags*)currentCompleteTagsInField;
 - (void)setCurrentCompleteTagsInField:(PASelectedTags*)newTags;
 
