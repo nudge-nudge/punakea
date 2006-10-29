@@ -491,5 +491,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
 	}
 }
+
+#pragma mark temp
+- (PATags*)tags
+{
+	return tags;
+}
 	
 @end

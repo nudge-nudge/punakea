@@ -29,6 +29,7 @@ displays all [datasource visibleTags] in a nice tag cloud view
 	NSMutableArray *viewAnimationCache; /**< animation cache */
 	
 	NSAttributedString *noRelatedTagsMessage;
+	NSAttributedString *noTagsMessage;
 }
 
 - (id)datasource;

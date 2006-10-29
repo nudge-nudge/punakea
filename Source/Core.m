@@ -35,6 +35,8 @@
 		tagger = [PATagger sharedInstance];
 		[self loadDataFromDisk];
 
+		[tagger test];
+		
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(tagsHaveChanged) name:nil object:[tagger tags]];
 	}
@@ -112,18 +114,26 @@
 - (void)loadDataFromDisk 
 {
 	NSString *path = [self pathForDataFile];
-	
 	NSMutableData *data = [NSData dataWithContentsOfFile:path];
-	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-	NSMutableDictionary *rootObject = [unarchiver decodeObject];
-	[unarchiver finishDecoding];
-	[unarchiver release];
 	
-	NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
-	
-	if ([loadedTags count] > 0)
+	if (data)
 	{
-		[[tagger tags] setTags:loadedTags];
+		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+		NSMutableDictionary *rootObject = [unarchiver decodeObject];
+		[unarchiver finishDecoding];
+		[unarchiver release];
+	
+		NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
+	
+		if ([loadedTags count] > 0)
+		{
+			[[tagger tags] setTags:loadedTags];
+		}
+	}
+	else
+	{
+		// on first startup there will be no data, create empty mutable array
+		[[tagger tags] setTags:[NSMutableArray array]];
 	}
 }	
 

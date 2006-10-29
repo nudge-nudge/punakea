@@ -116,6 +116,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (BOOL)startQuery
 {
 	// TODO: Smart caching!
+	NSLog(@"queryString: %@",[mdquery predicate]);
 	
 	// Finally, post notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryDidStartGatheringNotification

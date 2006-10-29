@@ -8,6 +8,9 @@
 
 #import "PATagger.h"
 
+NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
+NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
+
 @interface PATagger (PrivateAPI)
 
 - (void)writeTags:(NSArray*)tags toFile:(PAFile*)file;
@@ -142,10 +145,45 @@ static PATagger *sharedInstance = nil;
 }
 
 - (NSArray*)keywordsForFile:(PAFile*)file {
-	MDItemRef *item = MDItemCreate(NULL,[file path]);
-	CFTypeRef *keywords = MDItemCopyAttribute(item,@"kMDItemKeywords");
-	NSArray *tagNames = (NSArray*)keywords;
-	return [tagNames autorelease];
+	// TODO check invalid strings
+	
+	// get comment
+	NSString *finderSpotlightComment = [self finderSpotlightCommentForFile:file];
+	
+	// extract keywords
+	NSRange openCommentRange = [finderSpotlightComment rangeOfString:TAGGER_OPEN_COMMENT];
+	NSRange closeCommentRange = [finderSpotlightComment rangeOfString:TAGGER_CLOSE_COMMENT];
+	
+	if (openCommentRange.location != NSNotFound)
+	{
+		NSString *keywordString = [finderSpotlightComment substringWithRange:NSMakeRange(openCommentRange.location + openCommentRange.length,
+																						 closeCommentRange.location - openCommentRange.location - openCommentRange.length)];
+	
+		NSArray *components = [keywordString componentsSeparatedByString:@";"];
+		
+		// check if there are any keywords
+		if ([components count] == 1 && [[components objectAtIndex:0] isEqualToString:@""])
+		{
+			return [NSArray array];
+		}
+		else
+		{
+			NSMutableArray *keywords = [NSMutableArray array];
+			NSEnumerator *e = [components objectEnumerator];
+			NSString *component;
+			
+			while (component = [e nextObject])
+			{
+				// ignore tag: prefix ... TODO!
+				[keywords addObject:[component substringFromIndex:4]];
+			}
+			return keywords;
+		}
+	}
+	else
+	{
+		return [NSArray array];
+	}
 }
 
 - (void)addTags:(NSArray*)someTags toFiles:(NSArray*)files
@@ -262,24 +300,136 @@ static PATagger *sharedInstance = nil;
 }
 
 #pragma mark private
-- (void)writeTags:(NSArray*)someTags toFile:(PAFile*)file {
-	//only the names of the tags are written, create tmp array with names only
-	NSMutableArray *keywordArray = [[NSMutableArray alloc] init];
+- (void)writeTags:(NSArray*)keywords toFile:(PAFile*)file
+{
+	if (!keywords || [keywords count] == 0)
+		return;
 	
-	NSEnumerator *e = [someTags objectEnumerator];
+	// get current finder spotlight comment
+	NSString *currentFinderSpotlightComment = [self finderSpotlightCommentForFile:file];
+	
+	// delete old tag comment
+	NSRange openCommentRange = [currentFinderSpotlightComment rangeOfString:TAGGER_OPEN_COMMENT];
+	NSRange closeCommentRange = [currentFinderSpotlightComment rangeOfString:TAGGER_CLOSE_COMMENT];
+	
+	NSString *finderSpotlightCommentWithoutTags;
+	
+	if (openCommentRange.location != NSNotFound)
+	{
+		NSString *commentBeforeTags = [currentFinderSpotlightComment substringWithRange:NSMakeRange(0,openCommentRange.location)];
+		int lengthOfCommentAfterTags = [currentFinderSpotlightComment length] - closeCommentRange.location - closeCommentRange.length;
+		NSString *commentAfterTags = [currentFinderSpotlightComment substringWithRange:NSMakeRange(closeCommentRange.location,
+																								   lengthOfCommentAfterTags)];
+		finderSpotlightCommentWithoutTags = [commentBeforeTags stringByAppendingString:commentAfterTags];
+	}
+	else
+	{
+		finderSpotlightCommentWithoutTags = currentFinderSpotlightComment;
+	}
+		
+	// create new tag comment
+	NSMutableString *newTagComment = [NSMutableString stringWithString:TAGGER_OPEN_COMMENT];
+	NSEnumerator *e = [keywords objectEnumerator];
 	PATag *tag;
 	
-	while (tag = [e nextObject]) {
-		[keywordArray addObject:[tag name]];
+	if (tag = [e nextObject])
+	{
+		[newTagComment appendFormat:@"%@",tag];
 	}
 	
-	[[Matador sharedInstance] setAttributeForFileAtPath:[file path] name:@"kMDItemKeywords" value:keywordArray];
-	[keywordArray release];
+	while (tag = [e nextObject])
+	{
+		[newTagComment appendFormat:@";%@",tag];
+	}
+	
+	[newTagComment appendString:TAGGER_CLOSE_COMMENT];
+	
+	NSString *newFinderSpotlightComment = [finderSpotlightCommentWithoutTags stringByAppendingString:newTagComment];
+	
+	// write comment to end of finder spotlight comment
+	[self writeStringToFinderSpotlightComment:newFinderSpotlightComment ofFile:file];
 }
 
-- (void)writeKeywords:(NSArray*)keywords toFile:(PAFile*)file
+- (NSString*)finderSpotlightCommentForFile:(PAFile*)file
 {
-	[[Matador sharedInstance] setAttributeForFileAtPath:[file path] name:@"kMDItemKeywords" value:keywords];
+	MDItemRef *item = MDItemCreate(NULL,[file path]);
+	CFTypeRef *comment = MDItemCopyAttribute(item,@"kMDItemFinderComment");
+	
+	if (!comment)
+		return @"";
+	else
+		return (NSString*)comment;
+}
+
+- (void)writeStringToFinderSpotlightComment:(NSString*)comment ofFile:(PAFile*)file
+{
+	NSLog(@"%@ to %@",comment,file);
+	
+	// load the script from a resource by fetching its URL from within our bundle
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"findercomment" ofType:@"scpt"];
+    if (path != nil)
+    {
+        NSURL* url = [NSURL fileURLWithPath:path];
+        if (url != nil)
+        {
+            NSDictionary* errors = [NSDictionary dictionary];
+            NSAppleScript* appleScript =
+				[[NSAppleScript alloc] initWithContentsOfURL:url error:&errors];
+            if (appleScript != nil)
+            {				
+                // create the first parameter
+                NSAppleEventDescriptor* firstParameter =
+				[NSAppleEventDescriptor descriptorWithString:comment];
+				
+                // create the second parameter
+                NSAppleEventDescriptor* secondParameter =
+					[NSAppleEventDescriptor descriptorWithString:[file path]];				
+				
+                // create and populate the list of parameters
+                NSAppleEventDescriptor* parameters = [NSAppleEventDescriptor listDescriptor];
+                [parameters insertDescriptor:firstParameter atIndex:1];
+				[parameters insertDescriptor:secondParameter atIndex:2];
+				
+                // create the AppleEvent target
+                ProcessSerialNumber psn = {0, kCurrentProcess};
+                NSAppleEventDescriptor* target =
+					[NSAppleEventDescriptor
+                        descriptorWithDescriptorType:typeProcessSerialNumber
+											   bytes:&psn
+											  length:sizeof(ProcessSerialNumber)];
+				
+                // create an NSAppleEventDescriptor with the script's method name to call,
+                // this is used for the script statement: "on show_message(user_message)"
+                // Note that the routine name must be in lower case.
+                NSAppleEventDescriptor* handler =
+					[NSAppleEventDescriptor descriptorWithString:
+                        [@"write_comment" lowercaseString]];
+				
+                // create the event for an AppleScript subroutine,
+                // set the method name and the list of parameters
+                NSAppleEventDescriptor* event =
+					[NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
+															 eventID:kASSubroutineEvent
+													targetDescriptor:target
+															returnID:kAutoGenerateReturnID
+													   transactionID:kAnyTransactionID];
+                [event setParamDescriptor:handler forKeyword:keyASSubroutineName];
+                [event setParamDescriptor:parameters forKeyword:keyDirectObject];
+				
+                // call the event in AppleScript
+                if (![appleScript executeAppleEvent:event error:&errors]);
+                {
+                    // report any errors from 'errors'
+                }
+				
+                [appleScript release];
+            }
+            else
+            {
+                // report any errors from 'errors'
+            }
+        }
+    }
 }
 
 #pragma mark accessors
@@ -293,6 +443,13 @@ static PATagger *sharedInstance = nil;
 	[allTags retain];
 	[tags release];
 	tags = allTags;
+}
+
+#pragma mark temp
+- (void)test
+{
+	[[Matador sharedInstance] setAttributeForFileAtPath:@"/Users/darklight/Desktop/blubtest.txt"
+												   name:@"kMDItemFinderComment" value:@"dies test"];
 }
 
 #pragma mark singleton stuff

@@ -85,7 +85,10 @@ calculates the starting point in the next row according to the height of all the
 			[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:font,color,nil]
 										forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,nil]];
 		
-		noRelatedTagsMessage = [[NSAttributedString alloc] initWithString:@"no related tags" attributes:attrsDictionary]; 
+		noRelatedTagsMessage = [[NSAttributedString alloc] initWithString:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")
+															   attributes:attrsDictionary]; 
+		noTagsMessage = [[NSAttributedString alloc] initWithString:NSLocalizedStringFromTable(@"NO_TAGS",@"Tags",@"")
+														attributes:attrsDictionary];
 	}
 	return self;
 }
@@ -251,7 +254,11 @@ bound to visibleTags
 {	
 	[self drawBackground];
 	
-	if ([[datasource visibleTags] count] == 0 && ![delegate isWorking])
+	if ([[datasource tags] count] == 0)
+	{
+		[self drawString:noTagsMessage centeredIn:rect];
+	}
+	else if ([[datasource visibleTags] count] == 0 && ![delegate isWorking])
 	{
 		[self drawString:noRelatedTagsMessage centeredIn:rect];
 	}

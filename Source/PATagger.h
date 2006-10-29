@@ -8,12 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 #import <CoreServices/CoreServices.h>
+#import <Carbon/Carbon.h>
+#import <ApplicationServices/ApplicationServices.h>
 #import "Matador.h"
 #import "PATags.h"
 #import "PASimpleTagFactory.h"
 #import "PATempTag.h"
 #import "PAQuery.h"
 #import "PAFile.h"
+
+extern NSString * const TAGGER_OPEN_COMMENT;
+extern NSString * const TAGGER_CLOSE_COMMENT;
 
 /**
 singleton class for working with spotlight kMDItemKeywords (our simpleTags)

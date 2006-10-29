@@ -47,7 +47,7 @@
 	if (self) 
 	{
 		[self setName:[coder decodeObjectForKey:@"name"]];
-		[self setQuery:[coder decodeObjectForKey:@"query"]];
+		//[self setQuery:[coder decodeObjectForKey:@"query"]];
 		lastClicked = [[coder decodeObjectForKey:@"lastClicked"] retain];
 		lastUsed = [[coder decodeObjectForKey:@"lastUsed"] retain];
 		[coder decodeValueOfObjCType:@encode(unsigned long)	at:&clickCount];

@@ -21,7 +21,7 @@
 {
 	[super setName:aName];
 
-	[self setQuery:[NSString stringWithFormat:@"kMDItemKeywords LIKE[cd] \"%@\"",aName]];
+	[self setQuery:[NSString stringWithFormat:@"kMDItemFinderComment LIKE '*tag:%@*'",aName]];
 }
 
 - (NSString*)queryInSpotlightSyntax

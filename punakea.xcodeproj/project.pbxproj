@@ -120,6 +120,8 @@
 		4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */; };
 		4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */ = {isa = PBXBuildFile; fileRef = 4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */; };
 		4871792F0A5A619900A988DE /* BrowserView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4871792D0A5A619900A988DE /* BrowserView.nib */; };
+		487B00330AF4BD0D0011C0C7 /* findercomment.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 487BFFF70AF4BA380011C0C7 /* findercomment.scpt */; };
+		487BFFF80AF4BA380011C0C7 /* findercomment.scpt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 487BFFF70AF4BA380011C0C7 /* findercomment.scpt */; };
 		48893B020AF0A4E400BA0B50 /* FilenamesDropHandler.ntagsdh in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 483184E30AEF91A700C3C672 /* FilenamesDropHandler.ntagsdh */; };
 		48893B030AF0A4EE00BA0B50 /* NDResourceFork.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
 		48893B110AF0A59900BA0B50 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Info.plist */; };
@@ -440,6 +442,7 @@
 				654B4CFB0AF1FD37001082BA /* PATaggerHeaderCell.h in CopyFiles */,
 				6530FF360AF2229400D7A79A /* PATaggerTableView.h in CopyFiles */,
 				488E802C0AF3898400660B7B /* PACollectionNotEmpty.h in CopyFiles */,
+				487BFFF80AF4BA380011C0C7 /* findercomment.scpt in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +561,7 @@
 		4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadFind.h; sourceTree = "<group>"; };
 		4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadFind.m; sourceTree = "<group>"; };
 		4871792E0A5A619900A988DE /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/BrowserView.nib; sourceTree = "<group>"; };
+		487BFFF70AF4BA380011C0C7 /* findercomment.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; path = findercomment.scpt; sourceTree = "<group>"; };
 		488CBBDD0AC9674400F6D20E /* PABrowserViewMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserViewMainController.m; sourceTree = "<group>"; };
 		488CBBDF0AC9676C00F6D20E /* PAResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsViewController.h; sourceTree = "<group>"; };
 		488CBBE00AC9676C00F6D20E /* PAResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsViewController.m; sourceTree = "<group>"; };
@@ -1064,6 +1068,7 @@
 		488CD51F0AC023DF0038AB34 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				487BFFF70AF4BA380011C0C7 /* findercomment.scpt */,
 				488CD5240AC0240E0038AB34 /* Punakea */,
 			);
 			name = Scripts;
@@ -1673,6 +1678,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				487B00330AF4BD0D0011C0C7 /* findercomment.scpt in Resources */,
 				48893B110AF0A59900BA0B50 /* Info.plist in Resources */,
 				65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
