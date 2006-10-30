@@ -25,6 +25,7 @@
 - (void)dealloc
 {
 	if(addButton) [addButton release];
+	if(removeButton) [removeButton release];
 	[super dealloc];
 }
 
@@ -71,6 +72,26 @@
 		[addButton setTarget:controller];
 
 		[self addSubview:addButton]; 
+	}
+	
+	// Draw removeButton
+	if(!removeButton)
+	{
+		NSRect rect;
+		rect.origin.x = 27;  // As both buttons have borders, overlap them by 1px
+		rect.origin.y = 0;
+		rect.size.width = 28;
+		rect.size.height = 23;
+	
+		removeButton = [[PAImageButton alloc] initWithFrame:rect];
+		[removeButton setImage:[NSImage imageNamed:@"Remove"] forState:PAOffState];
+		[removeButton setImage:[NSImage imageNamed:@"RemovePressed"] forState:PAOnState];
+		[removeButton setState:PAOffState];
+		
+		[removeButton setAction:@selector(removeButtonClicked:)];
+		[removeButton setTarget:controller];
+
+		[self addSubview:removeButton]; 
 	}
 }
 

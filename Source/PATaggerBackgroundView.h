@@ -17,6 +17,7 @@
 	IBOutlet TaggerController		*controller;
 
 	PAImageButton					*addButton;
+	PAImageButton					*removeButton;
 	
 }
 

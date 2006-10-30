@@ -357,4 +357,9 @@ completionsForSubstring:(NSString *)substring
 	[self addFiles:results];
 }
 
+- (void)removeButtonClicked:(id)sender
+{
+	[fileController removeObjectsAtArrangedObjectIndexes:[tableView selectedRowIndexes]];
+}
+
 @end

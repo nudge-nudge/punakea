@@ -202,6 +202,8 @@
 		656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */; };
 		656C20030AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */; };
 		656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */; };
+		657321070AF63DAE000B3943 /* Remove.tif in Resources */ = {isa = PBXBuildFile; fileRef = 657321050AF63DAE000B3943 /* Remove.tif */; };
+		657321080AF63DAE000B3943 /* RemovePressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 657321060AF63DAE000B3943 /* RemovePressed.tif */; };
 		657CBD770AA5C4A800701D47 /* PAThumbnailManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */; };
 		657CBD780AA5C4A800701D47 /* PAThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */; };
 		65823B840A67CCFF0004DC39 /* NSBezierPathCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */; };
@@ -643,6 +645,8 @@
 		656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+FriendlyFormat.h"; sourceTree = "<group>"; };
 		656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+FriendlyFormat.m"; sourceTree = "<group>"; };
 		656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOn-1.tiff"; sourceTree = "<group>"; };
+		657321050AF63DAE000B3943 /* Remove.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Remove.tif; sourceTree = "<group>"; };
+		657321060AF63DAE000B3943 /* RemovePressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RemovePressed.tif; sourceTree = "<group>"; };
 		657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAThumbnailManager.h; sourceTree = "<group>"; };
 		657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAThumbnailManager.m; sourceTree = "<group>"; };
 		65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPathCategory.h; sourceTree = "<group>"; };
@@ -1441,6 +1445,8 @@
 			children = (
 				6530FF7A0AF2265300D7A79A /* Add.tiff */,
 				6530FF790AF2265300D7A79A /* AddPressed.tiff */,
+				657321050AF63DAE000B3943 /* Remove.tif */,
+				657321060AF63DAE000B3943 /* RemovePressed.tif */,
 				65B78F320AF0DA4600AF1102 /* statusbar.tiff */,
 			);
 			name = Tagger;
@@ -1737,6 +1743,8 @@
 				65B78F330AF0DA4600AF1102 /* statusbar.tiff in Resources */,
 				6530FF7B0AF2265300D7A79A /* AddPressed.tiff in Resources */,
 				6530FF7C0AF2265300D7A79A /* Add.tiff in Resources */,
+				657321070AF63DAE000B3943 /* Remove.tif in Resources */,
+				657321080AF63DAE000B3943 /* RemovePressed.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
