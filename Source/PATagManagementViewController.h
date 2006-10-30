@@ -11,20 +11,29 @@
 #import "PATagger.h"
 #import "PATags.h"
 #import "PATag.h"
+#import "NSDateFormatter+FriendlyFormat.h"
+#import "PAImageButton.h"
 
 extern NSString * const PATagManagementOperation;
 extern NSString * const PATagManagementRenameOperation;
 extern NSString * const PATagManagementRemoveOperation;
 
 @interface PATagManagementViewController : PABrowserViewMainController {
-	IBOutlet NSTextField *tagNameField;
 	
-	IBOutlet NSView *simpleTagManagementView;
+	IBOutlet NSTextField			*tagNameField;
+	IBOutlet NSTextField			*lastClickedField;
+	IBOutlet NSTextField			*lastUsedField;
+	IBOutlet NSLevelIndicator		*popularityIndicator;
+	IBOutlet NSView					*removeButtonPlaceholderView;
+	PAImageButton					*removeButton;
 	
-	PATag *currentEditedTag;
+	IBOutlet NSView					*simpleTagManagementView;
 	
-	PATagger *tagger;
-	PATags *tags;
+	PATag							*currentEditedTag;
+	
+	PATagger						*tagger;
+	PATags							*tags;
+	
 }
 
 - (PATag*)currentEditedTag;

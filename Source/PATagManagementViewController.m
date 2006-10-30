@@ -38,11 +38,32 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 - (void)awakeFromNib
 {
 	[self setCurrentView:view];
+	
+	[popularityIndicator setEnabled:NO];
+	
+	// Add remove button
+	NSRect rect;
+	rect.origin = NSZeroPoint;
+	rect.size.width = 12;
+	rect.size.height = 12;
+
+	removeButton = [[PAImageButton alloc] initWithFrame:rect];
+	[removeButton setImage:[NSImage imageNamed:@"RemoveRound"] forState:PAOffState];
+	[removeButton setImage:[NSImage imageNamed:@"RemoveRoundPressed"] forState:PAOnState];
+	[removeButton setState:PAOffState];
+	
+	[removeButton setAction:@selector(removeOperation:)];
+	[removeButton setTarget:self];
+	
+	[removeButton setToolTip:@"Delete this tag"];
+
+	[removeButtonPlaceholderView addSubview:removeButton]; 
 }
 
 - (void)dealloc
 {
 	[currentEditedTag release];
+	[removeButton release];
 	[super dealloc];
 }
 
@@ -198,9 +219,22 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 		
 	[sv addSubview:currentView];
 	[currentView setFrameSize:[sv frame].size];
-			
+	
+	// Update ui fields	
 	tagNameField = [currentView viewWithTag:1];
-	[tagNameField setObjectValue:[currentEditedTag name]];
+	[tagNameField setObjectValue:[tag name]];
+	
+	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];	
+	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+	[dateFormatter setDateStyle:NSDateFormatterLongStyle];	
+
+	[lastClickedField setStringValue:[dateFormatter friendlyStringFromDate:[tag lastClicked]]];
+	
+	[lastUsedField setStringValue:[dateFormatter friendlyStringFromDate:[tag lastUsed]]];
+	
+	// TODO: Set correct max value in IB
+	[popularityIndicator setFloatValue:[tag absoluteRating]];
+	
 	NSWindow *window = [[self currentView] window];
 	[window makeFirstResponder:tagNameField];
 }

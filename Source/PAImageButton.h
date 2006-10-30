@@ -13,6 +13,9 @@
 @interface PAImageButton : NSControl 
 {
 	
+	NSToolTipTag		*toolTipTag;
+	NSString			*toolTip;
+	
 }
 
 - (void)setButtonType:(PAButtonType)aType;
@@ -25,5 +28,7 @@
 - (void)setState:(PAButtonState)aState;
 - (NSMutableDictionary *)tag;
 - (void)setTag:(NSMutableDictionary *)aTag;
+- (NSString *)toolTip;
+- (void)setToolTip:(NSString *)aToolTip;
 
 @end

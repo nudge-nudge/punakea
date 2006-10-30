@@ -1,12 +1,14 @@
 {
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSLevelIndicator; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {
             CLASS = PABrowserViewMainController; 
             LANGUAGE = ObjC; 
             OUTLETS = {delegate = id; }; 
             SUPERCLASS = PAViewController; 
         }, 
+        {CLASS = PALabel; LANGUAGE = ObjC; SUPERCLASS = NSTextField; }, 
         {
             CLASS = PATagManagementArrayController; 
             LANGUAGE = ObjC; 
@@ -25,6 +27,10 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 currentView = NSView; 
+                lastClickedField = NSTextField; 
+                lastUsedField = NSTextField; 
+                popularityIndicator = NSLevelIndicator; 
+                removeButtonPlaceholderView = NSView; 
                 simpleTagManagementView = NSView; 
                 tagNameField = NSTextField; 
             }; 
