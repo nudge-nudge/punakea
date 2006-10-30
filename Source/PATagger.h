@@ -26,6 +26,8 @@ singleton class for working with spotlight kMDItemKeywords (our simpleTags)
 @interface PATagger : NSObject {
 	PASimpleTagFactory *simpleTagFactory;
 	PATags *tags;
+	
+	NSAppleScript *finderCommentScript;
 }
 
 /**

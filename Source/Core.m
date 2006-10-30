@@ -34,8 +34,6 @@
     {
 		tagger = [PATagger sharedInstance];
 		[self loadDataFromDisk];
-
-		[tagger test];
 		
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(tagsHaveChanged) name:nil object:[tagger tags]];

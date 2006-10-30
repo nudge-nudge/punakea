@@ -31,6 +31,17 @@ static PATagger *sharedInstance = nil;
 	{
 		simpleTagFactory = [[PASimpleTagFactory alloc] init];
 		tags = [[PATags alloc] init];
+		
+		// load the applescript for finder comments
+		NSString* path = [[NSBundle mainBundle] pathForResource:@"findercomment" ofType:@"scpt"];
+		if (path != nil)
+		{
+			NSURL* url = [NSURL fileURLWithPath:path];
+			if (url != nil)
+			{
+				finderCommentScript = [[NSAppleScript alloc] initWithContentsOfURL:url error:nil];
+			}
+		}
 	}
 	return self;
 }
@@ -364,72 +375,57 @@ static PATagger *sharedInstance = nil;
 - (void)writeStringToFinderSpotlightComment:(NSString*)comment ofFile:(PAFile*)file
 {
 	NSLog(@"%@ to %@",comment,file);
+
+	// create the first parameter
+	NSAppleEventDescriptor* firstParameter =
+	[NSAppleEventDescriptor descriptorWithString:comment];
 	
-	// load the script from a resource by fetching its URL from within our bundle
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"findercomment" ofType:@"scpt"];
-    if (path != nil)
-    {
-        NSURL* url = [NSURL fileURLWithPath:path];
-        if (url != nil)
-        {
-            NSDictionary* errors = [NSDictionary dictionary];
-            NSAppleScript* appleScript =
-				[[NSAppleScript alloc] initWithContentsOfURL:url error:&errors];
-            if (appleScript != nil)
-            {				
-                // create the first parameter
-                NSAppleEventDescriptor* firstParameter =
-				[NSAppleEventDescriptor descriptorWithString:comment];
-				
-                // create the second parameter
-                NSAppleEventDescriptor* secondParameter =
-					[NSAppleEventDescriptor descriptorWithString:[file path]];				
-				
-                // create and populate the list of parameters
-                NSAppleEventDescriptor* parameters = [NSAppleEventDescriptor listDescriptor];
-                [parameters insertDescriptor:firstParameter atIndex:1];
-				[parameters insertDescriptor:secondParameter atIndex:2];
-				
-                // create the AppleEvent target
-                ProcessSerialNumber psn = {0, kCurrentProcess};
-                NSAppleEventDescriptor* target =
-					[NSAppleEventDescriptor
-                        descriptorWithDescriptorType:typeProcessSerialNumber
-											   bytes:&psn
-											  length:sizeof(ProcessSerialNumber)];
-				
-                // create an NSAppleEventDescriptor with the script's method name to call,
-                // this is used for the script statement: "on show_message(user_message)"
-                // Note that the routine name must be in lower case.
-                NSAppleEventDescriptor* handler =
-					[NSAppleEventDescriptor descriptorWithString:
-                        [@"write_comment" lowercaseString]];
-				
-                // create the event for an AppleScript subroutine,
-                // set the method name and the list of parameters
-                NSAppleEventDescriptor* event =
-					[NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
-															 eventID:kASSubroutineEvent
-													targetDescriptor:target
-															returnID:kAutoGenerateReturnID
-													   transactionID:kAnyTransactionID];
-                [event setParamDescriptor:handler forKeyword:keyASSubroutineName];
-                [event setParamDescriptor:parameters forKeyword:keyDirectObject];
-				
-                // call the event in AppleScript
-                if (![appleScript executeAppleEvent:event error:&errors]);
-                {
-                    // report any errors from 'errors'
-                }
-				
-                [appleScript release];
-            }
-            else
-            {
-                // report any errors from 'errors'
-            }
-        }
-    }
+	// create the second parameter
+	NSAppleEventDescriptor* secondParameter =
+		[NSAppleEventDescriptor descriptorWithString:[file path]];				
+	
+	// create and populate the list of parameters
+	NSAppleEventDescriptor* parameters = [NSAppleEventDescriptor listDescriptor];
+	[parameters insertDescriptor:firstParameter atIndex:1];
+	[parameters insertDescriptor:secondParameter atIndex:2];
+	
+	// create the AppleEvent target
+	ProcessSerialNumber psn = {0, kCurrentProcess};
+	NSAppleEventDescriptor* target =
+		[NSAppleEventDescriptor
+			descriptorWithDescriptorType:typeProcessSerialNumber
+								   bytes:&psn
+								  length:sizeof(ProcessSerialNumber)];
+	
+	// create an NSAppleEventDescriptor with the script's method name to call,
+	// this is used for the script statement: "on show_message(user_message)"
+	// Note that the routine name must be in lower case.
+	NSAppleEventDescriptor* handler =
+		[NSAppleEventDescriptor descriptorWithString:
+			[@"write_comment" lowercaseString]];
+	
+	// create the event for an AppleScript subroutine,
+	// set the method name and the list of parameters
+	NSAppleEventDescriptor* event =
+		[NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
+												 eventID:kASSubroutineEvent
+										targetDescriptor:target
+												returnID:kAutoGenerateReturnID
+										   transactionID:kAnyTransactionID];
+	[event setParamDescriptor:handler forKeyword:keyASSubroutineName];
+	[event setParamDescriptor:parameters forKeyword:keyDirectObject];
+	
+	NSDictionary *errors = [NSDictionary dictionary];
+	
+	// call the event in AppleScript
+	if (![finderCommentScript executeAppleEvent:event error:&errors])
+	{
+		// report any errors from 'errors'
+	}
+	else
+	{
+		// report any errors from 'errors'
+	}
 }
 
 #pragma mark accessors
@@ -443,13 +439,6 @@ static PATagger *sharedInstance = nil;
 	[allTags retain];
 	[tags release];
 	tags = allTags;
-}
-
-#pragma mark temp
-- (void)test
-{
-	[[Matador sharedInstance] setAttributeForFileAtPath:@"/Users/darklight/Desktop/blubtest.txt"
-												   name:@"kMDItemFinderComment" value:@"dies test"];
 }
 
 #pragma mark singleton stuff
