@@ -56,7 +56,7 @@
 	NSEnumerator *e;
 	
 	// if active tags are set, look there, otherwise check in all tags
-	if ([activeTags count] > 0)
+	if (activeTags)
 	{
 		e = [activeTags objectEnumerator];
 	}
