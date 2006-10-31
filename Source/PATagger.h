@@ -16,7 +16,6 @@
 #import "PATempTag.h"
 #import "PAQuery.h"
 #import "PAFile.h"
-#import "ThreadWorker.h"
 
 extern NSString * const TAGGER_OPEN_COMMENT;
 extern NSString * const TAGGER_CLOSE_COMMENT;
@@ -30,7 +29,7 @@ singleton class for working with finder spotlight comment (our simpleTags)
 	
 	NSAppleScript *finderCommentScript;
 	
-	NSMutableDictionary *fileLocks;
+	NSMutableDictionary *fileCache;
 }
 
 /**

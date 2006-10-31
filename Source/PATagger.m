@@ -32,7 +32,7 @@ static PATagger *sharedInstance = nil;
 		simpleTagFactory = [[PASimpleTagFactory alloc] init];
 		tags = [[PATags alloc] init];
 		
-		fileLocks = [[NSMutableDictionary alloc] init];
+		fileCache = [[NSMutableDictionary alloc] init];
 		
 		// load the applescript for finder comments
 		NSString* path = [[NSBundle mainBundle] pathForResource:@"findercomment" ofType:@"scpt"];
@@ -200,42 +200,56 @@ static PATagger *sharedInstance = nil;
 - (NSArray*)keywordsForFile:(PAFile*)file {
 	// TODO check invalid strings
 	
-	// get comment
-	NSString *finderSpotlightComment = [self finderSpotlightCommentForFile:file];
+	NSArray *keywords;
+	// check cache if it has some keywords for file
 	
-	// extract keywords
-	NSRange openCommentRange = [finderSpotlightComment rangeOfString:TAGGER_OPEN_COMMENT];
-	NSRange closeCommentRange = [finderSpotlightComment rangeOfString:TAGGER_CLOSE_COMMENT];
-	
-	if (openCommentRange.location != NSNotFound)
+	@synchronized(fileCache)
 	{
-		NSString *keywordString = [finderSpotlightComment substringWithRange:NSMakeRange(openCommentRange.location + openCommentRange.length,
-																						 closeCommentRange.location - openCommentRange.location - openCommentRange.length)];
-		
-		NSArray *components = [keywordString componentsSeparatedByString:@";"];
-		
-		// check if there are any keywords
-		if ([components count] == 1 && [[components objectAtIndex:0] isEqualToString:@""])
+		if (keywords = [fileCache objectForKey:file])
 		{
-			return [NSArray array];
-		}
-		else
-		{
-			NSMutableArray *keywords = [NSMutableArray array];
-			NSEnumerator *e = [components objectEnumerator];
-			NSString *component;
-			
-			while (component = [e nextObject])
-			{
-				// ignore tag: prefix ... TODO!
-				[keywords addObject:[component substringFromIndex:1]];
-			}
+			NSLog(@"cache_hit");
 			return keywords;
 		}
-	}
-	else
-	{
-		return [NSArray array];
+		else
+		{	
+			// get comment
+			NSString *finderSpotlightComment = [self finderSpotlightCommentForFile:file];
+			
+			// extract keywords
+			NSRange openCommentRange = [finderSpotlightComment rangeOfString:TAGGER_OPEN_COMMENT];
+			NSRange closeCommentRange = [finderSpotlightComment rangeOfString:TAGGER_CLOSE_COMMENT];
+			
+			if (openCommentRange.location != NSNotFound)
+			{
+				NSString *keywordString = [finderSpotlightComment substringWithRange:NSMakeRange(openCommentRange.location + openCommentRange.length,
+																								 closeCommentRange.location - openCommentRange.location - openCommentRange.length)];
+				
+				NSArray *components = [keywordString componentsSeparatedByString:@";"];
+				
+				// check if there are any keywords
+				if ([components count] == 1 && [[components objectAtIndex:0] isEqualToString:@""])
+				{
+					return [NSArray array];
+				}
+				else
+				{
+					keywords = [NSMutableArray array];
+					NSEnumerator *e = [components objectEnumerator];
+					NSString *component;
+					
+					while (component = [e nextObject])
+					{
+						// ignore tag: prefix ... TODO!
+						[keywords addObject:[component substringFromIndex:1]];
+					}
+					return keywords;
+				}
+			}
+			else
+			{
+				return [NSArray array];
+			}
+		}
 	}
 }
 
@@ -313,9 +327,9 @@ static PATagger *sharedInstance = nil;
 }
 
 #pragma mark private
-- (void)writeTags:(NSArray*)keywords toFile:(PAFile*)file
+- (void)writeTags:(NSArray*)tags toFile:(PAFile*)file
 {
-	if (!keywords || [keywords count] == 0)
+	if (!tags || [tags count] == 0)
 		return;
 	
 	// get current finder spotlight comment
@@ -342,156 +356,132 @@ static PATagger *sharedInstance = nil;
 		
 	// create new tag comment
 	NSMutableString *newTagComment = [NSMutableString stringWithString:TAGGER_OPEN_COMMENT];
-	NSEnumerator *e = [keywords objectEnumerator];
+	NSMutableArray *keywords = [NSMutableArray array];
+	NSEnumerator *e = [tags objectEnumerator];
 	PATag *tag;
 	
 	if (tag = [e nextObject])
 	{
 		[newTagComment appendFormat:@"@%@",[tag name]];
+		[keywords addObject:[tag name]];
 	}
 	
 	while (tag = [e nextObject])
 	{
 		[newTagComment appendFormat:@";@%@",[tag name]];
+		[keywords addObject:[tag name]];
 	}
 	
 	[newTagComment appendString:TAGGER_CLOSE_COMMENT];
 	
 	NSString *newFinderSpotlightComment = [finderSpotlightCommentWithoutTags stringByAppendingString:newTagComment];
 	
-	// write comment to end of finder spotlight comment 
-	[self writeFinderSpotlightComment:newFinderSpotlightComment ofFile:file];
+	// write comment to end of finder spotlight comment
+	[self writeFinderSpotlightComment:newFinderSpotlightComment ofFile:file keywords:keywords];
 }
 
 - (NSString*)finderSpotlightCommentForFile:(PAFile*)file
 {
-	// check if file is locked
-	NSLock *fileLock = [fileLocks objectForKey:file];
+	MDItemRef *item = MDItemCreate(NULL,[file path]);
+	CFTypeRef *comment = MDItemCopyAttribute(item,@"kMDItemFinderComment");
 	
-	if (!fileLock)
-	{
-		MDItemRef *item = MDItemCreate(NULL,[file path]);
-		CFTypeRef *comment = MDItemCopyAttribute(item,@"kMDItemFinderComment");
-		
-		if (!comment)
-			return @"";
-		else
-			return (NSString*)comment;
-	}
-	else if (fileLock)
-	{
-		[fileLock retain];
-		[fileLock lock];
-		
-		// file is now free for reading
-		MDItemRef *item = MDItemCreate(NULL,[file path]);
-		CFTypeRef *comment = MDItemCopyAttribute(item,@"kMDItemFinderComment");
-		
-		if (!comment)
-			return @"";
-		else
-			return (NSString*)comment;
-		
-		[fileLock unlock];
-		[fileLock release];
-	}
-	
-	return @"";
+	if (!comment)
+		return @"";
+	else
+		return (NSString*)comment;
 }
 
-- (void)writeFinderSpotlightComment:(NSString*)comment ofFile:(PAFile*)file
+- (void)writeFinderSpotlightComment:(NSString*)comment ofFile:(PAFile*)file keywords:(NSArray*)keywords
 {
 	// locking and delay because of finder drop hang
-	[self createLockForFile:file];
-	[self performSelector:@selector(startWriteThread:)
+	[self createFileCacheFor:file keywords:keywords];
+	[self performSelector:@selector(writeStringToFinderSpotlightCommentOfFile:)
 			   withObject:[NSArray arrayWithObjects:comment,file,nil]
 			   afterDelay:0.1];
-}
-
-- (void)startWriteThread:(NSArray*)arguments
-{
-	[ThreadWorker workOn:self
-			withSelector:@selector(writeStringToFinderSpotlightCommentOfFile:)
-			  withObject:arguments
-		  didEndSelector:nil];
 }
 
 // perform selector afterDelay takes only 1 argument
 - (void)writeStringToFinderSpotlightCommentOfFile:(NSArray*)arguments
 {
-	NSString *comment = [arguments objectAtIndex:0];
-	PAFile *file = [arguments objectAtIndex:1];
-	
-	NSLog(@"%@ to %@",comment,file);
+	@synchronized(self)
+	{
+		NSString *comment = [arguments objectAtIndex:0];
+		PAFile *file = [arguments objectAtIndex:1];
+		
+		//NSLog(@"%@ to %@",comment,file);
 
-	// create the first parameter
-	NSAppleEventDescriptor* firstParameter =
-	[NSAppleEventDescriptor descriptorWithString:comment];
-	
-	// create the second parameter
-	NSAppleEventDescriptor* secondParameter =
-		[NSAppleEventDescriptor descriptorWithString:[file path]];				
-	
-	// create and populate the list of parameters
-	NSAppleEventDescriptor* parameters = [NSAppleEventDescriptor listDescriptor];
-	[parameters insertDescriptor:firstParameter atIndex:1];
-	[parameters insertDescriptor:secondParameter atIndex:2];
-	
-	// create the AppleEvent target
-	ProcessSerialNumber psn = {0, kCurrentProcess};
-	NSAppleEventDescriptor* target =
-		[NSAppleEventDescriptor
-			descriptorWithDescriptorType:typeProcessSerialNumber
-								   bytes:&psn
-								  length:sizeof(ProcessSerialNumber)];
-	
-	// create an NSAppleEventDescriptor with the script's method name to call,
-	// this is used for the script statement: "on show_message(user_message)"
-	// Note that the routine name must be in lower case.
-	NSAppleEventDescriptor* handler =
-		[NSAppleEventDescriptor descriptorWithString:
-			[@"write_comment" lowercaseString]];
-	
-	// create the event for an AppleScript subroutine,
-	// set the method name and the list of parameters
-	NSAppleEventDescriptor* event =
-		[NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
-												 eventID:kASSubroutineEvent
-										targetDescriptor:target
-												returnID:kAutoGenerateReturnID
-										   transactionID:kAnyTransactionID];
-	[event setParamDescriptor:handler forKeyword:keyASSubroutineName];
-	[event setParamDescriptor:parameters forKeyword:keyDirectObject];
-	
-	NSDictionary *errors = [NSDictionary dictionary];
-	
-	NSLog(@"pre");
-	
-	// call the event in AppleScript
-	NSAppleEventDescriptor *desc = [finderCommentScript executeAppleEvent:event error:&errors];
+		// create the first parameter
+		NSAppleEventDescriptor* firstParameter =
+		[NSAppleEventDescriptor descriptorWithString:comment];
+		
+		// create the second parameter
+		NSAppleEventDescriptor* secondParameter =
+			[NSAppleEventDescriptor descriptorWithString:[file path]];				
+		
+		// create and populate the list of parameters
+		NSAppleEventDescriptor* parameters = [NSAppleEventDescriptor listDescriptor];
+		[parameters insertDescriptor:firstParameter atIndex:1];
+		[parameters insertDescriptor:secondParameter atIndex:2];
+		
+		// create the AppleEvent target
+		ProcessSerialNumber psn = {0, kCurrentProcess};
+		NSAppleEventDescriptor* target =
+			[NSAppleEventDescriptor
+				descriptorWithDescriptorType:typeProcessSerialNumber
+									   bytes:&psn
+									  length:sizeof(ProcessSerialNumber)];
+		
+		// create an NSAppleEventDescriptor with the script's method name to call,
+		// this is used for the script statement: "on show_message(user_message)"
+		// Note that the routine name must be in lower case.
+		NSAppleEventDescriptor* handler =
+			[NSAppleEventDescriptor descriptorWithString:
+				[@"write_comment" lowercaseString]];
+		
+		// create the event for an AppleScript subroutine,
+		// set the method name and the list of parameters
+		NSAppleEventDescriptor* event =
+			[NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
+													 eventID:kASSubroutineEvent
+											targetDescriptor:target
+													returnID:kAutoGenerateReturnID
+											   transactionID:kAnyTransactionID];
+		[event setParamDescriptor:handler forKeyword:keyASSubroutineName];
+		[event setParamDescriptor:parameters forKeyword:keyDirectObject];
+		
+		NSDictionary *errors = [NSDictionary dictionary];
+		
+	//	NSLog(@"pre");
+		
+		// call the event in AppleScript
+		NSAppleEventDescriptor *desc = [finderCommentScript executeAppleEvent:event error:&errors];
 
-	NSLog(@"past");
-	
-	NSLog(@"desc: %@",desc);
-	NSLog(@"errors: %@",errors);
-	
-	[self unlockFile:file];
+//		NSLog(@"past");
+//		
+//		NSLog(@"desc: %@",desc);
+//		NSLog(@"errors: %@",errors);
+		
+		[self removeFileCacheFor:file];
+	}
 }
 
 #pragma mark threading stuff
-- (void)createLockForFile:(PAFile*)file
+- (void)createFileCacheFor:(PAFile*)file keywords:(NSArray*)keywords
 {
-	NSLock *lock = [[NSLock alloc] init];
-	[lock lock];
-	[fileLocks setObject:lock forKey:file];	
+	@synchronized(fileCache)
+	{
+		[fileCache setObject:[keywords retain] forKey:file];	
+	}
 }
 
-- (void)unlockFile:(PAFile*)file
+- (void)removeFileCacheFor:(PAFile*)file
 {
-	NSLock *lock = [fileLocks objectForKey:file];
-	[lock unlock];
-	[fileLocks removeObjectForKey:file];
-	[lock release];
+	@synchronized(fileCache)
+	{
+		NSArray *keywords = [fileCache objectForKey:file];
+		[fileCache removeObjectForKey:file];
+		[keywords release];
+	}
 }
 
 #pragma mark accessors
