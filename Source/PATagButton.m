@@ -59,13 +59,10 @@ should be overridden according to apple docs
 {
 	[[self cell] setHovered:NO];
 	[self setNeedsDisplay];
-}
+} 
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
-	NSArray *files = [dropManager handleDrop:[sender draggingPasteboard]];
-	[tagger addTags:[NSArray arrayWithObject:[[self cell] fileTag]] toFiles:files];
-	
     return YES;
 }
 
@@ -73,6 +70,10 @@ should be overridden according to apple docs
 {	
 	[[self cell] setHovered:NO];
 	[self setNeedsDisplay];
+	
+	
+	NSArray *files = [dropManager handleDrop:[sender draggingPasteboard]];
+	[tagger addTags:[NSArray arrayWithObject:[[self cell] fileTag]] toFiles:files];
 }
 
 @end

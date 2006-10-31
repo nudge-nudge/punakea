@@ -16,18 +16,21 @@
 #import "PATempTag.h"
 #import "PAQuery.h"
 #import "PAFile.h"
+#import "ThreadWorker.h"
 
 extern NSString * const TAGGER_OPEN_COMMENT;
 extern NSString * const TAGGER_CLOSE_COMMENT;
 
 /**
-singleton class for working with spotlight kMDItemKeywords (our simpleTags)
+singleton class for working with finder spotlight comment (our simpleTags)
  */
 @interface PATagger : NSObject {
 	PASimpleTagFactory *simpleTagFactory;
 	PATags *tags;
 	
 	NSAppleScript *finderCommentScript;
+	
+	NSMutableDictionary *fileLocks;
 }
 
 /**

@@ -16,6 +16,8 @@
 
 #import "PACollectionNotEmpty.h"
 
+#import "PAFinderCommentTests.h"
+
 @interface Core : NSWindowController
 {
 	PATagger *tagger;

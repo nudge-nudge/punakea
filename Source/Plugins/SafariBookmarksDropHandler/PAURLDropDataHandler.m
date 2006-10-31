@@ -77,7 +77,14 @@ data is NSDictionary with keys:
 - (NSString*)fileDropData:(id)data
 {
 	NSString *url = [data objectForKey:@""];
-	NSString *filename = [[data objectForKey:@"title"] stringByAppendingString:@".webloc"];
+	NSString *tempName = [[data objectForKey:@"title"] stringByAppendingString:@".webloc"];
+	
+	// replace non-file characters
+	NSMutableString *copy = [[tempName mutableCopy] autorelease];
+	[copy replaceOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0,[tempName length])];
+	[copy replaceOccurrencesOfString:@"/" withString:@"_" options:0 range:NSMakeRange(0,[tempName length])];
+	
+	NSString *filename = copy;	
 	NSString *filePath = [self destinationForNewFile:filename];
 	
 	NDResourceFork *resource = [[NDResourceFork alloc] initForWritingAtPath:filePath];

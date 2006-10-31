@@ -64,24 +64,37 @@ resets the tagger window (called when window is closed)
 	
 	// token field wrapping
 	[[tagField cell] setWraps:YES];
+	
+	[fileController addObserver:self
+					 forKeyPath:@"arrangedObjects"
+						options:nil
+						context:NULL];
 }
 
 - (void)dealloc
 {
 	[headerCell release];
 	[fileCell release];
-	[fileController removeObserver:self forKeyPath:@"selectionIndexes"];
+	[fileController removeObserver:self forKeyPath:@"arrangedObjects"];
 	[tableView unregisterDraggedTypes];
 	[currentCompleteTagsInField release];
 	[typeAheadFind release];
 	[super dealloc];
 }
 
+#pragma mark observing
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if ([keyPath isEqualToString:@"arrangedObjects"])
+	{
+		[self filesHaveChanged];
+	}
+}
+
 #pragma mark accessors
 - (void)addFiles:(NSMutableArray*)newFiles
 {
 	[fileController addObjects:newFiles];
-	[self filesHaveChanged];
 }
 
 - (NSArray*)files

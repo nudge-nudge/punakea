@@ -51,13 +51,9 @@
 
 - (void)setPath:(NSString*)aPath
 {
-	NSMutableString *copy = [aPath mutableCopy];
-	[copy replaceOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0,[path length])];
-	[copy replaceOccurrencesOfString:@"/" withString:@"_" options:0 range:NSMakeRange(0,[path length])];
-	
+	[aPath retain];
 	[path release];
-	path = [[NSString alloc] initWithString:copy];
-	[copy release];
+	path = aPath;
 }
 
 + (PAFile*)fileWithPath:(NSString*)aPath
@@ -158,6 +154,13 @@
 - (NSComparisonResult)compare:(PAFile*)aFile
 {
 	return [[self name] compare:[aFile name]];
+}
+
+#pragma mark copying
+- (id)copyWithZone:(NSZone *)zone
+{
+	PAFile *newFile = [[PAFile alloc] initWithPath:[[self path] copy]];
+	return newFile;
 }
 
 @end

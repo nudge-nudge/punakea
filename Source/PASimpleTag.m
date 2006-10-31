@@ -15,13 +15,29 @@
 
 @implementation PASimpleTag
 
+#pragma mark init
+- (id)initWithCoder:(NSCoder*)coder 
+{
+	// overwritten to keep coder from overwriting query
+	self = [super init];
+	if (self) 
+	{
+		[self setName:[coder decodeObjectForKey:@"name"]];
+		lastClicked = [[coder decodeObjectForKey:@"lastClicked"] retain];
+		lastUsed = [[coder decodeObjectForKey:@"lastUsed"] retain];
+		[coder decodeValueOfObjCType:@encode(unsigned long)	at:&clickCount];
+		[coder decodeValueOfObjCType:@encode(unsigned long)	at:&useCount];
+	}
+	return self;
+}
+
 #pragma mark functionality
 // overwriting super-class methods
 - (void)setName:(NSString*)aName 
 {
 	[super setName:aName];
 
-	[self setQuery:[NSString stringWithFormat:@"kMDItemFinderComment LIKE '*tag:%@*'",aName]];
+	[self setQuery:[NSString stringWithFormat:@"kMDItemFinderComment LIKE '*@%@*'",aName]];
 }
 
 - (NSString*)queryInSpotlightSyntax

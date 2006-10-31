@@ -12,7 +12,7 @@
 represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally. Please use this for all methods which
  access files
  */
-@interface PAFile : NSObject {
+@interface PAFile : NSObject <NSCopying> {
 	NSString *path; /**< full path including file.extension */
 	
 	NSWorkspace *workspace;
