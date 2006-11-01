@@ -79,6 +79,7 @@
 		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
 		484049730AF89F73001F7BB7 /* NSFileManager+PAExtensions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4840495C0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.h */; };
 		484049740AF89F73001F7BB7 /* NSFileManager+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4840495D0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.m */; };
+		48404B100AF8B392001F7BB7 /* PATaggerUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 48404A0B0AF8A722001F7BB7 /* PATaggerUnitTest.m */; };
 		4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */; };
 		4840AC400A4FFEE50046484E /* PASidebarContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */; };
 		4842FC0F09DA801500C4A931 /* PATagButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC0D09DA801500C4A931 /* PATagButton.h */; };
@@ -321,6 +322,13 @@
 			remoteGlobalIDString = 483184E20AEF91A700C3C672;
 			remoteInfo = FilenamesDropHandler;
 		};
+		48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090 /* Punakea */;
+			remoteInfo = Punakea;
+		};
 		48893B2D0AF0A6EC00BA0B50 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -524,6 +532,11 @@
 		484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadView.m; sourceTree = "<group>"; };
 		4840495C0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+PAExtensions.h"; sourceTree = "<group>"; };
 		4840495D0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+PAExtensions.m"; sourceTree = "<group>"; };
+		484049EA0AF8A58F001F7BB7 /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Unit Tests-Info.plist"; sourceTree = "<group>"; };
+		48404A0A0AF8A722001F7BB7 /* PATaggerUnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerUnitTest.h; sourceTree = "<group>"; };
+		48404A0B0AF8A722001F7BB7 /* PATaggerUnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerUnitTest.m; sourceTree = "<group>"; };
+		48404B000AF8B357001F7BB7 /* Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Unit Testing-Info.plist"; sourceTree = "<group>"; };
 		4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarContentView.h; sourceTree = "<group>"; };
 		4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarContentView.m; sourceTree = "<group>"; };
 		4842FC0D09DA801500C4A931 /* PATagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButton.h; sourceTree = "<group>"; };
@@ -757,6 +770,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		48404AFD0AF8B357001F7BB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		48C633B90AEF9720008F0E94 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -792,6 +812,7 @@
 				4816346E0A5A52EA003B8EE4 /* Misc */,
 				4831849F0AEF8FD800C3C672 /* Frameworks */,
 				483184F20AEF91E100C3C672 /* Plugins */,
+				48404A130AF8A7B4001F7BB7 /* UnitTests */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -823,6 +844,7 @@
 				483184E30AEF91A700C3C672 /* FilenamesDropHandler.ntagsdh */,
 				48C633BB0AEF9720008F0E94 /* SafariBookmarkDropHandler.ntagsdh */,
 				4815A0B10AEF99D900969296 /* NDResourceFork.framework */,
+				48404B000AF8B357001F7BB7 /* Unit Testing.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -840,6 +862,8 @@
 				483184E40AEF91A700C3C672 /* FilenamesDropHandler-Info.plist */,
 				48C633BC0AEF9720008F0E94 /* SafariBookmarkDropHandler-Info.plist */,
 				4815A0B20AEF99D900969296 /* NDResourceFork-Info.plist */,
+				484049EA0AF8A58F001F7BB7 /* Unit Tests-Info.plist */,
+				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
 			);
 			name = Punakea;
 			sourceTree = "<group>";
@@ -1063,6 +1087,15 @@
 				484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */,
 			);
 			name = TypeAheadView;
+			sourceTree = "<group>";
+		};
+		48404A130AF8A7B4001F7BB7 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				48404A0A0AF8A722001F7BB7 /* PATaggerUnitTest.h */,
+				48404A0B0AF8A722001F7BB7 /* PATaggerUnitTest.m */,
+			);
+			path = UnitTests;
 			sourceTree = "<group>";
 		};
 		484F717E0A666D4B00D886E5 /* TagManagement */ = {
@@ -1601,6 +1634,25 @@
 			productReference = 483184E30AEF91A700C3C672 /* FilenamesDropHandler.ntagsdh */;
 			productType = "com.apple.product-type.bundle";
 		};
+		48404AFF0AF8B357001F7BB7 /* Unit Testing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48404B030AF8B358001F7BB7 /* Build configuration list for PBXNativeTarget "Unit Testing" */;
+			buildPhases = (
+				48404AFB0AF8B357001F7BB7 /* Resources */,
+				48404AFC0AF8B357001F7BB7 /* Sources */,
+				48404AFD0AF8B357001F7BB7 /* Frameworks */,
+				48404AFE0AF8B357001F7BB7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				48404B140AF8B3A6001F7BB7 /* PBXTargetDependency */,
+			);
+			name = "Unit Testing";
+			productName = "Unit Testing";
+			productReference = 48404B000AF8B357001F7BB7 /* Unit Testing.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		48C633BA0AEF9720008F0E94 /* SafariBookmarkDropHandler */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48C633BD0AEF9721008F0E94 /* Build configuration list for PBXNativeTarget "SafariBookmarkDropHandler" */;
@@ -1675,6 +1727,7 @@
 				483184E20AEF91A700C3C672 /* FilenamesDropHandler */,
 				48C633BA0AEF9720008F0E94 /* SafariBookmarkDropHandler */,
 				4815A0B00AEF99D900969296 /* NDResourceFork */,
+				48404AFF0AF8B357001F7BB7 /* Unit Testing */,
 			);
 		};
 /* End PBXProject section */
@@ -1695,6 +1748,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		483184DF0AEF91A700C3C672 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48404AFB0AF8B357001F7BB7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1781,6 +1841,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		48404AFE0AF8B357001F7BB7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		488A52E70A81D9DC005B54A8 /* Run Doxygen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1826,6 +1899,14 @@
 			files = (
 				4815A0690AEF991A00969296 /* PAFilenamesDropDataHandler.m in Sources */,
 				4815A0680AEF991A00969296 /* PAFilenamesDropHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48404AFC0AF8B357001F7BB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48404B100AF8B392001F7BB7 /* PATaggerUnitTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1955,6 +2036,11 @@
 			isa = PBXTargetDependency;
 			target = 483184E20AEF91A700C3C672 /* FilenamesDropHandler */;
 			targetProxy = 483185020AEF92FD00C3C672 /* PBXContainerItemProxy */;
+		};
+		48404B140AF8B3A6001F7BB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* Punakea */;
+			targetProxy = 48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */;
 		};
 		48893B2E0AF0A6EC00BA0B50 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2262,6 +2348,61 @@
 			};
 			name = Release;
 		};
+		48404B040AF8B358001F7BB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Punakea.app/Contents/MacOS/Punakea";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Unit Testing-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Unit Testing";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		48404B050AF8B358001F7BB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Punakea.app/Contents/MacOS/Punakea";
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Unit Testing-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Unit Testing";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		488A52EC0A81D9FA005B54A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2453,6 +2594,15 @@
 			buildConfigurations = (
 				483F9BC40AEE01B300F3CC7F /* Debug */,
 				483F9BC50AEE01B300F3CC7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		48404B030AF8B358001F7BB7 /* Build configuration list for PBXNativeTarget "Unit Testing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48404B040AF8B358001F7BB7 /* Debug */,
+				48404B050AF8B358001F7BB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

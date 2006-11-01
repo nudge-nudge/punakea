@@ -59,7 +59,7 @@
 #pragma mark euality testing
 - (BOOL)isEqual:(id)other 
 {
-	if (!other || ![other isKindOfClass:[self class]]) 
+	if (!other || ![self isKindOfClass:[other class]]) 
         return NO;
     if (other == self)
         return YES;
@@ -69,11 +69,14 @@
 
 - (BOOL)isEqualToTag:(PASimpleTag*)otherTag 
 {
-	if ([name caseInsensitiveCompare:[otherTag name]] == NSOrderedSame 
-		&& [query isEqual:[otherTag query]])
+	if ([[self name] caseInsensitiveCompare:[otherTag name]] == NSOrderedSame)
+	{
 		return YES;
+	}
 	else
+	{
 		return NO;
+	}
 }
 
 - (unsigned)hash 
