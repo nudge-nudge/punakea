@@ -326,7 +326,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D1107260486CEB800E47090 /* Punakea */;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Punakea;
 		};
 		48893B2D0AF0A6EC00BA0B50 /* PBXContainerItemProxy */ = {
@@ -532,7 +532,6 @@
 		484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadView.m; sourceTree = "<group>"; };
 		4840495C0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+PAExtensions.h"; sourceTree = "<group>"; };
 		4840495D0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+PAExtensions.m"; sourceTree = "<group>"; };
-		484049EA0AF8A58F001F7BB7 /* Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		48404A0A0AF8A722001F7BB7 /* PATaggerUnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerUnitTest.h; sourceTree = "<group>"; };
 		48404A0B0AF8A722001F7BB7 /* PATaggerUnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerUnitTest.m; sourceTree = "<group>"; };
 		48404B000AF8B357001F7BB7 /* Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -862,7 +861,6 @@
 				483184E40AEF91A700C3C672 /* FilenamesDropHandler-Info.plist */,
 				48C633BC0AEF9720008F0E94 /* SafariBookmarkDropHandler-Info.plist */,
 				4815A0B20AEF99D900969296 /* NDResourceFork-Info.plist */,
-				484049EA0AF8A58F001F7BB7 /* Unit Tests-Info.plist */,
 				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
 			);
 			name = Punakea;
