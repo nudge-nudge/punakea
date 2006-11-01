@@ -411,59 +411,8 @@ static PATagger *sharedInstance = nil;
 		
 		[newTagComment appendString:TAGGER_CLOSE_COMMENT];
 		
-		//NSLog(@"%@ to %@",comment,file);
-
-		// create the first parameter
-		NSAppleEventDescriptor* firstParameter =
-		[NSAppleEventDescriptor descriptorWithString:[oldComment stringByAppendingString:newTagComment]];
-		
-		// create the second parameter
-		NSAppleEventDescriptor* secondParameter =
-			[NSAppleEventDescriptor descriptorWithString:[file path]];				
-		
-		// create and populate the list of parameters
-		NSAppleEventDescriptor* parameters = [NSAppleEventDescriptor listDescriptor];
-		[parameters insertDescriptor:firstParameter atIndex:1];
-		[parameters insertDescriptor:secondParameter atIndex:2];
-		
-		// create the AppleEvent target
-		ProcessSerialNumber psn = {0, kCurrentProcess};
-		NSAppleEventDescriptor* target =
-			[NSAppleEventDescriptor
-				descriptorWithDescriptorType:typeProcessSerialNumber
-									   bytes:&psn
-									  length:sizeof(ProcessSerialNumber)];
-		
-		// create an NSAppleEventDescriptor with the script's method name to call,
-		// this is used for the script statement: "on show_message(user_message)"
-		// Note that the routine name must be in lower case.
-		NSAppleEventDescriptor* handler =
-			[NSAppleEventDescriptor descriptorWithString:
-				[@"write_comment" lowercaseString]];
-		
-		// create the event for an AppleScript subroutine,
-		// set the method name and the list of parameters
-		NSAppleEventDescriptor* event =
-			[NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
-													 eventID:kASSubroutineEvent
-											targetDescriptor:target
-													returnID:kAutoGenerateReturnID
-											   transactionID:kAnyTransactionID];
-		[event setParamDescriptor:handler forKeyword:keyASSubroutineName];
-		[event setParamDescriptor:parameters forKeyword:keyDirectObject];
-		
-		NSDictionary *errors = [NSDictionary dictionary];
-		
-	//	NSLog(@"pre");
-		
-		// call the event in AppleScript
-		NSAppleEventDescriptor *desc = [finderCommentScript executeAppleEvent:event error:&errors];
-
-//		NSLog(@"past");
-//		
-//		NSLog(@"desc: %@",desc);
-//		NSLog(@"errors: %@",errors);
-		
+		[[NSFileManager defaultManager] setComment:newTagComment forURL:[NSURL fileURLWithPath:[file path]]];
+			
 		[self removeFileCacheFor:file];
 	}
 }

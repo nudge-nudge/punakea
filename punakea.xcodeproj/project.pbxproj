@@ -77,6 +77,8 @@
 		483F50CB0AE551EA00551B9D /* PABrowserSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F50C90AE551EA00551B9D /* PABrowserSplitView.m */; };
 		484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */; };
 		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
+		484049730AF89F73001F7BB7 /* NSFileManager+PAExtensions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4840495C0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.h */; };
+		484049740AF89F73001F7BB7 /* NSFileManager+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4840495D0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.m */; };
 		4840AC3F0A4FFEE50046484E /* PASidebarContentView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */; };
 		4840AC400A4FFEE50046484E /* PASidebarContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */; };
 		4842FC0F09DA801500C4A931 /* PATagButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC0D09DA801500C4A931 /* PATagButton.h */; };
@@ -450,6 +452,7 @@
 				488E802C0AF3898400660B7B /* PACollectionNotEmpty.h in CopyFiles */,
 				487BFFF80AF4BA380011C0C7 /* findercomment.scpt in CopyFiles */,
 				658ADEB80AF6432900063AE1 /* PALabel.h in CopyFiles */,
+				484049730AF89F73001F7BB7 /* NSFileManager+PAExtensions.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +522,8 @@
 		483F50C90AE551EA00551B9D /* PABrowserSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserSplitView.m; sourceTree = "<group>"; };
 		484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadView.h; sourceTree = "<group>"; };
 		484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadView.m; sourceTree = "<group>"; };
+		4840495C0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+PAExtensions.h"; sourceTree = "<group>"; };
+		4840495D0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+PAExtensions.m"; sourceTree = "<group>"; };
 		4840AC3D0A4FFEE50046484E /* PASidebarContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarContentView.h; sourceTree = "<group>"; };
 		4840AC3E0A4FFEE50046484E /* PASidebarContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarContentView.m; sourceTree = "<group>"; };
 		4842FC0D09DA801500C4A931 /* PATagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButton.h; sourceTree = "<group>"; };
@@ -1152,6 +1157,8 @@
 				65E5572A0AD1450E00AA2700 /* NSFileManager+TrashFile.m */,
 				48D450070ABB037B00A13B45 /* PAFile.h */,
 				48D450080ABB037B00A13B45 /* PAFile.m */,
+				4840495C0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.h */,
+				4840495D0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.m */,
 			);
 			name = "File Handling";
 			sourceTree = "<group>";
@@ -1917,6 +1924,7 @@
 				6530FF370AF2229400D7A79A /* PATaggerTableView.m in Sources */,
 				488E802D0AF3898400660B7B /* PACollectionNotEmpty.m in Sources */,
 				658ADEB90AF6432900063AE1 /* PALabel.m in Sources */,
+				484049740AF89F73001F7BB7 /* NSFileManager+PAExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
