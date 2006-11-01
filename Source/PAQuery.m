@@ -494,9 +494,6 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		if(fileWasMoved)
 		{
 			[fm removeFileAtPath:tempDestination handler:nil];
-			
-			PAFile *newFile = [PAFile fileWithPath:destination];
-			[[PATagger sharedInstance] addTags:tagsOnFiles toFiles:[NSArray arrayWithObject:newFile]];
 		}
 	} else {
 		fileWasMoved = [fm movePath:source toPath:destination handler:self];
@@ -504,6 +501,10 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	
 	if(fileWasMoved)
 	{
+		// Write tags on file
+		PAFile *newFile = [PAFile fileWithPath:destination];
+		[[PATagger sharedInstance] addTags:tagsOnFiles toFiles:[NSArray arrayWithObject:newFile]];
+	
 		[item setValue:newName forAttribute:(id)kMDItemDisplayName];
 		[item setValue:destination forAttribute:(id)kMDItemPath];
 	
