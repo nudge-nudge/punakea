@@ -32,12 +32,6 @@
 {
     if (self = [super init])
     {
-//		PAFinderCommentTests *test = [[PAFinderCommentTests alloc] init];
-//		[test test:[NSArray arrayWithObjects:@"/Users/darklight/Desktop/hello_my_name_is_delarge.pdf",
-//			@"/Users/darklight/Desktop/Unbekannt.jpg",
-//			@"/Users/darklight/Desktop/Unbekannt-1.jpg",
-//			nil]];
-		
 		tagger = [PATagger sharedInstance];
 		[self loadDataFromDisk];
 		

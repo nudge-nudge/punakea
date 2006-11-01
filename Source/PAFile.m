@@ -159,7 +159,9 @@
 #pragma mark copying
 - (id)copyWithZone:(NSZone *)zone
 {
-	PAFile *newFile = [[PAFile alloc] initWithPath:[[self path] copy]];
+	NSString *newPath = [[self path] copy];
+	PAFile *newFile = [[PAFile alloc] initWithPath:newPath];
+	[newPath release];
 	return newFile;
 }
 

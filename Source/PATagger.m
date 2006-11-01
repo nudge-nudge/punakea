@@ -205,7 +205,7 @@ static PATagger *sharedInstance = nil;
 	
 	@synchronized(fileCache)
 	{
-		if (keywords = [fileCache objectForKey:file])
+		if (keywords = [fileCache objectForKey:[file path]])
 		{
 			NSLog(@"cache_hit");
 			return keywords;
@@ -353,51 +353,35 @@ static PATagger *sharedInstance = nil;
 	{
 		finderSpotlightCommentWithoutTags = currentFinderSpotlightComment;
 	}
-		
-	// create new tag comment
-	NSMutableString *newTagComment = [NSMutableString stringWithString:TAGGER_OPEN_COMMENT];
+			
 	NSMutableArray *keywords = [NSMutableArray array];
 	NSEnumerator *e = [tags objectEnumerator];
 	PATag *tag;
 	
 	if (tag = [e nextObject])
 	{
-		[newTagComment appendFormat:@"@%@",[tag name]];
 		[keywords addObject:[tag name]];
 	}
 	
 	while (tag = [e nextObject])
 	{
-		[newTagComment appendFormat:@";@%@",[tag name]];
 		[keywords addObject:[tag name]];
 	}
 	
-	[newTagComment appendString:TAGGER_CLOSE_COMMENT];
-	
-	NSString *newFinderSpotlightComment = [finderSpotlightCommentWithoutTags stringByAppendingString:newTagComment];
-	
 	// write comment to end of finder spotlight comment
-	[self writeFinderSpotlightComment:newFinderSpotlightComment ofFile:file keywords:keywords];
+	[self writeFinderSpotlightCommentOfFile:file keywords:keywords oldComment:finderSpotlightCommentWithoutTags];
 }
 
-- (NSString*)finderSpotlightCommentForFile:(PAFile*)file
-{
-	MDItemRef *item = MDItemCreate(NULL,[file path]);
-	CFTypeRef *comment = MDItemCopyAttribute(item,@"kMDItemFinderComment");
-	
-	if (!comment)
-		return @"";
-	else
-		return (NSString*)comment;
-}
-
-- (void)writeFinderSpotlightComment:(NSString*)comment ofFile:(PAFile*)file keywords:(NSArray*)keywords
+- (void)writeFinderSpotlightCommentOfFile:(PAFile*)file keywords:(NSArray*)keywords oldComment:(NSString*)oldComment
 {
 	// locking and delay because of finder drop hang
-	[self createFileCacheFor:file keywords:keywords];
-	[self performSelector:@selector(writeStringToFinderSpotlightCommentOfFile:)
-			   withObject:[NSArray arrayWithObjects:comment,file,nil]
-			   afterDelay:0.1];
+	@synchronized(self)
+	{
+		[self createFileCacheFor:file keywords:keywords];
+		[self performSelector:@selector(writeStringToFinderSpotlightCommentOfFile:)
+				   withObject:[NSArray arrayWithObjects:file,oldComment,nil]
+				   afterDelay:0.1];
+	}
 }
 
 // perform selector afterDelay takes only 1 argument
@@ -405,14 +389,33 @@ static PATagger *sharedInstance = nil;
 {
 	@synchronized(self)
 	{
-		NSString *comment = [arguments objectAtIndex:0];
-		PAFile *file = [arguments objectAtIndex:1];
+		PAFile *file = [arguments objectAtIndex:0];
+		NSString *oldComment = [arguments objectAtIndex:1];
+		
+		NSMutableString *newTagComment = [NSMutableString stringWithString:TAGGER_OPEN_COMMENT];
+		
+		// create new tag comment from cache
+		NSMutableArray *keywords = [[self fileCache] objectForKey:[file path]];
+		NSEnumerator *e = [keywords objectEnumerator];
+		NSString *keyword;
+		
+		if (keyword = [e nextObject])
+		{
+			[newTagComment appendFormat:@"@%@",keyword];
+		}
+		
+		while (keyword = [e nextObject])
+		{
+			[newTagComment appendFormat:@";@%@",keyword];
+		}
+		
+		[newTagComment appendString:TAGGER_CLOSE_COMMENT];
 		
 		//NSLog(@"%@ to %@",comment,file);
 
 		// create the first parameter
 		NSAppleEventDescriptor* firstParameter =
-		[NSAppleEventDescriptor descriptorWithString:comment];
+		[NSAppleEventDescriptor descriptorWithString:[oldComment stringByAppendingString:newTagComment]];
 		
 		// create the second parameter
 		NSAppleEventDescriptor* secondParameter =
@@ -465,23 +468,28 @@ static PATagger *sharedInstance = nil;
 	}
 }
 
+- (NSString*)finderSpotlightCommentForFile:(PAFile*)file
+{
+	MDItemRef *item = MDItemCreate(NULL,[file path]);
+	CFTypeRef *comment = MDItemCopyAttribute(item,@"kMDItemFinderComment");
+	
+	if (!comment)
+		return @"";
+	else
+		return (NSString*)comment;
+}
+
 #pragma mark threading stuff
 - (void)createFileCacheFor:(PAFile*)file keywords:(NSArray*)keywords
 {
-	@synchronized(fileCache)
-	{
-		[fileCache setObject:[keywords retain] forKey:file];	
-	}
+	[[self fileCache] setObject:[keywords retain] forKey:[file path]];	
 }
 
 - (void)removeFileCacheFor:(PAFile*)file
 {
-	@synchronized(fileCache)
-	{
-		NSArray *keywords = [fileCache objectForKey:file];
-		[fileCache removeObjectForKey:file];
-		[keywords release];
-	}
+	NSArray *keywords = [fileCache objectForKey:[file path]];
+	[[self fileCache] removeObjectForKey:[file path]];
+	[keywords release];
 }
 
 #pragma mark accessors
@@ -495,6 +503,14 @@ static PATagger *sharedInstance = nil;
 	[allTags retain];
 	[tags release];
 	tags = allTags;
+}
+
+- (NSDictionary*)fileCache
+{
+	@synchronized(self)
+	{
+		return fileCache;
+	}
 }
 
 #pragma mark singleton stuff
