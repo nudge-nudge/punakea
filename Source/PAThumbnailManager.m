@@ -123,10 +123,17 @@ static PAThumbnailManager *sharedInstance = nil;
 	while(numberOfThumbsBeingProcessed < CONCURRENT_IMAGE_LOADING_MAX &&
 	      [queue count] > 0)
 	{
-		numberOfThumbsBeingProcessed++;
+		@synchronized(self)
+		{
+			numberOfThumbsBeingProcessed++;
+		}
 		
-		PAThumbnailItem *item = [queue objectAtIndex:0];		 
-		[queue removeObjectAtIndex:0];
+		PAThumbnailItem *item;
+		@synchronized(queue)
+		{
+			item = [queue objectAtIndex:0];		 
+			[queue removeObjectAtIndex:0];
+		}
 		
 		if([item type] == PAItemTypeThumbnail)
 		{
@@ -143,16 +150,27 @@ static PAThumbnailManager *sharedInstance = nil;
 	} 
 	
 	// If number of cached images exceeds limit, remove first item of stack
-	if([stack count] > NUMBER_OF_CACHED_ITEMS_MAX)
+	@synchronized(self)
 	{
-		NSString *filename = [stack objectAtIndex:0];
-		
-		[thumbnails removeObjectForKey:filename];
-		[icons removeObjectForKey:filename];
-		
-		[stack removeObjectAtIndex:0];
-		
-		//NSLog(@"removed: %@", filename);
+		if([stack count] > NUMBER_OF_CACHED_ITEMS_MAX)
+		{
+			NSString *filename = [stack objectAtIndex:0];
+			
+			@synchronized(thumbnails)
+			{
+				[thumbnails removeObjectForKey:filename];
+			}
+			@synchronized(icons)
+			{
+				[icons removeObjectForKey:filename];
+			}
+			@synchronized(stack)
+			{
+				[stack removeObjectAtIndex:0];
+			}
+			
+			//NSLog(@"removed: %@", filename);
+		}
 	}
 }
 
@@ -163,16 +181,28 @@ static PAThumbnailManager *sharedInstance = nil;
 	NSImage *thumbnail = [PAThumbnailManager thumbnailFromFileNew:filename maxBounds:NSMakeSize(76,75)];
 	if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
-	[thumbnails removeObjectForKey:filename];
-	[thumbnails setObject:thumbnail forKey:filename];
-	[stack addObject:filename];
-	
-	numberOfThumbsBeingProcessed--;
+	@synchronized(thumbnails)
+	{
+		[thumbnails removeObjectForKey:filename];
+		[thumbnails setObject:thumbnail forKey:filename];
+	}
+	@synchronized(stack)
+	{
+		[stack addObject:filename];
+	}
+	@synchronized(self)
+	{
+		numberOfThumbsBeingProcessed--;
+	}
 	
 	// Refresh item's view
 	NSView *view = [thumbnailItem view];
 	NSRect frame = [thumbnailItem frame];
-	[view setNeedsDisplayInRect:frame];
+	
+	@synchronized(view)
+	{
+		[view setNeedsDisplayInRect:frame];
+	}
 	
 	[thumbnailItem release];
 	
