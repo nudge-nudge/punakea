@@ -34,6 +34,7 @@
 - (void)applicationWillTerminate:(NSNotification *)note;
 
 // mainmenu actions
+- (IBAction)showResults:(id)sender;
 - (IBAction)manageTags:(id)sender;
 - (IBAction)showPreferences:(id)sender;
 

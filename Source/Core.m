@@ -170,6 +170,11 @@
 }
 
 #pragma mark MainMenu actions
+- (IBAction)showResults:(id)sender
+{
+	[[browserController browserViewController] showResults];
+}
+
 - (IBAction)manageTags:(id)sender
 {
 	[[browserController browserViewController] manageTags];

@@ -8,6 +8,7 @@
                 openFiles = id; 
                 showBrowser = id; 
                 showPreferences = id; 
+                showResults = id; 
                 showTagger = id; 
             }; 
             CLASS = Core; 
