@@ -353,7 +353,7 @@ static PATagger *sharedInstance = nil;
 	{
 		NSString *commentBeforeTags = [currentFinderSpotlightComment substringWithRange:NSMakeRange(0,openCommentRange.location)];
 		int lengthOfCommentAfterTags = [currentFinderSpotlightComment length] - closeCommentRange.location - closeCommentRange.length;
-		NSString *commentAfterTags = [currentFinderSpotlightComment substringWithRange:NSMakeRange(closeCommentRange.location,
+		NSString *commentAfterTags = [currentFinderSpotlightComment substringWithRange:NSMakeRange(closeCommentRange.location + closeCommentRange.length,
 																								   lengthOfCommentAfterTags)];
 		finderSpotlightCommentWithoutTags = [commentBeforeTags stringByAppendingString:commentAfterTags];
 	}
@@ -419,7 +419,8 @@ static PATagger *sharedInstance = nil;
 		
 		[newTagComment appendString:TAGGER_CLOSE_COMMENT];
 		
-		[[NSFileManager defaultManager] setComment:newTagComment forURL:[NSURL fileURLWithPath:[file path]]];
+		[[NSFileManager defaultManager] setComment:[oldComment stringByAppendingString:newTagComment]
+											forURL:[NSURL fileURLWithPath:[file path]]];
 			
 		[self removeFileCacheFor:file];
 	}
