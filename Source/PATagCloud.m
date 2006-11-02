@@ -271,6 +271,9 @@ bound to visibleTags
 		[self drawString:noRelatedTagsMessage centeredIn:rect];
 	}
 	
+	// Draw drop border
+	if(showsDropBorder) [self drawDropHighlightInRect:rect];
+	
 	[super drawRect:rect];
 }
 
@@ -278,6 +281,30 @@ bound to visibleTags
 {
 	[[NSColor colorWithDeviceRed:(236.0/255.0) green:(242.0/255.0) blue:(251.0/255.0) alpha:1.0] set];
 	NSRectFill([self bounds]);
+}
+
+- (void)drawDropHighlightInRect:(NSRect)rect
+{
+	NSSize offset = NSMakeSize(3.0, 3.0);
+
+	[self lockFocus];
+	
+	NSRect drawRect = rect;
+	
+	drawRect.size.width -= offset.width;
+	drawRect.origin.x += offset.width / 2.0;
+
+	drawRect.size.height -= offset.height;
+	drawRect.origin.y += offset.height / 2.0;
+
+	[[NSColor colorWithDeviceRed:(185.0/255.0) green:(215.0/255.0) blue:(255.0/255.0) alpha:1.0] set];
+	float lineWidth = [NSBezierPath defaultLineWidth];
+	[NSBezierPath setDefaultLineWidth:3.0];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRoundRectInRect:drawRect radius:4.0];
+	[path stroke];
+	[NSBezierPath setDefaultLineWidth:lineWidth];
+
+	[self unlockFocus];
 }
 
 - (void)drawString:(NSAttributedString*)string centeredIn:(NSRect)rect
@@ -607,13 +634,16 @@ bound to visibleTags
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
-	// TODO drop border
+	showsDropBorder = YES;
+	[self setNeedsDisplay:YES];
+	
 	return [dropManager performedDragOperation:[sender draggingPasteboard]];
 }
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender
 {
-	// remove drop border
+	showsDropBorder = NO;
+	[self setNeedsDisplay:YES];
 }
 
 - (void)draggingEnded:(id <NSDraggingInfo>)sender
@@ -639,7 +669,8 @@ executes some interface stuff
  */
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender
 {	
-	// TODO remove border
+	showsDropBorder = NO;
+	[self setNeedsDisplay:YES];
 }
 
 #pragma mark moving selection

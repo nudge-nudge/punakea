@@ -14,25 +14,27 @@ displays all [datasource visibleTags] in a nice tag cloud view
  */
 @interface PATagCloud : NSView
 {
-	id delegate;
-	id datasource;
+	id								delegate;
+	id								datasource;
 
-	NSMutableDictionary *tagButtonDict; /**< holds the current controls in the view */
-	PATagButton *activeButton; /**< currently selected tag */
+	NSMutableDictionary				*tagButtonDict; /**< holds the current controls in the view */
+	PATagButton						*activeButton; /**< currently selected tag */
 	
-	NSPoint pointForNextTagRect; /**< saves the point for the next tag to be displayed */
-	int tagPosition; /**< holds the position where the new line starts */
+	NSPoint							pointForNextTagRect; /**< saves the point for the next tag to be displayed */
+	int								tagPosition; /**< holds the position where the new line starts */
 	
-	NSUserDefaultsController *userDefaultsController; /**< holds user defaults for tag cloud */
-	BOOL eyeCandy;
+	NSUserDefaultsController		*userDefaultsController; /**< holds user defaults for tag cloud */
 	
-	NSViewAnimation *viewAnimation; /**< only one animation concurrently */
-	NSMutableArray *viewAnimationCache; /**< animation cache */
+	NSViewAnimation					*viewAnimation; /**< only one animation concurrently */
+	NSMutableArray					*viewAnimationCache; /**< animation cache */
 	
-	NSAttributedString *noRelatedTagsMessage;
-	NSAttributedString *noTagsMessage;
+	NSAttributedString				*noRelatedTagsMessage;
+	NSAttributedString				*noTagsMessage;
 	
-	PADropManager *dropManager;
+	PADropManager					*dropManager;
+	
+	BOOL							showsDropBorder;
+	BOOL							eyeCandy;
 }
 
 - (id)datasource;
