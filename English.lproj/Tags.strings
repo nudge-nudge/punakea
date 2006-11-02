@@ -5,4 +5,4 @@
 "TAG_WHITESPACE_REQUEST" = "Please enter a tag name";
 "TAG_WHITESPACE_REQUEST_INFO" = "No whitespace-only tags allowed";
 "NO_RELATED_TAGS" = "no related tags";
-"NO_TAGS" = "create new tags by tagging files!\njust open the tagger\nor drop files on the sidebar drop zone";
+"NO_TAGS" = "to get started\ndrop files here \nor on the sidebar drop zone";

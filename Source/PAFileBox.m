@@ -29,8 +29,6 @@
 }
 
 #pragma mark drap & drop stuff
-//code of cocoadevcentral tutorial
-
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
 	[[self window] mouseEvent];

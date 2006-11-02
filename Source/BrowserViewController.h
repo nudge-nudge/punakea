@@ -14,6 +14,7 @@
 #import "PABrowserViewMainController.h"
 #import "PATagManagementViewController.h"
 #import "PAResultsViewController.h"
+#import "TaggerController.h"
 
 typedef enum _PABrowserViewControllerState {
 	PABrowserViewControllerNormalState = 1,

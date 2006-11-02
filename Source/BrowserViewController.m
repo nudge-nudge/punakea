@@ -458,6 +458,16 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
+#pragma mark drag & drop stuff
+- (void)filesHaveBeenDropped:(NSArray*)files
+{
+	TaggerController *taggerController = [[TaggerController alloc] init];
+	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+	NSWindow *taggerWindow = [taggerController window];
+	[taggerWindow makeKeyAndOrderFront:nil];
+	[taggerController addFiles:files];
+}
+
 
 #pragma mark Split View
 - (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset

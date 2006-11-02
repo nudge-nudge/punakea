@@ -198,8 +198,6 @@ static PATagger *sharedInstance = nil;
 }
 
 - (NSArray*)keywordsForFile:(PAFile*)file {
-	// TODO check invalid strings
-	
 	NSArray *keywords;
 	// check cache if it has some keywords for file
 	
@@ -239,8 +237,17 @@ static PATagger *sharedInstance = nil;
 					
 					while (component = [e nextObject])
 					{
-						// ignore tag: prefix ... TODO!
-						[keywords addObject:[component substringFromIndex:1]];
+						// validate keywordstring-component
+						@try 
+						{
+							[self validateKeyword:component];
+							[keywords addObject:[component substringFromIndex:1]];
+						} 
+						@catch (NSException *e) 
+						{
+							// ignore keyword - TODO inform user
+							NSLog(@"%@ ignored",component);
+						}
 					}
 					return keywords;
 				}
@@ -329,6 +336,7 @@ static PATagger *sharedInstance = nil;
 #pragma mark private
 - (void)writeTags:(NSArray*)tags toFile:(PAFile*)file
 {
+	// empty tags are ignored
 	if (!tags || [tags count] == 0)
 		return;
 	
@@ -426,6 +434,20 @@ static PATagger *sharedInstance = nil;
 		return @"";
 	else
 		return (NSString*)comment;
+}
+
+- (void)validateKeyword:(NSString*)keyword
+{
+	if (!keyword ||
+		![keyword hasPrefix:@"@"] ||
+		[keyword length] == 0 ||
+		![tags tagForName:[keyword substringFromIndex:1]])
+	{
+		NSException *e = [NSException exceptionWithName:@"InvalidKeywordException"
+												 reason:@"user fiddled with comment"
+											   userInfo:nil];
+		@throw e;
+	}
 }
 
 #pragma mark threading stuff

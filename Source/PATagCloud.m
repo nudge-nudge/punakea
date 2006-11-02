@@ -81,14 +81,20 @@ calculates the starting point in the next row according to the height of all the
 		
 		NSFont *font = [NSFont fontWithName:@"Arial" size:20.0];
 		NSColor *color = [NSColor lightGrayColor];
+		NSParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+		[paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+		[paraStyle setAlignment:NSCenterTextAlignment];
+		
 		NSDictionary *attrsDictionary =
-			[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:font,color,nil]
-										forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,nil]];
+			[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:font,color,paraStyle,nil]
+										forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,NSParagraphStyleAttributeName,nil]];
 		
 		noRelatedTagsMessage = [[NSAttributedString alloc] initWithString:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")
 															   attributes:attrsDictionary]; 
 		noTagsMessage = [[NSAttributedString alloc] initWithString:NSLocalizedStringFromTable(@"NO_TAGS",@"Tags",@"")
 														attributes:attrsDictionary];
+		
+		dropManager = [PADropManager sharedInstance];
 	}
 	return self;
 }
@@ -110,7 +116,9 @@ bind to visibleTags
 											 selector:@selector(handleBoundsChange:) 
 												 name:nil 
 											   object:scrollView];
-
+	
+	[self registerForDraggedTypes:[dropManager handledPboardTypes]];
+	
 	[self handleTagsChange];
 }
 
@@ -281,7 +289,7 @@ bound to visibleTags
 	stringOrigin.x = rect.origin.x + (rect.size.width - stringSize.width)/2;
 	stringOrigin.y = rect.origin.y + (rect.size.height - stringSize.height)/2;
 	
-	[string drawAtPoint:stringOrigin];
+	[string drawInRect:NSMakeRect(stringOrigin.x,stringOrigin.y,stringSize.width,stringSize.height)];
 }
 
 - (void)updateViewHierarchy
@@ -593,6 +601,47 @@ bound to visibleTags
 			break;
 	}
 }
+
+#pragma mark drap & drop stuff
+//code of cocoadevcentral tutorial
+
+- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
+{
+	// TODO drop border
+	return [dropManager performedDragOperation:[sender draggingPasteboard]];
+}
+
+- (void)draggingExited:(id <NSDraggingInfo>)sender
+{
+	// remove drop border
+}
+
+- (void)draggingEnded:(id <NSDraggingInfo>)sender
+{
+	//nothin
+}
+
+- (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
+{
+    return YES;
+}
+
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+{
+	NSArray *newFiles = [dropManager handleDrop:[sender draggingPasteboard]];
+	[delegate filesHaveBeenDropped:newFiles];
+	
+    return YES;
+}
+
+/**
+executes some interface stuff
+ */
+- (void)concludeDragOperation:(id <NSDraggingInfo>)sender
+{	
+	// TODO remove border
+}
+
 #pragma mark moving selection
 - (void)selectUpperLeftButton
 {

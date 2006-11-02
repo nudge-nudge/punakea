@@ -4,6 +4,7 @@
 #import <math.h>
 #import "PATag.h"
 #import "PATagButton.h"
+#import "PADropManager.h"
 
 extern NSSize const TAGCLOUD_PADDING;
 extern NSSize const TAGCLOUD_SPACING;
@@ -30,6 +31,8 @@ displays all [datasource visibleTags] in a nice tag cloud view
 	
 	NSAttributedString *noRelatedTagsMessage;
 	NSAttributedString *noTagsMessage;
+	
+	PADropManager *dropManager;
 }
 
 - (id)datasource;

@@ -52,7 +52,7 @@ should be overridden according to apple docs
 	[[self cell] setHovered:YES];
 	[self setNeedsDisplay];
 	
-	return NSDragOperationCopy;
+	return [dropManager performedDragOperation:[sender draggingPasteboard]];
 }
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender
