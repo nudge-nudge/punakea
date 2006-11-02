@@ -10,22 +10,22 @@ data 'LPic' (5000) {
 
 
 data 'TEXT' (5002, "English") {
-    "Copyright (c) 2003, 2004 Jšrg Westheide. All rights reserved.\n"
+    "Copyright (c) 2006 nudge:nudge. All rights reserved.\n"
     "\n"
-    "Permission to use, copy, modify and distribute this software and its documentation "
-    "is hereby granted, provided that both the copyright notice and this permission "
-    "notice appear in all copies of the software, derivative works or modified versions, "
-    "and any portions thereof, and that both notices appear in supporting documentation, "
-    "and that credit is given to Jšrg Westheide in all documents and publicity "
-    "pertaining to direct or indirect use of this code or its derivatives.\n"
+	"This is experimental software and may have bugs, some of which may have "
+	"serious consequences.\n"
+	"THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY "
+	"APPLICABLE LAW.\n"
+	"IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING "
+	"WILL ANY COPYRIGHT HOLDER BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY "
+	"GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF "
+	"THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO "
+	"LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY "
+	"YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY "
+	"OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED "
+	"OF THE POSSIBILITY OF SUCH DAMAGES."
     "\n"
-    "THIS IS EXPERIMENTAL SOFTWARE AND IT IS KNOWN TO HAVE BUGS, SOME OF WHICH MAY HAVE "
-    "SERIOUS CONSEQUENCES. THE COPYRIGHT HOLDER ALLOWS FREE USE OF THIS SOFTWARE IN ITS "
-    "\"AS IS\" CONDITION. THE COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY OF ANY KIND FOR ANY "
-    "DAMAGES WHATSOEVER RESULTING DIRECTLY OR INDIRECTLY FROM THE USE OF THIS SOFTWARE "
-    "OR OF ANY DERIVATIVE WORK.\n"
-    "\n"
-    "For the most recent version see <http://www.objectpark.org>\n"
+    "For the most recent version see <http://www.nudgenudge.eu>\n"
 };
 
 
@@ -42,18 +42,18 @@ resource 'STR#' (5001, "German") {
         /* [5] */
         "Sichern...",
         /* [6] */
-        "Klicken Sie auf ÒAkzeptierenÓ, wenn Sie mit den Bestimmungen des "
+        "Klicken Sie auf â€œAkzeptierenâ€, wenn Sie mit den Bestimmungen des "
         "Software-Lizenzvertrages einverstanden sind. Falls nicht, klicken "
-        "Sie bitte ÒAblehnenÓ an. Sie kšnnen die Software nur installieren, "
-        "wenn Sie ÒAkzeptierenÓ angeklickt haben.",
+        "Sie bitte â€œAblehnenâ€ an. Sie kÃ¶nnen die Software nur installieren, "
+        "wenn Sie â€œAkzeptierenâ€ angeklickt haben.",
         /* [7] */
         "Software-Lizenzvertrag",
         /* [8] */
         "Dieser Text kann nicht gesichert werden. Diese Festplatte ist "
-        "mšglicherweise voll oder geschŸtzt oder der Ordner ist geschŸtzt.",
+        "mÃ¶glicherweise voll oder geschÃ¼tzt oder der Ordner ist geschÃ¼tzt.",
         /* [9] */
-        "Es kann nicht gedruckt werden. Bitte stellen Sie sicher, da§ ein "
-        "Drucker ausgewŠhlt ist."
+        "Es kann nicht gedruckt werden. Bitte stellen Sie sicher, daÃŸ ein "
+        "Drucker ausgewÃ¤hlt ist."
     }
 };
 
@@ -79,14 +79,14 @@ resource 'STR#' (5002, "English") {
         "This text cannot be saved. This disk may be full or locked, or the file "
         "may be locked.",
         /* [9] */
-        "Unable to print. Make sure youÕve selected a printer."
+        "Unable to print. Make sure youâ€™ve selected a printer."
     }
 };
 
 resource 'STR#' (5003, "Spanish") {
     {   /* array StringArray: 9 elements */
         /* [1] */
-        "Espa–ol",
+        "EspaÃ±ol",
         /* [2] */
         "Aceptar",
         /* [3] */
@@ -96,9 +96,9 @@ resource 'STR#' (5003, "Spanish") {
         /* [5] */
         "Guardar...",
         /* [6] */
-        "Si est‡ de acuerdo con los trminos de esta licencia, pulse \"Aceptar\" "
-        "para instalar el software. En el supuesto de que no est de acuerdo con "
-        "los trminos de esta licencia, pulse \"No aceptar.\"",
+        "Si estÃ¡ de acuerdo con los tÃ©rminos de esta licencia, pulse \"Aceptar\" "
+        "para instalar el software. En el supuesto de que no estÃ© de acuerdo con "
+        "los tÃ©rminos de esta licencia, pulse \"No aceptar.\"",
         /* [7] */
         "Licencia de Software",
         /* [8] */
@@ -112,7 +112,7 @@ resource 'STR#' (5003, "Spanish") {
 resource 'STR#' (5004, "French") {
     {   /* array StringArray: 9 elements */
         /* [1] */
-        "Franais",
+        "FranÃ§ais",
         /* [2] */
         "Accepter",
         /* [3] */
@@ -122,16 +122,16 @@ resource 'STR#' (5004, "French") {
         /* [5] */
         "Enregistrer...",
         /* [6] */
-        "Si vous acceptez les termes de la prsente licence, cliquez sur "
-        "\"Accepter\" afin d'installer le logiciel. Si vous n'tes pas d'accord "
+        "Si vous acceptez les termes de la prÃ©sente licence, cliquez sur "
+        "\"Accepter\" afin d'installer le logiciel. Si vous n'Ãªtes pas d'accord "
         "avec les termes de la licence, cliquez sur \"Refuser\".",
         /* [7] */
         "Contrat de licence de logiciel",
         /* [8] */
-        "Ce texte ne peut tre sauvegard. Le disque est peut-tre satur ou "
-        "verrouill, ou bien le fichier est peut-tre verrouill.",
+        "Ce texte ne peut Ãªtre sauvegardÃ©. Le disque est peut-Ãªtre saturÃ© ou "
+        "verrouillÃ©, ou bien le fichier est peut-Ãªtre verrouillÃ©.",
         /* [9] */
-        "Impression impossible. Assurez-vous dÕavoir slectionn une imprimante."
+        "Impression impossible. Assurez-vous dâ€™avoir sÃ©lectionnÃ© une imprimante."
     }
 };
 
@@ -160,36 +160,7 @@ resource 'STR#' (5005, "Italian") {
     }
 };
 
-resource 'STR#' (5006, "Japanese") {
-    {   /* array StringArray: 9 elements */
-        /* [1] */
-        "Japanese",
-        /* [2] */
-        "“¯ˆÓ‚µ‚Ü‚·",
-        /* [3] */
-        "“¯ˆÓ‚µ‚Ü‚¹‚ñ",
-        /* [4] */
-        "ˆóü‚·‚é",
-        /* [5] */
-        "•Û‘¶...",
-        /* [6] */
-        "–{ƒ\\ƒtƒgƒEƒGƒAg—p‹–‘øŒ_–ñ‚ÌğŒ‚É“¯ˆÓ‚³"
-        "‚ê‚éê‡‚É‚ÍAƒ\\ƒtƒgƒEƒGƒA‚ğƒCƒ“ƒXƒg[ƒ‹"
-        "‚·‚é‚½‚ß‚Éu“¯ˆÓ‚µ‚Ü‚·v‚ğ‰Ÿ‚µ‚Ä‚­‚¾‚³‚¢"
-        "B@“¯ˆÓ‚³‚ê‚È‚¢ê‡‚É‚ÍAu“¯ˆÓ‚µ‚Ü‚¹‚ñ"
-        "v‚ğ‰Ÿ‚µ‚Ä‚­‚¾‚³‚¢B",
-        /* [7] */
-        "ƒ\\ƒtƒgƒEƒFƒAg—p‹–‘øŒ_–ñ",
-        /* [8] */
-        "‚±‚ÌƒeƒLƒXƒg‚ÍA•Û‘¶‚Å‚«‚Ü‚¹‚ñB‚±‚ÌƒfƒB"
-        "ƒXƒN‚É‹ó‚«‚ª–³‚¢‚©ƒƒbƒN‚³‚ê‚Ä‚¢‚é‰Â”\\«"
-        "‚ª‚ ‚è‚Ü‚·B‚Ü‚½‚ÍA‚±‚Ìƒtƒ@ƒCƒ‹‚ªƒƒbƒN"
-        "‚³‚ê‚Ä‚¢‚é‰Â”\\«‚ª‚ ‚è‚Ü‚·B",
-        /* [9] */
-        "ˆóü‚Å‚«‚Ü‚¹‚ñBƒvƒŠƒ“ƒ^‚ª³‚µ‚­‘I‘ğ‚³‚ê"
-        "‚Ä‚¢‚é‚±‚Æ‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B"
-    }
-};
+
 
 resource 'STR#' (5007, "Dutch") {
     {   /* array StringArray: 9 elements */
@@ -222,21 +193,21 @@ resource 'STR#' (5008, "Swedish") {
         /* [1] */
         "Svensk",
         /* [2] */
-        "GodkŠnns",
+        "GodkÃ¤nns",
         /* [3] */
-        "Avbšjs",
+        "AvbÃ¶js",
         /* [4] */
         "Skriv ut",
         /* [5] */
         "Spara...",
         /* [6] */
-        "Om Du godkŠnner licensvillkoren klicka pŒ \"GodkŠnns\" fšr att installera "
-        "programprodukten. Om Du inte godkŠnner licensvillkoren, klicka pŒ \"Avbšjs\".",
+        "Om Du godkÃ¤nner licensvillkoren klicka pÃ¥ \"GodkÃ¤nns\" fÃ¶r att installera "
+        "programprodukten. Om Du inte godkÃ¤nner licensvillkoren, klicka pÃ¥ \"AvbÃ¶js\".",
         /* [7] */
-        "Licensavtal fšr Programprodukt",
+        "Licensavtal fÃ¶r Programprodukt",
         /* [8] */
-        "Den hŠr texten kan inte sparas eftersom antingen skivan Šr full eller skivan "
-        "och/eller dokumentet Šr lŒst.",
+        "Den hÃ¤r texten kan inte sparas eftersom antingen skivan Ã¤r full eller skivan "
+        "och/eller dokumentet Ã¤r lÃ¥st.",
         /* [9] */
         "Kan inte skriva ut. Kontrollera att du har valt en skrivare. "
     }
@@ -245,7 +216,7 @@ resource 'STR#' (5008, "Swedish") {
 resource 'STR#' (5009, "Brazilian Portuguese") {
     {   /* array StringArray: 9 elements */
         /* [1] */
-        "Portugus, Brasil",
+        "PortuguÃªs, Brasil",
         /* [2] */
         "Concordar",
         /* [3] */
@@ -255,15 +226,15 @@ resource 'STR#' (5009, "Brazilian Portuguese") {
         /* [5] */
         "Salvar...",
         /* [6] */
-        "Se est‡ de acordo com os termos desta licena, pressione \"Concordar\" para "
-        "instalar o software. Se n‹o est‡ de acordo, pressione \"Discordar\".",
+        "Se estÃ¡ de acordo com os termos desta licenÃ§a, pressione \"Concordar\" para "
+        "instalar o software. Se nÃ£o estÃ¡ de acordo, pressione \"Discordar\".",
         /* [7] */
-        "Licena de Uso de Software",
+        "LicenÃ§a de Uso de Software",
         /* [8] */
-        "Este texto n‹o pode ser salvo. O disco pode estar cheio ou\nbloqueado, ou o "
+        "Este texto nÃ£o pode ser salvo. O disco pode estar cheio ou\nbloqueado, ou o "
         "arquivo pode estar bloqueado.",
         /* [9] */
-        "N‹o  poss’vel imprimir. Comprove que voc selecionou uma impressora."
+        "NÃ£o Ã© possÃ­vel imprimir. Comprove que vocÃª selecionou uma impressora."
     }
 };
 
@@ -272,24 +243,24 @@ resource 'STR#' (5010, "Simplified Chinese") {
         /* [1] */
         "Simplified Chinese",
         /* [2] */
-        "Í¬Òâ",
+        "Ã•Â¨â€œâ€š",
         /* [3] */
-        "²»Í¬Òâ",
+        "â‰¤ÂªÃ•Â¨â€œâ€š",
         /* [4] */
-        "´òÓ¡",
+        "Â¥Ãšâ€Â°",
         /* [5] */
-        "´æ´¢¡­",
+        "Â¥ÃŠÂ¥Â¢Â°â‰ ",
         /* [6] */
-        "Èç¹ûÄúÍ¬Òâ±¾Ğí¿ÉĞ­ÒéµÄÌõ¿î£¬Çë°´¡°Í¬Òâ¡±"
-        "À´°²×°´ËÈí¼ş¡£Èç¹ûÄú²»Í¬Òâ£¬Çë°´¡°²»Í¬Òâ"
-        "¡±¡£",
+        "Â»ÃÏ€ËšÆ’Ë™Ã•Â¨â€œâ€šÂ±Ã¦â€“ÃŒÃ¸â€¦â€“â‰ â€œÃˆÂµÆ’ÃƒÄ±Ã¸Ã“Â£Â¨Â«ÃâˆÂ¥Â°âˆÃ•Â¨â€œâ€šÂ°Â±"
+        "Â¿Â¥âˆâ‰¤â—ŠâˆÂ¥Ã€Â»ÃŒÂºË›Â°Â£Â»ÃÏ€ËšÆ’Ë™â‰¤ÂªÃ•Â¨â€œâ€šÂ£Â¨Â«ÃâˆÂ¥Â°âˆâ‰¤ÂªÃ•Â¨â€œâ€š"
+        "Â°Â±Â°Â£",
         /* [7] */
-        "Èí¼şĞí¿ÉĞ­Òé",
+        "Â»ÃŒÂºË›â€“ÃŒÃ¸â€¦â€“â‰ â€œÃˆ",
         /* [8] */
-        "²»ÄÜ´æ´¢Õâ¸öÎÄ¼ş¡£´ÅÅÌ¿ÉÄÜ±»Ëø¶¨»òÒÑÂú£¬"
-        "Ò²ĞíÊÇÎÄ¼ş±»Ëø¶¨ÁË¡£",
+        "â‰¤ÂªÆ’â€¹Â¥ÃŠÂ¥Â¢â€™â€šâˆË†Å’Æ’ÂºË›Â°Â£Â¥â‰ˆâ‰ˆÃƒÃ¸â€¦Æ’â€¹Â±ÂªÃ€Â¯âˆ‚Â®ÂªÃšâ€œâ€”Â¬Ë™Â£Â¨"
+        "â€œâ‰¤â€“ÃŒÂ Â«Å’Æ’ÂºË›Â±ÂªÃ€Â¯âˆ‚Â®Â¡Ã€Â°Â£",
         /* [9] */
-        "ÎŞ·¨´òÓ¡¡£ÇëÈ·¶¨ÄúÒÑÑ¡ÔñÁËÒ»Ì¨´òÓ¡»ú¡£"
+        "Å’ï¬âˆ‘Â®Â¥Ãšâ€Â°Â°Â£Â«ÃÂ»âˆ‘âˆ‚Â®Æ’Ë™â€œâ€”â€”Â°â€˜Ã’Â¡Ã€â€œÂªÃƒÂ®Â¥Ãšâ€Â°ÂªË™Â°Â£"
     }
 };
 
@@ -298,23 +269,23 @@ resource 'STR#' (5011, "Traditional Chinese") {
         /* [1] */
         "Traditional Chinese",
         /* [2] */
-        "¦P·N",
+        "Â¶Pâˆ‘N",
         /* [3] */
-        "¤£¦P·N",
+        "Â§Â£Â¶Pâˆ‘N",
         /* [4] */
-        "¦C¦L",
+        "Â¶CÂ¶L",
         /* [5] */
-        "Àx¦s¡K",
+        "Â¿xÂ¶sÂ°K",
         /* [6] */
-        "¦pªG±z¦P·N¥»³\\¥iÃÒ¸Ìªº±ø´Ú¡A½Ğ«ö¡§¦P·N¡¨"
-        "¥H¦w¸Ë³nÅé¡C¦pªG¤£¦P·N¡A½Ğ«ö¡§¤£¦P·N¡¨¡C",
+        "Â¶pâ„¢GÂ±zÂ¶Pâˆ‘Nâ€¢Âªâ‰¥\\â€¢iâˆšâ€œâˆÃƒâ„¢âˆ«Â±Â¯Â¥â„Â°AÎ©â€“Â´Ë†Â°ÃŸÂ¶Pâˆ‘NÂ°Â®"
+        "â€¢HÂ¶wâˆÃ€â‰¥nâ‰ˆÃˆÂ°CÂ¶pâ„¢GÂ§Â£Â¶Pâˆ‘NÂ°AÎ©â€“Â´Ë†Â°ÃŸÂ§Â£Â¶Pâˆ‘NÂ°Â®Â°C",
         /* [7] */
-        "³nÅé³\\¥i¨óÄ³",
+        "â‰¥nâ‰ˆÃˆâ‰¥\\â€¢iÂ®Ã›Æ’â‰¥",
         /* [8] */
-        "¥»¤å¦rµLªkÀx¦s¡C³o­ÓºÏºĞ¥i¯à¤wº¡©Î¬OÂê©w"
-        "¡A©ÎÀÉ®×¤w¸gÂê©w¡C",
+        "â€¢ÂªÂ§Ã‚Â¶rÂµLâ„¢kÂ¿xÂ¶sÂ°Câ‰¥oâ‰ â€âˆ«Å“âˆ«â€“â€¢iÃ˜â€¡Â§wâˆ«Â°Â©Å’Â¨OÂ¬ÃÂ©w"
+        "Â°AÂ©Å’Â¿â€¦Ã†â—ŠÂ§wâˆgÂ¬ÃÂ©wÂ°C",
         /* [9] */
-        "µLªk¦C¦L¡C½Ğ½T©w±z¤w¸g¿ï¾Ü¤F¦Lªí¾÷¡C"
+        "ÂµLâ„¢kÂ¶CÂ¶LÂ°CÎ©â€“Î©TÂ©wÂ±zÂ§wâˆgÃ¸Ã”Ã¦â€¹Â§FÂ¶Lâ„¢ÃŒÃ¦ËœÂ°C"
     }
 };
 
@@ -331,15 +302,15 @@ resource 'STR#' (5012, "Danish") {
         /* [5] */
         "Arkiver...",
         /* [6] */
-        "Hvis du accepterer betingelserne i licensaftalen, skal du klikke pŒ ÒEnigÓ "
-        "for at installere softwaren. Klik pŒ ÒUenigÓ for at annullere installeringen.",
+        "Hvis du accepterer betingelserne i licensaftalen, skal du klikke pÃ¥ â€œEnigâ€ "
+        "for at installere softwaren. Klik pÃ¥ â€œUenigâ€ for at annullere installeringen.",
         /* [7] */
         "Licensaftale for software",
         /* [8] */
-        "Teksten kan ikke arkiveres. Disken er evt. fuld eller lŒst, eller ogsŒ er "
-        "arkivet lŒst.",
+        "Teksten kan ikke arkiveres. Disken er evt. fuld eller lÃ¥st, eller ogsÃ¥ er "
+        "arkivet lÃ¥st.",
         /* [9] */
-        "Kan ikke udskrive. S¿rg for, at der er valgt en printer."
+        "Kan ikke udskrive. SÃ¸rg for, at der er valgt en printer."
     }
 };
 
@@ -348,29 +319,29 @@ resource 'STR#' (5013, "Finnish") {
         /* [1] */
         "Suomi",
         /* [2] */
-        "HyvŠksyn",
+        "HyvÃ¤ksyn",
         /* [3] */
-        "En hyvŠksy",
+        "En hyvÃ¤ksy",
         /* [4] */
         "Tulosta",
         /* [5] */
-        "TallennaÉ",
+        "Tallennaâ€¦",
         /* [6] */
-        "HyvŠksy lisenssisopimuksen ehdot osoittamalla ÕHyvŠksyÕ. Jos et hyvŠksy "
-        "sopimuksen ehtoja, osoita ÕEn hyvŠksyÕ.",
+        "HyvÃ¤ksy lisenssisopimuksen ehdot osoittamalla â€™HyvÃ¤ksyâ€™. Jos et hyvÃ¤ksy "
+        "sopimuksen ehtoja, osoita â€™En hyvÃ¤ksyâ€™.",
         /* [7] */
         "Lisenssisopimus",
         /* [8] */
-        "TekstiŠ ei voida tallentaa. Levy voi olla tŠynnŠ tai lukittu.",
+        "TekstiÃ¤ ei voida tallentaa. Levy voi olla tÃ¤ynnÃ¤ tai lukittu.",
         /* [9] */
-        "TekstiŠ ei voida tulostaa. Varmista, ettŠ kirjoitin on valittu."
+        "TekstiÃ¤ ei voida tulostaa. Varmista, ettÃ¤ kirjoitin on valittu."
     }
 };
 
 resource 'STR#' (5014, "French Canadian") {
     {   /* array StringArray: 9 elements */
         /* [1] */
-        "Franais canadien",
+        "FranÃ§ais canadien",
         /* [2] */
         "Accepter",
         /* [3] */
@@ -380,16 +351,16 @@ resource 'STR#' (5014, "French Canadian") {
         /* [5] */
         "Enregistrer...",
         /* [6] */
-        "Si vous acceptez les termes de la prsente licence, cliquez sur \"Accepter\" "
-        "afin d'installer le logiciel. Si vous n'tes pas d'accord avec les termes de "
+        "Si vous acceptez les termes de la prÃ©sente licence, cliquez sur \"Accepter\" "
+        "afin d'installer le logiciel. Si vous n'Ãªtes pas d'accord avec les termes de "
         "la licence, cliquez sur \"Refuser\".",
         /* [7] */
         "Contrat de licence de logiciel",
         /* [8] */
-        "Ce texte ne peut tre sauvegard. Le disque est peut-tre satur ou verrouill, "
-        "ou bien le fichier est peut-tre verrouill.",
+        "Ce texte ne peut Ãªtre sauvegardÃ©. Le disque est peut-Ãªtre saturÃ© ou verrouillÃ©, "
+        "ou bien le fichier est peut-Ãªtre verrouillÃ©.",
         /* [9] */
-        "Impression impossible. Assurez-vous dÕavoir slectionn une imprimante."
+        "Impression impossible. Assurez-vous dâ€™avoir sÃ©lectionnÃ© une imprimante."
     }
 };
 
@@ -398,27 +369,27 @@ resource 'STR#' (5015, "Korean") {
         /* [1] */
         "Korean",
         /* [2] */
-        "µ¿ÀÇ",
+        "ÂµÃ¸Â¿Â«",
         /* [3] */
-        "µ¿ÀÇ ¾ÈÇÔ",
+        "ÂµÃ¸Â¿Â« Ã¦Â»Â«â€˜",
         /* [4] */
-        "ÇÁ¸°Æ®",
+        "Â«Â¡âˆâˆâˆ†Ã†",
         /* [5] */
-        "ÀúÀå...",
+        "Â¿Ë™Â¿Ã‚...",
         /* [6] */
-        "»ç¿ë °è¾à¼­ÀÇ ³»¿ë¿¡ µ¿ÀÇÇÏ¸é, \"µ¿ÀÇ\" ´Ü"
-        "Ãß¸¦ ´­·¯ ¼ÒÇÁÆ®¿ş¾î¸¦ ¼³Ä¡ÇÏ½Ê½Ã¿À. µ¿À"
-        "ÇÇÏÁö ¾Ê´Â´Ù¸é, \"µ¿ÀÇ ¾ÈÇÔ\" ´ÜÃß¸¦ ´©¸£½"
-        "Ê½Ã¿À.",
+        "ÂªÃÃ¸Ã âˆÃ‹Ã¦â€¡Âºâ‰ Â¿Â« â‰¥ÂªÃ¸ÃÃ¸Â° ÂµÃ¸Â¿Â«Â«Å“âˆÃˆ, \"ÂµÃ¸Â¿Â«\" Â¥â€¹"
+        "âˆšï¬‚âˆÂ¶ Â¥â‰ âˆ‘Ã˜ Âºâ€œÂ«Â¡âˆ†Ã†Ã¸Ë›Ã¦Ã“âˆÂ¶ Âºâ‰¥Æ’Â°Â«Å“Î©Â Î©âˆšÃ¸Â¿. ÂµÃ¸Â¿"
+        "Â«Â«Å“Â¡Ë† Ã¦Â Â¥Â¬Â¥Å¸âˆÃˆ, \"ÂµÃ¸Â¿Â« Ã¦Â»Â«â€˜\" Â¥â€¹âˆšï¬‚âˆÂ¶ Â¥Â©âˆÂ£Î©"
+        "Â Î©âˆšÃ¸Â¿.",
         /* [7] */
-        "»ç¿ë °è¾à µ¿ÀÇ¼­",
+        "ÂªÃÃ¸Ã âˆÃ‹Ã¦â€¡ ÂµÃ¸Â¿Â«Âºâ‰ ",
         /* [8] */
-        "ÀÌ ÅØ½ºÆ®¸¦ ÀúÀåÇÒ ¼ö ¾ø½À´Ï´Ù. ÀÌ µğ½ºÅ"
-        "©´Â ²Ë Ã¡°Å³ª Àá°Ü ÀÖ½À´Ï´Ù. ¶Ç´Â ÆÄÀÏÀÌ"
-        " Àá°Ü ÀÖÀ» ¼öµµ ÀÖ½À´Ï´Ù.",
+        "Â¿Ãƒ â‰ˆÃ¿Î©âˆ«âˆ†Ã†âˆÂ¶ Â¿Ë™Â¿Ã‚Â«â€œ ÂºË† Ã¦Â¯Î©Â¿Â¥Å“Â¥Å¸. Â¿Ãƒ Âµï£¿Î©âˆ«â‰ˆ"
+        "Â©Â¥Â¬ â‰¤Ã€ âˆšÂ°âˆâ‰ˆâ‰¥â„¢ Â¿Â·âˆâ€¹ Â¿Ã·Î©Â¿Â¥Å“Â¥Å¸. âˆ‚Â«Â¥Â¬ âˆ†Æ’Â¿Å“Â¿Ãƒ"
+        " Â¿Â·âˆâ€¹ Â¿Ã·Â¿Âª ÂºË†ÂµÂµ Â¿Ã·Î©Â¿Â¥Å“Â¥Å¸.",
         /* [9] */
-        "ÇÁ¸°Æ®ÇÒ ¼ö ¾ø½À´Ï´Ù. ÇÁ¸°ÅÍ¸¦ ¼±ÅÃÇß´ÂÁ"
-        "ö È®ÀÎÇÏ½Ê½Ã¿À."
+        "Â«Â¡âˆâˆâˆ†Ã†Â«â€œ ÂºË† Ã¦Â¯Î©Â¿Â¥Å“Â¥Å¸. Â«Â¡âˆâˆâ‰ˆÃ•âˆÂ¶ ÂºÂ±â‰ˆâˆšÂ«ï¬‚Â¥Â¬Â¡"
+        "Ë† Â»Ã†Â¿Å’Â«Å“Î©Â Î©âˆšÃ¸Â¿."
     }
 };
 
@@ -435,14 +406,14 @@ resource 'STR#' (5016, "Norwegian") {
         /* [5] */
         "Arkiver...",
         /* [6] */
-        "Hvis De er enig i bestemmelsene i denne lisensavtalen, klikker De pŒ "
-        "\"Enig\"-knappen for Œ installere programvaren. Hvis De ikke er enig, "
-        "klikker De pŒ \"Ikke enig\".",
+        "Hvis De er enig i bestemmelsene i denne lisensavtalen, klikker De pÃ¥ "
+        "\"Enig\"-knappen for Ã¥ installere programvaren. Hvis De ikke er enig, "
+        "klikker De pÃ¥ \"Ikke enig\".",
         /* [7] */
         "Programvarelisensavtale",
         /* [8] */
-        "Denne teksten kan ikke arkiveres. Disken kan v¾re full eller lŒst, "
-        "eller filen kan v¾re lŒst. ",
+        "Denne teksten kan ikke arkiveres. Disken kan vÃ¦re full eller lÃ¥st, "
+        "eller filen kan vÃ¦re lÃ¥st. ",
         /* [9] */
         "Kan ikke skrive ut. Forsikre deg om at du har valgt en skriver. "
     }
