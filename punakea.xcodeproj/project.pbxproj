@@ -233,6 +233,7 @@
 		659040E00A4C058400ADDC1D /* pane_key-favoriteIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659040CC0A4C058400ADDC1D /* pane_key-favoriteIcon.tiff */; };
 		6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */; };
 		6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */; };
+		65943F990AFA56AA00A8922F /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 65943F980AFA56AA00A8922F /* appicon.icns */; };
 		65988C6B0A875A11000270E6 /* PAButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65988C690A875A11000270E6 /* PAButton.h */; };
 		65988C6C0A875A11000270E6 /* PAButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65988C6A0A875A11000270E6 /* PAButton.m */; };
 		65988C810A875C53000270E6 /* PAButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65988C7F0A875C53000270E6 /* PAButtonCell.h */; };
@@ -695,6 +696,7 @@
 		659040CC0A4C058400ADDC1D /* pane_key-favoriteIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "pane_key-favoriteIcon.tiff"; sourceTree = "<group>"; };
 		6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemMatrix.h; sourceTree = "<group>"; };
 		6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemMatrix.m; sourceTree = "<group>"; };
+		65943F980AFA56AA00A8922F /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = appicon.icns; sourceTree = "<group>"; };
 		65988C690A875A11000270E6 /* PAButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAButton.h; sourceTree = "<group>"; };
 		65988C6A0A875A11000270E6 /* PAButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAButton.m; sourceTree = "<group>"; };
 		65988C7F0A875C53000270E6 /* PAButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAButtonCell.h; sourceTree = "<group>"; };
@@ -877,6 +879,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65943F980AFA56AA00A8922F /* appicon.icns */,
 				48F980700AEF5C9F003BA2DC /* DropHandlerPlugins */,
 				4860293B0AEE0AF600B7DC6F /* SLA.r */,
 				488CD51F0AC023DF0038AB34 /* Scripts */,
@@ -1833,6 +1836,7 @@
 				657321080AF63DAE000B3943 /* RemovePressed.tif in Resources */,
 				658ADF600AF6610A00063AE1 /* RemoveRound.tif in Resources */,
 				658ADF610AF6610A00063AE1 /* RemoveRoundPressed.tif in Resources */,
+				65943F990AFA56AA00A8922F /* appicon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

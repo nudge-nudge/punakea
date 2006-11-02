@@ -32,7 +32,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>appicon</string>
 	<key>CFBundleIdentifier</key>
 	<string>eu.nudgenudge.taguiero</string>
 	<key>CFBundleInfoDictionaryVersion</key>
