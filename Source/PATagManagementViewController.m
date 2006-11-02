@@ -233,12 +233,8 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	[lastUsedField setStringValue:[dateFormatter friendlyStringFromDate:[tag lastUsed]]];
 	
 	PATag *currentBestTag = [tags currentBestTag];
-	
-	float currentMaxValue = [currentBestTag absoluteRating];
-	float currentValue = [tag relativeRatingToTag:currentBestTag];
-	
-	[popularityIndicator setMaxValue:currentMaxValue];
-	[popularityIndicator setFloatValue:(currentValue * currentMaxValue)];
+
+	[popularityIndicator setFloatValue:[tag relativeRatingToTag:currentBestTag]];
 	
 	NSWindow *window = [[self currentView] window];
 	[window makeFirstResponder:tagNameField];
