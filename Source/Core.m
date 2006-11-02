@@ -173,11 +173,15 @@
 - (IBAction)showResults:(id)sender
 {
 	[[browserController browserViewController] showResults];
+	[[viewMenu itemWithTag:0] setState:NSOnState];
+	[[viewMenu itemWithTag:1] setState:NSOffState];
 }
 
 - (IBAction)manageTags:(id)sender
 {
 	[[browserController browserViewController] manageTags];
+	[[viewMenu itemWithTag:0] setState:NSOffState];
+	[[viewMenu itemWithTag:1] setState:NSOnState];
 }
 
 - (IBAction)showPreferences:(id)sender

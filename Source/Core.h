@@ -19,6 +19,8 @@
 
 @interface Core : NSWindowController
 {
+	IBOutlet NSMenu *viewMenu;
+	
 	PATagger *tagger;
 
 	BrowserController *browserController;
