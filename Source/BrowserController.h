@@ -14,7 +14,6 @@
 @interface BrowserController : NSWindowController 
 {
 	BrowserViewController				*browserViewController;
-	
 }
 
 - (BrowserViewController*)browserViewController;

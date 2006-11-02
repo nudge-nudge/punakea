@@ -46,5 +46,6 @@ returns the tag for the given name, or nil, if there is none
 - (int)count;
 - (PATag*)tagAtIndex:(unsigned int)index;
 - (void)sortUsingDescriptors:(NSArray *)sortDescriptors;
+- (PATag*)currentBestTag;
 
 @end

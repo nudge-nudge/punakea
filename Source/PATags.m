@@ -118,6 +118,26 @@ NSString * const PATagOperation = @"PATagOperation";
 	[tags sortUsingDescriptors:sortDescriptors];
 }
 
+- (PATag*)currentBestTag
+{
+	PATag *bestTag = nil;
+	float currentBestRating = 0.0;
+	
+	NSEnumerator *e = [self objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		if ([tag absoluteRating] > currentBestRating)
+		{
+			currentBestRating = [tag absoluteRating];
+			bestTag = tag;
+		}
+	}
+	
+	return bestTag;
+}
+
 #pragma mark tag observing
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
