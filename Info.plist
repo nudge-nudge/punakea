@@ -46,7 +46,7 @@
 	<key>CFBundleSignature</key>
 	<string>NuNu</string>
 	<key>CFBundleVersion</key>
-	<string>787</string>
+	<string>807</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

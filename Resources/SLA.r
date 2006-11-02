@@ -14,6 +14,7 @@ data 'TEXT' (5002, "English") {
     "\n"
 	"This is experimental software and may have bugs, some of which may have "
 	"serious consequences.\n"
+	"\n"
 	"THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY "
 	"APPLICABLE LAW.\n"
 	"IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING "
@@ -23,7 +24,7 @@ data 'TEXT' (5002, "English") {
 	"LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY "
 	"YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY "
 	"OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED "
-	"OF THE POSSIBILITY OF SUCH DAMAGES."
+	"OF THE POSSIBILITY OF SUCH DAMAGES.\n"
     "\n"
     "For the most recent version see <http://www.nudgenudge.eu>\n"
 };
