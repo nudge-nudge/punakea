@@ -89,6 +89,7 @@
 
 - (void)incrementUseCount 
 {
+	NSLog(@"inc");
 	useCount++;
 	[self setLastUsed:[[NSCalendarDate alloc] init]];
 }

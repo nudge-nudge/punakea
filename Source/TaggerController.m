@@ -141,8 +141,10 @@ completionsForSubstring:(NSString *)substring
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	
 	// resize field if neccessary
-	[self resizeTokenField];
-	
+	[self performSelector:@selector(resizeTokenField) 
+			   withObject:nil 
+			   afterDelay:0.1];
+		
 	// everything will be added
 	return tokens;
 }
