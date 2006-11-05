@@ -33,17 +33,6 @@ static PATagger *sharedInstance = nil;
 		tags = [[PATags alloc] init];
 		
 		fileCache = [[NSMutableDictionary alloc] init];
-		
-		// load the applescript for finder comments
-		NSString* path = [[NSBundle mainBundle] pathForResource:@"findercomment" ofType:@"scpt"];
-		if (path != nil)
-		{
-			NSURL* url = [NSURL fileURLWithPath:path];
-			if (url != nil)
-			{
-				finderCommentScript = [[NSAppleScript alloc] initWithContentsOfURL:url error:nil];
-			}
-		}
 	}
 	return self;
 }
@@ -205,7 +194,7 @@ static PATagger *sharedInstance = nil;
 	{
 		if (keywords = [fileCache objectForKey:[file path]])
 		{
-			NSLog(@"cache_hit");
+			NSLog(@"%@ cache_hit",file);
 			return keywords;
 		}
 		else
@@ -336,8 +325,10 @@ static PATagger *sharedInstance = nil;
 #pragma mark private
 - (void)writeTags:(NSArray*)tags toFile:(PAFile*)file
 {
+	@synchronized(self)
+	{
 	// empty tags are ignored
-	if (!tags || [tags count] == 0)
+	if (!tags)
 		return;
 	
 	// get current finder spotlight comment
@@ -378,6 +369,7 @@ static PATagger *sharedInstance = nil;
 	
 	// write comment to end of finder spotlight comment
 	[self writeFinderSpotlightCommentOfFile:file keywords:keywords oldComment:finderSpotlightCommentWithoutTags];
+	}
 }
 
 - (void)writeFinderSpotlightCommentOfFile:(PAFile*)file keywords:(NSArray*)keywords oldComment:(NSString*)oldComment
@@ -428,13 +420,20 @@ static PATagger *sharedInstance = nil;
 
 - (NSString*)finderSpotlightCommentForFile:(PAFile*)file
 {
-	MDItemRef *item = MDItemCreate(NULL,[file path]);
-	CFTypeRef *comment = MDItemCopyAttribute(item,@"kMDItemFinderComment");
-	
+	MDItemRef mdItem = NULL;
+    CFStringRef path = (CFStringRef)[file path];
+    NSString *comment = nil;
+    
+    if (path && (mdItem = MDItemCreate(CFGetAllocator(path), path))) {
+        comment = (NSString *)MDItemCopyAttribute(mdItem, kMDItemFinderComment);
+        CFRelease(mdItem);
+        [comment autorelease];
+    }
+
 	if (!comment)
 		return @"";
 	else
-		return (NSString*)comment;
+		return comment;
 }
 
 - (void)validateKeyword:(NSString*)keyword

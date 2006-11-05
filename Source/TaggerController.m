@@ -143,7 +143,7 @@ completionsForSubstring:(NSString *)substring
 	// resize field if neccessary
 	[self performSelector:@selector(resizeTokenField) 
 			   withObject:nil 
-			   afterDelay:0.1];
+			   afterDelay:0.05];
 		
 	// everything will be added
 	return tokens;

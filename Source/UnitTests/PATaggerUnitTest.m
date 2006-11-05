@@ -81,17 +81,31 @@
 	[tagger addTags:testTags toFiles:[NSArray arrayWithObject:file_0]];
 	NSArray *tagsOnFiles = [tagger tagsOnFile:file_0];
 	
-	STAssertEquals([testTags count],[tagsOnFiles count],@"size");
+	[self assertArrayContentOf:tagsOnFiles isEqualTo:testTags];
+		
+	[tagger removeAllTagsFromFile:file_0];
+	tagsOnFiles = [tagger tagsOnFile:file_0];
+	
+	[self assertArrayContentOf:tagsOnFiles isEqualTo:[NSArray array]];
+	
+	[tagger addTags:[NSArray arrayWithObjects:[testTags objectAtIndex:0],
+		[testTags objectAtIndex:2],
+		nil]
+									  toFiles:[NSArray arrayWithObject:file_1]];
+	
+	[tagger addTags:[NSArray arrayWithObjects:[testTags objectAtIndex:0],
+		[testTags objectAtIndex:2],
+		nil]
+			toFiles:[NSArray arrayWithObject:file_2]];
+	
+	[tagger addTags:[NSArray arrayWithObjects:[testTags objectAtIndex:5],
+		[testTags objectAtIndex:8],
+		nil]
+			toFiles:[NSArray arrayWithObject:file_1]];
+		
+	[self assertArrayContentOf:[tagger tagsOnFile:file_1]
+					 isEqualTo:[NSArray arrayWithObjects:[testTags objectAtIndex:0],[testTags objectAtIndex:2],[testTags objectAtIndex:5],[testTags objectAtIndex:8],nil]];
 
-	NSEnumerator *e = [testTags objectEnumerator];
-	PATag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		STAssertTrue([tagsOnFiles containsObject:tag],@"tag");
-	}
-	
-	return;
 }
 
 #pragma mark private
@@ -120,9 +134,22 @@
 	
 	while (filename = [e nextObject])
 	{
-		[fileManager removeFileAtPath:filename handler:nil];
+		//[fileManager removeFileAtPath:filename handler:nil];
 	}
 }
+
+
+- (void)assertArrayContentOf:(NSArray*)a isEqualTo:(NSArray*)b
+{
+	STAssertEquals([a count],[b count],@"size");
 	
+	NSEnumerator *e = [a objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [e nextObject])
+	{
+		STAssertTrue([b containsObject:tag],@"tag");
+	}
+}
 
 @end

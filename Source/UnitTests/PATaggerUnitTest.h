@@ -20,4 +20,6 @@
 	NSMutableArray *testTags;
 }
 
+- (void)assertArrayContentOf:(NSArray*)a isEqualTo:(NSArray*)b;
+
 @end

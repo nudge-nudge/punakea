@@ -27,8 +27,6 @@ singleton class for working with finder spotlight comment (our simpleTags)
 	PASimpleTagFactory *simpleTagFactory;
 	PATags *tags;
 	
-	NSAppleScript *finderCommentScript;
-	
 	NSMutableDictionary *fileCache;
 }
 
