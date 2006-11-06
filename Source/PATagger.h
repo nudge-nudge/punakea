@@ -16,9 +16,7 @@
 #import "PATempTag.h"
 #import "PAQuery.h"
 #import "PAFile.h"
-
-extern NSString * const TAGGER_OPEN_COMMENT;
-extern NSString * const TAGGER_CLOSE_COMMENT;
+#import "PAFileCache.h"
 
 /**
 singleton class for working with finder spotlight comment (our simpleTags)
@@ -27,7 +25,7 @@ singleton class for working with finder spotlight comment (our simpleTags)
 	PASimpleTagFactory *simpleTagFactory;
 	PATags *tags;
 	
-	NSMutableDictionary *fileCache;
+	PAFileCache *fileCache;
 }
 
 /**

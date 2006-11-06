@@ -137,14 +137,17 @@ completionsForSubstring:(NSString *)substring
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)idx
 {
-	[[PATagger sharedInstance] addTags:tokens toFiles:[fileController arrangedObjects]];
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
+	
+	NSLog(@"should add: %@",tokens);
+
+	[[PATagger sharedInstance] addTags:tokens toFiles:[fileController arrangedObjects]];
 	
 	// resize field if neccessary
 	[self performSelector:@selector(resizeTokenField) 
 			   withObject:nil 
 			   afterDelay:0.05];
-		
+	
 	// everything will be added
 	return tokens;
 }
@@ -162,7 +165,10 @@ completionsForSubstring:(NSString *)substring
 
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString
 {
-	return [tagger createTagForName:editingString];
+	if (editingString && [editingString isNotEqualTo:@""])
+		return [tagger createTagForName:editingString];
+	else
+		return nil;
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
@@ -188,12 +194,14 @@ completionsForSubstring:(NSString *)substring
 		// now remove the tags to be deleted from currentCompleteTagsInField - to keep in sync with tagField
 		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
 		
+		NSLog(@"removing %@",deletedTags);
+		
 		// remove the deleted tags from all files
 		[[PATagger sharedInstance] removeTags:deletedTags fromFiles:[fileController arrangedObjects]];
+
+		// resize tokenfield if neccessary
+		[self resizeTokenField];
 	}
-	
-	// resize tokenfield if neccessary
-	[self resizeTokenField];
 }
 
 - (void)resizeTokenField
@@ -261,7 +269,6 @@ completionsForSubstring:(NSString *)substring
 	[tagField setObjectValue:tagsOnAllFiles];
 	[currentCompleteTagsInField removeAllTags];
 	[currentCompleteTagsInField addObjectsFromArray:tagsOnAllFiles];
-	[self resizeTokenField];
 	[[self window] makeFirstResponder:tagField];
 }
 

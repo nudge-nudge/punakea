@@ -8,9 +8,6 @@
 
 #import "PATagger.h"
 
-NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
-NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
-
 @interface PATagger (PrivateAPI)
 
 - (void)writeTags:(NSArray*)tags toFile:(PAFile*)file;
@@ -32,7 +29,7 @@ static PATagger *sharedInstance = nil;
 		simpleTagFactory = [[PASimpleTagFactory alloc] init];
 		tags = [[PATags alloc] init];
 		
-		fileCache = [[NSMutableDictionary alloc] init];
+		fileCache = [[PAFileCache alloc] initWithTags:tags];
 	}
 	return self;
 }
@@ -186,67 +183,9 @@ static PATagger *sharedInstance = nil;
 	[self addTags:tagArray toFiles:files];
 }
 
-- (NSArray*)keywordsForFile:(PAFile*)file {
-	NSArray *keywords;
-	// check cache if it has some keywords for file
-	
-	@synchronized(fileCache)
-	{
-		if (keywords = [fileCache objectForKey:[file path]])
-		{
-			NSLog(@"%@ cache_hit",file);
-			return keywords;
-		}
-		else
-		{	
-			// get comment
-			NSString *finderSpotlightComment = [self finderSpotlightCommentForFile:file];
-			
-			// extract keywords
-			NSRange openCommentRange = [finderSpotlightComment rangeOfString:TAGGER_OPEN_COMMENT];
-			NSRange closeCommentRange = [finderSpotlightComment rangeOfString:TAGGER_CLOSE_COMMENT];
-			
-			if (openCommentRange.location != NSNotFound)
-			{
-				NSString *keywordString = [finderSpotlightComment substringWithRange:NSMakeRange(openCommentRange.location + openCommentRange.length,
-																								 closeCommentRange.location - openCommentRange.location - openCommentRange.length)];
-				
-				NSArray *components = [keywordString componentsSeparatedByString:@";"];
-				
-				// check if there are any keywords
-				if ([components count] == 1 && [[components objectAtIndex:0] isEqualToString:@""])
-				{
-					return [NSArray array];
-				}
-				else
-				{
-					keywords = [NSMutableArray array];
-					NSEnumerator *e = [components objectEnumerator];
-					NSString *component;
-					
-					while (component = [e nextObject])
-					{
-						// validate keywordstring-component
-						@try 
-						{
-							[self validateKeyword:component];
-							[keywords addObject:[component substringFromIndex:1]];
-						} 
-						@catch (NSException *e) 
-						{
-							// ignore keyword - TODO inform user
-							NSLog(@"%@ ignored",component);
-						}
-					}
-					return keywords;
-				}
-			}
-			else
-			{
-				return [NSArray array];
-			}
-		}
-	}
+- (NSArray*)keywordsForFile:(PAFile*)file 
+{
+	[fileCache keywordsForFile:file];
 }
 
 #pragma mark working with tags (renaming and deleting)
@@ -325,142 +264,17 @@ static PATagger *sharedInstance = nil;
 #pragma mark private
 - (void)writeTags:(NSArray*)tags toFile:(PAFile*)file
 {
-	@synchronized(self)
-	{
-	// empty tags are ignored
-	if (!tags)
-		return;
-	
-	// get current finder spotlight comment
-	NSString *currentFinderSpotlightComment = [self finderSpotlightCommentForFile:file];
-	
-	// delete old tag comment
-	NSRange openCommentRange = [currentFinderSpotlightComment rangeOfString:TAGGER_OPEN_COMMENT];
-	NSRange closeCommentRange = [currentFinderSpotlightComment rangeOfString:TAGGER_CLOSE_COMMENT];
-	
-	NSString *finderSpotlightCommentWithoutTags;
-	
-	if (openCommentRange.location != NSNotFound)
-	{
-		NSString *commentBeforeTags = [currentFinderSpotlightComment substringWithRange:NSMakeRange(0,openCommentRange.location)];
-		int lengthOfCommentAfterTags = [currentFinderSpotlightComment length] - closeCommentRange.location - closeCommentRange.length;
-		NSString *commentAfterTags = [currentFinderSpotlightComment substringWithRange:NSMakeRange(closeCommentRange.location + closeCommentRange.length,
-																								   lengthOfCommentAfterTags)];
-		finderSpotlightCommentWithoutTags = [commentBeforeTags stringByAppendingString:commentAfterTags];
-	}
-	else
-	{
-		finderSpotlightCommentWithoutTags = currentFinderSpotlightComment;
-	}
-			
 	NSMutableArray *keywords = [NSMutableArray array];
+		
 	NSEnumerator *e = [tags objectEnumerator];
 	PATag *tag;
-	
-	if (tag = [e nextObject])
-	{
-		[keywords addObject:[tag name]];
-	}
-	
+		
 	while (tag = [e nextObject])
 	{
 		[keywords addObject:[tag name]];
 	}
 	
-	// write comment to end of finder spotlight comment
-	[self writeFinderSpotlightCommentOfFile:file keywords:keywords oldComment:finderSpotlightCommentWithoutTags];
-	}
-}
-
-- (void)writeFinderSpotlightCommentOfFile:(PAFile*)file keywords:(NSArray*)keywords oldComment:(NSString*)oldComment
-{
-	// locking and delay because of finder drop hang
-	@synchronized(self)
-	{
-		[self createFileCacheFor:file keywords:keywords];
-		[self performSelector:@selector(writeStringToFinderSpotlightCommentOfFile:)
-				   withObject:[NSArray arrayWithObjects:file,oldComment,nil]
-				   afterDelay:0.1];
-	}
-}
-
-// perform selector afterDelay takes only 1 argument
-- (void)writeStringToFinderSpotlightCommentOfFile:(NSArray*)arguments
-{
-	@synchronized(self)
-	{
-		PAFile *file = [arguments objectAtIndex:0];
-		NSString *oldComment = [arguments objectAtIndex:1];
-		
-		NSMutableString *newTagComment = [NSMutableString stringWithString:TAGGER_OPEN_COMMENT];
-		
-		// create new tag comment from cache
-		NSMutableArray *keywords = [[self fileCache] objectForKey:[file path]];
-		NSEnumerator *e = [keywords objectEnumerator];
-		NSString *keyword;
-		
-		if (keyword = [e nextObject])
-		{
-			[newTagComment appendFormat:@"@%@",keyword];
-		}
-		
-		while (keyword = [e nextObject])
-		{
-			[newTagComment appendFormat:@";@%@",keyword];
-		}
-		
-		[newTagComment appendString:TAGGER_CLOSE_COMMENT];
-		
-		[[NSFileManager defaultManager] setComment:[oldComment stringByAppendingString:newTagComment]
-											forURL:[NSURL fileURLWithPath:[file path]]];
-			
-		[self removeFileCacheFor:file];
-	}
-}
-
-- (NSString*)finderSpotlightCommentForFile:(PAFile*)file
-{
-	MDItemRef mdItem = NULL;
-    CFStringRef path = (CFStringRef)[file path];
-    NSString *comment = nil;
-    
-    if (path && (mdItem = MDItemCreate(CFGetAllocator(path), path))) {
-        comment = (NSString *)MDItemCopyAttribute(mdItem, kMDItemFinderComment);
-        CFRelease(mdItem);
-        [comment autorelease];
-    }
-
-	if (!comment)
-		return @"";
-	else
-		return comment;
-}
-
-- (void)validateKeyword:(NSString*)keyword
-{
-	if (!keyword ||
-		![keyword hasPrefix:@"@"] ||
-		[keyword length] == 0 ||
-		![tags tagForName:[keyword substringFromIndex:1]])
-	{
-		NSException *e = [NSException exceptionWithName:@"InvalidKeywordException"
-												 reason:@"user fiddled with comment"
-											   userInfo:nil];
-		@throw e;
-	}
-}
-
-#pragma mark threading stuff
-- (void)createFileCacheFor:(PAFile*)file keywords:(NSArray*)keywords
-{
-	[[self fileCache] setObject:[keywords retain] forKey:[file path]];	
-}
-
-- (void)removeFileCacheFor:(PAFile*)file
-{
-	NSArray *keywords = [fileCache objectForKey:[file path]];
-	[[self fileCache] removeObjectForKey:[file path]];
-	[keywords release];
+	[fileCache writeKeywords:keywords toFile:file];
 }
 
 #pragma mark accessors

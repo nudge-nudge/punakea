@@ -150,6 +150,11 @@
 		return NO;
 }
 
+- (unsigned)hash 
+{
+	return [path hash];
+}
+
 #pragma mark comparison
 - (NSComparisonResult)compare:(PAFile*)aFile
 {
