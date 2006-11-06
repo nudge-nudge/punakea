@@ -18,9 +18,13 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 - (void)syncCache;
 
 - (NSArray*)keywordsForComment:(NSString*)comment;
-- (NSArray*)commentForKeywords:(NSArray*)keywords;
+- (NSString*)commentForKeywords:(NSArray*)keywords;
+- (void)validateKeyword:(NSString*)keyword;
 
 - (NSString*)finderSpotlightCommentForFile:(PAFile*)file;
+- (NSString*)finderCommentIgnoringKeywordsForFile:(PAFile*)file;
+
+- (void)writeFileCache:(PAFile*)file;
 
 @end
 
@@ -42,6 +46,12 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 												repeats:YES];
 		
 		tags = allTags;
+		
+		// sync on app shutdown
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(syncCache)
+													 name:NSApplicationWillTerminateNotification
+												   object:nil];
 	}
 	return self;
 }
@@ -148,7 +158,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		}
 		else
 		{
-			NSArray *keywords = [NSMutableArray array];
+			NSMutableArray *keywords = [NSMutableArray array];
 			NSEnumerator *e = [components objectEnumerator];
 			NSString *component;
 			
@@ -160,7 +170,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 					[self validateKeyword:component];
 					[keywords addObject:[component substringFromIndex:1]];
 				} 
-				@catch (NSException *e) 
+				@catch (NSException *exception) 
 				{
 						// ignore keyword - TODO inform user
 						NSLog(@"%@ ignored",component);
@@ -176,7 +186,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	}
 }
 	
-- (NSArray*)commentForKeywords:(NSArray*)keywords
+- (NSString*)commentForKeywords:(NSArray*)keywords
 {
 	NSMutableString *comment = [NSMutableString stringWithString:TAGGER_OPEN_COMMENT];
 	
