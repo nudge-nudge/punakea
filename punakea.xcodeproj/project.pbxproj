@@ -204,6 +204,7 @@
 		655D3BF60A7DD5CB009479F9 /* PAFilterSlice.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D3BF40A7DD5CB009479F9 /* PAFilterSlice.m */; };
 		6563884B09E419D300BE59AE /* PAResultsItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6563884909E419D300BE59AE /* PAResultsItemCell.h */; };
 		6563884C09E419D300BE59AE /* PAResultsItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6563884A09E419D300BE59AE /* PAResultsItemCell.m */; };
+		6566CDB90AFF8E1800FEAD7E /* Punakea.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* Punakea.app */; };
 		656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */; };
 		656C20030AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */; };
 		656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */; };
@@ -332,19 +333,19 @@
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Punakea;
 		};
-		48893B2D0AF0A6EC00BA0B50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D1107260486CEB800E47090;
-			remoteInfo = Punakea;
-		};
 		48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 483184970AEF8D8600C3C672;
 			remoteInfo = PADropHandler;
+		};
+		6566CDAC0AFF8B3500FEAD7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090 /* Punakea */;
+			remoteInfo = Punakea;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -371,6 +372,16 @@
 				4807215E0AEFE5600024118D /* SafariBookmarkDropHandler.ntagsdh in Copy Plugins */,
 			);
 			name = "Copy Plugins";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6566CDAE0AFF8B6200FEAD7E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = ../../Release/App;
+			dstSubfolderSpec = 16;
+			files = (
+				6566CDB90AFF8E1800FEAD7E /* Punakea.app in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		65E7B37C0994D97500565251 /* CopyFiles */ = {
@@ -1570,20 +1581,20 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXLegacyTarget section */
-		483F9BBB0AEE01A900F3CC7F /* DMG */ = {
+		6566CD5F0AFF889F00FEAD7E /* DMG */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = /usr/local/bin/buildDMG.pl;
-			buildConfigurationList = 483F9BC30AEE01B300F3CC7F /* Build configuration list for PBXLegacyTarget "DMG" */;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 6566CD6E0AFF88E200FEAD7E /* Build configuration list for PBXLegacyTarget "DMG" */;
 			buildPhases = (
 			);
-			buildToolPath = /usr/bin/perl;
-			buildWorkingDirectory = "";
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "$(BUILT_PRODUCTS_DIR)/../../Release";
 			dependencies = (
-				48893B2E0AF0A6EC00BA0B50 /* PBXTargetDependency */,
+				6566CDAD0AFF8B3500FEAD7E /* PBXTargetDependency */,
 			);
 			name = DMG;
 			passBuildSettingsInEnvironment = 1;
-			productName = DMG;
+			productName = "Make DMG";
 		};
 /* End PBXLegacyTarget section */
 
@@ -1690,6 +1701,7 @@
 				65E7B37C0994D97500565251 /* CopyFiles */,
 				48F97FEC0AEF5638003BA2DC /* Copy Frameworks */,
 				48F9807F0AEF5CC4003BA2DC /* Copy Plugins */,
+				6566CDAE0AFF8B6200FEAD7E /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1729,8 +1741,8 @@
 			projectDirPath = "";
 			targets = (
 				8D1107260486CEB800E47090 /* Punakea */,
+				6566CD5F0AFF889F00FEAD7E /* DMG */,
 				488A52E80A81D9DC005B54A8 /* Documentation */,
-				483F9BBB0AEE01A900F3CC7F /* DMG */,
 				483184970AEF8D8600C3C672 /* PADropHandler */,
 				483184E20AEF91A700C3C672 /* FilenamesDropHandler */,
 				48C633BA0AEF9720008F0E94 /* SafariBookmarkDropHandler */,
@@ -2052,15 +2064,15 @@
 			target = 8D1107260486CEB800E47090 /* Punakea */;
 			targetProxy = 48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */;
 		};
-		48893B2E0AF0A6EC00BA0B50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8D1107260486CEB800E47090 /* Punakea */;
-			targetProxy = 48893B2D0AF0A6EC00BA0B50 /* PBXContainerItemProxy */;
-		};
 		48C633C10AEF9724008F0E94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
 			targetProxy = 48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */;
+		};
+		6566CDAD0AFF8B3500FEAD7E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* Punakea */;
+			targetProxy = 6566CDAC0AFF8B3500FEAD7E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2331,33 +2343,6 @@
 			};
 			name = Release;
 		};
-		483F9BC40AEE01B300F3CC7F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = DMG;
-			};
-			name = Debug;
-		};
-		483F9BC50AEE01B300F3CC7F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DMG_COMPRESSIONLEVEL = 9;
-				DMG_DELETEHEADERS = "";
-				DMG_FILESLIST = "$(BUILD_DIR)/$(CONFIGURATION)/Punakea.app";
-				DMG_SLA_RSRCFILE = "$(PROJECT_DIR)/Resources/SLA.r";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				PRODUCT_NAME = DMG;
-				SETTINGS_FILE = "$(BUILD_DIR)/$(CONFIGURATION)/Punakea.app/Contents/Info.plist";
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		48404B040AF8B358001F7BB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2485,6 +2470,28 @@
 			};
 			name = Release;
 		};
+		6566CD6F0AFF88E200FEAD7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Make DMG";
+			};
+			name = Debug;
+		};
+		6566CD700AFF88E200FEAD7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = "Make DMG";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2599,15 +2606,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		483F9BC30AEE01B300F3CC7F /* Build configuration list for PBXLegacyTarget "DMG" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				483F9BC40AEE01B300F3CC7F /* Debug */,
-				483F9BC50AEE01B300F3CC7F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		48404B030AF8B358001F7BB7 /* Build configuration list for PBXNativeTarget "Unit Testing" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2631,6 +2629,15 @@
 			buildConfigurations = (
 				48C633BE0AEF9721008F0E94 /* Debug */,
 				48C633BF0AEF9721008F0E94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6566CD6E0AFF88E200FEAD7E /* Build configuration list for PBXLegacyTarget "DMG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6566CD6F0AFF88E200FEAD7E /* Debug */,
+				6566CD700AFF88E200FEAD7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
