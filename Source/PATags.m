@@ -141,7 +141,21 @@ NSString * const PATagOperation = @"PATagOperation";
 #pragma mark tag observing
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	NSNumber *changeOperation = [NSNumber numberWithInt:PATagUpdateOperation];
+	NSNumber *changeOperation;
+	
+	if ([keyPath isEqualTo:@"name"])
+	{
+		changeOperation = [NSNumber numberWithInt:PATagNameChangeOperation];
+	}
+	else if ([keyPath isEqualTo:@"lastUsed"])
+	{
+		changeOperation = [NSNumber numberWithInt:PATagUseIncrementOperation];
+	}
+	else if ([keyPath isEqualTo:@"lastUsed"])
+	{
+		changeOperation = [NSNumber numberWithInt:PATagClickIncrementOperation];
+	}
+	
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,object,nil] 
 														 forKeys:[NSArray arrayWithObjects:PATagOperation,@"tag",nil]];
 	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];

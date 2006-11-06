@@ -141,9 +141,9 @@
 	PATagChangeOperation tagOperation = [[userInfo objectForKey:PATagOperation] intValue];
 	
 	// ignore use count and increments ... will be saved on app termination
-	if (tagOperation != PATagUpdateOperation)
+	if (tagOperation != PATagUseIncrementOperation
+		&& tagOperation != PATagClickIncrementOperation)
 	{
-		NSLog(@"saving data");
 		[self saveDataToDisk];
 	}
 }

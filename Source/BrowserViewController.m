@@ -391,9 +391,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)tagsHaveChanged:(NSNotification*)notification
 {
+	PATagChangeOperation changeOperation = [[[notification userInfo] objectForKey:PATagOperation] intValue];
+	
 	if ([self state] == PABrowserViewControllerNormalState)
 	{
-		[self setVisibleTags:[tags tags]];
+		if (changeOperation != PATagUseIncrementOperation)
+			[self setVisibleTags:[tags tags]];
 	}
 }
 

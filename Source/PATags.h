@@ -14,7 +14,9 @@ typedef enum _PATagChangeOperation
 	PATagRemoveOperation = 1,
 	PATagAddOperation = 2,
 	PATagResetOperation = 4,
-	PATagUpdateOperation = 8
+	PATagNameChangeOperation = 8,
+	PATagUseIncrementOperation = 16,
+	PATagClickIncrementOperation = 32
 } PATagChangeOperation;
 
 extern NSString * const PATagOperation;
