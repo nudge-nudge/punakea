@@ -256,14 +256,12 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 {
 	[self setWorking:YES];
 	
-	NSString *oldTagName = [[currentEditedTag name] copy];
-	
 	[delegate removeActiveTagButton];
+	
+	[tagger renameTag:[currentEditedTag name] toTag:newTagName];
+
 	[currentEditedTag setName:newTagName];
 	[delegate displaySelectedTag:currentEditedTag];
-	
-	[tagger renameTag:oldTagName toTag:newTagName];
-	[oldTagName release];
 		
 	[self setWorking:NO];
 }

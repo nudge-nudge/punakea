@@ -195,6 +195,8 @@ static PATagger *sharedInstance = nil;
 	NSArray *files = [query filesForTag:tag];	
 	
 	[self removeTag:tag fromFiles:files];
+	
+	[query release];
 }
 
 - (void)renameTag:(NSString*)tagName toTag:(NSString*)newTagName
@@ -203,6 +205,8 @@ static PATagger *sharedInstance = nil;
 	NSArray *files = [query filesForTag:[self tagForName:tagName]];	
 	
 	[self renameTag:tagName toTag:newTagName onFiles:files];
+	
+	[query release];
 }
 
 - (void)removeTag:(PATag*)tag fromFiles:(NSArray*)files
@@ -251,7 +255,7 @@ static PATagger *sharedInstance = nil;
 		NSMutableArray *keywords = [[self keywordsForFile:file] mutableCopy];
 		[keywords removeObject:tagName];
 		[keywords addObject:newTagName];
-		[self writeKeywords:keywords toFile:file];
+		[fileCache writeKeywords:keywords toFile:file];
 		[keywords release];
 	}
 }

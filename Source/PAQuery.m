@@ -68,8 +68,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 #pragma mark Synchronous Searching
 - (NSArray*)filesForTag:(PATag*)tag
 {
-	CFStringRef *searchString = [self queryInSpotlightSyntaxForTags:[NSArray arrayWithObject:tag]];
-	MDQueryRef *query = MDQueryCreate(NULL,searchString,NULL,NULL);
+	CFStringRef searchString = (CFStringRef)[self queryInSpotlightSyntaxForTags:[NSArray arrayWithObject:tag]];
+	MDQueryRef query = MDQueryCreate(NULL,searchString,NULL,NULL);
 	MDQueryExecute(query,kMDQuerySynchronous);
 	CFIndex resultCount = MDQueryGetResultCount(query);
 	
@@ -77,11 +77,13 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	
 	for (int i=0;i<resultCount;i++)
 	{
-		MDItemRef *mditem = MDQueryGetResultAtIndex(query,i);
-		NSString *fileName = MDItemCopyAttribute(mditem,@"kMDItemPath");
+		MDItemRef queryResult = MDQueryGetResultAtIndex(query,i);
+		NSString *fileName = (NSString*)MDItemCopyAttribute(queryResult,@"kMDItemPath");
 		[resultArray addObject:[PAFile fileWithPath:fileName]];
 	}
 
+	CFRelease(query);
+	
 	return resultArray;
 }
 

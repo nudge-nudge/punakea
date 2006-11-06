@@ -42,7 +42,7 @@
 
 - (NSString*)queryInSpotlightSyntax
 {
-	return [NSString stringWithFormat:@"kMDItemKeywords == \"%@\"cd",[self name]];
+	return [NSString stringWithFormat:@"kMDItemFinderComment == \"*@%@*\"cd",[self name]];
 }
 
 // implementing needed super-class methods
