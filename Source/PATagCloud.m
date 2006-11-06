@@ -396,7 +396,7 @@ bound to visibleTags
 {
 	NSRect oldFrame = [tagButton frame];
 	NSRect newFrame = NSMakeRect(origin.x,origin.y,oldFrame.size.width,oldFrame.size.height);
-	
+		
 	if (animate && eyeCandy)
 	{
 		NSMutableDictionary *animationDict = [NSMutableDictionary dictionaryWithCapacity:3];

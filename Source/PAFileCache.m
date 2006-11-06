@@ -92,8 +92,6 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	
 	[cacheLock lock];
 		
-	NSLog(@"cache: %@",cache);
-	
 	NSEnumerator *e = [cache keyEnumerator];
 	PAFile *file;
 	
@@ -121,7 +119,6 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 - (void)writeFileCache:(PAFile*)file
 {
 	NSArray *keywords = [cache objectForKey:file];
-	NSLog(@"writing %@ to %@",keywords, file);
 	
 	// create comment
 	NSString *keywordComment = [self commentForKeywords:keywords];

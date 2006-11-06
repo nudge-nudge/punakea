@@ -139,8 +139,6 @@ completionsForSubstring:(NSString *)substring
 {
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	
-	NSLog(@"should add: %@",tokens);
-
 	[[PATagger sharedInstance] addTags:tokens toFiles:[fileController arrangedObjects]];
 	
 	// resize field if neccessary
@@ -193,8 +191,6 @@ completionsForSubstring:(NSString *)substring
 		
 		// now remove the tags to be deleted from currentCompleteTagsInField - to keep in sync with tagField
 		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
-		
-		NSLog(@"removing %@",deletedTags);
 		
 		// remove the deleted tags from all files
 		[[PATagger sharedInstance] removeTags:deletedTags fromFiles:[fileController arrangedObjects]];

@@ -36,7 +36,7 @@
 		[self loadDataFromDisk];
 		
 		nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(tagsHaveChanged) name:nil object:[tagger tags]];
+		[nc addObserver:self selector:@selector(tagsHaveChanged:) name:nil object:[tagger tags]];
 	}
     return self;
 }
@@ -96,7 +96,7 @@
 }
 
 - (void)saveDataToDisk 
-{
+{	
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
 	[rootObject setValue:[[tagger tags] tags] forKey:@"tags"];
@@ -135,9 +135,17 @@
 	}
 }	
 
-- (void)tagsHaveChanged
+- (void)tagsHaveChanged:(NSNotification*)notification
 {
-	[self saveDataToDisk];
+	NSDictionary *userInfo = [notification userInfo];
+	PATagChangeOperation tagOperation = [[userInfo objectForKey:PATagOperation] intValue];
+	
+	// ignore use count and increments ... will be saved on app termination
+	if (tagOperation != PATagUpdateOperation)
+	{
+		NSLog(@"saving data");
+		[self saveDataToDisk];
+	}
 }
 
 - (void)createManagedFilesDirIfNeeded
@@ -276,10 +284,10 @@
 }
 
 #pragma mark debug
-- (void)keyDown:(NSEvent*)event 
-{
-	NSLog(@"NSApp keydown: %@",event);
-}
+//- (void)keyDown:(NSEvent*)event 
+//{
+//	NSLog(@"NSApp keydown: %@",event);
+//}
 
 #pragma mark helper
 - (void)displayWarningWithMessage:(NSString*)messageInfo
