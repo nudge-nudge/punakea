@@ -151,7 +151,7 @@ NSString * const PATagOperation = @"PATagOperation";
 	{
 		changeOperation = [NSNumber numberWithInt:PATagUseIncrementOperation];
 	}
-	else if ([keyPath isEqualTo:@"lastUsed"])
+	else if ([keyPath isEqualTo:@"lastClicked"])
 	{
 		changeOperation = [NSNumber numberWithInt:PATagClickIncrementOperation];
 	}
