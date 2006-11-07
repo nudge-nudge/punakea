@@ -92,7 +92,7 @@ resets the tagger window (called when window is closed)
 }
 
 #pragma mark accessors
-- (void)addFiles:(NSMutableArray*)newFiles
+- (void)addFiles:(NSArray*)newFiles
 {
 	[fileController addObjects:newFiles];
 }

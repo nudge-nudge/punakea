@@ -12,6 +12,7 @@
 #import "PATags.h"
 #import "PATag.h"
 #import "NSDateFormatter+FriendlyFormat.h"
+#import "NSString+CharacterSetChecks.h"
 #import "PAImageButton.h"
 
 extern NSString * const PATagManagementOperation;

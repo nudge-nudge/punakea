@@ -10,6 +10,7 @@
 #import "PAFile.h"
 #import "ThreadWorker.h"
 #import "PATags.h"
+#import "NSFileManager+PAExtensions.h"
 
 extern int const PAFILECACHE_CYCLETIME;
 

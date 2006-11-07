@@ -10,7 +10,7 @@
 
 @interface PATagger (PrivateAPI)
 
-- (void)writeTags:(NSArray*)tags toFile:(PAFile*)file;
+- (void)writeTags:(NSArray*)someTags toFile:(PAFile*)file;
 - (void)writeKeywords:(NSArray*)keywords toFile:(PAFile*)file;
 
 @end
@@ -185,7 +185,7 @@ static PATagger *sharedInstance = nil;
 
 - (NSArray*)keywordsForFile:(PAFile*)file 
 {
-	[fileCache keywordsForFile:file];
+	return [fileCache keywordsForFile:file];
 }
 
 #pragma mark working with tags (renaming and deleting)
@@ -255,7 +255,7 @@ static PATagger *sharedInstance = nil;
 		NSMutableArray *keywords = [[self keywordsForFile:file] mutableCopy];
 		[keywords removeObject:tagName];
 		[keywords addObject:newTagName];
-		[fileCache writeKeywords:keywords toFile:file];
+		[self writeKeywords:keywords toFile:file];
 		[keywords release];
 	}
 }
@@ -266,11 +266,11 @@ static PATagger *sharedInstance = nil;
 }
 
 #pragma mark private
-- (void)writeTags:(NSArray*)tags toFile:(PAFile*)file
+- (void)writeTags:(NSArray*)someTags toFile:(PAFile*)file
 {
 	NSMutableArray *keywords = [NSMutableArray array];
 		
-	NSEnumerator *e = [tags objectEnumerator];
+	NSEnumerator *e = [someTags objectEnumerator];
 	PATag *tag;
 		
 	while (tag = [e nextObject])
@@ -278,6 +278,11 @@ static PATagger *sharedInstance = nil;
 		[keywords addObject:[tag name]];
 	}
 	
+	[fileCache writeKeywords:keywords toFile:file];
+}
+
+- (void)writeKeywords:(NSArray*)keywords toFile:(PAFile*)file
+{
 	[fileCache writeKeywords:keywords toFile:file];
 }
 
@@ -292,14 +297,6 @@ static PATagger *sharedInstance = nil;
 	[allTags retain];
 	[tags release];
 	tags = allTags;
-}
-
-- (NSDictionary*)fileCache
-{
-	@synchronized(self)
-	{
-		return fileCache;
-	}
 }
 
 #pragma mark singleton stuff

@@ -26,12 +26,14 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 
 - (void)writeFileCache:(PAFile*)file;
 
+- (void)startTimer;
+
 @end
 
 @implementation PAFileCache
 
 #pragma mark init
-- (id)initWithTags:(PATags*)allTags;
+- (id)initWithTags:(PATags*)allTags
 {
 	if (self = [super init])
 	{

@@ -151,7 +151,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 
 - (void)updateButtons
 {
-	int x = FILTERSLICE_PADDING.width;
+	float x = FILTERSLICE_PADDING.width;
 
 	/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *spotlightDict = [defaults persistentDomainForName:@"com.apple.spotlight"];

@@ -34,7 +34,7 @@
 adds new files to the fileController
  @param newFiles files to add
  */
-- (void)addFiles:(NSMutableArray*)newFiles;
+- (void)addFiles:(NSArray*)newFiles;
 - (NSArray*)files;
 
 - (PASelectedTags*)currentCompleteTagsInField;
