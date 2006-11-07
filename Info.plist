@@ -9,13 +9,13 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>ntagsdh</string>
+				<string>pudh</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>DropHandler Plugin</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
-				<string>NuNu</string>
+				<string>NNPA</string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
@@ -34,7 +34,7 @@
 	<key>CFBundleIconFile</key>
 	<string>appicon</string>
 	<key>CFBundleIdentifier</key>
-	<string>eu.nudgenudge.taguiero</string>
+	<string>eu.nudgenudge.punakea</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -44,7 +44,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>alpha</string>
 	<key>CFBundleSignature</key>
-	<string>NuNu</string>
+	<string>NNPA</string>
 	<key>CFBundleVersion</key>
 	<string>823</string>
 	<key>NSMainNibFile</key>

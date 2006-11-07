@@ -18,8 +18,8 @@
 
 //this is where the sharedInstance is held
 static PADropManager *sharedInstance = nil;
-NSString *ext = @"ntagsdh";
-NSString *appSupportSubpath = @"Application Support/ntags/PlugIns";
+NSString *ext = @"pudh";
+NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 
 #pragma mark init
 //constructor - only called by sharedInstance
