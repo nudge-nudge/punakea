@@ -26,19 +26,9 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 - (id)sharedInstanceInit {
 	if (self = [super init])
 	{
+		// load all drophandlers
 		dropHandlers = [[NSMutableArray alloc] init];
 		[self loadAllPlugins];
-		
-		// dropHandlers now contains all handlers
-		// register them
-		NSEnumerator *e = [dropHandlers objectEnumerator];
-		PADropHandler *dropHandler;
-		
-		while (dropHandler = [e nextObject])
-		{
-			[self registerDropHandler:dropHandler];
-			NSLog(@"dropHandler %@ registered",dropHandler);
-		}
 	}
 	return self;
 }
@@ -136,6 +126,7 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
                 currInstance = [[currPrincipalClass alloc] init];
                 if(currInstance)
                 {
+					NSLog(@"dropHandler %@ registered",currInstance);
                     [dropHandlers addObject:[currInstance autorelease]];
                 }
             }
@@ -168,16 +159,14 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
     {
         NSDirectoryEnumerator *bundleEnum;
         NSString *currBundlePath;
-        bundleEnum = [[NSFileManager defaultManager]
-            enumeratorAtPath:currPath];
+        bundleEnum = [[NSFileManager defaultManager] enumeratorAtPath:currPath];
         if(bundleEnum)
         {
             while(currBundlePath = [bundleEnum nextObject])
             {
                 if([[currBundlePath pathExtension] isEqualToString:ext])
                 {
-					[allBundles addObject:[currPath
-                           stringByAppendingPathComponent:currBundlePath]];
+					[allBundles addObject:[currPath stringByAppendingPathComponent:currBundlePath]];
                 }
             }
         }

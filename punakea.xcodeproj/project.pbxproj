@@ -2314,7 +2314,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FilenamesDropHandler;
-				WRAPPER_EXTENSION = ntagsdh;
+				WRAPPER_EXTENSION = pudh;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -2441,7 +2441,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = SafariBookmarkDropHandler;
-				WRAPPER_EXTENSION = ntagsdh;
+				WRAPPER_EXTENSION = pudh;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
