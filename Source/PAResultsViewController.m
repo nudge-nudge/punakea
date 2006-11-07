@@ -447,23 +447,12 @@
 	 forTableColumn:(NSTableColumn *)tableColumn
 	           item:(id)item
 {
-	/*if([item isKindOfClass:[NSMetadataQueryResultGroup class]])
-	{
-		[cell setObjectValue:item];
-		NSLog([item value]);
-	}*/
-	//if([[item class] isEqualTo:[NSMetadataItem class]])
-	//	[(PAResultsItemCell *)cell setItem:(NSMetadataItem *)item];
-	
-	// TODO Replace this by setObjectValue
-	/*if([[item class] isEqualTo:[PAResultsMultiItem class]])
-	[(PAResultsMultiItemCell *)cell setItem:(PAResultsMultiItem *)item];*/
+	// nothing yet
 }
 
 - (void)outlineViewItemDidCollapse:(NSNotification *)notification
 {
-	//NSMetadataQueryResultGroup *item = (NSMetadataQueryResultGroup *)[[notification userInfo] objectForKey:@"NSObject"];
-	//[self removeAllMultiItemSubviewsWithIdentifier:[item value]];
+	// nothing yet
 }
 
 - (BOOL)outlineView:(NSOutlineView *)ov shouldSelectItem:(id)item

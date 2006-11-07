@@ -64,17 +64,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		return;
 	}
 	
-	/*if([[selectedItem class] isEqualTo:[NSMetadataItem class]])
-	{
-		if([[self window] isKeyWindow])
-			[[NSColor alternateSelectedControlColor] set];
-		else
-			[[NSColor grayColor] set];
-		
-		NSRectFill([self rectOfRow:[self selectedRow]]);
-		return;
-	}*/
-	
 	[super highlightSelectionInClipRect:clipRect];
 }
 
@@ -179,7 +168,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)setFrameSize:(NSSize)newSize 
 {
-	// Todo: Smooth resizing of column
 	[super setFrameSize:newSize];
 }
 
@@ -287,8 +275,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSRange range = NSMakeRange(0,[self numberOfRows]);
 	[self noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:range]];
 	
-	// TEMP - seems to work quite well, with some flickering...
-	//[[self delegate] hideAllSubviews];
 	[self setNeedsDisplay:YES];
 }
 

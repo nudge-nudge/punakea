@@ -33,6 +33,26 @@ NSString * const PAQueryBundleDidUpdate = @"PAQueryBundleDidUpdate";
 }
 
 
+#pragma mark Comparing
+- (BOOL)isEqual:(id)object
+{
+	return [self isEqualTo:object];
+}
+
+- (BOOL)isEqualTo:(id)object
+{
+	if(self == object) return YES;
+	if(!object || ![object isMemberOfClass:[self class]]) return NO;
+
+	return [[self value] isEqualTo:[object value]];
+}
+
+- (unsigned)hash 
+{
+	return [[self value] hash];
+}
+
+
 #pragma mark Actions
 - (void)addResultItem:(id)anItem
 {

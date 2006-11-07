@@ -48,9 +48,14 @@
 - (BOOL)isEqualTo:(id)object
 {
 	if(self == object) return YES;
-	if(![object isMemberOfClass:[self class]]) return NO;
+	if(!object || ![object isMemberOfClass:[self class]]) return NO;
 
 	return [[self valueForAttribute:(id)kMDItemPath] isEqualTo:[object valueForAttribute:(id)kMDItemPath]];
+}
+
+- (unsigned)hash 
+{
+	return [[self valueForAttribute:(id)kMDItemPath] hash];
 }
 
 
