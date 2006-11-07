@@ -568,6 +568,10 @@
 	if([info draggingSource] == ov ||
 	   ([outlineView responder] && [info draggingSource] == [outlineView responder]))
 		return NSDragOperationNone;
+		
+	// Discard if no selected tags are present
+	if(!selectedTags || [selectedTags count] == 0)
+		return NSDragOperationNone;
 
 	// retarget to whole outlineview
 	[outlineView setDropItem:nil dropChildIndex:NSOutlineViewDropOnItemIndex];
