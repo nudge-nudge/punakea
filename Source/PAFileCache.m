@@ -8,7 +8,7 @@
 
 #import "PAFileCache.h"
 
-int const PAFILECACHE_CYCLETIME = 2.0;
+int const PAFILECACHE_CYCLETIME = 0.2;
 
 NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
 NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
@@ -38,13 +38,6 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		cache = [[NSMutableDictionary alloc] init];
 		cacheLock = [[NSLock alloc] init];
 		
-		// create cache cleanup timer
-		timer = [NSTimer scheduledTimerWithTimeInterval:PAFILECACHE_CYCLETIME
-												 target:self
-											   selector:@selector(startSyncCacheThread:)
-											   userInfo:nil
-												repeats:YES];
-		
 		tags = allTags;
 		
 		// sync on app shutdown
@@ -54,6 +47,14 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 												   object:nil];
 	}
 	return self;
+}
+
+#pragma mark accessors
+- (void)setTimer:(NSTimer*)aTimer
+{
+	[aTimer retain];
+	[timer release];
+	timer = aTimer;
 }
 
 #pragma mark external
@@ -83,6 +84,10 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	[cache setObject:keywords forKey:file];
 	
 	[cacheLock unlock];
+	
+	// start timer if not already started
+	if (!timer)
+		[self startTimer];
 }
 
 #pragma mark internal
@@ -99,8 +104,10 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	// look at every file
 	// compare comment to cache
 	// if equal, remove cache
-	
+		
 	[cacheLock lock];
+	
+	NSLog(@"cache %@",cache);
 		
 	NSEnumerator *e = [cache keyEnumerator];
 	PAFile *file;
@@ -121,6 +128,14 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		{
 			[self writeFileCache:file];
 		}
+	}
+	
+	// invalidate timer if cache is empty
+	if ([cache count] == 0 && timer)
+	{
+		[timer invalidate];
+		[timer release];
+		timer = nil;
 	}
 	
 	[cacheLock unlock];
@@ -232,6 +247,15 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	}
 	
 	return finderSpotlightCommentWithoutTags;
+}
+
+- (void)startTimer
+{
+	[self setTimer:[NSTimer scheduledTimerWithTimeInterval:PAFILECACHE_CYCLETIME
+													target:self
+												  selector:@selector(startSyncCacheThread:)
+												  userInfo:nil
+												   repeats:YES]];
 }
 
 #pragma mark helper helpers
