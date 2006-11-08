@@ -41,7 +41,15 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 
 - (void)registerDropHandler:(PADropHandler*)handler
 {
-	[dropHandlers addObject:handler];
+	if ([[self handledPboardTypes] containsObject:[handler pboardType]])
+	{
+		NSLog(@"%@ not added, pboardType already registered by another dropHandler",handler);
+	}
+	else
+	{
+		[dropHandlers addObject:handler];
+		NSLog(@"dropHandler %@ registered",handler);
+	}
 }
 	
 - (void)removeDropHandler:(PADropHandler*)handler
@@ -126,8 +134,7 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
                 currInstance = [[currPrincipalClass alloc] init];
                 if(currInstance)
                 {
-					NSLog(@"dropHandler %@ registered",currInstance);
-                    [dropHandlers addObject:[currInstance autorelease]];
+                    [self registerDropHandler:[currInstance autorelease]];
                 }
             }
         }

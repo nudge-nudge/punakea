@@ -58,7 +58,7 @@
 	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
 	
 	// path leads to script calling punakea with -noBrowser YES
-	NSString *path = [bundlePath stringByAppendingString:@"/Contents/Resources/Punakea"];
+	NSString *path = [bundlePath stringByAppendingString:@"/Contents/Resources/PunakeaSidebar.command"];
 	
 	OSStatus	status;
 	CFIndex 	itemCount;

@@ -160,7 +160,7 @@
 		48D66B0709CB4E4B007B6B1D /* PASimpleTagFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */; };
 		48D66B0809CB4E4B007B6B1D /* PASimpleTagFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */; };
 		48D759100B01D0F200D13CAD /* appstarter.c in Sources */ = {isa = PBXBuildFile; fileRef = 48D759050B01CF8500D13CAD /* appstarter.c */; };
-		48D759300B01D17400D13CAD /* punstarter in Resources */ = {isa = PBXBuildFile; fileRef = 48D7590E0B01D0E100D13CAD /* punstarter */; };
+		48D75A5C0B01FBEC00D13CAD /* PunakeaSidebar.command in Resources */ = {isa = PBXBuildFile; fileRef = 48D75A5B0B01FBEC00D13CAD /* PunakeaSidebar.command */; };
 		48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D81DAB09F79C1C0075EE44 /* TaggerController.h */; };
 		48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D81DAC09F79C1C0075EE44 /* TaggerController.m */; };
 		48D8F01209CBE94C0011401F /* PATag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D8F01109CBE94C0011401F /* PATag.m */; };
@@ -338,13 +338,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 483184970AEF8D8600C3C672;
 			remoteInfo = PADropHandler;
-		};
-		48D7592E0B01D15500D13CAD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 48D7590D0B01D0E100D13CAD;
-			remoteInfo = punstarter;
 		};
 		6566CDAC0AFF8B3500FEAD7E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -639,9 +632,9 @@
 		48D66AFC09CB4C5A007B6B1D /* PATagFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagFactory.m; sourceTree = "<group>"; };
 		48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleTagFactory.h; sourceTree = "<group>"; };
 		48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleTagFactory.m; sourceTree = "<group>"; };
-		48D759040B01CF8500D13CAD /* appstarter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appstarter.h; sourceTree = "<group>"; };
 		48D759050B01CF8500D13CAD /* appstarter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = appstarter.c; sourceTree = "<group>"; };
-		48D7590E0B01D0E100D13CAD /* punstarter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = punstarter; sourceTree = BUILT_PRODUCTS_DIR; };
+		48D7597F0B01EFE100D13CAD /* PunakeaSidebar */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PunakeaSidebar; sourceTree = BUILT_PRODUCTS_DIR; };
+		48D75A5B0B01FBEC00D13CAD /* PunakeaSidebar.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = PunakeaSidebar.command; sourceTree = "<group>"; };
 		48D81DAB09F79C1C0075EE44 /* TaggerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerController.h; sourceTree = "<group>"; };
 		48D81DAC09F79C1C0075EE44 /* TaggerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerController.m; sourceTree = "<group>"; };
 		48D8F01109CBE94C0011401F /* PATag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATag.m; sourceTree = "<group>"; };
@@ -875,7 +868,7 @@
 				48C633BB0AEF9720008F0E94 /* SafariBookmarkDropHandler.pudh */,
 				4815A0B10AEF99D900969296 /* NDResourceFork.framework */,
 				48404B000AF8B357001F7BB7 /* Unit Testing.octest */,
-				48D7590E0B01D0E100D13CAD /* punstarter */,
+				48D7597F0B01EFE100D13CAD /* PunakeaSidebar */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -909,6 +902,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				48D75A250B01FA0300D13CAD /* Scripts */,
 				65943F980AFA56AA00A8922F /* appicon.icns */,
 				48F980700AEF5C9F003BA2DC /* DropHandlerPlugins */,
 				4860293B0AEE0AF600B7DC6F /* SLA.r */,
@@ -1207,10 +1201,18 @@
 		48D758F00B01CD0900D13CAD /* App Starter */ = {
 			isa = PBXGroup;
 			children = (
-				48D759040B01CF8500D13CAD /* appstarter.h */,
 				48D759050B01CF8500D13CAD /* appstarter.c */,
 			);
 			name = "App Starter";
+			sourceTree = "<group>";
+		};
+		48D75A250B01FA0300D13CAD /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				48D75A5B0B01FBEC00D13CAD /* PunakeaSidebar.command */,
+			);
+			name = Scripts;
+			path = Resources/Scripts;
 			sourceTree = "<group>";
 		};
 		48DC82950AB69C0900DE0F16 /* File Handling */ = {
@@ -1704,9 +1706,9 @@
 			productReference = 48C633BB0AEF9720008F0E94 /* SafariBookmarkDropHandler.pudh */;
 			productType = "com.apple.product-type.bundle";
 		};
-		48D7590D0B01D0E100D13CAD /* punstarter */ = {
+		48D7590D0B01D0E100D13CAD /* PunakeaSidebar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 48D7591B0B01D11800D13CAD /* Build configuration list for PBXNativeTarget "punstarter" */;
+			buildConfigurationList = 48D7591B0B01D11800D13CAD /* Build configuration list for PBXNativeTarget "PunakeaSidebar" */;
 			buildPhases = (
 				48D7590B0B01D0E100D13CAD /* Sources */,
 				48D7590C0B01D0E100D13CAD /* Frameworks */,
@@ -1715,9 +1717,9 @@
 			);
 			dependencies = (
 			);
-			name = punstarter;
+			name = PunakeaSidebar;
 			productName = punstarter;
-			productReference = 48D7590E0B01D0E100D13CAD /* punstarter */;
+			productReference = 48D7597F0B01EFE100D13CAD /* PunakeaSidebar */;
 			productType = "com.apple.product-type.tool";
 		};
 		8D1107260486CEB800E47090 /* Punakea */ = {
@@ -1738,7 +1740,6 @@
 				483184CF0AEF90D000C3C672 /* PBXTargetDependency */,
 				483185030AEF92FD00C3C672 /* PBXTargetDependency */,
 				480721EC0AEFE8F40024118D /* PBXTargetDependency */,
-				48D7592F0B01D15500D13CAD /* PBXTargetDependency */,
 			);
 			name = Punakea;
 			productInstallPath = "$(HOME)/Applications";
@@ -1778,7 +1779,7 @@
 				48C633BA0AEF9720008F0E94 /* SafariBookmarkDropHandler */,
 				4815A0B00AEF99D900969296 /* NDResourceFork */,
 				48404AFF0AF8B357001F7BB7 /* Unit Testing */,
-				48D7590D0B01D0E100D13CAD /* punstarter */,
+				48D7590D0B01D0E100D13CAD /* PunakeaSidebar */,
 			);
 		};
 /* End PBXProject section */
@@ -1823,7 +1824,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48D759300B01D17400D13CAD /* punstarter in Resources */,
 				48893B110AF0A59900BA0B50 /* Info.plist in Resources */,
 				65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
@@ -1886,6 +1886,7 @@
 				658ADF600AF6610A00063AE1 /* RemoveRound.tif in Resources */,
 				658ADF610AF6610A00063AE1 /* RemoveRoundPressed.tif in Resources */,
 				65943F990AFA56AA00A8922F /* appicon.icns in Resources */,
+				48D75A5C0B01FBEC00D13CAD /* PunakeaSidebar.command in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2106,11 +2107,6 @@
 			isa = PBXTargetDependency;
 			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
 			targetProxy = 48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */;
-		};
-		48D7592F0B01D15500D13CAD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 48D7590D0B01D0E100D13CAD /* punstarter */;
-			targetProxy = 48D7592E0B01D15500D13CAD /* PBXContainerItemProxy */;
 		};
 		6566CDAD0AFF8B3500FEAD7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2524,7 +2520,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = "$(HOME)/bin";
 				PREBINDING = NO;
-				PRODUCT_NAME = punstarter;
+				PRODUCT_NAME = PunakeaSidebar;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -2538,7 +2534,7 @@
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = "$(HOME)/bin";
 				PREBINDING = NO;
-				PRODUCT_NAME = punstarter;
+				PRODUCT_NAME = PunakeaSidebar;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -2706,7 +2702,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		48D7591B0B01D11800D13CAD /* Build configuration list for PBXNativeTarget "punstarter" */ = {
+		48D7591B0B01D11800D13CAD /* Build configuration list for PBXNativeTarget "PunakeaSidebar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48D7591C0B01D11800D13CAD /* Debug */,
