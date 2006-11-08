@@ -84,11 +84,11 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	[cacheLock lock];
 	
 	[cache setObject:keywords forKey:file];
-	
-	[cacheLock unlock];
-	
+
 	if (!timer)
 		[self startTimer];
+	
+	[cacheLock unlock];
 }
 
 - (void)startTimer
@@ -116,8 +116,6 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	// if equal, remove cache
 		
 	[cacheLock lock];
-	
-	NSLog(@"cache %@",cache);
 		
 	NSEnumerator *e = [cache keyEnumerator];
 	PAFile *file;
