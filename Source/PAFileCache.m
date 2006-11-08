@@ -8,7 +8,7 @@
 
 #import "PAFileCache.h"
 
-int const PAFILECACHE_CYCLETIME = 0.2;
+NSTimeInterval const PAFILECACHE_CYCLETIME = 0.2;
 
 NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
 NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
@@ -87,9 +87,17 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	
 	[cacheLock unlock];
 	
-	// start timer if not already started
 	if (!timer)
 		[self startTimer];
+}
+
+- (void)startTimer
+{
+	[self setTimer:[NSTimer scheduledTimerWithTimeInterval:PAFILECACHE_CYCLETIME
+													target:self
+												  selector:@selector(startSyncCacheThread:)
+												  userInfo:nil
+												   repeats:YES]];
 }
 
 #pragma mark internal
@@ -249,15 +257,6 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	}
 	
 	return finderSpotlightCommentWithoutTags;
-}
-
-- (void)startTimer
-{
-	[self setTimer:[NSTimer scheduledTimerWithTimeInterval:PAFILECACHE_CYCLETIME
-													target:self
-												  selector:@selector(startSyncCacheThread:)
-												  userInfo:nil
-												   repeats:YES]];
 }
 
 #pragma mark helper helpers

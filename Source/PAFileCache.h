@@ -12,7 +12,7 @@
 #import "PATags.h"
 #import "NSFileManager+PAExtensions.h"
 
-extern int const PAFILECACHE_CYCLETIME;
+extern NSTimeInterval const PAFILECACHE_CYCLETIME;
 
 extern NSString * const TAGGER_OPEN_COMMENT;
 extern NSString * const TAGGER_CLOSE_COMMENT;
