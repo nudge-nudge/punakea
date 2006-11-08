@@ -634,6 +634,10 @@ bound to visibleTags
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
+	// Discard dragging from tag button
+	if([[sender draggingSource] isMemberOfClass:[PATagButton class]])
+		return NSDragOperationNone;
+
 	showsDropBorder = YES;
 	[self setNeedsDisplay:YES];
 	

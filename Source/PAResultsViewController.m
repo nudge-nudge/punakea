@@ -553,6 +553,10 @@
 				  proposedItem:(id)item 
 			proposedChildIndex:(int)index
 {
+	// Discard dragging from tag button
+	if([[info draggingSource] isMemberOfClass:[PATagButton class]])
+		return NSDragOperationNone;
+		
 	// Discard dragging on self
 	if([info draggingSource] == ov ||
 	   ([outlineView responder] && [info draggingSource] == [outlineView responder]))

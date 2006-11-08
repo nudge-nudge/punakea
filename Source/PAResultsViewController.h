@@ -21,6 +21,7 @@
 #import "PAQueryItem.h"
 #import "PAResultsOutlineView.h"
 #import "PADropManager.h"
+#import "PATagButton.h"
 
 @interface PAResultsViewController : PABrowserViewMainController {
 	

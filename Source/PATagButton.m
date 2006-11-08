@@ -55,7 +55,11 @@ should be overridden according to apple docs
 
 #pragma mark drop support
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
-{
+{	
+	// Discard dragging from tag button to tag button
+	if([[sender draggingSource] isMemberOfClass:[self class]])
+		return NSDragOperationNone;
+		
 	[[self cell] setHovered:YES];
 	[self setNeedsDisplay];
 	
@@ -158,11 +162,13 @@ should be overridden according to apple docs
 
 - (void)startDrag:(NSEvent *)event
 {
-	NSMutableArray *fileList = [NSMutableArray arrayWithObject:@"Hello World"];
+	NSString *smartFolder = [self createSmartFolderInTempDir];
+
+	NSMutableArray *fileList = [NSMutableArray arrayWithObject:smartFolder];
 
 	NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard]; 
-	[pboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
-	[pboard setPropertyList:fileList forType:NSStringPboardType];
+	[pboard declareTypes:[NSArray arrayWithObject:NSFilenamesPboardType] owner:nil];
+	[pboard setPropertyList:fileList forType:NSFilenamesPboardType];
 	
 	// Click point
 	NSPoint dragPoint = [self convertPoint:[event locationInWindow] fromView:nil];
@@ -189,6 +195,9 @@ should be overridden according to apple docs
          pasteboard:pboard 
              source:self 
           slideBack:YES];
+	
+	// Delete smart folder from temp dir
+	[[NSFileManager defaultManager] removeFileAtPath:smartFolder handler:nil];
 	
 	// Fire a custom mouse up event to break tracking loop as this is not done
 	// by dragImage automatically...
@@ -230,6 +239,53 @@ should be overridden according to apple docs
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag
 {
     return NSDragOperationCopy;
+}
+
+- (NSString *)createSmartFolderInTempDir
+{
+	NSMutableDictionary *sf = [NSMutableDictionary dictionary];
+	[sf setObject:[NSNumber numberWithInt:0] forKey:@"CompatibleVersion"];
+	
+	NSString *rawQuery = [[self fileTag] queryInSpotlightSyntax];	
+	[sf setObject:rawQuery forKey:@"RawQuery"];	
+	
+	// Search criteria are needed for editing the folder later on in Finder
+	NSMutableDictionary *criteria = [NSMutableDictionary dictionary];
+	
+	NSString *currentFolderPath = @"~";
+	NSMutableArray *currentFolderPathArray = [NSMutableArray arrayWithObject:[currentFolderPath stringByExpandingTildeInPath]];
+	[criteria setObject:currentFolderPathArray forKey:@"CurrentFolderPath"];
+	
+	[criteria setObject:[NSNumber numberWithLongLong:1396926573] forKey:@"FXScope"];
+	
+	NSMutableArray *scopeArrayOfPaths = [NSMutableArray arrayWithObject:@"kMDQueryScopeHome"];
+	[criteria setObject:scopeArrayOfPaths forKey:@"FXScopeArrayOfPaths"];
+	
+	NSMutableDictionary *criteriaSlice = [NSMutableDictionary dictionary];
+	[criteriaSlice setObject:@"kMDItemFinderComment" forKey:@"FXAttribute"];
+	[criteriaSlice setObject:@"Othr" forKey:@"FXSliceKind"];
+	[criteriaSlice setObject:@"S:**" forKey:@"Operator"];
+	
+	NSString *value = @"@";
+	[criteriaSlice setObject:[value stringByAppendingString:[self title]] forKey:@"Value"];
+	
+	NSMutableArray *criteriaSlices = [NSMutableArray arrayWithObject:criteriaSlice];
+	[criteria setObject:criteriaSlices forKey:@"FXCriteriaSlices"];
+	
+	[sf setObject:criteria forKey:@"SearchCriteria"];
+	
+	// Output file to temp dir
+	NSString *filename = @"/tmp";
+	filename = [filename stringByAppendingPathComponent:[self title]];
+	filename = [filename stringByAppendingPathExtension:@"savedSearch"];
+	
+	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:[NSNumber numberWithBool:TRUE] forKey:NSFileExtensionHidden];
+
+    [[NSFileManager defaultManager] createFileAtPath:filename
+                                            contents:sf
+                                          attributes:attr]; 
+	
+	return filename;
 }
 
 @end
