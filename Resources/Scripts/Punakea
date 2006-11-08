@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# Punakea
-# punakea
-#
-# Created by Johannes Hoffart on 19.09.06.
-# Copyright 2006 nudge:nudge. All rights reserved.
-../MacOS/Punakea -noBrowser YES

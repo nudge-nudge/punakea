@@ -314,7 +314,7 @@
 		
 		[fileManager movePath:directory toPath:newDir handler:self];
 	}
-	
+		
 	[userDefaultsController setValue:newPath forKeyPath:@"values.General.ManagedFilesLocation"];
 	[self updateButtonToCurrentLocation];
 }
