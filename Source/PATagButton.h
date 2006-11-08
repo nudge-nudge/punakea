@@ -8,8 +8,10 @@
 #import "PATagger.h"
 
 @interface PATagButton : PAButton {
-	PADropManager *dropManager;
-	PATagger *tagger;
+
+	PADropManager			*dropManager;
+	PATagger				*tagger;
+		
 }
 
 - (id)initWithTag:(PATag*)tag rating:(float)rating;

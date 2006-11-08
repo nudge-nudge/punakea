@@ -24,6 +24,16 @@ int const MAX_FONT_SIZE = 25;
 	return self;
 }
 
+
+#pragma mark Misc
+- (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(NSView *)controlView untilMouseUp:(BOOL)untilMouseUp
+{
+	// Disable mouse tracking to let our button handle the dragging
+	return NO;
+}
+
+
+
 #pragma mark accessors
 - (PATag*)fileTag
 {

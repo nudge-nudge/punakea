@@ -343,7 +343,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 48D7590D0B01D0E100D13CAD /* punstarter */;
+			remoteGlobalIDString = 48D7590D0B01D0E100D13CAD;
 			remoteInfo = punstarter;
 		};
 		6566CDAC0AFF8B3500FEAD7E /* PBXContainerItemProxy */ = {
@@ -641,7 +641,7 @@
 		48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleTagFactory.m; sourceTree = "<group>"; };
 		48D759040B01CF8500D13CAD /* appstarter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appstarter.h; sourceTree = "<group>"; };
 		48D759050B01CF8500D13CAD /* appstarter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = appstarter.c; sourceTree = "<group>"; };
-		48D7590E0B01D0E100D13CAD /* punstarter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = punstarter; path = build/Release/punstarter; sourceTree = "<group>"; };
+		48D7590E0B01D0E100D13CAD /* punstarter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = punstarter; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D81DAB09F79C1C0075EE44 /* TaggerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerController.h; sourceTree = "<group>"; };
 		48D81DAC09F79C1C0075EE44 /* TaggerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerController.m; sourceTree = "<group>"; };
 		48D8F01109CBE94C0011401F /* PATag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATag.m; sourceTree = "<group>"; };
