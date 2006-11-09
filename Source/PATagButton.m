@@ -267,7 +267,7 @@ should be overridden according to apple docs
 	[criteriaSlice setObject:@"S:**" forKey:@"Operator"];
 	
 	NSString *value = @"@";
-	[criteriaSlice setObject:[value stringByAppendingString:[self title]] forKey:@"Value"];
+	[criteriaSlice setObject:[value stringByAppendingString:[[self title] stringByAppendingString:@";"]] forKey:@"Value"];
 	
 	NSMutableArray *criteriaSlices = [NSMutableArray arrayWithObject:criteriaSlice];
 	[criteria setObject:criteriaSlices forKey:@"FXCriteriaSlices"];

@@ -37,12 +37,12 @@
 {
 	[super setName:aName];
 
-	[self setQuery:[NSString stringWithFormat:@"kMDItemFinderComment LIKE '*@%@*'",aName]];
+	[self setQuery:[NSString stringWithFormat:@"kMDItemFinderComment LIKE '*@%@;*'",aName]];
 }
 
 - (NSString*)queryInSpotlightSyntax
 {
-	return [NSString stringWithFormat:@"kMDItemFinderComment == \"*@%@*\"cd",[self name]];
+	return [NSString stringWithFormat:@"kMDItemFinderComment == \"*@%@;*\"cd",[self name]];
 }
 
 // implementing needed super-class methods

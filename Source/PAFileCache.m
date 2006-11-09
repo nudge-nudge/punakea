@@ -216,11 +216,6 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	NSEnumerator *e = [keywords objectEnumerator];
 	NSString *keyword;
 	
-	if (keyword = [e nextObject])
-	{
-		[comment appendFormat:@"@%@",keyword];
-	}
-	
 	while (keyword = [e nextObject])
 	{
 		[comment appendFormat:@";@%@",keyword];
