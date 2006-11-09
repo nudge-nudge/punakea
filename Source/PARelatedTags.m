@@ -130,7 +130,8 @@
 	{
 		[self setUpdating:YES];
 	}
-	else if ([[note name]isEqualToString:PAQueryGatheringProgressNotification]) 
+	else if ([[note name] isEqualToString:PAQueryGatheringProgressNotification] 
+			 || [[note name] isEqualToString:PAQueryDidUpdateNotification]) 
 	{
 		[self updateRelatedTags];
 	}
