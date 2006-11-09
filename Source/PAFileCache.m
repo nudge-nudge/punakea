@@ -8,7 +8,7 @@
 
 #import "PAFileCache.h"
 
-NSTimeInterval const PAFILECACHE_CYCLETIME = 0.2;
+NSTimeInterval const PAFILECACHE_CYCLETIME = 0.05;
 
 NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
 NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
@@ -218,7 +218,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	
 	while (keyword = [e nextObject])
 	{
-		[comment appendFormat:@";@%@",keyword];
+		[comment appendFormat:@"@%@;",keyword];
 	}
 	
 	[comment appendString:TAGGER_CLOSE_COMMENT];

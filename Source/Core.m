@@ -53,9 +53,9 @@
 	[NSApp setDelegate:self]; 
 	[self setupToolbar];
 	
-	BOOL noBrowser = [[NSUserDefaults standardUserDefaults] boolForKey:@"noBrowser"];
+	//BOOL noBrowser = [[NSUserDefaults standardUserDefaults] boolForKey:@"noBrowser"];
 	
-	if (!noBrowser)
+	if (![Core wasLaunchedAsLoginItem])
 	{
 		[self showBrowser:self];
 	}
@@ -309,6 +309,43 @@
 {
 	// terminate app (no path was found)
 	[[NSApplication sharedApplication] terminate:self];
+}
+
++ (BOOL)wasLaunchedAsLoginItem
+{
+	// If the launching process was 'loginwindow', we were launched as a
+	// login item
+	return [self wasLaunchedByProcess:@"lgnw"];
+}
+
++ (BOOL)wasLaunchedByProcess:(NSString*)creator
+{
+	BOOL    wasLaunchedByProcess = NO;
+	
+	// Get our PSN
+	OSStatus    err;
+	ProcessSerialNumber    currPSN;
+	err = GetCurrentProcess (&currPSN);
+	if (!err) {
+		// Get information about our process
+		NSDictionary* currDict = (NSDictionary*)ProcessInformationCopyDictionary (&currPSN,kProcessDictionaryIncludeAllInformationMask);
+		
+		// Get the PSN of the app that *launched* us.  Its not really the
+		// parent app, in the unix sense.
+		long long    temp = [[currDict objectForKey:@"ParentPSN"] longLongValue];
+		[currDict release];
+		ProcessSerialNumber    parentPSN = {(temp >> 32) & 0x00000000FFFFFFFFLL,
+			(temp >> 0) & 0x00000000FFFFFFFFLL};
+		
+		// Get info on the launching process
+		NSDictionary*    parentDict = (NSDictionary*)ProcessInformationCopyDictionary (&parentPSN,kProcessDictionaryIncludeAllInformationMask);
+		
+		// Test the creator code of the launching app
+		wasLaunchedByProcess = [[parentDict objectForKey:@"FileCreator"] isEqualToString:creator];
+		[parentDict release];
+	}
+	
+	return wasLaunchedByProcess;
 }
 
 @end

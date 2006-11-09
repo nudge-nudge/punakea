@@ -55,10 +55,8 @@
 #pragma mark event handling
 - (void)startOnLoginHasChanged
 {
-	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
-	
-	// path leads to script calling punakea with -noBrowser YES
-	NSString *path = [bundlePath stringByAppendingString:@"/Contents/Resources/PunakeaSidebar.command"];
+	// add mainbundle to login items
+	NSString *path = [[NSBundle mainBundle] bundlePath];
 	
 	OSStatus	status;
 	CFIndex 	itemCount;
@@ -66,27 +64,30 @@
 	Boolean		found;
 	
 	CFArrayRef loginItems = NULL; 
-	CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)path, kCFURLPOSIXPathStyle, false); 
+	CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)path, kCFURLPOSIXPathStyle, true); 
 	status = LIAECopyLoginItems(&loginItems); 
 	
 	if (status == noErr) {
 		itemCount = CFArrayGetCount(loginItems);
 		itemIndex = 0;
 		found = false;
-		NSDictionary *dic;
+		
+		CFDictionaryRef dic;
+		CFURLRef dicUrl;
 		
 		while ((itemIndex < itemCount) && ! found) {
 			dic = CFArrayGetValueAtIndex(loginItems,itemIndex);
-			NSURL *dicUrl = [dic valueForKey:@"URL"];
+			dicUrl = CFDictionaryGetValue(dic,@"URL");
 			
-			if ([dicUrl isEqualTo:url])
+			if (CFEqual(url,dicUrl))
 				found = true;
 			else
 				itemIndex++;
 		}
 		
-		if (found && !startOnLogin) 
-			LIAERemove(itemIndex); 
+		if (found && !startOnLogin)
+			LIAERemove(itemIndex);
+		
 		CFRelease(loginItems); 
     }
 
