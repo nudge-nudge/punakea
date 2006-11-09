@@ -637,11 +637,16 @@ bound to visibleTags
 	// Discard dragging from tag button
 	if([[sender draggingSource] isMemberOfClass:[PATagButton class]])
 		return NSDragOperationNone;
-
-	showsDropBorder = YES;
-	[self setNeedsDisplay:YES];
 	
-	return [dropManager performedDragOperation:[sender draggingPasteboard]];
+	NSDragOperation dragOp =  [dropManager performedDragOperation:[sender draggingPasteboard]];
+	
+	if (dragOp != NSDragOperationNone)
+	{
+		showsDropBorder = YES;
+		[self setNeedsDisplay:YES];
+	}
+	
+	return dragOp;
 }
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender

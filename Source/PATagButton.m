@@ -60,10 +60,15 @@ should be overridden according to apple docs
 	if([[sender draggingSource] isMemberOfClass:[self class]])
 		return NSDragOperationNone;
 		
-	[[self cell] setHovered:YES];
-	[self setNeedsDisplay];
+	NSDragOperation dragOp =  [dropManager performedDragOperation:[sender draggingPasteboard]];
 	
-	return [dropManager performedDragOperation:[sender draggingPasteboard]];
+	if (dragOp != NSDragOperationNone)
+	{
+		[[self cell] setHovered:YES];
+		[self setNeedsDisplay:YES];
+	}
+	
+	return dragOp;
 }
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender
