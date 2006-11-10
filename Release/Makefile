@@ -31,8 +31,8 @@ SRC_DIR=App
 BUILD_DIR=build
 ART_DIR=Artwork
 ADIUM_DIR=$(BUILD_DIR)/Punakea
-RELEASE_NAME=Punakea_Alpha
-ADIUM_BUILD_DIR=App
+RELEASE_NAME=Punakea
+ADIUM_BUILD_DIR=../build/Release
 
 
 
@@ -58,18 +58,18 @@ createfolder:
 	mv $(ADIUM_DIR)/Template_DSStore $(ADIUM_DIR)/.DS_Store
 
 	@# copy the text files
-	@#cp $(SRC_DIR)/Changes.txt $(ADIUM_DIR)
-	@#cp $(SRC_DIR)/License.txt $(ADIUM_DIR)
+	#cp $(SRC_DIR)/Changes.txt $(ADIUM_DIR)
+	#cp $(SRC_DIR)/License.txt $(ADIUM_DIR)
 	
 	@# symlink /Applications
 	ln -s /Applications $(ADIUM_DIR)/Applications
 
 	@# delete svn  and backup files
 	find $(BUILD_DIR) -name ".svn" -type d -exec rm -rf {} \; -prune
-	@#find $(BUILD_DIR) \( -name "*~" -or -name .DS_Store \) -type f -delete
+	#find $(BUILD_DIR) \( -name "*~" -or -name .DS_Store \) -type f -delete
 	
 diskimage:
-	rm "$(BUILD_DIR)/$(RELEASE_NAME).dmg" || true
+	# rm "$(BUILD_DIR)/$(RELEASE_NAME).dmg" || true
 	@# make Adium disk image
 	mkdir -p $(ADIUM_DIR)/.background
 	cp $(ART_DIR)/dmgBackground.png $(ADIUM_DIR)/.background

@@ -62,7 +62,7 @@ rm -f "${DMG_TEMP_NAME}"
 if [ ! -z "${EULA_RSRC}" -a "${EULA_RSRC}" != "-null-" ]; then
         echo "adding EULA resources"
         hdiutil unflatten "${DMG_DIR}/${DMG_NAME}"
-        /Developer/Tools/Rez /Developer/Headers/FlatCarbon/*.r -a sla.r -o "${DMG_DIR}/${DMG_NAME}"
+        /Developer/Tools/Rez /Developer/Headers/FlatCarbon/*.r -a ../Resources/SLA.r -o "${DMG_DIR}/${DMG_NAME}"
         hdiutil flatten "${DMG_DIR}/${DMG_NAME}"
 fi
 
