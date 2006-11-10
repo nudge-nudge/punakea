@@ -202,7 +202,6 @@
 		655D3BF60A7DD5CB009479F9 /* PAFilterSlice.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D3BF40A7DD5CB009479F9 /* PAFilterSlice.m */; };
 		6563884B09E419D300BE59AE /* PAResultsItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6563884909E419D300BE59AE /* PAResultsItemCell.h */; };
 		6563884C09E419D300BE59AE /* PAResultsItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6563884A09E419D300BE59AE /* PAResultsItemCell.m */; };
-		6566CDB90AFF8E1800FEAD7E /* Punakea.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* Punakea.app */; };
 		656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */; };
 		656C20030AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */; };
 		656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */; };
@@ -370,16 +369,6 @@
 				4807215E0AEFE5600024118D /* SafariBookmarkDropHandler.pudh in Copy Plugins */,
 			);
 			name = "Copy Plugins";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6566CDAE0AFF8B6200FEAD7E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = ../../Release/App;
-			dstSubfolderSpec = 16;
-			files = (
-				6566CDB90AFF8E1800FEAD7E /* Punakea.app in CopyFiles */,
-			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		65E7B37C0994D97500565251 /* CopyFiles */ = {
@@ -1706,7 +1695,6 @@
 				65E7B37C0994D97500565251 /* CopyFiles */,
 				48F97FEC0AEF5638003BA2DC /* Copy Frameworks */,
 				48F9807F0AEF5CC4003BA2DC /* Copy Plugins */,
-				6566CDAE0AFF8B6200FEAD7E /* CopyFiles */,
 			);
 			buildRules = (
 			);
