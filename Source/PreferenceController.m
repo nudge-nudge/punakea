@@ -30,6 +30,11 @@
 
 - (void)awakeFromNib
 {
+	BOOL isLoginItem = [self isLoginItem];
+	
+	[[NSUserDefaults standardUserDefaults] setBool:isLoginItem
+											forKey:@"values.General.StartOnLogin"];
+	
 	[self bind:@"startOnLogin"
 	  toObject:userDefaultsController
    withKeyPath:@"values.General.StartOnLogin"
@@ -56,43 +61,18 @@
 - (void)startOnLoginHasChanged
 {
 	// add mainbundle to login items
+	CFIndex itemIndex = [self loginItemIndex];
+	BOOL found = [self isLoginItem];
+	
 	NSString *path = [[NSBundle mainBundle] bundlePath];
-	
-	OSStatus	status;
-	CFIndex 	itemCount;
-	CFIndex 	itemIndex;
-	Boolean		found;
-	
-	CFArrayRef loginItems = NULL; 
 	CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)path, kCFURLPOSIXPathStyle, true); 
-	status = LIAECopyLoginItems(&loginItems); 
-	
-	if (status == noErr) {
-		itemCount = CFArrayGetCount(loginItems);
-		itemIndex = 0;
-		found = false;
-		
-		CFDictionaryRef dic;
-		CFURLRef dicUrl;
-		
-		while ((itemIndex < itemCount) && ! found) {
-			dic = CFArrayGetValueAtIndex(loginItems,itemIndex);
-			dicUrl = CFDictionaryGetValue(dic,@"URL");
-			
-			if (CFEqual(url,dicUrl))
-				found = true;
-			else
-				itemIndex++;
-		}
-		
-		if (found && !startOnLogin)
-			LIAERemove(itemIndex);
-		
-		CFRelease(loginItems); 
-    }
 
+	if (found && !startOnLogin)
+		LIAERemove(itemIndex);
+		
 	if (startOnLogin) 
-		LIAEAddURLAtEnd(url, false); 
+		LIAEAddURLAtEnd(url, false);
+	
 	CFRelease(url);
 }
 
@@ -319,5 +299,60 @@
 	[userDefaultsController setValue:newPath forKeyPath:@"values.General.ManagedFilesLocation"];
 	[self updateButtonToCurrentLocation];
 }
+
+// TODO error handling
+- (BOOL)isLoginItem
+{
+	OSStatus	status;
+	CFIndex		itemIndex;
+	CFIndex 	itemCount;
+	CFArrayRef loginItems = NULL; 
+	
+	status = LIAECopyLoginItems(&loginItems); 
+	
+	//if (status == noErr) {
+	
+	itemCount = CFArrayGetCount(loginItems);
+	itemIndex = [self loginItemIndex];
+	
+	return (itemIndex < itemCount);
+}
+
+// TODO error handling
+- (CFIndex)loginItemIndex
+{
+	OSStatus	status;
+	CFIndex 	itemCount;
+	CFIndex 	itemIndex;
+	
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	
+	CFArrayRef loginItems = NULL; 
+	CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)path, kCFURLPOSIXPathStyle, true); 
+	status = LIAECopyLoginItems(&loginItems); 
+	
+	if (status == noErr) {
+		itemCount = CFArrayGetCount(loginItems);
+		itemIndex = 0;
+		
+		CFDictionaryRef dic;
+		CFURLRef dicUrl;
+		
+		while (itemIndex < itemCount) {
+			dic = CFArrayGetValueAtIndex(loginItems,itemIndex);
+			dicUrl = CFDictionaryGetValue(dic,@"URL");
+			
+			if (CFEqual(url,dicUrl))
+				break;
+			else
+				itemIndex++;
+		}
+	}
+	
+	CFRelease(url);
+	
+	return itemIndex;
+}
+
 
 @end
