@@ -11,6 +11,7 @@
 
 @implementation PAImageButton
 
+#pragma mark Init + Dealloc
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -21,21 +22,6 @@
 		toolTipTag = [self addToolTipRect:[self bounds] owner:self userData:nil];
     }
     return self;
-}
-
-- (void)setImage:(NSImage *)anImage forState:(PAButtonState)aState
-{
-	[[self cell] setImage:anImage forState:aState];
-}
-
-- (void)setButtonType:(PAButtonType)aType
-{
-	[[self cell] setButtonType:aType];
-}
-
-- (BOOL)isHighlighted
-{
-	return [[self cell] isHighlighted];
 }
 
 - (void)dealloc
@@ -53,6 +39,18 @@
 		  userData:(void *)userData
 {
 	return [self toolTip] ? [self toolTip] : nil;
+}
+
+- (void)setImage:(NSImage *)anImage forState:(PAButtonState)aState
+{
+	[[self cell] setImage:anImage forState:aState];
+}
+
+- (void)mouseDown:(NSEvent *)event
+{
+	if(![self canDraw]) return;
+	
+	[super mouseDown:event];
 }
 
 
@@ -86,6 +84,16 @@
 {
 	if(toolTip) [toolTip release];
 	toolTip = [aToolTip retain];
+}
+
+- (void)setButtonType:(PAButtonType)aType
+{
+	[[self cell] setButtonType:aType];
+}
+
+- (BOOL)isHighlighted
+{
+	return [[self cell] isHighlighted];
 }
 
 @end

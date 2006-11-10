@@ -107,7 +107,7 @@
 		[image drawInRect:cellFrame fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	else
 		[image drawAtPoint:cellFrame.origin
-		          fromRect:imageRect
+				  fromRect:imageRect
 				 operation:NSCompositeSourceOver
 				  fraction:1.0];
 }
