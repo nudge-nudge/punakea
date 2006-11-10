@@ -9,7 +9,15 @@
 #import "PAResultsMultiItemMatrix.h"
 
 
+@interface PAResultsMultiItemMatrix (PrivateAPI)
+
+- (float)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint;
+
+@end
+
+
 static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
+
 
 @implementation PAResultsMultiItemMatrix
 
@@ -922,6 +930,10 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	int row, column; 
 
     NSPoint point = [self convertPoint:[mouseDownEvent locationInWindow] fromView:nil];
+	NSPoint curPoint = [self convertPoint:[event locationInWindow] fromView:nil];
+	
+	// Discard dragging if distance too short
+	if([self distanceFromPoint:point to:curPoint] < 4.0) return;
 	
 	// cancel editing action
 	[NSObject cancelPreviousPerformRequestsWithTarget:self
@@ -938,6 +950,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
     if(![cell isKindOfClass:[PAResultsMultiItemPlaceholderCell class]]) 
         [self startDrag:mouseDownEvent]; 
+}
+
+- (float)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint
+{
+	float dx = sourcePoint.x - destPoint.x;
+	float dy = sourcePoint.y - destPoint.y;
+	return sqrt(dx * dx + dy * dy);
 }
 
 - (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)isLocal
