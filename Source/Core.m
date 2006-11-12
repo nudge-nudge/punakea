@@ -9,6 +9,9 @@
 - (void)setupToolbar;
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 
++ (BOOL)wasLaunchedAsLoginItem;
++ (BOOL)wasLaunchedByProcess:(NSString*)creator;
+
 @end
 
 @implementation Core

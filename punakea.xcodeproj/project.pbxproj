@@ -186,7 +186,6 @@
 		65461C9609D0418F0076778E /* PAImageButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65461C9409D0418F0076778E /* PAImageButtonCell.m */; };
 		654B4CFB0AF1FD37001082BA /* PATaggerHeaderCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 654B4CF90AF1FD37001082BA /* PATaggerHeaderCell.h */; };
 		654B4CFC0AF1FD37001082BA /* PATaggerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 654B4CFA0AF1FD37001082BA /* PATaggerHeaderCell.m */; };
-		654DBC1B09C9D0620061BFA4 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 654DBC1A09C9D0620061BFA4 /* index.html */; };
 		655377CD0AAD8C5000C6376B /* dummyThumbSmall.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655377CB0AAD8C5000C6376B /* dummyThumbSmall.gif */; };
 		655377CE0AAD8C5000C6376B /* dummyThumbLarge.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655377CC0AAD8C5000C6376B /* dummyThumbLarge.gif */; };
 		655563A20A50672A0050104E /* stopRollover.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6555639F0A50672A0050104E /* stopRollover.tif */; };
@@ -1791,7 +1790,6 @@
 				65A4079709B9D6BA00B151F4 /* MD0-0-Middle-1.tiff in Resources */,
 				651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */,
 				651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */,
-				654DBC1B09C9D0620061BFA4 /* index.html in Resources */,
 				659EBBB109D2DC3D00879091 /* MDIconViewOff-1.tiff in Resources */,
 				656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */,
 				65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */,
