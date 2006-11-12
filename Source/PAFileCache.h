@@ -7,12 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#include <unistd.h>
+
 #import "PAFile.h"
 #import "ThreadWorker.h"
 #import "PATags.h"
 #import "NSFileManager+PAExtensions.h"
 
-extern NSTimeInterval const PAFILECACHE_CYCLETIME;
+extern useconds_t const PAFILECACHE_CYCLETIME;
 
 extern NSString * const TAGGER_OPEN_COMMENT;
 extern NSString * const TAGGER_CLOSE_COMMENT;
@@ -22,9 +24,9 @@ used by PATagger to cache read-/write accesses
  */
 @interface PAFileCache : NSObject {
 	NSMutableDictionary *cache;
-	NSLock *cacheLock;
 	
-	NSTimer *timer;
+	BOOL synching;
+	NSLock *threadRunLock;
 	
 	PATags *tags;
 }

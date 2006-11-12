@@ -58,6 +58,17 @@
 #pragma mark functionality
 - (void)tagsHaveChanged
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self
+											 selector:@selector(update)
+											   object:nil];
+	[self performSelector:@selector(update)
+			   withObject:nil
+			   afterDelay:0.2];
+
+}
+
+- (void)update
+{
 	// this is not thread-safe!
 	[tags sortUsingDescriptors:sortDescriptors];
 	

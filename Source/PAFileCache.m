@@ -8,7 +8,7 @@
 
 #import "PAFileCache.h"
 
-NSTimeInterval const PAFILECACHE_CYCLETIME = 0.05;
+useconds_t const PAFILECACHE_CYCLETIME = 1000000; // 0.2 secons
 
 NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
 NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
@@ -24,7 +24,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 - (NSString*)finderSpotlightCommentForFile:(PAFile*)file;
 - (NSString*)finderCommentIgnoringKeywordsForFile:(PAFile*)file;
 
-- (void)writeFileCache:(PAFile*)file;
+- (void)writeFileCache:(PAFile*)file; 
 
 - (void)startTimer;
 
@@ -38,7 +38,10 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	if (self = [super init])
 	{
 		cache = [[NSMutableDictionary alloc] init];
-		cacheLock = [[NSLock alloc] init];
+		
+		synching = NO;
+		
+		threadRunLock = [[NSLock alloc] init];
 		
 		tags = allTags;
 		
@@ -51,22 +54,15 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	return self;
 }
 
-#pragma mark accessors
-- (void)setTimer:(NSTimer*)aTimer
-{
-	[aTimer retain];
-	[timer release];
-	timer = aTimer;
-}
-
 #pragma mark external
 - (NSArray*)keywordsForFile:(PAFile*)file
 {
-	[cacheLock lock];
+	NSArray *keywords;
 	
-	NSArray *keywords = [cache objectForKey:file];
-	
-	[cacheLock unlock];
+	@synchronized(cache)
+	{
+		keywords = [cache objectForKey:file];
+	}
 	
 	if (!keywords)
 	{		
@@ -81,32 +77,25 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 
 - (void)writeKeywords:(NSArray*)keywords toFile:(PAFile*)file
 {
-	[cacheLock lock];
-	
-	[cache setObject:keywords forKey:file];
-
-	if (!timer)
-		[self startTimer];
-	
-	[cacheLock unlock];
-}
-
-- (void)startTimer
-{
-	[self setTimer:[NSTimer scheduledTimerWithTimeInterval:PAFILECACHE_CYCLETIME
-													target:self
-												  selector:@selector(startSyncCacheThread:)
-												  userInfo:nil
-												   repeats:YES]];
+	@synchronized(cache)
+	{
+		[cache setObject:keywords forKey:file];
+			
+		if (!synching)
+		{
+			synching = YES;
+			[self startSyncCacheThread];
+		}
+	}
 }
 
 #pragma mark internal
-- (void)startSyncCacheThread:(NSTimer*)timer
+- (void)startSyncCacheThread
 {
-	[ThreadWorker workOn:self
-			withSelector:@selector(syncCache)
-			  withObject:nil
-		  didEndSelector:nil];
+	// create thrad with autorelease pool
+	[NSApplication detachDrawingThread:@selector(syncCache) 
+							  toTarget:self 
+							withObject:nil];
 }
 
 - (void)syncCache
@@ -114,39 +103,42 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	// look at every file
 	// compare comment to cache
 	// if equal, remove cache
-		
-	[cacheLock lock];
-		
-	NSEnumerator *e = [cache keyEnumerator];
-	PAFile *file;
 	
-	while (file = [e nextObject])
+	while ([cache count] > 0)
 	{
-		NSString *comment = [[NSFileManager defaultManager] commentForURL:[NSURL fileURLWithPath:[file path]]];
-		NSArray *keywords = [self keywordsForComment:comment];
+		usleep(PAFILECACHE_CYCLETIME);
 		
-		NSArray *cachedKeywords = [cache objectForKey:file];
-		
-		// check if cache can be discarded
-		if ([[NSSet setWithArray:keywords] isEqualToSet:[NSSet setWithArray:cachedKeywords]])
+		@synchronized(cache)
 		{
-			[cache removeObjectForKey:file];
-		}
-		else
-		{
-			[self writeFileCache:file];
+			NSLog(@"flushing cache");
+			
+			NSEnumerator *e = [cache keyEnumerator];
+			PAFile *file;
+			
+			while (file = [e nextObject])
+			{
+				//NSString *comment = [[NSFileManager defaultManager] commentForURL:[NSURL fileURLWithPath:[file path]]];
+				NSString *comment = [self finderSpotlightCommentForFile:file];
+				NSArray *keywords = [self keywordsForComment:comment];
+				
+				NSArray *cachedKeywords = [cache objectForKey:file];
+				
+				// check if cache can be discarded
+				if ([[NSSet setWithArray:keywords] isEqualToSet:[NSSet setWithArray:cachedKeywords]])
+				{
+					[cache removeObjectForKey:file];
+				}
+				else
+				{
+					[self writeFileCache:file];
+				}
+			}
 		}
 	}
 	
-	// invalidate timer if cache is empty
-	if ([cache count] == 0 && timer)
-	{
-		[timer invalidate];
-		[timer release];
-		timer = nil;
-	}
+	NSLog(@"thread done");
 	
-	[cacheLock unlock];
+	synching = NO;
 }
 
 - (void)writeFileCache:(PAFile*)file
@@ -190,8 +182,11 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 				// validate keywordstring-component
 				@try 
 				{
-					[self validateKeyword:component];
-					[keywords addObject:[component substringFromIndex:1]];
+					if (component && [component isNotEqualTo:@""])
+					{
+						[self validateKeyword:component];
+						[keywords addObject:[component substringFromIndex:1]];
+					}
 				} 
 				@catch (NSException *exception) 
 				{
@@ -271,7 +266,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		return comment;
 }
 
-- (void)validateKeyword:(NSString*)keyword
+- (BOOL)validateKeyword:(NSString*)keyword
 {
 	if (!keyword ||
 		![keyword hasPrefix:@"@"] ||

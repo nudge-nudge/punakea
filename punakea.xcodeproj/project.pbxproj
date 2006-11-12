@@ -159,7 +159,6 @@
 		48D66AFE09CB4C5A007B6B1D /* PATagFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66AFC09CB4C5A007B6B1D /* PATagFactory.m */; };
 		48D66B0709CB4E4B007B6B1D /* PASimpleTagFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */; };
 		48D66B0809CB4E4B007B6B1D /* PASimpleTagFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */; };
-		48D75A5C0B01FBEC00D13CAD /* PunakeaSidebar.command in Resources */ = {isa = PBXBuildFile; fileRef = 48D75A5B0B01FBEC00D13CAD /* PunakeaSidebar.command */; };
 		48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D81DAB09F79C1C0075EE44 /* TaggerController.h */; };
 		48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D81DAC09F79C1C0075EE44 /* TaggerController.m */; };
 		48D8F01209CBE94C0011401F /* PATag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D8F01109CBE94C0011401F /* PATag.m */; };
@@ -1847,7 +1846,6 @@
 				658ADF600AF6610A00063AE1 /* RemoveRound.tif in Resources */,
 				658ADF610AF6610A00063AE1 /* RemoveRoundPressed.tif in Resources */,
 				65943F990AFA56AA00A8922F /* appicon.icns in Resources */,
-				48D75A5C0B01FBEC00D13CAD /* PunakeaSidebar.command in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
