@@ -8,7 +8,7 @@
 
 #import "PAFileCache.h"
 
-useconds_t const PAFILECACHE_CYCLETIME = 1000000; // 0.2 secons
+useconds_t const PAFILECACHE_CYCLETIME = 500000; // 0.2 secons
 
 NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
 NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
@@ -206,6 +206,9 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	
 - (NSString*)commentForKeywords:(NSArray*)keywords
 {
+	if ([keywords count] == 0)
+		return @"";
+	
 	NSMutableString *comment = [NSMutableString stringWithString:TAGGER_OPEN_COMMENT];
 	
 	NSEnumerator *e = [keywords objectEnumerator];
