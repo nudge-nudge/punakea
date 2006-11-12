@@ -40,6 +40,8 @@
 		
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(tagsHaveChanged:) name:nil object:[tagger tags]];
+		
+		printf("compiled on %s at %s\n",__DATE__,__TIME__);
 	}
     return self;
 }
