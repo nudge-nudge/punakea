@@ -157,8 +157,16 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	
 	if (openCommentRange.location != NSNotFound)
 	{
-		NSString *keywordString = [comment substringWithRange:NSMakeRange(openCommentRange.location + openCommentRange.length,
-																						 closeCommentRange.location - openCommentRange.location - openCommentRange.length)];
+		NSRange tagRange = NSMakeRange(openCommentRange.location + openCommentRange.length,
+									   closeCommentRange.location - openCommentRange.location - openCommentRange.length);
+		
+		NSRange seperatorRange = [comment rangeOfString:@";" options:0 range:tagRange];
+		
+		// if there are no ";", there are no tags
+		if (seperatorRange.location == NSNotFound)
+			return [NSArray array];
+		
+		NSString *keywordString = [comment substringWithRange:tagRange];
 	
 		NSArray *components = [keywordString componentsSeparatedByString:@";"];
 		
