@@ -47,6 +47,8 @@
 - (PASelectedTags*)selectedTags;
 - (void)setSelectedTags:(PASelectedTags*)otherSelectedTags;
 
+- (void)removeLastTag;
+
 - (NSArray*)draggedItems;
 - (void)setDraggedItems:(NSArray*)someItems;
 

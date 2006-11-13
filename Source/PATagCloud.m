@@ -4,6 +4,9 @@ NSSize const TAGCLOUD_PADDING = {10,5};
 NSSize const TAGCLOUD_SPACING = {0,1};
 
 @interface PATagCloud (PrivateAPI)
+// event handling
+- (void)handleTagsChange;
+
 /**
 creates buttons for tags held in [controller visibleTags]. created buttons can be accessed in
  tagButtonDict afterwards. called by setDisplayTags
@@ -17,11 +20,18 @@ creates buttons for tags held in [controller visibleTags]. created buttons can b
 draws the background
  */
 - (void)drawBackground;
+- (void)drawString:(NSAttributedString*)string centeredIn:(NSRect)rect;
+- (void)drawDropHighlightInRect:(NSRect)rect;
 
 /**
 adds all the tags in [controller visibleTags]
  */
 - (void)updateViewHierarchy;
+- (void)updateViewHierarchy:(BOOL)animate;
+- (void)removeTagButton:(PATagButton*)tagButton;
+
+- (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin animate:(BOOL)animate;
+- (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin;
 
 /**
 determines the oigin point for the next tag button to display;
@@ -40,7 +50,10 @@ calculates the starting point in the next row according to the height of all the
  */
 - (NSPoint)firstPointForNextRowIn:(NSRect)rect;
 
-- (void)scrollToButton:(NSButton*)tagButton;
+- (void)scrollToTop;
+- (void)scrollToButton:(PATagButton*)tagButton;
+
+- (void)arrowEvent:(unichar)key;
 - (void)moveSelectionRight;
 - (void)moveSelectionLeft;
 - (void)moveSelectionUp;
@@ -55,6 +68,7 @@ calculates the starting point in the next row according to the height of all the
 
 - (PATagButton*)buttonNearestPoint:(NSPoint)center inButtons:(NSArray*)buttons;
 - (NSMutableArray*)buttonsWithOriginOnHorizontalLineWithPoint:(NSPoint)point;
+- (PATagButton*)maximumButtonOnLineWithPoint:(NSPoint)point;
 
 - (double)distanceFrom:(NSPoint)a to:(NSPoint)b;
 
@@ -81,7 +95,7 @@ calculates the starting point in the next row according to the height of all the
 		
 		NSFont *font = [NSFont fontWithName:@"Arial" size:20.0];
 		NSColor *color = [NSColor lightGrayColor];
-		NSParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+		NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 		[paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
 		[paraStyle setAlignment:NSCenterTextAlignment];
 		
@@ -347,13 +361,13 @@ bound to visibleTags
 	
 	while (subview = [viewEnumerator nextObject])
 	{
-		if ([[datasource visibleTags] containsObject:[subview fileTag]])
+		if ([[datasource visibleTags] containsObject:[(PATagButton*)subview fileTag]])
 		{
 			[viewsToKeep addObject:subview];
 		}
 		else
 		{
-			[self removeTagButton:subview];
+			[self removeTagButton:(PATagButton*)subview];
 		}
 	}
 	
@@ -516,7 +530,16 @@ bound to visibleTags
 
 - (void)setDatasource:(id)ds
 {
-	datasource = ds;
+	if ([ds respondsToSelector:@selector(visibleTags)]
+		&& [ds respondsToSelector:@selector(currentBestTag)]
+		&& [ds respondsToSelector:@selector(tags)])
+	{
+		datasource = ds;
+	}
+	else
+	{
+		NSLog(@"wrong datasource!");
+	}
 }
 
 - (id)delegate
@@ -526,7 +549,16 @@ bound to visibleTags
 
 - (void)setDelegate:(id)del
 {
-	delegate = del;
+	if ([del respondsToSelector:@selector(filesHaveBeenDropped:)]
+		&& [del respondsToSelector:@selector(isWorking)]
+		&& [del respondsToSelector:@selector(makeControlledViewFirstResponder)])
+	{
+		delegate = del;
+	}
+	else
+	{
+		NSLog(@"delegate not implementing needed methods");
+	}
 }
 
 - (NSMutableDictionary*)tagButtonDict
@@ -694,7 +726,7 @@ executes some interface stuff
 	[self scrollPoint:upperLeftCorner];
 }
 
-- (void)scrollToButton:(NSButton*)tagButton
+- (void)scrollToButton:(PATagButton*)tagButton
 {
 	// check if we are in the top or bottom line
 	// scroll completely to the top or bottom then

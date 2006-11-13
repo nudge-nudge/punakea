@@ -333,7 +333,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		else if ([mainController isKindOfClass:[PAResultsViewController class]])
 		// else delete the last selected tag (if resultsview is active)
 		{
-			[mainController removeLastTag];
+			[(PAResultsViewController*)mainController removeLastTag];
 		}
 	}
 	// handle escape key (27)

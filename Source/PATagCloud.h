@@ -6,6 +6,23 @@
 #import "PATagButton.h"
 #import "PADropManager.h"
 
+@protocol PATagCloudDatasource
+
+- (NSArray*)visibleTags;
+- (PATag*)currentBestTag;
+- (PATags*)tags; //TODO hide this properly!
+
+@end
+
+@protocol PATagCloudDelegate
+
+- (void)filesHaveBeenDropped:(NSArray*)files;
+- (BOOL)isWorking;
+- (void)makeControlledViewFirstResponder;
+
+@end
+
+
 extern NSSize const TAGCLOUD_PADDING;
 extern NSSize const TAGCLOUD_SPACING;
 
@@ -14,8 +31,8 @@ displays all [datasource visibleTags] in a nice tag cloud view
  */
 @interface PATagCloud : NSView
 {
-	id								delegate;
-	id								datasource;
+	id<PATagCloudDelegate>			delegate;
+	id<PATagCloudDatasource>		datasource;
 
 	NSMutableDictionary				*tagButtonDict; /**< holds the current controls in the view */
 	PATagButton						*activeButton; /**< currently selected tag */
@@ -46,7 +63,6 @@ displays all [datasource visibleTags] in a nice tag cloud view
 - (void)setTagButtonDict:(NSMutableDictionary*)aDict;
 - (PATagButton*)activeButton;
 - (void)setActiveButton:(PATagButton*)aTag;
-- (BrowserViewController*)controller;
 - (void)selectUpperLeftButton;
 
 // called from outside
