@@ -8,6 +8,7 @@
 - (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
 - (void)setupToolbar;
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
+- (void)createManagedFilesDirIfNeeded;
 
 + (BOOL)wasLaunchedAsLoginItem;
 + (BOOL)wasLaunchedByProcess:(NSString*)creator;
@@ -212,7 +213,7 @@
 
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
-		PAResultsOutlineView *ov = [mainController outlineView];
+		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
 	
 		if([ov responder])
 			[[[ov responder] target] performSelector:@selector(doubleAction)];
@@ -227,7 +228,7 @@
 	
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
-		PAResultsOutlineView *ov = [mainController outlineView];
+		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
 		[[ov target] performSelector:@selector(deleteFilesForSelectedQueryItems:)];
 	}
 }
@@ -243,7 +244,7 @@
 	
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
-		PAResultsOutlineView *ov = [mainController outlineView];
+		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
 		[ov saveSelection];
 
 		NSArray *selectedQueryItems = [ov selectedQueryItems];

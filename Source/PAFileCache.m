@@ -8,7 +8,7 @@
 
 #import "PAFileCache.h"
 
-useconds_t const PAFILECACHE_CYCLETIME = 500000; // 0.2 secons
+useconds_t const PAFILECACHE_CYCLETIME = 200000; // 0.2 secons
 
 NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
 NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
@@ -26,7 +26,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 
 - (void)writeFileCache:(PAFile*)file; 
 
-- (void)startTimer;
+- (void)startSyncCacheThread;
 
 @end
 
@@ -110,8 +110,6 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		
 		@synchronized(cache)
 		{
-			NSLog(@"flushing cache");
-			
 			NSEnumerator *e = [cache keyEnumerator];
 			PAFile *file;
 			
@@ -135,9 +133,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 			}
 		}
 	}
-	
-	NSLog(@"thread done");
-	
+		
 	synching = NO;
 }
 
@@ -191,7 +187,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 				@catch (NSException *exception) 
 				{
 						// ignore keyword - TODO inform user
-						NSLog(@"%@ ignored",component);
+						// NSLog(@"%@ ignored",component);
 				}
 			}
 			
@@ -269,7 +265,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		return comment;
 }
 
-- (BOOL)validateKeyword:(NSString*)keyword
+- (void)validateKeyword:(NSString*)keyword
 {
 	if (!keyword ||
 		![keyword hasPrefix:@"@"] ||
