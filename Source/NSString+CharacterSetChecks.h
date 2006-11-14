@@ -11,4 +11,6 @@
 
 @interface NSString (CharacterSetChecks)
 
+- (BOOL)isWhiteSpace;
+
 @end

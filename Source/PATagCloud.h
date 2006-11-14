@@ -6,15 +6,15 @@
 #import "PATagButton.h"
 #import "PADropManager.h"
 
-@protocol PATagCloudDatasource
+@interface NSObject (PATagCloudDatasource)
 
-- (NSArray*)visibleTags;
+- (NSMutableArray*)visibleTags;
 - (PATag*)currentBestTag;
 - (PATags*)tags; //TODO hide this properly!
 
 @end
 
-@protocol PATagCloudDelegate
+@interface NSObject (PATagCloudDelegate)
 
 - (void)filesHaveBeenDropped:(NSArray*)files;
 - (BOOL)isWorking;
@@ -31,8 +31,8 @@ displays all [datasource visibleTags] in a nice tag cloud view
  */
 @interface PATagCloud : NSView
 {
-	id<PATagCloudDelegate>			delegate;
-	id<PATagCloudDatasource>		datasource;
+	id								delegate;
+	id								datasource;
 
 	NSMutableDictionary				*tagButtonDict; /**< holds the current controls in the view */
 	PATagButton						*activeButton; /**< currently selected tag */

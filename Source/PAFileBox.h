@@ -12,7 +12,7 @@
 	PADropManager *dropManager;
 }
 
-- (void)setFiles:(NSMutableArray*)fileArray;
+- (void)setFiles:(NSArray*)fileArray;
 - (NSMutableArray*)files;
 
 @end

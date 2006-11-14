@@ -14,6 +14,11 @@
 - (void)updateButtonToCurrentLocation;
 - (void)switchManagedLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath;
 
+- (void)displayWarningWithMessage:(NSString*)messageInfo;
+
+- (BOOL)isLoginItem;
+- (CFIndex)loginItemIndex;
+
 @end
 
 @implementation PreferenceController

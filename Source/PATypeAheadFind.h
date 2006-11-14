@@ -31,6 +31,6 @@ checks if there are any tags at all matching the prefix,
 - (BOOL)hasTagsForPrefix:(NSString*)prefix;
 
 - (NSMutableArray*)tagsForPrefix:(NSString*)prefix;
-- (NSMutableArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)tags;
+- (NSMutableArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)someTags;
 
 @end

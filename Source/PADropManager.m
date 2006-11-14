@@ -10,7 +10,9 @@
 
 @interface PADropManager (PrivateAPI)
 
-
+- (void)loadAllPlugins;
+- (NSMutableArray *)allBundles;
+- (BOOL)plugInClassIsValid:(Class)plugInClass;
 
 @end
 

@@ -118,6 +118,11 @@
 	return query;
 }
 
+- (NSString*)queryInSpotlightSyntax
+{
+	return @""; // TODO
+}
+
 - (NSCalendarDate*)lastClicked 
 {
 	return lastClicked;

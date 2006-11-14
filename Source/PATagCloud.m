@@ -151,19 +151,27 @@ bind to visibleTags
 {
 	[self setFrame:[self calcFrame]];
 	
-	if ([[datasource visibleTags] count] > 0)
+	if ([datasource respondsToSelector:@selector(visibleTags)])
+	{	
+		if ([[datasource visibleTags] count] > 0)
+		{
+			[self updateViewHierarchy];
+			
+			if ([self activeButton])
+			{
+				[self scrollToButton:[self activeButton]];
+			}
+			else
+			{
+				[self scrollToTop];
+			}
+		}	
+	}
+	else
 	{
-		[self updateViewHierarchy];
-		
-		if ([self activeButton])
-		{
-			[self scrollToButton:[self activeButton]];
-		}
-		else
-		{
-			[self scrollToTop];
-		}
-	}	
+		[NSException raise:NSInternalInconsistencyException
+					format:@"datasource invalid"];
+	}
 }
 
 - (void)handleTagsChange
@@ -206,12 +214,34 @@ bound to visibleTags
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	NSEnumerator *tagEnumerator = [[datasource visibleTags] objectEnumerator];
+	NSEnumerator *tagEnumerator;
+	
+	if ([datasource respondsToSelector:@selector(visibleTags)])
+	{
+		tagEnumerator = [[datasource visibleTags] objectEnumerator];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"datasource invalid"];
+	}
+	
 	PATag *tag;
 	
 	while (tag = [tagEnumerator nextObject])
 	{
-		float tagRating = [tag relativeRatingToTag:[datasource currentBestTag]];
+		float tagRating;
+		
+		if ([datasource respondsToSelector:@selector(currentBestTag)])
+		{
+			tagRating = [tag relativeRatingToTag:[datasource currentBestTag]];
+		}
+		else
+		{
+			[NSException raise:NSInternalInconsistencyException
+						format:@"datasource invalid"];
+		}
+		
 		PATagButton *button;
 		
 		// if the button is already created, use it
@@ -243,7 +273,18 @@ bound to visibleTags
 	NSRect tmpFrame = NSMakeRect(0,0,NSWidth(clipViewFrame),0);
 	[self calcInitialParametersInRect:tmpFrame];
 	
-	NSEnumerator *e = [[datasource visibleTags] objectEnumerator];
+	NSEnumerator *e;
+	
+	if ([datasource respondsToSelector:@selector(visibleTags)])
+	{
+		e = [[datasource visibleTags] objectEnumerator];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"datasource not valid"];
+	}
+	
 	PATag *tag;
 	
 	NSPoint buttonPoint = NSMakePoint(0.0,0.0);
@@ -276,13 +317,23 @@ bound to visibleTags
 {	
 	[self drawBackground];
 	
-	if ([[datasource tags] count] == 0)
+	if ([datasource respondsToSelector:@selector(tags)]
+		&& [datasource respondsToSelector:@selector(visibleTags)]
+		&& [delegate respondsToSelector:@selector(isWorking)])
 	{
-		[self drawString:noTagsMessage centeredIn:rect];
+		if ([[datasource tags] count] == 0)
+		{
+			[self drawString:noTagsMessage centeredIn:rect];
+		}
+		else if ([[datasource visibleTags] count] == 0 && ![delegate isWorking])
+		{
+			[self drawString:noRelatedTagsMessage centeredIn:rect];
+		}
 	}
-	else if ([[datasource visibleTags] count] == 0 && ![delegate isWorking])
+	else
 	{
-		[self drawString:noRelatedTagsMessage centeredIn:rect];
+		[NSException raise:NSInternalInconsistencyException
+					format:@"TagCloud datasource or delegate do not handle requests"];
 	}
 	
 	// Draw drop border
@@ -340,6 +391,18 @@ bound to visibleTags
 
 - (void)updateViewHierarchy:(BOOL)animate
 {	
+	NSMutableArray *currentlyVisibleTags;
+	
+	if ([datasource respondsToSelector:@selector(visibleTags)])
+	{
+		currentlyVisibleTags = [datasource visibleTags];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"datasource not valid"];
+	}
+	
 	// clear animation cache
 	if (animate && eyeCandy)
 	{
@@ -361,7 +424,7 @@ bound to visibleTags
 	
 	while (subview = [viewEnumerator nextObject])
 	{
-		if ([[datasource visibleTags] containsObject:[(PATagButton*)subview fileTag]])
+		if ([currentlyVisibleTags containsObject:[(PATagButton*)subview fileTag]])
 		{
 			[viewsToKeep addObject:subview];
 		}
@@ -371,7 +434,7 @@ bound to visibleTags
 		}
 	}
 	
-	NSEnumerator *e = [[datasource visibleTags] objectEnumerator];
+	NSEnumerator *e = [currentlyVisibleTags objectEnumerator];
 	PATag *tag;
 	
 	while (tag = [e nextObject])
@@ -530,16 +593,7 @@ bound to visibleTags
 
 - (void)setDatasource:(id)ds
 {
-	if ([ds respondsToSelector:@selector(visibleTags)]
-		&& [ds respondsToSelector:@selector(currentBestTag)]
-		&& [ds respondsToSelector:@selector(tags)])
-	{
-		datasource = ds;
-	}
-	else
-	{
-		NSLog(@"wrong datasource!");
-	}
+	datasource = ds;
 }
 
 - (id)delegate
@@ -549,16 +603,7 @@ bound to visibleTags
 
 - (void)setDelegate:(id)del
 {
-	if ([del respondsToSelector:@selector(filesHaveBeenDropped:)]
-		&& [del respondsToSelector:@selector(isWorking)]
-		&& [del respondsToSelector:@selector(makeControlledViewFirstResponder)])
-	{
-		delegate = del;
-	}
-	else
-	{
-		NSLog(@"delegate not implementing needed methods");
-	}
+	delegate = del;
 }
 
 - (NSMutableDictionary*)tagButtonDict
@@ -630,7 +675,15 @@ bound to visibleTags
 	}
 	else if (key == NSTabCharacter)
 	{
-		[delegate makeControlledViewFirstResponder];
+		if ([delegate respondsToSelector:@selector(makeControlledViewFirstResponder)])
+		{
+			[delegate makeControlledViewFirstResponder];
+		}
+		else
+		{
+			[NSException raise:NSInternalInconsistencyException
+						format:@"delegate does not respond to makeControlledViewFirstResponder"];
+		}
 	}
 	else
 	{
@@ -700,7 +753,16 @@ bound to visibleTags
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
 	NSArray *newFiles = [dropManager handleDrop:[sender draggingPasteboard]];
-	[delegate filesHaveBeenDropped:newFiles];
+	
+	if ([delegate respondsToSelector:@selector(filesHaveBeenDropped:)])
+	{
+		[delegate filesHaveBeenDropped:newFiles];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate does not respond to filesHaveBeenDropped"];
+	}
 	
     return YES;
 }

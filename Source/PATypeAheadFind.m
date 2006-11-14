@@ -92,11 +92,11 @@
 	}
 }
 
-- (NSMutableArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)tags
+- (NSMutableArray*)tagsForPrefix:(NSString*)prefix inTags:(NSArray*)someTags
 {
 	NSMutableArray *result = [NSMutableArray array];
 	
-	NSEnumerator *e = [tags objectEnumerator];
+	NSEnumerator *e = [someTags objectEnumerator];
 	PATag *tag;
 	
 	while (tag = [e nextObject])

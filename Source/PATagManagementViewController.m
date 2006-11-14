@@ -282,19 +282,24 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 
 #pragma mark alerts
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
-{
-	NSString *operation = [contextInfo objectForKey:PATagManagementOperation];
-	
-	if ([operation isEqualTo:PATagManagementRemoveOperation] && returnCode == NSAlertFirstButtonReturn)
+{	
+	if (contextInfo)
 	{
-		[self removeEditedTag];
-	}
-	else if ([operation isEqualTo:PATagManagementRenameOperation] && returnCode == NSAlertFirstButtonReturn)
-	{
-		NSString *newTagName = [contextInfo objectForKey:@"newTagName"];
-		[self renameEditedTagTo:newTagName];
-	}
+		NSDictionary *conInfo = (NSDictionary*)contextInfo;
 	
-	[contextInfo release];
+		NSString *operation = [conInfo objectForKey:PATagManagementOperation];
+		
+		if ([operation isEqualTo:PATagManagementRemoveOperation] && returnCode == NSAlertFirstButtonReturn)
+		{
+			[self removeEditedTag];
+		}
+		else if ([operation isEqualTo:PATagManagementRenameOperation] && returnCode == NSAlertFirstButtonReturn)
+		{
+			NSString *newTagName = [conInfo objectForKey:@"newTagName"];
+			[self renameEditedTagTo:newTagName];
+		}
+		
+		[conInfo release];
+	}
 }
 @end
