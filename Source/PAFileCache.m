@@ -18,6 +18,8 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 - (void)syncCache;
 
 - (NSArray*)keywordsForComment:(NSString*)comment;
+- (NSArray*)keywordsForComment:(NSString*)comment isValid:(BOOL*)isValid;
+
 - (NSString*)commentForKeywords:(NSArray*)keywords;
 - (void)validateKeyword:(NSString*)keyword;
 
@@ -107,6 +109,8 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	while ([cache count] > 0)
 	{
 		usleep(PAFILECACHE_CYCLETIME);
+
+		NSLog(@"cache %@",cache);
 		
 		@synchronized(cache)
 		{
@@ -115,14 +119,17 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 			
 			while (file = [e nextObject])
 			{
-				//NSString *comment = [[NSFileManager defaultManager] commentForURL:[NSURL fileURLWithPath:[file path]]];
+				BOOL commentIsValid = YES;
+				
 				NSString *comment = [self finderSpotlightCommentForFile:file];
-				NSArray *keywords = [self keywordsForComment:comment];
+				NSArray *keywords = [self keywordsForComment:comment isValid:&commentIsValid];
+				
+				// this only returns keywords which are in the db ... not what i want
 				
 				NSArray *cachedKeywords = [cache objectForKey:file];
 				
 				// check if cache can be discarded
-				if ([[NSSet setWithArray:keywords] isEqualToSet:[NSSet setWithArray:cachedKeywords]])
+				if ([[NSSet setWithArray:keywords] isEqualToSet:[NSSet setWithArray:cachedKeywords]] && commentIsValid)
 				{
 					[cache removeObjectForKey:file];
 				}
@@ -151,6 +158,12 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 
 #pragma mark helper
 - (NSArray*)keywordsForComment:(NSString*)comment
+{
+	BOOL notInterested;
+	return [self keywordsForComment:comment isValid:&notInterested];
+}
+
+- (NSArray*)keywordsForComment:(NSString*)comment isValid:(BOOL*)isValid
 {
 	NSRange openCommentRange = [comment rangeOfString:TAGGER_OPEN_COMMENT];
 	NSRange closeCommentRange = [comment rangeOfString:TAGGER_CLOSE_COMMENT];
@@ -194,8 +207,10 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 				} 
 				@catch (NSException *exception) 
 				{
-						// ignore keyword - TODO inform user
-						// NSLog(@"%@ ignored",component);
+					// if any invalid entries are detected
+					// (such as non-existant tags)
+					// force to write clean tags back to comment
+					*isValid = NO;
 				}
 			}
 			
