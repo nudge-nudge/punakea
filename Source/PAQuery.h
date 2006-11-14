@@ -81,7 +81,7 @@ initializer
 - (BOOL)isStopped;
 
 - (unsigned)resultCount;
-- (id)resultAtIndex:(unsigned)index;
+- (id)resultAtIndex:(unsigned)idx;
 - (NSArray*)results;
 - (NSArray*)flatResults;
 

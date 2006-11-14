@@ -754,9 +754,9 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	return filterDict ? [filteredResults count] : [results count];
 }
 
-- (id)resultAtIndex:(unsigned)index
+- (id)resultAtIndex:(unsigned)idx
 {
-	return filterDict ? [filteredResults objectAtIndex:index] : [results objectAtIndex:index];
+	return filterDict ? [filteredResults objectAtIndex:idx] : [results objectAtIndex:idx];
 }
 
 - (NSArray *)results

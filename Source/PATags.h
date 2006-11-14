@@ -46,7 +46,7 @@ returns the tag for the given name, or nil, if there is none
 - (void)removeTag:(PATag*)aTag;
 - (NSEnumerator*)objectEnumerator;
 - (int)count;
-- (PATag*)tagAtIndex:(unsigned int)index;
+- (PATag*)tagAtIndex:(unsigned int)idx;
 - (void)sortUsingDescriptors:(NSArray *)sortDescriptors;
 - (PATag*)currentBestTag;
 

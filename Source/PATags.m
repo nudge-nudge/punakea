@@ -108,9 +108,9 @@ NSString * const PATagOperation = @"PATagOperation";
 	return [tags count];
 }
 
-- (PATag*)tagAtIndex:(unsigned int)i
+- (PATag*)tagAtIndex:(unsigned int)idx
 {
-	return [tags objectAtIndex:i];
+	return [tags objectAtIndex:idx];
 }
 
 - (void)sortUsingDescriptors:(NSArray *)sortDescriptors

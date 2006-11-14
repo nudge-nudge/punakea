@@ -80,9 +80,9 @@ NSString * const PAQueryBundleDidUpdate = @"PAQueryBundleDidUpdate";
 	return [results count];
 }
 
-- (id)resultAtIndex:(unsigned)index
+- (id)resultAtIndex:(unsigned)idx
 {
-	return [results objectAtIndex:index];
+	return [results objectAtIndex:idx];
 }
 
 

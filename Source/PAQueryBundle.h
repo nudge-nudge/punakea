@@ -25,7 +25,7 @@ extern NSString * const PAQueryBundleDidUpdate;
 - (void)addResultItem:(id)anItem;
 - (NSString *)stringValue;
 - (unsigned)resultCount;
-- (id)resultAtIndex:(unsigned)index;
+- (id)resultAtIndex:(unsigned)idx;
 
 - (NSArray *)results;
 - (void)setResults:(NSArray *)newResults;

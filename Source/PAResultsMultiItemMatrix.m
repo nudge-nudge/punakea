@@ -199,29 +199,29 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	}
 	
 	// Highlight cells if there are already some selected indexes
-	unsigned index = [selectedIndexes firstIndex];
-	while(index != NSNotFound)
+	unsigned idx = [selectedIndexes firstIndex];
+	while(idx != NSNotFound)
 	{
-		int row = index / [self numberOfColumns];
-		int column = index - row * [self numberOfColumns];
+		int row = idx / [self numberOfColumns];
+		int column = idx - row * [self numberOfColumns];
 	
 		[self highlightCell:YES atRow:row column:column];
 		
-		index = [selectedIndexes indexGreaterThanIndex:index];
+		idx = [selectedIndexes indexGreaterThanIndex:idx];
 	}
 }
 
 - (void)doubleAction
 {	
-	unsigned index = [selectedIndexes firstIndex];
+	unsigned idx = [selectedIndexes firstIndex];
 		
-	while (index != NSNotFound)
+	while (idx != NSNotFound)
 	{
-		PAQueryItem *item = [items objectAtIndex:index];
+		PAQueryItem *item = [items objectAtIndex:idx];
 		NSString *path = [item valueForAttribute:(id)kMDItemPath];
 		[[NSWorkspace sharedWorkspace] openFile:path];		
 		
-		index = [selectedIndexes indexGreaterThanIndex:index];
+		idx = [selectedIndexes indexGreaterThanIndex:idx];
 	}
 }
 
@@ -251,26 +251,26 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		return;
 	}
 	
-	unsigned int index = row * [self numberOfColumns] + column;
+	unsigned int idx = row * [self numberOfColumns] + column;
 	
 	if(flag)
 	{
 		selectedCell = cell;
-		[selectedIndexes addIndex:index];
+		[selectedIndexes addIndex:idx];
 		[selectedCells addObject:cell];
 		
 		// Update selectedItems in OutlineView
-		[outlineView addSelectedQueryItem:[items objectAtIndex:index]];
+		[outlineView addSelectedQueryItem:[items objectAtIndex:idx]];
 		
 		[self scrollCellToVisibleAtRow:row column:column];
 		
 	} else {
-		[selectedIndexes removeIndex:index];
+		[selectedIndexes removeIndex:idx];
 		[selectedCells removeObject:cell];
 		
 		// Update selectedItems in OutlineView
-		if([items objectAtIndex:index])
-			[outlineView removeSelectedQueryItem:[items objectAtIndex:index]];
+		if([items objectAtIndex:idx])
+			[outlineView removeSelectedQueryItem:[items objectAtIndex:idx]];
 	}
 }
 
@@ -833,8 +833,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self getRow:&r column:&c ofCell:[self selectedCell]];
 	
 	// Set text color to red if the new destination already exists
-	int index = r * [self numberOfColumns] + c;
-	PAQueryItem *item = [items objectAtIndex:index];
+	int idx = r * [self numberOfColumns] + c;
+	PAQueryItem *item = [items objectAtIndex:idx];
 	PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
 	
 	NSText *textView = [notification object];
@@ -906,8 +906,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[newUserInfo release];
 		
 		// Forward renaming request to our delegate's query (delegate is equal to the outlineView's delegate)		
-		int				index = r * [self numberOfColumns] + c;
-		PAQueryItem		*item = [items objectAtIndex:index];
+		int				idx = r * [self numberOfColumns] + c;
+		PAQueryItem		*item = [items objectAtIndex:idx];
 		NSString		*newName = [[textView string] copy];
 		
 		BOOL wasMoved = [[outlineView query] renameItem:item to:newName errorWindow:[self window]];
@@ -979,14 +979,14 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// Create pasteboard contents
 	NSMutableArray *fileList = [NSMutableArray array];
 	
-	unsigned index = [selectedIndexes firstIndex];	
-	while (index != NSNotFound)
+	unsigned idx = [selectedIndexes firstIndex];	
+	while (idx != NSNotFound)
 	{
-		PAQueryItem *item = [items objectAtIndex:index];
+		PAQueryItem *item = [items objectAtIndex:idx];
 		
 		[fileList addObject:[item valueForAttribute:(id)kMDItemPath]];
 		
-		index = [selectedIndexes indexGreaterThanIndex:index];
+		idx = [selectedIndexes indexGreaterThanIndex:idx];
 	}
 	
 	NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard]; 
@@ -1185,11 +1185,11 @@ needed for supporting dragging to trash
 {
 	NSMutableArray *selectedItems = [NSMutableArray array];
 		
-	unsigned index = [selectedIndexes firstIndex];
-	while(index != NSNotFound)
+	unsigned idx = [selectedIndexes firstIndex];
+	while(idx != NSNotFound)
 	{
-		[selectedItems addObject:[items objectAtIndex:index]];
-		index = [selectedIndexes indexGreaterThanIndex:index];
+		[selectedItems addObject:[items objectAtIndex:idx]];
+		idx = [selectedIndexes indexGreaterThanIndex:idx];
 	}
 	
 	return selectedItems;
