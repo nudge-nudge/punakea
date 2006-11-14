@@ -54,7 +54,6 @@ initializes related tags with some selected tags and a query
 
 - (void)setQuery:(PAQuery*)aQuery;
 
-- (NSArray*)relatedTagArray;
 - (NSMutableArray*)relatedTags;
 - (void)setRelatedTags:(NSMutableArray*)otherTags;
 

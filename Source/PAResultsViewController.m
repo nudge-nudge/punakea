@@ -164,18 +164,42 @@
 		[query startQuery];
 		
 		// empty display tags until new related tags are found
-		[delegate setDisplayTags:[NSMutableArray array]];
+		if ([delegate respondsToSelector:@selector(setDisplayTags:)])
+		{
+			[delegate setDisplayTags:[NSMutableArray array]];
+		}
+		else
+		{
+			[NSException raise:NSInternalInconsistencyException
+						format:@"delegate does not implement setDisplayTags:"];
+		}
 	}
 	else 
 	{
 		// there are no selected tags, reset all tags
-		[delegate resetDisplayTags];
+		if ([delegate respondsToSelector:@selector(resetDisplayTags)])
+		{
+			[delegate resetDisplayTags];
+		}
+		else
+		{
+			[NSException raise:NSInternalInconsistencyException
+						format:@"delegate does not implement setDisplayTags:"];
+		}
 	}
 }
 
 - (void)relatedTagsHaveChanged:(NSNotification*)notification
 {
-	[delegate setDisplayTags:[relatedTags relatedTagArray]];
+	if ([delegate respondsToSelector:@selector(setDisplayTags:)])
+	{
+		[delegate setDisplayTags:[relatedTags relatedTags]];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate does not implement setDisplayTags:"];
+	}
 }
 
 - (IBAction)doubleAction:(id)sender
@@ -344,8 +368,6 @@
 {
 	PAQueryItem *queryItem = item;
 	NSString *value = object;
-	
-	PAFile *file = [PAFile fileWithPath:[queryItem valueForAttribute:(id)kMDItemPath]];
 	
 	BOOL wasMoved = [query renameItem:queryItem to:value errorWindow:[ov window]];
 	
@@ -551,7 +573,7 @@
 - (NSDragOperation)outlineView:(NSOutlineView *)ov 
 				  validateDrop:(id <NSDraggingInfo>)info 
 				  proposedItem:(id)item 
-			proposedChildIndex:(int)index
+			proposedChildIndex:(int)idx
 {
 	// Discard dragging from tag button
 	if([[info draggingSource] isMemberOfClass:[PATagButton class]])
@@ -575,7 +597,7 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView 
 		 acceptDrop:(id <NSDraggingInfo>)info 
 			   item:(id)item 
-		 childIndex:(int)index
+		 childIndex:(int)idx
 {
 	NSArray *files = [dropManager handleDrop:[info draggingPasteboard]];
 	NSArray *tagArray = [selectedTags selectedTags];
