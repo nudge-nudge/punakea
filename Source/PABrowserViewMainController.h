@@ -10,6 +10,16 @@
 #import "PATag.h"
 #import "PAViewController.h"
 
+@interface NSObject (PATagManagementViewControllerDelegate)
+
+- (void)displaySelectedTag:(PATag*)tag;
+- (NSView*)controlledView;
+- (void)removeActiveTagButton;
+- (void)displaySelectedTag:(PATag*)tag;
+- (void)showResults;
+
+@end
+
 /**
 abstract class, controller for everything except tagcloud in 
  browserview

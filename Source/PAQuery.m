@@ -77,8 +77,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	
 	for (int i=0;i<resultCount;i++)
 	{
-		MDItemRef queryResult = MDQueryGetResultAtIndex(query,i);
-		NSString *fileName = (NSString*)MDItemCopyAttribute(queryResult,@"kMDItemPath");
+		MDItemRef queryResult = (MDItemRef) MDQueryGetResultAtIndex(query,i);
+		NSString *fileName = (NSString*)MDItemCopyAttribute(queryResult,(CFStringRef)@"kMDItemPath");
 		[resultArray addObject:[PAFile fileWithPath:fileName]];
 	}
 

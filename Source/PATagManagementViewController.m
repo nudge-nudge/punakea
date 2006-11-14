@@ -206,12 +206,32 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 - (void)handleTagActivation:(PATag*)tag
 {
 	[self setCurrentEditedTag:tag];
-	[delegate displaySelectedTag:tag];
+	
+	if ([delegate respondsToSelector:@selector(displaySelectedTag:)])
+	{
+		[delegate displaySelectedTag:tag];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate invalid"];
+	}
 }
 
 - (void)loadViewForTag:(PATag*)tag
 {
-	NSView *sv = [delegate controlledView]; 
+	NSView *sv;
+	
+	if ([delegate respondsToSelector:@selector(controlledView)])
+	{
+		sv = [delegate controlledView]; 
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate invalid"];
+	}
+	
 	[currentView removeFromSuperview];
 	
 	if ([tag isKindOfClass:[PASimpleTag class]])
@@ -256,12 +276,29 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 {
 	[self setWorking:YES];
 	
-	[delegate removeActiveTagButton];
+	if ([delegate respondsToSelector:@selector(removeActiveTagButton)])
+	{
+		[delegate removeActiveTagButton];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate invalid"];
+	}
 	
 	[tagger renameTag:[currentEditedTag name] toTag:newTagName];
 
 	[currentEditedTag setName:newTagName];
-	[delegate displaySelectedTag:currentEditedTag];
+	
+	if ([delegate respondsToSelector:@selector(displaySelectedTag:)])
+	{
+		[delegate displaySelectedTag:currentEditedTag];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate invalid"];
+	}
 		
 	[self setWorking:NO];
 }
@@ -269,12 +306,32 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 - (IBAction)endTagManagement:(id)sender
 {
 	[self reset];
-	[delegate showResults];
+	
+	if ([delegate respondsToSelector:@selector(showResults)])
+	{
+		[delegate showResults];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate invalid"];
+	}
 }
 
 - (void)reset
 {
-	NSView *sv = [delegate controlledView]; 
+	NSView *sv;
+	
+	if ([delegate respondsToSelector:@selector(controlledView)])
+	{
+		sv = [delegate controlledView];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate invalid"];
+	}
+	
 	[currentView removeFromSuperview];
 	[self setCurrentView:view];
 	[sv addSubview:currentView];

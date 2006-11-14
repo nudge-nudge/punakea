@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "NSBezierPathCategory.h"
 /**
 only needed for gathering dragevents
  */
