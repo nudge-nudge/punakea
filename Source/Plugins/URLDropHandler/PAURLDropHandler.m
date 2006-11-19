@@ -23,9 +23,9 @@
 
 - (BOOL)willHandleDrop:(NSPasteboard*)pasteboard
 {
-	NSArray *WebURLsWithTitlesPboardTypeArray = [pasteboard propertyListForType:pboardType];
+	NSArray *webURLsWithTitlesPboardTypeArray = [pasteboard propertyListForType:pboardType];
 	
-	if ([WebURLsWithTitlesPboardTypeArray count] == 2)
+	if (webURLsWithTitlesPboardTypeArray && [webURLsWithTitlesPboardTypeArray count] == 2)
 		return YES;
 	else
 		return NO;
@@ -44,7 +44,7 @@
 		NSString *url = [urls objectAtIndex:i];
 		NSString *title = [titles objectAtIndex:i];
 		
-		NSString *urlDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:url,title,nil]
+		NSDictionary *urlDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:url,title,nil]
 															  forKeys:[NSArray arrayWithObjects:@"url",@"title",nil]];
 		
 		[files addObject:[dataHandler fileDropData:urlDictionary]];

@@ -109,8 +109,6 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	while ([cache count] > 0)
 	{
 		usleep(PAFILECACHE_CYCLETIME);
-
-		NSLog(@"cache %@",cache);
 		
 		@synchronized(cache)
 		{
