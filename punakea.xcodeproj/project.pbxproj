@@ -21,12 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		4807215E0AEFE5600024118D /* SafariBookmarkDropHandler.pudh in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 48C633BB0AEF9720008F0E94 /* SafariBookmarkDropHandler.pudh */; };
+		4807215E0AEFE5600024118D /* URLDropHandler.pudh in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 48C633BB0AEF9720008F0E94 /* URLDropHandler.pudh */; };
 		480721FB0AEFE9470024118D /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
 		4815A0680AEF991A00969296 /* PAFilenamesDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 48209CA80AB1BEED00F3CF21 /* PAFilenamesDropHandler.m */; };
 		4815A0690AEF991A00969296 /* PAFilenamesDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */; };
 		4815A06B0AEF992300969296 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
-		4815A0A20AEF993B00969296 /* PABookmarkDictionaryListDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F402D0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m */; };
+		4815A0A20AEF993B00969296 /* PAURLDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F402D0AB6D61300E230DC /* PAURLDropHandler.m */; };
 		4815A0D50AEF9A5D00969296 /* NDResourceFork.h in Headers */ = {isa = PBXBuildFile; fileRef = 4815A0CD0AEF9A5D00969296 /* NDResourceFork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4815A0D60AEF9A5D00969296 /* NDResourceFork.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815A0CE0AEF9A5D00969296 /* NDResourceFork.m */; };
 		4815A0D70AEF9A5D00969296 /* NDResourceFork+OtherSorces.h in Headers */ = {isa = PBXBuildFile; fileRef = 4815A0CF0AEF9A5D00969296 /* NDResourceFork+OtherSorces.h */; settings = {ATTRIBUTES = (); }; };
@@ -365,7 +365,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				48893B020AF0A4E400BA0B50 /* FilenamesDropHandler.pudh in Copy Plugins */,
-				4807215E0AEFE5600024118D /* SafariBookmarkDropHandler.pudh in Copy Plugins */,
+				4807215E0AEFE5600024118D /* URLDropHandler.pudh in Copy Plugins */,
 			);
 			name = "Copy Plugins";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -567,8 +567,8 @@
 		485DA54C09F4EC38008D3214 /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
 		485DA55309F4ECBC008D3214 /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
 		485DA55409F4ECBC008D3214 /* PATags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATags.m; sourceTree = "<group>"; };
-		485F402C0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABookmarkDictionaryListDropHandler.h; sourceTree = "<group>"; };
-		485F402D0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABookmarkDictionaryListDropHandler.m; sourceTree = "<group>"; };
+		485F402C0AB6D61300E230DC /* PAURLDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAURLDropHandler.h; sourceTree = "<group>"; };
+		485F402D0AB6D61300E230DC /* PAURLDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAURLDropHandler.m; sourceTree = "<group>"; };
 		485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarTableViewDropController.h; sourceTree = "<group>"; };
 		485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableViewDropController.m; sourceTree = "<group>"; };
 		4860293B0AEE0AF600B7DC6F /* SLA.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; name = SLA.r; path = Resources/SLA.r; sourceTree = "<group>"; };
@@ -604,8 +604,8 @@
 		48B241630B0393A100DAD2B5 /* appstarter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = appstarter.c; sourceTree = "<group>"; };
 		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
 		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
-		48C633BB0AEF9720008F0E94 /* SafariBookmarkDropHandler.pudh */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafariBookmarkDropHandler.pudh; sourceTree = BUILT_PRODUCTS_DIR; };
-		48C633BC0AEF9720008F0E94 /* SafariBookmarkDropHandler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "SafariBookmarkDropHandler-Info.plist"; sourceTree = "<group>"; };
+		48C633BB0AEF9720008F0E94 /* URLDropHandler.pudh */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLDropHandler.pudh; sourceTree = BUILT_PRODUCTS_DIR; };
+		48C633BC0AEF9720008F0E94 /* URLDropHandler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "URLDropHandler-Info.plist"; sourceTree = "<group>"; };
 		48C93614099742D800699265 /* Matador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matador.h; sourceTree = "<group>"; };
 		48C9362D099743F200699265 /* NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject.h; sourceTree = "<group>"; };
 		48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GeneralPreferences.tiff; sourceTree = "<group>"; };
@@ -845,7 +845,7 @@
 				8D1107320486CEB800E47090 /* Punakea.app */,
 				483184980AEF8D8600C3C672 /* PADropHandler.framework */,
 				483184E30AEF91A700C3C672 /* FilenamesDropHandler.pudh */,
-				48C633BB0AEF9720008F0E94 /* SafariBookmarkDropHandler.pudh */,
+				48C633BB0AEF9720008F0E94 /* URLDropHandler.pudh */,
 				4815A0B10AEF99D900969296 /* NDResourceFork.framework */,
 				48404B000AF8B357001F7BB7 /* Unit Testing.octest */,
 			);
@@ -863,7 +863,7 @@
 				654DBC1709C9D0320061BFA4 /* Documentation */,
 				483184990AEF8D8600C3C672 /* PADropHandler-Info.plist */,
 				483184E40AEF91A700C3C672 /* FilenamesDropHandler-Info.plist */,
-				48C633BC0AEF9720008F0E94 /* SafariBookmarkDropHandler-Info.plist */,
+				48C633BC0AEF9720008F0E94 /* URLDropHandler-Info.plist */,
 				4815A0B20AEF99D900969296 /* NDResourceFork-Info.plist */,
 				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
 			);
@@ -1045,7 +1045,7 @@
 			isa = PBXGroup;
 			children = (
 				483184F50AEF91F200C3C672 /* FilenamesDropHandler */,
-				483185320AEF966B00C3C672 /* SafariBookmarksDropHandler */,
+				483185320AEF966B00C3C672 /* URLDropHandler */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -1061,15 +1061,15 @@
 			path = FilenamesDropHandler;
 			sourceTree = "<group>";
 		};
-		483185320AEF966B00C3C672 /* SafariBookmarksDropHandler */ = {
+		483185320AEF966B00C3C672 /* URLDropHandler */ = {
 			isa = PBXGroup;
 			children = (
-				485F402C0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.h */,
-				485F402D0AB6D61300E230DC /* PABookmarkDictionaryListDropHandler.m */,
+				485F402C0AB6D61300E230DC /* PAURLDropHandler.h */,
+				485F402D0AB6D61300E230DC /* PAURLDropHandler.m */,
 				4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */,
 				4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */,
 			);
-			path = SafariBookmarksDropHandler;
+			path = URLDropHandler;
 			sourceTree = "<group>";
 		};
 		483272220AA42C7E003D98A6 /* Preferences */ = {
@@ -1667,9 +1667,9 @@
 			productReference = 48404B000AF8B357001F7BB7 /* Unit Testing.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		48C633BA0AEF9720008F0E94 /* SafariBookmarkDropHandler */ = {
+		48C633BA0AEF9720008F0E94 /* URLDropHandler */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 48C633BD0AEF9721008F0E94 /* Build configuration list for PBXNativeTarget "SafariBookmarkDropHandler" */;
+			buildConfigurationList = 48C633BD0AEF9721008F0E94 /* Build configuration list for PBXNativeTarget "URLDropHandler" */;
 			buildPhases = (
 				48C633B70AEF9720008F0E94 /* Resources */,
 				48C633B80AEF9720008F0E94 /* Sources */,
@@ -1681,9 +1681,9 @@
 				48C633C10AEF9724008F0E94 /* PBXTargetDependency */,
 				4815A0E80AEF9A8800969296 /* PBXTargetDependency */,
 			);
-			name = SafariBookmarkDropHandler;
+			name = URLDropHandler;
 			productName = SafariBookmarkDropHandler;
-			productReference = 48C633BB0AEF9720008F0E94 /* SafariBookmarkDropHandler.pudh */;
+			productReference = 48C633BB0AEF9720008F0E94 /* URLDropHandler.pudh */;
 			productType = "com.apple.product-type.bundle";
 		};
 		8D1107260486CEB800E47090 /* Punakea */ = {
@@ -1739,7 +1739,7 @@
 				488A52E80A81D9DC005B54A8 /* Documentation */,
 				483184970AEF8D8600C3C672 /* PADropHandler */,
 				483184E20AEF91A700C3C672 /* FilenamesDropHandler */,
-				48C633BA0AEF9720008F0E94 /* SafariBookmarkDropHandler */,
+				48C633BA0AEF9720008F0E94 /* URLDropHandler */,
 				4815A0B00AEF99D900969296 /* NDResourceFork */,
 				48404AFF0AF8B357001F7BB7 /* Unit Testing */,
 			);
@@ -1928,7 +1928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4815A06B0AEF992300969296 /* PAURLDropDataHandler.m in Sources */,
-				4815A0A20AEF993B00969296 /* PABookmarkDictionaryListDropHandler.m in Sources */,
+				4815A0A20AEF993B00969296 /* PAURLDropHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2028,7 +2028,7 @@
 /* Begin PBXTargetDependency section */
 		480721EC0AEFE8F40024118D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 48C633BA0AEF9720008F0E94 /* SafariBookmarkDropHandler */;
+			target = 48C633BA0AEF9720008F0E94 /* URLDropHandler */;
 			targetProxy = 480721EB0AEFE8F40024118D /* PBXContainerItemProxy */;
 		};
 		4815A0E80AEF9A8800969296 /* PBXTargetDependency */ = {
@@ -2423,7 +2423,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "SafariBookmarkDropHandler-Info.plist";
+				INFOPLIST_FILE = "URLDropHandler-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2432,7 +2432,7 @@
 					AppKit,
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = SafariBookmarkDropHandler;
+				PRODUCT_NAME = URLDropHandler;
 				WRAPPER_EXTENSION = pudh;
 				ZERO_LINK = YES;
 			};
@@ -2447,7 +2447,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "SafariBookmarkDropHandler-Info.plist";
+				INFOPLIST_FILE = "URLDropHandler-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2456,7 +2456,7 @@
 					AppKit,
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = SafariBookmarkDropHandler;
+				PRODUCT_NAME = URLDropHandler;
 				WRAPPER_EXTENSION = pudh;
 				ZERO_LINK = NO;
 			};
@@ -2496,7 +2496,7 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_5)",
 				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -2531,7 +2531,7 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_5)",
 				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
@@ -2546,6 +2546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -2562,6 +2563,7 @@
 					i386,
 				);
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -2617,7 +2619,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		48C633BD0AEF9721008F0E94 /* Build configuration list for PBXNativeTarget "SafariBookmarkDropHandler" */ = {
+		48C633BD0AEF9721008F0E94 /* Build configuration list for PBXNativeTarget "URLDropHandler" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48C633BE0AEF9721008F0E94 /* Debug */,

@@ -6,16 +6,16 @@
 //  Copyright 2006 nudge:nudge. All rights reserved.
 //
 
-#import "PABookmarkDictionaryListDropHandler.h"
+#import "PAURLDropHandler.h"
 
 
-@implementation PABookmarkDictionaryListDropHandler
+@implementation PAURLDropHandler
 
 - (id)init
 {
 	if (self = [super init])
 	{
-		pboardType = [@"BookmarkDictionaryListPboardType" retain];
+		pboardType = [@"WebURLsWithTitlesPboardType" retain];
 		dataHandler = [[PAURLDropDataHandler alloc] init];
 	}
 	return self;
@@ -23,10 +23,9 @@
 
 - (BOOL)willHandleDrop:(NSPasteboard*)pasteboard
 {
-	NSArray *bookmarkDictionaries = [pasteboard propertyListForType:pboardType];
-	NSDictionary *uriDictionary = [[bookmarkDictionaries objectAtIndex:0] objectForKey:@"URIDictionary"];
+	NSArray *WebURLsWithTitlesPboardTypeArray = [pasteboard propertyListForType:pboardType];
 	
-	if (uriDictionary)
+	if ([WebURLsWithTitlesPboardTypeArray count] == 2)
 		return YES;
 	else
 		return NO;
@@ -34,15 +33,21 @@
 
 - (NSArray*)handleDrop:(NSPasteboard*)pasteboard
 {
-	NSArray *bookmarkDictionaries = [pasteboard propertyListForType:pboardType];
+	NSArray *WebURLsWithTitlesPboardTypeArray = [pasteboard propertyListForType:pboardType];
+	NSArray *urls = [WebURLsWithTitlesPboardTypeArray objectAtIndex:0];
+	NSArray *titles = [WebURLsWithTitlesPboardTypeArray objectAtIndex:1];
+	
 	NSMutableArray *files = [NSMutableArray array];
-		
-	NSEnumerator *e = [bookmarkDictionaries objectEnumerator];
-	NSDictionary *uriDicitonary;
-		
-	while (uriDicitonary = [[e nextObject] objectForKey:@"URIDictionary"])
+	
+	for (int i=0;i<[urls count];i++)
 	{
-		[files addObject:[dataHandler fileDropData:uriDicitonary]];
+		NSString *url = [urls objectAtIndex:i];
+		NSString *title = [titles objectAtIndex:i];
+		
+		NSString *urlDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:url,title,nil]
+															  forKeys:[NSArray arrayWithObjects:@"url",@"title",nil]];
+		
+		[files addObject:[dataHandler fileDropData:urlDictionary]];
 	}
 		
 	return files;

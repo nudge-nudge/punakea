@@ -1,5 +1,5 @@
 //
-//  PABookmarkDictionaryListDropHandler.h
+//  PAURLDropHandler.h
 //  punakea
 //
 //  Created by Johannes Hoffart on 10.09.06.
@@ -11,9 +11,9 @@
 #import "PAURLDropDataHandler.h";
 
 /**
-handles BookmarkDictionaryListPboardType drops (safari bookmarks and address-bar drops)
+handles WebURLsWithTitlesPboardType drops (bookmarks, links and address-bar drops)
  */
-@interface PABookmarkDictionaryListDropHandler : PADropHandler {
+@interface PAURLDropHandler : PADropHandler {
 
 }
 

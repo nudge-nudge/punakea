@@ -76,7 +76,7 @@ data is NSDictionary with keys:
 */
 - (NSString*)fileDropData:(id)data
 {
-	NSString *url = [data objectForKey:@""];
+	NSString *url = [data objectForKey:@"url"];
 	NSString *tempName = [[data objectForKey:@"title"] stringByAppendingString:@".webloc"];
 	
 	// replace non-file characters
