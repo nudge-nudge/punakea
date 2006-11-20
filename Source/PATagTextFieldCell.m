@@ -65,6 +65,7 @@
 	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];
+	[paraStyle release];
 	
 	// Draw display name	
 	NSString *value = [self stringValue];

@@ -324,6 +324,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 #pragma mark Actions
 - (NSMutableAttributedString *)attributedTitle
 {
+	// TODO an bär: das hier wird doch nie gesetzt oder?
 	if(attributedTitle) return attributedTitle;
 
 	NSMutableAttributedString *attrTitle = attributedTitle;
