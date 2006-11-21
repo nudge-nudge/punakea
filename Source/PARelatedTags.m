@@ -42,6 +42,7 @@
 - (void)dealloc 
 {
 	[nc removeObserver:self];
+	[selectedTags release];
 	[relatedTags release];
 	[query release];
 	[super dealloc];

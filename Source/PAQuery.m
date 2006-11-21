@@ -40,7 +40,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 #pragma mark Init + Dealloc
 - (id)init
 {
-	return [self initWithTags:[[PASelectedTags alloc] init]];
+	return [self initWithTags:[[[PASelectedTags alloc] init] autorelease]];
 }
 
 - (id)initWithTags:(PASelectedTags*)otherTags
@@ -57,6 +57,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 
 - (void)dealloc
 {
+	[tags release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	if ([self isStarted]) [self stopQuery];	
 	[mdquery release];

@@ -17,10 +17,7 @@
 }
 
 - (void)dealloc
-{
-	NSLog(@"%@ dealloc",[self className]);
-	NSLog(@"mainView retaincount %i",[view retainCount]);
-	
+{	
 	// release view twice
 	// 1. objects in nib are instantiated with retain count 1
 	// 2. setView has been called

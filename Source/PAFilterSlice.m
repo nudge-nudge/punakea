@@ -44,9 +44,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 }
 
 - (void)dealloc
-{
-	NSLog(@"filter slice dealloced");
-	
+{	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[buttons release];
