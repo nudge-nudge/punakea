@@ -73,8 +73,6 @@ resets the tagger window (called when window is closed)
 
 - (void)dealloc
 {
-	NSLog(@"Tagger dealloc");
-	
 	[headerCell release];
 	[fileCell release];
 	[fileController removeObserver:self forKeyPath:@"arrangedObjects"];
@@ -273,8 +271,6 @@ completionsForSubstring:(NSString *)substring
 #pragma mark window delegate
 - (void)windowWillClose:(NSNotification *)aNotification
 {
-	NSLog(@"window will close");
-	NSLog(@"retaincount %i",[self retainCount]);
 	[self autorelease];
 }
 
@@ -381,18 +377,5 @@ completionsForSubstring:(NSString *)substring
 {
 	[fileController removeObjectsAtArrangedObjectIndexes:[tableView selectedRowIndexes]];
 }
-
-- (id)retain
-{
-	NSLog(@"retained to %i",[self retainCount]+1);
-	return [super retain];
-}
-
-- (oneway void)release
-{
-	NSLog(@"released to %i",[self retainCount]-1);
-	[super release];
-}
-
 
 @end
