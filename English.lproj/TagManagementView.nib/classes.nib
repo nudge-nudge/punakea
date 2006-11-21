@@ -2,12 +2,14 @@
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = NSLevelIndicator; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {
             CLASS = PABrowserViewMainController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {delegate = id; }; 
+            OUTLETS = {currentView = NSView; delegate = id; }; 
             SUPERCLASS = PAViewController; 
         }, 
+        {CLASS = PADebugView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {CLASS = PALabel; LANGUAGE = ObjC; SUPERCLASS = NSTextField; }, 
         {
             CLASS = PATagManagementArrayController; 
@@ -41,7 +43,7 @@
         {
             CLASS = PAViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {mainView = NSView; }; 
+            OUTLETS = {view = NSView; }; 
             SUPERCLASS = NSResponder; 
         }
     ); 

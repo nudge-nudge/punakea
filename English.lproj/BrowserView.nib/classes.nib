@@ -21,7 +21,14 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = PABrowserSplitView; LANGUAGE = ObjC; SUPERCLASS = NSSplitView; }, 
+        {
+            CLASS = PABrowserViewMainController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {currentView = NSView; delegate = id; }; 
+            SUPERCLASS = PAViewController; 
+        }, 
         {
             CLASS = PAControlledView; 
             LANGUAGE = ObjC; 
@@ -58,7 +65,7 @@
         {
             CLASS = PAViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {mainView = NSView; }; 
+            OUTLETS = {view = NSView; }; 
             SUPERCLASS = NSResponder; 
         }, 
         {

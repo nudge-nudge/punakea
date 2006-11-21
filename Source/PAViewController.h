@@ -20,6 +20,6 @@ used for views just as nswindowcontroller is used for windows.
 
 // accessors
 - (NSView*)view;
-- (void)setMainView:(NSView*)aView;
+- (void)setView:(NSView*)aView;
 
 @end

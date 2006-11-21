@@ -57,6 +57,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	if ([self isStarted]) [self stopQuery];	
 	[mdquery release];
 	[bundlingAttributes release];

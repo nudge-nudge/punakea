@@ -14,6 +14,8 @@
 #pragma mark init
 - (void)dealloc
 {
+	NSLog(@"maincontroller dealloced");
+	
 	[currentView release];
 	[super dealloc];
 }
@@ -67,6 +69,18 @@
 - (void)reset
 {
 	return;
+}
+
+- (id)retain
+{
+	NSLog(@"%@ retained to %i",[self className],[self retainCount]+1);
+	return [super retain];
+}
+
+- (oneway void)release
+{
+	NSLog(@"%@ release to %i",[self className],[self retainCount]-1);
+	[super release];
 }
 
 @end

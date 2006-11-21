@@ -146,6 +146,8 @@
 		48B0F1D80ACC020800738053 /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1D70ACC020800738053 /* Global.strings */; };
 		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
 		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
+		48BFF6250B13420500C1A127 /* PADebugView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BFF6230B13420500C1A127 /* PADebugView.h */; };
+		48BFF6260B13420500C1A127 /* PADebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BFF6240B13420500C1A127 /* PADebugView.m */; };
 		48C93615099742D800699265 /* Matador.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C93614099742D800699265 /* Matador.h */; };
 		48C9362E099743F200699265 /* NSObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48C9362D099743F200699265 /* NSObject.h */; };
 		48CDF4970AA57924002E9E78 /* GeneralPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4960AA57924002E9E78 /* GeneralPreferences.tiff */; };
@@ -461,6 +463,7 @@
 				658ADEB80AF6432900063AE1 /* PALabel.h in CopyFiles */,
 				484049730AF89F73001F7BB7 /* NSFileManager+PAExtensions.h in CopyFiles */,
 				48293F650AFF26D0009E760E /* PAFileCache.h in CopyFiles */,
+				48BFF6250B13420500C1A127 /* PADebugView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +607,8 @@
 		48B241630B0393A100DAD2B5 /* appstarter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = appstarter.c; sourceTree = "<group>"; };
 		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
 		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
+		48BFF6230B13420500C1A127 /* PADebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADebugView.h; sourceTree = "<group>"; };
+		48BFF6240B13420500C1A127 /* PADebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADebugView.m; sourceTree = "<group>"; };
 		48C633BB0AEF9720008F0E94 /* URLDropHandler.pudh */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLDropHandler.pudh; sourceTree = BUILT_PRODUCTS_DIR; };
 		48C633BC0AEF9720008F0E94 /* URLDropHandler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "URLDropHandler-Info.plist"; sourceTree = "<group>"; };
 		48C93614099742D800699265 /* Matador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matador.h; sourceTree = "<group>"; };
@@ -995,6 +1000,8 @@
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
 				65C8B5890AA5869000DC36EA /* ThreadWorker.h */,
 				65C8B58A0AA5869000DC36EA /* ThreadWorker.m */,
+				48BFF6230B13420500C1A127 /* PADebugView.h */,
+				48BFF6240B13420500C1A127 /* PADebugView.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -2020,6 +2027,7 @@
 				658ADEB90AF6432900063AE1 /* PALabel.m in Sources */,
 				484049740AF89F73001F7BB7 /* NSFileManager+PAExtensions.m in Sources */,
 				48293F660AFF26D0009E760E /* PAFileCache.m in Sources */,
+				48BFF6260B13420500C1A127 /* PADebugView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

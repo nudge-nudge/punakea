@@ -183,6 +183,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	while (subview = [e nextObject])
 	{
 		[subview removeFromSuperview];
+		[subview release];
 	}
 	
 	[controlledView addSubview:[mainController view]];
@@ -442,6 +443,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// only switch if controller is different
 	if ([controller isKindOfClass:[mainController class]])
 		return;
+	
+	/*
+	if ([self mainController])
+		[mainController release];
+	*/
 	
 	[self reset];
 	[self setMainController:controller];

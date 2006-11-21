@@ -18,6 +18,9 @@
 
 - (void)dealloc
 {
+	NSLog(@"blub dealloc");
+	NSLog(@"mainView retaincount %i",[view retainCount]);
+	
 	[view release];
 	[super dealloc];
 }
@@ -28,7 +31,7 @@
 	return view;
 }
 
-- (void)setMainView:(NSView*)aView
+- (void)setView:(NSView*)aView
 {
 	[aView retain];
 	[view release];

@@ -63,10 +63,10 @@
 - (void)dealloc
 {
 	[nc removeObserver:self];
-
+	
 	[outlineView unregisterDraggedTypes];
-
 	[draggedItems release];
+
 	[relatedTags release];
     [query release];
 	[selectedTags release];

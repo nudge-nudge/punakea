@@ -17,4 +17,10 @@
 	NSRectFill([self bounds]);
 }
 
+- (void)dealloc
+{
+	NSLog(@"tm-mainview dealloc");
+	[super dealloc];
+}
+
 @end
