@@ -28,10 +28,10 @@
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
-                currentView = NSView; 
                 lastClickedField = NSTextField; 
                 lastUsedField = NSTextField; 
                 popularityIndicator = NSLevelIndicator; 
+                progressIndicator = NSProgressIndicator; 
                 removeButtonPlaceholderView = NSView; 
                 simpleTagManagementView = NSView; 
                 tagNameField = NSTextField; 

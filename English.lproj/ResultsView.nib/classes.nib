@@ -32,7 +32,7 @@
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = PAResultsViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {outlineView = PAResultsOutlineView; }; 
+            OUTLETS = {outlineView = PAResultsOutlineView; progressIndicator = NSProgressIndicator; }; 
             SUPERCLASS = PABrowserViewMainController; 
         }, 
         {

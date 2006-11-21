@@ -94,6 +94,11 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 - (void)setWorking:(BOOL)flag
 {
 	working = flag;
+	
+	if (working)
+		[progressIndicator startAnimation:self];
+	else
+		[progressIndicator stopAnimation:self];
 }
 
 - (NSView*)currentView

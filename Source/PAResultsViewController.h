@@ -26,6 +26,7 @@
 @interface PAResultsViewController : PABrowserViewMainController {
 	
 	IBOutlet PAResultsOutlineView		*outlineView;
+	IBOutlet NSProgressIndicator		*progressIndicator;
 	
 	PATagger							*tagger;
 	PATags								*tags;

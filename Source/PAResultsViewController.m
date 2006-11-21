@@ -11,6 +11,7 @@
 
 @implementation PAResultsViewController
 
+#pragma mark init
 - (id)init
 {
 	if (self = [super init])
@@ -41,7 +42,7 @@
 			   selector:@selector(relatedTagsHaveChanged:) 
 				   name:@"PARelatedTagsHaveChanged" 
 				 object:relatedTags];
-		
+				
 		[NSBundle loadNibNamed:@"ResultsView" owner:self];
 	}
 	return self;
@@ -58,10 +59,17 @@
 	[outlineView registerForDraggedTypes:[dropManager handledPboardTypes]];
 	[outlineView setDraggingSourceOperationMask:NSDragOperationNone forLocal:YES];
 	[outlineView setDraggingSourceOperationMask:(dragOperation | NSDragOperationDelete) forLocal:NO];
+	
+	[relatedTags addObserver:self
+				  forKeyPath:@"updating"
+					 options:0
+					 context:NULL];
 }
 
 - (void)dealloc
 {
+	[relatedTags removeObserver:self forKeyPath:@"updating"];
+	
 	[nc removeObserver:self];
 	
 	[outlineView unregisterDraggedTypes];
@@ -72,6 +80,22 @@
 	[selectedTags release];
 	[super dealloc];
 }
+
+#pragma mark observing
+- (void)observeValueForKeyPath:(NSString *)keyPath 
+					  ofObject:(id)object 
+						change:(NSDictionary *)change
+					   context:(void *)context
+{
+	if ([keyPath isEqualToString:@"updating"])
+	{
+		if ([relatedTags isUpdating])
+			[progressIndicator startAnimation:self];
+		else
+			[progressIndicator stopAnimation:self];
+	}
+}
+
 
 #pragma mark accessors
 - (PAQuery*)query
@@ -539,7 +563,6 @@
 	
 	[outlineView reloadData];
 }
-
 
 #pragma mark Accessors
 - (PAResultsOutlineView *)outlineView

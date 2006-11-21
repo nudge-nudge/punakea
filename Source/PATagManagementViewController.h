@@ -21,6 +21,7 @@ extern NSString * const PATagManagementRemoveOperation;
 
 @interface PATagManagementViewController : PABrowserViewMainController {
 	
+	IBOutlet NSProgressIndicator	*progressIndicator;
 	IBOutlet NSTextField			*tagNameField;
 	IBOutlet NSTextField			*lastClickedField;
 	IBOutlet NSTextField			*lastUsedField;
