@@ -17,6 +17,18 @@
 	NSRectFill([self bounds]);
 }
 
+- (id)retain
+{
+	NSLog(@"%@ retained to %i",[self className],[self retainCount]+1);
+	return [super retain];
+}
+
+- (oneway void)release
+{
+	NSLog(@"%@ release to %i",[self className],[self retainCount]-1);
+	[super release];
+}
+
 - (void)dealloc
 {
 	NSLog(@"tm-mainview dealloc");

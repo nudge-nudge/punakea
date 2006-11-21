@@ -62,6 +62,10 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 
 - (void)dealloc
 {
+	// loading from nib causes retain count 1 
+	// -> release simpleTagManagementView
+	[simpleTagManagementView release];
+	
 	[currentEditedTag release];
 	[removeButton release];
 	[super dealloc];
