@@ -95,7 +95,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)dealloc
 {
+	// need to take care of tag cloud observer
+	// because tag cloud is released after the controller
+	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
+																 forKeyPath:@"values.TagCloud.SortKey"];
 	[visibleTags release];
 	[buffer release];
 	[typeAheadFind release];
@@ -459,6 +464,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[[[self view] window] makeFirstResponder:tagCloud];
 }
 
+- (void)unbindAll
+{
+	[self removeObserver:tagCloud forKeyPath:@"visibleTags"];
+	[self removeObserver:self forKeyPath:@"buffer"];
+	[searchField unbind:@"value"];
+}
+
 - (void)makeControlledViewFirstResponder
 {
 	[[[self view] window] makeFirstResponder:[mainController dedicatedFirstResponder]];
@@ -526,5 +538,17 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	return tags;
 }
-	
+
+- (id)retain
+{
+	NSLog(@"%@ retained to %i",[self className],[self retainCount]+1);
+	return [super retain];
+}
+
+- (oneway void)release
+{
+	NSLog(@"%@ release to %i",[self className],[self retainCount]-1);
+	[super release];
+}
+
 @end

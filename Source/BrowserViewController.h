@@ -95,5 +95,6 @@ is called when a tag is clicked. increments the tag click count and
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller;
 
 - (void)reset;
+- (void)unbindAll;
 
 @end

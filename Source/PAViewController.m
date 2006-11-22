@@ -18,11 +18,10 @@
 
 - (void)dealloc
 {	
-	// release view twice
-	// 1. objects in nib are instantiated with retain count 1
-	// 2. setView has been called
 	[view release];
-	[view release];
+	[nibView release];
+	
+	NSLog(@"%@ dealloc",[self className]);
 	
 	[super dealloc];
 }

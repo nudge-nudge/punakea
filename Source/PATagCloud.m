@@ -81,12 +81,7 @@ calculates the starting point in the next row according to the height of all the
 {
 	if (self = [super initWithFrame:frameRect]) {
 		userDefaultsController = [NSUserDefaultsController sharedUserDefaultsController];
-		
-		[self bind:@"eyeCandy" 
-		  toObject:userDefaultsController 
-	   withKeyPath:@"values.TagCloud.EyeCandy" 
-		   options:nil];
-		
+			
 		tagButtonDict = [[NSMutableDictionary alloc] init];	
 		viewAnimation = [[NSViewAnimation alloc] init];
 		
@@ -138,11 +133,14 @@ bind to visibleTags
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	[noRelatedTagsMessage release];
 	[activeButton release];
 	[viewAnimationCache release];
 	[viewAnimation release];
 	[tagButtonDict release];
+	NSLog(@"tagcloud dealloc");
 	[super dealloc];
 }
 
@@ -1073,6 +1071,18 @@ executes some interface stuff
 - (double)distanceFrom:(NSPoint)a to:(NSPoint)b
 {
 	return sqrt( pow(a.x - b.x,2) + pow(a.y - b.y,2) );
+}
+
+- (id)retain
+{
+	NSLog(@"%@ retained to %i",[self className],[self retainCount]+1);
+	return [super retain];
+}
+
+- (oneway void)release
+{
+	NSLog(@"%@ release to %i",[self className],[self retainCount]-1);
+	[super release];
 }
 
 @end

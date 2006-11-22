@@ -54,7 +54,7 @@
         {
             CLASS = PAViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {view = NSView; }; 
+            OUTLETS = {nibView = NSView; view = NSView; }; 
             SUPERCLASS = NSResponder; 
         }
     ); 

@@ -19,14 +19,14 @@
 
 @interface Core : NSWindowController
 {
-	IBOutlet NSMenu *viewMenu;
+	IBOutlet NSMenu			*viewMenu;
 	
-	PATagger *tagger;
+	PATagger				*tagger;
 
-	BrowserController *browserController;
-	PreferenceController *preferenceController;
+	BrowserController		*browserController;
+	PreferenceController	*preferenceController;
 	
-	NSNotificationCenter *nc;
+	NSNotificationCenter	*nc;
 }
 
 //saving and loading

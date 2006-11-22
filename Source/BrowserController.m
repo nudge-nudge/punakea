@@ -31,14 +31,24 @@
 
 - (void)dealloc
 {
+	// unbind stuff for retain count
 	[browserViewController release];
+	NSLog(@"bc dealloc");
 	[super dealloc];
 }
 
+/*
 - (BOOL)windowShouldClose:(id)sender
 {
 	[browserViewController reset];
 	return YES;
+}
+*/
+
+- (void)windowWillClose:(NSNotification *)aNotification
+{
+	[browserViewController unbindAll];
+	[self autorelease];
 }
 
 - (BrowserViewController*)browserViewController

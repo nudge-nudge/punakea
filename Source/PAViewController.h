@@ -16,6 +16,7 @@ used for views just as nswindowcontroller is used for windows.
  */
 @interface PAViewController : NSResponder {
 	IBOutlet NSView *view; /**< controlled view */
+	IBOutlet NSView *nibView;
 }
 
 // accessors
