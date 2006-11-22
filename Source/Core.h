@@ -45,6 +45,7 @@
 - (IBAction)editTagsOnFiles:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
+- (void)closeBrowser;
 - (IBAction)showTagger:(id)sender;
 
 @end

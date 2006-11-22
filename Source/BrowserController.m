@@ -7,13 +7,14 @@
 //
 
 #import "BrowserController.h"
-
+#import "Core.h"
 
 @implementation BrowserController
 
-- (id)init
+- (id)initWithCore:(Core*)aCore
 {
 	self = [super initWithWindowNibName:@"Browser"];
+	core = aCore;
 	return self;
 }
 
@@ -48,7 +49,7 @@
 - (void)windowWillClose:(NSNotification *)aNotification
 {
 	[browserViewController unbindAll];
-	[self autorelease];
+	[core closeBrowser];
 }
 
 - (BrowserViewController*)browserViewController

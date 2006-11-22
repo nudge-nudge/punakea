@@ -269,9 +269,18 @@
 {
 	if (!browserController)
 	{
-		browserController = [[BrowserController alloc] init];
+		browserController = [[BrowserController alloc] initWithCore:self];
 	}
 	[browserController showWindow:self];
+}
+
+- (void)closeBrowser
+{
+	if (browserController)
+	{
+		[browserController release];
+		browserController = nil;
+	}
 }
 
 - (IBAction)showTagger:(id)sender

@@ -11,11 +11,15 @@
 #import "PAQuery.h"
 #import "PATagCloud.h"
 
+@class Core;
+
 @interface BrowserController : NSWindowController 
 {
-	BrowserViewController				*browserViewController;
+	Core							*core;
+	BrowserViewController			*browserViewController;
 }
 
+- (id)initWithCore:(Core*)aCore;
 - (BrowserViewController*)browserViewController;
 
 @end
