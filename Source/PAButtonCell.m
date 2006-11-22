@@ -128,7 +128,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 				  range:NSMakeRange(0, [label length])];
 	[shadow release];
 	
-	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
 	[paraStyle setAlignment:NSCenterTextAlignment];
 	[label addAttribute:NSParagraphStyleAttributeName
@@ -197,7 +197,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 				  range:NSMakeRange(0, [label length])];
 				
 	// Set paragraph style
-	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
 	[paraStyle setAlignment:NSCenterTextAlignment];
 	[label addAttribute:NSParagraphStyleAttributeName

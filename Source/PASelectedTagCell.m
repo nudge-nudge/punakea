@@ -89,7 +89,7 @@
 		
 	[fontAttributes setObject:[NSFont systemFontOfSize:11] forKey:NSFontAttributeName];
 	
-	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];
 	

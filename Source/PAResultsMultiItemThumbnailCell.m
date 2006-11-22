@@ -37,7 +37,7 @@
 
 	// Attributed string for value
 	NSString *value = [item valueForAttribute:(id)kMDItemDisplayName];
-	NSMutableAttributedString *valueLabel = [[NSMutableAttributedString alloc] initWithString:value];
+	NSMutableAttributedString *valueLabel = [[[NSMutableAttributedString alloc] initWithString:value] autorelease];
 	[valueLabel addAttribute:NSFontAttributeName
 					   value:[NSFont systemFontOfSize:11]
 					   range:NSMakeRange(0, [valueLabel length])];
@@ -53,7 +53,7 @@
 						   range:NSMakeRange(0, [valueLabel length])];
 	}
 	
-	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
 	[paraStyle setAlignment:NSCenterTextAlignment];
 	[valueLabel addAttribute:NSParagraphStyleAttributeName
@@ -122,11 +122,10 @@
 	[fontAttributes setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];		
 	[fontAttributes setObject:[NSFont systemFontOfSize:10] forKey:NSFontAttributeName];	
 	
-	paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
 	[paraStyle setAlignment:NSCenterTextAlignment];
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];	
-	[paraStyle release];
 	
 	NSRect dateFrame = valueLabelFrame;
 	dateFrame.origin.x = cellFrame.origin.x;

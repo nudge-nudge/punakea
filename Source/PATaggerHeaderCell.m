@@ -34,12 +34,11 @@
 	[fontAttributes setObject:[NSColor textColor] forKey:NSForegroundColorAttributeName];		
 	[fontAttributes setObject:[NSFont systemFontOfSize:11] forKey:NSFontAttributeName];	
 	
-	NSParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
 	[paraStyle setAlignment:NSCenterTextAlignment];
 	
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];	
-	[paraStyle release];
 
 	NSRect stringRect = cellFrame;
 	stringRect.origin.y += 1.0;

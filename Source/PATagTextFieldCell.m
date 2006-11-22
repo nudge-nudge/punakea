@@ -62,10 +62,9 @@
 	[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
 	[fontAttributes setObject:[NSFont systemFontOfSize:14] forKey:NSFontAttributeName];
 	
-	NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];
-	[paraStyle release];
 	
 	// Draw display name	
 	NSString *value = [self stringValue];
