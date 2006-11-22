@@ -20,9 +20,7 @@
 {	
 	[view release];
 	[nibView release];
-	
-	NSLog(@"%@ dealloc",[self className]);
-	
+		
 	[super dealloc];
 }
 

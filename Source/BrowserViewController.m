@@ -539,16 +539,4 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	return tags;
 }
 
-- (id)retain
-{
-	NSLog(@"%@ retained to %i",[self className],[self retainCount]+1);
-	return [super retain];
-}
-
-- (oneway void)release
-{
-	NSLog(@"%@ release to %i",[self className],[self retainCount]-1);
-	[super release];
-}
-
 @end

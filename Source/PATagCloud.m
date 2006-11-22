@@ -140,7 +140,6 @@ bind to visibleTags
 	[viewAnimationCache release];
 	[viewAnimation release];
 	[tagButtonDict release];
-	NSLog(@"tagcloud dealloc");
 	[super dealloc];
 }
 
@@ -1071,18 +1070,6 @@ executes some interface stuff
 - (double)distanceFrom:(NSPoint)a to:(NSPoint)b
 {
 	return sqrt( pow(a.x - b.x,2) + pow(a.y - b.y,2) );
-}
-
-- (id)retain
-{
-	NSLog(@"%@ retained to %i",[self className],[self retainCount]+1);
-	return [super retain];
-}
-
-- (oneway void)release
-{
-	NSLog(@"%@ release to %i",[self className],[self retainCount]-1);
-	[super release];
 }
 
 @end
