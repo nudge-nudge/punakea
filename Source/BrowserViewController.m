@@ -95,12 +95,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)dealloc
 {
-	// need to take care of tag cloud observer
-	// because tag cloud is released after the controller
-	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
 																 forKeyPath:@"values.TagCloud.SortKey"];
+	[mainController release];
 	[visibleTags release];
 	[buffer release];
 	[typeAheadFind release];
