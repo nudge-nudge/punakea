@@ -239,7 +239,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			// Wrap theItem (a NSMetadataItem) into PAQueryItem
 			NSMetadataItem *mdItem = theItem;
 			id value;
-			item = [[PAQueryItem alloc] init];
+			item = [[[PAQueryItem alloc] init] autorelease];
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:@"value"];
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:(id)kMDItemDisplayName];
 			[item setValue:[mdItem valueForAttribute:(id)kMDItemPath] forAttribute:(id)kMDItemPath];			

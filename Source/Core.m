@@ -113,6 +113,7 @@
 	[archiver encodeObject:rootObject];
 	[archiver finishEncoding];
 	[data writeToFile:path atomically:YES];
+	[archiver release];
 }
 
 - (void)loadDataFromDisk 
