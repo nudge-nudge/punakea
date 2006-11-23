@@ -29,7 +29,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	// Misc
 	[self setDisplayMode:PAListMode];
-	[self setSelectedQueryItems:[[NSMutableArray alloc] init]];
+	[self setSelectedQueryItems:[NSMutableArray array]];
 }
 
 - (void)dealloc

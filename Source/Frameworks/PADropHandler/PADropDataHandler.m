@@ -32,6 +32,7 @@
 
 - (void)dealloc
 {
+	[self unbind:@"manageFiles"];
 	[super dealloc];
 }
 

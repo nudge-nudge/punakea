@@ -228,6 +228,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 				[bundle setValue:bundleValue];
 				[bundle setBundlingAttribute:bundlingAttribute];
 				[bundleDict setObject:bundle forKey:bundleValue];
+				[bundle release];
 			}			
 		}
 		
