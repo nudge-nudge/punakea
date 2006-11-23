@@ -51,7 +51,7 @@
 	{
 		NSBundle *bundle = [NSBundle mainBundle];
 		NSString *path = [bundle pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
-		NSDictionary *simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
+		NSDictionary *simpleGrouping = [NSDictionary dictionaryWithContentsOfFile:path];
 		
 		/*path = @"~/Library/Preferences/com.apple.spotlight.plist";
 		path = [path stringByExpandingTildeInPath];

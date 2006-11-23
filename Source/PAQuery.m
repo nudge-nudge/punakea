@@ -692,6 +692,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 
 - (void)setPredicate:(NSPredicate *)aPredicate
 {
+	[aPredicate retain];
+	[predicate release];
 	predicate = aPredicate;
 	[mdquery setPredicate:aPredicate];
 }

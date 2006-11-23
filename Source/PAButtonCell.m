@@ -324,28 +324,30 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 #pragma mark Actions
 - (NSMutableAttributedString *)attributedTitle
 {
-	// TODO an bär: das hier wird doch nie gesetzt oder?
-	if(attributedTitle) return attributedTitle;
-
-	NSMutableAttributedString *attrTitle = attributedTitle;
-	
-	switch([self bezelStyle])
+	if(attributedTitle)
 	{
-		case PARecessedBezelStyle:;
-			attrTitle = [[NSMutableAttributedString alloc] initWithString:[self title]];
-			[attrTitle addAttribute:NSFontAttributeName
-						      value:[NSFont boldSystemFontOfSize:11]
-						      range:NSMakeRange(0, [attrTitle length])];
-			break;
-		case PATagBezelStyle:;
-			attrTitle = [[NSMutableAttributedString alloc] initWithString:[self title]];
-			[attrTitle addAttribute:NSFontAttributeName
-						      value:[NSFont systemFontOfSize:[self fontSize]]
-						      range:NSMakeRange(0, [attrTitle length])];
-			break;
+		return attributedTitle;
 	}
-	
-	return attrTitle;
+	else
+	{
+		attributedTitle = [[NSMutableAttributedString alloc] initWithString:[self title]];
+		
+		switch([self bezelStyle])
+		{
+			case PARecessedBezelStyle:;
+				[attributedTitle addAttribute:NSFontAttributeName
+								  value:[NSFont boldSystemFontOfSize:11]
+								  range:NSMakeRange(0, [attributedTitle length])];
+				break;
+			case PATagBezelStyle:;
+				[attributedTitle addAttribute:NSFontAttributeName
+								  value:[NSFont systemFontOfSize:[self fontSize]]
+								  range:NSMakeRange(0, [attributedTitle length])];
+				break;
+		}
+			
+		return attributedTitle;
+	}
 }
 
 
