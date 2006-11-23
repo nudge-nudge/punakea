@@ -82,13 +82,13 @@
 - (void)incrementClickCount 
 {
 	clickCount++;
-	[self setLastClicked:[[NSCalendarDate alloc] init]];
+	[self setLastClicked:[NSCalendarDate calendarDate]];
 }
 
 - (void)incrementUseCount 
 {
 	useCount++;
-	[self setLastUsed:[[NSCalendarDate alloc] init]];
+	[self setLastUsed:[NSCalendarDate calendarDate]];
 }
 
 - (void)decrementUseCount 
