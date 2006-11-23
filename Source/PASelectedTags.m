@@ -21,7 +21,7 @@
 {
 	if (self = [super init])
 	{
-		[self setSelectedTags:[tags mutableCopy]];
+		[self setSelectedTags:[[tags mutableCopy] autorelease]];
 		nc = [NSNotificationCenter defaultCenter];
 	}
 	return self;

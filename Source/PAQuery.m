@@ -95,7 +95,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc removeObserver:self];
 	
-	[self setMdquery:[[NSMetadataQuery alloc] init]];
+	[self setMdquery:[[[NSMetadataQuery alloc] init] autorelease]];
 	[mdquery setDelegate:self];
 	[mdquery setNotificationBatchingInterval:0.3];
 	[mdquery setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
@@ -164,8 +164,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		[mdQueryResults addObject:[mdquery resultAtIndex:i]];
 	}
 	
-	flatResults = [self bundleResults:mdQueryResults byAttributes:nil];
-	results = [self bundleResults:flatResults byAttributes:bundlingAttributes];	
+	flatResults = [[self bundleResults:mdQueryResults byAttributes:nil] retain];
+	results = [[self bundleResults:flatResults byAttributes:bundlingAttributes] retain];	
 	
 	// Apply filter, if active
 	if(filterDict)
@@ -187,7 +187,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 {
 	NSMutableDictionary *bundleDict = [NSMutableDictionary dictionary];
 	
-	NSMutableArray *bundledResults = [[NSMutableArray alloc] init];
+	NSMutableArray *bundledResults = [NSMutableArray array];
 	
 	NSString *bundlingAttribute = nil;
 	if(attributes)

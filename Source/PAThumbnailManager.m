@@ -101,6 +101,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		// Add filename to queue						
 		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeIcon];		
 		[queue addObject:item];
+		[item release];
 		[icons setObject:dummyImageIcon forKey:filename];
 		
 		if(!timer)
@@ -131,7 +132,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		PAThumbnailItem *item;
 		@synchronized(queue)
 		{
-			item = [queue objectAtIndex:0];		 
+			item = [[queue objectAtIndex:0] retain];		 
 			[queue removeObjectAtIndex:0];
 		}
 		
@@ -139,12 +140,12 @@ static PAThumbnailManager *sharedInstance = nil;
 		{
 			[ThreadWorker workOn:self
 					withSelector:@selector(generateThumbnailFromFile:)
-					  withObject:item
+					  withObject:[item autorelease]
 				  didEndSelector:nil];
 		} else {
 			[ThreadWorker workOn:self
 					withSelector:@selector(generateIconForFile:)
-					  withObject:item
+					  withObject:[item autorelease]
 				  didEndSelector:nil];
 		}
 	} 
@@ -204,8 +205,6 @@ static PAThumbnailManager *sharedInstance = nil;
 		[view setNeedsDisplayInRect:frame];
 	}
 	
-	[thumbnailItem release];
-	
 	//NSLog(@"finished %@", filename);
 }
 
@@ -213,7 +212,7 @@ static PAThumbnailManager *sharedInstance = nil;
 {
 	NSString *filename = [thumbnailItem filename];
 
-	NSImage *img = [[[NSWorkspace sharedWorkspace] iconForFile:filename] retain];
+	NSImage *img = [[NSWorkspace sharedWorkspace] iconForFile:filename];
 		
 	[icons removeObjectForKey:filename];
 	[icons setObject:img forKey:filename];
@@ -225,8 +224,6 @@ static PAThumbnailManager *sharedInstance = nil;
 	NSView *view = [thumbnailItem view];
 	NSRect frame = [thumbnailItem frame];
 	[view setNeedsDisplayInRect:frame];
-	
-	[img release];
 }
 
 + (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds

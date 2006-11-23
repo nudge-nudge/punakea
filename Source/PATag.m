@@ -22,8 +22,6 @@
 	if (self = [super init]) 
 	{
 		[self setName:aName];
-		lastClicked = [[NSCalendarDate alloc] init];
-		lastUsed = [[NSCalendarDate alloc] init];
 		
 		clickCount = 0;
 		useCount = 0;

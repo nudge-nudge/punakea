@@ -341,6 +341,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 					format:@"delegate invalid"];
 	}
 	
+	[delegate resetDisplayTags];
 	[currentView removeFromSuperview];
 	[self setCurrentView:view];
 	[sv addSubview:currentView];

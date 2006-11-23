@@ -29,7 +29,7 @@
 		[self setUpdating:NO];
 		
 		[self setQuery:aQuery];
-		[self setRelatedTags:[[NSMutableArray alloc] init]];
+		[self setRelatedTags:[NSMutableArray array]];
 		[self setSelectedTags:otherSelectedTags];
 		
 		//register with notificationcenter - listen for changes in the query results -- activeFiles is the query
