@@ -136,6 +136,7 @@ bind to visibleTags
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[noRelatedTagsMessage release];
+	[noTagsMessage release];
 	[activeButton release];
 	[viewAnimationCache release];
 	[viewAnimation release];
