@@ -383,7 +383,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	
 	[filteredResults release];
 	filteredResults = nil;
-	filteredResults = [self bundleResults:flatFilteredResults byAttributes:newAttributes];
+	filteredResults = [[self bundleResults:flatFilteredResults byAttributes:newAttributes] retain];
 }
 
 - (BOOL)hasResultsUsingFilterWithValues:(NSArray *)filterValues

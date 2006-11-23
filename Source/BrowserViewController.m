@@ -446,11 +446,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	if ([controller isKindOfClass:[mainController class]])
 		return;
 	
-	/*
-	if ([self mainController])
-		[mainController release];
-	*/
-	
 	[self reset];
 	[self setMainController:controller];
 }

@@ -63,6 +63,7 @@ int const PADDING_TO_RIGHT = 60;
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[homeButton release];
 	[tagButtons release];
 	[super dealloc];
 }

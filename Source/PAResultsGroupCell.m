@@ -51,16 +51,18 @@
 		{
 			NSDictionary *tag = [(PAImageButton *)anObject tag];
 			if([[tag objectForKey:@"bundle"] isEqualTo:bundle])
+			{
 				triangle = anObject;
+			}
 		}
 		
-		if([self hasMultipleDisplayModes])
-			if([anObject isKindOfClass:[PASegmentedImageControl class]])
-			{
-				NSDictionary *tag = [(PASegmentedImageControl *)anObject tag];
-				if([[tag objectForKey:@"bundle"] isEqualTo:bundle])
-					segmentedControl = anObject;
-			}
+//		if([self hasMultipleDisplayModes])
+//			if([anObject isKindOfClass:[PASegmentedImageControl class]])
+//			{
+//				NSDictionary *tag = [(PASegmentedImageControl *)anObject tag];
+//				if([[tag objectForKey:@"bundle"] isEqualTo:bundle])
+//					segmentedControl = anObject;
+//			}
 	}
 	
 	// Ensure controls aren't hidden
@@ -70,7 +72,7 @@
 	// Add triangle if neccessary
 	if([triangle superview] != controlView)
 	{
-		triangle = [[PAImageButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x + 4, cellFrame.origin.y + 2, 16, 16)];
+		triangle = [[[PAImageButton alloc] initWithFrame:NSMakeRect(cellFrame.origin.x + 4, cellFrame.origin.y + 2, 16, 16)] autorelease];
 		[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"] forState:PAOffState];
 		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite"] forState:PAOnState];
 		[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite_Pressed"] forState:PAOnHighlightedState];

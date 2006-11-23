@@ -17,14 +17,14 @@
 	self = [super initWithFrame:frame];
 	if(self)
 	{
-		filter = [[NSMutableDictionary alloc] init];
+		[self setFilter:[NSMutableDictionary dictionary]];
 	}	
 	return self;
 }
 
 - (void)dealloc
 {
-	if(filter) [filter release];
+	[filter release];
 	[super dealloc];
 }
 
@@ -36,7 +36,7 @@
 
 - (void)setFilter:(NSDictionary *)dictionary
 {
-	if(filter) [filter release];
+	[filter release];
 	filter = [dictionary mutableCopy];
 }
 

@@ -121,6 +121,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 		
 		// Add button to array
 		[buttons addObject:button];
+		[button release];
 	}
 }
 
