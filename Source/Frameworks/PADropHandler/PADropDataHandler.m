@@ -20,11 +20,6 @@
 {
 	if (self = [super init])
 	{
-		[self bind:@"manageFiles" 
-		  toObject:[NSUserDefaultsController sharedUserDefaultsController] 
-	   withKeyPath:@"values.General.ManageFiles" 
-		   options:nil];
-		
 		fileManager = [NSFileManager defaultManager];
 	}
 	return self;
@@ -32,7 +27,6 @@
 
 - (void)dealloc
 {
-	[self unbind:@"manageFiles"];
 	[super dealloc];
 }
 
@@ -87,6 +81,11 @@
 	}
 	
 	return destination;
+}
+
+- (BOOL)isManagingFiles
+{
+	return [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
 }
 
 - (NSString*)pathForFiles

@@ -12,8 +12,6 @@
 abstract class for analyzing the data of a single pboardType. is used by PADropHandler.
  */
 @interface PADropDataHandler : NSObject {
-	BOOL manageFiles;
-	
 	NSFileManager *fileManager;
 }
 
@@ -43,6 +41,13 @@ returns the performed NSDragOperation, depending on fileManager.
  @return NSDragOperation which will be performed by this dropDataHandler
  */
 - (NSDragOperation)performedDragOperation;
+
+/**
+must be used in order to check if files are managed
+ i.e. they must be put in the managed files area
+ if this method returns YES
+ */
+- (BOOL)isManagingFiles;
 
 /**
 helper method
