@@ -15,7 +15,7 @@
 - (NSString*)fileDropData:(id)data
 {
 	// only do something if managing files and if file not already in the managed file directory
-	if (![self isManagingFiles] || [self pathIsInManagedHierarchy:data])
+	if (![self shouldManageFiles] || [self pathIsInManagedHierarchy:data])
 	{
 		return data;
 	}
@@ -29,7 +29,7 @@
 
 - (NSDragOperation)performedDragOperation
 {
-	if ([self isManagingFiles])
+	if ([self shouldManageFiles])
 		return NSDragOperationMove;
 	else
 		return NSDragOperationGeneric;

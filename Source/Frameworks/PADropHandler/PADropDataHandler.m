@@ -83,7 +83,7 @@
 	return destination;
 }
 
-- (BOOL)isManagingFiles
+- (BOOL)shouldManageFiles
 {
 	return [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
 }
