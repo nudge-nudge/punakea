@@ -66,40 +66,12 @@ action called on dropping files to FileBox
  */
 - (void)newFilesHaveBeenDropped
 {	
-	// if the tagger is already open, add more files
-	if (taggerController)
-	{
-		[taggerController showWindow:nil];
-		NSWindow *taggerWindow = [taggerController window];
-		[taggerWindow makeKeyAndOrderFront:nil];
-		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-		
-		NSArray *filesToBeAdded = [fileBox files];
-		NSArray *filesOnController = [taggerController files];
-		NSMutableArray *result = [NSMutableArray array];
-		
-		NSEnumerator *e = [filesToBeAdded objectEnumerator];
-		PAFile *file;
-		
-		while (file = [e nextObject])
-		{
-			if (![filesOnController containsObject:file])
-			{
-				[result addObject:file];
-			}
-		}
-		
-		[taggerController addFiles:result];
-	}
-	// otherwise create new tagger window
-	else 
-	{
-		taggerController = [[TaggerController alloc] init];
-		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-		NSWindow *taggerWindow = [taggerController window];
-		[taggerWindow makeKeyAndOrderFront:nil];
-		[taggerController addFiles:[fileBox files]];
-	}
+	// create new tagger window
+	taggerController = [[TaggerController alloc] init];
+	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+	NSWindow *taggerWindow = [taggerController window];
+	[taggerWindow makeKeyAndOrderFront:nil];
+	[taggerController addFiles:[fileBox files]];
 }
 
 @end
