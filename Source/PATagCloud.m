@@ -668,7 +668,7 @@ bound to visibleTags
 	{
 		if ([self activeButton])
 		{
-			[activeButton performClick:NULL];
+			[delegate tagButtonClicked:activeButton];
 		}
 	}
 	else if (key == NSTabCharacter)
