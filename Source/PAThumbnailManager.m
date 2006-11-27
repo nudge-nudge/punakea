@@ -462,7 +462,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	keys = [icons allKeys];
 	for(unsigned i = 0; i < [keys count]; i++)
 	{
-		NSImage *image =[icons objectForKey:[keys objectAtIndex:i]];
+		NSImage *image = [icons objectForKey:[keys objectAtIndex:i]];
 		if([image isEqualTo:dummyImageIcon])
 			[icons removeObjectForKey:[keys objectAtIndex:i]];
 	}

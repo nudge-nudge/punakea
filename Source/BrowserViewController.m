@@ -429,24 +429,34 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark actions
 - (void)manageTags
 {
-	PATagManagementViewController *tmvController = [[PATagManagementViewController alloc] init];
-	[self switchMainControllerTo:tmvController];
-	[tmvController release];
+	if ([[self mainController] isKindOfClass:[PATagManagementViewController class]])
+	{
+		return;
+	}
+	else
+	{
+		PATagManagementViewController *tmvController = [[PATagManagementViewController alloc] init];
+		[self switchMainControllerTo:tmvController];
+		[tmvController release];
+	}
 }
 
 - (void)showResults
 {
-	PAResultsViewController *rvController = [[PAResultsViewController alloc] init];
-	[self switchMainControllerTo:rvController];
-	[rvController release];
+	if ([[self mainController] isKindOfClass:[PAResultsViewController class]])
+	{
+		return;
+	}
+	else
+	{
+		PAResultsViewController *rvController = [[PAResultsViewController alloc] init];
+		[self switchMainControllerTo:rvController];
+		[rvController release];
+	}
 }
 
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller
 {
-	// only switch if controller is different
-	if ([controller isKindOfClass:[mainController class]])
-		return;
-	
 	[self resetBuffer];
 	[[[self view] window] makeFirstResponder:tagCloud];
 	[self setMainController:controller];
