@@ -313,7 +313,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 }
 
 - (IBAction)endTagManagement:(id)sender
-{
+{	
 	[self reset];
 	
 	if ([delegate respondsToSelector:@selector(showResults)])

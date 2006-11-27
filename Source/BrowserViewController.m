@@ -447,15 +447,15 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	if ([controller isKindOfClass:[mainController class]])
 		return;
 	
-	[self reset];
+	[self resetBuffer];
+	[[[self view] window] makeFirstResponder:tagCloud];
 	[self setMainController:controller];
 }
 
 - (void)reset
 {
-	[self resetBuffer];
+	[self showResults];
 	[mainController reset];
-	[[[self view] window] makeFirstResponder:tagCloud];
 }
 
 - (void)unbindAll
