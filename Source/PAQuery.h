@@ -83,9 +83,11 @@ initializer
 - (unsigned)resultCount;
 - (id)resultAtIndex:(unsigned)idx;
 - (NSArray*)results;
+- (void)setResults:(NSMutableArray*)newResults;
 - (NSArray*)flatResults;
+- (void)setFlatResults:(NSMutableArray*)newFlatResults;
 
-- (NSArray *)bundlingAttributes;
+- (NSMutableArray *)bundlingAttributes;
 - (void)setBundlingAttributes:(NSArray *)attributes;
 
 - (NSArray *)sortDescriptors;

@@ -30,7 +30,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (void)setMdquery:(NSMetadataQuery*)query;
 
 - (void)synchronizeResults;
-- (NSArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes;
+- (NSMutableArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes;
 - (void)filterResults:(BOOL)flag usingValues:(NSArray *)filterValues forBundlingAttribute:(NSString *)attribute newBundlingAttributes:(NSArray *)newAttributes;
 
 @end 
@@ -154,9 +154,6 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 {
 	[self disableUpdates];
 
-	if(flatResults) [flatResults release];
-	if(results) [results release];
-	
 	// We don't use [mdquery results] as this proxy array causes missing results during live update
 	NSMutableArray *mdQueryResults = [NSMutableArray array];
 	for(unsigned i = 0; i < [mdquery resultCount]; i++)
@@ -164,15 +161,15 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		[mdQueryResults addObject:[mdquery resultAtIndex:i]];
 	}
 	
-	flatResults = [[self bundleResults:mdQueryResults byAttributes:nil] retain];
-	results = [[self bundleResults:flatResults byAttributes:bundlingAttributes] retain];	
+	[self setFlatResults:[self bundleResults:mdQueryResults byAttributes:nil]];
+	[self setResults:[self bundleResults:flatResults byAttributes:bundlingAttributes]];	
 	
 	// Apply filter, if active
 	if(filterDict)
 	{
-		[self filterResults:YES usingValues:[[[filterDict objectForKey:@"values"] retain] autorelease]
-		               forBundlingAttribute:[[[filterDict objectForKey:@"bundlingAttribute"] retain] autorelease]
-					  newBundlingAttributes:[[[filterDict objectForKey:@"newBundlingAttributes"] retain] autorelease]];
+		[self filterResults:YES usingValues:[filterDict objectForKey:@"values"]
+		               forBundlingAttribute:[filterDict objectForKey:@"bundlingAttribute"]
+					  newBundlingAttributes:[filterDict objectForKey:@"newBundlingAttributes"]];
 	}
 	
 	[self enableUpdates];
@@ -183,7 +180,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	Bundles a flat list of results into a hierarchical structure
 	defined by the first item of bundlingAttributes
 */
-- (NSArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes
+- (NSMutableArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes
 {
 	NSMutableDictionary *bundleDict = [NSMutableDictionary dictionary];
 	
@@ -440,14 +437,14 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		}
 	}
 	
-	results = [self bundleResults:flatResults byAttributes:bundlingAttributes];	
+	[self setResults:[self bundleResults:flatResults byAttributes:bundlingAttributes]];	
 	
 	// Apply filter, if active
 	if(filterDict)
 	{
-		[self filterResults:YES usingValues:[[[filterDict objectForKey:@"values"] retain] autorelease]
-		               forBundlingAttribute:[[[filterDict objectForKey:@"bundlingAttribute"] retain] autorelease]
-					  newBundlingAttributes:[[[filterDict objectForKey:@"newBundlingAttributes"] retain] autorelease]];
+		[self filterResults:YES usingValues:[filterDict objectForKey:@"values"]
+		               forBundlingAttribute:[filterDict objectForKey:@"bundlingAttribute"]
+					  newBundlingAttributes:[filterDict objectForKey:@"newBundlingAttributes"]];
 	}
 	
 	[self enableUpdates];
@@ -769,9 +766,23 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	return filterDict ? filteredResults : results;
 }
 
+- (void)setResults:(NSMutableArray*)newResults
+{
+	[results release];
+	[newResults retain];
+	results = newResults;
+}
+
 - (NSArray *)flatResults
 {
 	return filterDict ? flatFilteredResults : flatResults;
+}
+
+- (void)setFlatResults:(NSMutableArray*)newFlatResults
+{
+	[flatResults release];
+	[newFlatResults retain];
+	flatResults = newFlatResults;
 }
 
 - (BOOL)hasFilter
