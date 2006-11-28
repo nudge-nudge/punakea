@@ -32,5 +32,10 @@ should be called after a mouse event inside the sidebar
 - checks if it should be shown
 */
 - (void)mouseEvent;
-	
+
+/**
+should be called if the resolution or display setup changes
+ */
+- (void)reset;
+
 @end

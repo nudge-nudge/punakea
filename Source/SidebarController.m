@@ -37,10 +37,16 @@
 	[recentTagsTable registerForDraggedTypes:[dropManager handledPboardTypes]];
 	recentTagTableController = [[PASidebarTableViewDropController alloc] initWithTags:recentTags];
 	[recentTagsTable setDataSource:recentTagTableController];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(screenDidChange:)
+												 name:NSApplicationDidChangeScreenParametersNotification
+											   object:[NSApplication sharedApplication]];
 }
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[recentTagsTable unregisterDraggedTypes];
 	[popularTagsTable unregisterDraggedTypes];
 	
@@ -74,17 +80,10 @@ action called on dropping files to FileBox
 	[taggerController addFiles:[fileBox files]];
 }
 
-#pragma mark window delegate
-- (void)windowDidChangeScreen:(NSNotification *)aNotification
+#pragma mark notifications
+- (void)screenDidChange:(NSNotification*)notification
 {
-	NSLog(@"sidebar did change screen");
-	[[self window] mouseEvent];
-}
-
-- (void)windowDidChangeScreenProfile:(NSNotification *)aNotification
-{
-	NSLog(@"sidebar did change screen profile");
-	[[self window] mouseEvent];
+	[[self window] reset];
 }
 
 @end

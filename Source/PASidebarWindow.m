@@ -43,7 +43,6 @@ double const SHOW_DELAY = 0.2;
 	[self setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:0.85]];
 	
 	[self setAcceptsMouseMovedEvents:YES];
-	[self setDisplaysWhenScreenProfileChanges:YES];
 		
 	defaultsController = [NSUserDefaultsController sharedUserDefaultsController];
 	nc = [NSNotificationCenter defaultCenter];
@@ -79,8 +78,7 @@ double const SHOW_DELAY = 0.2;
 			 object:nil];
 	
 	// move to screen edge - according to prefs
-	[self setExpanded:YES];
-	[self recede:NO];
+	[self reset];
 }
 
 - (void)dealloc
@@ -142,6 +140,12 @@ double const SHOW_DELAY = 0.2;
 
 
 #pragma mark functionality
+- (void)reset
+{
+	[self setExpanded:YES];
+	[self recede:NO];
+}
+
 - (void)show
 {
 	[self show:YES];
