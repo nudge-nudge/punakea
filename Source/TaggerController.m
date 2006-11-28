@@ -274,6 +274,11 @@ completionsForSubstring:(NSString *)substring
 	[self autorelease];
 }
 
+- (void)windowDidResize:(NSNotification *)aNotification
+{
+	[self resizeTokenField];
+}
+
 - (void)resetTaggerContent
 {
 	// files

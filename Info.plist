@@ -42,11 +42,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>alpha</string>
+	<string>beta</string>
 	<key>CFBundleSignature</key>
 	<string>NNPA</string>
 	<key>CFBundleVersion</key>
-	<string>895</string>
+	<string>0.1</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

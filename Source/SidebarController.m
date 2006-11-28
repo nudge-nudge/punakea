@@ -74,4 +74,17 @@ action called on dropping files to FileBox
 	[taggerController addFiles:[fileBox files]];
 }
 
+#pragma mark window delegate
+- (void)windowDidChangeScreen:(NSNotification *)aNotification
+{
+	NSLog(@"sidebar did change screen");
+	[[self window] mouseEvent];
+}
+
+- (void)windowDidChangeScreenProfile:(NSNotification *)aNotification
+{
+	NSLog(@"sidebar did change screen profile");
+	[[self window] mouseEvent];
+}
+
 @end
