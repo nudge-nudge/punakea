@@ -246,9 +246,9 @@
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
 		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
-		[ov saveSelection];
+		//[ov saveSelection];
 
-		NSArray *selectedQueryItems = [ov selectedQueryItems];
+		NSArray *selectedQueryItems = [[ov target] selectedItems];
 		NSMutableArray *files = [NSMutableArray array];
 		
 		NSEnumerator *e = [selectedQueryItems objectEnumerator];

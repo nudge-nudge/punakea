@@ -530,6 +530,21 @@
 
 - (void)deleteFilesForSelectedQueryItems:(id)sender
 {
+	[[outlineView query] trashItems:[self selectedItems] errorWindow:[outlineView window]];
+	
+	[outlineView reloadData];
+}
+
+- (NSArray *)selectedItems
+{
+	return [self selectedItems:self];
+}
+
+/**
+	Returns all currently selected items of the OutlineView, works fine even if a responder is active
+*/
+- (NSArray *)selectedItems:(id)sender
+{
 	[outlineView saveSelection];
 
 	NSMutableArray *selectedItems = [NSMutableArray array];
@@ -558,11 +573,10 @@
 			}
 		}
 	}
-
-	[[outlineView query] trashItems:selectedItems errorWindow:[outlineView window]];
 	
-	[outlineView reloadData];
+	return selectedItems;
 }
+
 
 #pragma mark Accessors
 - (PAResultsOutlineView *)outlineView
