@@ -13,4 +13,6 @@
 
 }
 
+- (id)initTextCell;
+
 @end

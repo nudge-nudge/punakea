@@ -11,7 +11,11 @@
 
 @interface PAResultsMultiItemMatrix (PrivateAPI)
 
+- (void)displayCellsForItems;
+
 - (float)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint;
+- (void)startDrag:(NSEvent *)event;
+- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(float *)offsetX y:(float *)offsetY;
 
 @end
 
@@ -178,7 +182,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			// Fill the new row with placeholder cells
 			for(int i = 0; i < column; i++)
 			{
-				NSTextFieldCell *cell = [[[PAResultsMultiItemPlaceholderCell alloc]
+				cell = [[[PAResultsMultiItemPlaceholderCell alloc]
 										   initTextCell] autorelease];
 				[self putCell:cell atRow:row+1 column:i];
 			}
@@ -202,8 +206,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	unsigned idx = [selectedIndexes firstIndex];
 	while(idx != NSNotFound)
 	{
-		int row = idx / [self numberOfColumns];
-		int column = idx - row * [self numberOfColumns];
+		row = idx / [self numberOfColumns];
+		column = idx - row * [self numberOfColumns];
 	
 		[self highlightCell:YES atRow:row column:column];
 		

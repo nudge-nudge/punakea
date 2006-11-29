@@ -16,6 +16,14 @@
 #import "PAThumbnailManager.h"
 #import "NSFileManager+TrashFile.h"
 
+
+/*@interface NSObject (PAQueryDelegate)
+
+- (id)metadataQuery:(PAQuery *)query replacementValueForAttribute:(NSString *)attrName value:(id)attrValue;
+
+@end*/
+
+
 /** Posted when the receiver begins with the initial result-gathering phase of the query. */
 extern NSString * const PAQueryDidStartGatheringNotification;
 
@@ -33,6 +41,7 @@ extern NSString * const PAQueryDidResetNotification;
 
 /** Posted when the receiver's grouping attributes have changed. */
 //extern NSString * const PAQueryGroupingAttributesDidChange;
+
 
 /**
 wrapper for NSMetadataQuery. searching for tags, no predicate needed
@@ -87,11 +96,27 @@ initializer
 - (NSArray*)flatResults;
 - (void)setFlatResults:(NSMutableArray*)newFlatResults;
 
-- (NSMutableArray *)bundlingAttributes;
+- (NSArray *)bundlingAttributes;
 - (void)setBundlingAttributes:(NSArray *)attributes;
 
 - (NSArray *)sortDescriptors;
 - (void)setSortDescriptors:(NSArray *)descriptors;
+
+- (void)createQuery;
+- (void)setMdquery:(NSMetadataQuery*)query;
+- (BOOL)startQuery;
+- (void)stopQuery;
+- (void)disableUpdates;
+- (void)enableUpdates;
+
+- (void)synchronizeResults;
+- (NSMutableArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes;
+-   (void)filterResults:(BOOL)flag
+			usingValues:(NSArray *)filterValues
+   forBundlingAttribute:(NSString *)attribute
+  newBundlingAttributes:(NSArray *)newAttributes;
+- (BOOL)hasResultsUsingFilterWithValues:(NSArray *)filterValues
+                   forBundlingAttribute:(NSArray *)attribute;
 
 - (void)trashItems:(NSArray *)items errorWindow:(NSWindow *)window;
 - (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window;

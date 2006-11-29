@@ -16,6 +16,13 @@ typedef enum _PAResultsDisplayMode
 } PAResultsDisplayMode;
 
 
+@interface NSObject (PAResultsOutlineViewDelegate)
+
+- (void)deleteDraggedItems;
+
+@end
+
+
 @interface PAResultsOutlineView : NSOutlineView
 {
 	PAQuery					*query;
@@ -43,6 +50,9 @@ typedef enum _PAResultsDisplayMode
 - (void)setDisplayMode:(PAResultsDisplayMode)mode;
 
 - (void)saveSelection;
+- (void)restoreSelection;
+
 - (NSMutableArray *)selectedQueryItems;
+- (void)setSelectedQueryItems:(NSMutableArray *)theItems;
 
 @end

@@ -9,6 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 
+@interface NSObject (PAControlledViewAdditions)
+
+- (void)controlledViewHasChanged;
+
+@end
+
+
 @interface PAControlledView : NSView {
 	id delegate;
 }

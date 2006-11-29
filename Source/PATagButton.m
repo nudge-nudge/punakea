@@ -3,6 +3,10 @@
 @interface PATagButton (PrivateAPI)
 
 - (float)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint;
+- (void)startDrag:(NSEvent *)event;
+
+- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(float *)offsetX y:(float *)offsetY;
+- (NSString *)createSmartFolderInTempDir;
 
 @end
 
@@ -287,7 +291,7 @@ should be overridden according to apple docs
 	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:[NSNumber numberWithBool:TRUE] forKey:NSFileExtensionHidden];
 
     [[NSFileManager defaultManager] createFileAtPath:filename
-                                            contents:sf
+                                            contents:(NSData *)sf
                                           attributes:attr]; 
 	
 	return filename;

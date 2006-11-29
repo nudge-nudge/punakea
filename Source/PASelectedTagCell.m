@@ -9,6 +9,13 @@
 #import "PASelectedTagCell.h"
 
 
+@interface PASelectedTagCell (PrivateAPI)
+
+- (void)setImagesForStates;
+
+@end
+
+
 @implementation PASelectedTagCell
 
 #pragma mark Init + Dealloc

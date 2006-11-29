@@ -66,7 +66,7 @@ NSString * const PAQueryBundleDidUpdate = @"PAQueryBundleDidUpdate";
 	str = [str stringByAppendingString:@": "];
 
 	NSEnumerator *enumerator = [results objectEnumerator];
-	NSObject *object;
+	id object;
 	while(object = [enumerator nextObject])
 	{
 		str = [str stringByAppendingString:[object stringValue]];

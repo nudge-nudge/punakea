@@ -25,6 +25,8 @@ typedef enum
 
 }
 
+- (id)initForFile:(NSString *)path inView:(NSView *)aView frame:(NSRect)aFrame type:(PAThumbnailItemType)itemType;
+
 - (NSString *)filename;
 - (NSView *)view;
 - (NSRect)frame;

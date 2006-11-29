@@ -34,4 +34,9 @@ extern int const PADDING_TO_RIGHT;
 	
 }
 
+- (void)updateTagButtons:(NSNotification *)notification;
+
+- (void)tagClicked:(id)sender;
+- (void)tagClosed:(id)sender;
+
 @end

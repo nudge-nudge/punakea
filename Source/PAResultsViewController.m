@@ -345,6 +345,8 @@
 		
 		return [bundle resultAtIndex:idx];
 	}
+	
+	return nil;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)ov isItemExpandable:(id)item

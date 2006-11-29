@@ -29,7 +29,7 @@
 }
 
 #pragma mark Accessors
-- (NSDictionary *)filter
+- (NSMutableDictionary *)filter
 {
 	return filter;
 }

@@ -19,6 +19,14 @@ extern NSString * const PATagManagementOperation;
 extern NSString * const PATagManagementRenameOperation;
 extern NSString * const PATagManagementRemoveOperation;
 
+
+@interface NSObject (PATagManagementViewControllerAdditions)
+
+- (void)resetDisplayTags;
+
+@end
+
+
 @interface PATagManagementViewController : PABrowserViewMainController {
 	
 	IBOutlet NSProgressIndicator	*progressIndicator;

@@ -3,6 +3,25 @@
 
 static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
 
+
+@interface NSOutlineView (PrivateAPI)
+
+- (id)_highlightColorForCell:(NSCell *)cell;
+
+@end
+
+
+@interface PAResultsOutlineView (PrivateAPI)
+
+- (int)mouseRowForEvent:(NSEvent *)theEvent;
+- (void)selectOnlyRowIndexes:(NSIndexSet *)rowIndexes;
+- (void)selectRowIndexes:(NSIndexSet *)rowIndexes byExtendingSelection:(BOOL)flag;
+
+- (void)beginEditing;
+
+@end
+
+
 @implementation PAResultsOutlineView
 
 #pragma mark Init + Dealloc

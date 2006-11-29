@@ -12,6 +12,7 @@
 #import "NSDateFormatter+FriendlyFormat.h"
 #import "NDResourceFork.h"
 
+
 @interface PAResultsBookmarkCell : NSTextFieldCell {
 
 	PAQueryItem				*item;

@@ -20,8 +20,8 @@
 	NSString *trashDir = [NSHomeDirectory() stringByAppendingPathComponent:@".Trash"];
 	int tag;
 
-	[[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
-						   source:sourceDir destination:trashDir files:files tag:&tag];
+	return [[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
+								  source:sourceDir destination:trashDir files:files tag:&tag];
 }
 
 @end

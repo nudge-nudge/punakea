@@ -16,6 +16,7 @@
 
 }
 
-
+- (NSMutableDictionary *)filter;
+- (void)setFilter:(NSDictionary *)dictionary;
 
 @end

@@ -13,6 +13,15 @@ NSSize const FILTERSLICE_PADDING = {10,5};
 unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 
 
+@interface PAFilterSlice (PrivateAPI)
+
+- (void)setupButtons;
+- (void)update;
+- (void)updateButtons;
+
+@end
+
+
 @implementation PAFilterSlice
 
 #pragma mark Init + Dealloc

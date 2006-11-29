@@ -16,6 +16,16 @@ NSSize const MARGIN_TAGBEZELSTYLE = {5,3};
 int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
 
+@interface PAButtonCell (PrivateAPI)
+
+- (void)commonInit;
+
+- (void)drawRecessedButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
+- (void)drawTagButtonWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
+
+@end
+
+
 @implementation PAButtonCell
 
 #pragma mark Init + Dealloc
@@ -25,7 +35,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	if(self)
 	{
 		images = [[NSMutableDictionary alloc] init];
-		if (anImage) [self setImage:anImage forState:PAOffState];
+		//if (anImage) [self setImage:anImage forState:PAOffState];
 		
 		[self commonInit];
 	}	
@@ -117,16 +127,16 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 				  range:NSMakeRange(0, [label length])];
 	
 	// Add shadow
-	NSShadow *shadow = [[NSShadow alloc] init];
+	NSShadow *shdw = [[NSShadow alloc] init];
 	
 	NSSize shadowOffset;
 	if([controlView isFlipped]) { shadowOffset = NSMakeSize(0,-1.5); } else { shadowOffset = NSMakeSize(0,1.5); }
-	[shadow setShadowOffset:shadowOffset];
-	[shadow setShadowColor:shadowColor];
+	[shdw setShadowOffset:shadowOffset];
+	[shdw setShadowColor:shadowColor];
 	[label addAttribute:NSShadowAttributeName
-				  value:shadow
+				  value:shdw
 				  range:NSMakeRange(0, [label length])];
-	[shadow release];
+	[shdw release];
 	
 	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];

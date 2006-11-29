@@ -69,19 +69,6 @@ extern int const FRAME_HEIGHT_REGULAR;
 
 }
 
-- (NSString *)title;
-- (void)setTitle:(NSString *)aTitle;
-- (BOOL)isBordered;
-- (void)setBordered:(BOOL)flag;
-- (BOOL)isHovered;
-- (void)setHovered:(BOOL)flag;
-- (BOOL)isPressed;
-- (void)setPressed:(BOOL)flag;
-- (void)select:(BOOL)flag;
-- (BOOL)isSelected;
-- (PAButtonState)state;
-- (void)setState:(PAButtonState)aState;
-
 - (PABezelStyle)bezelStyle;
 - (void)setBezelStyle:(PABezelStyle)aBezelStyle;
 - (NSColor *)bezelColor;	/**< Sets the background color of the rounded rect bezel, if style is PATokenBezelStyle */
@@ -98,5 +85,20 @@ extern int const FRAME_HEIGHT_REGULAR;
 
 - (SEL)closeAction;
 - (void)setCloseAction:(SEL)action;
+
+- (NSMutableAttributedString *)attributedTitle;
+
+- (NSString *)title;
+- (void)setTitle:(NSString *)aTitle;
+- (BOOL)isBordered;
+- (void)setBordered:(BOOL)flag;
+- (BOOL)isHovered;
+- (void)setHovered:(BOOL)flag;
+- (BOOL)isPressed;
+- (void)setPressed:(BOOL)flag;
+- (void)select:(BOOL)flag;
+- (BOOL)isSelected;
+- (PAButtonState)state;
+- (void)setState:(PAButtonState)aState;
 
 @end

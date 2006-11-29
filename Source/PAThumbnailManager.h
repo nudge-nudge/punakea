@@ -30,6 +30,11 @@
 
 + (PAThumbnailManager *)sharedInstance;
 
+- (NSImage *)thumbnailWithContentsOfFile:(NSString *)filename inView:(NSView *)aView frame:(NSRect)aFrame;
+- (NSImage *)iconForFile:(NSString *)filename inView:(NSView *)aView frame:(NSRect)aFrame;
 - (void)processQueue;
+- (void)generateThumbnailFromFile:(PAThumbnailItem *)thumbnailItem;
+- (void)generateIconForFile:(PAThumbnailItem *)thumbnailItem;
+- (void)removeAllQueuedItems;
 
 @end

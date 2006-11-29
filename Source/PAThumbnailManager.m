@@ -13,6 +13,16 @@ int const CONCURRENT_IMAGE_LOADING_MAX = 5;
 int const NUMBER_OF_CACHED_ITEMS_MAX = 300;
 
 
+@interface PAThumbnailManager (PrivateAPI)
+
++ (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds;
++ (NSImage *)scaledImageFromFile:(NSString *)source 
+		               maxBounds:(NSSize)maxBounds
+		                quality:(float)quality;
+
+@end
+
+
 @implementation PAThumbnailManager
 
 static PAThumbnailManager *sharedInstance = nil;
@@ -241,7 +251,7 @@ static PAThumbnailManager *sharedInstance = nil;
 
 	// First, try getting thumbnail image
 	CGImageRef image = CGImageSourceCreateThumbnailAtIndex(imageSourceRef,
-		0,imageOptions);
+		0,(CFDictionaryRef)imageOptions);
 	
 	// If this doesn't work, get ImageAtIndex
 	if(image == NULL)
@@ -418,7 +428,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	    [NSNumber numberWithFloat:quality],
 	    NSImageCompressionFactor, NULL];    
     
-    bitmapData = [output representationUsingType:NSJPEGFileType
+    bitmapData = [(NSBitmapImageRep *)output representationUsingType:NSJPEGFileType
 				      properties:properties];
     
     // could not get result

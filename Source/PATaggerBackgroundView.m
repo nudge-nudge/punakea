@@ -58,7 +58,6 @@
 	// Draw addButton
 	if(!addButton)
 	{
-		NSRect rect;
 		rect.origin = NSZeroPoint;
 		rect.size.width = 28;
 		rect.size.height = 23;
@@ -77,7 +76,6 @@
 	// Draw removeButton
 	if(!removeButton)
 	{
-		NSRect rect;
 		rect.origin.x = 27;  // As both buttons have borders, overlap them by 1px
 		rect.origin.y = 0;
 		rect.size.width = 28;

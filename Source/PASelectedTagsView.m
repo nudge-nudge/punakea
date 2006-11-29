@@ -11,8 +11,10 @@
 
 @interface PASelectedTagsView (PrivateAPI)
 
-- (void)drawBorder;
-- (void)updateView;
+- (void)setFrameHeight:(float)height;
+
+- (void)addHomeButton;
+- (void)refreshHomeButton;
 
 @end
 

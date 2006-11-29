@@ -59,8 +59,6 @@
 	[valueLabel addAttribute:NSParagraphStyleAttributeName
 	                   value:paraStyle
 				       range:NSMakeRange(0, [valueLabel length])];
-
-	NSSize valueLabelSize = [valueLabel size];
 	
 	NSRect bezelFrame = cellFrame;
 	bezelFrame.origin.y += cellFrame.size.height - 30;

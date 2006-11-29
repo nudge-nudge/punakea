@@ -24,4 +24,6 @@ extern unsigned const FILTERSLICE_BUTTON_SPACING;
 
 }
 
+- (void)buttonClick:(id)sender;
+
 @end
