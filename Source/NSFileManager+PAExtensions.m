@@ -64,6 +64,9 @@ static OSType finderSignatureBytes = 'MACS';
 // Based on OAAppKit's setComment:forPath: and http://developer.apple.com/samplecode/MoreAppleEvents/MoreAppleEvents.html (which is dated)
 - (BOOL)setComment:(NSString *)comment forURL:(NSURL *)fileURL;
 {
+	if (!fileURL)
+		return NO;
+	
     NSParameterAssert(comment != nil);
     NSParameterAssert([fileURL isFileURL]);
     NSString *path = [fileURL path];
