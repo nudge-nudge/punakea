@@ -150,8 +150,13 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	NSString *keywordComment = [self commentForKeywords:keywords];
 	NSString *finderComment = [self finderCommentIgnoringKeywordsForFile:file];
 	
-	[[NSFileManager defaultManager] setComment:[finderComment stringByAppendingString:keywordComment]
-										forURL:[NSURL fileURLWithPath:[file path]]];
+	BOOL success = [[NSFileManager defaultManager] setComment:[finderComment stringByAppendingString:keywordComment]
+													   forURL:[NSURL fileURLWithPath:[file path]]];
+	
+	// if there has been an error, discard the cache
+	// otherwise there will be an infinite loop
+	if (!success)
+		[cache removeObjectForKey:file];
 }
 
 #pragma mark helper
