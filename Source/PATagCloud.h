@@ -42,9 +42,6 @@ displays all [datasource visibleTags] in a nice tag cloud view
 	
 	NSUserDefaultsController		*userDefaultsController; /**< holds user defaults for tag cloud */
 	
-	NSViewAnimation					*viewAnimation; /**< only one animation concurrently */
-	NSMutableArray					*viewAnimationCache; /**< animation cache */
-	
 	NSAttributedString				*noRelatedTagsMessage;
 	NSAttributedString				*noTagsMessage;
 	

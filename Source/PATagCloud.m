@@ -83,20 +83,17 @@ calculates the starting point in the next row according to the height of all the
 		userDefaultsController = [NSUserDefaultsController sharedUserDefaultsController];
 			
 		tagButtonDict = [[NSMutableDictionary alloc] init];	
-		viewAnimation = [[NSViewAnimation alloc] init];
 		
-		//[viewAnimation setAnimationBlockingMode:NSAnimationNonblockingThreaded];
-		viewAnimationCache = [[NSMutableArray alloc] init];
-		
-		NSFont *font = [NSFont fontWithName:@"Arial" size:20.0];
+		NSFont *font = [NSFont systemFontOfSize:20.0];
 		NSColor *color = [NSColor lightGrayColor];
 		NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
 		[paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
 		[paraStyle setAlignment:NSCenterTextAlignment];
 		
-		NSDictionary *attrsDictionary =
-			[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:font,color,paraStyle,nil]
-										forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,NSParagraphStyleAttributeName,nil]];
+		NSMutableDictionary *attrsDictionary =	[NSMutableDictionary dictionaryWithCapacity:3];
+		[attrsDictionary setObject:font forKey:NSFontAttributeName];
+		[attrsDictionary setObject:color forKey:NSForegroundColorAttributeName];
+		[attrsDictionary setObject:paraStyle forKey:NSParagraphStyleAttributeName];
 		
 		noRelatedTagsMessage = [[NSAttributedString alloc] initWithString:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")
 															   attributes:attrsDictionary]; 
@@ -138,8 +135,6 @@ bind to visibleTags
 	[noRelatedTagsMessage release];
 	[noTagsMessage release];
 	[activeButton release];
-	[viewAnimationCache release];
-	[viewAnimation release];
 	[tagButtonDict release];
 	[super dealloc];
 }
@@ -401,16 +396,6 @@ bound to visibleTags
 					format:@"datasource not valid"];
 	}
 	
-	// clear animation cache
-	if (animate && eyeCandy)
-	{
-		if ([viewAnimation isAnimating])
-		{
-			[viewAnimation stopAnimation];
-		}
-		[viewAnimationCache removeAllObjects];
-	}
-	
 	NSRect rect = [self bounds];
 	
 	[self calcInitialParametersInRect:rect];
@@ -442,21 +427,12 @@ bound to visibleTags
 		
 		if ([viewsToKeep containsObject:tagButton])
 		{
-			[self moveTagButton:tagButton toPoint:newOrigin animate:animate];
+			[self moveTagButton:tagButton toPoint:newOrigin];
 		}
 		else
 		{		
 			[self addTagButton:tagButton atPoint:newOrigin];
 		}
-	}
-	
-	if (animate && eyeCandy)
-	{
-		[viewAnimation setViewAnimations:viewAnimationCache];
-		// Set some additional attributes for the animation.
-		[viewAnimation setDuration:0.2];    // One and a half seconds. 
-		[viewAnimation setAnimationCurve:NSAnimationEaseInOut];		
-		[viewAnimation startAnimation];
 	}
 	
 	[self setNeedsDisplay:YES];
@@ -467,25 +443,13 @@ bound to visibleTags
 	[tagButton removeFromSuperview];
 }
 
-- (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin animate:(BOOL)animate
+- (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin
 {
 	NSRect oldFrame = [tagButton frame];
 	NSRect newFrame = NSMakeRect(origin.x,origin.y,oldFrame.size.width,oldFrame.size.height);
-		
-	if (animate && eyeCandy)
-	{
-		NSMutableDictionary *animationDict = [NSMutableDictionary dictionaryWithCapacity:3];
-		[animationDict setObject:tagButton forKey:NSViewAnimationTargetKey];
-		[animationDict setObject:[NSValue valueWithRect:oldFrame] forKey:NSViewAnimationStartFrameKey];
-		[animationDict setObject:[NSValue valueWithRect:newFrame] forKey:NSViewAnimationEndFrameKey];
-		
-		[viewAnimationCache addObject:animationDict];
-	}
-	else
-	{
-		[tagButton setFrame:newFrame];
-		[self setNeedsDisplayInRect:oldFrame];
-	}	
+	
+	[tagButton setFrame:newFrame];
+	[self setNeedsDisplayInRect:oldFrame];
 }
 
 - (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin
