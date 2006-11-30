@@ -42,7 +42,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>beta</string>
+	<string>0.1</string>
 	<key>CFBundleSignature</key>
 	<string>NNPA</string>
 	<key>CFBundleVersion</key>
