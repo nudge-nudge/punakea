@@ -155,8 +155,11 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	
 	// if there has been an error, discard the cache
 	// otherwise there will be an infinite loop
+	// TODO
+	/*
 	if (!success)
 		[cache removeObjectForKey:file];
+	 */
 }
 
 #pragma mark helper
