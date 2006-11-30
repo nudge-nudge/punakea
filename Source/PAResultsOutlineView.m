@@ -191,8 +191,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 }
 
 - (void)saveSelection
-{	
-	for(unsigned row = 0; row < [self numberOfRows]; row++)
+{
+	/*for(unsigned row = 0; row < [self numberOfRows]; row++)
 	{
 		id item = [self itemAtRow:row];
 		
@@ -205,7 +205,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		{
 			[selectedQueryItems removeObject:item];
 		}
-	}
+	}*/
 }
 
 - (void)restoreSelection
@@ -260,7 +260,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	if([[note name] isEqualToString:PAQueryDidStartGatheringNotification] ||
 	   [[note name] isEqualToString:PAQueryDidFinishGatheringNotification] ||
 	   [[note name] isEqualToString:PAQueryDidResetNotification])
-	{
+	{	
 		[self reloadData];
 	}
 	
