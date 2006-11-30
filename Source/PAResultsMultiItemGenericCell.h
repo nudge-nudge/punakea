@@ -16,6 +16,8 @@
 
 }
 
+- (id)initTextCell:(PAQueryItem *)anItem;
+
 + (NSSize)cellSize;				/**< subclass must override */
 + (NSSize)intercellSpacing;		/**< subclass must override */
 

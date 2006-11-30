@@ -182,9 +182,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			// Fill the new row with placeholder cells
 			for(int i = 0; i < column; i++)
 			{
-				cell = [[[PAResultsMultiItemPlaceholderCell alloc]
+				NSTextFieldCell *thisCell = [[[PAResultsMultiItemPlaceholderCell alloc]
 										   initTextCell] autorelease];
-				[self putCell:cell atRow:row+1 column:i];
+				[self putCell:thisCell atRow:row+1 column:i];
 			}
 			
 			row++;
