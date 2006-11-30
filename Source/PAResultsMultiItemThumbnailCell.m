@@ -105,6 +105,13 @@
 	
 	NSPoint targetPoint = NSMakePoint(bezelFrame.origin.x + 4,
 									  bezelFrame.origin.y + 4 + (77 - imageRect.size.height) / 2);
+	
+	if(imageRect.size.width < bezelFrame.size.width - 8 ||
+	   imageRect.size.height < bezelFrame.size.height - 8)
+	{
+		targetPoint.x = bezelFrame.origin.x + (bezelFrame.size.width - imageRect.size.width) / 2;
+		targetPoint.y = bezelFrame.origin.y + (bezelFrame.size.height - imageRect.size.height) / 2;
+	}
 
 	[thumbImage drawAtPoint:targetPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	
