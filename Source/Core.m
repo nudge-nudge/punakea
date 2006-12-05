@@ -36,6 +36,8 @@
 {
     if (self = [super init])
     {
+		browserWindow = NO;
+		
 		tagger = [PATagger sharedInstance];
 		[self loadDataFromDisk];
 		
@@ -268,8 +270,9 @@
 
 - (IBAction)showBrowser:(id)sender
 {
-	if (!browserController)
+	if (!browserWindow)
 	{
+		browserWindow = YES;
 		browserController = [[BrowserController alloc] initWithCore:self];
 	}
 	[browserController showWindow:self];
@@ -279,8 +282,8 @@
 {
 	if (browserController)
 	{
-		[browserController release];
-		browserController = nil;
+		[browserController autorelease];
+		browserWindow = NO;
 	}
 }
 

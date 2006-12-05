@@ -24,6 +24,8 @@
 	PATagger				*tagger;
 
 	BrowserController		*browserController;
+	BOOL					browserWindow;
+	
 	PreferenceController	*preferenceController;
 	
 	NSNotificationCenter	*nc;
