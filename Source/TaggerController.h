@@ -8,6 +8,7 @@
 #import "PADropManager.h"
 #import "PAFileCell.h"
 #import "PATaggerHeaderCell.h"
+#import "PAThumbnailItem.h"
 
 @interface TaggerController : NSWindowController
 {	

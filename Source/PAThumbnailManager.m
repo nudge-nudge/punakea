@@ -380,7 +380,7 @@ static PAThumbnailManager *sharedInstance = nil;
     };
     
     // image to render into
-    scratch = [[[NSImage alloc] initWithSize:NSMakeSize(nw, nh)] autorelease];
+    scratch = [[NSImage alloc] initWithSize:NSMakeSize(nw, nh)];
     
     // could not create image
     if (!scratch)
@@ -394,6 +394,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	if(![rep isKindOfClass:[NSPDFImageRep class]])
 	{
 		// draw into image to scale it   
+		[scratch autorelease];
 		
 		[scratch lockFocus];
 		[NSGraphicsContext saveGraphicsState];
@@ -408,15 +409,31 @@ static PAThumbnailManager *sharedInstance = nil;
 		[scratch unlockFocus];
 	} else {
 		NSPDFImageRep *pdf = (NSPDFImageRep *)rep;
-		NSData *pdfData = [pdf PDFRepresentation];
+		
+		// We need to use a downscaled image instead
+		/*NSData *pdfData = [pdf PDFRepresentation];
 		
 		NSImage *pdfImage = [[NSImage alloc] initWithData:pdfData];
 		[pdfImage setScalesWhenResized:YES];
-		[pdfImage setSize:NSMakeSize(nw,nh)];
+		[pdfImage setSize:NSMakeSize(nw,nh)];*/
+		
+		[scratch lockFocus];
+		[NSGraphicsContext saveGraphicsState];
+		
+		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationLow];
+		[[NSGraphicsContext currentContext] setShouldAntialias:NO];
+		
+		[rep drawInRect:NSMakeRect(0.0, 0.0, nw, nh)];
+		
+		[NSGraphicsContext restoreGraphicsState];
+		[scratch unlockFocus];
 		
 		[pool release];
+		[scratch autorelease];
 		
-		return pdfImage;
+		return scratch;
+		
+		//return pdfImage;
 	}  
 	
     

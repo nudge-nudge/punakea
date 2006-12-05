@@ -44,7 +44,7 @@ resets the tagger window (called when window is closed)
 }
 
 - (void)awakeFromNib
-{
+{	
 	// autosave name
 	[[self window] setFrameAutosaveName:@"punakea.tagger"];
 	
@@ -69,10 +69,18 @@ resets the tagger window (called when window is closed)
 					 forKeyPath:@"arrangedObjects"
 						options:nil
 						context:NULL];
+	
+	// add observer for updating the threaded icons
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(iconWasGenerated:)
+												 name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
+											   object:nil];
 }
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	[headerCell release];
 	[fileCell release];
 	[fileController removeObserver:self forKeyPath:@"arrangedObjects"];
@@ -90,6 +98,19 @@ resets the tagger window (called when window is closed)
 		[self filesHaveChanged];
 	}
 }
+
+
+#pragma mark Notifications
+-(void)iconWasGenerated:(NSNotification *)notification
+{
+	PAThumbnailItem *thumbItem = (PAThumbnailItem *)[notification object];
+	
+	if([thumbItem view] == tableView)
+	{
+		[tableView setNeedsDisplayInRect:[thumbItem frame]];
+	}
+}
+
 
 #pragma mark accessors
 - (void)addFiles:(NSArray*)newFiles
