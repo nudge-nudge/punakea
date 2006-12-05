@@ -11,6 +11,8 @@
 #import "ThreadWorker.h"
 
 
+extern NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification;
+
 @interface PAThumbnailManager : NSObject {
 
 	NSMutableDictionary			*icons;	

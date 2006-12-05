@@ -11,6 +11,7 @@
 #import "PAResultsMultiItemThumbnailCell.h"
 #import "PAQueryItem.h"
 #import "PAFile.h"
+#import "PAThumbnailItem.h"
 
 
 @interface PAResultsMultiItemMatrix : NSMatrix {

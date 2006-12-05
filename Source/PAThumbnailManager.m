@@ -12,11 +12,13 @@
 int const CONCURRENT_IMAGE_LOADING_MAX = 5;
 int const NUMBER_OF_CACHED_ITEMS_MAX = 300;
 
+NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification = @"PAThumbnailManagerDidFinishGeneratingItemNotification";
+
 
 @interface PAThumbnailManager (PrivateAPI)
 
-+ (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds;
-+ (NSImage *)scaledImageFromFile:(NSString *)source 
+- (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds;
+- (NSImage *)scaledImageFromFile:(NSString *)source 
 		               maxBounds:(NSSize)maxBounds
 		                quality:(float)quality;
 
@@ -69,7 +71,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		// Thumbnail ready, return it
 		return thumbnail;
 	} else {
-		// Add filename to queue						
+		// Add filename to queue
 		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeThumbnail];		
 		[queue addObject:item];
 		[thumbnails setObject:dummyImageThumbnail forKey:filename];
@@ -189,8 +191,8 @@ static PAThumbnailManager *sharedInstance = nil;
 {
 	NSString *filename = [thumbnailItem filename];
 
-	NSImage *thumbnail = [PAThumbnailManager thumbnailFromFileNew:filename maxBounds:NSMakeSize(76,75)];
-	if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
+	NSImage *thumbnail = [self thumbnailFromFileNew:filename maxBounds:NSMakeSize(76,75)];
+	//if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
 	@synchronized(thumbnails)
 	{
@@ -206,15 +208,10 @@ static PAThumbnailManager *sharedInstance = nil;
 		numberOfThumbsBeingProcessed--;
 	}
 	
-	// Refresh item's view
-	NSView *view = [thumbnailItem view];
-	NSRect frame = [thumbnailItem frame];
-	
-	@synchronized(view)
-	{
-		[view setNeedsDisplayInRect:frame];
-	}
-	
+	// Post notification
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
+		
 	//NSLog(@"finished %@", filename);
 }
 
@@ -223,20 +220,27 @@ static PAThumbnailManager *sharedInstance = nil;
 	NSString *filename = [thumbnailItem filename];
 
 	NSImage *img = [[NSWorkspace sharedWorkspace] iconForFile:filename];
-		
-	[icons removeObjectForKey:filename];
-	[icons setObject:img forKey:filename];
-	[stack addObject:filename];
 	
-	numberOfThumbsBeingProcessed--;
+	@synchronized(thumbnails)
+	{
+		[icons removeObjectForKey:filename];
+		[icons setObject:img forKey:filename];
+	}
+	@synchronized(stack)
+	{
+		[stack addObject:filename];
+	}
+	@synchronized(self)
+	{
+		numberOfThumbsBeingProcessed--;
+	}
 	
-	// Refresh item's view
-	NSView *view = [thumbnailItem view];
-	NSRect frame = [thumbnailItem frame];
-	[view setNeedsDisplayInRect:frame];
+	// Post notification
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
 }
 
-+ (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds
+- (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds
 {
 	NSDictionary        *imageOptions = [NSDictionary 
 				dictionaryWithObjectsAndKeys:
@@ -261,7 +265,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		//	0,imageOptions);
 		
 		// This way of loading the whole file uses much less memory
-		NSImage *img = [PAThumbnailManager scaledImageFromFile:filename maxBounds:maxBounds quality:0.8];
+		NSImage *img = [self scaledImageFromFile:filename maxBounds:maxBounds quality:0.8];
 		
 		CFRelease(imageSourceRef);
 		
@@ -314,7 +318,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	}
 }
 
-+ (NSImage *)scaledImageFromFile:(NSString *)source 
+- (NSImage *)scaledImageFromFile:(NSString *)source 
 		               maxBounds:(NSSize)maxBounds
 		                quality:(float)quality
 {
@@ -403,12 +407,14 @@ static PAThumbnailManager *sharedInstance = nil;
 		[NSGraphicsContext restoreGraphicsState];
 		[scratch unlockFocus];
 	} else {
-		NSPDFImageRep *pdf = rep;
+		NSPDFImageRep *pdf = (NSPDFImageRep *)rep;
 		NSData *pdfData = [pdf PDFRepresentation];
 		
 		NSImage *pdfImage = [[NSImage alloc] initWithData:pdfData];
 		[pdfImage setScalesWhenResized:YES];
 		[pdfImage setSize:NSMakeSize(nw,nh)];
+		
+		[pool release];
 		
 		return pdfImage;
 	}  

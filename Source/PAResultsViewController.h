@@ -22,6 +22,7 @@
 #import "PAResultsOutlineView.h"
 #import "PADropManager.h"
 #import "PATagButton.h"
+#import "PAThumbnailItem.h"
 
 @interface PAResultsViewController : PABrowserViewMainController {
 	

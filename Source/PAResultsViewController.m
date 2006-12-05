@@ -42,6 +42,11 @@
 			   selector:@selector(relatedTagsHaveChanged:) 
 				   name:@"PARelatedTagsHaveChanged" 
 				 object:relatedTags];
+				 
+		[nc addObserver:self 
+			   selector:@selector(thumbnailWasGenerated:)
+				   name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
+				 object:nil];
 				
 		[NSBundle loadNibNamed:@"ResultsView" owner:self];
 	}
@@ -172,6 +177,71 @@
 		[selectedTags removeLastTag];
 }
 
+- (IBAction)doubleAction:(id)sender
+{
+	NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
+	unsigned row = [selectedRowIndexes firstIndex];
+	while(row != NSNotFound) 
+	{
+		id item = [outlineView itemAtRow:row];
+		
+		if([[item class] isEqualTo:[PAQueryItem class]])
+			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
+		
+		row = [selectedRowIndexes indexGreaterThanIndex:row];
+	}
+}
+
+- (void)hideAllSubviews
+{
+	NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
+	id anObject;
+	while(anObject = [enumerator nextObject])
+	{
+		[anObject setHidden:YES];
+	}
+}
+
+- (void)triangleClicked:(id)sender
+{
+	NSDictionary *tag = (NSDictionary *)[sender tag];
+	PAQueryBundle *item = [tag objectForKey:@"bundle"];
+	
+	if([outlineView isItemExpanded:item])
+	{
+		// Just toggle the item's state
+		[outlineView collapseItem:item];
+	} else {
+		// If we expand an item, we need to redraw all previously visible rows so that they
+		// can correctly (re-)move their subviews
+		
+		NSRange previousVisibleRowsRange = [outlineView rowsInRect:[outlineView visibleRect]];
+		
+		[outlineView expandItem:item];
+		
+		int numberOfChildrenOfItem = [[outlineView delegate] outlineView:outlineView numberOfChildrenOfItem:item];
+		for(unsigned i = 0; i < previousVisibleRowsRange.length; i++)
+		{
+			[outlineView drawRow:(numberOfChildrenOfItem + previousVisibleRowsRange.location + i) clipRect:[outlineView bounds]];
+		}
+	}
+	
+	// Save userDefaults
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
+	NSMutableArray *collapsedGroups = [NSMutableArray arrayWithArray:[results objectForKey:@"CollapsedGroups"]];
+	
+	if([outlineView isItemExpanded:item])
+		[collapsedGroups removeObject:[item value]];
+	else
+		[collapsedGroups addObject:[item value]];
+	
+	[results setObject:collapsedGroups forKey:@"CollapsedGroups"];		
+	[defaults setObject:results forKey:@"Results"];
+}
+
+
+#pragma mark Notifications
 - (void)selectedTagsHaveChanged:(NSNotification*)notification
 {
 	// stop an active query
@@ -213,7 +283,7 @@
 	}
 }
 
-- (void)relatedTagsHaveChanged:(NSNotification*)notification
+- (void)relatedTagsHaveChanged:(NSNotification *)notification
 {
 	if ([delegate respondsToSelector:@selector(setDisplayTags:)])
 	{
@@ -226,67 +296,14 @@
 	}
 }
 
-- (IBAction)doubleAction:(id)sender
+-(void)thumbnailWasGenerated:(NSNotification *)notification
 {
-	NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
-	unsigned row = [selectedRowIndexes firstIndex];
-	while(row != NSNotFound) 
-	{
-		id item = [outlineView itemAtRow:row];
-		
-		if([[item class] isEqualTo:[PAQueryItem class]])
-			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
-
-		row = [selectedRowIndexes indexGreaterThanIndex:row];
-	}
-}
-
-- (void)hideAllSubviews
-{
-	NSEnumerator *enumerator = [[outlineView subviews] objectEnumerator];
-	id anObject;
-	while(anObject = [enumerator nextObject])
-	{
-		[anObject setHidden:YES];
-	}
-}
-
-- (void)triangleClicked:(id)sender
-{
-	NSDictionary *tag = (NSDictionary *)[sender tag];
-	PAQueryBundle *item = [tag objectForKey:@"bundle"];
-
-	if([outlineView isItemExpanded:item])
-	{
-		// Just toggle the item's state
-		[outlineView collapseItem:item];
-	} else {
-		// If we expand an item, we need to redraw all previously visible rows so that they
-		// can correctly (re-)move their subviews
-		
-		NSRange previousVisibleRowsRange = [outlineView rowsInRect:[outlineView visibleRect]];
-		
-		[outlineView expandItem:item];
-		
-		int numberOfChildrenOfItem = [[outlineView delegate] outlineView:outlineView numberOfChildrenOfItem:item];
-		for(unsigned i = 0; i < previousVisibleRowsRange.length; i++)
-		{
-			[outlineView drawRow:(numberOfChildrenOfItem + previousVisibleRowsRange.location + i) clipRect:[outlineView bounds]];
-		}
-	}
+	PAThumbnailItem *thumbItem = (PAThumbnailItem *)[notification object];
 	
-	// Save userDefaults
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"Results"]];
-	NSMutableArray *collapsedGroups = [NSMutableArray arrayWithArray:[results objectForKey:@"CollapsedGroups"]];
-	
-	if([outlineView isItemExpanded:item])
-		[collapsedGroups removeObject:[item value]];
-	else
-		[collapsedGroups addObject:[item value]];
-			
-	[results setObject:collapsedGroups forKey:@"CollapsedGroups"];		
-	[defaults setObject:results forKey:@"Results"];
+	if([thumbItem view] == outlineView)
+	{
+		[outlineView setNeedsDisplayInRect:[thumbItem frame]];
+	}
 }
 
 

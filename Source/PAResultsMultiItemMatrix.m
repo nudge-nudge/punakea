@@ -41,17 +41,27 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		// Get notification frameDidChange
 		[self setPostsFrameChangedNotifications:YES];
+		
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+		
 		[nc addObserver:self
 			   selector:@selector(frameDidChange:)
 		           name:(id)NSViewFrameDidChangeNotification
 			     object:self];
+		
+		[nc addObserver:self
+			   selector:@selector(thumbnailWasGenerated:)
+				   name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
+				 object:nil];
 	}
     return self;
 }
 
 - (void)dealloc
 {
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self];
+	
 	if(selectedCells) [selectedCells release];
 	if(selectedIndexes) [selectedIndexes release];
 	if(items) [items release];
@@ -784,6 +794,18 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		{
 			[self highlightCell:!([cell isHighlighted]) atRow:row column:column];
 		}
+	}
+}
+
+
+#pragma mark Notifications
+-(void)thumbnailWasGenerated:(NSNotification *)notification
+{
+	PAThumbnailItem *thumbItem = (PAThumbnailItem *)[notification object];
+	
+	if([thumbItem view] == self)
+	{
+		[self setNeedsDisplayInRect:[thumbItem frame]];
 	}
 }
 

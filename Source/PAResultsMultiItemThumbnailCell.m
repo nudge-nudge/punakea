@@ -99,6 +99,8 @@
 				                     inView:controlView
 									  frame:bezelFrame];
 	
+	if([controlView isFlipped]) [thumbImage setFlipped:YES];
+	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [thumbImage size];
