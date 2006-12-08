@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>eu.nudgenudge.URLDropHandler</string>
+	<string>eu.nudgenudge.WebURLsWithTitlesPboardType</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -17,6 +17,6 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>NSPrincipalClass</key>
-	<string>PAURLDropHandler</string>
+	<string>PAWebURLsWithTitlesPboardTypeDropHandler</string>
 </dict>
 </plist>

@@ -11,9 +11,9 @@
 #import "PAURLDropDataHandler.h";
 
 /**
-handles WebURLsWithTitlesPboardType drops (bookmarks, links and address-bar drops)
+handles WebURLsWithTitlesPboardType drops (address-bar drops, links, bookmarks in safari, address-bar drops in camino)
  */
-@interface PAURLDropHandler : PADropHandler {
+@interface PAWebURLsWithTitlesPboardTypeDropHandler : PADropHandler {
 
 }
 

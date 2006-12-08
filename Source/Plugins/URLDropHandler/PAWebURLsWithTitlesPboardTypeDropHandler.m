@@ -6,10 +6,10 @@
 //  Copyright 2006 nudge:nudge. All rights reserved.
 //
 
-#import "PAURLDropHandler.h"
+#import "PAWebURLsWithTitlesPboardTypeDropHandler.h"
 
 
-@implementation PAURLDropHandler
+@implementation PAWebURLsWithTitlesPboardTypeDropHandler
 
 - (id)init
 {

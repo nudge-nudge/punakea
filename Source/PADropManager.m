@@ -20,7 +20,7 @@
 
 //this is where the sharedInstance is held
 static PADropManager *sharedInstance = nil;
-NSString *ext = @"pudh";
+NSString *ext = @"punakeaDropHandler";
 NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 
 #pragma mark init
