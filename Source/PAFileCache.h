@@ -16,6 +16,8 @@
 
 extern useconds_t const PAFILECACHE_CYCLETIME;
 
+extern int const MAX_RETRY_LIMIT;
+
 extern NSString * const TAGGER_OPEN_COMMENT;
 extern NSString * const TAGGER_CLOSE_COMMENT;
 
@@ -24,6 +26,7 @@ used by PATagger to cache read-/write accesses
  */
 @interface PAFileCache : NSObject {
 	NSMutableDictionary *cache;
+	NSMutableDictionary *fileRetryCount;
 	
 	BOOL synching;
 	NSLock *threadRunLock;

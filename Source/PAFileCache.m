@@ -10,6 +10,8 @@
 
 useconds_t const PAFILECACHE_CYCLETIME = 200000; // 0.2 secons
 
+int const MAX_RETRY_LIMIT = 10;
+
 NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
 NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 
@@ -26,7 +28,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 - (NSString*)finderSpotlightCommentForFile:(PAFile*)file;
 - (NSString*)finderCommentIgnoringKeywordsForFile:(PAFile*)file;
 
-- (void)writeFileCache:(PAFile*)file; 
+- (BOOL)writeFileCache:(PAFile*)file; 
 
 - (void)startSyncCacheThread;
 
@@ -40,6 +42,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	if (self = [super init])
 	{
 		cache = [[NSMutableDictionary alloc] init];
+		fileRetryCount = [[NSMutableDictionary alloc] init];
 		
 		synching = NO;
 		
@@ -112,12 +115,13 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		
 		@synchronized(cache)
 		{
-			NSEnumerator *e = [cache keyEnumerator];
-			PAFile *file;
+			NSArray *files = [cache allKeys];
+			int i = [files count];
 			
-			while (file = [e nextObject])
+			while (i-- > 0)
 			{
 				BOOL commentIsValid = YES;
+				PAFile *file = [files objectAtIndex:i];
 				
 				NSString *comment = [self finderSpotlightCommentForFile:file];
 				NSArray *keywords = [self keywordsForComment:comment isValid:&commentIsValid];
@@ -133,7 +137,33 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 				}
 				else
 				{
-					[self writeFileCache:file];
+					BOOL success = [self writeFileCache:file];
+					
+					// if file couldn't be written, retry a bit, then discard
+					// if it doesn't work
+					if (!success)
+					{
+						NSNumber *retryCount = [fileRetryCount objectForKey:file];
+						
+						if (!retryCount)
+						{
+							// first retry
+							retryCount = [NSNumber numberWithInt:0];
+						}
+						else if ([retryCount intValue] <= MAX_RETRY_LIMIT)
+						{
+							// increment retryCount
+							NSNumber *newRetryCount = [NSNumber numberWithInt:[retryCount intValue]+1];
+							[fileRetryCount setObject:newRetryCount forKey:file];
+						}
+						else if ([retryCount intValue] > MAX_RETRY_LIMIT)
+						{
+							// discard file
+							[fileRetryCount removeObjectForKey:file];
+							[cache removeObjectForKey:file];
+							NSLog(@"critical error: couldn't write spotlight comment to @%",file);
+						}
+					}
 				}
 			}
 		}
@@ -142,7 +172,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	synching = NO;
 }
 
-- (void)writeFileCache:(PAFile*)file
+- (BOOL)writeFileCache:(PAFile*)file
 {
 	NSArray *keywords = [cache objectForKey:file];
 	
@@ -153,13 +183,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	BOOL success = [[NSFileManager defaultManager] setComment:[finderComment stringByAppendingString:keywordComment]
 													   forURL:[NSURL fileURLWithPath:[file path]]];
 	
-	// if there has been an error, discard the cache
-	// otherwise there will be an infinite loop
-	// TODO
-	/*
-	if (!success)
-		[cache removeObjectForKey:file];
-	 */
+	return success;
 }
 
 #pragma mark helper
@@ -285,13 +309,12 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
     if (path && (mdItem = MDItemCreate(CFGetAllocator(path), path))) {
         comment = (NSString *)MDItemCopyAttribute(mdItem, kMDItemFinderComment);
         CFRelease(mdItem);
-        [comment autorelease];
     }
 	
 	if (!comment)
 		return @"";
 	else
-		return comment;
+		return [comment autorelease];
 }
 
 - (void)validateKeyword:(NSString*)keyword

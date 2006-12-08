@@ -305,7 +305,6 @@
 	[self updateButtonToCurrentLocation];
 }
 
-// TODO error handling
 - (BOOL)isLoginItem
 {
 	OSStatus	status;
@@ -315,15 +314,18 @@
 	
 	status = LIAECopyLoginItems(&loginItems); 
 	
-	//if (status == noErr) {
+	if (status == noErr) {
+		itemCount = CFArrayGetCount(loginItems);
+		itemIndex = [self loginItemIndex];
 	
-	itemCount = CFArrayGetCount(loginItems);
-	itemIndex = [self loginItemIndex];
-	
-	return (itemIndex < itemCount);
+		return (itemIndex < itemCount);
+	}
+	else 
+	{
+		return NO;
+	}
 }
 
-// TODO error handling
 - (CFIndex)loginItemIndex
 {
 	OSStatus	status;
@@ -335,6 +337,8 @@
 	CFArrayRef loginItems = NULL; 
 	CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)path, kCFURLPOSIXPathStyle, true); 
 	status = LIAECopyLoginItems(&loginItems); 
+	
+	itemIndex = INT32_MAX;
 	
 	if (status == noErr) {
 		itemCount = CFArrayGetCount(loginItems);

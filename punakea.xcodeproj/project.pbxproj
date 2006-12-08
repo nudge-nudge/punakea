@@ -981,7 +981,6 @@
 			children = (
 				48D758F00B01CD0900D13CAD /* App Starter */,
 				488E80270AF3895800660B7B /* Value Transformers */,
-				48DC82950AB69C0900DE0F16 /* File Handling */,
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				65B78F1A0AF0D8D400AF1102 /* CTGradient.h */,
@@ -1208,6 +1207,8 @@
 				65E5572A0AD1450E00AA2700 /* NSFileManager+TrashFile.m */,
 				48D450070ABB037B00A13B45 /* PAFile.h */,
 				48D450080ABB037B00A13B45 /* PAFile.m */,
+				48293F630AFF26D0009E760E /* PAFileCache.h */,
+				48293F640AFF26D0009E760E /* PAFileCache.m */,
 				4840495C0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.h */,
 				4840495D0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.m */,
 			);
@@ -1219,8 +1220,6 @@
 			children = (
 				48AA6BF5099B78E300D8F70B /* PATagger.h */,
 				48AA6BF6099B78E300D8F70B /* PATagger.m */,
-				48293F630AFF26D0009E760E /* PAFileCache.h */,
-				48293F640AFF26D0009E760E /* PAFileCache.m */,
 				485DA55309F4ECBC008D3214 /* PATags.h */,
 				485DA55409F4ECBC008D3214 /* PATags.m */,
 				481BF27609A3128600EBD7BA /* PATag.h */,
@@ -1314,6 +1313,7 @@
 		6531649B0AF2534B00928BEF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				48DC82950AB69C0900DE0F16 /* File Handling */,
 				483272220AA42C7E003D98A6 /* Preferences */,
 				65035FB70A20762F00AD0597 /* Query */,
 				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
