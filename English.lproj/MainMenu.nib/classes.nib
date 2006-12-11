@@ -49,6 +49,12 @@
             SUPERCLASS = NSObject; 
         }, 
         {
+            ACTIONS = {checkForUpdates = id; }; 
+            CLASS = SUUpdater; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
             CLASS = SidebarController; 
             LANGUAGE = ObjC; 
             OUTLETS = {

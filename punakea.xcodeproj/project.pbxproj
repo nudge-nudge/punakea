@@ -91,6 +91,8 @@
 		4842FC1309DA804100C4A931 /* PATagButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC1109DA804100C4A931 /* PATagButtonCell.h */; };
 		4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC1209DA804100C4A931 /* PATagButtonCell.m */; };
 		484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484496300B2D56CE009B262C /* ApplicationServices.framework */; };
+		484497BD0B2D9925009B262C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484497A90B2D9925009B262C /* Sparkle.framework */; };
+		484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 484497A90B2D9925009B262C /* Sparkle.framework */; };
 		48469B9E0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */; };
 		48469B9F0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */; };
 		48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48471FD90A4FFF90002B369A /* SidebarController.h */; };
@@ -357,6 +359,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
 				48893B030AF0A4EE00BA0B50 /* NDResourceFork.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
 			);
@@ -554,6 +557,7 @@
 		4842FC1109DA804100C4A931 /* PATagButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButtonCell.h; sourceTree = "<group>"; };
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
 		484496300B2D56CE009B262C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
+		484497A90B2D9925009B262C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CharacterSetChecks.h"; sourceTree = "<group>"; };
 		48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CharacterSetChecks.m"; sourceTree = "<group>"; };
 		48471FD90A4FFF90002B369A /* SidebarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarController.h; sourceTree = "<group>"; };
@@ -810,6 +814,7 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				658EA77D099798A6005F13DE /* Message.framework in Frameworks */,
 				484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */,
+				484497BD0B2D9925009B262C /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +841,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				484497A90B2D9925009B262C /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				658EA77C099798A6005F13DE /* Message.framework */,
 			);
@@ -927,7 +933,7 @@
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
-			name = Frameworks;
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		4815A0C40AEF9A0200969296 /* NDResourceFork */ = {
@@ -2516,7 +2522,11 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_5)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -2551,7 +2561,11 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_5)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
