@@ -301,6 +301,22 @@
 	return YES;
 }
 
+- (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
+{
+	// accept every file
+	[self application:theApplication openFiles:[NSArray arrayWithObject:filename]];
+	return YES;
+}
+
+- (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
+{
+	TaggerController *taggerController = [[TaggerController alloc] init];
+	[taggerController showWindow:self];
+	NSWindow *taggerWindow = [taggerController window];
+	[taggerController addFiles:[PAFile filesWithFilepaths:filenames]];
+	[taggerWindow makeKeyAndOrderFront:nil];
+}
+
 #pragma mark debug
 //- (void)keyDown:(NSEvent*)event 
 //{

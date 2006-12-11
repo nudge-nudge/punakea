@@ -9,7 +9,7 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>pudh</string>
+				<string>punakeaDropHandler</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>DropHandler Plugin</string>
@@ -25,6 +25,24 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<true/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>*</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>All Files</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>****</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
 			<key>NSPersistentStoreTypeKey</key>
 			<string>Binary</string>
 		</dict>
