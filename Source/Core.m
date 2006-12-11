@@ -292,8 +292,19 @@
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
 	NSArray *windows = [[NSApplication sharedApplication] windows];
+	//[windows makeObjectsPerformSelector:@selector(orderFront:) withObject:self];
 	
-	[windows makeObjectsPerformSelector:@selector(orderFront:) withObject:self];
+	// need to ignore sparkle TODO
+	NSEnumerator *e = [windows objectEnumerator];
+	NSWindow *window;
+	
+	while (window = [e nextObject])
+	{
+		if ([window isKindOfClass:[NSPanel class]])
+			continue;
+		else
+			[window orderFront:self];
+	}
 	
 	// order browser window front if one is started
 	if ([self appHasBrowser])
