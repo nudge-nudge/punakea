@@ -36,8 +36,6 @@
 {
     if (self = [super init])
     {
-		browserWindow = NO;
-		
 		tagger = [PATagger sharedInstance];
 		[self loadDataFromDisk];
 		
@@ -268,21 +266,12 @@
 
 - (IBAction)showBrowser:(id)sender
 {
-	if (!browserWindow)
+	if (![self appHasBrowser])
 	{
-		browserWindow = YES;
 		browserController = [[BrowserController alloc] initWithCore:self];
 	}
 	[browserController showWindow:self];
-}
-
-- (void)closeBrowser
-{
-	if (browserController)
-	{
-		[browserController autorelease];
-		browserWindow = NO;
-	}
+	[[browserController window] makeKeyAndOrderFront:self];
 }
 
 - (IBAction)showTagger:(id)sender
@@ -297,8 +286,19 @@
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
 	[self showBrowser:self];
-	// TODO tagger reopening?
 	return YES;
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)aNotification
+{
+	NSApplication *app = [NSApplication sharedApplication];
+	NSArray *windows = [app windows];
+	
+	[windows makeObjectsPerformSelector:@selector(orderFront:) withObject:self];
+	
+	// order browser window front if one is started
+	if ([self appHasBrowser])
+		[self showBrowser:self];
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
@@ -380,6 +380,25 @@
 	}
 	
 	return wasLaunchedByProcess;
+}
+
+- (BOOL)appHasBrowser
+{
+	BOOL hasBrowser = NO;
+	
+	NSApplication *app = [NSApplication sharedApplication];
+	NSArray *windows = [app windows];
+	
+	NSEnumerator *e = [windows objectEnumerator];
+	NSWindow *window;
+	
+	while (window = [e nextObject])
+	{
+		if ([window delegate] && [[window delegate] isKindOfClass:[BrowserController class]])
+			hasBrowser = YES;
+	}
+	
+	return hasBrowser;
 }
 
 @end

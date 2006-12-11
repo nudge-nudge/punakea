@@ -40,7 +40,7 @@
 - (void)windowWillClose:(NSNotification *)aNotification
 {
 	[browserViewController unbindAll];
-	[core closeBrowser];
+	[self autorelease];
 }
 
 - (BrowserViewController*)browserViewController

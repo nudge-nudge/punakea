@@ -24,7 +24,6 @@
 	PATagger				*tagger;
 
 	BrowserController		*browserController;
-	BOOL					browserWindow;
 	
 	PreferenceController	*preferenceController;
 	
@@ -47,7 +46,9 @@
 - (IBAction)editTagsOnFiles:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
-- (void)closeBrowser;
 - (IBAction)showTagger:(id)sender;
+
+// misc
+- (BOOL)appHasBrowser;
 
 @end
