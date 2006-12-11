@@ -13,8 +13,6 @@
 	IBOutlet NSPopUpButton *folderButton;
 	
 	NSUserDefaultsController *userDefaultsController;
-	
-	BOOL startOnLogin;
 }
 
 - (IBAction)locateDirectory:(id)sender;

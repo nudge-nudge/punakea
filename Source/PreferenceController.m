@@ -38,12 +38,7 @@
 	BOOL isLoginItem = [self isLoginItem];
 	
 	[[NSUserDefaults standardUserDefaults] setBool:isLoginItem
-											forKey:@"values.General.StartOnLogin"];
-	
-	[self bind:@"startOnLogin"
-	  toObject:userDefaultsController
-   withKeyPath:@"values.General.StartOnLogin"
-	   options:nil];
+											forKey:@"General.StartOnLogin"];
 	
 	[userDefaultsController addObserver:self
 							 forKeyPath:@"values.General.StartOnLogin"
@@ -64,11 +59,12 @@
 
 #pragma mark event handling
 - (void)startOnLoginHasChanged
-{
-	// add mainbundle to login items
+{	
+	// add app to login items
 	CFIndex itemIndex = [self loginItemIndex];
 	BOOL found = [self isLoginItem];
-	
+	BOOL startOnLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.StartOnLogin"];
+		
 	NSString *path = [[NSBundle mainBundle] bundlePath];
 	CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)path, kCFURLPOSIXPathStyle, true); 
 
@@ -314,10 +310,13 @@
 	
 	status = LIAECopyLoginItems(&loginItems); 
 	
-	if (status == noErr) {
+	if (status == noErr) 
+	{
 		itemCount = CFArrayGetCount(loginItems);
+		CFRelease(loginItems);
+		
 		itemIndex = [self loginItemIndex];
-	
+		
 		return (itemIndex < itemCount);
 	}
 	else 
@@ -358,6 +357,7 @@
 		}
 	}
 	
+	CFRelease(loginItems);
 	CFRelease(url);
 	
 	return itemIndex;
