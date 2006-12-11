@@ -7,6 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <ApplicationServices/ApplicationServices.h>
+
+// setSticky stuff
+typedef int CGSConnectionID;
+typedef int CGSWindowID;
+extern CGSConnectionID _CGSDefaultConnection();
+extern OSStatus CGSGetWindowTags(const CGSConnectionID cid, const CGSWindowID wid, int *tags, int thirtyTwo);
+extern OSStatus CGSSetWindowTags(const CGSConnectionID cid, const CGSWindowID wid, int *tags, int thirtyTwo);
+extern OSStatus CGSClearWindowTags(const CGSConnectionID cid, const CGSWindowID wid, int *tags, int thirtyTwo);
 
 extern double const SHOW_DELAY;
 

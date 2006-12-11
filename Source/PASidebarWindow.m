@@ -79,6 +79,8 @@ double const SHOW_DELAY = 0.2;
 	
 	// move to screen edge - according to prefs
 	[self reset];
+	
+	[self setSticky:YES];
 }
 
 - (void)dealloc
@@ -218,7 +220,6 @@ double const SHOW_DELAY = 0.2;
 }
 
 #pragma mark event
-
 // unhide on hiding ;)
 - (void)windowDidHide:(NSNotification*)notification
 {
@@ -230,12 +231,31 @@ double const SHOW_DELAY = 0.2;
 	
 	while (window = [e nextObject])
 	{
-		// hide all other windows (TODO not close)
+		// hide all other windows
 		if (window != self)
-			[window close];
+			[window orderOut:self];
 	}
 	
 	[app unhideWithoutActivation];
+}
+
+#pragma mark expose
+- (void) setSticky:(BOOL)flag {
+	CGSConnectionID cid;
+	CGSWindowID wid;
+	
+	wid = [self windowNumber];
+	cid = _CGSDefaultConnection();
+	int tags[2] = { 0, 0 };
+	
+	if (!CGSGetWindowTags(cid, wid, tags, 32)) {
+		if (flag) {
+			tags[0] = tags[0] | 0x00000800;
+		} else {
+			tags[0] = tags[0] & ~0x00000800;
+		}
+		CGSSetWindowTags(cid, wid, tags, 32);
+	}
 }
 
 @end

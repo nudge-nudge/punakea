@@ -60,9 +60,7 @@
 {
 	[NSApp setDelegate:self]; 
 	[self setupToolbar];
-	
-	//BOOL noBrowser = [[NSUserDefaults standardUserDefaults] boolForKey:@"noBrowser"];
-	
+		
 	if (![Core wasLaunchedAsLoginItem])
 	{
 		[self showBrowser:self];
@@ -299,6 +297,7 @@
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
 	[self showBrowser:self];
+	// TODO tagger reopening?
 	return YES;
 }
 

@@ -90,6 +90,7 @@
 		4842FC1009DA801700C4A931 /* PATagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC0E09DA801500C4A931 /* PATagButton.m */; };
 		4842FC1309DA804100C4A931 /* PATagButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4842FC1109DA804100C4A931 /* PATagButtonCell.h */; };
 		4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC1209DA804100C4A931 /* PATagButtonCell.m */; };
+		484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484496300B2D56CE009B262C /* ApplicationServices.framework */; };
 		48469B9E0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */; };
 		48469B9F0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */; };
 		48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48471FD90A4FFF90002B369A /* SidebarController.h */; };
@@ -552,6 +553,7 @@
 		4842FC0E09DA801500C4A931 /* PATagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButton.m; sourceTree = "<group>"; };
 		4842FC1109DA804100C4A931 /* PATagButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButtonCell.h; sourceTree = "<group>"; };
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
+		484496300B2D56CE009B262C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CharacterSetChecks.h"; sourceTree = "<group>"; };
 		48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CharacterSetChecks.m"; sourceTree = "<group>"; };
 		48471FD90A4FFF90002B369A /* SidebarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarController.h; sourceTree = "<group>"; };
@@ -807,6 +809,7 @@
 				48893B5A0AF0AB1600BA0B50 /* NDResourceFork.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				658EA77D099798A6005F13DE /* Message.framework in Frameworks */,
+				484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,6 +868,7 @@
 		29B97314FDCFA39411CA2CEA /* Punakea */ = {
 			isa = PBXGroup;
 			children = (
+				484496300B2D56CE009B262C /* ApplicationServices.framework */,
 				080E96DDFE201D6D7F000001 /* Source */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
