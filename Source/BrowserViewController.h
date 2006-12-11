@@ -50,9 +50,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	IBOutlet NSSearchField *searchField;
 	PATypeAheadFind *typeAheadFind; /**< used for type ahead find */
 	NSString *buffer;
-		
-	NSMutableDictionary *tagCloudSettings;
-	
+			
 	PATagCloudSortKey sortKey;
 	NSSortDescriptor *sortDescriptor;
 }

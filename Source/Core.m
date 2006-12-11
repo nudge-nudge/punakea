@@ -268,7 +268,7 @@
 {
 	if (![self appHasBrowser])
 	{
-		browserController = [[BrowserController alloc] initWithCore:self];
+		browserController = [[BrowserController alloc] init];
 	}
 	[browserController showWindow:self];
 	[[browserController window] makeKeyAndOrderFront:self];
@@ -291,8 +291,7 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
-	NSApplication *app = [NSApplication sharedApplication];
-	NSArray *windows = [app windows];
+	NSArray *windows = [[NSApplication sharedApplication] windows];
 	
 	[windows makeObjectsPerformSelector:@selector(orderFront:) withObject:self];
 	
@@ -386,8 +385,7 @@
 {
 	BOOL hasBrowser = NO;
 	
-	NSApplication *app = [NSApplication sharedApplication];
-	NSArray *windows = [app windows];
+	NSArray *windows = [[NSApplication sharedApplication] windows];
 	
 	NSEnumerator *e = [windows objectEnumerator];
 	NSWindow *window;

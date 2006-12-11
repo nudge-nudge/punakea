@@ -49,10 +49,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	if (self = [super init])
 	{
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		tagCloudSettings = [[NSMutableDictionary alloc] initWithDictionary:[defaults objectForKey:@"TagCloud"]];
-		
-		[self setState:PABrowserViewControllerNormalState];
+ 		[self setState:PABrowserViewControllerNormalState];
 		
 		tagger = [PATagger sharedInstance];
 		tags = [tagger tags];
@@ -103,7 +100,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[visibleTags release];
 	[buffer release];
 	[typeAheadFind release];
-	[tagCloudSettings release];
 	[super dealloc];
 }
 

@@ -7,14 +7,15 @@
 //
 
 #import "BrowserController.h"
-#import "Core.h"
 
 @implementation BrowserController
 
-- (id)initWithCore:(Core*)aCore
+- (id)init
 {
-	self = [super initWithWindowNibName:@"Browser"];
-	core = aCore;
+	if (self = [super initWithWindowNibName:@"Browser"])
+	{
+		// nothing
+	}	
 	return self;
 }
 
