@@ -297,8 +297,7 @@
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
 	NSArray *windows = [[NSApplication sharedApplication] windows];
-	NSLog(@"windows: %i",[windows count]);
-	
+
 	NSEnumerator *e = [windows objectEnumerator];
 	NSWindow *window;
 	

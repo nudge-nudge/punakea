@@ -63,7 +63,7 @@
 	[outlineView setQuery:query];
 	[outlineView registerForDraggedTypes:[dropManager handledPboardTypes]];
 	[outlineView setDraggingSourceOperationMask:NSDragOperationNone forLocal:YES];
-	[outlineView setDraggingSourceOperationMask:(dragOperation | NSDragOperationDelete) forLocal:NO];
+	[outlineView setDraggingSourceOperationMask:(dragOperation | NSDragOperationCopy | NSDragOperationDelete) forLocal:NO];
 	
 	[relatedTags addObserver:self
 				  forKeyPath:@"updating"
