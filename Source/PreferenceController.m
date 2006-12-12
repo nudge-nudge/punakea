@@ -7,10 +7,13 @@
 //
 
 #import "PreferenceController.h"
+#import "Core.h"
 
 @interface PreferenceController (PrivateAPI)
 
 - (void)startOnLoginHasChanged;
+- (void)scheduledUpdateCheckIntervalHasChanged;
+
 - (void)updateButtonToCurrentLocation;
 - (void)switchManagedLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath;
 
@@ -24,11 +27,12 @@
 @implementation PreferenceController
 
 #pragma mark init+dealloc
-- (id)init
+- (id)initWithCore:(Core*)aCore
 {
 	if (self = [super initWithWindowNibName:@"Preferences"])
 	{
 		userDefaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+		core = aCore;
 	}
 	return self;
 }
@@ -45,7 +49,21 @@
 								options:0
 								context:NULL];
 	
+	[userDefaultsController addObserver:self
+							 forKeyPath:@"values.PAScheduledUpdateCheckInterval"
+								options:0
+								context:NULL];
+	
 	[self updateButtonToCurrentLocation];
+}
+
+- (void)dealloc
+{
+	[userDefaultsController removeObserver:self
+								forKeyPath:@"values.PAScheduledUpdateCheckInterval"];
+	[userDefaultsController removeObserver:self
+								forKeyPath:@"values.General.StartOnLogin"];
+	[super dealloc];
 }
 
 #pragma mark observing
@@ -54,6 +72,10 @@
 	if ([keyPath isEqualToString:@"values.General.StartOnLogin"])
 	{
 		[self startOnLoginHasChanged];
+	}
+	else if ([keyPath isEqualToString:@"values.PAScheduledUpdateCheckInterval"])
+	{
+		[self scheduledUpdateCheckIntervalHasChanged];
 	}
 }
 
@@ -76,6 +98,28 @@
 	
 	CFRelease(url);
 }
+
+- (void)scheduledUpdateCheckIntervalHasChanged
+{
+	PAScheduledUpdateCheckInterval interval = [[NSUserDefaults standardUserDefaults] integerForKey:@"PAScheduledUpdateCheckInterval"];
+	NSTimeInterval timeInterval = 60.0*60.0*24.0*7.0*30.0;
+	
+	switch (interval)
+	{
+		case PAScheduledUpdateCheckDaily:
+			timeInterval = 60.0*60.0*24.0;
+			break;
+		case PAScheduledUpdateCheckWeekly:
+			timeInterval = 60.0*60.0*24.0*7.0;
+			break;
+		case PAScheduledUpdateCheckMonthly:
+			timeInterval = 60.0*60.0*24.0*7.0*30.0;
+			break;
+	}
+	
+	[[NSUserDefaults standardUserDefaults] setInteger:(int)timeInterval forKey:@"SUScheduledCheckInterval"];
+	[[core updater] scheduleCheckWithInterval:timeInterval];
+}			
 
 #pragma mark file location
 - (IBAction)locateDirectory:(id)sender
@@ -363,5 +407,9 @@
 	return itemIndex;
 }
 
+- (IBAction)checkForUpdates:(id)sender
+{
+	[[core updater] checkForUpdates:self];
+}
 
 @end

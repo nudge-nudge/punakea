@@ -8,10 +8,10 @@
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
-            ACTIONS = {locateDirectory = id; switchToDefaultDirectory = id; }; 
+            ACTIONS = {checkForUpdates = id; locateDirectory = id; switchToDefaultDirectory = id; }; 
             CLASS = PreferenceController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {folderButton = NSPopUpButton; }; 
+            OUTLETS = {folderButton = NSPopUpButton; updateIntervalButton = NSPopUpButton; }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {

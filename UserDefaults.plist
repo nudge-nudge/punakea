@@ -10,6 +10,8 @@
 	<string>~/Documents/punakea files/</string>
 	<key>General.StartOnLogin</key>
 	<false/>
+	<key>PAScheduledUpdateCheckInterval</key>
+	<integer>0</integer>
 	<key>Results</key>
 	<dict>
 		<key>CollapsedGroups</key>
@@ -34,6 +36,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>SUScheduledCheckInterval</key>
+	<integer>86400</integer>
 	<key>TagCloud.EyeCandy</key>
 	<false/>
 	<key>TagCloud.SortKey</key>

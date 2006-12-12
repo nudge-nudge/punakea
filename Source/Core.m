@@ -85,6 +85,11 @@
     [[self window] setToolbar:[toolbar autorelease]];
 }
 
+- (SUUpdater*)updater
+{
+	return updater;
+}
+
 #pragma mark loading and saving tags
 - (NSString *)pathForDataFile 
 { 
@@ -201,7 +206,7 @@
 {
 	if (!preferenceController)
 	{
-		preferenceController = [[PreferenceController alloc] init];
+		preferenceController = [[PreferenceController alloc] initWithCore:self];
 	}
 	[preferenceController showWindow:self];
 }
@@ -292,18 +297,17 @@
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
 	NSArray *windows = [[NSApplication sharedApplication] windows];
-	//[windows makeObjectsPerformSelector:@selector(orderFront:) withObject:self];
+	NSLog(@"windows: %i",[windows count]);
 	
-	// need to ignore sparkle TODO
 	NSEnumerator *e = [windows objectEnumerator];
 	NSWindow *window;
 	
 	while (window = [e nextObject])
 	{
-		if ([window isKindOfClass:[NSPanel class]])
-			continue;
-		else
-			[window orderFront:self];
+		if ([[window title] isEqualTo:@"Punakea : Tagger"] || 
+			[[window title] isEqualTo:@"Punakea : Browser"] ||
+			[[window title] hasPrefix:@"Preferences :"])
+				[window orderFront:self];
 	}
 	
 	// order browser window front if one is started

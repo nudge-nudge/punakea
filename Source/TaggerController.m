@@ -79,11 +79,12 @@ resets the tagger window (called when window is closed)
 
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[fileController removeObserver:self forKeyPath:@"arrangedObjects"];
+
 	[headerCell release];
 	[fileCell release];
-	[fileController removeObserver:self forKeyPath:@"arrangedObjects"];
 	[tableView unregisterDraggedTypes];
 	[currentCompleteTagsInField release];
 	[typeAheadFind release];

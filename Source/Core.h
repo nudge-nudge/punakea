@@ -16,10 +16,13 @@
 
 #import "PACollectionNotEmpty.h"
 
+#import "Sparkle/SUUpdater.h"
 
 @interface Core : NSWindowController
 {
 	IBOutlet NSMenu			*viewMenu;
+	
+	IBOutlet SUUpdater		*updater;
 	
 	PATagger				*tagger;
 
@@ -29,6 +32,8 @@
 	
 	NSNotificationCenter	*nc;
 }
+
+- (SUUpdater*)updater;
 
 //saving and loading
 - (NSString*)pathForDataFile;

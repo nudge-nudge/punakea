@@ -232,7 +232,9 @@ double const SHOW_DELAY = 0.2;
 	while (window = [e nextObject])
 	{
 		// hide all other windows
-		if (window != self)
+		if ([[window title] isEqualTo:@"Punakea : Tagger"] || 
+			[[window title] isEqualTo:@"Punakea : Browser"] ||
+			[[window title] hasPrefix:@"Preferences :"])
 			[window orderOut:self];
 	}
 	
