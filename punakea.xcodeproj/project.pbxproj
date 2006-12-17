@@ -841,6 +841,7 @@
 				484497A90B2D9925009B262C /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				658EA77C099798A6005F13DE /* Message.framework */,
+				484496300B2D56CE009B262C /* ApplicationServices.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -871,7 +872,6 @@
 		29B97314FDCFA39411CA2CEA /* Punakea */ = {
 			isa = PBXGroup;
 			children = (
-				484496300B2D56CE009B262C /* ApplicationServices.framework */,
 				080E96DDFE201D6D7F000001 /* Source */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,

@@ -119,7 +119,11 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 
 - (BOOL)startQuery
 {
-	// TODO: Smart caching!
+	// Cleanup results
+	[self setFlatResults:[NSMutableArray array]];
+	[self setResults:[NSMutableArray array]];
+	[self setFlatFilteredResults:[NSMutableArray array]];
+	[self setFilteredResults:[NSMutableArray array]];
 	
 	// Finally, post notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryDidStartGatheringNotification
@@ -149,8 +153,9 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 
 /**
 	Synchronizes results of MetadataQuery
+    @returns Dictionary with added/removed/updated items
 */
-- (void)synchronizeResults
+- (NSDictionary *)synchronizeResults
 {
 	[self disableUpdates];
 
@@ -161,7 +166,47 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		[mdQueryResults addObject:[mdquery resultAtIndex:i]];
 	}
 	
-	[self setFlatResults:[self bundleResults:mdQueryResults byAttributes:nil]];
+	NSArray *newFlatResults = [self bundleResults:mdQueryResults byAttributes:nil];
+	
+	NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:3];
+	
+	NSArray *theFlatResults = [self flatResults];
+	if(theFlatResults)
+	{
+		// There are already some results
+		
+		NSMutableArray *userInfoAddedItems = [NSMutableArray array];
+		NSMutableArray *userInfoRemovedItems = [NSMutableArray array];
+		
+		// First, match new to old results
+		NSEnumerator *enumerator = [newFlatResults objectEnumerator];
+		PAQueryItem *newResultItem;
+		while(newResultItem = [enumerator nextObject])
+		{
+			if(![theFlatResults containsObject:newResultItem])
+			{
+				[userInfoAddedItems addObject:newResultItem];
+			}
+		}
+		
+		// Next, match vice-versa
+		enumerator = [theFlatResults objectEnumerator];
+		PAQueryItem *oldResultItem;
+		while(oldResultItem = [enumerator nextObject])
+		{
+			if(![newFlatResults containsObject:oldResultItem])
+			{
+				[userInfoRemovedItems addObject:oldResultItem];
+			}
+		}
+		
+		// Currently, this does not note if an item was modified - only removing and adding
+		// of items will be passed in userInfo
+		[userInfo setObject:userInfoAddedItems forKey:(id)kMDQueryUpdateAddedItems];
+		[userInfo setObject:userInfoRemovedItems forKey:(id)kMDQueryUpdateRemovedItems];
+	}	
+	
+	[self setFlatResults:newFlatResults];
 	[self setResults:[self bundleResults:flatResults byAttributes:bundlingAttributes]];	
 	
 	// Apply filter, if active
@@ -173,6 +218,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	}
 	
 	[self enableUpdates];
+	
+	return userInfo;
 }
 
 
@@ -661,14 +708,14 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		
 	if([[note name] isEqualTo:NSMetadataQueryDidUpdateNotification])
 	{
-		[self synchronizeResults];
-		[nc postNotificationName:PAQueryDidUpdateNotification object:self];
+		NSDictionary *userInfo = [self synchronizeResults];
+		[nc postNotificationName:PAQueryDidUpdateNotification object:self userInfo:userInfo];
 	}
 		
 	if([[note name] isEqualTo:NSMetadataQueryDidFinishGatheringNotification])
 	{
-		[self synchronizeResults];
-		[nc postNotificationName:PAQueryDidFinishGatheringNotification object:self];
+		NSDictionary *userInfo = [self synchronizeResults];
+		[nc postNotificationName:PAQueryDidFinishGatheringNotification object:self userInfo:userInfo];
 	}
 }
 
@@ -783,6 +830,28 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	[flatResults release];
 	[newFlatResults retain];
 	flatResults = newFlatResults;
+}
+
+- (NSArray *)filteredResults
+{
+	return filteredResults;
+}
+
+- (void)setFilteredResults:(NSMutableArray *)newResults
+{
+	[filteredResults release];
+	filteredResults = [newResults retain];
+}
+
+- (NSArray *)flatFilteredResults
+{
+	return flatFilteredResults;
+}
+
+- (void)setFlatFilteredResults:(NSMutableArray *)newResults
+{
+	[flatFilteredResults release];
+	flatFilteredResults = [newResults retain];
 }
 
 - (BOOL)hasFilter

@@ -269,6 +269,22 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[self saveSelection];
 		NSRect visibleRect = [self visibleRect];
 		
+		// TODO: Remove items from selectedItems now
+		NSDictionary *userInfo = [note userInfo];
+		
+		NSArray *userInfoAddedItems = [userInfo objectForKey:(id)kMDQueryUpdateAddedItems];
+		NSEnumerator *enumerator = [userInfoAddedItems objectEnumerator];
+		PAQueryItem *item;
+		while(item = [enumerator nextObject]) {
+			NSLog(@"added: %@",[item valueForAttribute:(id)kMDItemDisplayName]);
+		}
+		
+		NSArray *userInfoRemovedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
+		enumerator = [userInfoRemovedItems objectEnumerator];
+		while(item = [enumerator nextObject]) {
+			NSLog(@"removed: %@", [item valueForAttribute:(id)kMDItemDisplayName]);
+		}
+		
 		[self reloadData];
 		
 		[self scrollPoint:visibleRect.origin];

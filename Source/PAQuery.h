@@ -109,7 +109,7 @@ initializer
 - (void)disableUpdates;
 - (void)enableUpdates;
 
-- (void)synchronizeResults;
+- (NSDictionary *)synchronizeResults;
 - (NSMutableArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes;
 -   (void)filterResults:(BOOL)flag
 			usingValues:(NSArray *)filterValues
