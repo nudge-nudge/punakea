@@ -26,6 +26,11 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (NSPredicate *)predicate;
 - (void)setPredicate:(NSPredicate *)aPredicate;
 
+- (NSArray *)filteredResults;
+- (void)setFilteredResults:(NSMutableArray *)newResults;
+- (NSArray *)flatFilteredResults;
+- (void)setFlatFilteredResults:(NSMutableArray *)newResults;
+
 - (void)createQuery;
 - (void)setMdquery:(NSMetadataQuery*)query;
 
