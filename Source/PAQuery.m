@@ -168,7 +168,11 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	NSMutableArray *mdQueryResults = [NSMutableArray array];
 	for(unsigned i = 0; i < [mdquery resultCount]; i++)
 	{
-		[mdQueryResults addObject:[mdquery resultAtIndex:i]];
+		NSMetadataItem *mdItem = [mdquery resultAtIndex:i];
+		
+		if([[NSFileManager defaultManager] fileExistsAtPath:[mdItem valueForAttribute:(id)kMDItemPath]]) {
+			[mdQueryResults addObject:mdItem];
+		}
 	}
 	
 	NSArray *newFlatResults = [self bundleResults:mdQueryResults byAttributes:nil];
