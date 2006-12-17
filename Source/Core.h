@@ -49,6 +49,7 @@
 - (IBAction)openFiles:(id)sender;
 - (IBAction)deleteFiles:(id)sender;
 - (IBAction)editTagsOnFiles:(id)sender;
+- (IBAction)selectAll:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
 - (IBAction)showTagger:(id)sender;

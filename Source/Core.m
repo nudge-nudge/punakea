@@ -190,13 +190,19 @@
 #pragma mark MainMenu actions
 - (IBAction)showResults:(id)sender
 {
+	if(![self appHasBrowser])
+		[self showBrowser:self];
+	
 	[[browserController browserViewController] showResults];
 	[[viewMenu itemWithTag:0] setState:NSOnState];
 	[[viewMenu itemWithTag:1] setState:NSOffState];
 }
 
 - (IBAction)manageTags:(id)sender
-{
+{	
+	if(![self appHasBrowser])
+		[self showBrowser:self];
+	
 	[[browserController browserViewController] manageTags];
 	[[viewMenu itemWithTag:0] setState:NSOffState];
 	[[viewMenu itemWithTag:1] setState:NSOnState];
@@ -213,6 +219,9 @@
 
 - (IBAction)openFiles:(id)sender
 {	
+	if(![self appHasBrowser])
+		[self showBrowser:self];
+	
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
@@ -228,17 +237,23 @@
 
 - (IBAction)deleteFiles:(id)sender
 {	
+	if(![self appHasBrowser])
+		[self showBrowser:self];
+	
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 	
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
 		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
-		[[ov target] performSelector:@selector(deleteFilesForSelectedQueryItems:)];
+		[[ov target] performSelector:@selector(deleteFilesForVisibleSelectedItems:)];
 	}
 }
 
 - (IBAction)editTagsOnFiles:(id)sender
 {
+	if(![self appHasBrowser])
+		[self showBrowser:self];
+	
 	TaggerController *taggerController = [[TaggerController alloc] init];
 	[taggerController showWindow:self];
 	NSWindow *taggerWindow = [taggerController window];
@@ -251,7 +266,7 @@
 		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
 		//[ov saveSelection];
 
-		NSArray *selectedQueryItems = [[ov target] selectedItems];
+		NSArray *selectedQueryItems = [ov visibleSelectedItems];
 		NSMutableArray *files = [NSMutableArray array];
 		
 		NSEnumerator *e = [selectedQueryItems objectEnumerator];
@@ -265,8 +280,21 @@
 		
 		[taggerController addFiles:files];
 		[ov reloadData];
-	}
+	}	
+}
+
+- (IBAction)selectAll:(id)sender
+{
+	if(![self appHasBrowser])
+		[self showBrowser:self];
 	
+	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
+	
+	if ([mainController isKindOfClass:[PAResultsViewController class]])
+	{
+		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
+		[ov selectAll:sender];
+	}
 }
 
 - (IBAction)showBrowser:(id)sender

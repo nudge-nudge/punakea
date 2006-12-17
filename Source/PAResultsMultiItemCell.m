@@ -63,7 +63,7 @@
 		[matrix setDelegate:[controlView delegate]];
 		
 		[matrix setItems:items];	
-		[matrix setSelectedQueryItems:[controlView selectedQueryItems]];
+		[matrix setSelectedQueryItems:[controlView selectedItems]];
 		[controlView addSubview:matrix];
 	}
 	else

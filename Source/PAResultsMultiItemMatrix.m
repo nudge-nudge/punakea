@@ -274,7 +274,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[selectedCells addObject:cell];
 		
 		// Update selectedItems in OutlineView
-		[outlineView addSelectedQueryItem:[items objectAtIndex:idx]];
+		[[outlineView selectedItems] addObject:[items objectAtIndex:idx]];
 		
 		[self scrollCellToVisibleAtRow:row column:column];
 		
@@ -284,7 +284,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		// Update selectedItems in OutlineView
 		if([items objectAtIndex:idx])
-			[outlineView removeSelectedQueryItem:[items objectAtIndex:idx]];
+			[[outlineView selectedItems] removeObject:[items objectAtIndex:idx]];
 	}
 }
 
@@ -322,6 +322,17 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			[self getRow:&r column:&c ofCell:aCell];
 			[self highlightCell:NO atRow:r column:c];
 		}
+	}
+}
+
+- (void)selectAll:(id)sender
+{
+	NSEnumerator *enumerator = [[self cells] objectEnumerator];
+	NSCell *aCell;
+	
+	while(aCell = [enumerator nextObject])
+	{
+		[self highlightCell:YES cell:aCell];
 	}
 }
 

@@ -36,7 +36,7 @@ typedef enum _PAResultsDisplayMode
 	
 	// A collection of selected PAQueryItems. OutlineView stores them for various responders,
 	// so that they are able to restore their selection if necessary.
-	NSMutableArray			*selectedQueryItems;
+	NSMutableArray			*selectedItems;
 }
 
 - (PAQuery *)query;
@@ -51,8 +51,9 @@ typedef enum _PAResultsDisplayMode
 
 - (void)saveSelection;
 - (void)restoreSelection;
+- (NSArray *)visibleSelectedItems;
 
-- (NSMutableArray *)selectedQueryItems;
-- (void)setSelectedQueryItems:(NSMutableArray *)theItems;
+- (NSMutableArray *)selectedItems;
+- (void)setSelectedItems:(NSMutableArray *)theItems;
 
 @end

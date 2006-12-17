@@ -60,9 +60,12 @@
 
 - (IBAction)setGroupingAttributes:(id)sender;
 
+- (void)deleteDraggedItems;
+- (void)deleteFilesForVisibleSelectedItems:(id)sender;
+
 - (PAResultsOutlineView *)outlineView;
 
-- (NSArray *)selectedItems;
-- (NSArray *)selectedItems:(id)sender;
+//- (NSArray *)selectedItems;
+//- (NSArray *)selectedItems:(id)sender;
 
 @end

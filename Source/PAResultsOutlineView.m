@@ -48,14 +48,14 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	// Misc
 	[self setDisplayMode:PAListMode];
-	[self setSelectedQueryItems:[NSMutableArray array]];
+	[self setSelectedItems:[NSMutableArray array]];
 }
 
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
-	if(selectedQueryItems) [selectedQueryItems release];
+	if(selectedItems) [selectedItems release];
 	[super dealloc];
 }
 
@@ -192,26 +192,26 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)saveSelection
 {
-	/*for(unsigned row = 0; row < [self numberOfRows]; row++)
+	for(unsigned row = 0; row < [self numberOfRows]; row++)
 	{
 		id item = [self itemAtRow:row];
 		
 		if([[self selectedRowIndexes] containsIndex:row])
 		{
-			if (![selectedQueryItems containsObject:item])
-				[selectedQueryItems addObject:item];
+			//if (![selectedItems containsObject:item])
+			[[self selectedItems] addObject:item];
 		}
 		else 
 		{
-			[selectedQueryItems removeObject:item];
+			[[self selectedItems] removeObject:item];
 		}
-	}*/
+	}
 }
 
 - (void)restoreSelection
 {
 	[self deselectAll:self];		
-	NSEnumerator *itemsEnumerator = [selectedQueryItems objectEnumerator];
+	NSEnumerator *itemsEnumerator = [[self selectedItems] objectEnumerator];
 	PAQueryItem *item;
 	while(item = [itemsEnumerator nextObject])
 	{	
@@ -246,15 +246,48 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	}
 }
 
+- (NSArray *)visibleSelectedItems
+{
+	[self saveSelection];
+	
+	NSMutableArray *selItems = [NSMutableArray array];
+	
+	for(unsigned row = 0; row < [self numberOfRows]; row++)
+	{
+		id item = [self itemAtRow:row];
+		
+		if([[self selectedRowIndexes] containsIndex:row])
+		{
+			if([item isKindOfClass:[NSArray class]] && [self responder])
+			{
+				NSArray *responderItems = [[self responder] selectedItems];
+				[selItems addObjectsFromArray:responderItems];
+			}
+			else
+			{
+				[selItems addObject:item];		
+			}
+		}
+	}
+	
+	return selItems;
+}
+
+- (void)selectAll:(id)sender
+{
+	if([self responder])
+		[responder selectAll:sender];
+	else
+		[super selectAll:sender];
+}
 
 #pragma mark Notifications
 - (void)queryNote:(NSNotification *)note
 {	
 	if([[note name] isEqualToString:PAQueryDidStartGatheringNotification])
 	{
-		// Reset selectedQueryItems
-		if(selectedQueryItems) [selectedQueryItems release];
-		selectedQueryItems = [[NSMutableArray alloc] init];
+		// Reset selectedItems
+		[self setSelectedItems:[[NSMutableArray alloc] init]];
 	}
 
 	if([[note name] isEqualToString:PAQueryDidStartGatheringNotification] ||
@@ -272,17 +305,21 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		// TODO: Remove items from selectedItems now
 		NSDictionary *userInfo = [note userInfo];
 		
-		NSArray *userInfoAddedItems = [userInfo objectForKey:(id)kMDQueryUpdateAddedItems];
+		/*NSArray *userInfoAddedItems = [userInfo objectForKey:(id)kMDQueryUpdateAddedItems];
 		NSEnumerator *enumerator = [userInfoAddedItems objectEnumerator];
 		PAQueryItem *item;
 		while(item = [enumerator nextObject]) {
 			NSLog(@"added: %@",[item valueForAttribute:(id)kMDItemDisplayName]);
-		}
+		}*/
 		
 		NSArray *userInfoRemovedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
-		enumerator = [userInfoRemovedItems objectEnumerator];
+		NSEnumerator *enumerator = [userInfoRemovedItems objectEnumerator];
+		PAQueryItem *item;
 		while(item = [enumerator nextObject]) {
-			NSLog(@"removed: %@", [item valueForAttribute:(id)kMDItemDisplayName]);
+			if([[self selectedItems] containsObject:item]) {
+				[[self selectedItems] removeObject:item];
+				NSLog(@"removed from selItems: %@", [item valueForAttribute:(id)kMDItemDisplayName]);
+			}
 		}
 		
 		[self reloadData];
@@ -532,26 +569,16 @@ needed for supporting dragging to trash
 	displayMode = mode;
 }
 
-- (void)setSelectedQueryItems:(NSMutableArray *)theItems
+- (NSMutableArray *)selectedItems
 {
-	if(selectedQueryItems) [selectedQueryItems release];
-	selectedQueryItems = [theItems retain];
+	//[self saveSelection];
+	return selectedItems;
 }
 
-- (NSMutableArray *)selectedQueryItems
+- (void)setSelectedItems:(NSMutableArray *)theItems
 {
-	return selectedQueryItems;
-}
-
-- (void)addSelectedQueryItem:(PAQueryItem *)anItem
-{
-	[selectedQueryItems addObject:anItem];
-}
-
-- (void)removeSelectedQueryItem:(PAQueryItem *)anItem
-{
-	if([selectedQueryItems containsObject:anItem])
-		[selectedQueryItems removeObject:anItem];
+	if(selectedItems) [selectedItems release];
+	selectedItems = [theItems retain];
 }
 
 
