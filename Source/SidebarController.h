@@ -1,6 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "PATag.h"
-#import "PATagger.h"
+#import "PATagging/PATag.h"
 #import "TaggerController.h"
 #import "PAFileBox.h"
 #import "PASidebarTableViewDropController.h"
@@ -10,7 +9,6 @@
 #import "PADropManager.h"
 
 @interface SidebarController : NSWindowController {
-	PATagger *tagger;
 	PATags *tags;
 	
 	PARecentTagGroup *recentTagGroup;

@@ -251,7 +251,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {
-	PATag *tag = [sender fileTag];
+	PATag *tag = [sender genericTag];
 	[mainController handleTagActivation:tag];
 }
 

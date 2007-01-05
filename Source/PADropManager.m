@@ -90,7 +90,7 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 		}
 	}
 
-	return [PAFile filesWithFilepaths:result];
+	return result;
 }
 
 - (NSDragOperation)performedDragOperation:(NSPasteboard*)pasteboard

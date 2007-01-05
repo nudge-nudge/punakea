@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PATagging/PATaggableObject.h"
 
 /**
 abstract class for analyzing the data of a single pboardType. is used by PADropHandler.
@@ -22,10 +23,10 @@ it should be called with appropriate data by the DropHandler.
  
  must be overwritten - abstract
  
- @param data pdata to file
- @return file with new location
+ @param data arbitrary data
+ @return taggableObject representing dropped data
  */
-- (NSString*)fileDropData:(id)data;
+- (PATaggableObject*)fileDropData:(id)data;
 
 /**
 convenience method, calls handleFile:

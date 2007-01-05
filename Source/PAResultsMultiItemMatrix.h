@@ -10,7 +10,7 @@
 #import "PAResultsMultiItemPlaceholderCell.h"
 #import "PAResultsMultiItemThumbnailCell.h"
 #import "PAQueryItem.h"
-#import "PAFile.h"
+#import "PATagging/PAFile.h"
 #import "PAThumbnailItem.h"
 
 

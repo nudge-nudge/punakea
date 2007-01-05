@@ -31,7 +31,7 @@
 }
 
 #pragma mark main methods
-- (NSString*)fileDropData:(id)data
+- (PATaggableObject*)fileDropData:(id)data
 {
 	return nil;
 }
@@ -41,14 +41,14 @@
 	NSEnumerator *e = [dataObjects objectEnumerator];
 	id data;
 	
-	NSMutableArray *newFiles = [NSMutableArray array];
+	NSMutableArray *newObjects = [NSMutableArray array];
 	
 	while (data = [e nextObject])
 	{
-		[newFiles addObject:[self fileDropData:data]];
+		[newObjects addObject:[self fileDropData:data]];
 	}
 	
-	return newFiles;
+	return newObjects;
 }
 
 - (NSDragOperation)performedDragOperation

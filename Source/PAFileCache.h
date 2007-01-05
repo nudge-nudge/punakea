@@ -29,7 +29,6 @@ used by PATagger to cache read-/write accesses
 	NSMutableDictionary *fileRetryCount;
 	
 	BOOL synching;
-	NSLock *threadRunLock;
 	
 	PATags *tags;
 }

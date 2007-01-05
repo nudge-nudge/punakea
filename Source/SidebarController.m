@@ -14,8 +14,7 @@
 {
 	if (self = [super initWithWindowNibName:nibName])
 	{
-		tagger = [PATagger sharedInstance];
-		tags = [tagger tags];
+		tags = [PATags sharedTags];
 		dropManager = [PADropManager sharedInstance];
 		
 		recentTagGroup = [[PARecentTagGroup alloc] init];

@@ -23,8 +23,7 @@
 {
 	if (self = [super init])
 	{	
-		tagger = [PATagger sharedInstance];
-		tags = [tagger tags];
+		tags = [PATags sharedTags];
 		
 		[self setUpdating:NO];
 		
@@ -175,18 +174,16 @@
 		{
 			//get keywords for result
 			PAQueryItem *item = [[query flatResults] objectAtIndex:i];
+			// TODO switch to taggable objects
 			NSString *path = [item valueForAttribute:(id)kMDItemPath];
-			NSArray *keywords = [[PATagger sharedInstance] keywordsForFile:[PAFile fileWithPath:path]];
+			PAFile *file = [PAFile fileWithPath:path];
+		
+			NSEnumerator *tagEnumerator = [[file tags] objectEnumerator];
+			PATag *tag;
 			
-			int j = [keywords count];
-
-			while (j--) 
+			while (tag = [tagEnumerator nextObject]) 
 			{
-				// tag may be nil if there is no simple tag for the given name
-				// others apps may edit kMDItemKeywords as well!
-				PATag *tag = [tagger tagForName:[keywords objectAtIndex:j]];
-				
-				if (![tag isKindOfClass:[PATempTag class]] && ![self containsTag:tag] && ![selectedTags containsTag:tag])
+				if (![self containsTag:tag] && ![selectedTags containsTag:tag])
 				{
 					[self addTag:tag];
 				}

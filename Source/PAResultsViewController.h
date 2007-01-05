@@ -12,8 +12,8 @@
 #import "NSFileManager+TrashFile.h"
 
 #import "PATagger.h"
-#import "PATags.h"
-#import "PATag.h"
+#import "PATagging/PATags.h"
+#import "PATagging/PATag.h"
 #import "PARelatedTags.h"
 #import "PASelectedTags.h"
 #import "PAQuery.h"

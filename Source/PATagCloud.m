@@ -407,7 +407,7 @@ bound to visibleTags
 	
 	while (subview = [viewEnumerator nextObject])
 	{
-		if ([currentlyVisibleTags containsObject:[(PATagButton*)subview fileTag]])
+		if ([currentlyVisibleTags containsObject:[(PATagButton*)subview genericTag]])
 		{
 			[viewsToKeep addObject:subview];
 		}
@@ -467,7 +467,7 @@ bound to visibleTags
 // work around until tagcloud supports tag renaming correctly
 - (void)removeActiveTagButton
 {
-	PATag *activeTag = [activeButton fileTag];
+	PATag *activeTag = [activeButton genericTag];
 	[activeButton removeFromSuperview];
 	[tagButtonDict removeObjectForKey:[activeTag name]];
 }

@@ -21,7 +21,7 @@
 {
 	if (self = [super init])
 	{
-		tags = [[PATagger sharedInstance] tags];
+		tags = [PATags sharedTags];
 	}
 	return self;
 }

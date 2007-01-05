@@ -30,17 +30,19 @@
 	PACollectionNotEmpty *collectionNotEmpty = [[[PACollectionNotEmpty alloc] init] autorelease];
 	[NSValueTransformer setValueTransformer:collectionNotEmpty
 									forName:@"PACollectionNotEmpty"];
+	
+	//[[PANotificationReceiver alloc] init];
 }
 
 - (id)init
 {
     if (self = [super init])
     {
-		tagger = [PATagger sharedInstance];
+		globalTags = [PATags sharedTags];
 		[self loadDataFromDisk];
 		
 		nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(tagsHaveChanged:) name:nil object:[tagger tags]];
+		[nc addObserver:self selector:@selector(tagsHaveChanged:) name:nil object:globalTags];
 		
 		printf("compiled on %s at %s\n",__DATE__,__TIME__);
 	}
@@ -108,7 +110,7 @@
 {	
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
-	[rootObject setValue:[[tagger tags] tags] forKey:@"tags"];
+	[rootObject setValue:[globalTags tags] forKey:@"tags"];
 	
 	NSMutableData *data = [NSMutableData data];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -135,13 +137,13 @@
 	
 		if ([loadedTags count] > 0)
 		{
-			[[tagger tags] setTags:loadedTags];
+			[globalTags setTags:loadedTags];
 		}
 	}
 	else
 	{
 		// on first startup there will be no data, create empty mutable array
-		[[tagger tags] setTags:[NSMutableArray array]];
+		[globalTags setTags:[NSMutableArray array]];
 	}
 }	
 
@@ -278,7 +280,7 @@
 			[files addObject:[PAFile fileWithPath:filePath]];
 		}
 		
-		[taggerController addFiles:files];
+		[taggerController addTaggableObjects:files];
 		[ov reloadData];
 	}	
 }
@@ -354,7 +356,7 @@
 	TaggerController *taggerController = [[TaggerController alloc] init];
 	[taggerController showWindow:self];
 	NSWindow *taggerWindow = [taggerController window];
-	[taggerController addFiles:[PAFile filesWithFilepaths:filenames]];
+	[taggerController addTaggableObjects:[PAFile filesWithFilepaths:filenames]];
 	[taggerWindow makeKeyAndOrderFront:nil];
 }
 

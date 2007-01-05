@@ -26,15 +26,16 @@ static PATagger *sharedInstance = nil;
 	self = [super init];
 	if (self)
 	{
-		simpleTagFactory = [[PASimpleTagFactory alloc] init];
-		tags = [[PATags alloc] init];
+		tags = [PATags sharedTags];
 		
-		fileCache = [[PAFileCache alloc] initWithTags:tags];
+		// TODO move to core
+		tagSave = [[PATagSave alloc] init];
 	}
 	return self;
 }
 
 #pragma mark tags and files
+/*
 - (NSArray*)tagsOnFile:(PAFile*)file
 {
 	return [self tagsOnFiles:[NSArray arrayWithObject:file] includeTempTags:YES];
@@ -188,6 +189,8 @@ static PATagger *sharedInstance = nil;
 	return [fileCache keywordsForFile:file];
 }
 
+*/
+
 #pragma mark working with tags (renaming and deleting)
 - (void)removeTag:(PATag*)tag
 {
@@ -266,6 +269,7 @@ static PATagger *sharedInstance = nil;
 }
 
 #pragma mark private
+/*
 - (void)writeTags:(NSArray*)someTags toFile:(PAFile*)file
 {
 	NSMutableArray *keywords = [NSMutableArray array];
@@ -285,6 +289,7 @@ static PATagger *sharedInstance = nil;
 {
 	[fileCache writeKeywords:keywords toFile:file];
 }
+*/
 
 #pragma mark accessors
 - (PATags*)tags

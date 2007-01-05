@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PADropHandler/PADropHandler.h"
-#import "PAFile.h"
 
 /**
 this singleton class handles all drops from the outside.

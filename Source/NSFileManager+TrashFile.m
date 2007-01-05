@@ -13,10 +13,8 @@
 
 - (BOOL)trashFileAtPath:(NSString *)path
 {
-	PAFile *file = [PAFile fileWithPath:path];
-
-	NSArray *files = [NSArray arrayWithObject:[file name]];
-	NSString *sourceDir = [file directory]; 
+	NSArray *files = [NSArray arrayWithObject:path];
+	NSString *sourceDir = [path stringByDeletingLastPathComponent]; 
 	NSString *trashDir = [NSHomeDirectory() stringByAppendingPathComponent:@".Trash"];
 	int tag;
 

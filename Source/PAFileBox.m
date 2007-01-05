@@ -17,15 +17,15 @@
 
 #pragma mark accessors
 
-- (void)setFiles:(NSArray*)fileArray
+- (void)setObjects:(NSArray*)objectArray
 {
-	[files release];
-	files = [fileArray mutableCopy];
+	[objectArray release];
+	objects = [objectArray mutableCopy];
 }
 
-- (NSMutableArray*)files
+- (NSMutableArray*)objects
 {
-	return files;
+	return objects;
 }
 
 #pragma mark drap & drop stuff
@@ -55,8 +55,8 @@
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
-	NSArray *newFiles = [dropManager handleDrop:[sender draggingPasteboard]];
-	[self setFiles:newFiles];
+	NSArray *newObjects = [dropManager handleDrop:[sender draggingPasteboard]];
+	[self setObjects:newObjects];
 	
     return YES;
 }

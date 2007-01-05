@@ -13,9 +13,9 @@
             CLASS = TaggerController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
-                fileController = NSArrayController; 
                 tableView = NSTableView; 
                 tagField = NSTokenField; 
+                taggableObjectController = NSArrayController; 
             }; 
             SUPERCLASS = NSWindowController; 
         }

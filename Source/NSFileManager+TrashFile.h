@@ -7,8 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAFile.h"
-
 
 @interface NSFileManager (TrashFile)
 

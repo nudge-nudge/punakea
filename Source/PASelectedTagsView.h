@@ -10,7 +10,7 @@
 #import "PAFilterSlice.h"
 #import "PAResultsOutlineView.h"
 #import "PAResultsViewController.h"
-#import "PATag.h"
+#import "PATagging/PATag.h"
 #import "PASelectedTags.h"
 #import "PAButton.h"
 #import "PAImageButton.h"

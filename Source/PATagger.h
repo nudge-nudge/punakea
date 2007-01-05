@@ -1,5 +1,5 @@
 //
-//  TaggerInterface.h
+//  Tagger.h
 //  punakea
 //
 //  Created by Johannes Hoffart on 05.02.06.
@@ -11,21 +11,18 @@
 #import <Carbon/Carbon.h>
 #import <ApplicationServices/ApplicationServices.h>
 #import "Matador.h"
-#import "PATags.h"
-#import "PASimpleTagFactory.h"
-#import "PATempTag.h"
+#import "PATagging/PATags.h"
 #import "PAQuery.h"
-#import "PAFile.h"
-#import "PAFileCache.h"
+#import "PATagging/PAFile.h"
+#import "PATagSave.h"
 
 /**
-singleton class for working with finder spotlight comment (our simpleTags)
+singleton class for working with finder spotlight comment
  */
 @interface PATagger : NSObject {
-	PASimpleTagFactory *simpleTagFactory;
 	PATags *tags;
 	
-	PAFileCache *fileCache;
+	PATagSave *tagSave;
 }
 
 /**
@@ -156,7 +153,7 @@ convenience method:
 renames the tag on files
  @param tagName tag to rename
  @param newTagName new name
- @param files files to rename in (array of path strings)
+ @param files files to rename in (array of PAFiles)
  */
 - (void)renameTag:(NSString*)tagName toTag:(NSString*)newTagName onFiles:(NSArray*)files;
 

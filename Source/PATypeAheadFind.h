@@ -7,8 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagger.h"
-#import "PATags.h"
+#import "PATagging/PATags.h"
 
 /**
 simple type ahead find implementation, not the quickest, but works

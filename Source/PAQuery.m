@@ -479,9 +479,10 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		[[NSFileManager defaultManager] trashFileAtPath:[file path]];
 		
 		// Remove tags from trashed file to give spotlight enough time
+		// TODO leave this to PAFile!!
 		PAFile *trashedFile = [PAFile fileWithPath:[trashDir stringByAppendingPathComponent:[file name]]];
-		[[PATagger sharedInstance] removeAllTagsFromFile:trashedFile];
-		
+		[trashedFile removeAllTags];
+
 		// Remove from flatresults
 		for(int k = 0; k < [flatResults count]; k++)
 		{
@@ -534,7 +535,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		tempDestination = [tempDestination stringByAppendingPathComponent:@"~"];
 		tempDestination = [tempDestination stringByAppendingString:newName];
 		
-		tagsOnFiles = [[PATagger sharedInstance] tagsOnFiles:[NSArray arrayWithObject:file]];
+		tagsOnFiles = [[file tags] allObjects];
 		
 		if([fm fileExistsAtPath:tempDestination])
 			[fm removeFileAtPath:tempDestination handler:nil];
@@ -559,8 +560,9 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	if(fileWasMoved)
 	{
 		// Write tags on file
+		// TODO this should be handled internally by PAFile
 		PAFile *newFile = [PAFile fileWithPath:destination];
-		[[PATagger sharedInstance] addTags:tagsOnFiles toFiles:[NSArray arrayWithObject:newFile]];
+		[newFile addTags:tagsOnFiles];
 	
 		[item setValue:newName forAttribute:(id)kMDItemDisplayName];
 		[item setValue:destination forAttribute:(id)kMDItemPath];

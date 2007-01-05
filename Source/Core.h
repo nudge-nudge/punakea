@@ -1,8 +1,6 @@
 /* Controller */
 #import <Cocoa/Cocoa.h>
-#import "PATags.h"
-#import "PASimpleTagFactory.h"
-#import "PATagger.h"
+#import "PATagging/PATags.h"
 
 #import "SidebarController.h"
 #import "BrowserController.h"
@@ -24,7 +22,7 @@
 	
 	IBOutlet SUUpdater		*updater;
 	
-	PATagger				*tagger;
+	PATags					*globalTags;
 
 	BrowserController		*browserController;
 	

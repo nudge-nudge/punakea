@@ -9,9 +9,9 @@ adds tag to tagField (use from "outside")
 - (void)addTagToField:(PASimpleTag*)tag;
 
 /**
-called when files have changed
+called when taggableObjects have changed
  */
-- (void)filesHaveChanged;
+- (void)taggableObjectsHaveChanged;
 
 /**
 resets the tagger window (called when window is closed)
@@ -32,13 +32,14 @@ resets the tagger window (called when window is closed)
 	if (self = [super initWithWindowNibName:@"Tagger"])
 	{
 		typeAheadFind = [[PATypeAheadFind alloc] init];
-		tagger = [PATagger sharedInstance];
-		tags = [tagger tags];
+
 		currentCompleteTagsInField = [[PASelectedTags alloc] init];
 		dropManager = [PADropManager sharedInstance];
 		
 		// custom data cell
 		fileCell = [[PAFileCell alloc] init];
+		
+		globalTags = [PATags sharedTags];
 	}
 	return self;
 }
@@ -65,7 +66,7 @@ resets the tagger window (called when window is closed)
 	// token field wrapping
 	[[tagField cell] setWraps:YES];
 	
-	[fileController addObserver:self
+	[taggableObjectController addObserver:self
 					 forKeyPath:@"arrangedObjects"
 						options:nil
 						context:NULL];
@@ -81,7 +82,7 @@ resets the tagger window (called when window is closed)
 {
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[fileController removeObserver:self forKeyPath:@"arrangedObjects"];
+	[taggableObjectController removeObserver:self forKeyPath:@"arrangedObjects"];
 
 	[headerCell release];
 	[fileCell release];
@@ -96,7 +97,7 @@ resets the tagger window (called when window is closed)
 {
 	if ([keyPath isEqualToString:@"arrangedObjects"])
 	{
-		[self filesHaveChanged];
+		[self taggableObjectsHaveChanged];
 	}
 }
 
@@ -114,14 +115,14 @@ resets the tagger window (called when window is closed)
 
 
 #pragma mark accessors
-- (void)addFiles:(NSArray*)newFiles
+- (void)addTaggableObjects:(NSArray*)objects
 {
-	[fileController addObjects:newFiles];
+	[taggableObjectController addObjects:objects];
 }
 
-- (NSArray*)files
+- (NSArray*)taggableObjects
 {
-	return [fileController arrangedObjects];
+	return [taggableObjectController arrangedObjects];
 }
 
 - (PASelectedTags*)currentCompleteTagsInField
@@ -161,8 +162,8 @@ completionsForSubstring:(NSString *)substring
 {
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	
-	[[PATagger sharedInstance] addTags:tokens toFiles:[fileController arrangedObjects]];
-	
+	[[self taggableObjects] makeObjectsPerformSelector:@selector(addTags:) withObject:tokens];
+		
 	// resize field if neccessary
 	[self performSelector:@selector(resizeTokenField) 
 			   withObject:nil 
@@ -186,7 +187,7 @@ completionsForSubstring:(NSString *)substring
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString
 {
 	if (editingString && [editingString isNotEqualTo:@""])
-		return [tagger createTagForName:editingString];
+		return [globalTags createTagForName:editingString];
 	else
 		return nil;
 }
@@ -215,7 +216,8 @@ completionsForSubstring:(NSString *)substring
 		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
 		
 		// remove the deleted tags from all files
-		[[PATagger sharedInstance] removeTags:deletedTags fromFiles:[fileController arrangedObjects]];
+		[[self taggableObjects] makeObjectsPerformSelector:@selector(removeTags:)
+												withObject:deletedTags];
 
 		// resize tokenfield if neccessary
 		[self resizeTokenField];
@@ -244,49 +246,30 @@ completionsForSubstring:(NSString *)substring
 }
 
 #pragma mark gui change actions
-- (void)filesHaveChanged
+- (void)taggableObjectsHaveChanged
 {
-	NSMutableArray *tagsOnSomeFiles = [NSMutableArray array];
-	NSMutableArray *tagsOnAllFiles = [NSMutableArray array];
-
-	NSArray *allTags = [tagger tagsOnFiles:[fileController arrangedObjects]];
+	// only tags present on every object are shown
+	NSMutableSet *tagsOnAllObjects = [NSMutableSet set];
 	
-	NSEnumerator *fileEnumerator = [[fileController arrangedObjects] objectEnumerator];
-	PAFile *file;
+	NSEnumerator *taggableObjectEnumerator = [[self taggableObjects] objectEnumerator];
+	PATaggableObject *taggableObject;
 	
-	// all files are checked for their tags,
-	// if a tag is not on a single file, it is not on all files, thus not shown in the tokenField
-	while (file = [fileEnumerator nextObject])
+	// set all tags to tags on first object
+	if (taggableObject = [taggableObjectEnumerator nextObject])
 	{
-		NSArray *tagsOnFile = [tagger tagsOnFiles:[NSArray arrayWithObject:file]];
-		
-		NSEnumerator *tagEnumerator = [allTags objectEnumerator];
-		PATag *tag;
-		
-		while (tag = [tagEnumerator nextObject])
-		{
-			if (![tagsOnFile containsObject:tag] && ![tagsOnSomeFiles containsObject:tag])
-			{
-				[tagsOnSomeFiles addObject:tag];
-			}
-		}
+		[tagsOnAllObjects unionSet:[taggableObject tags]];
 	}
 	
-	NSEnumerator *allTagsEnumerator = [allTags objectEnumerator];
-	PATag *tag;
-	
-	// now all tags not in tagsOnSomeFiles but on allTags are on all files
-	while (tag = [allTagsEnumerator nextObject])
+	// now intersect with all tags on other objects	
+	while (taggableObject = [taggableObjectEnumerator nextObject])
 	{
-		if (![tagsOnSomeFiles containsObject:tag] && ![tagsOnAllFiles containsObject:tag])
-		{
-			[tagsOnAllFiles addObject:tag];
-		}
+		[tagsOnAllObjects intersectSet:[taggableObject tags]];
 	}
 	
-	[tagField setObjectValue:tagsOnAllFiles];
+	// update to new value
+	[tagField setObjectValue:[tagsOnAllObjects allObjects]];
 	[currentCompleteTagsInField removeAllTags];
-	[currentCompleteTagsInField addObjectsFromArray:tagsOnAllFiles];
+	[currentCompleteTagsInField addObjectsFromArray:[tagsOnAllObjects allObjects]];
 	[[self window] makeFirstResponder:tagField];
 }
 
@@ -304,7 +287,7 @@ completionsForSubstring:(NSString *)substring
 - (void)resetTaggerContent
 {
 	// files
-	[fileController removeObjects:[fileController arrangedObjects]];
+	[taggableObjectController removeObjects:[taggableObjectController arrangedObjects]];
 	
 	// tagField - cascades to currentCompleteTagsInField
 	[self setCurrentCompleteTagsInField:[[PASelectedTags alloc] init]];
@@ -316,7 +299,7 @@ completionsForSubstring:(NSString *)substring
 				 proposedRow:(int)row 
 	   proposedDropOperation:(NSTableViewDropOperation)op
 {
-	int fileCount = [[self files] count];
+	int fileCount = [[self taggableObjects] count];
 
 	if (fileCount == 0)
 	{
@@ -344,13 +327,13 @@ completionsForSubstring:(NSString *)substring
 	
 	while (file = [e nextObject])
 	{
-		if (![[fileController arrangedObjects] containsObject:file])
+		if (![[taggableObjectController arrangedObjects] containsObject:file])
 		{
 			[result addObject:file];
 		}
 	}
 	
-	[self addFiles:result];
+	[self addTaggableObjects:result];
 	
 	return YES;
 }
@@ -391,18 +374,18 @@ completionsForSubstring:(NSString *)substring
 	{
 		PAFile *file = [PAFile fileWithPath:filename];
 	
-		if (![[fileController arrangedObjects] containsObject:file])
+		if (![[taggableObjectController arrangedObjects] containsObject:file])
 		{
 			[results addObject:file];
 		}
 	}
 	
-	[self addFiles:results];
+	[self addTaggableObjects:results];
 }
 
 - (void)removeButtonClicked:(id)sender
 {
-	[fileController removeObjectsAtArrangedObjectIndexes:[tableView selectedRowIndexes]];
+	[taggableObjectController removeObjectsAtArrangedObjectIndexes:[tableView selectedRowIndexes]];
 }
 
 @end

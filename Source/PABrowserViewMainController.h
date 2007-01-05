@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATag.h"
+#import "PATagging/PATag.h"
 #import "PAViewController.h"
 
 @interface NSObject (PATagManagementViewControllerDelegate)

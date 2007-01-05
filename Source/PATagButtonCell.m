@@ -18,7 +18,7 @@ int const MAX_FONT_SIZE = 25;
 	if (self = [super initTextCell:[aTag name]])
 	{
 		[self setAction:@selector(tagButtonClicked:)];
-		[self setFileTag:aTag];
+		[self setGenericTag:aTag];
 		[self setRating:aRating];
 	}
 	return self;
@@ -35,16 +35,16 @@ int const MAX_FONT_SIZE = 25;
 
 
 #pragma mark accessors
-- (PATag*)fileTag
+- (PATag*)genericTag
 {
-	return fileTag;
+	return genericTag;
 }
 
-- (void)setFileTag:(PATag*)aTag
+- (void)setGenericTag:(PATag*)aTag
 {
 	[aTag retain];
-	[fileTag release];
-	fileTag = aTag;
+	[genericTag release];
+	genericTag = aTag;
 }
 
 - (float)rating

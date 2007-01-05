@@ -51,15 +51,10 @@
 		4817B3A70ABE8C4A00ACBBC6 /* PAPopularTagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */; };
 		481A64310ABFD16F005516E7 /* LoginItemsAE.c in Sources */ = {isa = PBXBuildFile; fileRef = 481A642F0ABFD16F005516E7 /* LoginItemsAE.c */; };
 		481A64320ABFD16F005516E7 /* LoginItemsAE.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481A64300ABFD16F005516E7 /* LoginItemsAE.h */; };
-		481BF27809A3128600EBD7BA /* PATag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF27609A3128600EBD7BA /* PATag.h */; };
-		481BF2F209A31B9B00EBD7BA /* PATagSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481BF2F009A31B9B00EBD7BA /* PATagSet.h */; };
-		481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 481BF2F109A31B9B00EBD7BA /* PATagSet.m */; };
 		481F78BC0A5FE2BB0018DF6C /* PARelatedTagsStandalone.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481F78BA0A5FE2BB0018DF6C /* PARelatedTagsStandalone.h */; };
 		481F78BD0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m in Sources */ = {isa = PBXBuildFile; fileRef = 481F78BB0A5FE2BB0018DF6C /* PARelatedTagsStandalone.m */; };
 		48209CAB0AB1BEED00F3CF21 /* PADropManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48209CA50AB1BEED00F3CF21 /* PADropManager.h */; };
 		48209CAC0AB1BEED00F3CF21 /* PADropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 48209CA60AB1BEED00F3CF21 /* PADropManager.m */; };
-		482248340A886DE1008C8CB9 /* PATempTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482248320A886DE1008C8CB9 /* PATempTag.h */; };
-		482248350A886DE1008C8CB9 /* PATempTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 482248330A886DE1008C8CB9 /* PATempTag.m */; };
 		48293F650AFF26D0009E760E /* PAFileCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48293F630AFF26D0009E760E /* PAFileCache.h */; };
 		48293F660AFF26D0009E760E /* PAFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 48293F640AFF26D0009E760E /* PAFileCache.m */; };
 		482B31150AC6C70D0071C33B /* ResultsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 482B31130AC6C70D0071C33B /* ResultsView.nib */; };
@@ -91,6 +86,8 @@
 		484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484496300B2D56CE009B262C /* ApplicationServices.framework */; };
 		484497BD0B2D9925009B262C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484497A90B2D9925009B262C /* Sparkle.framework */; };
 		484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 484497A90B2D9925009B262C /* Sparkle.framework */; };
+		4845CBA90B4A7B8F003D242C /* PANotificationReceiver.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */; };
+		4845CBAA0B4A7B8F003D242C /* PANotificationReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4845CBA80B4A7B8F003D242C /* PANotificationReceiver.m */; };
 		48469B9E0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */; };
 		48469B9F0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */; };
 		48471FDB0A4FFF90002B369A /* SidebarController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48471FD90A4FFF90002B369A /* SidebarController.h */; };
@@ -112,8 +109,6 @@
 		485C09870ABAC830002CB2C2 /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = 485C09860ABAC830002CB2C2 /* drop.png */; };
 		485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA54B09F4EC38008D3214 /* PASelectedTags.h */; };
 		485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA54C09F4EC38008D3214 /* PASelectedTags.m */; };
-		485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485DA55309F4ECBC008D3214 /* PATags.h */; };
-		485DA55609F4ECBC008D3214 /* PATags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA55409F4ECBC008D3214 /* PATags.m */; };
 		485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */; };
 		485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */; };
 		4860293C0AEE0AF600B7DC6F /* SLA.r in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4860293B0AEE0AF600B7DC6F /* SLA.r */; };
@@ -147,6 +142,24 @@
 		48AA6BF8099B78E300D8F70B /* PATagger.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AA6BF6099B78E300D8F70B /* PATagger.m */; };
 		48B0F1C30ACBFA6200738053 /* Tags.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1C20ACBFA6200738053 /* Tags.strings */; };
 		48B0F1D80ACC020800738053 /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1D70ACC020800738053 /* Global.strings */; };
+		48B3CE4C0B4E4BCB00F2AFA2 /* PATagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 481BF2F109A31B9B00EBD7BA /* PATagSet.m */; };
+		48B3CE4D0B4E4BCC00F2AFA2 /* PATagSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 481BF2F009A31B9B00EBD7BA /* PATagSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B3CE500B4E4BCD00F2AFA2 /* PATags.m in Sources */ = {isa = PBXBuildFile; fileRef = 485DA55409F4ECBC008D3214 /* PATags.m */; };
+		48B3CE510B4E4BCD00F2AFA2 /* PATags.h in Headers */ = {isa = PBXBuildFile; fileRef = 485DA55309F4ECBC008D3214 /* PATags.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B3CE520B4E4BCF00F2AFA2 /* PATaggableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A145A30B37E9300094B0A0 /* PATaggableObject.m */; };
+		48B3CE530B4E4BCF00F2AFA2 /* PATaggableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 48A145A20B37E9300094B0A0 /* PATaggableObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B3CE540B4E4BD000F2AFA2 /* PATag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D8F01109CBE94C0011401F /* PATag.m */; };
+		48B3CE550B4E4BD000F2AFA2 /* PATag.h in Headers */ = {isa = PBXBuildFile; fileRef = 481BF27609A3128600EBD7BA /* PATag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B3CE560B4E4BD100F2AFA2 /* PASimpleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66A5E09CB3752007B6B1D /* PASimpleTag.m */; };
+		48B3CE570B4E4BD100F2AFA2 /* PASimpleTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D66A5D09CB3752007B6B1D /* PASimpleTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B3CE580B4E4BD200F2AFA2 /* PAFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D450080ABB037B00A13B45 /* PAFile.m */; };
+		48B3CE590B4E4BD200F2AFA2 /* PAFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D450070ABB037B00A13B45 /* PAFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B3CE5D0B4E4C1600F2AFA2 /* PATagSave.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4845CAC80B4A75B6003D242C /* PATagSave.h */; };
+		48B3CE5E0B4E4C1700F2AFA2 /* PATagSave.m in Sources */ = {isa = PBXBuildFile; fileRef = 4845CAC90B4A75B6003D242C /* PATagSave.m */; };
+		48B3CF3B0B4E4DB600F2AFA2 /* PATagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
+		48B3CF450B4E4DC100F2AFA2 /* PATagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
+		48B3CF6A0B4E500500F2AFA2 /* PATagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
+		48B3CF8E0B4E508200F2AFA2 /* PATagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
 		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
 		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
 		48BFF6250B13420500C1A127 /* PADebugView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BFF6230B13420500C1A127 /* PADebugView.h */; };
@@ -157,18 +170,11 @@
 		48CFDC320B2ED76A002282D9 /* UpdatePreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CFDC310B2ED76A002282D9 /* UpdatePreferences.tiff */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
-		48D450090ABB037B00A13B45 /* PAFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D450070ABB037B00A13B45 /* PAFile.h */; };
-		48D4500A0ABB037B00A13B45 /* PAFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D450080ABB037B00A13B45 /* PAFile.m */; };
-		48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66A5D09CB3752007B6B1D /* PASimpleTag.h */; };
-		48D66A6009CB3752007B6B1D /* PASimpleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66A5E09CB3752007B6B1D /* PASimpleTag.m */; };
-		48D66AFD09CB4C5A007B6B1D /* PATagFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */; };
-		48D66AFE09CB4C5A007B6B1D /* PATagFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66AFC09CB4C5A007B6B1D /* PATagFactory.m */; };
-		48D66B0709CB4E4B007B6B1D /* PASimpleTagFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */; };
-		48D66B0809CB4E4B007B6B1D /* PASimpleTagFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */; };
 		48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D81DAB09F79C1C0075EE44 /* TaggerController.h */; };
 		48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D81DAC09F79C1C0075EE44 /* TaggerController.m */; };
-		48D8F01209CBE94C0011401F /* PATag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D8F01109CBE94C0011401F /* PATag.m */; };
 		48D954CB0B09073B00D69336 /* TagCloudPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48D954CA0B09073B00D69336 /* TagCloudPreferences.tiff */; };
+		48DB8F2B0B4BB6750035D5DF /* PAThreadSafeQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48DB8F290B4BB6750035D5DF /* PAThreadSafeQueue.h */; };
+		48DB8F2C0B4BB6750035D5DF /* PAThreadSafeQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB8F2A0B4BB6750035D5DF /* PAThreadSafeQueue.m */; };
 		48EB614409C2D4A40071D654 /* PARelatedTags.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48EB614209C2D4A40071D654 /* PARelatedTags.h */; };
 		48EB614509C2D4A40071D654 /* PARelatedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB614309C2D4A40071D654 /* PARelatedTags.m */; };
 		65035FCB0A20769500AD0597 /* PAQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65035FC90A20769500AD0597 /* PAQuery.h */; };
@@ -335,6 +341,13 @@
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Punakea;
 		};
+		48B3CE650B4E4C5900F2AFA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 48B3CE460B4E4BB000F2AFA2 /* PATagging */;
+			remoteInfo = PATagging;
+		};
 		48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -387,13 +400,8 @@
 				48C9362E099743F200699265 /* NSObject.h in CopyFiles */,
 				65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */,
 				48AA6BF7099B78E300D8F70B /* PATagger.h in CopyFiles */,
-				481BF27809A3128600EBD7BA /* PATag.h in CopyFiles */,
-				481BF2F209A31B9B00EBD7BA /* PATagSet.h in CopyFiles */,
 				48EB614409C2D4A40071D654 /* PARelatedTags.h in CopyFiles */,
 				48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */,
-				48D66A5F09CB3752007B6B1D /* PASimpleTag.h in CopyFiles */,
-				48D66AFD09CB4C5A007B6B1D /* PATagFactory.h in CopyFiles */,
-				48D66B0709CB4E4B007B6B1D /* PASimpleTagFactory.h in CopyFiles */,
 				65461C9509D0418F0076778E /* PAImageButtonCell.h in CopyFiles */,
 				659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */,
 				486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */,
@@ -408,7 +416,6 @@
 				6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */,
 				65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */,
 				485DA54D09F4EC38008D3214 /* PASelectedTags.h in CopyFiles */,
-				485DA55509F4ECBC008D3214 /* PATags.h in CopyFiles */,
 				6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in CopyFiles */,
 				48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */,
 				4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */,
@@ -432,7 +439,6 @@
 				65D43F530A7E3ADA008CC164 /* PAQueryItem.h in CopyFiles */,
 				65988C6B0A875A11000270E6 /* PAButton.h in CopyFiles */,
 				65988C810A875C53000270E6 /* PAButtonCell.h in CopyFiles */,
-				482248340A886DE1008C8CB9 /* PATempTag.h in CopyFiles */,
 				484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */,
 				486063DE0AA0553000D9E103 /* PASidebarTableView.h in CopyFiles */,
 				485016A40AA423FC00579C92 /* PASidebarTableColumn.h in CopyFiles */,
@@ -443,7 +449,6 @@
 				65AA051C0AA6DE31003E4E2F /* PAThumbnailItem.h in CopyFiles */,
 				65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */,
 				48209CAB0AB1BEED00F3CF21 /* PADropManager.h in CopyFiles */,
-				48D450090ABB037B00A13B45 /* PAFile.h in CopyFiles */,
 				4817B29E0ABE849D00ACBBC6 /* PATagGroup.h in CopyFiles */,
 				4817B2B00ABE864B00ACBBC6 /* PARecentTagGroup.h in CopyFiles */,
 				4817B3A60ABE8C4A00ACBBC6 /* PAPopularTagGroup.h in CopyFiles */,
@@ -469,6 +474,9 @@
 				484049730AF89F73001F7BB7 /* NSFileManager+PAExtensions.h in CopyFiles */,
 				48293F650AFF26D0009E760E /* PAFileCache.h in CopyFiles */,
 				48BFF6250B13420500C1A127 /* PADebugView.h in CopyFiles */,
+				4845CBA90B4A7B8F003D242C /* PANotificationReceiver.h in CopyFiles */,
+				48DB8F2B0B4BB6750035D5DF /* PAThreadSafeQueue.h in CopyFiles */,
+				48B3CE5D0B4E4C1600F2AFA2 /* PATagSave.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,8 +524,6 @@
 		48209CA60AB1BEED00F3CF21 /* PADropManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADropManager.m; sourceTree = "<group>"; };
 		48209CA70AB1BEED00F3CF21 /* PAFilenamesDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAFilenamesDropHandler.h; path = ../../PAFilenamesDropHandler.h; sourceTree = "<group>"; };
 		48209CA80AB1BEED00F3CF21 /* PAFilenamesDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAFilenamesDropHandler.m; path = ../../PAFilenamesDropHandler.m; sourceTree = "<group>"; };
-		482248320A886DE1008C8CB9 /* PATempTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATempTag.h; sourceTree = "<group>"; };
-		482248330A886DE1008C8CB9 /* PATempTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATempTag.m; sourceTree = "<group>"; };
 		48293F630AFF26D0009E760E /* PAFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileCache.h; sourceTree = "<group>"; };
 		48293F640AFF26D0009E760E /* PAFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileCache.m; sourceTree = "<group>"; };
 		482B31140AC6C70D0071C33B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ResultsView.nib; sourceTree = "<group>"; };
@@ -554,6 +560,10 @@
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
 		484496300B2D56CE009B262C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		484497A90B2D9925009B262C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		4845CAC80B4A75B6003D242C /* PATagSave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagSave.h; sourceTree = "<group>"; };
+		4845CAC90B4A75B6003D242C /* PATagSave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSave.m; sourceTree = "<group>"; };
+		4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PANotificationReceiver.h; sourceTree = "<group>"; };
+		4845CBA80B4A7B8F003D242C /* PANotificationReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PANotificationReceiver.m; sourceTree = "<group>"; };
 		48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CharacterSetChecks.h"; sourceTree = "<group>"; };
 		48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CharacterSetChecks.m"; sourceTree = "<group>"; };
 		48471FD90A4FFF90002B369A /* SidebarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarController.h; sourceTree = "<group>"; };
@@ -607,11 +617,15 @@
 		489A603E0ADA4AF500C6CE36 /* drop_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop_highlight.png; sourceTree = "<group>"; };
 		489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagsView.h; sourceTree = "<group>"; };
 		489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTagsView.m; sourceTree = "<group>"; };
+		48A145A20B37E9300094B0A0 /* PATaggableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggableObject.h; sourceTree = "<group>"; };
+		48A145A30B37E9300094B0A0 /* PATaggableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggableObject.m; sourceTree = "<group>"; };
 		48AA6BF5099B78E300D8F70B /* PATagger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagger.h; sourceTree = "<group>"; };
 		48AA6BF6099B78E300D8F70B /* PATagger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagger.m; sourceTree = "<group>"; };
 		48B0F1C00ACBFA5200738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Tags.strings; sourceTree = "<group>"; };
 		48B0F1D50ACC020000738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Global.strings; sourceTree = "<group>"; };
 		48B241630B0393A100DAD2B5 /* appstarter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = appstarter.c; sourceTree = "<group>"; };
+		48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PATagging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48B3CE480B4E4BB000F2AFA2 /* PATagging-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PATagging-Info.plist"; sourceTree = "<group>"; };
 		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
 		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
 		48BFF6230B13420500C1A127 /* PADebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADebugView.h; sourceTree = "<group>"; };
@@ -629,15 +643,13 @@
 		48D450080ABB037B00A13B45 /* PAFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFile.m; sourceTree = "<group>"; };
 		48D66A5D09CB3752007B6B1D /* PASimpleTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleTag.h; sourceTree = "<group>"; };
 		48D66A5E09CB3752007B6B1D /* PASimpleTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleTag.m; sourceTree = "<group>"; };
-		48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagFactory.h; sourceTree = "<group>"; };
-		48D66AFC09CB4C5A007B6B1D /* PATagFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagFactory.m; sourceTree = "<group>"; };
-		48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleTagFactory.h; sourceTree = "<group>"; };
-		48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleTagFactory.m; sourceTree = "<group>"; };
 		48D75A5B0B01FBEC00D13CAD /* PunakeaSidebar.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = PunakeaSidebar.command; sourceTree = "<group>"; };
 		48D81DAB09F79C1C0075EE44 /* TaggerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerController.h; sourceTree = "<group>"; };
 		48D81DAC09F79C1C0075EE44 /* TaggerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerController.m; sourceTree = "<group>"; };
 		48D8F01109CBE94C0011401F /* PATag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATag.m; sourceTree = "<group>"; };
 		48D954CA0B09073B00D69336 /* TagCloudPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TagCloudPreferences.tiff; sourceTree = "<group>"; };
+		48DB8F290B4BB6750035D5DF /* PAThreadSafeQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAThreadSafeQueue.h; sourceTree = "<group>"; };
+		48DB8F2A0B4BB6750035D5DF /* PAThreadSafeQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAThreadSafeQueue.m; sourceTree = "<group>"; };
 		48EB614209C2D4A40071D654 /* PARelatedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARelatedTags.h; sourceTree = "<group>"; };
 		48EB614309C2D4A40071D654 /* PARelatedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTags.m; sourceTree = "<group>"; };
 		48F980760AEF5CAF003BA2DC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -775,6 +787,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B3CF6A0B4E500500F2AFA2 /* PATagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +795,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B3CF3B0B4E4DB600F2AFA2 /* PATagging.framework in Frameworks */,
 				4815A1CA0AEFA06400969296 /* PADropHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -793,10 +807,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		48B3CE450B4E4BB000F2AFA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		48C633B90AEF9720008F0E94 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B3CF450B4E4DC100F2AFA2 /* PATagging.framework in Frameworks */,
 				480721FB0AEFE9470024118D /* NDResourceFork.framework in Frameworks */,
 				4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */,
 			);
@@ -806,6 +828,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B3CF8E0B4E508200F2AFA2 /* PATagging.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
 				48893B5A0AF0AB1600BA0B50 /* NDResourceFork.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
@@ -841,7 +864,6 @@
 				484497A90B2D9925009B262C /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				658EA77C099798A6005F13DE /* Message.framework */,
-				484496300B2D56CE009B262C /* ApplicationServices.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -865,6 +887,7 @@
 				48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */,
 				4815A0B10AEF99D900969296 /* NDResourceFork.framework */,
 				48404B000AF8B357001F7BB7 /* Unit Testing.octest */,
+				48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -872,6 +895,7 @@
 		29B97314FDCFA39411CA2CEA /* Punakea */ = {
 			isa = PBXGroup;
 			children = (
+				484496300B2D56CE009B262C /* ApplicationServices.framework */,
 				080E96DDFE201D6D7F000001 /* Source */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -883,6 +907,7 @@
 				48C633BC0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler-Info.plist */,
 				4815A0B20AEF99D900969296 /* NDResourceFork-Info.plist */,
 				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
+				48B3CE480B4E4BB000F2AFA2 /* PATagging-Info.plist */,
 			);
 			name = Punakea;
 			sourceTree = "<group>";
@@ -1013,6 +1038,10 @@
 				65C8B58A0AA5869000DC36EA /* ThreadWorker.m */,
 				48BFF6230B13420500C1A127 /* PADebugView.h */,
 				48BFF6240B13420500C1A127 /* PADebugView.m */,
+				4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */,
+				4845CBA80B4A7B8F003D242C /* PANotificationReceiver.m */,
+				48DB8F290B4BB6750035D5DF /* PAThreadSafeQueue.h */,
+				48DB8F2A0B4BB6750035D5DF /* PAThreadSafeQueue.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -1183,6 +1212,17 @@
 			name = SelectedTagsView;
 			sourceTree = "<group>";
 		};
+		48A1459F0B37E90F0094B0A0 /* Taggables */ = {
+			isa = PBXGroup;
+			children = (
+				48A145A20B37E9300094B0A0 /* PATaggableObject.h */,
+				48A145A30B37E9300094B0A0 /* PATaggableObject.m */,
+				48D450070ABB037B00A13B45 /* PAFile.h */,
+				48D450080ABB037B00A13B45 /* PAFile.m */,
+			);
+			name = Taggables;
+			sourceTree = "<group>";
+		};
 		48BDCECE09C4A1EE00A57165 /* TagCloud */ = {
 			isa = PBXGroup;
 			children = (
@@ -1218,10 +1258,6 @@
 			children = (
 				65E557290AD1450E00AA2700 /* NSFileManager+TrashFile.h */,
 				65E5572A0AD1450E00AA2700 /* NSFileManager+TrashFile.m */,
-				48D450070ABB037B00A13B45 /* PAFile.h */,
-				48D450080ABB037B00A13B45 /* PAFile.m */,
-				48293F630AFF26D0009E760E /* PAFileCache.h */,
-				48293F640AFF26D0009E760E /* PAFileCache.m */,
 				4840495C0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.h */,
 				4840495D0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.m */,
 			);
@@ -1231,8 +1267,13 @@
 		48F6A9F40996423000AA118D /* Tagging */ = {
 			isa = PBXGroup;
 			children = (
+				48A1459F0B37E90F0094B0A0 /* Taggables */,
+				4845CAC80B4A75B6003D242C /* PATagSave.h */,
+				4845CAC90B4A75B6003D242C /* PATagSave.m */,
 				48AA6BF5099B78E300D8F70B /* PATagger.h */,
 				48AA6BF6099B78E300D8F70B /* PATagger.m */,
+				48293F630AFF26D0009E760E /* PAFileCache.h */,
+				48293F640AFF26D0009E760E /* PAFileCache.m */,
 				485DA55309F4ECBC008D3214 /* PATags.h */,
 				485DA55409F4ECBC008D3214 /* PATags.m */,
 				481BF27609A3128600EBD7BA /* PATag.h */,
@@ -1249,12 +1290,6 @@
 				485DA54C09F4EC38008D3214 /* PASelectedTags.m */,
 				48C93614099742D800699265 /* Matador.h */,
 				48C9362D099743F200699265 /* NSObject.h */,
-				48D66AFB09CB4C5A007B6B1D /* PATagFactory.h */,
-				48D66AFC09CB4C5A007B6B1D /* PATagFactory.m */,
-				48D66B0509CB4E4B007B6B1D /* PASimpleTagFactory.h */,
-				48D66B0609CB4E4B007B6B1D /* PASimpleTagFactory.m */,
-				482248320A886DE1008C8CB9 /* PATempTag.h */,
-				482248330A886DE1008C8CB9 /* PATempTag.m */,
 			);
 			name = Tagging;
 			sourceTree = "<group>";
@@ -1594,6 +1629,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		48B3CE420B4E4BB000F2AFA2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48B3CE4D0B4E4BCC00F2AFA2 /* PATagSet.h in Headers */,
+				48B3CE510B4E4BCD00F2AFA2 /* PATags.h in Headers */,
+				48B3CE530B4E4BCF00F2AFA2 /* PATaggableObject.h in Headers */,
+				48B3CE550B4E4BD000F2AFA2 /* PATag.h in Headers */,
+				48B3CE570B4E4BD100F2AFA2 /* PASimpleTag.h in Headers */,
+				48B3CE590B4E4BD200F2AFA2 /* PAFile.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXLegacyTarget section */
@@ -1645,6 +1693,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				48B3CE660B4E4C5900F2AFA2 /* PBXTargetDependency */,
 			);
 			name = PADropHandler;
 			productName = PADropHandler;
@@ -1687,6 +1736,24 @@
 			productName = "Unit Testing";
 			productReference = 48404B000AF8B357001F7BB7 /* Unit Testing.octest */;
 			productType = "com.apple.product-type.bundle";
+		};
+		48B3CE460B4E4BB000F2AFA2 /* PATagging */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48B3CE490B4E4BB100F2AFA2 /* Build configuration list for PBXNativeTarget "PATagging" */;
+			buildPhases = (
+				48B3CE420B4E4BB000F2AFA2 /* Headers */,
+				48B3CE430B4E4BB000F2AFA2 /* Resources */,
+				48B3CE440B4E4BB000F2AFA2 /* Sources */,
+				48B3CE450B4E4BB000F2AFA2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PATagging;
+			productName = PATagging;
+			productReference = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		48C633BA0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler */ = {
 			isa = PBXNativeTarget;
@@ -1763,6 +1830,7 @@
 				48C633BA0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler */,
 				4815A0B00AEF99D900969296 /* NDResourceFork */,
 				48404AFF0AF8B357001F7BB7 /* Unit Testing */,
+				48B3CE460B4E4BB000F2AFA2 /* PATagging */,
 			);
 		};
 /* End PBXProject section */
@@ -1790,6 +1858,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		48404AFB0AF8B357001F7BB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48B3CE430B4E4BB000F2AFA2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1945,6 +2020,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		48B3CE440B4E4BB000F2AFA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48B3CE4C0B4E4BCB00F2AFA2 /* PATagSet.m in Sources */,
+				48B3CE500B4E4BCD00F2AFA2 /* PATags.m in Sources */,
+				48B3CE520B4E4BCF00F2AFA2 /* PATaggableObject.m in Sources */,
+				48B3CE540B4E4BD000F2AFA2 /* PATag.m in Sources */,
+				48B3CE560B4E4BD100F2AFA2 /* PASimpleTag.m in Sources */,
+				48B3CE580B4E4BD200F2AFA2 /* PAFile.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		48C633B80AEF9720008F0E94 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1962,13 +2050,8 @@
 				65E7B06B0994D5AA00565251 /* Core.m in Sources */,
 				65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */,
 				48AA6BF8099B78E300D8F70B /* PATagger.m in Sources */,
-				481BF2F309A31B9B00EBD7BA /* PATagSet.m in Sources */,
 				48EB614509C2D4A40071D654 /* PARelatedTags.m in Sources */,
 				48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */,
-				48D66A6009CB3752007B6B1D /* PASimpleTag.m in Sources */,
-				48D66AFE09CB4C5A007B6B1D /* PATagFactory.m in Sources */,
-				48D66B0809CB4E4B007B6B1D /* PASimpleTagFactory.m in Sources */,
-				48D8F01209CBE94C0011401F /* PATag.m in Sources */,
 				65461C9609D0418F0076778E /* PAImageButtonCell.m in Sources */,
 				659EBB4409D2D78300879091 /* PAImageButton.m in Sources */,
 				486EBA4509D68F16000C154C /* PAFileBox.m in Sources */,
@@ -1983,7 +2066,6 @@
 				6525F34F09EA3C2B006E1FB7 /* PASegmentedImageControl.m in Sources */,
 				65D86D5C09F15BA8006BCC8D /* PAResultsMultiItemCell.m in Sources */,
 				485DA54E09F4EC38008D3214 /* PASelectedTags.m in Sources */,
-				485DA55609F4ECBC008D3214 /* PATags.m in Sources */,
 				6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */,
 				48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */,
 				4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */,
@@ -2007,7 +2089,6 @@
 				65D43F540A7E3ADA008CC164 /* PAQueryItem.m in Sources */,
 				65988C6C0A875A11000270E6 /* PAButton.m in Sources */,
 				65988C820A875C53000270E6 /* PAButtonCell.m in Sources */,
-				482248350A886DE1008C8CB9 /* PATempTag.m in Sources */,
 				484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */,
 				486063DF0AA0553000D9E103 /* PASidebarTableView.m in Sources */,
 				485016A50AA423FC00579C92 /* PASidebarTableColumn.m in Sources */,
@@ -2018,7 +2099,6 @@
 				65AA051D0AA6DE31003E4E2F /* PAThumbnailItem.m in Sources */,
 				65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */,
 				48209CAC0AB1BEED00F3CF21 /* PADropManager.m in Sources */,
-				48D4500A0ABB037B00A13B45 /* PAFile.m in Sources */,
 				4817B29F0ABE849D00ACBBC6 /* PATagGroup.m in Sources */,
 				4817B2B10ABE864B00ACBBC6 /* PARecentTagGroup.m in Sources */,
 				4817B3A70ABE8C4A00ACBBC6 /* PAPopularTagGroup.m in Sources */,
@@ -2043,6 +2123,9 @@
 				484049740AF89F73001F7BB7 /* NSFileManager+PAExtensions.m in Sources */,
 				48293F660AFF26D0009E760E /* PAFileCache.m in Sources */,
 				48BFF6260B13420500C1A127 /* PADebugView.m in Sources */,
+				4845CBAA0B4A7B8F003D242C /* PANotificationReceiver.m in Sources */,
+				48DB8F2C0B4BB6750035D5DF /* PAThreadSafeQueue.m in Sources */,
+				48B3CE5E0B4E4C1700F2AFA2 /* PATagSave.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2078,6 +2161,11 @@
 			isa = PBXTargetDependency;
 			target = 8D1107260486CEB800E47090 /* Punakea */;
 			targetProxy = 48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */;
+		};
+		48B3CE660B4E4C5900F2AFA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 48B3CE460B4E4BB000F2AFA2 /* PATagging */;
+			targetProxy = 48B3CE650B4E4C5900F2AFA2 /* PBXContainerItemProxy */;
 		};
 		48C633C10AEF9724008F0E94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2435,6 +2523,60 @@
 			};
 			name = Release;
 		};
+		48B3CE4A0B4E4BB100F2AFA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PATagging-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PATagging;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		48B3CE4B0B4E4BB100F2AFA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PATagging-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PATagging;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		48C633BE0AEF9721008F0E94 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2646,6 +2788,15 @@
 			buildConfigurations = (
 				488A52EC0A81D9FA005B54A8 /* Debug */,
 				488A52ED0A81D9FA005B54A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		48B3CE490B4E4BB100F2AFA2 /* Build configuration list for PBXNativeTarget "PATagging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48B3CE4A0B4E4BB100F2AFA2 /* Debug */,
+				48B3CE4B0B4E4BB100F2AFA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

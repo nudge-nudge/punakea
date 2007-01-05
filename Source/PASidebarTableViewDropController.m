@@ -57,11 +57,10 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 			  row:(int)row 
 	dropOperation:(NSTableViewDropOperation)op 
 {
-	NSArray *files = [dropManager handleDrop:[info draggingPasteboard]];
+	NSArray *objects = [dropManager handleDrop:[info draggingPasteboard]];
 	PATag *tag = [[tags arrangedObjects] objectAtIndex:row];
 	
-	PATagger *tagger = [PATagger sharedInstance];
-	[tagger addTags:[NSArray arrayWithObject:tag] toFiles:files];
+	[objects makeObjectsPerformSelector:@selector(addTag:) withObject:tag];
     return YES;    
 }
 

@@ -23,9 +23,7 @@
 		
 		dropManager = [PADropManager sharedInstance];
 		[self registerForDraggedTypes:[dropManager handledPboardTypes]];
-		
-		tagger = [PATagger sharedInstance];
-		
+				
 		[self setBezelStyle:PATagBezelStyle];
 		[self setButtonType:PAMomentaryLightButton];
     }
@@ -41,14 +39,14 @@ should be overridden according to apple docs
 }
 
 #pragma mark functionality
-- (PATag*)fileTag
+- (PATag*)genericTag
 {
-	return [[self cell] fileTag];
+	return [[self cell] genericTag];
 }
 
-- (void)setFileTag:(PATag*)aTag
+- (void)setGenericTag:(PATag*)aTag
 {
-	[[self cell] setFileTag:aTag];
+	[[self cell] setGenericTag:aTag];
 }
 
 #pragma mark accessors
@@ -91,8 +89,8 @@ should be overridden according to apple docs
 	[[self cell] setHovered:NO];
 	[self setNeedsDisplay];
 	
-	NSArray *files = [dropManager handleDrop:[sender draggingPasteboard]];
-	[tagger addTags:[NSArray arrayWithObject:[[self cell] fileTag]] toFiles:files];
+	NSArray *objects = [dropManager handleDrop:[sender draggingPasteboard]];
+	[objects makeObjectsPerformSelector:@selector(addTag:) withObject:[self genericTag]];
 }
 
 
@@ -255,7 +253,7 @@ should be overridden according to apple docs
 	NSMutableDictionary *sf = [NSMutableDictionary dictionary];
 	[sf setObject:[NSNumber numberWithInt:0] forKey:@"CompatibleVersion"];
 	
-	NSString *rawQuery = [[self fileTag] queryInSpotlightSyntax];	
+	NSString *rawQuery = [[self genericTag] queryInSpotlightSyntax];	
 	[sf setObject:rawQuery forKey:@"RawQuery"];	
 	
 	// Search criteria are needed for editing the folder later on in Finder

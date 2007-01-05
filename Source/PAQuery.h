@@ -7,12 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PATagging/PATag.h"
+#import "PATagging/PAFile.h"
+
 #import "PAQueryBundle.h"
 #import "PAQueryItem.h"
-#import "PATag.h"
-#import "PATagger.h"
 #import "PASelectedTags.h"
-#import "PAFile.h"
 #import "PAThumbnailManager.h"
 #import "NSFileManager+TrashFile.h"
 

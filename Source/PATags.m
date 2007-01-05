@@ -21,9 +21,12 @@ NSString * const PATagOperation = @"PATagOperation";
 
 @implementation PATags
 
-#pragma mark init + dealloc
-- (id)init
-{
+//this is where the sharedInstance is held
+static PATags *sharedInstance = nil;
+
+#pragma mark init
+//constructor - only called by sharedInstance
+- (id)sharedInstanceInit {
 	if (self = [super init])
 	{
 		[self setTags:[NSMutableArray array]];
@@ -31,12 +34,6 @@ NSString * const PATagOperation = @"PATagOperation";
 		nc = [NSNotificationCenter defaultCenter];
 	}
 	return self;
-}
-
-- (void)dealloc
-{
-	[tags release];
-	[super dealloc];
 }
 
 #pragma mark accessors
@@ -76,6 +73,38 @@ NSString * const PATagOperation = @"PATagOperation";
 }
 
 #pragma mark additional
+- (NSArray*)tagsForNames:(NSArray*)tagNames
+{
+	NSMutableArray *tags = [NSMutableArray array];
+	
+	NSEnumerator *e = [tagNames objectEnumerator];
+	NSString *tagName;
+	
+	while (tagName = [e nextObject])
+	{
+		PATag *tag = [self tagForName:tagName];
+		
+		if (tag != nil)
+			[tags addObject:tag];
+	}
+	
+	return tags;
+}
+
+- (PATag*)createTagForName:(NSString*)tagName
+{
+	PATag *resultTag = [self tagForName:tagName];
+	
+	if (resultTag == nil)
+	{
+		resultTag = [[PASimpleTag alloc] initWithName:tagName];
+		[self addTag:resultTag];
+		[resultTag autorelease];
+	}
+	
+	return resultTag;
+}
+
 - (void)addTag:(PATag*)aTag
 {
 	[self observeTag:aTag];
@@ -136,6 +165,20 @@ NSString * const PATagOperation = @"PATagOperation";
 	}
 	
 	return bestTag;
+}
+
+- (void)validateKeyword:(NSString*)keyword
+{
+	if (!keyword ||
+		![keyword hasPrefix:@"@"] ||
+		[keyword length] == 0 ||
+		![self tagForName:[keyword substringFromIndex:1]])
+	{
+		NSException *e = [NSException exceptionWithName:@"InvalidKeywordException"
+												 reason:@"user fiddled with comment"
+											   userInfo:nil];
+		@throw e;
+	}
 }
 
 #pragma mark tag observing
@@ -200,6 +243,46 @@ NSString * const PATagOperation = @"PATagOperation";
 - (NSString*)description
 {
 	return [tags description];
+}
+
+#pragma mark singleton stuff
+- (void)dealloc {
+	[tags release];
+	[super dealloc];
+}
+
++ (PATags*)sharedTags {
+	@synchronized(self) {
+        if (sharedInstance == nil) {
+            sharedInstance = [[self alloc] sharedInstanceInit];
+        }
+    }
+    return sharedInstance;
+}
+
++ (id)allocWithZone:(NSZone *)zone {
+    @synchronized(self) {
+        if (sharedInstance == nil) {
+            sharedInstance = [super allocWithZone:zone];
+        }
+    }
+    return sharedInstance;
+}
+
+- (id)retain {
+    return self;
+}
+
+- (unsigned)retainCount {
+    return UINT_MAX;  //denotes an object that cannot be released
+}
+
+- (void)release {
+    //do nothing
+}
+
+- (id)autorelease {
+    return self;
 }
 
 @end

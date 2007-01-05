@@ -45,9 +45,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		fileRetryCount = [[NSMutableDictionary alloc] init];
 		
 		synching = NO;
-		
-		threadRunLock = [[NSLock alloc] init];
-		
+				
 		tags = allTags;
 		
 		// sync on app shutdown
@@ -317,6 +315,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		return [comment autorelease];
 }
 
+// TODO move this to PATags
 - (void)validateKeyword:(NSString*)keyword
 {
 	if (!keyword ||

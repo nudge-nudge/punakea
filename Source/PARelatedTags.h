@@ -7,11 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagger.h"
-#import "PAFile.h"
-#import "PATag.h"
-#import "PATempTag.h"
-#import "PATags.h"
+#import "PATagging/PAFile.h"
+#import "PATagging/PATag.h"
+#import "PATagging/PATags.h"
 #import "PAQuery.h"
 #import "PASelectedTags.h"
 
@@ -26,7 +24,6 @@ finds related tags for a given query or a given selection of tags.
  posts PARelatedTagsHaveChanged notification on update
  */
 @interface PARelatedTags : NSObject {
-	PATagger *tagger;
 	PATags *tags;
 	
 	NSMutableArray *relatedTags;

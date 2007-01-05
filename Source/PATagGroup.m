@@ -21,7 +21,7 @@
 	if (self = [super init])
 	{
 		maxSize = 8;
-		tags = [[PATagger sharedInstance] tags];
+		tags = [PATags sharedTags];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagsHaveChanged) name:nil object:tags];
 	}
