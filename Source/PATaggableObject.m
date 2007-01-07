@@ -33,6 +33,7 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 
 - (void)dealloc
 {
+	[self saveTags];
 	[tags release];
 	[super dealloc];
 }
@@ -84,6 +85,11 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 {
 	[tags removeAllObjects];
 	
+	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
+}
+
+- (void)initiateSave
+{
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
 

@@ -22,6 +22,8 @@ typedef enum _PATagChangeOperation
 
 extern NSString * const PATagOperation;
 
+extern NSString * const PATagsHaveChangedNotification;
+
 /**
 contains all PATag instances in the application. don't rely on tag order!
  posts PATagsHaveChanged notification whenever the tags array has changed or a single tag was renamed, clicked or used.

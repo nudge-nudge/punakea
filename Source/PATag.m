@@ -72,6 +72,16 @@
 	name = aName;
 }
 
+- (void)renameTo:(NSString*)aName
+{
+	[self setName:aName];
+}
+
+- (void)remove
+{
+	// nothing
+}
+
 - (void)setQuery:(NSString*)aQuery 
 {
 	[aQuery retain];

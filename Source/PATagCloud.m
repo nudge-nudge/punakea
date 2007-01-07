@@ -460,6 +460,9 @@ bound to visibleTags
 
 - (void)selectTag:(PATag*)tag
 {
+	// make sure all buttons are updated
+	[self handleTagsChange];
+	
 	PATagButton *button = [tagButtonDict objectForKey:[tag name]];
 	[self setActiveButton:button];
 }

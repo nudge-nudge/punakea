@@ -10,6 +10,8 @@
 
 NSString * const PATagOperation = @"PATagOperation";
 
+NSString * const PATagsHaveChangedNotification = @"PATagsHaveChangedNotification";
+
 @interface PATags (PrivateAPI)
 
 - (void)observeTag:(PATag*)tag;
@@ -69,7 +71,7 @@ static PATags *sharedInstance = nil;
 	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagResetOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:changeOperation forKey:PATagOperation];
-	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
+	[nc postNotificationName:PATagsHaveChangedNotification object:self userInfo:userInfo];
 }
 
 #pragma mark additional
@@ -113,18 +115,23 @@ static PATags *sharedInstance = nil;
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagAddOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,aTag,nil] 
 														 forKeys:[NSArray arrayWithObjects:PATagOperation,@"tag",nil]];
-	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
+	[nc postNotificationName:PATagsHaveChangedNotification object:self userInfo:userInfo];
 }
 
 - (void)removeTag:(PATag*)aTag
 {
 	[self stopObservingTag:aTag];
-	[tags removeObject:aTag];
 	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagRemoveOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,aTag,nil] 
 														 forKeys:[NSArray arrayWithObjects:PATagOperation,@"tag",nil]];
-	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
+	[nc postNotificationName:PATagsHaveChangedNotification object:self userInfo:userInfo];
+	
+	// remove from HD
+	[aTag remove];
+	
+	// remove from collection
+	[tags removeObject:aTag];
 }
 
 - (NSEnumerator*)objectEnumerator
@@ -201,14 +208,14 @@ static PATags *sharedInstance = nil;
 	
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,object,nil] 
 														 forKeys:[NSArray arrayWithObjects:PATagOperation,@"tag",nil]];
-	[nc postNotificationName:@"PATagsHaveChanged" object:self userInfo:userInfo];
+	[nc postNotificationName:PATagsHaveChangedNotification object:self userInfo:userInfo];
 }
 
 - (void)observeTag:(PATag*)tag
 {
-	[tag addObserver:self forKeyPath:@"name" options:nil context:NULL];
-	[tag addObserver:self forKeyPath:@"lastUsed" options:nil context:NULL];
-	[tag addObserver:self forKeyPath:@"lastClicked" options:nil context:NULL];
+	[tag addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionOld context:NULL];
+	[tag addObserver:self forKeyPath:@"lastUsed" options:NSKeyValueObservingOptionOld context:NULL];
+	[tag addObserver:self forKeyPath:@"lastClicked" options:NSKeyValueObservingOptionOld context:NULL];
 }	
 
 - (void)observeTags:(NSArray*)someTags

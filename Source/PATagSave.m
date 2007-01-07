@@ -18,7 +18,7 @@
 		queue = [[PAThreadSafeQueue alloc] init];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(tagUpdate:)
+												 selector:@selector(taggableObjectUpdate:)
 													 name:PATaggableObjectUpdate
 												   object:nil];
 		
@@ -35,7 +35,7 @@
 }
 
 #pragma mark event
-- (void)tagUpdate:(NSNotification*)notification
+- (void)taggableObjectUpdate:(NSNotification*)notification
 {
 	NSParameterAssert([[notification object] isKindOfClass:[PATaggableObject class]]);
 	
@@ -43,7 +43,6 @@
 }
 
 #pragma mark queue functionality
-
 - (void)startBackgroundThread
 {
 	[NSApplication detachDrawingThread:@selector(processQueue)
@@ -60,7 +59,9 @@
 	while (true)
 	{
 		// this blocks until an object is available
-		PATaggableObject *currentObject = (PATaggableObject*)[queue dequeue];		
+		PATaggableObject *currentObject = (PATaggableObject*)[queue dequeue];	
+		
+		// TODO retry
 		[currentObject saveTags];
 	}
 }

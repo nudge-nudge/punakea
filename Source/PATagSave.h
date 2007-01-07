@@ -9,10 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "PAThreadSafeQueue.h"
 #import "PATagging/PATaggableObject.h"
+#import "PATagging/PATags.h"
 
 /**
 waits for taggable objects to post update notifications
  runs a background thread to save the tags to spotligh comment
+ 
+ TODO interrupt quit until queue is empty!
  */
 @interface PATagSave : NSObject {
 	PAThreadSafeQueue *queue;

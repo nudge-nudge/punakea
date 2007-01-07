@@ -7,9 +7,17 @@
 //
 
 #import "PASimpleTag.h"
+#import "PAFile.h"
+
 @interface PASimpleTag (PrivateAPI)
 
 - (BOOL)isEqualToTag:(PASimpleTag*)otherTag;
+
+/**
+executes a spotlight query for the tag
+ @return PAFile array for tag
+ */
+- (NSArray*)files;
 
 @end
 
@@ -38,6 +46,25 @@
 	[super setName:aName];
 
 	[self setQuery:[NSString stringWithFormat:@"kMDItemFinderComment LIKE '*@%@;*'",aName]];
+}
+
+- (void)renameTo:(NSString*)aName
+{
+	// search for files
+	NSArray *files = [self files];
+	
+	// set new name
+	[super renameTo:aName];
+	
+	// update files
+	[files makeObjectsPerformSelector:@selector(initiateSave)];
+}
+
+- (void)remove
+{
+	NSArray *files = [self files];
+	
+	[files makeObjectsPerformSelector:@selector(removeTag:) withObject:self];
 }
 
 - (NSString*)queryInSpotlightSyntax
@@ -94,6 +121,28 @@
 	[newTag setClickCount:[self clickCount]];
 	[newTag setValue:[self lastClicked]  forKey:@"lastClicked"];
 	return newTag;
+}
+
+#pragma mark synchronous searching
+- (NSArray*)files
+{
+	CFStringRef searchString = (CFStringRef)[self queryInSpotlightSyntax];
+	MDQueryRef query = MDQueryCreate(NULL,searchString,NULL,NULL);
+	MDQueryExecute(query,kMDQuerySynchronous);
+	CFIndex resultCount = MDQueryGetResultCount(query);
+	
+	NSMutableArray *resultArray = [NSMutableArray array];
+	
+	for (int i=0;i<resultCount;i++)
+	{
+		MDItemRef queryResult = (MDItemRef) MDQueryGetResultAtIndex(query,i);
+		NSString *fileName = (NSString*)MDItemCopyAttribute(queryResult,(CFStringRef)@"kMDItemPath");
+		[resultArray addObject:[PAFile fileWithPath:fileName]];
+	}
+	
+	CFRelease(query);
+	
+	return resultArray;
 }
 
 @end

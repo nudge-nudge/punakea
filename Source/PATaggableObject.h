@@ -35,6 +35,12 @@ abstract class representing a taggable object (normally a file
 - (void)removeAllTags;
 
 /**
+call this if you want to save to harddisk,
+ don't call saveTags directly
+ */
+- (void)initiateSave;
+
+/**
 must be implemented by subclass
  */
 - (void)saveTags;

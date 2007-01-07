@@ -10,6 +10,8 @@
 #import <math.h>
 #import "PATag.h"
 
+@class PAFile;
+
 /**
 tag class for a single kMDItemKeyword
  */

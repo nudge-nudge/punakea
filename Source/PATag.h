@@ -43,6 +43,8 @@ treat this class as the abstract superclass for all Tags,
 - (unsigned long)useCount; /**< may overwrite */
 
 - (void)setName:(NSString*)aName; /**< may overwrite */
+- (void)renameTo:(NSString*)aName; /**< may overwrite, call this to update on backing storage */
+- (void)remove; /**< may overwrite, should remove from backing storage */
 - (void)setQuery:(NSString*)aQuery; /**< may overwrite */
 - (void)incrementClickCount; /**< may overwrite */
 - (void)incrementUseCount; /**< may overwrite */

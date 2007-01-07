@@ -273,7 +273,6 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 {	
 	[self setWorking:YES];
 	
-	[tagger removeTag:currentEditedTag];
 	[tags removeTag:currentEditedTag];
 	
 	[self setWorking:NO];
@@ -295,10 +294,8 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 					format:@"delegate invalid"];
 	}
 	
-	[tagger renameTag:[currentEditedTag name] toTag:newTagName];
+	[currentEditedTag renameTo:newTagName];
 
-	[currentEditedTag setName:newTagName];
-	
 	if ([delegate respondsToSelector:@selector(displaySelectedTag:)])
 	{
 		[delegate displaySelectedTag:currentEditedTag];
