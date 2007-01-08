@@ -25,13 +25,12 @@ abstract class representing a taggable object (normally a file
 	NSNotificationCenter *nc;
 }
 
-- (id)initWithTags:(NSSet*)someTags;
-
 - (NSSet*)tags;
 - (void)setTags:(NSSet*)someTags;
+
 - (int)retryCount;
 - (void)incrementRetryCount;
-- (void)resetRetryCount;
+- (void)setRetryCount:(int)i;
 
 - (void)addTag:(PATag*)tag;
 - (void)addTags:(NSArray*)someTags;

@@ -183,9 +183,12 @@ helper method
 #pragma mark copying
 - (id)copyWithZone:(NSZone *)zone
 {
-	NSString *newPath = [[self path] copy];
-	PAFile *newFile = [[PAFile alloc] initWithPath:newPath];
-	[newPath release];
+	PAFile *newFile = [[PAFile alloc] initWithPath:[[[self path] copy] autorelease]];
+	
+	// abstract class instance vars
+	[newFile setTags:[[[self tags] copy] autorelease]];
+	[newFile setRetryCount:[self retryCount]];
+	
 	return newFile;
 }
 

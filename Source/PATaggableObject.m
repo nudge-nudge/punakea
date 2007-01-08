@@ -24,18 +24,13 @@ must be used in order to check if files are managed
 @implementation PATaggableObject
 
 #pragma marg init
+// designated init - ONLY USED BY SUBCLASSES!
 - (id)init
-{
-	return [self initWithTags:[NSMutableSet set]];
-}
-
-// designated init
-- (id)initWithTags:(NSSet*)someTags
 {
 	if (self = [super init])
 	{
 		globalTags = [PATags sharedTags];
-		[self setTags:someTags];
+		tags = [[NSMutableSet alloc] init];
 		
 		retryCount = 0;
 		
@@ -78,9 +73,9 @@ must be used in order to check if files are managed
 	retryCount++;
 }
 
-- (void)resetRetryCount
+- (void)setRetryCount:(int)i
 {
-	retryCount = 0;
+	retryCount = i;
 }
 
 #pragma mark functionality
@@ -142,6 +137,7 @@ must be used in order to check if files are managed
 - (BOOL)saveTags
 {
 	// does nothing, must be implemented by subclass
+	return YES;
 }
 
 - (void)handleFileManagement
@@ -153,6 +149,12 @@ must be used in order to check if files are managed
 {
 	// only manage if there are some tags on the file
 	return [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"] && ([tags count] > 0);
+}
+
+#pragma mark copying
+- (id)copyWithZone:(NSZone *)zone
+{
+	return nil;
 }
 
 @end

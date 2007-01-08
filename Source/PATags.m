@@ -77,7 +77,7 @@ static PATags *sharedInstance = nil;
 #pragma mark additional
 - (NSArray*)tagsForNames:(NSArray*)tagNames
 {
-	NSMutableArray *tags = [NSMutableArray array];
+	NSMutableArray *resultsTags = [NSMutableArray array];
 	
 	NSEnumerator *e = [tagNames objectEnumerator];
 	NSString *tagName;
@@ -87,10 +87,10 @@ static PATags *sharedInstance = nil;
 		PATag *tag = [self tagForName:tagName];
 		
 		if (tag != nil)
-			[tags addObject:tag];
+			[resultsTags addObject:tag];
 	}
 	
-	return tags;
+	return resultsTags;
 }
 
 - (PATag*)createTagForName:(NSString*)tagName
