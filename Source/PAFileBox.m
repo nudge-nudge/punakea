@@ -19,7 +19,7 @@
 
 - (void)setObjects:(NSArray*)objectArray
 {
-	[objectArray release];
+	[objects release];
 	objects = [objectArray mutableCopy];
 }
 

@@ -10,6 +10,17 @@
 
 NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 
+@interface PATaggableObject (PrivateAPI)
+
+/**
+must be used in order to check if files are managed
+ i.e. they must be put in the managed files area
+ if this method returns YES
+ */
+- (BOOL)shouldManageFiles;
+
+@end
+
 @implementation PATaggableObject
 
 #pragma marg init

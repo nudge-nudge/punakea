@@ -43,30 +43,4 @@ returns the performed NSDragOperation, depending on fileManager.
  */
 - (NSDragOperation)performedDragOperation;
 
-/**
-must be used in order to check if files are managed
- i.e. they must be put in the managed files area
- if this method returns YES
- */
-- (BOOL)shouldManageFiles;
-
-/**
-helper method
-
-returns the destination for a file to be written
- use this to get a destination for the dropped data, it
- will consider user settings of managing files
- @param fileName name of the new file
- @return complete path for the new file. save the drop data there
- */ 
-- (NSString*)destinationForNewFile:(NSString*)fileName;
-
-/**
-helper method
- 
- checks if the given path is already located in the managed files directory (or a subdirectory).
- if this returns NO, the dropData should not be moved again.
- */
-- (BOOL)pathIsInManagedHierarchy:(NSString*)path;
-
 @end

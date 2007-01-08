@@ -16,7 +16,7 @@
 
 @interface NSObject (PATagCloudDelegate)
 
-- (void)filesHaveBeenDropped:(NSArray*)files;
+- (void)taggableObjectsHaveBeenDropped:(NSArray*)objects;
 - (BOOL)isWorking;
 - (void)makeControlledViewFirstResponder;
 

@@ -9,6 +9,8 @@
 #import "PATagSave.h"
 
 int const MAX_RETRY_COUNT = 10;
+useconds_t const PATAGSAVE_CYCLETIME = 200000; // 0.2 seconds
+
 
 @implementation PATagSave
 
@@ -52,7 +54,8 @@ int const MAX_RETRY_COUNT = 10;
 - (void)applicationWillTerminate:(NSNotification*)notification
 {
 	// block main thread until queue is empty
-	while ([queue tryDequeue] != NULL);
+	while ([queue tryDequeue] != NULL)
+		usleep(PATAGSAVE_CYCLETIME);
 }
 
 #pragma mark queue functionality

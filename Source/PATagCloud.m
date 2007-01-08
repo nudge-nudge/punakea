@@ -717,16 +717,16 @@ bound to visibleTags
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
-	NSArray *newFiles = [dropManager handleDrop:[sender draggingPasteboard]];
+	NSArray *newObjects = [dropManager handleDrop:[sender draggingPasteboard]];
 	
-	if ([delegate respondsToSelector:@selector(filesHaveBeenDropped:)])
+	if ([delegate respondsToSelector:@selector(taggableObjectsHaveBeenDropped:)])
 	{
-		[delegate filesHaveBeenDropped:newFiles];
+		[delegate taggableObjectsHaveBeenDropped:newObjects];
 	}
 	else
 	{
 		[NSException raise:NSInternalInconsistencyException
-					format:@"delegate does not respond to filesHaveBeenDropped"];
+					format:@"delegate does not respond to taggableObjectsHaveBeenDropped"];
 	}
 	
     return YES;

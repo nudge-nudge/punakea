@@ -12,12 +12,11 @@
 #import "PATagging/PATags.h"
 
 extern int const MAX_RETRY_COUNT;
+extern useconds_t const PATAGSAVE_CYCLETIME;
 
 /**
 waits for taggable objects to post update notifications
  runs a background thread to save the tags to spotligh comment
- 
- TODO dropping 
  */
 @interface PATagSave : NSObject {
 	PAThreadSafeQueue *queue;

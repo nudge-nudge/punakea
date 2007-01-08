@@ -339,9 +339,7 @@
 				[window orderFront:self];
 	}
 	
-	// order browser window front if one is started
-	if ([self appHasBrowser])
-		[self showBrowser:self];
+	// TODO key window on unhide
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename

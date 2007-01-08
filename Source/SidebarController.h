@@ -30,6 +30,6 @@
 	TaggerController *taggerController; /**< there is at most one instance at any time */
 }
 
-- (void)newFilesHaveBeenDropped;
+- (void)newTaggableObjectsHaveBeenDropped;
 
 @end

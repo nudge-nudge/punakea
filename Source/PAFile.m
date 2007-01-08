@@ -16,6 +16,26 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 - (void)setPath:(NSString*)path; /**< checks for illegal characters */
 - (BOOL)isEqualToFile:(PAFile*)otherFile;
 
+
+/**
+helper method
+ 
+ returns the destination for a file to be written
+ use this to get a destination for the dropped data, it
+ will consider user settings of managing files
+ @param fileName name of the new file
+ @return complete path for the new file. save the drop data there
+ */ 
+- (NSString*)destinationForNewFile:(NSString*)fileName;
+
+/**
+helper method
+ 
+ checks if the given path is already located in the managed files directory (or a subdirectory).
+ if this returns NO, the dropData should not be moved again.
+ */
+- (BOOL)pathIsInManagedHierarchy:(NSString*)path;
+
 @end
 
 @implementation PAFile

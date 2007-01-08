@@ -26,7 +26,7 @@
 - (void)awakeFromNib 
 {	
 	//observe files on fileBox
-	[fileBox addObserver:self forKeyPath:@"files" options:0 context:NULL];
+	[fileBox addObserver:self forKeyPath:@"objects" options:0 context:NULL];
 	
 	//drag & drop
 	[popularTagsTable registerForDraggedTypes:[dropManager handledPboardTypes]];
@@ -61,22 +61,22 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if ([keyPath isEqual:@"files"]) 
-		[self newFilesHaveBeenDropped];
+	if ([keyPath isEqual:@"objects"]) 
+		[self newTaggableObjectsHaveBeenDropped];
 }
 
 #pragma mark tag field delegates
 /**
 action called on dropping files to FileBox
  */
-- (void)newFilesHaveBeenDropped
+- (void)newTaggableObjectsHaveBeenDropped
 {	
 	// create new tagger window
 	taggerController = [[TaggerController alloc] init];
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	NSWindow *taggerWindow = [taggerController window];
 	[taggerWindow makeKeyAndOrderFront:nil];
-	[taggerController addFiles:[fileBox files]];
+	[taggerController addTaggableObjects:[fileBox objects]];
 }
 
 #pragma mark notifications

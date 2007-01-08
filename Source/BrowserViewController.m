@@ -490,13 +490,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark drag & drop stuff
-- (void)filesHaveBeenDropped:(NSArray*)files
+- (void)taggableObjectsHaveBeenDropped:(NSArray*)objects
 {
 	TaggerController *taggerController = [[TaggerController alloc] init];
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	NSWindow *taggerWindow = [taggerController window];
 	[taggerWindow makeKeyAndOrderFront:nil];
-	[taggerController addFiles:files];
+	[taggerController addTaggableObjects:objects];
 }
 
 
