@@ -40,7 +40,6 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 		
 	PABrowserViewMainController *mainController;
 	
-	PATagger *tagger;
 	PATags *tags;
 	
 	NSMutableArray *visibleTags; /**< holds tags for TagCloud */

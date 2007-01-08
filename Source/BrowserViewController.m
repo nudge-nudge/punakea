@@ -51,8 +51,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	{
  		[self setState:PABrowserViewControllerNormalState];
 		
-		tagger = [PATagger sharedInstance];
-		tags = [tagger tags];
+		tags = [PATags sharedTags];
 				
 		typeAheadFind = [[PATypeAheadFind alloc] init];
 		

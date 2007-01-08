@@ -326,20 +326,36 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
+	NSLog(@"active");
+	
 	NSArray *windows = [[NSApplication sharedApplication] windows];
 
 	NSEnumerator *e = [windows objectEnumerator];
 	NSWindow *window;
 	
+	NSWindow *lastTaggerWindow = nil;
+	
 	while (window = [e nextObject])
 	{
-		if ([[window title] isEqualTo:@"Punakea : Tagger"] || 
-			[[window title] isEqualTo:@"Punakea : Browser"] ||
+		if ([[window title] isEqualTo:@"Punakea : Tagger"])
+		{
+			[window orderFront:self];
+			lastTaggerWindow = window;
+		}
+		
+		if	([[window title] isEqualTo:@"Punakea : Browser"] ||
 			[[window title] hasPrefix:@"Preferences :"])
-				[window orderFront:self];
+		{
+			[window orderFront:self];
+		}
 	}
 	
-	// TODO key window on unhide
+	// if tagger window exists, make key, otherwise make browser key
+	if (lastTaggerWindow)
+		[lastTaggerWindow makeKeyAndOrderFront:self];
+	else
+		[self showBrowser:self];
+	
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename

@@ -11,7 +11,6 @@
 
 #import "NSFileManager+TrashFile.h"
 
-#import "PATagger.h"
 #import "PATagging/PATags.h"
 #import "PATagging/PATag.h"
 #import "PARelatedTags.h"
@@ -29,7 +28,6 @@
 	IBOutlet PAResultsOutlineView		*outlineView;
 	IBOutlet NSProgressIndicator		*progressIndicator;
 	
-	PATagger							*tagger;
 	PATags								*tags;
 	PARelatedTags						*relatedTags;
 	PASelectedTags						*selectedTags;

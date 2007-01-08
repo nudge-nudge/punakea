@@ -113,7 +113,7 @@ int const PADDING_TO_RIGHT = 60;
 	for(unsigned i = 0; i < [tagButtonKeys count]; i++)
 	{
 		NSString *tagName = [tagButtonKeys objectAtIndex:i];		
-		PATag *tag = [[PATagger sharedInstance] tagForName:tagName];
+		PATag *tag = [[PATags sharedTags] tagForName:tagName];
 		
 		if(![selectedTags containsTag:tag])
 		{
@@ -266,7 +266,7 @@ int const PADDING_TO_RIGHT = 60;
 
 - (void)tagClosed:(id)sender
 {
-	[selectedTags removeTag:[[PATagger sharedInstance] tagForName:[sender title]]];
+	[selectedTags removeTag:[[PATags sharedTags] tagForName:[sender title]]];
 }
 
 

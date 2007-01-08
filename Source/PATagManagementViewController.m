@@ -25,8 +25,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 {
 	if (self = [super init])
 	{
-		tagger = [PATagger sharedInstance];
-		tags = [tagger tags];
+		tags = [PATags sharedTags];
 		
 		[self setWorking:NO];
 		

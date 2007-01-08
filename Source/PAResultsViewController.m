@@ -16,8 +16,7 @@
 {
 	if (self = [super init])
 	{
-		tagger = [PATagger sharedInstance];
-		tags = [tagger tags];
+		tags = [PATags sharedTags];
 		
 		selectedTags = [[PASelectedTags alloc] init];
 		
@@ -655,10 +654,10 @@
 			   item:(id)item 
 		 childIndex:(int)idx
 {
-	NSArray *files = [dropManager handleDrop:[info draggingPasteboard]];
+	NSArray *objects = [dropManager handleDrop:[info draggingPasteboard]];
 	NSArray *tagArray = [selectedTags selectedTags];
 	
-	[tagger addTags:tagArray toFiles:files];
+	[objects makeObjectsPerformSelector:@selector(addTags:) withObject:tagArray];
     return YES;    
 }
 

@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PABrowserViewMainController.h"
-#import "PATagger.h"
 #import "PATagging/PATags.h"
 #import "PATagging/PATag.h"
 #import "NSDateFormatter+FriendlyFormat.h"
@@ -41,7 +40,6 @@ extern NSString * const PATagManagementRemoveOperation;
 	
 	PATag							*currentEditedTag;
 	
-	PATagger						*tagger;
 	PATags							*tags;
 	
 }
