@@ -353,7 +353,7 @@
 	// if tagger window exists, make key, otherwise make browser key
 	if (lastTaggerWindow)
 		[lastTaggerWindow makeKeyAndOrderFront:self];
-	else
+	else if ([self appHasBrowser])
 		[self showBrowser:self];
 	
 }
