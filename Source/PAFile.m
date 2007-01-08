@@ -181,6 +181,17 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 													   forURL:[NSURL fileURLWithPath:[self path]]];
 }
 
+- (void)handleFileManagement
+{
+	NSString *newFullPath = [self destinationForNewFile:[self name]];
+	
+	// TODO error handling
+	[fileManager movePath:[self path] toPath:newFullPath handler:nil];
+	
+	// update path to reflect new location
+	[self setPath:newFullPath];
+}
+
 #pragma mark spotlight comment integration
 - (NSArray*)tagsInSpotlightComment
 {
@@ -301,7 +312,6 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	return finderSpotlightCommentWithoutTags;
 }
 
-#pragma mark helper helpers
 - (NSString*)finderSpotlightComment
 {
 	MDItemRef mdItem = NULL;
@@ -317,6 +327,51 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 		return @"";
 	else
 		return [comment autorelease];
+}
+
+#pragma mark file management helper
+- (NSString*)destinationForNewFile:(NSString*)fileName
+{
+	// check if main directory folder contains file
+	// increment until directory is found/created where file can be place
+	NSString *managedRoot = [self pathForFiles];
+	NSString *destination;
+	int i = 1;
+	
+	while (true)
+	{
+		NSString *directory = [managedRoot stringByAppendingFormat:@"/%i/",i];
+		
+		if ([fileManager fileExistsAtPath:directory] == NO) 
+			[fileManager createDirectoryAtPath:directory attributes:nil];
+		
+		destination = [directory stringByAppendingPathComponent:fileName];
+		
+		// if file doesn't exists in directory, use this one
+		if (![fileManager fileExistsAtPath:destination])
+			break;
+		
+		i++;
+	}
+	
+	return destination;
+}
+
+- (NSString*)pathForFiles
+{ 
+	NSString *directory = [[NSUserDefaults standardUserDefaults] objectForKey:@"General.ManagedFilesLocation"];
+	directory = [directory stringByExpandingTildeInPath]; 
+	
+	if ([fileManager fileExistsAtPath:directory] == NO) 
+		[fileManager createDirectoryAtPath:directory attributes: nil];
+	
+	return directory; 
+}
+
+- (BOOL)pathIsInManagedHierarchy:(NSString*)aPath
+{
+	NSString *managedRoot = [self pathForFiles];
+	return [aPath hasPrefix:managedRoot];
 }
 
 @end

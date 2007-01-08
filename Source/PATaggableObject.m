@@ -24,8 +24,8 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 	if (self = [super init])
 	{
 		globalTags = [PATags sharedTags];
-		
 		[self setTags:someTags];
+		
 		nc = [NSNotificationCenter defaultCenter];
 	}
 	return self;
@@ -48,6 +48,9 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 {
 	[tags release];
 	tags = [someTags mutableCopy];
+
+	if ([self shouldManageFiles])
+		[self handleFileManagement];
 	
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
@@ -57,12 +60,18 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 {
 	[tags addObject:tag];
 	
+	if ([self shouldManageFiles])
+		[self handleFileManagement];
+	
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
 
 - (void)addTags:(NSArray*)someTags
 {
 	[tags addObjectsFromArray:someTags];
+	
+	if ([self shouldManageFiles])
+		[self handleFileManagement];
 	
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
@@ -71,6 +80,9 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 {
 	[tags removeObject:tag];
 	
+	if ([self shouldManageFiles])
+		[self handleFileManagement];
+	
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
 
@@ -78,12 +90,18 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 {
 	[tags minusSet:[NSSet setWithArray:someTags]];
 	
+	if ([self shouldManageFiles])
+		[self handleFileManagement];
+	
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
 
 - (void)removeAllTags
 {
 	[tags removeAllObjects];
+	
+	if ([self shouldManageFiles])
+		[self handleFileManagement];
 	
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
@@ -96,7 +114,17 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 - (void)saveTags
 {
 	// does nothing, must be implemented by subclass
-	return;
+}
+
+- (void)handleFileManagement
+{
+	// does nothing, must be implemented by subclass
+}
+
+- (BOOL)shouldManageFiles
+{
+	// only manage if there are some tags on the file
+	return ([tags count] > 0) && [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
 }
 
 @end

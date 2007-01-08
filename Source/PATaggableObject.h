@@ -18,9 +18,9 @@ abstract class representing a taggable object (normally a file
  */
 @interface PATaggableObject : NSObject <NSCopying> {
 	NSMutableSet *tags;
-	NSNotificationCenter *nc;
-	
 	PATags *globalTags;
+
+	NSNotificationCenter *nc;
 }
 
 - (id)initWithTags:(NSSet*)someTags;
@@ -41,7 +41,15 @@ call this if you want to save to harddisk,
 - (void)initiateSave;
 
 /**
-must be implemented by subclass
+will be called when files are scheduled for file managing,
+ abstract method does nothing, subclass may implement on demand
+  - only called if pref is set
+ */
+- (void)handleFileManagement;
+
+/**
+must be implemented by subclass,
+ save tags to backing storage
  */
 - (void)saveTags;
 

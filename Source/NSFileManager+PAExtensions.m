@@ -64,12 +64,16 @@ static OSType finderSignatureBytes = 'MACS';
 // Based on OAAppKit's setComment:forPath: and http://developer.apple.com/samplecode/MoreAppleEvents/MoreAppleEvents.html (which is dated)
 - (BOOL)setComment:(NSString *)comment forURL:(NSURL *)fileURL;
 {
-	if (!fileURL)
-		return NO;
-	
     NSParameterAssert(comment != nil);
     NSParameterAssert([fileURL isFileURL]);
     NSString *path = [fileURL path];
+	
+	// do nothing if there is no file
+	if (![self fileExistsAtPath:path])
+	{
+		return NO;
+	}
+	
     BOOL isSymLink = [[[self fileAttributesAtPath:path traverseLink:NO] objectForKey:NSFileType] isEqualToString:NSFileTypeSymbolicLink];
     BOOL success = YES;
     NSAppleEventDescriptor *commentTextDesc;
