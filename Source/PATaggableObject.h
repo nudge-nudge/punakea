@@ -19,6 +19,8 @@ abstract class representing a taggable object (normally a file
 @interface PATaggableObject : NSObject <NSCopying> {
 	NSMutableSet *tags;
 	PATags *globalTags;
+	
+	int retryCount;
 
 	NSNotificationCenter *nc;
 }
@@ -27,6 +29,9 @@ abstract class representing a taggable object (normally a file
 
 - (NSSet*)tags;
 - (void)setTags:(NSSet*)someTags;
+- (int)retryCount;
+- (void)incrementRetryCount;
+- (void)resetRetryCount;
 
 - (void)addTag:(PATag*)tag;
 - (void)addTags:(NSArray*)someTags;
@@ -50,7 +55,8 @@ will be called when files are scheduled for file managing,
 /**
 must be implemented by subclass,
  save tags to backing storage
+ @return success or failure
  */
-- (void)saveTags;
+- (BOOL)saveTags;
 
 @end

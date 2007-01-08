@@ -11,14 +11,13 @@
 #import "PATagging/PATaggableObject.h"
 #import "PATagging/PATags.h"
 
+extern int const MAX_RETRY_COUNT;
+
 /**
 waits for taggable objects to post update notifications
  runs a background thread to save the tags to spotligh comment
  
- TODO interrupt quit until queue is empty!
  TODO dropping 
- TODO file managing
- TODO retry on fail
  */
 @interface PATagSave : NSObject {
 	PAThreadSafeQueue *queue;

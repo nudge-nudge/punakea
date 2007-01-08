@@ -170,7 +170,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 }
 
 #pragma mark abstract implemented
-- (void)saveTags
+- (BOOL)saveTags
 {	
 	// create comment
 	NSString *keywordComment = [self finderTagComment];
@@ -179,6 +179,7 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 	// TODO retry
 	BOOL success = [[NSFileManager defaultManager] setComment:[finderComment stringByAppendingString:keywordComment]
 													   forURL:[NSURL fileURLWithPath:[self path]]];
+	return success;
 }
 
 - (void)handleFileManagement

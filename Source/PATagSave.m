@@ -8,6 +8,8 @@
 
 #import "PATagSave.h"
 
+int const MAX_RETRY_COUNT = 10;
+
 @implementation PATagSave
 
 #pragma mark init
@@ -20,6 +22,11 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(taggableObjectUpdate:)
 													 name:PATaggableObjectUpdate
+												   object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(applicationWillTerminate:)
+													 name:NSApplicationWillTerminateNotification
 												   object:nil];
 		
 		[self startBackgroundThread];
@@ -42,6 +49,12 @@
 	[queue enqueue:[notification object]];
 }
 
+- (void)applicationWillTerminate:(NSNotification*)notification
+{
+	// block main thread until queue is empty
+	while ([queue tryDequeue] != NULL);
+}
+
 #pragma mark queue functionality
 - (void)startBackgroundThread
 {
@@ -61,8 +74,22 @@
 		// this blocks until an object is available
 		PATaggableObject *currentObject = (PATaggableObject*)[queue dequeue];	
 		
-		// TODO retry
-		[currentObject saveTags];
+		// TODO perhaps a timeout is in order
+		BOOL success = [currentObject saveTags];
+		
+		// retry up to MAX_RETRY_COUNT
+		if (!success )
+		{
+			if ([currentObject retryCount] < MAX_RETRY_COUNT)
+			{
+				[currentObject incrementRetryCount];
+				[queue enqueue:currentObject];
+			}
+			else
+			{
+				NSLog(@"writing tags to %@ failed",currentObject);
+			}
+		}
 	}
 }
 

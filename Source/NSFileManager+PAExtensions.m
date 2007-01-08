@@ -127,6 +127,10 @@ static OSType finderSignatureBytes = 'MACS';
 - (NSString *)commentForURL:(NSURL *)fileURL;
 {
     NSParameterAssert([fileURL isFileURL]);
+
+	// handle fnf case gracefully
+	if (![self fileExistsAtPath:[fileURL path]])
+		return @"";
     
     OSErr err;
     AEDesc fileDesc, builtEvent, replyEvent;

@@ -26,6 +26,8 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 		globalTags = [PATags sharedTags];
 		[self setTags:someTags];
 		
+		retryCount = 0;
+		
 		nc = [NSNotificationCenter defaultCenter];
 	}
 	return self;
@@ -53,6 +55,21 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 		[self handleFileManagement];
 	
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
+}
+
+- (int)retryCount
+{
+	return retryCount;
+}
+
+- (void)incrementRetryCount
+{
+	retryCount++;
+}
+
+- (void)resetRetryCount
+{
+	retryCount = 0;
 }
 
 #pragma mark functionality
@@ -111,7 +128,7 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
 
-- (void)saveTags
+- (BOOL)saveTags
 {
 	// does nothing, must be implemented by subclass
 }
@@ -124,7 +141,7 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 - (BOOL)shouldManageFiles
 {
 	// only manage if there are some tags on the file
-	return ([tags count] > 0) && [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+	return [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"] && ([tags count] > 0);
 }
 
 @end
