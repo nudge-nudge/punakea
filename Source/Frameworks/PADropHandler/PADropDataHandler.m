@@ -63,5 +63,43 @@
 	return [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
 }
 
+- (NSString*)destinationForNewFile:(NSString*)fileName
+{
+	// check if main directory folder contains file
+	// increment until directory is found/created where file can be place
+	NSString *managedRoot = [self pathForFiles];
+	NSString *destination;
+	int i = 1;
+	
+	while (true)
+	{
+		NSString *directory = [managedRoot stringByAppendingFormat:@"/%i/",i];
+		
+		if ([fileManager fileExistsAtPath:directory] == NO) 
+			[fileManager createDirectoryAtPath:directory attributes:nil];
+		
+		destination = [directory stringByAppendingPathComponent:fileName];
+		
+		// if file doesn't exists in directory, use this one
+		if (![fileManager fileExistsAtPath:destination])
+			break;
+		
+		i++;
+	}
+	
+	return destination;
+}
+
+- (NSString*)pathForFiles
+{ 
+	NSString *directory = [[NSUserDefaults standardUserDefaults] objectForKey:@"General.ManagedFilesLocation"];
+	directory = [directory stringByExpandingTildeInPath]; 
+	
+	if ([fileManager fileExistsAtPath:directory] == NO) 
+		[fileManager createDirectoryAtPath:directory attributes: nil];
+	
+	return directory; 
+}
+
 
 @end

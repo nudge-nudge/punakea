@@ -43,4 +43,15 @@ returns the performed NSDragOperation, depending on fileManager.
  */
 - (NSDragOperation)performedDragOperation;
 
+/**
+helper method
+ 
+ returns the destination for a file to be written
+ use this to get a destination for the dropped data,
+ for example to create a .webloc file in the right directory
+ @param fileName name of the new file
+ @return complete path for the new file. save the drop data there
+ */ 
+- (NSString*)destinationForNewFile:(NSString*)fileName;
+
 @end
