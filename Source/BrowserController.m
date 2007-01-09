@@ -21,6 +21,10 @@
 
 - (void)awakeFromNib
 {
+	// this keeps the windowcontroller from auto-placing the window
+	// - window is always opened where it was closed
+	[self setShouldCascadeWindows:NO];
+	
 	[[self window] setFrameAutosaveName:@"punakea.browser"];
 	
 	browserViewController = [[BrowserViewController alloc] init];
