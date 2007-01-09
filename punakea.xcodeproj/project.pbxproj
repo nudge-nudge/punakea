@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		48008B7A0B5429700014E01A /* PATagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
 		4807215E0AEFE5600024118D /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */; };
 		480721FB0AEFE9470024118D /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
 		4815A0680AEF991A00969296 /* PAFilenamesDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 48209CA80AB1BEED00F3CF21 /* PAFilenamesDropHandler.m */; };
@@ -360,6 +361,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				48008B7A0B5429700014E01A /* PATagging.framework in Copy Frameworks */,
 				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
 				48893B030AF0A4EE00BA0B50 /* NDResourceFork.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
