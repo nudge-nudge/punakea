@@ -31,7 +31,7 @@
 }
 
 -(id)dequeue {
-	[lock lockWhenCondition:1];
+	[lock lockWhenCondition:PAQueueFilled];
 	id element = [[[elements objectAtIndex:0] retain] autorelease];
 	[elements removeObjectAtIndex:0];
 	int count = [elements count];
@@ -40,7 +40,7 @@
 }
 
 -(id)tryDequeue {
-	id element = NULL;
+	id element = nil;
 	if ([lock tryLock]) {
 		if ([lock condition] == PAQueueFilled) {
 			element = [[[elements objectAtIndex:0] retain] autorelease];

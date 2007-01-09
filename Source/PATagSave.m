@@ -60,7 +60,7 @@ useconds_t const PATAGSAVE_CYCLETIME = 200000; // 0.2 seconds
 - (void)applicationWillTerminate:(NSNotification*)notification
 {
 	// block main thread until queue is empty
-	while ([queue tryDequeue] != NULL)
+	while ([queue tryDequeue] != nil)
 		usleep(PATAGSAVE_CYCLETIME);
 }
 

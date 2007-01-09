@@ -18,6 +18,8 @@
 
 #import "Sparkle/SUUpdater.h"
 
+//#import "PANotificationReceiver.h"
+
 @interface Core : NSWindowController
 {
 	IBOutlet NSMenu			*viewMenu;
