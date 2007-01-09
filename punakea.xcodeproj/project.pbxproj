@@ -68,11 +68,6 @@
 		483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483272330AA42DC6003D98A6 /* UKPrefsPanel.m */; };
 		4832723D0AA42E8C003D98A6 /* PreferenceController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4832723B0AA42E8C003D98A6 /* PreferenceController.h */; };
 		4832723E0AA42E8C003D98A6 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832723C0AA42E8C003D98A6 /* PreferenceController.m */; };
-		483A99200B538D8000CF2491 /* PAMZDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 483A98D30B53895B00CF2491 /* PAMZDropHandler.m */; };
-		483A99210B538D8000CF2491 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 483A98F60B538D1400CF2491 /* PAURLDropDataHandler.m */; };
-		483A99320B538DA900CF2491 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
-		483A99330B538DA900CF2491 /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
-		483A99340B538DA900CF2491 /* PATagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
 		483A9A710B53A8BF00CF2491 /* NSFileManager+PAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4840495C0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.h */; };
 		483A9A720B53A8BF00CF2491 /* NSFileManager+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4840495D0AF89ED7001F7BB7 /* NSFileManager+PAExtensions.m */; };
 		483F50CA0AE551EA00551B9D /* PABrowserSplitView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 483F50C80AE551EA00551B9D /* PABrowserSplitView.h */; };
@@ -314,13 +309,6 @@
 			remoteGlobalIDString = 4815A0B00AEF99D900969296;
 			remoteInfo = NDResourceFork;
 		};
-		483184CE0AEF90D000C3C672 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 483184970AEF8D8600C3C672;
-			remoteInfo = PADropHandler;
-		};
 		483184E80AEF91AE00C3C672 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -334,27 +322,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 483184E20AEF91A700C3C672;
 			remoteInfo = FilenamesDropHandler;
-		};
-		483A99370B538DB300CF2491 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 483A990B0B538D2F00CF2491 /* MZDropHandler */;
-			remoteInfo = MZDropHandler;
-		};
-		483A99890B538EF700CF2491 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 483184970AEF8D8600C3C672 /* PADropHandler */;
-			remoteInfo = PADropHandler;
-		};
-		483A998B0B538EFB00CF2491 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4815A0B00AEF99D900969296 /* NDResourceFork */;
-			remoteInfo = NDResourceFork;
 		};
 		48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -559,12 +526,6 @@
 		483272330AA42DC6003D98A6 /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
 		4832723B0AA42E8C003D98A6 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
 		4832723C0AA42E8C003D98A6 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
-		483A98D20B53895B00CF2491 /* PAMZDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMZDropHandler.h; sourceTree = "<group>"; };
-		483A98D30B53895B00CF2491 /* PAMZDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAMZDropHandler.m; sourceTree = "<group>"; };
-		483A98F50B538D1400CF2491 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAURLDropDataHandler.h; sourceTree = "<group>"; };
-		483A98F60B538D1400CF2491 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAURLDropDataHandler.m; sourceTree = "<group>"; };
-		483A990C0B538D2F00CF2491 /* MZDropHandler.punakeaDropHandler */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MZDropHandler.punakeaDropHandler; sourceTree = BUILT_PRODUCTS_DIR; };
-		483A990D0B538D2F00CF2491 /* MZDropHandler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "MZDropHandler-Info.plist"; sourceTree = "<group>"; };
 		483F50C80AE551EA00551B9D /* PABrowserSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserSplitView.h; sourceTree = "<group>"; };
 		483F50C90AE551EA00551B9D /* PABrowserSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserSplitView.m; sourceTree = "<group>"; };
 		484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadView.h; sourceTree = "<group>"; };
@@ -821,16 +782,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		483A990A0B538D2F00CF2491 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				483A99320B538DA900CF2491 /* PADropHandler.framework in Frameworks */,
-				483A99330B538DA900CF2491 /* NDResourceFork.framework in Frameworks */,
-				483A99340B538DA900CF2491 /* PATagging.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		48404AFD0AF8B357001F7BB7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -919,7 +870,6 @@
 				4815A0B10AEF99D900969296 /* NDResourceFork.framework */,
 				48404B000AF8B357001F7BB7 /* Unit Testing.octest */,
 				48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */,
-				483A990C0B538D2F00CF2491 /* MZDropHandler.punakeaDropHandler */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -940,7 +890,6 @@
 				4815A0B20AEF99D900969296 /* NDResourceFork-Info.plist */,
 				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
 				48B3CE480B4E4BB000F2AFA2 /* PATagging-Info.plist */,
-				483A990D0B538D2F00CF2491 /* MZDropHandler-Info.plist */,
 			);
 			name = Punakea;
 			sourceTree = "<group>";
@@ -1125,7 +1074,6 @@
 		483184F20AEF91E100C3C672 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				483A98CF0B53892B00CF2491 /* MZDropHandler */,
 				483184F50AEF91F200C3C672 /* FilenamesDropHandler */,
 				483185320AEF966B00C3C672 /* WebURLsWithTitlesPboardTypeDropHandler */,
 			);
@@ -1165,17 +1113,6 @@
 				4832723C0AA42E8C003D98A6 /* PreferenceController.m */,
 			);
 			name = Preferences;
-			sourceTree = "<group>";
-		};
-		483A98CF0B53892B00CF2491 /* MZDropHandler */ = {
-			isa = PBXGroup;
-			children = (
-				483A98D20B53895B00CF2491 /* PAMZDropHandler.h */,
-				483A98D30B53895B00CF2491 /* PAMZDropHandler.m */,
-				483A98F50B538D1400CF2491 /* PAURLDropDataHandler.h */,
-				483A98F60B538D1400CF2491 /* PAURLDropDataHandler.m */,
-			);
-			path = MZDropHandler;
 			sourceTree = "<group>";
 		};
 		484003C90A9B3A6500C0AD99 /* TypeAheadView */ = {
@@ -1769,25 +1706,6 @@
 			productReference = 483184E30AEF91A700C3C672 /* FilenamesDropHandler.punakeaDropHandler */;
 			productType = "com.apple.product-type.bundle";
 		};
-		483A990B0B538D2F00CF2491 /* MZDropHandler */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 483A990E0B538D3000CF2491 /* Build configuration list for PBXNativeTarget "MZDropHandler" */;
-			buildPhases = (
-				483A99080B538D2F00CF2491 /* Resources */,
-				483A99090B538D2F00CF2491 /* Sources */,
-				483A990A0B538D2F00CF2491 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				483A998A0B538EF700CF2491 /* PBXTargetDependency */,
-				483A998C0B538EFB00CF2491 /* PBXTargetDependency */,
-			);
-			name = MZDropHandler;
-			productName = MZDropHandler;
-			productReference = 483A990C0B538D2F00CF2491 /* MZDropHandler.punakeaDropHandler */;
-			productType = "com.apple.product-type.bundle";
-		};
 		48404AFF0AF8B357001F7BB7 /* Unit Testing */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48404B030AF8B358001F7BB7 /* Build configuration list for PBXNativeTarget "Unit Testing" */;
@@ -1858,10 +1776,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				483184CF0AEF90D000C3C672 /* PBXTargetDependency */,
 				483185030AEF92FD00C3C672 /* PBXTargetDependency */,
 				480721EC0AEFE8F40024118D /* PBXTargetDependency */,
-				483A99380B538DB300CF2491 /* PBXTargetDependency */,
 			);
 			name = Punakea;
 			productInstallPath = "$(HOME)/Applications";
@@ -1902,7 +1818,6 @@
 				4815A0B00AEF99D900969296 /* NDResourceFork */,
 				48404AFF0AF8B357001F7BB7 /* Unit Testing */,
 				48B3CE460B4E4BB000F2AFA2 /* PATagging */,
-				483A990B0B538D2F00CF2491 /* MZDropHandler */,
 			);
 		};
 /* End PBXProject section */
@@ -1923,13 +1838,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		483184DF0AEF91A700C3C672 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		483A99080B538D2F00CF2491 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2091,15 +1999,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		483A99090B538D2F00CF2491 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				483A99200B538D8000CF2491 /* PAMZDropHandler.m in Sources */,
-				483A99210B538D8000CF2491 /* PAURLDropDataHandler.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		48404AFC0AF8B357001F7BB7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2228,11 +2127,6 @@
 			target = 4815A0B00AEF99D900969296 /* NDResourceFork */;
 			targetProxy = 4815A0E70AEF9A8800969296 /* PBXContainerItemProxy */;
 		};
-		483184CF0AEF90D000C3C672 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
-			targetProxy = 483184CE0AEF90D000C3C672 /* PBXContainerItemProxy */;
-		};
 		483184E90AEF91AE00C3C672 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
@@ -2242,21 +2136,6 @@
 			isa = PBXTargetDependency;
 			target = 483184E20AEF91A700C3C672 /* FilenamesDropHandler */;
 			targetProxy = 483185020AEF92FD00C3C672 /* PBXContainerItemProxy */;
-		};
-		483A99380B538DB300CF2491 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 483A990B0B538D2F00CF2491 /* MZDropHandler */;
-			targetProxy = 483A99370B538DB300CF2491 /* PBXContainerItemProxy */;
-		};
-		483A998A0B538EF700CF2491 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
-			targetProxy = 483A99890B538EF700CF2491 /* PBXContainerItemProxy */;
-		};
-		483A998C0B538EFB00CF2491 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4815A0B00AEF99D900969296 /* NDResourceFork */;
-			targetProxy = 483A998B0B538EFB00CF2491 /* PBXContainerItemProxy */;
 		};
 		48404B140AF8B3A6001F7BB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2542,56 +2421,6 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FilenamesDropHandler;
-				WRAPPER_EXTENSION = punakeaDropHandler;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
-		483A990F0B538D3000CF2491 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "MZDropHandler-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = MZDropHandler;
-				WRAPPER_EXTENSION = punakeaDropHandler;
-				ZERO_LINK = YES;
-			};
-			name = Debug;
-		};
-		483A99100B538D3000CF2491 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "MZDropHandler-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = MZDropHandler;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
 			};
@@ -2921,15 +2750,6 @@
 			buildConfigurations = (
 				483184E60AEF91A700C3C672 /* Debug */,
 				483184E70AEF91A700C3C672 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		483A990E0B538D3000CF2491 /* Build configuration list for PBXNativeTarget "MZDropHandler" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				483A990F0B538D3000CF2491 /* Debug */,
-				483A99100B538D3000CF2491 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
