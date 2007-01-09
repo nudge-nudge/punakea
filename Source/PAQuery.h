@@ -51,6 +51,8 @@ wrapper for NSMetadataQuery. searching for tags, no predicate needed
 	id						delegate;
 	NSMetadataQuery			*mdquery;
 	
+	NSDictionary			*simpleGrouping;
+	
 	PASelectedTags			*tags;
 	
 	NSPredicate				*predicate;
@@ -95,6 +97,11 @@ initializer
 - (void)setResults:(NSMutableArray*)newResults;
 - (NSArray*)flatResults;
 - (void)setFlatResults:(NSMutableArray*)newFlatResults;
+
+- (NSDictionary *)simpleGrouping;
+- (void)setSimpleGrouping:(NSDictionary *)aDictionary;
+- (NSPredicate *)predicate;
+- (void)setPredicate:(NSPredicate *)aPredicate;
 
 - (NSArray *)bundlingAttributes;
 - (void)setBundlingAttributes:(NSArray *)attributes;

@@ -48,13 +48,7 @@
     } 
 	// kMDItemContentType
 	else if([attrName isEqualToString:@"kMDItemContentTypeTree"])
-	{
-		NSBundle *bundle = [NSBundle mainBundle];
-		NSString *path = [bundle pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
-		
-		// TODO
-		NSDictionary *simpleGrouping = [NSDictionary dictionaryWithContentsOfFile:path];
-		
+	{	
 		/*path = @"~/Library/Preferences/com.apple.spotlight.plist";
 		path = [path stringByExpandingTildeInPath];
 		NSDictionary *spotlightUserDefaults = [[NSDictionary alloc] initWithContentsOfFile:path];
@@ -66,7 +60,7 @@
 		
 		while(aType = [enumerator nextObject])
 		{
-			replacementValue = [simpleGrouping objectForKey:aType];
+			replacementValue = [[self simpleGrouping] objectForKey:aType];
 			if(replacementValue) break;
 		}
 		

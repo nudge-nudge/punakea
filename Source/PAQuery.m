@@ -52,6 +52,10 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 {
 	if (self = [super init])
 	{
+		// Simple Grouping
+		NSString *path = [[NSBundle mainBundle] pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
+		[self setSimpleGrouping:[NSDictionary dictionaryWithContentsOfFile:path]];
+		
 		[self setDelegate:self];
 		[self createQuery];
 		
@@ -69,6 +73,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	[bundlingAttributes release];
 	[filterDict release];
 	[predicate release];
+	[simpleGrouping release];
 	[super dealloc];
 }
 
@@ -739,6 +744,17 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (void)setDelegate:(id)aDelegate
 {
 	delegate = aDelegate;
+}
+
+- (NSDictionary *)simpleGrouping
+{
+	return simpleGrouping;
+}
+
+- (void)setSimpleGrouping:(NSDictionary *)aDictionary
+{
+	[simpleGrouping release];
+	simpleGrouping = [aDictionary retain];
 }
 
 - (NSPredicate *)predicate
