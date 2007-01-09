@@ -6,7 +6,9 @@
                 editTagsOnFiles = id; 
                 manageTags = id; 
                 openFiles = id; 
+                selectAll = id; 
                 showBrowser = id; 
+                showDonationWebsite = id; 
                 showPreferences = id; 
                 showResults = id; 
                 showTagger = id; 

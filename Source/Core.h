@@ -52,6 +52,8 @@
 - (IBAction)showBrowser:(id)sender;
 - (IBAction)showTagger:(id)sender;
 
+- (IBAction)showDonationWebsite:(id)sender;
+
 // misc
 - (BOOL)appHasBrowser;
 

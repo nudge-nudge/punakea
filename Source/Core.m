@@ -317,6 +317,11 @@
 	[taggerWindow makeKeyAndOrderFront:nil];
 }
 
+- (IBAction)showDonationWebsite:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/donate"]];
+}
+
 #pragma mark NSApplication delegate
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
@@ -350,7 +355,7 @@
 		}
 	}
 	
-	// if tagger window exists, make key, otherwise make browser key
+	// if tagger window exists, make key, otherwise make browser key (if exists)
 	if (lastTaggerWindow)
 		[lastTaggerWindow makeKeyAndOrderFront:self];
 	else if ([self appHasBrowser])
