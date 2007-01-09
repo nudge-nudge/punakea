@@ -11,6 +11,12 @@
 int const MAX_RETRY_COUNT = 10;
 useconds_t const PATAGSAVE_CYCLETIME = 200000; // 0.2 seconds
 
+@interface PATagSave (PrivateAPI)
+
+- (void)startBackgroundThread;
+
+@end
+
 
 @implementation PATagSave
 

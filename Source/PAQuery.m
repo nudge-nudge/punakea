@@ -633,7 +633,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 
 - (void)updateQueryFromTags
 {
-	NSMutableString *queryString = [self queryStringForTags:[tags selectedTags]];
+	NSString *queryString = [self queryStringForTags:[tags selectedTags]];
 	
 	if ([queryString isEqualToString:@""])
 	{

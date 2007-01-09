@@ -11,6 +11,8 @@
 #import "PATagging/PATaggableObject.h"
 #import "PATagging/PATags.h"
 
+#include <unistd.h>
+
 extern int const MAX_RETRY_COUNT;
 extern useconds_t const PATAGSAVE_CYCLETIME;
 

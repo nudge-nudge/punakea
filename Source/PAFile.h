@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATaggableObject.h"
+#import "NSFileManager+PAExtensions.h"
 
 extern NSString * const TAGGER_OPEN_COMMENT;
 extern NSString * const TAGGER_CLOSE_COMMENT;
@@ -40,8 +41,5 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
 - (NSString*)directory; /**< directory path the file is located in */
 - (BOOL)isDirectory; /**< checks if file is directory */
 - (NSImage*)icon; /**< icon representing file */
-
-// taggable object stuff
-- (void)saveTags;
 
 @end

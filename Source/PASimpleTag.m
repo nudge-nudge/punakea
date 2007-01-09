@@ -127,20 +127,20 @@ executes a spotlight query for the tag
 - (NSArray*)files
 {
 	CFStringRef searchString = (CFStringRef)[self queryInSpotlightSyntax];
-	MDQueryRef query = MDQueryCreate(NULL,searchString,NULL,NULL);
-	MDQueryExecute(query,kMDQuerySynchronous);
-	CFIndex resultCount = MDQueryGetResultCount(query);
+	MDQueryRef synchronousQuery = MDQueryCreate(NULL,searchString,NULL,NULL);
+	MDQueryExecute(synchronousQuery,kMDQuerySynchronous);
+	CFIndex resultCount = MDQueryGetResultCount(synchronousQuery);
 	
 	NSMutableArray *resultArray = [NSMutableArray array];
 	
 	for (int i=0;i<resultCount;i++)
 	{
-		MDItemRef queryResult = (MDItemRef) MDQueryGetResultAtIndex(query,i);
+		MDItemRef queryResult = (MDItemRef) MDQueryGetResultAtIndex(synchronousQuery,i);
 		NSString *fileName = (NSString*)MDItemCopyAttribute(queryResult,(CFStringRef)@"kMDItemPath");
 		[resultArray addObject:[PAFile fileWithPath:fileName]];
 	}
 	
-	CFRelease(query);
+	CFRelease(synchronousQuery);
 	
 	return resultArray;
 }

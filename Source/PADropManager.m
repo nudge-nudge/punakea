@@ -71,6 +71,8 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 		[handledTypes addObject:[dropHandler pboardType]];
 	}
 	
+	NSLog(@"pboardTypes: %@",handledTypes);
+	
 	return handledTypes;
 }
 

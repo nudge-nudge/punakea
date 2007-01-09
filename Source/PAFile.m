@@ -16,6 +16,13 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 - (void)setPath:(NSString*)path; /**< checks for illegal characters */
 - (BOOL)isEqualToFile:(PAFile*)otherFile;
 
+- (NSArray*)tagsInSpotlightComment;
+- (NSArray*)keywordsForComment:(NSString*)comment;
+- (NSArray*)keywordsForComment:(NSString*)comment isValid:(BOOL*)isValid;
+- (NSString*)finderTagComment;
+- (NSString*)finderCommentIgnoringKeywords;
+- (NSString*)finderSpotlightComment;
+
 
 /**
 helper method
@@ -35,6 +42,8 @@ helper method
  if this returns NO, the dropData should not be moved again.
  */
 - (BOOL)pathIsInManagedHierarchy:(NSString*)path;
+
+- (NSString*)pathForFiles;
 
 @end
 
@@ -220,8 +229,8 @@ helper method
 - (NSArray*)tagsInSpotlightComment
 {
 	NSArray *keywords = [self keywordsForComment:[self finderSpotlightComment]];
-	NSArray *tags = [globalTags tagsForNames:keywords];
-	return tags;
+	NSArray *tagsInComment = [globalTags tagsForNames:keywords];
+	return tagsInComment;
 }
 
 - (NSArray*)keywordsForComment:(NSString*)comment

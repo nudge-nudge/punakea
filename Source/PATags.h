@@ -73,4 +73,8 @@ returns the tag for the given name or creates a new simpletag
 - (void)sortUsingDescriptors:(NSArray *)sortDescriptors;
 - (PATag*)currentBestTag;
 
+/**
+will throw an exception for an invalid keyword
+ */
+- (void)validateKeyword:(NSString*)keyword;
 @end

@@ -54,4 +54,11 @@ helper method
  */ 
 - (NSString*)destinationForNewFile:(NSString*)fileName;
 
+/**
+may be used in order to check if files are managed
+ i.e. they must be put in the managed files area
+ if this method returns YES
+ */
+- (BOOL)shouldManageFiles;
+
 @end

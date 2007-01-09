@@ -27,10 +27,9 @@ draws the background
 adds all the tags in [controller visibleTags]
  */
 - (void)updateViewHierarchy;
-- (void)updateViewHierarchy:(BOOL)animate;
 - (void)removeTagButton:(PATagButton*)tagButton;
 
-- (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin animate:(BOOL)animate;
+- (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin;
 - (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin;
 
 /**
@@ -171,7 +170,7 @@ bind to visibleTags
 {
 	[self updateButtons];
 	[self setFrame:[self calcFrame]];
-	[self updateViewHierarchy:YES];
+	[self updateViewHierarchy];
 	[self setActiveButton:nil];
 	[self scrollToTop];
 }
@@ -378,11 +377,6 @@ bound to visibleTags
 }
 
 - (void)updateViewHierarchy
-{
-	[self updateViewHierarchy:NO];
-}
-
-- (void)updateViewHierarchy:(BOOL)animate
 {	
 	NSMutableArray *currentlyVisibleTags;
 	
