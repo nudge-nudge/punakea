@@ -41,6 +41,8 @@
 		globalTags = [PATags sharedTags];
 		[self loadDataFromDisk];
 		
+		tagSave = [[PATagSave alloc] init];
+		
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(tagsHaveChanged:) name:nil object:globalTags];
 		
@@ -51,6 +53,7 @@
 
 - (void)dealloc
 {
+	[tagSave release];
 	[preferenceController release];
 	[nc removeObserver:self];
     [super dealloc];
@@ -331,8 +334,6 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
-	NSLog(@"active");
-	
 	NSArray *windows = [[NSApplication sharedApplication] windows];
 
 	NSEnumerator *e = [windows objectEnumerator];

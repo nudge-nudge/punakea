@@ -91,6 +91,8 @@ must be used in order to check if files are managed
 
 - (void)addTags:(NSArray*)someTags
 {
+	NSLog(@"adding");
+	
 	[tags addObjectsFromArray:someTags];
 	
 	if ([self shouldManageFiles])

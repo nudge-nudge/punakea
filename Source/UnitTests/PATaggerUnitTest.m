@@ -18,20 +18,18 @@
 		@"/tmp/nudgenudge_unittestfile_2",
 		nil];
 	
-	simpleTagFactory = [[PASimpleTagFactory alloc] init];
-	
 	// create tags
 	testTags = [NSMutableArray array];
-	PASimpleTag *test_0 = [simpleTagFactory createTagWithName:@"test_0"];
-	PASimpleTag *test_1 = [simpleTagFactory createTagWithName:@"test_1"];
-	PASimpleTag *test_2 = [simpleTagFactory createTagWithName:@"test_2"];
-	PASimpleTag *test_3 = [simpleTagFactory createTagWithName:@"test_3"];
-	PASimpleTag *test_4 = [simpleTagFactory createTagWithName:@"test_4"];
-	PASimpleTag *test_5 = [simpleTagFactory createTagWithName:@"test_5"];
-	PASimpleTag *test_6 = [simpleTagFactory createTagWithName:@"test_6"];
-	PASimpleTag *test_7 = [simpleTagFactory createTagWithName:@"test_7"];
-	PASimpleTag *test_8 = [simpleTagFactory createTagWithName:@"test_8"];
-	PASimpleTag *test_9 = [simpleTagFactory createTagWithName:@"test_9"];
+	PASimpleTag *test_0 = [[PASimpleTag alloc] initWithName:@"test_0"];
+	PASimpleTag *test_1 = [[PASimpleTag alloc] initWithName:@"test_1"];
+	PASimpleTag *test_2 = [[PASimpleTag alloc] initWithName:@"test_2"];
+	PASimpleTag *test_3 = [[PASimpleTag alloc] initWithName:@"test_3"];
+	PASimpleTag *test_4 = [[PASimpleTag alloc] initWithName:@"test_4"];
+	PASimpleTag *test_5 = [[PASimpleTag alloc] initWithName:@"test_5"];
+	PASimpleTag *test_6 = [[PASimpleTag alloc] initWithName:@"test_6"];
+	PASimpleTag *test_7 = [[PASimpleTag alloc] initWithName:@"test_7"];
+	PASimpleTag *test_8 = [[PASimpleTag alloc] initWithName:@"test_8"];
+	PASimpleTag *test_9 = [[PASimpleTag alloc] initWithName:@"test_9"];
 	
 	[testTags addObject:test_0];
 	[testTags addObject:test_1];
@@ -44,7 +42,7 @@
 	[testTags addObject:test_8];
 	[testTags addObject:test_9];
 	
-	tags = [[PATags alloc] init];
+	tags = [PATags sharedTags;
 	[tags addTag:test_0];
 	[tags addTag:test_1];
 	[tags addTag:test_2];
@@ -55,9 +53,6 @@
 	[tags addTag:test_7];
 	[tags addTag:test_8];
 	[tags addTag:test_9];
-
-	tagger = [PATagger sharedInstance];
-	[tagger setTags:tags];
 	
 	[self createTestFiles:filenames];
 }

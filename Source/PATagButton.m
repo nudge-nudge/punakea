@@ -282,7 +282,7 @@ should be overridden according to apple docs
 	[sf setObject:criteria forKey:@"SearchCriteria"];
 	
 	// Output file to temp dir
-	NSString *filename = @"/tmp";
+	NSString *filename = NSTemporaryDirectory();
 	filename = [filename stringByAppendingPathComponent:[self title]];
 	filename = [filename stringByAppendingPathExtension:@"savedSearch"];
 	

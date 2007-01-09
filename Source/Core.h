@@ -14,6 +14,8 @@
 
 #import "PACollectionNotEmpty.h"
 
+#import "PATagSave.h"
+
 #import "Sparkle/SUUpdater.h"
 
 @interface Core : NSWindowController
@@ -23,7 +25,8 @@
 	IBOutlet SUUpdater		*updater;
 	
 	PATags					*globalTags;
-
+	PATagSave				*tagSave;
+	
 	BrowserController		*browserController;
 	
 	PreferenceController	*preferenceController;
