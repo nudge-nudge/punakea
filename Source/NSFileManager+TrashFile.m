@@ -13,7 +13,7 @@
 
 - (BOOL)trashFileAtPath:(NSString *)path
 {
-	NSArray *files = [NSArray arrayWithObject:path];
+	NSArray *files = [NSArray arrayWithObject:[path lastPathComponent]];
 	NSString *sourceDir = [path stringByDeletingLastPathComponent]; 
 	NSString *trashDir = [NSHomeDirectory() stringByAppendingPathComponent:@".Trash"];
 	int tag;
