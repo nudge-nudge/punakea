@@ -78,6 +78,8 @@ helper method
 		
 		[self setPath:aPath];
 		tags = [[self loadTags] retain];
+		
+		// TODO: Read metadata attributes
 	}
 	return self;
 }
@@ -95,23 +97,55 @@ helper method
 	{
 		[self commonInit];
 		
-		[self setPath:[metadataItem valueForAttribute:(id)kMDItemPath]];
-		tags = [[self loadTagsFromNSMetadataItem:metadataItem];
+		tags = [self loadTagsFromNSMetadataItem:metadataItem];
+			
+		id value;
+		[self setDisplayName:[metadataItem valueForAttribute:(id)kMDItemDisplayName]];
+		[self setPath:[metadataItem valueForAttribute:(id)kMDItemPath]];			
+		[self setContentTypeIdentifier:[metadataItem valueForAttribute:(id)kMDItemContentType]];
+		[self setContentTypeTree:[metadataItem valueForAttribute:@"kMDItemContentTypeTree"]];
+		
+		value = [self replaceMetadataValue:[metadataItem valueForAttribute:(id)kMDItemLastUsedDate]
+							  forAttribute:(id)kMDItemLastUsedDate];
+		if(value) [self setLastUsedDate:value];
+		
+		// AUDIO
+		value = [self replaceMetadataValue:[metadataItem valueForAttribute:(id)kMDItemAlbum]
+							  forAttribute:(id)kMDItemAlbum];
+		if(value) [self setAlbum:value];
+		
+		value = [self replaceMetadataValue:[metadataItem valueForAttribute:(id)kMDItemAuthors]
+							  forAttribute:(id)kMDItemAuthors];
+		if(value) [self setAuthors:value];
+		
+		value = [self replaceMetadataValue:[metadataItem valueForAttribute:@"kMDItemContentTypeTree"]
+							  forAttribute:@"kMDItemContentTypeTree"];
+		if([value isEqualTo:@"DOCUMENTS"])
+		{
+			// Bookmarks that are stored as webloc file don't have the right content type,
+			// so we set it here
+			NSString *path = [metadataItem valueForAttribute:(id)kMDItemPath];
+			if(path && [path hasSuffix:@"webloc"])
+			{
+				// Set new value for Content Type Tree
+				value = @"BOOKMARKS";
+				
+				/*
+				 // Set new value for Display Name
+				 NSString *displayName = [item valueForAttribute:(id)kMDItemDisplayName];
+				 [item setValue:[displayName substringToIndex:[displayName length]-7] forAttribute:(id)kMDItemDisplayName];
+				 */
+			}
+		}
+		[self setContentType:value];
 	}
-	return nil;
+	return self;
 }	
 
 - (void)dealloc
 {
 	[path release];
 	[super dealloc];
-}
-
-- (void)setPath:(NSString*)aPath
-{
-	[aPath retain];
-	[path release];
-	path = aPath;
 }
 
 + (PAFile*)fileWithPath:(NSString*)aPath
@@ -148,9 +182,16 @@ helper method
 }
 
 #pragma mark accessors
-- (NSString*)path
+- (NSString *)path
 {
 	return path;
+}
+
+- (void)setPath:(NSString *)aPath
+{
+	[aPath retain];
+	[path release];
+	path = aPath;
 }
 
 - (NSString*)standardizedPath
@@ -193,6 +234,28 @@ helper method
 - (NSString *)description
 {
 	return [@"file:" stringByAppendingString:path];
+}
+
+- (NSString *)album
+{
+	return album;
+}
+
+- (void)setAlbum:(NSString *)anAlbum
+{
+	[album release];
+	album = [anAlbum retain];
+}
+
+- (NSString *)authors
+{
+	return authors;
+}
+
+- (void)setAuthors:(NSString *)theAuthors
+{
+	[authors release];
+	authors = [theAuthors retain];
 }
 
 #pragma mark euality testing
@@ -456,6 +519,19 @@ helper method
 {
 	NSString *managedRoot = [self pathForFiles];
 	return [aPath hasPrefix:managedRoot];
+}
+
+
+#pragma mark Misc
+// Compatibility mode
+- (id)valueForAttribute:(id)attribute
+{
+	if([attribute isEqualTo:kMDItemContentType]) return [self contentTypeIdentifier];
+	if([attribute isEqualTo:@"kMDItemContentTypeTree"]) return [self contentType];
+	if([attribute isEqualTo:kMDItemDisplayName]) return [self displayName];
+	if([attribute isEqualTo:kMDItemPath]) return [self path];
+	if([attribute isEqualTo:kMDItemLastUsedDate]) return [self lastUsedDate];
+	return nil;
 }
 
 @end

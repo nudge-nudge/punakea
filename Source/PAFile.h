@@ -18,10 +18,15 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
  access files
  */
 @interface PAFile : PATaggableObject {
-	NSString *path; /**< full path including file.extension */
 	
-	NSWorkspace *workspace;
-	NSFileManager *fileManager;
+	NSString				*path; /**< full path including file.extension */
+	
+	NSString				*album;
+	NSString				*authors;
+	
+	NSWorkspace				*workspace;
+	NSFileManager			*fileManager;
+	
 }
 
 - (id)initWithPath:(NSString*)aPath;
@@ -43,5 +48,11 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
 - (NSString*)directory; /**< directory path the file is located in */
 - (BOOL)isDirectory; /**< checks if file is directory */
 - (NSImage*)icon; /**< icon representing file */
+
+// These accessors will be moved into some more sophisticated classes later
+- (NSString *)album;
+- (void)setAlbum:(NSString *)anAlbum;
+- (NSString *)authors;
+- (void)setAuthors:(NSString *)theAuthors;
 
 @end

@@ -19,12 +19,21 @@ abstract class representing a taggable object (normally a file
  tags must be loaded by subclass!
  */
 @interface PATaggableObject : NSObject <NSCopying> {
-	NSMutableSet *tags;
-	PATags *globalTags;
 	
-	int retryCount;
+	NSMutableSet			*tags;
+	PATags					*globalTags;
+	
+	int						retryCount;
+	
+	NSString				*displayName;
+	NSString				*contentType;
+	NSString				*contentTypeIdentifier;
+	NSArray					*contentTypeTree;
+	NSDate					*lastUsedDate;
 
-	NSNotificationCenter *nc;
+	NSNotificationCenter	*nc;
+	
+	NSDictionary			*simpleGrouping;
 }
 
 - (NSSet*)tags;
@@ -33,6 +42,17 @@ abstract class representing a taggable object (normally a file
 - (int)retryCount;
 - (void)incrementRetryCount;
 - (void)setRetryCount:(int)i;
+
+- (NSString *)displayName;
+- (void)setDisplayName:(NSString *)aDisplayName;
+- (NSString *)contentType;
+- (void)setContentType:(NSString *)aContentType;
+- (NSString *)contentTypeIdentifier;
+- (void)setContentTypeIdentifier:(NSString *)aContentTypeIdentifier;
+- (NSArray *)contentTypeTree;
+- (void)setContentTypeTree:(NSArray *)aContentTypeTree;
+- (NSDate *)lastUsedDate;
+- (void)setLastUsedDate:(NSDate *)aDate;
 
 - (void)addTag:(PATag*)tag;
 - (void)addTags:(NSArray*)someTags;
@@ -59,6 +79,8 @@ must be implemented by subclass,
  @return success or failure
  */
 - (BOOL)saveTags;
+
+- (id)replaceMetadataValue:(id)attrValue forAttribute:(NSString *)attrName;
 
 
 @end

@@ -51,11 +51,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (id)initWithTags:(PASelectedTags*)otherTags
 {
 	if (self = [super init])
-	{
-		// Simple Grouping
-		NSString *path = [[NSBundle mainBundle] pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
-		[self setSimpleGrouping:[NSDictionary dictionaryWithContentsOfFile:path]];
-		
+	{		
 		[self setDelegate:self];
 		[self createQuery];
 		
@@ -73,7 +69,6 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	[bundlingAttributes release];
 	[filterDict release];
 	[predicate release];
-	[simpleGrouping release];
 	[super dealloc];
 }
 
@@ -172,7 +167,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		
 		// First, match new to old results
 		NSEnumerator *enumerator = [newFlatResults objectEnumerator];
-		PAQueryItem *newResultItem;
+		PAFile *newResultItem;
 		while(newResultItem = [enumerator nextObject])
 		{
 			if(![theFlatResults containsObject:newResultItem])
@@ -183,7 +178,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		
 		// Next, match vice-versa
 		enumerator = [theFlatResults objectEnumerator];
-		PAQueryItem *oldResultItem;
+		PAFile *oldResultItem;
 		while(oldResultItem = [enumerator nextObject])
 		{
 			if(![newFlatResults containsObject:oldResultItem])
@@ -248,6 +243,9 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			if(wrapping)
 			{
 				// theItem is a NSMetadataItem
+				
+				// TODO: this can't work as there is not replacementValue category any more!
+				
 				id valueToBeReplaced = [theItem valueForAttribute:bundlingAttribute];
 				bundleValue = [delegate metadataQuery:self
 						 replacementValueForAttribute:bundlingAttribute
@@ -268,57 +266,13 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			}			
 		}
 		
-		// TODO: DEFINE MACRO FOR REPLACEMENTVALUEFORATTRIBUTE!
-		PAQueryItem *item;
+		PAFile *item;
 		if(wrapping)
 		{
-			// Wrap theItem (a NSMetadataItem) into PAQueryItem
+			// Wrap theItem (a NSMetadataItem) into PAFile
 			NSMetadataItem *mdItem = theItem;
-			id value;
-			item = [[[PAQueryItem alloc] init] autorelease];
-			[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:@"value"];
-			[item setValue:[mdItem valueForAttribute:(id)kMDItemDisplayName] forAttribute:(id)kMDItemDisplayName];
-			[item setValue:[mdItem valueForAttribute:(id)kMDItemPath] forAttribute:(id)kMDItemPath];			
-			[item setValue:[mdItem valueForAttribute:(id)kMDItemContentType] forAttribute:(id)kMDItemContentType];
-			
-			value = [delegate metadataQuery:self
-			   replacementValueForAttribute:(id)kMDItemLastUsedDate
-									  value:[mdItem valueForAttribute:(id)kMDItemLastUsedDate]];
-			if(value) [item setValue:value forAttribute:(id)kMDItemLastUsedDate];
-			
-			// AUDIO
-			value = [delegate metadataQuery:self
-			   replacementValueForAttribute:(id)kMDItemAlbum
-									  value:[mdItem valueForAttribute:(id)kMDItemAlbum]];
-			if(value) [item setValue:value forAttribute:(id)kMDItemAlbum];
-			
-			value = [delegate metadataQuery:self
-			   replacementValueForAttribute:(id)kMDItemAuthors
-									  value:[mdItem valueForAttribute:(id)kMDItemAuthors]];
-			if(value) [item setValue:value forAttribute:(id)kMDItemAuthors];
-			
-			value = [delegate metadataQuery:self
-			   replacementValueForAttribute:@"kMDItemContentTypeTree"
-									  value:[mdItem valueForAttribute:@"kMDItemContentTypeTree"]];
-			if([value isEqualTo:@"DOCUMENTS"])
-			{
-				// Bookmarks that are stored as webloc file don't have the right content type,
-				// so we set it here
-				NSString *path = [mdItem valueForAttribute:(id)kMDItemPath];
-				if(path && [path hasSuffix:@"webloc"])
-				{
-					// Set new value for Content Type Tree
-					value = @"BOOKMARKS";
-					
-					/*
-					// Set new value for Display Name
-					NSString *displayName = [item valueForAttribute:(id)kMDItemDisplayName];
-					[item setValue:[displayName substringToIndex:[displayName length]-7] forAttribute:(id)kMDItemDisplayName];
-					*/
-				}
-			}
-			[item setValue:value forAttribute:@"kMDItemContentTypeTree"];
-			
+			item = [[PAFile alloc] initWithNSMetadataItem:mdItem];
+						
 			// TODO more attributes of item, use replacementValueForAttribute for each value!!
 		
 		} else {
@@ -401,7 +355,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	flatFilteredResults = [[NSMutableArray alloc] init];
 
 	NSEnumerator *enumerator = [flatResults objectEnumerator];
-	PAQueryItem *item;
+	PAFile *item;
 	while(item = [enumerator nextObject])
 	{		
 		id valueForAttribute = [item valueForAttribute:attribute];
@@ -426,7 +380,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
                    forBundlingAttribute:(NSArray *)attribute
 {
 	NSEnumerator *enumerator = [flatResults objectEnumerator];
-	PAQueryItem *item;
+	PAFile *item;
 	while(item = [enumerator nextObject])
 	{		
 		id valueForAttribute = [item valueForAttribute:attribute];
@@ -452,7 +406,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	NSString *trashDir = [NSHomeDirectory() stringByAppendingPathComponent:@".Trash"];
 	
 	NSEnumerator *e = [items objectEnumerator];
-	PAQueryItem *item;
+	PAFile *item;
 
 	while (item = [e nextObject])
 	{
@@ -490,7 +444,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	[self enableUpdates];
 }
 
-- (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window
+/*- (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window
 {
 	errorWindow = window;
 	
@@ -573,7 +527,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	{
 		return NO;
 	}
-}
+}*/
 
 - (void)fileManager:(NSFileManager *)manager willProcessPath:(NSString *)path
 {

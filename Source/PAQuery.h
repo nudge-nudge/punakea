@@ -11,7 +11,6 @@
 #import "PATagging/PAFile.h"
 
 #import "PAQueryBundle.h"
-#import "PAQueryItem.h"
 #import "PASelectedTags.h"
 #import "PAThumbnailManager.h"
 #import "NSFileManager+TrashFile.h"
@@ -126,10 +125,10 @@ initializer
                    forBundlingAttribute:(NSArray *)attribute;
 
 - (void)trashItems:(NSArray *)items errorWindow:(NSWindow *)window;
-- (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window;
+//- (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window;
 
-- (id)delegate;
-- (void)setDelegate:(id)aDelegate;
+//- (id)delegate;
+//- (void)setDelegate:(id)aDelegate;
 
 - (BOOL)hasFilter;
 

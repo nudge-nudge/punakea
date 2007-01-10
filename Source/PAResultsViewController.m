@@ -184,7 +184,7 @@
 	{
 		id item = [outlineView itemAtRow:row];
 		
-		if([[item class] isEqualTo:[PAQueryItem class]])
+		if([[item class] isEqualTo:[PAFile class]])
 			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
 		
 		row = [selectedRowIndexes indexGreaterThanIndex:row];
@@ -408,7 +408,7 @@
 	 forTableColumn:(NSTableColumn *)tableColumn
 	         byItem:(id)item
 {
-	PAQueryItem *queryItem = item;
+	PAFile *queryItem = item;
 	NSString *value = object;
 	
 	BOOL wasMoved = [query renameItem:queryItem to:value errorWindow:[ov window]];
@@ -424,7 +424,7 @@
 	if([item isKindOfClass:[PAQueryBundle class]]) return 20.0;
 	
 	// Height of list items is determined by its content type
-	if([item isKindOfClass:[PAQueryItem class]])
+	if([item isKindOfClass:[PAFile class]])
 	{
 		NSString *contentType = [item valueForAttribute:@"kMDItemContentTypeTree"];		
 		if([contentType isEqualToString:@"BOOKMARKS"] &&
@@ -475,7 +475,7 @@
 	{
 		cell = [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
 	}
-	else if([item isKindOfClass:[PAQueryItem class]])
+	else if([item isKindOfClass:[PAFile class]])
 	{
 		NSString *contentType = [item valueForAttribute:@"kMDItemContentTypeTree"];
 		if([contentType isEqualToString:@"BOOKMARKS"] &&
@@ -610,7 +610,7 @@
 	NSMutableArray *fileList = [NSMutableArray array];
 	
 	NSEnumerator *e = [items objectEnumerator];
-	PAQueryItem *queryItem;
+	PAFile *queryItem;
 	
 	while (queryItem = [e nextObject])
 	{

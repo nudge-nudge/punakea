@@ -212,7 +212,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	[self deselectAll:self];		
 	NSEnumerator *itemsEnumerator = [[self selectedItems] objectEnumerator];
-	PAQueryItem *item;
+	PAFile *item;
 	while(item = [itemsEnumerator nextObject])
 	{	
 		for(int i = 0; i < [self numberOfRows]; i++)
@@ -231,7 +231,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			if([thisItem isKindOfClass:[NSArray class]])
 			{
 				NSEnumerator *arrayEnumerator = [thisItem objectEnumerator];
-				PAQueryItem *arrayItem;
+				PAFile *arrayItem;
 				while(arrayItem = [arrayEnumerator nextObject])
 				{
 					if([item isEqualTo:arrayItem])
@@ -314,7 +314,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		NSArray *userInfoRemovedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
 		NSEnumerator *enumerator = [userInfoRemovedItems objectEnumerator];
-		PAQueryItem *item;
+		PAFile *item;
 		while(item = [enumerator nextObject]) {
 			if([[self selectedItems] containsObject:item]) {
 				[[self selectedItems] removeObject:item];
@@ -617,7 +617,7 @@ needed for supporting dragging to trash
 	//[super textDidChange:notification];
 	
 	// Set text color to red if the new destination already exists
-	PAQueryItem *item = [self itemAtRow:[self selectedRow]];
+	PAFile *item = [self itemAtRow:[self selectedRow]];
 	PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
 	
 	NSText *textView = [notification object];
