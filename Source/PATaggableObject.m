@@ -30,7 +30,6 @@ must be used in order to check if files are managed
 	if (self = [super init])
 	{
 		globalTags = [PATags sharedTags];
-		tags = [[NSMutableSet alloc] init];
 		
 		retryCount = 0;
 		
@@ -137,7 +136,7 @@ must be used in order to check if files are managed
 - (BOOL)saveTags
 {
 	// does nothing, must be implemented by subclass
-	return YES;
+	return NO;
 }
 
 - (void)handleFileManagement

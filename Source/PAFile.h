@@ -26,11 +26,13 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
 
 - (id)initWithPath:(NSString*)aPath;
 - (id)initWithFileURL:(NSURL*)url;
+- (id)initWithNSMetadataItem:(NSMetadataItem*)metadataItem;
 
 // convenience initializers
 + (PAFile*)fileWithPath:(NSString*)aPath;
 + (NSArray*)filesWithFilepaths:(NSArray*)filepaths;
 + (PAFile*)fileWithFileURL:(NSURL*)url;
++ (PAFile*)fileWithNSMetadataItem:(NSMetadataItem*)metadataItem;
 
 // file wrapping stuff
 - (NSString*)path; /**< full path including file.extension */

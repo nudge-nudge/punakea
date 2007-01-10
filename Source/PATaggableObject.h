@@ -15,6 +15,8 @@ extern NSString * const PATaggableObjectUpdate;
 /**
 abstract class representing a taggable object (normally a file
  but can be anything really)
+ 
+ tags must be loaded by subclass!
  */
 @interface PATaggableObject : NSObject <NSCopying> {
 	NSMutableSet *tags;
@@ -57,5 +59,6 @@ must be implemented by subclass,
  @return success or failure
  */
 - (BOOL)saveTags;
+
 
 @end

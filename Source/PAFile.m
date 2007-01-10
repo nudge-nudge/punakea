@@ -13,6 +13,8 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 
 @interface PAFile (PrivateAPI)
 
+- (void)commonInit;
+
 - (void)setPath:(NSString*)path; /**< checks for illegal characters */
 - (BOOL)isEqualToFile:(PAFile*)otherFile;
 
@@ -23,6 +25,17 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 - (NSString*)finderCommentIgnoringKeywords;
 - (NSString*)finderSpotlightComment;
 
+/**
+loads tags from backing storage
+ @return tags read from storage
+ */
+- (NSMutableSet*)loadTagsFromStorage;
+
+/**
+loads tags from kMDItemFinderComment
+ @return tags parsed from spotlight finder comment
+ */
+- (NSMutableSet*)loadTagsFromNSMetadataItem:(NSMetadataItem*)metadataItem;
 
 /**
 helper method
@@ -50,16 +63,21 @@ helper method
 @implementation PAFile
 
 #pragma mark init+dealloc
-// designated initializer
+// common initializer
+- (void)commonInit
+{
+	workspace = [NSWorkspace sharedWorkspace];
+	fileManager = [NSFileManager defaultManager];
+}
+
 - (id)initWithPath:(NSString*)aPath
 {
 	if (self = [super init])
-	{		
-		[self setPath:aPath];
-		workspace = [NSWorkspace sharedWorkspace];
-		fileManager = [NSFileManager defaultManager];
+	{
+		[self commonInit];
 		
-		[self setTags:[NSSet setWithArray:[self tagsInSpotlightComment]]];
+		[self setPath:aPath];
+		tags = [[self loadTags] retain];
 	}
 	return self;
 }
@@ -70,7 +88,17 @@ helper method
 	
 	return [self initWithPath:[url path]];
 }
-	
+
+- (id)initWithNSMetadataItem:(NSMetadataItem*)metadataItem;
+{
+	if (self = [super init])
+	{
+		[self commonInit];
+		tags = [[self loadTagsFromNSMetadataItem:metadataItem];
+	}
+	return nil;
+}	
+
 - (void)dealloc
 {
 	[path release];
@@ -204,6 +232,8 @@ helper method
 #pragma mark abstract implemented
 - (BOOL)saveTags
 {	
+	NSLog(@"saving");
+	
 	// create comment
 	NSString *keywordComment = [self finderTagComment];
 	NSString *finderComment = [self finderCommentIgnoringKeywords];
@@ -226,6 +256,12 @@ helper method
 }
 
 #pragma mark spotlight comment integration
+- (NSMutableSet*)loadTags
+{
+	NSArray *tags = [self tagsInSpotlightComment];
+	return [NSMutableSet setWithArray:tags];
+}
+
 - (NSArray*)tagsInSpotlightComment
 {
 	NSArray *keywords = [self keywordsForComment:[self finderSpotlightComment]];
