@@ -100,7 +100,6 @@ helper method
 		tags = [[self loadTagsFromNSMetadataItem:metadataItem] retain];
 			
 		id value;
-		[self setDisplayName:[metadataItem valueForAttribute:(id)kMDItemDisplayName]];
 		[self setPath:[metadataItem valueForAttribute:(id)kMDItemPath]];			
 		[self setContentTypeIdentifier:[metadataItem valueForAttribute:(id)kMDItemContentType]];
 		[self setContentTypeTree:[metadataItem valueForAttribute:@"kMDItemContentTypeTree"]];
@@ -199,14 +198,15 @@ helper method
 	return [path stringByStandardizingPath];
 }
 
-- (NSString*)name
+// overwriting method of abstract class
+- (NSString *)displayName
 {
 	return [path lastPathComponent];
 }
 
-- (NSString*)nameWithoutExtension
+- (NSString*)displayNameWithoutExtension
 {
-	return [[self name] stringByDeletingPathExtension];
+	return [[self displayName] stringByDeletingPathExtension];
 }
 
 - (NSString*)extension
@@ -323,6 +323,34 @@ helper method
 	
 	// update path to reflect new location
 	[self setPath:newFullPath];
+	
+	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
+}
+
+- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)errorWindow
+{
+	 // TODO capitalization !!
+	
+	// TODO error checking in handler
+	NSString *newPath = [[self directory] stringByAppendingPathComponent:newName];
+	BOOL success = [[NSFileManager defaultManager] movePath:[self path]
+													 toPath:newPath
+													handler:nil];
+	
+	// update path to reflect new location
+	[self setPath:newPath];
+	
+	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
+	
+	return success;
+}
+
+- (BOOL)validateNewName:(NSString*)newName
+{
+	NSString *newDestination = [[self directory] stringByAppendingPathComponent:newName];
+	
+	return (![[NSFileManager defaultManager] fileExistsAtPath:newDestination] || 
+			([newDestination compare:[self path] options:NSCaseInsensitiveSearch] == NSOrderedSame));
 }
 
 #pragma mark spotlight comment integration

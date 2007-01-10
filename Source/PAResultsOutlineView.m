@@ -212,7 +212,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	[self deselectAll:self];		
 	NSEnumerator *itemsEnumerator = [[self selectedItems] objectEnumerator];
-	PAFile *item;
+	PATaggableObject *item;
 	while(item = [itemsEnumerator nextObject])
 	{	
 		for(int i = 0; i < [self numberOfRows]; i++)
@@ -231,7 +231,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			if([thisItem isKindOfClass:[NSArray class]])
 			{
 				NSEnumerator *arrayEnumerator = [thisItem objectEnumerator];
-				PAFile *arrayItem;
+				PATaggableObject *arrayItem;
 				while(arrayItem = [arrayEnumerator nextObject])
 				{
 					if([item isEqualTo:arrayItem])
@@ -314,7 +314,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		NSArray *userInfoRemovedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
 		NSEnumerator *enumerator = [userInfoRemovedItems objectEnumerator];
-		PAFile *item;
+		PATaggableObject *item;
 		while(item = [enumerator nextObject]) {
 			if([[self selectedItems] containsObject:item]) {
 				[[self selectedItems] removeObject:item];
@@ -614,23 +614,16 @@ needed for supporting dragging to trash
 
 - (void)textDidChange:(NSNotification *)notification
 {
-	//[super textDidChange:notification];
-	
 	// Set text color to red if the new destination already exists
-	PAFile *item = [self itemAtRow:[self selectedRow]];
-	PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
+	PATaggableObject *taggableObject = [self itemAtRow:[self selectedRow]];
 	
 	NSText *textView = [notification object];
+	NSString *newName = [textView string];
 	
-	NSString *newDestination = [[file directory] stringByAppendingPathComponent:[textView string]];
-	
-	if([[NSFileManager defaultManager] fileExistsAtPath:newDestination] &&
-	   [newDestination compare:[file path] options:NSCaseInsensitiveSearch] != NSOrderedSame)
-	{
+	if(![taggableObject validateNewName:newName])
 		[textView setTextColor:[NSColor redColor]];
-	} else {
+	else 
 		[textView setTextColor:[NSColor textColor]];
-	}
 	
 	[self setNeedsDisplay:YES];
 }

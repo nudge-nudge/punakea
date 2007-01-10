@@ -80,6 +80,26 @@ must be implemented by subclass,
  */
 - (BOOL)saveTags;
 
+/**
+will be called on renaming
+ must be implemented in subclass
+ @param newName new name for taggable object
+ @param window error window
+ @return success as bool
+ */
+- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)errorWindow;
+
+/**
+checks if new name for object is valid
+ for example:
+ PAFile needs to check if the filename is free in the directory
+ 
+ must be implemented by subclass!
+ @param newName proposed name
+ @return YES if valid, else NO
+ */
+- (BOOL)validateNewName:(NSString*)newName;
+
 - (id)replaceMetadataValue:(id)attrValue forAttribute:(NSString *)attrName;
 
 

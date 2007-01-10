@@ -43,7 +43,7 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
 - (NSString*)path; /**< full path including file.extension */
 - (NSString*)standardizedPath; /**< standardized path */
 - (NSString*)name; /**< file name including extension */
-- (NSString*)nameWithoutExtension; /**< file name without extension */
+- (NSString*)displayNameWithoutExtension; /**< file name without extension */
 - (NSString*)extension; /**< file extension */
 - (NSString*)directory; /**< directory path the file is located in */
 - (BOOL)isDirectory; /**< checks if file is directory */

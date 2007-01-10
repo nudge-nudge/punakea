@@ -194,6 +194,7 @@ must be used in order to check if files are managed
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
 
+#pragma mark abstract methods
 - (BOOL)saveTags
 {
 	// does nothing, must be implemented by subclass
@@ -205,6 +206,17 @@ must be used in order to check if files are managed
 	// does nothing, must be implemented by subclass
 }
 
+- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)errorWindow;
+{
+	return NO;
+}
+
+- (BOOL)validateNewName:(NSString*)newName
+{
+	return NO;
+}
+
+#pragma mark helper
 - (BOOL)shouldManageFiles
 {
 	// only manage if there are some tags on the file

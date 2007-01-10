@@ -408,14 +408,13 @@
 	 forTableColumn:(NSTableColumn *)tableColumn
 	         byItem:(id)item
 {
-	PAFile *queryItem = item;
+	PATaggableObject *taggableObject = item;
 	NSString *value = object;
 	
-	BOOL wasMoved = [query renameItem:queryItem to:value errorWindow:[ov window]];
+	BOOL wasMoved = [taggableObject renameTo:value errorWindow:[ov window]];
 	
 	if(wasMoved) [ov reloadData];
 }
-
 
 #pragma mark ResultsOutlineView Delegate
 - (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
