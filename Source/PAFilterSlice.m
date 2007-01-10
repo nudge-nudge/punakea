@@ -64,7 +64,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 #pragma mark Actions
 - (void)setupButtons
 {
-	for(unsigned i = 0; i < 8; i++)
+	for(unsigned i = 0; i < 9; i++)
 	{	
 		// Init button
 		PAFilterButton *button = [[PAFilterButton alloc] initWithFrame:[self frame]];
@@ -108,12 +108,17 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 				[filter setObject:[NSArray arrayWithObject:@"IMAGES"] forKey:@"filterValues"];
 				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
 				break;
-			case 6:		// CONTACT
+			case 6:		// PRESENTATIONS
+				[filter setObject:@"PRESENTATIONS" forKey:@"title"];
+				[filter setObject:[NSArray arrayWithObject:@"PRESENTATIONS"] forKey:@"filterValues"];
+				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
+				break;
+			case 7:		// CONTACT
 				[filter setObject:@"CONTACT" forKey:@"title"];
 				[filter setObject:[NSArray arrayWithObject:@"CONTACT"] forKey:@"filterValues"];
 				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
 				break;
-			case 7:		// BOOKMARKS
+			case 8:		// BOOKMARKS
 				[filter setObject:@"BOOKMARKS" forKey:@"title"];
 				[filter setObject:[NSArray arrayWithObject:@"BOOKMARKS"] forKey:@"filterValues"];
 				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
