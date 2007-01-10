@@ -162,29 +162,24 @@
 	   Temporary solution: Ues [query flatResults]
 	*/
 
-	int i = [[query flatResults] count];
+	[self removeAllTags];
 	
-	if (i > 0)
+	NSEnumerator *resultEnumerator = [[query flatResults] objectEnumerator];
+	PATaggableObject *taggableObject;
+	
+	while (taggableObject = [resultEnumerator nextObject])
 	//get the related tags to the current results
 	{
-		//TODO hack
-		[self removeAllTags];
-		//disable updates, parse files, continue -- TODO make more efficient, performance will SUCK
-		while (i--) 
+		NSEnumerator *tagEnumerator = [[taggableObject tags] objectEnumerator];
+		PATag *tag;
+		
+		while (tag = [tagEnumerator nextObject]) 
 		{
-			//get keywords for result
-			PATaggableObject *taggableObject = [[query flatResults] objectAtIndex:i];
-			
-			NSEnumerator *tagEnumerator = [[taggableObject tags] objectEnumerator];
-			PATag *tag;
-			
-			while (tag = [tagEnumerator nextObject]) 
+			if (![self containsTag:tag] && ![selectedTags containsTag:tag])
 			{
-				if (![self containsTag:tag] && ![selectedTags containsTag:tag])
-				{
-					[self addTag:tag];
-				}
+				[self addTag:tag];
 			}
+
 		}
 	}
 	

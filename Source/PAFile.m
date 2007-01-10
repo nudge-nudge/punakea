@@ -97,7 +97,7 @@ helper method
 	{
 		[self commonInit];
 		
-		tags = [self loadTagsFromNSMetadataItem:metadataItem];
+		tags = [[self loadTagsFromNSMetadataItem:metadataItem] retain];
 			
 		id value;
 		[self setDisplayName:[metadataItem valueForAttribute:(id)kMDItemDisplayName]];
