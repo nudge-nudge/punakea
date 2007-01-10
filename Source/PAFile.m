@@ -551,7 +551,7 @@ helper method
 
 
 #pragma mark Misc
-// Compatibility mode
+// Compatibility mode for PAQuery
 - (id)valueForAttribute:(id)attribute
 {
 	if([attribute isEqualTo:kMDItemContentType]) return [self contentTypeIdentifier];

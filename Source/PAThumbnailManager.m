@@ -38,13 +38,17 @@ static PAThumbnailManager *sharedInstance = nil;
 		numberOfThumbsBeingProcessed = 0;
 		icons = [[NSMutableDictionary alloc] init];
 		thumbnails = [[NSMutableDictionary alloc] init];
-		queue = [[NSMutableArray alloc] init];
+		queue = [[PAThreadSafeQueue alloc] init];
 		stack = [[NSMutableArray alloc] init];
 		
 		dummyImageThumbnail = [NSImage imageNamed:@"dummyThumbLarge"];
 		[dummyImageThumbnail setFlipped:YES];
 		dummyImageIcon = [NSImage imageNamed:@"dummyThumbSmall"];
 		[dummyImageIcon setFlipped:YES];
+		
+		[NSApplication detachDrawingThread:@selector(processQueue)
+								  toTarget:self
+								withObject:nil];
 	}
 	return self;
 }
@@ -72,18 +76,11 @@ static PAThumbnailManager *sharedInstance = nil;
 		return thumbnail;
 	} else {
 		// Add filename to queue
-		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeThumbnail];		
-		[queue addObject:item];
 		[thumbnails setObject:dummyImageThumbnail forKey:filename];
 		
-		if(!timer)
-		{
-			timer = [NSTimer scheduledTimerWithTimeInterval:0.2
-													 target:self
-												   selector:@selector(processQueue)
-												   userInfo:nil
-													repeats:YES];
-		}
+		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeThumbnail];		
+		[queue enqueue:item];
+		[item release];
 		
 		return dummyImageThumbnail;
 	}
@@ -110,20 +107,12 @@ static PAThumbnailManager *sharedInstance = nil;
 	{
 		return icon;
 	} else {		
-		// Add filename to queue						
-		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeIcon];		
-		[queue addObject:item];
-		[item release];
+		// Add filename to queue	
 		[icons setObject:dummyImageIcon forKey:filename];
 		
-		if(!timer)
-		{
-			timer = [NSTimer scheduledTimerWithTimeInterval:0.2
-													 target:self
-												   selector:@selector(processQueue)
-												   userInfo:nil
-													repeats:YES];
-		}
+		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeIcon];		
+		[queue enqueue:item];
+		[item release];
 		
 		return dummyImageIcon;
 	}
@@ -133,56 +122,37 @@ static PAThumbnailManager *sharedInstance = nil;
 {
 	//NSLog(@"processing queue");
 	
-	while(numberOfThumbsBeingProcessed < CONCURRENT_IMAGE_LOADING_MAX &&
-	      [queue count] > 0)
+	//while(numberOfThumbsBeingProcessed < CONCURRENT_IMAGE_LOADING_MAX &&
+	//      [queue count] > 0)
+	while(true)
 	{
-		@synchronized(self)
+		/*@synchronized(self)
 		{
 			numberOfThumbsBeingProcessed++;
-		}
+		}*/
 		
-		PAThumbnailItem *item;
-		@synchronized(queue)
-		{
-			item = [[queue objectAtIndex:0] retain];		 
-			[queue removeObjectAtIndex:0];
-		}
+		PAThumbnailItem *item = [queue dequeue];
 		
 		if([item type] == PAItemTypeThumbnail)
 		{
-			[ThreadWorker workOn:self
-					withSelector:@selector(generateThumbnailFromFile:)
-					  withObject:[item autorelease]
-				  didEndSelector:nil];
+			[self generateThumbnailFromFile:[item autorelease]];
 		} else {
-			[ThreadWorker workOn:self
-					withSelector:@selector(generateIconForFile:)
-					  withObject:[item autorelease]
-				  didEndSelector:nil];
+			[self generateIconForFile:[item autorelease]];
 		}
-	} 
 	
-	// If number of cached images exceeds limit, remove first item of stack
-	@synchronized(self)
-	{
-		if([stack count] > NUMBER_OF_CACHED_ITEMS_MAX)
+		// If number of cached images exceeds limit, remove first item of stack
+		@synchronized(self)
 		{
-			NSString *filename = [stack objectAtIndex:0];
-			
-			@synchronized(thumbnails)
+			if([stack count] > NUMBER_OF_CACHED_ITEMS_MAX)
 			{
+				NSString *filename = [stack objectAtIndex:0];
+				
 				[thumbnails removeObjectForKey:filename];
-			}
-			@synchronized(icons)
-			{
 				[icons removeObjectForKey:filename];
-			}
-			@synchronized(stack)
-			{
 				[stack removeObjectAtIndex:0];
+				
+				//NSLog(@"removed: %@", filename);
 			}
-			
-			//NSLog(@"removed: %@", filename);
 		}
 	}
 }
@@ -194,25 +164,21 @@ static PAThumbnailManager *sharedInstance = nil;
 	NSImage *thumbnail = [self thumbnailFromFileNew:filename maxBounds:NSMakeSize(76,75)];
 	//if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
-	@synchronized(thumbnails)
+	@synchronized(self)
 	{
 		[thumbnails removeObjectForKey:filename];
 		[thumbnails setObject:thumbnail forKey:filename];
-	}
-	@synchronized(stack)
-	{
+	
 		[stack addObject:filename];
-	}
-	@synchronized(self)
-	{
-		numberOfThumbsBeingProcessed--;
+	
+		//numberOfThumbsBeingProcessed--;
 	}
 	
 	// Post notification
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
 		
-	//NSLog(@"finished %@", filename);
+	//NSLog(@"finished thumbnail %@", filename);
 }
 
 - (void)generateIconForFile:(PAThumbnailItem *)thumbnailItem
@@ -221,23 +187,21 @@ static PAThumbnailManager *sharedInstance = nil;
 
 	NSImage *img = [[NSWorkspace sharedWorkspace] iconForFile:filename];
 	
-	@synchronized(thumbnails)
+	@synchronized(self)
 	{
 		[icons removeObjectForKey:filename];
 		[icons setObject:img forKey:filename];
-	}
-	@synchronized(stack)
-	{
+	
 		[stack addObject:filename];
-	}
-	@synchronized(self)
-	{
-		numberOfThumbsBeingProcessed--;
+	
+		//numberOfThumbsBeingProcessed--;
 	}
 	
 	// Post notification
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
+	
+	//NSLog(@"finished icon %@", filename);
 }
 
 - (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds
@@ -480,7 +444,7 @@ static PAThumbnailManager *sharedInstance = nil;
 
 - (void)removeAllQueuedItems
 {	
-	[queue removeAllObjects];
+	/*[queue removeAllObjects];
 
 	// Remove dummys from thumbnails
 	NSArray *keys = [thumbnails allKeys];
@@ -498,7 +462,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		NSImage *image = [icons objectForKey:[keys objectAtIndex:i]];
 		if([image isEqualTo:dummyImageIcon])
 			[icons removeObjectForKey:[keys objectAtIndex:i]];
-	}
+	}*/
 }
 
 

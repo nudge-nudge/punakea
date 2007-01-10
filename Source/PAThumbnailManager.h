@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAThumbnailItem.h"
-#import "ThreadWorker.h"
+#import "PAThreadSafeQueue.h"
 
 
 extern NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification;
@@ -18,7 +18,7 @@ extern NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification;
 	NSMutableDictionary			*icons;	
 	NSMutableDictionary			*thumbnails;
 	
-	NSMutableArray				*queue;
+	PAThreadSafeQueue			*queue;
 	NSMutableArray				*stack;
 	int							numberOfThumbsBeingProcessed;
 	
