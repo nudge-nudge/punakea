@@ -28,9 +28,9 @@
 		
 		relatedTags = [[PARelatedTags alloc] initWithSelectedTags:selectedTags query:query];
 		
-		nc = [NSNotificationCenter defaultCenter];
-		
 		draggedItems = nil;
+		
+		nc = [NSNotificationCenter defaultCenter];
 		
 		[nc addObserver:self 
 			   selector:@selector(selectedTagsHaveChanged:) 
@@ -302,6 +302,8 @@
 	if([thumbItem view] == outlineView)
 	{
 		[outlineView setNeedsDisplayInRect:[thumbItem frame]];
+		NSRect frame = [thumbItem frame];
+		NSLog(@"ja %f %f %f %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 	}
 }
 
