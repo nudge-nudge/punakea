@@ -350,16 +350,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self setNeedsDisplay:YES];
 }
 
-- (void)boundsDidChange:(NSNotification *)notification
-{
-	PAThumbnailItem *thumbItem = (PAThumbnailItem *)[notification object];
-	
-	if([thumbItem view] == self)
-	{
-		[self setNeedsDisplayInRect:[thumbItem frame]];
-	}
-}
-
 
 #pragma mark Events
 /**

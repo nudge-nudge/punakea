@@ -300,10 +300,8 @@
 	PAThumbnailItem *thumbItem = (PAThumbnailItem *)[notification object];
 	
 	if([thumbItem view] == outlineView)
-	{
-		[outlineView setNeedsDisplayInRect:[thumbItem frame]];
-		NSRect frame = [thumbItem frame];
-		NSLog(@"ja %f %f %f %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+	{	
+		[outlineView displayRect:[thumbItem frame]];
 	}
 }
 

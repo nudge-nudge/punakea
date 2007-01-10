@@ -816,7 +816,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	if([thumbItem view] == self)
 	{
-		[self setNeedsDisplayInRect:[thumbItem frame]];
+		[self displayRect:[thumbItem frame]];
 	}
 }
 
