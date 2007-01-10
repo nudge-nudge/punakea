@@ -109,7 +109,7 @@ resets the tagger window (called when window is closed)
 	
 	if([thumbItem view] == tableView)
 	{
-		[tableView setNeedsDisplayInRect:[thumbItem frame]];
+		[tableView displayRect:[thumbItem frame]];
 	}
 }
 
