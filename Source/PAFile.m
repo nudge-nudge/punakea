@@ -94,6 +94,8 @@ helper method
 	if (self = [super init])
 	{
 		[self commonInit];
+		
+		[self setPath:[metadataItem valueForAttribute:(id)kMDItemPath]];
 		tags = [[self loadTagsFromNSMetadataItem:metadataItem];
 	}
 	return nil;
@@ -136,6 +138,12 @@ helper method
 + (PAFile*)fileWithFileURL:(NSURL*)url
 {
 	PAFile *file = [[PAFile alloc] initWithFileURL:url];
+	return [file autorelease];
+}
+
++ (PAFile*)fileWithNSMetadataItem:(NSMetadataItem*)metadataItem
+{
+	PAFile *file = [[PAFile alloc] initWithNSMetadataItem:metadataItem];
 	return [file autorelease];
 }
 
@@ -238,7 +246,6 @@ helper method
 	NSString *keywordComment = [self finderTagComment];
 	NSString *finderComment = [self finderCommentIgnoringKeywords];
 	
-	// TODO retry
 	BOOL success = [[NSFileManager defaultManager] setComment:[finderComment stringByAppendingString:keywordComment]
 													   forURL:[NSURL fileURLWithPath:[self path]]];
 	return success;
@@ -260,6 +267,14 @@ helper method
 {
 	NSArray *tags = [self tagsInSpotlightComment];
 	return [NSMutableSet setWithArray:tags];
+}
+
+- (NSMutableSet*)loadTagsFromNSMetadataItem:(NSMetadataItem*)metadataItem;
+{
+	NSString *finderComment = [metadataItem valueForAttribute:(id)kMDItemFinderComment];
+	NSArray *keywords = [self keywordsForComment:finderComment];
+	NSArray *tagsInComment = [globalTags tagsForNames:keywords];
+	return [NSMutableSet setWithArray:tagsInComment];
 }
 
 - (NSArray*)tagsInSpotlightComment

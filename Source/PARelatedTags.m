@@ -173,12 +173,9 @@
 		while (i--) 
 		{
 			//get keywords for result
-			PAQueryItem *item = [[query flatResults] objectAtIndex:i];
-			// TODO switch to taggable objects
-			NSString *path = [item valueForAttribute:(id)kMDItemPath];
-			PAFile *file = [PAFile fileWithPath:path];
-		
-			NSEnumerator *tagEnumerator = [[file tags] objectEnumerator];
+			PATaggableObject *taggableObject = [[query flatResults] objectAtIndex:i];
+			
+			NSEnumerator *tagEnumerator = [[taggableObject tags] objectEnumerator];
 			PATag *tag;
 			
 			while (tag = [tagEnumerator nextObject]) 
