@@ -275,7 +275,7 @@
 		NSMutableArray *files = [NSMutableArray array];
 		
 		NSEnumerator *e = [selectedQueryItems objectEnumerator];
-		PAQueryItem *item;
+		PATaggableObject *item;
 
 		while (item = [e nextObject])
 		{

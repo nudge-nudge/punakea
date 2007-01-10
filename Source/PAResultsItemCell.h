@@ -7,14 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAQueryItem.h"
+#import "PATagging/PATaggableObject.h"
 #import "PAThumbnailManager.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 
 
 @interface PAResultsItemCell : NSTextFieldCell {
 
-	PAQueryItem				*item;
+	PATaggableObject				*item;
 
 }
 

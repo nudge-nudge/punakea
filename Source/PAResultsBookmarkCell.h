@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAQueryItem.h"
+#import "PATagging/PATaggableObject.h"
 #import "PAThumbnailManager.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 #import "NDResourceFork.h"
@@ -15,7 +15,7 @@
 
 @interface PAResultsBookmarkCell : NSTextFieldCell {
 
-	PAQueryItem				*item;
+	PATaggableObject				*item;
 
 }
 

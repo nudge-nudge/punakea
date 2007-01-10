@@ -12,7 +12,7 @@
 @implementation PAResultsMultiItemGenericCell
 
 #pragma mark Init + Dealloc
-- (id)initTextCell:(PAQueryItem *)anItem
+- (id)initTextCell:(PATaggableObject *)anItem
 {
 	self = [super initTextCell:@""];
 	if (self)
@@ -42,12 +42,12 @@
 
 
 #pragma mark Accessors
-- (PAQueryItem *)item
+- (PATaggableObject *)item
 {
 	return item;
 }
 
-- (void)setItem:(PAQueryItem *)anItem
+- (void)setItem:(PATaggableObject *)anItem
 {
 	if(item) [item release];
 	item = [anItem retain];

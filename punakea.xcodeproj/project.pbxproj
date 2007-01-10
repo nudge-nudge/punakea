@@ -232,8 +232,6 @@
 		658ADEB90AF6432900063AE1 /* PALabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 658ADEB70AF6432900063AE1 /* PALabel.m */; };
 		658ADF600AF6610A00063AE1 /* RemoveRound.tif in Resources */ = {isa = PBXBuildFile; fileRef = 658ADF5E0AF6610A00063AE1 /* RemoveRound.tif */; };
 		658ADF610AF6610A00063AE1 /* RemoveRoundPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 658ADF5F0AF6610A00063AE1 /* RemoveRoundPressed.tif */; };
-		658DCD0F09E25908008FBC2C /* QueryDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */; };
-		658DCD1009E25908008FBC2C /* QueryDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */; };
 		658DCD1A09E25A4F008FBC2C /* MDSimpleGrouping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */; };
 		658EA77D099798A6005F13DE /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658EA77C099798A6005F13DE /* Message.framework */; };
 		65903EFF0A4BFE9900ADDC1D /* PASelectedTagCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65903EFD0A4BFE9900ADDC1D /* PASelectedTagCell.h */; };
@@ -398,7 +396,6 @@
 				4842FC0F09DA801500C4A931 /* PATagButton.h in CopyFiles */,
 				4842FC1309DA804100C4A931 /* PATagButtonCell.h in CopyFiles */,
 				489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */,
-				658DCD0F09E25908008FBC2C /* QueryDelegateCategory.h in CopyFiles */,
 				65C4890609E2C30F00A45A17 /* PAResultsOutlineView.h in CopyFiles */,
 				65A74ABB09E3AA23001131A8 /* PAResultsTableColumn.h in CopyFiles */,
 				65C0E04309E3EF11006C5A7C /* PAResultsGroupCell.h in CopyFiles */,
@@ -698,8 +695,6 @@
 		658ADEB70AF6432900063AE1 /* PALabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PALabel.m; sourceTree = "<group>"; };
 		658ADF5E0AF6610A00063AE1 /* RemoveRound.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RemoveRound.tif; sourceTree = "<group>"; };
 		658ADF5F0AF6610A00063AE1 /* RemoveRoundPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RemoveRoundPressed.tif; sourceTree = "<group>"; };
-		658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryDelegateCategory.h; sourceTree = "<group>"; };
-		658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryDelegateCategory.m; sourceTree = "<group>"; };
 		658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = MDSimpleGrouping.plist; sourceTree = "<group>"; };
 		658EA77C099798A6005F13DE /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
 		65903EFD0A4BFE9900ADDC1D /* PASelectedTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagCell.h; sourceTree = "<group>"; };
@@ -1333,8 +1328,6 @@
 				65D43F4E0A7E3AC6008CC164 /* PAQueryBundle.m */,
 				65D43F510A7E3ADA008CC164 /* PAQueryItem.h */,
 				65D43F520A7E3ADA008CC164 /* PAQueryItem.m */,
-				658DCD0D09E25908008FBC2C /* QueryDelegateCategory.h */,
-				658DCD0E09E25908008FBC2C /* QueryDelegateCategory.m */,
 			);
 			name = Query;
 			sourceTree = "<group>";
@@ -2047,7 +2040,6 @@
 				4842FC1009DA801700C4A931 /* PATagButton.m in Sources */,
 				4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */,
 				489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */,
-				658DCD1009E25908008FBC2C /* QueryDelegateCategory.m in Sources */,
 				65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */,
 				65A74ABC09E3AA23001131A8 /* PAResultsTableColumn.m in Sources */,
 				65C0E04409E3EF11006C5A7C /* PAResultsGroupCell.m in Sources */,

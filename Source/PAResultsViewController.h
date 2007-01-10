@@ -16,8 +16,6 @@
 #import "PARelatedTags.h"
 #import "PASelectedTags.h"
 #import "PAQuery.h"
-#import "PAQueryBundle.h"
-#import "PAQueryItem.h"
 #import "PAResultsOutlineView.h"
 #import "PADropManager.h"
 #import "PATagButton.h"

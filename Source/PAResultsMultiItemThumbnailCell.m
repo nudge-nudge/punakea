@@ -12,7 +12,7 @@
 @implementation PAResultsMultiItemThumbnailCell
 
 #pragma mark Init + Dealloc
-- (id)initTextCell:(PAQueryItem *)anItem
+- (id)initTextCell:(PATaggableObject *)anItem
 {
 	self = [super initTextCell:anItem];
 	if(self)

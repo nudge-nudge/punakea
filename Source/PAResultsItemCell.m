@@ -37,7 +37,7 @@
 	iconFrame.origin.y += 1;
 	iconFrame.size = NSMakeSize(16,16);
 	
-	NSImage *icon = [[PAThumbnailManager sharedInstance] iconForFile:[item valueForAttribute:kMDItemPath]
+	NSImage *icon = [[PAThumbnailManager sharedInstance] iconForFile:[item path]
 	                                                          inView:controlView
 															   frame:iconFrame];
 	[icon setSize:NSMakeSize(16,16)];
@@ -67,7 +67,7 @@
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];
 	
 	// Draw display name	
-	NSString *value = [item valueForAttribute:kMDItemDisplayName];
+	NSString *value = [item displayName];
 	
 	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 25,
 								  cellFrame.origin.y + 2,
@@ -80,7 +80,7 @@
 	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
 	[dateFormatter setDateStyle:NSDateFormatterLongStyle];	
 	
-	NSDate *lastUsedDate = [item valueForAttribute:(id)kMDItemLastUsedDate];
+	NSDate *lastUsedDate = [item lastUsedDate];
 	
 	value = [dateFormatter friendlyStringFromDate:lastUsedDate];
 			
@@ -105,7 +105,7 @@
 	[super selectWithFrame:frame inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 
 	[textObj setFont:[NSFont systemFontOfSize:11]];
-	[textObj setString:[item valueForAttribute:(id)kMDItemDisplayName]];
+	[textObj setString:[item displayName]];
 	
 	[textObj selectAll:self];
 }

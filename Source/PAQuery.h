@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATagging/PATag.h"
+#import "PATagging/PATaggableObject.h"
 #import "PATagging/PAFile.h"
 
 #import "PAQueryBundle.h"

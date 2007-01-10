@@ -1,6 +1,7 @@
 /* Controller */
 #import <Cocoa/Cocoa.h>
 #import "PATagging/PATags.h"
+#import "PATagging/PATaggableObject.h"
 
 #import "SidebarController.h"
 #import "BrowserController.h"
