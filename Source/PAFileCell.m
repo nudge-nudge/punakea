@@ -58,7 +58,7 @@
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];
 	
 	// Draw display name	
-	NSString *value = [file name];
+	NSString *value = [file displayName];
 	
 	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 25,
 								  cellFrame.origin.y + 2,
