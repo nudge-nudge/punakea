@@ -21,9 +21,18 @@ must be used in order to check if files are managed
 
 @end
 
+
 @implementation PATaggableObject
 
 #pragma marg init
++ (void)initialize
+{
+	// Simple Grouping
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
+	simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
+}
+
+
 // designated init - ONLY USED BY SUBCLASSES!
 - (id)init
 {
@@ -34,10 +43,7 @@ must be used in order to check if files are managed
 		retryCount = 0;
 		
 		nc = [NSNotificationCenter defaultCenter];
-		
-		// Simple Grouping
-		NSString *path = [[NSBundle mainBundle] pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
-		simpleGrouping = [NSDictionary dictionaryWithContentsOfFile:path];
+	
 	}
 	return self;
 }
@@ -46,7 +52,6 @@ must be used in order to check if files are managed
 {
 	[self saveTags];
 	[tags release];
-	[simpleGrouping release];
 	[super dealloc];
 }
 
