@@ -32,6 +32,7 @@ static PATags *sharedInstance = nil;
 	if (self = [super init])
 	{
 		[self setTags:[NSMutableArray array]];
+		tagDict = [[NSMutableDictionary alloc] init];
 		
 		nc = [NSNotificationCenter defaultCenter];
 	}

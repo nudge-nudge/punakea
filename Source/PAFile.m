@@ -55,10 +55,10 @@ helper method
 /**
 helper method
  
- checks if the given path is already located in the managed files directory (or a subdirectory).
- if this returns NO, the dropData should not be moved again.
+ checks if the self is already located in the managed files directory (or a subdirectory).
+ if this returns YES, the file should not be moved again.
  */
-- (BOOL)pathIsInManagedHierarchy:(NSString*)path;
+- (BOOL)isInManagedHierarchy;
 
 - (NSString*)pathForFiles;
 
@@ -302,7 +302,7 @@ helper method
 #pragma mark abstract implemented
 - (BOOL)saveTags
 {	
-	NSLog(@"saving");
+	NSLog(@"saving %@ to %@",[self tags],[self filename]);
 	
 	// create comment
 	NSString *keywordComment = [self finderTagComment];
@@ -315,15 +315,18 @@ helper method
 
 - (void)handleFileManagement
 {
-	NSString *newFullPath = [self destinationForNewFile:[self filename]];
-	
-	// TODO error handling
-	[fileManager movePath:[self path] toPath:newFullPath handler:nil];
-	
-	// update path to reflect new location
-	[self setPath:newFullPath];
-	
-	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
+	if (![self isInManagedHierarchy])
+	{
+		NSString *newFullPath = [self destinationForNewFile:[self filename]];
+		
+		// TODO error handling
+		[fileManager movePath:[self path] toPath:newFullPath handler:nil];
+		
+		// update path to reflect new location
+		[self setPath:newFullPath];
+		
+		[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
+	}
 }
 
 - (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)window
@@ -600,10 +603,10 @@ helper method
 	return directory; 
 }
 
-- (BOOL)pathIsInManagedHierarchy:(NSString*)aPath
+- (BOOL)isInManagedHierarchy
 {
 	NSString *managedRoot = [self pathForFiles];
-	return [aPath hasPrefix:managedRoot];
+	return [[self path] hasPrefix:managedRoot];
 }
 
 

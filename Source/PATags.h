@@ -30,7 +30,8 @@ contains all PATag instances in the application. don't rely on tag order!
  look at code for userInfo specifics.
  */
 @interface PATags : NSObject {
-	NSMutableArray *tags;
+	NSMutableArray *tags; /**< holds all tags */
+	NSMutableDictionary *tagDict; /**< hash tagname -> tag for quick access */
 	
 	NSNotificationCenter *nc;
 }
