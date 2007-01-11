@@ -26,7 +26,6 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
 	
 	NSWorkspace				*workspace;
 	NSFileManager			*fileManager;
-	
 }
 
 - (id)initWithPath:(NSString*)aPath;

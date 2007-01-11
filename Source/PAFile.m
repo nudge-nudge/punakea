@@ -15,7 +15,9 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 
 - (void)commonInit;
 
-- (void)setPath:(NSString*)path; /**< checks for illegal characters */
+- (void)setPath:(NSString*)path;
+- (NSString*)filename; /**< name AND extension (if there is any) */
+
 - (BOOL)isEqualToFile:(PAFile*)otherFile;
 
 - (NSArray*)tagsInSpotlightComment;
@@ -24,6 +26,8 @@ NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
 - (NSString*)finderTagComment;
 - (NSString*)finderCommentIgnoringKeywords;
 - (NSString*)finderSpotlightComment;
+
+- (BOOL)caseRenameToPath:(NSString*)newPath;
 
 /**
 loads tags from backing storage
@@ -199,14 +203,15 @@ helper method
 }
 
 // overwriting method of abstract class
+// TODO waterjoe
 - (NSString *)displayName
 {
 	return [path lastPathComponent];
 }
 
-- (NSString*)displayNameWithoutExtension
+- (NSString*)filename
 {
-	return [[self displayName] stringByDeletingPathExtension];
+	return [path lastPathComponent];
 }
 
 - (NSString*)extension
@@ -309,14 +314,14 @@ helper method
 	NSString *keywordComment = [self finderTagComment];
 	NSString *finderComment = [self finderCommentIgnoringKeywords];
 	
-	BOOL success = [[NSFileManager defaultManager] setComment:[finderComment stringByAppendingString:keywordComment]
+	BOOL success = [fileManager setComment:[finderComment stringByAppendingString:keywordComment]
 													   forURL:[NSURL fileURLWithPath:[self path]]];
 	return success;
 }
 
 - (void)handleFileManagement
 {
-	NSString *newFullPath = [self destinationForNewFile:[[self path] lastPathComponent]];
+	NSString *newFullPath = [self destinationForNewFile:[self filename]];
 	
 	// TODO error handling
 	[fileManager movePath:[self path] toPath:newFullPath handler:nil];
@@ -327,20 +332,48 @@ helper method
 	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 }
 
-- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)errorWindow
+- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)window
 {
-	 // TODO capitalization !!
+	errorWindow = window;
 	
-	// TODO error checking in handler
 	NSString *newPath = [[self directory] stringByAppendingPathComponent:newName];
-	BOOL success = [[NSFileManager defaultManager] movePath:[self path]
-													 toPath:newPath
-													handler:nil];
+	BOOL success;
+	
+	// handle capitalization change separate
+	if([[self path] compare:newPath options:NSCaseInsensitiveSearch] == NSOrderedSame)
+	{
+		success = [self caseRenameToPath:newPath errorWindow:errorWindow];
+	}
+	else
+	{
+		success = [fileManager movePath:[self path] toPath:newPath handler:self];
+	}
 	
 	// update path to reflect new location
-	[self setPath:newPath];
+	if (success)
+	{
+		[self setPath:newPath];
 	
-	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
+		[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
+	}
+	
+	return success;
+}
+
+- (BOOL)caseRenameToPath:(NSString*)newPath
+{
+	BOOL success;
+	
+	NSString *tempDir = NSTemporaryDirectory();
+	
+	if (tempDir == nil)
+		return NO;
+	
+	NSString *tempPath = [tempDir stringByAppendingPathComponent:[self filename]];
+	success = [fileManager movePath:[self path] toPath:tempPath handler:self];
+	
+	if (success)
+		success = [fileManager movePath:tempPath toPath:newPath handler:self];
 	
 	return success;
 }
@@ -349,8 +382,38 @@ helper method
 {
 	NSString *newDestination = [[self directory] stringByAppendingPathComponent:newName];
 	
-	return (![[NSFileManager defaultManager] fileExistsAtPath:newDestination] || 
+	return (![fileManager fileExistsAtPath:newDestination] || 
 			([newDestination compare:[self path] options:NSCaseInsensitiveSearch] == NSOrderedSame));
+}
+
+#pragma mark file error handling
+-(BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
+{
+	NSString *informativeText;
+	informativeText = [NSString stringWithFormat:
+		NSLocalizedStringFromTable(@"ALREADY_EXISTS_INFORMATION", @"FileManager", @""),
+		[errorInfo objectForKey:@"ToPath"]];
+	
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	
+	// TODO: Support correct error message text for more types of errors
+	if([[errorInfo objectForKey:@"Error"] isEqualTo:@"Already Exists"])
+	{
+		[alert setMessageText:NSLocalizedStringFromTable([errorInfo objectForKey:@"Error"], @"FileManager", @"")];
+		[alert setInformativeText:informativeText];
+	} else {
+		[alert setMessageText:NSLocalizedStringFromTable(@"Unknown Error", @"FileManager", @"")];
+	}
+	
+	[alert addButtonWithTitle:@"OK"];
+	[alert setAlertStyle:NSWarningAlertStyle];  
+	
+	[alert beginSheetModalForWindow:errorWindow
+	                  modalDelegate:self
+					 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+					    contextInfo:nil];
+	
+	return NO;
 }
 
 #pragma mark spotlight comment integration

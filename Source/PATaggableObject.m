@@ -153,12 +153,19 @@ static NSDictionary *simpleGrouping;
 
 - (void)addTags:(NSArray*)someTags
 {
-	// increment use count if necessary
-	NSSet *newTags = [[NSSet setWithArray:someTags] minusSet:tags];
-	[newTags makeObjectsPerformSelector:@selector(incrementUseCount)];
+	NSEnumerator *tagEnumerator = [someTags objectEnumerator];
+	PATag *newTag;
 	
-	// add tags to object	
-	[tags addObjectsFromArray:someTags];
+	while (newTag = [tagEnumerator nextObject])
+	{
+		if (![tags containsObject:newTag])
+		{
+			[tags addObject:newTag];
+			
+			// increment use count if necessary
+			[newTag incrementUseCount];
+		}
+	}
 	
 	// handle file management
 	if ([self shouldManageFiles])
@@ -185,13 +192,20 @@ static NSDictionary *simpleGrouping;
 
 - (void)removeTags:(NSArray*)someTags
 {
-	// decrement use count if necessary
-	NSSet *removedTags = [tags intersectSet:[NSSet setWithArray:someTags]];
-	[removedTags makeObjectsPerformSelector:@selector(decrementUseCount)];
+	NSEnumerator *tagEnumerator = [someTags objectEnumerator];
+	PATag *newTag;
 	
-	// remove tags from object	
-	[tags minusSet:[NSSet setWithArray:someTags]];
-	
+	while (newTag = [tagEnumerator nextObject])
+	{
+		if ([tags containsObject:newTag])
+		{
+			[tags removeObject:newTag];
+			
+			// decrement use count if necessary
+			[newTag decrementUseCount];
+		}
+	}
+		
 	// handle file management
 	if ([self shouldManageFiles])
 		[self handleFileManagement];
@@ -231,7 +245,7 @@ static NSDictionary *simpleGrouping;
 	// does nothing, must be implemented by subclass
 }
 
-- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)errorWindow;
+- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)window;
 {
 	return NO;
 }

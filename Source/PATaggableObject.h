@@ -34,6 +34,8 @@ abstract class representing a taggable object (normally a file
 	NSNotificationCenter	*nc;
 	
 	NSDictionary			*simpleGrouping;
+	
+	NSWindow				*errorWindow;
 }
 
 - (NSSet*)tags;
@@ -86,7 +88,7 @@ will be called on renaming
  @param window error window
  @return success as bool
  */
-- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)errorWindow;
+- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)window;
 
 /**
 checks if new name for object is valid
