@@ -31,7 +31,12 @@ contains all PATag instances in the application. don't rely on tag order!
  */
 @interface PATags : NSObject {
 	NSMutableArray *tags; /**< holds all tags */
-	NSMutableDictionary *tagDict; /**< hash tagname -> tag for quick access */
+	
+	/** 
+		hash tagname -> tag for quick access 
+		hash uses lowercase-only strings
+	*/
+	NSMutableDictionary *tagHash;
 	
 	NSNotificationCenter *nc;
 }

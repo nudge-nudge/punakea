@@ -14,6 +14,9 @@ NSString * const PATagsHaveChangedNotification = @"PATagsHaveChangedNotification
 
 @interface PATags (PrivateAPI)
 
+- (NSMutableDictionary*)tagHash;
+- (void)setTagHash:(NSMutableDictionary*)someHash;
+
 - (void)observeTag:(PATag*)tag;
 - (void)observeTags:(NSArray*)someTags;
 - (void)stopObservingTag:(PATag*)tag;
@@ -32,7 +35,6 @@ static PATags *sharedInstance = nil;
 	if (self = [super init])
 	{
 		[self setTags:[NSMutableArray array]];
-		tagDict = [[NSMutableDictionary alloc] init];
 		
 		nc = [NSNotificationCenter defaultCenter];
 	}
@@ -41,20 +43,8 @@ static PATags *sharedInstance = nil;
 
 #pragma mark accessors
 - (PATag*)tagForName:(NSString*)tagName
-{
-	NSEnumerator *e = [self objectEnumerator];
-	PATag *resultTag = nil;
-	PATag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		if ([[tag name] caseInsensitiveCompare:tagName] == NSOrderedSame)
-		{
-			resultTag = tag;
-		}
-	}
-	
-	return resultTag;
+{	
+	return [tagHash objectForKey:[tagName lowercaseString]];
 }
 
 - (NSMutableArray*)tags
@@ -70,12 +60,41 @@ static PATags *sharedInstance = nil;
 	[tags release];
 	tags = otherTags;
 	
+	[self setTagHash:[self createTagHash]];
+	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagResetOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:changeOperation forKey:PATagOperation];
 	[nc postNotificationName:PATagsHaveChangedNotification object:self userInfo:userInfo];
 }
 
+- (NSMutableDictionary*)tagHash
+{
+	return tagHash;
+}
+
+- (void)setTagHash:(NSMutableDictionary*)someHash
+{
+	[someHash retain];
+	[tagHash release];
+	tagHash = someHash;
+}
+
 #pragma mark additional
+- (NSMutableDictionary*)createTagHash
+{
+	NSMutableDictionary *newHash = [NSMutableDictionary dictionary];
+	
+	NSEnumerator *tagEnumerator = [self objectEnumerator];
+	PATag *tag;
+	
+	while (tag = [tagEnumerator nextObject])
+	{
+		[newHash setObject:tag forKey:[[tag name] lowercaseString]];
+	}
+	
+	return newHash;
+}
+
 - (NSArray*)tagsForNames:(NSArray*)tagNames
 {
 	NSMutableArray *resultsTags = [NSMutableArray array];
@@ -113,6 +132,9 @@ static PATags *sharedInstance = nil;
 	[self observeTag:aTag];
 	[tags addObject:aTag];
 	
+	// update hash
+	[tagHash setObject:aTag forKey:[[aTag name] lowercaseString]];
+	
 	NSNumber *changeOperation = [NSNumber numberWithInt:PATagAddOperation];
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:changeOperation,aTag,nil] 
 														 forKeys:[NSArray arrayWithObjects:PATagOperation,@"tag",nil]];
@@ -130,6 +152,9 @@ static PATags *sharedInstance = nil;
 	
 	// remove from HD
 	[aTag remove];
+	
+	// update hash
+	[tagHash removeObjectForKey:[[aTag name] lowercaseString]];
 	
 	// remove from collection
 	[tags removeObject:aTag];
