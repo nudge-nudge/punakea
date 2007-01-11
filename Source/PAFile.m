@@ -272,8 +272,6 @@ helper method
 {
 	errorWindow = window;
 	
-	NSString *newDisplayName = newName;
-	
 	// newName might reflect only the displayName without suffix - "myfile.xml" or "myfile"
 	NSDictionary *fileAttributes = [fileManager fileAttributesAtPath:[self path] traverseLink:NO];
 	BOOL fileExtensionHidden = [fileAttributes objectForKey:NSFileExtensionHidden];
@@ -294,6 +292,61 @@ helper method
 	{
 		// We want to show the extension
 		fileExtensionHidden = NO;
+	}
+	
+	// Show modal sheet if extension has changed
+	if([newExtension isNotEqualTo:@""] && [newExtension isNotEqualTo:[self extension]])
+	{
+		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		
+		NSString *text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"CHANGE_FILE_EXTENSION", @"FileManager", @""), [self extension], newExtension];
+		[alert setMessageText:text];
+		
+		text = NSLocalizedStringFromTable(@"CHANGE_FILE_EXTENSION_INFORMATIVE", @"FileManager", @"");
+		[alert setInformativeText:text];
+		
+		text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"CHANGE_FILE_EXTENSION_KEEP_OLD", @"FileManager", @""), [self extension]];
+		[alert addButtonWithTitle:text];
+		text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"CHANGE_FILE_EXTENSION_USE_NEW", @"FileManager", @""), newExtension];
+		[alert addButtonWithTitle:text];
+		[alert setAlertStyle:NSWarningAlertStyle];  
+		
+		NSMutableDictionary *contextInfo = [NSMutableDictionary dictionary];
+		[contextInfo setObject:[NSNumber numberWithBool:fileExtensionHidden] forKey:NSFileExtensionHidden];
+		[contextInfo setObject:newExtension forKey:@"newExtension"];
+		[contextInfo setObject:[self extension] forKey:@"oldExtension"];
+		[contextInfo setObject:newName forKey:@"newName"];
+		
+		[alert beginSheetModalForWindow:errorWindow
+						  modalDelegate:self
+						 didEndSelector:@selector(continueRenaming:returnCode:contextInfo:)
+							contextInfo:nil];
+	}
+	
+	return YES;
+}
+
+- (void)continueRenaming:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)context
+{
+	NSLog(@"hier");	
+	
+	NSDictionary *contextInfo = context;
+	
+	BOOL		fileExtensionHidden = [contextInfo objectForKey:NSFileExtensionHidden];
+	NSString	*newExtension = [contextInfo objectForKey:@"newExtension"];
+	NSString	*oldExtension = [contextInfo objectForKey:@"oldExtension"];
+	NSString	*newName = [contextInfo objectForKey:@"newName"];
+	NSString	*newDisplayName;
+	
+	if(returnCode == NSAlertFirstButtonReturn)
+	{
+		// Discard extension changes
+		newName = [newName stringByDeletingPathExtension];
+		
+		if(!fileExtensionHidden) newDisplayName = [newName stringByAppendingPathExtension:oldExtension];
+		newName = [newName stringByAppendingPathExtension:oldExtension];
+	} else {
+		if(!fileExtensionHidden) newDisplayName = [newName stringByAppendingPathExtension:newExtension];
 	}
 	
 	NSString *newPath = [[self directory] stringByAppendingPathComponent:newName];
@@ -322,11 +375,9 @@ helper method
 		
 		[fileManager changeFileAttributes:fileAttributes
 								   atPath:newPath];
-	
+		
 		[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 	}
-	
-	return success;
 }
 
 - (BOOL)caseRenameToPath:(NSString*)newPath
