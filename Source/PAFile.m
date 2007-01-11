@@ -336,7 +336,7 @@ helper method
 	// handle capitalization change separate
 	if([[self path] compare:newPath options:NSCaseInsensitiveSearch] == NSOrderedSame)
 	{
-		success = [self caseRenameToPath:newPath errorWindow:errorWindow];
+		success = [self caseRenameToPath:newPath];
 	}
 	else
 	{

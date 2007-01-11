@@ -247,9 +247,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 				// TODO: this can't work as there is not replacementValue category any more!
 				
 				id valueToBeReplaced = [theItem valueForAttribute:bundlingAttribute];
-				bundleValue = [delegate metadataQuery:self
-						 replacementValueForAttribute:bundlingAttribute
-						                        value:valueToBeReplaced];
+				bundleValue = [PATaggableObject replaceMetadataValue:valueToBeReplaced
+														forAttribute:bundlingAttribute];
 			} else {
 				// theItem is a PAQueryItem
 				bundleValue = [theItem valueForAttribute:bundlingAttribute];
