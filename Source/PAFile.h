@@ -19,10 +19,12 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
  */
 @interface PAFile : PATaggableObject {
 	
+	MDItemRef				mdItem;
+	
 	NSString				*path; /**< full path including file.extension */
 	
-	NSString				*album;
-	NSString				*authors;
+	/*NSString				*album;
+	NSString				*authors;*/
 	
 	NSWorkspace				*workspace;
 	NSFileManager			*fileManager;
@@ -49,9 +51,9 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
 - (NSImage*)icon; /**< icon representing file */
 
 // These accessors will be moved into some more sophisticated classes later
-- (NSString *)album;
+/*- (NSString *)album;
 - (void)setAlbum:(NSString *)anAlbum;
 - (NSString *)authors;
-- (void)setAuthors:(NSString *)theAuthors;
+- (void)setAuthors:(NSString *)theAuthors;*/
 
 @end

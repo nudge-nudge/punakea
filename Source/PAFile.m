@@ -70,6 +70,8 @@ helper method
 // common initializer
 - (void)commonInit
 {
+	[self readMetadata];
+	
 	workspace = [NSWorkspace sharedWorkspace];
 	fileManager = [NSFileManager defaultManager];
 }
@@ -77,13 +79,11 @@ helper method
 - (id)initWithPath:(NSString*)aPath
 {
 	if (self = [super init])
-	{
-		[self commonInit];
-		
+	{		
 		[self setPath:aPath];
 		tags = [[self loadTags] retain];
 		
-		// TODO: Read metadata attributes
+		[self commonInit];
 	}
 	return self;
 }
@@ -99,12 +99,15 @@ helper method
 {
 	if (self = [super init])
 	{
+		tags = [[self loadTagsFromNSMetadataItem:metadataItem] retain];
+		
+		[self setPath:[metadataItem valueForAttribute:(id)kMDItemPath]];
+		
 		[self commonInit];
 		
-		tags = [[self loadTagsFromNSMetadataItem:metadataItem] retain];
-			
-		id value;
+		/*id value;
 		[self setPath:[metadataItem valueForAttribute:(id)kMDItemPath]];			
+		[self setDisplayName:[metadataItem valueForAttribute:(id)kMDItemDisplayName]];
 		[self setContentTypeIdentifier:[metadataItem valueForAttribute:(id)kMDItemContentType]];
 		[self setContentTypeTree:[metadataItem valueForAttribute:@"kMDItemContentTypeTree"]];
 		
@@ -131,22 +134,23 @@ helper method
 			if(path && [path hasSuffix:@"webloc"])
 			{
 				// Set new value for Content Type Tree
-				value = @"BOOKMARKS";
+				value = @"BOOKMARKS";*/
 				
 				/*
 				 // Set new value for Display Name
 				 NSString *displayName = [item valueForAttribute:(id)kMDItemDisplayName];
 				 [item setValue:[displayName substringToIndex:[displayName length]-7] forAttribute:(id)kMDItemDisplayName];
 				 */
-			}
+			/*}
 		}
-		[self setContentType:value];
+		[self setContentType:value];*/
 	}
 	return self;
 }	
 
 - (void)dealloc
 {
+	CFRelease(mdItem);
 	[path release];
 	[super dealloc];
 }
@@ -241,7 +245,7 @@ helper method
 	return [@"file:" stringByAppendingString:path];
 }
 
-- (NSString *)album
+/*- (NSString *)album
 {
 	return album;
 }
@@ -261,7 +265,7 @@ helper method
 {
 	[authors release];
 	authors = [theAuthors retain];
-}
+}*/
 
 #pragma mark euality testing
 - (BOOL)isEqual:(id)other 
@@ -614,6 +618,46 @@ helper method
 
 
 #pragma mark Misc
+- (MDItemRef)readMetadata
+{
+	CFStringRef filePath = (CFStringRef)[self path];
+	mdItem = MDItemCreate(CFGetAllocator(filePath), filePath);
+	
+	id value = (id)MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
+	[self setDisplayName:value];
+	value = (id)MDItemCopyAttribute(mdItem, kMDItemContentType);	
+	[self setContentTypeIdentifier:value];
+	value = (id)MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");	
+	[self setContentTypeTree:value];
+	
+	value = [PATaggableObject replaceMetadataValue:(id)MDItemCopyAttribute(mdItem, kMDItemLastUsedDate)
+									  forAttribute:(id)kMDItemLastUsedDate];
+	if(value) [self setLastUsedDate:value];
+	
+	value = [PATaggableObject replaceMetadataValue:(id)MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree")
+									  forAttribute:@"kMDItemContentTypeTree"];
+	if([value isEqualTo:@"DOCUMENTS"])
+	{
+		// Bookmarks that are stored as webloc file don't have the right content type,
+		// so we set it here
+		NSString *path = [self path];
+		if(path && [path hasSuffix:@"webloc"])
+		{
+			// Set new value for Content Type Tree
+			value = @"BOOKMARKS";
+
+			/*
+			 // Set new value for Display Name
+			 NSString *displayName = [item valueForAttribute:(id)kMDItemDisplayName];
+			 [item setValue:[displayName substringToIndex:[displayName length]-7] forAttribute:(id)kMDItemDisplayName];
+			 */
+		}
+	}
+	[self setContentType:value];
+	
+	return mdItem;
+}
+
 // Compatibility mode for PAQuery
 - (id)valueForAttribute:(id)attribute
 {

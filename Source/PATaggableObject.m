@@ -262,7 +262,9 @@ static NSDictionary *simpleGrouping;
 	return [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"] && ([tags count] > 0);
 }
 
-- (id)replaceMetadataValue:(id)attrValue forAttribute:(NSString *)attrName {
+
+#pragma mark Class Methods
++ (id)replaceMetadataValue:(id)attrValue forAttribute:(NSString *)attrName {
 	if ((attrValue == nil) || (attrValue == [NSNull null])) {
         // We don't want to display <null> for the user, so, depending on the category, display something better
         if ([attrName isEqualToString:(id)kMDItemKind]) {
