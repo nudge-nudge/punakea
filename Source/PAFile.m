@@ -10,6 +10,7 @@
 
 NSString * const TAGGER_OPEN_COMMENT = @"###begin_tags###";
 NSString * const TAGGER_CLOSE_COMMENT = @"###end_tags###";
+NSString * const TAGGER_WHITESPACE_SEPARATOR = @"    ";
 
 @interface PAFile (PrivateAPI)
 
@@ -244,8 +245,10 @@ helper method
 	NSString *keywordComment = [self finderTagComment];
 	NSString *finderComment = [self finderCommentIgnoringKeywords];
 	
-	BOOL success = [fileManager setComment:[finderComment stringByAppendingString:keywordComment]
-													   forURL:[NSURL fileURLWithPath:[self path]]];
+	NSString *finderCommentWithWhitespaceSeparator = [finderComment stringByAppendingString:TAGGER_WHITESPACE_SEPARATOR];
+	
+	BOOL success = [fileManager setComment:[finderCommentWithWhitespaceSeparator stringByAppendingString:keywordComment]
+									forURL:[NSURL fileURLWithPath:[self path]]];
 	return success;
 }
 
@@ -505,7 +508,10 @@ helper method
 		finderSpotlightCommentWithoutTags = currentFinderSpotlightComment;
 	}
 	
-	return finderSpotlightCommentWithoutTags;
+	// remove whitespace around comment
+	NSString *trimmedComment = [finderSpotlightCommentWithoutTags stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	
+	return trimmedComment;
 }
 
 - (NSString*)finderSpotlightComment

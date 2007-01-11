@@ -12,6 +12,7 @@
 
 extern NSString * const TAGGER_OPEN_COMMENT;
 extern NSString * const TAGGER_CLOSE_COMMENT;
+extern NSString * const TAGGER_WHITESPACE_SEPARATOR;
 
 /**
 represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally. Please use this for all methods which
@@ -40,8 +41,7 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
 // file wrapping stuff
 - (NSString*)path; /**< full path including file.extension */
 - (NSString*)standardizedPath; /**< standardized path */
-- (NSString*)name; /**< file name including extension */
-- (NSString*)displayNameWithoutExtension; /**< file name without extension */
+- (NSString*)filename; /**< file name including extension */
 - (NSString*)extension; /**< file extension */
 - (NSString*)directory; /**< directory path the file is located in */
 - (BOOL)isDirectory; /**< checks if file is directory */
