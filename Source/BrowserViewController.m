@@ -74,7 +74,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 		[[NSNotificationCenter defaultCenter] addObserver:self 
 												 selector:@selector(tagsHaveChanged:) 
-													 name:@"PATagsHaveChanged" 
+													 name:PATagsHaveChangedNotification
 												   object:tags];
 		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
