@@ -316,7 +316,7 @@ helper method
 
 - (void)handleFileManagement
 {
-	NSString *newFullPath = [self destinationForNewFile:[self name]];
+	NSString *newFullPath = [self destinationForNewFile:[self displayName]];
 	
 	// TODO error handling
 	[fileManager movePath:[self path] toPath:newFullPath handler:nil];

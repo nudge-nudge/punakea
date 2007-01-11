@@ -24,6 +24,8 @@ must be used in order to check if files are managed
 
 @implementation PATaggableObject
 
+static NSDictionary *simpleGrouping;
+
 #pragma marg init
 + (void)initialize
 {

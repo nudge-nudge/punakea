@@ -12,8 +12,6 @@
 
 extern NSString * const PATaggableObjectUpdate;
 
-static NSDictionary *simpleGrouping;
-
 /**
 abstract class representing a taggable object (normally a file
  but can be anything really)
