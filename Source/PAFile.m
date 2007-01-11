@@ -36,12 +36,6 @@ loads tags from backing storage
 - (NSMutableSet*)loadTagsFromStorage;
 
 /**
-loads tags from kMDItemFinderComment
- @return tags parsed from spotlight finder comment
- */
-- (NSMutableSet*)loadTagsFromNSMetadataItem:(NSMetadataItem*)metadataItem;
-
-/**
 helper method
  
  returns the destination for a file to be written
@@ -70,8 +64,12 @@ helper method
 // common initializer
 - (void)commonInit
 {	
+	[self readMetadata];
+	
 	workspace = [NSWorkspace sharedWorkspace];
 	fileManager = [NSFileManager defaultManager];
+	
+	tags = [[self loadTags] retain];
 }
 
 - (id)initWithPath:(NSString*)aPath
@@ -79,11 +77,8 @@ helper method
 	if (self = [super init])
 	{		
 		[self setPath:aPath];
-		tags = [[self loadTags] retain];
 		
 		[self commonInit];
-		
-		[self readMetadata];
 	}
 	return self;
 }
@@ -99,41 +94,9 @@ helper method
 {
 	if (self = [super init])
 	{
-		tags = [[self loadTagsFromNSMetadataItem:metadataItem] retain];
-		
 		[self setPath:[metadataItem valueForAttribute:(id)kMDItemPath]];
 		
 		[self commonInit];
-		
-		id value;		
-		[self setDisplayName:[metadataItem valueForAttribute:(id)kMDItemDisplayName]];
-		[self setContentTypeIdentifier:[metadataItem valueForAttribute:(id)kMDItemContentType]];
-		[self setContentTypeTree:[metadataItem valueForAttribute:@"kMDItemContentTypeTree"]];
-		
-		value = [PATaggableObject replaceMetadataValue:[metadataItem valueForAttribute:(id)kMDItemLastUsedDate]
-										  forAttribute:(id)kMDItemLastUsedDate];
-		if(value) [self setLastUsedDate:value];
-		
-		value = [PATaggableObject replaceMetadataValue:[metadataItem valueForAttribute:@"kMDItemContentTypeTree"]
-										  forAttribute:@"kMDItemContentTypeTree"];
-		if([value isEqualTo:@"DOCUMENTS"])
-		{
-			// Bookmarks that are stored as webloc file don't have the right content type,
-			// so we set it here
-			NSString *path = [metadataItem valueForAttribute:(id)kMDItemPath];
-			if(path && [path hasSuffix:@"webloc"])
-			{
-				// Set new value for Content Type Tree
-				value = @"BOOKMARKS";
-				
-				/*
-				 // Set new value for Display Name
-				 NSString *displayName = [item valueForAttribute:(id)kMDItemDisplayName];
-				 [item setValue:[displayName substringToIndex:[displayName length]-7] forAttribute:(id)kMDItemDisplayName];
-				 */
-			}
-		}
-		[self setContentType:value];
 	}
 	return self;
 }	
@@ -424,14 +387,6 @@ helper method
 {
 	NSArray *tags = [self tagsInSpotlightComment];
 	return [NSMutableSet setWithArray:tags];
-}
-
-- (NSMutableSet*)loadTagsFromNSMetadataItem:(NSMetadataItem*)metadataItem;
-{
-	NSString *finderComment = [metadataItem valueForAttribute:(id)kMDItemFinderComment];
-	NSArray *keywords = [self keywordsForComment:finderComment];
-	NSArray *tagsInComment = [globalTags tagsForNames:keywords];
-	return [NSMutableSet setWithArray:tagsInComment];
 }
 
 - (NSArray*)tagsInSpotlightComment
