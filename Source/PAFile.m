@@ -197,12 +197,6 @@ helper method
 }
 
 // overwriting method of abstract class
-// TODO waterjoe
-- (NSString *)displayName
-{
-	return [path lastPathComponent];
-}
-
 - (NSString*)filename
 {
 	return [path lastPathComponent];
@@ -235,27 +229,6 @@ helper method
 	return [@"file:" stringByAppendingString:path];
 }
 
-/*- (NSString *)album
-{
-	return album;
-}
-
-- (void)setAlbum:(NSString *)anAlbum
-{
-	[album release];
-	album = [anAlbum retain];
-}
-
-- (NSString *)authors
-{
-	return authors;
-}
-
-- (void)setAuthors:(NSString *)theAuthors
-{
-	[authors release];
-	authors = [theAuthors retain];
-}*/
 
 #pragma mark euality testing
 - (BOOL)isEqual:(id)other 
@@ -333,7 +306,32 @@ helper method
 {
 	errorWindow = window;
 	
+	NSString *newDisplayName = newName;
+	
+	// newName might reflect only the displayName without suffix - "myfile.xml" or "myfile"
+	NSDictionary *fileAttributes = [fileManager fileAttributesAtPath:[self path] traverseLink:NO];
+	BOOL fileExtensionHidden = [fileAttributes objectForKey:NSFileExtensionHidden];
+	
+	NSString *newExtension = [newName pathExtension];
+	
+	if(fileExtensionHidden && [newExtension isEqualTo:@""])
+	{
+		// Add extension for internal renaming purposes
+		newName = [newName stringByAppendingPathExtension:[self extension]];
+	}
+	else if(!fileExtensionHidden && [newExtension isEqualTo:@""])
+	{
+		// Keep extension, but change flag on file to hide it
+		fileExtensionHidden = YES;
+	}
+	else if(fileExtensionHidden)
+	{
+		// We want to show the extension
+		fileExtensionHidden = NO;
+	}
+	
 	NSString *newPath = [[self directory] stringByAppendingPathComponent:newName];
+	
 	BOOL success;
 	
 	// handle capitalization change separate
@@ -346,10 +344,18 @@ helper method
 		success = [fileManager movePath:[self path] toPath:newPath handler:self];
 	}
 	
-	// update path to reflect new location
 	if (success)
-	{
+	{		
+		// update file details on self
 		[self setPath:newPath];
+		[self setDisplayName:newDisplayName];
+		
+		// Set attributes
+		NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:fileExtensionHidden]
+																   forKey:NSFileExtensionHidden];
+		
+		[fileManager changeFileAttributes:fileAttributes
+								   atPath:newPath];
 	
 		[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 	}
