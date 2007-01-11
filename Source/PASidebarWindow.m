@@ -64,14 +64,7 @@ double const SHOW_DELAY = 0.2;
 						 forKeyPath:@"values.Appearance.SidebarPosition" 
 							options:0 
 							context:NULL];
-	
-	sidebarColor = [defaultsController valueForKeyPath:@"values.Appearance.SidebarColor"];
-	
-	[defaultsController addObserver:self
-						 forKeyPath:@"values.Appearance.SidebarColor"
-							options:0
-							context:NULL];
-	
+
 	[nc addObserver:self
 		   selector:@selector(windowDidHide:)
 			   name:NSApplicationDidHideNotification
@@ -86,7 +79,6 @@ double const SHOW_DELAY = 0.2;
 - (void)dealloc
 {
 	[defaultsController removeObserver:self forKeyPath:@"values.Appearance.SidebarPosition"];
-	[defaultsController removeObserver:self forKeyPath:@"values.Appearance.SidebarColor"];
 	[super dealloc];
 }
 
@@ -97,10 +89,6 @@ double const SHOW_DELAY = 0.2;
 		sidebarPosition = [[defaultsController valueForKeyPath:@"values.Appearance.SidebarPosition"] intValue];
 		[self setExpanded:YES];
 		[self recede:NO];
-	}
-	else if ((object == defaultsController) && [keyPath isEqualToString:@"values.Appearance.SidebarColor"])
-	{
-		[self setBackgroundColor:[defaultsController valueForKeyPath:@"values.Appearance.SidebarColor"]];
 	}
 }			
 

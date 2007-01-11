@@ -43,6 +43,8 @@
 		
 		tagSave = [[PATagSave alloc] init];
 		
+		userDefaults = [NSUserDefaults standardUserDefaults];
+		
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(tagsHaveChanged:) name:nil object:globalTags];
 		
@@ -53,6 +55,9 @@
 
 - (void)dealloc
 {
+	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
+																 forKeyPath:@"values.General.LoadSidebar"];
+	
 	[tagSave release];
 	[preferenceController release];
 	[nc removeObserver:self];
@@ -69,15 +74,24 @@
 		[self showBrowser:self];
 	}
 	
-	SidebarController *sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
-	[sidebarController window];
+	if ([userDefaults boolForKey:@"General.LoadSidebar"])
+	{
+		sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
+		[sidebarController window];
+	}
+	
+	// listen for sidebar pref changes
+	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
+															  forKeyPath:@"values.General.LoadSidebar" 
+																 options:0 
+																 context:NULL];
 	
 	[self createManagedFilesDirIfNeeded];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)note 
 { 
-	[[NSUserDefaults standardUserDefaults] synchronize];
+	[userDefaults synchronize];
 	[self saveDataToDisk]; 
 } 
 
@@ -94,6 +108,40 @@
 {
 	return updater;
 }
+
+#pragma mark events
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.LoadSidebar"])
+	{
+		BOOL showSidebar = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.LoadSidebar"];
+		BOOL sidebarIsLoaded = NO;
+		
+		// look if sidebar is already loaded
+		NSEnumerator *windowEnumerator = [[[NSApplication sharedApplication] windows] objectEnumerator];
+		NSWindow *window;
+		
+		while (window = [windowEnumerator nextObject])
+		{
+			if ([[window title] isEqualToString:@"Punakea : Sidebar"])
+				sidebarIsLoaded = YES;
+		}
+		
+		// don't do anything if flags are equal
+		if (showSidebar != sidebarIsLoaded)
+		{
+			if (showSidebar)
+			{
+				sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
+				[sidebarController window];
+			}
+			else
+			{
+				[sidebarController release];
+			}
+		}
+	}
+}			
 
 #pragma mark loading and saving tags
 - (NSString *)pathForDataFile 
@@ -165,8 +213,6 @@
 
 - (void)createManagedFilesDirIfNeeded
 {
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-	
 	if (![userDefaults boolForKey:@"General.ManageFiles"])
 		return;
 	

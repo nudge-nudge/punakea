@@ -34,7 +34,11 @@
 	
 	PreferenceController	*preferenceController;
 	
+	SidebarController		*sidebarController;
+	
 	NSNotificationCenter	*nc;
+	
+	NSUserDefaults			*userDefaults;
 }
 
 - (SUUpdater*)updater;

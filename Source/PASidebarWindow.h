@@ -27,7 +27,6 @@ typedef enum _PASidebarPosition {
 @interface PASidebarWindow : NSWindow {
 	BOOL expanded;
 	PASidebarPosition sidebarPosition;
-	NSColor *sidebarColor;
 	
 	NSNotificationCenter *nc;
 	NSUserDefaultsController *defaultsController;

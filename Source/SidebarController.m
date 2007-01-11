@@ -45,6 +45,7 @@
 
 - (void)dealloc
 {
+	[fileBox removeObserver:self forKeyPath:@"objects"];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[recentTagsTable unregisterDraggedTypes];
 	[popularTagsTable unregisterDraggedTypes];

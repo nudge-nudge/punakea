@@ -4,6 +4,8 @@
 <dict>
 	<key>Appearance.SidebarPosition</key>
 	<integer>1</integer>
+	<key>General.LoadSidebar</key>
+	<false/>
 	<key>General.ManageFiles</key>
 	<false/>
 	<key>General.ManagedFilesLocation</key>
