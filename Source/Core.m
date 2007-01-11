@@ -269,21 +269,8 @@
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
 		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
-		//[ov saveSelection];
-
-		NSArray *selectedQueryItems = [ov visibleSelectedItems];
-		NSMutableArray *files = [NSMutableArray array];
-		
-		NSEnumerator *e = [selectedQueryItems objectEnumerator];
-		PATaggableObject *item;
-
-		while (item = [e nextObject])
-		{
-			NSString *filePath = [item valueForAttribute:(id)kMDItemPath];
-			[files addObject:[PAFile fileWithPath:filePath]];
-		}
-		
-		[taggerController addTaggableObjects:files];
+	
+		[taggerController addTaggableObjects:[ov visibleSelectedItems]];
 		[ov reloadData];
 	}	
 }
