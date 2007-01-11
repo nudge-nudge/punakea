@@ -69,9 +69,7 @@ helper method
 #pragma mark init+dealloc
 // common initializer
 - (void)commonInit
-{
-	[self readMetadata];
-	
+{	
 	workspace = [NSWorkspace sharedWorkspace];
 	fileManager = [NSFileManager defaultManager];
 }
@@ -84,6 +82,8 @@ helper method
 		tags = [[self loadTags] retain];
 		
 		[self commonInit];
+		
+		[self readMetadata];
 	}
 	return self;
 }
@@ -105,27 +105,17 @@ helper method
 		
 		[self commonInit];
 		
-		/*id value;
-		[self setPath:[metadataItem valueForAttribute:(id)kMDItemPath]];			
+		id value;		
 		[self setDisplayName:[metadataItem valueForAttribute:(id)kMDItemDisplayName]];
 		[self setContentTypeIdentifier:[metadataItem valueForAttribute:(id)kMDItemContentType]];
 		[self setContentTypeTree:[metadataItem valueForAttribute:@"kMDItemContentTypeTree"]];
 		
-		value = [self replaceMetadataValue:[metadataItem valueForAttribute:(id)kMDItemLastUsedDate]
-							  forAttribute:(id)kMDItemLastUsedDate];
+		value = [PATaggableObject replaceMetadataValue:[metadataItem valueForAttribute:(id)kMDItemLastUsedDate]
+										  forAttribute:(id)kMDItemLastUsedDate];
 		if(value) [self setLastUsedDate:value];
 		
-		// AUDIO
-		value = [self replaceMetadataValue:[metadataItem valueForAttribute:(id)kMDItemAlbum]
-							  forAttribute:(id)kMDItemAlbum];
-		if(value) [self setAlbum:value];
-		
-		value = [self replaceMetadataValue:[metadataItem valueForAttribute:(id)kMDItemAuthors]
-							  forAttribute:(id)kMDItemAuthors];
-		if(value) [self setAuthors:value];
-		
-		value = [self replaceMetadataValue:[metadataItem valueForAttribute:@"kMDItemContentTypeTree"]
-							  forAttribute:@"kMDItemContentTypeTree"];
+		value = [PATaggableObject replaceMetadataValue:[metadataItem valueForAttribute:@"kMDItemContentTypeTree"]
+										  forAttribute:@"kMDItemContentTypeTree"];
 		if([value isEqualTo:@"DOCUMENTS"])
 		{
 			// Bookmarks that are stored as webloc file don't have the right content type,
@@ -134,16 +124,16 @@ helper method
 			if(path && [path hasSuffix:@"webloc"])
 			{
 				// Set new value for Content Type Tree
-				value = @"BOOKMARKS";*/
+				value = @"BOOKMARKS";
 				
 				/*
 				 // Set new value for Display Name
 				 NSString *displayName = [item valueForAttribute:(id)kMDItemDisplayName];
 				 [item setValue:[displayName substringToIndex:[displayName length]-7] forAttribute:(id)kMDItemDisplayName];
 				 */
-			/*}
+			}
 		}
-		[self setContentType:value];*/
+		[self setContentType:value];
 	}
 	return self;
 }	
