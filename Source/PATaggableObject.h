@@ -37,7 +37,6 @@ abstract class representing a taggable object (normally a file
 }
 
 - (NSSet*)tags;
-- (void)setTags:(NSSet*)someTags;
 
 - (int)retryCount;
 - (void)incrementRetryCount;

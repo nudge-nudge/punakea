@@ -63,17 +63,6 @@ static NSDictionary *simpleGrouping;
 	return tags;
 }
 
-- (void)setTags:(NSSet*)someTags
-{
-	[tags release];
-	tags = [someTags mutableCopy];
-
-	if ([self shouldManageFiles])
-		[self handleFileManagement];
-	
-	[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
-}
-
 - (int)retryCount
 {
 	return retryCount;
@@ -148,8 +137,14 @@ static NSDictionary *simpleGrouping;
 #pragma mark functionality
 - (void)addTag:(PATag*)tag
 {
+	// increment use count if necessary
+	if (![tags containsObject:tag])
+		[tag incrementUseCount];
+		
+	// add tag to object
 	[tags addObject:tag];
 	
+	// handle file management
 	if ([self shouldManageFiles])
 		[self handleFileManagement];
 	
@@ -158,8 +153,14 @@ static NSDictionary *simpleGrouping;
 
 - (void)addTags:(NSArray*)someTags
 {
+	// increment use count if necessary
+	NSSet *newTags = [[NSSet setWithArray:someTags] minusSet:tags];
+	[newTags makeObjectsPerformSelector:@selector(incrementUseCount)];
+	
+	// add tags to object	
 	[tags addObjectsFromArray:someTags];
 	
+	// handle file management
 	if ([self shouldManageFiles])
 		[self handleFileManagement];
 	
@@ -168,8 +169,14 @@ static NSDictionary *simpleGrouping;
 
 - (void)removeTag:(PATag*)tag
 {
+	// decrement use count if necessary
+	if ([tags containsObject:tag])
+		[tag decrementUseCount];
+	
+	// remove tag from object	
 	[tags removeObject:tag];
 	
+	// handle file management
 	if ([self shouldManageFiles])
 		[self handleFileManagement];
 	
@@ -178,8 +185,14 @@ static NSDictionary *simpleGrouping;
 
 - (void)removeTags:(NSArray*)someTags
 {
+	// decrement use count if necessary
+	NSSet *removedTags = [tags intersectSet:[NSSet setWithArray:someTags]];
+	[removedTags makeObjectsPerformSelector:@selector(decrementUseCount)];
+	
+	// remove tags from object	
 	[tags minusSet:[NSSet setWithArray:someTags]];
 	
+	// handle file management
 	if ([self shouldManageFiles])
 		[self handleFileManagement];
 	
@@ -188,8 +201,13 @@ static NSDictionary *simpleGrouping;
 
 - (void)removeAllTags
 {
+	// decrement use count if necessary
+	[tags makeObjectsPerformSelector:@selector(decrementUseCount)];
+	
+	// remove all tags
 	[tags removeAllObjects];
 	
+	// handle file management
 	if ([self shouldManageFiles])
 		[self handleFileManagement];
 	
