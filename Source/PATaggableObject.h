@@ -16,6 +16,8 @@ extern NSString * const PATaggableObjectUpdate;
 abstract class representing a taggable object (normally a file
  but can be anything really)
  
+ important: take care to save the files to backup storage on dealloc in all subclasses!
+ 
  tags must be loaded by subclass!
  */
 @interface PATaggableObject : NSObject <NSCopying> {

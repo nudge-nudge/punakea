@@ -57,7 +57,6 @@ static NSDictionary *simpleGrouping;
 
 - (void)dealloc
 {
-	[self saveTags];
 	[tags release];
 	[super dealloc];
 }

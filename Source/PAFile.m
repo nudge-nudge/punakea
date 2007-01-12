@@ -108,6 +108,7 @@ helper method
 
 - (void)dealloc
 {
+	[self saveTags];
 	[path release];
 	[super dealloc];
 }
@@ -648,31 +649,30 @@ helper method
 	CFStringRef filePath = (CFStringRef)[self path];
 	MDItemRef mdItem = MDItemCreate(CFGetAllocator(filePath), filePath);
 	
-	id value = NULL;
+	CFTypeRef value = NULL;
 	
 	// make sure the file is ready
-	while(value == NULL)
-	{
-		value = (id)MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
-	}
+	/*while(value == NULL)
+	{*/
+		value = MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
 	[self setDisplayName:value];
 	CFRelease(value);
 	
-	value = (id)MDItemCopyAttribute(mdItem, kMDItemContentType);	
+	value = MDItemCopyAttribute(mdItem, kMDItemContentType);	
 	[self setContentTypeIdentifier:value];
 	CFRelease(value);
 	
-	value = (id)MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");	
+	value = MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");	
 	[self setContentTypeTree:value];
 	CFRelease(value);
 	
-	id mdValue = (id)MDItemCopyAttribute(mdItem, kMDItemLastUsedDate);
+	CFTypeRef mdValue = MDItemCopyAttribute(mdItem, kMDItemLastUsedDate);
 	value = [PATaggableObject replaceMetadataValue:mdValue
 									  forAttribute:(id)kMDItemLastUsedDate];
 	if(value) [self setLastUsedDate:value];
 	CFRelease(mdValue);
 
-	mdValue = (id)MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");
+	mdValue = MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");
 	value = [PATaggableObject replaceMetadataValue:mdValue
 									  forAttribute:@"kMDItemContentTypeTree"];
 	
@@ -696,7 +696,6 @@ helper method
 	[self setContentType:value];
 	CFRelease(mdValue);
 	
-	// TODO hab das hier ma released statt returned, oder wird das noch gebraucht?
 	CFRelease(mdItem);
 }
 
