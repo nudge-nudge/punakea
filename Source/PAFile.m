@@ -641,17 +641,24 @@ helper method
 	
 	id value = (id)MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
 	[self setDisplayName:value];
+	CFRelease(value);
 	value = (id)MDItemCopyAttribute(mdItem, kMDItemContentType);	
 	[self setContentTypeIdentifier:value];
+	CFRelease(value);
 	value = (id)MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");	
 	[self setContentTypeTree:value];
+	CFRelease(value);
 	
-	value = [PATaggableObject replaceMetadataValue:(id)MDItemCopyAttribute(mdItem, kMDItemLastUsedDate)
+	id mdValue = (id)MDItemCopyAttribute(mdItem, kMDItemLastUsedDate);
+	value = [PATaggableObject replaceMetadataValue:mdValue
 									  forAttribute:(id)kMDItemLastUsedDate];
 	if(value) [self setLastUsedDate:value];
-	
-	value = [PATaggableObject replaceMetadataValue:(id)MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree")
+	CFRelease(mdValue);
+
+	mdValue = (id)MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");
+	value = [PATaggableObject replaceMetadataValue:mdValue
 									  forAttribute:@"kMDItemContentTypeTree"];
+	
 	if([value isEqualTo:@"DOCUMENTS"])
 	{
 		// Bookmarks that are stored as webloc file don't have the right content type,
@@ -670,6 +677,7 @@ helper method
 		}
 	}
 	[self setContentType:value];
+	CFRelease(mdValue);
 	
 	// TODO hab das hier ma released statt returned, oder wird das noch gebraucht?
 	CFRelease(mdItem);
