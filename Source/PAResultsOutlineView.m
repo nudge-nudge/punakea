@@ -287,7 +287,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	if([[note name] isEqualToString:PAQueryDidStartGatheringNotification])
 	{
 		// Reset selectedItems
-		[self setSelectedItems:[[NSMutableArray alloc] init]];
+		[self setSelectedItems:[NSMutableArray array]];
 	}
 
 	if([[note name] isEqualToString:PAQueryDidStartGatheringNotification] ||

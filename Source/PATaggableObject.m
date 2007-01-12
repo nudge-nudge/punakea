@@ -35,7 +35,7 @@ static NSDictionary *simpleGrouping;
 #pragma marg init
 + (void)initialize
 {
-	// Simple Grouping
+	// Simple Grouping TODO leaks
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
 	simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
 }

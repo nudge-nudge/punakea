@@ -272,6 +272,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		{
 			// Wrap theItem (a NSMetadataItem) into PAFile
 			NSMetadataItem *mdItem = theItem;
+			
+			// TODO das leakt aber wenn ichs autorelease crashts .... tu was!
 			item = [[PAFile alloc] initWithNSMetadataItem:mdItem];
 						
 			// TODO more attributes of item, use replacementValueForAttribute for each value!!
