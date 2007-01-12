@@ -323,7 +323,7 @@ helper method
 		[alert addButtonWithTitle:text];
 		text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"CHANGE_FILE_EXTENSION_USE_NEW", @"FileManager", @""), newExtension];
 		[alert addButtonWithTitle:text];
-		[alert setAlertStyle:NSWarningAlertStyle];  
+		[alert setAlertStyle:NSCriticalAlertStyle];  
 		
 		[alert beginSheetModalForWindow:errorWindow
 						  modalDelegate:self
