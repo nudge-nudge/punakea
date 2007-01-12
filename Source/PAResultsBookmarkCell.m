@@ -37,6 +37,7 @@
 	iconFrame.origin.y += 1;
 	iconFrame.size = NSMakeSize(16,16);
 	
+	// TODO taggableObject does not necessarily have a path
 	NSImage *icon = [[PAThumbnailManager sharedInstance] iconForFile:[item path]
 	                                                          inView:controlView
 															   frame:iconFrame];
@@ -76,7 +77,7 @@
 								  cellFrame.size.height - 2)
 	    withAttributes:fontAttributes];
 		
-	// Draw bookmark url
+	// Draw bookmark url	// TODO taggableObject does not necessarily have a path
 	NDResourceFork *resource = [[NDResourceFork alloc] initForReadingAtPath:[item path]];
 	NSData *data = [resource dataForType:'url ' Id:256];
 	NSString *url = [[NSString alloc] initWithData:data encoding:[NSString defaultCStringEncoding]];

@@ -38,6 +38,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (NSMutableArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes;
 - (void)filterResults:(BOOL)flag usingValues:(NSArray *)filterValues forBundlingAttribute:(NSString *)attribute newBundlingAttributes:(NSArray *)newAttributes;
 
+- (void)setDelegate:(id)aDelegate;
+
 @end 
 
 @implementation PAQuery
@@ -416,7 +418,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		
 		// Remove tags from trashed file to give spotlight enough time
 		// TODO leave this to PAFile!!
-		PAFile *trashedFile = [PAFile fileWithPath:[trashDir stringByAppendingPathComponent:[file name]]];
+		PAFile *trashedFile = [PAFile fileWithPath:[trashDir stringByAppendingPathComponent:[file filename]]];
 		[trashedFile removeAllTags];
 
 		// Remove from flatresults

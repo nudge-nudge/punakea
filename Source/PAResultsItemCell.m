@@ -37,6 +37,7 @@
 	iconFrame.origin.y += 1;
 	iconFrame.size = NSMakeSize(16,16);
 	
+	// TODO taggableObject does not necessarily have a path
 	NSImage *icon = [[PAThumbnailManager sharedInstance] iconForFile:[item path]
 	                                                          inView:controlView
 															   frame:iconFrame];

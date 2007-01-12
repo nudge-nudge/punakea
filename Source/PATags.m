@@ -16,6 +16,7 @@ NSString * const PATagsHaveChangedNotification = @"PATagsHaveChangedNotification
 
 - (NSMutableDictionary*)tagHash;
 - (void)setTagHash:(NSMutableDictionary*)someHash;
+- (NSMutableDictionary*)createTagHash;
 
 - (void)observeTag:(PATag*)tag;
 - (void)observeTags:(NSArray*)someTags;

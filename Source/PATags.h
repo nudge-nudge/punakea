@@ -34,7 +34,7 @@ contains all PATag instances in the application. don't rely on tag order!
 	
 	/** 
 		hash tagname -> tag for quick access 
-		hash uses lowercase-only strings
+		hash uses lowercase-only strings for identifying
 	*/
 	NSMutableDictionary *tagHash;
 	

@@ -15,12 +15,15 @@ NSString * const TAGGER_WHITESPACE_SEPARATOR = @"    ";
 @interface PAFile (PrivateAPI)
 
 - (void)commonInit;
+- (MDItemRef)readMetadata;
 
 - (void)setPath:(NSString*)path;
 - (NSString*)filename; /**< name AND extension (if there is any) */
 
 - (BOOL)isEqualToFile:(PAFile*)otherFile;
 
+// spotlight comment integration
+- (NSMutableSet*)loadTags;
 - (NSArray*)tagsInSpotlightComment;
 - (NSArray*)keywordsForComment:(NSString*)comment;
 - (NSArray*)keywordsForComment:(NSString*)comment isValid:(BOOL*)isValid;
@@ -28,6 +31,7 @@ NSString * const TAGGER_WHITESPACE_SEPARATOR = @"    ";
 - (NSString*)finderCommentIgnoringKeywords;
 - (NSString*)finderSpotlightComment;
 
+// internal rename stuff
 - (BOOL)caseRenameToPath:(NSString*)newPath;
 
 /**
@@ -221,7 +225,7 @@ helper method
 #pragma mark comparison
 - (NSComparisonResult)compare:(PAFile*)aFile
 {
-	return [[self name] compare:[aFile name]];
+	return [[self filename] compare:[aFile filename]];
 }
 
 #pragma mark copying
@@ -407,6 +411,7 @@ helper method
 }
 
 #pragma mark file error handling
+/* TODO
 -(BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
 {
 	NSString *informativeText;
@@ -435,12 +440,13 @@ helper method
 	
 	return NO;
 }
+*/
 
 #pragma mark spotlight comment integration
 - (NSMutableSet*)loadTags
 {
-	NSArray *tags = [self tagsInSpotlightComment];
-	return [NSMutableSet setWithArray:tags];
+	NSArray *loadedTags = [self tagsInSpotlightComment];
+	return [NSMutableSet setWithArray:loadedTags];
 }
 
 - (NSArray*)tagsInSpotlightComment
@@ -666,6 +672,7 @@ helper method
 	}
 	[self setContentType:value];
 	
+	// TODO wieso gibste das zurueck? wird doch nich verwendet? und released wirds auch net ;)
 	return mdItem;
 }
 

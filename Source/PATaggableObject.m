@@ -12,6 +12,12 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 
 @interface PATaggableObject (PrivateAPI)
 
+/** 
+internal use only, does not initiate saving
+
+*/
+- (void)setTags:(NSMutableSet*)someTags;
+
 /**
 must be used in order to check if files are managed
  i.e. they must be put in the managed files area
@@ -318,7 +324,7 @@ static NSDictionary *simpleGrouping;
 	// kMDItemArtists (Wrap NSArray into NSString)
 	else if ([attrName isEqualToString:(id)kMDItemAuthors])
 	{
-		NSArray *artists = attrValue;
+		NSArray *artists = (NSArray*)attrValue;
 		NSEnumerator *artistEnumerator = [artists objectEnumerator];
 		NSMutableString *replacementValue = [NSMutableString string];
 		NSString *artist;

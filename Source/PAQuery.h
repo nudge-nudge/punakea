@@ -78,9 +78,6 @@ initializer
 - (PASelectedTags*)tags;
 - (void)setTags:(PASelectedTags*)otherTags;
 
-//synchronous searching
-- (NSArray*)filesForTag:(PATag*)tag;
-
 //wrapper methods
 - (BOOL)startQuery;
 - (void)stopQuery;
