@@ -15,7 +15,7 @@ NSString * const TAGGER_WHITESPACE_SEPARATOR = @"    ";
 @interface PAFile (PrivateAPI)
 
 - (void)commonInit;
-- (MDItemRef)readMetadata;
+- (void)readMetadata;
 
 - (void)setPath:(NSString*)path;
 - (NSString*)filename; /**< name AND extension (if there is any) */
@@ -108,7 +108,6 @@ helper method
 
 - (void)dealloc
 {
-	CFRelease(mdItem);
 	[path release];
 	[super dealloc];
 }
@@ -635,10 +634,10 @@ helper method
 
 
 #pragma mark Misc
-- (MDItemRef)readMetadata
+- (void)readMetadata
 {
 	CFStringRef filePath = (CFStringRef)[self path];
-	mdItem = MDItemCreate(CFGetAllocator(filePath), filePath);
+	MDItemRef mdItem = MDItemCreate(CFGetAllocator(filePath), filePath);
 	
 	id value = (id)MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
 	[self setDisplayName:value];
@@ -672,8 +671,8 @@ helper method
 	}
 	[self setContentType:value];
 	
-	// TODO wieso gibste das zurueck? wird doch nich verwendet? und released wirds auch net ;)
-	return mdItem;
+	// TODO hab das hier ma released statt returned, oder wird das noch gebraucht?
+	CFRelease(mdItem);
 }
 
 // Compatibility mode for PAQuery

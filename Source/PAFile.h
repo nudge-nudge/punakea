@@ -20,8 +20,6 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
  */
 @interface PAFile : PATaggableObject {
 	
-	MDItemRef				mdItem;
-	
 	NSString				*path; /**< full path including file.extension */
 	
 	NSWorkspace				*workspace;

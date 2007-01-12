@@ -40,7 +40,6 @@ static NSDictionary *simpleGrouping;
 	simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
 }
 
-
 // designated init - ONLY USED BY SUBCLASSES!
 - (id)init
 {

@@ -32,9 +32,7 @@ abstract class representing a taggable object (normally a file
 	NSDate					*lastUsedDate;
 
 	NSNotificationCenter	*nc;
-	
-	NSDictionary			*simpleGrouping;
-	
+		
 	NSWindow				*errorWindow;
 }
 
