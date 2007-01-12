@@ -648,7 +648,13 @@ helper method
 	CFStringRef filePath = (CFStringRef)[self path];
 	MDItemRef mdItem = MDItemCreate(CFGetAllocator(filePath), filePath);
 	
-	id value = (id)MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
+	id value = NULL;
+	
+	// make sure the file is ready
+	while(value == NULL)
+	{
+		value = (id)MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
+	}
 	[self setDisplayName:value];
 	CFRelease(value);
 	
