@@ -647,14 +647,15 @@ helper method
 - (void)readMetadata
 {
 	CFStringRef filePath = (CFStringRef)[self path];
-	MDItemRef mdItem = MDItemCreate(CFGetAllocator(filePath), filePath);
+	MDItemRef mdItem = MDItemCreate(kCFAllocatorDefault, filePath);
 	
 	CFTypeRef value = NULL;
 	
 	// make sure the file is ready
-	/*while(value == NULL)
-	{*/
+	while(value == NULL)
+	{
 		value = MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
+	}
 	[self setDisplayName:value];
 	CFRelease(value);
 	

@@ -57,6 +57,12 @@ static NSDictionary *simpleGrouping;
 
 - (void)dealloc
 {
+	[displayName release];
+	[contentType release];
+	[contentTypeIdentifier release];
+	[contentTypeTree release];
+	[lastUsedDate release];
+	
 	[tags release];
 	[super dealloc];
 }
