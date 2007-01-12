@@ -271,6 +271,8 @@ helper method
 	}
 }
 
+
+#pragma mark Renaming
 - (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)window
 {
 	errorWindow = window;
@@ -297,6 +299,14 @@ helper method
 		fileExtensionHidden = NO;
 	}
 	
+	// Context Info for passing to continueRenaming:returnCode:contextInfo
+	// Will be release there
+	NSMutableDictionary *contextInfo = [[NSMutableDictionary alloc] init];
+	[contextInfo setObject:[NSNumber numberWithBool:fileExtensionHidden] forKey:@"fileExtensionHidden"];
+	[contextInfo setObject:newExtension forKey:@"newExtension"];
+	[contextInfo setObject:[self extension] forKey:@"oldExtension"];
+	[contextInfo setObject:newName forKey:@"newName"];
+	
 	// Show modal sheet if extension has changed
 	if([newExtension isNotEqualTo:@""] && [newExtension isNotEqualTo:[self extension]])
 	{
@@ -314,16 +324,12 @@ helper method
 		[alert addButtonWithTitle:text];
 		[alert setAlertStyle:NSWarningAlertStyle];  
 		
-		NSMutableDictionary *contextInfo = [NSMutableDictionary dictionary];
-		[contextInfo setObject:[NSNumber numberWithBool:fileExtensionHidden] forKey:NSFileExtensionHidden];
-		[contextInfo setObject:newExtension forKey:@"newExtension"];
-		[contextInfo setObject:[self extension] forKey:@"oldExtension"];
-		[contextInfo setObject:newName forKey:@"newName"];
-		
 		[alert beginSheetModalForWindow:errorWindow
 						  modalDelegate:self
 						 didEndSelector:@selector(continueRenaming:returnCode:contextInfo:)
-							contextInfo:nil];
+							contextInfo:contextInfo];
+	} else {
+		[self continueRenaming:nil returnCode:nil contextInfo:contextInfo];
 	}
 	
 	return YES;
@@ -335,21 +341,22 @@ helper method
 	
 	NSDictionary *contextInfo = context;
 	
-	BOOL		fileExtensionHidden = [contextInfo objectForKey:NSFileExtensionHidden];
+	NSNumber	*fileExtensionHiddenNumber = [contextInfo objectForKey:@"fileExtensionHidden"];
+	BOOL		fileExtensionHidden = [fileExtensionHiddenNumber boolValue];
 	NSString	*newExtension = [contextInfo objectForKey:@"newExtension"];
 	NSString	*oldExtension = [contextInfo objectForKey:@"oldExtension"];
 	NSString	*newName = [contextInfo objectForKey:@"newName"];
-	NSString	*newDisplayName;
+	NSString	*newDisplayName = newName;
 	
 	if(returnCode == NSAlertFirstButtonReturn)
-	{
-		// Discard extension changes
+	{		
 		newName = [newName stringByDeletingPathExtension];
-		
 		if(!fileExtensionHidden) newDisplayName = [newName stringByAppendingPathExtension:oldExtension];
 		newName = [newName stringByAppendingPathExtension:oldExtension];
-	} else {
+	} else if(returnCode == NSAlertSecondButtonReturn) {
+		newName = [newName stringByDeletingPathExtension];
 		if(!fileExtensionHidden) newDisplayName = [newName stringByAppendingPathExtension:newExtension];
+		newName = [newName stringByAppendingPathExtension:newExtension];
 	}
 	
 	NSString *newPath = [[self directory] stringByAppendingPathComponent:newName];
@@ -381,6 +388,8 @@ helper method
 		
 		[nc postNotificationName:PATaggableObjectUpdate object:self userInfo:nil];
 	}
+	
+	[contextInfo release];
 }
 
 - (BOOL)caseRenameToPath:(NSString*)newPath
@@ -642,9 +651,11 @@ helper method
 	id value = (id)MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
 	[self setDisplayName:value];
 	CFRelease(value);
+	
 	value = (id)MDItemCopyAttribute(mdItem, kMDItemContentType);	
 	[self setContentTypeIdentifier:value];
 	CFRelease(value);
+	
 	value = (id)MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");	
 	[self setContentTypeTree:value];
 	CFRelease(value);
