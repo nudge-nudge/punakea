@@ -92,7 +92,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
 																 forKeyPath:@"values.TagCloud.SortKey"];
-	[self removeObserver:self forKeyPath:@"buffer"];
 	[sortDescriptor release];
 	[mainController release];
 	[visibleTags release];

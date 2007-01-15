@@ -50,7 +50,7 @@ resets the tagger window (called when window is closed)
 	[[self window] setFrameAutosaveName:@"punakea.tagger"];
 	
 	// table view drop support
-	[tableView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+	[tableView registerForDraggedTypes:[dropManager handledPboardTypes]];
 	
 	// set custom data + header cell
 	NSArray *columns = [tableView tableColumns];
@@ -67,9 +67,9 @@ resets the tagger window (called when window is closed)
 	[[tagField cell] setWraps:YES];
 	
 	[taggableObjectController addObserver:self
-					 forKeyPath:@"arrangedObjects"
-						options:nil
-						context:NULL];
+							   forKeyPath:@"arrangedObjects"
+								  options:nil
+								  context:NULL];
 	
 	// add observer for updating the threaded icons
 	[[NSNotificationCenter defaultCenter] addObserver:self 
@@ -80,13 +80,11 @@ resets the tagger window (called when window is closed)
 
 - (void)dealloc
 {
-	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[taggableObjectController removeObserver:self forKeyPath:@"arrangedObjects"];
-
+	
 	[headerCell release];
-	[fileCell release];
 	[tableView unregisterDraggedTypes];
+	[fileCell release];
 	[currentCompleteTagsInField release];
 	[typeAheadFind release];
 	[super dealloc];
@@ -275,22 +273,17 @@ completionsForSubstring:(NSString *)substring
 
 #pragma mark window delegate
 - (void)windowWillClose:(NSNotification *)aNotification
-{
+{	
+	NSTableColumn *column = [[tableView tableColumns] objectAtIndex:0];
+	[column unbind:@"value"];
+	
+	[taggableObjectController removeObserver:self forKeyPath:@"arrangedObjects"];	
 	[self autorelease];
 }
 
 - (void)windowDidResize:(NSNotification *)aNotification
 {
 	[self resizeTokenField];
-}
-
-- (void)resetTaggerContent
-{
-	// files
-	[taggableObjectController removeObjects:[taggableObjectController arrangedObjects]];
-	
-	// tagField - cascades to currentCompleteTagsInField
-	[self setCurrentCompleteTagsInField:[[PASelectedTags alloc] init]];
 }
 
 #pragma mark tableview drop support
