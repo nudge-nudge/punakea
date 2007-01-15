@@ -411,9 +411,9 @@
 	PATaggableObject *taggableObject = item;
 	NSString *value = object;
 	
-	BOOL wasMoved = [taggableObject renameTo:value errorWindow:[ov window]];
+	[taggableObject renameTo:value errorWindow:[ov window]];
 	
-	if(wasMoved) [ov reloadData];
+	[ov reloadData];
 }
 
 #pragma mark ResultsOutlineView Delegate

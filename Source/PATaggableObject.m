@@ -255,9 +255,9 @@ static NSDictionary *simpleGrouping;
 	// does nothing, must be implemented by subclass
 }
 
-- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)window;
+- (void)renameTo:(NSString*)newName errorWindow:(NSWindow*)window;
 {
-	return NO;
+	// does nothing, must be implemented by subclass
 }
 
 - (BOOL)validateNewName:(NSString*)newName

@@ -274,9 +274,13 @@ helper method
 
 
 #pragma mark Renaming
-- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)window
+- (void)renameTo:(NSString*)newName errorWindow:(NSWindow*)window
 {
 	errorWindow = window;
+	
+	// Return if there was no modification
+	if([[self displayName] isEqualTo:newName])
+		return;
 	
 	// newName might reflect only the displayName without suffix - "myfile.xml" or "myfile"
 	NSDictionary *fileAttributes = [fileManager fileAttributesAtPath:[self path] traverseLink:NO];
@@ -348,17 +352,19 @@ helper method
 	NSString	*oldExtension = [contextInfo objectForKey:@"oldExtension"];
 	NSString	*newName = [contextInfo objectForKey:@"newName"];
 	NSString	*newDisplayName = newName;
+	NSString	*extension = oldExtension;
 	
-	if(returnCode == NSAlertFirstButtonReturn)
-	{		
-		newName = [newName stringByDeletingPathExtension];
-		if(!fileExtensionHidden) newDisplayName = [newName stringByAppendingPathExtension:oldExtension];
-		newName = [newName stringByAppendingPathExtension:oldExtension];
-	} else if(returnCode == NSAlertSecondButtonReturn) {
-		newName = [newName stringByDeletingPathExtension];
-		if(!fileExtensionHidden) newDisplayName = [newName stringByAppendingPathExtension:newExtension];
-		newName = [newName stringByAppendingPathExtension:newExtension];
-	}
+	newName = [newName stringByDeletingPathExtension];
+	
+	if(returnCode == NSAlertSecondButtonReturn)
+		extension = newExtension;
+		
+	if(!fileExtensionHidden && extension)
+		newDisplayName = [newName stringByAppendingPathExtension:extension];
+	else
+		newDisplayName = newName;
+		
+	newName = [newName stringByAppendingPathExtension:extension];
 	
 	NSString *newPath = [[self directory] stringByAppendingPathComponent:newName];
 	

@@ -88,7 +88,7 @@ will be called on renaming
  @param window error window
  @return success as bool
  */
-- (BOOL)renameTo:(NSString*)newName errorWindow:(NSWindow*)window;
+- (void)renameTo:(NSString*)newName errorWindow:(NSWindow*)window;
 
 /**
 checks if new name for object is valid
