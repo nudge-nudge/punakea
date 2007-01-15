@@ -59,15 +59,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		
 		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
 	
-		NSUserDefaultsController *userDefaultsController = [NSUserDefaultsController sharedUserDefaultsController];
-		
-		sortKey = [[userDefaultsController valueForKeyPath:@"values.TagCloud.SortKey"] intValue];
+		sortKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"TagCloud.SortKey"];
 		[self updateSortDescriptor];
 		
-		[userDefaultsController addObserver:self 
-								 forKeyPath:@"values.TagCloud.SortKey" 
-									options:0 
-									context:NULL];
+		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
+																  forKeyPath:@"values.TagCloud.SortKey" 
+																	 options:0 
+																	 context:NULL];
 		
 		[self setVisibleTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
@@ -94,6 +92,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
 																 forKeyPath:@"values.TagCloud.SortKey"];
+	[self removeObserver:self forKeyPath:@"buffer"];
 	[sortDescriptor release];
 	[mainController release];
 	[visibleTags release];
