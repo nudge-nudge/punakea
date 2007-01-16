@@ -79,7 +79,7 @@ resets the tagger window (called when window is closed)
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-
+	
 	[headerCell release];
 	[tableView unregisterDraggedTypes];
 	[fileCell release];
@@ -273,7 +273,7 @@ completionsForSubstring:(NSString *)substring
 
 #pragma mark window delegate
 - (void)windowWillClose:(NSNotification *)aNotification
-{	
+{		
 	// unbind stuff
 	[tagField unbind:@"editable"];
 	
