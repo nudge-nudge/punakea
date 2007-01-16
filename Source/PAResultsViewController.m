@@ -413,6 +413,7 @@
 	
 	[taggableObject renameTo:value errorWindow:[ov window]];
 	
+	// TODO waterjoe
 	[ov reloadData];
 }
 

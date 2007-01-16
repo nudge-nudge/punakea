@@ -10,7 +10,6 @@
 
 - (NSMutableArray*)visibleTags;
 - (PATag*)currentBestTag;
-- (PATags*)tags; //TODO hide this properly!
 
 @end
 
