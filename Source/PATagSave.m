@@ -67,9 +67,9 @@ useconds_t const PATAGSAVE_CYCLETIME = 200000; // 0.2 seconds
 #pragma mark queue functionality
 - (void)startBackgroundThread
 {
-	[NSApplication detachDrawingThread:@selector(processQueue)
-							  toTarget:self
-							withObject:nil];
+	[NSThread detachNewThreadSelector:@selector(processQueue)
+							 toTarget:self
+						   withObject:nil];
 }
 
 - (void)processQueue
@@ -77,6 +77,8 @@ useconds_t const PATAGSAVE_CYCLETIME = 200000; // 0.2 seconds
 	// this is the method executed by the background thread
 	// - it will be executed during all application lifetime
 	// - blocks when no object should be processed
+	
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	while (true)
 	{
@@ -98,8 +100,13 @@ useconds_t const PATAGSAVE_CYCLETIME = 200000; // 0.2 seconds
 			{
 				NSLog(@"writing tags to %@ failed",currentObject);
 			}
-		}
+		} 
+		
+		// queue doesn't autorelease stuff
+		[currentObject release];
 	}
+	
+	[pool release];
 }
 
 @end

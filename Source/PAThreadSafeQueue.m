@@ -12,8 +12,8 @@
 
 -(id)init {
 	if (self = [super init]) {
-		elements = [[NSMutableArray alloc] init];
 		lock = [[NSConditionLock alloc] initWithCondition:PAQueueEmpty];
+		elements = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -32,24 +32,24 @@
 
 -(id)dequeue {
 	[lock lockWhenCondition:PAQueueFilled];
-	id element = [[[elements objectAtIndex:0] retain] autorelease];
+	id element = [[elements objectAtIndex:0] retain];
 	[elements removeObjectAtIndex:0];
 	int count = [elements count];
 	[lock unlockWithCondition:(count > 0)?PAQueueFilled:PAQueueEmpty];
-	return element;
+	return [element autorelease];
 }
 
 -(id)tryDequeue {
 	id element = nil;
 	if ([lock tryLock]) {
 		if ([lock condition] == PAQueueFilled) {
-			element = [[[elements objectAtIndex:0] retain] autorelease];
+			element = [[elements objectAtIndex:0] retain];  
 			[elements removeObjectAtIndex:0];
 		}
 		int count = [elements count];
 		[lock unlockWithCondition:(count > 0)?PAQueueFilled:PAQueueEmpty];
 	}
-	return element;
+	return [element autorelease];
 }
 
 @end

@@ -135,10 +135,13 @@ static PAThumbnailManager *sharedInstance = nil;
 		
 		if([item type] == PAItemTypeThumbnail)
 		{
-			[self generateThumbnailFromFile:[item autorelease]];
+			[self generateThumbnailFromFile:item];
 		} else {
-			[self generateIconForFile:[item autorelease]];
+			[self generateIconForFile:item];
 		}
+		
+		// queue doesn't autorelease stuff
+		[item release];
 	
 		// If number of cached images exceeds limit, remove first item of stack
 		@synchronized(self)

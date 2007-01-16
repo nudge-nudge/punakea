@@ -57,6 +57,8 @@ static NSDictionary *simpleGrouping;
 
 - (void)dealloc
 {
+	NSLog(@"%@ dealloc",[self displayName]);
+	
 	[displayName release];
 	[contentType release];
 	[contentTypeIdentifier release];
@@ -350,6 +352,19 @@ static NSDictionary *simpleGrouping;
 - (id)copyWithZone:(NSZone *)zone
 {
 	return nil;
+}
+
+#pragma mark debug
+- (id)retain
+{
+	NSLog(@"%@ retained to %i",[self displayName],[self retainCount]+1);
+	[super retain];
+}
+
+- (void)release
+{
+	NSLog(@"%@ released to %i",[self displayName],[self retainCount]-1);
+	[super release];
 }
 
 @end

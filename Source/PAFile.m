@@ -115,8 +115,8 @@ helper method
 
 + (PAFile*)fileWithPath:(NSString*)aPath
 {
-	PAFile *file = [[PAFile alloc] initWithPath:aPath];
-	return [file autorelease];
+	PAFile *file = [[[PAFile alloc] initWithPath:aPath] autorelease];
+	return file;
 }
 
 + (NSArray*)filesWithFilepaths:(NSArray*)filepaths
@@ -136,14 +136,14 @@ helper method
 	
 + (PAFile*)fileWithFileURL:(NSURL*)url
 {
-	PAFile *file = [[PAFile alloc] initWithFileURL:url];
-	return [file autorelease];
+	PAFile *file = [[[PAFile alloc] initWithFileURL:url] autorelease];
+	return file;
 }
 
 + (PAFile*)fileWithNSMetadataItem:(NSMetadataItem*)metadataItem
 {
-	PAFile *file = [[PAFile alloc] initWithNSMetadataItem:metadataItem];
-	return [file autorelease];
+	PAFile *file = [[[PAFile alloc] initWithNSMetadataItem:metadataItem] autorelease];
+	return file;
 }
 
 #pragma mark accessors
@@ -234,7 +234,7 @@ helper method
 	PAFile *newFile = [[PAFile alloc] initWithPath:[[[self path] copy] autorelease]];
 	
 	// abstract class instance vars
-	[newFile setTags:[[[self tags] copy] autorelease]];
+	[newFile setTags:[self tags]];
 	[newFile setRetryCount:[self retryCount]];
 	
 	return newFile;

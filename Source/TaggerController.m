@@ -56,11 +56,9 @@ resets the tagger window (called when window is closed)
 	NSArray *columns = [tableView tableColumns];
 	[[columns objectAtIndex:0] setDataCell:fileCell];
 	
-	if(!headerCell)
-	{
-		NSString *title = [[[columns objectAtIndex:0] headerCell] stringValue];
-		headerCell = [[PATaggerHeaderCell alloc] initTextCell:title];
-	}	
+	NSString *title = [[[columns objectAtIndex:0] headerCell] stringValue];
+	headerCell = [[PATaggerHeaderCell alloc] initTextCell:title];
+
 	[[columns objectAtIndex:0] setHeaderCell:headerCell];
 	
 	// token field wrapping
@@ -81,7 +79,7 @@ resets the tagger window (called when window is closed)
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
+
 	[headerCell release];
 	[tableView unregisterDraggedTypes];
 	[fileCell release];
@@ -266,16 +264,18 @@ completionsForSubstring:(NSString *)substring
 	
 	// update to new value
 	[tagField setObjectValue:[tagsOnAllObjects allObjects]];
+	
 	[currentCompleteTagsInField removeAllTags];
 	[currentCompleteTagsInField addObjectsFromArray:[tagsOnAllObjects allObjects]];
+
 	[[self window] makeFirstResponder:tagField];
 }
 
 #pragma mark window delegate
 - (void)windowWillClose:(NSNotification *)aNotification
 {	
-	NSTableColumn *column = [[tableView tableColumns] objectAtIndex:0];
-	[column unbind:@"value"];
+	// unbind stuff
+	[tagField unbind:@"editable"];
 	
 	[taggableObjectController removeObserver:self forKeyPath:@"arrangedObjects"];	
 	[self autorelease];
