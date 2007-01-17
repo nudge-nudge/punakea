@@ -253,12 +253,11 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 		[outlineView setDisplayMode:PAListMode];
 	}
 	
-	[outlineView saveSelection];
 	[outlineView reloadData];
-	[outlineView restoreSelection];
+	[outlineView deselectAll:self];
 	
 	// Scrolling - if item is an array, it handles scrolling itself
-	if(![[outlineView itemAtRow:[outlineView selectedRow]] isKindOfClass:[NSArray class]])
+	/*if(![[outlineView itemAtRow:[outlineView selectedRow]] isKindOfClass:[NSArray class]])
 	{
 		if([outlineView selectedRow])
 		{
@@ -268,7 +267,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 		}
 	} else {
 		[[outlineView responder] scrollToVisible];
-	}
+	}*/
 	
 	[[self window] makeFirstResponder:outlineView];
 }

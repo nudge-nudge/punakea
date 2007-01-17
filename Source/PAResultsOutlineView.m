@@ -210,7 +210,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)restoreSelection
 {
-	[self deselectAll:self];		
+	/*[self deselectAll:self];		
 	NSEnumerator *itemsEnumerator = [[self selectedItems] objectEnumerator];
 	PATaggableObject *item;
 	while(item = [itemsEnumerator nextObject])
@@ -230,20 +230,15 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			// If this is an array, check if it contains our item
 			if([thisItem isKindOfClass:[NSArray class]])
 			{
-				NSEnumerator *arrayEnumerator = [thisItem objectEnumerator];
-				PATaggableObject *arrayItem;
-				while(arrayItem = [arrayEnumerator nextObject])
+				if([thisItem containsObject:item])
 				{
-					if([item isEqualTo:arrayItem])
-					{
-						int row = [self rowForItem:thisItem];
-						[self selectRow:row byExtendingSelection:YES];
-						break;
-					}
+					int row = [self rowForItem:thisItem];
+					[self selectRow:row byExtendingSelection:YES];
+					break;
 				}
 			}
 		}
-	}
+	}*/
 }
 
 - (NSArray *)visibleSelectedItems
