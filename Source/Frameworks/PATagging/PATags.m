@@ -23,6 +23,12 @@ NSString * const PATagsHaveChangedNotification = @"PATagsHaveChangedNotification
 - (void)stopObservingTag:(PATag*)tag;
 - (void)stopObservingTags:(NSArray*)someTags;
 
+- (NSString *)pathForDataFile;
+- (void)loadDataFromDisk;
+- (void)saveDataToDisk;
+
+- (void)tagsHaveChanged:(NSNotification*)notification;
+
 @end
 
 @implementation PATags
@@ -35,9 +41,21 @@ static PATags *sharedInstance = nil;
 - (id)sharedInstanceInit {
 	if (self = [super init])
 	{
-		[self setTags:[NSMutableArray array]];
+		[self loadDataFromDisk];
+		
+		tagSave = [[PATagSave alloc] init];
 		
 		nc = [NSNotificationCenter defaultCenter];
+		
+		[nc addObserver:self 
+			   selector:@selector(tagsHaveChanged:) 
+				   name:nil 
+				 object:self];
+		
+		[nc addObserver:self 
+			   selector:@selector(syncToDisk:) 
+				   name:NSApplicationWillTerminateNotification 
+				 object:nil];
 	}
 	return self;
 }
@@ -215,6 +233,25 @@ static PATags *sharedInstance = nil;
 	}
 }
 
+#pragma mark events
+- (void)tagsHaveChanged:(NSNotification*)notification
+{
+	NSDictionary *userInfo = [notification userInfo];
+	PATagChangeOperation tagOperation = [[userInfo objectForKey:PATagOperation] intValue];
+	
+	// ignore use count and increments ... will be saved on app termination
+	if (tagOperation != PATagUseIncrementOperation
+		&& tagOperation != PATagClickIncrementOperation)
+	{
+		[self saveDataToDisk];
+	}
+}
+
+- (void)syncToDisk:(NSNotification*)notification
+{
+	[self saveDataToDisk];
+}
+
 #pragma mark tag observing
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -278,6 +315,61 @@ static PATags *sharedInstance = nil;
 {
 	return [tags description];
 }
+
+#pragma mark loading and saving tags
+- (NSString *)pathForDataFile 
+{ 
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSString *folder = @"~/Library/Application Support/Punakea/"; 
+	folder = [folder stringByExpandingTildeInPath]; 
+	
+	if ([fileManager fileExistsAtPath: folder] == NO) 
+		[fileManager createDirectoryAtPath: folder attributes: nil];
+	
+	NSString *fileName = @"tags.plist"; 
+	return [folder stringByAppendingPathComponent: fileName]; 
+}
+
+- (void)saveDataToDisk 
+{	
+	NSString *path  = [self pathForDataFile];
+	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
+	[rootObject setValue:[self tags] forKey:@"tags"];
+	
+	NSMutableData *data = [NSMutableData data];
+	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+	[archiver setOutputFormat:NSPropertyListXMLFormat_v1_0];
+	[archiver encodeObject:rootObject];
+	[archiver finishEncoding];
+	[data writeToFile:path atomically:YES];
+	[archiver release];
+}
+
+- (void)loadDataFromDisk 
+{
+	NSString *path = [self pathForDataFile];
+	NSMutableData *data = [NSData dataWithContentsOfFile:path];
+	
+	if (data)
+	{
+		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+		NSMutableDictionary *rootObject = [unarchiver decodeObject];
+		[unarchiver finishDecoding];
+		[unarchiver release];
+		
+		NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
+		
+		if ([loadedTags count] > 0)
+		{
+			[self setTags:loadedTags];
+		}
+	}
+	else
+	{
+		// on first startup there will be no data, create empty mutable array
+		[self setTags:[NSMutableArray array]];
+	}
+}	
 
 #pragma mark singleton stuff
 - (void)dealloc {

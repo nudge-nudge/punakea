@@ -39,14 +39,8 @@
     if (self = [super init])
     {
 		globalTags = [PATags sharedTags];
-		[self loadDataFromDisk];
-		
-		tagSave = [[PATagSave alloc] init];
 		
 		userDefaults = [NSUserDefaults standardUserDefaults];
-		
-		nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(tagsHaveChanged:) name:nil object:globalTags];
 		
 		printf("compiled on %s at %s\n",__DATE__,__TIME__);
 	}
@@ -92,7 +86,6 @@
 - (void)applicationWillTerminate:(NSNotification *)note 
 { 
 	[userDefaults synchronize];
-	[self saveDataToDisk]; 
 } 
 
 - (void)setupToolbar
@@ -142,74 +135,6 @@
 		}
 	}
 }			
-
-#pragma mark loading and saving tags
-- (NSString *)pathForDataFile 
-{ 
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	NSString *folder = @"~/Library/Application Support/Punakea/"; 
-	folder = [folder stringByExpandingTildeInPath]; 
-	
-	if ([fileManager fileExistsAtPath: folder] == NO) 
-		[fileManager createDirectoryAtPath: folder attributes: nil];
-	
-	NSString *fileName = @"tags.plist"; 
-	return [folder stringByAppendingPathComponent: fileName]; 
-}
-
-- (void)saveDataToDisk 
-{	
-	NSString *path  = [self pathForDataFile];
-	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
-	[rootObject setValue:[globalTags tags] forKey:@"tags"];
-	
-	NSMutableData *data = [NSMutableData data];
-	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-	[archiver setOutputFormat:NSPropertyListXMLFormat_v1_0];
-	[archiver encodeObject:rootObject];
-	[archiver finishEncoding];
-	[data writeToFile:path atomically:YES];
-	[archiver release];
-}
-
-- (void)loadDataFromDisk 
-{
-	NSString *path = [self pathForDataFile];
-	NSMutableData *data = [NSData dataWithContentsOfFile:path];
-	
-	if (data)
-	{
-		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-		NSMutableDictionary *rootObject = [unarchiver decodeObject];
-		[unarchiver finishDecoding];
-		[unarchiver release];
-	
-		NSMutableArray *loadedTags = [rootObject valueForKey:@"tags"];
-	
-		if ([loadedTags count] > 0)
-		{
-			[globalTags setTags:loadedTags];
-		}
-	}
-	else
-	{
-		// on first startup there will be no data, create empty mutable array
-		[globalTags setTags:[NSMutableArray array]];
-	}
-}	
-
-- (void)tagsHaveChanged:(NSNotification*)notification
-{
-	NSDictionary *userInfo = [notification userInfo];
-	PATagChangeOperation tagOperation = [[userInfo objectForKey:PATagOperation] intValue];
-	
-	// ignore use count and increments ... will be saved on app termination
-	if (tagOperation != PATagUseIncrementOperation
-		&& tagOperation != PATagClickIncrementOperation)
-	{
-		[self saveDataToDisk];
-	}
-}
 
 - (void)createManagedFilesDirIfNeeded
 {

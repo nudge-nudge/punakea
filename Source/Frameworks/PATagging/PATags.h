@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PATag.h"
 #import "PASimpleTag.h"
+#import "PATagSave.h"
 
 typedef enum _PATagChangeOperation
 {
@@ -30,13 +31,21 @@ contains all PATag instances in the application. don't rely on tag order!
  look at code for userInfo specifics.
  */
 @interface PATags : NSObject {
-	NSMutableArray *tags; /**< holds all tags */
+	/** holds all tags */
+	NSMutableArray *tags;
 	
 	/** 
 		hash tagname -> tag for quick access 
 		hash uses lowercase-only strings for identifying
 	*/
 	NSMutableDictionary *tagHash;
+	
+	/**
+		takes care of writing tags on file to backup storage 
+		needs to be started only, everything else is handled
+		internally
+	*/
+	PATagSave *tagSave;
 	
 	NSNotificationCenter *nc;
 }
