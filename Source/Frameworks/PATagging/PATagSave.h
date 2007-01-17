@@ -20,8 +20,11 @@ extern useconds_t const PATAGSAVE_CYCLETIME;
 /**
 waits for taggable objects to post update notifications
  runs a background thread to save the tags to spotligh comment
+ 
+ TagSave is started by PATags
  */
 @interface PATagSave : NSObject {
+	/** queue holding PATaggable objects to work on */
 	PAThreadSafeQueue *queue;
 }
 

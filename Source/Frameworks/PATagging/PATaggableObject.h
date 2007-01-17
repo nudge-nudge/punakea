@@ -38,7 +38,17 @@ abstract class representing a taggable object (normally a file
 	NSWindow				*errorWindow;
 }
 
-- (NSSet*)tags;
+- (NSMutableSet*)tags;
+
+/** 
+should be used internally only (for example to
+implement copying), as it does not save the new
+tags to the backup storage
+
+if you want to do that, please call initiateSave 
+afterwards
+*/
+- (void)setTags:(NSMutableSet*)someTags;
 
 - (int)retryCount;
 - (void)incrementRetryCount;

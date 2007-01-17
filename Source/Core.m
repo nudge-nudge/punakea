@@ -10,6 +10,8 @@
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 - (void)createManagedFilesDirIfNeeded;
 
+- (void)applicationWillTerminate:(NSNotification *)note;
+
 + (BOOL)wasLaunchedAsLoginItem;
 + (BOOL)wasLaunchedByProcess:(NSString*)creator;
 

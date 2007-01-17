@@ -43,12 +43,6 @@
 
 - (SUUpdater*)updater;
 
-//saving and loading
-- (NSString*)pathForDataFile;
-- (void)saveDataToDisk;
-- (void)loadDataFromDisk;
-- (void)applicationWillTerminate:(NSNotification *)note;
-
 // mainmenu actions
 - (IBAction)showResults:(id)sender;
 - (IBAction)manageTags:(id)sender;

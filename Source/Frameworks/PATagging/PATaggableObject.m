@@ -12,12 +12,6 @@ NSString * const PATaggableObjectUpdate = @"PATaggableObjectUpdate";
 
 @interface PATaggableObject (PrivateAPI)
 
-/** 
-internal use only, does not initiate saving
-
-*/
-- (void)setTags:(NSMutableSet*)someTags;
-
 /**
 must be used in order to check if files are managed
  i.e. they must be put in the managed files area

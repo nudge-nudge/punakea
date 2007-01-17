@@ -660,28 +660,28 @@ helper method
 	{
 		value = MDItemCopyAttribute(mdItem, kMDItemDisplayName);	
 	}
-	[self setDisplayName:value];
+	[self setDisplayName:(NSString*)value];
 	CFRelease(value);
 	
 	value = MDItemCopyAttribute(mdItem, kMDItemContentType);	
-	[self setContentTypeIdentifier:value];
+	[self setContentTypeIdentifier:(NSString*)value];
 	CFRelease(value);
 	
-	value = MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");	
-	[self setContentTypeTree:value];
+	value = MDItemCopyAttribute(mdItem, (CFStringRef)@"kMDItemContentTypeTree");	
+	[self setContentTypeTree:(NSArray*)value];
 	CFRelease(value);
 	
 	CFTypeRef mdValue = MDItemCopyAttribute(mdItem, kMDItemLastUsedDate);
-	value = [PATaggableObject replaceMetadataValue:mdValue
-									  forAttribute:(id)kMDItemLastUsedDate];
-	if(value) [self setLastUsedDate:value];
+	value = [PATaggableObject replaceMetadataValue:(id)mdValue
+									  forAttribute:(NSString*)kMDItemLastUsedDate];
+	if(value) [self setLastUsedDate:(NSDate*)value];
 	CFRelease(mdValue);
 
-	mdValue = MDItemCopyAttribute(mdItem, @"kMDItemContentTypeTree");
-	value = [PATaggableObject replaceMetadataValue:mdValue
+	mdValue = MDItemCopyAttribute(mdItem, (CFStringRef)@"kMDItemContentTypeTree");
+	value = [PATaggableObject replaceMetadataValue:(id)mdValue
 									  forAttribute:@"kMDItemContentTypeTree"];
 	
-	if([value isEqualTo:@"DOCUMENTS"])
+	if([(id)value isEqualTo:@"DOCUMENTS"])
 	{
 		// Bookmarks that are stored as webloc file don't have the right content type,
 		// so we set it here
@@ -697,7 +697,7 @@ helper method
 			 */
 		}
 	}
-	[self setContentType:value];
+	[self setContentType:(NSString*)value];
 	CFRelease(mdValue);
 	
 	CFRelease(mdItem);
@@ -706,11 +706,11 @@ helper method
 // Compatibility mode for PAQuery
 - (id)valueForAttribute:(id)attribute
 {
-	if([attribute isEqualTo:kMDItemContentType]) return [self contentTypeIdentifier];
+	if([attribute isEqualTo:(NSString*)kMDItemContentType]) return [self contentTypeIdentifier];
 	if([attribute isEqualTo:@"kMDItemContentTypeTree"]) return [self contentType];
-	if([attribute isEqualTo:kMDItemDisplayName]) return [self displayName];
-	if([attribute isEqualTo:kMDItemPath]) return [self path];
-	if([attribute isEqualTo:kMDItemLastUsedDate]) return [self lastUsedDate];
+	if([attribute isEqualTo:(NSString*)kMDItemDisplayName]) return [self displayName];
+	if([attribute isEqualTo:(NSString*)kMDItemPath]) return [self path];
+	if([attribute isEqualTo:(NSString*)kMDItemLastUsedDate]) return [self lastUsedDate];
 	return nil;
 }
 

@@ -15,9 +15,9 @@
 
 /**
 executes a spotlight query for the tag
- @return PAFile array for tag
+ @return PATaggableObjects array for tag
  */
-- (NSArray*)files;
+- (NSArray*)taggedObjects;
 
 @end
 
@@ -51,20 +51,19 @@ executes a spotlight query for the tag
 - (void)renameTo:(NSString*)aName
 {
 	// search for files
-	NSArray *files = [self files];
+	NSArray *objects = [self taggedObjects];
 	
 	// set new name
 	[super renameTo:aName];
 	
 	// update files
-	[files makeObjectsPerformSelector:@selector(initiateSave)];
+	[objects makeObjectsPerformSelector:@selector(initiateSave)];
 }
 
 - (void)remove
 {
-	NSArray *files = [self files];
-	
-	[files makeObjectsPerformSelector:@selector(removeTag:) withObject:self];
+	NSArray *objects = [self taggedObjects];
+	[objects makeObjectsPerformSelector:@selector(removeTag:) withObject:self];
 }
 
 - (NSString*)queryInSpotlightSyntax
@@ -124,7 +123,7 @@ executes a spotlight query for the tag
 }
 
 #pragma mark synchronous searching
-- (NSArray*)files
+- (NSArray*)taggedObjects
 {
 	CFStringRef searchString = (CFStringRef)[self queryInSpotlightSyntax];
 	MDQueryRef synchronousQuery = MDQueryCreate(NULL,searchString,NULL,NULL);
