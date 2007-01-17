@@ -91,7 +91,7 @@ initializer
 - (id)resultAtIndex:(unsigned)idx;
 - (NSArray*)results;
 - (void)setResults:(NSMutableArray*)newResults;
-- (NSArray*)flatResults;
+- (NSMutableArray*)flatResults;
 - (void)setFlatResults:(NSMutableArray*)newFlatResults;
 
 - (NSDictionary *)simpleGrouping;

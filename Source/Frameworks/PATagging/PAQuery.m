@@ -90,6 +90,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			   name:nil
 			 object:mdquery];
 	
+	[self setFlatResults:[NSMutableArray array]];
+	
 	[self synchronizeResults];
 	
 	[nc postNotificationName:PAQueryDidResetNotification object:self];
@@ -159,8 +161,8 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	
 	NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:3];
 	
-	NSArray *theFlatResults = [self flatResults];
-	if(theFlatResults)
+	NSMutableArray *theFlatResults = [self flatResults];
+	if(theFlatResults && [theFlatResults count] > 0)
 	{
 		// There are already some results
 		
@@ -193,10 +195,16 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		// of items will be passed in userInfo
 		[userInfo setObject:userInfoAddedItems forKey:(id)kMDQueryUpdateAddedItems];
 		[userInfo setObject:userInfoRemovedItems forKey:(id)kMDQueryUpdateRemovedItems];
+		
+		[theFlatResults addObjectsFromArray:userInfoAddedItems];
+		[theFlatResults removeObjectsInArray:userInfoRemovedItems];
 	}	
+	else 
+	{
+		[self setFlatResults:newFlatResults];
+	}
 	
-	[self setFlatResults:newFlatResults];
-	[self setResults:[self bundleResults:flatResults byAttributes:bundlingAttributes]];	
+	[self setResults:[self bundleResults:[self flatResults] byAttributes:bundlingAttributes]];	
 	
 	// Apply filter, if active
 	if(filterDict)
@@ -773,7 +781,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	results = newResults;
 }
 
-- (NSArray *)flatResults
+- (NSMutableArray *)flatResults
 {
 	return filterDict ? flatFilteredResults : flatResults;
 }

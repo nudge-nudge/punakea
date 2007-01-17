@@ -268,6 +268,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	} else {
 		[[outlineView responder] scrollToVisible];
 	}*/
+	[outlineView scrollPoint:NSZeroPoint];
 	
 	[[self window] makeFirstResponder:outlineView];
 }

@@ -109,7 +109,8 @@ helper method
 
 - (void)dealloc
 {
-	[self saveTags];
+	// OutlineView constantly releases objects
+	//[self saveTags];
 	[path release];
 	[super dealloc];
 }
@@ -340,9 +341,7 @@ helper method
 }
 
 - (void)continueRenaming:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)context
-{
-	NSLog(@"hier");	
-	
+{	
 	NSDictionary *contextInfo = context;
 	
 	NSNumber	*fileExtensionHiddenNumber = [contextInfo objectForKey:@"fileExtensionHidden"];
