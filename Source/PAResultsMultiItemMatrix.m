@@ -940,9 +940,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		PATaggableObject	*item = [items objectAtIndex:idx];
 		NSString			*newName = [[textView string] copy];
 		
-		BOOL wasMoved = [[outlineView query] renameItem:item to:newName errorWindow:[self window]];
+		[item renameTo:newName errorWindow:[self window]];
 		
-		if(wasMoved) [self setNeedsDisplayInRect:[self cellFrameAtRow:r column:c]];
+		[self setNeedsDisplayInRect:[self cellFrameAtRow:r column:c]];
 	}
 	else if(textMovement == NSIllegalTextMovement)
 	{		
