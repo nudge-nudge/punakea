@@ -286,7 +286,7 @@ helper method
 	
 	// newName might reflect only the displayName without suffix - "myfile.xml" or "myfile"
 	NSDictionary *fileAttributes = [fileManager fileAttributesAtPath:[self path] traverseLink:NO];
-	BOOL fileExtensionHidden = [fileAttributes objectForKey:NSFileExtensionHidden];
+	BOOL fileExtensionHidden = [[fileAttributes objectForKey:NSFileExtensionHidden] boolValue];
 	
 	NSString *newExtension = [newName pathExtension];
 	

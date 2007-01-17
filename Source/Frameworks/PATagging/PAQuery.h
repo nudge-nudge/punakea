@@ -56,12 +56,13 @@ wrapper for NSMetadataQuery. searching for tags, no predicate needed
 	
 	NSPredicate				*predicate;
 	
+	NSMutableDictionary		*bundles;
 	NSArray					*bundlingAttributes;
 	
 	NSMutableDictionary		*filterDict;
 	
-	NSMutableArray			*results;
-	NSMutableArray			*flatResults;
+	NSMutableArray			*plainResults;
+	NSMutableArray			*flatPlainResults;
 	NSMutableArray			*filteredResults;
 	NSMutableArray			*flatFilteredResults;
 	
@@ -89,10 +90,8 @@ initializer
 
 - (unsigned)resultCount;
 - (id)resultAtIndex:(unsigned)idx;
-- (NSArray*)results;
-- (void)setResults:(NSMutableArray*)newResults;
-- (NSMutableArray*)flatResults;
-- (void)setFlatResults:(NSMutableArray*)newFlatResults;
+- (NSArray *)results;
+- (NSArray *)flatResults;
 
 - (NSDictionary *)simpleGrouping;
 - (void)setSimpleGrouping:(NSDictionary *)aDictionary;
@@ -112,17 +111,15 @@ initializer
 - (void)disableUpdates;
 - (void)enableUpdates;
 
-- (NSDictionary *)synchronizeResults;
-- (NSMutableArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes;
 -   (void)filterResults:(BOOL)flag
 			usingValues:(NSArray *)filterValues
    forBundlingAttribute:(NSString *)attribute
   newBundlingAttributes:(NSArray *)newAttributes;
+- (void)filterResults;
 - (BOOL)hasResultsUsingFilterWithValues:(NSArray *)filterValues
                    forBundlingAttribute:(NSArray *)attribute;
 
 - (void)trashItems:(NSArray *)items errorWindow:(NSWindow *)window;
-//- (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window;
 
 //- (id)delegate;
 //- (void)setDelegate:(id)aDelegate;

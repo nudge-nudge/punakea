@@ -23,22 +23,29 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (NSString*)queryStringForTags:(NSArray*)tags;
 - (NSString*)queryInSpotlightSyntaxForTags:(NSArray*)someTags;
 
+- (void)createQuery;
+- (void)setMdquery:(NSMetadataQuery*)query;
+
+- (NSDictionary *)synchronizeResults;
+- (NSArray *)wrapMetadataQueryItems:(NSArray *)mdQueryItems;
+- (NSDictionary *)compareNewResults:(NSArray *)newResults toOld:(NSArray *)oldResults;
+
+- (void)setDelegate:(id)aDelegate;
+
 - (NSPredicate *)predicate;
 - (void)setPredicate:(NSPredicate *)aPredicate;
 
+- (NSMutableArray *)plainResults;
+- (void)setPlainResults:(NSMutableArray *)newResults;
+- (NSMutableArray *)flatPlainResults;
+- (void)setFlatPlainResults:(NSMutableArray *)newFlatResults;
 - (NSArray *)filteredResults;
 - (void)setFilteredResults:(NSMutableArray *)newResults;
 - (NSArray *)flatFilteredResults;
 - (void)setFlatFilteredResults:(NSMutableArray *)newResults;
 
-- (void)createQuery;
-- (void)setMdquery:(NSMetadataQuery*)query;
-
-- (void)synchronizeResults;
-- (NSMutableArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes;
-- (void)filterResults:(BOOL)flag usingValues:(NSArray *)filterValues forBundlingAttribute:(NSString *)attribute newBundlingAttributes:(NSArray *)newAttributes;
-
-- (void)setDelegate:(id)aDelegate;
+- (NSMutableDictionary *)bundles;
+- (void)setBundles:(NSMutableDictionary *)theBundles;
 
 @end 
 
@@ -71,6 +78,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	[bundlingAttributes release];
 	[filterDict release];
 	[predicate release];
+	if(bundles) [bundles release];
 	[super dealloc];
 }
 
@@ -90,7 +98,10 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 			   name:nil
 			 object:mdquery];
 	
-	[self setFlatResults:[NSMutableArray array]];
+	[self setPlainResults:[NSMutableArray array]];
+	[self setFlatPlainResults:[NSMutableArray array]];
+	[self setFilteredResults:[NSMutableArray array]];
+	[self setFlatFilteredResults:[NSMutableArray array]];
 	
 	[self synchronizeResults];
 	
@@ -107,10 +118,10 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (BOOL)startQuery
 {
 	// Cleanup results
-	[self setFlatResults:[NSMutableArray array]];
-	[self setResults:[NSMutableArray array]];
-	[self setFlatFilteredResults:[NSMutableArray array]];
+	[self setPlainResults:[NSMutableArray array]];
+	[self setFlatPlainResults:[NSMutableArray array]];
 	[self setFilteredResults:[NSMutableArray array]];
+	[self setFlatFilteredResults:[NSMutableArray array]];
 	
 	// Finally, post notification
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAQueryDidStartGatheringNotification
@@ -157,193 +168,158 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		}
 	}
 	
-	NSArray *newFlatResults = [self bundleResults:mdQueryResults byAttributes:nil];
+	NSArray *queryResults = [self wrapMetadataQueryItems:mdQueryResults];
 	
-	NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:3];
+	NSDictionary *userInfo = [self compareNewResults:queryResults toOld:[self flatResults]];
+	NSArray *addedItems = [userInfo objectForKey:(id)kMDQueryUpdateAddedItems];
+	NSArray *removedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
+		
+	// 1. Update flatResults
+	[[self flatPlainResults] addObjectsFromArray:addedItems];
+	[[self flatPlainResults] removeObjectsInArray:removedItems];
 	
-	NSMutableArray *theFlatResults = [self flatResults];
-	if(theFlatResults && [theFlatResults count] > 0)
+	// 2. Update results	
+	if([self bundlingAttributes])
 	{
-		// There are already some results
-		
-		NSMutableArray *userInfoAddedItems = [NSMutableArray array];
-		NSMutableArray *userInfoRemovedItems = [NSMutableArray array];
-		
-		// First, match new to old results
-		NSEnumerator *enumerator = [newFlatResults objectEnumerator];
-		PAFile *newResultItem;
-		while(newResultItem = [enumerator nextObject])
+		// --- Add items
+		NSEnumerator *enumerator = [addedItems objectEnumerator];
+		PAFile *item;
+		while(item = [enumerator nextObject])
 		{
-			if(![theFlatResults containsObject:newResultItem])
+			// Add the item to the matching bundle on level 1. if there are sub-bundles,
+			// that bundle might handle any further moving of this item IN THE FUTURE - TODO.
+			NSString *bundlingAttribute = [[self bundlingAttributes] objectAtIndex:0];		
+			id bundlingAttributeValue = [item valueForAttribute:bundlingAttribute];
+			
+			NSString *bundleValue;
+			if([bundlingAttributeValue isKindOfClass:[NSString class]])
 			{
-				[userInfoAddedItems addObject:newResultItem];
+				bundleValue = (NSString *)bundlingAttributeValue;
+			} else {
+				bundleValue = [PATaggableObject replaceMetadataValue:bundlingAttributeValue
+															  forAttribute:bundlingAttribute];
 			}
+			
+			PAQueryBundle *bundle = [bundles objectForKey:bundleValue];
+			if(!bundle)
+			{
+				bundle = [PAQueryBundle bundle];
+				[bundle setValue:bundleValue];
+				[bundle setBundlingAttribute:bundlingAttribute];
+				[bundles setObject:bundle forKey:bundleValue];
+				
+				[[self plainResults] addObject:bundle];
+			}
+			[bundle addObject:item];
 		}
 		
-		// Next, match vice-versa
-		enumerator = [theFlatResults objectEnumerator];
-		PAFile *oldResultItem;
-		while(oldResultItem = [enumerator nextObject])
+		// --- Remove items
+		enumerator = [removedItems objectEnumerator];
+		while(item = [enumerator nextObject])
 		{
-			if(![newFlatResults containsObject:oldResultItem])
+			// Remove the item from the matching bundle on level 1. if there are sub-bundles,
+			// that bundle might handle any further removing of this item IN THE FUTURE - TODO.
+			NSString *bundlingAttribute = [[self bundlingAttributes] objectAtIndex:0];		
+			id bundlingAttributeValue = [item valueForAttribute:bundlingAttribute];
+			
+			NSString *bundleValue;
+			if([bundlingAttributeValue isKindOfClass:[NSString class]])
 			{
-				[userInfoRemovedItems addObject:oldResultItem];
+				bundleValue = (NSString *)bundlingAttributeValue;
+			} else {
+				bundleValue = [PATaggableObject replaceMetadataValue:bundlingAttributeValue
+														forAttribute:bundlingAttribute];
 			}
+			
+			PAQueryBundle *bundle = [bundles objectForKey:bundleValue];
+			[bundle removeObject:item];
+			
+			if([bundle resultCount] == 0)
+				[[self plainResults] removeObject:bundle];
 		}
-		
-		// Currently, this does not note if an item was modified - only removing and adding
-		// of items will be passed in userInfo
-		[userInfo setObject:userInfoAddedItems forKey:(id)kMDQueryUpdateAddedItems];
-		[userInfo setObject:userInfoRemovedItems forKey:(id)kMDQueryUpdateRemovedItems];
-		
-		[theFlatResults addObjectsFromArray:userInfoAddedItems];
-		[theFlatResults removeObjectsInArray:userInfoRemovedItems];
-	}	
-	else 
-	{
-		[self setFlatResults:newFlatResults];
+	}
+	else {
+		[[self plainResults] addObjectsFromArray:addedItems];
+		[[self plainResults] removeObjectsInArray:removedItems];
 	}
 	
-	[self setResults:[self bundleResults:[self flatResults] byAttributes:bundlingAttributes]];	
-	
-	// Apply filter, if active
-	if(filterDict)
-	{
-		[self filterResults:YES usingValues:[filterDict objectForKey:@"values"]
-		               forBundlingAttribute:[filterDict objectForKey:@"bundlingAttribute"]
-					  newBundlingAttributes:[filterDict objectForKey:@"newBundlingAttributes"]];
-	}
+	// 3. Update filteredResults and flatFilteredResults
+	[self filterResults];
 	
 	[self enableUpdates];
 	
 	return userInfo;
 }
 
-
-/**
-	Bundles a flat list of results into a hierarchical structure
-	defined by the first item of bundlingAttributes
-*/
-- (NSMutableArray *)bundleResults:(NSArray *)theResults byAttributes:(NSArray *)attributes
+- (NSArray *)wrapMetadataQueryItems:(NSArray *)mdQueryItems
 {
-	NSMutableDictionary *bundleDict = [NSMutableDictionary dictionary];
-	
-	NSMutableArray *bundledResults = [NSMutableArray array];
-	
-	NSString *bundlingAttribute = nil;
-	if(attributes)
-	{
-		bundlingAttribute = [attributes objectAtIndex:0];
-	}
-	
 	BOOL wrapping = NO;
-	if([theResults count] > 0) wrapping = [[theResults objectAtIndex:0] isKindOfClass:[NSMetadataItem class]];
-
-	NSEnumerator *resultsEnumerator = [theResults objectEnumerator];
-	//NSMetadataItem *mdItem;
-	id theItem;
-	while(theItem = [resultsEnumerator nextObject])
-	{	
-		PAQueryBundle *bundle;
-		
-		if(bundlingAttribute)
-		{
-			NSString *bundleValue;
-			
-			if(wrapping)
-			{
-				// theItem is a NSMetadataItem
-				
-				// TODO: this can't work as there is not replacementValue category any more!
-				
-				id valueToBeReplaced = [theItem valueForAttribute:bundlingAttribute];
-				bundleValue = [PATaggableObject replaceMetadataValue:valueToBeReplaced
-														forAttribute:bundlingAttribute];
-			} else {
-				// theItem is a PAQueryItem
-				bundleValue = [theItem valueForAttribute:bundlingAttribute];
-			}
-		
-			bundle = [bundleDict objectForKey:bundleValue];
-			if(!bundle)
-			{
-				bundle = [[PAQueryBundle alloc] init];
-				[bundle setValue:bundleValue];
-				[bundle setBundlingAttribute:bundlingAttribute];
-				[bundleDict setObject:bundle forKey:bundleValue];
-				[bundle release];
-			}			
-		}
-		
-		PAFile *item;
-		if(wrapping)			
-			item = [PAFile fileWithNSMetadataItem:(NSMetadataItem *)theItem];
-		else
-			item = theItem;
-		
-		if(bundlingAttribute)
-		{
-			[bundle addResultItem:item];
-		} else {
-			[bundledResults addObject:item];
-		}
-	}
+	if([mdQueryItems count] > 0)
+		wrapping = [[mdQueryItems objectAtIndex:0] isKindOfClass:[NSMetadataItem class]];
 	
-	if(bundlingAttribute)
+	if(!wrapping)
 	{
-		NSEnumerator *bundleEnumerator = [bundleDict objectEnumerator];
-		PAQueryBundle *bundle;
-		while(bundle = [bundleEnumerator nextObject])
-		{
-			// Bundle at next level if needed
-			NSMutableArray *nextBundlingAttributes = [attributes mutableCopy];
-			[nextBundlingAttributes removeObjectAtIndex:0];
-			
-			if([nextBundlingAttributes count] > 0)
-			{
-				NSArray *subResults = [self bundleResults:[bundle results]
-											 byAttributes:nextBundlingAttributes];
-				[bundle setResults:subResults];
-			}
+		return mdQueryItems;
+	} 
+	else
+	{
+		NSMutableArray *wrappedItems = [NSMutableArray array];
 		
-			[bundledResults addObject:bundle];
-			
-			[nextBundlingAttributes release];
+		NSEnumerator *enumerator = [mdQueryItems objectEnumerator];
+		NSMetadataItem *mdItem;
+		while(mdItem = [enumerator nextObject])
+		{
+			[wrappedItems addObject:[PAFile fileWithNSMetadataItem:mdItem]];
 		}
+		
+		return wrappedItems;
 	}
-	
-	return bundledResults;
 }
 
--   (void)filterResults:(BOOL)flag
-			usingValues:(NSArray *)filterValues
-   forBundlingAttribute:(NSString *)attribute
-  newBundlingAttributes:(NSArray *)newAttributes
-{	
-	if(!flag) 
-	{		
-		[filterDict release];
-		filterDict = nil;
-		return;
+- (NSDictionary *)compareNewResults:(NSArray *)newResults toOld:(NSArray *)oldResults
+{
+	NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:3];
+	
+	NSMutableArray *addedItems = [NSMutableArray array];
+	NSMutableArray *removedItems = [NSMutableArray array];
+				
+	// First, match new to old
+	NSEnumerator *enumerator = [newResults objectEnumerator];
+	PAFile *newResultItem;
+	while(newResultItem = [enumerator nextObject])
+	{
+		if(![oldResults containsObject:newResultItem])
+			[addedItems addObject:newResultItem];
 	}
 	
-	// If there is already a filter applied, we may check if it's the right one
-	BOOL isSameFilter = NO;
-	/*if(filterDict)
+	// Next, match vice-versa
+	enumerator = [oldResults objectEnumerator];
+	PAFile *oldResultItem;
+	while(oldResultItem = [enumerator nextObject])
 	{
-		isSameFilter = YES;
-		if(![[filterDict objectForKey:@"values"] isEqualTo:filterValues]) isSameFilter = NO;
-		if(![[filterDict objectForKey:@"bundlingAttribute"] isEqualTo:attribute]) isSameFilter = NO;
-		if([filterDict objectForKey:@"newBundlingAttributes"] &&
-		   ![[filterDict objectForKey:@"newBundlingAttributes"] isEqualTo:newAttributes]) isSameFilter = NO;
-	}*/
+		if(![newResults containsObject:oldResultItem])
+			[removedItems addObject:oldResultItem];
+	}
 	
-	// Return if we already have results for this filter
-	if(isSameFilter && flatFilteredResults) return;
+	// Currently, this does not note if an item was modified - only removing and adding
+	// of items will be passed in userInfo
+	[userInfo setObject:addedItems forKey:(id)kMDQueryUpdateAddedItems];
+	[userInfo setObject:removedItems forKey:(id)kMDQueryUpdateRemovedItems];
+
+	return userInfo;
+}
+
+-	(void)filterResults:(BOOL)flag
+	  	    usingValues:(NSArray *)filterValues
+   forBundlingAttribute:(NSString *)attribute 
+  newBundlingAttributes:(NSArray *)newAttributes
+{
+	if(filterDict)
+	{
+		[filterDict release];
+		filterDict = nil;
+	}
 	
-	// Store current filter values for later use
-	
-	[filterDict release];
 	if(attribute)
 	{
 		filterDict = [[NSMutableDictionary alloc] initWithCapacity:3];
@@ -351,37 +327,71 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		if(attribute) [filterDict setObject:attribute forKey:@"bundlingAttribute"];
 		if(newAttributes) [filterDict setObject:newAttributes forKey:@"newBundlingAttributes"];
 	}
-
-	[flatFilteredResults release];
-	flatFilteredResults = nil;
-	flatFilteredResults = [[NSMutableArray alloc] init];
-
-	NSEnumerator *enumerator = [flatResults objectEnumerator];
-	PAFile *item;
-	while(item = [enumerator nextObject])
-	{		
-		id valueForAttribute = [item valueForAttribute:attribute];
-		
-		if([valueForAttribute isKindOfClass:[NSString class]])
-		{
-			if([filterValues containsObject:valueForAttribute])
-			{
-				[flatFilteredResults addObject:item];
-			}
-		} else {
-			NSLog(@"couldn't properly filter results");
-		}
-	}
 	
-	[filteredResults release];
-	filteredResults = nil;
-	filteredResults = [[self bundleResults:flatFilteredResults byAttributes:newAttributes] retain];
+	[self filterResults];
+}
+
+- (void)filterResults
+{
+	if(filterDict) 
+	{
+		// Currently, we only use VALUES from the filterDict to determine all bundles
+		// that match the current filter. BundlingAttribute is ignored and assumed to be ContentTypeTree.
+		NSArray *filterValues = [filterDict objectForKey:@"values"];
+		
+		// flatFilteredResults
+		NSMutableArray *newFilteredResults = [NSMutableArray array];
+		
+		NSEnumerator *enumerator = [[self flatPlainResults] objectEnumerator];
+		id item;
+		while(item = [enumerator nextObject])
+		{
+			NSString *bundlingAttribute = [[self bundlingAttributes] objectAtIndex:0];		
+			id bundlingAttributeValue = [item valueForAttribute:bundlingAttribute];
+			
+			NSString *bundleValue;
+			if([bundlingAttributeValue isKindOfClass:[NSString class]])
+			{
+				bundleValue = (NSString *)bundlingAttributeValue;
+			} else {
+				bundleValue = [PATaggableObject replaceMetadataValue:bundlingAttributeValue
+														forAttribute:bundlingAttribute];
+			}
+			
+			if([[item valueForAttribute:bundlingAttribute] isEqualTo:bundleValue])
+				[newFilteredResults addObject:item];
+		}
+		
+		[self setFlatFilteredResults:newFilteredResults];
+		
+		// filteredResults		
+		newFilteredResults = [NSMutableArray array];
+		
+		enumerator = [[self plainResults] objectEnumerator];
+		while(item = [enumerator nextObject])
+		{
+			if([self bundlingAttributes])
+			{
+				// This item is a PAQueryBundle
+				PAQueryBundle *bundle = (PAQueryBundle *)item;
+				if([filterValues containsObject:[bundle value]])
+					[newFilteredResults addObjectsFromArray:[bundle results]];
+			}
+			else 
+			{
+				// This item is a PAFile - this case should not happen on level 1
+				[newFilteredResults addObject:item];
+			}
+		}
+		
+		[self setFilteredResults:newFilteredResults];
+	}	
 }
 
 - (BOOL)hasResultsUsingFilterWithValues:(NSArray *)filterValues
                    forBundlingAttribute:(NSArray *)attribute
 {
-	NSEnumerator *enumerator = [flatResults objectEnumerator];
+	NSEnumerator *enumerator = [[self flatPlainResults] objectEnumerator];
 	PAFile *item;
 	while(item = [enumerator nextObject])
 	{		
@@ -403,7 +413,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 
 - (void)trashItems:(NSArray *)items errorWindow:(NSWindow *)window
 {
-	[self disableUpdates];
+	/*[self disableUpdates];
 	
 	NSString *trashDir = [NSHomeDirectory() stringByAppendingPathComponent:@".Trash"];
 	
@@ -423,11 +433,11 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 		[trashedFile removeAllTags];
 
 		// Remove from flatresults
-		for(int k = 0; k < [flatResults count]; k++)
+		for(int k = 0; k < [[self flatPlainResults] count]; k++)
 		{
-			if([[flatResults objectAtIndex:k] isEqualTo:item])
+			if([[[self flatPlainResults] objectAtIndex:k] isEqualTo:item])
 			{
-				[flatResults removeObjectAtIndex:k];
+				[[self flatPlainResults] removeObjectAtIndex:k];
 				break;
 			}
 		}
@@ -444,6 +454,7 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	}
 	
 	[self enableUpdates];
+	*/
 }
 
 /*- (BOOL)renameItem:(PAQueryItem *)item to:(NSString *)newName errorWindow:(NSWindow *)window
@@ -643,10 +654,10 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 	
 	if([[note name] isEqualTo:NSMetadataQueryDidStartGatheringNotification])
 	{
-		[flatFilteredResults release];
-		flatFilteredResults = nil;
-		[filteredResults release];
-		filteredResults = nil;
+		[self setFlatFilteredResults:nil];
+		[self setFilteredResults:nil];
+		[self setBundles:[NSMutableDictionary dictionary]];
+		
 		[nc postNotificationName:PAQueryDidStartGatheringNotification object:self];
 	}
 	
@@ -761,36 +772,47 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 
 - (unsigned)resultCount
 {
-	return filterDict ? [filteredResults count] : [results count];
+	return filterDict ? [filteredResults count] : [plainResults count];
 }
 
 - (id)resultAtIndex:(unsigned)idx
 {
-	return filterDict ? [filteredResults objectAtIndex:idx] : [results objectAtIndex:idx];
+	return filterDict ? [filteredResults objectAtIndex:idx] : [plainResults objectAtIndex:idx];
 }
 
+// Public Accessor 
 - (NSArray *)results
 {
-	return filterDict ? filteredResults : results;
+	return filterDict ? filteredResults : plainResults;
 }
 
-- (void)setResults:(NSMutableArray*)newResults
+// Public Accessor 
+- (NSArray *)flatResults
 {
-	[results release];
-	[newResults retain];
-	results = newResults;
+	return filterDict ? flatFilteredResults : flatPlainResults;
 }
 
-- (NSMutableArray *)flatResults
+- (NSMutableArray *)plainResults
 {
-	return filterDict ? flatFilteredResults : flatResults;
+	return plainResults;
 }
 
-- (void)setFlatResults:(NSMutableArray*)newFlatResults
+- (void)setPlainResults:(NSMutableArray *)newResults
 {
-	[flatResults release];
-	[newFlatResults retain];
-	flatResults = newFlatResults;
+	[plainResults release];
+	plainResults = [newResults retain];
+}
+
+- (NSMutableArray *)flatPlainResults
+{
+	return flatPlainResults;
+}
+
+
+- (void)setFlatPlainResults:(NSMutableArray *)newFlatResults
+{
+	[flatPlainResults release];
+	flatPlainResults = [newFlatResults retain];
 }
 
 - (NSArray *)filteredResults
@@ -818,6 +840,17 @@ NSString * const PAQueryDidResetNotification = @"PAQueryDidResetNotification";
 - (BOOL)hasFilter
 {
 	return filterDict ? YES : NO;
+}
+
+- (NSMutableDictionary *)bundles
+{
+	return bundles;
+}
+
+- (void)setBundles:(NSMutableDictionary *)theBundles
+{
+	[bundles release];
+	bundles = [theBundles retain];
 }
 
 

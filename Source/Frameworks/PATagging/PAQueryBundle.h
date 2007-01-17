@@ -22,7 +22,11 @@ extern NSString * const PAQueryBundleDidUpdate;
 
 }
 
-- (void)addResultItem:(id)anItem;
++ (PAQueryBundle *)bundle;
+
+- (void)addObject:(id)anItem;
+- (void)removeObject:(id)anItem;
+
 - (NSString *)stringValue;
 - (unsigned)resultCount;
 - (id)resultAtIndex:(unsigned)idx;

@@ -45,4 +45,7 @@ represents a file. uses NSString, NSWorkspace and NSFilemanager stuff internally
 - (BOOL)isDirectory; /**< checks if file is directory */
 - (NSImage*)icon; /**< icon representing file */
 
+// Compatibility
+- (id)valueForAttribute:(id)attribute;
+
 @end

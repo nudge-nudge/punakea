@@ -32,6 +32,11 @@ NSString * const PAQueryBundleDidUpdate = @"PAQueryBundleDidUpdate";
 	[super dealloc];
 }
 
++ (PAQueryBundle *)bundle
+{
+	return [[[PAQueryBundle alloc] init] autorelease];
+}
+
 
 #pragma mark Comparing
 - (BOOL)isEqual:(id)object
@@ -54,22 +59,27 @@ NSString * const PAQueryBundleDidUpdate = @"PAQueryBundleDidUpdate";
 
 
 #pragma mark Actions
-- (void)addResultItem:(id)anItem
+- (void)addObject:(id)anItem
 {
 	[results addObject:anItem];
+}
+
+- (void)removeObject:(id)anItem
+{
+	[results removeObject:anItem];
 }
 
 - (NSString *)stringValue
 {
 	NSMutableString *str = [NSMutableString stringWithString:@"["];
-	str = [str stringByAppendingString:value];
-	str = [str stringByAppendingString:@": "];
+	str = (NSMutableString *)[str stringByAppendingString:value];
+	str = (NSMutableString *)[str stringByAppendingString:@": "];
 
 	NSEnumerator *enumerator = [results objectEnumerator];
 	id object;
 	while(object = [enumerator nextObject])
 	{
-		str = [str stringByAppendingString:[object stringValue]];
+		str = (NSMutableString *)[str stringByAppendingString:[object stringValue]];
 	}
 	
 	return [str stringByAppendingString:@"]"];
