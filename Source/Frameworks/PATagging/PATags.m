@@ -352,8 +352,6 @@ static PATags *sharedInstance = nil;
 
 - (void)saveDataToDisk 
 {	
-	NSLog(@"saving tags");
-	
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
 	[rootObject setValue:[self tags] forKey:@"tags"];
@@ -369,8 +367,6 @@ static PATags *sharedInstance = nil;
 
 - (void)loadDataFromDisk 
 {
-	NSLog(@"loading tags");
-	
 	NSString *path = [self pathForDataFile];
 	NSMutableData *data = [NSData dataWithContentsOfFile:path];
 	
