@@ -13,7 +13,6 @@
 
 #import "PAQueryBundle.h"
 #import "PASelectedTags.h"
-#import "PAThumbnailManager.h"
 #import "NSFileManager+TrashFile.h"
 
 
