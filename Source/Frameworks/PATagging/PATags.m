@@ -47,15 +47,29 @@ static PATags *sharedInstance = nil;
 		
 		nc = [NSNotificationCenter defaultCenter];
 		
+		// observe all tag changes
 		[nc addObserver:self 
 			   selector:@selector(tagsHaveChanged:) 
 				   name:nil 
 				 object:self];
 		
+		// save on app termination
 		[nc addObserver:self 
 			   selector:@selector(syncToDisk:) 
 				   name:NSApplicationWillTerminateNotification 
 				 object:nil];
+		
+		// save on app going inactive
+		[nc addObserver:self
+			   selector:@selector(syncToDisk:)
+				   name:NSApplicationDidResignActiveNotification
+				 object:nil];
+		
+		// load on app becoming active
+		[nc addObserver:self
+			   selector:@selector(syncFromDisk:)
+				   name:NSApplicationDidBecomeActiveNotification
+				 object:nil];	
 	}
 	return self;
 }
@@ -252,6 +266,12 @@ static PATags *sharedInstance = nil;
 	[self saveDataToDisk];
 }
 
+- (void)syncFromDisk:(NSNotification*)notification
+{
+	[self loadDataFromDisk];
+}
+
+
 #pragma mark tag observing
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -332,6 +352,8 @@ static PATags *sharedInstance = nil;
 
 - (void)saveDataToDisk 
 {	
+	NSLog(@"saving tags");
+	
 	NSString *path  = [self pathForDataFile];
 	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
 	[rootObject setValue:[self tags] forKey:@"tags"];
@@ -347,6 +369,8 @@ static PATags *sharedInstance = nil;
 
 - (void)loadDataFromDisk 
 {
+	NSLog(@"loading tags");
+	
 	NSString *path = [self pathForDataFile];
 	NSMutableData *data = [NSData dataWithContentsOfFile:path];
 	
