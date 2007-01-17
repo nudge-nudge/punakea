@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PAQueryBundle.h"
+#import "PATagging/PAQueryBundle.h"
+
 #import "PAImageButton.h"
 #import "PASegmentedImageControl.h"
 #import "PAResultsOutlineView.h"

@@ -2,6 +2,8 @@
 #import <Cocoa/Cocoa.h>
 #import "PATagging/PATags.h"
 #import "PATagging/PATaggableObject.h"
+// TODO move this to PATags
+#import "PATagging/PATagSave.h"
 
 #import "SidebarController.h"
 #import "BrowserController.h"
@@ -14,8 +16,6 @@
 #import "PAResultsOutlineView.h"
 
 #import "PACollectionNotEmpty.h"
-
-#import "PATagSave.h"
 
 #import "Sparkle/SUUpdater.h"
 

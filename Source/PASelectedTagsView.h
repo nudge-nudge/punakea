@@ -11,7 +11,7 @@
 #import "PAResultsOutlineView.h"
 #import "PAResultsViewController.h"
 #import "PATagging/PATag.h"
-#import "PASelectedTags.h"
+#import "PATagging/PASelectedTags.h"
 #import "PAButton.h"
 #import "PAImageButton.h"
 

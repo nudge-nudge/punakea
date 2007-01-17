@@ -6,7 +6,8 @@
 #import "PAResultsBookmarkCell.h"
 #import "PAResultsMultiItemCell.h"
 #import "PAResultsMultiItemThumbnailCell.h"
-#import "PAQuery.h"
+
+#import "PATagging/PAQuery.h"
 
 
 typedef enum _PAResultsDisplayMode

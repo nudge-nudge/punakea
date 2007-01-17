@@ -10,8 +10,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAThreadSafeQueue.h"
-#import "PATagging/PATaggableObject.h"
-#import "PATagging/PATags.h"
+#import "PATaggableObject.h"
+#import "PATags.h"
 
 extern int const MAX_RETRY_COUNT;
 extern useconds_t const PATAGSAVE_CYCLETIME;

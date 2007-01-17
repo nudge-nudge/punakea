@@ -13,9 +13,10 @@
 
 #import "PATagging/PATags.h"
 #import "PATagging/PATag.h"
-#import "PARelatedTags.h"
-#import "PASelectedTags.h"
-#import "PAQuery.h"
+#import "PATagging/PARelatedTags.h"
+#import "PATagging/PASelectedTags.h"
+#import "PATagging/PAQuery.h"
+
 #import "PAResultsOutlineView.h"
 #import "PADropManager.h"
 #import "PATagButton.h"

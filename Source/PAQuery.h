@@ -7,9 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PATag.h"
-#import "PATagging/PATaggableObject.h"
-#import "PATagging/PAFile.h"
+#import "PATag.h"
+#import "PATaggableObject.h"
+#import "PAFile.h"
 
 #import "PAQueryBundle.h"
 #import "PASelectedTags.h"

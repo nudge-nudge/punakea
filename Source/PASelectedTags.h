@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PATag.h"
+#import "PATag.h"
 
 /**
 container class for selected tags

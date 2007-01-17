@@ -61,6 +61,8 @@ abstract class representing a taggable object (normally a file
 - (void)removeTags:(NSArray*)someTags;
 - (void)removeAllTags;
 
++ (id)replaceMetadataValue:(id)attrValue forAttribute:(NSString *)attrName;
+
 /**
 call this if you want to save to harddisk,
  don't call saveTags directly

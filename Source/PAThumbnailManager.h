@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAThumbnailItem.h"
-#import "PAThreadSafeQueue.h"
+#import "PATagging/PAThreadSafeQueue.h"
 
 
 extern NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification;

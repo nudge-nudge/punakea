@@ -33,6 +33,7 @@ NSString * const TAGGER_WHITESPACE_SEPARATOR = @"    ";
 
 // internal rename stuff
 - (BOOL)caseRenameToPath:(NSString*)newPath;
+- (void)continueRenaming:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)context;
 
 /**
 loads tags from backing storage
@@ -336,8 +337,6 @@ helper method
 	} else {
 		[self continueRenaming:nil returnCode:nil contextInfo:contextInfo];
 	}
-	
-	return YES;
 }
 
 - (void)continueRenaming:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)context
@@ -687,8 +686,7 @@ helper method
 	{
 		// Bookmarks that are stored as webloc file don't have the right content type,
 		// so we set it here
-		NSString *path = [self path];
-		if(path && [path hasSuffix:@"webloc"])
+		if([[self path] hasSuffix:@"webloc"])
 		{
 			// Set new value for Content Type Tree
 			value = @"BOOKMARKS";

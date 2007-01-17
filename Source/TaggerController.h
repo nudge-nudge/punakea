@@ -2,7 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PATagging/PATags.h"
-#import "PARelatedTagsStandalone.h"
+#import "PATagging/PARelatedTagsStandalone.h"
 #import "PATypeAheadFind.h"
 #import "PADropManager.h"
 #import "PAFileCell.h"
