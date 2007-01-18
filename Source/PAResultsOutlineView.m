@@ -483,7 +483,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 												   object:[NSIndexSet indexSetWithIndex:mouseRow]];
 
         // perform double action
-		if([[[self itemAtRow:mouseRow] class] isNotEqualTo:[NSMetadataQueryResultGroup class]])
+		if([[[self itemAtRow:mouseRow] class] isNotEqualTo:[PAQueryBundle class]])
 			[[self target] performSelector:[self doubleAction]];
     }
     else

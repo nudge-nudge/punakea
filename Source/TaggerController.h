@@ -1,6 +1,7 @@
 /* TaggerController */
 
 #import <Cocoa/Cocoa.h>
+#import "NNTagging/PATaggableObject.h"
 #import "NNTagging/PATags.h"
 #import "NNTagging/PARelatedTagsStandalone.h"
 #import "PATypeAheadFind.h"
@@ -18,7 +19,7 @@
 	
 	IBOutlet NSTokenField		*tagField; /**< shows tags which are on all selected files */
 	
-	IBOutlet NSArrayController	*taggableObjectController;
+	NSMutableArray				*items;
 	
 	PASelectedTags				*currentCompleteTagsInField; /**< holds the relevant tags of tagField (as a copy) */
 	NSString					*restDisplayString;
@@ -29,12 +30,8 @@
 	PATags						*globalTags;
 }
 
-/**
-adds new files to the fileController
- @param newFiles files to add
- */
-- (void)addTaggableObjects:(NSArray*)objects;
-- (NSArray*)taggableObjects;
+- (void)addTaggableObject:(PATaggableObject *)anObject;
+- (void)addTaggableObjects:(NSArray *)theObjects;
 
 - (PASelectedTags*)currentCompleteTagsInField;
 - (void)setCurrentCompleteTagsInField:(PASelectedTags*)newTags;

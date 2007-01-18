@@ -53,14 +53,21 @@
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	
+	NSColor *textColor = [NSColor blackColor];
+	
 	if([self isHighlighted] &&
 	   [[[controlView window] firstResponder] isDescendantOf:[controlView superview]] &&
-	   [[controlView window] isKeyWindow] &&
-	   ![[controlView itemAtRow:[controlView editedRow]] isEqualTo:item]) 
-		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
-	else
-		[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-		
+	   [[controlView window] isKeyWindow]) 
+	{
+		// This depends on whether it is used in an OutlineView or a TableView or somewhere else
+		if([controlView isKindOfClass:[NSOutlineView class]])
+		{
+			if(![[(NSOutlineView *)controlView itemAtRow:[controlView editedRow]] isEqualTo:item])
+				textColor = [NSColor whiteColor];
+		}
+	}
+	
+	[fontAttributes setObject:textColor forKey:NSForegroundColorAttributeName];	
 	[fontAttributes setObject:[NSFont systemFontOfSize:11] forKey:NSFontAttributeName];
 	
 	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];

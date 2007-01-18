@@ -9,9 +9,9 @@ adds tag to tagField (use from "outside")
 - (void)addTagToField:(PASimpleTag*)tag;
 
 /**
-called when taggableObjects have changed
+called when items have changed
  */
-- (void)taggableObjectsHaveChanged;
+- (void)itemsHaveChanged;
 
 /**
 resets the tagger window (called when window is closed)
@@ -31,13 +31,16 @@ resets the tagger window (called when window is closed)
 {
 	if (self = [super initWithWindowNibName:@"Tagger"])
 	{
+		items = [[NSMutableArray alloc] init];
+		
 		typeAheadFind = [[PATypeAheadFind alloc] init];
 
 		currentCompleteTagsInField = [[PASelectedTags alloc] init];
 		dropManager = [PADropManager sharedInstance];
 		
 		// custom data cell
-		fileCell = [[PAFileCell alloc] init];
+		fileCell = [[PAFileCell alloc] initTextCell:@""];
+		[fileCell setEditable:YES];
 		
 		globalTags = [PATags sharedTags];
 	}
@@ -64,22 +67,19 @@ resets the tagger window (called when window is closed)
 	// token field wrapping
 	[[tagField cell] setWraps:YES];
 	
-	[taggableObjectController addObserver:self
-							   forKeyPath:@"arrangedObjects"
-								  options:nil
-								  context:NULL];
-	
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	// add observer for updating the threaded icons
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(iconWasGenerated:)
-												 name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
-											   object:nil];
+	[nc addObserver:self 
+		   selector:@selector(iconWasGenerated:)
+			   name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
+			 object:nil];
 }
 
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
+	[items release];
 	[headerCell release];
 	[tableView unregisterDraggedTypes];
 	[fileCell release];
@@ -88,13 +88,49 @@ resets the tagger window (called when window is closed)
 	[super dealloc];
 }
 
-#pragma mark observing
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+
+#pragma mark Actions
+- (void)addTaggableObject:(PATaggableObject *)anObject
 {
-	if ([keyPath isEqualToString:@"arrangedObjects"])
+	[items addObject:anObject];
+	[self updateTags];
+	[tableView reloadData];
+}
+
+- (void)addTaggableObjects:(NSArray *)theObjects
+{
+	[items addObjectsFromArray:theObjects];
+	[self updateTags];
+	[tableView reloadData];
+}
+
+- (void)updateTags
+{
+	// only tags present on every object are shown
+	NSMutableSet *tagsOnAllObjects = [NSMutableSet set];
+	
+	NSEnumerator *itemsEnumerator = [items objectEnumerator];
+	PATaggableObject *taggableObject;
+	
+	// set all tags to tags on first object
+	if (taggableObject = [itemsEnumerator nextObject])
 	{
-		[self taggableObjectsHaveChanged];
+		[tagsOnAllObjects unionSet:[taggableObject tags]];
 	}
+	
+	// now intersect with all tags on other objects	
+	while (taggableObject = [itemsEnumerator nextObject])
+	{
+		[tagsOnAllObjects intersectSet:[taggableObject tags]];
+	}
+	
+	// update to new value
+	[tagField setObjectValue:[tagsOnAllObjects allObjects]];
+	
+	[currentCompleteTagsInField removeAllTags];
+	[currentCompleteTagsInField addObjectsFromArray:[tagsOnAllObjects allObjects]];
+	
+	[[self window] makeFirstResponder:tagField];
 }
 
 
@@ -109,29 +145,6 @@ resets the tagger window (called when window is closed)
 	}
 }
 
-
-#pragma mark accessors
-- (void)addTaggableObjects:(NSArray*)objects
-{
-	[taggableObjectController addObjects:objects];
-}
-
-- (NSArray*)taggableObjects
-{
-	return [taggableObjectController arrangedObjects];
-}
-
-- (PASelectedTags*)currentCompleteTagsInField
-{
-	return currentCompleteTagsInField;
-}
-
-- (void)setCurrentCompleteTagsInField:(PASelectedTags*)newTags
-{
-	[newTags retain];
-	[currentCompleteTagsInField release];
-	currentCompleteTagsInField = newTags;
-}
 
 #pragma mark tokenField delegate
 - (NSArray *)tokenField:(NSTokenField *)tokenField 
@@ -158,7 +171,7 @@ completionsForSubstring:(NSString *)substring
 {
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	
-	[[self taggableObjects] makeObjectsPerformSelector:@selector(addTags:) withObject:tokens];
+	[items makeObjectsPerformSelector:@selector(addTags:) withObject:tokens];
 		
 	// resize field if neccessary
 	[self performSelector:@selector(resizeTokenField) 
@@ -212,7 +225,7 @@ completionsForSubstring:(NSString *)substring
 		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
 		
 		// remove the deleted tags from all files
-		[[self taggableObjects] makeObjectsPerformSelector:@selector(removeTags:)
+		[items makeObjectsPerformSelector:@selector(removeTags:)
 												withObject:deletedTags];
 
 		// resize tokenfield if neccessary
@@ -241,35 +254,6 @@ completionsForSubstring:(NSString *)substring
 	[[[self window] contentView] setNeedsDisplay:YES];
 }
 
-#pragma mark gui change actions
-- (void)taggableObjectsHaveChanged
-{
-	// only tags present on every object are shown
-	NSMutableSet *tagsOnAllObjects = [NSMutableSet set];
-	
-	NSEnumerator *taggableObjectEnumerator = [[self taggableObjects] objectEnumerator];
-	PATaggableObject *taggableObject;
-	
-	// set all tags to tags on first object
-	if (taggableObject = [taggableObjectEnumerator nextObject])
-	{
-		[tagsOnAllObjects unionSet:[taggableObject tags]];
-	}
-	
-	// now intersect with all tags on other objects	
-	while (taggableObject = [taggableObjectEnumerator nextObject])
-	{
-		[tagsOnAllObjects intersectSet:[taggableObject tags]];
-	}
-	
-	// update to new value
-	[tagField setObjectValue:[tagsOnAllObjects allObjects]];
-	
-	[currentCompleteTagsInField removeAllTags];
-	[currentCompleteTagsInField addObjectsFromArray:[tagsOnAllObjects allObjects]];
-
-	[[self window] makeFirstResponder:tagField];
-}
 
 #pragma mark window delegate
 - (void)windowWillClose:(NSNotification *)aNotification
@@ -277,7 +261,6 @@ completionsForSubstring:(NSString *)substring
 	// unbind stuff
 	[tagField unbind:@"editable"];
 	
-	[taggableObjectController removeObserver:self forKeyPath:@"arrangedObjects"];	
 	[self autorelease];
 }
 
@@ -286,13 +269,49 @@ completionsForSubstring:(NSString *)substring
 	[self resizeTokenField];
 }
 
+
+#pragma mark TableView Data Source
+- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+{
+	return [items count];
+}
+
+-      	      (id)tableView:(NSTableView *)aTableView 
+  objectValueForTableColumn:(NSTableColumn *)aTableColumn
+						row:(int)rowIndex
+{
+	return [items objectAtIndex:rowIndex];
+}
+
+
+#pragma mark ResultsOutlineView Set Object Value
+- (void)tableView:(NSTableView *)aTableView
+   setObjectValue:(id)anObject
+   forTableColumn:(NSTableColumn *)aTableColumn 
+			  row:(int)rowIndex
+{
+	PATaggableObject *taggableObject = [items objectAtIndex:rowIndex];
+	NSString *value = anObject;
+	
+	[taggableObject renameTo:value errorWindow:[aTableView window]];
+	
+	[tableView reloadData];
+}
+
+
+#pragma mark TableView Delegate
+- (float)tableView:(NSTableView *)tableView heightOfRow:(int)row
+{
+	return 19.0;
+}
+
 #pragma mark tableview drop support
 - (NSDragOperation)tableView:(NSTableView*)tv 
 				validateDrop:(id <NSDraggingInfo>)info 
 				 proposedRow:(int)row 
 	   proposedDropOperation:(NSTableViewDropOperation)op
 {
-	int fileCount = [[self taggableObjects] count];
+	int fileCount = [items count];
 
 	if (fileCount == 0)
 	{
@@ -313,20 +332,20 @@ completionsForSubstring:(NSString *)substring
 {
 	NSArray *files = [dropManager handleDrop:[info draggingPasteboard]];
 	
-	NSMutableArray *result = [NSMutableArray array];
+	NSMutableArray *results = [NSMutableArray array];
 	
 	NSEnumerator *e = [files objectEnumerator];
 	PAFile *file;
 	
 	while (file = [e nextObject])
 	{
-		if (![[taggableObjectController arrangedObjects] containsObject:file])
+		if (![items containsObject:file])
 		{
-			[result addObject:file];
+			[results addObject:file];
 		}
 	}
 	
-	[self addTaggableObjects:result];
+	[self addTaggableObjects:results];
 	
 	return YES;
 }
@@ -367,7 +386,7 @@ completionsForSubstring:(NSString *)substring
 	{
 		PAFile *file = [PAFile fileWithPath:filename];
 	
-		if (![[taggableObjectController arrangedObjects] containsObject:file])
+		if (![items containsObject:file])
 		{
 			[results addObject:file];
 		}
@@ -378,7 +397,23 @@ completionsForSubstring:(NSString *)substring
 
 - (void)removeButtonClicked:(id)sender
 {
-	[taggableObjectController removeObjectsAtArrangedObjectIndexes:[tableView selectedRowIndexes]];
+	[items removeObjectsAtIndexes:[tableView selectedRowIndexes]];
+	[self updateTags];
+	[tableView reloadData];
+}
+
+
+#pragma mark accessors
+- (PASelectedTags*)currentCompleteTagsInField
+{
+	return currentCompleteTagsInField;
+}
+
+- (void)setCurrentCompleteTagsInField:(PASelectedTags*)newTags
+{
+	[newTags retain];
+	[currentCompleteTagsInField release];
+	currentCompleteTagsInField = newTags;
 }
 
 @end

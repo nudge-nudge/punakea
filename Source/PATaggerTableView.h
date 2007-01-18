@@ -7,10 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NNTagging/PATaggableObject.h"
 
 
 @interface PATaggerTableView : NSTableView {
 
 }
+
+- (void)beginEditing;
 
 @end

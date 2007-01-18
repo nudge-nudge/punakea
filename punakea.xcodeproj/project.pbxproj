@@ -891,6 +891,8 @@
 				6530FF350AF2229400D7A79A /* PATaggerTableView.m */,
 				48D81DAB09F79C1C0075EE44 /* TaggerController.h */,
 				48D81DAC09F79C1C0075EE44 /* TaggerController.m */,
+				48557AD50ADB8ADA0025CE9C /* PAFileCell.h */,
+				48557AD60ADB8ADA0025CE9C /* PAFileCell.m */,
 			);
 			name = Tagger;
 			sourceTree = "<group>";
@@ -1311,8 +1313,6 @@
 				65988C6A0A875A11000270E6 /* PAButton.m */,
 				65988C7F0A875C53000270E6 /* PAButtonCell.h */,
 				65988C800A875C53000270E6 /* PAButtonCell.m */,
-				48557AD50ADB8ADA0025CE9C /* PAFileCell.h */,
-				48557AD60ADB8ADA0025CE9C /* PAFileCell.m */,
 				659EBB4109D2D78300879091 /* PAImageButton.h */,
 				659EBB4209D2D78300879091 /* PAImageButton.m */,
 				65461C9309D0418F0076778E /* PAImageButtonCell.h */,

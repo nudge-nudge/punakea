@@ -12,11 +12,7 @@
         {
             CLASS = TaggerController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {
-                tableView = NSTableView; 
-                tagField = NSTokenField; 
-                taggableObjectController = NSArrayController; 
-            }; 
+            OUTLETS = {tableView = NSTableView; tagField = NSTokenField; }; 
             SUPERCLASS = NSWindowController; 
         }
     ); 
