@@ -6,7 +6,7 @@
 #import "NNTagging/PARelatedTagsStandalone.h"
 #import "PATypeAheadFind.h"
 #import "PADropManager.h"
-#import "PAFileCell.h"
+#import "PATaggerItemCell.h"
 #import "PATaggerHeaderCell.h"
 #import "PAThumbnailItem.h"
 
@@ -14,7 +14,7 @@
 {	
 	IBOutlet NSTableView		*tableView;
 	
-	PAFileCell					*fileCell;
+	PATaggerItemCell			*fileCell;
 	PATaggerHeaderCell			*headerCell;
 	
 	IBOutlet NSTokenField		*tagField; /**< shows tags which are on all selected files */

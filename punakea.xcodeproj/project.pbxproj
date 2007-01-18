@@ -659,8 +659,6 @@
 		65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
-		65F9B8E60B5FB715005AC66F /* PAFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileCell.h; sourceTree = "<group>"; };
-		65F9B8E90B5FB732005AC66F /* PAFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileCell.m; sourceTree = "<group>"; };
 		65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewPressed-1.tiff"; sourceTree = "<group>"; };
 		65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
 		65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
@@ -889,14 +887,12 @@
 				65B78E690AF0D32700AF1102 /* PATaggerBackgroundView.m */,
 				654B4CF90AF1FD37001082BA /* PATaggerHeaderCell.h */,
 				654B4CFA0AF1FD37001082BA /* PATaggerHeaderCell.m */,
+				48557AD50ADB8ADA0025CE9C /* PATaggerItemCell.h */,
+				48557AD60ADB8ADA0025CE9C /* PATaggerItemCell.m */,
 				6530FF340AF2229400D7A79A /* PATaggerTableView.h */,
 				6530FF350AF2229400D7A79A /* PATaggerTableView.m */,
 				48D81DAB09F79C1C0075EE44 /* TaggerController.h */,
 				48D81DAC09F79C1C0075EE44 /* TaggerController.m */,
-				65F9B8E60B5FB715005AC66F /* PAFileCell.h */,
-				48557AD50ADB8ADA0025CE9C /* PATaggerItemCell.h */,
-				65F9B8E90B5FB732005AC66F /* PAFileCell.m */,
-				48557AD60ADB8ADA0025CE9C /* PATaggerItemCell.m */,
 			);
 			name = Tagger;
 			sourceTree = "<group>";

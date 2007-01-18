@@ -39,7 +39,7 @@ resets the tagger window (called when window is closed)
 		dropManager = [PADropManager sharedInstance];
 		
 		// custom data cell
-		fileCell = [[PAFileCell alloc] initTextCell:@""];
+		fileCell = [[PATaggerItemCell alloc] initTextCell:@""];
 		[fileCell setEditable:YES];
 		
 		globalTags = [PATags sharedTags];
@@ -131,6 +131,21 @@ resets the tagger window (called when window is closed)
 	[currentCompleteTagsInField addObjectsFromArray:[tagsOnAllObjects allObjects]];
 	
 	[[self window] makeFirstResponder:tagField];
+}
+
+- (void)doubleAction:(id)sender
+{
+	NSIndexSet *selectedRowIndexes = [tableView selectedRowIndexes];	
+	unsigned row = [selectedRowIndexes firstIndex];
+	while(row != NSNotFound) 
+	{
+		id item = [tableView itemAtRow:row];
+		
+		if([[item class] isEqualTo:[PAFile class]])
+			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
+		
+		row = [selectedRowIndexes indexGreaterThanIndex:row];
+	}
 }
 
 

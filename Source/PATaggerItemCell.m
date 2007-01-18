@@ -1,15 +1,15 @@
 //
-//  PAFileCell.m
+//  PATaggerItemCell.m
 //  punakea
 //
 //  Created by Johannes Hoffart on 10.10.06.
 //  Copyright 2006 nudge:nudge. All rights reserved.
 //
 
-#import "PAFileCell.h"
+#import "PATaggerItemCell.h"
 
 
-@implementation PAFileCell
+@implementation PATaggerItemCell
 
 - (id)initTextCell:(NSString *)aText
 {

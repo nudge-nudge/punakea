@@ -1,5 +1,5 @@
 //
-//  PAFileCell.h
+//  PATaggerItemCell.h
 //  punakea
 //
 //  Created by Johannes Hoffart on 10.10.06.
@@ -10,7 +10,7 @@
 #import "NNTagging/PAFile.h"
 #import "PAThumbnailManager.h"
 
-@interface PAFileCell : NSTextFieldCell {
+@interface PATaggerItemCell : NSTextFieldCell {
 	PAFile *file;
 }
 

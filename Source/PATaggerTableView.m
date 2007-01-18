@@ -139,7 +139,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 												   object:[NSIndexSet indexSetWithIndex:mouseRow]];
 		
         // perform double action
-		[[self target] performSelector:[self doubleAction]];
+		[[self delegate] performSelector:@selector(doubleAction:)];
     }
     else
     {
