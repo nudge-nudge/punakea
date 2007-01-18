@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PATaggableObject.h"
+#import "NNTagging/PATaggableObject.h"
 
 /**
 abstract class for analyzing the data of a single pboardType. is used by PADropHandler.

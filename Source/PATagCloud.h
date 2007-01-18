@@ -2,7 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <math.h>
-#import "PATagging/PATag.h"
+#import "NNTagging/PATag.h"
 #import "PATagButton.h"
 #import "PADropManager.h"
 

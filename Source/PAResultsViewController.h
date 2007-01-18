@@ -9,13 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "PABrowserViewMainController.h"
 
-#import "NSFileManager+TrashFile.h"
+#import "NNTagging/NSFileManager+TrashFile.h"
 
-#import "PATagging/PATags.h"
-#import "PATagging/PATag.h"
-#import "PATagging/PARelatedTags.h"
-#import "PATagging/PASelectedTags.h"
-#import "PATagging/PAQuery.h"
+#import "NNTagging/PATags.h"
+#import "NNTagging/PATag.h"
+#import "NNTagging/PARelatedTags.h"
+#import "NNTagging/PASelectedTags.h"
+#import "NNTagging/PAQuery.h"
 
 #import "PAResultsOutlineView.h"
 #import "PADropManager.h"

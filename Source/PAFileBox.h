@@ -1,7 +1,7 @@
 /* PAFileBox */
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PATag.h"
+#import "NNTagging/PATag.h"
 #import "PADropManager.h"
 
 @interface PAFileBox : NSImageView

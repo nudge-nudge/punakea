@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PABrowserViewMainController.h"
-#import "PATagging/PATags.h"
-#import "PATagging/PATag.h"
+#import "NNTagging/PATags.h"
+#import "NNTagging/PATag.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 #import "NSString+CharacterSetChecks.h"
 #import "PAImageButton.h"

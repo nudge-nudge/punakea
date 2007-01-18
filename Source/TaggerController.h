@@ -1,8 +1,8 @@
 /* TaggerController */
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PATags.h"
-#import "PATagging/PARelatedTagsStandalone.h"
+#import "NNTagging/PATags.h"
+#import "NNTagging/PARelatedTagsStandalone.h"
 #import "PATypeAheadFind.h"
 #import "PADropManager.h"
 #import "PAFileCell.h"

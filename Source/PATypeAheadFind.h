@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PATags.h"
+#import "NNTagging/PATags.h"
 
 /**
 simple type ahead find implementation, not the quickest, but works

@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PATags.h"
+#import "NNTagging/PATags.h"
 
 @interface PATagGroup : NSObject {
 	int maxSize;

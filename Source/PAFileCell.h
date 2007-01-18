@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PAFile.h"
+#import "NNTagging/PAFile.h"
 #import "PAThumbnailManager.h"
 
 @interface PAFileCell : NSTextFieldCell {

@@ -1,7 +1,7 @@
 /* PATagButton */
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PATag.h"
+#import "NNTagging/PATag.h"
 #import "PAButton.h"
 #import "PATagButtonCell.h"
 #import "PADropManager.h"

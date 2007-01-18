@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PATag.h"
+#import "NNTagging/PATag.h"
 #import "TaggerController.h"
 #import "PAFileBox.h"
 #import "PASidebarTableViewDropController.h"

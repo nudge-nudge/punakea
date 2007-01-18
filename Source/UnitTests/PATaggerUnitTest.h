@@ -7,9 +7,9 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "PATagging/PAFile.h"
-#import "PATagging/PATags.h"
-#import "PATagging/PASimpleTag.h"
+#import "NNTagging/PAFile.h"
+#import "NNTagging/PATags.h"
+#import "NNTagging/PASimpleTag.h"
 
 @interface PATaggerUnitTest : SenTestCase {
 	NSArray *filenames;

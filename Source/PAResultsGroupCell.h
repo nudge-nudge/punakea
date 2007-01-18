@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PAQueryBundle.h"
+#import "NNTagging/PAQueryBundle.h"
 
 #import "PAImageButton.h"
 #import "PASegmentedImageControl.h"

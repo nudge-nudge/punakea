@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		48008B7A0B5429700014E01A /* PATagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
 		4807215E0AEFE5600024118D /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */; };
 		480721FB0AEFE9470024118D /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
 		4815A0680AEF991A00969296 /* PAFilenamesDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 48209CA80AB1BEED00F3CF21 /* PAFilenamesDropHandler.m */; };
@@ -133,10 +132,6 @@
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
 		48B0F1C30ACBFA6200738053 /* Tags.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1C20ACBFA6200738053 /* Tags.strings */; };
 		48B0F1D80ACC020800738053 /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1D70ACC020800738053 /* Global.strings */; };
-		48B3CF3B0B4E4DB600F2AFA2 /* PATagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
-		48B3CF450B4E4DC100F2AFA2 /* PATagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
-		48B3CF6A0B4E500500F2AFA2 /* PATagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
-		48B3CF8E0B4E508200F2AFA2 /* PATagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */; };
 		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
 		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
 		48BFF6250B13420500C1A127 /* PADebugView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BFF6230B13420500C1A127 /* PADebugView.h */; };
@@ -148,36 +143,11 @@
 		48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D81DAB09F79C1C0075EE44 /* TaggerController.h */; };
 		48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D81DAC09F79C1C0075EE44 /* TaggerController.m */; };
 		48D954CB0B09073B00D69336 /* TagCloudPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48D954CA0B09073B00D69336 /* TagCloudPreferences.tiff */; };
-		48F26F6F0B5E2A2600FEE89F /* NSFileManager+PAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F6B0B5E2A2600FEE89F /* NSFileManager+PAExtensions.h */; };
-		48F26F700B5E2A2600FEE89F /* NSFileManager+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F6C0B5E2A2600FEE89F /* NSFileManager+PAExtensions.m */; };
-		48F26F710B5E2A2600FEE89F /* NSFileManager+TrashFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F6D0B5E2A2600FEE89F /* NSFileManager+TrashFile.h */; };
-		48F26F720B5E2A2600FEE89F /* NSFileManager+TrashFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F6E0B5E2A2600FEE89F /* NSFileManager+TrashFile.m */; };
-		48F26F7A0B5E2A3A00FEE89F /* PAQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F740B5E2A3A00FEE89F /* PAQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26F7B0B5E2A3A00FEE89F /* PAQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F750B5E2A3A00FEE89F /* PAQuery.m */; };
-		48F26F7C0B5E2A3A00FEE89F /* PAQueryBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F760B5E2A3A00FEE89F /* PAQueryBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26F7D0B5E2A3A00FEE89F /* PAQueryBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F770B5E2A3A00FEE89F /* PAQueryBundle.m */; };
-		48F26F840B5E2A4D00FEE89F /* PAFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F800B5E2A4D00FEE89F /* PAFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26F850B5E2A4D00FEE89F /* PAFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F810B5E2A4D00FEE89F /* PAFile.m */; };
-		48F26F860B5E2A4D00FEE89F /* PATaggableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F820B5E2A4D00FEE89F /* PATaggableObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26F870B5E2A4D00FEE89F /* PATaggableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F830B5E2A4D00FEE89F /* PATaggableObject.m */; };
-		48F26F8A0B5E2A5B00FEE89F /* PATagSave.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F880B5E2A5B00FEE89F /* PATagSave.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26F8B0B5E2A5B00FEE89F /* PATagSave.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F890B5E2A5B00FEE89F /* PATagSave.m */; };
-		48F26F920B5E2A6B00FEE89F /* PASimpleTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F8C0B5E2A6B00FEE89F /* PASimpleTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26F930B5E2A6B00FEE89F /* PASimpleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F8D0B5E2A6B00FEE89F /* PASimpleTag.m */; };
-		48F26F940B5E2A6B00FEE89F /* PATag.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F8E0B5E2A6B00FEE89F /* PATag.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26F950B5E2A6B00FEE89F /* PATag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F8F0B5E2A6B00FEE89F /* PATag.m */; };
-		48F26F960B5E2A6B00FEE89F /* PATags.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F900B5E2A6B00FEE89F /* PATags.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26F970B5E2A6B00FEE89F /* PATags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F910B5E2A6B00FEE89F /* PATags.m */; };
-		48F26F9A0B5E2A7800FEE89F /* PATagSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F980B5E2A7800FEE89F /* PATagSet.h */; };
-		48F26F9B0B5E2A7800FEE89F /* PATagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F990B5E2A7800FEE89F /* PATagSet.m */; };
-		48F26F9E0B5E2A8600FEE89F /* PAThreadSafeQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26F9C0B5E2A8600FEE89F /* PAThreadSafeQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26F9F0B5E2A8600FEE89F /* PAThreadSafeQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26F9D0B5E2A8600FEE89F /* PAThreadSafeQueue.m */; };
-		48F26FA60B5E2A9A00FEE89F /* PARelatedTags.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26FA00B5E2A9A00FEE89F /* PARelatedTags.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26FA70B5E2A9A00FEE89F /* PARelatedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26FA10B5E2A9A00FEE89F /* PARelatedTags.m */; };
-		48F26FA80B5E2A9A00FEE89F /* PARelatedTagsStandalone.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26FA20B5E2A9A00FEE89F /* PARelatedTagsStandalone.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26FA90B5E2A9A00FEE89F /* PARelatedTagsStandalone.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26FA30B5E2A9A00FEE89F /* PARelatedTagsStandalone.m */; };
-		48F26FAA0B5E2A9A00FEE89F /* PASelectedTags.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F26FA40B5E2A9A00FEE89F /* PASelectedTags.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F26FAB0B5E2A9A00FEE89F /* PASelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F26FA50B5E2A9A00FEE89F /* PASelectedTags.m */; };
+		48E145430B5F99FA00859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
+		48E1454C0B5F9A6700859B22 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
+		48E145AB0B5F9BB400859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
+		48E145B20B5F9BD400859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
+		48E145B50B5F9BDB00859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
 		651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */; };
 		6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */; };
@@ -325,13 +295,6 @@
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Punakea;
 		};
-		48B3CE650B4E4C5900F2AFA2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 48B3CE460B4E4BB000F2AFA2;
-			remoteInfo = PATagging;
-		};
 		48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -355,7 +318,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				48008B7A0B5429700014E01A /* PATagging.framework in Copy Frameworks */,
+				48E1454C0B5F9A6700859B22 /* NNTagging.framework in Copy Frameworks */,
 				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
 				48893B030AF0A4EE00BA0B50 /* NDResourceFork.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
@@ -574,8 +537,6 @@
 		489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTagsView.m; sourceTree = "<group>"; };
 		48B0F1C00ACBFA5200738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Tags.strings; sourceTree = "<group>"; };
 		48B0F1D50ACC020000738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Global.strings; sourceTree = "<group>"; };
-		48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PATagging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		48B3CE480B4E4BB000F2AFA2 /* PATagging-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PATagging-Info.plist"; sourceTree = "<group>"; };
 		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
 		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
 		48BFF6230B13420500C1A127 /* PADebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADebugView.h; sourceTree = "<group>"; };
@@ -591,36 +552,7 @@
 		48D81DAB09F79C1C0075EE44 /* TaggerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerController.h; sourceTree = "<group>"; };
 		48D81DAC09F79C1C0075EE44 /* TaggerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerController.m; sourceTree = "<group>"; };
 		48D954CA0B09073B00D69336 /* TagCloudPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TagCloudPreferences.tiff; sourceTree = "<group>"; };
-		48F26F6B0B5E2A2600FEE89F /* NSFileManager+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+PAExtensions.h"; path = "PATagging/NSFileManager+PAExtensions.h"; sourceTree = "<group>"; };
-		48F26F6C0B5E2A2600FEE89F /* NSFileManager+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+PAExtensions.m"; path = "PATagging/NSFileManager+PAExtensions.m"; sourceTree = "<group>"; };
-		48F26F6D0B5E2A2600FEE89F /* NSFileManager+TrashFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+TrashFile.h"; path = "PATagging/NSFileManager+TrashFile.h"; sourceTree = "<group>"; };
-		48F26F6E0B5E2A2600FEE89F /* NSFileManager+TrashFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+TrashFile.m"; path = "PATagging/NSFileManager+TrashFile.m"; sourceTree = "<group>"; };
-		48F26F740B5E2A3A00FEE89F /* PAQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAQuery.h; path = PATagging/PAQuery.h; sourceTree = "<group>"; };
-		48F26F750B5E2A3A00FEE89F /* PAQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAQuery.m; path = PATagging/PAQuery.m; sourceTree = "<group>"; };
-		48F26F760B5E2A3A00FEE89F /* PAQueryBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAQueryBundle.h; path = PATagging/PAQueryBundle.h; sourceTree = "<group>"; };
-		48F26F770B5E2A3A00FEE89F /* PAQueryBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAQueryBundle.m; path = PATagging/PAQueryBundle.m; sourceTree = "<group>"; };
-		48F26F800B5E2A4D00FEE89F /* PAFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAFile.h; path = PATagging/PAFile.h; sourceTree = "<group>"; };
-		48F26F810B5E2A4D00FEE89F /* PAFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAFile.m; path = PATagging/PAFile.m; sourceTree = "<group>"; };
-		48F26F820B5E2A4D00FEE89F /* PATaggableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PATaggableObject.h; path = PATagging/PATaggableObject.h; sourceTree = "<group>"; };
-		48F26F830B5E2A4D00FEE89F /* PATaggableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PATaggableObject.m; path = PATagging/PATaggableObject.m; sourceTree = "<group>"; };
-		48F26F880B5E2A5B00FEE89F /* PATagSave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagSave.h; sourceTree = "<group>"; };
-		48F26F890B5E2A5B00FEE89F /* PATagSave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSave.m; sourceTree = "<group>"; };
-		48F26F8C0B5E2A6B00FEE89F /* PASimpleTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleTag.h; sourceTree = "<group>"; };
-		48F26F8D0B5E2A6B00FEE89F /* PASimpleTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleTag.m; sourceTree = "<group>"; };
-		48F26F8E0B5E2A6B00FEE89F /* PATag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATag.h; sourceTree = "<group>"; };
-		48F26F8F0B5E2A6B00FEE89F /* PATag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATag.m; sourceTree = "<group>"; };
-		48F26F900B5E2A6B00FEE89F /* PATags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATags.h; sourceTree = "<group>"; };
-		48F26F910B5E2A6B00FEE89F /* PATags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATags.m; sourceTree = "<group>"; };
-		48F26F980B5E2A7800FEE89F /* PATagSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagSet.h; sourceTree = "<group>"; };
-		48F26F990B5E2A7800FEE89F /* PATagSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSet.m; sourceTree = "<group>"; };
-		48F26F9C0B5E2A8600FEE89F /* PAThreadSafeQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAThreadSafeQueue.h; sourceTree = "<group>"; };
-		48F26F9D0B5E2A8600FEE89F /* PAThreadSafeQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAThreadSafeQueue.m; sourceTree = "<group>"; };
-		48F26FA00B5E2A9A00FEE89F /* PARelatedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARelatedTags.h; sourceTree = "<group>"; };
-		48F26FA10B5E2A9A00FEE89F /* PARelatedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTags.m; sourceTree = "<group>"; };
-		48F26FA20B5E2A9A00FEE89F /* PARelatedTagsStandalone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARelatedTagsStandalone.h; sourceTree = "<group>"; };
-		48F26FA30B5E2A9A00FEE89F /* PARelatedTagsStandalone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARelatedTagsStandalone.m; sourceTree = "<group>"; };
-		48F26FA40B5E2A9A00FEE89F /* PASelectedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTags.h; sourceTree = "<group>"; };
-		48F26FA50B5E2A9A00FEE89F /* PASelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTags.m; sourceTree = "<group>"; };
+		48E145320B5F99FA00859B22 /* NNTagging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NNTagging.framework; sourceTree = "<group>"; };
 		48F980760AEF5CAF003BA2DC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		48F980780AEF5CAF003BA2DC /* FileDropHandler */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; path = FileDropHandler; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
@@ -746,7 +678,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B3CF6A0B4E500500F2AFA2 /* PATagging.framework in Frameworks */,
+				48E145AB0B5F9BB400859B22 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,7 +686,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B3CF3B0B4E4DB600F2AFA2 /* PATagging.framework in Frameworks */,
+				48E145B20B5F9BD400859B22 /* NNTagging.framework in Frameworks */,
 				4815A1CA0AEFA06400969296 /* PADropHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -766,18 +698,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		48B3CE450B4E4BB000F2AFA2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		48C633B90AEF9720008F0E94 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B3CF450B4E4DC100F2AFA2 /* PATagging.framework in Frameworks */,
+				48E145B50B5F9BDB00859B22 /* NNTagging.framework in Frameworks */,
 				480721FB0AEFE9470024118D /* NDResourceFork.framework in Frameworks */,
 				4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */,
 			);
@@ -787,7 +712,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B3CF8E0B4E508200F2AFA2 /* PATagging.framework in Frameworks */,
+				48E145430B5F99FA00859B22 /* NNTagging.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
 				48893B5A0AF0AB1600BA0B50 /* NDResourceFork.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
@@ -819,6 +744,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48E145320B5F99FA00859B22 /* NNTagging.framework */,
 				484497A90B2D9925009B262C /* Sparkle.framework */,
 			);
 			name = "Linked Frameworks";
@@ -846,7 +772,6 @@
 				48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */,
 				4815A0B10AEF99D900969296 /* NDResourceFork.framework */,
 				48404B000AF8B357001F7BB7 /* Unit Testing.octest */,
-				48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -865,7 +790,6 @@
 				48C633BC0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler-Info.plist */,
 				4815A0B20AEF99D900969296 /* NDResourceFork-Info.plist */,
 				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
-				48B3CE480B4E4BB000F2AFA2 /* PATagging-Info.plist */,
 			);
 			name = Punakea;
 			sourceTree = "<group>";
@@ -1027,7 +951,6 @@
 		4831849F0AEF8FD800C3C672 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4841CAA30B52953B001FD631 /* PATagging */,
 				4815A0C40AEF9A0200969296 /* NDResourceFork */,
 				483184A20AEF8FE500C3C672 /* PADropHandler */,
 			);
@@ -1107,34 +1030,6 @@
 			path = UnitTests;
 			sourceTree = "<group>";
 		};
-		4841CAA30B52953B001FD631 /* PATagging */ = {
-			isa = PBXGroup;
-			children = (
-				48DC82950AB69C0900DE0F16 /* File Handling */,
-				65035FB70A20762F00AD0597 /* Query */,
-				48A1459F0B37E90F0094B0A0 /* Taggables */,
-				48F26F880B5E2A5B00FEE89F /* PATagSave.h */,
-				48F26F890B5E2A5B00FEE89F /* PATagSave.m */,
-				48F26F8C0B5E2A6B00FEE89F /* PASimpleTag.h */,
-				48F26F8D0B5E2A6B00FEE89F /* PASimpleTag.m */,
-				48F26F8E0B5E2A6B00FEE89F /* PATag.h */,
-				48F26F8F0B5E2A6B00FEE89F /* PATag.m */,
-				48F26F900B5E2A6B00FEE89F /* PATags.h */,
-				48F26F910B5E2A6B00FEE89F /* PATags.m */,
-				48F26F980B5E2A7800FEE89F /* PATagSet.h */,
-				48F26F990B5E2A7800FEE89F /* PATagSet.m */,
-				48F26F9C0B5E2A8600FEE89F /* PAThreadSafeQueue.h */,
-				48F26F9D0B5E2A8600FEE89F /* PAThreadSafeQueue.m */,
-				48F26FA00B5E2A9A00FEE89F /* PARelatedTags.h */,
-				48F26FA10B5E2A9A00FEE89F /* PARelatedTags.m */,
-				48F26FA20B5E2A9A00FEE89F /* PARelatedTagsStandalone.h */,
-				48F26FA30B5E2A9A00FEE89F /* PARelatedTagsStandalone.m */,
-				48F26FA40B5E2A9A00FEE89F /* PASelectedTags.h */,
-				48F26FA50B5E2A9A00FEE89F /* PASelectedTags.m */,
-			);
-			path = PATagging;
-			sourceTree = "<group>";
-		};
 		484F717E0A666D4B00D886E5 /* TagManagement */ = {
 			isa = PBXGroup;
 			children = (
@@ -1197,18 +1092,6 @@
 			name = SelectedTagsView;
 			sourceTree = "<group>";
 		};
-		48A1459F0B37E90F0094B0A0 /* Taggables */ = {
-			isa = PBXGroup;
-			children = (
-				48F26F820B5E2A4D00FEE89F /* PATaggableObject.h */,
-				48F26F830B5E2A4D00FEE89F /* PATaggableObject.m */,
-				48F26F800B5E2A4D00FEE89F /* PAFile.h */,
-				48F26F810B5E2A4D00FEE89F /* PAFile.m */,
-			);
-			name = Taggables;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		48BDCECE09C4A1EE00A57165 /* TagCloud */ = {
 			isa = PBXGroup;
 			children = (
@@ -1236,18 +1119,6 @@
 			);
 			name = Scripts;
 			path = Resources/Scripts;
-			sourceTree = "<group>";
-		};
-		48DC82950AB69C0900DE0F16 /* File Handling */ = {
-			isa = PBXGroup;
-			children = (
-				48F26F6B0B5E2A2600FEE89F /* NSFileManager+PAExtensions.h */,
-				48F26F6C0B5E2A2600FEE89F /* NSFileManager+PAExtensions.m */,
-				48F26F6D0B5E2A2600FEE89F /* NSFileManager+TrashFile.h */,
-				48F26F6E0B5E2A2600FEE89F /* NSFileManager+TrashFile.m */,
-			);
-			name = "File Handling";
-			path = ..;
 			sourceTree = "<group>";
 		};
 		48F980700AEF5C9F003BA2DC /* DropHandlerPlugins */ = {
@@ -1289,18 +1160,6 @@
 			children = (
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		65035FB70A20762F00AD0597 /* Query */ = {
-			isa = PBXGroup;
-			children = (
-				48F26F740B5E2A3A00FEE89F /* PAQuery.h */,
-				48F26F750B5E2A3A00FEE89F /* PAQuery.m */,
-				48F26F760B5E2A3A00FEE89F /* PAQueryBundle.h */,
-				48F26F770B5E2A3A00FEE89F /* PAQueryBundle.m */,
-			);
-			name = Query;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		6509FA390A7D2774003D32D8 /* Filter Slice */ = {
@@ -1580,28 +1439,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		48B3CE420B4E4BB000F2AFA2 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				48F26F6F0B5E2A2600FEE89F /* NSFileManager+PAExtensions.h in Headers */,
-				48F26F710B5E2A2600FEE89F /* NSFileManager+TrashFile.h in Headers */,
-				48F26F7A0B5E2A3A00FEE89F /* PAQuery.h in Headers */,
-				48F26F7C0B5E2A3A00FEE89F /* PAQueryBundle.h in Headers */,
-				48F26F840B5E2A4D00FEE89F /* PAFile.h in Headers */,
-				48F26F860B5E2A4D00FEE89F /* PATaggableObject.h in Headers */,
-				48F26F8A0B5E2A5B00FEE89F /* PATagSave.h in Headers */,
-				48F26F920B5E2A6B00FEE89F /* PASimpleTag.h in Headers */,
-				48F26F940B5E2A6B00FEE89F /* PATag.h in Headers */,
-				48F26F960B5E2A6B00FEE89F /* PATags.h in Headers */,
-				48F26F9A0B5E2A7800FEE89F /* PATagSet.h in Headers */,
-				48F26F9E0B5E2A8600FEE89F /* PAThreadSafeQueue.h in Headers */,
-				48F26FA60B5E2A9A00FEE89F /* PARelatedTags.h in Headers */,
-				48F26FA80B5E2A9A00FEE89F /* PARelatedTagsStandalone.h in Headers */,
-				48F26FAA0B5E2A9A00FEE89F /* PASelectedTags.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXLegacyTarget section */
@@ -1653,7 +1490,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				48B3CE660B4E4C5900F2AFA2 /* PBXTargetDependency */,
 			);
 			name = PADropHandler;
 			productName = PADropHandler;
@@ -1696,24 +1532,6 @@
 			productName = "Unit Testing";
 			productReference = 48404B000AF8B357001F7BB7 /* Unit Testing.octest */;
 			productType = "com.apple.product-type.bundle";
-		};
-		48B3CE460B4E4BB000F2AFA2 /* PATagging */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 48B3CE490B4E4BB100F2AFA2 /* Build configuration list for PBXNativeTarget "PATagging" */;
-			buildPhases = (
-				48B3CE420B4E4BB000F2AFA2 /* Headers */,
-				48B3CE430B4E4BB000F2AFA2 /* Resources */,
-				48B3CE440B4E4BB000F2AFA2 /* Sources */,
-				48B3CE450B4E4BB000F2AFA2 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = PATagging;
-			productName = PATagging;
-			productReference = 48B3CE470B4E4BB000F2AFA2 /* PATagging.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 		48C633BA0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler */ = {
 			isa = PBXNativeTarget;
@@ -1789,7 +1607,6 @@
 				48C633BA0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler */,
 				4815A0B00AEF99D900969296 /* NDResourceFork */,
 				48404AFF0AF8B357001F7BB7 /* Unit Testing */,
-				48B3CE460B4E4BB000F2AFA2 /* PATagging */,
 			);
 		};
 /* End PBXProject section */
@@ -1817,13 +1634,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		48404AFB0AF8B357001F7BB7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		48B3CE430B4E4BB000F2AFA2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1979,28 +1789,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		48B3CE440B4E4BB000F2AFA2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				48F26F700B5E2A2600FEE89F /* NSFileManager+PAExtensions.m in Sources */,
-				48F26F720B5E2A2600FEE89F /* NSFileManager+TrashFile.m in Sources */,
-				48F26F7B0B5E2A3A00FEE89F /* PAQuery.m in Sources */,
-				48F26F7D0B5E2A3A00FEE89F /* PAQueryBundle.m in Sources */,
-				48F26F850B5E2A4D00FEE89F /* PAFile.m in Sources */,
-				48F26F870B5E2A4D00FEE89F /* PATaggableObject.m in Sources */,
-				48F26F8B0B5E2A5B00FEE89F /* PATagSave.m in Sources */,
-				48F26F930B5E2A6B00FEE89F /* PASimpleTag.m in Sources */,
-				48F26F950B5E2A6B00FEE89F /* PATag.m in Sources */,
-				48F26F970B5E2A6B00FEE89F /* PATags.m in Sources */,
-				48F26F9B0B5E2A7800FEE89F /* PATagSet.m in Sources */,
-				48F26F9F0B5E2A8600FEE89F /* PAThreadSafeQueue.m in Sources */,
-				48F26FA70B5E2A9A00FEE89F /* PARelatedTags.m in Sources */,
-				48F26FA90B5E2A9A00FEE89F /* PARelatedTagsStandalone.m in Sources */,
-				48F26FAB0B5E2A9A00FEE89F /* PASelectedTags.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		48C633B80AEF9720008F0E94 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2111,11 +1899,6 @@
 			isa = PBXTargetDependency;
 			target = 8D1107260486CEB800E47090 /* Punakea */;
 			targetProxy = 48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */;
-		};
-		48B3CE660B4E4C5900F2AFA2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 48B3CE460B4E4BB000F2AFA2 /* PATagging */;
-			targetProxy = 48B3CE650B4E4C5900F2AFA2 /* PBXContainerItemProxy */;
 		};
 		48C633C10AEF9724008F0E94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2298,6 +2081,11 @@
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -2326,6 +2114,11 @@
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2350,6 +2143,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -2376,6 +2174,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
@@ -2473,66 +2276,15 @@
 			};
 			name = Release;
 		};
-		48B3CE4A0B4E4BB100F2AFA2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "PATagging-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = PATagging;
-				ZERO_LINK = YES;
-			};
-			name = Debug;
-		};
-		48B3CE4B0B4E4BB100F2AFA2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "PATagging-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = PATagging;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		48C633BE0AEF9721008F0E94 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -2559,6 +2311,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
@@ -2614,9 +2371,11 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_5)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -2653,9 +2412,11 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_5)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2740,15 +2501,6 @@
 			buildConfigurations = (
 				488A52EC0A81D9FA005B54A8 /* Debug */,
 				488A52ED0A81D9FA005B54A8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		48B3CE490B4E4BB100F2AFA2 /* Build configuration list for PBXNativeTarget "PATagging" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				48B3CE4A0B4E4BB100F2AFA2 /* Debug */,
-				48B3CE4B0B4E4BB100F2AFA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

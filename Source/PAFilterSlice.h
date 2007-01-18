@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PATagging/PAQuery.h"
+#import "NNTagging/PAQuery.h"
 
 #import "PAFilterButton.h"
 #import "PAResultsOutlineView.h"

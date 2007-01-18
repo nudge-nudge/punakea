@@ -7,7 +7,7 @@
 #import "PAResultsMultiItemCell.h"
 #import "PAResultsMultiItemThumbnailCell.h"
 
-#import "PATagging/PAQuery.h"
+#import "NNTagging/PAQuery.h"
 
 
 typedef enum _PAResultsDisplayMode
