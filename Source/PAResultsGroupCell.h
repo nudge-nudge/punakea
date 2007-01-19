@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PAQueryBundle.h"
+#import "NNTagging/NNQueryBundle.h"
 
 #import "PAImageButton.h"
 #import "PASegmentedImageControl.h"
@@ -19,7 +19,7 @@
 	PAImageButton				*triangle;
 	PASegmentedImageControl		*segmentedControl;
 	
-	PAQueryBundle				*bundle;
+	NNQueryBundle				*bundle;
 	
 	BOOL						hasMultipleDisplayModes;
 

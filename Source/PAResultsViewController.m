@@ -16,17 +16,17 @@
 {
 	if (self = [super init])
 	{
-		tags = [PATags sharedTags];
+		tags = [NNTags sharedTags];
 		
-		selectedTags = [[PASelectedTags alloc] init];
+		selectedTags = [[NNSelectedTags alloc] init];
 		
-		query = [[PAQuery alloc] init];
+		query = [[NNQuery alloc] init];
 		[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
 		[query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
 		dropManager = [PADropManager sharedInstance];
 		
-		relatedTags = [[PARelatedTags alloc] initWithSelectedTags:selectedTags query:query];
+		relatedTags = [[NNRelatedTags alloc] initWithSelectedTags:selectedTags query:query];
 		
 		draggedItems = nil;
 		
@@ -34,12 +34,12 @@
 		
 		[nc addObserver:self 
 			   selector:@selector(selectedTagsHaveChanged:) 
-				   name:@"PASelectedTagsHaveChanged" 
+				   name:@"NNSelectedTagsHaveChanged" 
 				 object:selectedTags];
 		
 		[nc addObserver:self 
 			   selector:@selector(relatedTagsHaveChanged:) 
-				   name:@"PARelatedTagsHaveChanged" 
+				   name:@"NNRelatedTagsHaveChanged" 
 				 object:relatedTags];
 				 
 		[nc addObserver:self 
@@ -102,29 +102,29 @@
 
 
 #pragma mark accessors
-- (PAQuery*)query
+- (NNQuery*)query
 {
 	return query;
 }
 
-- (PARelatedTags*)relatedTags;
+- (NNRelatedTags*)relatedTags;
 {
 	return relatedTags;
 }
 
-- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags
+- (void)setRelatedTags:(NNRelatedTags*)otherRelatedTags
 {
 	[otherRelatedTags retain];
 	[relatedTags release];
 	relatedTags = otherRelatedTags;
 }
 
-- (PASelectedTags*)selectedTags;
+- (NNSelectedTags*)selectedTags;
 {
 	return selectedTags;
 }
 
-- (void)setSelectedTags:(PASelectedTags*)otherSelectedTags
+- (void)setSelectedTags:(NNSelectedTags*)otherSelectedTags
 {
 	[otherSelectedTags retain];
 	[selectedTags release];
@@ -154,7 +154,7 @@
 }
 
 #pragma mark actions
-- (void)handleTagActivation:(PATag*)tag
+- (void)handleTagActivation:(NNTag*)tag
 {
 	[tag incrementClickCount];
 	[selectedTags addTag:tag];
@@ -184,7 +184,7 @@
 	{
 		id item = [outlineView itemAtRow:row];
 		
-		if([[item class] isEqualTo:[PAFile class]])
+		if([[item class] isEqualTo:[NNFile class]])
 			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
 		
 		row = [selectedRowIndexes indexGreaterThanIndex:row];
@@ -204,7 +204,7 @@
 - (void)triangleClicked:(id)sender
 {
 	NSDictionary *tag = (NSDictionary *)[sender tag];
-	PAQueryBundle *item = [tag objectForKey:@"bundle"];
+	NNQueryBundle *item = [tag objectForKey:@"bundle"];
 	
 	if([outlineView isItemExpanded:item])
 	{
@@ -325,7 +325,7 @@
 {
 	return item;
 	
-	/*if([item isKindOfClass:[PAQueryBundle class]])
+	/*if([item isKindOfClass:[NNQueryBundle class]])
 	return item;
 	else 
 	return [item valueForAttribute:@"value"];*/
@@ -344,9 +344,9 @@
 		return [query resultAtIndex:idx];
 	}
 	
-	if([item isKindOfClass:[PAQueryBundle class]])
+	if([item isKindOfClass:[NNQueryBundle class]])
 	{
-		PAQueryBundle *bundle = item;
+		NNQueryBundle *bundle = item;
 		
 		// Children depend on display mode		
 		if([outlineView displayMode] == PAThumbnailMode)
@@ -382,9 +382,9 @@
 		return [query resultCount];
 	}
 	
-	if([item isKindOfClass:[PAQueryBundle class]])
+	if([item isKindOfClass:[NNQueryBundle class]])
 	{
-		PAQueryBundle *bundle = item;
+		NNQueryBundle *bundle = item;
 		
 		// Number of children depends on display mode
 		if([outlineView displayMode] == PAThumbnailMode) return 1;
@@ -408,7 +408,7 @@
 	 forTableColumn:(NSTableColumn *)tableColumn
 	         byItem:(id)item
 {
-	PATaggableObject *taggableObject = item;
+	NNTaggableObject *taggableObject = item;
 	NSString *value = object;
 	
 	[taggableObject renameTo:value errorWindow:[ov window]];
@@ -421,10 +421,10 @@
 - (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
 {		
 	// Bundles have a fix height
-	if([item isKindOfClass:[PAQueryBundle class]]) return 20.0;
+	if([item isKindOfClass:[NNQueryBundle class]]) return 20.0;
 	
 	// Height of list items is determined by its content type
-	if([item isKindOfClass:[PAFile class]])
+	if([item isKindOfClass:[NNFile class]])
 	{
 		NSString *contentType = [item valueForAttribute:@"kMDItemContentTypeTree"];		
 		if([contentType isEqualToString:@"BOOKMARKS"] &&
@@ -471,11 +471,11 @@
 	id item = [ov itemAtRow:row];
 	
 	NSCell *cell;	
-	if([item isKindOfClass:[PAQueryBundle class]])
+	if([item isKindOfClass:[NNQueryBundle class]])
 	{
 		cell = [[[PAResultsGroupCell alloc] initTextCell:@""] autorelease];
 	}
-	else if([item isKindOfClass:[PAFile class]])
+	else if([item isKindOfClass:[NNFile class]])
 	{
 		NSString *contentType = [item valueForAttribute:@"kMDItemContentTypeTree"];
 		if([contentType isEqualToString:@"BOOKMARKS"] &&
@@ -527,7 +527,7 @@
 		[outlineView setResponder:nil];
 	}
 	
-	return [item isKindOfClass:[PAQueryBundle class]] ? NO : YES;
+	return [item isKindOfClass:[NNQueryBundle class]] ? NO : YES;
 }
 
 
@@ -610,7 +610,7 @@
 	NSMutableArray *fileList = [NSMutableArray array];
 	
 	NSEnumerator *e = [items objectEnumerator];
-	PAFile *queryItem;
+	NNFile *queryItem;
 	
 	while (queryItem = [e nextObject])
 	{

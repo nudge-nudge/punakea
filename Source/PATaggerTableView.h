@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATaggableObject.h"
+#import "NNTagging/NNTaggableObject.h"
 
 
 @interface PATaggerTableView : NSTableView {

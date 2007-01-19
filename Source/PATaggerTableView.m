@@ -179,7 +179,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)textDidChange:(NSNotification *)notification
 {
 	// Set text color to red if the new destination already exists
-	PATaggableObject *taggableObject =
+	NNTaggableObject *taggableObject =
 		[[self dataSource] tableView:self 
 		   objectValueForTableColumn:[[self tableColumns] objectAtIndex:0]
 								 row:[self selectedRow]];

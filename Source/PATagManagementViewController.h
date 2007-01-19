@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PABrowserViewMainController.h"
-#import "NNTagging/PATags.h"
-#import "NNTagging/PATag.h"
+#import "NNTagging/NNTags.h"
+#import "NNTagging/NNTag.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 #import "NSString+CharacterSetChecks.h"
 #import "PAImageButton.h"
@@ -38,14 +38,14 @@ extern NSString * const PATagManagementRemoveOperation;
 	
 	IBOutlet NSView					*simpleTagManagementView;
 	
-	PATag							*currentEditedTag;
+	NNTag							*currentEditedTag;
 	
-	PATags							*tags;
+	NNTags							*tags;
 	
 }
 
-- (PATag*)currentEditedTag;
-- (void)setCurrentEditedTag:(PATag*)aTag;
+- (NNTag*)currentEditedTag;
+- (void)setCurrentEditedTag:(NNTag*)aTag;
 - (BOOL)isWorking;
 
 - (IBAction)renameOperation:(id)sender;

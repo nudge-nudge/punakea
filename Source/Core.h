@@ -1,9 +1,9 @@
 /* Controller */
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATags.h"
-#import "NNTagging/PATaggableObject.h"
-// TODO move this to PATags
-#import "NNTagging/PATagSave.h"
+#import "NNTagging/NNTags.h"
+#import "NNTagging/NNTaggableObject.h"
+// TODO move this to NNTags
+#import "NNTagging/NNTagSave.h"
 
 #import "SidebarController.h"
 #import "BrowserController.h"
@@ -27,8 +27,7 @@
 	
 	IBOutlet SUUpdater		*updater;
 	
-	PATags					*globalTags;
-	PATagSave				*tagSave;
+	NNTags					*globalTags;
 	
 	BrowserController		*browserController;
 	

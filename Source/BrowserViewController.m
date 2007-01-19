@@ -20,10 +20,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (NSMutableArray*)visibleTags;
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
 
-- (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
+- (NNTag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
 
-- (PATag*)currentBestTag;
-- (void)setCurrentBestTag:(PATag*)otherTag;
+- (NNTag*)currentBestTag;
+- (void)setCurrentBestTag:(NNTag*)otherTag;
 
 - (void)showTypeAheadView;
 - (void)hideTypeAheadView;
@@ -51,7 +51,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	{
  		[self setState:PABrowserViewControllerNormalState];
 		
-		tags = [PATags sharedTags];
+		tags = [NNTags sharedTags];
 				
 		typeAheadFind = [[PATypeAheadFind alloc] init];
 		
@@ -72,7 +72,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 		[[NSNotificationCenter defaultCenter] addObserver:self 
 												 selector:@selector(tagsHaveChanged:) 
-													 name:PATagsHaveChangedNotification
+													 name:NNTagsHaveChangedNotification
 												   object:tags];
 		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
@@ -131,12 +131,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	state = aState;
 }
 
-- (PATag*)currentBestTag
+- (NNTag*)currentBestTag
 {
 	return currentBestTag;
 }
 
-- (void)setCurrentBestTag:(PATag*)otherTag
+- (void)setCurrentBestTag:(NNTag*)otherTag
 {
 	[otherTag retain];
 	[currentBestTag release];
@@ -235,7 +235,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[[[self view] window] makeFirstResponder:tagCloud];
 }
 
-- (void)displaySelectedTag:(PATag*)tag
+- (void)displaySelectedTag:(NNTag*)tag
 {
 	[tagCloud selectTag:tag];
 }
@@ -248,7 +248,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {
-	PATag *tag = [sender genericTag];
+	NNTag *tag = [sender genericTag];
 	[mainController handleTagActivation:tag];
 }
 
@@ -262,11 +262,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
-- (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
+- (NNTag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
 {
 	NSEnumerator *e = [tagSet objectEnumerator];
-	PATag *tag;
-	PATag *maxTag;
+	NNTag *tag;
+	NNTag *maxTag;
 	
 	if (tag = [e nextObject])
 		maxTag = tag;
@@ -388,11 +388,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)tagsHaveChanged:(NSNotification*)notification
 {
-	PATagChangeOperation changeOperation = [[[notification userInfo] objectForKey:PATagOperation] intValue];
+	NNTagChangeOperation changeOperation = [[[notification userInfo] objectForKey:NNTagOperation] intValue];
 	
 	if ([self state] == PABrowserViewControllerNormalState)
 	{
-		if (changeOperation == PATagUseIncrementOperation)
+		if (changeOperation == NNTagUseIncrementOperation)
 		{
 			[NSObject cancelPreviousPerformRequestsWithTarget:self
 													 selector:@selector(setVisibleTags:)
@@ -531,7 +531,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark temp
-- (PATags*)tags
+- (NNTags*)tags
 {
 	return tags;
 }

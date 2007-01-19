@@ -7,7 +7,7 @@
 #import "PAResultsMultiItemCell.h"
 #import "PAResultsMultiItemThumbnailCell.h"
 
-#import "NNTagging/PAQuery.h"
+#import "NNTagging/NNQuery.h"
 
 
 typedef enum _PAResultsDisplayMode
@@ -26,7 +26,7 @@ typedef enum _PAResultsDisplayMode
 
 @interface PAResultsOutlineView : NSOutlineView
 {
-	PAQuery					*query;
+	NNQuery					*query;
 	PAResultsDisplayMode	displayMode;
 	
 	// Stores the last up or down arrow function key to get the direction of key navigation
@@ -35,13 +35,13 @@ typedef enum _PAResultsDisplayMode
 	// If not nil, forward keyboard events to responder
 	NSView					*responder;
 	
-	// A collection of selected PAQueryItems. OutlineView stores them for various responders,
+	// A collection of selected NNQueryItems. OutlineView stores them for various responders,
 	// so that they are able to restore their selection if necessary.
 	NSMutableArray			*selectedItems;
 }
 
-- (PAQuery *)query;
-- (void)setQuery:(PAQuery *)aQuery;
+- (NNQuery *)query;
+- (void)setQuery:(NNQuery *)aQuery;
 
 - (unsigned int)lastUpDownArrowFunctionKey;
 - (void)setLastUpDownArrowFunctionKey:(unsigned int)key;

@@ -21,7 +21,7 @@
 {
 	if (self = [super init])
 	{
-		tags = [PATags sharedTags];
+		tags = [NNTags sharedTags];
 	}
 	return self;
 }
@@ -65,7 +65,7 @@
 		e = [tags objectEnumerator];
 	}
 	
-	PATag *tag;
+	NNTag *tag;
 	
 	while (tag = [e nextObject])
 	{
@@ -97,7 +97,7 @@
 	NSMutableArray *result = [NSMutableArray array];
 	
 	NSEnumerator *e = [someTags objectEnumerator];
-	PATag *tag;
+	NNTag *tag;
 	
 	while (tag = [e nextObject])
 	{

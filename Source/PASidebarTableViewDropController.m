@@ -58,7 +58,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 	dropOperation:(NSTableViewDropOperation)op 
 {
 	NSArray *objects = [dropManager handleDrop:[info draggingPasteboard]];
-	PATag *tag = [[tags arrangedObjects] objectAtIndex:row];
+	NNTag *tag = [[tags arrangedObjects] objectAtIndex:row];
 	
 	[objects makeObjectsPerformSelector:@selector(addTag:) withObject:tag];
     return YES;    

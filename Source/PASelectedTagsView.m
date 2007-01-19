@@ -44,7 +44,7 @@ int const PADDING_TO_RIGHT = 60;
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self 
 		   selector:@selector(updateTagButtons:)
-		       name:@"PASelectedTagsHaveChanged"
+		       name:@"NNSelectedTagsHaveChanged"
 		     object:selectedTags];
 	
 	// Get notification frameDidChange
@@ -113,7 +113,7 @@ int const PADDING_TO_RIGHT = 60;
 	for(unsigned i = 0; i < [tagButtonKeys count]; i++)
 	{
 		NSString *tagName = [tagButtonKeys objectAtIndex:i];		
-		PATag *tag = [[PATags sharedTags] tagForName:tagName];
+		NNTag *tag = [[NNTags sharedTags] tagForName:tagName];
 		
 		if(![selectedTags containsTag:tag])
 		{
@@ -132,7 +132,7 @@ int const PADDING_TO_RIGHT = 60;
 
 	NSEnumerator *enumerator = [selectedTags objectEnumerator];
 	
-	PATag *tag;
+	NNTag *tag;
 	while(tag = [enumerator nextObject])
 	{			
 		PAButton *button;
@@ -266,7 +266,7 @@ int const PADDING_TO_RIGHT = 60;
 
 - (void)tagClosed:(id)sender
 {
-	[selectedTags removeTag:[[PATags sharedTags] tagForName:[sender title]]];
+	[selectedTags removeTag:[[NNTags sharedTags] tagForName:[sender title]]];
 }
 
 

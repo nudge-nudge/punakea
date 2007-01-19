@@ -2,14 +2,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import <math.h>
-#import "NNTagging/PATag.h"
+#import "NNTagging/NNTag.h"
 #import "PATagButton.h"
 #import "PADropManager.h"
 
 @interface NSObject (PATagCloudDatasource)
 
 - (NSMutableArray*)visibleTags;
-- (PATag*)currentBestTag;
+- (NNTag*)currentBestTag;
 
 @end
 
@@ -62,7 +62,7 @@ displays all [datasource visibleTags] in a nice tag cloud view
 - (void)selectUpperLeftButton;
 
 // called from outside
-- (void)selectTag:(PATag*)tag;
+- (void)selectTag:(NNTag*)tag;
 - (void)removeActiveTagButton;
 
 @end

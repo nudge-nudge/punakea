@@ -175,7 +175,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	int numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
 	
 	NSEnumerator *enumerator = [items objectEnumerator];
-	PATaggableObject *anObject;
+	NNTaggableObject *anObject;
 	
 	int row = 0;
 	int column = 0;
@@ -231,7 +231,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 	while (idx != NSNotFound)
 	{
-		PATaggableObject *item = [items objectAtIndex:idx];
+		NNTaggableObject *item = [items objectAtIndex:idx];
 		NSString *path = [item valueForAttribute:(id)kMDItemPath];
 		[[NSWorkspace sharedWorkspace] openFile:path];		
 		
@@ -864,8 +864,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	// Set text color to red if the new destination already exists
 	int idx = r * [self numberOfColumns] + c;
-	PATaggableObject *item = [items objectAtIndex:idx];
-	PAFile *file = [PAFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
+	NNTaggableObject *item = [items objectAtIndex:idx];
+	NNFile *file = [NNFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
 	
 	NSText *textView = [notification object];
 	
@@ -937,7 +937,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		// Forward renaming request to our delegate's query (delegate is equal to the outlineView's delegate)		
 		int					idx = r * [self numberOfColumns] + c;
-		PATaggableObject	*item = [items objectAtIndex:idx];
+		NNTaggableObject	*item = [items objectAtIndex:idx];
 		NSString			*newName = [[textView string] copy];
 		
 		[item renameTo:newName errorWindow:[self window]];
@@ -1012,7 +1012,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	unsigned idx = [selectedIndexes firstIndex];	
 	while (idx != NSNotFound)
 	{
-		PATaggableObject *item = [items objectAtIndex:idx];
+		NNTaggableObject *item = [items objectAtIndex:idx];
 		
 		[fileList addObject:[item valueForAttribute:(id)kMDItemPath]];
 		
@@ -1179,7 +1179,7 @@ needed for supporting dragging to trash
 - (void)setSelectedQueryItems:(NSMutableArray *)theSelectedItems
 {
 	NSEnumerator *enumerator = [theSelectedItems objectEnumerator];
-	PATaggableObject *item;
+	NNTaggableObject *item;
 	
 	[selectedIndexes removeAllIndexes];
 	
@@ -1187,7 +1187,7 @@ needed for supporting dragging to trash
 	{
 		for(int i = 0; i < [items count]; i++)
 		{
-			PATaggableObject *thisItem = [items objectAtIndex:i];
+			NNTaggableObject *thisItem = [items objectAtIndex:i];
 			if([thisItem isEqualTo:item])
 			{
 				[selectedIndexes addIndex:i];

@@ -7,14 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATaggableObject.h"
+#import "NNTagging/NNTaggableObject.h"
 #import "PAThumbnailManager.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 
 
 @interface PAResultsItemCell : NSTextFieldCell {
 
-	PATaggableObject				*item;
+	NNTaggableObject				*item;
 
 }
 

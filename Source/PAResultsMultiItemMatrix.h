@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PAResultsMultiItemPlaceholderCell.h"
 #import "PAResultsMultiItemThumbnailCell.h"
-#import "NNTagging/PATaggableObject.h"
+#import "NNTagging/NNTaggableObject.h"
 #import "PAThumbnailItem.h"
 
 

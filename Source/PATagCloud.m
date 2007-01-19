@@ -218,7 +218,7 @@ bound to visibleTags
 					format:@"datasource invalid"];
 	}
 	
-	PATag *tag;
+	NNTag *tag;
 	
 	while (tag = [tagEnumerator nextObject])
 	{
@@ -277,7 +277,7 @@ bound to visibleTags
 					format:@"datasource not valid"];
 	}
 	
-	PATag *tag;
+	NNTag *tag;
 	
 	NSPoint buttonPoint = NSMakePoint(0.0,0.0);
 	
@@ -412,7 +412,7 @@ bound to visibleTags
 	}
 	
 	NSEnumerator *e = [currentlyVisibleTags objectEnumerator];
-	PATag *tag;
+	NNTag *tag;
 	
 	while (tag = [e nextObject])
 	{
@@ -452,7 +452,7 @@ bound to visibleTags
 	[self addSubview:tagButton];
 }
 
-- (void)selectTag:(PATag*)tag
+- (void)selectTag:(NNTag*)tag
 {
 	// make sure all buttons are updated
 	[self handleTagsChange];
@@ -464,7 +464,7 @@ bound to visibleTags
 // work around until tagcloud supports tag renaming correctly
 - (void)removeActiveTagButton
 {
-	PATag *activeTag = [activeButton genericTag];
+	NNTag *activeTag = [activeButton genericTag];
 	[activeButton removeFromSuperview];
 	[tagButtonDict removeObjectForKey:[activeTag name]];
 }
@@ -515,7 +515,7 @@ bound to visibleTags
 	/* while there are tags, compose a row and get the maximum height,
 		then keep the starting points for each one */
 	NSEnumerator *tagEnumerator = [[datasource visibleTags] objectEnumerator];
-	PATag *tag;
+	NNTag *tag;
 	
 	int i;
 	for (i=0;i<tagPosition;i++)

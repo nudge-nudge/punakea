@@ -11,11 +11,11 @@
 
 #import "NNTagging/NSFileManager+TrashFile.h"
 
-#import "NNTagging/PATags.h"
-#import "NNTagging/PATag.h"
-#import "NNTagging/PARelatedTags.h"
-#import "NNTagging/PASelectedTags.h"
-#import "NNTagging/PAQuery.h"
+#import "NNTagging/NNTags.h"
+#import "NNTagging/NNTag.h"
+#import "NNTagging/NNRelatedTags.h"
+#import "NNTagging/NNSelectedTags.h"
+#import "NNTagging/NNQuery.h"
 
 #import "PAResultsOutlineView.h"
 #import "PADropManager.h"
@@ -27,31 +27,31 @@
 	IBOutlet PAResultsOutlineView		*outlineView;
 	IBOutlet NSProgressIndicator		*progressIndicator;
 	
-	PATags								*tags;
-	PARelatedTags						*relatedTags;
-	PASelectedTags						*selectedTags;
+	NNTags								*tags;
+	NNRelatedTags						*relatedTags;
+	NNSelectedTags						*selectedTags;
 	
 	PADropManager						*dropManager;
-	PAQuery								*query;
+	NNQuery								*query;
 	
 	NSNotificationCenter				*nc;
 	
 	NSArray								*draggedItems;
 }
 
-- (void)handleTagActivation:(PATag*)tag;
+- (void)handleTagActivation:(NNTag*)tag;
 
-- (PARelatedTags*)relatedTags;
-- (void)setRelatedTags:(PARelatedTags*)otherRelatedTags;
-- (PASelectedTags*)selectedTags;
-- (void)setSelectedTags:(PASelectedTags*)otherSelectedTags;
+- (NNRelatedTags*)relatedTags;
+- (void)setRelatedTags:(NNRelatedTags*)otherRelatedTags;
+- (NNSelectedTags*)selectedTags;
+- (void)setSelectedTags:(NNSelectedTags*)otherSelectedTags;
 
 - (void)removeLastTag;
 
 - (NSArray*)draggedItems;
 - (void)setDraggedItems:(NSArray*)someItems;
 
-- (PAQuery *)query;
+- (NNQuery *)query;
 
 - (IBAction)clearSelectedTags:(id)sender;
 

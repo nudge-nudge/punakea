@@ -7,14 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATags.h"
+#import "NNTagging/NNTags.h"
 
 @interface PATagGroup : NSObject {
 	int maxSize;
 	NSMutableArray *groupedTags;
 	NSArray *sortDescriptors;
 	
-	PATags *tags;
+	NNTags *tags;
 }
 
 - (NSMutableArray*)groupedTags;

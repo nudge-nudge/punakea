@@ -19,7 +19,7 @@
 }
 
 #pragma mark main
-- (void)handleTagActivation:(PATag*)tag
+- (void)handleTagActivation:(NNTag*)tag
 {
 	return;
 }

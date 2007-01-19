@@ -13,7 +13,7 @@ int const MAX_FONT_SIZE = 25;
 @implementation PATagButtonCell
 
 #pragma mark init
-- (id)initWithTag:(PATag*)aTag rating:(float)aRating
+- (id)initWithTag:(NNTag*)aTag rating:(float)aRating
 {
 	if (self = [super initTextCell:[aTag name]])
 	{
@@ -35,12 +35,12 @@ int const MAX_FONT_SIZE = 25;
 
 
 #pragma mark accessors
-- (PATag*)genericTag
+- (NNTag*)genericTag
 {
 	return genericTag;
 }
 
-- (void)setGenericTag:(PATag*)aTag
+- (void)setGenericTag:(NNTag*)aTag
 {
 	[aTag retain];
 	[genericTag release];

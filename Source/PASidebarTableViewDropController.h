@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PASimpleTag.h"
+#import "NNTagging/NNSimpleTag.h"
 #import "PADropManager.h"
 
 @interface PASidebarTableViewDropController : NSObject {

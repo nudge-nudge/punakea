@@ -35,15 +35,15 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 		/* TODO not removed on controller change */
 		[[NSNotificationCenter defaultCenter] addObserver:self
 		                                         selector:@selector(update)
-												     name:PAQueryDidUpdateNotification
+												     name:NNQueryDidUpdateNotification
 												   object:[controller query]];
 		[[NSNotificationCenter defaultCenter] addObserver:self
 		                                         selector:@selector(update)
-												     name:PAQueryDidFinishGatheringNotification
+												     name:NNQueryDidFinishGatheringNotification
 												   object:[controller query]];
 		[[NSNotificationCenter defaultCenter] addObserver:self
 		                                         selector:@selector(update)
-												     name:PAQueryDidResetNotification
+												     name:NNQueryDidResetNotification
 												   object:[controller query]];
 		
 		[self setupButtons];
@@ -230,11 +230,11 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	// Reset queue of ThumbnailManager. We don't need to process images that are not visible any more
 	[[PAThumbnailManager sharedInstance] removeAllQueuedItems];
 	
-	PAQuery *query = [controller query];
+	NNQuery *query = [controller query];
 	NSDictionary *filter = [sender filter];
 	
-	// Bundlings attributes that we set here need to be wrapped into an PAQueryItem in 
-	// PAQuery's bundleResults:byAttributes:objectWrapping!! Only a few are there yet! TODO!
+	// Bundlings attributes that we set here need to be wrapped into an NNQueryItem in 
+	// NNQuery's bundleResults:byAttributes:objectWrapping!! Only a few are there yet! TODO!
 	if([[buttons objectAtIndex:0] isEqualTo:sender])
 	{
 		[query filterResults:NO usingValues:nil forBundlingAttribute:nil

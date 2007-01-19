@@ -6,7 +6,7 @@
 adds tag to tagField (use from "outside")
  @param tag tag to add 
  */
-- (void)addTagToField:(PASimpleTag*)tag;
+- (void)addTagToField:(NNSimpleTag*)tag;
 
 /**
 called when items have changed
@@ -35,14 +35,14 @@ resets the tagger window (called when window is closed)
 		
 		typeAheadFind = [[PATypeAheadFind alloc] init];
 
-		currentCompleteTagsInField = [[PASelectedTags alloc] init];
+		currentCompleteTagsInField = [[NNSelectedTags alloc] init];
 		dropManager = [PADropManager sharedInstance];
 		
 		// custom data cell
 		fileCell = [[PATaggerItemCell alloc] initTextCell:@""];
 		[fileCell setEditable:YES];
 		
-		globalTags = [PATags sharedTags];
+		globalTags = [NNTags sharedTags];
 	}
 	return self;
 }
@@ -90,7 +90,7 @@ resets the tagger window (called when window is closed)
 
 
 #pragma mark Actions
-- (void)addTaggableObject:(PATaggableObject *)anObject
+- (void)addTaggableObject:(NNTaggableObject *)anObject
 {
 	[items addObject:anObject];
 	[self updateTags];
@@ -110,7 +110,7 @@ resets the tagger window (called when window is closed)
 	NSMutableSet *tagsOnAllObjects = [NSMutableSet set];
 	
 	NSEnumerator *itemsEnumerator = [items objectEnumerator];
-	PATaggableObject *taggableObject;
+	NNTaggableObject *taggableObject;
 	
 	// set all tags to tags on first object
 	if (taggableObject = [itemsEnumerator nextObject])
@@ -141,7 +141,7 @@ resets the tagger window (called when window is closed)
 	{
 		id item = [tableView itemAtRow:row];
 		
-		if([[item class] isEqualTo:[PAFile class]])
+		if([[item class] isEqualTo:[NNFile class]])
 			[[NSWorkspace sharedWorkspace] openFile:[item valueForAttribute:(id)kMDItemPath]];
 		
 		row = [selectedRowIndexes indexGreaterThanIndex:row];
@@ -170,7 +170,7 @@ completionsForSubstring:(NSString *)substring
 	NSMutableArray *results = [NSMutableArray array];
 	
 	NSEnumerator *e = [[typeAheadFind tagsForPrefix:substring] objectEnumerator];
-	PASimpleTag *tag;
+	NNSimpleTag *tag;
 	
 	while (tag = [e nextObject])
 	{
@@ -226,7 +226,7 @@ completionsForSubstring:(NSString *)substring
 		NSMutableArray *deletedTags = [NSMutableArray array];
 		
 		NSEnumerator *e = [currentCompleteTagsInField objectEnumerator];
-		PASimpleTag *tag;
+		NNSimpleTag *tag;
 		
 		while (tag = [e nextObject])
 		{
@@ -305,7 +305,7 @@ completionsForSubstring:(NSString *)substring
    forTableColumn:(NSTableColumn *)aTableColumn 
 			  row:(int)rowIndex
 {
-	PATaggableObject *taggableObject = [items objectAtIndex:rowIndex];
+	NNTaggableObject *taggableObject = [items objectAtIndex:rowIndex];
 	NSString *value = anObject;
 	
 	[taggableObject renameTo:value errorWindow:[aTableView window]];
@@ -350,7 +350,7 @@ completionsForSubstring:(NSString *)substring
 	NSMutableArray *results = [NSMutableArray array];
 	
 	NSEnumerator *e = [files objectEnumerator];
-	PAFile *file;
+	NNFile *file;
 	
 	while (file = [e nextObject])
 	{
@@ -399,7 +399,7 @@ completionsForSubstring:(NSString *)substring
 	
 	while(filename = [e nextObject])
 	{
-		PAFile *file = [PAFile fileWithPath:filename];
+		NNFile *file = [NNFile fileWithPath:filename];
 	
 		if (![items containsObject:file])
 		{
@@ -419,12 +419,12 @@ completionsForSubstring:(NSString *)substring
 
 
 #pragma mark accessors
-- (PASelectedTags*)currentCompleteTagsInField
+- (NNSelectedTags*)currentCompleteTagsInField
 {
 	return currentCompleteTagsInField;
 }
 
-- (void)setCurrentCompleteTagsInField:(PASelectedTags*)newTags
+- (void)setCurrentCompleteTagsInField:(NNSelectedTags*)newTags
 {
 	[newTags retain];
 	[currentCompleteTagsInField release];

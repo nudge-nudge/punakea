@@ -7,21 +7,21 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATaggableObject.h"
+#import "NNTagging/NNTaggableObject.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 
 @interface PAResultsMultiItemGenericCell : NSTextFieldCell {
 
-	PATaggableObject			*item;
+	NNTaggableObject			*item;
 
 }
 
-- (id)initTextCell:(PATaggableObject *)anItem;
+- (id)initTextCell:(NNTaggableObject *)anItem;
 
 + (NSSize)cellSize;				/**< subclass must override */
 + (NSSize)intercellSpacing;		/**< subclass must override */
 
-- (PATaggableObject *)item;
-- (void)setItem:(PATaggableObject *)anItem;
+- (NNTaggableObject *)item;
+- (void)setItem:(NNTaggableObject *)anItem;
 
 @end

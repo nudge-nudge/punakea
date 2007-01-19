@@ -38,7 +38,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		numberOfThumbsBeingProcessed = 0;
 		icons = [[NSMutableDictionary alloc] init];
 		thumbnails = [[NSMutableDictionary alloc] init];
-		queue = [[PAThreadSafeQueue alloc] init];
+		queue = [[NNThreadSafeQueue alloc] init];
 		stack = [[NSMutableArray alloc] init];
 		
 		dummyImageThumbnail = [NSImage imageNamed:@"dummyThumbLarge"];

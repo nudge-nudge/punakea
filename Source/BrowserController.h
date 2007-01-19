@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BrowserViewController.h"
-#import "NNTagging/PAQuery.h"
+#import "NNTagging/NNQuery.h"
 #import "PATagCloud.h"
 
 @interface BrowserController : NSWindowController 

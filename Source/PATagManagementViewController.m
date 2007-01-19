@@ -14,7 +14,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 
 @interface PATagManagementViewController (PrivateAPI)
 
-- (void)loadViewForTag:(PATag*)tag;
+- (void)loadViewForTag:(NNTag*)tag;
 
 @end
 
@@ -25,7 +25,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 {
 	if (self = [super init])
 	{
-		tags = [PATags sharedTags];
+		tags = [NNTags sharedTags];
 		
 		[self setWorking:NO];
 		
@@ -71,12 +71,12 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 }
 
 #pragma mark accessors
-- (PATag*)currentEditedTag
+- (NNTag*)currentEditedTag
 {
 	return currentEditedTag;
 }
 
-- (void)setCurrentEditedTag:(PATag*)aTag
+- (void)setCurrentEditedTag:(NNTag*)aTag
 {
 	[aTag retain];
 	[currentEditedTag release];
@@ -211,7 +211,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 }
 
 #pragma mark actions
-- (void)handleTagActivation:(PATag*)tag
+- (void)handleTagActivation:(NNTag*)tag
 {
 	[self setCurrentEditedTag:tag];
 	
@@ -226,7 +226,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	}
 }
 
-- (void)loadViewForTag:(PATag*)tag
+- (void)loadViewForTag:(NNTag*)tag
 {
 	NSView *sv;
 	
@@ -242,7 +242,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	
 	[currentView removeFromSuperview];
 	
-	if ([tag isKindOfClass:[PASimpleTag class]])
+	if ([tag isKindOfClass:[NNSimpleTag class]])
 		[self setCurrentView:simpleTagManagementView];
 		
 	[sv addSubview:currentView];
@@ -260,7 +260,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	
 	[lastUsedField setStringValue:[dateFormatter friendlyStringFromDate:[tag lastUsed]]];
 	
-	PATag *currentBestTag = [tags currentBestTag];
+	NNTag *currentBestTag = [tags currentBestTag];
 
 	[popularityIndicator setFloatValue:[tag relativeRatingToTag:currentBestTag]];
 	

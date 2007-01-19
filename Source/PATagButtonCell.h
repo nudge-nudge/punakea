@@ -1,7 +1,7 @@
 /* PATagButtonCell */
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATag.h"
+#import "NNTagging/NNTag.h"
 #import "PATagButton.h"
 #import "PAButtonCell.h"
 #import "BrowserViewController.h"
@@ -14,14 +14,14 @@ cell for the tagcloud, displays the given tag and interacts with the user
  */
 @interface PATagButtonCell : PAButtonCell
 {
-	PATag *genericTag;
+	NNTag *genericTag;
 	float rating;
 }
 
-- (id)initWithTag:(PATag*)aTag rating:(float)aRating;
+- (id)initWithTag:(NNTag*)aTag rating:(float)aRating;
 
-- (PATag*)genericTag;
-- (void)setGenericTag:(PATag*)aTag;
+- (NNTag*)genericTag;
+- (void)setGenericTag:(NNTag*)aTag;
 
 - (float)rating;
 - (void)setRating:(float)aRating;

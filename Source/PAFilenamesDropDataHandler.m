@@ -12,9 +12,9 @@
 @implementation PAFilenamesDropDataHandler
 
 // data is NSString (filepath)
-- (PATaggableObject*)fileDropData:(id)data
+- (NNTaggableObject*)fileDropData:(id)data
 {
-	return [PAFile fileWithPath:data];
+	return [NNFile fileWithPath:data];
 }
 
 - (NSDragOperation)performedDragOperation

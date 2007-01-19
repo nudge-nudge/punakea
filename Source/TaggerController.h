@@ -1,9 +1,9 @@
 /* TaggerController */
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATaggableObject.h"
-#import "NNTagging/PATags.h"
-#import "NNTagging/PARelatedTagsStandalone.h"
+#import "NNTagging/NNTaggableObject.h"
+#import "NNTagging/NNTags.h"
+#import "NNTagging/NNRelatedTagsStandalone.h"
 #import "PATypeAheadFind.h"
 #import "PADropManager.h"
 #import "PATaggerItemCell.h"
@@ -21,19 +21,19 @@
 	
 	NSMutableArray				*items;
 	
-	PASelectedTags				*currentCompleteTagsInField; /**< holds the relevant tags of tagField (as a copy) */
+	NNSelectedTags				*currentCompleteTagsInField; /**< holds the relevant tags of tagField (as a copy) */
 	NSString					*restDisplayString;
 
 	PATypeAheadFind				*typeAheadFind;
 	PADropManager				*dropManager;
 	
-	PATags						*globalTags;
+	NNTags						*globalTags;
 }
 
-- (void)addTaggableObject:(PATaggableObject *)anObject;
+- (void)addTaggableObject:(NNTaggableObject *)anObject;
 - (void)addTaggableObjects:(NSArray *)theObjects;
 
-- (PASelectedTags*)currentCompleteTagsInField;
-- (void)setCurrentCompleteTagsInField:(PASelectedTags*)newTags;
+- (NNSelectedTags*)currentCompleteTagsInField;
+- (void)setCurrentCompleteTagsInField:(NNSelectedTags*)newTags;
 
 @end

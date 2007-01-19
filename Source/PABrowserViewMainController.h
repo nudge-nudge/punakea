@@ -7,15 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATag.h"
+#import "NNTagging/NNTag.h"
 #import "PAViewController.h"
 
 @interface NSObject (PATagManagementViewControllerDelegate)
 
-- (void)displaySelectedTag:(PATag*)tag;
+- (void)displaySelectedTag:(NNTag*)tag;
 - (NSView*)controlledView;
 - (void)removeActiveTagButton;
-- (void)displaySelectedTag:(PATag*)tag;
+- (void)displaySelectedTag:(NNTag*)tag;
 - (void)showResults;
 
 @end
@@ -38,7 +38,7 @@ abstract class, controller for everything except tagcloud in
 /**
 abstract, must overwrite
  */
-- (void)handleTagActivation:(PATag*)tag;
+- (void)handleTagActivation:(NNTag*)tag;
 - (id)delegate;
 - (void)setDelegate:(id)anObject;
 - (BOOL)isWorking;

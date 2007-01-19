@@ -1,7 +1,7 @@
 /* PATagButton */
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATag.h"
+#import "NNTagging/NNTag.h"
 #import "PAButton.h"
 #import "PATagButtonCell.h"
 #import "PADropManager.h"
@@ -10,10 +10,10 @@
 	PADropManager			*dropManager;		
 }
 
-- (id)initWithTag:(PATag*)tag rating:(float)rating;
+- (id)initWithTag:(NNTag*)tag rating:(float)rating;
 
-- (PATag*)genericTag;
-- (void)setGenericTag:(PATag*)aTag;
+- (NNTag*)genericTag;
+- (void)setGenericTag:(NNTag*)aTag;
 
 - (void)setRating:(float)aRating;
 

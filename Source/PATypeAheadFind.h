@@ -7,13 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATags.h"
+#import "NNTagging/NNTags.h"
 
 /**
 simple type ahead find implementation, not the quickest, but works
  */
 @interface PATypeAheadFind : NSObject {
-	PATags *tags; /**< all tags currently known */
+	NNTags *tags; /**< all tags currently known */
 	NSMutableArray *activeTags;
 }
 

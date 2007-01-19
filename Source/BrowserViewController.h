@@ -40,10 +40,10 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 		
 	PABrowserViewMainController *mainController;
 	
-	PATags *tags;
+	NNTags *tags;
 	
 	NSMutableArray *visibleTags; /**< holds tags for TagCloud */
-	PATag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
+	NNTag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
 	
 	IBOutlet PATypeAheadView *typeAheadView;
 	IBOutlet NSSearchField *searchField;
@@ -71,7 +71,7 @@ use this method to tell bvc that mainController doesn't need to
 highlights tag in tagcloud
  @param tag tag to highligh
  */
-- (void)displaySelectedTag:(PATag*)tag;
+- (void)displaySelectedTag:(NNTag*)tag;
 - (void)removeActiveTagButton;
 
 - (PABrowserViewMainController*)mainController;

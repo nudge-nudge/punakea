@@ -20,16 +20,16 @@
 	
 	// create tags
 	testTags = [NSMutableArray array];
-	PASimpleTag *test_0 = [[PASimpleTag alloc] initWithName:@"test_0"];
-	PASimpleTag *test_1 = [[PASimpleTag alloc] initWithName:@"test_1"];
-	PASimpleTag *test_2 = [[PASimpleTag alloc] initWithName:@"test_2"];
-	PASimpleTag *test_3 = [[PASimpleTag alloc] initWithName:@"test_3"];
-	PASimpleTag *test_4 = [[PASimpleTag alloc] initWithName:@"test_4"];
-	PASimpleTag *test_5 = [[PASimpleTag alloc] initWithName:@"test_5"];
-	PASimpleTag *test_6 = [[PASimpleTag alloc] initWithName:@"test_6"];
-	PASimpleTag *test_7 = [[PASimpleTag alloc] initWithName:@"test_7"];
-	PASimpleTag *test_8 = [[PASimpleTag alloc] initWithName:@"test_8"];
-	PASimpleTag *test_9 = [[PASimpleTag alloc] initWithName:@"test_9"];
+	NNSimpleTag *test_0 = [[NNSimpleTag alloc] initWithName:@"test_0"];
+	NNSimpleTag *test_1 = [[NNSimpleTag alloc] initWithName:@"test_1"];
+	NNSimpleTag *test_2 = [[NNSimpleTag alloc] initWithName:@"test_2"];
+	NNSimpleTag *test_3 = [[NNSimpleTag alloc] initWithName:@"test_3"];
+	NNSimpleTag *test_4 = [[NNSimpleTag alloc] initWithName:@"test_4"];
+	NNSimpleTag *test_5 = [[NNSimpleTag alloc] initWithName:@"test_5"];
+	NNSimpleTag *test_6 = [[NNSimpleTag alloc] initWithName:@"test_6"];
+	NNSimpleTag *test_7 = [[NNSimpleTag alloc] initWithName:@"test_7"];
+	NNSimpleTag *test_8 = [[NNSimpleTag alloc] initWithName:@"test_8"];
+	NNSimpleTag *test_9 = [[NNSimpleTag alloc] initWithName:@"test_9"];
 	
 	[testTags addObject:test_0];
 	[testTags addObject:test_1];
@@ -42,7 +42,7 @@
 	[testTags addObject:test_8];
 	[testTags addObject:test_9];
 	
-	tags = [PATags sharedTags;
+	tags = [NNTags sharedTags;
 	[tags addTag:test_0];
 	[tags addTag:test_1];
 	[tags addTag:test_2];
@@ -69,9 +69,9 @@
 - (void)testTagging
 {
 			
-	PAFile *file_0 = [PAFile fileWithPath:[filenames objectAtIndex:0]];
-	PAFile *file_1 = [PAFile fileWithPath:[filenames objectAtIndex:0]];
-	PAFile *file_2 = [PAFile fileWithPath:[filenames objectAtIndex:0]];
+	NNFile *file_0 = [NNFile fileWithPath:[filenames objectAtIndex:0]];
+	NNFile *file_1 = [NNFile fileWithPath:[filenames objectAtIndex:0]];
+	NNFile *file_2 = [NNFile fileWithPath:[filenames objectAtIndex:0]];
 	
 	[tagger addTags:testTags toFiles:[NSArray arrayWithObject:file_0]];
 	NSArray *tagsOnFiles = [tagger tagsOnFile:file_0];
@@ -139,7 +139,7 @@
 	STAssertEquals([a count],[b count],@"size");
 	
 	NSEnumerator *e = [a objectEnumerator];
-	PATag *tag;
+	NNTag *tag;
 	
 	while (tag = [e nextObject])
 	{

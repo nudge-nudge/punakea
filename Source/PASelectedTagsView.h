@@ -10,8 +10,8 @@
 #import "PAFilterSlice.h"
 #import "PAResultsOutlineView.h"
 #import "PAResultsViewController.h"
-#import "NNTagging/PATag.h"
-#import "NNTagging/PASelectedTags.h"
+#import "NNTagging/NNTag.h"
+#import "NNTagging/NNSelectedTags.h"
 #import "PAButton.h"
 #import "PAImageButton.h"
 
@@ -24,7 +24,7 @@ extern int const PADDING_TO_RIGHT;
 	IBOutlet PAResultsOutlineView		*outlineView;
 	IBOutlet PAFilterSlice				*filterSlice;
 	IBOutlet PAResultsViewController	*controller;
-	PASelectedTags						*selectedTags;
+	NNSelectedTags						*selectedTags;
 	
 	NSMutableDictionary					*tagButtons;
 	

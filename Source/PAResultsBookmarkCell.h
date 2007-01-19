@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATaggableObject.h"
+#import "NNTagging/NNTaggableObject.h"
 #import "PAThumbnailManager.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 #import "NDResourceFork.h"
@@ -15,7 +15,7 @@
 
 @interface PAResultsBookmarkCell : NSTextFieldCell {
 
-	PATaggableObject				*item;
+	NNTaggableObject				*item;
 
 }
 

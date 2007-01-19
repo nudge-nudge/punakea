@@ -2,7 +2,7 @@
 
 @interface SidebarController (PrivateAPI)
 
-- (void)addTagToFileTags:(PATag*)tag;
+- (void)addTagToFileTags:(NNTag*)tag;
 - (void)updateTagsOnFile;
 
 @end
@@ -14,7 +14,7 @@
 {
 	if (self = [super initWithWindowNibName:nibName])
 	{
-		tags = [PATags sharedTags];
+		tags = [NNTags sharedTags];
 		dropManager = [PADropManager sharedInstance];
 		
 		recentTagGroup = [[PARecentTagGroup alloc] init];

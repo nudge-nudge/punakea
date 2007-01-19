@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/PATaggableObject.h"
+#import "NNTagging/NNTaggableObject.h"
 
 /**
 abstract class for analyzing the data of a single pboardType. is used by PADropHandler.
@@ -26,7 +26,7 @@ it should be called with appropriate data by the DropHandler.
  @param data arbitrary data
  @return taggableObject representing dropped data
  */
-- (PATaggableObject*)fileDropData:(id)data;
+- (NNTaggableObject*)fileDropData:(id)data;
 
 /**
 convenience method, calls handleFile:

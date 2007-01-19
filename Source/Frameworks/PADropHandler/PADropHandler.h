@@ -31,10 +31,10 @@ checks pasteboard if it can be handled
 /**
 must be overwritten
  
-handles the pasteboard, returns content as array of PATaggableObjects.
+handles the pasteboard, returns content as array of NNTaggableObjects.
  uses dropDataHandler to get a file for the pasteboard data
  @param pasteboard pasteboard to handle
- @return array of PATaggableObjects
+ @return array of NNTaggableObjects
  */
 - (NSArray*)handleDrop:(NSPasteboard*)pasteboard;
 

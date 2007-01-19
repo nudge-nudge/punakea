@@ -31,7 +31,7 @@
 }
 
 #pragma mark main methods
-- (PATaggableObject*)fileDropData:(id)data
+- (NNTaggableObject*)fileDropData:(id)data
 {
 	return nil;
 }

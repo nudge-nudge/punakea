@@ -5,7 +5,7 @@
 - (void)selectedTagsHaveChanged;
 - (void)relatedTagsHaveChanged;
 - (void)allTagsHaveChanged;
-- (PATag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
+- (NNTag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
 - (void)setupToolbar;
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 - (void)createManagedFilesDirIfNeeded;
@@ -40,7 +40,7 @@
 {
     if (self = [super init])
     {
-		globalTags = [PATags sharedTags];
+		globalTags = [NNTags sharedTags];
 		
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		
@@ -54,7 +54,6 @@
 	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
 																 forKeyPath:@"values.General.LoadSidebar"];
 	
-	[tagSave release];
 	[preferenceController release];
 	[nc removeObserver:self];
     [super dealloc];
@@ -336,7 +335,7 @@
 	TaggerController *taggerController = [[TaggerController alloc] init];
 	[taggerController showWindow:self];
 	NSWindow *taggerWindow = [taggerController window];
-	[taggerController addTaggableObjects:[PAFile filesWithFilepaths:filenames]];
+	[taggerController addTaggableObjects:[NNFile filesWithFilepaths:filenames]];
 	[taggerWindow makeKeyAndOrderFront:nil];
 }
 

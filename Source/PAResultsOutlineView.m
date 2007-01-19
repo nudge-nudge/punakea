@@ -133,7 +133,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		for(unsigned i = 0; i < [self numberOfRows]; i++)
 		{
-			if([[self itemAtRow:i] isKindOfClass:[PAQueryItem class]] ||
+			if([[self itemAtRow:i] isKindOfClass:[NNQueryItem class]] ||
 			   [[self itemAtRow:i] isKindOfClass:[NSArray class]])
 			{
 				[self selectRow:i byExtendingSelection:NO];
@@ -161,7 +161,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	for(int i = 0; i < [self numberOfRows]; i++)
 	{
 		id item = [self itemAtRow:i];
-		if([item isKindOfClass:[PAQueryBundle class]])
+		if([item isKindOfClass:[NNQueryBundle class]])
 		{
 			if(![collapsedGroups containsObject:[item value]])
 				[self expandItem:item];
@@ -212,7 +212,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	/*[self deselectAll:self];		
 	NSEnumerator *itemsEnumerator = [[self selectedItems] objectEnumerator];
-	PATaggableObject *item;
+	NNTaggableObject *item;
 	while(item = [itemsEnumerator nextObject])
 	{	
 		for(int i = 0; i < [self numberOfRows]; i++)
@@ -279,20 +279,20 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 #pragma mark Notifications
 - (void)queryNote:(NSNotification *)note
 {	
-	if([[note name] isEqualToString:PAQueryDidStartGatheringNotification])
+	if([[note name] isEqualToString:NNQueryDidStartGatheringNotification])
 	{
 		// Reset selectedItems
 		[self setSelectedItems:[NSMutableArray array]];
 	}
 
-	if([[note name] isEqualToString:PAQueryDidStartGatheringNotification] ||
-	   [[note name] isEqualToString:PAQueryDidFinishGatheringNotification] ||
-	   [[note name] isEqualToString:PAQueryDidResetNotification])
+	if([[note name] isEqualToString:NNQueryDidStartGatheringNotification] ||
+	   [[note name] isEqualToString:NNQueryDidFinishGatheringNotification] ||
+	   [[note name] isEqualToString:NNQueryDidResetNotification])
 	{	
 		[self reloadData];
 	}
 	
-	if([[note name] isEqualToString:PAQueryDidUpdateNotification])
+	if([[note name] isEqualToString:NNQueryDidUpdateNotification])
 	{		
 		[self saveSelection];
 		NSRect visibleRect = [self visibleRect];
@@ -302,14 +302,14 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		/*NSArray *userInfoAddedItems = [userInfo objectForKey:(id)kMDQueryUpdateAddedItems];
 		NSEnumerator *enumerator = [userInfoAddedItems objectEnumerator];
-		PAQueryItem *item;
+		NNQueryItem *item;
 		while(item = [enumerator nextObject]) {
 			NSLog(@"added: %@",[item valueForAttribute:(id)kMDItemDisplayName]);
 		}*/
 		
 		NSArray *userInfoRemovedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
 		NSEnumerator *enumerator = [userInfoRemovedItems objectEnumerator];
-		PATaggableObject *item;
+		NNTaggableObject *item;
 		while(item = [enumerator nextObject]) {
 			if([[self selectedItems] containsObject:item]) {
 				[[self selectedItems] removeObject:item];
@@ -483,7 +483,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 												   object:[NSIndexSet indexSetWithIndex:mouseRow]];
 
         // perform double action
-		if([[[self itemAtRow:mouseRow] class] isNotEqualTo:[PAQueryBundle class]])
+		if([[[self itemAtRow:mouseRow] class] isNotEqualTo:[NNQueryBundle class]])
 			[[self target] performSelector:@selector(doubleAction:)];
     }
     else
@@ -522,12 +522,12 @@ needed for supporting dragging to trash
 
 
 #pragma mark Accessors
-- (PAQuery *)query
+- (NNQuery *)query
 {
 	return query;
 }
 
-- (void)setQuery:(PAQuery *)aQuery
+- (void)setQuery:(NNQuery *)aQuery
 {
 	query = aQuery;
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -610,7 +610,7 @@ needed for supporting dragging to trash
 - (void)textDidChange:(NSNotification *)notification
 {
 	// Set text color to red if the new destination already exists
-	PATaggableObject *taggableObject = [self itemAtRow:[self selectedRow]];
+	NNTaggableObject *taggableObject = [self itemAtRow:[self selectedRow]];
 	
 	NSText *textView = [notification object];
 	NSString *newName = [textView string];

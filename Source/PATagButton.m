@@ -12,7 +12,7 @@
 
 
 @implementation PATagButton
-- (id)initWithTag:(PATag*)aTag rating:(float)aRating
+- (id)initWithTag:(NNTag*)aTag rating:(float)aRating
 {
     self = [super initWithFrame:NSMakeRect(0,0,0,0)];
     if (self) 
@@ -39,12 +39,12 @@ should be overridden according to apple docs
 }
 
 #pragma mark functionality
-- (PATag*)genericTag
+- (NNTag*)genericTag
 {
 	return [[self cell] genericTag];
 }
 
-- (void)setGenericTag:(PATag*)aTag
+- (void)setGenericTag:(NNTag*)aTag
 {
 	[[self cell] setGenericTag:aTag];
 }

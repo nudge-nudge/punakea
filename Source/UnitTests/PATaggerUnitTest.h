@@ -7,15 +7,15 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "NNTagging/PAFile.h"
-#import "NNTagging/PATags.h"
-#import "NNTagging/PASimpleTag.h"
+#import "NNTagging/NNFile.h"
+#import "NNTagging/NNTags.h"
+#import "NNTagging/NNSimpleTag.h"
 
 @interface PATaggerUnitTest : SenTestCase {
 	NSArray *filenames;
 	PATagger *tagger;
-	PATags *tags;
-	PASimpleTagFactory *simpleTagFactory;
+	NNTags *tags;
+	NNSimpleTagFactory *simpleTagFactory;
 	NSMutableArray *testTags;
 }
 
