@@ -80,8 +80,7 @@ highlights tag in tagcloud
 - (void)makeControlledViewFirstResponder;
 
 /**
-is called when a tag is clicked. increments the tag click count and
- adds to selectedTags
+is called when a tag is clicked
  */
 - (IBAction)tagButtonClicked:(id)sender;
 - (IBAction)findFieldAction:(id)sender;
