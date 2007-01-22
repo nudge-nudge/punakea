@@ -69,7 +69,8 @@
 	
 	// Draw display name	
 	NSString *value = [item displayName];
-	value = [value substringToIndex:[value length] - 7];
+	if([value hasSuffix:@"webloc"])
+		value = [value substringToIndex:[value length] - 7];
 	
 	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 25,
 								  cellFrame.origin.y + 2,
@@ -135,7 +136,12 @@
 	[super selectWithFrame:frame inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 
 	[textObj setFont:[NSFont systemFontOfSize:11]];
-	[textObj setString:[item displayName]];
+	
+	NSString *displayName = [item displayName];
+	if([displayName hasSuffix:@"webloc"])
+		displayName = [displayName substringToIndex:[displayName length] - 7];
+	
+	[textObj setString:displayName];
 	
 	[textObj selectAll:self];
 }
