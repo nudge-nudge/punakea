@@ -20,14 +20,12 @@ extern NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification;
 	
 	NNThreadSafeQueue			*queue;
 	NSMutableArray				*stack;
-	int							numberOfThumbsBeingProcessed;
 	
 	NSImage						*dummyImageThumbnail;
 	NSImage						*dummyImageIcon;
 	
-	NSTimer						*timer;
-	BOOL						processingQueue;
-
+	BOOL						delayNextNotification;
+	
 }
 
 + (PAThumbnailManager *)sharedInstance;

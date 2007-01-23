@@ -11,6 +11,7 @@
 
 int const CONCURRENT_IMAGE_LOADING_MAX = 5;
 int const NUMBER_OF_CACHED_ITEMS_MAX = 300;
+useconds_t const FIRST_ITEM_NOTIFICATION_DELAY = 200000;		// 0.2 sec
 
 NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification = @"PAThumbnailManagerDidFinishGeneratingItemNotification";
 
@@ -35,7 +36,6 @@ static PAThumbnailManager *sharedInstance = nil;
 	self = [super init];
 	if(self)
 	{
-		numberOfThumbsBeingProcessed = 0;
 		icons = [[NSMutableDictionary alloc] init];
 		thumbnails = [[NSMutableDictionary alloc] init];
 		queue = [[NNThreadSafeQueue alloc] init];
@@ -111,6 +111,12 @@ static PAThumbnailManager *sharedInstance = nil;
 		[icons setObject:dummyImageIcon forKey:filename];
 		
 		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeIcon];		
+		
+		// Processing icons is blazingly fast. We need to delay the first item of the queue to
+		// give the control view enough time for its own stuff. 
+		if([queue count] == 0)
+			delayNextNotification = YES;
+		
 		[queue enqueue:item];
 		[item release];
 		
@@ -120,17 +126,8 @@ static PAThumbnailManager *sharedInstance = nil;
 
 - (void)processQueue
 {
-	//NSLog(@"processing queue");
-	
-	//while(numberOfThumbsBeingProcessed < CONCURRENT_IMAGE_LOADING_MAX &&
-	//      [queue count] > 0)
 	while(true)
-	{
-		/*@synchronized(self)
-		{
-			numberOfThumbsBeingProcessed++;
-		}*/
-		
+	{	
 		PAThumbnailItem *item = [queue dequeue];
 		
 		if([item type] == PAItemTypeThumbnail)
@@ -153,8 +150,6 @@ static PAThumbnailManager *sharedInstance = nil;
 				[thumbnails removeObjectForKey:filename];
 				[icons removeObjectForKey:filename];
 				[stack removeObjectAtIndex:0];
-				
-				//NSLog(@"removed: %@", filename);
 			}
 		}
 	}
@@ -173,15 +168,11 @@ static PAThumbnailManager *sharedInstance = nil;
 		[thumbnails setObject:thumbnail forKey:filename];
 	
 		[stack addObject:filename];
-	
-		//numberOfThumbsBeingProcessed--;
 	}
 	
 	// Post notification
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
-		
-	//NSLog(@"finished thumbnail %@", filename);
 }
 
 - (void)generateIconForFile:(PAThumbnailItem *)thumbnailItem
@@ -196,15 +187,17 @@ static PAThumbnailManager *sharedInstance = nil;
 		[icons setObject:img forKey:filename];
 	
 		[stack addObject:filename];
-	
-		//numberOfThumbsBeingProcessed--;
 	}
 	
 	// Post notification
+	if(delayNextNotification)
+	{
+		delayNextNotification = NO;
+		usleep(FIRST_ITEM_NOTIFICATION_DELAY);
+	}
+	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
-	
-	//NSLog(@"finished icon %@", filename);
 }
 
 - (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds
