@@ -38,9 +38,10 @@
 	while(anObject = [enumerator nextObject])
 	{
 		if([[anObject class] isEqualTo:[PAResultsMultiItemMatrix class]])
-		{
-			NSArray *theseItems = [(PAResultsMultiItemMatrix *)anObject items];
-			if([items isEqualTo:theseItems])
+		{			
+			NSArray *theseItems = [(PAResultsMultiItemMatrix *)anObject items];			
+			
+			if([items isEqualTo:theseItems])			
 				matrix = anObject;
 		}
 	}
@@ -63,7 +64,7 @@
 		[matrix setDelegate:[controlView delegate]];
 		
 		[matrix setItems:items];	
-		[matrix setSelectedQueryItems:[controlView selectedItems]];
+		[matrix setSelectedItems:[controlView selectedItemsOfMultiItem]];
 		[controlView addSubview:matrix];
 	}
 	else

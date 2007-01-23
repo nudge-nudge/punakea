@@ -255,6 +255,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	
 	[outlineView reloadData];
 	[outlineView deselectAll:self];
+	[outlineView setSelectedItemsOfMultiItem:[NSMutableArray array]];
 	
 	// Scrolling - if item is an array, it handles scrolling itself
 	/*if(![[outlineView itemAtRow:[outlineView selectedRow]] isKindOfClass:[NSArray class]])

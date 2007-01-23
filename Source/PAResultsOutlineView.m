@@ -49,6 +49,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// Misc
 	[self setDisplayMode:PAListMode];
 	[self setSelectedItems:[NSMutableArray array]];
+	[self setSelectedItemsOfMultiItem:[NSMutableArray array]];
 }
 
 - (void)dealloc
@@ -56,6 +57,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	if(selectedItems) [selectedItems release];
+	if(selectedItemsOfMultiItem) [selectedItemsOfMultiItem release];
+	
 	[super dealloc];
 }
 
@@ -283,6 +286,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	{
 		// Reset selectedItems
 		[self setSelectedItems:[NSMutableArray array]];
+		[self setSelectedItemsOfMultiItem:[NSMutableArray array]];
 	}
 
 	if([[note name] isEqualToString:NNQueryDidStartGatheringNotification] ||
@@ -297,7 +301,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[self saveSelection];
 		NSRect visibleRect = [self visibleRect];
 		
-		// TODO: Remove items from selectedItems now
 		NSDictionary *userInfo = [note userInfo];
 		
 		/*NSArray *userInfoAddedItems = [userInfo objectForKey:(id)kMDQueryUpdateAddedItems];
@@ -310,11 +313,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		NSArray *userInfoRemovedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
 		NSEnumerator *enumerator = [userInfoRemovedItems objectEnumerator];
 		NNTaggableObject *item;
-		while(item = [enumerator nextObject]) {
-			if([[self selectedItems] containsObject:item]) {
+		while(item = [enumerator nextObject])
+		{
+			if([[self selectedItems] containsObject:item])
 				[[self selectedItems] removeObject:item];
-				NSLog(@"removed from selItems: %@", [item valueForAttribute:(id)kMDItemDisplayName]);
-			}
+			
+			if([[self selectedItemsOfMultiItem] containsObject:item])
+				[[self selectedItemsOfMultiItem] removeObject:item];
 		}
 		
 		[self reloadData];
@@ -574,6 +579,17 @@ needed for supporting dragging to trash
 {
 	if(selectedItems) [selectedItems release];
 	selectedItems = [theItems retain];
+}
+
+- (NSMutableArray *)selectedItemsOfMultiItem
+{
+	return selectedItemsOfMultiItem;
+}
+
+- (void)setSelectedItemsOfMultiItem:(NSMutableArray *)theItems
+{
+	if(selectedItemsOfMultiItem) [selectedItemsOfMultiItem release];
+	selectedItemsOfMultiItem = [theItems retain];
 }
 
 

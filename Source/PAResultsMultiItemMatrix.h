@@ -49,10 +49,10 @@
 
 - (NSArray *)items;
 - (void)setItems:(NSArray *)theItems;
-- (void)setSelectedQueryItems:(NSMutableArray *)theSelectedItems;
 - (NSCell *)selectedCell;
 - (NSArray *)selectedCells;
 - (NSArray *)selectedItems;
+- (void)setSelectedItems:(NSArray *)theSelectedItems;
 - (void)setCellClass:(Class)aClass;
 
 @end

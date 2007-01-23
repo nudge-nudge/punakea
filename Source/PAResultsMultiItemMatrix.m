@@ -273,11 +273,15 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[selectedIndexes addIndex:idx];
 		[selectedCells addObject:cell];
 		
+		[[outlineView selectedItemsOfMultiItem] addObject:[items objectAtIndex:idx]];
+		
 		[self scrollCellToVisibleAtRow:row column:column];
 		
 	} else {
 		[selectedIndexes removeIndex:idx];
 		[selectedCells removeObject:cell];
+		
+		[[outlineView selectedItemsOfMultiItem] removeObject:[items objectAtIndex:idx]];
 	}
 }
 
@@ -1176,31 +1180,6 @@ needed for supporting dragging to trash
 	items = [theItems retain];
 }
 
-- (void)setSelectedQueryItems:(NSMutableArray *)theSelectedItems
-{
-	NSEnumerator *enumerator = [theSelectedItems objectEnumerator];
-	NNTaggableObject *item;
-	
-	[selectedIndexes removeAllIndexes];
-	
-	while(item = [enumerator nextObject])
-	{
-		for(int i = 0; i < [items count]; i++)
-		{
-			NNTaggableObject *thisItem = [items objectAtIndex:i];
-			if([thisItem isEqualTo:item])
-			{
-				[selectedIndexes addIndex:i];
-				break;
-			}
-		}
-	}
-	
-	[self displayCellsForItems];
-	
-	[self scrollToVisible];
-}
-
 - (NSCell *)selectedCell
 {
 	return selectedCell;
@@ -1223,6 +1202,23 @@ needed for supporting dragging to trash
 	}
 	
 	return selectedItems;
+}
+
+- (void)setSelectedItems:(NSArray *)theSelectedItems
+{
+	NSEnumerator *enumerator = [theSelectedItems objectEnumerator];
+	NNTaggableObject *item;
+	
+	[selectedIndexes removeAllIndexes];
+	
+	while(item = [enumerator nextObject])
+	{
+		[selectedIndexes addIndex:[items indexOfObjectIdenticalTo:item]];
+	}
+	
+	[self displayCellsForItems];
+	
+	[self scrollToVisible];
 }
 
 - (void)setCellClass:(Class)aClass
