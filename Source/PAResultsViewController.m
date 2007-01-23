@@ -548,11 +548,11 @@
 
 - (void)deleteFilesForVisibleSelectedItems:(id)sender
 {
-	NSArray *items = [outlineView visibleSelectedItems];
+	NSEnumerator *enumerator = [[outlineView visibleSelectedItems] objectEnumerator];
 	
-	while([items count] > 0)
+	NNTaggableObject *item;
+	while(item = [enumerator nextObject])
 	{
-		NNTaggableObject *item = [items lastObject];
 		[item moveToTrash:YES errorWindow:[outlineView window]];
 	}
 	
