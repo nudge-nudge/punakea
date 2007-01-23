@@ -868,20 +868,15 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	// Set text color to red if the new destination already exists
 	int idx = r * [self numberOfColumns] + c;
-	NNTaggableObject *item = [items objectAtIndex:idx];
-	NNFile *file = [NNFile fileWithPath:[item valueForAttribute:(id)kMDItemPath]];
+	NNTaggableObject *taggableObject = [items objectAtIndex:idx];
 	
 	NSText *textView = [notification object];
+	NSString *newName = [textView string];
 	
-	NSString *newDestination = [[file directory] stringByAppendingPathComponent:[textView string]];
-	
-	if([[NSFileManager defaultManager] fileExistsAtPath:newDestination] &&
-	   [newDestination compare:[file path] options:NSCaseInsensitiveSearch] != NSOrderedSame)
-	{
+	if(![taggableObject validateNewName:newName])
 		[textView setTextColor:[NSColor redColor]];
-	} else {
+	else 
 		[textView setTextColor:[NSColor textColor]];
-	}
 	
 	// Fix frame to resize vertically
 	/*NSSize stringSize = [[self attributedStringValue] size];
