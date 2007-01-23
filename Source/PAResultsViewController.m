@@ -555,8 +555,6 @@
 	{
 		[item moveToTrash:YES errorWindow:[outlineView window]];
 	}
-	
-	[outlineView reloadData];
 }
 
 /*- (NSArray *)selectedItems
