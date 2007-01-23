@@ -548,7 +548,13 @@
 
 - (void)deleteFilesForVisibleSelectedItems:(id)sender
 {
-	[[outlineView query] trashItems:[outlineView visibleSelectedItems] errorWindow:[outlineView window]];
+	NSArray *items = [outlineView visibleSelectedItems];
+	
+	while([items count] > 0)
+	{
+		NNTaggableObject *item = [items lastObject];
+		[item moveToTrash:YES errorWindow:[outlineView window]];
+	}
 	
 	[outlineView reloadData];
 }
