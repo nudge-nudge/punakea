@@ -50,6 +50,9 @@
 	[recentTagsTable unregisterDraggedTypes];
 	[popularTagsTable unregisterDraggedTypes];
 	
+	[recentTagTableController release];
+	[popularTagTableController release];
+	
 	[popularTagGroup release];
 	[recentTagGroup release];
 	[dropManager release];

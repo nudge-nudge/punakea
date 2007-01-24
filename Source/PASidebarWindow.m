@@ -87,8 +87,7 @@ double const SHOW_DELAY = 0.2;
 	if ((object == defaultsController) && [keyPath isEqualToString:@"values.Appearance.SidebarPosition"])
 	{
 		sidebarPosition = [[defaultsController valueForKeyPath:@"values.Appearance.SidebarPosition"] intValue];
-		[self setExpanded:YES];
-		[self recede:NO];
+		[self reset];
 	}
 }			
 
@@ -131,7 +130,7 @@ double const SHOW_DELAY = 0.2;
 
 #pragma mark functionality
 - (void)reset
-{
+{	
 	[self setExpanded:YES];
 	[self recede:NO];
 }
@@ -187,6 +186,7 @@ double const SHOW_DELAY = 0.2;
 		}
 		
 		newRect.origin.y = screenRect.size.height/2 - newRect.size.height/2;
+				
 		[self setFrame:newRect display:YES animate:animate];
 		[self setExpanded:NO];
 		
