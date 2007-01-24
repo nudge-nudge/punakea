@@ -155,8 +155,33 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[[[self subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
     }
 	[self setResponder:nil];
+	
+	// Save selected items - outlineview only stores indexes of selected rows. thus selection is
+	// incorrect when adding an item above selection. we'll do this by hand as workaround
+	[self setSelectedItems:[NSMutableArray array]];
+	
+	NSIndexSet *selectedRowIndexes = [self selectedRowIndexes];
+	int row = [selectedRowIndexes firstIndex];
+	
+	while(row != NSNotFound)
+	{
+		[[self selectedItems] addObject:[self itemAtRow:row]];
+		
+		row = [selectedRowIndexes indexGreaterThanIndex:row];
+	}
     
+	// Forward reload request to super
 	[super reloadData];
+	
+	// Restore selection
+	[self deselectAll:self];
+	NSEnumerator *enumerator = [[self selectedItems] objectEnumerator];
+	NNTaggableObject *item;
+	while(item = [enumerator nextObject])
+	{
+		row = [self rowForItem:item];
+		[self selectRow:row byExtendingSelection:YES];
+	}	
 	
 	// Restore group's state from user defaults
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

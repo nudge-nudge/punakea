@@ -37,7 +37,6 @@ typedef enum _PAResultsDisplayMode
 	
 	// A collection of selected NNTaggableObjects. OutlineView stores them for various responders,
 	// so that they are able to restore their selection if necessary.
-	// TODO: Do we need this?!
 	NSMutableArray			*selectedItems;
 	
 	// Collection of NNTaggableObjects that have been selected in a MultiItemMatrix. Workaround
