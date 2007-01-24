@@ -10,7 +10,7 @@ data 'LPic' (5000) {
 
 
 data 'TEXT' (5002, "English") {
-    "Copyright (c) 2006 nudge:nudge. All rights reserved.\n"
+    "Copyright (c) 2006-2007 nudge:nudge. All rights reserved.\n"
     "\n"
 	"This is experimental software and may have bugs, some of which may have "
 	"serious consequences.\n"
