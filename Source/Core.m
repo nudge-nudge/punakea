@@ -187,11 +187,13 @@
 
 - (IBAction)showPreferences:(id)sender
 {
-	if (!preferenceController)
+	if (![self appHasPreferences])
 	{
-		preferenceController = [[PreferenceController alloc] initWithCore:self];
+		preferenceController = [[PreferenceController alloc] initWithCore:self];	
 	}
+	
 	[preferenceController showWindow:self];
+	[[preferenceController window] makeKeyAndOrderFront:self];
 }
 
 - (IBAction)openFiles:(id)sender
@@ -420,6 +422,24 @@
 	}
 	
 	return hasBrowser;
+}
+
+- (BOOL)appHasPreferences
+{
+	BOOL hasPreferences = NO;
+	
+	NSArray *windows = [[NSApplication sharedApplication] windows];
+	
+	NSEnumerator *e = [windows objectEnumerator];
+	NSWindow *window;
+	
+	while (window = [e nextObject])
+	{
+		if ([window delegate] && [[window delegate] isKindOfClass:[PreferenceController class]])
+			hasPreferences = YES;
+	}
+	
+	return hasPreferences;
 }
 
 @end

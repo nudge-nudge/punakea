@@ -79,6 +79,12 @@
 	}
 }
 
+#pragma mark window delegate
+- (void)windowWillClose:(NSNotification *)aNotification
+{		
+	[self autorelease];
+}
+
 #pragma mark event handling
 - (void)startOnLoginHasChanged
 {	
