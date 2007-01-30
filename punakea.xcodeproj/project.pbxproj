@@ -237,8 +237,6 @@
 		65C0E04409E3EF11006C5A7C /* PAResultsGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */; };
 		65C4890609E2C30F00A45A17 /* PAResultsOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */; };
 		65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */; };
-		65C8B58B0AA5869000DC36EA /* ThreadWorker.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C8B5890AA5869000DC36EA /* ThreadWorker.h */; };
-		65C8B58C0AA5869000DC36EA /* ThreadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C8B58A0AA5869000DC36EA /* ThreadWorker.m */; };
 		65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CA80100AAEEF8A002117C0 /* PAFilterButton.h */; };
 		65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA80110AAEEF8A002117C0 /* PAFilterButton.m */; };
 		65D6ACBD0A89E1E800FDAC8A /* TabActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBA0A89E1E800FDAC8A /* TabActive.png */; };
@@ -382,7 +380,6 @@
 				485016A40AA423FC00579C92 /* PASidebarTableColumn.h in CopyFiles */,
 				483272340AA42DC6003D98A6 /* UKPrefsPanel.h in CopyFiles */,
 				4832723D0AA42E8C003D98A6 /* PreferenceController.h in CopyFiles */,
-				65C8B58B0AA5869000DC36EA /* ThreadWorker.h in CopyFiles */,
 				657CBD770AA5C4A800701D47 /* PAThumbnailManager.h in CopyFiles */,
 				65AA051C0AA6DE31003E4E2F /* PAThumbnailItem.h in CopyFiles */,
 				65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */,
@@ -646,8 +643,6 @@
 		65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsGroupCell.m; sourceTree = "<group>"; };
 		65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsOutlineView.h; sourceTree = "<group>"; };
 		65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsOutlineView.m; sourceTree = "<group>"; };
-		65C8B5890AA5869000DC36EA /* ThreadWorker.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ThreadWorker.h; sourceTree = "<group>"; };
-		65C8B58A0AA5869000DC36EA /* ThreadWorker.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ThreadWorker.m; sourceTree = "<group>"; };
 		65CA80100AAEEF8A002117C0 /* PAFilterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilterButton.h; sourceTree = "<group>"; };
 		65CA80110AAEEF8A002117C0 /* PAFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilterButton.m; sourceTree = "<group>"; };
 		65D6ACBA0A89E1E800FDAC8A /* TabActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabActive.png; sourceTree = "<group>"; };
@@ -918,8 +913,6 @@
 				658ADEB70AF6432900063AE1 /* PALabel.m */,
 				484F71AB0A66722000D886E5 /* PAViewController.h */,
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
-				65C8B5890AA5869000DC36EA /* ThreadWorker.h */,
-				65C8B58A0AA5869000DC36EA /* ThreadWorker.m */,
 				48BFF6230B13420500C1A127 /* PADebugView.h */,
 				48BFF6240B13420500C1A127 /* PADebugView.m */,
 				4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */,
@@ -1842,7 +1835,6 @@
 				485016A50AA423FC00579C92 /* PASidebarTableColumn.m in Sources */,
 				483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */,
 				4832723E0AA42E8C003D98A6 /* PreferenceController.m in Sources */,
-				65C8B58C0AA5869000DC36EA /* ThreadWorker.m in Sources */,
 				657CBD780AA5C4A800701D47 /* PAThumbnailManager.m in Sources */,
 				65AA051D0AA6DE31003E4E2F /* PAThumbnailItem.m in Sources */,
 				65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */,
