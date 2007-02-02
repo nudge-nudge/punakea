@@ -538,6 +538,7 @@
 	{
 		[outlineView saveSelection];
 		
+		// TODO waterjoe
 		[[outlineView query] trashItems:draggedItems errorWindow:[outlineView window]];
 		
 		[self setDraggedItems:nil];
