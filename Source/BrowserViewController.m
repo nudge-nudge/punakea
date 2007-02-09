@@ -388,11 +388,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)tagsHaveChanged:(NSNotification*)notification
 {
-	NNTagChangeOperation changeOperation = [[[notification userInfo] objectForKey:NNTagOperation] intValue];
+	NSString *changeOperation = [[notification userInfo] objectForKey:NNTagOperation];
 	
 	if ([self state] == PABrowserViewControllerNormalState)
 	{
-		if (changeOperation == NNTagUseChangeOperation)
+		if ([changeOperation isEqualToString:NNTagUseChangeOperation])
 		{
 			[NSObject cancelPreviousPerformRequestsWithTarget:self
 													 selector:@selector(setVisibleTags:)
