@@ -67,6 +67,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 																	 options:0 
 																	 context:NULL];
 		
+		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
+																  forKeyPath:@"values.TagCloud.ClickCountWeight" 
+																	 options:0 
+																	 context:NULL];
+		
+		
 		[self setVisibleTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
 
@@ -92,6 +98,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
 																 forKeyPath:@"values.TagCloud.SortKey"];
+	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
+																 forKeyPath:@"values.TagCloud.ClickCountWeight"];
+	
 	[sortDescriptor release];
 	[mainController release];
 	[visibleTags release];
@@ -117,6 +126,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		NSMutableArray *currentVisibleTags = [visibleTags mutableCopy];
 		[self setVisibleTags:currentVisibleTags];
 		[currentVisibleTags release];
+	}
+	else if ([keyPath isEqualToString:@"values.TagCloud.ClickCountWeight"])
+	{
+		[self resetDisplayTags];
 	}
 }
 
@@ -420,6 +433,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark actions
+- (void)searchForTag:(NNTag*)aTag
+{
+	[[self mainController] handleTagActivation:aTag];
+}
+
 - (void)manageTags
 {
 	if ([[self mainController] isKindOfClass:[PATagManagementViewController class]])

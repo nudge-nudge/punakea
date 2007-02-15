@@ -69,7 +69,7 @@
 		[self newTaggableObjectsHaveBeenDropped];
 }
 
-#pragma mark tag field delegates
+#pragma mark sidebar delegates
 /**
 action called on dropping files to FileBox
  */
@@ -81,6 +81,24 @@ action called on dropping files to FileBox
 	NSWindow *taggerWindow = [taggerController window];
 	[taggerWindow makeKeyAndOrderFront:nil];
 	[taggerController addTaggableObjects:[fileBox objects]];
+}
+
+- (IBAction)tagClicked:(id)sender
+{
+	NNTag *tag;
+	
+	NSTableColumn *column = [[sender tableColumns] objectAtIndex:[sender clickedColumn]];
+	
+	if ([[column identifier] isEqualToString:@"popularTags"])
+	{
+		tag = [[popularTags arrangedObjects] objectAtIndex:[sender clickedRow]];
+	}
+	else if ([[column identifier] isEqualToString:@"recentTags"])
+	{
+		tag = [[recentTags arrangedObjects] objectAtIndex:[sender clickedRow]];
+	}
+	
+	[[[NSApplication sharedApplication] delegate] searchForTag:tag];
 }
 
 #pragma mark notifications

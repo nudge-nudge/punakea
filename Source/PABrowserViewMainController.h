@@ -39,6 +39,7 @@ abstract class, controller for everything except tagcloud in
 abstract, must overwrite
  */
 - (void)handleTagActivation:(NNTag*)tag;
+- (void)handleTagActivations:(NSArray*)someTags;
 - (id)delegate;
 - (void)setDelegate:(id)anObject;
 - (BOOL)isWorking;

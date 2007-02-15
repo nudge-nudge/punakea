@@ -2,10 +2,6 @@
 
 @interface Core (PrivateAPI)
 
-- (void)selectedTagsHaveChanged;
-- (void)relatedTagsHaveChanged;
-- (void)allTagsHaveChanged;
-- (NNTag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
 - (void)setupToolbar;
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 - (void)createManagedFilesDirIfNeeded;
@@ -14,6 +10,8 @@
 
 + (BOOL)wasLaunchedAsLoginItem;
 + (BOOL)wasLaunchedByProcess:(NSString*)creator;
+
+- (BOOL)appHasPreferences;
 
 @end
 
@@ -284,6 +282,12 @@
 - (IBAction)showDonationWebsite:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/donate"]];
+}
+
+- (IBAction)searchForTag:(NNTag*)aTag
+{
+	[self showBrowser:self];
+	[[browserController browserViewController] searchForTag:aTag];
 }
 
 #pragma mark NSApplication delegate

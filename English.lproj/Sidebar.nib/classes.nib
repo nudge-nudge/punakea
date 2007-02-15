@@ -15,6 +15,7 @@
         }, 
         {CLASS = PASidebarWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {
+            ACTIONS = {tagClicked = id; }; 
             CLASS = SidebarController; 
             LANGUAGE = ObjC; 
             OUTLETS = {

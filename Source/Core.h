@@ -45,6 +45,7 @@
 // mainmenu actions
 - (IBAction)showResults:(id)sender;
 - (IBAction)manageTags:(id)sender;
+- (IBAction)searchForTag:(NNTag*)aTag;
 - (IBAction)showPreferences:(id)sender;
 
 - (IBAction)openFiles:(id)sender;

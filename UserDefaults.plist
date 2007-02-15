@@ -40,6 +40,8 @@
 	</dict>
 	<key>SUScheduledCheckInterval</key>
 	<integer>86400</integer>
+	<key>TagCloud.ClickCountWeight</key>
+	<real>0.5</real>
 	<key>TagCloud.EyeCandy</key>
 	<false/>
 	<key>TagCloud.SortKey</key>

@@ -396,6 +396,7 @@ bound to visibleTags
 
 	NSMutableArray *viewsToKeep = [NSMutableArray array];
 	
+	
 	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
 	NSControl *subview;
 	

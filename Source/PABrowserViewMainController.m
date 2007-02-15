@@ -24,6 +24,11 @@
 	return;
 }
 
+- (void)handleTagActivations:(NSArray*)someTags
+{
+	return;
+}
+
 #pragma mark accessors
 - (NSView*)currentView
 {

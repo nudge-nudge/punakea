@@ -226,6 +226,12 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	}
 }
 
+- (void)handleTagActivations:(NSArray*)someTags
+{
+	// show edit menu for first tag
+	[self handleTagActivation:[someTags objectAtIndex:0]];
+}
+
 - (void)loadViewForTag:(NNTag*)tag
 {
 	NSView *sv;

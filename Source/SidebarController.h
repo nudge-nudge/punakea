@@ -32,4 +32,6 @@
 
 - (void)newTaggableObjectsHaveBeenDropped;
 
+- (IBAction)tagClicked:(id)sender;
+
 @end

@@ -160,6 +160,12 @@
 	[selectedTags addTag:tag];
 }
 
+- (void)handleTagActivations:(NSArray*)someTags
+{
+	[someTags makeObjectsPerformSelector:@selector(incrementClickCount)];
+	[selectedTags addTags:someTags];
+}
+
 - (void)reset
 {
 	[self clearSelectedTags:self];

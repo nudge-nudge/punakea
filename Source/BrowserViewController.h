@@ -85,6 +85,7 @@ is called when a tag is clicked
 - (IBAction)tagButtonClicked:(id)sender;
 - (IBAction)findFieldAction:(id)sender;
 
+- (void)searchForTags:(NSArray*)someTags;
 - (void)manageTags;
 - (void)showResults;
 
