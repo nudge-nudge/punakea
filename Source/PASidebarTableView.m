@@ -34,7 +34,14 @@ only works if parent window is a PASidebar
 	[[self window] mouseEvent];
 }
 
-#pragma mark drop highlighting
+#pragma mark drawing
+// do not use default highlight on clicking
+-(id)_highlightColorForCell:(NSCell *)cell
+{
+	return [NSColor colorWithDeviceRed:1.0 green:1.0 blue:1.0 alpha:0.85];
+}
+
+// draw black border on drop TODO
 -(void)_drawDropHighlightOnRow:(int)rowIndex 
 {
 	NSRect cellFrame = [self frameOfCellAtColumn:0 row:rowIndex];

@@ -33,7 +33,12 @@
 	[bezel fill];
 	
 	// Draw inner bezel
-	NSColor *innerBezelColor = bezelColor;
+	NSColor *innerBezelColor;
+	
+	if ([self isHighlighted])
+		 innerBezelColor = selectedBezelColor;
+	else
+		innerBezelColor = bezelColor;	
 
 	bezel = [NSBezierPath bezierPathWithRoundRectInRect:NSInsetRect(cellFrame, 1.0, 1.0) radius:20.0];
 	[innerBezelColor set];
@@ -78,7 +83,6 @@
 
 - (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	NSLog(@"highlight");
 	[self drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
