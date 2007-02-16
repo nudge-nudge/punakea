@@ -106,6 +106,7 @@
 		4860293C0AEE0AF600B7DC6F /* SLA.r in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4860293B0AEE0AF600B7DC6F /* SLA.r */; };
 		486063DE0AA0553000D9E103 /* PASidebarTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486063DC0AA0553000D9E103 /* PASidebarTableView.h */; };
 		486063DF0AA0553000D9E103 /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486063DD0AA0553000D9E103 /* PASidebarTableView.m */; };
+		4861774C0B85B3EC00A03CAA /* MenuBarIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 4861774B0B85B3EC00A03CAA /* MenuBarIcon.tif */; };
 		486DC7500ACD3B2D00BE0F54 /* PATagManagementViewMainView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */; };
 		486DC7510ACD3B2D00BE0F54 /* PATagManagementViewMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
@@ -513,6 +514,7 @@
 		4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAFilenamesDropDataHandler.m; path = ../../PAFilenamesDropDataHandler.m; sourceTree = "<group>"; };
 		4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAURLDropDataHandler.h; sourceTree = "<group>"; };
 		4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAURLDropDataHandler.m; sourceTree = "<group>"; };
+		4861774B0B85B3EC00A03CAA /* MenuBarIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIcon.tif; sourceTree = "<group>"; };
 		486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementViewMainView.h; sourceTree = "<group>"; };
 		486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementViewMainView.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
@@ -1036,6 +1038,14 @@
 			name = TagManagement;
 			sourceTree = "<group>";
 		};
+		486177430B85B3DC00A03CAA /* StatusItem */ = {
+			isa = PBXGroup;
+			children = (
+				4861774B0B85B3EC00A03CAA /* MenuBarIcon.tif */,
+			);
+			name = StatusItem;
+			sourceTree = "<group>";
+		};
 		4870698B0A0C930700A3ADE2 /* Type-Ahead Find */ = {
 			isa = PBXGroup;
 			children = (
@@ -1235,6 +1245,7 @@
 		6562A1D40996399100DBE7DB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				486177430B85B3DC00A03CAA /* StatusItem */,
 				658ADF5B0AF660EA00063AE1 /* Tag Management */,
 				65B78F310AF0DA2E00AF1102 /* Tagger */,
 				655377C50AAD8C3500C6376B /* Thumbnail Manager */,
@@ -1707,6 +1718,7 @@
 				65943F990AFA56AA00A8922F /* appicon.icns in Resources */,
 				48D954CB0B09073B00D69336 /* TagCloudPreferences.tiff in Resources */,
 				48CFDC320B2ED76A002282D9 /* UpdatePreferences.tiff in Resources */,
+				4861774C0B85B3EC00A03CAA /* MenuBarIcon.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

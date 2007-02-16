@@ -27,6 +27,8 @@
 	
 	IBOutlet SUUpdater		*updater;
 	
+	IBOutlet NSMenu			*statusMenu;
+	
 	NNTags					*globalTags;
 	
 	BrowserController		*browserController;
@@ -34,6 +36,8 @@
 	PreferenceController	*preferenceController;
 	
 	SidebarController		*sidebarController;
+	
+	NSStatusItem			*statusItem;
 	
 	NSNotificationCenter	*nc;
 	

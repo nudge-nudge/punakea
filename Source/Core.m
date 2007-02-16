@@ -49,6 +49,8 @@
 
 - (void)dealloc
 {
+	[statusMenu release];
+	
 	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
 																 forKeyPath:@"values.General.LoadSidebar"];
 	
@@ -73,9 +75,20 @@
 		[sidebarController window];
 	}
 	
+	if ([userDefaults boolForKey:@"General.LoadStatusItem"])
+	{
+		[self showStatusItem];
+	}
+	
 	// listen for sidebar pref changes
 	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
 															  forKeyPath:@"values.General.LoadSidebar" 
+																 options:0 
+																 context:NULL];
+
+	// listen for status item pref changes
+	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
+															  forKeyPath:@"values.General.LoadStatusItem" 
 																 options:0 
 																 context:NULL];
 	
@@ -99,6 +112,28 @@
 - (SUUpdater*)updater
 {
 	return updater;
+}
+
+- (void)showStatusItem
+{
+	// create status item
+	NSStatusBar *bar = [NSStatusBar systemStatusBar];
+	statusItem = [bar statusItemWithLength:NSVariableStatusItemLength];
+	[statusItem retain];
+	
+	// set images
+	[statusItem setImage:[NSImage imageNamed:@"MenuBarIcon"]];
+	
+	// set menu
+	[statusItem setMenu:statusMenu];
+}
+
+- (void)unloadStatusItem
+{
+	NSStatusBar *bar = [NSStatusBar systemStatusBar];
+	[bar removeStatusItem:statusItem];
+	[statusItem release];
+	statusItem = nil;
 }
 
 #pragma mark events
@@ -132,6 +167,13 @@
 				[sidebarController release];
 			}
 		}
+	}
+	else if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.LoadStatusItem"])
+	{
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"General.LoadStatusItem"])
+			[self showStatusItem];
+		else
+			[self unloadStatusItem];
 	}
 }			
 

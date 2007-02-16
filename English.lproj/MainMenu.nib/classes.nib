@@ -6,6 +6,7 @@
                 editTagsOnFiles = id; 
                 manageTags = id; 
                 openFiles = id; 
+                searchForTag = id; 
                 selectAll = id; 
                 showBrowser = id; 
                 showDonationWebsite = id; 
@@ -15,7 +16,7 @@
             }; 
             CLASS = Core; 
             LANGUAGE = ObjC; 
-            OUTLETS = {updater = SUUpdater; viewMenu = NSMenu; }; 
+            OUTLETS = {statusMenu = NSMenu; updater = SUUpdater; viewMenu = NSMenu; }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 

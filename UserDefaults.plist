@@ -6,6 +6,8 @@
 	<integer>1</integer>
 	<key>General.LoadSidebar</key>
 	<true/>
+	<key>General.LoadStatusItem</key>
+	<true/>
 	<key>General.ManageFiles</key>
 	<false/>
 	<key>General.ManagedFilesLocation</key>
