@@ -121,6 +121,7 @@
 		48893B110AF0A59900BA0B50 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Info.plist */; };
 		48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
 		48893B5A0AF0AB1600BA0B50 /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
+		4889D92B0B871DCE001F6901 /* MenuBarIconAlt.tif in Resources */ = {isa = PBXBuildFile; fileRef = 4889D92A0B871DCE001F6901 /* MenuBarIconAlt.tif */; };
 		488CBBDE0AC9674400F6D20E /* PABrowserViewMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488CBBDD0AC9674400F6D20E /* PABrowserViewMainController.m */; };
 		488CBBE10AC9676C00F6D20E /* PAResultsViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488CBBDF0AC9676C00F6D20E /* PAResultsViewController.h */; };
 		488CBBE20AC9676C00F6D20E /* PAResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488CBBE00AC9676C00F6D20E /* PAResultsViewController.m */; };
@@ -524,6 +525,7 @@
 		4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadFind.h; sourceTree = "<group>"; };
 		4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadFind.m; sourceTree = "<group>"; };
 		4871792E0A5A619900A988DE /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/BrowserView.nib; sourceTree = "<group>"; };
+		4889D92A0B871DCE001F6901 /* MenuBarIconAlt.tif */ = {isa = PBXFileReference; lastKnownFileType = file; path = MenuBarIconAlt.tif; sourceTree = "<group>"; };
 		488CBBDD0AC9674400F6D20E /* PABrowserViewMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserViewMainController.m; sourceTree = "<group>"; };
 		488CBBDF0AC9676C00F6D20E /* PAResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsViewController.h; sourceTree = "<group>"; };
 		488CBBE00AC9676C00F6D20E /* PAResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsViewController.m; sourceTree = "<group>"; };
@@ -1042,6 +1044,7 @@
 			isa = PBXGroup;
 			children = (
 				4861774B0B85B3EC00A03CAA /* MenuBarIcon.tif */,
+				4889D92A0B871DCE001F6901 /* MenuBarIconAlt.tif */,
 			);
 			name = StatusItem;
 			sourceTree = "<group>";
@@ -1719,6 +1722,7 @@
 				48D954CB0B09073B00D69336 /* TagCloudPreferences.tiff in Resources */,
 				48CFDC320B2ED76A002282D9 /* UpdatePreferences.tiff in Resources */,
 				4861774C0B85B3EC00A03CAA /* MenuBarIcon.tif in Resources */,
+				4889D92B0B871DCE001F6901 /* MenuBarIconAlt.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

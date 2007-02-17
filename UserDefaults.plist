@@ -8,6 +8,8 @@
 	<true/>
 	<key>General.LoadStatusItem</key>
 	<true/>
+	<key>General.HideDockIcon</key>
+	<false/>
 	<key>General.ManageFiles</key>
 	<false/>
 	<key>General.ManagedFilesLocation</key>

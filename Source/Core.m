@@ -47,23 +47,11 @@
     return self;
 }
 
-- (void)dealloc
-{
-	[statusMenu release];
-	
-	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
-																 forKeyPath:@"values.General.LoadSidebar"];
-	
-	[preferenceController release];
-	[nc removeObserver:self];
-    [super dealloc];
-}
-
 - (void)awakeFromNib
 {
 	[NSApp setDelegate:self]; 
 	[self setupToolbar];
-		
+	
 	if (![Core wasLaunchedAsLoginItem])
 	{
 		[self showBrowser:self];
@@ -80,19 +68,42 @@
 		[self showStatusItem];
 	}
 	
+	NSUserDefaultsController *udc = [NSUserDefaultsController sharedUserDefaultsController];
+	
 	// listen for sidebar pref changes
-	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
-															  forKeyPath:@"values.General.LoadSidebar" 
-																 options:0 
-																 context:NULL];
-
+	[udc addObserver:self 
+		  forKeyPath:@"values.General.LoadSidebar" 
+			 options:0 
+			 context:NULL];
+	
 	// listen for status item pref changes
-	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
-															  forKeyPath:@"values.General.LoadStatusItem" 
-																 options:0 
-																 context:NULL];
+	[udc addObserver:self 
+		  forKeyPath:@"values.General.LoadStatusItem" 
+			 options:0 
+			 context:NULL];
+	
+	// listen for dock icon pref changes
+	[udc addObserver:self 
+		  forKeyPath:@"values.General.HideDockIcon" 
+			 options:0 
+			 context:NULL];
 	
 	[self createManagedFilesDirIfNeeded];
+}
+
+- (void)dealloc
+{
+	[statusMenu release];
+	
+	NSUserDefaultsController *udc = [NSUserDefaultsController sharedUserDefaultsController];
+	
+	[udc removeObserver:self forKeyPath:@"values.General.LoadSidebar"];
+	[udc removeObserver:self forKeyPath:@"values.General.LoadStatusItem"];
+	[udc removeObserver:self forKeyPath:@"values.General.HideDockIcon"];
+	
+	[preferenceController release];
+	[nc removeObserver:self];
+    [super dealloc];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)note 
@@ -123,6 +134,8 @@
 	
 	// set images
 	[statusItem setImage:[NSImage imageNamed:@"MenuBarIcon"]];
+	[statusItem setAlternateImage:[NSImage imageNamed:@"MenuBarIconAlt"]];
+	[statusItem setHighlightMode:YES];
 	
 	// set menu
 	[statusItem setMenu:statusMenu];
@@ -138,7 +151,7 @@
 
 #pragma mark events
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
+{	
 	if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.LoadSidebar"])
 	{
 		BOOL showSidebar = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.LoadSidebar"];
@@ -174,6 +187,13 @@
 			[self showStatusItem];
 		else
 			[self unloadStatusItem];
+	}
+	else if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.HideDockIcon"])
+	{
+		
+		// date needs to be modified so that LaunchServices recache the Info.plist file
+		[[NSFileManager defaultManager] changeFileAttributes:[NSDictionary dictionaryWithObject:[NSDate date] forKey:NSFileModificationDate]
+													  atPath:[[NSBundle mainBundle] bundlePath]];
 	}
 }			
 
@@ -486,6 +506,11 @@
 	}
 	
 	return hasPreferences;
+}
+
+- (void)setHideDockIcon:(BOOL)flag
+{
+	// TODO
 }
 
 @end
