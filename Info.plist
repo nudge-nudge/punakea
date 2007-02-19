@@ -72,6 +72,6 @@
 	<key>SUFeedURL</key> 
 	<string>http://download.nudgenudge.eu/punakea-appcast.xml</string>
 	<key>LSUIElement</key>
-	<string>1</string>
+	<string>0</string>
 </dict>
 </plist>
