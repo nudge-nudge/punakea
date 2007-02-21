@@ -2,8 +2,6 @@
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNTags.h"
 #import "NNTagging/NNTaggableObject.h"
-// TODO move this to NNTags
-#import "NNTagging/NNTagSave.h"
 
 #import "SidebarController.h"
 #import "BrowserController.h"

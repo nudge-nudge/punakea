@@ -30,8 +30,6 @@
 	PACollectionNotEmpty *collectionNotEmpty = [[[PACollectionNotEmpty alloc] init] autorelease];
 	[NSValueTransformer setValueTransformer:collectionNotEmpty
 									forName:@"PACollectionNotEmpty"];
-	
-	//[[PANotificationReceiver alloc] init];
 }
 
 - (id)init
@@ -82,12 +80,6 @@
 			 options:0 
 			 context:NULL];
 	
-	// listen for dock icon pref changes
-	[udc addObserver:self 
-		  forKeyPath:@"values.General.HideDockIcon" 
-			 options:0 
-			 context:NULL];
-	
 	[self createManagedFilesDirIfNeeded];
 }
 
@@ -99,7 +91,6 @@
 	
 	[udc removeObserver:self forKeyPath:@"values.General.LoadSidebar"];
 	[udc removeObserver:self forKeyPath:@"values.General.LoadStatusItem"];
-	[udc removeObserver:self forKeyPath:@"values.General.HideDockIcon"];
 	
 	[preferenceController release];
 	[nc removeObserver:self];
@@ -187,13 +178,6 @@
 			[self showStatusItem];
 		else
 			[self unloadStatusItem];
-	}
-	else if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.HideDockIcon"])
-	{
-		
-		// date needs to be modified so that LaunchServices recache the Info.plist file
-		[[NSFileManager defaultManager] changeFileAttributes:[NSDictionary dictionaryWithObject:[NSDate date] forKey:NSFileModificationDate]
-													  atPath:[[NSBundle mainBundle] bundlePath]];
 	}
 }			
 
@@ -407,7 +391,7 @@
 	[taggerWindow makeKeyAndOrderFront:nil];
 }
 
-#pragma mark debug
+//#pragma mark debug
 //- (void)keyDown:(NSEvent*)event 
 //{
 //	NSLog(@"NSApp keydown: %@",event);
@@ -506,11 +490,6 @@
 	}
 	
 	return hasPreferences;
-}
-
-- (void)setHideDockIcon:(BOOL)flag
-{
-	// TODO
 }
 
 @end
