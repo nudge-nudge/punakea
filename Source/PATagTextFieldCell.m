@@ -64,7 +64,11 @@
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	
-	[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+	if ([self isHighlighted])
+		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
+	else
+		[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+	
 	[fontAttributes setObject:[NSFont systemFontOfSize:14] forKey:NSFontAttributeName];
 	
 	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
