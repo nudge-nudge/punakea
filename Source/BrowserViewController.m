@@ -129,7 +129,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 	else if ([keyPath isEqualToString:@"values.TagCloud.ClickCountWeight"])
 	{
-		[self resetDisplayTags];
+		[self reset];
 	}
 }
 
