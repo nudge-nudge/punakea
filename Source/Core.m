@@ -3,6 +3,8 @@
 @interface Core (PrivateAPI)
 
 - (void)setupToolbar;
+- (void)showStatusItem;
+
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 - (void)createManagedFilesDirIfNeeded;
 
