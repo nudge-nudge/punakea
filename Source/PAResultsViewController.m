@@ -542,10 +542,13 @@
 {
 	if (draggedItems)
 	{
-		[outlineView saveSelection];
+		NSEnumerator *enumerator = [draggedItems objectEnumerator];
+		NNTaggableObject *item;
 		
-		// TODO waterjoe
-		[[outlineView query] trashItems:draggedItems errorWindow:[outlineView window]];
+		while(item = [enumerator nextObject])
+		{
+			[item moveToTrash:YES errorWindow:[view window]];
+		}
 		
 		[self setDraggedItems:nil];
 		

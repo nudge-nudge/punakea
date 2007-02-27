@@ -45,6 +45,7 @@
 	[bezel fill];
 	
 	// Draw icon
+	/*
 	NSRect iconFrame = cellFrame;
 	iconFrame.origin.x += iconFrame.size.width - 28;
 	iconFrame.origin.y += 7;
@@ -60,6 +61,7 @@
 	imageRect.size = [icon size];
 	
 	[icon drawAtPoint:iconFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	*/
 	
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
@@ -80,7 +82,7 @@
 	
 	[value	drawInRect:NSMakeRect(cellFrame.origin.x + 6,
 								  cellFrame.origin.y + 2,
-								  cellFrame.size.width - 44,
+								  cellFrame.size.width - 8,
 								  cellFrame.size.height - 4)
 	    withAttributes:fontAttributes];
 }
