@@ -159,8 +159,8 @@
 		6530FF370AF2229400D7A79A /* PATaggerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6530FF350AF2229400D7A79A /* PATaggerTableView.m */; };
 		6530FF7B0AF2265300D7A79A /* AddPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6530FF790AF2265300D7A79A /* AddPressed.tiff */; };
 		6530FF7C0AF2265300D7A79A /* Add.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6530FF7A0AF2265300D7A79A /* Add.tiff */; };
-		6534E0C60BA1B1B70015D466 /* MenuBarIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0C40BA1B1B70015D466 /* MenuBarIcon.tif */; };
-		6534E0C70BA1B1B70015D466 /* MenuBarIconAlt.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0C50BA1B1B70015D466 /* MenuBarIconAlt.tif */; };
+		6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */; };
+		6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */; };
 		653DCE1809E295C8009175E5 /* MDSimpleGrouping.strings in Resources */ = {isa = PBXBuildFile; fileRef = 653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */; };
 		6540FA550AEE0F5100EF51F3 /* PAResultsBookmarkCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */; };
 		6540FA560AEE0F5100EF51F3 /* PAResultsBookmarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */; };
@@ -565,8 +565,8 @@
 		6530FF350AF2229400D7A79A /* PATaggerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerTableView.m; sourceTree = "<group>"; };
 		6530FF790AF2265300D7A79A /* AddPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = AddPressed.tiff; sourceTree = "<group>"; };
 		6530FF7A0AF2265300D7A79A /* Add.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Add.tiff; sourceTree = "<group>"; };
-		6534E0C40BA1B1B70015D466 /* MenuBarIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIcon.tif; sourceTree = "<group>"; };
-		6534E0C50BA1B1B70015D466 /* MenuBarIconAlt.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIconAlt.tif; sourceTree = "<group>"; };
+		6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIcon.tif; sourceTree = "<group>"; };
+		6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIconAlt.tif; sourceTree = "<group>"; };
 		653DCE1409E295A1009175E5 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/MDSimpleGrouping.strings; sourceTree = "<group>"; };
 		6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsBookmarkCell.h; sourceTree = "<group>"; };
 		6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsBookmarkCell.m; sourceTree = "<group>"; };
@@ -1043,8 +1043,8 @@
 		486177430B85B3DC00A03CAA /* StatusItem */ = {
 			isa = PBXGroup;
 			children = (
-				6534E0C40BA1B1B70015D466 /* MenuBarIcon.tif */,
-				6534E0C50BA1B1B70015D466 /* MenuBarIconAlt.tif */,
+				6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */,
+				6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */,
 			);
 			name = StatusItem;
 			sourceTree = "<group>";
@@ -1721,8 +1721,8 @@
 				65943F990AFA56AA00A8922F /* appicon.icns in Resources */,
 				48D954CB0B09073B00D69336 /* TagCloudPreferences.tiff in Resources */,
 				48CFDC320B2ED76A002282D9 /* UpdatePreferences.tiff in Resources */,
-				6534E0C60BA1B1B70015D466 /* MenuBarIcon.tif in Resources */,
-				6534E0C70BA1B1B70015D466 /* MenuBarIconAlt.tif in Resources */,
+				6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */,
+				6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
