@@ -122,7 +122,7 @@
 {
 	// create status item
 	NSStatusBar *bar = [NSStatusBar systemStatusBar];
-	statusItem = [bar statusItemWithLength:NSVariableStatusItemLength];
+	statusItem = [bar statusItemWithLength:30.0];
 	[statusItem retain];
 	
 	// set images
