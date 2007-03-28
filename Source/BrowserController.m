@@ -28,7 +28,7 @@
 	[[self window] setFrameAutosaveName:@"punakea.browser"];
 	
 	browserViewController = [[BrowserViewController alloc] init];
-	[[self window] setContentView:[browserViewController view]];
+	[horizontalSplitView replaceSubview:mainPlaceholderView with:[browserViewController view]];
 	
 	// insert browserViewController in the responder chain
 	[browserViewController setNextResponder:[self window]];

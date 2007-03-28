@@ -218,6 +218,12 @@
 		65988C6C0A875A11000270E6 /* PAButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65988C6A0A875A11000270E6 /* PAButton.m */; };
 		65988C810A875C53000270E6 /* PAButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65988C7F0A875C53000270E6 /* PAButtonCell.h */; };
 		65988C820A875C53000270E6 /* PAButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65988C800A875C53000270E6 /* PAButtonCell.m */; };
+		659945C90BBAAA2400F146D2 /* PASourcePanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659945C70BBAAA2400F146D2 /* PASourcePanel.h */; };
+		659945CA0BBAAA2400F146D2 /* PASourcePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 659945C80BBAAA2400F146D2 /* PASourcePanel.m */; };
+		659945CF0BBAAC4000F146D2 /* PASourcePanelController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659945CD0BBAAC4000F146D2 /* PASourcePanelController.h */; };
+		659945D00BBAAC4000F146D2 /* PASourcePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659945CE0BBAAC4000F146D2 /* PASourcePanelController.m */; };
+		659945E90BBAB2F000F146D2 /* PASourceItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659945E70BBAB2F000F146D2 /* PASourceItem.h */; };
+		659945EA0BBAB2F000F146D2 /* PASourceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 659945E80BBAB2F000F146D2 /* PASourceItem.m */; };
 		659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659EBB4109D2D78300879091 /* PAImageButton.h */; };
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
 		659EBBB109D2DC3D00879091 /* MDIconViewOff-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */; };
@@ -409,6 +415,9 @@
 				658ADEB80AF6432900063AE1 /* PALabel.h in CopyFiles */,
 				48BFF6250B13420500C1A127 /* PADebugView.h in CopyFiles */,
 				4845CBA90B4A7B8F003D242C /* PANotificationReceiver.h in CopyFiles */,
+				659945C90BBAAA2400F146D2 /* PASourcePanel.h in CopyFiles */,
+				659945CF0BBAAC4000F146D2 /* PASourcePanelController.h in CopyFiles */,
+				659945E90BBAB2F000F146D2 /* PASourceItem.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +635,12 @@
 		65988C6A0A875A11000270E6 /* PAButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAButton.m; sourceTree = "<group>"; };
 		65988C7F0A875C53000270E6 /* PAButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAButtonCell.h; sourceTree = "<group>"; };
 		65988C800A875C53000270E6 /* PAButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAButtonCell.m; sourceTree = "<group>"; };
+		659945C70BBAAA2400F146D2 /* PASourcePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASourcePanel.h; sourceTree = "<group>"; };
+		659945C80BBAAA2400F146D2 /* PASourcePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASourcePanel.m; sourceTree = "<group>"; };
+		659945CD0BBAAC4000F146D2 /* PASourcePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASourcePanelController.h; sourceTree = "<group>"; };
+		659945CE0BBAAC4000F146D2 /* PASourcePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASourcePanelController.m; sourceTree = "<group>"; };
+		659945E70BBAB2F000F146D2 /* PASourceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASourceItem.h; sourceTree = "<group>"; };
+		659945E80BBAB2F000F146D2 /* PASourceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASourceItem.m; sourceTree = "<group>"; };
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
 		659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOff-1.tiff"; sourceTree = "<group>"; };
@@ -864,6 +879,7 @@
 				484003C90A9B3A6500C0AD99 /* TypeAheadView */,
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
 				6588132C09DDCA7300428B83 /* ResultsView */,
+				659945C60BBAA9ED00F146D2 /* SourcePanel */,
 				484F717E0A666D4B00D886E5 /* TagManagement */,
 				48D16FED0A5A6468006C667B /* BrowserController.h */,
 				48D16FEE0A5A6468006C667B /* BrowserController.m */,
@@ -1343,6 +1359,19 @@
 				655563A10A50672A0050104E /* stop.tif */,
 			);
 			name = SelectedTagsView;
+			sourceTree = "<group>";
+		};
+		659945C60BBAA9ED00F146D2 /* SourcePanel */ = {
+			isa = PBXGroup;
+			children = (
+				659945E70BBAB2F000F146D2 /* PASourceItem.h */,
+				659945E80BBAB2F000F146D2 /* PASourceItem.m */,
+				659945C70BBAAA2400F146D2 /* PASourcePanel.h */,
+				659945C80BBAAA2400F146D2 /* PASourcePanel.m */,
+				659945CD0BBAAC4000F146D2 /* PASourcePanelController.h */,
+				659945CE0BBAAC4000F146D2 /* PASourcePanelController.m */,
+			);
+			name = SourcePanel;
 			sourceTree = "<group>";
 		};
 		65A4079109B9D53200B151F4 /* ResultsView */ = {
@@ -1877,6 +1906,9 @@
 				658ADEB90AF6432900063AE1 /* PALabel.m in Sources */,
 				48BFF6260B13420500C1A127 /* PADebugView.m in Sources */,
 				4845CBAA0B4A7B8F003D242C /* PANotificationReceiver.m in Sources */,
+				659945CA0BBAAA2400F146D2 /* PASourcePanel.m in Sources */,
+				659945D00BBAAC4000F146D2 /* PASourcePanelController.m in Sources */,
+				659945EA0BBAB2F000F146D2 /* PASourceItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,12 @@
 
 @interface BrowserController : NSWindowController 
 {
+	
 	BrowserViewController			*browserViewController;
+	
+	IBOutlet NSView					*mainPlaceholderView;
+	IBOutlet NSSplitView			*horizontalSplitView;
+
 }
 
 - (BrowserViewController*)browserViewController;

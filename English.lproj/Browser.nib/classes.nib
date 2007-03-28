@@ -1,6 +1,11 @@
 {
     IBClasses = (
-        {CLASS = BrowserController; LANGUAGE = ObjC; SUPERCLASS = NSWindowController; }, 
+        {
+            CLASS = BrowserController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {horizontalSplitView = NSSplitView; mainPlaceholderView = NSView; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
         {
             ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
             CLASS = BrowserViewController; 
@@ -24,6 +29,8 @@
             OUTLETS = {controller = Controller; }; 
             SUPERCLASS = NSMatrix; 
         }, 
+        {CLASS = PASourcePanel; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
+        {CLASS = PASourcePanelController; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             CLASS = PASubViewController; 
             LANGUAGE = ObjC; 
