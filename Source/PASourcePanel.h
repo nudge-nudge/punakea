@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PASourceItem.h"
 
 
 @interface PASourcePanel : NSOutlineView {

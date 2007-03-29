@@ -19,10 +19,17 @@
 		// Define Source Items
 		sourceItems = [[NSMutableArray alloc] init];
 		
+		PASourceItem *sourceGroup = [PASourceItem itemWithValue:@"TEST" displayName:@"Test"];
+		[sourceGroup setSelectable:NO];
+		[sourceGroup setHeading:YES];
+		
 		PASourceItem *sourceItem = [PASourceItem itemWithValue:@"LIBRARY" displayName:@"Library"];
-		[sourceItems addObject:sourceItem];
+		[sourceGroup addChild:sourceItem];
 		sourceItem = [PASourceItem itemWithValue:@"MANAGETAGS" displayName:@"Manage Tags"];
-		[sourceItems addObject:sourceItem];
+		[sourceGroup addChild:sourceItem];
+		
+		[sourceItems addObject:sourceGroup];
+		
 		sourceItem = [PASourceItem itemWithValue:@"FAVORITES" displayName:@"Favorites"];
 		[sourceItem setSelectable:NO];
 		[sourceItem setHeading:YES];
@@ -51,6 +58,8 @@
 	if(item == nil)
 	{
 		return [sourceItems objectAtIndex:idx];
+	} else if([item isKindOfClass:[PASourceItem class]]) {
+		return [[(PASourceItem *)item children] objectAtIndex:idx];
 	}
 	
 	return nil;
@@ -68,6 +77,8 @@
 	if(item == nil)
 	{
 		return [sourceItems count];
+	} else if([item isKindOfClass:[PASourceItem class]]) {
+		return [[item children] count];
 	}
 	
 	return 0;
@@ -120,6 +131,27 @@
 	}
 	
 	return 20.0;
+}
+
+- (void)     outlineView:(NSOutlineView *)ov
+  willDisplayOutlineCell:(id)cell
+	      forTableColumn:(NSTableColumn *)tableColumn
+                    item:(id)item
+{
+	// Hide default triangle
+	[cell setImage:[NSImage imageNamed:@"transparent"]];
+	[cell setAlternateImage:[NSImage imageNamed:@"transparent"]];
+}
+
+- (BOOL)outlineView:(NSOutlineView *)ov shouldCollapseItem:(id)item
+{
+	if([item isKindOfClass:[PASourceItem class]] &&
+	   [(PASourceItem *)item isSelectable])
+	{
+		return YES;
+	}
+	
+	return NO;
 }
 
 @end

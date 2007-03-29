@@ -16,6 +16,8 @@
 {
 	if (self = [super init])
 	{
+		children = [[NSMutableArray alloc] init];
+		
 		[self setValue:@""];
 		[self setDisplayName:@""];
 		[self setSelectable:YES];
@@ -35,6 +37,7 @@
 
 - (void)dealloc
 {
+	[children release];
 	[super dealloc];
 }
 
@@ -71,7 +74,16 @@
 	[newItem setDisplayName:[self displayName]];
 	[newItem setSelectable:[self isSelectable]];
 	
+	newItem->children = [children copy];
+	
 	return [newItem autorelease];
+}
+
+
+#pragma mark Actions
+- (void)addChild:(PASourceItem *)anItem
+{
+	[children addObject:anItem];
 }
 
 
@@ -116,6 +128,11 @@
 - (void)setHeading:(BOOL)flag
 {
 	heading = flag;
+}
+
+- (NSArray *)children
+{
+	return children;
 }
 
 @end

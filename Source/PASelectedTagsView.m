@@ -80,8 +80,7 @@ int const PADDING_TO_RIGHT = 60;
 
 	// Draw top and bottom borders
 	NSRect bounds = [self bounds];	
-	
-	
+		
 	NSBezierPath *path = [NSBezierPath bezierPath];
 	[path moveToPoint:NSMakePoint(0, bounds.size.height)];
 	[path lineToPoint:NSMakePoint(bounds.size.width, bounds.size.height)];

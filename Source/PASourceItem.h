@@ -16,6 +16,8 @@
 	BOOL					selectable;
 	BOOL					heading;
 	
+	NSMutableArray			*children;
+	
 }
 
 + (PASourceItem *)itemWithValue:(NSString *)aValue displayName:(NSString *)aDisplayName;
@@ -28,5 +30,8 @@
 - (void)setSelectable:(BOOL)flag;
 - (BOOL)isHeading;
 - (void)setHeading:(BOOL)flag;
+
+- (NSArray *)children;
+- (void)addChild:(PASourceItem *)anItem;
 
 @end

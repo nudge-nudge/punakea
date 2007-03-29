@@ -293,6 +293,16 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	dirtyRect.size.width = aRect.size.width;
 		
 	[backgroundImage drawInRect:dirtyRect fromRect:imageRect operation:NSCompositeCopy fraction:1.0];
+	
+	// Draw bottom border
+	NSRect bounds = [self bounds];		
+	
+	NSBezierPath *path = [NSBezierPath bezierPath];
+	[path moveToPoint:NSMakePoint(0, bounds.size.height)];
+	[path lineToPoint:NSMakePoint(bounds.size.width, bounds.size.height)];
+	[path closePath];
+	[[NSColor grayColor] set];	
+	[path stroke];
 
 	// Super
 	[super drawRect:aRect];

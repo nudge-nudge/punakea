@@ -66,4 +66,26 @@
 	return rect;
 }
 
+- (void)reloadData
+{
+	[super reloadData];
+	
+	// Expand all items and select first selectable item
+	BOOL selectableItemFound = NO;
+	
+	for(int row = 0; row < [self numberOfRows]; row++)
+	{
+		id item = [self itemAtRow:row];
+		[self expandItem:item expandChildren:YES];
+		
+		if(!selectableItemFound &&
+		   [item isKindOfClass:[PASourceItem class]] &&
+		   [(PASourceItem *)item isSelectable])
+		{
+			[self selectRow:row byExtendingSelection:NO];
+			selectableItemFound = YES;
+		}
+	}
+}
+
 @end
