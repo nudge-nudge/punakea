@@ -32,6 +32,7 @@
         }, 
         {CLASS = PASourcePanel; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {CLASS = PASourcePanelController; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PASplitView; LANGUAGE = ObjC; SUPERCLASS = NSSplitView; }, 
         {
             CLASS = PASubViewController; 
             LANGUAGE = ObjC; 

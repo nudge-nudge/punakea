@@ -252,6 +252,8 @@
 		65CB09450BBBBF8700799E25 /* PAGenericTableColumn.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */; };
 		65CB09460BBBBF8700799E25 /* PAGenericTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB09440BBBBF8700799E25 /* PAGenericTableColumn.m */; };
 		65CB0A0F0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif in Resources */ = {isa = PBXBuildFile; fileRef = 65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */; };
+		65CB0AAC0BBBE7E400799E25 /* PASplitView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB0AAA0BBBE7E400799E25 /* PASplitView.h */; };
+		65CB0AAD0BBBE7E400799E25 /* PASplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB0AAB0BBBE7E400799E25 /* PASplitView.m */; };
 		65D6ACBD0A89E1E800FDAC8A /* TabActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBA0A89E1E800FDAC8A /* TabActive.png */; };
 		65D6ACBE0A89E1E800FDAC8A /* TabHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBB0A89E1E800FDAC8A /* TabHover.png */; };
 		65D6ACBF0A89E1E800FDAC8A /* TabSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBC0A89E1E800FDAC8A /* TabSelected.png */; };
@@ -425,6 +427,7 @@
 				659945E90BBAB2F000F146D2 /* PASourceItem.h in CopyFiles */,
 				65CB093B0BBBBDA800799E25 /* PASourceItemCell.h in CopyFiles */,
 				65CB09450BBBBF8700799E25 /* PAGenericTableColumn.h in CopyFiles */,
+				65CB0AAC0BBBE7E400799E25 /* PASplitView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +679,8 @@
 		65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAGenericTableColumn.h; sourceTree = "<group>"; };
 		65CB09440BBBBF8700799E25 /* PAGenericTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAGenericTableColumn.m; sourceTree = "<group>"; };
 		65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SourcePanelSelectionGradient.tif; sourceTree = "<group>"; };
+		65CB0AAA0BBBE7E400799E25 /* PASplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASplitView.h; sourceTree = "<group>"; };
+		65CB0AAB0BBBE7E400799E25 /* PASplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASplitView.m; sourceTree = "<group>"; };
 		65D6ACBA0A89E1E800FDAC8A /* TabActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabActive.png; sourceTree = "<group>"; };
 		65D6ACBB0A89E1E800FDAC8A /* TabHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabHover.png; sourceTree = "<group>"; };
 		65D6ACBC0A89E1E800FDAC8A /* TabSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabSelected.png; sourceTree = "<group>"; };
@@ -933,24 +938,26 @@
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				65B78F1A0AF0D8D400AF1102 /* CTGradient.h */,
 				65B78F1B0AF0D8D400AF1102 /* CTGradient.m */,
+				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
+				65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */,
 				656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */,
 				656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */,
 				48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */,
 				48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */,
-				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
-				65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */,
+				48BFF6230B13420500C1A127 /* PADebugView.h */,
+				48BFF6240B13420500C1A127 /* PADebugView.m */,
 				48209CA50AB1BEED00F3CF21 /* PADropManager.h */,
 				48209CA60AB1BEED00F3CF21 /* PADropManager.m */,
 				65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */,
 				65CB09440BBBBF8700799E25 /* PAGenericTableColumn.m */,
 				658ADEB60AF6432900063AE1 /* PALabel.h */,
 				658ADEB70AF6432900063AE1 /* PALabel.m */,
-				484F71AB0A66722000D886E5 /* PAViewController.h */,
-				484F71AC0A66722000D886E5 /* PAViewController.m */,
-				48BFF6230B13420500C1A127 /* PADebugView.h */,
-				48BFF6240B13420500C1A127 /* PADebugView.m */,
 				4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */,
 				4845CBA80B4A7B8F003D242C /* PANotificationReceiver.m */,
+				65CB0AAA0BBBE7E400799E25 /* PASplitView.h */,
+				65CB0AAB0BBBE7E400799E25 /* PASplitView.m */,
+				484F71AB0A66722000D886E5 /* PAViewController.h */,
+				484F71AC0A66722000D886E5 /* PAViewController.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -1937,6 +1944,7 @@
 				659945EA0BBAB2F000F146D2 /* PASourceItem.m in Sources */,
 				65CB093C0BBBBDA800799E25 /* PASourceItemCell.m in Sources */,
 				65CB09460BBBBF8700799E25 /* PAGenericTableColumn.m in Sources */,
+				65CB0AAD0BBBE7E400799E25 /* PASplitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
