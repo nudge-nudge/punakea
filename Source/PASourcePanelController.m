@@ -25,6 +25,7 @@
 		[sourceItems addObject:sourceItem];
 		sourceItem = [PASourceItem itemWithValue:@"FAVORITES" displayName:@"Favorites"];
 		[sourceItem setSelectable:NO];
+		[sourceItem setHeading:YES];
 		[sourceItems addObject:sourceItem];
 	}
 	return self;
@@ -49,9 +50,7 @@
 {		
 	if(item == nil)
 	{
-		PASourceItem *sourceItem = [sourceItems objectAtIndex:idx];
-		 
-		return [sourceItem displayName];
+		return [sourceItems objectAtIndex:idx];
 	}
 	
 	return nil;
@@ -78,7 +77,49 @@
 #pragma mark Delegate
 - (BOOL)outlineView:(NSOutlineView *)ov shouldSelectItem:(id)item
 {
-	// todo
+	if([item isKindOfClass:[PASourceItem class]]) {
+		return [(PASourceItem *)item isSelectable];
+	}
+	
+	return YES;
+}
+
+- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+	NSOutlineView *ov = (NSOutlineView *)[notification object];
+	
+	id item = [ov itemAtRow:[ov selectedRow]];
+	
+	if([item isKindOfClass:[PASourceItem class]])
+	{		
+		PASourceItem *sourceItem = (PASourceItem *)item;
+		
+		//if([[sourceItem value] isEqualTo:@"LIBRARY"])
+			// todo
+		//else if([[sourceItem value] isEqualTo:@"MANAGETAGS"])
+			// todo
+	}
+}
+
+- (id)tableColumn:(NSTableColumn *)column
+	  inTableView:(NSTableView *)tableView
+   dataCellForRow:(int)row
+{
+	PASourceItemCell *cell = [[[PASourceItemCell alloc] initTextCell:@""] autorelease];
+		
+	return cell;
+}
+
+- (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
+{
+	if([item isKindOfClass:[PASourceItem class]])
+	{
+		PASourceItem *sourceItem = (PASourceItem *)item;
+		if([sourceItem isHeading])
+			return 25.0;
+	}
+	
+	return 20.0;
 }
 
 @end

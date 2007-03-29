@@ -14,6 +14,7 @@
 	NSString				*value;
 	NSString				*displayName;
 	BOOL					selectable;
+	BOOL					heading;
 	
 }
 
@@ -25,5 +26,7 @@
 - (void)setDisplayName:(NSString *)aString;
 - (BOOL)isSelectable;
 - (void)setSelectable:(BOOL)flag;
+- (BOOL)isHeading;
+- (void)setHeading:(BOOL)flag;
 
 @end

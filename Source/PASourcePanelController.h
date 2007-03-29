@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PASourceItem.h"
+#import "PASourceItemCell.h"
 
 
 @interface PASourcePanelController : NSObject {

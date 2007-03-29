@@ -247,6 +247,11 @@
 		65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */; };
 		65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CA80100AAEEF8A002117C0 /* PAFilterButton.h */; };
 		65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA80110AAEEF8A002117C0 /* PAFilterButton.m */; };
+		65CB093B0BBBBDA800799E25 /* PASourceItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB09390BBBBDA800799E25 /* PASourceItemCell.h */; };
+		65CB093C0BBBBDA800799E25 /* PASourceItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB093A0BBBBDA800799E25 /* PASourceItemCell.m */; };
+		65CB09450BBBBF8700799E25 /* PAGenericTableColumn.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */; };
+		65CB09460BBBBF8700799E25 /* PAGenericTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB09440BBBBF8700799E25 /* PAGenericTableColumn.m */; };
+		65CB0A0F0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif in Resources */ = {isa = PBXBuildFile; fileRef = 65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */; };
 		65D6ACBD0A89E1E800FDAC8A /* TabActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBA0A89E1E800FDAC8A /* TabActive.png */; };
 		65D6ACBE0A89E1E800FDAC8A /* TabHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBB0A89E1E800FDAC8A /* TabHover.png */; };
 		65D6ACBF0A89E1E800FDAC8A /* TabSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBC0A89E1E800FDAC8A /* TabSelected.png */; };
@@ -418,6 +423,8 @@
 				659945C90BBAAA2400F146D2 /* PASourcePanel.h in CopyFiles */,
 				659945CF0BBAAC4000F146D2 /* PASourcePanelController.h in CopyFiles */,
 				659945E90BBAB2F000F146D2 /* PASourceItem.h in CopyFiles */,
+				65CB093B0BBBBDA800799E25 /* PASourceItemCell.h in CopyFiles */,
+				65CB09450BBBBF8700799E25 /* PAGenericTableColumn.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +671,11 @@
 		65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsOutlineView.m; sourceTree = "<group>"; };
 		65CA80100AAEEF8A002117C0 /* PAFilterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilterButton.h; sourceTree = "<group>"; };
 		65CA80110AAEEF8A002117C0 /* PAFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilterButton.m; sourceTree = "<group>"; };
+		65CB09390BBBBDA800799E25 /* PASourceItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASourceItemCell.h; sourceTree = "<group>"; };
+		65CB093A0BBBBDA800799E25 /* PASourceItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASourceItemCell.m; sourceTree = "<group>"; };
+		65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAGenericTableColumn.h; sourceTree = "<group>"; };
+		65CB09440BBBBF8700799E25 /* PAGenericTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAGenericTableColumn.m; sourceTree = "<group>"; };
+		65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SourcePanelSelectionGradient.tif; sourceTree = "<group>"; };
 		65D6ACBA0A89E1E800FDAC8A /* TabActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabActive.png; sourceTree = "<group>"; };
 		65D6ACBB0A89E1E800FDAC8A /* TabHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabHover.png; sourceTree = "<group>"; };
 		65D6ACBC0A89E1E800FDAC8A /* TabSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabSelected.png; sourceTree = "<group>"; };
@@ -929,6 +941,8 @@
 				65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */,
 				48209CA50AB1BEED00F3CF21 /* PADropManager.h */,
 				48209CA60AB1BEED00F3CF21 /* PADropManager.m */,
+				65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */,
+				65CB09440BBBBF8700799E25 /* PAGenericTableColumn.m */,
 				658ADEB60AF6432900063AE1 /* PALabel.h */,
 				658ADEB70AF6432900063AE1 /* PALabel.m */,
 				484F71AB0A66722000D886E5 /* PAViewController.h */,
@@ -1264,6 +1278,7 @@
 		6562A1D40996399100DBE7DB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				65CB0A0D0BBBD4E200799E25 /* Source Panel */,
 				486177430B85B3DC00A03CAA /* StatusItem */,
 				658ADF5B0AF660EA00063AE1 /* Tag Management */,
 				65B78F310AF0DA2E00AF1102 /* Tagger */,
@@ -1366,6 +1381,8 @@
 			children = (
 				659945E70BBAB2F000F146D2 /* PASourceItem.h */,
 				659945E80BBAB2F000F146D2 /* PASourceItem.m */,
+				65CB09390BBBBDA800799E25 /* PASourceItemCell.h */,
+				65CB093A0BBBBDA800799E25 /* PASourceItemCell.m */,
 				659945C70BBAAA2400F146D2 /* PASourcePanel.h */,
 				659945C80BBAAA2400F146D2 /* PASourcePanel.m */,
 				659945CD0BBAAC4000F146D2 /* PASourcePanelController.h */,
@@ -1427,6 +1444,14 @@
 				65B78F320AF0DA4600AF1102 /* statusbar.tiff */,
 			);
 			name = Tagger;
+			sourceTree = "<group>";
+		};
+		65CB0A0D0BBBD4E200799E25 /* Source Panel */ = {
+			isa = PBXGroup;
+			children = (
+				65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */,
+			);
+			name = "Source Panel";
 			sourceTree = "<group>";
 		};
 		65D6ACC10A89E20300FDAC8A /* Custom Controls */ = {
@@ -1752,6 +1777,7 @@
 				48CFDC320B2ED76A002282D9 /* UpdatePreferences.tiff in Resources */,
 				6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */,
 				6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */,
+				65CB0A0F0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1909,6 +1935,8 @@
 				659945CA0BBAAA2400F146D2 /* PASourcePanel.m in Sources */,
 				659945D00BBAAC4000F146D2 /* PASourcePanelController.m in Sources */,
 				659945EA0BBAB2F000F146D2 /* PASourceItem.m in Sources */,
+				65CB093C0BBBBDA800799E25 /* PASourceItemCell.m in Sources */,
+				65CB09460BBBBF8700799E25 /* PAGenericTableColumn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,7 @@
 		[self setValue:@""];
 		[self setDisplayName:@""];
 		[self setSelectable:YES];
+		[self setHeading:NO];
 	}
 	return self;
 }
@@ -35,6 +36,42 @@
 - (void)dealloc
 {
 	[super dealloc];
+}
+
+
+#pragma mark Equality
+- (BOOL)isEqual:(id)other 
+{
+	return [self isEqualTo:other];
+}
+
+- (BOOL)isEqualTo:(id)other
+{
+	if (!other || ![other isKindOfClass:[self class]]) 
+        return NO;
+    if (other == self)
+        return YES;
+	
+    return [value isEqualTo:[other value]];
+}
+
+- (unsigned)hash 
+{
+	return [value hash];
+}
+
+
+#pragma mark Copying
+- (id)copyWithZone:(NSZone *)zone
+{
+	PASourceItem *newItem = [[PASourceItem alloc] init];
+	
+	// abstract class instance vars
+	[newItem setValue:[self value]];
+	[newItem setDisplayName:[self displayName]];
+	[newItem setSelectable:[self isSelectable]];
+	
+	return [newItem autorelease];
 }
 
 
@@ -69,6 +106,16 @@
 - (void)setSelectable:(BOOL)flag
 {
 	selectable = flag;
+}
+
+- (BOOL)isHeading
+{
+	return heading;
+}
+
+- (void)setHeading:(BOOL)flag
+{
+	heading = flag;
 }
 
 @end
