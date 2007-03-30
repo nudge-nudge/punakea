@@ -81,9 +81,14 @@
 
 
 #pragma mark Actions
-- (void)addChild:(PASourceItem *)anItem
+- (void)addChild:(id)anItem
 {
 	[children addObject:anItem];
+}
+
+- (void)insertChild:(id)anItem atIndex:(unsigned)idx;
+{
+	[children insertObject:anItem atIndex:idx];
 }
 
 

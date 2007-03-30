@@ -31,10 +31,23 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {		
+	// Get attributes for different types of items
+	NSString *displayName = nil;	
+	
+	if([item isKindOfClass:[NNTag class]])
+	{
+		displayName = [(NNTag *)item name];
+	} else {
+		// Assume this is a SourceItem
+		displayName = [(PASourceItem *)item displayName];
+	}
+	
+	
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	
-	if(![item isHeading]) 
+	if(!([item isKindOfClass:[PASourceItem class]] &&
+		 [item isHeading])) 
 	{
 		NSColor *textColor = [NSColor blackColor];
 		NSFont *font = [NSFont systemFontOfSize:11];
@@ -56,7 +69,7 @@
 		[fontAttributes setObject:font forKey:NSFontAttributeName];
 		
 		// Draw display name	
-		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[item displayName]
+		NSAttributedString *label = [[NSAttributedString alloc] initWithString:displayName
 																	attributes:fontAttributes];	
 		
 		[label drawInRect:NSMakeRect(cellFrame.origin.x,
@@ -73,7 +86,7 @@
 		[fontAttributes setObject:font forKey:NSFontAttributeName];
 		
 		// Draw display name	
-		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[[item displayName] uppercaseString]
+		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[displayName uppercaseString]
 																	attributes:fontAttributes];	
 		
 		[label drawInRect:NSMakeRect(cellFrame.origin.x,

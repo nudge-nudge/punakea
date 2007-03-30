@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PASourceItem.h"
+#import "NSBezierPathCategory.h"
 
 
 @interface PASourcePanel : NSOutlineView {

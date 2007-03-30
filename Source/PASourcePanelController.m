@@ -109,6 +109,10 @@
 			// todo
 		//else if([[sourceItem value] isEqualTo:@"MANAGETAGS"])
 			// todo
+	} else if([item isKindOfClass:[NNTag class]]){
+
+		//[st setSelectedTags:[NSArray arrayWithObject:item]];
+		
 	}
 }
 
@@ -152,6 +156,67 @@
 	}
 	
 	return NO;
+}
+
+
+#pragma mark Drag & Drop
+- (BOOL)outlineView:(NSOutlineView *)ov
+		 writeItems:(NSArray *)items 
+	   toPasteboard:(NSPasteboard *)pboard
+{
+    // No drag support yet	
+	return NO;
+}
+
+- (NSDragOperation)outlineView:(NSOutlineView *)ov 
+				  validateDrop:(id <NSDraggingInfo>)info 
+				  proposedItem:(id)item 
+			proposedChildIndex:(int)idx
+{
+	// Allow dragging only from tag button
+	if(![[info draggingSource] isMemberOfClass:[PATagButton class]])
+		return NSDragOperationNone;
+	
+	// retarget to whole outlineview
+	//[ov setDropItem:item dropChildIndex:NSOutlineViewDropOnItemIndex];
+	BOOL isDroppedOnItem = idx==NSOutlineViewDropOnItemIndex;
+	
+	if(!([item isKindOfClass:[PASourceItem class]] &&
+		 [[(PASourceItem *)item value] isEqualTo:@"FAVORITES"]))
+	{
+		// Allow dragging only to FAVORITES group
+		return NSDragOperationNone;
+	}
+	else 
+	{
+		// Deny adding duplicates
+		PATagButton *tagButton = [info draggingSource];
+		NNTag *tag = [tagButton genericTag];
+		
+		if([[(PASourceItem *)item children] containsObject:tag])
+			return NSDragOperationNone;
+	}
+
+	return NSDragOperationCopy;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)ov 
+		 acceptDrop:(id <NSDraggingInfo>)info 
+			   item:(id)item 
+		 childIndex:(int)idx
+{
+	PATagButton *tagButton = [info draggingSource];
+	NNTag *tag = [tagButton genericTag];
+	
+	PASourceItem *sourceItem = (PASourceItem *)item;
+	if(idx != -1)
+		[sourceItem insertChild:tag atIndex:idx];
+	else
+		[sourceItem addChild:tag];
+	
+	[ov reloadData];
+	
+    return YES;    
 }
 
 @end

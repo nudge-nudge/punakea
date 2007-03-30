@@ -8,11 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PASourceItem.h"
+#import "NNTagging/NNTag.h"
 
 
 @interface PASourceItemCell : NSTextFieldCell {
 
-	PASourceItem					*item;
+	id					*item;
 	
 }
 

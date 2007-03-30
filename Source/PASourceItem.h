@@ -22,6 +22,9 @@
 
 + (PASourceItem *)itemWithValue:(NSString *)aValue displayName:(NSString *)aDisplayName;
 
+- (void)addChild:(id)anItem;
+- (void)insertChild:(id)anItem atIndex:(unsigned)idx;
+
 - (NSString *)value;
 - (void)setValue:(NSString *)aString;
 - (NSString *)displayName;
@@ -32,6 +35,5 @@
 - (void)setHeading:(BOOL)flag;
 
 - (NSArray *)children;
-- (void)addChild:(PASourceItem *)anItem;
 
 @end

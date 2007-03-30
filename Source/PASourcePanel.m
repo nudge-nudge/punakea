@@ -14,6 +14,10 @@
 - (void)awakeFromNib
 {
 	[self setIntercellSpacing:NSZeroSize];
+	
+	[self registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+	[self setDraggingSourceOperationMask:NSDragOperationNone forLocal:NO];
+	[self setDraggingSourceOperationMask:NSDragOperationAll forLocal:YES];
 }
 
 #pragma mark Drawing
@@ -51,6 +55,35 @@
 	[backgroundImage drawInRect:rowRect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	
 	//[super highlightSelectionInClipRect:clipRect];
+}
+
+-(void)_drawDropHighlightOnRow:(int)rowIndex
+{
+	NSSize offset = NSMakeSize(3.0, 3.0);
+	
+	[self lockFocus];
+	
+	NSRect drawRect = [self rectOfRow:rowIndex];
+	
+	drawRect.size.width -= offset.width;
+	drawRect.origin.x += offset.width / 2.0;
+	
+	drawRect.size.height -= offset.height;
+	drawRect.origin.y += offset.height / 2.0;
+	
+	[[NSColor colorWithDeviceRed:(7.0/255.0) green:(82.0/255.0) blue:(215.0/255.0) alpha:1.0] set];
+	float lineWidth = [NSBezierPath defaultLineWidth];
+	[NSBezierPath setDefaultLineWidth:2.0];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRoundRectInRect:drawRect radius:4.0];
+	[path stroke];
+	
+	// Fill with 172,193,226
+	//[[NSColor colorWithDeviceRed:(172.0/255.0) green:(193.0/255.0) blue:(226.0/255.0) alpha:1.0] set];
+	//[path fill];
+	
+	[NSBezierPath setDefaultLineWidth:lineWidth];
+	
+	[self unlockFocus];
 }
 
 
