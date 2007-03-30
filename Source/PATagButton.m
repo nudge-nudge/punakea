@@ -6,7 +6,6 @@
 - (void)startDrag:(NSEvent *)event;
 
 - (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(float *)offsetX y:(float *)offsetY;
-- (NSString *)createSmartFolderInTempDir;
 
 @end
 
@@ -169,7 +168,7 @@ should be overridden according to apple docs
 
 - (void)startDrag:(NSEvent *)event
 {
-	NSString *smartFolder = [self createSmartFolderInTempDir];
+	NSString *smartFolder = [PASmartFolder smartFolderFilenameForTag:[self genericTag]];
 
 	NSMutableArray *fileList = [NSMutableArray arrayWithObject:smartFolder];
 
@@ -204,7 +203,7 @@ should be overridden according to apple docs
           slideBack:YES];
 	
 	// Delete smart folder from temp dir
-	[[NSFileManager defaultManager] removeFileAtPath:smartFolder handler:nil];
+	[PASmartFolder removeSmartFolderForTag:[self genericTag]];
 	
 	// Fire a custom mouse up event to break tracking loop as this is not done
 	// by dragImage automatically...
@@ -246,53 +245,6 @@ should be overridden according to apple docs
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag
 {
     return NSDragOperationCopy;
-}
-
-- (NSString *)createSmartFolderInTempDir
-{
-	NSMutableDictionary *sf = [NSMutableDictionary dictionary];
-	[sf setObject:[NSNumber numberWithInt:0] forKey:@"CompatibleVersion"];
-	
-	NSString *rawQuery = [[self genericTag] queryInSpotlightSyntax];	
-	[sf setObject:rawQuery forKey:@"RawQuery"];	
-	
-	// Search criteria are needed for editing the folder later on in Finder
-	NSMutableDictionary *criteria = [NSMutableDictionary dictionary];
-	
-	NSString *currentFolderPath = @"~";
-	NSMutableArray *currentFolderPathArray = [NSMutableArray arrayWithObject:[currentFolderPath stringByExpandingTildeInPath]];
-	[criteria setObject:currentFolderPathArray forKey:@"CurrentFolderPath"];
-	
-	[criteria setObject:[NSNumber numberWithLongLong:1396926573] forKey:@"FXScope"];
-	
-	NSMutableArray *scopeArrayOfPaths = [NSMutableArray arrayWithObject:@"kMDQueryScopeHome"];
-	[criteria setObject:scopeArrayOfPaths forKey:@"FXScopeArrayOfPaths"];
-	
-	NSMutableDictionary *criteriaSlice = [NSMutableDictionary dictionary];
-	[criteriaSlice setObject:@"kMDItemFinderComment" forKey:@"FXAttribute"];
-	[criteriaSlice setObject:@"Othr" forKey:@"FXSliceKind"];
-	[criteriaSlice setObject:@"S:**" forKey:@"Operator"];
-	
-	NSString *value = @"@";
-	[criteriaSlice setObject:[value stringByAppendingString:[[self title] stringByAppendingString:@";"]] forKey:@"Value"];
-	
-	NSMutableArray *criteriaSlices = [NSMutableArray arrayWithObject:criteriaSlice];
-	[criteria setObject:criteriaSlices forKey:@"FXCriteriaSlices"];
-	
-	[sf setObject:criteria forKey:@"SearchCriteria"];
-	
-	// Output file to temp dir
-	NSString *filename = NSTemporaryDirectory();
-	filename = [filename stringByAppendingPathComponent:[self title]];
-	filename = [filename stringByAppendingPathExtension:@"savedSearch"];
-	
-	NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithObject:[NSNumber numberWithBool:TRUE] forKey:NSFileExtensionHidden];
-
-    [[NSFileManager defaultManager] createFileAtPath:filename
-                                            contents:(NSData *)sf
-                                          attributes:attr]; 
-	
-	return filename;
 }
 
 @end

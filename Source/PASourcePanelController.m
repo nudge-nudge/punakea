@@ -164,7 +164,19 @@
 		 writeItems:(NSArray *)items 
 	   toPasteboard:(NSPasteboard *)pboard
 {
-    // No drag support yet	
+	// Allow only dragging of NNTags
+	/*if(![[items objectAtIndex:0] isKindOfClass:[NNTag class]])
+		return NO;
+	
+	NNTag *tag = [items objectAtIndex:0];
+	NSString *smartFolder = [PASmartFolder smartFolderFilenameForTag:tag];
+	
+	NSArray *itemList = [NSArray arrayWithObject:smartFolder];
+	
+	[pboard declareTypes:[NSArray arrayWithObject:NSFilenamesPboardType] owner:nil];
+	[pboard setPropertyList:itemList forType:NSFilenamesPboardType];
+	
+	return YES;*/
 	return NO;
 }
 
@@ -173,28 +185,50 @@
 				  proposedItem:(id)item 
 			proposedChildIndex:(int)idx
 {
-	// Allow dragging only from tag button
-	if(![[info draggingSource] isMemberOfClass:[PATagButton class]])
+	// Allow dragging only from PATagButton or an own item
+	if(!([[info draggingSource] isMemberOfClass:[PATagButton class]] ||
+		 [[info draggingSource] isMemberOfClass:[PASourceItem class]]))
 		return NSDragOperationNone;
 	
 	// retarget to whole outlineview
 	//[ov setDropItem:item dropChildIndex:NSOutlineViewDropOnItemIndex];
+	
 	BOOL isDroppedOnItem = idx==NSOutlineViewDropOnItemIndex;
 	
-	if(!([item isKindOfClass:[PASourceItem class]] &&
-		 [[(PASourceItem *)item value] isEqualTo:@"FAVORITES"]))
+	PASourceItem *sourceItem = (PASourceItem *)item;
+	
+	if(!([[sourceItem value] isEqualTo:@"FAVORITES"] ||
+		 [sourceItem isDescendantOfValue:@"FAVORITES"]))
 	{
 		// Allow dragging only to FAVORITES group
 		return NSDragOperationNone;
 	}
-	else 
+	else if([sourceItem isLeaf]) 
+	{
+		// Deny dragging to leafs
+		return NSDragOperationNone;
+	}
+	else
 	{
 		// Deny adding duplicates
-		PATagButton *tagButton = [info draggingSource];
-		NNTag *tag = [tagButton genericTag];
+		// Set drag action to MOVE if source is self (reordering of items)
 		
-		if([[(PASourceItem *)item children] containsObject:tag])
-			return NSDragOperationNone;
+		NNTag *tag = nil;
+		if([[info draggingSource] isMemberOfClass:[PATagButton class]])
+		{
+			PATagButton *tagButton = [info draggingSource];
+			tag = [tagButton genericTag];
+		} else {
+			tag = [info draggingSource];
+		}		
+		
+		if([sourceItem hasChildContainingObject:tag])
+		{
+		   if([[info draggingSource] isEqualTo:self])
+			   return NSDragOperationMove;
+			else
+				return NSDragOperationNone;
+		}
 	}
 
 	return NSDragOperationCopy;
@@ -209,12 +243,17 @@
 	NNTag *tag = [tagButton genericTag];
 	
 	PASourceItem *sourceItem = (PASourceItem *)item;
+	PASourceItem *newItem = [PASourceItem itemWithValue:[tag name] displayName:[tag name]];
+	[newItem setContainedObject:tag];
+	
 	if(idx != -1)
-		[sourceItem insertChild:tag atIndex:idx];
+		[sourceItem insertChild:newItem atIndex:idx];
 	else
-		[sourceItem addChild:tag];
+		[sourceItem addChild:newItem];
 	
 	[ov reloadData];
+	
+	// TODO: Delete smart folder if necessary
 	
     return YES;    
 }

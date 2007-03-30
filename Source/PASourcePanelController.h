@@ -10,8 +10,9 @@
 #import "PASourceItem.h"
 #import "PASourceItemCell.h"
 #import "PATagButton.h"
-#import "NNTagging/NNTag.h";
-#import "NNTagging/NNSelectedTags.h";
+#import "NNTagging/NNTag.h"
+#import "NNTagging/NNSelectedTags.h"
+#import "PASmartFolder.h"
 
 
 @interface PASourcePanelController : NSObject {

@@ -37,6 +37,7 @@
 
 - (void)dealloc
 {
+	if(containedObject) [containedObject release];
 	[children release];
 	[super dealloc];
 }
@@ -83,12 +84,66 @@
 #pragma mark Actions
 - (void)addChild:(id)anItem
 {
+	[anItem setParent:self];
 	[children addObject:anItem];
 }
 
 - (void)insertChild:(id)anItem atIndex:(unsigned)idx;
 {
+	[anItem setParent:self];
 	[children insertObject:anItem atIndex:idx];
+}
+
+- (BOOL)isDescendantOf:(PASourceItem *)anItem
+{
+	PASourceItem *thisParent = [self parent];
+	
+	while(thisParent)
+	{
+		if([thisParent isEqualTo:anItem])
+			return YES;
+		
+		thisParent = [thisParent parent];
+	}
+	
+	return NO;
+}
+
+- (BOOL)isDescendantOfValue:(NSString *)anItemValue
+{
+	PASourceItem *thisParent = [self parent];
+	
+	while(thisParent)
+	{
+		if([[thisParent value] isEqualTo:anItemValue])
+			return YES;
+		
+		thisParent = [thisParent parent];
+	}
+	
+	return NO;
+}
+
+- (BOOL)isLeaf
+{
+	if(![self containedObject])
+		return NO;
+		
+	return YES;
+}
+
+- (BOOL)hasChildContainingObject:(id)anObject
+{
+	NSEnumerator *enumerator = [[self children] objectEnumerator];
+	PASourceItem *child;
+	
+	while(child = [enumerator nextObject])
+	{
+		if([[child containedObject] isEqualTo:anObject])
+			return YES;
+	}
+	
+	return NO;
 }
 
 
@@ -133,6 +188,28 @@
 - (void)setHeading:(BOOL)flag
 {
 	heading = flag;
+}
+
+- (id)containedObject
+{
+	return containedObject;
+}
+
+- (void)setContainedObject:(id)anObject
+{
+	[containedObject release];
+	containedObject = [anObject retain];
+}
+
+- (PASourceItem *)parent
+{
+	return parent;
+}
+
+- (void)setParent:(PASourceItem *)parentItem
+{
+	[parent release];
+	parent = [parentItem retain];
 }
 
 - (NSArray *)children

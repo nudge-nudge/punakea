@@ -267,6 +267,8 @@
 		65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */; };
 		65F9B96309D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */; };
 		65F9B96409D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */; };
+		65FB5ADF0BBD4DD80024EE3C /* PASmartFolder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65FB5ADD0BBD4DD80024EE3C /* PASmartFolder.h */; };
+		65FB5AE00BBD4DD80024EE3C /* PASmartFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FB5ADE0BBD4DD80024EE3C /* PASmartFolder.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -428,6 +430,7 @@
 				65CB093B0BBBBDA800799E25 /* PASourceItemCell.h in CopyFiles */,
 				65CB09450BBBBF8700799E25 /* PAGenericTableColumn.h in CopyFiles */,
 				65CB0AAC0BBBE7E400799E25 /* PASplitView.h in CopyFiles */,
+				65FB5ADF0BBD4DD80024EE3C /* PASmartFolder.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,6 +696,8 @@
 		65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewPressed-1.tiff"; sourceTree = "<group>"; };
 		65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
 		65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
+		65FB5ADD0BBD4DD80024EE3C /* PASmartFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASmartFolder.h; sourceTree = "<group>"; };
+		65FB5ADE0BBD4DD80024EE3C /* PASmartFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASmartFolder.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Punakea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Punakea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -954,6 +959,8 @@
 				658ADEB70AF6432900063AE1 /* PALabel.m */,
 				4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */,
 				4845CBA80B4A7B8F003D242C /* PANotificationReceiver.m */,
+				65FB5ADD0BBD4DD80024EE3C /* PASmartFolder.h */,
+				65FB5ADE0BBD4DD80024EE3C /* PASmartFolder.m */,
 				65CB0AAA0BBBE7E400799E25 /* PASplitView.h */,
 				65CB0AAB0BBBE7E400799E25 /* PASplitView.m */,
 				484F71AB0A66722000D886E5 /* PAViewController.h */,
@@ -1945,6 +1952,7 @@
 				65CB093C0BBBBDA800799E25 /* PASourceItemCell.m in Sources */,
 				65CB09460BBBBF8700799E25 /* PAGenericTableColumn.m in Sources */,
 				65CB0AAD0BBBE7E400799E25 /* PASplitView.m in Sources */,
+				65FB5AE00BBD4DD80024EE3C /* PASmartFolder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

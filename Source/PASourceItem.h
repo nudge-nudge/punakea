@@ -16,6 +16,9 @@
 	BOOL					selectable;
 	BOOL					heading;
 	
+	id						containedObject;
+	PASourceItem			*parent;
+	
 	NSMutableArray			*children;
 	
 }
@@ -24,6 +27,10 @@
 
 - (void)addChild:(id)anItem;
 - (void)insertChild:(id)anItem atIndex:(unsigned)idx;
+- (BOOL)isDescendantOf:(PASourceItem *)anItem;
+- (BOOL)isDescendantOfValue:(NSString *)anItemValue;
+- (BOOL)isLeaf;
+- (BOOL)hasChildContainingObject:(id)anObject;
 
 - (NSString *)value;
 - (void)setValue:(NSString *)aString;
@@ -33,6 +40,11 @@
 - (void)setSelectable:(BOOL)flag;
 - (BOOL)isHeading;
 - (void)setHeading:(BOOL)flag;
+
+- (id)containedObject;
+- (void)setContainedObject:(id)anObject;
+- (PASourceItem *)parent;
+- (void)setParent:(PASourceItem *)parentItem;
 
 - (NSArray *)children;
 
