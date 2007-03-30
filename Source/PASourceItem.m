@@ -74,6 +74,8 @@
 	[newItem setValue:[self value]];
 	[newItem setDisplayName:[self displayName]];
 	[newItem setSelectable:[self isSelectable]];
+	[newItem setParent:[self parent]];
+	[newItem setContainedObject:[self containedObject]];
 	
 	newItem->children = [children copy];
 	
@@ -144,6 +146,13 @@
 	}
 	
 	return NO;
+}
+
+
+#pragma mark Misc
+- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)isLocal
+{
+	return NSDragOperationAll;
 }
 
 

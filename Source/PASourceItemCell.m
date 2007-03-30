@@ -30,19 +30,7 @@
 
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{		
-	// Get attributes for different types of items
-	NSString *displayName = nil;	
-	
-	if([item isKindOfClass:[NNTag class]])
-	{
-		displayName = [(NNTag *)item name];
-	} else {
-		// Assume this is a SourceItem
-		displayName = [(PASourceItem *)item displayName];
-	}
-	
-	
+{			
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	
@@ -69,7 +57,7 @@
 		[fontAttributes setObject:font forKey:NSFontAttributeName];
 		
 		// Draw display name	
-		NSAttributedString *label = [[NSAttributedString alloc] initWithString:displayName
+		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[item displayName]
 																	attributes:fontAttributes];	
 		
 		[label drawInRect:NSMakeRect(cellFrame.origin.x,
@@ -86,7 +74,7 @@
 		[fontAttributes setObject:font forKey:NSFontAttributeName];
 		
 		// Draw display name	
-		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[displayName uppercaseString]
+		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[[item displayName] uppercaseString]
 																	attributes:fontAttributes];	
 		
 		[label drawInRect:NSMakeRect(cellFrame.origin.x,

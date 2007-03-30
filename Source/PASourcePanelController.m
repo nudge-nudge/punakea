@@ -165,10 +165,13 @@
 	   toPasteboard:(NSPasteboard *)pboard
 {
 	// Allow only dragging of NNTags
-	/*if(![[items objectAtIndex:0] isKindOfClass:[NNTag class]])
+	
+	PASourceItem *sourceItem = [items objectAtIndex:0];
+	
+	if(![sourceItem containedObject])
 		return NO;
 	
-	NNTag *tag = [items objectAtIndex:0];
+	NNTag *tag = (NNTag *)[sourceItem containedObject];
 	NSString *smartFolder = [PASmartFolder smartFolderFilenameForTag:tag];
 	
 	NSArray *itemList = [NSArray arrayWithObject:smartFolder];
@@ -176,8 +179,7 @@
 	[pboard declareTypes:[NSArray arrayWithObject:NSFilenamesPboardType] owner:nil];
 	[pboard setPropertyList:itemList forType:NSFilenamesPboardType];
 	
-	return YES;*/
-	return NO;
+	return YES;
 }
 
 - (NSDragOperation)outlineView:(NSOutlineView *)ov 
@@ -224,7 +226,7 @@
 		
 		if([sourceItem hasChildContainingObject:tag])
 		{
-		   if([[info draggingSource] isEqualTo:self])
+		   if([[info draggingSource] isEqualTo:ov])
 			   return NSDragOperationMove;
 			else
 				return NSDragOperationNone;

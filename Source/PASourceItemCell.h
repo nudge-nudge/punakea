@@ -13,7 +13,7 @@
 
 @interface PASourceItemCell : NSTextFieldCell {
 
-	id					*item;
+	PASourceItem					*item;
 	
 }
 
