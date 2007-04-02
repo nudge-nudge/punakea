@@ -164,8 +164,10 @@
 		 writeItems:(NSArray *)items 
 	   toPasteboard:(NSPasteboard *)pboard
 {
-	// Allow only dragging of NNTags
+	// Weak temporary reference to draggedItems
+	draggedItems = items;
 	
+	// Currently we only support single selection mode
 	PASourceItem *sourceItem = [items objectAtIndex:0];
 	
 	if(![sourceItem containedObject])
@@ -189,7 +191,7 @@
 {
 	// Allow dragging only from PATagButton or an own item
 	if(!([[info draggingSource] isMemberOfClass:[PATagButton class]] ||
-		 [[info draggingSource] isMemberOfClass:[PASourceItem class]]))
+		 [info draggingSource] == ov))
 		return NSDragOperationNone;
 	
 	// retarget to whole outlineview
@@ -221,12 +223,12 @@
 			PATagButton *tagButton = [info draggingSource];
 			tag = [tagButton genericTag];
 		} else {
-			tag = [info draggingSource];
+			tag = [(PASourceItem *)[[[[info draggingSource] dataSource] draggedItems] objectAtIndex:0] containedObject];
 		}		
 		
 		if([sourceItem hasChildContainingObject:tag])
 		{
-		   if([[info draggingSource] isEqualTo:ov])
+		   if([info draggingSource] == ov)
 			   return NSDragOperationMove;
 			else
 				return NSDragOperationNone;
@@ -241,23 +243,58 @@
 			   item:(id)item 
 		 childIndex:(int)idx
 {
-	PATagButton *tagButton = [info draggingSource];
-	NNTag *tag = [tagButton genericTag];
+	NNTag *tag = nil;
+	if([[info draggingSource] isMemberOfClass:[PATagButton class]])
+	{
+		PATagButton *tagButton = [info draggingSource];
+		tag = [tagButton genericTag];
+	} else {
+		tag = [(PASourceItem *)[[[[info draggingSource] dataSource] draggedItems] objectAtIndex:0] containedObject];
+	}	
 	
 	PASourceItem *sourceItem = (PASourceItem *)item;
 	PASourceItem *newItem = [PASourceItem itemWithValue:[tag name] displayName:[tag name]];
 	[newItem setContainedObject:tag];
 	
-	if(idx != -1)
+	if(idx != -1 &&
+	   idx < [[sourceItem children] count])
 		[sourceItem insertChild:newItem atIndex:idx];
 	else
 		[sourceItem addChild:newItem];
 	
+	// If reordered item, delete the old one
+	if([sourceItem hasChildContainingObject:tag])
+	{
+		for(int i = 0; i < [[sourceItem children] count]; i++)
+		{
+			PASourceItem *thisItem = [[sourceItem children] objectAtIndex:i];
+			if([[thisItem value] isEqualTo:[newItem value]] &&
+			   thisItem != newItem)
+				[sourceItem removeChildAtIndex:i];
+		}
+	}
+	
+	// Propagate model changes to ui
+	id selectedItem = [ov itemAtRow:[ov selectedRow]];
+	
 	[ov reloadData];
+	
+	int newSelectedRow = [ov rowForItem:selectedItem];
+	if(newSelectedRow == -1)
+		newSelectedRow = [ov rowForItem:newItem];
+	
+	[ov selectRow:newSelectedRow byExtendingSelection:NO];
 	
 	// TODO: Delete smart folder if necessary
 	
     return YES;    
+}
+
+
+#pragma mark Accessors
+- (NSArray *)draggedItems
+{
+	return draggedItems;
 }
 
 @end

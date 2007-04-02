@@ -111,7 +111,8 @@
 		id item = [self itemAtRow:row];
 		[self expandItem:item expandChildren:YES];
 		
-		if(!selectableItemFound &&
+		if([self selectedRow] == 0 &&
+		   !selectableItemFound &&
 		   [item isKindOfClass:[PASourceItem class]] &&
 		   [(PASourceItem *)item isSelectable])
 		{

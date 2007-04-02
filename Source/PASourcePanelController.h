@@ -19,6 +19,10 @@
 
 	NSMutableArray				*sourceItems;
 	
+	NSArray						*draggedItems;
+	
 }
+
+- (NSArray *)draggedItems;
 
 @end

@@ -96,6 +96,23 @@
 	[children insertObject:anItem atIndex:idx];
 }
 
+- (void)removeChildWithValue:(NSString *)theValue
+{
+	for(unsigned i = 0; i < [children count]; i++)
+	{
+		if([[[children objectAtIndex:i] value] isEqualTo:theValue])
+		{
+			[children removeObjectAtIndex:i];
+			break;
+		}
+	}
+}
+
+- (void)removeChildAtIndex:(int)idx
+{
+	[children removeObjectAtIndex:idx];
+}
+
 - (BOOL)isDescendantOf:(PASourceItem *)anItem
 {
 	PASourceItem *thisParent = [self parent];
