@@ -71,15 +71,65 @@
 	drawRect.size.height -= offset.height;
 	drawRect.origin.y += offset.height / 2.0;
 	
-	[[NSColor colorWithDeviceRed:(7.0/255.0) green:(82.0/255.0) blue:(215.0/255.0) alpha:1.0] set];
-	float lineWidth = [NSBezierPath defaultLineWidth];
-	[NSBezierPath setDefaultLineWidth:2.0];
 	NSBezierPath *path = [NSBezierPath bezierPathWithRoundRectInRect:drawRect radius:4.0];
-	[path stroke];
+	
+	// Stroke
+	[[NSColor colorWithDeviceRed:(7.0/255.0) green:(82.0/255.0) blue:(215.0/255.0) alpha:1.0] set];
+	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
+	[path fill];
+	[[NSGraphicsContext currentContext] setShouldAntialias:YES];
 	
 	// Fill with 172,193,226
-	//[[NSColor colorWithDeviceRed:(172.0/255.0) green:(193.0/255.0) blue:(226.0/255.0) alpha:1.0] set];
-	//[path fill];
+	[[NSColor colorWithDeviceRed:(172.0/255.0) green:(193.0/255.0) blue:(226.0/255.0) alpha:1.0] set];
+	path = [NSBezierPath bezierPathWithRoundRectInRect:NSInsetRect(drawRect, 2.0, 2.0) radius:4.0];
+	[path fill];
+	
+	// Force drawing of content
+	[self drawRow:rowIndex clipRect:drawRect];
+	
+	[self unlockFocus];
+}
+
+- (void)_drawDropHighlightBetweenUpperRow:(int)inUpper andLowerRow:(int)inLower atOffset:(float)inOffset
+{	
+	[self lockFocus];
+	
+	// Remember lineWidth	float lineWidth = [NSBezierPath defaultLineWidth];
+	float lineWidth = [NSBezierPath defaultLineWidth];
+	[NSBezierPath setDefaultLineWidth:2.0];
+	
+	NSRect upperRowRect = [self rectOfRow:inUpper];
+	
+	NSRect upperFirstCellRect = [self frameOfCellAtColumn:0 row:inUpper];
+	NSRect lowerFirstCellRect = [self frameOfCellAtColumn:0 row:inLower];
+	
+	NSRect drawRect;
+	
+	// Ignore inOffset, x offset depends on where we are - we use frameOfCellAtColumn to determine it
+	if([self itemAtRow:inLower])
+		drawRect.origin.x = lowerFirstCellRect.origin.x;
+	else
+		drawRect.origin.x = upperFirstCellRect.origin.x;
+	
+	drawRect.origin.x - 2.0;													// connect to circle
+	drawRect.origin.y = upperRowRect.origin.y + upperRowRect.size.height - 1.0;	// exact mid position
+	drawRect.size.height = 2.0;													// 2px line height
+	drawRect.size.width = upperRowRect.size.width - drawRect.origin.x;
+	
+	[[NSColor colorWithDeviceRed:(7.0/255.0) green:(82.0/255.0) blue:(215.0/255.0) alpha:1.0] set];
+	
+	NSBezierPath *path = [NSBezierPath bezierPathWithRect:drawRect];
+	[path fill];
+	
+	// Draw circle
+	NSRect circleRect;
+	circleRect.origin.x = drawRect.origin.x - 6.0;
+	circleRect.origin.y = drawRect.origin.y - 2.0;
+	circleRect.size.width = 6.0;
+	circleRect.size.height = 6.0;
+	
+	path = [NSBezierPath bezierPathWithOvalInRect:circleRect];
+	[path stroke];
 	
 	[NSBezierPath setDefaultLineWidth:lineWidth];
 	

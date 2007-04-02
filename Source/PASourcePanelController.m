@@ -194,9 +194,6 @@
 		 [info draggingSource] == ov))
 		return NSDragOperationNone;
 	
-	// retarget to whole outlineview
-	//[ov setDropItem:item dropChildIndex:NSOutlineViewDropOnItemIndex];
-	
 	BOOL isDroppedOnItem = idx==NSOutlineViewDropOnItemIndex;
 	
 	PASourceItem *sourceItem = (PASourceItem *)item;
