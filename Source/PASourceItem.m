@@ -55,6 +55,8 @@
         return NO;
     if (other == self)
         return YES;
+	if(![containedObject isEqualTo:[other containedObject]])
+		return NO;
 	
     return [value isEqualTo:[other value]];
 }

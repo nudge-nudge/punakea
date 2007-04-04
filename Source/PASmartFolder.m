@@ -58,6 +58,13 @@
 	return filename;
 }
 
++ (NSString *)smartFolderFilenameForTagSet:(NNTagSet *)tagSet
+{
+	// TODO
+	
+	return [PASmartFolder smartFolderFilenameForTag:[[tagSet tags] objectAtIndex:0]];
+}
+
 + (void)removeSmartFolderForTag:(NNTag *)tag
 {
 	NSString *filename = NSTemporaryDirectory();

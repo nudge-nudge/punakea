@@ -173,8 +173,16 @@
 	if(![sourceItem containedObject])
 		return NO;
 	
-	NNTag *tag = (NNTag *)[sourceItem containedObject];
-	NSString *smartFolder = [PASmartFolder smartFolderFilenameForTag:tag];
+	NSString *smartFolder;
+	
+	if([[sourceItem containedObject] isKindOfClass:[NNTag class]])
+	{
+		NNTag *tag = (NNTag *)[sourceItem containedObject];
+		smartFolder = [PASmartFolder smartFolderFilenameForTag:tag];
+	} else {
+		NNTagSet *tagSet = (NNTagSet *)[sourceItem containedObject];
+		smartFolder = [PASmartFolder smartFolderFilenameForTagSet:tagSet];	
+	}
 	
 	NSArray *itemList = [NSArray arrayWithObject:smartFolder];
 	
@@ -204,9 +212,50 @@
 		// Allow dragging only to FAVORITES group
 		return NSDragOperationNone;
 	}
-	else if([sourceItem isLeaf]) 
+	
+	NNTag			*tag = nil;
+	NNTagSet		*tagSet = nil;
+	id				draggedObject = nil;
+	
+	if([[info draggingSource] isMemberOfClass:[PATagButton class]])
 	{
-		// Deny dragging to leafs
+		PATagButton *tagButton = [info draggingSource];
+		tag = [tagButton genericTag];
+		draggedObject = tag;
+	} else {
+		PASourceItem *draggedItem = [[[[info draggingSource] dataSource] draggedItems] objectAtIndex:0];
+		draggedObject = [draggedItem containedObject];
+		
+		if([draggedObject isKindOfClass:[NNTag class]])
+			tag = (NNTag *)draggedObject;
+		else
+			tagSet = (NNTagSet *)draggedObject;
+	}	
+	
+	if([sourceItem isLeaf]) 
+	{
+		// Allow dropping on leafs to create/extend tag sets 
+		if([[sourceItem containedObject] isKindOfClass:[NNTag class]])
+		{
+			NNTag *existingTag = (NNTag *)[sourceItem containedObject];
+			
+			if([existingTag isEqualTo:tag]) 
+			{
+				return NSDragOperationNone;
+			} else {
+				return NSDragOperationCopy;
+			}
+		} else {
+			NNTagSet *existingSet = (NNTagSet *)[sourceItem containedObject];
+			
+			if([existingSet containsTag:tag]) 
+			{
+				return NSDragOperationNone;
+			} else {
+				return NSDragOperationCopy;
+			}
+		}
+		
 		return NSDragOperationNone;
 	}
 	else
@@ -214,18 +263,9 @@
 		// Deny adding duplicates
 		// Set drag action to MOVE if source is self (reordering of items)
 		
-		NNTag *tag = nil;
-		if([[info draggingSource] isMemberOfClass:[PATagButton class]])
+		if([sourceItem hasChildContainingObject:draggedObject])
 		{
-			PATagButton *tagButton = [info draggingSource];
-			tag = [tagButton genericTag];
-		} else {
-			tag = [(PASourceItem *)[[[[info draggingSource] dataSource] draggedItems] objectAtIndex:0] containedObject];
-		}		
-		
-		if([sourceItem hasChildContainingObject:tag])
-		{
-		   if([info draggingSource] == ov)
+		   if([info draggingSource] == ov && !isDroppedOnItem)
 			   return NSDragOperationMove;
 			else
 				return NSDragOperationNone;
@@ -240,34 +280,106 @@
 			   item:(id)item 
 		 childIndex:(int)idx
 {
-	NNTag *tag = nil;
+	BOOL isDroppedOnItem = idx==NSOutlineViewDropOnItemIndex;
+	
+	NNTag		*tag = nil;
+	NNTagSet	*tagSet = nil;
+	id			draggedObject = nil;
+	
 	if([[info draggingSource] isMemberOfClass:[PATagButton class]])
 	{
 		PATagButton *tagButton = [info draggingSource];
 		tag = [tagButton genericTag];
+		draggedObject = tag;
 	} else {
-		tag = [(PASourceItem *)[[[[info draggingSource] dataSource] draggedItems] objectAtIndex:0] containedObject];
+		// We currently support only single selection
+		PASourceItem *draggedItem = [[[[info draggingSource] dataSource] draggedItems] objectAtIndex:0];
+		draggedObject = [draggedItem containedObject];
+		
+		if([draggedObject isKindOfClass:[NNTag class]])
+			tag = (NNTag *)draggedObject;
+		else
+			tagSet = (NNTagSet *)draggedObject;
 	}	
 	
-	PASourceItem *sourceItem = (PASourceItem *)item;
-	PASourceItem *newItem = [PASourceItem itemWithValue:[tag name] displayName:[tag name]];
-	[newItem setContainedObject:tag];
+	PASourceItem		*sourceItem = (PASourceItem *)item;
+	PASourceItem		*newItem = nil;
 	
-	if(idx != -1 &&
-	   idx < [[sourceItem children] count])
-		[sourceItem insertChild:newItem atIndex:idx];
-	else
-		[sourceItem addChild:newItem];
-	
-	// If reordered item, delete the old one
-	if([sourceItem hasChildContainingObject:tag])
+	if(isDroppedOnItem)
 	{
-		for(int i = 0; i < [[sourceItem children] count]; i++)
+		if([[sourceItem containedObject] isKindOfClass:[NNTag class]])
 		{
-			PASourceItem *thisItem = [[sourceItem children] objectAtIndex:i];
-			if([[thisItem value] isEqualTo:[newItem value]] &&
-			   thisItem != newItem)
-				[sourceItem removeChildAtIndex:i];
+			// Convert existing tag to set and add the dropped tag
+			
+			NNTag *existingTag = (NNTag *)[sourceItem containedObject];
+			
+			NSString *setName = [existingTag name];
+			setName = [setName stringByAppendingString:@", "];
+			setName = [setName stringByAppendingString:[tag name]];
+					
+			NNTagSet *tagSet = [NNTagSet setWithTags:[NSArray arrayWithObjects:existingTag, tag, nil] name:setName];
+			
+			[sourceItem setContainedObject:tagSet];
+			[sourceItem setDisplayName:setName];
+			[sourceItem setValue:setName];
+		}
+		else if ([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
+		{
+			// Add the dropped tag to the existing set
+			
+			NNTagSet *existingTagSet = (NNTagSet *)[sourceItem containedObject];
+			
+			NSString *setName = [sourceItem displayName];
+			setName = [setName stringByAppendingString:@", "];
+			setName = [setName stringByAppendingString:[tag name]];
+			
+			NNTagSet *tagSet = [NNTagSet setWithTags:[existingTagSet tags] name:setName];
+			[tagSet addTag:tag];
+				
+			[sourceItem setContainedObject:tagSet];
+			[sourceItem setDisplayName:setName];
+			[sourceItem setValue:setName];
+		}
+		else 
+		{
+			// Just add the dropped tag as a new item
+			
+			newItem = [PASourceItem itemWithValue:[tag name] displayName:[tag name]];
+			[newItem setContainedObject:tag];
+			
+			[sourceItem addChild:newItem];
+		}
+	}
+	else
+	{
+		// Insert the dropped tag or set at index idx
+		
+		NSString *name;
+		
+		if(tag)
+			name = [tag name];
+		else
+			name = [tagSet name];
+		
+		newItem = [PASourceItem itemWithValue:name displayName:name];		
+		[newItem setContainedObject:draggedObject];
+		
+		if(idx != -1 &&
+		   idx < [[sourceItem children] count])
+			[sourceItem insertChild:newItem atIndex:idx];
+		else
+			[sourceItem addChild:newItem];
+		
+		// If reordered item, delete the old one
+		if([sourceItem hasChildContainingObject:draggedObject])
+		{
+			for(int i = 0; i < [[sourceItem children] count]; i++)
+			{
+				PASourceItem *thisItem = [[sourceItem children] objectAtIndex:i];
+				if([[thisItem value] isEqualTo:[newItem value]] &&
+				   thisItem != newItem)
+					[sourceItem removeChildAtIndex:i];
+			}
 		}
 	}
 	

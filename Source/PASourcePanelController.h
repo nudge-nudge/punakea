@@ -11,6 +11,7 @@
 #import "PASourceItemCell.h"
 #import "PATagButton.h"
 #import "NNTagging/NNTag.h"
+#import "NNTagging/NNTagSet.h"
 #import "NNTagging/NNSelectedTags.h"
 #import "PASmartFolder.h"
 

@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNTag.h"
+#import "NNTagging/NNTagSet.h"
 
 
 @interface PASmartFolder : NSObject {
@@ -15,5 +16,6 @@
 }
 
 + (NSString *)smartFolderFilenameForTag:(NNTag *)tag;
++ (NSString *)smartFolderFilenameForTagSet:(NNTagSet *)tagSet;
 
 @end
