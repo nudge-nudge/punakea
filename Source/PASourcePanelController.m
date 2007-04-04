@@ -239,21 +239,25 @@
 		{
 			NNTag *existingTag = (NNTag *)[sourceItem containedObject];
 			
-			if([existingTag isEqualTo:tag]) 
+			if(tag)
 			{
-				return NSDragOperationNone;
+				if([existingTag isEqualTo:tag]) return NSDragOperationNone;
 			} else {
-				return NSDragOperationCopy;
+				if([tagSet containsTag:existingTag]) return NSDragOperationNone;
 			}
+		
+			return NSDragOperationCopy;
 		} else {
 			NNTagSet *existingSet = (NNTagSet *)[sourceItem containedObject];
 			
-			if([existingSet containsTag:tag]) 
+			if(tag) 
 			{
-				return NSDragOperationNone;
+				if([existingSet containsTag:tag]) return NSDragOperationNone;
 			} else {
-				return NSDragOperationCopy;
+				if([existingSet intersectsTagSet:tagSet]) return NSDragOperationNone;
 			}
+				
+			return NSDragOperationCopy;
 		}
 		
 		return NSDragOperationNone;
@@ -315,11 +319,25 @@
 			
 			NSString *setName = [existingTag name];
 			setName = [setName stringByAppendingString:@", "];
-			setName = [setName stringByAppendingString:[tag name]];
-					
-			NNTagSet *tagSet = [NNTagSet setWithTags:[NSArray arrayWithObjects:existingTag, tag, nil] name:setName];
 			
-			[sourceItem setContainedObject:tagSet];
+			if(tag)
+				setName = [setName stringByAppendingString:[tag name]];
+			else
+				setName = [setName stringByAppendingString:[tagSet name]];
+					
+			NNTagSet *newTagSet;
+			
+			if(tag)
+			{
+				newTagSet = [NNTagSet setWithTags:[NSArray arrayWithObjects:existingTag, tag, nil] name:setName];
+			} else {
+				NSMutableArray *newTags = [NSMutableArray arrayWithObject:existingTag];
+				[newTags addObjectsFromArray:[tagSet tags]];
+				
+				newTagSet = [NNTagSet setWithTags:newTags name:setName];
+			}
+			
+			[sourceItem setContainedObject:newTagSet];
 			[sourceItem setDisplayName:setName];
 			[sourceItem setValue:setName];
 		}
@@ -331,12 +349,20 @@
 			
 			NSString *setName = [sourceItem displayName];
 			setName = [setName stringByAppendingString:@", "];
-			setName = [setName stringByAppendingString:[tag name]];
 			
-			NNTagSet *tagSet = [NNTagSet setWithTags:[existingTagSet tags] name:setName];
-			[tagSet addTag:tag];
+			if(tag)
+				setName = [setName stringByAppendingString:[tag name]];
+			else
+				setName = [setName stringByAppendingString:[tagSet name]];
+			
+			NNTagSet *newTagSet = [NNTagSet setWithTags:[existingTagSet tags] name:setName];
+			
+			if(tag)
+				[newTagSet addTag:tag];
+			else
+				[newTagSet addTags:[tagSet tags]];
 				
-			[sourceItem setContainedObject:tagSet];
+			[sourceItem setContainedObject:newTagSet];
 			[sourceItem setDisplayName:setName];
 			[sourceItem setValue:setName];
 		}
