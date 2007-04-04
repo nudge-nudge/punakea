@@ -841,6 +841,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6572864C0BC427D1000034D2 /* Strings */,
 				48D75A250B01FA0300D13CAD /* Scripts */,
 				65943F980AFA56AA00A8922F /* appicon.icns */,
 				48F980700AEF5C9F003BA2DC /* DropHandlerPlugins */,
@@ -849,19 +850,15 @@
 				4871792D0A5A619900A988DE /* BrowserView.nib */,
 				4816340E0A5A48A1003B8EE4 /* Tagger.nib */,
 				65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */,
-				655B2ABE0ABFE8AC000A3AA4 /* FileManager.strings */,
 				6562A1D40996399100DBE7DB /* Images */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				65E7B0190994D02E00565251 /* MainMenu.nib */,
 				658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */,
 				65E7B01E0994D0AE00565251 /* Sidebar.nib */,
-				653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */,
 				484F71900A666F5A00D886E5 /* TagManagementView.nib */,
 				4832722B0AA42D19003D98A6 /* Preferences.nib */,
 				482B31130AC6C70D0071C33B /* ResultsView.nib */,
-				48B0F1C20ACBFA6200738053 /* Tags.strings */,
-				48B0F1D70ACC020800738053 /* Global.strings */,
 				485944A60AE4B41100AFB18F /* Credits.html */,
 			);
 			name = Resources;
@@ -1307,6 +1304,17 @@
 			);
 			name = Images;
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6572864C0BC427D1000034D2 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				655B2ABE0ABFE8AC000A3AA4 /* FileManager.strings */,
+				48B0F1D70ACC020800738053 /* Global.strings */,
+				653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */,
+				48B0F1C20ACBFA6200738053 /* Tags.strings */,
+			);
+			name = Strings;
 			sourceTree = "<group>";
 		};
 		657CBD740AA5C48E00701D47 /* Thumbnail Manager */ = {

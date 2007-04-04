@@ -101,18 +101,11 @@
 	
 	id item = [ov itemAtRow:[ov selectedRow]];
 	
-	if([item isKindOfClass:[PASourceItem class]])
-	{		
-		PASourceItem *sourceItem = (PASourceItem *)item;
+	PASourceItem *sourceItem = (PASourceItem *)item;
 		
-		//if([[sourceItem value] isEqualTo:@"LIBRARY"])
-			// todo
-		//else if([[sourceItem value] isEqualTo:@"MANAGETAGS"])
-			// todo
-	} else if([item isKindOfClass:[NNTag class]]){
-
-		//[st setSelectedTags:[NSArray arrayWithObject:item]];
-		
+	if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
+	{
+		NSLog(@"%@", [[sourceItem containedObject] tags]);
 	}
 }
 
@@ -254,7 +247,7 @@
 			{
 				if([existingSet containsTag:tag]) return NSDragOperationNone;
 			} else {
-				if([existingSet intersectsTagSet:tagSet]) return NSDragOperationNone;
+				if([[existingSet tags] isEqualTo:[tagSet tags]]) return NSDragOperationNone;
 			}
 				
 			return NSDragOperationCopy;
@@ -317,13 +310,7 @@
 			
 			NNTag *existingTag = (NNTag *)[sourceItem containedObject];
 			
-			NSString *setName = [existingTag name];
-			setName = [setName stringByAppendingString:@", "];
-			
-			if(tag)
-				setName = [setName stringByAppendingString:[tag name]];
-			else
-				setName = [setName stringByAppendingString:[tagSet name]];
+			NSString *setName = NSLocalizedStringFromTable(@"NEW_TAGSET",@"Tags",@"");
 					
 			NNTagSet *newTagSet;
 			
@@ -348,12 +335,6 @@
 			NNTagSet *existingTagSet = (NNTagSet *)[sourceItem containedObject];
 			
 			NSString *setName = [sourceItem displayName];
-			setName = [setName stringByAppendingString:@", "];
-			
-			if(tag)
-				setName = [setName stringByAppendingString:[tag name]];
-			else
-				setName = [setName stringByAppendingString:[tagSet name]];
 			
 			NNTagSet *newTagSet = [NNTagSet setWithTags:[existingTagSet tags] name:setName];
 			
@@ -363,8 +344,6 @@
 				[newTagSet addTags:[tagSet tags]];
 				
 			[sourceItem setContainedObject:newTagSet];
-			[sourceItem setDisplayName:setName];
-			[sourceItem setValue:setName];
 		}
 		else 
 		{
