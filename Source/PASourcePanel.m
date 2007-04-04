@@ -172,6 +172,22 @@
 	}
 }
 
+- (void)reloadDataAndSelectItemWithValue:(NSString *)value
+{
+	[super reloadData];
+	
+	for(int row = 0; row < [self numberOfRows]; row++)
+	{
+		PASourceItem *item = [self itemAtRow:row];
+		
+		if([[item value] isEqualTo:value])
+		{
+			[self selectRow:row byExtendingSelection:NO];
+			return;
+		}
+	}
+}
+
 
 #pragma mark Events
 - (void)keyDown:(NSEvent *)theEvent
@@ -179,12 +195,19 @@
 	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
 	
 	if([theEvent type] == NSKeyDown)
-	{						
+	{			
 		// Begin editing on Return or Enter
 		if((key == NSEnterCharacter || key == '\r') &&
 		   [[self selectedRowIndexes] count] == 1)
 		{
 			[self beginEditing];
+			return;
+		}
+		
+		// Remove editable item on Backspace
+		if(key == NSDeleteCharacter)
+		{
+			[self removeSelectedItem];
 			return;
 		}
 	}
@@ -194,6 +217,18 @@
 
 
 #pragma mark Editing
+- (void)removeSelectedItem
+{
+	PASourceItem *sourceItem = [self itemAtRow:[self selectedRow]];
+	
+	if(!(sourceItem && [sourceItem isEditable]))
+		return;
+	
+	[[sourceItem parent] removeChild:sourceItem];
+	
+	[self reloadDataAndSelectItemWithValue:@"LIBRARY"];
+}
+
 - (void)beginEditing
 {		
 	if(![[self selectedRowIndexes] count] == 1) return;

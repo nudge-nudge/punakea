@@ -100,6 +100,11 @@
 	[children insertObject:anItem atIndex:idx];
 }
 
+- (void)removeChild:(id)anItem
+{
+	[children removeObject:anItem];
+}
+
 - (void)removeChildWithValue:(NSString *)theValue
 {
 	for(unsigned i = 0; i < [children count]; i++)

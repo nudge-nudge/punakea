@@ -28,7 +28,9 @@
 
 - (void)addChild:(id)anItem;
 - (void)insertChild:(id)anItem atIndex:(unsigned)idx;
+- (void)removeChild:(id)anItem;
 - (void)removeChildWithValue:(NSString *)theValue;
+- (void)removeChildAtIndex:(int)idx;
 
 - (BOOL)isDescendantOf:(PASourceItem *)anItem;
 - (BOOL)isDescendantOfValue:(NSString *)anItemValue;

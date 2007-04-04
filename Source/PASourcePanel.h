@@ -15,4 +15,6 @@
 
 }
 
+- (void)reloadDataAndSelectItemWithValue:(NSString *)value;
+
 @end
