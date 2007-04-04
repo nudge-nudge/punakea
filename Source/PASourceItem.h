@@ -15,6 +15,7 @@
 	NSString				*displayName;
 	BOOL					selectable;
 	BOOL					heading;
+	BOOL					editable;
 	
 	id						containedObject;
 	PASourceItem			*parent;
@@ -42,6 +43,8 @@
 - (void)setSelectable:(BOOL)flag;
 - (BOOL)isHeading;
 - (void)setHeading:(BOOL)flag;
+- (BOOL)isEditable;
+- (void)setEditable:(BOOL)flag;
 
 - (id)containedObject;
 - (void)setContainedObject:(id)anObject;

@@ -22,6 +22,7 @@
 		[self setDisplayName:@""];
 		[self setSelectable:YES];
 		[self setHeading:NO];
+		[self setEditable:YES];
 	}
 	return self;
 }
@@ -76,6 +77,7 @@
 	[newItem setValue:[self value]];
 	[newItem setDisplayName:[self displayName]];
 	[newItem setSelectable:[self isSelectable]];
+	[newItem setEditable:[self isEditable]];
 	[newItem setParent:[self parent]];
 	[newItem setContainedObject:[self containedObject]];
 	
@@ -216,6 +218,18 @@
 - (void)setHeading:(BOOL)flag
 {
 	heading = flag;
+}
+
+- (BOOL)isEditable
+{
+	if(heading) return NO;
+	
+	return editable;
+}
+
+- (void)setEditable:(BOOL)flag
+{
+	editable = flag;
 }
 
 - (id)containedObject

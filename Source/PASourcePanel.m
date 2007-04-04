@@ -172,4 +172,108 @@
 	}
 }
 
+
+#pragma mark Events
+- (void)keyDown:(NSEvent *)theEvent
+{
+	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+	
+	if([theEvent type] == NSKeyDown)
+	{						
+		// Begin editing on Return or Enter
+		if((key == NSEnterCharacter || key == '\r') &&
+		   [[self selectedRowIndexes] count] == 1)
+		{
+			[self beginEditing];
+			return;
+		}
+	}
+	
+	[super keyDown:theEvent];
+}
+
+
+#pragma mark Editing
+- (void)beginEditing
+{		
+	if(![[self selectedRowIndexes] count] == 1) return;
+	
+	[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
+}
+
+- (void)cancelOperation:(id)sender
+{	
+	NSText *textView = [[self window] fieldEditor:NO forObject:self];
+	[textView setString:[[self itemAtRow:[self selectedRow]] displayName]];
+	
+	NSMutableDictionary *newUserInfo;
+	newUserInfo = [[NSMutableDictionary alloc] init];
+	[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+	
+	NSNotification *notification;
+	notification = [NSNotification notificationWithName:NSTextDidEndEditingNotification
+												 object:textView
+											   userInfo:newUserInfo];
+	
+	[self textDidEndEditing:notification];
+	
+	[newUserInfo release];
+	
+	[[self window] makeFirstResponder:self];
+}
+
+- (void)textDidChange:(NSNotification *)notification
+{
+	// Set text color to red if the new destination already exists
+	/*NNTaggableObject *taggableObject = [self itemAtRow:[self selectedRow]];
+	
+	NSText *textView = [notification object];
+	NSString *newName = [textView string];
+	
+	if(![taggableObject validateNewName:newName])
+		[textView setTextColor:[NSColor redColor]];
+	else 
+		[textView setTextColor:[NSColor textColor]];
+	
+	[self setNeedsDisplay:YES];*/
+}
+
+- (void)textDidEndEditing:(NSNotification *)notification
+{
+	NSText *textView = [notification object];
+	
+	// Force editing not to end if text color is red
+	/*if([[textView textColor] isEqualTo:[NSColor redColor]])
+	{
+		[[self window] makeFirstResponder:textView];
+		return;
+	}*/
+	
+	// Force editing to end after pressing the Return key
+	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
+	
+	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
+	
+	if(textMovement == NSReturnTextMovement)
+	{
+		NSMutableDictionary *newUserInfo;
+		newUserInfo = [[NSMutableDictionary alloc] initWithDictionary:[notification userInfo]];
+		[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+		
+		notification = [NSNotification notificationWithName:[notification name]
+													 object:[notification object]
+												   userInfo:newUserInfo];
+		
+		[super textDidEndEditing:notification];
+		
+		[newUserInfo release];
+		
+		[[self window] makeFirstResponder:self];
+	}
+	else
+	{
+		[super textDidEndEditing:notification];
+    }
+}
+
 @end

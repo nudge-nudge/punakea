@@ -24,8 +24,10 @@
 		[sourceGroup setHeading:YES];
 		
 		PASourceItem *sourceItem = [PASourceItem itemWithValue:@"LIBRARY" displayName:@"Library"];
+		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
 		sourceItem = [PASourceItem itemWithValue:@"MANAGETAGS" displayName:@"Manage Tags"];
+		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
 		
 		[sourceItems addObject:sourceGroup];
@@ -84,6 +86,16 @@
 	return 0;
 }
 
+- (void)outlineView:(NSOutlineView *)ov
+     setObjectValue:(id)object
+	 forTableColumn:(NSTableColumn *)tableColumn
+	         byItem:(id)item
+{
+	PASourceItem *sourceItem = (PASourceItem *)item;
+	
+	[sourceItem setDisplayName:(NSString *)object];
+}
+
 
 #pragma mark Delegate
 - (BOOL)outlineView:(NSOutlineView *)ov shouldSelectItem:(id)item
@@ -114,6 +126,9 @@
    dataCellForRow:(int)row
 {
 	PASourceItemCell *cell = [[[PASourceItemCell alloc] initTextCell:@""] autorelease];
+	
+	PASourceItem *sourceItem = (PASourceItem *)[(NSOutlineView *)tableView itemAtRow:row];
+	if([sourceItem isEditable]) [cell setEditable:YES];
 		
 	return cell;
 }
@@ -304,46 +319,81 @@
 	
 	if(isDroppedOnItem)
 	{
+		NNTag		*existingTag = nil;
+		NNTagSet	*existingTagSet = nil;
+		
 		if([[sourceItem containedObject] isKindOfClass:[NNTag class]])
+			existingTag = (NNTag *)[sourceItem containedObject];
+		
+		if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
+			existingTagSet = (NNTagSet *)[sourceItem containedObject];
+		
+		if(existingTag || existingTagSet)
 		{
-			// Convert existing tag to set and add the dropped tag
+			NSString *setName = [sourceItem displayName];
 			
-			NNTag *existingTag = (NNTag *)[sourceItem containedObject];
+			// Determine default display name for existing tag or set
+			NSString *defaultSetName = nil;			
+			if(existingTag)
+			{
+				defaultSetName = [existingTag name];
+			} else {
+				defaultSetName = @"";
+				NSEnumerator *enumerator = [[existingTagSet tags] objectEnumerator];
+				NNTag *nextTag;
+				while(nextTag = [enumerator nextObject])
+				{
+					if([defaultSetName isNotEqualTo:@""]) 
+						defaultSetName = [defaultSetName stringByAppendingString:@", "];
+					defaultSetName = [defaultSetName stringByAppendingString:[nextTag name]];
+				}
+			}
 			
-			NSString *setName = NSLocalizedStringFromTable(@"NEW_TAGSET",@"Tags",@"");
+			if([[sourceItem displayName] isEqualTo:defaultSetName])
+			{
+				// SourceItem's name has not been modified yet,
+				// so we may add the new tag(s)
+				
+				if(tag)
+				{
+					setName = [setName stringByAppendingString:@", "];
+					setName = [setName stringByAppendingString:[tag name]];
+				} else {
+					NSEnumerator *enumerator = [[tagSet tags] objectEnumerator];
+					NNTag *nextTag;
+					while(nextTag = [enumerator nextObject])
+					{
+						setName = [setName stringByAppendingString:@", "];
+						setName = [setName stringByAppendingString:[nextTag name]];
+					}
+				}
+			}
 					
 			NNTagSet *newTagSet;
+			if(existingTagSet)
+				newTagSet = [NNTagSet setWithTags:[existingTagSet tags] name:setName];
 			
 			if(tag)
 			{
-				newTagSet = [NNTagSet setWithTags:[NSArray arrayWithObjects:existingTag, tag, nil] name:setName];
+				if(existingTag)
+					newTagSet = [NNTagSet setWithTags:[NSArray arrayWithObjects:existingTag, tag, nil] name:setName];
+				else
+					[newTagSet addTag:tag];
 			} else {
-				NSMutableArray *newTags = [NSMutableArray arrayWithObject:existingTag];
-				[newTags addObjectsFromArray:[tagSet tags]];
-				
-				newTagSet = [NNTagSet setWithTags:newTags name:setName];
+				if(existingTag)
+				{
+					NSMutableArray *newTags = [NSMutableArray arrayWithObject:existingTag];
+					[newTags addObjectsFromArray:[tagSet tags]];
+					
+					newTagSet = [NNTagSet setWithTags:newTags name:setName];
+				} else {
+					[newTagSet addTags:[tagSet tags]];
+				}
 			}
 			
 			[sourceItem setContainedObject:newTagSet];
 			[sourceItem setDisplayName:setName];
 			[sourceItem setValue:setName];
-		}
-		else if ([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
-		{
-			// Add the dropped tag to the existing set
-			
-			NNTagSet *existingTagSet = (NNTagSet *)[sourceItem containedObject];
-			
-			NSString *setName = [sourceItem displayName];
-			
-			NNTagSet *newTagSet = [NNTagSet setWithTags:[existingTagSet tags] name:setName];
-			
-			if(tag)
-				[newTagSet addTag:tag];
-			else
-				[newTagSet addTags:[tagSet tags]];
-				
-			[sourceItem setContainedObject:newTagSet];
 		}
 		else 
 		{
