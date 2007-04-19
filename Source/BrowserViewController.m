@@ -40,6 +40,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)updateSortDescriptor;
 
+- (void)setActivePrefixFilter:(NNStringPrefixFilter*)filter;
+- (NNStringPrefixFilter*)activePrefixFilter;
+
 @end
 
 @implementation BrowserViewController
@@ -58,8 +61,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		buffer = [[NSMutableString alloc] init];
 		
 		filterEngine = [[NNFilterEngine alloc] init];
-		[filterEngine addFilter:[[NNStringPrefixFilter alloc] initWithFilterPrefix:@"a"]];
-		[filterEngine addFilter:[[NNStringPrefixFilter alloc] initWithFilterPrefix:@"ap"]];
+		activePrefixFilter = nil;
 		
 		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
 	
@@ -108,6 +110,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[sortDescriptor release];
 	[mainController release];
 	[visibleTags release];
+	[activePrefixFilter release];
 	[filterEngine release];
 	[buffer release];
 	[typeAheadFind release];
@@ -216,6 +219,18 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		return YES;
 }
 
+- (void)setActivePrefixFilter:(NNStringPrefixFilter*)filter
+{
+	[filter retain];
+	[activePrefixFilter release];
+	activePrefixFilter = filter;
+}
+
+- (NNStringPrefixFilter*)activePrefixFilter
+{
+	return activePrefixFilter;
+}
+
 - (NSMutableArray*)visibleTags;
 {
 	return visibleTags;
@@ -234,23 +249,14 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setDisplayTags:(NSMutableArray*)someTags
 {
-	if ([self state] == PABrowserViewControllerTypeAheadFindState)
-		[self resetBuffer];
-	
-	[self setState:PABrowserViewControllerMainControllerState];
 	[self setVisibleTags:someTags];
-	[typeAheadFind setActiveTags:someTags];
 	[filterEngine setObjects:someTags];
 }
 
 - (void)resetDisplayTags
 {
-	if ([self state] == PABrowserViewControllerTypeAheadFindState)
-		[self resetBuffer];
-	
-	[self setState:PABrowserViewControllerNormalState];
 	[self setVisibleTags:[tags tags]];
-	[typeAheadFind setActiveTags:[tags tags]];
+	[filterEngine setObjects:[tags tags]];
 	[[[self view] window] makeFirstResponder:tagCloud];
 }
 
@@ -390,19 +396,33 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		if ([typeAheadView isHidden])
 		{
 			[self showTypeAheadView];
+		} 
+		
+		// remove old filter
+		if (activePrefixFilter)
+		{
+			[filterEngine removeFilter:[self activePrefixFilter]];
 		}
-		[self setVisibleTags:[typeAheadFind tagsForPrefix:buffer]];
-		[tagCloud selectUpperLeftButton];
+		NNStringPrefixFilter *newFilter = [[[NNStringPrefixFilter alloc] initWithFilterPrefix:buffer] autorelease];
+		[filterEngine addFilter:newFilter];
+		[self setActivePrefixFilter:newFilter];
 	}
 	else
 	{
 		if (![typeAheadView isHidden])
 		{
 			[self hideTypeAheadView];
-			[self setVisibleTags:[typeAheadFind activeTags]];
 			[[tagCloud window] makeFirstResponder:tagCloud];
 		}
+		
+		if (activePrefixFilter) 
+		{
+			[filterEngine removeFilter:[self activePrefixFilter]];
+		}		
+		[self setActivePrefixFilter:nil];
 	}
+	
+	[filterEngine setObjects:[tags tags]];
 }
 
 - (void)tagsHaveChanged:(NSNotification*)notification
