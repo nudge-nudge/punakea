@@ -57,6 +57,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		
 		buffer = [[NSMutableString alloc] init];
 		
+		filterEngine = [[NNFilterEngine alloc] init];
+		[filterEngine addFilter:[[NNStringPrefixFilter alloc] initWithFilterPrefix:@"a"]];
+		[filterEngine addFilter:[[NNStringPrefixFilter alloc] initWithFilterPrefix:@"ap"]];
+		
 		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
 	
 		sortKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"TagCloud.SortKey"];
@@ -73,7 +77,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 																	 context:NULL];
 		
 		
-		[self setVisibleTags:[tags tags]];
+		[self setDisplayTags:[tags tags]];
 		[typeAheadFind setActiveTags:[tags tags]];
 
 		[[NSNotificationCenter defaultCenter] addObserver:self 
@@ -104,6 +108,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[sortDescriptor release];
 	[mainController release];
 	[visibleTags release];
+	[filterEngine release];
 	[buffer release];
 	[typeAheadFind release];
 	[super dealloc];
@@ -235,6 +240,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setState:PABrowserViewControllerMainControllerState];
 	[self setVisibleTags:someTags];
 	[typeAheadFind setActiveTags:someTags];
+	[filterEngine setObjects:someTags];
 }
 
 - (void)resetDisplayTags

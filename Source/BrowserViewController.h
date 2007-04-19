@@ -16,6 +16,9 @@
 #import "PAResultsViewController.h"
 #import "TaggerController.h"
 
+#import "NNTagging/NNFilterEngine.h"
+#import "NNTagging/NNStringPrefixFilter.h"
+
 typedef enum _PABrowserViewControllerState {
 	PABrowserViewControllerNormalState = 1,
 	PABrowserViewControllerTypeAheadFindState = 2,
@@ -42,7 +45,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	
 	NNTags *tags;
 	
-	NSMutableArray *visibleTags; /**< holds tags for TagCloud */
+	NSMutableArray *visibleTags; /**< holds the (filtered) tags for TagCloud */
 	NNTag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
 	
 	IBOutlet PATypeAheadView *typeAheadView;
@@ -50,6 +53,8 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	PATypeAheadFind *typeAheadFind; /**< used for type ahead find */
 	NSString *buffer;
 			
+	NNFilterEngine *filterEngine;
+	
 	PATagCloudSortKey sortKey;
 	NSSortDescriptor *sortDescriptor;
 }
@@ -69,7 +74,7 @@ use this method to tell bvc that mainController doesn't need to
 
 /**
 highlights tag in tagcloud
- @param tag tag to highligh
+ @param tag tag to highlight
  */
 - (void)displaySelectedTag:(NNTag*)tag;
 - (void)removeActiveTagButton;
