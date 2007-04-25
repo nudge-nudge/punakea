@@ -191,6 +191,8 @@
 		657321080AF63DAE000B3943 /* RemovePressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 657321060AF63DAE000B3943 /* RemovePressed.tif */; };
 		657CBD770AA5C4A800701D47 /* PAThumbnailManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */; };
 		657CBD780AA5C4A800701D47 /* PAThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */; };
+		6581C3030BDFD51E0001455D /* PAStatusBar.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6581C3010BDFD51E0001455D /* PAStatusBar.h */; };
+		6581C3040BDFD51E0001455D /* PAStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6581C3020BDFD51E0001455D /* PAStatusBar.m */; };
 		65823B840A67CCFF0004DC39 /* NSBezierPathCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */; };
 		65823B850A67CCFF0004DC39 /* NSBezierPathCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
@@ -431,6 +433,7 @@
 				65CB09450BBBBF8700799E25 /* PAGenericTableColumn.h in CopyFiles */,
 				65CB0AAC0BBBE7E400799E25 /* PASplitView.h in CopyFiles */,
 				65FB5ADF0BBD4DD80024EE3C /* PASmartFolder.h in CopyFiles */,
+				6581C3030BDFD51E0001455D /* PAStatusBar.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +624,8 @@
 		657321060AF63DAE000B3943 /* RemovePressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RemovePressed.tif; sourceTree = "<group>"; };
 		657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAThumbnailManager.h; sourceTree = "<group>"; };
 		657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAThumbnailManager.m; sourceTree = "<group>"; };
+		6581C3010BDFD51E0001455D /* PAStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBar.h; sourceTree = "<group>"; };
+		6581C3020BDFD51E0001455D /* PAStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBar.m; sourceTree = "<group>"; };
 		65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPathCategory.h; sourceTree = "<group>"; };
 		65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPathCategory.m; sourceTree = "<group>"; };
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
@@ -1379,6 +1384,8 @@
 				65461C9409D0418F0076778E /* PAImageButtonCell.m */,
 				6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */,
 				6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */,
+				6581C3010BDFD51E0001455D /* PAStatusBar.h */,
+				6581C3020BDFD51E0001455D /* PAStatusBar.m */,
 				488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */,
 				488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */,
 			);
@@ -1961,6 +1968,7 @@
 				65CB09460BBBBF8700799E25 /* PAGenericTableColumn.m in Sources */,
 				65CB0AAD0BBBE7E400799E25 /* PASplitView.m in Sources */,
 				65FB5AE00BBD4DD80024EE3C /* PASmartFolder.m in Sources */,
+				6581C3040BDFD51E0001455D /* PAStatusBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

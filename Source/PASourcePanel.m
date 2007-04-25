@@ -296,4 +296,16 @@
 	}
 }
 
+
+#pragma mark Live Resizing
+- (BOOL) _wantsLiveResizeToUseCachedImage;
+{
+    return NO;
+}
+
+- (BOOL) _shouldLiveResizeUseCachedImage;
+{
+    return NO;
+}
+
 @end
