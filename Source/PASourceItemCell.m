@@ -34,8 +34,12 @@
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	
-	if(!([item isKindOfClass:[PASourceItem class]] &&
-		 [item isHeading])) 
+	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+	[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];		
+	
+	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];	
+	
+	if(![item isHeading]) 
 	{
 		NSColor *textColor = [NSColor blackColor];
 		NSFont *font = [NSFont systemFontOfSize:11];
@@ -68,7 +72,7 @@
 	else
 	{
 		NSColor *textColor = [NSColor colorWithDeviceRed:(57.0/255.0) green:(67.0/255.0) blue:(81.0/255.0) alpha:1.0];
-		NSFont *font = [NSFont systemFontOfSize:11];
+		NSFont *font = [NSFont systemFontOfSize:11];	
 		
 		[fontAttributes setObject:textColor forKey:NSForegroundColorAttributeName];	
 		[fontAttributes setObject:font forKey:NSFontAttributeName];
@@ -86,25 +90,57 @@
 
 
 #pragma mark Renaming Stuff
-- (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent
-{
-	NSLog(@"editWithFrame");
-}
-
 - (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
 {	
+	NSTextView *editor = (NSTextView *)textObj;
+	//[editor setFieldEditor:YES];
+	
 	NSRect frame = aRect;
-	/*frame.origin.x += 25;
-	frame.origin.y += 1;
-	frame.size.width -= 180 + 25; 
-	frame.size.height -= 3;*/
+	//frame.origin.x += 0;
+	frame.origin.y += 2;
+	frame.size.width -= 5;
 	
-	[super selectWithFrame:frame inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
+	[editor setBackgroundColor:[NSColor whiteColor]];
+	[editor setFocusRingType:NSFocusRingTypeNone];
 	
-	[textObj setFont:[NSFont systemFontOfSize:11]];
-	[textObj setString:[item displayName]];
+	[editor setFont:[NSFont systemFontOfSize:11]];
+	[editor setString:[item displayName]];
+	[editor setTextContainerInset:NSMakeSize(-3,1)];
 	
-	[textObj selectAll:self];
+	[editor setDelegate:controlView];
+	
+	[editor selectAll:self];
+	//[editor setSelectedRange:NSMakeRange([editor selectedRange].length, 0)];
+
+	[editor sizeToFit];
+	
+	//NSLayoutManager *layoutManager = [editor layoutManager];
+	//[layoutManager boundingRectForGlyphRange:NSMakeRange(0, [layoutManager numberOfGlyphs]) inTextContainer:[editor textContainer]];
+		
+	//frame.size.width = [layoutManager usedRectForTextContainer:[editor textContainer]].size.width;
+	frame.size.height = 16;
+	
+	[editor setFrame:frame];	
+	
+	// Set up scrollview
+	NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:frame];
+	
+	[scrollView setBorderType:NSNoBorder];	
+	[scrollView setHasVerticalScroller:NO];	
+	[scrollView setHasHorizontalScroller:NO];	
+	[scrollView setAutoresizingMask:NSViewWidthSizable];
+	
+	// Put scrollview and editor together
+	[scrollView setDocumentView:editor];
+	[editor scrollPoint:NSMakePoint(250.0, 0.0)];
+	
+	[[controlView enclosingScrollView] addSubview:scrollView];
+	
+	[[controlView window] makeFirstResponder:scrollView];
+	
+	[controlView lockFocus];
+	[controlView highlightSelectionInClipRect:aRect];
+	[controlView unlockFocus];
 }
 
 

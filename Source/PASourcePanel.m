@@ -44,7 +44,8 @@
 	imageRect.size.height = [backgroundImage size].height;
 	
 	// Decide which color to use
-	if([[[self window] firstResponder] isDescendantOf:self] &&
+	if(([[[self window] firstResponder] isDescendantOf:self] ||
+		[[[self window] firstResponder] isDescendantOf:[[self window] fieldEditor:NO forObject:self]]) &&
 	   [[self window] isKeyWindow]) 
 	{
 		imageRect.origin.x = 0.0;
@@ -60,8 +61,6 @@
 -(void)_drawDropHighlightOnRow:(int)rowIndex
 {
 	NSSize offset = NSMakeSize(3.0, 3.0);
-	
-	[self lockFocus];
 	
 	NSRect drawRect = [self rectOfRow:rowIndex];
 	
@@ -86,14 +85,10 @@
 	
 	// Force drawing of content
 	[self drawRow:rowIndex clipRect:drawRect];
-	
-	[self unlockFocus];
 }
 
 - (void)_drawDropHighlightBetweenUpperRow:(int)inUpper andLowerRow:(int)inLower atOffset:(float)inOffset
 {	
-	[self lockFocus];
-	
 	// Remember lineWidth	float lineWidth = [NSBezierPath defaultLineWidth];
 	float lineWidth = [NSBezierPath defaultLineWidth];
 	[NSBezierPath setDefaultLineWidth:2.0];
@@ -132,8 +127,6 @@
 	[path stroke];
 	
 	[NSBezierPath setDefaultLineWidth:lineWidth];
-	
-	[self unlockFocus];
 }
 
 
@@ -234,10 +227,25 @@
 	if(![[self selectedRowIndexes] count] == 1) return;
 	
 	[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
+	
+	NSTextView *editor = (NSTextView *)[[self window] fieldEditor:YES forObject:self];
+
+	[editor setMinSize:NSMakeSize(0.0, 16.0)];
+	[editor setMaxSize:NSMakeSize(FLT_MAX, 16.0)];
+
+	[editor setVerticallyResizable:NO];
+	[editor setHorizontallyResizable:YES];
+
+	[editor setAutoresizingMask:NSViewWidthSizable];
+
+	[[editor textContainer] setContainerSize:NSMakeSize(FLT_MAX, 16.0)];
+	[[editor textContainer] setWidthTracksTextView:NO];
 }
 
 - (void)cancelOperation:(id)sender
 {	
+	NSLog(@"cancel");
+	
 	NSText *textView = [[self window] fieldEditor:NO forObject:self];
 	[textView setString:[[self itemAtRow:[self selectedRow]] displayName]];
 	
@@ -258,24 +266,15 @@
 }
 
 - (void)textDidChange:(NSNotification *)notification
-{
-	// Set text color to red if the new destination already exists
-	/*NNTaggableObject *taggableObject = [self itemAtRow:[self selectedRow]];
-	
-	NSText *textView = [notification object];
-	NSString *newName = [textView string];
-	
-	if(![taggableObject validateNewName:newName])
-		[textView setTextColor:[NSColor redColor]];
-	else 
-		[textView setTextColor:[NSColor textColor]];
-	
-	[self setNeedsDisplay:YES];*/
+{		
+	NSTextView *editor = [notification object];
+	[editor setNeedsDisplay:YES];
+	[self setNeedsDisplay:YES];
 }
 
 - (void)textDidEndEditing:(NSNotification *)notification
-{
-	NSText *textView = [notification object];
+{	
+	NSTextView *editor = [notification object];
 	
 	// Force editing not to end if text color is red
 	/*if([[textView textColor] isEqualTo:[NSColor redColor]])
@@ -286,6 +285,9 @@
 	
 	// Force editing to end after pressing the Return key
 	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
+	
+	[[editor enclosingScrollView] removeFromSuperview];
+	[self setNeedsDisplay:YES];
 	
 	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
 	
