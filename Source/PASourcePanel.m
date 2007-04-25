@@ -44,8 +44,8 @@
 	imageRect.size.height = [backgroundImage size].height;
 	
 	// Decide which color to use
-	if(([[[self window] firstResponder] isDescendantOf:self] ||
-		[[[self window] firstResponder] isDescendantOf:[[self window] fieldEditor:NO forObject:self]]) &&
+	if(([[[self window] firstResponder] isEqualTo:self] ||
+		[[[self window] firstResponder] isEqualTo:[[self window] fieldEditor:NO forObject:self]]) &&
 	   [[self window] isKeyWindow]) 
 	{
 		imageRect.origin.x = 0.0;
@@ -230,32 +230,21 @@
 	
 	NSTextView *editor = (NSTextView *)[[self window] fieldEditor:YES forObject:self];
 
-	[editor setMinSize:NSMakeSize(0.0, 16.0)];
-	[editor setMaxSize:NSMakeSize(FLT_MAX, 16.0)];
-
-	[editor setVerticallyResizable:NO];
-	[editor setHorizontallyResizable:YES];
-
-	[editor setAutoresizingMask:NSViewWidthSizable];
-
 	[[editor textContainer] setContainerSize:NSMakeSize(FLT_MAX, 16.0)];
 	[[editor textContainer] setWidthTracksTextView:NO];
 }
 
 - (void)cancelOperation:(id)sender
 {	
-	NSLog(@"cancel");
+	NSTextView *editor = (NSTextView *)[[self window] fieldEditor:NO forObject:self];
+	[editor setString:[[self itemAtRow:[self selectedRow]] displayName]];
 	
-	NSText *textView = [[self window] fieldEditor:NO forObject:self];
-	[textView setString:[[self itemAtRow:[self selectedRow]] displayName]];
-	
-	NSMutableDictionary *newUserInfo;
-	newUserInfo = [[NSMutableDictionary alloc] init];
+	NSMutableDictionary *newUserInfo = [[NSMutableDictionary alloc] init];
 	[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 	
 	NSNotification *notification;
 	notification = [NSNotification notificationWithName:NSTextDidEndEditingNotification
-												 object:textView
+												 object:editor
 											   userInfo:newUserInfo];
 	
 	[self textDidEndEditing:notification];
@@ -283,10 +272,10 @@
 		return;
 	}*/
 	
-	// Force editing to end after pressing the Return key
-	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
-	
 	[[editor enclosingScrollView] removeFromSuperview];
+	
+	NSLog(@"%d", [self editedRow]);
+	
 	[self setNeedsDisplay:YES];
 	
 	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
@@ -307,10 +296,6 @@
 		
 		[[self window] makeFirstResponder:self];
 	}
-	else
-	{
-		[super textDidEndEditing:notification];
-    }
 }
 
 @end

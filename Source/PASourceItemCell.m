@@ -17,7 +17,7 @@
 	self = [super initTextCell:aText];
 	if (self)
 	{
-		// Nothing
+		// nothing yet
 	}	
 	return self;
 }
@@ -59,7 +59,7 @@
 		
 		[fontAttributes setObject:textColor forKey:NSForegroundColorAttributeName];	
 		[fontAttributes setObject:font forKey:NSFontAttributeName];
-		
+	
 		// Draw display name	
 		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[item displayName]
 																	attributes:fontAttributes];	
@@ -70,7 +70,7 @@
 									 cellFrame.size.height)];
 	} 
 	else
-	{
+	{		
 		NSColor *textColor = [NSColor colorWithDeviceRed:(57.0/255.0) green:(67.0/255.0) blue:(81.0/255.0) alpha:1.0];
 		NSFont *font = [NSFont systemFontOfSize:11];	
 		
@@ -91,7 +91,7 @@
 
 #pragma mark Renaming Stuff
 - (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
-{	
+{		
 	NSTextView *editor = (NSTextView *)textObj;
 	//[editor setFieldEditor:YES];
 	
@@ -122,6 +122,14 @@
 	
 	[editor setFrame:frame];	
 	
+	[editor setMinSize:NSMakeSize(0.0, 16.0)];
+	[editor setMaxSize:NSMakeSize(FLT_MAX, 16.0)];
+	
+	[editor setVerticallyResizable:NO];
+	[editor setHorizontallyResizable:YES];
+	
+	[editor setAutoresizingMask:NSViewWidthSizable];
+	
 	// Set up scrollview
 	NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:frame];
 	
@@ -134,13 +142,14 @@
 	[scrollView setDocumentView:editor];
 	[editor scrollPoint:NSMakePoint(250.0, 0.0)];
 	
-	[[controlView enclosingScrollView] addSubview:scrollView];
+	[controlView addSubview:scrollView];
 	
 	[[controlView window] makeFirstResponder:scrollView];
-	
-	[controlView lockFocus];
-	[controlView highlightSelectionInClipRect:aRect];
-	[controlView unlockFocus];
+}
+
+- (void)endEditing:(NSText *)textObj
+{
+	// nothing yet
 }
 
 

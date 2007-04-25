@@ -359,10 +359,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		}
 	}
 	// handle escape key (27)
-	else if (key == 27)
+	/*else if (key == 27)
 	{
 		[self reset];
-	}
+	}*/
 	else if ([alphanumericCharacterSet characterIsMember:key]) 
 	{
 		// only add to buffer if there are any tags, otherwise do nothing
