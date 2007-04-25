@@ -274,8 +274,6 @@
 	
 	[[editor enclosingScrollView] removeFromSuperview];
 	
-	NSLog(@"%d", [self editedRow]);
-	
 	[self setNeedsDisplay:YES];
 	
 	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];

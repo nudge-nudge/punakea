@@ -41,18 +41,18 @@
 	
 	if(![item isHeading]) 
 	{
-		NSColor *textColor = [NSColor blackColor];
-		NSFont *font = [NSFont systemFontOfSize:11];
+		NSColor *textColor = [NSColor whiteColor];
+		NSFont *font = [NSFont boldSystemFontOfSize:11];
 		
-		if([self isHighlighted]) 
+		if(![self isHighlighted]) 
 		{
 			// This depends on whether it is used in an OutlineView or a TableView or somewhere else
 			if([controlView isKindOfClass:[NSOutlineView class]])
 			{
 				if(![[(NSOutlineView *)controlView itemAtRow:[controlView editedRow]] isEqualTo:item])
 				{
-					textColor = [NSColor whiteColor];
-					font = [NSFont boldSystemFontOfSize:11];
+					textColor = [NSColor blackColor];
+					font = [NSFont systemFontOfSize:11];
 				}
 			}
 		}
@@ -66,7 +66,7 @@
 		
 		[label drawInRect:NSMakeRect(cellFrame.origin.x,
 									 cellFrame.origin.y + (cellFrame.size.height - [label size].height) / 2,
-									 cellFrame.size.width,
+									 cellFrame.size.width - 10.0,
 									 cellFrame.size.height)];
 	} 
 	else
@@ -83,7 +83,7 @@
 		
 		[label drawInRect:NSMakeRect(cellFrame.origin.x,
 									 cellFrame.origin.y + cellFrame.size.height - [label size].height - 3,
-									 cellFrame.size.width,
+									 cellFrame.size.width - 10.0,
 									 cellFrame.size.height)];
 	}
 }
