@@ -256,6 +256,7 @@
 		65CB0A0F0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif in Resources */ = {isa = PBXBuildFile; fileRef = 65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */; };
 		65CB0AAC0BBBE7E400799E25 /* PASplitView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB0AAA0BBBE7E400799E25 /* PASplitView.h */; };
 		65CB0AAD0BBBE7E400799E25 /* PASplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB0AAB0BBBE7E400799E25 /* PASplitView.m */; };
+		65CC15680BE0A87C00866AF7 /* statusbar-grip.tif in Resources */ = {isa = PBXBuildFile; fileRef = 65CC15670BE0A87C00866AF7 /* statusbar-grip.tif */; };
 		65D6ACBD0A89E1E800FDAC8A /* TabActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBA0A89E1E800FDAC8A /* TabActive.png */; };
 		65D6ACBE0A89E1E800FDAC8A /* TabHover.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBB0A89E1E800FDAC8A /* TabHover.png */; };
 		65D6ACBF0A89E1E800FDAC8A /* TabSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D6ACBC0A89E1E800FDAC8A /* TabSelected.png */; };
@@ -689,6 +690,7 @@
 		65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SourcePanelSelectionGradient.tif; sourceTree = "<group>"; };
 		65CB0AAA0BBBE7E400799E25 /* PASplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASplitView.h; sourceTree = "<group>"; };
 		65CB0AAB0BBBE7E400799E25 /* PASplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASplitView.m; sourceTree = "<group>"; };
+		65CC15670BE0A87C00866AF7 /* statusbar-grip.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "statusbar-grip.tif"; sourceTree = "<group>"; };
 		65D6ACBA0A89E1E800FDAC8A /* TabActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabActive.png; sourceTree = "<group>"; };
 		65D6ACBB0A89E1E800FDAC8A /* TabHover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabHover.png; sourceTree = "<group>"; };
 		65D6ACBC0A89E1E800FDAC8A /* TabSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabSelected.png; sourceTree = "<group>"; };
@@ -1227,6 +1229,7 @@
 		6531649B0AF2534B00928BEF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				65CC15530BE0A5B800866AF7 /* Controls */,
 				483272220AA42C7E003D98A6 /* Preferences */,
 				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
 			);
@@ -1384,8 +1387,6 @@
 				65461C9409D0418F0076778E /* PAImageButtonCell.m */,
 				6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */,
 				6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */,
-				6581C3010BDFD51E0001455D /* PAStatusBar.h */,
-				6581C3020BDFD51E0001455D /* PAStatusBar.m */,
 				488E18BB0A27231F009D2826 /* PATagTextFieldCell.h */,
 				488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */,
 			);
@@ -1470,7 +1471,6 @@
 				6530FF790AF2265300D7A79A /* AddPressed.tiff */,
 				657321050AF63DAE000B3943 /* Remove.tif */,
 				657321060AF63DAE000B3943 /* RemovePressed.tif */,
-				65B78F320AF0DA4600AF1102 /* statusbar.tiff */,
 			);
 			name = Tagger;
 			sourceTree = "<group>";
@@ -1483,9 +1483,36 @@
 			name = "Source Panel";
 			sourceTree = "<group>";
 		};
+		65CC15530BE0A5B800866AF7 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				65CC15540BE0A5C800866AF7 /* StatusBar */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
+		65CC15540BE0A5C800866AF7 /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				6581C3010BDFD51E0001455D /* PAStatusBar.h */,
+				6581C3020BDFD51E0001455D /* PAStatusBar.m */,
+			);
+			name = StatusBar;
+			sourceTree = "<group>";
+		};
+		65CC15610BE0A83100866AF7 /* PAStatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				65B78F320AF0DA4600AF1102 /* statusbar.tiff */,
+				65CC15670BE0A87C00866AF7 /* statusbar-grip.tif */,
+			);
+			name = PAStatusBar;
+			sourceTree = "<group>";
+		};
 		65D6ACC10A89E20300FDAC8A /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
+				65CC15610BE0A83100866AF7 /* PAStatusBar */,
 				65D6ACC20A89E21200FDAC8A /* PAButton */,
 			);
 			name = "Custom Controls";
@@ -1807,6 +1834,7 @@
 				6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */,
 				6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */,
 				65CB0A0F0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif in Resources */,
+				65CC15680BE0A87C00866AF7 /* statusbar-grip.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,8 @@
 
 @interface PAStatusBar : NSView {
 
+	IBOutlet NSSplitView		*resizableSplitView;
+	
 	NSMutableArray				*buttons;
 	
 }
