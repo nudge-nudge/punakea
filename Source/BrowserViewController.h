@@ -50,10 +50,10 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	
 	IBOutlet PATypeAheadView *typeAheadView;
 	IBOutlet NSSearchField *searchField;
-	PATypeAheadFind *typeAheadFind; /**< used for type ahead find */
 	NSString *buffer;
 			
 	NNFilterEngine *filterEngine;
+	NSConnection *filterEngineConnection;
 	NNStringPrefixFilter *activePrefixFilter;
 	
 	PATagCloudSortKey sortKey;

@@ -175,10 +175,6 @@ bind to visibleTags
 	[self scrollToTop];
 }
 
-- (void)handleTypeAheadFindChange
-{
-}
-
 - (void)handleActiveTagChange
 {
 	if ([self activeButton])

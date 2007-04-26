@@ -43,6 +43,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)setActivePrefixFilter:(NNStringPrefixFilter*)filter;
 - (NNStringPrefixFilter*)activePrefixFilter;
 
+- (void)setupFilterEngine;
+
 @end
 
 @implementation BrowserViewController
@@ -56,12 +58,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		
 		tags = [NNTags sharedTags];
 				
-		typeAheadFind = [[PATypeAheadFind alloc] init];
+		// needs to be setup before tags can be displayed
+		// cannot be done here or in awakeFromNib because of wrong
+		// order, self needs to be available already
+		filterEngine = nil;
 		
 		buffer = [[NSMutableString alloc] init];
-		
-		filterEngine = [[NNFilterEngine alloc] init];
-		activePrefixFilter = nil;
 		
 		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
 	
@@ -78,16 +80,18 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 																	 options:0 
 																	 context:NULL];
 		
-		
-		[self setDisplayTags:[tags tags]];
-		[typeAheadFind setActiveTags:[tags tags]];
-
 		[[NSNotificationCenter defaultCenter] addObserver:self 
 												 selector:@selector(tagsHaveChanged:) 
 													 name:NNTagsHaveChangedNotification
 												   object:tags];
 		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
+		
+		// tags will be displayed a little later,
+		// so that filterEngine will be up and running
+		[self performSelector:@selector(setDisplayTags:)
+				   withObject:[tags tags]
+				   afterDelay:0.01];
 	}
 	return self;
 }
@@ -111,9 +115,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[mainController release];
 	[visibleTags release];
 	[activePrefixFilter release];
+	[filterEngineConnection release];
 	[filterEngine release];
 	[buffer release];
-	[typeAheadFind release];
 	[super dealloc];
 }
 
@@ -249,7 +253,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setDisplayTags:(NSMutableArray*)someTags
 {
-	[self setVisibleTags:someTags];
+	// empty visibleTags
+	[self setVisibleTags:[NSMutableArray array]];
+	
+	if (!filterEngine)
+		[self setupFilterEngine];
+	
+	// start filtering
 	[filterEngine setObjects:someTags];
 }
 
@@ -336,6 +346,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark events
+- (void)objectsFiltered:(NSMutableArray*)objects
+{
+	[self setVisibleTags:objects];
+}
+
 - (void)keyDown:(NSEvent*)event 
 {
 	// get the pressed key
@@ -459,6 +474,27 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark actions
+- (void)setupFilterEngine
+{
+	// setup DO messaging
+	NSPort *port1;
+	NSPort *port2;
+	NSArray *portArray;
+	
+	port1 = [NSPort port];
+	port2 = [NSPort port];
+	
+	filterEngineConnection = [[NSConnection alloc] initWithReceivePort:port1
+															  sendPort:port2];
+	
+	[filterEngineConnection setRootObject:self];
+	
+	portArray = [NSArray arrayWithObjects:port2,port1,nil];
+	
+	filterEngine = [[NNFilterEngine alloc] initWithPorts:portArray];
+	activePrefixFilter = nil;
+}
+
 - (void)searchForTag:(NNTag*)aTag
 {
 	[[self mainController] handleTagActivation:aTag];
@@ -523,7 +559,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
 	NSString *currentString = [fieldEditor string];
 	
-	if ([currentString isNotEqualTo:@""] && ![typeAheadFind hasTagsForPrefix:currentString])
+	// TODO this has to be handled by filter ...
+	if ([currentString isNotEqualTo:@""]) //&& ![typeAheadFind hasTagsForPrefix:currentString])
 	{
 		NSString *newString = [currentString substringToIndex:[currentString length]-1];
 		[fieldEditor setString:newString];
