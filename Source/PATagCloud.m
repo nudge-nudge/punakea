@@ -109,18 +109,15 @@ bind to visibleTags
  */
 - (void)awakeFromNib
 {
-	[datasource addObserver:self
-				 forKeyPath:@"visibleTags"
-					options:0
-					context:NULL];
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
 	// register for superview bounds change
 	NSScrollView *scrollView = [self enclosingScrollView];
 	[scrollView setPostsBoundsChangedNotifications:YES];
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(handleBoundsChange:) 
-												 name:nil 
-											   object:scrollView];
+	[nc addObserver:self 
+		   selector:@selector(handleBoundsChange:) 
+			   name:nil 
+			 object:scrollView];
 	
 	[self registerForDraggedTypes:[dropManager handledPboardTypes]];
 	
@@ -184,18 +181,9 @@ bind to visibleTags
 }
 
 #pragma mark observer and important stuff
-/**
-bound to visibleTags
- */
-- (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object 
-                        change:(NSDictionary *)change
-                       context:(void *)context
+- (void)reloadData
 {
-	if ([keyPath isEqual:@"visibleTags"]) 
-	{
-		[self handleTagsChange];
-	}
+	[self handleTagsChange];
 }
 
 - (void)updateButtons

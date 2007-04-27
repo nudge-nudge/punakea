@@ -55,6 +55,8 @@ displays all [datasource visibleTags] in a nice tag cloud view
 - (id)delegate;
 - (void)setDelegate:(id)del;
 
+- (void)reloadData;
+
 - (NSMutableDictionary*)tagButtonDict;
 - (void)setTagButtonDict:(NSMutableDictionary*)aDict;
 - (PATagButton*)activeButton;

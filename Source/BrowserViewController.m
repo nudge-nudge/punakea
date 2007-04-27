@@ -249,10 +249,14 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	if ([visibleTags count] > 0)
 		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
+	
+	[tagCloud reloadData];
 }
 
 - (void)setDisplayTags:(NSMutableArray*)someTags
 {
+	NSLog(@"setting display tags");
+	
 	// empty visibleTags
 	[self setVisibleTags:[NSMutableArray array]];
 	
@@ -346,9 +350,16 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark events
-- (void)objectsFiltered:(NSMutableArray*)objects
+- (void)objectsFiltered:(NSArray*)objects
 {
-	[self setVisibleTags:objects];
+	// TODO set objects (threadsafe)
+	// call this method, etc
+	// otherwise they will be proxies -> overhead
+	
+	NSLog(@"objects filtered");
+
+	// TODO
+	[self setVisibleTags:[filterEngine filteredObjects]];
 }
 
 - (void)keyDown:(NSEvent*)event 
@@ -384,15 +395,16 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		NSMutableString *tmpBuffer = [buffer mutableCopy];
 		[tmpBuffer appendString:[event charactersIgnoringModifiers]];
 		
-		if ([typeAheadFind hasTagsForPrefix:tmpBuffer])
-		{
+		// TODO replace by filterEngine
+//		if ([typeAheadFind hasTagsForPrefix:tmpBuffer])
+//		{
 			[self setBuffer:tmpBuffer];
-		}
-		else
-		{
-			[[self nextResponder] keyDown:event];
-		}
-		
+//		}
+//		else
+//		{
+//			[[self nextResponder] keyDown:event];
+//		}
+//		
 		[tmpBuffer release];
 	}
 	else
@@ -476,6 +488,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark actions
 - (void)setupFilterEngine
 {
+	NSLog(@"filterEngine DO setup");
+	
 	// setup DO messaging
 	NSPort *port1;
 	NSPort *port2;
