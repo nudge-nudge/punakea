@@ -89,8 +89,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		
 		// tags will be displayed a little later,
 		// so that filterEngine will be up and running
-		[self performSelector:@selector(setDisplayTags:)
-				   withObject:[tags tags]
+		[self performSelector:@selector(initFilterEngine)
+				   withObject:nil
 				   afterDelay:0.01];
 	}
 	return self;
@@ -255,16 +255,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setDisplayTags:(NSMutableArray*)someTags
 {
-	NSLog(@"setting display tags");
+	//NSLog(@"setting display tags");
 	
 	// empty visibleTags
-	[self setVisibleTags:[NSMutableArray array]];
-	
-	if (!filterEngine)
-		[self setupFilterEngine];
+	[self setVisibleTags:someTags];
 	
 	// start filtering
-	[filterEngine setObjects:someTags];
+	//[filterEngine setObjects:someTags];
 }
 
 - (void)resetDisplayTags
@@ -350,16 +347,17 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark events
-- (void)objectsFiltered:(NSArray*)objects
+- (void)objectsFiltered
 {
 	// TODO set objects (threadsafe)
 	// call this method, etc
 	// otherwise they will be proxies -> overhead
 	
 	NSLog(@"objects filtered");
-
-	// TODO
+	
+	[filterEngine lockFilteredObjects];
 	[self setVisibleTags:[filterEngine filteredObjects]];
+	[filterEngine unlockFilteredObjects];
 }
 
 - (void)keyDown:(NSEvent*)event 
@@ -486,6 +484,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark actions
+- (void)initFilterEngine
+{
+	[self setupFilterEngine];
+	[self setDisplayTags:[tags tags]];
+}
+
 - (void)setupFilterEngine
 {
 	NSLog(@"filterEngine DO setup");
