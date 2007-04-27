@@ -10,6 +10,8 @@
 #import "BrowserViewController.h"
 #import "NNTagging/NNQuery.h"
 #import "PATagCloud.h"
+#import "PAStatusBar.h"
+#import "PASimpleStatusBarButton.h"
 
 @interface BrowserController : NSWindowController 
 {
@@ -18,6 +20,8 @@
 	
 	IBOutlet NSView					*mainPlaceholderView;
 	IBOutlet NSSplitView			*horizontalSplitView;
+	
+	IBOutlet PAStatusBar			*sourcePanelStatusBar;
 
 }
 

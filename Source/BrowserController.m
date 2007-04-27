@@ -33,6 +33,10 @@
 	// insert browserViewController in the responder chain
 	[browserViewController setNextResponder:[self window]];
 	[[[self window] contentView] setNextResponder:browserViewController];
+	
+	// Setup status bar for source panel
+	PASimpleStatusBarButton *sbitem = [PASimpleStatusBarButton statusBarButton];
+	[sourcePanelStatusBar addItem:sbitem];
 }
 
 - (void)dealloc

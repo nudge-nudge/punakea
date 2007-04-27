@@ -17,14 +17,14 @@
 	self = [super initWithFrame:frameRect];
 	if(self)
 	{
-		buttons = [[NSMutableArray alloc] init];
+		items = [[NSMutableArray alloc] init];
 	}	
 	return self;
 }
 
 - (void)dealloc
 {
-	[buttons release];
+	[items release];
 	[super dealloc];
 }
 
@@ -32,6 +32,8 @@
 #pragma mark Drawing
 - (void)drawRect:(NSRect)aRect
 {
+	aRect = [self bounds];
+	
 	[[NSColor whiteColor] set];
 	NSRectFill(aRect);
 	
@@ -78,6 +80,20 @@
 
 
 #pragma mark Misc
+- (void)addItem:(NSView *)anItem
+{
+	[items addObject:anItem];
+	[self updateItems];
+}
+
+- (void)updateItems
+{
+	// TODO, temp
+	NSView *view = [items objectAtIndex:0];
+	[view setFrame:NSMakeRect(0,0,30,22)];
+	[self addSubview:view];
+}
+
 - (BOOL)isFlipped
 {
 	return YES;

@@ -13,8 +13,10 @@
 
 	IBOutlet NSSplitView		*resizableSplitView;
 	
-	NSMutableArray				*buttons;
+	NSMutableArray				*items;
 	
 }
+
+- (void)addItem:(NSView *)anItem;
 
 @end

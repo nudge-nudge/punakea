@@ -3,7 +3,11 @@
         {
             CLASS = BrowserController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {horizontalSplitView = NSSplitView; mainPlaceholderView = NSView; }; 
+            OUTLETS = {
+                horizontalSplitView = NSSplitView; 
+                mainPlaceholderView = NSView; 
+                sourcePanelStatusBar = PAStatusBar; 
+            }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {

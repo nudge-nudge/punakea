@@ -267,6 +267,10 @@
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Core.m */; };
+		65EB72160BE20D86007FF40C /* PASimpleStatusBarButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65EB72140BE20D86007FF40C /* PASimpleStatusBarButton.h */; };
+		65EB72170BE20D86007FF40C /* PASimpleStatusBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EB72150BE20D86007FF40C /* PASimpleStatusBarButton.m */; };
+		65EB722C0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65EB722A0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.h */; };
+		65EB722D0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EB722B0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.m */; };
 		65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */; };
 		65F9B96309D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */; };
 		65F9B96409D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */; };
@@ -435,6 +439,8 @@
 				65CB0AAC0BBBE7E400799E25 /* PASplitView.h in CopyFiles */,
 				65FB5ADF0BBD4DD80024EE3C /* PASmartFolder.h in CopyFiles */,
 				6581C3030BDFD51E0001455D /* PAStatusBar.h in CopyFiles */,
+				65EB72160BE20D86007FF40C /* PASimpleStatusBarButton.h in CopyFiles */,
+				65EB722C0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +706,10 @@
 		65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
+		65EB72140BE20D86007FF40C /* PASimpleStatusBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleStatusBarButton.h; sourceTree = "<group>"; };
+		65EB72150BE20D86007FF40C /* PASimpleStatusBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleStatusBarButton.m; sourceTree = "<group>"; };
+		65EB722A0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASimpleStatusBarButtonCell.h; sourceTree = "<group>"; };
+		65EB722B0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASimpleStatusBarButtonCell.m; sourceTree = "<group>"; };
 		65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewPressed-1.tiff"; sourceTree = "<group>"; };
 		65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
 		65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
@@ -1494,6 +1504,10 @@
 		65CC15540BE0A5C800866AF7 /* StatusBar */ = {
 			isa = PBXGroup;
 			children = (
+				65EB72140BE20D86007FF40C /* PASimpleStatusBarButton.h */,
+				65EB72150BE20D86007FF40C /* PASimpleStatusBarButton.m */,
+				65EB722A0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.h */,
+				65EB722B0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.m */,
 				6581C3010BDFD51E0001455D /* PAStatusBar.h */,
 				6581C3020BDFD51E0001455D /* PAStatusBar.m */,
 			);
@@ -1997,6 +2011,8 @@
 				65CB0AAD0BBBE7E400799E25 /* PASplitView.m in Sources */,
 				65FB5AE00BBD4DD80024EE3C /* PASmartFolder.m in Sources */,
 				6581C3040BDFD51E0001455D /* PAStatusBar.m in Sources */,
+				65EB72170BE20D86007FF40C /* PASimpleStatusBarButton.m in Sources */,
+				65EB722D0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
