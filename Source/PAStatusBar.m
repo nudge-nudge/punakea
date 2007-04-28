@@ -102,6 +102,9 @@
 	if(NSPointInRect(clickLocation, gripRect)) 
 	{
 		gripDragOffset = NSMakeSize([self frame].size.width - clickLocation.x, clickLocation.y);
+		[[self window] disableCursorRects];
+		[[NSCursor resizeLeftRightCursor] set];
+		
 		gripDragged = YES;	
 	}
 }
@@ -112,6 +115,7 @@
 	
 	NSView *view = [[resizableSplitView subviews] objectAtIndex:0];
 	[view setNeedsDisplay:YES];
+	[[self window] enableCursorRects];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent 
@@ -121,8 +125,6 @@
 		[super mouseDragged:theEvent];
 		return;
 	}
-	
-	[[NSCursor resizeLeftRightCursor] set];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewWillResizeSubviewsNotification object:self];
 	
