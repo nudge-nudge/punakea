@@ -19,7 +19,7 @@
 	BrowserViewController			*browserViewController;
 	
 	IBOutlet NSView					*mainPlaceholderView;
-	IBOutlet NSSplitView			*horizontalSplitView;
+	IBOutlet NSSplitView			*verticalSplitView;
 	
 	IBOutlet PAStatusBar			*sourcePanelStatusBar;
 

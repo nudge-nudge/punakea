@@ -10,6 +10,7 @@
 
 @implementation BrowserController
 
+#pragma mark Init + Dealloc
 - (id)init
 {
 	if (self = [super initWithWindowNibName:@"Browser"])
@@ -28,7 +29,7 @@
 	[[self window] setFrameAutosaveName:@"punakea.browser"];
 	
 	browserViewController = [[BrowserViewController alloc] init];
-	[horizontalSplitView replaceSubview:mainPlaceholderView with:[browserViewController view]];
+	[verticalSplitView replaceSubview:mainPlaceholderView with:[browserViewController view]];
 	
 	// insert browserViewController in the responder chain
 	[browserViewController setNextResponder:[self window]];
@@ -46,12 +47,46 @@
 	[super dealloc];
 }
 
+
+#pragma mark SplitView Delegate
+- (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+{
+	if([sender isEqualTo:verticalSplitView])
+	{
+		if(offset == 0) return 120.0;
+	}
+	else
+	{
+		// handle horizontal split view
+	}
+	
+	return nil;
+}
+
+- (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+{
+	if([sender isEqualTo:verticalSplitView])
+	{
+		if(offset == 0) return [sender frame].size.width - [self splitView:sender constrainMinCoordinate:0.0 ofSubviewAt:0];
+	}
+	else
+	{
+		// handle horizontal split view
+	}
+	
+	return nil;
+}
+
+
+#pragma mark Notifications
 - (void)windowWillClose:(NSNotification *)aNotification
 {
 	[browserViewController unbindAll];
 	[self autorelease];
 }
 
+
+#pragma mark Accessors
 - (BrowserViewController*)browserViewController
 {
 	return browserViewController;

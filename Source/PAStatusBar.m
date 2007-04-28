@@ -115,6 +115,9 @@
 	
 	NSView *view = [[resizableSplitView subviews] objectAtIndex:0];
 	[view setNeedsDisplay:YES];
+	
+	[resizableSplitView setNeedsDisplay:YES];	
+	
 	[[self window] enableCursorRects];
 }
 
@@ -126,20 +129,47 @@
 		return;
 	}
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewWillResizeSubviewsNotification object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewWillResizeSubviewsNotification 
+														object:resizableSplitView];
 	
 	NSPoint clickLocation = [theEvent locationInWindow];	
-	
-	// TODO use constraints from splitView:constrainSplitPosition:ofSubviewAt:
 	
 	NSView *view = [[resizableSplitView subviews] objectAtIndex:0];
 	
 	NSRect newFrame = [view frame];
 	newFrame.size.width = clickLocation.x + gripDragOffset.width;
+		
+	// Check if there are any constraints for this subview's width
+	id svDelegate = [resizableSplitView delegate];
+	
+	if(svDelegate && [svDelegate respondsToSelector:@selector(splitView:constrainSplitPosition:ofSubviewAt:)] )
+	{
+		float newWidth = [svDelegate splitView:resizableSplitView
+						constrainSplitPosition:newFrame.size.width 
+								   ofSubviewAt:0];
+		newFrame.size.width = newWidth;
+	}
+	
+	if(svDelegate && [svDelegate respondsToSelector:@selector(splitView:constrainMaxCoordinate:ofSubviewAt:)] )
+	{
+		float maxWidth = [svDelegate splitView:resizableSplitView
+						constrainMaxCoordinate:0.0 
+								   ofSubviewAt:0];
+		newFrame.size.width = MIN(maxWidth, newFrame.size.width);
+	}
+	
+	if(svDelegate && [svDelegate respondsToSelector:@selector(splitView:constrainMinCoordinate:ofSubviewAt:)] )
+	{
+		float minWidth = [svDelegate splitView:resizableSplitView
+						constrainMinCoordinate:0.0 
+								   ofSubviewAt:0];
+		newFrame.size.width = MAX(minWidth, newFrame.size.width);
+	}
 	
 	[view setFrame:newFrame];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewDidResizeSubviewsNotification object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewDidResizeSubviewsNotification 
+														object:resizableSplitView];
 }
 
 
