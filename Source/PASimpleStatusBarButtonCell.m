@@ -9,6 +9,10 @@
 #import "PASimpleStatusBarButtonCell.h"
 
 
+NSSize const PADDING = {10,5};
+NSSize const MIN_SIZE = {30, 22};
+
+
 @implementation PASimpleStatusBarButtonCell
 
 #pragma mark Init + Dealloc
@@ -44,36 +48,31 @@
 
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-	[[NSColor clearColor] set];
-	NSBezierPath *path = [NSBezierPath bezierPathWithRect:cellFrame];
-	[path fill];
-	
-	/*NSImage *image = [images objectForKey:[self stringForState:thisState]];
+{		
+	NSImage *img;
+	if(alternateState)
+	{
+		img = [self alternateImage];
+	} else {
+		img = [self image];
+	}
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
-	imageRect.size = [image size];
+	imageRect.size = [img size];
 	
-	if([image scalesWhenResized])
-		[image drawInRect:cellFrame fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
-	else
-		[image drawAtPoint:cellFrame.origin
-				  fromRect:imageRect
-				 operation:NSCompositeSourceOver
-				  fraction:1.0];
-	*/
+	NSRect destRect;
+	destRect.origin.x = cellFrame.origin.x + PADDING.width;
+	destRect.origin.y = cellFrame.origin.y + (cellFrame.size.height - imageRect.size.height) / 2;
+	destRect.size = imageRect.size;
 	
-	NSString *str = @"aaa";
-	
-	if([self isHighlighted]) str = @"bbb";
-	
-	[str drawAtPoint:NSZeroPoint withAttributes:nil];
-}
+	[img drawInRect:destRect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 
-- (void)highlight:(BOOL)flag withFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{
-	[self drawInteriorWithFrame:cellFrame inView:controlView];
+	if([self isHighlighted])
+	{
+		[[NSColor colorWithCalibratedWhite:0.1 alpha:0.3] set];
+		[NSBezierPath fillRect:cellFrame];
+	}
 }
 
 
@@ -133,6 +132,34 @@
 {
 	[alternateImage release];
 	alternateImage = [anImage retain];
+}
+
+- (NSSize)cellSize
+{
+	if([self image])
+	{
+		NSSize imageSize = [[self image] size];
+		
+		NSSize newSize;
+		newSize.width = MAX(imageSize.width + 2 * PADDING.width, MIN_SIZE.width);
+		newSize.height = 22;
+		
+		return newSize;
+	}
+	else
+	{
+		return MIN_SIZE;
+	}
+}
+
+- (BOOL)alternateState
+{
+	return alternateState;
+}
+
+- (void)setAlternateState:(BOOL)flag
+{
+	alternateState = flag;
 }
 
 @end

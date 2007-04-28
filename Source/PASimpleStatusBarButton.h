@@ -12,7 +12,7 @@
 
 @interface PASimpleStatusBarButton : NSControl {
 	
-	NSToolTipTag		*toolTipTag;
+	NSToolTipTag		toolTipTag;
 	NSString			*toolTip;
 	
 }
@@ -24,5 +24,7 @@
 
 - (NSString *)toolTip;
 - (void)setToolTip:(NSString *)aToolTip;
+- (BOOL)alternateState;
+- (void)setAlternateState:(BOOL)flag;
 
 @end

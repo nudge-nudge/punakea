@@ -26,6 +26,7 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = PABrowserWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {CLASS = PAGenericTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {

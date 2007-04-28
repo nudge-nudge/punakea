@@ -9,10 +9,16 @@
 #import <Cocoa/Cocoa.h>
 
 
+extern NSSize const PADDING;
+extern NSSize const MIN_SIZE;
+
+
 @interface PASimpleStatusBarButtonCell : NSActionCell {
 
 	NSImage				*image;
 	NSImage				*alternateImage;			/**< Image that will be displayed if user holds down the option key */
+	
+	BOOL				alternateState;
 	
 }
 
@@ -20,5 +26,8 @@
 - (void)setImage:(NSImage *)anImage;
 - (NSImage *)alternateImage;
 - (void)setAlternateImage:(NSImage *)anImage;
+
+- (BOOL)alternateState;
+- (void)setAlternateState:(BOOL)flag;
 
 @end

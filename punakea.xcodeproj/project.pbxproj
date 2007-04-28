@@ -161,6 +161,8 @@
 		6530FF7C0AF2265300D7A79A /* Add.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6530FF7A0AF2265300D7A79A /* Add.tiff */; };
 		6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */; };
 		6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */; };
+		6539B9FB0BE35A3B00B1D216 /* statusbar-button-gear.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6539B9F90BE35A3B00B1D216 /* statusbar-button-gear.pdf */; };
+		6539B9FC0BE35A3B00B1D216 /* statusbar-button-plus.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6539B9FA0BE35A3B00B1D216 /* statusbar-button-plus.pdf */; };
 		653DCE1809E295C8009175E5 /* MDSimpleGrouping.strings in Resources */ = {isa = PBXBuildFile; fileRef = 653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */; };
 		6540FA550AEE0F5100EF51F3 /* PAResultsBookmarkCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */; };
 		6540FA560AEE0F5100EF51F3 /* PAResultsBookmarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */; };
@@ -175,6 +177,8 @@
 		655563A20A50672A0050104E /* stopRollover.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6555639F0A50672A0050104E /* stopRollover.tif */; };
 		655563A30A50672A0050104E /* stopPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655563A00A50672A0050104E /* stopPressed.tif */; };
 		655563A40A50672A0050104E /* stop.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655563A10A50672A0050104E /* stop.tif */; };
+		655631660BE3B099004D3B33 /* PABrowserWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 655631640BE3B099004D3B33 /* PABrowserWindow.h */; };
+		655631670BE3B099004D3B33 /* PABrowserWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655631650BE3B099004D3B33 /* PABrowserWindow.m */; };
 		6557CAF40A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6557CAF20A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h */; };
 		6557CAF50A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6557CAF30A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m */; };
 		655B2ABF0ABFE8AC000A3AA4 /* FileManager.strings in Resources */ = {isa = PBXBuildFile; fileRef = 655B2ABE0ABFE8AC000A3AA4 /* FileManager.strings */; };
@@ -441,6 +445,7 @@
 				6581C3030BDFD51E0001455D /* PAStatusBar.h in CopyFiles */,
 				65EB72160BE20D86007FF40C /* PASimpleStatusBarButton.h in CopyFiles */,
 				65EB722C0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.h in CopyFiles */,
+				655631660BE3B099004D3B33 /* PABrowserWindow.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +604,8 @@
 		6530FF7A0AF2265300D7A79A /* Add.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Add.tiff; sourceTree = "<group>"; };
 		6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIcon.tif; sourceTree = "<group>"; };
 		6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIconAlt.tif; sourceTree = "<group>"; };
+		6539B9F90BE35A3B00B1D216 /* statusbar-button-gear.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "statusbar-button-gear.pdf"; sourceTree = "<group>"; };
+		6539B9FA0BE35A3B00B1D216 /* statusbar-button-plus.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "statusbar-button-plus.pdf"; sourceTree = "<group>"; };
 		653DCE1409E295A1009175E5 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/MDSimpleGrouping.strings; sourceTree = "<group>"; };
 		6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsBookmarkCell.h; sourceTree = "<group>"; };
 		6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsBookmarkCell.m; sourceTree = "<group>"; };
@@ -615,6 +622,8 @@
 		6555639F0A50672A0050104E /* stopRollover.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stopRollover.tif; sourceTree = "<group>"; };
 		655563A00A50672A0050104E /* stopPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stopPressed.tif; sourceTree = "<group>"; };
 		655563A10A50672A0050104E /* stop.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stop.tif; sourceTree = "<group>"; };
+		655631640BE3B099004D3B33 /* PABrowserWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserWindow.h; sourceTree = "<group>"; };
+		655631650BE3B099004D3B33 /* PABrowserWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserWindow.m; sourceTree = "<group>"; };
 		6557CAF20A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemThumbnailCell.h; sourceTree = "<group>"; };
 		6557CAF30A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemThumbnailCell.m; sourceTree = "<group>"; };
 		655B2AB70ABFE884000A3AA4 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/FileManager.strings; sourceTree = "<group>"; };
@@ -923,6 +932,8 @@
 				4856C6730A516D8300E1D568 /* BrowserViewController.m */,
 				482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */,
 				488CBBDD0AC9674400F6D20E /* PABrowserViewMainController.m */,
+				655631640BE3B099004D3B33 /* PABrowserWindow.h */,
+				655631650BE3B099004D3B33 /* PABrowserWindow.m */,
 				484C56AC0AE4D1FD0000EB7D /* PAControlledView.h */,
 				484C56AD0AE4D1FD0000EB7D /* PAControlledView.m */,
 				483F50C80AE551EA00551B9D /* PABrowserSplitView.h */,
@@ -1518,6 +1529,8 @@
 			isa = PBXGroup;
 			children = (
 				65B78F320AF0DA4600AF1102 /* statusbar.tiff */,
+				6539B9F90BE35A3B00B1D216 /* statusbar-button-gear.pdf */,
+				6539B9FA0BE35A3B00B1D216 /* statusbar-button-plus.pdf */,
 				65CC15670BE0A87C00866AF7 /* statusbar-grip.tif */,
 			);
 			name = PAStatusBar;
@@ -1849,6 +1862,8 @@
 				6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */,
 				65CB0A0F0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif in Resources */,
 				65CC15680BE0A87C00866AF7 /* statusbar-grip.tif in Resources */,
+				6539B9FB0BE35A3B00B1D216 /* statusbar-button-gear.pdf in Resources */,
+				6539B9FC0BE35A3B00B1D216 /* statusbar-button-plus.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2013,6 +2028,7 @@
 				6581C3040BDFD51E0001455D /* PAStatusBar.m in Sources */,
 				65EB72170BE20D86007FF40C /* PASimpleStatusBarButton.m in Sources */,
 				65EB722D0BE20ECC007FF40C /* PASimpleStatusBarButtonCell.m in Sources */,
+				655631670BE3B099004D3B33 /* PABrowserWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

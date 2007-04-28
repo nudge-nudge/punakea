@@ -23,4 +23,6 @@
 
 - (void)addItem:(NSView *)anItem;
 
+- (void)setAlternateState:(BOOL)flag;
+
 @end

@@ -37,6 +37,12 @@
 	
 	// Setup status bar for source panel
 	PASimpleStatusBarButton *sbitem = [PASimpleStatusBarButton statusBarButton];
+	[sbitem setToolTip:@"Add favorite"];
+	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
+	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-gear"]];
+	[sourcePanelStatusBar addItem:sbitem];
+	
+	sbitem = [PASimpleStatusBarButton statusBarButton];
 	[sourcePanelStatusBar addItem:sbitem];
 }
 
@@ -45,6 +51,17 @@
 	// unbind stuff for retain count
 	[browserViewController release];
 	[super dealloc];
+}
+
+
+#pragma mark Events
+- (void)flagsChanged:(NSEvent *)theEvent
+{
+	if ([theEvent modifierFlags] & NSAlternateKeyMask) {
+		[sourcePanelStatusBar setAlternateState:YES];
+	} else {
+		[sourcePanelStatusBar setAlternateState:NO];
+	}
 }
 
 

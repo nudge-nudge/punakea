@@ -52,14 +52,11 @@
 	
 	[image drawInRect:aRect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	
-	// Draw top line
-	NSBezierPath *path = [NSBezierPath bezierPath];
-	[path moveToPoint:NSZeroPoint];
-	[path lineToPoint:NSMakePoint(aRect.size.width, 0.0)];
-	
+	// Draw top line	
 	//[[NSColor colorWithDeviceRed:(202.0/255.0) green:(202.0/255.0) blue:(202.0/255.0) alpha:1.0] set];
 	[[NSColor grayColor] set];
-	[path stroke];
+	[NSBezierPath strokeLineFromPoint:NSZeroPoint
+							  toPoint:NSMakePoint(aRect.size.width, 0.0)];
 	
 	// Draw grip if applicable
 	if(resizableSplitView)
@@ -81,6 +78,24 @@
 		
 		[image drawInRect:destRect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	}
+
+	// Draw separator lines	
+	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
+	
+	NSEnumerator *enumerator = [[self subviews] objectEnumerator];
+	NSView *view;
+	
+	while(view = [enumerator nextObject])
+	{
+		NSRect frame = [view frame];
+		
+		[[NSColor colorWithDeviceCyan:0.24 magenta:0.19 yellow:0.19 black:0.0 alpha:1.0] set];	
+		
+		[NSBezierPath strokeLineFromPoint:NSMakePoint(frame.origin.x + frame.size.width, 1.0)
+								  toPoint:NSMakePoint(frame.origin.x + frame.size.width, 23.0)];
+	}
+	
+	[[NSGraphicsContext currentContext] setShouldAntialias:YES];
 }
 
 
@@ -119,6 +134,8 @@
 	[resizableSplitView setNeedsDisplay:YES];	
 	
 	[[self window] enableCursorRects];
+	
+	[self setNeedsDisplay:YES];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent 
@@ -183,29 +200,43 @@
 - (void)updateItems
 {
 	// TODO, temp
-	NSView *view = [items objectAtIndex:0];
-	[view setFrame:NSMakeRect(0,0,30,22)];
-	[self addSubview:view];
+	
+	for(int i = 0; i < [[self subviews] count]; i++)
+	{
+		[[[self subviews] objectAtIndex:i] removeFromSuperview];
+	}
+	
+	NSEnumerator *enumerator = [items objectEnumerator];
+	NSView *view;
+	float current_x = 0.0;
+	
+	while(view = [enumerator nextObject])
+	{		
+		[view setFrameOrigin:NSMakePoint(current_x, 1.0)];
+		
+		[self addSubview:view];
+		
+		current_x += [view frame].size.width + 1.0;
+	}
+}
+
+
+#pragma mark Accessors
+- (void)setAlternateState:(BOOL)flag
+{
+	NSEnumerator *enumerator = [items objectEnumerator];
+	NSView *view;
+	
+	while(view = [enumerator nextObject])
+	{
+		[view setAlternateState:flag];
+		[view setNeedsDisplay:YES];
+	}
 }
 
 - (BOOL)isFlipped
 {
 	return YES;
 }
-
-
-#pragma mark TEMP
-/*- (void)mouseDown:(NSEvent *)theEvent
-{
-	NSView *view = [[resizableSplitView subviews] objectAtIndex:0];
-	
-	NSRect frame = [view frame];
-	frame.size.width = 100.0;
-	
-	[view setFrame:frame];
-	
-	[resizableSplitView setNeedsDisplay:YES];
-}*/
-
 
 @end

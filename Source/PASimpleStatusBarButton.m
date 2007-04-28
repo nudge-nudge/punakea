@@ -26,13 +26,12 @@
 
 + (PASimpleStatusBarButton *)statusBarButton
 {
-	return [[[PASimpleStatusBarButton alloc] initWithFrame:NSMakeRect(0,0,0,0)] autorelease];
+	return [[[PASimpleStatusBarButton alloc] initWithFrame:NSMakeRect(0, 0, MIN_SIZE.width, MIN_SIZE.height)] autorelease];
 }
 
 - (void)dealloc
 {
 	[self removeToolTip:toolTipTag];
-	if(toolTipTag) [toolTipTag release];
 	if(toolTip) [toolTip release];
 	
 	[super dealloc];
@@ -62,6 +61,8 @@
 - (void)setImage:(NSImage *)anImage
 {
 	[[self cell] setImage:anImage];
+	
+	[self sizeToFit];
 }
 
 - (void)setAlternateImage:(NSImage *)anImage
@@ -78,6 +79,16 @@
 {
 	if(toolTip) [toolTip release];
 	toolTip = [aToolTip retain];
+}
+
+- (BOOL)alternateState
+{
+	return [[self cell] alternateState];
+}
+
+- (void)setAlternateState:(BOOL)flag
+{
+	[[self cell] setAlternateState:flag];
 }
 
 @end
