@@ -13,6 +13,10 @@
 
 	IBOutlet NSSplitView		*resizableSplitView;
 	
+	NSRect						gripRect;
+	BOOL						gripDragged;
+	NSSize						gripDragOffset;
+	
 	NSMutableArray				*items;
 	
 }

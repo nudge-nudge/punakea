@@ -74,8 +74,70 @@
 		destRect.origin.y = 1;
 		destRect.size = imageRect.size;
 		
+		// Save grip rect for later use and add some left padding
+		gripRect = destRect;
+		gripRect.origin.x -= 3.0;
+		gripRect.size.width += 3.0;
+		
 		[image drawInRect:destRect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	}
+}
+
+
+#pragma mark Grip
+- (void)resetCursorRects
+{
+	[super resetCursorRects];
+	
+	if(resizableSplitView) 
+	{		
+		[self addCursorRect:gripRect cursor:[NSCursor resizeLeftRightCursor]];
+	}
+}
+
+- (void)mouseDown:(NSEvent *)theEvent 
+{
+	NSPoint clickLocation = [theEvent locationInWindow];
+	
+	if(NSPointInRect(clickLocation, gripRect)) 
+	{
+		gripDragOffset = NSMakeSize([self frame].size.width - clickLocation.x, clickLocation.y);
+		gripDragged = YES;	
+	}
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+	gripDragged = NO;
+	
+	NSView *view = [[resizableSplitView subviews] objectAtIndex:0];
+	[view setNeedsDisplay:YES];
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent 
+{
+	if(!gripDragged)
+	{
+		[super mouseDragged:theEvent];
+		return;
+	}
+	
+	[[NSCursor resizeLeftRightCursor] set];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewWillResizeSubviewsNotification object:self];
+	
+	NSPoint clickLocation = [theEvent locationInWindow];	
+	
+	// TODO use constraints from splitView:constrainSplitPosition:ofSubviewAt:
+	
+	NSView *view = [[resizableSplitView subviews] objectAtIndex:0];
+	
+	NSRect newFrame = [view frame];
+	newFrame.size.width = clickLocation.x + gripDragOffset.width;
+	
+	[view setFrame:newFrame];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewDidResizeSubviewsNotification object:self];
 }
 
 
@@ -98,5 +160,20 @@
 {
 	return YES;
 }
+
+
+#pragma mark TEMP
+/*- (void)mouseDown:(NSEvent *)theEvent
+{
+	NSView *view = [[resizableSplitView subviews] objectAtIndex:0];
+	
+	NSRect frame = [view frame];
+	frame.size.width = 100.0;
+	
+	[view setFrame:frame];
+	
+	[resizableSplitView setNeedsDisplay:YES];
+}*/
+
 
 @end
