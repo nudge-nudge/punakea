@@ -16,8 +16,8 @@
 #import "PAResultsViewController.h"
 #import "TaggerController.h"
 
-#import "NNTagging/NNFilterEngine.h"
-#import "NNTagging/NNStringPrefixFilter.h"
+#import "NNFilterEngine.h"
+#import "NNStringPrefixFilter.h"
 
 typedef enum _PABrowserViewControllerState {
 	PABrowserViewControllerNormalState = 1,

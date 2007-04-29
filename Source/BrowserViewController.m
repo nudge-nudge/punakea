@@ -255,13 +255,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setDisplayTags:(NSMutableArray*)someTags
 {
-	//NSLog(@"setting display tags");
+	NSLog(@"setting display tags");
 	
 	// empty visibleTags
-	[self setVisibleTags:someTags];
+	[self setVisibleTags:[NSMutableArray array]];
 	
 	// start filtering
-	//[filterEngine setObjects:someTags];
+	[filterEngine setObjects:someTags];
 }
 
 - (void)resetDisplayTags
