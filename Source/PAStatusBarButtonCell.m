@@ -36,7 +36,7 @@ NSSize const MIN_SIZE = {30, 22};
 	self = [self initImageCell:nil];
 	if(self)
 	{
-		NSLog(@"Warning - PASimpleStatusBarButtonCell: Use initImageCell instead of initTextCell!");
+		NSLog(@"Warning - PAStatusBarButtonCell: Use initImageCell instead of initTextCell!");
 	}
 	return self;
 }
