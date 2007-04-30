@@ -17,7 +17,7 @@
 	
 }
 
-+ (PASimpleStatusBarButton *)statusBarButton;	/**< Use this for init */
++ (PAStatusBarButton *)statusBarButton;	/**< Use this for init */
 
 - (void)setImage:(NSImage *)anImage;
 - (void)setAlternateImage:(NSImage *)anImage;

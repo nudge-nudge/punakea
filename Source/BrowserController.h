@@ -11,7 +11,7 @@
 #import "NNTagging/NNQuery.h"
 #import "PATagCloud.h"
 #import "PAStatusBar.h"
-#import "PASimpleStatusBarButton.h"
+#import "PAStatusBarButton.h"
 
 @interface BrowserController : NSWindowController 
 {

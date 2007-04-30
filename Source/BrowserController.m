@@ -36,13 +36,13 @@
 	[[[self window] contentView] setNextResponder:browserViewController];
 	
 	// Setup status bar for source panel
-	PASimpleStatusBarButton *sbitem = [PASimpleStatusBarButton statusBarButton];
+	PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
 	[sbitem setToolTip:@"Add favorite"];
 	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
 	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-gear"]];
 	[sourcePanelStatusBar addItem:sbitem];
 	
-	sbitem = [PASimpleStatusBarButton statusBarButton];
+	sbitem = [PAStatusBarButton statusBarButton];
 	[sourcePanelStatusBar addItem:sbitem];
 }
 
