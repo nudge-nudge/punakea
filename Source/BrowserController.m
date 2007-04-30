@@ -44,7 +44,7 @@
 	
 	sbitem = [PAStatusBarButton statusBarButton];
 	[sbitem setButtonType:NSToggleButton];
-	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
+	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-info"]];
 	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-gear"]];
 	[sourcePanelStatusBar addItem:sbitem];
 }
