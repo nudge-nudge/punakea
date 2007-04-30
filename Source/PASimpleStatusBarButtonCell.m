@@ -6,14 +6,14 @@
 //  Copyright 2007 __MyCompanyName__. All rights reserved.
 //
 
-#import "PASimpleStatusBarButtonCell.h"
+#import "PAStatusBarButtonCell.h"
 
 
 NSSize const PADDING = {10,5};
 NSSize const MIN_SIZE = {30, 22};
 
 
-@implementation PASimpleStatusBarButtonCell
+@implementation PAStatusBarButtonCell
 
 #pragma mark Init + Dealloc
 - (id)initImageCell:(NSImage *)anImage
@@ -50,7 +50,7 @@ NSSize const MIN_SIZE = {30, 22};
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {		
 	NSImage *img;
-	if(alternateState)
+	if(alternateState && [self alternateImage])
 	{
 		img = [self alternateImage];
 	} else {

@@ -13,7 +13,7 @@ extern NSSize const PADDING;
 extern NSSize const MIN_SIZE;
 
 
-@interface PASimpleStatusBarButtonCell : NSActionCell {
+@interface PAStatusBarButtonCell : NSActionCell {
 
 	NSImage				*image;
 	NSImage				*alternateImage;			/**< Image that will be displayed if user holds down the option key */

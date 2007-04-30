@@ -6,16 +6,16 @@
 //  Copyright 2007 __MyCompanyName__. All rights reserved.
 //
 
-#import "PASimpleStatusBarButton.h"
+#import "PAStatusBarButton.h"
 
 
-@implementation PASimpleStatusBarButton
+@implementation PAStatusBarButton
 
 #pragma mark Init + Dealloc
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-		PASimpleStatusBarButtonCell *cell = [[PASimpleStatusBarButtonCell alloc] initImageCell:nil];
+		PAStatusBarButtonCell *cell = [[PAStatusBarButtonCell alloc] initImageCell:nil];
 		[self setCell:cell];
 		[cell release];
 		
@@ -24,9 +24,9 @@
     return self;
 }
 
-+ (PASimpleStatusBarButton *)statusBarButton
++ (PAStatusBarButton *)statusBarButton
 {
-	return [[[PASimpleStatusBarButton alloc] initWithFrame:NSMakeRect(0, 0, MIN_SIZE.width, MIN_SIZE.height)] autorelease];
+	return [[[[self class] alloc] initWithFrame:NSMakeRect(0, 0, MIN_SIZE.width, MIN_SIZE.height)] autorelease];
 }
 
 - (void)dealloc

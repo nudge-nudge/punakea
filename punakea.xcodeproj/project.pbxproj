@@ -316,7 +316,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 48186F380BE4C7BE000B4638 /* NNFilterEngine */;
+			remoteGlobalIDString = 48186F380BE4C7BE000B4638;
 			remoteInfo = NNFilterEngine;
 		};
 		483184E80AEF91AE00C3C672 /* PBXContainerItemProxy */ = {

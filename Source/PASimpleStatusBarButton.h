@@ -7,10 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PASimpleStatusBarButtonCell.h"
+#import "PAStatusBarButtonCell.h"
 
 
-@interface PASimpleStatusBarButton : NSControl {
+@interface PAStatusBarButton : NSControl {
 	
 	NSToolTipTag		toolTipTag;
 	NSString			*toolTip;
