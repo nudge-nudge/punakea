@@ -73,11 +73,13 @@
 {
 	if([sender isEqualTo:verticalSplitView])
 	{
+		// left subview
 		if(offset == 0) return 120.0;
 	}
 	else
 	{
-		// handle horizontal split view
+		// bottom subview
+		if(offset == 1) return 120.0;
 	}
 	
 	return nil;
@@ -87,11 +89,13 @@
 {
 	if([sender isEqualTo:verticalSplitView])
 	{
+		// left subview
 		if(offset == 0) return [sender frame].size.width - [self splitView:sender constrainMinCoordinate:0.0 ofSubviewAt:0];
 	}
 	else
 	{
-		// handle horizontal split view
+		// bottom subview
+		if(offset == 1) return [sender frame].size.height - [self splitView:sender constrainMinCoordinate:0.0 ofSubviewAt:1];
 	}
 	
 	return nil;

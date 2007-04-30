@@ -220,6 +220,10 @@
 		6589C5020A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C4FF0A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff */; };
 		6589C5030A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C5000A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff */; };
 		6589C5040A9DE6F600CA2CD1 /* sl-status_stop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C5010A9DE6F600CA2CD1 /* sl-status_stop.tiff */; };
+		658AB8340BE60D4E0036FCA2 /* PATabPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 658AB8320BE60D4E0036FCA2 /* PATabPanel.h */; };
+		658AB8350BE60D4E0036FCA2 /* PATabPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 658AB8330BE60D4E0036FCA2 /* PATabPanel.m */; };
+		658AB8460BE60F730036FCA2 /* tabpanel-header.tif in Resources */ = {isa = PBXBuildFile; fileRef = 658AB8440BE60F730036FCA2 /* tabpanel-header.tif */; };
+		658AB8470BE60F730036FCA2 /* tabpanel-header-grip.tif in Resources */ = {isa = PBXBuildFile; fileRef = 658AB8450BE60F730036FCA2 /* tabpanel-header-grip.tif */; };
 		658ADEB80AF6432900063AE1 /* PALabel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 658ADEB60AF6432900063AE1 /* PALabel.h */; };
 		658ADEB90AF6432900063AE1 /* PALabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 658ADEB70AF6432900063AE1 /* PALabel.m */; };
 		658ADF600AF6610A00063AE1 /* RemoveRound.tif in Resources */ = {isa = PBXBuildFile; fileRef = 658ADF5E0AF6610A00063AE1 /* RemoveRound.tif */; };
@@ -467,6 +471,7 @@
 				65EB722C0BE20ECC007FF40C /* PAStatusBarButtonCell.h in CopyFiles */,
 				655631660BE3B099004D3B33 /* PABrowserWindow.h in CopyFiles */,
 				48186F7E0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h in CopyFiles */,
+				658AB8340BE60D4E0036FCA2 /* PATabPanel.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,6 +690,10 @@
 		6589C4FF0A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_stop-pressed.tiff"; sourceTree = "<group>"; };
 		6589C5000A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_stop-rollover.tiff"; sourceTree = "<group>"; };
 		6589C5010A9DE6F600CA2CD1 /* sl-status_stop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_stop.tiff"; sourceTree = "<group>"; };
+		658AB8320BE60D4E0036FCA2 /* PATabPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATabPanel.h; sourceTree = "<group>"; };
+		658AB8330BE60D4E0036FCA2 /* PATabPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATabPanel.m; sourceTree = "<group>"; };
+		658AB8440BE60F730036FCA2 /* tabpanel-header.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "tabpanel-header.tif"; sourceTree = "<group>"; };
+		658AB8450BE60F730036FCA2 /* tabpanel-header-grip.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "tabpanel-header-grip.tif"; sourceTree = "<group>"; };
 		658ADEB60AF6432900063AE1 /* PALabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PALabel.h; sourceTree = "<group>"; };
 		658ADEB70AF6432900063AE1 /* PALabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PALabel.m; sourceTree = "<group>"; };
 		658ADF5E0AF6610A00063AE1 /* RemoveRound.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RemoveRound.tif; sourceTree = "<group>"; };
@@ -1446,6 +1455,24 @@
 			name = ResultsView;
 			sourceTree = "<group>";
 		};
+		658AB8310BE60D000036FCA2 /* TabPanel */ = {
+			isa = PBXGroup;
+			children = (
+				658AB8320BE60D4E0036FCA2 /* PATabPanel.h */,
+				658AB8330BE60D4E0036FCA2 /* PATabPanel.m */,
+			);
+			name = TabPanel;
+			sourceTree = "<group>";
+		};
+		658AB8420BE60F5A0036FCA2 /* TabPanel */ = {
+			isa = PBXGroup;
+			children = (
+				658AB8440BE60F730036FCA2 /* tabpanel-header.tif */,
+				658AB8450BE60F730036FCA2 /* tabpanel-header-grip.tif */,
+			);
+			name = TabPanel;
+			sourceTree = "<group>";
+		};
 		658ADF5B0AF660EA00063AE1 /* Tag Management */ = {
 			isa = PBXGroup;
 			children = (
@@ -1567,6 +1594,7 @@
 		65CC15530BE0A5B800866AF7 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				658AB8310BE60D000036FCA2 /* TabPanel */,
 				65CC15540BE0A5C800866AF7 /* StatusBar */,
 			);
 			name = Controls;
@@ -1599,6 +1627,7 @@
 		65D6ACC10A89E20300FDAC8A /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
+				658AB8420BE60F5A0036FCA2 /* TabPanel */,
 				65CC15610BE0A83100866AF7 /* PAStatusBar */,
 				65D6ACC20A89E21200FDAC8A /* PAButton */,
 			);
@@ -1962,6 +1991,8 @@
 				65CC15680BE0A87C00866AF7 /* statusbar-grip.tif in Resources */,
 				6539B9FB0BE35A3B00B1D216 /* statusbar-button-gear.pdf in Resources */,
 				6539B9FC0BE35A3B00B1D216 /* statusbar-button-plus.pdf in Resources */,
+				658AB8460BE60F730036FCA2 /* tabpanel-header.tif in Resources */,
+				658AB8470BE60F730036FCA2 /* tabpanel-header-grip.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2138,6 +2169,7 @@
 				65EB72170BE20D86007FF40C /* PAStatusBarButton.m in Sources */,
 				65EB722D0BE20ECC007FF40C /* PAStatusBarButtonCell.m in Sources */,
 				655631670BE3B099004D3B33 /* PABrowserWindow.m in Sources */,
+				658AB8350BE60D4E0036FCA2 /* PATabPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

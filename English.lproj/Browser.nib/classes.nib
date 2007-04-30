@@ -51,6 +51,12 @@
             SUPERCLASS = NSObject; 
         }, 
         {
+            CLASS = PATabPanel; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {resizableSplitView = NSSplitView; }; 
+            SUPERCLASS = NSTabView; 
+        }, 
+        {
             CLASS = PATagCloud; 
             LANGUAGE = ObjC; 
             OUTLETS = {controller = Controller; }; 

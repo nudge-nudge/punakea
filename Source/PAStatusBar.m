@@ -24,6 +24,8 @@
 
 - (void)dealloc
 {
+	[self removeCursorRect:gripRect cursor:[NSCursor resizeLeftRightCursor]];
+	
 	[items release];
 	[super dealloc];
 }
@@ -53,10 +55,14 @@
 	[image drawInRect:aRect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	
 	// Draw top line	
-	//[[NSColor colorWithDeviceRed:(202.0/255.0) green:(202.0/255.0) blue:(202.0/255.0) alpha:1.0] set];
-	[[NSColor grayColor] set];
-	[NSBezierPath strokeLineFromPoint:NSZeroPoint
-							  toPoint:NSMakePoint(aRect.size.width, 0.0)];
+	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
+	
+	[[NSColor colorWithCalibratedWhite:0.6 alpha:1.0] set];
+	
+	[NSBezierPath strokeLineFromPoint:NSMakePoint(0.0, 1.0)
+							  toPoint:NSMakePoint(aRect.size.width, 1.0)];
+	
+	[[NSGraphicsContext currentContext] setShouldAntialias:YES];
 	
 	// Draw grip if applicable
 	if(resizableSplitView)
@@ -89,7 +95,8 @@
 	{
 		NSRect frame = [view frame];
 		
-		[[NSColor colorWithDeviceCyan:0.24 magenta:0.19 yellow:0.19 black:0.0 alpha:1.0] set];	
+		//[[NSColor colorWithDeviceCyan:0.24 magenta:0.19 yellow:0.19 black:0.0 alpha:1.0] set];	
+		[[NSColor colorWithCalibratedWhite:0.6 alpha:1.0] set];
 		
 		[NSBezierPath strokeLineFromPoint:NSMakePoint(frame.origin.x + frame.size.width, 1.0)
 								  toPoint:NSMakePoint(frame.origin.x + frame.size.width, 23.0)];
@@ -112,7 +119,7 @@
 
 - (void)mouseDown:(NSEvent *)theEvent 
 {
-	NSPoint clickLocation = [theEvent locationInWindow];
+	NSPoint clickLocation = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 	
 	if(NSPointInRect(clickLocation, gripRect)) 
 	{
@@ -149,7 +156,7 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewWillResizeSubviewsNotification 
 														object:resizableSplitView];
 	
-	NSPoint clickLocation = [theEvent locationInWindow];	
+	NSPoint clickLocation = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 	
 	NSView *view = [[resizableSplitView subviews] objectAtIndex:0];
 	

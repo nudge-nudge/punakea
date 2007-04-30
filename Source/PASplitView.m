@@ -19,7 +19,7 @@
 - (void)drawDividerInRect:(NSRect)aRect
 {
 	// override to do nothing
-	[[NSColor grayColor] set];
+	[[NSColor colorWithCalibratedWhite:0.6 alpha:1.0] set];
 	NSRectFill(aRect);
 }
 
