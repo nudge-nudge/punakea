@@ -21,6 +21,7 @@ NSSize const MIN_SIZE = {30, 22};
 	self = [super initImageCell:anImage];
 	if(self)
 	{
+		[self setButtonType:NSMomentaryPushInButton];
 		[self setAction:@selector(action:)];
 		
 		// For mouse move events
@@ -105,13 +106,30 @@ NSSize const MIN_SIZE = {30, 22};
 }
 
 - (void)stopTracking:(NSPoint)lastPoint at:(NSPoint)stopPoint inView:(NSView *)controlView mouseIsUp:(BOOL)flag
-{
+{	
 	[self setHighlighted:NO];
+	
+	// Toggle state if this is a toggle button
+	if(buttonType == NSToggleButton)
+	{
+		alternateState = alternateState ? NO : YES;
+	}
+	
 	[[self controlView] setNeedsDisplay:YES];
 }
 
 
 #pragma mark Accessors
+- (NSButtonType)buttonType
+{
+	return buttonType;
+}
+
+- (void)setButtonType:(NSButtonType)aType
+{
+	buttonType = aType;
+}
+
 - (NSImage *)image
 {
 	return image;

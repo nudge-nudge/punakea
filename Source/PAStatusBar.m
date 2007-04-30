@@ -229,8 +229,12 @@
 	
 	while(view = [enumerator nextObject])
 	{
-		[view setAlternateState:flag];
-		[view setNeedsDisplay:YES];
+		if([view isKindOfClass:[PAStatusBarButton class]] &&
+		   [(PAStatusBarButton *)view buttonType] == NSMomentaryPushInButton)
+		{
+			[view setAlternateState:flag];
+			[view setNeedsDisplay:YES];
+		}
 	}
 }
 

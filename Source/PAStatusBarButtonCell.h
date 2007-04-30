@@ -15,12 +15,17 @@ extern NSSize const MIN_SIZE;
 
 @interface PAStatusBarButtonCell : NSActionCell {
 
+	NSButtonType		buttonType;
+	
 	NSImage				*image;
 	NSImage				*alternateImage;			/**< Image that will be displayed if user holds down the option key */
 	
 	BOOL				alternateState;
 	
 }
+
+- (NSButtonType)buttonType;
+- (void)setButtonType:(NSButtonType)aType;
 
 - (NSImage *)image;
 - (void)setImage:(NSImage *)anImage;

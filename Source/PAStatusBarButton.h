@@ -19,6 +19,9 @@
 
 + (PAStatusBarButton *)statusBarButton;	/**< Use this for init */
 
+- (NSButtonType)buttonType;
+- (void)setButtonType:(NSButtonType)aType;
+
 - (void)setImage:(NSImage *)anImage;
 - (void)setAlternateImage:(NSImage *)anImage;
 

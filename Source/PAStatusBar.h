@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PAStatusBarButton.h"
 
 
 @interface PAStatusBar : NSView {

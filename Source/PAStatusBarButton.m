@@ -58,6 +58,16 @@
 
 
 #pragma mark Accessors
+- (NSButtonType)buttonType
+{
+	return [[self cell] buttonType];
+}
+
+- (void)setButtonType:(NSButtonType)aType
+{
+	[[self cell] setButtonType:aType];
+}
+
 - (void)setImage:(NSImage *)anImage
 {
 	[[self cell] setImage:anImage];
