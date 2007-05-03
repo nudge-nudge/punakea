@@ -44,6 +44,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (NNStringPrefixFilter*)activePrefixFilter;
 
 - (void)setupFilterEngine;
+- (void)filterTags;
+- (void)setFilterEngineConnection:(NSConnection*)conn;
+- (NSConnection*)filterEngineConnection;
 
 @end
 
@@ -261,7 +264,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setVisibleTags:[NSMutableArray array]];
 	
 	// start filtering
-	[filterEngine setObjects:someTags];
+	[self filterTags:someTags];
 }
 
 - (void)resetDisplayTags
@@ -349,10 +352,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark events
 - (void)objectsFiltered
 {
-	// TODO set objects (threadsafe)
-	// call this method, etc
-	// otherwise they will be proxies -> overhead
-	
 	NSLog(@"objects filtered");
 	
 	[filterEngine lockFilteredObjects];
@@ -483,17 +482,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[splitView adjustSubviews];
 }
 
-#pragma mark actions
-- (void)initFilterEngine
+#pragma mark tag filtering
+- (void)filterTags:(NSArray*)someTags
 {
-	[self setupFilterEngine];
-	[self setDisplayTags:[tags tags]];
-}
-
-- (void)setupFilterEngine
-{
-	NSLog(@"filterEngine DO setup");
-	
 	// setup DO messaging
 	NSPort *port1;
 	NSPort *port2;
@@ -502,17 +493,42 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	port1 = [NSPort port];
 	port2 = [NSPort port];
 	
-	filterEngineConnection = [[NSConnection alloc] initWithReceivePort:port1
-															  sendPort:port2];
+	[self setFilterEngineConnection:[NSConnection connectionWithReceivePort:port1
+																   sendPort:port2]];
 	
 	[filterEngineConnection setRootObject:self];
 	
 	portArray = [NSArray arrayWithObjects:port2,port1,nil];
 	
-	filterEngine = [[NNFilterEngine alloc] initWithPorts:portArray];
+	[filterEngine setObjects:someTags];
+	[filterEngine startWithPorts:portArray];
+}
+
+- (void)initFilterEngine
+{
+	[self setupFilterEngine];
+	[self setDisplayTags:[tags tags]];
+}
+
+- (void)setupFilterEngine
+{
+	filterEngine = [[NNFilterEngine alloc] init];
 	activePrefixFilter = nil;
 }
 
+- (void)setFilterEngineConnection:(NSConnection*)conn
+{
+	[conn retain];
+	[filterEngineConnection release];
+	filterEngineConnection = conn;
+}
+
+- (NSConnection*)filterEngineConnection
+{
+	return filterEngineConnection;
+}
+
+#pragma mark actions
 - (void)searchForTag:(NNTag*)aTag
 {
 	[[self mainController] handleTagActivation:aTag];

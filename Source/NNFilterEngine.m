@@ -18,6 +18,8 @@
 
 - (NSConnection*)serverConnection;
 - (void)setServerConnection:(NSConnection*)newConnection;
+- (void)setPorts:(NSArray*)portArray;
+- (NSArray*)ports;
 
 - (void)stopThread;
 
@@ -31,12 +33,10 @@
 @implementation NNFilterEngine
 
 #pragma mark init
-- (id)initWithPorts:(NSArray*)newPorts
+- (id)init
 {
 	if (self = [super init])
 	{
-		ports = [newPorts retain];
-		
 		filters = [[NSMutableArray alloc] init];
 		buffers = [[NSMutableArray alloc] init];
 		
@@ -54,6 +54,7 @@
 
 - (void)dealloc
 {
+	[ports release];
 	[serverConnection release];
 	[filterObjects release];
 	
@@ -62,53 +63,33 @@
 	[threadLock release];
 	[buffers release];
 	[filters release];
-	[ports release];
 	[super dealloc];
 }
 
 #pragma mark threading stuff
-- (void)runCheck
+- (void)runCheckWithPorts:(NSArray*)portArray
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-	[threadLock lock];
+	[threadLock lockWhenCondition:NNThreadStopped];
 	
-	if ([threadLock condition] == NNThreadCanceled)
-	{
-		// canceled directly after run,
-		// don't do anything
-		[threadLock unlockWithCondition:NNThreadStopped];
-		return;
-	}
-	else if ([threadLock condition] == NNThreadRunning)
-	{
-		// wait for previous filter-thread to stop
-		[threadLock unlock];
-		[threadLock lockWhenCondition:NNThreadStopped];
-		[threadLock unlockWithCondition:NNThreadRunning];
-	}
-	else if ([threadLock condition] == NNThreadStopped)
-	{
-		//  this is what we want
-		[threadLock unlockWithCondition:NNThreadRunning];
-	}		
-
 	// setup DO messaging stuff
-	[self setServerConnection:[NSConnection connectionWithReceivePort:[ports objectAtIndex:0] 
-															 sendPort:[ports objectAtIndex:1]]];
-	
+	[self setServerConnection:[NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
+															 sendPort:[portArray objectAtIndex:1]]];
+		
 	[[serverConnection rootProxy] setProtocolForProxy:@protocol(NNBVCServerProtocol)];
-	
+		
 	[[NSRunLoop currentRunLoop] run];
+		
+	//  start thread
+	[threadLock unlockWithCondition:NNThreadRunning];	
 	
-	while ([threadLock tryLockWhenCondition:NNThreadRunning])
+	while ([threadLock condition] == NNThreadRunning)
 	{
-		[threadLock unlockWithCondition:NNThreadRunning];
 		usleep(100000);
 		
-		if ([threadLock tryLockWhenCondition:NNThreadCanceled])
+		if ([threadLock condition] == NNThreadCanceled)
 		{
-			[threadLock unlockWithCondition:NNThreadStopped];
 			break;
 		}
 				
@@ -142,6 +123,18 @@
 	[newConnection retain];
 	[serverConnection release];
 	serverConnection = newConnection;
+}
+
+- (void)setPorts:(NSArray*)portArray
+{
+	[portArray retain];
+	[ports release];
+	ports = portArray;
+}
+	
+- (NSArray*)ports
+{
+	return ports;
 }
 
 - (void)setFilterObjects:(NSMutableArray*)objects
@@ -179,14 +172,20 @@
 	[filteredObjectsLock unlock];
 }
 
-- (void)setObjects:(NSMutableArray*)objects
+// will be called from outside
+- (void)startWithPorts:(NSArray*)portArray
+{	
+	// start the engine
+	[self startFilterEngineWithPorts:portArray];
+}
+
+- (void)setObjects:(NSArray*)objects
 {
 	[self stopFilterEngine];
 	[self setFilterObjects:objects];
-	[self startFilterEngine];
 }
 
-- (void)startFilterEngine
+- (void)startFilterEngineWithPorts:(NSArray*)portArray
 {
 	// buffer in position 0 is the main input buffer
 	NNQueue *inBuffer = [buffers objectAtIndex:0];
@@ -204,16 +203,16 @@
 	}
 	
 	// start check thread
-	[NSThread detachNewThreadSelector:@selector(runCheck)
+	[NSThread detachNewThreadSelector:@selector(runCheckWithPorts:)
 							 toTarget:self
-						   withObject:nil];
+						   withObject:portArray];
 }
 
 - (void)stopFilterEngine
 {
 	// stop check thread
 	// TODO make this thread safe?
-	[self stopThread];
+	[self setThreadShouldQuit];
 	
 	// cancel filter threads
 	NNObjectFilter *filter;

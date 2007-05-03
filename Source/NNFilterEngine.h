@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 @interface NNFilterEngine : NSObject {
-	NSMutableArray *filterObjects;
+	NSArray *filterObjects;
 	NSMutableArray *filteredObjects;
 	
 	NSMutableArray *filters;
@@ -29,11 +29,11 @@
 	NSConnection *serverConnection;
 }
 
-- (id)initWithPorts:(NSArray*)newPorts;
-
+- (void)startWithPorts:(NSArray*)portArray;
 - (void)setThreadShouldQuit;
 
-- (void)setObjects:(NSMutableArray*)objects;
+- (void)setObjects:(NSArray*)objects;
+
 - (void)addFilter:(NNObjectFilter*)filter;
 - (void)removeFilter:(NNObjectFilter*)filter;
 - (void)removeAllFilters;
