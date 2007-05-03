@@ -199,6 +199,8 @@
 		655BC1E00AE795E9000A004A /* SnapBack.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655BC1DE0AE795E9000A004A /* SnapBack.tif */; };
 		655D3BF50A7DD5CB009479F9 /* PAFilterSlice.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 655D3BF30A7DD5CB009479F9 /* PAFilterSlice.h */; };
 		655D3BF60A7DD5CB009479F9 /* PAFilterSlice.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D3BF40A7DD5CB009479F9 /* PAFilterSlice.m */; };
+		655FD6090BEA229C00095532 /* PATagSetPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 655FD6070BEA229C00095532 /* PATagSetPanel.h */; };
+		655FD60A0BEA229C00095532 /* PATagSetPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 655FD6080BEA229C00095532 /* PATagSetPanel.m */; };
 		6563884B09E419D300BE59AE /* PAResultsItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6563884909E419D300BE59AE /* PAResultsItemCell.h */; };
 		6563884C09E419D300BE59AE /* PAResultsItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6563884A09E419D300BE59AE /* PAResultsItemCell.m */; };
 		656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */; };
@@ -473,6 +475,7 @@
 				655631660BE3B099004D3B33 /* PABrowserWindow.h in CopyFiles */,
 				48186F7E0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h in CopyFiles */,
 				658AB8340BE60D4E0036FCA2 /* PATabPanel.h in CopyFiles */,
+				655FD6090BEA229C00095532 /* PATagSetPanel.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,6 +673,8 @@
 		655BC1DE0AE795E9000A004A /* SnapBack.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SnapBack.tif; sourceTree = "<group>"; };
 		655D3BF30A7DD5CB009479F9 /* PAFilterSlice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilterSlice.h; sourceTree = "<group>"; };
 		655D3BF40A7DD5CB009479F9 /* PAFilterSlice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilterSlice.m; sourceTree = "<group>"; };
+		655FD6070BEA229C00095532 /* PATagSetPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagSetPanel.h; sourceTree = "<group>"; };
+		655FD6080BEA229C00095532 /* PATagSetPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagSetPanel.m; sourceTree = "<group>"; };
 		6563884909E419D300BE59AE /* PAResultsItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsItemCell.h; sourceTree = "<group>"; };
 		6563884A09E419D300BE59AE /* PAResultsItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsItemCell.m; sourceTree = "<group>"; };
 		656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+FriendlyFormat.h"; sourceTree = "<group>"; };
@@ -975,23 +980,12 @@
 		4816343A0A5A51D2003B8EE4 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
+				655FD6050BEA225600095532 /* Global */,
 				484003C90A9B3A6500C0AD99 /* TypeAheadView */,
 				48BDCECE09C4A1EE00A57165 /* TagCloud */,
 				6588132C09DDCA7300428B83 /* ResultsView */,
 				659945C60BBAA9ED00F146D2 /* SourcePanel */,
 				484F717E0A666D4B00D886E5 /* TagManagement */,
-				48D16FED0A5A6468006C667B /* BrowserController.h */,
-				48D16FEE0A5A6468006C667B /* BrowserController.m */,
-				4856C6720A516D8300E1D568 /* BrowserViewController.h */,
-				4856C6730A516D8300E1D568 /* BrowserViewController.m */,
-				482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */,
-				488CBBDD0AC9674400F6D20E /* PABrowserViewMainController.m */,
-				655631640BE3B099004D3B33 /* PABrowserWindow.h */,
-				655631650BE3B099004D3B33 /* PABrowserWindow.m */,
-				484C56AC0AE4D1FD0000EB7D /* PAControlledView.h */,
-				484C56AD0AE4D1FD0000EB7D /* PAControlledView.m */,
-				483F50C80AE551EA00551B9D /* PABrowserSplitView.h */,
-				483F50C90AE551EA00551B9D /* PABrowserSplitView.m */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -1384,6 +1378,35 @@
 				655D3BF40A7DD5CB009479F9 /* PAFilterSlice.m */,
 			);
 			name = "Filter Slice";
+			sourceTree = "<group>";
+		};
+		655FD6050BEA225600095532 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				655FD6060BEA228200095532 /* Panels */,
+				48D16FED0A5A6468006C667B /* BrowserController.h */,
+				48D16FEE0A5A6468006C667B /* BrowserController.m */,
+				4856C6720A516D8300E1D568 /* BrowserViewController.h */,
+				4856C6730A516D8300E1D568 /* BrowserViewController.m */,
+				482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */,
+				488CBBDD0AC9674400F6D20E /* PABrowserViewMainController.m */,
+				655631640BE3B099004D3B33 /* PABrowserWindow.h */,
+				655631650BE3B099004D3B33 /* PABrowserWindow.m */,
+				484C56AC0AE4D1FD0000EB7D /* PAControlledView.h */,
+				484C56AD0AE4D1FD0000EB7D /* PAControlledView.m */,
+				483F50C80AE551EA00551B9D /* PABrowserSplitView.h */,
+				483F50C90AE551EA00551B9D /* PABrowserSplitView.m */,
+			);
+			name = Global;
+			sourceTree = "<group>";
+		};
+		655FD6060BEA228200095532 /* Panels */ = {
+			isa = PBXGroup;
+			children = (
+				655FD6070BEA229C00095532 /* PATagSetPanel.h */,
+				655FD6080BEA229C00095532 /* PATagSetPanel.m */,
+			);
+			name = Panels;
 			sourceTree = "<group>";
 		};
 		6562A1D40996399100DBE7DB /* Images */ = {
@@ -2174,6 +2197,7 @@
 				65EB722D0BE20ECC007FF40C /* PAStatusBarButtonCell.m in Sources */,
 				655631670BE3B099004D3B33 /* PABrowserWindow.m in Sources */,
 				658AB8350BE60D4E0036FCA2 /* PATabPanel.m in Sources */,
+				655FD60A0BEA229C00095532 /* PATagSetPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,7 +57,7 @@
 	// Draw top line	
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 	
-	[[NSColor colorWithCalibratedWhite:0.6 alpha:1.0] set];
+	[[NSColor colorWithCalibratedWhite:0.7 alpha:1.0] set];
 	
 	[NSBezierPath strokeLineFromPoint:NSMakePoint(0.0, 1.0)
 							  toPoint:NSMakePoint(aRect.size.width, 1.0)];
@@ -96,7 +96,7 @@
 		NSRect frame = [view frame];
 		
 		//[[NSColor colorWithDeviceCyan:0.24 magenta:0.19 yellow:0.19 black:0.0 alpha:1.0] set];	
-		[[NSColor colorWithCalibratedWhite:0.6 alpha:1.0] set];
+		[[NSColor colorWithCalibratedWhite:0.7 alpha:1.0] set];
 		
 		[NSBezierPath strokeLineFromPoint:NSMakePoint(frame.origin.x + frame.size.width, 1.0)
 								  toPoint:NSMakePoint(frame.origin.x + frame.size.width, 23.0)];

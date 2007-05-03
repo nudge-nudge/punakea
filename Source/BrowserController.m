@@ -37,9 +37,10 @@
 	
 	// Setup status bar for source panel
 	PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
-	[sbitem setToolTip:@"Add favorite"];
+	[sbitem setToolTip:@"Add tag set"];
 	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
 	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-gear"]];
+	[sbitem setAction:@selector(addTagSet:)];
 	[sourcePanelStatusBar addItem:sbitem];
 	
 	sbitem = [PAStatusBarButton statusBarButton];
@@ -65,6 +66,39 @@
 	} else {
 		[sourcePanelStatusBar setAlternateState:NO];
 	}
+}
+
+
+#pragma mark Actions
+- (IBAction)confirmSheet:(id)sender
+{
+	NSWindow *theSheet = [sender window];
+	
+	[NSApp endSheet:theSheet returnCode:NSOKButton];
+	[theSheet orderOut:nil];
+}
+
+- (IBAction)cancelSheet:(id)sender
+{
+	NSWindow *theSheet = [sender window];
+	
+	[NSApp endSheet:theSheet returnCode:NSCancelButton];
+	[theSheet orderOut:nil];
+}
+
+- (void)tagSetPanelDidEnd:(PATagSetPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	if (returnCode == NSOKButton)
+		NSLog(@"jau");
+}
+
+- (void)addTagSet:(id)sender
+{
+	[NSApp beginSheet:editTagSetSheet
+	   modalForWindow:[sender window]
+		modalDelegate:self
+	   didEndSelector:@selector(tagSetPanelDidEnd:returnCode:contextInfo:)
+		  contextInfo:NULL];
 }
 
 

@@ -1,9 +1,11 @@
 {
     IBClasses = (
         {
+            ACTIONS = {cancelSheet = id; confirmSheet = id; }; 
             CLASS = BrowserController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                editTagSetSheet = NSPanel; 
                 mainPlaceholderView = NSView; 
                 sourcePanelStatusBar = PAStatusBar; 
                 verticalSplitView = NSSplitView; 
@@ -61,6 +63,12 @@
             LANGUAGE = ObjC; 
             OUTLETS = {controller = Controller; }; 
             SUPERCLASS = NSView; 
+        }, 
+        {
+            CLASS = PATagSetPanel; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {tokenField = NSTokenField; }; 
+            SUPERCLASS = NSPanel; 
         }, 
         {
             ACTIONS = {doubleAction = id; }; 

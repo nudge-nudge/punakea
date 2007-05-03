@@ -12,9 +12,12 @@
 #import "PATagCloud.h"
 #import "PAStatusBar.h"
 #import "PAStatusBarButton.h"
+#import "PATagSetPanel.h"
 
 @interface BrowserController : NSWindowController 
 {
+	
+	IBOutlet NSPanel				*editTagSetSheet;
 	
 	BrowserViewController			*browserViewController;
 	
@@ -24,6 +27,9 @@
 	IBOutlet PAStatusBar			*sourcePanelStatusBar;
 
 }
+
+- (IBAction)confirmSheet:(id)sender;
+- (IBAction)cancelSheet:(id)sender;
 
 - (BrowserViewController*)browserViewController;
 
