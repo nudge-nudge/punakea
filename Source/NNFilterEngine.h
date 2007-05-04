@@ -24,9 +24,6 @@
 	
 	NSConditionLock *threadLock;
 	NSLock *filteredObjectsLock;
-	
-	NSArray *ports;
-	NSConnection *serverConnection;
 }
 
 - (void)startWithPorts:(NSArray*)portArray;

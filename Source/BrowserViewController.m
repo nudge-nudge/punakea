@@ -485,23 +485,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag filtering
 - (void)filterTags:(NSArray*)someTags
 {
-	// setup DO messaging
-	NSPort *port1;
-	NSPort *port2;
-	NSArray *portArray;
-	
-	port1 = [NSPort port];
-	port2 = [NSPort port];
-	
-	[self setFilterEngineConnection:[NSConnection connectionWithReceivePort:port1
-																   sendPort:port2]];
-	
-	[filterEngineConnection setRootObject:self];
-	
-	portArray = [NSArray arrayWithObjects:port2,port1,nil];
 	
 	[filterEngine setObjects:someTags];
-	[filterEngine startWithPorts:portArray];
+	[filterEngine startWithServer:self];
 }
 
 - (void)initFilterEngine

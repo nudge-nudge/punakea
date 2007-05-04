@@ -54,8 +54,6 @@
 
 - (void)dealloc
 {
-	[ports release];
-	[serverConnection release];
 	[filterObjects release];
 	
 	[filteredObjectsLock release];
@@ -74,10 +72,10 @@
 	[threadLock lockWhenCondition:NNThreadStopped];
 	
 	// setup DO messaging stuff
-	[self setServerConnection:[NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
-															 sendPort:[portArray objectAtIndex:1]]];
+	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
+																	sendPort:[portArray objectAtIndex:1]];
 		
-	[[serverConnection rootProxy] setProtocolForProxy:@protocol(NNBVCServerProtocol)];
+	//[[serverConnection rootProxy] setProtocolForProxy:@protocol(NNBVCServerProtocol)];
 		
 	[[NSRunLoop currentRunLoop] run];
 		
@@ -109,34 +107,12 @@
 	[threadLock lock];
 	[threadLock unlockWithCondition:NNThreadStopped];
 	
+	NSLog(@"filter thread finished");
+	
 	[pool release];
 }
 
 #pragma mark accessors
-- (NSConnection*)serverConnection
-{
-	return serverConnection;
-}
-
-- (void)setServerConnection:(NSConnection*)newConnection
-{
-	[newConnection retain];
-	[serverConnection release];
-	serverConnection = newConnection;
-}
-
-- (void)setPorts:(NSArray*)portArray
-{
-	[portArray retain];
-	[ports release];
-	ports = portArray;
-}
-	
-- (NSArray*)ports
-{
-	return ports;
-}
-
 - (void)setFilterObjects:(NSMutableArray*)objects
 {
 	[objects retain];
@@ -173,8 +149,24 @@
 }
 
 // will be called from outside
-- (void)startWithPorts:(NSArray*)portArray
+- (void)startWithServer:(id <NNBVCServerProtocol>)server
 {	
+	// setup DO messaging
+	NSPort *port1;
+	NSPort *port2;
+	NSArray *portArray;
+	
+	port1 = [NSPort port];
+	port2 = [NSPort port];
+	
+	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:port1
+																	sendPort:port2];
+	[serverConnection retain];
+	
+	[serverConnection setRootObject:server];
+	
+	portArray = [NSArray arrayWithObjects:port2,port1,nil];
+	
 	// start the engine
 	[self startFilterEngineWithPorts:portArray];
 }

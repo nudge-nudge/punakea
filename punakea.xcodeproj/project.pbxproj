@@ -1015,7 +1015,6 @@
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				48186F480BE4C834000B4638 /* ObjectFilter */,
-				48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */,
 				65B78F1A0AF0D8D400AF1102 /* CTGradient.h */,
 				65B78F1B0AF0D8D400AF1102 /* CTGradient.m */,
 				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
@@ -1068,6 +1067,7 @@
 				48186F4E0BE4C834000B4638 /* NNStringPrefixFilter.m */,
 				48186F4F0BE4C834000B4638 /* NNContentTypeFilter.h */,
 				48186F500BE4C834000B4638 /* NNContentTypeFilter.m */,
+				48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */,
 			);
 			name = ObjectFilter;
 			sourceTree = "<group>";
