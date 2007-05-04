@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "BrowserViewController.h"
 #import "NNTagging/NNTag.h"
+#import "NNTagging/NNTagSet.h"
 #import "NNTagging/NNQuery.h"
 #import "PATagCloud.h"
 #import "PAStatusBar.h"
@@ -21,7 +22,7 @@
 @interface BrowserController : NSWindowController 
 {
 	
-	IBOutlet NSPanel				*tagSetPanel;
+	IBOutlet PATagSetPanel			*tagSetPanel;
 	
 	BrowserViewController			*browserViewController;
 	

@@ -119,7 +119,9 @@
 		PASourceItem *parent = [spController itemWithValue:@"FAVORITES"];
 		
 		PASourceItem *item = [PASourceItem itemWithValue:@"aValue" displayName:@"new name"];
-		[item setContainedObject:[[NNTag alloc] initWithName:@"aja"]];
+		
+		NNTagSet *tagSet = [NNTagSet setWithTags:[tagSetPanel tags]];
+		[item setContainedObject:tagSet];
 		
 		[spController addChild:item toItem:parent];
 		
@@ -131,7 +133,9 @@
 }
 
 - (void)addTagSet:(id)sender
-{
+{	
+	[tagSetPanel removeAllTags];
+	
 	[NSApp beginSheet:tagSetPanel
 	   modalForWindow:[sender window]
 		modalDelegate:self

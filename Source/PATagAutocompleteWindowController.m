@@ -139,7 +139,7 @@
 	return currentCompleteTagsInField;
 }
 
-- (void)setCurrentCompleteTagsInField:(NNSelectedTags*)newTags
+- (void)setCurrentCompleteTagsInField:(NNSelectedTags *)newTags
 {
 	[currentCompleteTagsInField release];
 	currentCompleteTagsInField = [newTags retain];

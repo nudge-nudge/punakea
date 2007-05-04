@@ -79,7 +79,7 @@
         {
             CLASS = PATagSetPanel; 
             LANGUAGE = ObjC; 
-            OUTLETS = {tokenField = NSTokenField; }; 
+            OUTLETS = {tagField = NSTokenField; }; 
             SUPERCLASS = NSPanel; 
         }, 
         {

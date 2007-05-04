@@ -14,10 +14,12 @@
 	// This outlet is a first draft. For future versions we need to distinguish
 	// between simple and smart sets and offer more sophisticated accessors.
 	
-	IBOutlet NSTokenField				*tokenField;
+	IBOutlet NSTokenField				*tagField;
 	
 }
 
-- (NSTokenField *)tokenField;
+- (void)removeAllTags;
+
+- (NSTokenField *)tagField;
 
 @end
