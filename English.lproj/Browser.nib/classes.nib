@@ -5,9 +5,10 @@
             CLASS = BrowserController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
-                editTagSetSheet = NSPanel; 
                 mainPlaceholderView = NSView; 
+                sourcePanel = PASourcePanel; 
                 sourcePanelStatusBar = PAStatusBar; 
+                tagSetPanel = NSPanel; 
                 verticalSplitView = NSSplitView; 
             }; 
             SUPERCLASS = NSWindowController; 
@@ -38,7 +39,12 @@
             SUPERCLASS = NSMatrix; 
         }, 
         {CLASS = PASourcePanel; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
-        {CLASS = PASourcePanelController; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = PASourcePanelController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {sourcePanel = PASourcePanel; }; 
+            SUPERCLASS = NSObject; 
+        }, 
         {CLASS = PASplitView; LANGUAGE = ObjC; SUPERCLASS = NSSplitView; }, 
         {
             CLASS = PAStatusBar; 
@@ -57,6 +63,12 @@
             LANGUAGE = ObjC; 
             OUTLETS = {resizableSplitView = NSSplitView; }; 
             SUPERCLASS = NSTabView; 
+        }, 
+        {
+            CLASS = PATagAutocompleteWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {tagField = NSTokenField; }; 
+            SUPERCLASS = NSWindowController; 
         }, 
         {
             CLASS = PATagCloud; 

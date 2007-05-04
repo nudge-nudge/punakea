@@ -8,16 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BrowserViewController.h"
+#import "NNTagging/NNTag.h"
 #import "NNTagging/NNQuery.h"
 #import "PATagCloud.h"
 #import "PAStatusBar.h"
 #import "PAStatusBarButton.h"
+#import "PASourcePanel.h"
+#import "PASourceItem.h"
+#import "PASourcePanelController.h"
 #import "PATagSetPanel.h"
 
 @interface BrowserController : NSWindowController 
 {
 	
-	IBOutlet NSPanel				*editTagSetSheet;
+	IBOutlet NSPanel				*tagSetPanel;
 	
 	BrowserViewController			*browserViewController;
 	
@@ -25,6 +29,7 @@
 	IBOutlet NSSplitView			*verticalSplitView;
 	
 	IBOutlet PAStatusBar			*sourcePanelStatusBar;
+	IBOutlet PASourcePanel			*sourcePanel;
 
 }
 

@@ -11,7 +11,6 @@
 
 @implementation PATagSetPanel
 
-
 #pragma mark Accessors
 - (NSTokenField *)tokenField
 {

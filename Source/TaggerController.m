@@ -1,6 +1,9 @@
 #import "TaggerController.h"
 
+
 @interface TaggerController (PrivateAPI)
+
+- (void)updateTags;
 
 /**
 adds tag to tagField (use from "outside")
@@ -8,41 +11,30 @@ adds tag to tagField (use from "outside")
  */
 - (void)addTagToField:(NNSimpleTag*)tag;
 
-/**
-called when items have changed
- */
-- (void)itemsHaveChanged;
-
-/**
-resets the tagger window (called when window is closed)
- */
-- (void)resetTaggerContent;
-
+- (void)itemsHaveChanged;							/**< called when items have changed */
+- (void)resetTaggerContent;							/**< resets the tagger window (called when window is closed) */
 - (void)displayRestTags:(NSArray*)restTags;
-
 - (void)resizeTokenField;
 
 @end
 
+
+
 @implementation TaggerController
 
 #pragma mark init + dealloc
+// TODO: Why are we using this non-designated initializer for a NSWindowController subclass?!
 - (id)init
 {
 	if (self = [super initWithWindowNibName:@"Tagger"])
 	{
 		items = [[NSMutableArray alloc] init];
 		
-		typeAheadFind = [[PATypeAheadFind alloc] init];
-
-		currentCompleteTagsInField = [[NNSelectedTags alloc] init];
 		dropManager = [PADropManager sharedInstance];
 		
 		// custom data cell
 		fileCell = [[PATaggerItemCell alloc] initTextCell:@""];
 		[fileCell setEditable:YES];
-		
-		globalTags = [NNTags sharedTags];
 	}
 	return self;
 }
@@ -65,7 +57,7 @@ resets the tagger window (called when window is closed)
 	[[columns objectAtIndex:0] setHeaderCell:headerCell];
 	
 	// token field wrapping
-	[[tagField cell] setWraps:YES];
+	[[[self tagField] cell] setWraps:YES];
 	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	// add observer for updating the threaded icons
@@ -83,8 +75,6 @@ resets the tagger window (called when window is closed)
 	[headerCell release];
 	[tableView unregisterDraggedTypes];
 	[fileCell release];
-	[currentCompleteTagsInField release];
-	[typeAheadFind release];
 	[super dealloc];
 }
 
@@ -125,10 +115,10 @@ resets the tagger window (called when window is closed)
 	}
 	
 	// update to new value
-	[tagField setObjectValue:[tagsOnAllObjects allObjects]];
+	[[self tagField] setObjectValue:[tagsOnAllObjects allObjects]];
 	
-	[currentCompleteTagsInField removeAllTags];
-	[currentCompleteTagsInField addObjectsFromArray:[tagsOnAllObjects allObjects]];
+	[[self currentCompleteTagsInField] removeAllTags];
+	[[self currentCompleteTagsInField] addObjectsFromArray:[tagsOnAllObjects allObjects]];
 	
 	[[self window] makeFirstResponder:tagField];
 }
@@ -163,29 +153,10 @@ resets the tagger window (called when window is closed)
 
 #pragma mark tokenField delegate
 - (NSArray *)tokenField:(NSTokenField *)tokenField 
-completionsForSubstring:(NSString *)substring 
-		   indexOfToken:(int)tokenIndex 
-	indexOfSelectedItem:(int *)selectedIndex
-{
-	NSMutableArray *results = [NSMutableArray array];
-	
-	NSEnumerator *e = [[typeAheadFind tagsForPrefix:substring] objectEnumerator];
-	NNSimpleTag *tag;
-	
-	while (tag = [e nextObject])
-	{
-		[results addObject:[tag name]];
-	}
-	
-	return results;
-}
-
-- (NSArray *)tokenField:(NSTokenField *)tokenField 
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)idx
-{
-	[currentCompleteTagsInField addObjectsFromArray:tokens];
-	
+{	
+	// Add tags to items
 	[items makeObjectsPerformSelector:@selector(addTags:) withObject:tokens];
 		
 	// resize field if neccessary
@@ -193,28 +164,10 @@ completionsForSubstring:(NSString *)substring
 			   withObject:nil 
 			   afterDelay:0.05];
 	
-	// everything will be added
-	return tokens;
+	// Forward to super
+	return [super tokenField:tokenField shouldAddObjects:tokens atIndex:idx];
 }
 
-// the following methods are for 'translation' from tag to string and back (NSTokenField)
-- (NSString *)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject
-{
-	return [representedObject name];
-}
-
-- (NSString *)tokenField:(NSTokenField *)tokenField editingStringForRepresentedObject:(id)representedObject
-{
-	return [representedObject name];
-}
-
-- (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString
-{
-	if (editingString && [editingString isNotEqualTo:@""])
-		return [globalTags createTagForName:editingString];
-	else
-		return nil;
-}
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
@@ -225,20 +178,20 @@ completionsForSubstring:(NSString *)substring
 		// look for deleted tags
 		NSMutableArray *deletedTags = [NSMutableArray array];
 		
-		NSEnumerator *e = [currentCompleteTagsInField objectEnumerator];
+		NSEnumerator *e = [[self currentCompleteTagsInField] objectEnumerator];
 		NNSimpleTag *tag;
 		
 		while (tag = [e nextObject])
 		{
-			if (![[tagField objectValue] containsObject:tag])
+			if (![[[self tagField] objectValue] containsObject:tag])
 			{
 				[deletedTags addObject:tag];
 			}
 		}
 		
 		// now remove the tags to be deleted from currentCompleteTagsInField - to keep in sync with tagField
-		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
-		
+		[[self currentCompleteTagsInField] removeObjectsInArray:deletedTags];
+
 		// remove the deleted tags from all files
 		[items makeObjectsPerformSelector:@selector(removeTags:)
 												withObject:deletedTags];
@@ -250,15 +203,15 @@ completionsForSubstring:(NSString *)substring
 
 - (void)resizeTokenField
 {
-	NSRect oldTokenFieldFrame = [tagField frame];
-	NSSize cellSize = [[tagField cell] cellSizeForBounds:[tagField bounds]];
+	NSRect oldTokenFieldFrame = [[self tagField] frame];
+	NSSize cellSize = [[[self tagField] cell] cellSizeForBounds:[[self tagField] bounds]];
 	cellSize.height = (cellSize.height > 22) ? cellSize.height : 22;
 	float sizeDifference = cellSize.height - oldTokenFieldFrame.size.height;
 	
-	[tagField setFrame:NSMakeRect(oldTokenFieldFrame.origin.x,
-								  oldTokenFieldFrame.origin.y - sizeDifference,
-								  oldTokenFieldFrame.size.width,
-								  cellSize.height)];
+	[[self tagField] setFrame:NSMakeRect(oldTokenFieldFrame.origin.x,
+										 oldTokenFieldFrame.origin.y - sizeDifference,
+										 oldTokenFieldFrame.size.width,
+										 cellSize.height)];
 	
 	NSRect oldTableViewFrame = [[tableView enclosingScrollView] frame];
 	[[tableView enclosingScrollView] setFrame:NSMakeRect(oldTableViewFrame.origin.x,
@@ -274,7 +227,7 @@ completionsForSubstring:(NSString *)substring
 - (void)windowWillClose:(NSNotification *)aNotification
 {		
 	// unbind stuff
-	[tagField unbind:@"editable"];
+	[[self tagField] unbind:@"editable"];
 	
 	[self autorelease];
 }
@@ -415,20 +368,6 @@ completionsForSubstring:(NSString *)substring
 	[items removeObjectsAtIndexes:[tableView selectedRowIndexes]];
 	[self updateTags];
 	[tableView reloadData];
-}
-
-
-#pragma mark accessors
-- (NNSelectedTags*)currentCompleteTagsInField
-{
-	return currentCompleteTagsInField;
-}
-
-- (void)setCurrentCompleteTagsInField:(NNSelectedTags*)newTags
-{
-	[newTags retain];
-	[currentCompleteTagsInField release];
-	currentCompleteTagsInField = newTags;
 }
 
 @end

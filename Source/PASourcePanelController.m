@@ -17,7 +17,7 @@
 	if (self = [super init])
 	{
 		// Define Source Items
-		sourceItems = [[NSMutableArray alloc] init];
+		items = [[NSMutableArray alloc] init];
 		
 		PASourceItem *sourceGroup = [PASourceItem itemWithValue:@"TEST" displayName:@"Test"];
 		[sourceGroup setSelectable:NO];
@@ -30,19 +30,19 @@
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
 		
-		[sourceItems addObject:sourceGroup];
+		[items addObject:sourceGroup];
 		
 		sourceItem = [PASourceItem itemWithValue:@"FAVORITES" displayName:@"Favorites"];
 		[sourceItem setSelectable:NO];
 		[sourceItem setHeading:YES];
-		[sourceItems addObject:sourceItem];
+		[items addObject:sourceItem];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[sourceItems release];
+	[items release];
 	[super dealloc];
 }
 
@@ -59,7 +59,7 @@
 {		
 	if(item == nil)
 	{
-		return [sourceItems objectAtIndex:idx];
+		return [items objectAtIndex:idx];
 	} else if([item isKindOfClass:[PASourceItem class]]) {
 		return [[(PASourceItem *)item children] objectAtIndex:idx];
 	}
@@ -78,7 +78,7 @@
 {
 	if(item == nil)
 	{
-		return [sourceItems count];
+		return [items count];
 	} else if([item isKindOfClass:[PASourceItem class]]) {
 		return [[item children] count];
 	}
@@ -455,7 +455,47 @@
 }
 
 
+#pragma mark Misc
+- (void)addItem:(PASourceItem *)anItem
+{
+	[items addObject:anItem];
+	
+	[sourcePanel reloadData];
+}
+
+- (void)addChild:(PASourceItem *)anItem toItem:(PASourceItem *)aParent
+{
+	[aParent addChild:anItem];
+	
+	[sourcePanel reloadData];
+}
+
+- (void)removeItem:(PASourceItem *)anItem
+{
+	[items removeObject:anItem];
+	
+	[sourcePanel reloadData];
+}
+
+- (PASourceItem *)itemWithValue:(NSString *)value
+{
+	NSEnumerator *e = [items objectEnumerator];
+	PASourceItem *item;
+	while(item = [e nextObject])
+	{
+		if([[item value] isEqualTo:value])
+			return item;
+	}
+	return nil;
+}
+
+
 #pragma mark Accessors
+- (NSArray *)items
+{
+	return items;
+}
+
 - (NSArray *)draggedItems
 {
 	return draggedItems;

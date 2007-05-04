@@ -3,6 +3,12 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = PAFileCell; LANGUAGE = ObjC; SUPERCLASS = NSTextFieldCell; }, 
         {
+            CLASS = PATagAutocompleteWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {tagField = NSTokenField; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
             CLASS = PATaggerBackgroundView; 
             LANGUAGE = ObjC; 
             OUTLETS = {controller = TaggerController; }; 
@@ -12,8 +18,8 @@
         {
             CLASS = TaggerController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {tableView = NSTableView; tagField = NSTokenField; }; 
-            SUPERCLASS = NSWindowController; 
+            OUTLETS = {tableView = NSTableView; }; 
+            SUPERCLASS = PATagAutocompleteWindowController; 
         }
     ); 
     IBVersion = 1; 

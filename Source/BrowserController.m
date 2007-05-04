@@ -8,6 +8,15 @@
 
 #import "BrowserController.h"
 
+
+@interface BrowserController (PrivateAPI)
+
+- (void)setupToolbar;
+- (void)setupStatusBar;
+
+@end
+
+
 @implementation BrowserController
 
 #pragma mark Init + Dealloc
@@ -35,7 +44,22 @@
 	[browserViewController setNextResponder:[self window]];
 	[[[self window] contentView] setNextResponder:browserViewController];
 	
-	// Setup status bar for source panel
+	[self setupToolbar];
+	[self setupStatusBar];
+}
+
+- (void)setupToolbar
+{
+	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"mainToolbar"];
+    [toolbar setDelegate:self];
+    [toolbar setAllowsUserCustomization:YES];
+    [toolbar setAutosavesConfiguration:YES];
+	
+	[[self window] setToolbar:[toolbar autorelease]];
+}
+
+- (void)setupStatusBar
+{
 	PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
 	[sbitem setToolTip:@"Add tag set"];
 	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
@@ -89,16 +113,59 @@
 - (void)tagSetPanelDidEnd:(PATagSetPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSOKButton)
-		NSLog(@"jau");
+	{
+		PASourcePanelController *spController = [sourcePanel dataSource];
+		
+		PASourceItem *parent = [spController itemWithValue:@"FAVORITES"];
+		
+		PASourceItem *item = [PASourceItem itemWithValue:@"aValue" displayName:@"new name"];
+		[item setContainedObject:[[NNTag alloc] initWithName:@"aja"]];
+		
+		[spController addChild:item toItem:parent];
+		
+		// Begin editing
+		int row = [sourcePanel rowForItem:item];
+		[sourcePanel selectRow:row byExtendingSelection:NO];
+		[sourcePanel editColumn:0 row:row withEvent:nil select:YES];
+	}
 }
 
 - (void)addTagSet:(id)sender
 {
-	[NSApp beginSheet:editTagSetSheet
+	[NSApp beginSheet:tagSetPanel
 	   modalForWindow:[sender window]
 		modalDelegate:self
 	   didEndSelector:@selector(tagSetPanelDidEnd:returnCode:contextInfo:)
 		  contextInfo:NULL];
+}
+
+
+#pragma mark Toolbar Delegate
+- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar
+	 itemForItemIdentifier:(NSString *)itemIdentifier
+ willBeInsertedIntoToolbar:(BOOL)flag
+{
+	NSToolbarItem *import = [[NSToolbarItem alloc] initWithItemIdentifier:@"Import"];
+    [import setLabel:NSLocalizedString(@"Import", nil)];
+    [import setToolTip:@"Import just the selected songs based on the preferences that you have set"];
+    [import setPaletteLabel:[import label]];
+    [import setTarget:self];
+    [import setAction:@selector(import:)];
+	
+	return [import autorelease];
+}
+
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
+{
+    return [NSArray arrayWithObjects:NSToolbarSeparatorItemIdentifier,
+        NSToolbarSpaceItemIdentifier,
+        NSToolbarFlexibleSpaceItemIdentifier,
+        NSToolbarCustomizeToolbarItemIdentifier, @"Import", nil];
+}
+
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
+{
+    return [NSArray arrayWithObjects:NSToolbarSeparatorItemIdentifier, @"Import", nil];
 }
 
 

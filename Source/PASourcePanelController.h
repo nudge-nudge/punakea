@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PASourcePanel.h"
 #import "PASourceItem.h"
 #import "PASourceItemCell.h"
 #import "PATagButton.h"
@@ -18,12 +19,20 @@
 
 @interface PASourcePanelController : NSObject {
 
-	NSMutableArray				*sourceItems;
+	IBOutlet PASourcePanel		*sourcePanel;
+	
+	NSMutableArray				*items;
 	
 	NSArray						*draggedItems;
 	
 }
 
+- (void)addItem:(PASourceItem *)anItem;
+- (void)addChild:(PASourceItem *)anItem toItem:(PASourceItem *)aParent;
+- (void)removeItem:(PASourceItem *)anItem;
+- (PASourceItem *)itemWithValue:(NSString *)value;
+
+- (NSArray *)items;
 - (NSArray *)draggedItems;
 
 @end
