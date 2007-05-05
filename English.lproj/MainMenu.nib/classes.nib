@@ -11,6 +11,7 @@
                 selectAll = id; 
                 showBrowser = id; 
                 showDonationWebsite = id; 
+                showInfo = id; 
                 showPreferences = id; 
                 showResults = id; 
                 showTagger = id; 

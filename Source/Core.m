@@ -213,7 +213,16 @@
 #pragma mark MainMenu actions
 - (BOOL)validateMenuItem:(id <NSMenuItem>)item
 {
-	// Disable all items that are browser-specific
+	// Adjust dynamic titles
+	if([item action] == @selector(toggleToolbarShown:))
+	{
+		if([[[browserController window] toolbar] isVisible])
+			[item setTitle:@"Hide Toolbar"];
+		else
+			[item setTitle:@"Show Toolbar"];
+	}	
+	
+	// Check all items that are browser-specific
 	if(![self appHasBrowser])
 	{
 		// File menu
@@ -231,7 +240,7 @@
 		if([item action] == @selector(runToolbarCustomizationPalette:)) return NO;		
 	}
 	
-	// Disable all items that are browser-specific but have constraints	
+	// Check all items that are browser-specific and have constraints	
 	if([self appHasBrowser])
 	{
 		NSResponder *firstResponder = [[browserController window] firstResponder];
@@ -380,11 +389,6 @@
 {
 	[self showBrowser:self];
 	[[browserController window] toggleToolbarShown:sender];
-	
-	if([[[browserController window] toolbar] isVisible])
-		[sender setTitle:@"Hide Toolbar"];
-	else
-		[sender setTitle:@"Show Toolbar"];
 }
 
 - (IBAction)runToolbarCustomizationPalette:(id)sender

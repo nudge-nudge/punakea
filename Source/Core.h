@@ -43,6 +43,7 @@
 - (SUUpdater*)updater;
 
 // Menu Actions
+- (IBAction)showInfo:(id)sender;
 - (IBAction)showResults:(id)sender;
 - (IBAction)manageTags:(id)sender;
 - (IBAction)searchForTag:(NNTag*)aTag;
