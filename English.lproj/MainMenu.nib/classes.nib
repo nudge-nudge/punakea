@@ -2,10 +2,11 @@
     IBClasses = (
         {
             ACTIONS = {
-                deleteFiles = id; 
+                delete = id; 
                 editTagsOnFiles = id; 
                 manageTags = id; 
                 openFiles = id; 
+                runToolbarCustomizationPalette = id; 
                 searchForTag = id; 
                 selectAll = id; 
                 showBrowser = id; 
@@ -13,6 +14,7 @@
                 showPreferences = id; 
                 showResults = id; 
                 showTagger = id; 
+                toggleToolbarShown = id; 
             }; 
             CLASS = Core; 
             LANGUAGE = ObjC; 

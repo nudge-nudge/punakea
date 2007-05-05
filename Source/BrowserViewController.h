@@ -34,30 +34,31 @@ typedef enum _PATagCloudSortKey {
 
 extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 
-@interface BrowserViewController : PAViewController {
-	IBOutlet PATagCloud *tagCloud;
-	IBOutlet NSSplitView *splitView;
-	IBOutlet NSView *controlledView;
+@interface BrowserViewController : PAViewController
+{
+	IBOutlet PATagCloud					*tagCloud;
+	IBOutlet NSSplitView				*splitView;
+	IBOutlet NSView						*controlledView;
 	
-	PABrowserViewControllerState state;
+	PABrowserViewControllerState		state;
 		
-	PABrowserViewMainController *mainController;
+	PABrowserViewMainController			*mainController;
 	
-	NNTags *tags;
+	NNTags								*tags;
 	
-	NSMutableArray *visibleTags; /**< holds the (filtered) tags for TagCloud */
-	NNTag *currentBestTag; /**< holds the tag with the highest absolute rating currently in visibleTags */
+	NSMutableArray						*visibleTags;			/**< holds the (filtered) tags for TagCloud */
+	NNTag								*currentBestTag;		/**< holds the tag with the highest absolute rating currently in visibleTags */
 	
-	IBOutlet PATypeAheadView *typeAheadView;
-	IBOutlet NSSearchField *searchField;
-	NSString *buffer;
+	IBOutlet PATypeAheadView			*typeAheadView;
+	IBOutlet NSSearchField				*searchField;
+	NSString							*buffer;
 			
-	NNFilterEngine *filterEngine;
-	NSConnection *filterEngineConnection;
-	NNStringPrefixFilter *activePrefixFilter;
+	NNFilterEngine						*filterEngine;
+	NSConnection						*filterEngineConnection;
+	NNStringPrefixFilter				*activePrefixFilter;
 	
-	PATagCloudSortKey sortKey;
-	NSSortDescriptor *sortDescriptor;
+	PATagCloudSortKey					sortKey;
+	NSSortDescriptor					*sortDescriptor;
 }
 
 /** 

@@ -52,7 +52,7 @@
 
 - (BOOL)isEqualTo:(id)other
 {
-	if (!other || ![other isKindOfClass:[self class]]) 
+	if (!other || ![other isMemberOfClass:[self class]]) 
         return NO;
     if (other == self)
         return YES;
@@ -64,7 +64,7 @@
 
 - (unsigned)hash 
 {
-	return [value hash];
+	return [value hash] * [displayName hash] * [children hash];
 }
 
 
@@ -77,9 +77,11 @@
 	[newItem setValue:[self value]];
 	[newItem setDisplayName:[self displayName]];
 	[newItem setSelectable:[self isSelectable]];
+	[newItem setHeading:[self isHeading]];
 	[newItem setEditable:[self isEditable]];
-	[newItem setParent:[self parent]];
+	
 	[newItem setContainedObject:[self containedObject]];
+	[newItem setParent:[self parent]];
 	
 	newItem->children = [children copy];
 	

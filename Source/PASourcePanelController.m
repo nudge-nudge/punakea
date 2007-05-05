@@ -474,7 +474,7 @@
 {
 	[items removeObject:anItem];
 	
-	[sourcePanel reloadData];
+	[sourcePanel reloadData];	
 }
 
 - (PASourceItem *)itemWithValue:(NSString *)value

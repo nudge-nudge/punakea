@@ -152,9 +152,10 @@
 	NSToolbarItem *import = [[NSToolbarItem alloc] initWithItemIdentifier:@"Import"];
     [import setLabel:NSLocalizedString(@"Import", nil)];
     [import setToolTip:@"Import just the selected songs based on the preferences that you have set"];
+	[import setImage:[NSImage imageNamed:@"toolbar-show-tagger"]];
     [import setPaletteLabel:[import label]];
     [import setTarget:self];
-    [import setAction:@selector(import:)];
+    [import setAction:@selector(addTagSet:)];
 	
 	return [import autorelease];
 }

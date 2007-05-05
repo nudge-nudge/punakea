@@ -211,21 +211,65 @@
 }
 
 #pragma mark MainMenu actions
-- (IBAction)showResults:(id)sender
+- (BOOL)validateMenuItem:(id <NSMenuItem>)item
 {
+	// Disable all items that are browser-specific
 	if(![self appHasBrowser])
-		[self showBrowser:self];
+	{
+		// File menu
+		if([item action] == @selector(openFiles:)) return NO;
+		
+		// Edit menu
+		if([item action] == @selector(delete:)) return NO;
+		if([item action] == @selector(editTagsOnFiles:)) return NO;
+		if([item action] == @selector(selectAll:)) return NO;
+		
+		// View menu
+		if([item action] == @selector(showResults:)) return NO;
+		if([item action] == @selector(manageTags:)) return NO;
+		if([item action] == @selector(toggleToolbarShown:)) return NO;
+		if([item action] == @selector(runToolbarCustomizationPalette:)) return NO;		
+	}
 	
+	// Disable all items that are browser-specific but have constraints	
+	if([self appHasBrowser])
+	{
+		NSResponder *firstResponder = [[browserController window] firstResponder];
+		
+		// Edit menu
+		if([item action] == @selector(delete:))
+		{
+			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
+			{
+				PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
+				if([ov numberOfSelectedRows] > 0)
+					return YES;
+			}
+			
+			if([firstResponder isMemberOfClass:[PASourcePanel class]])
+			{
+				PASourcePanel *sp = (PASourcePanel *)firstResponder;
+				if([sp numberOfSelectedRows] > 0 &&
+				   [(PASourceItem *)[sp itemAtRow:[sp selectedRow]] isEditable])
+					return YES;
+			}
+				
+			return NO;
+		}
+	}
+	
+	return YES;
+}
+
+- (IBAction)showResults:(id)sender
+{	
 	[[browserController browserViewController] showResults];
 	[[viewMenu itemWithTag:0] setState:NSOnState];
 	[[viewMenu itemWithTag:1] setState:NSOffState];
 }
 
 - (IBAction)manageTags:(id)sender
-{	
-	if(![self appHasBrowser])
-		[self showBrowser:self];
-	
+{		
 	[[browserController browserViewController] manageTags];
 	[[viewMenu itemWithTag:0] setState:NSOffState];
 	[[viewMenu itemWithTag:1] setState:NSOnState];
@@ -243,10 +287,7 @@
 }
 
 - (IBAction)openFiles:(id)sender
-{	
-	if(![self appHasBrowser])
-		[self showBrowser:self];
-	
+{		
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
@@ -260,25 +301,25 @@
 	}
 }
 
-- (IBAction)deleteFiles:(id)sender
-{	
-	if(![self appHasBrowser])
-		[self showBrowser:self];
+- (IBAction)delete:(id)sender
+{		
+	NSResponder *firstResponder = [[browserController window] firstResponder];
 	
-	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
-	
-	if ([mainController isKindOfClass:[PAResultsViewController class]])
+	if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 	{
-		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
+		PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
 		[[ov target] performSelector:@selector(deleteFilesForVisibleSelectedItems:)];
+	}
+	
+	if([firstResponder isMemberOfClass:[PASourcePanel class]])
+	{
+		PASourcePanel *sp = (PASourcePanel *)firstResponder;
+		[sp removeSelectedItem];
 	}
 }
 
 - (IBAction)editTagsOnFiles:(id)sender
-{
-	if(![self appHasBrowser])
-		[self showBrowser:self];
-	
+{	
 	TaggerController *taggerController = [[TaggerController alloc] init];
 	[taggerController showWindow:self];
 	NSWindow *taggerWindow = [taggerController window];
@@ -296,10 +337,7 @@
 }
 
 - (IBAction)selectAll:(id)sender
-{
-	if(![self appHasBrowser])
-		[self showBrowser:self];
-	
+{	
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 	
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
@@ -336,6 +374,23 @@
 {
 	[self showBrowser:self];
 	[[browserController browserViewController] searchForTag:aTag];
+}
+
+- (IBAction)toggleToolbarShown:(id)sender
+{
+	[self showBrowser:self];
+	[[browserController window] toggleToolbarShown:sender];
+	
+	if([[[browserController window] toolbar] isVisible])
+		[sender setTitle:@"Hide Toolbar"];
+	else
+		[sender setTitle:@"Show Toolbar"];
+}
+
+- (IBAction)runToolbarCustomizationPalette:(id)sender
+{
+	[self showBrowser:self];
+	[[browserController window] runToolbarCustomizationPalette:sender];
 }
 
 #pragma mark NSApplication delegate

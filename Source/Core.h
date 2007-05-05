@@ -12,6 +12,8 @@
 #import "PABrowserViewMainController.h"
 #import "PAResultsViewController.h"
 #import "PAResultsOutlineView.h"
+#import "PASourcePanel.h"
+#import "PASourceItem.h"
 
 #import "PACollectionNotEmpty.h"
 
@@ -21,37 +23,33 @@
 
 @interface Core : NSWindowController
 {
-	IBOutlet NSMenu			*viewMenu;
+	IBOutlet NSMenu					*viewMenu;	
 	
-	IBOutlet SUUpdater		*updater;
+	IBOutlet NSMenu					*statusMenu;	
+	NNTags							*globalTags;
 	
-	IBOutlet NSMenu			*statusMenu;
+	BrowserController				*browserController;	
+	PreferenceController			*preferenceController;	
+	SidebarController				*sidebarController;
 	
-	NNTags					*globalTags;
+	NSStatusItem					*statusItem;
 	
-	BrowserController		*browserController;
+	NSNotificationCenter			*nc;	
+	NSUserDefaults					*userDefaults;
 	
-	PreferenceController	*preferenceController;
-	
-	SidebarController		*sidebarController;
-	
-	NSStatusItem			*statusItem;
-	
-	NSNotificationCenter	*nc;
-	
-	NSUserDefaults			*userDefaults;
+	IBOutlet SUUpdater				*updater;
 }
 
 - (SUUpdater*)updater;
 
-// mainmenu actions
+// Menu Actions
 - (IBAction)showResults:(id)sender;
 - (IBAction)manageTags:(id)sender;
 - (IBAction)searchForTag:(NNTag*)aTag;
 - (IBAction)showPreferences:(id)sender;
 
 - (IBAction)openFiles:(id)sender;
-- (IBAction)deleteFiles:(id)sender;
+- (IBAction)delete:(id)sender;
 - (IBAction)editTagsOnFiles:(id)sender;
 - (IBAction)selectAll:(id)sender;
 
@@ -59,6 +57,9 @@
 - (IBAction)showTagger:(id)sender;
 
 - (IBAction)showDonationWebsite:(id)sender;
+
+- (IBAction)toggleToolbarShown:(id)sender;
+- (IBAction)runToolbarCustomizationPalette:(id)sender;
 
 // misc
 - (BOOL)appHasBrowser;

@@ -17,4 +17,6 @@
 
 - (void)reloadDataAndSelectItemWithValue:(NSString *)value;
 
+- (void)removeSelectedItem;
+
 @end

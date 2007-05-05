@@ -9,6 +9,14 @@
 #import "PASourcePanel.h"
 
 
+@interface PASourcePanel (PrivateAPI)
+
+- (void)beginEditing;
+
+@end
+
+
+
 @implementation PASourcePanel
 
 - (void)awakeFromNib
@@ -156,7 +164,6 @@
 		
 		if([self selectedRow] == 0 &&
 		   !selectableItemFound &&
-		   [item isKindOfClass:[PASourceItem class]] &&
 		   [(PASourceItem *)item isSelectable])
 		{
 			[self selectRow:row byExtendingSelection:NO];
@@ -167,7 +174,7 @@
 
 - (void)reloadDataAndSelectItemWithValue:(NSString *)value
 {
-	[super reloadData];
+	[self reloadData];
 	
 	for(int row = 0; row < [self numberOfRows]; row++)
 	{
@@ -194,13 +201,6 @@
 		   [[self selectedRowIndexes] count] == 1)
 		{
 			[self beginEditing];
-			return;
-		}
-		
-		// Remove editable item on Backspace
-		if(key == NSDeleteCharacter)
-		{
-			[self removeSelectedItem];
 			return;
 		}
 	}
