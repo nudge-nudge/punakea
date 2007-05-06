@@ -26,7 +26,7 @@
 		PASourceItem *sourceItem = [PASourceItem itemWithValue:@"LIBRARY" displayName:@"Library"];
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
-		sourceItem = [PASourceItem itemWithValue:@"MANAGETAGS" displayName:@"Manage Tags"];
+		sourceItem = [PASourceItem itemWithValue:@"MANAGE_TAGS" displayName:@"Manage Tags"];
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
 		

@@ -20,11 +20,12 @@
 @implementation BrowserController
 
 #pragma mark Init + Dealloc
+// TODO: Why are we using this non-designated initializer???
 - (id)init
 {
 	if (self = [super initWithWindowNibName:@"Browser"])
 	{
-		// nothing
+		// Nothing yet
 	}	
 	return self;
 }
@@ -49,11 +50,11 @@
 }
 
 - (void)setupToolbar
-{
+{	
 	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"mainToolbar"];
     [toolbar setDelegate:self];
     [toolbar setAllowsUserCustomization:YES];
-    [toolbar setAutosavesConfiguration:YES];
+    [toolbar setAutosavesConfiguration:NO];
 	
 	[[self window] setToolbar:[toolbar autorelease]];
 }
@@ -143,21 +144,73 @@
 		  contextInfo:NULL];
 }
 
+- (void)manageTags:(id)sender
+{
+	[sourcePanel selectItemWithValue:@"MANAGE_TAGS"];
+}
+
 
 #pragma mark Toolbar Delegate
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar
 	 itemForItemIdentifier:(NSString *)itemIdentifier
  willBeInsertedIntoToolbar:(BOOL)flag
 {
-	NSToolbarItem *import = [[NSToolbarItem alloc] initWithItemIdentifier:@"Import"];
-    [import setLabel:NSLocalizedString(@"Import", nil)];
-    [import setToolTip:@"Import just the selected songs based on the preferences that you have set"];
-	[import setImage:[NSImage imageNamed:@"toolbar-show-tagger"]];
-    [import setPaletteLabel:[import label]];
-    [import setTarget:self];
-    [import setAction:@selector(addTagSet:)];
+	NSToolbarItem *item = nil;
 	
-	return [import autorelease];
+	if([itemIdentifier isEqualTo:@"ShowTagger"])
+	{
+		item = [[[NSToolbarItem alloc] initWithItemIdentifier:@"ShowTagger"] autorelease];
+		[item setLabel:NSLocalizedStringFromTable(@"SHOW_TAGGER", @"Toolbars", nil)];
+		[item setToolTip:NSLocalizedStringFromTable(@"SHOW_TAGGER_TOOLTIP", @"Toolbars", nil)];
+		[item setImage:[NSImage imageNamed:@"toolbar-show-tagger"]];
+		[item setPaletteLabel:[item label]];
+		[item setTarget:self];
+		[item setAction:@selector(showTagger:)];
+	}	
+	else if([itemIdentifier isEqualTo:@"ManageTags"])
+	{
+		item = [[[NSToolbarItem alloc] initWithItemIdentifier:@"ManageTags"] autorelease];
+		[item setLabel:NSLocalizedStringFromTable(@"MANAGE_TAGS", @"Toolbars", nil)];
+		[item setToolTip:NSLocalizedStringFromTable(@"MANAGE_TAGS_TOOLTIP", @"Toolbars", nil)];
+		[item setImage:[NSImage imageNamed:@"toolbar-manage-tags"]];
+		[item setPaletteLabel:[item label]];
+		[item setTarget:self];
+		[item setAction:@selector(manageTags:)];
+	}	
+	else if([itemIdentifier isEqualTo:@"SortByName"])
+	{
+		item = [[[NSToolbarItem alloc] initWithItemIdentifier:@"SortByName"] autorelease];
+		[item setLabel:NSLocalizedStringFromTable(@"SORT_BY_NAME", @"Toolbars", nil)];
+		[item setToolTip:NSLocalizedStringFromTable(@"SORT_BY_NAME_TOOLTIP", @"Toolbars", nil)];
+		[item setImage:[NSImage imageNamed:@"toolbar-sort-by-name"]];
+		[item setPaletteLabel:[item label]];
+		[item setTarget:self];
+		[item setAction:@selector(sortByName:)];
+	}	
+	else if([itemIdentifier isEqualTo:@"SortByRating"])
+	{
+		item = [[[NSToolbarItem alloc] initWithItemIdentifier:@"SortByRating"] autorelease];
+		[item setLabel:NSLocalizedStringFromTable(@"SORT_BY_RATING", @"Toolbars", nil)];
+		[item setToolTip:NSLocalizedStringFromTable(@"SORT_BY_RATING_TOOLTIP", @"Toolbars", nil)];
+		[item setImage:[NSImage imageNamed:@"toolbar-sort-by-rating"]];
+		[item setPaletteLabel:[item label]];
+		[item setTarget:self];
+		[item setAction:@selector(sortByRating:)];
+	}
+	else if([itemIdentifier isEqualTo:@"Search"])
+	{
+		NSSearchField *searchField = [[[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)] autorelease];
+		
+		item = [[[NSToolbarItem alloc] initWithItemIdentifier:@"Search"] autorelease];
+		[item setLabel:NSLocalizedStringFromTable(@"SEARCH", @"Toolbars", nil)];
+		[item setToolTip:NSLocalizedStringFromTable(@"SEARCH_TOOLTIP", @"Toolbars", nil)];
+		[item setView:searchField];
+		[item setPaletteLabel:[item label]];
+		[item setMinSize:NSMakeSize(130, 22)];
+		[item setMaxSize:NSMakeSize(180, 22)];
+	}
+	
+	return item;
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
@@ -165,12 +218,15 @@
     return [NSArray arrayWithObjects:NSToolbarSeparatorItemIdentifier,
         NSToolbarSpaceItemIdentifier,
         NSToolbarFlexibleSpaceItemIdentifier,
-        NSToolbarCustomizeToolbarItemIdentifier, @"Import", nil];
+        NSToolbarCustomizeToolbarItemIdentifier, @"ShowTagger", 
+		@"ManageTags", @"SortByName", @"SortByRating", @"Search", nil];
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
-    return [NSArray arrayWithObjects:NSToolbarSeparatorItemIdentifier, @"Import", nil];
+    return [NSArray arrayWithObjects:@"ShowTagger", @"ManageTags", 
+		NSToolbarSpaceItemIdentifier, @"SortByName", @"SortByRating", 
+		NSToolbarFlexibleSpaceItemIdentifier, @"Search", nil];
 }
 
 
@@ -206,6 +262,16 @@
 	
 	return nil;
 }
+
+
+#pragma mark Window Delegate
+/*- (id)windowWillReturnFieldEditor:(NSWindow *)sender toObject:(id)anObject
+{
+	if([anObject isMemberOfClass:[PASourcePanel class]])
+		return [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,50,20)] autorelease];
+	
+	return nil;
+}*/
 
 
 #pragma mark Notifications

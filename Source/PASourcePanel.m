@@ -52,9 +52,13 @@
 	imageRect.size.height = [backgroundImage size].height;
 	
 	// Decide which color to use
-	if(([[[self window] firstResponder] isEqualTo:self] ||
-		[[[self window] firstResponder] isEqualTo:[[self window] fieldEditor:NO forObject:self]]) &&
-	   [[self window] isKeyWindow]) 
+	NSResponder *firstResponder = [[self window] firstResponder];
+	
+	if([[self window] isKeyWindow] && 
+	   ([firstResponder isEqualTo:self] ||
+		([firstResponder isEqualTo:[[self window] fieldEditor:NO forObject:self]] &&
+		 [[[[self window] fieldEditor:NO forObject:self] delegate] isEqualTo:self]))
+	   ) 
 	{
 		imageRect.origin.x = 0.0;
 	} else {
@@ -150,6 +154,20 @@
 	return rect;
 }
 
+- (void)selectItemWithValue:(NSString *)value
+{
+	for(int row = 0; row < [self numberOfRows]; row++)
+	{
+		PASourceItem *item = [self itemAtRow:row];
+		
+		if([[item value] isEqualTo:value])
+		{
+			[self selectRow:row byExtendingSelection:NO];
+			return;
+		}
+	}
+}
+
 - (void)reloadData
 {
 	[super reloadData];
@@ -174,18 +192,8 @@
 
 - (void)reloadDataAndSelectItemWithValue:(NSString *)value
 {
-	[self reloadData];
-	
-	for(int row = 0; row < [self numberOfRows]; row++)
-	{
-		PASourceItem *item = [self itemAtRow:row];
-		
-		if([[item value] isEqualTo:value])
-		{
-			[self selectRow:row byExtendingSelection:NO];
-			return;
-		}
-	}
+	[self reloadData];	
+	[self selectItemWithValue:value];
 }
 
 
