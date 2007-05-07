@@ -5,6 +5,7 @@
 
 #import "SidebarController.h"
 #import "BrowserController.h"
+#import "TaggerController.h"
 #import "PreferenceController.h"
 #import "TaggerController.h"
 #import "PATagManagementViewController.h"
@@ -29,6 +30,7 @@
 	NNTags							*globalTags;
 	
 	BrowserController				*browserController;	
+	TaggerController				*taggerController;
 	PreferenceController			*preferenceController;	
 	SidebarController				*sidebarController;
 	

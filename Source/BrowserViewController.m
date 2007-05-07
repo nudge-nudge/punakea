@@ -38,8 +38,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (PABrowserViewControllerState)state;
 - (void)setState:(PABrowserViewControllerState)aState;
 
-- (void)updateSortDescriptor;
-
 - (void)setActivePrefixFilter:(NNStringPrefixFilter*)filter;
 - (NNStringPrefixFilter*)activePrefixFilter;
 
@@ -48,7 +46,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)setFilterEngineConnection:(NSConnection*)conn;
 - (NSConnection*)filterEngineConnection;
 
+- (void)updateSortDescriptor;
+
 @end
+
+
 
 @implementation BrowserViewController
 
@@ -283,6 +285,17 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[tagCloud removeActiveTagButton];
 }
+
+- (NNTags *)tags
+{
+	return tags;
+}
+
+- (PATagCloud *)tagCloud
+{
+	return tagCloud;
+}
+
 
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
@@ -587,6 +600,16 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
+- (void)reloadData
+{
+	sortKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"TagCloud.SortKey"];
+	[self updateSortDescriptor];
+	NSMutableArray *currentVisibleTags = [visibleTags mutableCopy];
+	[self setVisibleTags:currentVisibleTags];
+	[currentVisibleTags release];
+}
+
+
 #pragma mark drag & drop stuff
 - (void)taggableObjectsHaveBeenDropped:(NSArray*)objects
 {
@@ -629,12 +652,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		// default to name
 		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
 	}
-}
-
-#pragma mark temp
-- (NNTags*)tags
-{
-	return tags;
 }
 
 @end

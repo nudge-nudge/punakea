@@ -149,6 +149,18 @@
 	[sourcePanel selectItemWithValue:@"MANAGE_TAGS"];
 }
 
+- (void)sortByName:(id)sender
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:PATagCloudNameSortKey forKey:@"TagCloud.SortKey"];
+	[browserViewController reloadData];
+}
+
+- (void)sortByRating:(id)sender
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:PATagCloudRatingSortKey forKey:@"TagCloud.SortKey"];
+	[browserViewController reloadData];
+}
+
 
 #pragma mark Toolbar Delegate
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar
@@ -164,7 +176,7 @@
 		[item setToolTip:NSLocalizedStringFromTable(@"SHOW_TAGGER_TOOLTIP", @"Toolbars", nil)];
 		[item setImage:[NSImage imageNamed:@"toolbar-show-tagger"]];
 		[item setPaletteLabel:[item label]];
-		[item setTarget:self];
+		[item setTarget:[[NSApplication sharedApplication] delegate]];
 		[item setAction:@selector(showTagger:)];
 	}	
 	else if([itemIdentifier isEqualTo:@"ManageTags"])
@@ -225,7 +237,6 @@
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
     return [NSArray arrayWithObjects:@"ShowTagger", @"ManageTags", 
-		NSToolbarSpaceItemIdentifier, @"SortByName", @"SortByRating", 
 		NSToolbarFlexibleSpaceItemIdentifier, @"Search", nil];
 }
 

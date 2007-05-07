@@ -101,4 +101,9 @@ is called when a tag is clicked
 - (void)reset;
 - (void)unbindAll;
 
+- (void)reloadData;
+
+- (NNTags*)tags;				/*< what's that for?! */
+- (PATagCloud *)tagCloud;
+
 @end

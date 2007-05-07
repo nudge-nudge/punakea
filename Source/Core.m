@@ -13,6 +13,7 @@
 + (BOOL)wasLaunchedAsLoginItem;
 + (BOOL)wasLaunchedByProcess:(NSString*)creator;
 
+- (BOOL)appHasTagger;
 - (BOOL)appHasPreferences;
 
 @end
@@ -368,10 +369,22 @@
 
 - (IBAction)showTagger:(id)sender
 {
+	/*
+	// Implementation of multiple tagger windows 
+	
 	TaggerController *taggerController = [[TaggerController alloc] init];
 	[taggerController showWindow:self];
 	NSWindow *taggerWindow = [taggerController window];
-	[taggerWindow makeKeyAndOrderFront:nil];
+	[taggerWindow makeKeyAndOrderFront:nil];*/
+	
+	// Implementation of single tagger window
+	
+	if(![self appHasTagger])
+	{
+		taggerController =  [[TaggerController alloc] init];
+	}
+	[taggerController showWindow:self];
+	[[taggerController window] makeKeyAndOrderFront:self];
 }
 
 - (IBAction)showDonationWebsite:(id)sender
@@ -533,6 +546,24 @@
 	}
 	
 	return hasBrowser;
+}
+
+- (BOOL)appHasTagger
+{
+	BOOL hasTagger = NO;
+	
+	NSArray *windows = [[NSApplication sharedApplication] windows];
+	
+	NSEnumerator *e = [windows objectEnumerator];
+	NSWindow *window;
+	
+	while (window = [e nextObject])
+	{
+		if ([window delegate] && [[window delegate] isKindOfClass:[TaggerController class]])
+			hasTagger = YES;
+	}
+	
+	return hasTagger;
 }
 
 - (BOOL)appHasPreferences
