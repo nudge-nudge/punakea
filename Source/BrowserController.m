@@ -161,6 +161,13 @@
 	[browserViewController reloadData];
 }
 
+- (void)search:(id)sender
+{
+	NSSearchField *searchField = sender;
+	
+	[browserViewController setBuffer:[searchField stringValue]];
+}
+
 
 #pragma mark Toolbar Delegate
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar
@@ -220,6 +227,8 @@
 		[item setPaletteLabel:[item label]];
 		[item setMinSize:NSMakeSize(130, 22)];
 		[item setMaxSize:NSMakeSize(180, 22)];
+		[item setTarget:self];
+		[item setAction:@selector(search:)];
 	}
 	
 	return item;
@@ -286,7 +295,7 @@
 
 
 #pragma mark Notifications
-- (void)windowWillClose:(NSNotification *)aNotification
+- (void)windowWillClose:(NSNotification *)notification
 {
 	[browserViewController unbindAll];
 	[self autorelease];

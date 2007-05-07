@@ -29,7 +29,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)hideTypeAheadView;
 
 - (NSString*)buffer;
-- (void)setBuffer:(NSString*)string;
 - (void)resetBuffer;
 - (void)bufferHasChanged;
 
@@ -372,7 +371,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[filterEngine unlockFilteredObjects];
 }
 
-- (void)keyDown:(NSEvent*)event 
+/*- (void)keyDown:(NSEvent*)event 
 {
 	// get the pressed key
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
@@ -394,11 +393,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			[(PAResultsViewController*)mainController removeLastTag];
 		}
 	}
-	// handle escape key (27)
-	/*else if (key == 27)
-	{
-		[self reset];
-	}*/
 	else if ([alphanumericCharacterSet characterIsMember:key]) 
 	{
 		// only add to buffer if there are any tags, otherwise do nothing
@@ -422,7 +416,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		// forward unhandled events
 		[[self nextResponder] keyDown:event];
 	}
-}
+}*/
 
 - (void)bufferHasChanged
 {
@@ -430,10 +424,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// else display all tags
 	if ([buffer length] > 0)
 	{
-		if ([typeAheadView isHidden])
+		/*if ([typeAheadView isHidden])
 		{
 			[self showTypeAheadView];
-		} 
+		}*/
 		
 		// remove old filter
 		if (activePrefixFilter)
@@ -446,11 +440,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 	else
 	{
-		if (![typeAheadView isHidden])
+		/*if (![typeAheadView isHidden])
 		{
 			[self hideTypeAheadView];
-			[[tagCloud window] makeFirstResponder:tagCloud];
-		}
+			//[[tagCloud window] makeFirstResponder:tagCloud];
+		}*/
 		
 		if (activePrefixFilter) 
 		{

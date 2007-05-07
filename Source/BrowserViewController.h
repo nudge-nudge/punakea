@@ -92,6 +92,8 @@ is called when a tag is clicked
 - (IBAction)tagButtonClicked:(id)sender;
 - (IBAction)findFieldAction:(id)sender;
 
+- (void)setBuffer:(NSString*)string;
+
 - (void)searchForTag:(NNTag*)aTag;
 - (void)manageTags;
 - (void)showResults;
