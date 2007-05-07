@@ -51,10 +51,10 @@
 
 - (void)setupToolbar
 {	
-	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"mainToolbar"];
+	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"BrowserToolbar"];
     [toolbar setDelegate:self];
     [toolbar setAllowsUserCustomization:YES];
-    [toolbar setAutosavesConfiguration:NO];
+    [toolbar setAutosavesConfiguration:YES];
 	
 	[[self window] setToolbar:[toolbar autorelease]];
 }
@@ -174,6 +174,10 @@
 	 itemForItemIdentifier:(NSString *)itemIdentifier
  willBeInsertedIntoToolbar:(BOOL)flag
 {
+	// Check if this itemIdentifier is allowed (after version updates this may occur)
+	if(![[self toolbarAllowedItemIdentifiers:toolbar] containsObject:itemIdentifier])
+		return nil;
+	
 	NSToolbarItem *item = nil;
 	
 	if([itemIdentifier isEqualTo:@"ShowTagger"])

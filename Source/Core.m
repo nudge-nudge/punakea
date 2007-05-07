@@ -357,6 +357,26 @@
 	}
 }
 
+- (IBAction)tagSearch:(id)sender
+{
+	// Make sure browser toolbar is visible
+	NSToolbar *toolbar = [[browserController window] toolbar];	
+	if(![toolbar isVisible])
+		[toolbar setVisible:YES];
+	
+	// Make search field the first responder if its toolbar item is visible
+	NSEnumerator *e = [[toolbar items] objectEnumerator];
+	NSToolbarItem *item;
+	while(item = [e nextObject])
+	{
+		if([[item view] isKindOfClass:[NSSearchField class]])
+		{
+			[[browserController window] makeFirstResponder:[item view]];
+			return;
+		}
+	}
+}
+
 - (IBAction)showBrowser:(id)sender
 {
 	if (![self appHasBrowser])
@@ -387,15 +407,14 @@
 	[[taggerController window] makeKeyAndOrderFront:self];
 }
 
+- (IBAction)showWebsite:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/punakea"]];
+}
+
 - (IBAction)showDonationWebsite:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/donate"]];
-}
-
-- (IBAction)searchForTag:(NNTag*)aTag
-{
-	[self showBrowser:self];
-	[[browserController browserViewController] searchForTag:aTag];
 }
 
 - (IBAction)toggleToolbarShown:(id)sender
@@ -409,6 +428,13 @@
 	[self showBrowser:self];
 	[[browserController window] runToolbarCustomizationPalette:sender];
 }
+
+- (IBAction)searchForTag:(NNTag*)aTag
+{
+	[self showBrowser:self];
+	[[browserController browserViewController] searchForTag:aTag];
+}
+
 
 #pragma mark NSApplication delegate
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag

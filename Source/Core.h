@@ -48,21 +48,25 @@
 - (IBAction)showInfo:(id)sender;
 - (IBAction)showResults:(id)sender;
 - (IBAction)manageTags:(id)sender;
-- (IBAction)searchForTag:(NNTag*)aTag;
 - (IBAction)showPreferences:(id)sender;
 
 - (IBAction)openFiles:(id)sender;
 - (IBAction)delete:(id)sender;
 - (IBAction)editTagsOnFiles:(id)sender;
 - (IBAction)selectAll:(id)sender;
+- (IBAction)tagSearch:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
 - (IBAction)showTagger:(id)sender;
 
+- (IBAction)showWebsite:(id)sender;
 - (IBAction)showDonationWebsite:(id)sender;
 
 - (IBAction)toggleToolbarShown:(id)sender;
 - (IBAction)runToolbarCustomizationPalette:(id)sender;
+
+
+- (IBAction)searchForTag:(NNTag*)aTag;
 
 // misc
 - (BOOL)appHasBrowser;
