@@ -16,6 +16,8 @@
 #include <unistd.h>
 
 @interface NNFilterEngine : NSObject {
+	id <NNBVCServerProtocol> server;
+	
 	NSArray *filterObjects;
 	NSMutableArray *filteredObjects;
 	
@@ -26,7 +28,7 @@
 	NSLock *filteredObjectsLock;
 }
 
-- (void)startWithPorts:(NSArray*)portArray;
+- (void)startWithServer:(id <NNBVCServerProtocol>)aServer;
 - (void)setThreadShouldQuit;
 
 - (void)setObjects:(NSArray*)objects;

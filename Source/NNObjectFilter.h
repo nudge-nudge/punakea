@@ -33,6 +33,7 @@ each filter comes with its own outQueue, and the inQueue will be connected to ot
 
 - (void)stopFilter;
 - (void)markAsCanceled;
+
 - (void)setInQueue:(NNQueue*)queue;
 - (NNQueue*)inQueue;
 - (void)setOutQueue:(NNQueue*)queue;

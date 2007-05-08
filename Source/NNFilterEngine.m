@@ -74,11 +74,13 @@
 	// setup DO messaging stuff
 	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
 																	sendPort:[portArray objectAtIndex:1]];
-		
-	//[[serverConnection rootProxy] setProtocolForProxy:@protocol(NNBVCServerProtocol)];
-		
+				
 	[[NSRunLoop currentRunLoop] run];
+//	
+//	[(id)[serverConnection rootProxy] setProtocolForProxy:@protocol(NNBVCServerProtocol)];
 		
+	// TODO stop thread if filtering is done
+	
 	//  start thread
 	[threadLock unlockWithCondition:NNThreadRunning];	
 	
@@ -87,9 +89,7 @@
 		usleep(100000);
 		
 		if ([threadLock condition] == NNThreadCanceled)
-		{
 			break;
-		}
 				
 		NSMutableArray *currentlyFilteredObjects = [self currentlyFilteredObjects];
 		
@@ -149,8 +149,12 @@
 }
 
 // will be called from outside
-- (void)startWithServer:(id <NNBVCServerProtocol>)server
+- (void)startWithServer:(id <NNBVCServerProtocol>)aServer
 {	
+	// hold server reference
+	// needed if filters change without new filterObjects being set
+	server = aServer;
+	
 	// setup DO messaging
 	NSPort *port1;
 	NSPort *port2;
@@ -159,9 +163,8 @@
 	port1 = [NSPort port];
 	port2 = [NSPort port];
 	
-	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:port1
-																	sendPort:port2];
-	[serverConnection retain];
+	NSConnection *serverConnection = [[NSConnection alloc] initWithReceivePort:port1
+																	  sendPort:port2];
 	
 	[serverConnection setRootObject:server];
 	
@@ -203,7 +206,6 @@
 - (void)stopFilterEngine
 {
 	// stop check thread
-	// TODO make this thread safe?
 	[self setThreadShouldQuit];
 	
 	// cancel filter threads
@@ -265,7 +267,8 @@
 {
 	NSLog(@"adding %@ to filterQueue",newFilter);
 
-	[self stopFilterEngine];
+	// stops check thread and resets main buffer
+	[self setObjects:filterObjects];
 	
 	NSEnumerator *e = [filters objectEnumerator];
 	NNObjectFilter *filter;
@@ -292,7 +295,7 @@
 		[nextFilter setInQueue:[newFilter outQueue]];
 	}
 	
-	[self startFilterEngine];
+	[self startWithServer:server];
 }
 	
 - (void)removeFilter:(NNObjectFilter*)filter
@@ -300,7 +303,8 @@
 	if (!filter)
 		return;
 
-	[self stopFilterEngine];
+	// stops check thread and resets main buffer
+	[self setObjects:filterObjects];
 	
 	unsigned int slot = [filters indexOfObject:filter];
 	
@@ -315,7 +319,7 @@
 	[filters removeObjectAtIndex:slot];
 	[buffers removeObjectAtIndex:slot+1];
 	
-	[self startFilterEngine];
+	[self startWithServer:server];
 }
 
 - (void)removeAllFilters

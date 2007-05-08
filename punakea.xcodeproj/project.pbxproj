@@ -1029,7 +1029,6 @@
 				488E80270AF3895800660B7B /* Value Transformers */,
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
-				48186F480BE4C834000B4638 /* ObjectFilter */,
 				65B78F1A0AF0D8D400AF1102 /* CTGradient.h */,
 				65B78F1B0AF0D8D400AF1102 /* CTGradient.m */,
 				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
@@ -1071,7 +1070,7 @@
 			name = TagGroups;
 			sourceTree = "<group>";
 		};
-		48186F480BE4C834000B4638 /* ObjectFilter */ = {
+		48186F480BE4C834000B4638 /* NNFilterEngine */ = {
 			isa = PBXGroup;
 			children = (
 				48186F490BE4C834000B4638 /* NNFilterEngine.h */,
@@ -1084,7 +1083,8 @@
 				48186F500BE4C834000B4638 /* NNContentTypeFilter.m */,
 				48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */,
 			);
-			name = ObjectFilter;
+			name = NNFilterEngine;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		481A64240ABFD153005516E7 /* Login Item */ = {
@@ -1099,6 +1099,7 @@
 		4831849F0AEF8FD800C3C672 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48186F480BE4C834000B4638 /* NNFilterEngine */,
 				4815A0C40AEF9A0200969296 /* NDResourceFork */,
 				483184A20AEF8FE500C3C672 /* PADropHandler */,
 			);

@@ -452,8 +452,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		}		
 		[self setActivePrefixFilter:nil];
 	}
-	
-	[filterEngine setObjects:[tags tags]];
 }
 
 - (void)tagsHaveChanged:(NSNotification*)notification
@@ -473,7 +471,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		}
 		else
 		{
-			[self setVisibleTags:[tags tags]];
+			[self setDisplayTags:[tags tags]];
 		}
 	}
 }
@@ -492,7 +490,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag filtering
 - (void)filterTags:(NSArray*)someTags
 {
-	
 	[filterEngine setObjects:someTags];
 	[filterEngine startWithServer:self];
 }
