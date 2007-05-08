@@ -74,38 +74,16 @@
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	[stateLock lock];
-	
-	if ([stateLock condition] == NNThreadCanceled)
-	{
-		// canceled directly after run,
-		// don't do anything
-		[stateLock unlockWithCondition:NNThreadStopped];
-		return;
-	}
-	else if ([stateLock condition] == NNThreadRunning)
-	{
-		// wait for previous filter-thread to stop
-		[stateLock unlock];
-		[stateLock lockWhenCondition:NNThreadStopped];
-		[stateLock unlockWithCondition:NNThreadRunning];
-	} 
-	else if ([stateLock condition] == NNThreadStopped)
-	{
-		//  this is what we want
-		[stateLock unlockWithCondition:NNThreadRunning];
-	}		
+	[stateLock lockWhenCondition:NNThreadStopped];
+	[stateLock unlockWithCondition:NNThreadRunning];
 	
 	// start filtering until thread gets canceled	
-	while ([stateLock tryLockWhenCondition:NNThreadRunning])
+	while ([stateLock condition] == NNThreadRunning)
 	{
-		[stateLock unlockWithCondition:NNThreadRunning];
-		
 		id object = [inQueue dequeueWithTimeout:0.5];
 		
-		if ([stateLock tryLockWhenCondition:NNThreadCanceled])
+		if ([stateLock condition] == NNThreadCanceled)
 		{
-			[stateLock unlock];
 			break;
 		}
 		else if (object)
