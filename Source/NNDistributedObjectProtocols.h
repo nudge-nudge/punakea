@@ -11,6 +11,14 @@
 
 @protocol NNBVCServerProtocol
 
+- (void)filteringStarted;
+- (void)filteringFinished;
+
+/** 
+	will be called whenever new objects have been filtered
+	filtered objects will be held in: filteredObjects
+	use lockFilteredObjects before accessing, unlockFilteredObjects afterwards
+*/
 - (void)objectsFiltered;
 
 @end

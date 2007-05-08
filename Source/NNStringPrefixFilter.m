@@ -41,7 +41,6 @@
 	
 	if ([tagName hasPrefix:filterPrefix])
 	{
-		NSLog(@"%@ : %@",self,object);
 		[self objectFiltered:object];
 	}
 }

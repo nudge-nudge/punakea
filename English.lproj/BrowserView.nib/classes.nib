@@ -5,6 +5,7 @@
             CLASS = BrowserViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                activityIndicator = NSProgressIndicator; 
                 controlledView = NSView; 
                 searchField = NSSearchField; 
                 splitView = NSSplitView; 

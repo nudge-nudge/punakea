@@ -28,6 +28,8 @@
 - (void)setFilteredObjects:(NSMutableArray*)objects;
 - (NSMutableArray*)filteredObjects;
 
+- (BOOL)checkIfDone;
+
 @end
 
 @implementation NNFilterEngine
@@ -48,6 +50,8 @@
 		
 		filteredObjects = [[NSMutableArray alloc] init];
 		filteredObjectsLock = [[NSLock alloc] init];
+		
+		threadCount = 0;
 	}
 	return self;
 }
@@ -69,20 +73,26 @@
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-	[threadLock lockWhenCondition:NNThreadStopped];
-	
 	// setup DO messaging stuff
 	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
 																	sendPort:[portArray objectAtIndex:1]];
 				
 	[[NSRunLoop currentRunLoop] run];
-//	
-//	[(id)[serverConnection rootProxy] setProtocolForProxy:@protocol(NNBVCServerProtocol)];
-		
-	// TODO stop thread if filtering is done
+	
+	// do some book keeping	
+	[threadLock lock];
+	if (threadCount == 0)
+	{
+		[(id)[serverConnection rootProxy] filteringStarted];
+	}
+	
+	threadCount++;
+	[threadLock unlock];
+	
+	[threadLock lockWhenCondition:NNThreadStopped];
 	
 	//  start thread
-	[threadLock unlockWithCondition:NNThreadRunning];	
+	[threadLock unlockWithCondition:NNThreadRunning];
 	
 	while ([threadLock condition] == NNThreadRunning)
 	{
@@ -101,13 +111,20 @@
 			
 			// tell client-thread that new objects have been filtered
 			[(id)[serverConnection rootProxy] objectsFiltered];
+		} 
+		else if ([self checkIfDone])
+		{
+			break;
 		}
 	}
 	
 	[threadLock lock];
+	threadCount--;
+	if (threadCount == 0)
+	{
+		[(id)[serverConnection rootProxy] filteringFinished];
+	}
 	[threadLock unlockWithCondition:NNThreadStopped];
-	
-	NSLog(@"filter thread finished");
 	
 	[pool release];
 }
@@ -237,12 +254,30 @@
 	{
 		[results addObject:obj];
 	}
-
-	// TODO if buffer was empty, check if filtering is done
 	
 	return results;
 }
+
+- (BOOL)checkIfDone
+{
+	BOOL done = YES;
 	
+	// check if all buffers are empty
+	NSEnumerator *bufferEnumerator = [buffers objectEnumerator];
+	NNQueue *buffer;
+	
+	while (buffer = [bufferEnumerator nextObject])
+	{
+		if (![buffer count] == 0)
+		{
+			done = NO;
+			break;
+		}
+	}
+	
+	return done;	
+}
+
 - (void)stopThread
 {
 	[self setThreadShouldQuit];

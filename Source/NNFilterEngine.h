@@ -19,15 +19,15 @@
 	id <NNBVCServerProtocol> server;
 	
 	NSArray *filterObjects;
-	
-	/** use lockFilteredObjects before accessing them! */
-	NSMutableArray *filteredObjects;
+	NSMutableArray *filteredObjects; /**< use lockFilteredObjects before accessing them! */
 	
 	NSMutableArray *filters;
 	NSMutableArray *buffers;
 	
 	NSConditionLock *threadLock;
 	NSLock *filteredObjectsLock;
+	
+	unsigned int threadCount;
 }
 
 - (void)startWithServer:(id <NNBVCServerProtocol>)aServer;

@@ -362,15 +362,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark events
-- (void)objectsFiltered
-{
-	NSLog(@"objects filtered");
-	
-	[filterEngine lockFilteredObjects];
-	[self setVisibleTags:[filterEngine filteredObjects]];
-	[filterEngine unlockFilteredObjects];
-}
-
 /*- (void)keyDown:(NSEvent*)event 
 {
 	// get the pressed key
@@ -424,11 +415,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// else display all tags
 	if ([searchFieldString length] > 0)
 	{
-		/*if ([typeAheadView isHidden])
-		{
-			[self showTypeAheadView];
-		}*/
-		
 		// remove old filter
 		if (activePrefixFilter)
 		{
@@ -440,12 +426,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 	else
 	{
-		/*if (![typeAheadView isHidden])
-		{
-			[self hideTypeAheadView];
-			//[[tagCloud window] makeFirstResponder:tagCloud];
-		}*/
-		
 		if (activePrefixFilter) 
 		{
 			[filterEngine removeFilter:[self activePrefixFilter]];
@@ -506,16 +486,21 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	activePrefixFilter = nil;
 }
 
-- (void)setFilterEngineConnection:(NSConnection*)conn
+- (void)filteringStarted
 {
-	[conn retain];
-	[filterEngineConnection release];
-	filterEngineConnection = conn;
+	[activityIndicator startAnimation:self];
 }
 
-- (NSConnection*)filterEngineConnection
+- (void)filteringFinished
 {
-	return filterEngineConnection;
+	[activityIndicator stopAnimation:self];
+}
+
+- (void)objectsFiltered
+{
+	[filterEngine lockFilteredObjects];
+	[self setVisibleTags:[filterEngine filteredObjects]];
+	[filterEngine unlockFilteredObjects];
 }
 
 #pragma mark actions

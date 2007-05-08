@@ -34,11 +34,12 @@ typedef enum _PATagCloudSortKey {
 
 extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 
-@interface BrowserViewController : PAViewController
+@interface BrowserViewController : PAViewController <NNBVCServerProtocol>
 {
 	IBOutlet PATagCloud					*tagCloud;
 	IBOutlet NSSplitView				*splitView;
 	IBOutlet NSView						*controlledView;
+	IBOutlet NSProgressIndicator		*activityIndicator;
 	
 	PABrowserViewControllerState		state;
 		
