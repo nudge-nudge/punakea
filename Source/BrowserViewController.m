@@ -411,6 +411,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)searchFieldStringHasChanged
 {
+	[self setVisibleTags:[NSMutableArray array]];
+	
 	// if searchFieldString has any content, display tags with corresponding prefix
 	// else display all tags
 	if ([searchFieldString length] > 0)
@@ -489,12 +491,17 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)filteringStarted
 {
 	//NSLog(@"START");
-	[activityIndicator startAnimation:self];
+	[activityIndicator performSelector:@selector(startAnimation:)
+							withObject:self
+							afterDelay:0.4];
 }
 
 - (void)filteringFinished
 {
 	//NSLog(@"FINISH");
+	[NSObject cancelPreviousPerformRequestsWithTarget:activityIndicator
+											 selector:@selector(startAnimation:)
+											   object:self];
 	[activityIndicator stopAnimation:self];
 }
 

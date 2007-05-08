@@ -303,7 +303,8 @@ bind to visibleTags
 		}
 		else if ([[datasource visibleTags] count] == 0 && ![delegate isWorking])
 		{
-			[self drawString:noRelatedTagsMessage centeredIn:rect];
+			   // TODO do this somewhere else
+		//	[self drawString:noRelatedTagsMessage centeredIn:rect];
 		}
 	}
 	else

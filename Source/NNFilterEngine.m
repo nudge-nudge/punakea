@@ -91,15 +91,16 @@
 	threadCount++;
 	[threadCountLock unlock];
 	
+	// wait for possible previous thread to stop
 	[threadLock lockWhenCondition:NNThreadStopped];
 	
 	//  start thread
 	[threadLock unlockWithCondition:NNThreadRunning];
 	
 	while ([threadLock condition] == NNThreadRunning)
-	{
+	{		
 		usleep(50000);
-		
+
 		if ([threadLock condition] == NNThreadCanceled)
 			break;
 				
@@ -113,6 +114,9 @@
 			
 			// tell client-thread that new objects have been filtered
 			[(id)[serverConnection rootProxy] objectsFiltered];
+			
+			if ([self checkIfDone])
+				break;
 		} 
 		else if ([self checkIfDone])
 		{
@@ -127,6 +131,7 @@
 		[(id)[serverConnection rootProxy] filteringFinished];
 	}
 	[threadCountLock unlock];
+	
 	[threadLock lock];
 	[threadLock unlockWithCondition:NNThreadStopped];
 	
