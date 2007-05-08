@@ -51,7 +51,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	
 	IBOutlet PATypeAheadView			*typeAheadView;
 	IBOutlet NSSearchField				*searchField;
-	NSString							*buffer;
+	NSString							*searchFieldString;
 			
 	NNFilterEngine						*filterEngine;
 	NSConnection						*filterEngineConnection;
@@ -92,7 +92,7 @@ is called when a tag is clicked
 - (IBAction)tagButtonClicked:(id)sender;
 - (IBAction)findFieldAction:(id)sender;
 
-- (void)setBuffer:(NSString*)string;
+- (void)setSearchFieldString:(NSString*)string;
 
 - (void)searchForTag:(NNTag*)aTag;
 - (void)manageTags;

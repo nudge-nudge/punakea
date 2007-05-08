@@ -19,6 +19,8 @@
 	id <NNBVCServerProtocol> server;
 	
 	NSArray *filterObjects;
+	
+	/** use lockFilteredObjects before accessing them! */
 	NSMutableArray *filteredObjects;
 	
 	NSMutableArray *filters;

@@ -28,9 +28,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)showTypeAheadView;
 - (void)hideTypeAheadView;
 
-- (NSString*)buffer;
-- (void)resetBuffer;
-- (void)bufferHasChanged;
+- (NSString*)searchFieldString;
+- (void)resetSearchFieldString;
+- (void)searchFieldStringHasChanged;
 
 - (void)setMainController:(PABrowserViewMainController*)aController;
 
@@ -67,9 +67,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		// order, self needs to be available already
 		filterEngine = nil;
 		
-		buffer = [[NSMutableString alloc] init];
+		searchFieldString = [[NSMutableString alloc] init];
 		
-		[self addObserver:self forKeyPath:@"buffer" options:nil context:NULL];
+		[self addObserver:self forKeyPath:@"searchFieldString" options:nil context:NULL];
 	
 		sortKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"TagCloud.SortKey"];
 		[self updateSortDescriptor];
@@ -121,7 +121,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[activePrefixFilter release];
 	[filterEngineConnection release];
 	[filterEngine release];
-	[buffer release];
+	[searchFieldString release];
 	[super dealloc];
 }
 
@@ -131,9 +131,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if ([keyPath isEqualToString:@"buffer"])
+	if ([keyPath isEqualToString:@"searchFieldString"])
 	{
-		[self bufferHasChanged];
+		[self searchFieldStringHasChanged];
 	}
 	else if ([keyPath isEqual:@"values.TagCloud.SortKey"])
 	{
@@ -172,18 +172,18 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	currentBestTag = otherTag;
 }
 
-- (NSString*)buffer
+- (NSString*)searchFieldString
 {
-	return buffer;
+	return searchFieldString;
 }
 
-- (void)setBuffer:(NSString*)string
+- (void)setSearchFieldString:(NSString*)string
 {
 	if (!string)
 		string = @"";
 	
-	[buffer release];
-	buffer = [string mutableCopy];
+	[searchFieldString release];
+	searchFieldString = [string mutableCopy];
 }
 
 - (PABrowserViewMainController*)mainController
@@ -356,9 +356,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setState:PABrowserViewControllerNormalState];
 }
 
-- (void)resetBuffer
+- (void)resetSearchFieldString
 {
-	[self setBuffer:@""];
+	[self setSearchFieldString:@""];
 }
 
 #pragma mark events
@@ -381,11 +381,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	if (key == NSDeleteCharacter) 
 	{
-		// if buffer has any content (i.e. user is using type-ahead-find), delete last char
-		if ([buffer length] > 0)
+		// if searchFieldString has any content (i.e. user is using type-ahead-find), delete last char
+		if ([searchFieldString length] > 0)
 		{
-			NSString *tmpBuffer = [buffer substringToIndex:[buffer length]-1];
-			[self setBuffer:tmpBuffer];
+			NSString *tmpsearchFieldString = [searchFieldString substringToIndex:[searchFieldString length]-1];
+			[self setSearchFieldString:tmpsearchFieldString];
 		}
 		else if ([mainController isKindOfClass:[PAResultsViewController class]])
 		// else delete the last selected tag (if resultsview is active)
@@ -395,21 +395,21 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 	else if ([alphanumericCharacterSet characterIsMember:key]) 
 	{
-		// only add to buffer if there are any tags, otherwise do nothing
-		NSMutableString *tmpBuffer = [buffer mutableCopy];
-		[tmpBuffer appendString:[event charactersIgnoringModifiers]];
+		// only add to searchFieldString if there are any tags, otherwise do nothing
+		NSMutableString *tmpsearchFieldString = [searchFieldString mutableCopy];
+		[tmpsearchFieldString appendString:[event charactersIgnoringModifiers]];
 		
 		// TODO replace by filterEngine
-//		if ([typeAheadFind hasTagsForPrefix:tmpBuffer])
+//		if ([typeAheadFind hasTagsForPrefix:tmpsearchFieldString])
 //		{
-			[self setBuffer:tmpBuffer];
+			[self setSearchFieldString:tmpsearchFieldString];
 //		}
 //		else
 //		{
 //			[[self nextResponder] keyDown:event];
 //		}
 //		
-		[tmpBuffer release];
+		[tmpsearchFieldString release];
 	}
 	else
 	{
@@ -418,11 +418,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }*/
 
-- (void)bufferHasChanged
+- (void)searchFieldStringHasChanged
 {
-	// if buffer has any content, display tags with corresponding prefix
+	// if searchFieldString has any content, display tags with corresponding prefix
 	// else display all tags
-	if ([buffer length] > 0)
+	if ([searchFieldString length] > 0)
 	{
 		/*if ([typeAheadView isHidden])
 		{
@@ -434,7 +434,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		{
 			[filterEngine removeFilter:[self activePrefixFilter]];
 		}
-		NNStringPrefixFilter *newFilter = [[[NNStringPrefixFilter alloc] initWithFilterPrefix:buffer] autorelease];
+		NNStringPrefixFilter *newFilter = [[[NNStringPrefixFilter alloc] initWithFilterPrefix:searchFieldString] autorelease];
 		[filterEngine addFilter:newFilter];
 		[self setActivePrefixFilter:newFilter];
 	}
@@ -554,7 +554,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller
 {
-	[self resetBuffer];
+	[self resetSearchFieldString];
 	[[[self view] window] makeFirstResponder:tagCloud];
 	[self setMainController:controller];
 }
@@ -568,7 +568,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)unbindAll
 {
 	[self removeObserver:tagCloud forKeyPath:@"visibleTags"];
-	[self removeObserver:self forKeyPath:@"buffer"];
+	[self removeObserver:self forKeyPath:@"searchFieldString"];
 	[searchField unbind:@"value"];
 }
 

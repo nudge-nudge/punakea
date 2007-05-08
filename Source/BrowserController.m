@@ -165,7 +165,7 @@
 {
 	NSSearchField *searchField = sender;
 	
-	[browserViewController setBuffer:[searchField stringValue]];
+	[browserViewController setSearchFieldString:[searchField stringValue]];
 }
 
 
