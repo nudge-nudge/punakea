@@ -223,6 +223,7 @@
 	else if([itemIdentifier isEqualTo:@"Search"])
 	{
 		NSSearchField *searchField = [[[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)] autorelease];
+		[[searchField cell] setSendsSearchStringImmediately:YES];
 		[searchField setDelegate:self];
 		
 		item = [[[NSToolbarItem alloc] initWithItemIdentifier:@"Search"] autorelease];
