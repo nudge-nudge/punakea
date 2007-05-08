@@ -115,7 +115,16 @@
 	
 	PASourceItem *sourceItem = (PASourceItem *)item;
 		
-	if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
+	// Perform actions
+	if([[sourceItem value] isEqualTo:@"LIBRARY"])
+	{
+		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] showResults];
+	}
+	else if([[sourceItem value] isEqualTo:@"MANAGE_TAGS"])
+	{
+		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] manageTags];
+	}
+	else if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
 	{
 		NSLog(@"%@", [[sourceItem containedObject] tags]);
 	}
@@ -475,18 +484,6 @@
 	[items removeObject:anItem];
 	
 	[sourcePanel reloadData];	
-}
-
-- (PASourceItem *)itemWithValue:(NSString *)value
-{
-	NSEnumerator *e = [items objectEnumerator];
-	PASourceItem *item;
-	while(item = [e nextObject])
-	{
-		if([[item value] isEqualTo:value])
-			return item;
-	}
-	return nil;
 }
 
 

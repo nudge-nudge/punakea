@@ -196,6 +196,17 @@
 	[self selectItemWithValue:value];
 }
 
+- (PASourceItem *)itemWithValue:(NSString *)value
+{
+	for(int row = 0; row < [self numberOfRows]; row++)
+	{
+		PASourceItem *item = [self itemAtRow:row];
+		if([[item value] isEqualTo:value])
+			return item;
+	}
+	return nil;
+}
+
 
 #pragma mark Events
 - (void)keyDown:(NSEvent *)theEvent

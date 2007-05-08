@@ -17,6 +17,7 @@
 
 - (void)selectItemWithValue:(NSString *)value;
 - (void)reloadDataAndSelectItemWithValue:(NSString *)value;
+- (PASourceItem *)itemWithValue:(NSString *)value;
 
 - (void)removeSelectedItem;
 

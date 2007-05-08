@@ -12,8 +12,8 @@
                 showBrowser = id; 
                 showDonationWebsite = id; 
                 showInfo = id; 
+                showLibrary = id; 
                 showPreferences = id; 
-                showResults = id; 
                 showTagger = id; 
                 showWebsite = id; 
                 tagSearch = id; 

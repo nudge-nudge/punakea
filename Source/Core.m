@@ -266,23 +266,39 @@
 				
 			return NO;
 		}
+		
+		// View menu
+		if([item action] == @selector(showLibrary:))
+		{			
+			PASourcePanel *sp = [browserController sourcePanel];
+			if([sp selectedRow] ==	[sp rowForItem:[sp itemWithValue:@"LIBRARY"]])
+				[item setState:NSOnState];
+			else
+				[item setState:NSOffState];
+		}
+		else if([item action] == @selector(manageTags:))
+		{
+			PASourcePanel *sp = [browserController sourcePanel];
+			if([sp selectedRow] ==	[sp rowForItem:[sp itemWithValue:@"MANAGE_TAGS"]])
+				[item setState:NSOnState];
+			else
+				[item setState:NSOffState];
+		}
 	}
 	
 	return YES;
 }
 
-- (IBAction)showResults:(id)sender
+- (IBAction)showLibrary:(id)sender;
 {	
-	[[browserController browserViewController] showResults];
-	[[viewMenu itemWithTag:0] setState:NSOnState];
-	[[viewMenu itemWithTag:1] setState:NSOffState];
+	[[browserController sourcePanel] selectItemWithValue:@"LIBRARY"];
+	[[browserController window] makeFirstResponder:[browserController sourcePanel]];
 }
 
 - (IBAction)manageTags:(id)sender
 {		
-	[[browserController browserViewController] manageTags];
-	[[viewMenu itemWithTag:0] setState:NSOffState];
-	[[viewMenu itemWithTag:1] setState:NSOnState];
+	[[browserController sourcePanel] selectItemWithValue:@"MANAGE_TAGS"];
+	[[browserController window] makeFirstResponder:[browserController sourcePanel]];
 }
 
 - (IBAction)showPreferences:(id)sender
@@ -608,6 +624,13 @@
 	}
 	
 	return hasPreferences;
+}
+
+
+#pragma mark Accessors
+- (BrowserController *)browserController
+{
+	return browserController;
 }
 
 @end

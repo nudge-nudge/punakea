@@ -38,5 +38,6 @@
 - (IBAction)cancelSheet:(id)sender;
 
 - (BrowserViewController*)browserViewController;
+- (PASourcePanel *)sourcePanel;
 
 @end

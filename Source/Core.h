@@ -46,7 +46,7 @@
 
 // Menu Actions
 - (IBAction)showInfo:(id)sender;
-- (IBAction)showResults:(id)sender;
+- (IBAction)showLibrary:(id)sender;
 - (IBAction)manageTags:(id)sender;
 - (IBAction)showPreferences:(id)sender;
 
@@ -70,5 +70,7 @@
 
 // misc
 - (BOOL)appHasBrowser;
+
+- (BrowserController *)browserController;
 
 @end

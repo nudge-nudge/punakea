@@ -551,7 +551,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller
 {
 	[self resetSearchFieldString];
-	[[[self view] window] makeFirstResponder:tagCloud];
+	//[[[self view] window] makeFirstResponder:tagCloud];
 	[self setMainController:controller];
 }
 

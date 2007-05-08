@@ -30,7 +30,6 @@
 - (void)addItem:(PASourceItem *)anItem;
 - (void)addChild:(PASourceItem *)anItem toItem:(PASourceItem *)aParent;
 - (void)removeItem:(PASourceItem *)anItem;
-- (PASourceItem *)itemWithValue:(NSString *)value;
 
 - (NSArray *)items;
 - (NSArray *)draggedItems;

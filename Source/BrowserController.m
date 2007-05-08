@@ -117,7 +117,7 @@
 	{
 		PASourcePanelController *spController = [sourcePanel dataSource];
 		
-		PASourceItem *parent = [spController itemWithValue:@"FAVORITES"];
+		PASourceItem *parent = [sourcePanel itemWithValue:@"FAVORITES"];
 		
 		PASourceItem *item = [PASourceItem itemWithValue:@"aValue" displayName:@"new name"];
 		
@@ -142,11 +142,6 @@
 		modalDelegate:self
 	   didEndSelector:@selector(tagSetPanelDidEnd:returnCode:contextInfo:)
 		  contextInfo:NULL];
-}
-
-- (void)manageTags:(id)sender
-{
-	[sourcePanel selectItemWithValue:@"MANAGE_TAGS"];
 }
 
 - (void)sortByName:(id)sender
@@ -197,7 +192,7 @@
 		[item setToolTip:NSLocalizedStringFromTable(@"MANAGE_TAGS_TOOLTIP", @"Toolbars", nil)];
 		[item setImage:[NSImage imageNamed:@"toolbar-manage-tags"]];
 		[item setPaletteLabel:[item label]];
-		[item setTarget:self];
+		[item setTarget:[[NSApplication sharedApplication] delegate]];
 		[item setAction:@selector(manageTags:)];
 	}	
 	else if([itemIdentifier isEqualTo:@"SortByName"])
@@ -321,6 +316,11 @@
 - (BrowserViewController*)browserViewController
 {
 	return browserViewController;
+}
+
+- (PASourcePanel *)sourcePanel
+{
+	return sourcePanel;
 }
 
 @end
