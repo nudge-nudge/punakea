@@ -52,6 +52,7 @@
 		filteredObjectsLock = [[NSLock alloc] init];
 		
 		threadCount = 0;
+		threadCountLock = [[NSLock alloc] init];
 	}
 	return self;
 }
@@ -60,6 +61,7 @@
 {
 	[filterObjects release];
 	
+	[threadCountLock release];
 	[filteredObjectsLock release];
 	[filteredObjects release];
 	[threadLock release];
@@ -80,14 +82,14 @@
 	[[NSRunLoop currentRunLoop] run];
 	
 	// do some book keeping	
-	[threadLock lock];
+	[threadCountLock lock];
 	if (threadCount == 0)
 	{
 		[(id)[serverConnection rootProxy] filteringStarted];
 	}
 	
 	threadCount++;
-	[threadLock unlock];
+	[threadCountLock unlock];
 	
 	[threadLock lockWhenCondition:NNThreadStopped];
 	
@@ -96,7 +98,7 @@
 	
 	while ([threadLock condition] == NNThreadRunning)
 	{
-		usleep(100000);
+		usleep(50000);
 		
 		if ([threadLock condition] == NNThreadCanceled)
 			break;
@@ -118,12 +120,14 @@
 		}
 	}
 	
-	[threadLock lock];
+	[threadCountLock lock];
 	threadCount--;
 	if (threadCount == 0)
 	{
 		[(id)[serverConnection rootProxy] filteringFinished];
 	}
+	[threadCountLock unlock];
+	[threadLock lock];
 	[threadLock unlockWithCondition:NNThreadStopped];
 	
 	[pool release];

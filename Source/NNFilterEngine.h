@@ -28,6 +28,7 @@
 	NSLock *filteredObjectsLock;
 	
 	unsigned int threadCount;
+	NSLock *threadCountLock;
 }
 
 - (void)startWithServer:(id <NNBVCServerProtocol>)aServer;

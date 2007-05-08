@@ -488,16 +488,20 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filteringStarted
 {
+	//NSLog(@"START");
 	[activityIndicator startAnimation:self];
 }
 
 - (void)filteringFinished
 {
+	//NSLog(@"FINISH");
 	[activityIndicator stopAnimation:self];
 }
 
 - (void)objectsFiltered
 {
+	//NSLog(@"objects filtered");
+	
 	[filterEngine lockFilteredObjects];
 	[self setVisibleTags:[filterEngine filteredObjects]];
 	[filterEngine unlockFilteredObjects];
