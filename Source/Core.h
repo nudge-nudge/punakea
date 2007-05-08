@@ -45,9 +45,10 @@
 - (SUUpdater*)updater;
 
 // Menu Actions
+- (IBAction)goHome:(id)sender;
 - (IBAction)showInfo:(id)sender;
-- (IBAction)showLibrary:(id)sender;
-- (IBAction)manageTags:(id)sender;
+- (IBAction)goToLibrary:(id)sender;
+- (IBAction)goToManageTags:(id)sender;
 - (IBAction)showPreferences:(id)sender;
 
 - (IBAction)openFiles:(id)sender;
@@ -59,8 +60,8 @@
 - (IBAction)showBrowser:(id)sender;
 - (IBAction)showTagger:(id)sender;
 
-- (IBAction)showWebsite:(id)sender;
-- (IBAction)showDonationWebsite:(id)sender;
+- (IBAction)openWebsite:(id)sender;
+- (IBAction)openDonationWebsite:(id)sender;
 
 - (IBAction)toggleToolbarShown:(id)sender;
 - (IBAction)runToolbarCustomizationPalette:(id)sender;

@@ -193,7 +193,7 @@
 		[item setImage:[NSImage imageNamed:@"toolbar-manage-tags"]];
 		[item setPaletteLabel:[item label]];
 		[item setTarget:[[NSApplication sharedApplication] delegate]];
-		[item setAction:@selector(manageTags:)];
+		[item setAction:@selector(goToManageTags:)];
 	}	
 	else if([itemIdentifier isEqualTo:@"SortByName"])
 	{

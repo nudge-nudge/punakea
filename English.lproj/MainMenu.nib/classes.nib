@@ -4,18 +4,19 @@
             ACTIONS = {
                 delete = id; 
                 editTagsOnFiles = id; 
-                manageTags = id; 
+                goHome = id; 
+                goToLibrary = id; 
+                goToManageTags = id; 
+                openDonationWebsite = id; 
                 openFiles = id; 
+                openWebsite = id; 
                 runToolbarCustomizationPalette = id; 
                 searchForTag = id; 
                 selectAll = id; 
                 showBrowser = id; 
-                showDonationWebsite = id; 
                 showInfo = id; 
-                showLibrary = id; 
                 showPreferences = id; 
                 showTagger = id; 
-                showWebsite = id; 
                 tagSearch = id; 
                 toggleToolbarShown = id; 
             }; 

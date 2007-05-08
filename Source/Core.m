@@ -289,13 +289,20 @@
 	return YES;
 }
 
-- (IBAction)showLibrary:(id)sender;
+- (IBAction)goHome:(id)sender
+{
+	[[browserController sourcePanel] selectItemWithValue:@"LIBRARY"];
+	[[[browserController browserViewController] mainController] reset];
+	//[[browserController window] makeFirstResponder:[browserController sourcePanel]];
+}
+
+- (IBAction)goToLibrary:(id)sender
 {	
 	[[browserController sourcePanel] selectItemWithValue:@"LIBRARY"];
 	[[browserController window] makeFirstResponder:[browserController sourcePanel]];
 }
 
-- (IBAction)manageTags:(id)sender
+- (IBAction)goToManageTags:(id)sender
 {		
 	[[browserController sourcePanel] selectItemWithValue:@"MANAGE_TAGS"];
 	[[browserController window] makeFirstResponder:[browserController sourcePanel]];
@@ -423,12 +430,12 @@
 	[[taggerController window] makeKeyAndOrderFront:self];
 }
 
-- (IBAction)showWebsite:(id)sender
+- (IBAction)openWebsite:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/punakea"]];
 }
 
-- (IBAction)showDonationWebsite:(id)sender
+- (IBAction)openDonationWebsite:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/donate"]];
 }

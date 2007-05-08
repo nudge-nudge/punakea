@@ -127,6 +127,8 @@
 	else if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
 	{
 		NSLog(@"%@", [[sourceItem containedObject] tags]);
+		[[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController]
+			mainController] setSelectedTags:[[sourceItem containedObject] tags]];
 	}
 }
 
