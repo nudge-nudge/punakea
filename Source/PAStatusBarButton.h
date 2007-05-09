@@ -12,12 +12,17 @@
 
 @interface PAStatusBarButton : NSControl {
 	
+	NSString			*identifier;
+	
 	NSToolTipTag		toolTipTag;
 	NSString			*toolTip;
 	
 }
 
 + (PAStatusBarButton *)statusBarButton;	/**< Use this for init */
+
+- (NSString *)identifier;
+- (void)setIdentifier:(NSString *)anIdentifier;
 
 - (NSButtonType)buttonType;
 - (void)setButtonType:(NSButtonType)aType;

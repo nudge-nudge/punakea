@@ -223,14 +223,37 @@
 	{		
 		[view setFrameOrigin:NSMakePoint(current_x, 1.0)];
 		
+		// Validate this view
+		if(delegate && [delegate respondsToSelector:@selector(statusBar:validateItem:)])
+		{
+			// Return value may be used to disable items in future versions
+			BOOL flag = [delegate statusBar:self validateItem:view];
+		}
+		
 		[self addSubview:view];
 		
 		current_x += [view frame].size.width + 1.0;
 	}
 }
 
+- (void)reloadData
+{
+	[self updateItems];
+}
+
 
 #pragma mark Accessors
+- (id)delegate
+{
+	return delegate;
+}
+
+- (void)setDelegate:(id)anObject
+{
+	// Weak reference
+	delegate = anObject;
+}
+
 - (void)setAlternateState:(BOOL)flag
 {
 	NSEnumerator *enumerator = [items objectEnumerator];

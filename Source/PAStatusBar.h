@@ -10,8 +10,18 @@
 #import "PAStatusBarButton.h"
 
 
-@interface PAStatusBar : NSView {
+@interface NSObject (PAStatusBarDelegate)
 
+- (BOOL)statusBar:(id)sender validateItem:(PAStatusBarButton *)item;
+
+@end
+
+
+@interface PAStatusBar : NSView
+{
+
+	IBOutlet id					delegate;
+	
 	IBOutlet NSSplitView		*resizableSplitView;
 	
 	NSRect						gripRect;
@@ -23,6 +33,10 @@
 }
 
 - (void)addItem:(NSView *)anItem;
+- (void)reloadData;
+
+- (id)delegate;
+- (void)setDelegate:(id)anObject;
 
 - (void)setAlternateState:(BOOL)flag;
 

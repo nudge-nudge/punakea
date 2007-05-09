@@ -56,7 +56,7 @@
         {
             CLASS = PAStatusBar; 
             LANGUAGE = ObjC; 
-            OUTLETS = {resizableSplitView = NSSplitView; }; 
+            OUTLETS = {delegate = id; resizableSplitView = NSSplitView; }; 
             SUPERCLASS = NSView; 
         }, 
         {

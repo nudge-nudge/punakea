@@ -17,6 +17,10 @@
 @end
 
 
+NSString * const VERTICAL_SPLITVIEW_DEFAULTS = @"0 0 180 472 0 181 0 577 472 0";
+NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0";
+
+
 @implementation BrowserController
 
 #pragma mark Init + Dealloc
@@ -39,9 +43,10 @@
 	[[self window] setFrameAutosaveName:@"punakea.browser"];
 	
 	// Set autosave names for split views
-	[verticalSplitView setAutosaveName:@"PASplitView Configuration VerticalSplitView" defaults:@"0 0 180 472 0 181 0 577 472 0"];
-	[horizontalSplitView setAutosaveName:@"PASplitView Configuration HorizontalSplitView" defaults:@"0 0 182 286 0 0 287 182 162 0"];
+	[verticalSplitView setAutosaveName:@"PASplitView Configuration VerticalSplitView" defaults:VERTICAL_SPLITVIEW_DEFAULTS];
+	[horizontalSplitView setAutosaveName:@"PASplitView Configuration HorizontalSplitView" defaults:HORIZONTAL_SPLITVIEW_DEFAULTS];
 	
+	// Initialize browserViewController
 	browserViewController = [[BrowserViewController alloc] init];
 	[verticalSplitView replaceSubview:mainPlaceholderView with:[browserViewController view]];
 	
@@ -66,17 +71,18 @@
 - (void)setupStatusBar
 {
 	PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
-	[sbitem setToolTip:@"Add tag set"];
+	[sbitem setToolTip:@"Add new tag set to favorites"];
 	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
 	//[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-gear"]];
 	[sbitem setAction:@selector(addTagSet:)];
 	[sourcePanelStatusBar addItem:sbitem];
 	
 	sbitem = [PAStatusBarButton statusBarButton];
+	[sbitem setToolTip:@"Toggle info panel"];
 	[sbitem setButtonType:NSToggleButton];
 	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-info"]];
-	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-gear"]];
-	[sbitem setAction:@selector(toggleInfoPanel:)];
+	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-info-on"]];
+	[sbitem setAction:@selector(toggleInfo:)];
 	
 	[sourcePanelStatusBar addItem:sbitem];
 }
@@ -150,7 +156,7 @@
 		  contextInfo:NULL];
 }
 
-- (void)toggleInfoPanel:(id)sender
+- (void)toggleInfo:(id)sender
 {
 	[horizontalSplitView toggleSubviewAtIndex:1];
 }
@@ -300,6 +306,21 @@
 }
 
 
+#pragma mark StatusBar Delegate
+- (BOOL)statusBar:(PAStatusBar *)sender validateItem:(PAStatusBarButton *)item
+{	
+	if([item action] == @selector(toggleInfo:))
+	{
+		if([[[horizontalSplitView subviews] objectAtIndex:1] isHidden])
+			[item setAlternateState:NO];
+		else
+			[item setAlternateState:YES];
+	}
+	
+	return YES;
+}
+
+
 #pragma mark Window Delegate
 /*- (id)windowWillReturnFieldEditor:(NSWindow *)sender toObject:(id)anObject
 {
@@ -331,6 +352,21 @@
 - (BrowserViewController*)browserViewController
 {
 	return browserViewController;
+}
+
+- (PASplitView *)verticalSplitView
+{
+	return verticalSplitView;
+}
+
+- (PASplitView *)horizontalSplitView
+{
+	return horizontalSplitView;
+}
+
+- (PAStatusBar *)sourcePanelStatusBar
+{
+	return sourcePanelStatusBar;
 }
 
 - (PASourcePanel *)sourcePanel

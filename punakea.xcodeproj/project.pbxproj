@@ -187,6 +187,8 @@
 		654B4CFC0AF1FD37001082BA /* PATaggerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 654B4CFA0AF1FD37001082BA /* PATaggerHeaderCell.m */; };
 		655377CD0AAD8C5000C6376B /* dummyThumbSmall.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655377CB0AAD8C5000C6376B /* dummyThumbSmall.gif */; };
 		655377CE0AAD8C5000C6376B /* dummyThumbLarge.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655377CC0AAD8C5000C6376B /* dummyThumbLarge.gif */; };
+		655540F30BF1EEA200D3AF8E /* Menus.strings in Resources */ = {isa = PBXBuildFile; fileRef = 655540F20BF1EEA200D3AF8E /* Menus.strings */; };
+		655541B20BF1F9C800D3AF8E /* statusbar-button-info-on.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655541B10BF1F9C800D3AF8E /* statusbar-button-info-on.tif */; };
 		655563A20A50672A0050104E /* stopRollover.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6555639F0A50672A0050104E /* stopRollover.tif */; };
 		655563A30A50672A0050104E /* stopPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655563A00A50672A0050104E /* stopPressed.tif */; };
 		655563A40A50672A0050104E /* stop.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655563A10A50672A0050104E /* stop.tif */; };
@@ -666,6 +668,8 @@
 		654DBC1A09C9D0620061BFA4 /* index.html */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = index.html; path = html/index.html; sourceTree = "<group>"; };
 		655377CB0AAD8C5000C6376B /* dummyThumbSmall.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dummyThumbSmall.gif; sourceTree = "<group>"; };
 		655377CC0AAD8C5000C6376B /* dummyThumbLarge.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dummyThumbLarge.gif; sourceTree = "<group>"; };
+		655540EE0BF1EE8E00D3AF8E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Menus.strings; sourceTree = "<group>"; };
+		655541B10BF1F9C800D3AF8E /* statusbar-button-info-on.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "statusbar-button-info-on.tif"; sourceTree = "<group>"; };
 		6555639F0A50672A0050104E /* stopRollover.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stopRollover.tif; sourceTree = "<group>"; };
 		655563A00A50672A0050104E /* stopPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stopPressed.tif; sourceTree = "<group>"; };
 		655563A10A50672A0050104E /* stop.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stop.tif; sourceTree = "<group>"; };
@@ -1445,6 +1449,7 @@
 				655B2ABE0ABFE8AC000A3AA4 /* FileManager.strings */,
 				48B0F1D70ACC020800738053 /* Global.strings */,
 				653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */,
+				655540F20BF1EEA200D3AF8E /* Menus.strings */,
 				48B0F1C20ACBFA6200738053 /* Tags.strings */,
 				650902120BEDF429005468E0 /* Toolbars.strings */,
 			);
@@ -1668,6 +1673,7 @@
 				65B78F320AF0DA4600AF1102 /* statusbar.tiff */,
 				6539B9F90BE35A3B00B1D216 /* statusbar-button-gear.pdf */,
 				650846FB0BE641320046CB89 /* statusbar-button-info.png */,
+				655541B10BF1F9C800D3AF8E /* statusbar-button-info-on.tif */,
 				6539B9FA0BE35A3B00B1D216 /* statusbar-button-plus.pdf */,
 				65CC15670BE0A87C00866AF7 /* statusbar-grip.tif */,
 			);
@@ -2049,6 +2055,8 @@
 				6509020B0BEDF1A1005468E0 /* toolbar-sort-by-name.tif in Resources */,
 				6509020C0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif in Resources */,
 				650902130BEDF429005468E0 /* Toolbars.strings in Resources */,
+				655540F30BF1EEA200D3AF8E /* Menus.strings in Resources */,
+				655541B20BF1F9C800D3AF8E /* statusbar-button-info-on.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2363,6 +2371,14 @@
 				653DCE1409E295A1009175E5 /* English */,
 			);
 			name = MDSimpleGrouping.strings;
+			sourceTree = "<group>";
+		};
+		655540F20BF1EEA200D3AF8E /* Menus.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				655540EE0BF1EE8E00D3AF8E /* English */,
+			);
+			name = Menus.strings;
 			sourceTree = "<group>";
 		};
 		655B2ABE0ABFE8AC000A3AA4 /* FileManager.strings */ = {

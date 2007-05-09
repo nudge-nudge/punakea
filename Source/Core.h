@@ -46,7 +46,7 @@
 
 // Menu Actions
 - (IBAction)goHome:(id)sender;
-- (IBAction)showInfo:(id)sender;
+- (IBAction)toggleInfo:(id)sender;
 - (IBAction)goToLibrary:(id)sender;
 - (IBAction)goToManageTags:(id)sender;
 - (IBAction)showPreferences:(id)sender;

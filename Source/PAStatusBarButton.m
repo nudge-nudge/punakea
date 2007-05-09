@@ -58,6 +58,17 @@
 
 
 #pragma mark Accessors
+- (NSString *)identifier
+{
+	return identifier;
+}
+
+- (void)setIdentifier:(NSString *)anIdentifier
+{
+	[identifier release];
+	identifier = [anIdentifier retain];
+}
+
 - (NSButtonType)buttonType
 {
 	return [[self cell] buttonType];

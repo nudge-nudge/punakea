@@ -268,7 +268,15 @@
 		}
 		
 		// View menu
-		if([item action] == @selector(showLibrary:))
+		if([item action] == @selector(toggleInfo:))
+		{
+			NSView *subview = [[[browserController horizontalSplitView] subviews] objectAtIndex:1];
+			if([subview isHidden])
+				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_SHOW_INFO", @"Menus", nil)];
+			else
+				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_HIDE_INFO", @"Menus", nil)];
+		}
+		else if([item action] == @selector(showLibrary:))
 		{			
 			PASourcePanel *sp = [browserController sourcePanel];
 			if([sp selectedRow] ==	[sp rowForItem:[sp itemWithValue:@"LIBRARY"]])
@@ -294,6 +302,12 @@
 	[[browserController sourcePanel] selectItemWithValue:@"LIBRARY"];
 	[[[browserController browserViewController] mainController] reset];
 	//[[browserController window] makeFirstResponder:[browserController sourcePanel]];
+}
+
+- (IBAction)toggleInfo:(id)sender
+{
+	[[browserController horizontalSplitView] toggleSubviewAtIndex:1];
+	[[browserController sourcePanelStatusBar] reloadData];
 }
 
 - (IBAction)goToLibrary:(id)sender

@@ -40,6 +40,9 @@
 - (IBAction)cancelSheet:(id)sender;
 
 - (BrowserViewController*)browserViewController;
+- (PASplitView *)verticalSplitView;
+- (PASplitView *)horizontalSplitView;
+- (PAStatusBar *)sourcePanelStatusBar;
 - (PASourcePanel *)sourcePanel;
 
 @end

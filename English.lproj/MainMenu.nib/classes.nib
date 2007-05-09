@@ -14,10 +14,10 @@
                 searchForTag = id; 
                 selectAll = id; 
                 showBrowser = id; 
-                showInfo = id; 
                 showPreferences = id; 
                 showTagger = id; 
                 tagSearch = id; 
+                toggleInfo = id; 
                 toggleToolbarShown = id; 
             }; 
             CLASS = Core; 
