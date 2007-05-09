@@ -482,6 +482,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[self setupFilterEngine];
 	[self setDisplayTags:[tags tags]];
+	// TODO TEMP
+	[filterEngine addFilter:[[[NNContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
 }
 
 - (void)setupFilterEngine

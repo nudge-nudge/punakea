@@ -19,6 +19,7 @@
 
 #import "NNFilterEngine.h"
 #import "NNStringPrefixFilter.h"
+#import "NNContentTypeFilter.h"
 
 typedef enum _PABrowserViewControllerState {
 	PABrowserViewControllerNormalState = 1,

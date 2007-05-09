@@ -15,6 +15,8 @@
 
 #include <unistd.h>
 
+// TODO should the server be the delegate? only a delegate?
+
 @interface NNFilterEngine : NSObject {
 	id <NNBVCServerProtocol> server;
 	

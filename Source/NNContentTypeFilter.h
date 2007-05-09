@@ -9,8 +9,19 @@
 #import <Cocoa/Cocoa.h>
 #import "NNObjectFilter.h"
 
+#import "NNTagging/NNFile.h"
+#import "NNTagging/NNSelectedTags.h"
+#import "NNTagging/NNQuery.h"
+
 @interface NNContentTypeFilter : NNObjectFilter {
 	NSString *contentType;
+	
+	NNSelectedTags *selectedTags;
+	NNQuery *query;
+	
+	NSDictionary *simpleGrouping;
+	
+	NSLock *filterLock;
 }
 
 - (id)initWithContentType:(NSString*)type;

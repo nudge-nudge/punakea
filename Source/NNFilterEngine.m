@@ -114,14 +114,10 @@
 			
 			// tell client-thread that new objects have been filtered
 			[(id)[serverConnection rootProxy] objectsFiltered];
-			
-			if ([self checkIfDone])
-				break;
 		} 
-		else if ([self checkIfDone])
-		{
+		
+		if ([self checkIfDone])
 			break;
-		}
 	}
 	
 	[threadCountLock lock];

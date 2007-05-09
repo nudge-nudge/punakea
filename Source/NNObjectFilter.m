@@ -73,7 +73,7 @@
 - (void)run
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
+		
 	[stateLock lockWhenCondition:NNThreadStopped];
 	[stateLock unlockWithCondition:NNThreadRunning];
 	
