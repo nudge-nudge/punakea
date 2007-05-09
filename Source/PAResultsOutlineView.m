@@ -304,6 +304,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[super selectAll:sender];
 }
 
+
 #pragma mark Notifications
 - (void)queryNote:(NSNotification *)note
 {	
@@ -377,6 +378,26 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Events
+- (BOOL)performKeyEquivalent:(NSEvent *)theEvent
+{
+	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+	
+	if([theEvent type] == NSKeyDown)
+	{
+		// Delete files on Command + Delete
+		if(key == NSDeleteCharacter &&
+		   [[self selectedRowIndexes] count] > 0)
+		{			
+			if([[self selectedRowIndexes] count] > 0)
+				[[self target] deleteFilesForVisibleSelectedItems:self];
+			
+			return YES;
+		}
+	}
+	
+	return [super performKeyEquivalent:theEvent];
+}
+
 /**
 	Custom keyDown event allows opening files with CMD + ARROW-DOWN
 */
@@ -386,6 +407,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 	if([theEvent type] == NSKeyDown)
 	{				
+		NSLog(@"%d", key);
+		
 		// Forward request to responder
 		if([self responder])
 		{

@@ -222,6 +222,13 @@
 			[self beginEditing];
 			return;
 		}
+		
+		if(key == NSDeleteCharacter &&
+		   [(PASourceItem *)[self itemAtRow:[self selectedRow]] isEditable])
+		{
+			[self removeSelectedItem];
+			return;
+		}
 	}
 	
 	[super keyDown:theEvent];
