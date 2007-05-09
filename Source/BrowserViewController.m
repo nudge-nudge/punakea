@@ -483,7 +483,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setupFilterEngine];
 	[self setDisplayTags:[tags tags]];
 	// TODO TEMP
-	[filterEngine addFilter:[[[NNContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
+	//[filterEngine addFilter:[[[NNContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
 }
 
 - (void)setupFilterEngine
@@ -522,6 +522,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)searchForTag:(NNTag*)aTag
 {
 	[[self mainController] handleTagActivation:aTag];
+}
+
+- (void)searchForTags:(NSArray*)someTags
+{
+	[[self mainController] handleTagActivations:someTags];
 }
 
 - (void)manageTags

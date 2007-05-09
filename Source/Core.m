@@ -472,6 +472,11 @@
 	[[browserController browserViewController] searchForTag:aTag];
 }
 
+- (IBAction)searchForTags:(NSArray*)someTags
+{
+	[self showBrowser:self];
+	[[browserController browserViewController] searchForTags:someTags];
+}
 
 #pragma mark NSApplication delegate
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag

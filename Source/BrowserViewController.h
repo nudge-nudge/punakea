@@ -98,6 +98,8 @@ is called when a tag is clicked
 - (void)setSearchFieldString:(NSString*)string;
 
 - (void)searchForTag:(NNTag*)aTag;
+- (void)searchForTags:(NSArray*)someTags;
+
 - (void)manageTags;
 - (void)showResults;
 
