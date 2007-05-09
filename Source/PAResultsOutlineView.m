@@ -406,9 +406,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
 
 	if([theEvent type] == NSKeyDown)
-	{				
-		NSLog(@"%d", key);
-		
+	{						
 		// Forward request to responder
 		if([self responder])
 		{
