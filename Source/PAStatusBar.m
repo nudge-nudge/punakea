@@ -192,6 +192,8 @@
 	
 	[view setFrame:newFrame];
 	
+	[resizableSplitView adjustSubviews];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewDidResizeSubviewsNotification 
 														object:resizableSplitView];
 }

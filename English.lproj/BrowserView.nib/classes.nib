@@ -8,7 +8,7 @@
                 activityIndicator = NSProgressIndicator; 
                 controlledView = NSView; 
                 searchField = NSSearchField; 
-                splitView = NSSplitView; 
+                splitView = PASplitView; 
                 tagCloud = PATagCloud; 
                 typeAheadView = PATypeAheadView; 
             }; 
@@ -23,7 +23,6 @@
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
-        {CLASS = PABrowserSplitView; LANGUAGE = ObjC; SUPERCLASS = NSSplitView; }, 
         {
             CLASS = PABrowserViewMainController; 
             LANGUAGE = ObjC; 
@@ -50,6 +49,7 @@
             OUTLETS = {browserViewController = BrowserViewController; }; 
             SUPERCLASS = NSMatrix; 
         }, 
+        {CLASS = PASplitView; LANGUAGE = ObjC; SUPERCLASS = NSSplitView; }, 
         {
             CLASS = PASubViewController; 
             LANGUAGE = ObjC; 

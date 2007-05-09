@@ -18,6 +18,7 @@
 #import "PASourceItem.h"
 #import "PASourcePanelController.h"
 #import "PATagSetPanel.h"
+#import "PASplitView.h"
 
 @interface BrowserController : NSWindowController 
 {
@@ -27,7 +28,8 @@
 	BrowserViewController			*browserViewController;
 	
 	IBOutlet NSView					*mainPlaceholderView;
-	IBOutlet NSSplitView			*verticalSplitView;
+	IBOutlet PASplitView			*verticalSplitView;
+	IBOutlet PASplitView			*horizontalSplitView;
 	
 	IBOutlet PAStatusBar			*sourcePanelStatusBar;
 	IBOutlet PASourcePanel			*sourcePanel;

@@ -169,7 +169,13 @@
 		newFrame.size.height = MAX(minHeight, newFrame.size.height);
 	}
 	
-	[view setFrame:newFrame];
+	// We need to resize subview at index 0, so we'll map our new height
+	NSView *topView = [[resizableSplitView subviews] objectAtIndex:0];
+	NSRect topViewFrame = [topView frame];
+	topViewFrame.size.height = [resizableSplitView frame].size.height - newFrame.size.height - [resizableSplitView dividerThickness];
+	[topView setFrame:topViewFrame];
+	
+	[resizableSplitView adjustSubviews];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewDidResizeSubviewsNotification 
 														object:resizableSplitView];

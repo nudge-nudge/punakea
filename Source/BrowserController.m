@@ -38,6 +38,10 @@
 	
 	[[self window] setFrameAutosaveName:@"punakea.browser"];
 	
+	// Set autosave names for split views
+	[verticalSplitView setAutosaveName:@"PASplitView Configuration VerticalSplitView" defaults:@"0 0 180 472 0 181 0 577 472 0"];
+	[horizontalSplitView setAutosaveName:@"PASplitView Configuration HorizontalSplitView" defaults:@"0 0 182 286 0 0 287 182 162 0"];
+	
 	browserViewController = [[BrowserViewController alloc] init];
 	[verticalSplitView replaceSubview:mainPlaceholderView with:[browserViewController view]];
 	
@@ -64,7 +68,7 @@
 	PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
 	[sbitem setToolTip:@"Add tag set"];
 	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
-	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-gear"]];
+	//[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-gear"]];
 	[sbitem setAction:@selector(addTagSet:)];
 	[sourcePanelStatusBar addItem:sbitem];
 	
@@ -72,6 +76,8 @@
 	[sbitem setButtonType:NSToggleButton];
 	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-info"]];
 	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-gear"]];
+	[sbitem setAction:@selector(toggleInfoPanel:)];
+	
 	[sourcePanelStatusBar addItem:sbitem];
 }
 
@@ -142,6 +148,11 @@
 		modalDelegate:self
 	   didEndSelector:@selector(tagSetPanelDidEnd:returnCode:contextInfo:)
 		  contextInfo:NULL];
+}
+
+- (void)toggleInfoPanel:(id)sender
+{
+	[horizontalSplitView toggleSubviewAtIndex:1];
 }
 
 - (void)sortByName:(id)sender
@@ -256,12 +267,14 @@
 {
 	if([sender isEqualTo:verticalSplitView])
 	{
-		// left subview
+		// left, right subview
 		if(offset == 0) return 120.0;
+		if(offset == 1) return 120.0;
 	}
 	else
 	{
-		// bottom subview
+		// top, bottom subview
+		if(offset == 0) return [sender frame].size.height - [self splitView:sender constrainMaxCoordinate:0.0 ofSubviewAt:1];
 		if(offset == 1) return 120.0;
 	}
 	
@@ -272,13 +285,15 @@
 {
 	if([sender isEqualTo:verticalSplitView])
 	{
-		// left subview
-		if(offset == 0) return [sender frame].size.width - [self splitView:sender constrainMinCoordinate:0.0 ofSubviewAt:0];
+		// left, right subview
+		if(offset == 0) return 400.0;
+		if(offset == 1) return [sender frame].size.width - [self splitView:sender constrainMinCoordinate:0.0 ofSubviewAt:0];
 	}
 	else
 	{
-		// bottom subview
-		if(offset == 1) return [sender frame].size.height - [self splitView:sender constrainMinCoordinate:0.0 ofSubviewAt:1];
+		// top, bottom subview
+		if(offset == 0) return [sender frame].size.height - [self splitView:sender constrainMinCoordinate:0.0 ofSubviewAt:1];
+		if(offset == 1) return 200.0;
 	}
 	
 	return nil;

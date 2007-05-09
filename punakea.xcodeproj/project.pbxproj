@@ -78,8 +78,6 @@
 		483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483272330AA42DC6003D98A6 /* UKPrefsPanel.m */; };
 		4832723D0AA42E8C003D98A6 /* PreferenceController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4832723B0AA42E8C003D98A6 /* PreferenceController.h */; };
 		4832723E0AA42E8C003D98A6 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832723C0AA42E8C003D98A6 /* PreferenceController.m */; };
-		483F50CA0AE551EA00551B9D /* PABrowserSplitView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 483F50C80AE551EA00551B9D /* PABrowserSplitView.h */; };
-		483F50CB0AE551EA00551B9D /* PABrowserSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F50C90AE551EA00551B9D /* PABrowserSplitView.m */; };
 		484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */; };
 		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
 		48404B100AF8B392001F7BB7 /* PATaggerUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 48404A0B0AF8A722001F7BB7 /* PATaggerUnitTest.m */; };
@@ -456,7 +454,6 @@
 				48469B9E0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h in CopyFiles */,
 				48557AD70ADB8ADA0025CE9C /* PATaggerItemCell.h in CopyFiles */,
 				484C56AE0AE4D1FD0000EB7D /* PAControlledView.h in CopyFiles */,
-				483F50CA0AE551EA00551B9D /* PABrowserSplitView.h in CopyFiles */,
 				656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */,
 				4860293C0AEE0AF600B7DC6F /* SLA.r in CopyFiles */,
 				6540FA550AEE0F5100EF51F3 /* PAResultsBookmarkCell.h in CopyFiles */,
@@ -553,8 +550,6 @@
 		483272330AA42DC6003D98A6 /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
 		4832723B0AA42E8C003D98A6 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
 		4832723C0AA42E8C003D98A6 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
-		483F50C80AE551EA00551B9D /* PABrowserSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABrowserSplitView.h; sourceTree = "<group>"; };
-		483F50C90AE551EA00551B9D /* PABrowserSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserSplitView.m; sourceTree = "<group>"; };
 		484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadView.h; sourceTree = "<group>"; };
 		484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadView.m; sourceTree = "<group>"; };
 		48404A0A0AF8A722001F7BB7 /* PATaggerUnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerUnitTest.h; sourceTree = "<group>"; };
@@ -1411,8 +1406,6 @@
 				655631650BE3B099004D3B33 /* PABrowserWindow.m */,
 				484C56AC0AE4D1FD0000EB7D /* PAControlledView.h */,
 				484C56AD0AE4D1FD0000EB7D /* PAControlledView.m */,
-				483F50C80AE551EA00551B9D /* PABrowserSplitView.h */,
-				483F50C90AE551EA00551B9D /* PABrowserSplitView.m */,
 			);
 			name = Global;
 			sourceTree = "<group>";
@@ -2209,7 +2202,6 @@
 				48469B9F0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m in Sources */,
 				48557AD80ADB8ADA0025CE9C /* PATaggerItemCell.m in Sources */,
 				484C56AF0AE4D1FD0000EB7D /* PAControlledView.m in Sources */,
-				483F50CB0AE551EA00551B9D /* PABrowserSplitView.m in Sources */,
 				656C20030AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m in Sources */,
 				6540FA560AEE0F5100EF51F3 /* PAResultsBookmarkCell.m in Sources */,
 				6540FA680AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m in Sources */,

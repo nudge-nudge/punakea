@@ -39,7 +39,31 @@
 	
 	[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];	
 	
-	if(![item isHeading]) 
+	if([item isHeading]) 
+	{
+		NSColor *textColor = [NSColor colorWithDeviceRed:(57.0/255.0) green:(67.0/255.0) blue:(81.0/255.0) alpha:1.0];
+		NSFont *font = [NSFont boldSystemFontOfSize:11];
+		
+		NSShadow *shdw = [[[NSShadow alloc] init] autorelease];
+		NSSize shadowOffset;
+		if([controlView isFlipped]) { shadowOffset = NSMakeSize(0,-1.5); } else { shadowOffset = NSMakeSize(0,1.5); }
+		[shdw setShadowOffset:shadowOffset];
+		[shdw setShadowColor:[NSColor colorWithCalibratedWhite:0.95 alpha:1.0]];
+		
+		[fontAttributes setObject:textColor forKey:NSForegroundColorAttributeName];	
+		[fontAttributes setObject:font forKey:NSFontAttributeName];
+		[fontAttributes setObject:shdw forKey:NSShadowAttributeName];
+		
+		// Draw display name	
+		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[[item displayName] uppercaseString]
+																	attributes:fontAttributes];	
+		
+		[label drawInRect:NSMakeRect(cellFrame.origin.x,
+									 cellFrame.origin.y + cellFrame.size.height - [label size].height - 3,
+									 cellFrame.size.width - 10.0,
+									 cellFrame.size.height)];
+	}
+	else 
 	{
 		NSColor *textColor = [NSColor whiteColor];
 		NSFont *font = [NSFont boldSystemFontOfSize:11];
@@ -69,23 +93,6 @@
 									 cellFrame.size.width - 10.0,
 									 cellFrame.size.height)];
 	} 
-	else
-	{		
-		NSColor *textColor = [NSColor colorWithDeviceRed:(57.0/255.0) green:(67.0/255.0) blue:(81.0/255.0) alpha:1.0];
-		NSFont *font = [NSFont systemFontOfSize:11];	
-		
-		[fontAttributes setObject:textColor forKey:NSForegroundColorAttributeName];	
-		[fontAttributes setObject:font forKey:NSFontAttributeName];
-		
-		// Draw display name	
-		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[[item displayName] uppercaseString]
-																	attributes:fontAttributes];	
-		
-		[label drawInRect:NSMakeRect(cellFrame.origin.x,
-									 cellFrame.origin.y + cellFrame.size.height - [label size].height - 3,
-									 cellFrame.size.width - 10.0,
-									 cellFrame.size.height)];
-	}
 }
 
 

@@ -15,6 +15,7 @@
 #import "PATagManagementViewController.h"
 #import "PAResultsViewController.h"
 #import "TaggerController.h"
+#import "PASplitView.h"
 
 #import "NNFilterEngine.h"
 #import "NNStringPrefixFilter.h"
@@ -37,7 +38,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 @interface BrowserViewController : PAViewController <NNBVCServerProtocol>
 {
 	IBOutlet PATagCloud					*tagCloud;
-	IBOutlet NSSplitView				*splitView;
+	IBOutlet PASplitView				*splitView;
 	IBOutlet NSView						*controlledView;
 	IBOutlet NSProgressIndicator		*activityIndicator;
 	

@@ -5,11 +5,12 @@
             CLASS = BrowserController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                horizontalSplitView = PASplitView; 
                 mainPlaceholderView = NSView; 
                 sourcePanel = PASourcePanel; 
                 sourcePanelStatusBar = PAStatusBar; 
-                tagSetPanel = NSPanel; 
-                verticalSplitView = NSSplitView; 
+                tagSetPanel = PATagSetPanel; 
+                verticalSplitView = PASplitView; 
             }; 
             SUPERCLASS = NSWindowController; 
         }, 
@@ -27,6 +28,12 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = KFSplitView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {kfDelegate = id; }; 
+            SUPERCLASS = NSSplitView; 
+        }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {CLASS = PABrowserWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
