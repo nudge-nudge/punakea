@@ -386,6 +386,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	{
 		// Delete files on Command + Delete
 		if(key == NSDeleteCharacter &&
+		   ([theEvent modifierFlags] & NSCommandKeyMask) != 0 &&
 		   [[self selectedRowIndexes] count] > 0)
 		{			
 			if([[self selectedRowIndexes] count] > 0)
