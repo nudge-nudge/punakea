@@ -316,8 +316,12 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 #pragma mark Notifications
 - (void)selectionDidChange:(NSNotification *)notification
 {
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[self visibleSelectedItems]
+														 forKey:@"SelectedItems"];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PAResultsOutlineViewSelectionDidChangeNotification 
-														object:self];
+														object:self
+													  userInfo:userInfo];
 }
 
 - (void)queryNote:(NSNotification *)note

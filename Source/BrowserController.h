@@ -39,6 +39,7 @@
 	IBOutlet PATabPanel							*tabPanel;
 	
 	NSTabView									*infoPane;
+	IBOutlet NSView								*infoPanePlaceholderView;
 	IBOutlet PAInfoPaneSingleSelectionView		*infoPaneSingleSelectionView;
 
 }

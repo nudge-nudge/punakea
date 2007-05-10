@@ -104,7 +104,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	[infoPane setTabViewType:NSNoTabsNoBorder];
 	
 	// Placeholder
-	NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:@"PLACEHOLDER"];	
+	NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:@"PLACEHOLDER"];
+	[item setView:infoPanePlaceholderView];
 	[infoPane addTabViewItem:item];
 	[item release];
 	
@@ -392,16 +393,18 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 {
 	NSOutlineView *ov = [notification object];
 	
-	if([ov numberOfSelectedRows] == 0)
+	NSArray *selectedItems = [[notification userInfo] objectForKey:@"SelectedItems"];
+	
+	if([selectedItems count] == 0)
 	{
 		[infoPane selectTabViewItemWithIdentifier:@"PLACEHOLDER"];
 	}
-	else if([ov numberOfSelectedRows] == 1)
-	{
+	else if([selectedItems count] == 1)
+	{		
 		NSTabViewItem *tvItem = [infoPane tabViewItemAtIndex:[infoPane indexOfTabViewItemWithIdentifier:@"SINGLE_SELECTION"]];
 		PAInfoPaneSingleSelectionView *view = [tvItem view];
 		
-		[view setFile:[ov itemAtRow:[ov selectedRow]]];
+		[view setFile:[selectedItems objectAtIndex:0]];
 		
 		[infoPane selectTabViewItemWithIdentifier:@"SINGLE_SELECTION"];
 	} 

@@ -6,6 +6,7 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 horizontalSplitView = PASplitView; 
+                infoPanePlaceholderView = NSView; 
                 infoPaneSingleSelectionView = PAInfoPaneSingleSelectionView; 
                 mainPlaceholderView = NSView; 
                 sourcePanel = PASourcePanel; 

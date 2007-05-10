@@ -59,8 +59,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)dealloc
 {
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	[nc removeObserver:self];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	if(selectedCells) [selectedCells release];
 	if(selectedIndexes) [selectedIndexes release];
@@ -283,6 +282,10 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		[[outlineView selectedItemsOfMultiItem] removeObject:[items objectAtIndex:idx]];
 	}
+	
+	// Post notification
+	[[NSNotificationCenter defaultCenter] postNotificationName:NSOutlineViewSelectionDidChangeNotification
+														object:outlineView];
 }
 
 - (void)highlightOnlyCell:(NSCell *)cell

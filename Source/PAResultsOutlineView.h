@@ -10,6 +10,8 @@
 #import "NNTagging/NNQuery.h"
 
 
+/** Notification is posted when the selection changed.
+	userInfo dictionary: Key "SelectedItems" contains the current selection */
 extern NSString *PAResultsOutlineViewSelectionDidChangeNotification;
 
 
