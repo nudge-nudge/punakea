@@ -10,6 +10,9 @@
 #import "NNTagging/NNQuery.h"
 
 
+extern NSString *PAResultsOutlineViewSelectionDidChangeNotification;
+
+
 typedef enum _PAResultsDisplayMode
 {
 	PAListMode = 0,

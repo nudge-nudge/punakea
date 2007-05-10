@@ -22,6 +22,7 @@
 #import "PATagButton.h"
 #import "PAThumbnailItem.h"
 
+
 @interface PAResultsViewController : PABrowserViewMainController {
 	
 	IBOutlet PAResultsOutlineView		*outlineView;

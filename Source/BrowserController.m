@@ -56,6 +56,14 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	
 	[self setupToolbar];
 	[self setupStatusBar];
+	[self setupTabPanel];
+	
+	// Register for notifications
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self
+		   selector:@selector(resultsOutlineViewSelectionDidChange:)
+			   name:(id)PAResultsOutlineViewSelectionDidChangeNotification
+			 object:nil];
 }
 
 - (void)setupToolbar
@@ -87,8 +95,41 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	[sourcePanelStatusBar addItem:sbitem];
 }
 
+- (void)setupTabPanel
+{
+	NSTabViewItem *infoItem = [tabPanel tabViewItemAtIndex:[tabPanel indexOfTabViewItemWithIdentifier:@"INFO"]];
+	
+	// Add tabview that holds infoPanePlaceholderView, infoPaneSingleSelectionView, infoPaneMultipleSelectionView
+	infoPane = [[NSTabView alloc] initWithFrame:[[infoItem view] frame]];
+	[infoPane setTabViewType:NSNoTabsNoBorder];
+	
+	// Placeholder
+	NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:@"PLACEHOLDER"];	
+	[infoPane addTabViewItem:item];
+	[item release];
+	
+	// Single selection
+	item = [[NSTabViewItem alloc] initWithIdentifier:@"SINGLE_SELECTION"];	
+	[item setView:infoPaneSingleSelectionView];	
+	[infoPane addTabViewItem:item];
+	[item release];
+	
+	// Multiple selection
+	item = [[NSTabViewItem alloc] initWithIdentifier:@"MULTIPLE_SELECTION"];	
+	[infoPane addTabViewItem:item];
+	[item release];
+	
+	[infoItem setView:infoPane];
+	[infoPane release];
+	
+	// TEMP
+	[infoPane selectTabViewItemAtIndex:1];
+}
+
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	// unbind stuff for retain count
 	[browserViewController release];
 	[super dealloc];
@@ -344,6 +385,29 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	if([[notification object] isMemberOfClass:[NSSearchField class]])
 	{
 		[[self window] makeFirstResponder:[browserViewController tagCloud]];
+	}
+}
+
+- (void)resultsOutlineViewSelectionDidChange:(NSNotification *)notification
+{
+	NSOutlineView *ov = [notification object];
+	
+	if([ov numberOfSelectedRows] == 0)
+	{
+		[infoPane selectTabViewItemWithIdentifier:@"PLACEHOLDER"];
+	}
+	else if([ov numberOfSelectedRows] == 1)
+	{
+		NSTabViewItem *tvItem = [infoPane tabViewItemAtIndex:[infoPane indexOfTabViewItemWithIdentifier:@"SINGLE_SELECTION"]];
+		PAInfoPaneSingleSelectionView *view = [tvItem view];
+		
+		[view setFile:[ov itemAtRow:[ov selectedRow]]];
+		
+		[infoPane selectTabViewItemWithIdentifier:@"SINGLE_SELECTION"];
+	} 
+	else
+	{
+		[infoPane selectTabViewItemWithIdentifier:@"MULTIPLE_SELECTION"];
 	}
 }
 

@@ -1,9 +1,6 @@
 #import "PAResultsOutlineView.h"
 
 
-static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
-
-
 @interface NSOutlineView (PrivateAPI)
 
 - (id)_highlightColorForCell:(NSCell *)cell;
@@ -20,6 +17,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)beginEditing;
 
 @end
+
+
+static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
+
+NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlineViewSelectionDidChangeNotification";
 
 
 @implementation PAResultsOutlineView
@@ -39,11 +41,17 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self setTarget:[self delegate]];
 	[self setDoubleAction:@selector(doubleAction:)];
 	
-	// Get notification frameDidChange
+	// Get notifications
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	
 	[nc addObserver:self
 	       selector:@selector(frameDidChange:)
 		       name:(id)NSViewFrameDidChangeNotification
+			 object:self];
+	
+	[nc addObserver:self
+		   selector:@selector(selectionDidChange:)
+			   name:(id)NSOutlineViewSelectionDidChangeNotification
 			 object:self];
 	
 	// Misc
@@ -306,6 +314,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Notifications
+- (void)selectionDidChange:(NSNotification *)notification
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:PAResultsOutlineViewSelectionDidChangeNotification 
+														object:self];
+}
+
 - (void)queryNote:(NSNotification *)note
 {	
 	if([[note name] isEqualToString:NNQueryDidStartGatheringNotification])

@@ -19,20 +19,27 @@
 #import "PASourcePanelController.h"
 #import "PATagSetPanel.h"
 #import "PASplitView.h"
+#import "PATabPanel.h"
+#import "PAInfoPaneSingleSelectionView.h"
+
 
 @interface BrowserController : NSWindowController 
 {
 	
-	IBOutlet PATagSetPanel			*tagSetPanel;
+	IBOutlet PATagSetPanel						*tagSetPanel;
 	
-	BrowserViewController			*browserViewController;
+	BrowserViewController						*browserViewController;
 	
-	IBOutlet NSView					*mainPlaceholderView;
-	IBOutlet PASplitView			*verticalSplitView;
-	IBOutlet PASplitView			*horizontalSplitView;
+	IBOutlet NSView								*mainPlaceholderView;
+	IBOutlet PASplitView						*verticalSplitView;
+	IBOutlet PASplitView						*horizontalSplitView;
 	
-	IBOutlet PAStatusBar			*sourcePanelStatusBar;
-	IBOutlet PASourcePanel			*sourcePanel;
+	IBOutlet PAStatusBar						*sourcePanelStatusBar;
+	IBOutlet PASourcePanel						*sourcePanel;
+	IBOutlet PATabPanel							*tabPanel;
+	
+	NSTabView									*infoPane;
+	IBOutlet PAInfoPaneSingleSelectionView		*infoPaneSingleSelectionView;
 
 }
 
