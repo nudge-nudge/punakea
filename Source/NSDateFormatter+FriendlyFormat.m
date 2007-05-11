@@ -15,7 +15,7 @@
 
 - (NSString *)friendlyStringFromDate:(NSDate *)date
 {
-	if(!date) return NSLocalizedStringFromTable(@"NO DATE",@"Global",@"");
+	if(!date) return NSLocalizedStringFromTable(@"NO_DATE",@"Global",@"");
 	
 	// Save current styles
 	NSDateFormatterStyle dateStyle = [self dateStyle];
@@ -58,6 +58,13 @@
 	[self setTimeStyle:timeStyle];
 
 	return value;
+}
+
+- (NSString *)saveStringFromDate:(NSDate *)date
+{
+	NSString *s = [self stringFromDate:date];
+	
+	return s ? s : NSLocalizedStringFromTable(@"NO_DATE",@"Global",@"");
 }
 
 @end

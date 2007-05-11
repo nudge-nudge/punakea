@@ -126,6 +126,15 @@
 	// Update fields
 	[kindField setStringValue:[file kind]];
 	
+	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];	
+	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+	
+	[createdField setStringValue:[dateFormatter saveStringFromDate:[file creationDate]]];
+	[modifiedField setStringValue:[dateFormatter saveStringFromDate:[file modificationDate]]];
+	[lastOpenedField setStringValue:[dateFormatter saveStringFromDate:[file lastUsedDate]]];
+	
 	[self repositionFields];
 }
 

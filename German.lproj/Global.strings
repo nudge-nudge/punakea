@@ -2,6 +2,6 @@
 "CANCEL" = "Abbrechen";
 "ERROR" = "Fehler";
 
-"NO DATE" = "Ohne Datum";
+"NO_DATE" = "Ohne Datum";
 "TODAY" = "Heute";
 "YESTERDAY" = "Gestern";

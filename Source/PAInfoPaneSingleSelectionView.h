@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNFile.h"
 #import "NSTextFieldAdditions.h"
+#import "NSDateFormatter+FriendlyFormat.h"
 
 
 @interface PAInfoPaneSingleSelectionView : NSView {

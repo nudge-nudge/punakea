@@ -12,5 +12,6 @@
 @interface NSDateFormatter (FriendlyFormat)
 
 - (NSString *)friendlyStringFromDate:(NSDate *)date;
+- (NSString *)saveStringFromDate:(NSDate *)date;
 
 @end
