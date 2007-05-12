@@ -5,3 +5,5 @@
 "NO_DATE" = "No Date";
 "TODAY" = "Today";
 "YESTERDAY" = "Yesterday";
+
+"FILE_SIZE_ON_DISK" = "%@ on disk";
