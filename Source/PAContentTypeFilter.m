@@ -8,7 +8,6 @@
 
 #import "PAContentTypeFilter.h"
 
-
 @implementation PAContentTypeFilter
 
 #pragma mark init
@@ -50,7 +49,7 @@
 		
 		while (contentType = [e nextObject])
 		{
-			[query addFilter:[NNQueryFilter queryFilterWithAttribute:kMDItemContentType value:contentType]];
+			[query addFilter:[NNQueryFilter queryFilterWithAttribute:(NSString*)kMDItemContentType value:contentType]];
 		}
 	}
 	return self;
@@ -92,7 +91,6 @@
 		else if (object)
 		{
 			[self filterObject:object];
-			CFRunLoopRun();
 		}
 	}
 	
@@ -107,25 +105,24 @@
 	// look if cache can satisfy request
 	PACacheResult result = [tagCache checkFiletype:[self contentType] forTag:object];
 	
-	if (result & PACacheSatisfiesRequest)
+	if (result & PACacheIsValid)
 	{
-		if (result & PACacheIsValid)
+		if (result & PACacheSatisfiesRequest)
 		{
-			// cache was valid and object is good to go
+			// cache was valid and object is good to go			
 			[self objectFiltered:object];
 		}
-		else
-		{
-			// cache was valid and object failed
-			return;
-		}
 	}
-	// if this is reached, the cache needs to be updated
-	// take care of this in the queryNote:
-	
-	// only one query can be active at a time at the moment
-	[selectedTags setSelectedTags:[NSArray arrayWithObject:object]];
-	[query startQuery];
+	else
+	{
+		// if this is reached, the cache needs to be updated
+		// take care of this in the queryNote:
+		
+		// only one query can be active at a time at the moment
+		[selectedTags setSelectedTags:[NSArray arrayWithObject:object]];
+		[query startQuery];
+		CFRunLoopRun();
+	}
 }
 
 - (void)queryNote:(NSNotification*)notification

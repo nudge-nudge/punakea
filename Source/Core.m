@@ -16,6 +16,10 @@
 - (BOOL)appHasTagger;
 - (BOOL)appHasPreferences;
 
+- (void)loadTagCache;
+- (void)saveTagCache;
+- (NSString*)pathForTagCacheFile;
+
 @end
 
 @implementation Core
@@ -52,6 +56,9 @@
 {
 	[NSApp setDelegate:self]; 
 	[self setupToolbar];
+	
+	// load cache
+	[self loadTagCache];
 	
 	if (![Core wasLaunchedAsLoginItem])
 	{
@@ -102,6 +109,9 @@
 
 - (void)applicationWillTerminate:(NSNotification *)note 
 { 
+	// save tag cache
+	[self saveTagCache];
+	
 	[userDefaults synchronize];
 } 
 
@@ -141,6 +151,57 @@
 	[bar removeStatusItem:statusItem];
 	[statusItem release];
 	statusItem = nil;
+}
+
+#pragma mark storage
+- (void)loadTagCache
+{
+	NSString *path = [self pathForTagCacheFile];
+	NSMutableData *data = [NSData dataWithContentsOfFile:path];
+	
+	if (data)
+	{
+		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+		NSMutableDictionary *rootObject = [unarchiver decodeObject];
+		[unarchiver finishDecoding];
+		[unarchiver release];
+		
+		[[PATagCache sharedInstance] setCache:[rootObject valueForKey:@"tagCache"]];
+	}
+}
+
+- (void)saveTagCache
+{
+	NSString *path  = [self pathForTagCacheFile];
+	NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
+	[rootObject setValue:[[PATagCache sharedInstance] cache] forKey:@"tagCache"];
+	
+	NSMutableData *data = [NSMutableData data];
+	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+	[archiver setOutputFormat:NSPropertyListBinaryFormat_v1_0];
+	[archiver encodeObject:rootObject];
+	[archiver finishEncoding];
+	[data writeToFile:path atomically:YES];
+	[archiver release];
+}
+
+- (NSString*)pathForTagCacheFile
+{
+	NSString *fileName = @"tagCache.plist"; 
+	
+	// use default location in app support
+	NSBundle *bundle = [NSBundle mainBundle];
+	NSString *path = [bundle bundlePath];
+	NSString *appName = [[path lastPathComponent] stringByDeletingPathExtension]; 
+		
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSString *folder = [NSString stringWithFormat:@"~/Library/Application Support/%@/",appName];
+	folder = [folder stringByExpandingTildeInPath]; 
+		
+	if ([fileManager fileExistsAtPath: folder] == NO) 
+		[fileManager createDirectoryAtPath: folder attributes: nil];
+		
+	return [folder stringByAppendingPathComponent:fileName]; 
 }
 
 #pragma mark events

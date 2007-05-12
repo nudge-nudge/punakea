@@ -44,6 +44,19 @@ static PATagCache *sharedInstance = nil;
 	return self;
 }
 
+#pragma mark accessors
+- (void)setCache:(NSMutableDictionary*)aCache
+{
+	[aCache retain];
+	[cache release];
+	cache = aCache;
+}
+
+- (NSMutableDictionary*)cache
+{
+	return cache;
+}
+
 #pragma mark function
 - (PACacheResult)checkFiletype:(NSString*)filetype forTag:(NNTag*)tag
 {

@@ -16,6 +16,8 @@ enum
 	PACacheSatisfiesRequest = 1 << 1
 };
 
+
+// TODO THREADSAFE!!
 @interface PATagCacheEntry : NSObject {
 	/**
 	an array of filetypes corresponding to the values of 
@@ -23,6 +25,9 @@ enum
 	 */
 	NSMutableDictionary *assignedFiletypes;
 }
+
+- (void)setAssignedFiletypes:(NSMutableDictionary*)dic;
+- (NSMutableDictionary*)assignedFiletypes;
 
 - (void)setHasFiletype:(NSString*)filetype toValue:(BOOL)hasFiletype;
 

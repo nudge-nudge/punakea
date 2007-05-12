@@ -16,6 +16,8 @@
 #import "PASourcePanel.h"
 #import "PASourceItem.h"
 
+#import "PATagCache.h"
+
 #import "PACollectionNotEmpty.h"
 
 #import "Sparkle/SUUpdater.h"

@@ -55,13 +55,12 @@
 		4817B2B10ABE864B00ACBBC6 /* PARecentTagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B2AF0ABE864B00ACBBC6 /* PARecentTagGroup.m */; };
 		4817B3A60ABE8C4A00ACBBC6 /* PAPopularTagGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4817B3A40ABE8C4A00ACBBC6 /* PAPopularTagGroup.h */; };
 		4817B3A70ABE8C4A00ACBBC6 /* PAPopularTagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */; };
-		48186F510BE4C834000B4638 /* NNFilterEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F490BE4C834000B4638 /* NNFilterEngine.h */; };
+		48186F510BE4C834000B4638 /* NNFilterEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F490BE4C834000B4638 /* NNFilterEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48186F520BE4C834000B4638 /* NNFilterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 48186F4A0BE4C834000B4638 /* NNFilterEngine.m */; };
-		48186F530BE4C834000B4638 /* NNObjectFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F4B0BE4C834000B4638 /* NNObjectFilter.h */; };
+		48186F530BE4C834000B4638 /* NNObjectFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F4B0BE4C834000B4638 /* NNObjectFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48186F540BE4C834000B4638 /* NNObjectFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48186F4C0BE4C834000B4638 /* NNObjectFilter.m */; };
 		48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48186F390BE4C7BE000B4638 /* NNFilterEngine.framework */; };
 		48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48186F390BE4C7BE000B4638 /* NNFilterEngine.framework */; };
-		48186F7E0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */; };
 		48186F930BE4C957000B4638 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		481A64310ABFD16F005516E7 /* LoginItemsAE.c in Sources */ = {isa = PBXBuildFile; fileRef = 481A642F0ABFD16F005516E7 /* LoginItemsAE.c */; };
 		481A64320ABFD16F005516E7 /* LoginItemsAE.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481A64300ABFD16F005516E7 /* LoginItemsAE.h */; };
@@ -152,6 +151,11 @@
 		48CFDC320B2ED76A002282D9 /* toolbar-pref-update.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CFDC310B2ED76A002282D9 /* toolbar-pref-update.tiff */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
+		48D815CB0BF5BF6600821C25 /* PAStringPrefixFilter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48EDB8330BF5A68C008452FF /* PAStringPrefixFilter.h */; };
+		48D815CC0BF5BF6600821C25 /* PAStringPrefixFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EDB8360BF5A693008452FF /* PAStringPrefixFilter.m */; };
+		48D815CD0BF5BF6600821C25 /* PAContentTypeFilter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48EDB8390BF5A698008452FF /* PAContentTypeFilter.h */; };
+		48D815CE0BF5BF6600821C25 /* PAContentTypeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EDB83E0BF5A6A2008452FF /* PAContentTypeFilter.m */; };
+		48D815F20BF5BFB000821C25 /* NNDistributedObjectProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */; };
 		48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D81DAB09F79C1C0075EE44 /* TaggerController.h */; };
 		48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D81DAC09F79C1C0075EE44 /* TaggerController.m */; };
 		48E145430B5F99FA00859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
@@ -487,7 +491,6 @@
 				65EB72160BE20D86007FF40C /* PAStatusBarButton.h in CopyFiles */,
 				65EB722C0BE20ECC007FF40C /* PAStatusBarButtonCell.h in CopyFiles */,
 				655631660BE3B099004D3B33 /* PABrowserWindow.h in CopyFiles */,
-				48186F7E0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h in CopyFiles */,
 				658AB8340BE60D4E0036FCA2 /* PATabPanel.h in CopyFiles */,
 				655FD6090BEA229C00095532 /* PATagSetPanel.h in CopyFiles */,
 				65C8A1FF0BEB4D6400DC032F /* PATagAutocompleteWindowController.h in CopyFiles */,
@@ -497,6 +500,8 @@
 				480C40300BF4469A00C90B2C /* PATagCache.h in CopyFiles */,
 				480C403B0BF4471300C90B2C /* PASingleton.h in CopyFiles */,
 				480C40480BF4484400C90B2C /* PATagCacheEntry.h in CopyFiles */,
+				48D815CB0BF5BF6600821C25 /* PAStringPrefixFilter.h in CopyFiles */,
+				48D815CD0BF5BF6600821C25 /* PAContentTypeFilter.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,10 +1008,6 @@
 			children = (
 				480C402E0BF4469A00C90B2C /* PATagCache.h */,
 				480C402F0BF4469A00C90B2C /* PATagCache.m */,
-				48EDB8330BF5A68C008452FF /* PAStringPrefixFilter.h */,
-				48EDB8360BF5A693008452FF /* PAStringPrefixFilter.m */,
-				48EDB8390BF5A698008452FF /* PAContentTypeFilter.h */,
-				48EDB83E0BF5A6A2008452FF /* PAContentTypeFilter.m */,
 				480C40460BF4484400C90B2C /* PATagCacheEntry.h */,
 				480C40470BF4484400C90B2C /* PATagCacheEntry.m */,
 			);
@@ -1324,6 +1325,10 @@
 		48EDB82A0BF5A660008452FF /* TagFilter */ = {
 			isa = PBXGroup;
 			children = (
+				48EDB8330BF5A68C008452FF /* PAStringPrefixFilter.h */,
+				48EDB8360BF5A693008452FF /* PAStringPrefixFilter.m */,
+				48EDB8390BF5A698008452FF /* PAContentTypeFilter.h */,
+				48EDB83E0BF5A6A2008452FF /* PAContentTypeFilter.m */,
 			);
 			name = TagFilter;
 			sourceTree = "<group>";
@@ -1787,6 +1792,7 @@
 			files = (
 				48186F510BE4C834000B4638 /* NNFilterEngine.h in Headers */,
 				48186F530BE4C834000B4638 /* NNObjectFilter.h in Headers */,
+				48D815F20BF5BFB000821C25 /* NNDistributedObjectProtocols.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2299,6 +2305,8 @@
 				480C40310BF4469A00C90B2C /* PATagCache.m in Sources */,
 				480C403C0BF4471300C90B2C /* PASingleton.m in Sources */,
 				480C40490BF4484400C90B2C /* PATagCacheEntry.m in Sources */,
+				48D815CC0BF5BF6600821C25 /* PAStringPrefixFilter.m in Sources */,
+				48D815CE0BF5BF6600821C25 /* PAContentTypeFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

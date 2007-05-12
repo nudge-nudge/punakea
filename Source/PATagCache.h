@@ -16,6 +16,11 @@
 	NSMutableDictionary *cache;
 }
 
++ (PATagCache*)sharedInstance;
+
+- (void)setCache:(NSMutableDictionary*)aCache;
+- (NSMutableDictionary*)cache;
+
 - (PACacheResult)checkFiletype:(NSString*)filetype forTag:(NNTag*)tag;
 
 - (void)updateCacheForTag:(NNTag*)tag setFiletype:(NSString*)filetype toValue:(BOOL)hasFiletype;

@@ -16,7 +16,7 @@
 {
 	if (self = [super init])
 	{
-		assignedFiletypes = [[NSMutableDictionary alloc] initWithCapacity:10];
+		[self setAssignedFiletypes:[NSMutableDictionary dictionary]];
 	}
 	return self;
 }
@@ -27,6 +27,35 @@
 	[super dealloc];
 }
 
+#pragma mark coding
+- (id)initWithCoder:(NSCoder*)coder 
+{
+	self = [super init];
+	if (self) 
+	{
+		[self setAssignedFiletypes:[coder decodeObjectForKey:@"assignedFiletypes"]];
+	}
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder*)coder 
+{
+	[coder encodeObject:assignedFiletypes forKey:@"assignedFiletypes"];
+}
+
+#pragma mark accessors
+- (void)setAssignedFiletypes:(NSMutableDictionary*)dic
+{
+	[dic retain];
+	[assignedFiletypes release];
+	assignedFiletypes = dic;
+}
+
+- (NSMutableDictionary*)assignedFiletypes
+{
+	return assignedFiletypes;
+}
+
 #pragma mark function
 - (void)setHasFiletype:(NSString*)filetype toValue:(BOOL)hasFiletype
 {
@@ -35,7 +64,7 @@
 	[assignedFiletypes setObject:values forKey:filetype];
 }		
 
-- (BOOL)hasFiletype:(NSString*)filetype forDate:(NSCalendarDate*)date
+- (PACacheResult)hasFiletype:(NSString*)filetype forDate:(NSCalendarDate*)date
 {
 	PACacheResult result = 0;
 	
