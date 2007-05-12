@@ -13,6 +13,8 @@
 #import "NNTagging/NNSelectedTags.h"
 #import "NNTagging/NNQuery.h"
 
+#import "PATagCache.h"
+
 @interface NNContentTypeFilter : NNObjectFilter {
 	NSString *contentType;
 	
@@ -22,6 +24,8 @@
 	NSDictionary *simpleGrouping;
 	
 	NSLock *filterLock;
+	
+	PATagCache *tagCache;
 }
 
 - (id)initWithContentType:(NSString*)type;

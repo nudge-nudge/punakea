@@ -19,6 +19,8 @@
 		weight = 10;
 		contentType = [type copy];
 		
+		tagCache = [PATagCache sharedInstance];
+		
 		selectedTags = [[NNSelectedTags alloc] init];
 		query = [[NNQuery alloc] initWithTags:selectedTags];
 
@@ -102,6 +104,25 @@
 
 - (void)filterObject:(id)object
 {
+	// look if cache can satisfy request
+	PACacheResult result = [tagCache checkFiletype:[self contentType] forTag:object];
+	
+	if (result & PACacheSatisfiesRequest)
+	{
+		if (result & PACacheIsValid)
+		{
+			// cache was valid and object is good to go
+			[self objectFiltered:object];
+		}
+		else
+		{
+			// cache was valid and object failed
+			return;
+		}
+	}
+	// if this is reached, the cache needs to be updated
+	// take care of this in the queryNote:
+	
 	// only one query can be active at a time at the moment
 	[selectedTags setSelectedTags:[NSArray arrayWithObject:object]];
 	[query startQuery];
@@ -119,7 +140,19 @@
 		
 		if ([[query flatResults] count] > 0)
 		{
+			// update cache
+			[tagCache updateCacheForTag:object
+							setFiletype:[self contentType]
+								toValue:YES];
+			
 			[self objectFiltered:object];
+		}
+		else
+		{
+			// update cache
+			[tagCache updateCacheForTag:object
+							setFiletype:[self contentType]
+								toValue:NO];
 		}
 	}
 	else if ([[notification name] isEqualTo:NNQueryGatheringProgressNotification])
@@ -128,7 +161,20 @@
 		{
 			CFRunLoopStop(CFRunLoopGetCurrent ());
 			[query stopQuery];
+			
+			// update cache
+			[tagCache updateCacheForTag:object
+							setFiletype:[self contentType]
+								toValue:YES];
+			
 			[self objectFiltered:object];
+		}
+		else
+		{
+			// update cache
+			[tagCache updateCacheForTag:object
+							setFiletype:[self contentType]
+								toValue:NO];
 		}
 	}
 }
