@@ -1,5 +1,5 @@
 //
-//  NNContentTypeFilter.h
+//  PAContentTypeFilter.h
 //  NNTagging
 //
 //  Created by Johannes Hoffart on 19.04.07.
@@ -15,7 +15,7 @@
 
 #import "PATagCache.h"
 
-@interface NNContentTypeFilter : NNObjectFilter {
+@interface PAContentTypeFilter : NNObjectFilter {
 	NSString *contentType;
 	
 	NNSelectedTags *selectedTags;

@@ -1,5 +1,5 @@
 //
-//  NNStringPrefixFilter.h
+//  PAStringPrefixFilter.h
 //  NNTagging
 //
 //  Created by Johannes Hoffart on 18.04.07.
@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "NNObjectFilter.h"
 
-@interface NNStringPrefixFilter : NNObjectFilter {
+@interface PAStringPrefixFilter : NNObjectFilter {
 	NSString *filterPrefix;
 }
 

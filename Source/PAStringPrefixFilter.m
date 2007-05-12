@@ -1,15 +1,15 @@
 //
-//  NNStringPrefixFilter.m
+//  PAStringPrefixFilter.m
 //  NNTagging
 //
 //  Created by Johannes Hoffart on 18.04.07.
 //  Copyright 2007 __MyCompanyName__. All rights reserved.
 //
 
-#import "NNStringPrefixFilter.h"
+#import "PAStringPrefixFilter.h"
 
 
-@implementation NNStringPrefixFilter
+@implementation PAStringPrefixFilter
 
 #pragma mark init
 - (id)initWithFilterPrefix:(NSString*)prefix

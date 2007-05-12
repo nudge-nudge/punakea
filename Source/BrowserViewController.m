@@ -37,8 +37,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (PABrowserViewControllerState)state;
 - (void)setState:(PABrowserViewControllerState)aState;
 
-- (void)setActivePrefixFilter:(NNStringPrefixFilter*)filter;
-- (NNStringPrefixFilter*)activePrefixFilter;
+- (void)setActivePrefixFilter:(PAStringPrefixFilter*)filter;
+- (PAStringPrefixFilter*)activePrefixFilter;
 
 - (void)setupFilterEngine;
 - (void)filterTags;
@@ -229,14 +229,14 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		return YES;
 }
 
-- (void)setActivePrefixFilter:(NNStringPrefixFilter*)filter
+- (void)setActivePrefixFilter:(PAStringPrefixFilter*)filter
 {
 	[filter retain];
 	[activePrefixFilter release];
 	activePrefixFilter = filter;
 }
 
-- (NNStringPrefixFilter*)activePrefixFilter
+- (PAStringPrefixFilter*)activePrefixFilter
 {
 	return activePrefixFilter;
 }
@@ -424,7 +424,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		{
 			[filterEngine removeFilter:[self activePrefixFilter]];
 		}
-		NNStringPrefixFilter *newFilter = [[[NNStringPrefixFilter alloc] initWithFilterPrefix:searchFieldString] autorelease];
+		PAStringPrefixFilter *newFilter = [[[PAStringPrefixFilter alloc] initWithFilterPrefix:searchFieldString] autorelease];
 		[filterEngine addFilter:newFilter];
 		[self setActivePrefixFilter:newFilter];
 	}
@@ -483,7 +483,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setupFilterEngine];
 	[self setDisplayTags:[tags tags]];
 	// TODO TEMP
-	//[filterEngine addFilter:[[[NNContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
+	//[filterEngine addFilter:[[[PAContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
 }
 
 - (void)setupFilterEngine

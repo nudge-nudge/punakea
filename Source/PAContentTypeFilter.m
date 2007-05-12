@@ -1,15 +1,15 @@
 //
-//  NNContentTypeFilter.m
+//  PAContentTypeFilter.m
 //  NNTagging
 //
 //  Created by Johannes Hoffart on 19.04.07.
 //  Copyright 2007 __MyCompanyName__. All rights reserved.
 //
 
-#import "NNContentTypeFilter.h"
+#import "PAContentTypeFilter.h"
 
 
-@implementation NNContentTypeFilter
+@implementation PAContentTypeFilter
 
 #pragma mark init
 - (id)initWithContentType:(NSString*)type
@@ -181,7 +181,7 @@
 
 - (NSString*)description
 {
-	return [NSString stringWithFormat:@"NNContentTypeFilter: %@",contentType];
+	return [NSString stringWithFormat:@"PAContentTypeFilter: %@",contentType];
 }
 
 @end

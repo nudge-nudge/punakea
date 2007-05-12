@@ -18,8 +18,8 @@
 #import "PASplitView.h"
 
 #import "NNFilterEngine.h"
-#import "NNStringPrefixFilter.h"
-#import "NNContentTypeFilter.h"
+#import "PAStringPrefixFilter.h"
+#import "PAContentTypeFilter.h"
 
 typedef enum _PABrowserViewControllerState {
 	PABrowserViewControllerNormalState = 1,
@@ -58,7 +58,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 			
 	NNFilterEngine						*filterEngine;
 	NSConnection						*filterEngineConnection;
-	NNStringPrefixFilter				*activePrefixFilter;
+	PAStringPrefixFilter				*activePrefixFilter;
 	
 	PATagCloudSortKey					sortKey;
 	NSSortDescriptor					*sortDescriptor;
