@@ -38,6 +38,7 @@
 
 - (void)setObjects:(NSArray*)objects;
 
+- (NSMutableArray*)filters;
 - (void)addFilter:(NNObjectFilter*)filter;
 - (void)removeFilter:(NNObjectFilter*)filter;
 - (void)removeAllFilters;

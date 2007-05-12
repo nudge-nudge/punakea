@@ -428,10 +428,7 @@
 
 - (IBAction)editTagsOnFiles:(id)sender
 {	
-	TaggerController *taggerController = [[TaggerController alloc] init];
-	[taggerController showWindow:self];
-	NSWindow *taggerWindow = [taggerController window];
-	[taggerWindow makeKeyAndOrderFront:nil];
+	[self showTagger:self];
 	
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 	
@@ -439,7 +436,7 @@
 	{
 		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
 	
-		[taggerController addTaggableObjects:[ov visibleSelectedItems]];
+		[taggerController setTaggableObjects:[ov visibleSelectedItems]];
 		[ov reloadData];
 	}	
 }
@@ -587,11 +584,8 @@
 
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
 {
-	TaggerController *taggerController = [[TaggerController alloc] init];
-	[taggerController showWindow:self];
-	NSWindow *taggerWindow = [taggerController window];
-	[taggerController addTaggableObjects:[NNFile filesWithFilepaths:filenames]];
-	[taggerWindow makeKeyAndOrderFront:nil];
+	[self showTagger:self];
+	[taggerController setTaggableObjects:[NNFile filesWithFilepaths:filenames]];
 }
 
 //#pragma mark debug

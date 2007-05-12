@@ -293,12 +293,13 @@ bind to visibleTags
 {	
 	[self drawBackground];
 	
-	if ([datasource respondsToSelector:@selector(tags)]
+	if ([datasource respondsToSelector:@selector(allTags)]
 		&& [datasource respondsToSelector:@selector(visibleTags)]
 		&& [delegate respondsToSelector:@selector(isWorking)])
 	{
-		if ([[datasource tags] count] == 0)
+		if ([[datasource allTags] count] == 0)
 		{
+			// TODO do this somewhere else
 			[self drawString:noTagsMessage centeredIn:rect];
 		}
 		else if ([[datasource visibleTags] count] == 0 && ![delegate isWorking])

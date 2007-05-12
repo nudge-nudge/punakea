@@ -24,5 +24,6 @@
 
 - (void)addTaggableObject:(NNTaggableObject *)anObject;
 - (void)addTaggableObjects:(NSArray *)theObjects;
+- (void)setTaggableObjects:(NSArray *)theObjects;
 
 @end

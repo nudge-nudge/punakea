@@ -18,7 +18,7 @@ extern NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification;
 	NSMutableDictionary			*icons;	
 	NSMutableDictionary			*thumbnails;
 	
-	NNQueue			*queue;
+	NNQueue						*queue;
 	NSMutableArray				*stack;
 	
 	NSImage						*dummyImageThumbnail;

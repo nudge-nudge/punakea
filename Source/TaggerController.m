@@ -94,6 +94,12 @@ adds tag to tagField (use from "outside")
 	[tableView reloadData];
 }
 
+- (void)setTaggableObjects:(NSArray *)theObjects
+{
+	[items release];
+	items = [theObjects mutableCopy];
+}
+
 - (void)updateTags
 {
 	// only tags present on every object are shown

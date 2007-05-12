@@ -59,6 +59,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	NNFilterEngine						*filterEngine;
 	NSConnection						*filterEngineConnection;
 	PAStringPrefixFilter				*activePrefixFilter;
+	NSArray								*activeContentTypeFilters;
 	
 	PATagCloudSortKey					sortKey;
 	NSSortDescriptor					*sortDescriptor;
@@ -110,7 +111,12 @@ is called when a tag is clicked
 
 - (void)reloadData;
 
-- (NNTags*)tags;				/*< what's that for?! */
 - (PATagCloud *)tagCloud;
+- (NSArray *)allTags; /**< needed by tagcloud - this will be gone as soon as the tag cloud is a proper view and has no app logic anymore*/
+
+- (NSArray*)activeContentTypeFilters;
+- (void)setActiveContentTypeFilters:(NSArray*)filters;
+- (void)addContentTypeFilter:(PAContentTypeFilter*)filter;
+- (void)removeContentTypeFilter:(PAContentTypeFilter*)filter;
 
 @end

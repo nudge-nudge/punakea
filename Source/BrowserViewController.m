@@ -287,16 +287,48 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[tagCloud removeActiveTagButton];
 }
 
-- (NNTags *)tags
-{
-	return tags;
-}
-
 - (PATagCloud *)tagCloud
 {
 	return tagCloud;
 }
 
+- (NSArray *)allTags
+{
+	return [tags tags];
+}
+
+- (NSArray*)activeContentTypeFilters
+{
+	return activeContentTypeFilters;
+}
+
+- (void)setActiveContentTypeFilters:(NSArray*)filters
+{
+	[filters retain];
+	[activeContentTypeFilters release];
+	activeContentTypeFilters = filters;
+	
+	// adjust filterengine
+	// remove old content type filters
+	NSEnumerator *oldFiltersEnumerator = [[filterEngine filters] objectEnumerator];
+	NNObjectFilter *filter;
+	
+	while (filter = [oldFiltersEnumerator nextObject])
+	{
+		if ([filter isKindOfClass:[PAContentTypeFilter class]])
+		{
+			[filterEngine removeFilter:filter];
+		}
+	}
+	
+	// add new filters
+	NSEnumerator *newFilterEnumerator = [filters objectEnumerator];
+	
+	while (filter = [newFilterEnumerator nextObject])
+	{
+		[filterEngine addFilter:filter];
+	}
+}
 
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
@@ -364,7 +396,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark events
-/*- (void)keyDown:(NSEvent*)event 
+- (void)keyDown:(NSEvent*)event 
 {
 	// get the pressed key
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
@@ -377,8 +409,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		// if searchFieldString has any content (i.e. user is using type-ahead-find), delete last char
 		if ([searchFieldString length] > 0)
 		{
-			NSString *tmpsearchFieldString = [searchFieldString substringToIndex:[searchFieldString length]-1];
-			[self setSearchFieldString:tmpsearchFieldString];
+			NSString *tmpSearchFieldString = [searchFieldString substringToIndex:[searchFieldString length]-1];
+			[self setSearchFieldString:tmpSearchFieldString];
 		}
 		else if ([mainController isKindOfClass:[PAResultsViewController class]])
 		// else delete the last selected tag (if resultsview is active)
@@ -392,16 +424,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		NSMutableString *tmpsearchFieldString = [searchFieldString mutableCopy];
 		[tmpsearchFieldString appendString:[event charactersIgnoringModifiers]];
 		
-		// TODO replace by filterEngine
-//		if ([typeAheadFind hasTagsForPrefix:tmpsearchFieldString])
-//		{
-			[self setSearchFieldString:tmpsearchFieldString];
-//		}
-//		else
-//		{
-//			[[self nextResponder] keyDown:event];
-//		}
-//		
+		[self setSearchFieldString:tmpsearchFieldString];
 		[tmpsearchFieldString release];
 	}
 	else
@@ -409,7 +432,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		// forward unhandled events
 		[[self nextResponder] keyDown:event];
 	}
-}*/
+}
 
 - (void)searchFieldStringHasChanged
 {
@@ -482,8 +505,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[self setupFilterEngine];
 	[self setDisplayTags:[tags tags]];
+	
 	// TODO TEMP
-	//[filterEngine addFilter:[[[PAContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
+	[self addContentTypeFilter:[[[PAContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
 }
 
 - (void)setupFilterEngine
@@ -516,6 +540,16 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[filterEngine lockFilteredObjects];
 	[self setVisibleTags:[filterEngine filteredObjects]];
 	[filterEngine unlockFilteredObjects];
+}
+
+- (void)addContentTypeFilter:(PAContentTypeFilter*)filter
+{
+	[filterEngine addFilter:filter];
+}
+
+- (void)removeContentTypeFilter:(PAContentTypeFilter*)filter
+{
+	[filterEngine removeFilter:filter];
 }
 
 #pragma mark actions

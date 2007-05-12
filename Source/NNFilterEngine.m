@@ -303,6 +303,11 @@
 		[threadLock unlockWithCondition:NNThreadCanceled];
 }
 
+- (NSMutableArray*)filters
+{
+	return filters;
+}
+
 - (void)addFilter:(NNObjectFilter*)newFilter
 {
 	NSLog(@"adding %@ to filterQueue",newFilter);
