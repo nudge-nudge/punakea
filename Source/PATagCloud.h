@@ -41,8 +41,7 @@ displays all [datasource visibleTags] in a nice tag cloud view
 	
 	NSUserDefaultsController		*userDefaultsController; /**< holds user defaults for tag cloud */
 	
-	NSAttributedString				*noRelatedTagsMessage;
-	NSAttributedString				*noTagsMessage;
+	NSString						*displayMessage;
 	
 	PADropManager					*dropManager;
 	
@@ -57,13 +56,12 @@ displays all [datasource visibleTags] in a nice tag cloud view
 
 - (void)reloadData;
 
+- (NSString*)displayMessage;
+- (void)setDisplayMessage:(NSString*)message;
+
 - (NSMutableDictionary*)tagButtonDict;
 - (void)setTagButtonDict:(NSMutableDictionary*)aDict;
-- (PATagButton*)activeButton;
-- (void)setActiveButton:(PATagButton*)aTag;
 - (void)selectUpperLeftButton;
-
-// called from outside
 - (void)selectTag:(NNTag*)tag;
 - (void)removeActiveTagButton;
 

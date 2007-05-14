@@ -22,7 +22,7 @@ creates buttons for tags held in [controller visibleTags]. created buttons can b
 draws the background
  */
 - (void)drawBackground;
-- (void)drawString:(NSAttributedString*)string centeredIn:(NSRect)rect;
+- (void)drawString:(NSString*)string;
 - (void)drawDropHighlightInRect:(NSRect)rect;
 
 /**
@@ -33,6 +33,9 @@ adds all the tags in [controller visibleTags]
 
 - (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin;
 - (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin;
+
+- (PATagButton*)activeButton;
+- (void)setActiveButton:(PATagButton*)aTag;
 
 /**
 determines the oigin point for the next tag button to display;
@@ -85,22 +88,6 @@ calculates the starting point in the next row according to the height of all the
 			
 		tagButtonDict = [[NSMutableDictionary alloc] init];	
 		
-		NSFont *font = [NSFont systemFontOfSize:20.0];
-		NSColor *color = [NSColor lightGrayColor];
-		NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
-		[paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
-		[paraStyle setAlignment:NSCenterTextAlignment];
-		
-		NSMutableDictionary *attrsDictionary =	[NSMutableDictionary dictionaryWithCapacity:3];
-		[attrsDictionary setObject:font forKey:NSFontAttributeName];
-		[attrsDictionary setObject:color forKey:NSForegroundColorAttributeName];
-		[attrsDictionary setObject:paraStyle forKey:NSParagraphStyleAttributeName];
-		
-		noRelatedTagsMessage = [[NSAttributedString alloc] initWithString:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")
-															   attributes:attrsDictionary]; 
-		noTagsMessage = [[NSAttributedString alloc] initWithString:NSLocalizedStringFromTable(@"NO_TAGS",@"Tags",@"")
-														attributes:attrsDictionary];
-		
 		dropManager = [PADropManager sharedInstance];
 	}
 	return self;
@@ -130,8 +117,6 @@ bind to visibleTags
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	[noRelatedTagsMessage release];
-	[noTagsMessage release];
 	[activeButton release];
 	[tagButtonDict release];
 	[super dealloc];
@@ -289,26 +274,9 @@ bind to visibleTags
 {	
 	[self drawBackground];
 	
-	if ([datasource respondsToSelector:@selector(allTags)]
-		&& [datasource respondsToSelector:@selector(visibleTags)]
-		&& [delegate respondsToSelector:@selector(isWorking)])
-	{
-		if ([[datasource allTags] count] == 0)
-		{
-			// TODO do this somewhere else
-			[self drawString:noTagsMessage centeredIn:rect];
-		}
-		else if ([[datasource visibleTags] count] == 0 && ![delegate isWorking])
-		{
-			   // TODO do this somewhere else
-		//	[self drawString:noRelatedTagsMessage centeredIn:rect];
-		}
-	}
-	else
-	{
-		[NSException raise:NSInternalInconsistencyException
-					format:@"TagCloud datasource or delegate do not handle requests"];
-	}
+	// draw message string if needed
+	if ([displayMessage isNotEqualTo:@""])
+		[self drawString:displayMessage];
 	
 	// Draw drop border
 	if(showsDropBorder) [self drawDropHighlightInRect:rect];
@@ -346,16 +314,33 @@ bind to visibleTags
 	[self unlockFocus];
 }
 
-- (void)drawString:(NSAttributedString*)string centeredIn:(NSRect)rect
+- (void)drawString:(NSString*)string
 {
+	NSFont *font = [NSFont systemFontOfSize:20.0];
+	NSColor *color = [NSColor lightGrayColor];
+	NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+	[paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+	[paraStyle setAlignment:NSCenterTextAlignment];
+	
+	NSMutableDictionary *attrsDictionary =	[NSMutableDictionary dictionaryWithCapacity:3];
+	[attrsDictionary setObject:font forKey:NSFontAttributeName];
+	[attrsDictionary setObject:color forKey:NSForegroundColorAttributeName];
+	[attrsDictionary setObject:paraStyle forKey:NSParagraphStyleAttributeName];
+	
+	NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:string
+																	 attributes:attrsDictionary];
+	
 	NSPoint stringOrigin;
 	NSSize stringSize;
+	NSRect rect = [[self enclosingScrollView] documentVisibleRect];
 	
-	stringSize = [string size];
+	stringSize = [attrString size];
 	stringOrigin.x = rect.origin.x + (rect.size.width - stringSize.width)/2;
 	stringOrigin.y = rect.origin.y + (rect.size.height - stringSize.height)/2;
 	
-	[string drawInRect:NSMakeRect(stringOrigin.x,stringOrigin.y,stringSize.width,stringSize.height)];
+	[attrString drawInRect:NSMakeRect(stringOrigin.x,stringOrigin.y,stringSize.width,stringSize.height)];
+	
+	[attrString release];
 }
 
 - (void)updateViewHierarchy
@@ -596,6 +581,18 @@ bind to visibleTags
 	activeButton = aTagButton;
 	
 	[self handleActiveTagChange];
+}
+
+- (NSString*)displayMessage
+{
+	return displayMessage;
+}
+
+- (void)setDisplayMessage:(NSString*)message
+{
+	[displayMessage release];
+	[message retain];
+	displayMessage = message;
 }
 
 #pragma mark event handling

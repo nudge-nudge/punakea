@@ -251,6 +251,30 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 	visibleTags = [sortedArray mutableCopy];
 	
+	// if there are no visible tags,
+	// display a status message
+	if ([visibleTags count] == 0 && !filterEngineIsWorking)
+	{
+		if ([tags count] == 0)
+		{
+			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS",@"Tags",@"")];
+		}
+		else if ([searchFieldString length] > 0)
+		{
+			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_SEARCHSTRING",@"Tags",@"")];
+		}
+		else
+		{
+			// TODO
+			// get the message from the mainController
+			//[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")];
+		}
+	}
+	else
+	{
+		[tagCloud setDisplayMessage:@""];
+	}
+	
 	[tagCloud reloadData];
 }
 
@@ -493,7 +517,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filteringStarted
 {
-	//NSLog(@"START");
+	filterEngineIsWorking = YES;
+	
 	[activityIndicator performSelector:@selector(startAnimation:)
 							withObject:self
 							afterDelay:0.4];
@@ -501,7 +526,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filteringFinished
 {
-	//NSLog(@"FINISH");
+	filterEngineIsWorking = NO;
+	
 	[NSObject cancelPreviousPerformRequestsWithTarget:activityIndicator
 											 selector:@selector(startAnimation:)
 											   object:self];

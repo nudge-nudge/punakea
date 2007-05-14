@@ -6,3 +6,4 @@
 "TAG_WHITESPACE_REQUEST_INFO" = "No whitespace-only tags allowed";
 "NO_RELATED_TAGS" = "no related tags";
 "NO_TAGS" = "to get started\ndrop files here \nor on the sidebar drop zone";
+"NO_TAGS_FOR_SEARCHSTRING" = "no tags found";

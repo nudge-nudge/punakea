@@ -60,6 +60,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	NSConnection						*filterEngineConnection;
 	PAStringPrefixFilter				*activePrefixFilter;
 	NSArray								*activeContentTypeFilters;
+	BOOL								*filterEngineIsWorking;
 	
 	PATagCloudSortKey					sortKey;
 	NSSortDescriptor					*sortDescriptor;
