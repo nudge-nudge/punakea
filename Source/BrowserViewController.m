@@ -20,8 +20,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (NSMutableArray*)visibleTags;
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
 
-- (NNTag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
-
 - (NNTag*)currentBestTag;
 - (void)setCurrentBestTag:(NNTag*)otherTag;
 
@@ -253,16 +251,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 	visibleTags = [sortedArray mutableCopy];
 	
-	if ([visibleTags count] > 0)
-		[self setCurrentBestTag:[self tagWithBestAbsoluteRating:visibleTags]];
-	
 	[tagCloud reloadData];
 }
 
 - (void)setDisplayTags:(NSMutableArray*)someTags
 {
-	NSLog(@"setting display tags");
-	
 	// empty visibleTags
 	[self setVisibleTags:[NSMutableArray array]];
 	
@@ -345,24 +338,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	{
 		[self tagButtonClicked:button];
 	}
-}
-
-- (NNTag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
-{
-	NSEnumerator *e = [tagSet objectEnumerator];
-	NNTag *tag;
-	NNTag *maxTag;
-	
-	if (tag = [e nextObject])
-		maxTag = tag;
-	
-	while (tag = [e nextObject])
-	{
-		if ([tag absoluteRating] > [maxTag absoluteRating])
-			maxTag = tag;
-	}	
-	
-	return maxTag;
 }
 
 #pragma mark typeAheadFind
@@ -507,7 +482,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setDisplayTags:[tags tags]];
 	
 	// TODO TEMP
-	[self addContentTypeFilter:[[[PAContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
+	//[self addContentTypeFilter:[[[PAContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
 }
 
 - (void)setupFilterEngine

@@ -16,6 +16,8 @@ creates buttons for tags held in [controller visibleTags]. created buttons can b
 - (void)calcInitialParametersInRect:(NSRect)rect;
 - (NSRect)calcFrame;
 
+- (NNTag*)tagWithBestAbsoluteRating:(NSArray*)tagSet;
+
 /**
 draws the background
  */
@@ -191,10 +193,12 @@ bind to visibleTags
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
 	NSEnumerator *tagEnumerator;
+	NNTag *currentBestTag;
 	
 	if ([datasource respondsToSelector:@selector(visibleTags)])
 	{
 		tagEnumerator = [[datasource visibleTags] objectEnumerator];
+		currentBestTag = [self tagWithBestAbsoluteRating:[datasource visibleTags]];
 	}
 	else
 	{
@@ -208,16 +212,8 @@ bind to visibleTags
 	{
 		float tagRating;
 		
-		if ([datasource respondsToSelector:@selector(currentBestTag)])
-		{
-			tagRating = [tag relativeRatingToTag:[datasource currentBestTag]];
-		}
-		else
-		{
-			[NSException raise:NSInternalInconsistencyException
-						format:@"datasource invalid"];
-		}
-		
+		tagRating = [tag relativeRatingToTag:currentBestTag];
+				
 		PATagButton *button;
 		
 		// if the button is already created, use it
@@ -529,6 +525,24 @@ bind to visibleTags
 		}
 	
 	return NSMakePoint(TAGCLOUD_SPACING.width,pointForNextTagRect.y-maxHeight-TAGCLOUD_SPACING.height);
+}
+
+- (NNTag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
+{
+	NSEnumerator *e = [tagSet objectEnumerator];
+	NNTag *tag;
+	NNTag *maxTag;
+	
+	if (tag = [e nextObject])
+		maxTag = tag;
+	
+	while (tag = [e nextObject])
+	{
+		if ([tag absoluteRating] > [maxTag absoluteRating])
+			maxTag = tag;
+	}	
+	
+	return maxTag;
 }
 
 #pragma mark accessors
