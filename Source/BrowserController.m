@@ -116,15 +116,13 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	[item release];
 	
 	// Multiple selection
-	item = [[NSTabViewItem alloc] initWithIdentifier:@"MULTIPLE_SELECTION"];	
+	item = [[NSTabViewItem alloc] initWithIdentifier:@"MULTIPLE_SELECTION"];
+	[item setView:infoPaneMultipleSelectionView];	
 	[infoPane addTabViewItem:item];
 	[item release];
 	
 	[infoItem setView:infoPane];
 	[infoPane release];
-	
-	// TEMP
-	[infoPane selectTabViewItemAtIndex:1];
 }
 
 - (void)dealloc
@@ -316,14 +314,14 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	if([sender isEqualTo:verticalSplitView])
 	{
 		// left, right subview
-		if(offset == 0) return 120.0;
-		if(offset == 1) return 120.0;
+		if(offset == 0) return 200.0;
+		if(offset == 1) return 300.0;
 	}
 	else
 	{
 		// top, bottom subview
 		if(offset == 0) return [sender frame].size.height - [self splitView:sender constrainMaxCoordinate:0.0 ofSubviewAt:1];
-		if(offset == 1) return 120.0;
+		if(offset == 1) return 150.0;
 	}
 	
 	return nil;
@@ -334,7 +332,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	if([sender isEqualTo:verticalSplitView])
 	{
 		// left, right subview
-		if(offset == 0) return 400.0;
+		if(offset == 0) return 300.0;
 		if(offset == 1) return [sender frame].size.width - [self splitView:sender constrainMinCoordinate:0.0 ofSubviewAt:0];
 	}
 	else
@@ -410,6 +408,11 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	} 
 	else
 	{
+		NSTabViewItem *tvItem = [infoPane tabViewItemAtIndex:[infoPane indexOfTabViewItemWithIdentifier:@"MULTIPLE_SELECTION"]];
+		PAInfoPaneMultipleSelectionView *view = [tvItem view];
+		
+		[view setFiles:selectedItems];
+		
 		[infoPane selectTabViewItemWithIdentifier:@"MULTIPLE_SELECTION"];
 	}
 }

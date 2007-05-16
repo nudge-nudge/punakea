@@ -306,6 +306,10 @@
 		65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */; };
 		65D86D5C09F15BA8006BCC8D /* PAResultsMultiItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */; };
 		65D86E3E09F15E1B006BCC8D /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */; };
+		65E38D2E0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E38D2C0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h */; };
+		65E38D2F0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E38D2D0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m */; };
+		65E38E530BFB390E000C1976 /* NSNumberFormatterAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E38E510BFB390E000C1976 /* NSNumberFormatterAdditions.h */; };
+		65E38E540BFB390E000C1976 /* NSNumberFormatterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E38E520BFB390E000C1976 /* NSNumberFormatterAdditions.m */; };
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Core.m */; };
@@ -502,6 +506,8 @@
 				480C40480BF4484400C90B2C /* PATagCacheEntry.h in CopyFiles */,
 				48D815CB0BF5BF6600821C25 /* PAStringPrefixFilter.h in CopyFiles */,
 				48D815CD0BF5BF6600821C25 /* PAContentTypeFilter.h in CopyFiles */,
+				65E38D2E0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h in CopyFiles */,
+				65E38E530BFB390E000C1976 /* NSNumberFormatterAdditions.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,6 +812,10 @@
 		65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemCell.h; sourceTree = "<group>"; };
 		65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemCell.m; sourceTree = "<group>"; };
 		65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
+		65E38D2C0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInfoPaneMultipleSelectionView.h; sourceTree = "<group>"; };
+		65E38D2D0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAInfoPaneMultipleSelectionView.m; sourceTree = "<group>"; };
+		65E38E510BFB390E000C1976 /* NSNumberFormatterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberFormatterAdditions.h; sourceTree = "<group>"; };
+		65E38E520BFB390E000C1976 /* NSNumberFormatterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberFormatterAdditions.m; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
 		65EB72140BE20D86007FF40C /* PAStatusBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBarButton.h; sourceTree = "<group>"; };
@@ -1078,6 +1088,8 @@
 				65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */,
 				656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */,
 				656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */,
+				65E38E510BFB390E000C1976 /* NSNumberFormatterAdditions.h */,
+				65E38E520BFB390E000C1976 /* NSNumberFormatterAdditions.m */,
 				48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */,
 				48469B9D0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.m */,
 				65AA74BB0BF35D2C0054407D /* NSTextFieldAdditions.h */,
@@ -1687,6 +1699,8 @@
 		65BD56990BF3153A00E202F8 /* Panes */ = {
 			isa = PBXGroup;
 			children = (
+				65E38D2C0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h */,
+				65E38D2D0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m */,
 				65BD56D50BF31BF600E202F8 /* PAInfoPaneSingleSelectionView.h */,
 				65BD56D60BF31BF600E202F8 /* PAInfoPaneSingleSelectionView.m */,
 				65BD569A0BF3155F00E202F8 /* PAInfoPaneSubview.h */,
@@ -2307,6 +2321,8 @@
 				480C40490BF4484400C90B2C /* PATagCacheEntry.m in Sources */,
 				48D815CC0BF5BF6600821C25 /* PAStringPrefixFilter.m in Sources */,
 				48D815CE0BF5BF6600821C25 /* PAContentTypeFilter.m in Sources */,
+				65E38D2F0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m in Sources */,
+				65E38E540BFB390E000C1976 /* NSNumberFormatterAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,9 @@
 #import "PATagSetPanel.h"
 #import "PASplitView.h"
 #import "PATabPanel.h"
+#import "PAInfoPaneSubview.h"
 #import "PAInfoPaneSingleSelectionView.h"
+#import "PAInfoPaneMultipleSelectionView.h"
 
 
 @interface BrowserController : NSWindowController 
@@ -41,6 +43,7 @@
 	NSTabView									*infoPane;
 	IBOutlet NSView								*infoPanePlaceholderView;
 	IBOutlet PAInfoPaneSingleSelectionView		*infoPaneSingleSelectionView;
+	IBOutlet PAInfoPaneMultipleSelectionView	*infoPaneMultipleSelectionView;
 
 }
 

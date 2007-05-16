@@ -7,10 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NNTagging/NNFile.h"
+#import "NSNumberFormatterAdditions.h"
 
 
-@interface PAInfoPaneSubview : NSView {
+extern unsigned const LINE_HEIGHT;
 
+
+@interface PAInfoPaneSubview : NSView {	
+	
 }
+
+
 
 @end

@@ -6,4 +6,10 @@
 "TODAY" = "Today";
 "YESTERDAY" = "Yesterday";
 
+"FROM" = "From";
+"TO" = "To";
+"DATE" = "Date";
+
 "FILE_SIZE_ON_DISK" = "%@ on disk";
+
+"FILES" = "files";

@@ -9,17 +9,23 @@
 #import "PAInfoPaneSubview.h"
 
 
+unsigned const LINE_HEIGHT = 16;
+
+
 @implementation PAInfoPaneSubview
 
 - (id)initWithFrame:(NSRect)frame 
 {
     self = [super initWithFrame:frame];
-    if(self) {
+    if(self)
+	{
         // Initialization code here.
     }
     return self;
 }
 
+
+#pragma mark Drawing
 - (void)drawRect:(NSRect)rect
 {
 	[[NSColor whiteColor] set];

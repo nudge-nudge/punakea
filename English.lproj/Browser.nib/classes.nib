@@ -6,6 +6,7 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 horizontalSplitView = PASplitView; 
+                infoPaneMultipleSelectionView = PAInfoPaneMultipleSelectionView; 
                 infoPanePlaceholderView = NSView; 
                 infoPaneSingleSelectionView = PAInfoPaneSingleSelectionView; 
                 mainPlaceholderView = NSView; 
@@ -42,6 +43,21 @@
         {CLASS = PABrowserWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {CLASS = PAGenericTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {
+            CLASS = PAInfoPaneMultipleSelectionView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                fromField = NSTextField; 
+                fromLabel = NSTextField; 
+                itemsField = NSTextField; 
+                itemsLabel = NSTextField; 
+                sizeField = NSTextField; 
+                sizeLabel = NSTextField; 
+                toField = NSTextField; 
+                toLabel = NSTextField; 
+            }; 
+            SUPERCLASS = PAInfoPaneSubview; 
+        }, 
+        {
             CLASS = PAInfoPaneSingleSelectionView; 
             LANGUAGE = ObjC; 
             OUTLETS = {
@@ -55,9 +71,8 @@
                 modifiedLabel = NSTextField; 
                 sizeField = NSTextField; 
                 sizeLabel = NSTextField; 
-                tagField = NSTokenField; 
             }; 
-            SUPERCLASS = NSView; 
+            SUPERCLASS = PAInfoPaneSubview; 
         }, 
         {CLASS = PAInfoPaneSubview; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {CLASS = PALabel; LANGUAGE = ObjC; SUPERCLASS = NSTextField; }, 

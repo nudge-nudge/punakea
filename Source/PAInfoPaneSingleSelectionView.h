@@ -7,15 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/NNFile.h"
+#import "PAInfoPaneSubview.h"
 #import "NSTextFieldAdditions.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 
 
-@interface PAInfoPaneSingleSelectionView : NSView {
-	
-	NNFile								*file;
+@interface PAInfoPaneSingleSelectionView : PAInfoPaneSubview {
 
+	NNFile								*file;
+	
 	IBOutlet NSTextField				*kindLabel;
 	IBOutlet NSTextField				*sizeLabel;
 	IBOutlet NSTextField				*createdLabel;
@@ -27,7 +27,6 @@
 	IBOutlet NSTextField				*createdField;
 	IBOutlet NSTextField				*modifiedField;
 	IBOutlet NSTextField				*lastOpenedField;
-	IBOutlet NSTokenField				*tagField;
 	
 }
 

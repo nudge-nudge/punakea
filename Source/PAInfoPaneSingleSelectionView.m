@@ -47,15 +47,9 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
+	[file release];
+	
 	[super dealloc];
-}
-
-
-#pragma mark Drawing
-- (void)drawRect:(NSRect)rect
-{	
-	[[NSColor whiteColor] set];
-	NSRectFill(rect);
 }
 
 
@@ -64,14 +58,12 @@
 {
 	// Remember: We're working in a non-flipped environment!
 	
-	float lineHeight = 16.0;
-	
 	NSSize kfContentSize = [kindField minSizeForContent];
 	NSRect kfFrame = [kindField frame];
 	
-	// Set frame for first field and label "Size"
+	// Set "To" hidden if there are files from only one date
 	NSPoint o = [sizeField frame].origin;
-	o.y = kfFrame.origin.y + kfFrame.size.height - kfContentSize.height - lineHeight;
+	o.y = kfFrame.origin.y + kfFrame.size.height - kfContentSize.height - LINE_HEIGHT;
 	[sizeField setFrameOrigin:o];
 	
 	o.x = [sizeLabel frame].origin.x;
@@ -90,17 +82,12 @@
 		
 		// Set frame for textfield
 		o.x = [textField frame].origin.x;
-		o.y -= lineHeight;
+		o.y -= LINE_HEIGHT;
 		[textField setFrameOrigin:o];
 		
 		o.x = [label frame].origin.x;
 		[label setFrameOrigin:o];
-	}	
-	
-	// Set frame for tagField
-	o.x = [tagField frame].origin.x;
-	o.y -= 2 * lineHeight;
-	[tagField setFrameOrigin:o];
+	}
 	
 	[self setNeedsDisplay:YES];
 }
@@ -135,50 +122,14 @@
 	[modifiedField setStringValue:[dateFormatter saveStringFromDate:[file modificationDate]]];
 	[lastOpenedField setStringValue:[dateFormatter saveStringFromDate:[file lastUsedDate]]];
 	
-
-	float fileSize = [[NSNumber numberWithUnsignedLongLong:[file size]] floatValue];
-	if(fileSize > 0 && fileSize < 4096)
-		fileSize = 4096;
-	
-	fileSize /= 1024;				// file size in KB
-	
-	NSString *fileSizeString;
-	
 	NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
 	[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
 	
-	if(fileSize < 1024)
-	{
-		[numberFormatter setFormat:@"0"];
-		
-		NSNumber *n = [NSNumber numberWithDouble:fileSize];		
-		fileSizeString = [NSString stringWithFormat:@"%@ KB", [numberFormatter stringFromNumber:n]];
-	}
-	else
-	{
-		[numberFormatter setFormat:@"0.0"];
-		
-		if(fileSize < 1024 * 1024)
-		{
-			fileSize /= 1024;
-			
-			NSNumber *n = [NSNumber numberWithFloat:fileSize];					
-			fileSizeString = [NSString stringWithFormat:@"%@ MB", [numberFormatter stringFromNumber:n]];
-		}
-		else
-		{
-			fileSize /= (1024 * 1024);
-			
-			NSNumber *n = [NSNumber numberWithFloat:fileSize];
-			fileSizeString = [NSString stringWithFormat:@"%@ GB", [numberFormatter stringFromNumber:n]];
-		}
-	}
+	NSString *s = [NSString stringWithFormat:
+		NSLocalizedStringFromTable(@"FILE_SIZE_ON_DISK", @"Global", nil),
+		[numberFormatter stringFromFileSize:[file size]]];
 	
-	// Localize string
-	fileSizeString = [NSString stringWithFormat:
-		NSLocalizedStringFromTable(@"FILE_SIZE_ON_DISK", @"Global", nil), fileSizeString];
-	
-	[sizeField setStringValue:fileSizeString];
+	[sizeField setStringValue:s];
 	
 	[self repositionFields];
 }
