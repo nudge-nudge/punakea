@@ -19,6 +19,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (NSMutableArray*)visibleTags;
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
+- (void)emptyVisibleTags;
 
 - (NNTag*)currentBestTag;
 - (void)setCurrentBestTag:(NNTag*)otherTag;
@@ -32,12 +33,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setMainController:(PABrowserViewMainController*)aController;
 
-- (PABrowserViewControllerState)state;
-- (void)setState:(PABrowserViewControllerState)aState;
-
 - (void)setActivePrefixFilter:(PAStringPrefixFilter*)filter;
 - (PAStringPrefixFilter*)activePrefixFilter;
 
+- (void)filterTags:(NSArray*)someTags;
 - (void)setupFilterEngine;
 - (void)filterTags;
 - (void)setFilterEngineConnection:(NSConnection*)conn;
@@ -56,8 +55,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	if (self = [super init])
 	{
- 		[self setState:PABrowserViewControllerNormalState];
-		
 		tags = [NNTags sharedTags];
 				
 		// needs to be setup before tags can be displayed
@@ -150,16 +147,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark accessors
-- (PABrowserViewControllerState)state
-{
-	return state;
-}
-
-- (void)setState:(PABrowserViewControllerState)aState
-{
-	state = aState;
-}
-
 - (NNTag*)currentBestTag
 {
 	return currentBestTag;
@@ -250,38 +237,25 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			
 	NSArray *sortedArray = [otherTags sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 	visibleTags = [sortedArray mutableCopy];
+		
+	[self updateTagCloudDisplayMessage];
 	
-	// if there are no visible tags,
-	// display a status message
-	if ([visibleTags count] == 0 && !filterEngineIsWorking)
-	{
-		if ([tags count] == 0)
-		{
-			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS",@"Tags",@"")];
-		}
-		else if ([searchFieldString length] > 0)
-		{
-			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_SEARCHSTRING",@"Tags",@"")];
-		}
-		else
-		{
-			// TODO
-			// get the message from the mainController
-			//[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")];
-		}
-	}
-	else
-	{
-		[tagCloud setDisplayMessage:@""];
-	}
-	
+	[tagCloud reloadData];
+}
+
+- (void)emptyVisibleTags
+{
+	[visibleTags release];
+	visibleTags = [[NSMutableArray alloc] init];
 	[tagCloud reloadData];
 }
 
 - (void)setDisplayTags:(NSMutableArray*)someTags
 {
+	NSLog(@"setting display tags: %@",someTags);
+	
 	// empty visibleTags
-	[self setVisibleTags:[NSMutableArray array]];
+	[self emptyVisibleTags];
 	
 	// start filtering
 	[self filterTags:someTags];
@@ -374,7 +348,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[tagCloud setNeedsDisplay:YES];
 	
 	[typeAheadView setHidden:NO];
-	[self setState:PABrowserViewControllerTypeAheadFindState];
 }
 
 - (void)hideTypeAheadView
@@ -386,7 +359,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[tagCloud setNeedsDisplay:YES];
 	
 	[typeAheadView setHidden:YES];	
-	[self setState:PABrowserViewControllerNormalState];
 }
 
 - (void)resetSearchFieldString
@@ -435,7 +407,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)searchFieldStringHasChanged
 {
-	[self setVisibleTags:[NSMutableArray array]];
+	[self emptyVisibleTags];
 	
 	// if searchFieldString has any content, display tags with corresponding prefix
 	// else display all tags
@@ -449,6 +421,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		PAStringPrefixFilter *newFilter = [[[PAStringPrefixFilter alloc] initWithFilterPrefix:searchFieldString] autorelease];
 		[filterEngine addFilter:newFilter];
 		[self setActivePrefixFilter:newFilter];
+		
+		filterEngineIsWorking = YES;
 	}
 	else
 	{
@@ -464,21 +438,20 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	NSString *changeOperation = [[notification userInfo] objectForKey:NNTagOperation];
 	
-	if ([self state] == PABrowserViewControllerNormalState)
+	if ([changeOperation isEqualToString:NNTagUseChangeOperation])
 	{
-		if ([changeOperation isEqualToString:NNTagUseChangeOperation])
-		{
-			[NSObject cancelPreviousPerformRequestsWithTarget:self
-													 selector:@selector(setVisibleTags:)
-													   object:[tags tags]];
-			[self performSelector:@selector(setVisibleTags:)
-					   withObject:[tags tags]
-					   afterDelay:0.2];
-		}
-		else
-		{
-			[self setDisplayTags:[tags tags]];
-		}
+		[NSObject cancelPreviousPerformRequestsWithTarget:self
+												 selector:@selector(setVisibleTags:)
+												   object:[tags tags]];
+		[self performSelector:@selector(setVisibleTags:)
+				   withObject:[tags tags]
+				   afterDelay:0.2];
+	}
+	else if ([changeOperation isNotEqualTo:NNTagClickIncrementOperation])
+	{
+		// clicks are ignored, as they are (normally)
+		// causing the displayed tags to change
+		[self setDisplayTags:[tags tags]];
 	}
 }
 
@@ -496,6 +469,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag filtering
 - (void)filterTags:(NSArray*)someTags
 {
+	filterEngineIsWorking = YES;
 	[filterEngine setObjects:someTags];
 	[filterEngine startWithServer:self];
 }
@@ -517,8 +491,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filteringStarted
 {
-	filterEngineIsWorking = YES;
-	
 	[activityIndicator performSelector:@selector(startAnimation:)
 							withObject:self
 							afterDelay:0.4];
@@ -532,12 +504,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 											 selector:@selector(startAnimation:)
 											   object:self];
 	[activityIndicator stopAnimation:self];
+	
+	[self updateTagCloudDisplayMessage];
+	[tagCloud reloadData];
 }
 
 - (void)objectsFiltered
 {
-	//NSLog(@"objects filtered");
-	
 	[filterEngine lockFilteredObjects];
 	[self setVisibleTags:[filterEngine filteredObjects]];
 	[filterEngine unlockFilteredObjects];
@@ -554,6 +527,34 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark actions
+- (void)updateTagCloudDisplayMessage
+{
+	// if there are no visible tags,
+	// display a status message
+	if ([visibleTags count] == 0)
+	{
+		if ([tags count] == 0)
+		{
+			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS",@"Tags",@"")];
+		}
+		else if (mainController && [[mainController displayMessage] isNotEqualTo:@""])
+		{
+			// give the mainController a chance to display a message
+			[tagCloud setDisplayMessage:[mainController displayMessage]];
+		}
+		else if (([searchFieldString length] > 0) && 
+				 !filterEngineIsWorking && 
+				 ![mainController isWorking])
+		{
+			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_SEARCHSTRING",@"Tags",@"")];
+		}
+	}
+	else
+	{
+		[tagCloud setDisplayMessage:@""];
+	}
+}
+
 - (void)searchForTag:(NNTag*)aTag
 {
 	[[self mainController] handleTagActivation:aTag];

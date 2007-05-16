@@ -25,10 +25,12 @@ abstract class, controller for everything except tagcloud in
  browserview
  */
 @interface PABrowserViewMainController : PAViewController {
-	IBOutlet NSView *currentView;
+	IBOutlet NSView		*currentView;
 	
-	id delegate;
-	BOOL working;
+	id					delegate;
+	BOOL				working;
+	
+	NSString			*displayMessage;
 }
 
 - (NSView*)currentView;
@@ -44,6 +46,7 @@ abstract, must overwrite
 - (void)setDelegate:(id)anObject;
 - (BOOL)isWorking;
 - (void)setWorking:(BOOL)flag;
+- (NSString*)displayMessage;
 
 /** is called when reset is needed
 	(handle escape key reset here)

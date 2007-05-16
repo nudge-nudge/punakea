@@ -8,6 +8,11 @@
 
 #import "PAResultsViewController.h"
 
+@interface PAResultsViewController (PrivateAPI)
+
+- (void)setDisplayMessage:(NSString*)message;
+
+@end
 
 @implementation PAResultsViewController
 
@@ -46,7 +51,9 @@
 			   selector:@selector(thumbnailWasGenerated:)
 				   name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
 				 object:nil];
-				
+			
+		[self setDisplayMessage:@""];
+		
 		[NSBundle loadNibNamed:@"ResultsView" owner:self];
 	}
 	return self;
@@ -129,6 +136,18 @@
 	[otherSelectedTags retain];
 	[selectedTags release];
 	selectedTags = otherSelectedTags;
+}
+
+- (NSString*)displayMessage
+{
+	return displayMessage;
+}
+
+- (void)setDisplayMessage:(NSString*)message
+{
+	[displayMessage release];
+	[message retain];
+	displayMessage = message;
 }
 
 - (NSArray*)draggedItems
@@ -249,6 +268,9 @@
 #pragma mark Notifications
 - (void)selectedTagsHaveChanged:(NSNotification*)notification
 {
+	// reset displayMessage
+	[self setDisplayMessage:@""];
+	
 	// stop an active query
 	if ([query isStarted])
 	{
@@ -290,6 +312,16 @@
 
 - (void)relatedTagsHaveChanged:(NSNotification *)notification
 {
+	if (![relatedTags isUpdating] && ([relatedTags count] == 0) )
+	{
+		NSLog(@"no related tags");
+		[self setDisplayMessage:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")];
+	}
+	else
+	{
+		[self setDisplayMessage:@""];
+	}
+	
 	if ([delegate respondsToSelector:@selector(setDisplayTags:)])
 	{
 		[delegate setDisplayTags:[relatedTags relatedTags]];

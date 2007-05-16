@@ -21,12 +21,6 @@
 #import "PAStringPrefixFilter.h"
 #import "PAContentTypeFilter.h"
 
-typedef enum _PABrowserViewControllerState {
-	PABrowserViewControllerNormalState = 1,
-	PABrowserViewControllerTypeAheadFindState = 2,
-	PABrowserViewControllerMainControllerState = 4
-} PABrowserViewControllerState;
-
 typedef enum _PATagCloudSortKey {
 	PATagCloudNameSortKey = 0,
 	PATagCloudRatingSortKey = 1
@@ -42,9 +36,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	IBOutlet PASplitView				*splitView;
 	IBOutlet NSView						*controlledView;
 	IBOutlet NSProgressIndicator		*activityIndicator;
-	
-	PABrowserViewControllerState		state;
-		
+			
 	PABrowserViewMainController			*mainController;
 	
 	NNTags								*tags;
@@ -60,7 +52,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	NSConnection						*filterEngineConnection;
 	PAStringPrefixFilter				*activePrefixFilter;
 	NSArray								*activeContentTypeFilters;
-	BOOL								*filterEngineIsWorking;
+	BOOL								filterEngineIsWorking;
 	
 	PATagCloudSortKey					sortKey;
 	NSSortDescriptor					*sortDescriptor;

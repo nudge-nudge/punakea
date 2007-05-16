@@ -8,12 +8,12 @@
 
 #import "PABrowserViewMainController.h"
 
-
 @implementation PABrowserViewMainController
 
 #pragma mark init
 - (void)dealloc
 {	
+	[displayMessage release];
 	[currentView release];
 	[super dealloc];
 }
@@ -67,6 +67,11 @@
 - (void)setWorking:(BOOL)flag
 {
 	working = flag;
+}
+
+- (NSString*)displayMessage
+{
+	return @"";
 }
 
 - (void)reset
