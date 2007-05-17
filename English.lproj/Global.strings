@@ -13,3 +13,6 @@
 "FILE_SIZE_ON_DISK" = "%@ on disk";
 
 "FILES" = "files";
+
+"TAGSETPANEL_ADD_TAG_SET_LABEL" = "Add a new favorite set with these tags:";
+"TAGSETPANEL_EDIT_TAG_SET_LABEL" = "Edit tags of this favorite set:";

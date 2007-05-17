@@ -22,6 +22,8 @@
 	frame.origin.y = 48;
 	
 	[tagField setFrame:frame];
+	
+	[tagLabel setStringValue:NSLocalizedStringFromTable(@"TAGSETPANEL_ADD_TAG_SET_LABEL", @"Global", nil)];
 }
 
 
@@ -30,6 +32,8 @@
 {
 	[tagField setStringValue:@""];
 	[[self delegate] setCurrentCompleteTagsInField:[[[NNSelectedTags alloc] init] autorelease]];
+	
+	[[self delegate] validateConfirmButton];
 }
 
 
@@ -41,8 +45,15 @@
 
 - (void)setTags:(NSArray *)someTags
 {
+	[self removeAllTags];
+	
 	NNSelectedTags *selTags = [[[NNSelectedTags alloc] initWithTags:someTags] autorelease];
-	[[self delegate] setCurrentCompleteTagsInField:selTags];
+	
+	// Update tagField
+	[tagField setStringValue:[selTags selectedTags]];
+	
+	// Move cursor to end
+	[tagField selectText:self];
 }
 
 - (NSTokenField *)tagField
@@ -59,6 +70,12 @@
 {
 	[sourceItem release];
 	sourceItem = [anItem retain];
+	
+	// Update tag label
+	if(anItem)
+		[tagLabel setStringValue:NSLocalizedStringFromTable(@"TAGSETPANEL_EDIT_TAG_SET_LABEL", @"Global", nil)];
+	else
+		[tagLabel setStringValue:NSLocalizedStringFromTable(@"TAGSETPANEL_ADD_TAG_SET_LABEL", @"Global", nil)];
 }
 
 @end

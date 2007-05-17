@@ -16,6 +16,7 @@
 @interface PATagAutocompleteWindowController : NSWindowController {
 
 	IBOutlet NSTokenField				*tagField;						/**< shows tags which are on all selected files */
+	IBOutlet NSButton					*confirmButton;
 	
 	NNSelectedTags						*currentCompleteTagsInField;	/**< holds the relevant tags of tagField (as a copy) */
 	NSString							*restDisplayString;

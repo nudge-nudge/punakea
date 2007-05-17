@@ -2,6 +2,7 @@
     IBClasses = (
         {
             ACTIONS = {
+                addTagSet = id; 
                 delete = id; 
                 editTagsOnFiles = id; 
                 goHome = id; 

@@ -278,7 +278,7 @@
 	// Adjust dynamic titles
 	if([item action] == @selector(toggleToolbarShown:))
 	{
-		if([[[browserController window] toolbar] isVisible])
+		if([self appHasBrowser] && [[[browserController window] toolbar] isVisible])
 			[item setTitle:@"Hide Toolbar"];
 		else
 			[item setTitle:@"Show Toolbar"];
@@ -288,16 +288,20 @@
 	if(![self appHasBrowser])
 	{
 		// File menu
+		if([item action] == @selector(addTagSet:)) return NO;
 		if([item action] == @selector(openFiles:)) return NO;
+		if([item action] == @selector(editTagsOnFiles:)) return NO;
 		
 		// Edit menu
 		if([item action] == @selector(delete:)) return NO;
-		if([item action] == @selector(editTagsOnFiles:)) return NO;
+		if([item action] == @selector(tagSearch:)) return NO;
 		if([item action] == @selector(selectAll:)) return NO;
 		
 		// View menu
-		if([item action] == @selector(showResults:)) return NO;
-		if([item action] == @selector(manageTags:)) return NO;
+		if([item action] == @selector(goHome:)) return NO;
+		if([item action] == @selector(toggleInfo:)) return NO;
+		if([item action] == @selector(goToLibrary:)) return NO;
+		if([item action] == @selector(goToManageTags:)) return NO;
 		if([item action] == @selector(toggleToolbarShown:)) return NO;
 		if([item action] == @selector(runToolbarCustomizationPalette:)) return NO;		
 	}
@@ -327,6 +331,18 @@
 				
 			return NO;
 		}
+		else if([item action] == @selector(openFiles:) ||
+				[item action] == @selector(editTagsOnFiles:))
+		{
+			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
+			{
+				PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
+				if([ov numberOfSelectedRows] > 0)
+					return YES;
+			}
+			
+			return NO;
+		}
 		
 		// View menu
 		if([item action] == @selector(toggleInfo:))
@@ -337,7 +353,7 @@
 			else
 				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_HIDE_INFO", @"Menus", nil)];
 		}
-		else if([item action] == @selector(showLibrary:))
+		else if([item action] == @selector(goToLibrary:))
 		{			
 			PASourcePanel *sp = [browserController sourcePanel];
 			if([sp selectedRow] ==	[sp rowForItem:[sp itemWithValue:@"LIBRARY"]])
@@ -345,7 +361,7 @@
 			else
 				[item setState:NSOffState];
 		}
-		else if([item action] == @selector(manageTags:))
+		else if([item action] == @selector(goToManageTags:))
 		{
 			PASourcePanel *sp = [browserController sourcePanel];
 			if([sp selectedRow] ==	[sp rowForItem:[sp itemWithValue:@"MANAGE_TAGS"]])
@@ -356,6 +372,11 @@
 	}
 	
 	return YES;
+}
+
+- (IBAction)addTagSet:(id)sender
+{
+	[browserController addTagSet:sender];
 }
 
 - (IBAction)goHome:(id)sender
@@ -526,13 +547,11 @@
 
 - (IBAction)searchForTag:(NNTag*)aTag
 {
-	[self showBrowser:self];
 	[[browserController browserViewController] searchForTag:aTag];
 }
 
 - (IBAction)searchForTags:(NSArray*)someTags
 {
-	[self showBrowser:self];
 	[[browserController browserViewController] searchForTags:someTags];
 }
 

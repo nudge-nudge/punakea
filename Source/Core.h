@@ -47,6 +47,8 @@
 - (SUUpdater*)updater;
 
 // Menu Actions
+- (IBAction)addTagSet:(id)sender;
+
 - (IBAction)goHome:(id)sender;
 - (IBAction)toggleInfo:(id)sender;
 - (IBAction)goToLibrary:(id)sender;

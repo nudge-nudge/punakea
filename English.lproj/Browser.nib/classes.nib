@@ -112,7 +112,7 @@
         {
             CLASS = PATagAutocompleteWindowController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {tagField = NSTokenField; }; 
+            OUTLETS = {confirmButton = NSButton; tagField = NSTokenField; }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {
@@ -124,7 +124,7 @@
         {
             CLASS = PATagSetPanel; 
             LANGUAGE = ObjC; 
-            OUTLETS = {tagField = NSTokenField; }; 
+            OUTLETS = {tagField = NSTokenField; tagLabel = NSTextField; }; 
             SUPERCLASS = NSPanel; 
         }, 
         {

@@ -171,28 +171,37 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 		
 		PASourceItem *parent = [sourcePanel itemWithValue:@"FAVORITES"];
 		
-		PASourceItem *item = [PASourceItem itemWithValue:@"aValue" displayName:@"New Tag Set"];
+		PASourceItem *item;
 		
-		NNTagSet *tagSet = [NNTagSet setWithTags:[tagSetPanel tags]];
+		if([panel sourceItem])
+			item = [panel sourceItem];
+		else
+			item = [PASourceItem itemWithValue:@"aValue" displayName:@"New Tag Set"];
+		
+		NNTagSet *tagSet = [NNTagSet setWithTags:[tagSetPanel tags] name:[item displayName]];
 		[item setContainedObject:tagSet];
 		
-		[spController addChild:item toItem:parent];
+		if(![panel sourceItem])
+		{
+			[spController addChild:item toItem:parent];
 		
-		[item validateDisplayName];
+			[item validateDisplayName];
 		
-		// Begin editing
-		int row = [sourcePanel rowForItem:item];
-		[sourcePanel selectRow:row byExtendingSelection:NO];
-		[sourcePanel editColumn:0 row:row withEvent:nil select:YES];
+			// Begin editing
+			int row = [sourcePanel rowForItem:item];
+			[sourcePanel selectRow:row byExtendingSelection:NO];
+			[sourcePanel editColumn:0 row:row withEvent:nil select:YES];
+		}
 	}
 }
 
 - (void)addTagSet:(id)sender
 {	
 	[tagSetPanel removeAllTags];
+	[tagSetPanel setSourceItem:nil];
 	
 	[NSApp beginSheet:tagSetPanel
-	   modalForWindow:[sender window]
+	   modalForWindow:[self window]
 		modalDelegate:self
 	   didEndSelector:@selector(tagSetPanelDidEnd:returnCode:contextInfo:)
 		  contextInfo:NULL];
@@ -228,10 +237,16 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	PASourceItem *sourceItem = [ov itemAtRow:[ov selectedRow]];
 	
 	[tagSetPanel setSourceItem:sourceItem];
-	[tagSetPanel setTags:[[sourceItem containedObject] tags]];
+	
+	if([[sourceItem containedObject] isMemberOfClass:[NNTagSet class]])
+	{
+		[tagSetPanel setTags:[[sourceItem containedObject] tags]];
+	} else {
+		[tagSetPanel setTags:[NSArray arrayWithObject:[sourceItem containedObject]]];
+	}
 	
 	[NSApp beginSheet:tagSetPanel
-	   modalForWindow:[ov window]
+	   modalForWindow:[self window]
 		modalDelegate:self
 	   didEndSelector:@selector(tagSetPanelDidEnd:returnCode:contextInfo:)
 		  contextInfo:NULL];

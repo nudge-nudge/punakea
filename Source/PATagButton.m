@@ -167,7 +167,7 @@ should be overridden according to apple docs
 }
 
 - (void)startDrag:(NSEvent *)event
-{
+{	
 	NSString *smartFolder = [PASmartFolder smartFolderFilenameForTag:[self genericTag]];
 
 	NSMutableArray *fileList = [NSMutableArray arrayWithObject:smartFolder];
@@ -194,13 +194,13 @@ should be overridden according to apple docs
     [image dissolveToPoint:NSMakePoint(0,0) fraction:0.5]; 
     [dragImage unlockFocus];
 
-    [self dragImage:dragImage 
-                 at:dragPoint 
-             offset:NSZeroSize
-              event:event 
-         pasteboard:pboard 
-             source:self 
-          slideBack:YES];
+	[self dragImage:dragImage 
+				 at:dragPoint 
+			 offset:NSZeroSize
+			  event:event 
+		 pasteboard:pboard 
+			 source:self 
+		  slideBack:YES];
 	
 	// Delete smart folder from temp dir
 	[PASmartFolder removeSmartFolderForTag:[self genericTag]];

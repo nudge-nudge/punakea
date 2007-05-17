@@ -55,6 +55,16 @@
 }
 
 
+#pragma mark Misc
+- (void)validateConfirmButton
+{
+	if(!confirmButton)
+		return;
+	
+	[confirmButton setEnabled:([currentCompleteTagsInField count] > 0)];
+}
+
+
 #pragma mark Tag Field Delegate
 -    (NSArray *)tokenField:(NSTokenField *)tokenField 
    completionsForSubstring:(NSString *)substring 
@@ -79,6 +89,8 @@
 				atIndex:(unsigned)idx
 {
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
+	
+	[self validateConfirmButton];
 	
 	// everything will be added
 	return tokens;
@@ -107,7 +119,7 @@
 	// only do something if a tag has been completely deleted
 	// adding tags is handled by ... shouldAddObjects: ...
 	if ([[tagField objectValue] count] < [currentCompleteTagsInField count])
-	{
+	{		
 		// look for deleted tags
 		NSMutableArray *deletedTags = [NSMutableArray array];
 		
@@ -125,6 +137,8 @@
 		// now remove the tags to be deleted from currentCompleteTagsInField - to keep in sync with tagField
 		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
 	}
+	
+	[self validateConfirmButton];
 }
 
 
@@ -140,10 +154,7 @@
 }
 
 - (void)setCurrentCompleteTagsInField:(NNSelectedTags *)newTags
-{
-	// Update tagField
-	[[self tagField] setObjectValue:newTags];
-	
+{	
 	[currentCompleteTagsInField release];
 	currentCompleteTagsInField = [newTags retain];
 }
