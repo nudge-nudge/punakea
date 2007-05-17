@@ -171,12 +171,14 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 		
 		PASourceItem *parent = [sourcePanel itemWithValue:@"FAVORITES"];
 		
-		PASourceItem *item = [PASourceItem itemWithValue:@"aValue" displayName:@"new name"];
+		PASourceItem *item = [PASourceItem itemWithValue:@"aValue" displayName:@"New Tag Set"];
 		
 		NNTagSet *tagSet = [NNTagSet setWithTags:[tagSetPanel tags]];
 		[item setContainedObject:tagSet];
 		
 		[spController addChild:item toItem:parent];
+		
+		[item validateDisplayName];
 		
 		// Begin editing
 		int row = [sourcePanel rowForItem:item];
@@ -218,6 +220,26 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	NSSearchField *searchField = sender;
 	
 	[browserViewController setSearchFieldString:[searchField stringValue]];
+}
+
+- (IBAction)editTagSet:(id)sender
+{
+	NSOutlineView *ov = [[(NSMenuItem *)sender menu] delegate];
+	PASourceItem *sourceItem = [ov itemAtRow:[ov selectedRow]];
+	
+	[tagSetPanel setSourceItem:sourceItem];
+	[tagSetPanel setTags:[[sourceItem containedObject] tags]];
+	
+	[NSApp beginSheet:tagSetPanel
+	   modalForWindow:[ov window]
+		modalDelegate:self
+	   didEndSelector:@selector(tagSetPanelDidEnd:returnCode:contextInfo:)
+		  contextInfo:NULL];
+}
+
+- (IBAction)removeTagSet:(id)sender
+{
+	[[[NSApplication sharedApplication] delegate] delete:sender];
 }
 
 

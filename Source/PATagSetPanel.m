@@ -39,9 +39,26 @@
 	return [[[self delegate] currentCompleteTagsInField] selectedTags];
 }
 
+- (void)setTags:(NSArray *)someTags
+{
+	NNSelectedTags *selTags = [[[NNSelectedTags alloc] initWithTags:someTags] autorelease];
+	[[self delegate] setCurrentCompleteTagsInField:selTags];
+}
+
 - (NSTokenField *)tagField
 {
 	return tagField;
+}
+
+- (PASourceItem *)sourceItem
+{
+	return sourceItem;
+}
+
+- (void)setSourceItem:(PASourceItem *)anItem
+{
+	[sourceItem release];
+	sourceItem = [anItem retain];
 }
 
 @end

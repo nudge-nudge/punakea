@@ -56,15 +56,13 @@
         return NO;
     if (other == self)
         return YES;
-	if(![containedObject isEqualTo:[other containedObject]])
-		return NO;
 	
-    return [value isEqualTo:[other value]];
+    return [displayName isEqualTo:[other displayName]];
 }
 
 - (unsigned)hash 
 {
-	return [value hash] * [displayName hash] * [children hash];
+	return [displayName hash];
 }
 
 
@@ -91,7 +89,9 @@
 
 #pragma mark Actions
 - (void)addChild:(id)anItem
-{
+{	
+	[anItem validateDisplayName];
+	
 	[anItem setParent:self];
 	[children addObject:anItem];
 }
@@ -174,6 +174,43 @@
 	}
 	
 	return NO;
+}
+
+- (void)validateDisplayName
+{
+	// Check on duplicates for display name
+	
+	NSString *newNameBase = [self displayName];
+	NSString *newName = newNameBase;	
+	
+	BOOL hasDuplicate = YES;
+	int numberOfLoops = 0;
+	
+	while(hasDuplicate)
+	{
+		hasDuplicate = NO;
+		numberOfLoops++;
+		
+		NSEnumerator *e = [[[self parent] children] objectEnumerator];
+		PASourceItem *item;
+		while(item = [e nextObject])
+		{
+			if(item != self &&
+			   [[item displayName] isEqualTo:newName])
+			{
+				hasDuplicate = YES;
+				break;
+			}
+		}
+		
+		if(hasDuplicate)
+			newName = [NSString stringWithFormat:@"%@ (%d)", newNameBase, numberOfLoops];
+	}
+	
+	[self setDisplayName:newName];
+	
+	if([[self containedObject] isMemberOfClass:[NNTagSet class]])
+		[(NNTagSet *)[self containedObject] setName:newName];
 }
 
 

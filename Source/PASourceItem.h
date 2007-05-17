@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NNTagging/NNTagSet.h"
 
 
 @interface PASourceItem : NSObject {
@@ -36,6 +37,8 @@
 - (BOOL)isDescendantOfValue:(NSString *)anItemValue;
 - (BOOL)isLeaf;
 - (BOOL)hasChildContainingObject:(id)anObject;
+
+- (void)validateDisplayName;
 
 - (NSString *)value;
 - (void)setValue:(NSString *)aString;

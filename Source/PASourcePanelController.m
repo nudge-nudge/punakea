@@ -93,7 +93,13 @@
 {
 	PASourceItem *sourceItem = (PASourceItem *)item;
 	
-	[sourceItem setDisplayName:(NSString *)object];
+	NSString *newName = object;
+	
+	[sourceItem setDisplayName:newName];
+	[sourceItem setValue:newName];
+	
+	if([[sourceItem containedObject] isMemberOfClass:[NNTagSet class]])
+		[(NNTagSet *)[sourceItem containedObject] setName:newName];
 }
 
 
@@ -126,7 +132,6 @@
 	}
 	else if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
 	{
-		NSLog(@"%@", [[sourceItem containedObject] tags]);
 		[[[NSApplication sharedApplication] delegate] searchForTags:[[sourceItem containedObject] tags]];
 	}
 }
@@ -441,12 +446,16 @@
 			for(int i = 0; i < [[sourceItem children] count]; i++)
 			{
 				PASourceItem *thisItem = [[sourceItem children] objectAtIndex:i];
-				if([[thisItem value] isEqualTo:[newItem value]] &&
+				if([[thisItem displayName] isEqualTo:[newItem displayName]] &&
 				   thisItem != newItem)
 					[sourceItem removeChildAtIndex:i];
 			}
 		}
 	}
+	
+	// Validate the new name
+	[sourceItem validateDisplayName];
+	[newItem validateDisplayName];
 	
 	// Propagate model changes to ui
 	id selectedItem = [ov itemAtRow:[ov selectedRow]];

@@ -50,6 +50,9 @@
 - (IBAction)confirmSheet:(id)sender;
 - (IBAction)cancelSheet:(id)sender;
 
+- (IBAction)editTagSet:(id)sender;
+- (IBAction)removeTagSet:(id)sender;
+
 - (BrowserViewController*)browserViewController;
 - (PASplitView *)verticalSplitView;
 - (PASplitView *)horizontalSplitView;

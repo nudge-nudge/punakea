@@ -234,6 +234,23 @@
 	[super keyDown:theEvent];
 }
 
+- (NSMenu *)menuForEvent:(NSEvent *)theEvent
+{
+	// Allow menu only for editable items by now
+			
+	NSPoint mousePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+	int row = [self rowAtPoint:mousePoint];		
+	PASourceItem *item = (PASourceItem *)[self itemAtRow:row];
+	
+	if([item isEditable])
+	{
+		[[self window] makeFirstResponder:self];
+		return [super menuForEvent:theEvent];
+	} else {
+		return nil;
+	}
+}
+
 
 #pragma mark Editing
 - (void)removeSelectedItem
@@ -283,6 +300,31 @@
 - (void)textDidChange:(NSNotification *)notification
 {		
 	NSTextView *editor = [notification object];
+	
+	PASourceItem *editedItem = [self itemAtRow:[self editedRow]];
+	
+	PASourceItem *favorites = [self itemWithValue:@"FAVORITES"];
+	
+	// Check on duplicates - compare display names only
+	BOOL hasDuplicate = NO;
+	
+	NSEnumerator *e = [[favorites children] objectEnumerator];
+	PASourceItem *item;
+	while(item = [e nextObject])
+	{
+		if(item != editedItem &&
+		   [[editor string] isEqualTo:[item displayName]])
+		{
+			hasDuplicate = YES;
+			break;
+		}
+	}
+	
+	if(hasDuplicate || [[editor string] length] == 0)
+		[editor setTextColor:[NSColor redColor]];
+	else
+		[editor setTextColor:[NSColor textColor]];
+	
 	[editor setNeedsDisplay:YES];
 	[self setNeedsDisplay:YES];
 }
@@ -292,11 +334,12 @@
 	NSTextView *editor = [notification object];
 	
 	// Force editing not to end if text color is red
-	/*if([[textView textColor] isEqualTo:[NSColor redColor]])
+	if([[editor textColor] isEqualTo:[NSColor redColor]])
 	{
-		[[self window] makeFirstResponder:textView];
+		[editor setTextColor:[NSColor textColor]];
+		[self cancelOperation:editor];
 		return;
-	}*/
+	}
 	
 	[[editor enclosingScrollView] removeFromSuperview];
 	

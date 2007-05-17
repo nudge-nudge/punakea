@@ -1,7 +1,7 @@
 {
     IBClasses = (
         {
-            ACTIONS = {cancelSheet = id; confirmSheet = id; }; 
+            ACTIONS = {cancelSheet = id; confirmSheet = id; editTagSet = id; removeTagSet = id; }; 
             CLASS = BrowserController; 
             LANGUAGE = ObjC; 
             OUTLETS = {

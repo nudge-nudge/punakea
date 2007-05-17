@@ -141,6 +141,9 @@
 
 - (void)setCurrentCompleteTagsInField:(NNSelectedTags *)newTags
 {
+	// Update tagField
+	[[self tagField] setObjectValue:newTags];
+	
 	[currentCompleteTagsInField release];
 	currentCompleteTagsInField = [newTags retain];
 }
