@@ -590,7 +590,6 @@ bind to visibleTags
 
 - (void)setDisplayMessage:(NSString*)message
 {
-	NSLog(@"tagCloud: %@",message);
 	[displayMessage release];
 	[message retain];
 	displayMessage = message;

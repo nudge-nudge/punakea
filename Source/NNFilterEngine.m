@@ -101,7 +101,7 @@
 	{		
 		usleep(50000);
 
-		if ([threadLock condition] == NNThreadCanceled)
+		if (![threadLock tryLockWhenCondition:NNThreadRunning])
 			break;
 				
 		NSMutableArray *currentlyFilteredObjects = [self currentlyFilteredObjects];
@@ -114,7 +114,9 @@
 			
 			// tell client-thread that new objects have been filtered
 			[(id)[serverConnection rootProxy] objectsFiltered];
-		} 
+		}
+		
+		[threadLock unlock];
 		
 		if ([self checkIfDone])
 			break;
@@ -208,6 +210,8 @@
 	NNQueue *inBuffer = [buffers objectAtIndex:0];
 	[inBuffer enqueueObjects:[self filterObjects]];
 	
+	NSLog(@"filterEngine started with filterObjects: %@\ninBuffer: %@\nfilters: %@",[self filterObjects],inBuffer,filters);
+	
 	NNObjectFilter *filter;
 	NSEnumerator *e = [filters objectEnumerator];
 	
@@ -238,8 +242,8 @@
 		[filter markAsCanceled];
 		
 	// empty all buffers
-	NNQueue *buffer;
 	NSEnumerator *bufferEnumerator = [buffers objectEnumerator];
+	NNQueue *buffer;
 	
 	while (buffer = [bufferEnumerator nextObject])
 		[buffer clear];	
@@ -310,8 +314,6 @@
 
 - (void)addFilter:(NNObjectFilter*)newFilter
 {
-	NSLog(@"adding %@ to filterQueue",newFilter);
-
 	// stops check thread and resets main buffer
 	[self setObjects:filterObjects];
 	

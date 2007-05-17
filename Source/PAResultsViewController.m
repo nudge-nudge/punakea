@@ -285,14 +285,14 @@
 		[query startQuery];
 		
 		// empty display tags until new related tags are found
-		if ([delegate respondsToSelector:@selector(setDisplayTags:)])
+		if ([delegate respondsToSelector:@selector(emptyVisibleTags)])
 		{
-			[delegate setDisplayTags:[NSMutableArray array]];
+			[delegate emptyVisibleTags];
 		}
 		else
 		{
 			[NSException raise:NSInternalInconsistencyException
-						format:@"delegate does not implement setDisplayTags:"];
+						format:@"delegate does not implement emptyVisibleTags"];
 		}
 	}
 	else 
@@ -305,7 +305,7 @@
 		else
 		{
 			[NSException raise:NSInternalInconsistencyException
-						format:@"delegate does not implement setDisplayTags:"];
+						format:@"delegate does not implement resetDisplayTags"];
 		}
 	}
 }

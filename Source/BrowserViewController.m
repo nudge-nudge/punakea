@@ -512,6 +512,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)objectsFiltered
 {
 	[filterEngine lockFilteredObjects];
+	NSLog(@"filtered: %@",[filterEngine filteredObjects]);
 	[self setVisibleTags:[filterEngine filteredObjects]];
 	[filterEngine unlockFilteredObjects];
 }

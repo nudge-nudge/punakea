@@ -98,6 +98,7 @@ adds tag to tagField (use from "outside")
 {
 	[items release];
 	items = [theObjects mutableCopy];
+	[tableView reloadData];
 }
 
 - (void)updateTags
