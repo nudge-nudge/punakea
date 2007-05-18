@@ -213,6 +213,38 @@
 		[(NNTagSet *)[self containedObject] setName:newName];
 }
 
+- (NSString *)defaultDisplayName
+{	
+	NSString *defaultName = nil;		
+	
+	if([[self containedObject] isKindOfClass:[NNTag class]])
+	{
+		defaultName = [(NNTag *)[self containedObject] name];
+	}
+	else if([[self containedObject] isKindOfClass:[NNTagSet class]])
+	{
+		defaultName = @"";
+		
+		NNTagSet *tagSet = [self containedObject];
+		
+		NSEnumerator *enumerator = [[tagSet tags] objectEnumerator];
+		NNTag *tag;
+		while(tag = [enumerator nextObject])
+		{
+			if([defaultName isNotEqualTo:@""]) 
+				defaultName = [defaultName stringByAppendingString:@", "];
+			
+			defaultName = [defaultName stringByAppendingString:[tag name]];
+		}
+	}
+	else
+	{
+		defaultName = [self displayName];
+	}
+	
+	return defaultName;
+}
+
 
 #pragma mark Misc
 - (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)isLocal

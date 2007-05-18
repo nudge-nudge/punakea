@@ -347,43 +347,10 @@
 		{
 			NSString *setName = [sourceItem displayName];
 			
-			// Determine default display name for existing tag or set
-			NSString *defaultSetName = nil;			
-			if(existingTag)
-			{
-				defaultSetName = [existingTag name];
-			} else {
-				defaultSetName = @"";
-				NSEnumerator *enumerator = [[existingTagSet tags] objectEnumerator];
-				NNTag *nextTag;
-				while(nextTag = [enumerator nextObject])
-				{
-					if([defaultSetName isNotEqualTo:@""]) 
-						defaultSetName = [defaultSetName stringByAppendingString:@", "];
-					defaultSetName = [defaultSetName stringByAppendingString:[nextTag name]];
-				}
-			}
+			BOOL usesDefaultDisplayName = 
+				[[sourceItem displayName] isEqualTo:[sourceItem defaultDisplayName]];
 			
-			if([[sourceItem displayName] isEqualTo:defaultSetName])
-			{
-				// SourceItem's name has not been modified yet,
-				// so we may add the new tag(s)
-				
-				if(tag)
-				{
-					setName = [setName stringByAppendingString:@", "];
-					setName = [setName stringByAppendingString:[tag name]];
-				} else {
-					NSEnumerator *enumerator = [[tagSet tags] objectEnumerator];
-					NNTag *nextTag;
-					while(nextTag = [enumerator nextObject])
-					{
-						setName = [setName stringByAppendingString:@", "];
-						setName = [setName stringByAppendingString:[nextTag name]];
-					}
-				}
-			}
-					
+			// Update sourceItem's containedObject (may be a tag or tag set by now)
 			NNTagSet *newTagSet;
 			if(existingTagSet)
 				newTagSet = [NNTagSet setWithTags:[existingTagSet tags] name:setName];
@@ -407,6 +374,11 @@
 			}
 			
 			[sourceItem setContainedObject:newTagSet];
+			
+			// If we were using the default display name before, we'll stick to this
+			if(usesDefaultDisplayName)
+				setName = [sourceItem defaultDisplayName];
+			
 			[sourceItem setDisplayName:setName];
 			[sourceItem setValue:setName];
 		}

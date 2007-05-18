@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NNTagging/NNTag.h"
 #import "NNTagging/NNTagSet.h"
 
 
@@ -38,7 +39,8 @@
 - (BOOL)isLeaf;
 - (BOOL)hasChildContainingObject:(id)anObject;
 
-- (void)validateDisplayName;
+- (void)validateDisplayName;			/**< Checks all children of this item's parent for the display name. If there's a duplicate, append an index to the current display name to solve conflict. */
+- (NSString *)defaultDisplayName;		/**< Returns the display name that indicates the default. For a tag as contained object it's the tag's name. For a tag set it's a comma separated list of tag names. Otherwise returns the current display name.*/
 
 - (NSString *)value;
 - (void)setValue:(NSString *)aString;

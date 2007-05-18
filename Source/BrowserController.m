@@ -169,18 +169,23 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	{
 		PASourcePanelController *spController = [sourcePanel dataSource];
 		
-		PASourceItem *parent = [sourcePanel itemWithValue:@"FAVORITES"];
-		
+		PASourceItem *parent = [sourcePanel itemWithValue:@"FAVORITES"];		
 		PASourceItem *item;
 		
+		BOOL usesDefaultDisplayName = NO;
+		
 		if([panel sourceItem])
+		{
 			item = [panel sourceItem];
-		else
+			usesDefaultDisplayName = [[item displayName] isEqualTo:[item defaultDisplayName]];
+		} else {
 			item = [PASourceItem itemWithValue:@"aValue" displayName:@"New Tag Set"];
+		}
 		
 		NNTagSet *tagSet = [NNTagSet setWithTags:[tagSetPanel tags] name:[item displayName]];
 		[item setContainedObject:tagSet];
 		
+		// Is this a new set?
 		if(![panel sourceItem])
 		{
 			[spController addChild:item toItem:parent];
@@ -191,6 +196,10 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 			int row = [sourcePanel rowForItem:item];
 			[sourcePanel selectRow:row byExtendingSelection:NO];
 			[sourcePanel editColumn:0 row:row withEvent:nil select:YES];
+		} else {
+			// If we were using the default display name, stick to this
+			if(usesDefaultDisplayName)
+				[item setDisplayName:[item defaultDisplayName]];
 		}
 	}
 }
