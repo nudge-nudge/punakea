@@ -189,6 +189,11 @@
 		 writeItems:(NSArray *)items 
 	   toPasteboard:(NSPasteboard *)pboard
 {
+	// Cancel any editing
+	[NSObject cancelPreviousPerformRequestsWithTarget:sourcePanel
+											 selector:@selector(beginEditing)
+											   object:nil];
+	
 	// Weak temporary reference to draggedItems
 	draggedItems = items;
 	
