@@ -29,7 +29,7 @@
         {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {
-            ACTIONS = {clearSelectedTags = id; setGroupingAttributes = id; }; 
+            ACTIONS = {deleteFilesForVisibleSelectedItems = id; setGroupingAttributes = id; }; 
             CLASS = PAResultsViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {outlineView = PAResultsOutlineView; progressIndicator = NSProgressIndicator; }; 

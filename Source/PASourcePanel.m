@@ -324,7 +324,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		if(key == NSDeleteCharacter &&
 		   [(PASourceItem *)[self itemAtRow:[self selectedRow]] isEditable])
 		{
-			[self removeSelectedItem];
+			[[[NSApplication sharedApplication] delegate] delete:self];
 			return;
 		}
 	}
@@ -360,7 +360,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	[[sourceItem parent] removeChild:sourceItem];
 	
-	[self reloadDataAndSelectItemWithValue:@"LIBRARY"];
+	[self reloadDataAndSelectItemWithValue:@"ALL_ITEMS"];
 }
 
 - (void)beginEditing

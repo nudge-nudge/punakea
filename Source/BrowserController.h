@@ -10,6 +10,7 @@
 #import "BrowserViewController.h"
 #import "NNTagging/NNTag.h"
 #import "NNTagging/NNTagSet.h"
+#import "NNTagging/NNTags.h"
 #import "NNTagging/NNQuery.h"
 #import "PATagCloud.h"
 #import "PAStatusBar.h"
@@ -23,6 +24,10 @@
 #import "PAInfoPaneSubview.h"
 #import "PAInfoPaneSingleSelectionView.h"
 #import "PAInfoPaneMultipleSelectionView.h"
+
+
+extern NSString * const FILENAME_FAVORITES_PLIST;
+extern unsigned const VERSION_FAVORITES_PLIST;
 
 
 @interface BrowserController : NSWindowController 
@@ -52,6 +57,8 @@
 
 - (IBAction)editTagSet:(id)sender;
 - (IBAction)removeTagSet:(id)sender;
+
+- (void)saveFavorites;
 
 - (BrowserViewController*)browserViewController;
 - (PASplitView *)verticalSplitView;

@@ -118,7 +118,11 @@
 {
 	// only do something if a tag has been completely deleted
 	// adding tags is handled by ... shouldAddObjects: ...
-	if ([[tagField objectValue] count] < [currentCompleteTagsInField count])
+	
+	// Important: If one tag is present and selected and we type in a new one, the following operator
+	// needs to be LESS THAN, not LESS
+		
+	if ([[tagField objectValue] count] <= [currentCompleteTagsInField count])
 	{		
 		// look for deleted tags
 		NSMutableArray *deletedTags = [NSMutableArray array];

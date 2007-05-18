@@ -19,11 +19,11 @@
 		// Define Source Items
 		items = [[NSMutableArray alloc] init];
 		
-		PASourceItem *sourceGroup = [PASourceItem itemWithValue:@"TEST" displayName:@"Test"];
+		PASourceItem *sourceGroup = [PASourceItem itemWithValue:@"LIBRARY" displayName:@"LIBRARY"];
 		[sourceGroup setSelectable:NO];
 		[sourceGroup setHeading:YES];
 		
-		PASourceItem *sourceItem = [PASourceItem itemWithValue:@"LIBRARY" displayName:@"Library"];
+		PASourceItem *sourceItem = [PASourceItem itemWithValue:@"ALL_ITEMS" displayName:@"All Items"];
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
 		sourceItem = [PASourceItem itemWithValue:@"MANAGE_TAGS" displayName:@"Manage Tags"];
@@ -100,6 +100,8 @@
 	
 	if([[sourceItem containedObject] isMemberOfClass:[NNTagSet class]])
 		[(NNTagSet *)[sourceItem containedObject] setName:newName];
+	
+	[[[[NSApplication sharedApplication] delegate] browserController] saveFavorites];
 }
 
 
@@ -122,7 +124,7 @@
 	PASourceItem *sourceItem = (PASourceItem *)item;
 		
 	// Perform actions
-	if([[sourceItem value] isEqualTo:@"LIBRARY"])
+	if([[sourceItem value] isEqualTo:@"ALL_ITEMS"])
 	{
 		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] showResults];
 	}
@@ -439,6 +441,9 @@
 		newSelectedRow = [ov rowForItem:newItem];
 	
 	[ov selectRow:newSelectedRow byExtendingSelection:NO];
+	
+	// Save favorites
+	[[[[NSApplication sharedApplication] delegate] browserController] saveFavorites];
 	
 	// TODO: Delete smart folder if necessary
 	

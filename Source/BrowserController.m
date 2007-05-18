@@ -14,8 +14,13 @@
 - (void)setupToolbar;
 - (void)setupStatusBar;
 
+- (NSString *)pathOfFavoritesFile;
+
 @end
 
+
+NSString * const FILENAME_FAVORITES_PLIST = @"favorites.plist";
+unsigned const VERSION_FAVORITES_PLIST = 1;
 
 NSString * const VERTICAL_SPLITVIEW_DEFAULTS = @"0 0 180 472 0 181 0 577 472 0";
 NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0";
@@ -64,6 +69,9 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 		   selector:@selector(resultsOutlineViewSelectionDidChange:)
 			   name:(id)PAResultsOutlineViewSelectionDidChangeNotification
 			 object:nil];
+	
+	// Load favorites
+	[self loadFavorites];
 }
 
 - (void)setupToolbar
@@ -201,6 +209,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 			if(usesDefaultDisplayName)
 				[item setDisplayName:[item defaultDisplayName]];
 		}
+		
+		[self saveFavorites];
 	}
 }
 
@@ -270,6 +280,111 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 - (IBAction)removeTagSet:(id)sender
 {
 	[[[NSApplication sharedApplication] delegate] delete:sender];
+}
+
+
+#pragma mark Misc
+- (NSString *)pathOfFavoritesFile
+{	
+	// use default location in app support
+	NSBundle *bundle = [NSBundle mainBundle];
+	NSString *path = [bundle bundlePath];
+	NSString *appName = [[path lastPathComponent] stringByDeletingPathExtension]; 
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSString *folder = [NSString stringWithFormat:@"~/Library/Application Support/%@/",appName];
+	folder = [folder stringByExpandingTildeInPath]; 
+	
+	if ([fileManager fileExistsAtPath: folder] == NO) 
+		[fileManager createDirectoryAtPath: folder attributes: nil];
+	
+	return [folder stringByAppendingPathComponent:FILENAME_FAVORITES_PLIST]; 
+}
+
+- (void)saveFavorites
+{
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	
+	// Store version number for future versions and easy update procedure
+	[dict setObject:[NSNumber numberWithInt:VERSION_FAVORITES_PLIST] forKey:@"Version"];
+	
+	NSMutableArray *favorites = [NSMutableArray array];
+	
+	NSEnumerator *e = [[(PASourceItem *)[sourcePanel itemWithValue:@"FAVORITES"] children] objectEnumerator];
+	PASourceItem *item;
+	
+	while(item = [e nextObject])
+	{
+		NSMutableDictionary *itemDict = [NSMutableDictionary dictionary];
+		
+		// Save display name
+		[itemDict setObject:[item displayName] forKey:@"DisplayName"];
+		
+		// Save tags		
+		NSMutableArray *tags = [NSMutableArray array];
+		
+		if([[item containedObject] isKindOfClass:[NNTag class]])
+		{
+			NNTag *tag = [item containedObject];
+			[tags addObject:[tag name]];
+		}
+		else
+		{
+			NNTagSet *tagSet = [item containedObject];
+			
+			NSEnumerator *tagE = [[tagSet tags] objectEnumerator];
+			NNTag *tag;
+			while(tag = [tagE nextObject])
+			{
+				[tags addObject:[tag name]];
+			}
+		}
+		
+		[itemDict setObject:tags forKey:@"Tags"];
+		
+		[favorites addObject:itemDict];
+	}	
+	
+	[dict setObject:favorites forKey:@"Favorites"];
+	
+	[dict writeToFile:[self pathOfFavoritesFile] atomically:YES];
+}
+
+- (void)loadFavorites
+{
+	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:[self pathOfFavoritesFile]];
+	
+	NSArray *favorites = [dict objectForKey:@"Favorites"];
+	
+	PASourceItem *favSourceItem = [sourcePanel itemWithValue:@"FAVORITES"];
+	
+	NSEnumerator *e = [favorites objectEnumerator];
+	NSDictionary *itemDict;
+	while(itemDict = [e nextObject])
+	{
+		// Create item with restored display name
+		PASourceItem *favorite = [PASourceItem itemWithValue:[itemDict objectForKey:@"DisplayName"] 
+												 displayName:[itemDict objectForKey:@"DisplayName"]];
+		
+		// Restore tags
+		NNTagSet *tagSet = [NNTagSet setWithTags:[NSArray array] name:[favorite displayName]];
+		
+		NSEnumerator *tagE = [(NSArray *)[itemDict objectForKey:@"Tags"] objectEnumerator];
+		NSString *tagName;
+		while(tagName = [tagE nextObject])
+		{
+			NNTag *tag = [[[NNTag alloc] initWithName:tagName] autorelease];
+			[tagSet addTag:tag];
+		}
+		
+		[favorite setContainedObject:tagSet];
+		
+		// Add favorite set to favorites group
+		[favSourceItem addChild:favorite];
+	}
+	
+	// Reload data
+	[sourcePanel reloadData];
 }
 
 

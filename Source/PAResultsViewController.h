@@ -54,8 +54,6 @@
 
 - (NNQuery *)query;
 
-- (IBAction)clearSelectedTags:(id)sender;
-
 - (IBAction)setGroupingAttributes:(id)sender;
 
 - (void)deleteDraggedItems;

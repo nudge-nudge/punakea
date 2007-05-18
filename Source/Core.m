@@ -356,7 +356,7 @@
 		else if([item action] == @selector(goToLibrary:))
 		{			
 			PASourcePanel *sp = [browserController sourcePanel];
-			if([sp selectedRow] ==	[sp rowForItem:[sp itemWithValue:@"LIBRARY"]])
+			if([sp selectedRow] ==	[sp rowForItem:[sp itemWithValue:@"ALL_ITEMS"]])
 				[item setState:NSOnState];
 			else
 				[item setState:NSOffState];
@@ -381,7 +381,7 @@
 
 - (IBAction)goHome:(id)sender
 {
-	[[browserController sourcePanel] selectItemWithValue:@"LIBRARY"];
+	[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
 	[[[browserController browserViewController] mainController] reset];
 	//[[browserController window] makeFirstResponder:[browserController sourcePanel]];
 }
@@ -394,7 +394,7 @@
 
 - (IBAction)goToLibrary:(id)sender
 {	
-	[[browserController sourcePanel] selectItemWithValue:@"LIBRARY"];
+	[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
 	[[browserController window] makeFirstResponder:[browserController sourcePanel]];
 }
 
@@ -444,6 +444,7 @@
 	{
 		PASourcePanel *sp = (PASourcePanel *)firstResponder;
 		[sp removeSelectedItem];
+		[browserController saveFavorites];
 	}
 }
 

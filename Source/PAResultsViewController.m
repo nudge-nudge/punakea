@@ -187,11 +187,6 @@
 
 - (void)reset
 {
-	[self clearSelectedTags:self];
-}
-
-- (void)clearSelectedTags:(id)sender
-{
 	[selectedTags removeAllTags];
 }
 
