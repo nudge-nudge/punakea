@@ -373,8 +373,10 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 		NSString *tagName;
 		while(tagName = [tagE nextObject])
 		{
-			NNTag *tag = [[[NNTag alloc] initWithName:tagName] autorelease];
-			[tagSet addTag:tag];
+			NNTag *tag = [[NNTags sharedTags] tagForName:tagName];
+			
+			if(tag)
+				[tagSet addTag:tag];
 		}
 		
 		[favorite setContainedObject:tagSet];
