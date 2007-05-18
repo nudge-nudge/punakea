@@ -242,7 +242,13 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 
 - (IBAction)editTagSet:(id)sender
 {
-	NSOutlineView *ov = [[(NSMenuItem *)sender menu] delegate];
+	NSOutlineView *ov;
+	
+	if([sender isKindOfClass:[NSOutlineView class]])
+	   ov = sender;
+	else
+	   ov = [[(NSMenuItem *)sender menu] delegate];
+	
 	PASourceItem *sourceItem = [ov itemAtRow:[ov selectedRow]];
 	
 	[tagSetPanel setSourceItem:sourceItem];

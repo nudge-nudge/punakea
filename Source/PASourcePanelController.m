@@ -468,6 +468,11 @@
 	[sourcePanel reloadData];	
 }
 
+- (void)doubleAction:(id)sender
+{
+	[[[[NSApplication sharedApplication] delegate] browserController] editTagSet:sourcePanel];
+}
+
 
 #pragma mark Accessors
 - (NSArray *)items
