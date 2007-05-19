@@ -22,8 +22,8 @@
 NSString * const FILENAME_FAVORITES_PLIST = @"favorites.plist";
 unsigned const VERSION_FAVORITES_PLIST = 1;
 
-NSString * const VERTICAL_SPLITVIEW_DEFAULTS = @"0 0 180 472 0 181 0 577 472 0";
-NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0";
+NSString * const VERTICAL_SPLITVIEW_DEFAULTS = @"0 0 200 553 0 201 0 494 553 0";
+NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0";
 
 
 @implementation BrowserController
@@ -53,7 +53,11 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 182 286 0 0 287 182 162 0
 	
 	// Initialize browserViewController
 	browserViewController = [[BrowserViewController alloc] init];
-	[verticalSplitView replaceSubview:mainPlaceholderView with:[browserViewController view]];
+	NSRect mainPlaceholderViewFrame = [mainPlaceholderView frame];
+	[rightContentView replaceSubview:mainPlaceholderView with:[browserViewController view]];
+	
+	// Fix frame of this new view
+	[[browserViewController view] setFrame:mainPlaceholderViewFrame];
 	
 	// insert browserViewController in the responder chain
 	[browserViewController setNextResponder:[self window]];

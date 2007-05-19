@@ -37,7 +37,8 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 	
 	BrowserViewController						*browserViewController;
 	
-	IBOutlet NSView								*mainPlaceholderView;
+	IBOutlet NSView								*rightContentView;			/**< Contains mainPlaceholderView and a status bar */
+	IBOutlet NSView								*mainPlaceholderView;		/**< Placeholder for the view that BrowserViewController provides */
 	IBOutlet PASplitView						*verticalSplitView;
 	IBOutlet PASplitView						*horizontalSplitView;
 	
