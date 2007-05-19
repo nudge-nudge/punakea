@@ -107,17 +107,11 @@
 	frame.origin.y += 2;
 	frame.size.width -= 5;
 	
-	[editor setBackgroundColor:[NSColor whiteColor]];
-	[editor setFocusRingType:NSFocusRingTypeNone];
-	
-	[editor setFont:[NSFont systemFontOfSize:11]];
 	[editor setString:[item displayName]];
-	[editor setTextContainerInset:NSMakeSize(-3,1)];
 	
 	[editor setDelegate:controlView];
 	
 	[editor selectAll:self];
-	//[editor setSelectedRange:NSMakeRange([editor selectedRange].length, 0)];
 
 	[editor sizeToFit];
 	
@@ -128,14 +122,6 @@
 	frame.size.height = 16;
 	
 	[editor setFrame:frame];	
-	
-	[editor setMinSize:NSMakeSize(0.0, 16.0)];
-	[editor setMaxSize:NSMakeSize(FLT_MAX, 16.0)];
-	
-	[editor setVerticallyResizable:NO];
-	[editor setHorizontallyResizable:YES];
-	
-	[editor setAutoresizingMask:NSViewWidthSizable];
 	
 	// Set up scrollview
 	NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:frame];

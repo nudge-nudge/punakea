@@ -46,6 +46,8 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 	IBOutlet PAStatusBar						*rightStatusBar;
 	IBOutlet PAStatusBar						*sourcePanelStatusBar;
 	
+	NSTextView									*sourcePanelFieldEditor;
+	
 	IBOutlet PASourcePanel						*sourcePanel;
 	IBOutlet PATabPanel							*tabPanel;
 	

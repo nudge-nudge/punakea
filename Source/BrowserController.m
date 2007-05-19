@@ -66,6 +66,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[self setupToolbar];
 	[self setupStatusBar];
 	[self setupTabPanel];
+	[self setupFieldEditor];
 	
 	// Register for notifications
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -137,9 +138,35 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[infoPane release];
 }
 
+- (void)setupFieldEditor
+{
+	// Create custom field editor for source panel
+	
+	NSTextView *editor = [[NSTextView alloc] initWithFrame:NSMakeRect(0,0,50,20)];
+	[editor setFieldEditor:YES];
+	
+	[editor setBackgroundColor:[NSColor whiteColor]];
+	[editor setFocusRingType:NSFocusRingTypeNone];
+	
+	[editor setFont:[NSFont systemFontOfSize:11]];
+	[editor setTextContainerInset:NSMakeSize(-3,1)];
+	
+	[editor setAutoresizingMask:NSViewWidthSizable];
+	
+	[editor setMinSize:NSMakeSize(0.0, 16.0)];
+	[editor setMaxSize:NSMakeSize(FLT_MAX, 16.0)];
+	
+	[editor setVerticallyResizable:NO];
+	[editor setHorizontallyResizable:YES];
+	
+	sourcePanelFieldEditor = editor;
+}
+
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[sourcePanelFieldEditor release];
 	
 	// unbind stuff for retain count
 	[browserViewController release];
@@ -535,13 +562,13 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 
 #pragma mark Window Delegate
-/*- (id)windowWillReturnFieldEditor:(NSWindow *)sender toObject:(id)anObject
+- (id)windowWillReturnFieldEditor:(NSWindow *)sender toObject:(id)anObject
 {
 	if([anObject isMemberOfClass:[PASourcePanel class]])
-		return [[[NSTextField alloc] initWithFrame:NSMakeRect(0,0,50,20)] autorelease];
+		return sourcePanelFieldEditor;
 	
 	return nil;
-}*/
+}
 
 
 #pragma mark Notifications
