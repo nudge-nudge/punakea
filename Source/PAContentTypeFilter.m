@@ -45,11 +45,11 @@
 		NSArray *contentValues = [simpleGrouping allKeysForObject:contentType];
 		
 		NSEnumerator *e = [contentValues objectEnumerator];
-		NSString *contentType;
+		NSString *aContentType;
 		
-		while (contentType = [e nextObject])
+		while (aContentType = [e nextObject])
 		{
-			[query addFilter:[NNQueryFilter queryFilterWithAttribute:(NSString*)kMDItemContentType value:contentType]];
+			[query addFilter:[NNQueryFilter queryFilterWithAttribute:(NSString*)kMDItemContentType value:aContentType]];
 		}
 	}
 	return self;

@@ -82,13 +82,20 @@
 	{
 		id object = [inQueue dequeueWithTimeout:0.5];
 		
-		if ([stateLock condition] == NNThreadCanceled)
+		if ([stateLock tryLockWhenCondition:NNThreadRunning])
 		{
-			break;
+			if (object)
+				[self filterObject:object];
+			
+			[stateLock unlock];
 		}
-		else if (object)
+		else
 		{
-			[self filterObject:object];
+			// put the object back from where it was taken
+			[inQueue enqueue:object];
+			
+			// cancel filter
+			break;
 		}
 	}
 	
