@@ -143,7 +143,11 @@
 				toDate = creationDate;
 		}
 		
-		size += [file size];
+		// As we are calcing the file size on disk, each file needs to be of at least 4096 bytes
+		if([file size] < 4096)
+			size += 4096;
+		else
+			size += [file size];
 	}
 
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];	

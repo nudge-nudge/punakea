@@ -8,10 +8,13 @@
 #import "PATaggerItemCell.h"
 #import "PATaggerHeaderCell.h"
 #import "PAThumbnailItem.h"
+#import "PAStatusBar.h"
+
 
 @interface TaggerController : PATagAutocompleteWindowController
 {	
 	IBOutlet NSTableView		*tableView;
+	IBOutlet PAStatusBar		*statusBar;
 	
 	PATaggerItemCell			*fileCell;
 	PATaggerHeaderCell			*headerCell;

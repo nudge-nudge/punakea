@@ -15,9 +15,6 @@
 @interface PATaggerBackgroundView : NSView {
 
 	IBOutlet TaggerController		*controller;
-
-	PAImageButton					*addButton;
-	PAImageButton					*removeButton;
 	
 }
 

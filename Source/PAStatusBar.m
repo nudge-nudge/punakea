@@ -266,6 +266,8 @@
 		
 		current_x += [view frame].size.width + 1.0;
 	}
+	
+	[self setNeedsDisplay:YES];
 }
 
 - (void)reloadData

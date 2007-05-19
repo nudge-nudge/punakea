@@ -41,6 +41,10 @@ adds tag to tagField (use from "outside")
 
 - (void)awakeFromNib
 {	
+	// this keeps the windowcontroller from auto-placing the window
+	// - window is always opened where it was closed
+	[self setShouldCascadeWindows:NO];
+	
 	// autosave name
 	[[self window] setFrameAutosaveName:@"punakea.tagger"];
 	
@@ -56,6 +60,9 @@ adds tag to tagField (use from "outside")
 
 	[[columns objectAtIndex:0] setHeaderCell:headerCell];
 	
+	// Fix column width
+	[[columns objectAtIndex:0] setWidth:[tableView frame].size.width];
+	
 	// token field wrapping
 	[[[self tagField] cell] setWraps:YES];
 	
@@ -65,6 +72,25 @@ adds tag to tagField (use from "outside")
 		   selector:@selector(iconWasGenerated:)
 			   name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
 			 object:nil];
+	
+	// Setup status bar
+	[self setupStatusBar];
+}
+
+- (void)setupStatusBar
+{
+	PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
+	[sbitem setToolTip:@"Add files to tag"];
+	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
+	[sbitem setAction:@selector(addFiles:)];
+	[statusBar addItem:sbitem];
+	
+	sbitem = [PAStatusBarButton statusBarButton];
+	[sbitem setToolTip:@"Remove files from Tagger"];
+	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-minus"]];
+	[sbitem setAction:@selector(removeFiles:)];
+	
+	[statusBar addItem:sbitem];
 }
 
 - (void)dealloc
@@ -144,6 +170,59 @@ adds tag to tagField (use from "outside")
 		
 		row = [selectedRowIndexes indexGreaterThanIndex:row];
 	}
+}
+
+- (void)addFiles:(id)sender
+{
+	// create open panel with the needed settings
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	
+	[openPanel setAllowsMultipleSelection:YES];
+	[openPanel setCanChooseFiles:YES];
+	[openPanel setCanChooseDirectories:NO];
+	[openPanel setCanCreateDirectories:NO];
+	
+	NSString *path = @"~/Desktop";
+	
+	[openPanel beginSheetForDirectory:[path stringByExpandingTildeInPath]
+								 file:nil
+								types:nil
+					   modalForWindow:[self window]
+						modalDelegate:self
+					   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) 
+						  contextInfo:NULL];
+}
+
+- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+{
+	if(returnCode != NSOKButton) return;
+	
+	NSMutableArray *results = [NSMutableArray array];
+	
+	NSEnumerator *e = [[panel filenames] objectEnumerator];
+	NSString *filename;
+	
+	while(filename = [e nextObject])
+	{
+		NNFile *file = [NNFile fileWithPath:filename];
+		
+		if (![items containsObject:file])
+		{
+			[results addObject:file];
+		}
+	}
+	
+	[self addTaggableObjects:results];
+}
+
+- (void)removeFiles:(id)sender
+{
+	[items removeObjectsAtIndexes:[tableView selectedRowIndexes]];
+	
+	[tableView deselectAll:tableView];
+		
+	[self updateTags];
+	[tableView reloadData];
 }
 
 
@@ -328,58 +407,6 @@ adds tag to tagField (use from "outside")
 	[self addTaggableObjects:results];
 	
 	return YES;
-}
-
-
-#pragma mark Background View delegate
-- (void)addButtonClicked:(id)sender
-{
-	// create open panel with the needed settings
-	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
-	
-	[openPanel setAllowsMultipleSelection:YES];
-	[openPanel setCanChooseFiles:YES];
-	[openPanel setCanChooseDirectories:NO];
-	[openPanel setCanCreateDirectories:NO];
-	
-	NSString *path = @"~/Desktop";
-	
-	[openPanel beginSheetForDirectory:[path stringByExpandingTildeInPath]
-								   file:nil
-								  types:nil
-						 modalForWindow:[self window]
-						  modalDelegate:self
-						 didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) 
-							contextInfo:NULL];
-}
-
-- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
-{
-	if(returnCode != NSOKButton) return;
-	
-	NSMutableArray *results = [NSMutableArray array];
-	
-	NSEnumerator *e = [[panel filenames] objectEnumerator];
-	NSString *filename;
-	
-	while(filename = [e nextObject])
-	{
-		NNFile *file = [NNFile fileWithPath:filename];
-	
-		if (![items containsObject:file])
-		{
-			[results addObject:file];
-		}
-	}
-	
-	[self addTaggableObjects:results];
-}
-
-- (void)removeButtonClicked:(id)sender
-{
-	[items removeObjectsAtIndexes:[tableView selectedRowIndexes]];
-	[self updateTags];
-	[tableView reloadData];
 }
 
 @end
