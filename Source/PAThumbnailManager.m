@@ -379,6 +379,8 @@ static PAThumbnailManager *sharedInstance = nil;
 		[pdfImage setScalesWhenResized:YES];
 		[pdfImage setSize:NSMakeSize(nw,nh)];*/
 		
+		[scratch setFlipped:YES];
+		
 		[scratch lockFocus];
 		[NSGraphicsContext saveGraphicsState];
 		
