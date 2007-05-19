@@ -92,7 +92,8 @@
 		else
 		{
 			// put the object back from where it was taken
-			[inQueue enqueue:object];
+			if (object)
+				[inQueue enqueue:object];
 			
 			// cancel filter
 			break;
