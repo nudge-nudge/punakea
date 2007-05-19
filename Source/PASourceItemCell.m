@@ -55,8 +55,8 @@
 		[fontAttributes setObject:shdw forKey:NSShadowAttributeName];
 		
 		// Draw display name	
-		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[[item displayName] uppercaseString]
-																	attributes:fontAttributes];	
+		NSAttributedString *label = [[[NSAttributedString alloc] initWithString:[[item displayName] uppercaseString]
+																	attributes:fontAttributes] autorelease];	
 		
 		[label drawInRect:NSMakeRect(cellFrame.origin.x,
 									 cellFrame.origin.y + cellFrame.size.height - [label size].height - 3,
@@ -85,8 +85,8 @@
 		[fontAttributes setObject:font forKey:NSFontAttributeName];
 	
 		// Draw display name	
-		NSAttributedString *label = [[NSAttributedString alloc] initWithString:[item displayName]
-																	attributes:fontAttributes];	
+		NSAttributedString *label = [[[NSAttributedString alloc] initWithString:[item displayName]
+																	attributes:fontAttributes] autorelease];	
 		
 		[label drawInRect:NSMakeRect(cellFrame.origin.x,
 									 cellFrame.origin.y + (cellFrame.size.height - [label size].height) / 2,

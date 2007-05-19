@@ -11,6 +11,7 @@
                 infoPaneSingleSelectionView = PAInfoPaneSingleSelectionView; 
                 mainPlaceholderView = NSView; 
                 rightContentView = NSView; 
+                rightStatusBar = PAStatusBar; 
                 sourcePanel = PASourcePanel; 
                 sourcePanelStatusBar = PAStatusBar; 
                 tabPanel = PATabPanel; 

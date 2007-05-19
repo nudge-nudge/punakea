@@ -64,6 +64,38 @@
 	
 	[[NSGraphicsContext currentContext] setShouldAntialias:YES];
 	
+	// Draw stringValue if applicable
+	if(stringValue)
+	{		
+		NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+		[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];			
+		
+		NSColor *color = [NSColor colorWithCalibratedWhite:0.05 alpha:1.0];		
+		
+		NSFont *font = [NSFont systemFontOfSize:11.0];
+		
+		NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
+		[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];	
+		[fontAttributes setObject:color forKey:NSForegroundColorAttributeName];
+		[fontAttributes setObject:font forKey:NSFontAttributeName];
+		
+		NSAttributedString *attrStr = [[[NSAttributedString alloc] initWithString:stringValue
+																	   attributes:fontAttributes] autorelease];
+		
+		NSRect rect = [self frame];
+		rect.size.width -= 30.0;		// We currently support a stringValue only for a statusbar on the right side of a window. Therefore we need some padding for the resize window grip.
+		rect.origin.x = 7.0;
+		rect.origin.y = (rect.size.height - [attrStr size].height) / 2.0;
+		
+		// Set toolip if we cannot draw stringValue completely
+		if([attrStr size].width > rect.size.width)
+			[self setToolTip:stringValue];
+		else
+			[self setToolTip:nil];
+		
+		[attrStr drawInRect:rect];
+	}
+	
 	// Draw grip if applicable
 	if(resizableSplitView)
 	{
@@ -268,6 +300,21 @@
 			[view setNeedsDisplay:YES];
 		}
 	}
+}
+
+- (NSString *)stringValue
+{
+	return stringValue;
+}
+
+- (void)setStringValue:(NSString *)value;
+{
+	[stringValue release];
+	stringValue = [value retain];
+	
+	[self setToolTip:nil];
+	
+	[self setNeedsDisplay:YES];
 }
 
 - (BOOL)isFlipped

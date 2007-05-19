@@ -39,10 +39,13 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 	
 	IBOutlet NSView								*rightContentView;			/**< Contains mainPlaceholderView and a status bar */
 	IBOutlet NSView								*mainPlaceholderView;		/**< Placeholder for the view that BrowserViewController provides */
+	
 	IBOutlet PASplitView						*verticalSplitView;
 	IBOutlet PASplitView						*horizontalSplitView;
 	
+	IBOutlet PAStatusBar						*rightStatusBar;
 	IBOutlet PAStatusBar						*sourcePanelStatusBar;
+	
 	IBOutlet PASourcePanel						*sourcePanel;
 	IBOutlet PATabPanel							*tabPanel;
 	

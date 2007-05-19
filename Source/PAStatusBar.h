@@ -30,6 +30,8 @@
 	
 	NSMutableArray				*items;
 	
+	NSString					*stringValue;
+	
 }
 
 - (void)addItem:(NSView *)anItem;
@@ -39,5 +41,8 @@
 - (void)setDelegate:(id)anObject;
 
 - (void)setAlternateState:(BOOL)flag;
+
+- (NSString *)stringValue;
+- (void)setStringValue:(NSString *)value;
 
 @end

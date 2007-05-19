@@ -566,6 +566,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	NSArray *selectedItems = [[notification userInfo] objectForKey:@"SelectedItems"];
 	
+	// Update Info Pane
 	if([selectedItems count] == 0)
 	{
 		[infoPane selectTabViewItemWithIdentifier:@"PLACEHOLDER"];
@@ -587,6 +588,17 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		[view setFiles:selectedItems];
 		
 		[infoPane selectTabViewItemWithIdentifier:@"MULTIPLE_SELECTION"];
+	}
+	
+	// Update right statusbar to reveal location of the selected file (if applicable)
+	if([selectedItems count] == 1)
+	{
+		NNFile *file = [selectedItems objectAtIndex:0];
+		NSString *path = [[[file path] stringByAbbreviatingWithTildeInPath] stringByDeletingLastPathComponent];
+		
+		[rightStatusBar setStringValue:path];
+	} else {
+		[rightStatusBar setStringValue:nil];
 	}
 }
 
