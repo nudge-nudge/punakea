@@ -249,7 +249,7 @@
 	previousFrame1 = f1;
 	previousFrame2 = f2;	
 
-	[[[self subviews] objectAtIndex:0] setFrame:f1];
+	[[[self subviews] objectAtIndex:0] setFrame:f1];	
 	[[[self subviews] objectAtIndex:1] setFrame:f2];
 	
 	[self adjustSubviews];

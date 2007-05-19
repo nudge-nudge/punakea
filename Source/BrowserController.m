@@ -53,11 +53,12 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	// Initialize browserViewController
 	browserViewController = [[BrowserViewController alloc] init];
-	NSRect mainPlaceholderViewFrame = [mainPlaceholderView frame];
 	[rightContentView replaceSubview:mainPlaceholderView with:[browserViewController view]];
 	
 	// Fix frame of this new view
-	[[browserViewController view] setFrame:mainPlaceholderViewFrame];
+	NSRect rect = [mainPlaceholderView frame];
+	rect.size.width = [[[verticalSplitView subviews] objectAtIndex:1] frame].size.width;
+	[[browserViewController view] setFrame:rect];
 	
 	// insert browserViewController in the responder chain
 	[browserViewController setNextResponder:[self window]];
