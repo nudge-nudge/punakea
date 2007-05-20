@@ -218,6 +218,10 @@
 		6581C3040BDFD51E0001455D /* PAStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6581C3020BDFD51E0001455D /* PAStatusBar.m */; };
 		65823B840A67CCFF0004DC39 /* NSBezierPathCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */; };
 		65823B850A67CCFF0004DC39 /* NSBezierPathCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */; };
+		6582F4160C0069E80016AA2D /* triangle-gray-collapsed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6582F4120C0069E70016AA2D /* triangle-gray-collapsed.tif */; };
+		6582F4180C0069E80016AA2D /* triangle-gray-expanded.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6582F4140C0069E70016AA2D /* triangle-gray-expanded.tif */; };
+		6582F41E0C006AF00016AA2D /* triangle-gray-collapsed-on.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6582F41C0C006AF00016AA2D /* triangle-gray-collapsed-on.tif */; };
+		6582F41F0C006AF00016AA2D /* triangle-gray-expanded-on.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6582F41D0C006AF00016AA2D /* triangle-gray-expanded-on.tif */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
 		6588EE160A07463D00082718 /* MDIconViewOffDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE120A07463D00082718 /* MDIconViewOffDisabled.tiff */; };
@@ -721,6 +725,10 @@
 		6581C3020BDFD51E0001455D /* PAStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBar.m; sourceTree = "<group>"; };
 		65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPathCategory.h; sourceTree = "<group>"; };
 		65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBezierPathCategory.m; sourceTree = "<group>"; };
+		6582F4120C0069E70016AA2D /* triangle-gray-collapsed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "triangle-gray-collapsed.tif"; sourceTree = "<group>"; };
+		6582F4140C0069E70016AA2D /* triangle-gray-expanded.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "triangle-gray-expanded.tif"; sourceTree = "<group>"; };
+		6582F41C0C006AF00016AA2D /* triangle-gray-collapsed-on.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "triangle-gray-collapsed-on.tif"; sourceTree = "<group>"; };
+		6582F41D0C006AF00016AA2D /* triangle-gray-expanded-on.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "triangle-gray-expanded-on.tif"; sourceTree = "<group>"; };
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
 		6588EE120A07463D00082718 /* MDIconViewOffDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDIconViewOffDisabled.tiff; sourceTree = "<group>"; };
@@ -1703,6 +1711,10 @@
 		65CB0A0D0BBBD4E200799E25 /* Source Panel */ = {
 			isa = PBXGroup;
 			children = (
+				6582F4120C0069E70016AA2D /* triangle-gray-collapsed.tif */,
+				6582F41C0C006AF00016AA2D /* triangle-gray-collapsed-on.tif */,
+				6582F4140C0069E70016AA2D /* triangle-gray-expanded.tif */,
+				6582F41D0C006AF00016AA2D /* triangle-gray-expanded-on.tif */,
 				65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */,
 			);
 			name = "Source Panel";
@@ -2117,6 +2129,10 @@
 				655540F30BF1EEA200D3AF8E /* Menus.strings in Resources */,
 				655541B20BF1F9C800D3AF8E /* statusbar-button-info-on.tif in Resources */,
 				65CF5E4E0BFF1A57006F7B2D /* statusbar-button-minus.pdf in Resources */,
+				6582F4160C0069E80016AA2D /* triangle-gray-collapsed.tif in Resources */,
+				6582F4180C0069E80016AA2D /* triangle-gray-expanded.tif in Resources */,
+				6582F41E0C006AF00016AA2D /* triangle-gray-collapsed-on.tif in Resources */,
+				6582F41F0C006AF00016AA2D /* triangle-gray-expanded-on.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

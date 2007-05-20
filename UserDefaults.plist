@@ -42,6 +42,11 @@
 			</array>
 		</dict>
 	</dict>
+	<key>SourcePanel</key>
+	<dict>
+		<key>ExpandedItems</key>
+		<array/>
+	</dict>
 	<key>SUScheduledCheckInterval</key>
 	<integer>86400</integer>
 	<key>TagCloud.ClickCountWeight</key>

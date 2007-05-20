@@ -19,6 +19,7 @@
 		// Define Source Items
 		items = [[NSMutableArray alloc] init];
 		
+		// Group: Library
 		PASourceItem *sourceGroup = [PASourceItem itemWithValue:@"LIBRARY" displayName:@"LIBRARY"];
 		[sourceGroup setSelectable:NO];
 		[sourceGroup setHeading:YES];
@@ -26,12 +27,34 @@
 		PASourceItem *sourceItem = [PASourceItem itemWithValue:@"ALL_ITEMS" displayName:@"All Items"];
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
+		
+		PASourceItem *fileKindItem = [PASourceItem itemWithValue:@"DOCUMENTS" displayName:
+			NSLocalizedStringFromTable(@"DOCUMENTS", @"MDSimpleGrouping", nil)];
+		[fileKindItem setEditable:NO];
+		[sourceItem addChild:fileKindItem];
+
+		fileKindItem = [PASourceItem itemWithValue:@"IMAGES" displayName:
+			NSLocalizedStringFromTable(@"IMAGES", @"MDSimpleGrouping", nil)];
+		[fileKindItem setEditable:NO];
+		[sourceItem addChild:fileKindItem];
+		
+		fileKindItem = [PASourceItem itemWithValue:@"PDF" displayName:
+			NSLocalizedStringFromTable(@"PDF", @"MDSimpleGrouping", nil)];
+		[fileKindItem setEditable:NO];
+		[sourceItem addChild:fileKindItem];
+		
+		fileKindItem = [PASourceItem itemWithValue:@"BOOKMARKS" displayName:
+			NSLocalizedStringFromTable(@"BOOKMARKS", @"MDSimpleGrouping", nil)];
+		[fileKindItem setEditable:NO];
+		[sourceItem addChild:fileKindItem];
+		
 		sourceItem = [PASourceItem itemWithValue:@"MANAGE_TAGS" displayName:@"Manage Tags"];
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
 		
 		[items addObject:sourceGroup];
 		
+		// Group Favorites
 		sourceItem = [PASourceItem itemWithValue:@"FAVORITES" displayName:@"Favorites"];
 		[sourceItem setSelectable:NO];
 		[sourceItem setHeading:YES];
@@ -136,6 +159,10 @@
 	{
 		[[[NSApplication sharedApplication] delegate] searchForTags:[[sourceItem containedObject] tags]];
 	}
+	else if([[sourceItem value] isEqualTo:@"DOCUMENTS"])
+	{
+		NSLog(@"apply filter for documents");
+	}
 }
 
 - (id)tableColumn:(NSTableColumn *)column
@@ -168,8 +195,7 @@
                     item:(id)item
 {
 	// Hide default triangle
-	[cell setImage:[NSImage imageNamed:@"transparent"]];
-	[cell setAlternateImage:[NSImage imageNamed:@"transparent"]];
+	[cell setImagePosition:NSNoImage];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)ov shouldCollapseItem:(id)item
@@ -482,6 +508,42 @@
 {
 	[[[[NSApplication sharedApplication] delegate] browserController] editTagSet:sourcePanel];
 }
+
+- (void)triangleClicked:(id)sender
+{
+	NSDictionary *tag = (NSDictionary *)[sender tag];
+	NSString *value = [tag objectForKey:@"value"];
+	
+	PASourceItem *item = [sourcePanel itemWithValue:value];
+	
+	if([sourcePanel isItemExpanded:item])
+	{
+		// Just toggle the item's state
+		[sourcePanel collapseItem:item];
+	} else {
+		// If we expand an item, we need to redraw all previously visible rows so that they
+		// can correctly (re-)move their subviews
+		// NOTE: This is not necessary at the moment, as we have only one single triangle by now
+		[sourcePanel expandItem:item];
+	}
+	
+	// Save userDefaults
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *sourcePanelDict = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"SourcePanel"]];
+	NSMutableArray *expandedItems = [NSMutableArray arrayWithArray:(NSArray *)[sourcePanelDict objectForKey:@"ExpandedItems"]];
+	
+	if([sourcePanel isItemExpanded:item])
+		[expandedItems addObject:[item value]];
+	else
+		[expandedItems removeObject:[item value]];
+	
+	[sourcePanelDict setObject:expandedItems forKey:@"ExpandedItems"];		
+	[defaults setObject:sourcePanelDict forKey:@"SourcePanel"];
+	
+	// Make source panel the first responder
+	[[sourcePanel window] makeFirstResponder:sourcePanel];
+}
+
 
 
 #pragma mark Accessors

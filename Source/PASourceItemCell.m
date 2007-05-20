@@ -30,7 +30,85 @@
 
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{			
+{		 
+	// Draw a triangle for ALL_ITEMS - hardcoded value, as we'll update this workaround later on	
+	if([[item value] isEqualTo:@"ALL_ITEMS"])
+	{	
+		// Check if triangle already exists in controlView
+		// References are not kept because cells are autoreleased
+		NSEnumerator *enumerator = [[controlView subviews] objectEnumerator];
+		id anObject;
+		PAImageButton *triangle = nil;
+		
+		while(anObject = [enumerator nextObject])
+		{
+			if([anObject isKindOfClass:[PAImageButton class]])
+			{
+				NSDictionary *tag = [(PAImageButton *)anObject tag];
+				if([[tag objectForKey:@"value"] isEqualTo:[item value]])
+				{
+					triangle = anObject;
+				}
+			}
+		}
+		
+		NSRect triangleRect = NSMakeRect(cellFrame.origin.x - 16, cellFrame.origin.y + 2, 16, 16);
+		
+		// Add triangle if neccessary
+		if([triangle superview] != controlView)
+		{
+			triangle = [[[PAImageButton alloc] initWithFrame:triangleRect] autorelease];
+			[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"] forState:PAOffState];
+			[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite"] forState:PAOnState];
+			[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite_Pressed"] forState:PAOnHighlightedState];
+			[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];		
+			
+			[triangle setButtonType:PASwitchButton];
+			[triangle setState:PAOnState];
+			[triangle setAction:@selector(triangleClicked:)];
+			[triangle setTarget:[[self controlView] delegate]];
+			
+			// Add references to PAImageButton's tag for later usage
+			NSMutableDictionary *tag = [triangle tag];
+			[tag setObject:[item value] forKey:@"value"];
+			
+			[controlView addSubview:triangle];  
+			
+			// needs to be set after adding as subview
+			[[triangle cell] setShowsBorderOnlyWhileMouseInside:YES];
+		} else {
+			[triangle setFrame:triangleRect];
+		}
+		
+		// Change images on highlight and deselect
+		if(![self isHighlighted])
+		{
+			[triangle setImage:[NSImage imageNamed:@"triangle-gray-collapsed"] forState:PAOffState];
+			[triangle setImage:[NSImage imageNamed:@"triangle-gray-expanded"] forState:PAOnState];
+			[triangle setImage:[NSImage imageNamed:@"triangle-gray-expanded-on"] forState:PAOnHighlightedState];
+			[triangle setImage:[NSImage imageNamed:@"triangle-gray-collapsed-on"] forState:PAOffHighlightedState];		
+		}
+		else
+		{
+			[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite"] forState:PAOffState];
+			[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite"] forState:PAOnState];
+			[triangle setImage:[NSImage imageNamed:@"ExpandedTriangleWhite_Pressed"] forState:PAOnHighlightedState];
+			[triangle setImage:[NSImage imageNamed:@"CollapsedTriangleWhite_Pressed"] forState:PAOffHighlightedState];		
+		}
+		
+		// Does triangle's current state match the cell's state?	
+		if([triangle state] != PAOnHoveredState &&
+		   [triangle state] != PAOffHoveredState &&
+		   [triangle state] != PAOnHighlightedState &&
+		   [triangle state] != PAOffHighlightedState)
+		{
+			if([(NSOutlineView *)[triangle superview] isItemExpanded:item])
+				[triangle setState:PAOnState];
+			else
+				[triangle setState:PAOffState];
+		}
+	}
+	
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	

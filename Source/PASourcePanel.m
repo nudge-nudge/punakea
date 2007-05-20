@@ -23,6 +23,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)awakeFromNib
 {
+	[self setIndentationPerLevel:8.0];
 	[self setIntercellSpacing:NSZeroSize];
 	
 	[self registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
@@ -245,9 +246,18 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	NSRect rect = [super frameOfCellAtColumn:column row:row];
 	
-	// Skip half indentation for level 0 and shift other levels one half #up
-	rect.origin.x -= [self indentationPerLevel] / 2;
-	rect.size.width += [self indentationPerLevel] / 2;
+	// Add one more indentation per level except for level 0
+	// NOTE: If we want to shift our levels up or down, make indentationPerLevel less than the value
+	// that we want it to be and shift them up/down in frameOfCellAtColumn. This causes the triangle
+	// not to be drawn above our cell. Clicking on the cell's content would cause it to
+	// expand/collapse otherwise.
+	
+	int level = [self levelForRow:row];
+	if(level > 0)
+	{
+		rect.origin.x += level * [self indentationPerLevel];
+		rect.size.width -= level * [self indentationPerLevel];
+	}
 	
 	return rect;
 }
@@ -270,14 +280,28 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	[super reloadData];
 	
-	// Expand all items and select first selectable item
+	// Expand all items except ALL_ITEMS (hardcoded for now) and select first selectable item
 	BOOL selectableItemFound = NO;
 	
 	for(int row = 0; row < [self numberOfRows]; row++)
 	{
 		id item = [self itemAtRow:row];
-		[self expandItem:item expandChildren:YES];
 		
+		if([self isExpandable:item])
+		{
+			if([[item value] isEqualTo:@"ALL_ITEMS"])
+			{
+				// Check User Defaults for state
+				NSDictionary *dict = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"SourcePanel"];
+				NSArray *expandedItems = [dict objectForKey:@"ExpandedItems"];
+				if([expandedItems containsObject:@"ALL_ITEMS"])
+					[self expandItem:item expandChildren:NO];
+			} else {
+				// Just expand the item
+				[self expandItem:item expandChildren:NO];
+			}
+		}
+			
 		if([self selectedRow] == 0 &&
 		   !selectableItemFound &&
 		   [(PASourceItem *)item isSelectable])

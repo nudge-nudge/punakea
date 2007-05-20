@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PASourceItem.h"
 #import "NNTagging/NNTag.h"
+#import "PAImageButton.h"
 
 
 @interface PASourceItemCell : NSTextFieldCell {
