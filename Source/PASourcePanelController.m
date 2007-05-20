@@ -520,6 +520,10 @@
 	{
 		// Just toggle the item's state
 		[sourcePanel collapseItem:item];
+		
+		// Select ALL ITEMS if no selection
+		if([[sourcePanel selectedRowIndexes] count] == 0)
+			[sourcePanel selectItemWithValue:@"ALL_ITEMS"];
 	} else {
 		// If we expand an item, we need to redraw all previously visible rows so that they
 		// can correctly (re-)move their subviews
