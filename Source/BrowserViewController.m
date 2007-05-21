@@ -334,16 +334,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[mainController handleTagActivation:tag];
 }
 
-- (IBAction)findFieldAction:(id)sender
-{
-	PATagButton *button = [tagCloud activeButton];
-	
-	if (button)
-	{
-		[self tagButtonClicked:button];
-	}
-}
-
 #pragma mark typeAheadFind
 - (void)resetSearchFieldString
 {
