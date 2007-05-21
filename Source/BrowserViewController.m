@@ -597,6 +597,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)reset
 {
+	[self setSearchFieldString:@""];
 	[self showResults];
 	[mainController reset];
 }

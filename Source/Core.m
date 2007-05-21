@@ -385,7 +385,7 @@
 - (IBAction)goHome:(id)sender
 {
 	[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
-	[[[browserController browserViewController] mainController] reset];
+	[[browserController browserViewController] reset];
 	//[[browserController window] makeFirstResponder:[browserController sourcePanel]];
 }
 
