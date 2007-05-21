@@ -61,7 +61,7 @@ should be overridden according to apple docs
 	if([[sender draggingSource] isMemberOfClass:[self class]])
 		return NSDragOperationNone;
 		
-	NSDragOperation dragOp =  [dropManager performedDragOperation:[sender draggingPasteboard]];
+	NSDragOperation dragOp = [dropManager performedDragOperation:[sender draggingPasteboard]];
 	
 	if (dragOp != NSDragOperationNone)
 	{
@@ -89,7 +89,42 @@ should be overridden according to apple docs
 	[self setNeedsDisplay];
 	
 	NSArray *objects = [dropManager handleDrop:[sender draggingPasteboard]];
+	
+	// If dropManager is in alternateState, set manageFiles flag on each object
+	
+	BOOL alternateState = [dropManager alternateState];
+	
+	if(alternateState)
+	{		
+		NSEnumerator *e = [objects objectEnumerator];
+		NNTaggableObject *object;
+		
+		while(object = [e nextObject])
+		{
+			BOOL theDefault = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+			
+			if([[object tags] count] > 0)
+			{
+				BOOL newFlag = !theDefault;
+				[object setShouldManageFiles:newFlag];
+			}
+		}
+	}
+	
+	// Perform operation addTag:
 	[objects makeObjectsPerformSelector:@selector(addTag:) withObject:[self genericTag]];
+	
+	// Now switch back to automatic management 
+	if(alternateState)
+	{		
+		NSEnumerator *e = [objects objectEnumerator];
+		NNTaggableObject *object;
+		
+		while(object = [e nextObject])
+		{	
+			[object setShouldManageFilesAutomatically:YES];
+		}
+	}
 }
 
 

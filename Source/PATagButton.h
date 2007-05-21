@@ -2,6 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNTag.h"
+#import "NNTagging/NNTaggableObject.h"
 #import "PAButton.h"
 #import "PATagButtonCell.h"
 #import "PADropManager.h"

@@ -24,6 +24,7 @@
 #import "PAInfoPaneSubview.h"
 #import "PAInfoPaneSingleSelectionView.h"
 #import "PAInfoPaneMultipleSelectionView.h"
+#import "PADropManager.h"
 
 
 extern NSString * const FILENAME_FAVORITES_PLIST;

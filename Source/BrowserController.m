@@ -178,10 +178,13 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 #pragma mark Events
 - (void)flagsChanged:(NSEvent *)theEvent
 {
-	if ([theEvent modifierFlags] & NSAlternateKeyMask) {
+	if ([theEvent modifierFlags] & NSAlternateKeyMask)
+	{
 		[sourcePanelStatusBar setAlternateState:YES];
+		[[PADropManager sharedInstance] setAlternateState:YES];
 	} else {
 		[sourcePanelStatusBar setAlternateState:NO];
+		[[PADropManager sharedInstance] setAlternateState:NO];
 	}
 }
 

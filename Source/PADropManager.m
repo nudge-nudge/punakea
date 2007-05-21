@@ -106,6 +106,15 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 			op = [dropHandler performedDragOperation:pasteboard];
 	}
 	
+	// If self is in alternate state, toggle performed drag operation
+	if([self alternateState])
+	{
+		if(op == NSDragOperationCopy)
+			op = NSDragOperationMove;
+		else if(op == NSDragOperationMove || op == NSDragOperationGeneric)
+			op = NSDragOperationCopy;
+	}
+	
 	return op;
 }
 
@@ -228,6 +237,18 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 
 - (id)autorelease {
     return self;
+}
+
+
+#pragma mark Accessors
+- (BOOL)alternateState
+{
+	return alternateState;
+}
+
+- (void)setAlternateState:(BOOL)flag
+{
+	alternateState = flag;
 }
 
 @end

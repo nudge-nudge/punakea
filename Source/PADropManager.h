@@ -17,7 +17,11 @@ this singleton class handles all drops from the outside.
  */
  
 @interface PADropManager : NSObject {
-	NSMutableArray *dropHandlers;
+	
+	NSMutableArray					*dropHandlers;
+	
+	BOOL							alternateState;
+	
 }
 
 /**
@@ -50,5 +54,8 @@ determines the NSDragOperation which will be performed on the
  @return NSDragOperation which will be performed on drop
  */
 - (NSDragOperation)performedDragOperation:(NSPasteboard*)pasteboard;
+
+- (BOOL)alternateState;
+- (void)setAlternateState:(BOOL)flag;
 
 @end
