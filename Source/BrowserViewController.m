@@ -19,7 +19,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (NSMutableArray*)visibleTags;
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
-- (void)emptyVisibleTags;
+- (void)clearVisibleTags;
 
 - (NNTag*)currentBestTag;
 - (void)setCurrentBestTag:(NNTag*)otherTag;
@@ -83,6 +83,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 												 selector:@selector(tagsHaveChanged:) 
 													 name:NNTagsHaveChangedNotification
 												   object:tags];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(contentTypeFilterUpdate:)
+													 name:PAContentTypeFilterUpdate
+												   object:nil];
 		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
 		
@@ -243,7 +248,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[tagCloud reloadData];
 }
 
-- (void)emptyVisibleTags
+- (void)clearVisibleTags
 {
 	[visibleTags release];
 	visibleTags = [[NSMutableArray alloc] init];
@@ -255,7 +260,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	NSLog(@"setting display tags: %@",someTags);
 	
 	// empty visibleTags
-	[self emptyVisibleTags];
+	[self clearVisibleTags];
 	
 	// start filtering
 	[self filterTags:someTags];
@@ -295,6 +300,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setActiveContentTypeFilters:(NSArray*)filters
 {
+	[self clearVisibleTags];
+	
 	[filters retain];
 	[activeContentTypeFilters release];
 	activeContentTypeFilters = filters;
@@ -407,7 +414,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)searchFieldStringHasChanged
 {
-	[self emptyVisibleTags];
+	[self clearVisibleTags];
 	
 	// if searchFieldString has any content, display tags with corresponding prefix
 	// else display all tags
@@ -455,6 +462,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
+- (void)contentTypeFilterUpdate:(NSNotification*)notification
+{
+	NSString *contentType = [[notification userInfo] objectForKey:@"contentType"];
+	PAContentTypeFilter *filter = [PAContentTypeFilter filterWithContentType:contentType];
+	[self setActiveContentTypeFilters:[NSArray arrayWithObject:filter]];
+}
+
 - (void)controlledViewHasChanged
 {	
 	// resize controlledView to content subview
@@ -478,9 +492,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[self setupFilterEngine];
 	[self setDisplayTags:[tags tags]];
-	
-	// TODO TEMP
-	//[self addContentTypeFilter:[[[PAContentTypeFilter alloc] initWithContentType:@"PDF"] autorelease]];
 }
 
 - (void)setupFilterEngine
@@ -512,7 +523,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)objectsFiltered
 {
 	[filterEngine lockFilteredObjects];
-	NSLog(@"filtered: %@",[filterEngine filteredObjects]);
+	//NSLog(@"filtered: %@",[filterEngine filteredObjects]);
 	[self setVisibleTags:[filterEngine filteredObjects]];
 	[filterEngine unlockFilteredObjects];
 }
@@ -547,7 +558,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 				 !filterEngineIsWorking && 
 				 ![mainController isWorking])
 		{
+			// searchstring stuff
 			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_SEARCHSTRING",@"Tags",@"")];
+		}
+		else if ([activeContentTypeFilters count] > 0)
+		{
+			// no items found for content type
+			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_CONTENTTYPE",@"Tags",@"")];
 		}
 	}
 	else

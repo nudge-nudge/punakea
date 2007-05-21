@@ -49,7 +49,7 @@
 		
 		while (aContentType = [e nextObject])
 		{
-			[query addFilter:[NNQueryFilter queryFilterWithAttribute:(NSString*)kMDItemContentType value:aContentType]];
+			[query addFilter:[NNQueryFilter queryFilterWithAttribute:@"kMDItemContentTypeTree" value:aContentType]];
 		}
 	}
 	return self;
@@ -63,6 +63,12 @@
 	[selectedTags release];
 	[contentType release];
 	[super dealloc];
+}
+
++ (PAContentTypeFilter*)filterWithContentType:(NSString*)type
+{
+	PAContentTypeFilter* filter = [[PAContentTypeFilter alloc] initWithContentType:type];
+	return [filter autorelease];
 }
 
 #pragma mark accessors
@@ -107,6 +113,8 @@
 	
 	if (result & PACacheIsValid)
 	{
+		NSLog(@".");
+		
 		if (result & PACacheSatisfiesRequest)
 		{
 			// cache was valid and object is good to go			

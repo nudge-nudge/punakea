@@ -16,6 +16,8 @@
 #import "NNTagging/NNSelectedTags.h"
 #import "PASmartFolder.h"
 
+extern NSString * const PAContentTypeFilterUpdate;
+
 
 @interface PASourcePanelController : NSObject {
 

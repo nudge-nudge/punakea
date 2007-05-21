@@ -8,6 +8,7 @@
 
 #import "PASourcePanelController.h"
 
+NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 
 @implementation PASourcePanelController
 
@@ -149,6 +150,7 @@
 	// Perform actions
 	if([[sourceItem value] isEqualTo:@"ALL_ITEMS"])
 	{
+		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] setActiveContentTypeFilters:[NSArray array]];
 		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] showResults];
 	}
 	else if([[sourceItem value] isEqualTo:@"MANAGE_TAGS"])
@@ -159,9 +161,19 @@
 	{
 		[[[NSApplication sharedApplication] delegate] searchForTags:[[sourceItem containedObject] tags]];
 	}
-	else if([[sourceItem value] isEqualTo:@"DOCUMENTS"])
+	else
 	{
-		NSLog(@"apply filter for documents");
+		// the sourceItem is a contenttypefilter
+		NSString *contentType = [sourceItem value];
+		
+		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+		[nc postNotificationName:PAContentTypeFilterUpdate
+						  object:self
+						userInfo:[NSDictionary dictionaryWithObject:contentType
+															 forKey:@"contentType"]];
+		
+		
+		NSLog(@"apply filter for %@",contentType);
 	}
 }
 

@@ -28,6 +28,8 @@
 	PATagCache *tagCache;
 }
 
++ (PAContentTypeFilter*)filterWithContentType:(NSString*)type;
+
 - (id)initWithContentType:(NSString*)type;
 - (NSString*)contentType;
 

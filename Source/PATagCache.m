@@ -75,6 +75,8 @@ static PATagCache *sharedInstance = nil;
 
 - (void)updateCacheForTag:(NNTag*)tag setFiletype:(NSString*)filetype toValue:(BOOL)hasFiletype;
 {
+	NSLog(@"update: %@ for %@ to %i",tag,filetype,hasFiletype);
+	
 	PATagCacheEntry *entry = [cache objectForKey:[tag name]];
 	
 	if (entry)

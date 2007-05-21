@@ -280,14 +280,14 @@
 		[query startQuery];
 		
 		// empty display tags until new related tags are found
-		if ([delegate respondsToSelector:@selector(emptyVisibleTags)])
+		if ([delegate respondsToSelector:@selector(clearVisibleTags)])
 		{
-			[delegate emptyVisibleTags];
+			[delegate clearVisibleTags];
 		}
 		else
 		{
 			[NSException raise:NSInternalInconsistencyException
-						format:@"delegate does not implement emptyVisibleTags"];
+						format:@"delegate does not implement clearVisibleTags"];
 		}
 	}
 	else 

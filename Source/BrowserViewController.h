@@ -17,6 +17,8 @@
 #import "TaggerController.h"
 #import "PASplitView.h"
 
+#import "PASourcePanelController.h"
+
 #import "NNFilterEngine.h"
 #import "PAStringPrefixFilter.h"
 #import "PAContentTypeFilter.h"

@@ -210,7 +210,7 @@
 	NNQueue *inBuffer = [buffers objectAtIndex:0];
 	[inBuffer enqueueObjects:[self filterObjects]];
 	
-	NSLog(@"filterEngine started with filterObjects: %@\ninBuffer: %@\nfilters: %@",[self filterObjects],inBuffer,filters);
+	//NSLog(@"filterEngine started with filterObjects: %@\ninBuffer: %@\nfilters: %@",[self filterObjects],inBuffer,filters);
 	
 	NNObjectFilter *filter;
 	NSEnumerator *e = [filters objectEnumerator];
