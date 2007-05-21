@@ -698,7 +698,42 @@
 	NSArray *objects = [dropManager handleDrop:[info draggingPasteboard]];
 	NSArray *tagArray = [selectedTags selectedTags];
 	
+	// If dropManager is in alternateState, set manageFiles flag on each object
+	
+	BOOL alternateState = [dropManager alternateState];
+	
+	if(alternateState)
+	{		
+		NSEnumerator *e = [objects objectEnumerator];
+		NNTaggableObject *object;
+		
+		while(object = [e nextObject])
+		{
+			BOOL theDefault = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+			
+			if([[object tags] count] > 0)
+			{
+				BOOL newFlag = !theDefault;
+				[object setShouldManageFiles:newFlag];
+			}
+		}
+	}
+	
+	// Perform action addTags:
 	[objects makeObjectsPerformSelector:@selector(addTags:) withObject:tagArray];
+	
+	// Now switch back to automatic management 
+	if(alternateState)
+	{		
+		NSEnumerator *e = [objects objectEnumerator];
+		NNTaggableObject *object;
+		
+		while(object = [e nextObject])
+		{	
+			[object setShouldManageFilesAutomatically:YES];
+		}
+	}
+	
     return YES;    
 }
 
