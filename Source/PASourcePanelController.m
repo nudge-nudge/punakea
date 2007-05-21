@@ -143,9 +143,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 {
 	NSOutlineView *ov = (NSOutlineView *)[notification object];
 	
-	id item = [ov itemAtRow:[ov selectedRow]];
-	
-	PASourceItem *sourceItem = (PASourceItem *)item;
+	PASourceItem *sourceItem = (PASourceItem *)[ov itemAtRow:[ov selectedRow]];
 		
 	// Perform actions
 	if([[sourceItem value] isEqualTo:@"ALL_ITEMS"])
