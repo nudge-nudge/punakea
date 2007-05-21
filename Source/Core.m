@@ -91,6 +91,9 @@
 			 context:NULL];
 	
 	[self createManagedFilesDirIfNeeded];
+	
+	// TODO DEBUG
+	//[[PANotificationReceiver alloc] init];
 }
 
 - (void)dealloc

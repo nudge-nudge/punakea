@@ -1078,6 +1078,7 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
 				48EDB82A0BF5A660008452FF /* TagFilter */,
 				480C40430BF4482700C90B2C /* TagCache */,
 				48D758F00B01CD0900D13CAD /* App Starter */,
@@ -1402,7 +1403,6 @@
 				65C8A1FB0BEB4D3000DC032F /* Controllers */,
 				65CC15530BE0A5B800866AF7 /* Controls */,
 				483272220AA42C7E003D98A6 /* Preferences */,
-				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
 			);
 			name = Common;
 			sourceTree = "<group>";

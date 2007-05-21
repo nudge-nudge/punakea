@@ -199,7 +199,7 @@ static PAThumbnailManager *sharedInstance = nil;
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
 	// TODO DEBUG not threadsafe?
-	//[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
+	[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
 }
 
 - (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds
