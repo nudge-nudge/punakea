@@ -72,6 +72,12 @@ should be overridden according to apple docs
 	return dragOp;
 }
 
+- (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
+{
+	// Make sure we are show the latest drag operation - flags may have been changed
+	return [dropManager performedDragOperation:[sender draggingPasteboard]];
+}
+
 - (void)draggingExited:(id <NSDraggingInfo>)sender
 {
 	[[self cell] setHovered:NO];

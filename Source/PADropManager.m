@@ -109,10 +109,10 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 	// If self is in alternate state, toggle performed drag operation
 	if([self alternateState])
 	{
-		if(op == NSDragOperationCopy)
+		if(op == NSDragOperationMove)
+			op = NSDragOperationLink;
+		else if(op == NSDragOperationLink)
 			op = NSDragOperationMove;
-		else if(op == NSDragOperationMove || op == NSDragOperationGeneric)
-			op = NSDragOperationCopy;
 	}
 	
 	return op;

@@ -22,7 +22,7 @@
 	if ([self shouldManageFiles])
 		return NSDragOperationMove;
 	else
-		return NSDragOperationGeneric;
+		return NSDragOperationLink;
 }
 
 @end
