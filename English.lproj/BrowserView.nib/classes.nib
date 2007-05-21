@@ -7,10 +7,8 @@
             OUTLETS = {
                 activityIndicator = NSProgressIndicator; 
                 controlledView = NSView; 
-                searchField = NSSearchField; 
                 splitView = PASplitView; 
                 tagCloud = PATagCloud; 
-                typeAheadView = PATypeAheadView; 
             }; 
             SUPERCLASS = PAViewController; 
         }, 

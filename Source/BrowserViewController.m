@@ -104,7 +104,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[splitView setAutosaveName:@"PASplitView Configuration BrowserSplitView" defaults:@"0 0 200 200 0 0 0 200 200 0"];
 	
-	[searchField setEditable:NO];
 	[self showResults];
 	[[[self view] window] setInitialFirstResponder:tagCloud];
 }	
@@ -346,28 +345,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark typeAheadFind
-- (void)showTypeAheadView
-{
-	float height = NSHeight([typeAheadView frame]);
-	NSScrollView *sv = [tagCloud enclosingScrollView];
-	// placed above
-	[sv setFrame:NSMakeRect(0,NSMinY([sv frame]),NSWidth([sv frame]),NSHeight([sv frame])-height)];
-	[tagCloud setNeedsDisplay:YES];
-	
-	[typeAheadView setHidden:NO];
-}
-
-- (void)hideTypeAheadView
-{
-	float height = NSHeight([typeAheadView frame]);
-	NSScrollView *sv = [tagCloud enclosingScrollView];
-	// placed above
-	[sv setFrame:NSMakeRect(0,NSMinY([sv frame]),NSWidth([sv frame]),NSHeight([sv frame])+height)];
-	[tagCloud setNeedsDisplay:YES];
-	
-	[typeAheadView setHidden:YES];	
-}
-
 - (void)resetSearchFieldString
 {
 	[self setSearchFieldString:@""];
@@ -628,7 +605,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[self removeObserver:tagCloud forKeyPath:@"visibleTags"];
 	[self removeObserver:self forKeyPath:@"searchFieldString"];
-	[searchField unbind:@"value"];
 }
 
 - (void)makeControlledViewFirstResponder

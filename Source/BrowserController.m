@@ -69,6 +69,12 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[self setupTabPanel];
 	[self setupFieldEditor];
 	
+	// bind search field to bvc searchFieldString
+	[searchField bind:@"value"
+			 toObject:browserViewController
+		  withKeyPath:@"searchFieldString"
+			  options:nil];
+	
 	// Register for notifications
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
@@ -165,6 +171,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 - (void)dealloc
 {
+	[searchField unbind:@"value"];
+	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[sourcePanelFieldEditor release];
@@ -280,9 +288,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 - (void)search:(id)sender
 {
-	NSSearchField *searchField = sender;
-	
-	[browserViewController setSearchFieldString:[searchField stringValue]];
+	// TODO why is this needed to make the tagcloud the next responder on pressing enter in searchField?
+	return;
 }
 
 - (IBAction)editTagSet:(id)sender
@@ -478,7 +485,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	}
 	else if([itemIdentifier isEqualTo:@"Search"])
 	{
-		NSSearchField *searchField = [[[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)] autorelease];
+		searchField = [[[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)] autorelease];
 		[[searchField cell] setSendsSearchStringImmediately:YES];
 		[searchField setDelegate:self];
 		

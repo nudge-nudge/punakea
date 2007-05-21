@@ -56,6 +56,8 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 	IBOutlet NSView								*infoPanePlaceholderView;
 	IBOutlet PAInfoPaneSingleSelectionView		*infoPaneSingleSelectionView;
 	IBOutlet PAInfoPaneMultipleSelectionView	*infoPaneMultipleSelectionView;
+	
+	NSSearchField								*searchField;
 
 }
 
