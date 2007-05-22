@@ -563,6 +563,8 @@
 	[[browserController window] runToolbarCustomizationPalette:sender];
 }
 
+
+#pragma mark Misc
 - (IBAction)searchForTag:(NNTag*)aTag
 {
 	[[browserController browserViewController] searchForTag:aTag];

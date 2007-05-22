@@ -172,7 +172,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 															 forKey:@"contentType"]];
 		
 		
-		NSLog(@"apply filter for %@",contentType);
+		NSLog(@"filter: %@", contentType);
 	}
 }
 

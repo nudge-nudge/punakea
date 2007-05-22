@@ -408,6 +408,19 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
+- (void)controlledViewHasChanged
+{	
+	// resize controlledView to content subview
+	NSView *subview = [[controlledView subviews] objectAtIndex:0];
+	NSRect subviewFrame = [subview frame];
+	NSRect oldFrame = [controlledView frame];
+	[subview setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,oldFrame.size.height)];
+	[controlledView setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,subviewFrame.size.height)];
+	[splitView adjustSubviews];
+}
+
+
+#pragma mark Notifications
 - (void)tagsHaveChanged:(NSNotification*)notification
 {
 	NSString *changeOperation = [[notification userInfo] objectForKey:NNTagOperation];
@@ -431,21 +444,13 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)contentTypeFilterUpdate:(NSNotification*)notification
 {
+	[self showResults];
+	
 	NSString *contentType = [[notification userInfo] objectForKey:@"contentType"];
 	NNObjectFilter *filter = [PAContentTypeFilter filterWithContentType:contentType];
 	[self setActiveContentTypeFilters:[NSArray arrayWithObject:filter]];
 }
 
-- (void)controlledViewHasChanged
-{	
-	// resize controlledView to content subview
-	NSView *subview = [[controlledView subviews] objectAtIndex:0];
-	NSRect subviewFrame = [subview frame];
-	NSRect oldFrame = [controlledView frame];
-	[subview setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,oldFrame.size.height)];
-	[controlledView setFrame:NSMakeRect(0.0,0.0,oldFrame.size.width,subviewFrame.size.height)];
-	[splitView adjustSubviews];
-}
 
 #pragma mark tag filtering
 - (void)filterTags:(NSArray*)someTags

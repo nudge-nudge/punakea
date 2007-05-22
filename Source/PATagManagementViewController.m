@@ -314,21 +314,6 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	[self setWorking:NO];
 }
 
-- (IBAction)endTagManagement:(id)sender
-{	
-	[self reset];
-	
-	if ([delegate respondsToSelector:@selector(showResults)])
-	{
-		[delegate showResults];
-	}
-	else
-	{
-		[NSException raise:NSInternalInconsistencyException
-					format:@"delegate invalid"];
-	}
-}
-
 - (void)reset
 {
 	NSView *sv;

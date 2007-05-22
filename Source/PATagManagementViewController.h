@@ -54,6 +54,4 @@ extern NSString * const PATagManagementRemoveOperation;
 - (void)removeEditedTag;
 - (void)renameEditedTagTo:(NSString*)newTagName;
 
-- (IBAction)endTagManagement:(id)sender;
-
 @end

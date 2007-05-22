@@ -24,7 +24,7 @@
             SUPERCLASS = NSTableView; 
         }, 
         {
-            ACTIONS = {endTagManagement = id; removeOperation = id; renameOperation = id; }; 
+            ACTIONS = {removeOperation = id; renameOperation = id; }; 
             CLASS = PATagManagementViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
