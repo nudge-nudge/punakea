@@ -27,6 +27,7 @@
 		gotoButton = [[PAImageButton alloc] initWithFrame:NSMakeRect(0,0,12,12)];
 		[gotoButton setImage:[NSImage imageNamed:@"button-goto"] forState:PAOffState];
 		[gotoButton setImage:[NSImage imageNamed:@"button-goto-on"] forState:PAOffHighlightedState];
+		[gotoButton setToolTip:NSLocalizedStringFromTable(@"REVEAL_IN_FINDER", @"Global", nil)];
 		[gotoButton setAction:@selector(revealInFinder:)];
 		[gotoButton setTarget:self];
 		[gotoButton setHidden:YES];
