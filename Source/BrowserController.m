@@ -86,6 +86,11 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[self loadFavorites];
 }
 
+- (void)windowDidLoad
+{
+	[[self window] makeFirstResponder:[browserViewController tagCloud]];
+}
+
 - (void)setupToolbar
 {	
 	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"BrowserToolbar"];
