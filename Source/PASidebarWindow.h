@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <Carbon/Carbon.h>
 #import <ApplicationServices/ApplicationServices.h>
 
 // setSticky stuff
@@ -25,11 +26,15 @@ typedef enum _PASidebarPosition {
 } PASidebarPosition;
 
 @interface PASidebarWindow : NSWindow {
-	BOOL expanded;
-	PASidebarPosition sidebarPosition;
 	
-	NSNotificationCenter *nc;
-	NSUserDefaultsController *defaultsController;
+	BOOL								expanded;
+	PASidebarPosition					sidebarPosition;
+	
+	NSNotificationCenter				*nc;
+	NSUserDefaultsController			*defaultsController;
+	
+	ProcessSerialNumber					lastFrontProcess;	/**< Indicates the process that was front before showing the sidebar */
+	
 }
 
 - (BOOL)isExpanded;

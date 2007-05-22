@@ -8,11 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNSimpleTag.h"
+#import "NNTagging/NNTaggableObject.h"
 #import "PADropManager.h"
 
+
 @interface PASidebarTableViewDropController : NSObject {
-	NSArrayController *tags;
-	PADropManager *dropManager;
+	
+	NSArrayController						*tags;
+	PADropManager							*dropManager;
+	
 }
 
 - (id)initWithTags:(NSArrayController*)usedTags;

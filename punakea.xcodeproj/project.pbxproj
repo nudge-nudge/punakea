@@ -336,14 +336,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8D576316048677EA00EA77CD /* WeblocImporter.mdimporter */;
+			remoteGlobalIDString = 8D576316048677EA00EA77CD;
 			remoteInfo = WeblocImporter;
 		};
 		4802194B0C02CE85001CF480 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D57630D048677EA00EA77CD /* WeblocImporter */;
+			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
 			remoteInfo = WeblocImporter;
 		};
 		480721EB0AEFE8F40024118D /* PBXContainerItemProxy */ = {

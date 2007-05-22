@@ -31,6 +31,13 @@
 #pragma mark drap & drop stuff
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
+	NSEvent *currentEvent = [NSApp currentEvent];
+    unsigned flags = [currentEvent modifierFlags];
+    if (flags & NSAlternateKeyMask)
+		[dropManager setAlternateState:YES];
+	else 
+		[dropManager setAlternateState:NO];	
+	
 	[[self window] mouseEvent];
 	[self setImage:[NSImage imageNamed:@"drop_highlight"]];
 	
@@ -41,6 +48,18 @@
 {
 	[self setImage:[NSImage imageNamed:@"drop"]];
 	[[self window] mouseEvent];
+}
+
+- (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
+{
+	NSEvent *currentEvent = [NSApp currentEvent];
+    unsigned flags = [currentEvent modifierFlags];
+    if (flags & NSAlternateKeyMask)
+		[dropManager setAlternateState:YES];
+	else 
+		[dropManager setAlternateState:NO];
+	
+	return [dropManager performedDragOperation:[sender draggingPasteboard]];
 }
 
 - (void)draggingEnded:(id <NSDraggingInfo>)sender

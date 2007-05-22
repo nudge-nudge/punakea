@@ -149,6 +149,10 @@ double const SHOW_DELAY = 0.2;
 {
 	if (![self isExpanded] && [self mouseInWindow])
 	{
+		GetFrontProcess(&lastFrontProcess);
+		
+		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+		
 		NSRect newRect = [self frame];
 		
 		switch (sidebarPosition)
@@ -193,6 +197,8 @@ double const SHOW_DELAY = 0.2;
 		// multiplied with backgroundcolor this has to be > 0.05, or else there
 		// won't be drop notifications
 		[self setAlphaValue:0.06];
+		
+		SetFrontProcess(&lastFrontProcess);
 	}
 }
 
