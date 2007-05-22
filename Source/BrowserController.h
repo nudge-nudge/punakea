@@ -71,6 +71,9 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 
 - (void)saveFavorites;
 
+- (void)startProgressAnimationWithDescription:(NSString *)aString;
+- (void)stopProgressAnimation;
+
 - (BrowserViewController*)browserViewController;
 - (PASplitView *)verticalSplitView;
 - (PASplitView *)horizontalSplitView;

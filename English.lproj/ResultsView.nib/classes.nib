@@ -32,7 +32,7 @@
             ACTIONS = {deleteFilesForVisibleSelectedItems = id; setGroupingAttributes = id; }; 
             CLASS = PAResultsViewController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {outlineView = PAResultsOutlineView; progressIndicator = NSProgressIndicator; }; 
+            OUTLETS = {outlineView = PAResultsOutlineView; }; 
             SUPERCLASS = PABrowserViewMainController; 
         }, 
         {

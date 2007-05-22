@@ -35,7 +35,7 @@
 		
 		draggedItems = nil;
 		
-		nc = [NSNotificationCenter defaultCenter];
+		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 		
 		[nc addObserver:self 
 			   selector:@selector(selectedTagsHaveChanged:) 
@@ -51,6 +51,11 @@
 			   selector:@selector(thumbnailWasGenerated:)
 				   name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
 				 object:nil];
+		
+		[nc addObserver:self
+			   selector:@selector(queryNote:)
+				   name:nil
+				 object:query];
 			
 		[self setDisplayMessage:@""];
 		
@@ -70,18 +75,11 @@
 	[outlineView registerForDraggedTypes:[dropManager handledPboardTypes]];
 	[outlineView setDraggingSourceOperationMask:NSDragOperationNone forLocal:YES];
 	[outlineView setDraggingSourceOperationMask:(dragOperation | NSDragOperationCopy | NSDragOperationDelete) forLocal:NO];
-	
-	[relatedTags addObserver:self
-				  forKeyPath:@"updating"
-					 options:0
-					 context:NULL];
 }
 
 - (void)dealloc
-{
-	[relatedTags removeObserver:self forKeyPath:@"updating"];
-	
-	[nc removeObserver:self];
+{	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[outlineView unregisterDraggedTypes];
 	[draggedItems release];
@@ -90,21 +88,6 @@
     [query release];
 	[selectedTags release];
 	[super dealloc];
-}
-
-#pragma mark observing
-- (void)observeValueForKeyPath:(NSString *)keyPath 
-					  ofObject:(id)object 
-						change:(NSDictionary *)change
-					   context:(void *)context
-{
-	if ([keyPath isEqualToString:@"updating"])
-	{
-		if ([relatedTags isUpdating])
-			[progressIndicator startAnimation:self];
-		else
-			[progressIndicator stopAnimation:self];
-	}
 }
 
 
@@ -328,13 +311,27 @@
 	}
 }
 
--(void)thumbnailWasGenerated:(NSNotification *)notification
+- (void)thumbnailWasGenerated:(NSNotification *)notification
 {
 	PAThumbnailItem *thumbItem = (PAThumbnailItem *)[notification object];
 	
 	if([thumbItem view] == outlineView)
 	{	
 		[outlineView displayRect:[thumbItem frame]];
+	}
+}
+
+- (void)queryNote:(NSNotification *)notification
+{
+	// Start or stop progress animation	
+	if([[notification name] isEqualTo:NNQueryDidStartGatheringNotification])
+	{
+		NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_SEARCHING", @"Global", nil);
+		[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
+	}
+	else if([[notification name] isEqualTo:NNQueryDidFinishGatheringNotification])
+	{
+		[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
 	}
 }
 

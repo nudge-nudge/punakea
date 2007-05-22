@@ -469,14 +469,15 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filteringStarted
 {
-	[[[[NSApplication sharedApplication] delegate] browserController] filteringStarted];
+	NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_GATHERING_TAGS", @"Global", nil);
+	[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
 }
 
 - (void)filteringFinished
 {
 	filterEngineIsWorking = NO;
 	
-	[[[[NSApplication sharedApplication] delegate] browserController] filteringFinished];
+	[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
 	
 	[self updateTagCloudDisplayMessage];
 	[tagCloud reloadData];

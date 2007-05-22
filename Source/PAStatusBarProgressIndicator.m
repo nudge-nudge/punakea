@@ -9,7 +9,7 @@
 #import "PAStatusBarProgressIndicator.h"
 
 
-float const STATUSBAR_PROGRESS_INDICATOR_SPACING = 10.0;
+float const STATUSBAR_PROGRESS_INDICATOR_SPACING = 7.0;
 float const STATUSBAR_PROGRESS_INDICATOR_MIN_WIDTH = 60.0;
 NSSize const STATUSBAR_PROGRESS_INDICATOR_PADDING = {5.0, 0.0};
 
@@ -32,7 +32,8 @@ NSSize const STATUSBAR_PROGRESS_INDICATOR_PADDING = {5.0, 0.0};
 		// By now we only support indeterminate indicators ;)
 		[progressIndicator setIndeterminate:YES];
 		
-		[progressIndicator setDisplayedWhenStopped:YES];
+		[progressIndicator setDisplayedWhenStopped:NO];
+		[progressIndicator setUsesThreadedAnimation:YES];
 		[progressIndicator startAnimation:self];
 		
 		[self setAlignment:NSRightTextAlignment];
@@ -171,6 +172,7 @@ NSSize const STATUSBAR_PROGRESS_INDICATOR_PADDING = {5.0, 0.0};
 	stringValue = [aString retain];
 	
 	[self sizeToFit];
+	[[self superview] updateItems];
 }
 
 - (NSTextAlignment)alignment

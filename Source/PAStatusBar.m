@@ -94,6 +94,7 @@
 	
 	// Create string value rect
 	NSRect stringValueRect = [self frame];
+	stringValueRect.size.height -= 1.0;
 
 	// Draw separator lines	
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
@@ -120,7 +121,7 @@
 				[NSBezierPath strokeLineFromPoint:NSMakePoint(frame.origin.x - 1.0, 1.0)
 										  toPoint:NSMakePoint(frame.origin.x - 1.0, 23.0)];
 				
-				stringValueRect.size.width -= frame.size.width;
+				stringValueRect.size.width -= frame.size.width + 7.0;
 			}
 		}
 	}
@@ -300,7 +301,7 @@
 	
 	// Process all right items
 	enumerator = [items objectEnumerator];
-	current_x = [self frame].size.width - 17.0;
+	current_x = [self frame].size.width - 20.0;
 	
 	while(control = [enumerator nextObject])
 	{		

@@ -26,7 +26,6 @@
 @interface PAResultsViewController : PABrowserViewMainController {
 	
 	IBOutlet PAResultsOutlineView		*outlineView;
-	IBOutlet NSProgressIndicator		*progressIndicator;
 	
 	NNTags								*tags;
 	NNRelatedTags						*relatedTags;
@@ -34,8 +33,6 @@
 	
 	PADropManager						*dropManager;
 	NNQuery								*query;
-	
-	NSNotificationCenter				*nc;
 	
 	NSArray								*draggedItems;
 }
