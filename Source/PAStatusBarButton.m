@@ -19,6 +19,8 @@
 		[self setCell:cell];
 		[cell release];
 		
+		[self setAlignment:NSLeftTextAlignment];
+		
 		toolTipTag = [self addToolTipRect:[self bounds] owner:self userData:nil];
     }
     return self;
@@ -110,6 +112,16 @@
 - (void)setAlternateState:(BOOL)flag
 {
 	[[self cell] setAlternateState:flag];
+}
+
+- (NSTextAlignment)alignment
+{
+	return alignment;
+}
+
+- (void)setAlignment:(NSTextAlignment)mode
+{
+	alignment = mode;
 }
 
 @end

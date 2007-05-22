@@ -37,7 +37,6 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	IBOutlet PATagCloud					*tagCloud;
 	IBOutlet PASplitView				*splitView;
 	IBOutlet NSView						*controlledView;
-	IBOutlet NSProgressIndicator		*activityIndicator;
 			
 	PABrowserViewMainController			*mainController;
 	

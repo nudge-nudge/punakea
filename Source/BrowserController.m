@@ -103,6 +103,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 - (void)setupStatusBar
 {
+	// Source Panel StatusBar
+	
 	PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
 	[sbitem setToolTip:@"Add new tag set to favorites"];
 	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
@@ -118,6 +120,13 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[sbitem setAction:@selector(toggleInfo:)];
 	
 	[sourcePanelStatusBar addItem:sbitem];
+	
+	// Right StatusBar
+	
+	statusBarProgressIndicator = [[PAStatusBarProgressIndicator statusBarProgressIndicator] retain];
+	[statusBarProgressIndicator setStringValue:@"Gathering Tags"];
+	[statusBarProgressIndicator setHidden:YES];
+	[rightStatusBar addItem:statusBarProgressIndicator];
 }
 
 - (void)setupTabPanel
@@ -176,6 +185,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 - (void)dealloc
 {
+	[statusBarProgressIndicator release];
+	
 	[searchField unbind:@"value"];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -434,6 +445,18 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	// Reload data
 	[sourcePanel reloadData];
+}
+
+- (void)filteringStarted
+{
+	[statusBarProgressIndicator setHidden:NO];
+	[rightStatusBar setNeedsDisplay:YES];
+}
+
+- (void)filteringFinished
+{
+	[statusBarProgressIndicator setHidden:YES];
+	[rightStatusBar setNeedsDisplay:YES];
 }
 
 

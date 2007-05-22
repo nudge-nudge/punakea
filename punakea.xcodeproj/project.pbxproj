@@ -275,6 +275,8 @@
 		65AA74BE0BF35D2C0054407D /* NSTextFieldAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AA74BC0BF35D2C0054407D /* NSTextFieldAdditions.m */; };
 		65AC736E0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65AC736C0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h */; };
 		65AC736F0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AC736D0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.m */; };
+		65B1FC890C0308EC0099D12B /* PAStatusBarProgressIndicator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B1FC870C0308EC0099D12B /* PAStatusBarProgressIndicator.h */; };
+		65B1FC8A0C0308EC0099D12B /* PAStatusBarProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B1FC880C0308EC0099D12B /* PAStatusBarProgressIndicator.m */; };
 		65B78E6A0AF0D32700AF1102 /* PATaggerBackgroundView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B78E680AF0D32700AF1102 /* PATaggerBackgroundView.h */; };
 		65B78E6B0AF0D32700AF1102 /* PATaggerBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B78E690AF0D32700AF1102 /* PATaggerBackgroundView.m */; };
 		65B78F1C0AF0D8D400AF1102 /* CTGradient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B78F1A0AF0D8D400AF1102 /* CTGradient.h */; };
@@ -528,6 +530,7 @@
 				65E38D2E0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h in CopyFiles */,
 				65E38E530BFB390E000C1976 /* NSNumberFormatterAdditions.h in CopyFiles */,
 				480219540C02D2EE001CF480 /* PAInstaller.h in CopyFiles */,
+				65B1FC890C0308EC0099D12B /* PAStatusBarProgressIndicator.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,6 +804,8 @@
 		65AA74BC0BF35D2C0054407D /* NSTextFieldAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTextFieldAdditions.m; sourceTree = "<group>"; };
 		65AC736C0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemPlaceholderCell.h; sourceTree = "<group>"; };
 		65AC736D0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemPlaceholderCell.m; sourceTree = "<group>"; };
+		65B1FC870C0308EC0099D12B /* PAStatusBarProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBarProgressIndicator.h; sourceTree = "<group>"; };
+		65B1FC880C0308EC0099D12B /* PAStatusBarProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBarProgressIndicator.m; sourceTree = "<group>"; };
 		65B78E680AF0D32700AF1102 /* PATaggerBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerBackgroundView.h; sourceTree = "<group>"; };
 		65B78E690AF0D32700AF1102 /* PATaggerBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerBackgroundView.m; sourceTree = "<group>"; };
 		65B78F1A0AF0D8D400AF1102 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
@@ -1765,12 +1770,14 @@
 		65CC15540BE0A5C800866AF7 /* StatusBar */ = {
 			isa = PBXGroup;
 			children = (
+				6581C3010BDFD51E0001455D /* PAStatusBar.h */,
+				6581C3020BDFD51E0001455D /* PAStatusBar.m */,
 				65EB72140BE20D86007FF40C /* PAStatusBarButton.h */,
 				65EB72150BE20D86007FF40C /* PAStatusBarButton.m */,
 				65EB722A0BE20ECC007FF40C /* PAStatusBarButtonCell.h */,
 				65EB722B0BE20ECC007FF40C /* PAStatusBarButtonCell.m */,
-				6581C3010BDFD51E0001455D /* PAStatusBar.h */,
-				6581C3020BDFD51E0001455D /* PAStatusBar.m */,
+				65B1FC870C0308EC0099D12B /* PAStatusBarProgressIndicator.h */,
+				65B1FC880C0308EC0099D12B /* PAStatusBarProgressIndicator.m */,
 			);
 			name = StatusBar;
 			sourceTree = "<group>";
@@ -2370,6 +2377,7 @@
 				65E38D2F0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m in Sources */,
 				65E38E540BFB390E000C1976 /* NSNumberFormatterAdditions.m in Sources */,
 				480219550C02D2EE001CF480 /* PAInstaller.m in Sources */,
+				65B1FC8A0C0308EC0099D12B /* PAStatusBarProgressIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

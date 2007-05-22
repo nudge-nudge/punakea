@@ -12,10 +12,12 @@
 
 @interface PAStatusBarButton : NSControl {
 	
-	NSString			*identifier;
+	NSString					*identifier;
 	
-	NSToolTipTag		toolTipTag;
-	NSString			*toolTip;
+	NSToolTipTag				toolTipTag;
+	NSString					*toolTip;
+	
+	NSTextAlignment				alignment;
 	
 }
 

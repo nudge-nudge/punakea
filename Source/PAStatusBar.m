@@ -18,6 +18,11 @@
 	if(self)
 	{
 		items = [[NSMutableArray alloc] init];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(frameDidChange:)
+													 name:NSViewFrameDidChangeNotification
+												   object:self];
 	}	
 	return self;
 }
@@ -25,6 +30,8 @@
 - (void)dealloc
 {
 	[self removeCursorRect:gripRect cursor:[NSCursor resizeLeftRightCursor]];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[items release];
 	[super dealloc];
@@ -64,38 +71,6 @@
 	
 	[[NSGraphicsContext currentContext] setShouldAntialias:YES];
 	
-	// Draw stringValue if applicable
-	if(stringValue)
-	{		
-		NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
-		[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];			
-		
-		NSColor *color = [NSColor colorWithCalibratedWhite:0.05 alpha:1.0];		
-		
-		NSFont *font = [NSFont systemFontOfSize:11.0];
-		
-		NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
-		[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];	
-		[fontAttributes setObject:color forKey:NSForegroundColorAttributeName];
-		[fontAttributes setObject:font forKey:NSFontAttributeName];
-		
-		NSAttributedString *attrStr = [[[NSAttributedString alloc] initWithString:stringValue
-																	   attributes:fontAttributes] autorelease];
-		
-		NSRect rect = [self frame];
-		rect.size.width -= 30.0;		// We currently support a stringValue only for a statusbar on the right side of a window. Therefore we need some padding for the resize window grip.
-		rect.origin.x = 7.0;
-		rect.origin.y = (rect.size.height - [attrStr size].height) / 2.0;
-		
-		// Set toolip if we cannot draw stringValue completely
-		if([attrStr size].width > rect.size.width)
-			[self setToolTip:stringValue];
-		else
-			[self setToolTip:nil];
-		
-		[attrStr drawInRect:rect];
-	}
-	
 	// Draw grip if applicable
 	if(resizableSplitView)
 	{
@@ -116,25 +91,72 @@
 		
 		[image drawInRect:destRect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	}
+	
+	// Create string value rect
+	NSRect stringValueRect = [self frame];
 
 	// Draw separator lines	
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 	
 	NSEnumerator *enumerator = [[self subviews] objectEnumerator];
-	NSView *view;
+	NSControl *control;
 	
-	while(view = [enumerator nextObject])
+	while(control = [enumerator nextObject])
 	{
-		NSRect frame = [view frame];
-		
-		//[[NSColor colorWithDeviceCyan:0.24 magenta:0.19 yellow:0.19 black:0.0 alpha:1.0] set];	
-		[[NSColor colorWithCalibratedWhite:0.7 alpha:1.0] set];
-		
-		[NSBezierPath strokeLineFromPoint:NSMakePoint(frame.origin.x + frame.size.width, 1.0)
-								  toPoint:NSMakePoint(frame.origin.x + frame.size.width, 23.0)];
+		if(![control isHidden])
+		{
+			NSRect frame = [control frame];
+			
+			//[[NSColor colorWithDeviceCyan:0.24 magenta:0.19 yellow:0.19 black:0.0 alpha:1.0] set];	
+			[[NSColor colorWithCalibratedWhite:0.7 alpha:1.0] set];
+			
+			if([control alignment] == NSLeftTextAlignment)
+			{
+				[NSBezierPath strokeLineFromPoint:NSMakePoint(frame.origin.x + frame.size.width, 1.0)
+										  toPoint:NSMakePoint(frame.origin.x + frame.size.width, 23.0)];
+			}
+			else
+			{
+				[NSBezierPath strokeLineFromPoint:NSMakePoint(frame.origin.x - 1.0, 1.0)
+										  toPoint:NSMakePoint(frame.origin.x - 1.0, 23.0)];
+				
+				stringValueRect.size.width -= frame.size.width;
+			}
+		}
 	}
 	
 	[[NSGraphicsContext currentContext] setShouldAntialias:YES];
+	
+	// Draw stringValue if applicable
+	if(stringValue)
+	{		
+		NSMutableParagraphStyle *paraStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+		[paraStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];			
+		
+		NSColor *color = [NSColor colorWithCalibratedWhite:0.05 alpha:1.0];		
+		
+		NSFont *font = [NSFont systemFontOfSize:11.0];
+		
+		NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
+		[fontAttributes setObject:paraStyle forKey:NSParagraphStyleAttributeName];	
+		[fontAttributes setObject:color forKey:NSForegroundColorAttributeName];
+		[fontAttributes setObject:font forKey:NSFontAttributeName];
+		
+		NSAttributedString *attrStr = [[[NSAttributedString alloc] initWithString:stringValue
+																	   attributes:fontAttributes] autorelease];
+		
+		stringValueRect.size.width -= 30.0;		// We currently support a stringValue only for a statusbar on the right side of a window. Therefore we need some padding for the resize window grip.
+		stringValueRect.origin.x = 7.0;
+		stringValueRect.origin.y = (stringValueRect.size.height - [attrStr size].height) / 2.0;
+		
+		// Set toolip if we cannot draw stringValue completely
+		if([attrStr size].width > stringValueRect.size.width)
+			[self setToolTip:stringValue];
+		else
+			[self setToolTip:nil];
+		
+		[attrStr drawInRect:stringValueRect];
+	}
 }
 
 
@@ -231,6 +253,13 @@
 }
 
 
+#pragma mark Notifications
+- (void)frameDidChange:(NSNotification *)notification
+{
+	[self updateItems];
+}
+
+
 #pragma mark Misc
 - (void)addItem:(NSView *)anItem
 {
@@ -240,31 +269,56 @@
 
 - (void)updateItems
 {
-	// TODO, temp
-	
 	for(int i = 0; i < [[self subviews] count]; i++)
 	{
 		[[[self subviews] objectAtIndex:i] removeFromSuperview];
 	}
 	
 	NSEnumerator *enumerator = [items objectEnumerator];
-	NSView *view;
+	NSControl *control;
 	float current_x = 0.0;
 	
-	while(view = [enumerator nextObject])
+	// Process all left items
+	while(control = [enumerator nextObject])
 	{		
-		[view setFrameOrigin:NSMakePoint(current_x, 1.0)];
-		
-		// Validate this view
-		if(delegate && [delegate respondsToSelector:@selector(statusBar:validateItem:)])
+		if([control alignment] == NSLeftTextAlignment)
 		{
-			// Return value may be used to disable items in future versions
-			BOOL flag = [delegate statusBar:self validateItem:view];
+			[control setFrameOrigin:NSMakePoint(current_x, 1.0)];
+			
+			// Validate this view
+			if(delegate && [delegate respondsToSelector:@selector(statusBar:validateItem:)])
+			{
+				// Return value may be used to disable items in future versions
+				BOOL flag = [delegate statusBar:self validateItem:control];
+			}
+			
+			[self addSubview:control];
+			
+			current_x += [control frame].size.width + 1.0;
 		}
-		
-		[self addSubview:view];
-		
-		current_x += [view frame].size.width + 1.0;
+	}
+	
+	// Process all right items
+	enumerator = [items objectEnumerator];
+	current_x = [self frame].size.width - 17.0;
+	
+	while(control = [enumerator nextObject])
+	{		
+		if([control alignment] == NSRightTextAlignment)
+		{
+			[control setFrameOrigin:NSMakePoint(current_x - [control frame].size.width, 1.0)];
+			
+			// Validate this view
+			if(delegate && [delegate respondsToSelector:@selector(statusBar:validateItem:)])
+			{
+				// Return value may be used to disable items in future versions
+				BOOL flag = [delegate statusBar:self validateItem:control];
+			}
+			
+			[self addSubview:control];
+			
+			current_x -= [control frame].size.width + 1.0;
+		}
 	}
 	
 	[self setNeedsDisplay:YES];

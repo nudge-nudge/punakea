@@ -469,19 +469,14 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filteringStarted
 {
-	[activityIndicator performSelector:@selector(startAnimation:)
-							withObject:self
-							afterDelay:0.4];
+	[[[[NSApplication sharedApplication] delegate] browserController] filteringStarted];
 }
 
 - (void)filteringFinished
 {
 	filterEngineIsWorking = NO;
 	
-	[NSObject cancelPreviousPerformRequestsWithTarget:activityIndicator
-											 selector:@selector(startAnimation:)
-											   object:self];
-	[activityIndicator stopAnimation:self];
+	[[[[NSApplication sharedApplication] delegate] browserController] filteringFinished];
 	
 	[self updateTagCloudDisplayMessage];
 	[tagCloud reloadData];

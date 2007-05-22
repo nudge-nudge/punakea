@@ -45,6 +45,8 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 	IBOutlet PASplitView						*horizontalSplitView;
 	
 	IBOutlet PAStatusBar						*rightStatusBar;
+	PAStatusBarProgressIndicator				*statusBarProgressIndicator;
+	
 	IBOutlet PAStatusBar						*sourcePanelStatusBar;
 	
 	NSTextView									*sourcePanelFieldEditor;
