@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		480219540C02D2EE001CF480 /* PAInstaller.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 480219520C02D2EE001CF480 /* PAInstaller.h */; };
+		480219550C02D2EE001CF480 /* PAInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 480219530C02D2EE001CF480 /* PAInstaller.m */; };
+		480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 480219480C02CE7B001CF480 /* WeblocImporter.mdimporter */; };
 		4807215E0AEFE5600024118D /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */; };
 		480721FB0AEFE9470024118D /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
 		480C40300BF4469A00C90B2C /* PATagCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 480C402E0BF4469A00C90B2C /* PATagCache.h */; };
@@ -329,6 +332,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		480219470C02CE7B001CF480 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D576316048677EA00EA77CD /* WeblocImporter.mdimporter */;
+			remoteInfo = WeblocImporter;
+		};
+		4802194B0C02CE85001CF480 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D57630D048677EA00EA77CD /* WeblocImporter */;
+			remoteInfo = WeblocImporter;
+		};
 		480721EB0AEFE8F40024118D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -409,6 +426,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy Plugins */,
 				48893B020AF0A4E400BA0B50 /* FilenamesDropHandler.punakeaDropHandler in Copy Plugins */,
 				4807215E0AEFE5600024118D /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler in Copy Plugins */,
 			);
@@ -509,6 +527,7 @@
 				48D815CD0BF5BF6600821C25 /* PAContentTypeFilter.h in CopyFiles */,
 				65E38D2E0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h in CopyFiles */,
 				65E38E530BFB390E000C1976 /* NSNumberFormatterAdditions.h in CopyFiles */,
+				480219540C02D2EE001CF480 /* PAInstaller.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +542,9 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* punakea_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = punakea_Prefix.pch; sourceTree = "<group>"; };
+		480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WeblocImporter.xcodeproj; path = WeblocImporter/WeblocImporter.xcodeproj; sourceTree = "<group>"; };
+		480219520C02D2EE001CF480 /* PAInstaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInstaller.h; sourceTree = "<group>"; };
+		480219530C02D2EE001CF480 /* PAInstaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAInstaller.m; sourceTree = "<group>"; };
 		480C402E0BF4469A00C90B2C /* PATagCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCache.h; sourceTree = "<group>"; };
 		480C402F0BF4469A00C90B2C /* PATagCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCache.m; sourceTree = "<group>"; };
 		480C40390BF4471300C90B2C /* PASingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASingleton.h; sourceTree = "<group>"; };
@@ -960,6 +982,7 @@
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				4802193B0C02CE42001CF480 /* Subprojects */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				654DBC1709C9D0320061BFA4 /* Documentation */,
 				483184990AEF8D8600C3C672 /* PADropHandler-Info.plist */,
@@ -1013,6 +1036,22 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		4802193B0C02CE42001CF480 /* Subprojects */ = {
+			isa = PBXGroup;
+			children = (
+				480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */,
+			);
+			path = Subprojects;
+			sourceTree = "<group>";
+		};
+		480219440C02CE7B001CF480 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				480219480C02CE7B001CF480 /* WeblocImporter.mdimporter */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		480C40430BF4482700C90B2C /* TagCache */ = {
@@ -1081,7 +1120,6 @@
 				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
 				48EDB82A0BF5A660008452FF /* TagFilter */,
 				480C40430BF4482700C90B2C /* TagCache */,
-				48D758F00B01CD0900D13CAD /* App Starter */,
 				488E80270AF3895800660B7B /* Value Transformers */,
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
@@ -1115,6 +1153,8 @@
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
 				480C40390BF4471300C90B2C /* PASingleton.h */,
 				480C403A0BF4471300C90B2C /* PASingleton.m */,
+				480219520C02D2EE001CF480 /* PAInstaller.h */,
+				480219530C02D2EE001CF480 /* PAInstaller.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -1319,13 +1359,6 @@
 				4842FC1209DA804100C4A931 /* PATagButtonCell.m */,
 			);
 			name = TagCloud;
-			sourceTree = "<group>";
-		};
-		48D758F00B01CD0900D13CAD /* App Starter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "App Starter";
 			sourceTree = "<group>";
 		};
 		48D75A250B01FA0300D13CAD /* Scripts */ = {
@@ -1962,6 +1995,7 @@
 				483185030AEF92FD00C3C672 /* PBXTargetDependency */,
 				480721EC0AEFE8F40024118D /* PBXTargetDependency */,
 				48186F8F0BE4C930000B4638 /* PBXTargetDependency */,
+				4802194C0C02CE85001CF480 /* PBXTargetDependency */,
 			);
 			name = Punakea;
 			productInstallPath = "$(HOME)/Applications";
@@ -1992,6 +2026,12 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Punakea */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 480219440C02CE7B001CF480 /* Products */;
+					ProjectRef = 480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */;
+				},
+			);
 			targets = (
 				8D1107260486CEB800E47090 /* Punakea */,
 				6566CD5F0AFF889F00FEAD7E /* DMG */,
@@ -2005,6 +2045,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		480219480C02CE7B001CF480 /* WeblocImporter.mdimporter */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WeblocImporter.mdimporter;
+			remoteRef = 480219470C02CE7B001CF480 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4815A0AD0AEF99D900969296 /* Resources */ = {
@@ -2319,12 +2369,18 @@
 				48D815CE0BF5BF6600821C25 /* PAContentTypeFilter.m in Sources */,
 				65E38D2F0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m in Sources */,
 				65E38E540BFB390E000C1976 /* NSNumberFormatterAdditions.m in Sources */,
+				480219550C02D2EE001CF480 /* PAInstaller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4802194C0C02CE85001CF480 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WeblocImporter;
+			targetProxy = 4802194B0C02CE85001CF480 /* PBXContainerItemProxy */;
+		};
 		480721EC0AEFE8F40024118D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 48C633BA0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler */;

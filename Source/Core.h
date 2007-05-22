@@ -20,6 +20,8 @@
 
 #import "PACollectionNotEmpty.h"
 
+#import "PAInstaller.h"
+
 #import "Sparkle/SUUpdater.h"
 
 //#import "PANotificationReceiver.h"

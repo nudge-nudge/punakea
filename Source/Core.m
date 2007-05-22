@@ -43,6 +43,8 @@
 {
     if (self = [super init])
     {
+		[PAInstaller install];
+		
 		globalTags = [NNTags sharedTags];
 		
 		userDefaults = [NSUserDefaults standardUserDefaults];
