@@ -8,6 +8,12 @@
 
 #import "PAContentTypeFilter.h"
 
+@interface PAContentTypeFilter (PrivateAPI)
+
+- (void)createFiltersForContentType:(NSString*)contentType;
+
+@end
+
 @implementation PAContentTypeFilter
 
 #pragma mark init
@@ -35,22 +41,7 @@
 		
 		filterLock = [[NSLock alloc] init];
 		
-		// TODO move this to NNQueryFilters ?
-		
-		// load groupings
-		NSString *path = [[NSBundle mainBundle] pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
-		simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
-		
-		// add filters for every resource type
-		NSArray *contentValues = [simpleGrouping allKeysForObject:contentType];
-		
-		NSEnumerator *e = [contentValues objectEnumerator];
-		NSString *aContentType;
-		
-		while (aContentType = [e nextObject])
-		{
-			[query addFilter:[NNQueryFilter queryFilterWithAttribute:@"kMDItemContentTypeTree" value:aContentType]];
-		}
+		[self createFilters];
 	}
 	return self;
 }
@@ -78,6 +69,24 @@
 }
 
 #pragma mark function
+- (void)createFilters
+{
+	// load groupings
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
+	simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
+	
+	// add filters for every resource type
+	NSArray *contentValues = [simpleGrouping allKeysForObject:contentType];
+	
+	NSEnumerator *e = [contentValues objectEnumerator];
+	NSString *aContentType;
+	
+	while (aContentType = [e nextObject])
+	{
+		[query addFilter:[NNQueryFilter queryFilterWithAttribute:@"kMDItemContentTypeTree" value:aContentType]];
+	}
+}
+
 - (void)run
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];

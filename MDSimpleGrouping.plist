@@ -59,5 +59,6 @@
     "com.apple.iwork.keynote.key"			  = "PRESENTATIONS";
 
     "com.apple.safari.bookmark"				  = "BOOKMARKS";
+	"public.url"							  = "BOOKMARKS";
 }
 

@@ -432,7 +432,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)contentTypeFilterUpdate:(NSNotification*)notification
 {
 	NSString *contentType = [[notification userInfo] objectForKey:@"contentType"];
-	PAContentTypeFilter *filter = [PAContentTypeFilter filterWithContentType:contentType];
+	NNObjectFilter *filter = [PAContentTypeFilter filterWithContentType:contentType];
 	[self setActiveContentTypeFilters:[NSArray arrayWithObject:filter]];
 }
 
