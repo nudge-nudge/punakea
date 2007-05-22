@@ -75,11 +75,29 @@ action called on dropping files to FileBox
  */
 - (void)newTaggableObjectsHaveBeenDropped
 {	
+	// set window not to activate last front app
+	[[self window] setActivatesLastFrontApp:NO];
+	
 	// create new tagger window
 	taggerController = [[TaggerController alloc] init];
+	
+	// Check whether to manage files or not
+	BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+	[taggerController setManageFiles:manageFiles];
+	
+	NSEvent *currentEvent = [NSApp currentEvent];
+    unsigned flags = [currentEvent modifierFlags];
+    if (flags & NSAlternateKeyMask)
+	{
+		manageFiles = !manageFiles;
+		[taggerController setManageFiles:manageFiles];
+	}
+	
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+	
 	NSWindow *taggerWindow = [taggerController window];
 	[taggerWindow makeKeyAndOrderFront:nil];
+	
 	[taggerController addTaggableObjects:[fileBox objects]];
 }
 
@@ -105,6 +123,13 @@ action called on dropping files to FileBox
 - (void)screenDidChange:(NSNotification*)notification
 {
 	[[self window] reset];
+}
+
+
+#pragma mark Accessors
+- (id)taggerController
+{
+	return taggerController;
 }
 
 @end

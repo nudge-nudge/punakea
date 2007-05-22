@@ -150,6 +150,7 @@ double const SHOW_DELAY = 0.2;
 	if (![self isExpanded] && [self mouseInWindow])
 	{
 		GetFrontProcess(&lastFrontProcess);
+		[self setActivatesLastFrontApp:YES];
 		
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 		
@@ -198,7 +199,8 @@ double const SHOW_DELAY = 0.2;
 		// won't be drop notifications
 		[self setAlphaValue:0.06];
 		
-		SetFrontProcess(&lastFrontProcess);
+		if(animate && [self activatesLastFrontApp])
+			SetFrontProcess(&lastFrontProcess);
 	}
 }
 
@@ -252,6 +254,18 @@ double const SHOW_DELAY = 0.2;
 		}
 		CGSSetWindowTags(cid, wid, tags, 32);
 	}
+}
+
+
+#pragma mark Accessors
+- (BOOL)activatesLastFrontApp
+{
+	return activatesLastFrontApp;
+}
+
+- (void)setActivatesLastFrontApp:(BOOL)flag
+{
+	activatesLastFrontApp = flag;
 }
 
 @end

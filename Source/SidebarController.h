@@ -34,4 +34,6 @@
 
 - (IBAction)tagClicked:(id)sender;
 
+- (id)taggerController;
+
 @end

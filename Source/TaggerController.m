@@ -4,6 +4,7 @@
 @interface TaggerController (PrivateAPI)
 
 - (void)updateTags;
+- (void)updateManageFilesFlagOnTaggableObjects;
 
 /**
 adds tag to tagField (use from "outside")
@@ -14,7 +15,6 @@ adds tag to tagField (use from "outside")
 - (void)itemsHaveChanged;							/**< called when items have changed */
 - (void)resetTaggerContent;							/**< resets the tagger window (called when window is closed) */
 - (void)displayRestTags:(NSArray*)restTags;
-- (void)resizeTokenField;
 
 @end
 
@@ -35,6 +35,9 @@ adds tag to tagField (use from "outside")
 		// custom data cell
 		fileCell = [[PATaggerItemCell alloc] initTextCell:@""];
 		[fileCell setEditable:YES];
+		
+		manageFilesAutomatically = YES;
+		showsManageFiles = YES;
 	}
 	return self;
 }
@@ -75,6 +78,22 @@ adds tag to tagField (use from "outside")
 	
 	// Setup status bar
 	[self setupStatusBar];
+	
+	// Check manage files
+	if(manageFilesAutomatically)
+		manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];	
+		
+	if(manageFiles)
+		[manageFilesButton setState:NSOnState];
+	else
+		[manageFilesButton setState:NSOffState];
+	
+	if(showsManageFiles)
+	{
+		[manageFilesButton setHidden:NO];
+	} else {
+		[manageFilesButton setHidden:YES];
+	}
 }
 
 - (void)setupStatusBar
@@ -109,6 +128,7 @@ adds tag to tagField (use from "outside")
 - (void)addTaggableObject:(NNTaggableObject *)anObject
 {
 	[items addObject:anObject];
+	[self updateManageFilesFlagOnTaggableObjects];
 	[self updateTags];
 	[tableView reloadData];
 }
@@ -116,6 +136,7 @@ adds tag to tagField (use from "outside")
 - (void)addTaggableObjects:(NSArray *)theObjects
 {
 	[items addObjectsFromArray:theObjects];
+	[self updateManageFilesFlagOnTaggableObjects];
 	[self updateTags];
 	[tableView reloadData];
 }
@@ -124,6 +145,7 @@ adds tag to tagField (use from "outside")
 {
 	[items release];
 	items = [theObjects mutableCopy];
+	[self updateManageFilesFlagOnTaggableObjects];
 	[self updateTags];
 	[tableView reloadData];
 }
@@ -155,6 +177,31 @@ adds tag to tagField (use from "outside")
 	[[self currentCompleteTagsInField] addObjectsFromArray:[tagsOnAllObjects allObjects]];
 	
 	[[self window] makeFirstResponder:tagField];
+}
+
+- (void)updateManageFilesFlagOnTaggableObjects
+{
+	// Break if files manage themselves
+	if(manageFilesAutomatically)
+		return;
+
+	manageFiles = NO;
+	
+	if([manageFilesButton state] == NSOnState)
+		manageFiles = YES;		
+	
+	NSEnumerator *e = [items objectEnumerator];
+	NNTaggableObject *object;
+	
+	while(object = [e nextObject])
+	{
+		[object setShouldManageFiles:manageFiles];
+	}
+	
+	// Disable manage files button if there are any files present
+	if([items count] > 0 && manageFiles)
+		[manageFilesButton setEnabled:NO];
+		
 }
 
 - (void)doubleAction:(id)sender
@@ -221,8 +268,19 @@ adds tag to tagField (use from "outside")
 	
 	[tableView deselectAll:tableView];
 		
+	[self updateManageFilesFlagOnTaggableObjects];
 	[self updateTags];
 	[tableView reloadData];
+}
+
+- (IBAction)changeManageFilesFlag:(id)sender
+{
+	manageFilesAutomatically = NO;
+	
+	[self updateManageFilesFlagOnTaggableObjects];
+	
+	// Make all objects perform an update so that they are moved
+	[self updateTags];
 }
 
 
@@ -299,17 +357,32 @@ adds tag to tagField (use from "outside")
 	cellSize.height = (cellSize.height > 22) ? cellSize.height : 22;
 	float sizeDifference = cellSize.height - oldTokenFieldFrame.size.height;
 	
+	// Resize tag field
 	[[self tagField] setFrame:NSMakeRect(oldTokenFieldFrame.origin.x,
 										 oldTokenFieldFrame.origin.y - sizeDifference,
 										 oldTokenFieldFrame.size.width,
 										 cellSize.height)];
 	
+	// Resize table view
 	NSRect oldTableViewFrame = [[tableView enclosingScrollView] frame];
-	[[tableView enclosingScrollView] setFrame:NSMakeRect(oldTableViewFrame.origin.x,
-														 oldTableViewFrame.origin.y,
-														 oldTableViewFrame.size.width,
-														 oldTableViewFrame.size.height - sizeDifference)];
 	
+	NSRect tvFrame = NSMakeRect(oldTableViewFrame.origin.x,
+								oldTableViewFrame.origin.y,
+								oldTableViewFrame.size.width,
+								[[self tagField] frame].origin.y - oldTableViewFrame.origin.y - 42.0);
+	
+	if(!showsManageFiles)
+		tvFrame.size.height += [manageFilesButton frame].size.height;
+	
+	[[tableView enclosingScrollView] setFrame:tvFrame];
+	
+	// Move manage files button	
+	NSRect manageFilesFrame = [manageFilesButton frame];
+	manageFilesFrame.origin.y = tvFrame.origin.y + tvFrame.size.height + 13.0;
+	
+	[manageFilesButton setFrame:manageFilesFrame];
+	
+	// Set needs display
 	[[[self window] contentView] setNeedsDisplay:YES];
 }
 
@@ -407,6 +480,25 @@ adds tag to tagField (use from "outside")
 	[self addTaggableObjects:results];
 	
 	return YES;
+}
+
+
+#pragma mark Accessors
+
+- (void)setManageFiles:(BOOL)flag
+{
+	manageFilesAutomatically = NO;
+	manageFiles = flag;
+}
+
+- (void)setShowsManageFiles:(BOOL)flag
+{
+	showsManageFiles = flag;
+	
+	if(flag)
+		[manageFilesButton setHidden:NO];
+	else
+		[manageFilesButton setHidden:YES];
 }
 
 @end

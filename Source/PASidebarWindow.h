@@ -33,6 +33,7 @@ typedef enum _PASidebarPosition {
 	NSNotificationCenter				*nc;
 	NSUserDefaultsController			*defaultsController;
 	
+	BOOL								activatesLastFrontApp;
 	ProcessSerialNumber					lastFrontProcess;	/**< Indicates the process that was front before showing the sidebar */
 	
 }
@@ -50,5 +51,8 @@ should be called after a mouse event inside the sidebar
 should be called if the resolution or display setup changes
  */
 - (void)reset;
+
+- (BOOL)activatesLastFrontApp;
+- (void)setActivatesLastFrontApp:(BOOL)flag;
 
 @end

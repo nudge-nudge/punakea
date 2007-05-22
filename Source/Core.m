@@ -8,6 +8,8 @@
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 - (void)createManagedFilesDirIfNeeded;
 
+- (void)showTagger:(id)sender enableManageFiles:(BOOL)flag;
+
 - (void)applicationWillTerminate:(NSNotification *)note;
 
 + (BOOL)wasLaunchedAsLoginItem;
@@ -455,7 +457,7 @@
 
 - (IBAction)editTagsOnFiles:(id)sender
 {	
-	[self showTagger:self];
+	[self showTagger:self enableManageFiles:NO];
 	
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 	
@@ -511,13 +513,18 @@
 
 - (IBAction)showTagger:(id)sender
 {
+	[self showTagger:sender enableManageFiles:YES];
+}
+
+- (void)showTagger:(id)sender enableManageFiles:(BOOL)flag
+{
 	/*
-	// Implementation of multiple tagger windows 
-	
-	TaggerController *taggerController = [[TaggerController alloc] init];
-	[taggerController showWindow:self];
-	NSWindow *taggerWindow = [taggerController window];
-	[taggerWindow makeKeyAndOrderFront:nil];*/
+	 // Implementation of multiple tagger windows 
+	 
+	 TaggerController *taggerController = [[TaggerController alloc] init];
+	 [taggerController showWindow:self];
+	 NSWindow *taggerWindow = [taggerController window];
+	 [taggerWindow makeKeyAndOrderFront:nil];*/
 	
 	// Implementation of single tagger window
 	
@@ -525,6 +532,11 @@
 	{
 		taggerController =  [[TaggerController alloc] init];
 	}
+	[taggerController setShowsManageFiles:flag];
+	
+	if(!flag)
+		[taggerController resizeTokenField];	
+	
 	[taggerController showWindow:self];
 	[[taggerController window] makeKeyAndOrderFront:self];
 }
