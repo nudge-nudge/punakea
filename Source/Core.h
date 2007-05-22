@@ -53,7 +53,7 @@
 
 - (IBAction)goHome:(id)sender;
 - (IBAction)toggleInfo:(id)sender;
-- (IBAction)goToLibrary:(id)sender;
+- (IBAction)goToAllItems:(id)sender;
 - (IBAction)goToManageTags:(id)sender;
 - (IBAction)showPreferences:(id)sender;
 

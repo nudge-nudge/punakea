@@ -6,7 +6,7 @@
                 delete = id; 
                 editTagsOnFiles = id; 
                 goHome = id; 
-                goToLibrary = id; 
+                goToAllItems = id; 
                 goToManageTags = id; 
                 openDonationWebsite = id; 
                 openFiles = id; 

@@ -307,7 +307,7 @@
 		// View menu
 		if([item action] == @selector(goHome:)) return NO;
 		if([item action] == @selector(toggleInfo:)) return NO;
-		if([item action] == @selector(goToLibrary:)) return NO;
+		if([item action] == @selector(goToAllItems:)) return NO;
 		if([item action] == @selector(goToManageTags:)) return NO;
 		if([item action] == @selector(toggleToolbarShown:)) return NO;
 		if([item action] == @selector(runToolbarCustomizationPalette:)) return NO;		
@@ -360,7 +360,7 @@
 			else
 				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_HIDE_INFO", @"Menus", nil)];
 		}
-		else if([item action] == @selector(goToLibrary:))
+		else if([item action] == @selector(goToAllItems:))
 		{			
 			PASourcePanel *sp = [browserController sourcePanel];
 			if([sp selectedRow] ==	[sp rowForItem:[sp itemWithValue:@"ALL_ITEMS"]])
@@ -399,7 +399,7 @@
 	[[browserController sourcePanelStatusBar] reloadData];
 }
 
-- (IBAction)goToLibrary:(id)sender
+- (IBAction)goToAllItems:(id)sender
 {	
 	[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
 	[[browserController window] makeFirstResponder:[browserController sourcePanel]];
