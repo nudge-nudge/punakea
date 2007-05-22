@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PAStatusBarButton.h"
 #import "PAStatusBarProgressIndicator.h"
+#import "PAImageButton.h"
 
 
 @interface NSObject (PAStatusBarDelegate)
@@ -32,6 +33,8 @@
 	NSMutableArray				*items;
 	
 	NSString					*stringValue;
+	
+	PAImageButton				*gotoButton;
 	
 }
 

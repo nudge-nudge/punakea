@@ -23,6 +23,13 @@
 												 selector:@selector(frameDidChange:)
 													 name:NSViewFrameDidChangeNotification
 												   object:self];
+		
+		gotoButton = [[PAImageButton alloc] initWithFrame:NSMakeRect(0,0,12,12)];
+		[gotoButton setImage:[NSImage imageNamed:@"button-goto"] forState:PAOffState];
+		[gotoButton setImage:[NSImage imageNamed:@"button-goto-on"] forState:PAOffHighlightedState];
+		[gotoButton setAction:@selector(revealInFinder:)];
+		[gotoButton setTarget:self];
+		[gotoButton setHidden:YES];
 	}	
 	return self;
 }
@@ -32,6 +39,9 @@
 	[self removeCursorRect:gripRect cursor:[NSCursor resizeLeftRightCursor]];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[gotoButton removeFromSuperviewWithoutNeedingDisplay];
+	[gotoButton release];
 	
 	[items release];
 	[super dealloc];
@@ -104,7 +114,8 @@
 	
 	while(control = [enumerator nextObject])
 	{
-		if(![control isHidden])
+		if(![control isHidden] && 
+		   ![control isKindOfClass:[PAImageButton class]])
 		{
 			NSRect frame = [control frame];
 			
@@ -146,7 +157,7 @@
 		NSAttributedString *attrStr = [[[NSAttributedString alloc] initWithString:stringValue
 																	   attributes:fontAttributes] autorelease];
 		
-		stringValueRect.size.width -= 30.0;		// We currently support a stringValue only for a statusbar on the right side of a window. Therefore we need some padding for the resize window grip.
+		stringValueRect.size.width -= 50.0;		// We currently support a stringValue only for a statusbar on the right side of a window. Therefore we need some padding for the resize window grip.
 		stringValueRect.origin.x = 7.0;
 		stringValueRect.origin.y = (stringValueRect.size.height - [attrStr size].height) / 2.0;
 		
@@ -157,6 +168,25 @@
 			[self setToolTip:nil];
 		
 		[attrStr drawInRect:stringValueRect];
+		
+		// Move goto button
+		NSRect buttonRect = [gotoButton frame];
+		buttonRect.origin.x = stringValueRect.origin.x + 7.0;
+		
+		if([attrStr size].width > stringValueRect.size.width)
+			buttonRect.origin.x += stringValueRect.size.width;
+		else
+			buttonRect.origin.x += [attrStr size].width;
+		
+		buttonRect.origin.y = ([self frame].size.height - 1.0 - buttonRect.size.height) / 2.0;
+		
+		if([gotoButton superview] != self)
+			[self addSubview:gotoButton];
+		
+		[gotoButton setFrame:buttonRect];
+		[gotoButton setHidden:NO];
+	} else {
+		[gotoButton setHidden:YES];
 	}
 }
 
@@ -272,7 +302,10 @@
 {
 	for(int i = 0; i < [[self subviews] count]; i++)
 	{
-		[[[self subviews] objectAtIndex:i] removeFromSuperview];
+		NSView *subview = [[self subviews] objectAtIndex:i];
+		if([subview isKindOfClass:[PAStatusBarButton class]] ||
+		   [subview isKindOfClass:[PAStatusBarProgressIndicator class]])
+			[subview removeFromSuperview];
 	}
 	
 	NSEnumerator *enumerator = [items objectEnumerator];
@@ -328,6 +361,14 @@
 - (void)reloadData
 {
 	[self updateItems];
+}
+
+
+#pragma mark Actions
+- (void)revealInFinder:(id)sender
+{
+	NSString *path = [[self stringValue] stringByExpandingTildeInPath];
+	[[NSWorkspace sharedWorkspace] selectFile:path inFileViewerRootedAtPath:nil];
 }
 
 

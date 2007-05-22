@@ -181,6 +181,8 @@
 		6530FF370AF2229400D7A79A /* PATaggerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6530FF350AF2229400D7A79A /* PATaggerTableView.m */; };
 		6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */; };
 		6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */; };
+		653948DC0C0359C4001705D6 /* button-goto.tif in Resources */ = {isa = PBXBuildFile; fileRef = 653948DA0C0359C4001705D6 /* button-goto.tif */; };
+		653948DD0C0359C4001705D6 /* button-goto-on.tif in Resources */ = {isa = PBXBuildFile; fileRef = 653948DB0C0359C4001705D6 /* button-goto-on.tif */; };
 		6539B9FB0BE35A3B00B1D216 /* statusbar-button-gear.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6539B9F90BE35A3B00B1D216 /* statusbar-button-gear.pdf */; };
 		6539B9FC0BE35A3B00B1D216 /* statusbar-button-plus.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6539B9FA0BE35A3B00B1D216 /* statusbar-button-plus.pdf */; };
 		653DCE1809E295C8009175E5 /* MDSimpleGrouping.strings in Resources */ = {isa = PBXBuildFile; fileRef = 653DCE1709E295C8009175E5 /* MDSimpleGrouping.strings */; };
@@ -708,6 +710,8 @@
 		6530FF350AF2229400D7A79A /* PATaggerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerTableView.m; sourceTree = "<group>"; };
 		6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIcon.tif; sourceTree = "<group>"; };
 		6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIconAlt.tif; sourceTree = "<group>"; };
+		653948DA0C0359C4001705D6 /* button-goto.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "button-goto.tif"; sourceTree = "<group>"; };
+		653948DB0C0359C4001705D6 /* button-goto-on.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "button-goto-on.tif"; sourceTree = "<group>"; };
 		6539B9F90BE35A3B00B1D216 /* statusbar-button-gear.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "statusbar-button-gear.pdf"; sourceTree = "<group>"; };
 		6539B9FA0BE35A3B00B1D216 /* statusbar-button-plus.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "statusbar-button-plus.pdf"; sourceTree = "<group>"; };
 		653DCE1409E295A1009175E5 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/MDSimpleGrouping.strings; sourceTree = "<group>"; };
@@ -1445,6 +1449,15 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		653948D90C035993001705D6 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				653948DA0C0359C4001705D6 /* button-goto.tif */,
+				653948DB0C0359C4001705D6 /* button-goto-on.tif */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
 		6540FA520AEE0F2800EF51F3 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1534,6 +1547,7 @@
 		6562A1D40996399100DBE7DB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				653948D90C035993001705D6 /* Buttons */,
 				658B58DD0BEC842900E618F1 /* Toolbar */,
 				65CB0A0D0BBBD4E200799E25 /* Source Panel */,
 				486177430B85B3DC00A03CAA /* StatusItem */,
@@ -2190,6 +2204,8 @@
 				6582F4180C0069E80016AA2D /* triangle-gray-expanded.tif in Resources */,
 				6582F41E0C006AF00016AA2D /* triangle-gray-collapsed-on.tif in Resources */,
 				6582F41F0C006AF00016AA2D /* triangle-gray-expanded-on.tif in Resources */,
+				653948DC0C0359C4001705D6 /* button-goto.tif in Resources */,
+				653948DD0C0359C4001705D6 /* button-goto-on.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
