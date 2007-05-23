@@ -44,6 +44,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)updateSortDescriptor;
 
+- (int)nextID;
+
 @end
 
 
@@ -90,6 +92,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 												   object:nil];
 		
 		filterEngine = [[NNFilterEngine alloc] init];
+		filterThreadID = 0;
 		activePrefixFilter = nil;
 		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
@@ -304,7 +307,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[filters retain];
 	[activeContentTypeFilters release];
 	activeContentTypeFilters = filters;
-	
+		
 	// adjust filterengine
 	// remove old content type filters
 	NSEnumerator *oldFiltersEnumerator = [[filterEngine filters] objectEnumerator];
@@ -465,7 +468,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	filterEngineIsWorking = YES;
 	[filterEngine setObjects:someTags];
-	[filterEngine startWithServer:self];
+	
+	[filterEngine startWithServer:self forID:[self nextID]];
 }
 
 - (void)filteringStarted
@@ -483,12 +487,16 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self updateTagCloudDisplayMessage];
 }
 
-- (void)objectsFiltered
+- (void)objectsFilteredForID:(int)threadID
 {
-	[filterEngine lockFilteredObjects];
-	//NSLog(@"filtered: %@",[filterEngine filteredObjects]);
-	[self setVisibleTags:[filterEngine filteredObjects]];
-	[filterEngine unlockFilteredObjects];
+	// do nothing if theadID does not match filterThreadID
+	// (a previous filter run has sent a message)
+	if (threadID == filterThreadID)
+	{
+		[filterEngine lockFilteredObjects];
+		[self setVisibleTags:[filterEngine filteredObjects]];
+		[filterEngine unlockFilteredObjects];
+	}
 }
 
 - (void)addContentTypeFilter:(PAContentTypeFilter*)filter
@@ -505,6 +513,18 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[filterEngine removeAllFilters];
 }
+
+- (int)nextID
+{
+	// increase ID
+	if (filterThreadID < INT_MAX)
+		filterThreadID++;
+	else
+		filterThreadID = 0;
+	
+	return filterThreadID;
+}
+
 
 #pragma mark actions
 - (void)updateTagCloudDisplayMessage

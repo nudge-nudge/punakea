@@ -31,9 +31,11 @@
 	
 	unsigned int threadCount;
 	NSLock *threadCountLock;
+	
+	int currentID;
 }
 
-- (void)startWithServer:(id <NNBVCServerProtocol>)aServer;
+- (void)startWithServer:(id <NNBVCServerProtocol>)aServer forID:(int)threadID;
 - (void)setThreadShouldQuit;
 
 - (void)setObjects:(NSArray*)objects;
