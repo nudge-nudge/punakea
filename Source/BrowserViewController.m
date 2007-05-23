@@ -245,6 +245,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self updateTagCloudDisplayMessage];
 	
 	[tagCloud reloadData];
+	
+	// if find-as-you-type is active, select upper left tag
+	// this way the tag can be activated directly by clicking enter
+	if ([searchFieldString length] > 0)
+		[tagCloud selectUpperLeftButton];
 }
 
 - (void)clearVisibleTags
@@ -483,7 +488,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
 	
 	[self updateTagCloudDisplayMessage];
-	[tagCloud reloadData];
 }
 
 - (void)objectsFiltered
@@ -537,6 +541,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	{
 		[tagCloud setDisplayMessage:@""];
 	}
+	
+	// reload data to display message if necessary
+	if ([[tagCloud displayMessage] length] > 0)
+		[tagCloud reloadData];
 }
 
 - (void)searchForTag:(NNTag*)aTag
