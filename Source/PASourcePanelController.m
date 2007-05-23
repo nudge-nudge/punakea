@@ -28,13 +28,8 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		PASourceItem *sourceItem = [PASourceItem itemWithValue:@"ALL_ITEMS" displayName:@"All Items"];
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
-		
-		PASourceItem *fileKindItem = [PASourceItem itemWithValue:@"DOCUMENTS" displayName:
-			NSLocalizedStringFromTable(@"DOCUMENTS", @"MDSimpleGrouping", nil)];
-		[fileKindItem setEditable:NO];
-		[sourceItem addChild:fileKindItem];
 
-		fileKindItem = [PASourceItem itemWithValue:@"IMAGES" displayName:
+		PASourceItem *fileKindItem = [PASourceItem itemWithValue:@"IMAGES" displayName:
 			NSLocalizedStringFromTable(@"IMAGES", @"MDSimpleGrouping", nil)];
 		[fileKindItem setEditable:NO];
 		[sourceItem addChild:fileKindItem];
