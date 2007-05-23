@@ -373,7 +373,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		[self scrollPoint:visibleRect.origin];
 		[self restoreSelection];
 
-		[[self window] makeFirstResponder:self];
+		//[[self window] makeFirstResponder:self];
 	}
 }
 

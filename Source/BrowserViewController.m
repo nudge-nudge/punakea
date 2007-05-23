@@ -269,7 +269,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[self setVisibleTags:[tags tags]];
 	[filterEngine setObjects:[tags tags]];
-	[[[self view] window] makeFirstResponder:tagCloud];
+	//[[[self view] window] makeFirstResponder:tagCloud];
 }
 
 - (void)displaySelectedTag:(NNTag*)tag
@@ -330,6 +330,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {
+	// Make tagcloud first responder on click of a tag button
+	if([[tagCloud window] firstResponder] != tagCloud)
+		[[tagCloud window] makeFirstResponder:tagCloud];
+	
 	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
 		[self resetSearchFieldString];
 	

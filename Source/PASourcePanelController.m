@@ -156,6 +156,11 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
 		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] manageTags];
 	}
+	else if([[sourceItem containedObject] isKindOfClass:[NNTag class]])
+	{
+		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
+		[[[NSApplication sharedApplication] delegate] searchForTag:[sourceItem containedObject]];
+	}
 	else if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
 	{
 		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
