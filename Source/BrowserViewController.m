@@ -89,13 +89,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 													 name:PAContentTypeFilterUpdate
 												   object:nil];
 		
-		[NSBundle loadNibNamed:@"BrowserView" owner:self];
+		filterEngine = [[NNFilterEngine alloc] init];
+		activePrefixFilter = nil;
 		
-		// tags will be displayed a little later,
-		// so that filterEngine will be up and running
-		[self performSelector:@selector(initFilterEngine)
-				   withObject:nil
-				   afterDelay:0.01];
+		[NSBundle loadNibNamed:@"BrowserView" owner:self];
 	}
 	return self;
 }
@@ -333,7 +330,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {
-	[self resetSearchFieldString];
+	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
+		[self resetSearchFieldString];
 	
 	NNTag *tag = [sender genericTag];
 	[mainController handleTagActivation:tag];
@@ -342,7 +340,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark typeAheadFind
 - (void)resetSearchFieldString
 {
-	[self setSearchFieldString:@""];
+	if ([searchFieldString length] > 0)
+		[self setSearchFieldString:@""];
 }
 
 #pragma mark events
@@ -465,18 +464,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[filterEngine startWithServer:self];
 }
 
-- (void)initFilterEngine
-{
-	[self setupFilterEngine];
-	[self setDisplayTags:[tags tags]];
-}
-
-- (void)setupFilterEngine
-{
-	filterEngine = [[NNFilterEngine alloc] init];
-	activePrefixFilter = nil;
-}
-
 - (void)filteringStarted
 {
 	NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_GATHERING_TAGS", @"Global", nil);
@@ -508,6 +495,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)removeContentTypeFilter:(PAContentTypeFilter*)filter
 {
 	[filterEngine removeFilter:filter];
+}
+
+- (void)removeAllFilters
+{
+	[filterEngine removeAllFilters];
 }
 
 #pragma mark actions
@@ -590,7 +582,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller
 {
 	[self resetSearchFieldString];
-	//[[[self view] window] makeFirstResponder:tagCloud];
+	[self setDisplayTags:[tags tags]];
 	[self setMainController:controller];
 }
 

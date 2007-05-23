@@ -109,8 +109,6 @@ bind to visibleTags
 			 object:scrollView];
 	
 	[self registerForDraggedTypes:[dropManager handledPboardTypes]];
-	
-	[self handleTagsChange];
 }
 
 - (void)dealloc

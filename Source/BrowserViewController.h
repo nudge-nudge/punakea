@@ -112,5 +112,6 @@ is called when a tag is clicked
 - (void)setActiveContentTypeFilters:(NSArray*)filters;
 - (void)addContentTypeFilter:(PAContentTypeFilter*)filter;
 - (void)removeContentTypeFilter:(PAContentTypeFilter*)filter;
+- (void)removeAllFilters;
 
 @end

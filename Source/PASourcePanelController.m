@@ -148,11 +148,12 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	// Perform actions
 	if([[sourceItem value] isEqualTo:@"ALL_ITEMS"])
 	{
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] setActiveContentTypeFilters:[NSArray array]];
+		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
 		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] showResults];
 	}
 	else if([[sourceItem value] isEqualTo:@"MANAGE_TAGS"])
 	{
+		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
 		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] manageTags];
 	}
 	else if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])

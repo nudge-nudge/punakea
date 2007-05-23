@@ -78,7 +78,7 @@
 	// setup DO messaging stuff
 	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
 																	sendPort:[portArray objectAtIndex:1]];
-				
+	
 	[[NSRunLoop currentRunLoop] run];
 	
 	// do some book keeping	
@@ -297,8 +297,6 @@
 
 - (void)setThreadShouldQuit
 {
-	[threadLock lock];
-	
 	if ([threadLock condition] == NNThreadStopped)
 		[threadLock unlock];
 	else
