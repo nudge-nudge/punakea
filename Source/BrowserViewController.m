@@ -333,6 +333,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {
+	[self resetSearchFieldString];
+	
 	NNTag *tag = [sender genericTag];
 	[mainController handleTagActivation:tag];
 }
