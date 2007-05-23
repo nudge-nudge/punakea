@@ -92,7 +92,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 												   object:nil];
 		
 		filterEngine = [[NNFilterEngine alloc] init];
-		filterThreadID = 0;
 		activePrefixFilter = nil;
 		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
@@ -469,7 +468,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	filterEngineIsWorking = YES;
 	[filterEngine setObjects:someTags];
 	
-	[filterEngine startWithServer:self forID:[self nextID]];
+	[filterEngine startWithServer:self];
 }
 
 - (void)filteringStarted
@@ -487,16 +486,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self updateTagCloudDisplayMessage];
 }
 
-- (void)objectsFilteredForID:(int)threadID
+- (void)objectsFiltered
 {
-	// do nothing if theadID does not match filterThreadID
-	// (a previous filter run has sent a message)
-	if (threadID == filterThreadID)
-	{
-		[filterEngine lockFilteredObjects];
-		[self setVisibleTags:[filterEngine filteredObjects]];
-		[filterEngine unlockFilteredObjects];
-	}
+	[filterEngine lockFilteredObjects];
+	[self setVisibleTags:[filterEngine filteredObjects]];
+	[filterEngine unlockFilteredObjects];
 }
 
 - (void)addContentTypeFilter:(PAContentTypeFilter*)filter
@@ -512,17 +506,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)removeAllFilters
 {
 	[filterEngine removeAllFilters];
-}
-
-- (int)nextID
-{
-	// increase ID
-	if (filterThreadID < INT_MAX)
-		filterThreadID++;
-	else
-		filterThreadID = 0;
-	
-	return filterThreadID;
 }
 
 

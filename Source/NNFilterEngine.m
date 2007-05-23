@@ -71,15 +71,15 @@
 }
 
 #pragma mark threading stuff
-- (void)runCheckWithParams:(NSArray*)params
+- (void)runCheckWithPorts:(NSArray*)portArray
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
 	// setup DO messaging stuff
-	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[params objectAtIndex:0] 
-																	sendPort:[params objectAtIndex:1]];
+	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
+																	sendPort:[portArray objectAtIndex:1]];
 	
-	currentID = [[params objectAtIndex:2] intValue];
+	[serverConnection setReplyTimeout:2.0];
 	
 	[[NSRunLoop currentRunLoop] run];
 	
@@ -87,7 +87,17 @@
 	[threadCountLock lock];
 	if (threadCount == 0)
 	{
-		[(id)[serverConnection rootProxy] filteringStarted];
+		@try
+		{
+			[(id)[serverConnection rootProxy] filteringStarted];
+		}
+		@catch (NSException *e)
+		{
+			NSLog(@"main thread not ready");
+			[pool release];
+			return;
+		}
+			
 	}
 	
 	threadCount++;
@@ -114,7 +124,14 @@
 			[self lockFilteredObjects];
 			[filteredObjects addObjectsFromArray:currentlyFilteredObjects];
 			[self unlockFilteredObjects];
-			[(id)[serverConnection rootProxy] objectsFilteredForID:currentID];
+			@try
+			{
+				[(id)[serverConnection rootProxy] objectsFiltered];
+			}
+			@catch (NSException *e)
+			{
+				NSLog(@"deadlock avoided");
+			}
 			[threadLock unlock];
 		}
 				
@@ -173,7 +190,7 @@
 }
 
 // will be called from outside
-- (void)startWithServer:(id <NNBVCServerProtocol>)aServer forID:(int)threadID;
+- (void)startWithServer:(id <NNBVCServerProtocol>)aServer
 {	
 	// hold server reference
 	// needed if filters change without new filterObjects being set
@@ -195,7 +212,7 @@
 	portArray = [NSArray arrayWithObjects:port2,port1,nil];
 	
 	// start the engine
-	[self startFilterEngineWithPorts:portArray forID:threadID];
+	[self startFilterEngineWithPorts:portArray];
 }
 
 - (void)setObjects:(NSArray*)objects
@@ -204,7 +221,7 @@
 	[self setFilterObjects:objects];
 }
 
-- (void)startFilterEngineWithPorts:(NSArray*)portArray forID:(int)threadID
+- (void)startFilterEngineWithPorts:(NSArray*)portArray
 {
 	// buffer in position 0 is the main input buffer
 	NNQueue *inBuffer = [buffers objectAtIndex:0];
@@ -223,13 +240,10 @@
 							   withObject:nil];
 	}
 	
-	NSMutableArray *params = [NSMutableArray arrayWithArray:portArray];
-	[params addObject:[NSNumber numberWithInt:threadID]];
-	
 	// start check thread
-	[NSThread detachNewThreadSelector:@selector(runCheckWithParams:)
+	[NSThread detachNewThreadSelector:@selector(runCheckWithPorts:)
 							 toTarget:self
-						   withObject:params];
+						   withObject:portArray];
 }
 
 - (void)stopFilterEngine
@@ -335,7 +349,7 @@
 		[nextFilter setInQueue:[newFilter outQueue]];
 	}
 	
-	[self startWithServer:server forID:currentID];
+	[self startWithServer:server];
 }
 	
 - (void)removeFilter:(NNObjectFilter*)filter
@@ -359,7 +373,7 @@
 	[filters removeObjectAtIndex:slot];
 	[buffers removeObjectAtIndex:slot+1];
 	
-	[self startWithServer:server forID:currentID];
+	[self startWithServer:server];
 }
 
 - (void)removeAllFilters
