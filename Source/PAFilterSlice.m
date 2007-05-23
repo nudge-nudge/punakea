@@ -235,14 +235,16 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	
 	// Bundlings attributes that we set here need to be wrapped into an NNQueryItem in 
 	// NNQuery's bundleResults:byAttributes:objectWrapping!! Only a few are there yet! TODO!
-	if([[buttons objectAtIndex:0] isEqualTo:sender])
+	
+	// remove all filters
+	[query removeAllFilters];
+
+	// add filter if a content type button was clicked
+	if(![sender isEqualTo:[buttons objectAtIndex:0]])
 	{
-		[query filterResults:NO usingValues:nil forBundlingAttribute:nil
-				      newBundlingAttributes:nil];
-	} else {
-		[query filterResults:YES usingValues:[filter objectForKey:@"filterValues"]
-						forBundlingAttribute:[filter objectForKey:@"filterBundlingAttribute"]
-					   newBundlingAttributes:[filter objectForKey:@"filterNewBundlingAttributes"]];
+		NNQueryFilter *queryFilter = [NNQueryFilter queryFilterWithAttribute:[filter objectForKey:@"filterValues"]
+																	   value:[filter objectForKey:@"filterBundlingAttribute"]];
+		[query addFilter:queryFilter];
 	}
 	
 	// Set display mode

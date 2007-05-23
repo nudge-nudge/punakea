@@ -324,6 +324,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 													  userInfo:userInfo];
 }
 
+// TODO move this to controller
 - (void)queryNote:(NSNotification *)note
 {	
 	if([[note name] isEqualToString:NNQueryDidStartGatheringNotification])
@@ -340,7 +341,8 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		[self reloadData];
 	}
 	
-	if([[note name] isEqualToString:NNQueryDidUpdateNotification])
+	if([[note name] isEqualToString:NNQueryDidUpdateNotification] ||
+	   [[note name] isEqualToString:NNQueryGatheringProgressNotification])
 	{		
 		[self saveSelection];
 		NSRect visibleRect = [self visibleRect];

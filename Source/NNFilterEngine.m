@@ -101,23 +101,21 @@
 	{		
 		usleep(50000);
 
-		if (![threadLock tryLockWhenCondition:NNThreadRunning])
+		if (![threadLock condition] == NNThreadRunning)
 			break;
 				
 		NSMutableArray *currentlyFilteredObjects = [self currentlyFilteredObjects];
 		
-		if ([currentlyFilteredObjects count] > 0)
+		if ([currentlyFilteredObjects count] > 0 &&
+			[threadLock lockWhenCondition:NNThreadRunning beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]])
 		{
 			[self lockFilteredObjects];
 			[filteredObjects addObjectsFromArray:currentlyFilteredObjects];
 			[self unlockFilteredObjects];
-			
-			// tell client-thread that new objects have been filtered
 			[(id)[serverConnection rootProxy] objectsFiltered];
+			[threadLock unlock];
 		}
-		
-		[threadLock unlock];
-		
+				
 		if ([self checkIfDone])
 			break;
 	}

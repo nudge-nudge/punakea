@@ -290,9 +290,8 @@
 
 - (void)relatedTagsHaveChanged:(NSNotification *)notification
 {
-	if (![relatedTags isUpdating] && ([relatedTags count] == 0) )
+	if (![relatedTags isUpdating] && ([relatedTags count] == 0))
 	{
-		NSLog(@"no related tags");
 		[self setDisplayMessage:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")];
 	}
 	else

@@ -350,6 +350,20 @@
 			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
 			remoteInfo = WeblocImporter;
 		};
+		48021BAF0C02E50C001CF480 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = NNTagging;
+		};
+		48021BB30C02E519001CF480 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = NNTagging;
+		};
 		480721EB0AEFE8F40024118D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -550,6 +564,7 @@
 		480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WeblocImporter.xcodeproj; path = WeblocImporter/WeblocImporter.xcodeproj; sourceTree = "<group>"; };
 		480219520C02D2EE001CF480 /* PAInstaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInstaller.h; sourceTree = "<group>"; };
 		480219530C02D2EE001CF480 /* PAInstaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAInstaller.m; sourceTree = "<group>"; };
+		48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNTagging.xcodeproj; path = ../../../nntagging/trunk/NNTagging.xcodeproj; sourceTree = SOURCE_ROOT; };
 		480C402E0BF4469A00C90B2C /* PATagCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCache.h; sourceTree = "<group>"; };
 		480C402F0BF4469A00C90B2C /* PATagCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCache.m; sourceTree = "<group>"; };
 		480C40390BF4471300C90B2C /* PASingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASingleton.h; sourceTree = "<group>"; };
@@ -1050,6 +1065,7 @@
 		4802193B0C02CE42001CF480 /* Subprojects */ = {
 			isa = PBXGroup;
 			children = (
+				48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */,
 				480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */,
 			);
 			path = Subprojects;
@@ -1059,6 +1075,14 @@
 			isa = PBXGroup;
 			children = (
 				480219480C02CE7B001CF480 /* WeblocImporter.mdimporter */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		48021BAB0C02E50C001CF480 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48021BB00C02E50C001CF480 /* NNTagging.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2017,6 +2041,7 @@
 				480721EC0AEFE8F40024118D /* PBXTargetDependency */,
 				48186F8F0BE4C930000B4638 /* PBXTargetDependency */,
 				4802194C0C02CE85001CF480 /* PBXTargetDependency */,
+				48021BB40C02E519001CF480 /* PBXTargetDependency */,
 			);
 			name = Punakea;
 			productInstallPath = "$(HOME)/Applications";
@@ -2049,6 +2074,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 48021BAB0C02E50C001CF480 /* Products */;
+					ProjectRef = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+				},
+				{
 					ProductGroup = 480219440C02CE7B001CF480 /* Products */;
 					ProjectRef = 480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */;
 				},
@@ -2073,6 +2102,13 @@
 			fileType = wrapper.cfbundle;
 			path = WeblocImporter.mdimporter;
 			remoteRef = 480219470C02CE7B001CF480 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		48021BB00C02E50C001CF480 /* NNTagging.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NNTagging.framework;
+			remoteRef = 48021BAF0C02E50C001CF480 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2404,6 +2440,11 @@
 			isa = PBXTargetDependency;
 			name = WeblocImporter;
 			targetProxy = 4802194B0C02CE85001CF480 /* PBXContainerItemProxy */;
+		};
+		48021BB40C02E519001CF480 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 48021BB30C02E519001CF480 /* PBXContainerItemProxy */;
 		};
 		480721EC0AEFE8F40024118D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
