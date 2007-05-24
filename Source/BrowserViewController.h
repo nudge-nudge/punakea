@@ -55,6 +55,8 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	NSArray								*activeContentTypeFilters;
 	BOOL								filterEngineIsWorking;
 	
+	NSArray								*contentTypeFilterIdentifiers;
+	
 	PATagCloudSortKey					sortKey;
 	NSSortDescriptor					*sortDescriptor;
 }
@@ -111,5 +113,8 @@ is called when a tag is clicked
 - (NSArray*)activeContentTypeFilters;
 - (void)setActiveContentTypeFilters:(NSArray*)filters;
 - (void)removeAllFilters;
+
+- (NSArray*)contentTypeFilterIdentifiers;
+- (void)setContentTypeFilterIdentifiers:(NSArray*)identifiers;
 
 @end

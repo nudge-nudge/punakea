@@ -79,7 +79,7 @@
 	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
 																	sendPort:[portArray objectAtIndex:1]];
 	
-	[serverConnection setReplyTimeout:2.0];
+	[serverConnection setReplyTimeout:0.2];
 	
 	[[NSRunLoop currentRunLoop] run];
 	
@@ -87,17 +87,20 @@
 	[threadCountLock lock];
 	if (threadCount == 0)
 	{
-		@try
+		BOOL established = NO;
+		
+		while (!established)
 		{
-			[(id)[serverConnection rootProxy] filteringStarted];
-		}
-		@catch (NSException *e)
-		{
-			NSLog(@"main thread not ready");
-			[pool release];
-			return;
-		}
-			
+			@try
+			{
+				[(id)[serverConnection rootProxy] filteringStarted];
+				established = YES;
+			}
+			@catch (NSException *e)
+			{
+				NSLog(@"main thread not ready yet");
+			}
+		}			
 	}
 	
 	threadCount++;
@@ -115,30 +118,29 @@
 
 		if (![threadLock condition] == NNThreadRunning)
 			break;
-				
-		NSMutableArray *currentlyFilteredObjects = [self currentlyFilteredObjects];
 		
-		if ([currentlyFilteredObjects count] > 0 &&
-			[threadLock lockWhenCondition:NNThreadRunning beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]])
+		if ([threadLock lockWhenCondition:NNThreadRunning 
+							   beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]])
 		{
-			[self lockFilteredObjects];
-			[filteredObjects addObjectsFromArray:currentlyFilteredObjects];
-			[self unlockFilteredObjects];
-			@try
+			NSMutableArray *currentlyFilteredObjects = [self currentlyFilteredObjects];
+			
+			if ([currentlyFilteredObjects count] > 0)
 			{
-				[(id)[serverConnection rootProxy] objectsFiltered];
-			}
-			@catch (NSException *e)
-			{
-				NSLog(@"deadlock avoided");
-				[[buffers lastObject] enqueueObjects:currentlyFilteredObjects];
+				[self lockFilteredObjects];
+				[filteredObjects addObjectsFromArray:currentlyFilteredObjects];
+				[self unlockFilteredObjects];
+				@try
+				{
+					[(id)[serverConnection rootProxy] objectsFiltered];
+				}
+				@catch (NSException *e)
+				{
+					NSLog(@"deadlock avoided");
+					//[[buffers lastObject] enqueueObjects:currentlyFilteredObjects];
+				}
 			}
 			[threadLock unlock];
 		} 
-		else
-		{
-			[[buffers lastObject] enqueueObjects:currentlyFilteredObjects];
-		}
 				
 		if ([self checkIfDone])
 			break;
@@ -148,7 +150,20 @@
 	threadCount--;
 	if (threadCount == 0)
 	{
-		[(id)[serverConnection rootProxy] filteringFinished];
+		BOOL established = NO;
+		
+		while (!established)
+		{
+			@try
+			{
+				[(id)[serverConnection rootProxy] filteringFinished];
+				established = YES;
+			}
+			@catch (NSException *e)
+			{
+					NSLog(@"main thread not ready yet");
+			}		
+		}
 	}
 	[threadCountLock unlock];
 	
@@ -181,6 +196,19 @@
 - (NSMutableArray*)filteredObjects
 {
 	return filteredObjects;
+}
+
+- (NNQueue*)inBuffer
+{
+	if ([buffers count] > 0)
+		return [buffers objectAtIndex:0];
+	else
+		return nil;
+}
+
+- (NNQueue*)outBuffer
+{
+	return [buffers lastObject];
 }
 
 #pragma mark function
@@ -229,10 +257,9 @@
 - (void)startFilterEngineWithPorts:(NSArray*)portArray
 {
 	// buffer in position 0 is the main input buffer
-	NNQueue *inBuffer = [buffers objectAtIndex:0];
-	[inBuffer enqueueObjects:[self filterObjects]];
+	[[self inBuffer] enqueueObjects:[self filterObjects]];
 	
-	//NSLog(@"filterEngine started with filterObjects: %@\ninBuffer: %@\nfilters: %@",[self filterObjects],inBuffer,filters);
+	NSLog(@"filterEngine started with filterObjects: %@\ninBuffer: %@\nfilters: %@",[self filterObjects],[self inBuffer],filters);
 	
 	NNObjectFilter *filter;
 	NSEnumerator *e = [filters objectEnumerator];
@@ -285,9 +312,7 @@
 	NSMutableArray *results = [NSMutableArray array];
 	id obj;
 	
-	NNQueue *lastBuffer = [buffers lastObject];
-	
-	while (obj = [lastBuffer tryDequeue])
+	while (obj = [[self outBuffer] tryDequeue])
 	{
 		[results addObject:obj];
 	}

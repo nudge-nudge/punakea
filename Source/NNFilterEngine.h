@@ -33,9 +33,12 @@
 	NSLock *threadCountLock;
 }
 
-- (void)startWithServer:(id <NNBVCServerProtocol>)aServer forID:(int)threadID;
+- (void)startWithServer:(id <NNBVCServerProtocol>)aServer;
 - (void)stopFilterEngine;
 - (void)reset;
+
+- (NNQueue*)inBuffer;
+- (NNQueue*)outBuffer;
 
 - (void)setObjects:(NSArray*)objects;
 

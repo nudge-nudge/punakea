@@ -329,6 +329,17 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
+- (NSArray*)contentTypeFilterIdentifiers
+{
+	return contentTypeFilterIdentifiers;
+}
+
+- (void)setContentTypeFilterIdentifiers:(NSArray*)identifiers
+{
+	[contentTypeFilterIdentifiers release];
+	contentTypeFilterIdentifiers = [identifiers retain];
+}
+
 #pragma mark tag stuff
 - (IBAction)tagButtonClicked:(id)sender
 {
@@ -457,6 +468,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self showResults];
 	
 	NSString *contentType = [[notification userInfo] objectForKey:@"contentType"];
+	
+	[self setContentTypeFilterIdentifiers:[NSArray arrayWithObject:contentType]];
+	
 	NNObjectFilter *filter = [PAContentTypeFilter filterWithContentType:contentType];
 	[self setActiveContentTypeFilters:[NSArray arrayWithObject:filter]];
 }
@@ -489,6 +503,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)objectsFiltered
 {
 	[filterEngine lockFilteredObjects];
+	NSLog(@"objects filtered");
 	[self setVisibleTags:[filterEngine filteredObjects]];
 	[filterEngine unlockFilteredObjects];
 }

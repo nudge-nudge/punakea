@@ -11,6 +11,7 @@
 @interface PAResultsViewController (PrivateAPI)
 
 - (void)setDisplayMessage:(NSString*)message;
+- (NSArray*)createContentTypeQueryFilters;
 
 @end
 
@@ -263,6 +264,10 @@
 	
 	// set tags to search for
 	[query setTags:selectedTags];
+	
+	// update query to conform to active content type filters
+	NSArray *queryFilters = [self createContentTypeQueryFilters];
+	[query addFilters:queryFilters];
 	
 	// the query is only started if there are any tags to look for
 	if ([selectedTags count] > 0)
@@ -604,6 +609,35 @@
 	{
 		[item moveToTrash:YES errorWindow:[outlineView window]];
 	}
+}
+
+- (NSArray*)createContentTypeQueryFilters
+{
+	NSArray *identifiers = [NSArray array];
+	NSMutableArray *queryFilters = [NSMutableArray array];
+	
+	if ([delegate respondsToSelector:@selector(contentTypeFilterIdentifiers)])
+	{
+		identifiers = [delegate contentTypeFilterIdentifiers];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate does not implement contentTypeFilterIdentifiers"];
+	}
+	
+	NSEnumerator *e = [identifiers objectEnumerator];
+	NSString *identifier;
+	
+	while (identifier = [e nextObject])
+	{
+		NNContentTypeTreeQueryFilter *filter = 
+			[NNContentTypeTreeQueryFilter contentTypeTreeQueryFilterForType:identifier];
+
+		[queryFilters addObject:filter];
+	}
+	
+	return queryFilters;
 }
 
 /*- (NSArray *)selectedItems

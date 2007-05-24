@@ -104,8 +104,6 @@
 	
 	if (result & PACacheIsValid)
 	{
-		NSLog(@".");
-		
 		if (result & PACacheSatisfiesRequest)
 		{
 			// cache was valid and object is good to go			
