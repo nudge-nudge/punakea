@@ -493,19 +493,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[filterEngine unlockFilteredObjects];
 }
 
-- (void)addContentTypeFilter:(PAContentTypeFilter*)filter
-{
-	[filterEngine addFilter:filter];
-}
-
-- (void)removeContentTypeFilter:(PAContentTypeFilter*)filter
-{
-	[filterEngine removeFilter:filter];
-}
-
 - (void)removeAllFilters
 {
-	[filterEngine removeAllFilters];
+	[self setActiveContentTypeFilters:[NSArray array]];
+	[filterEngine removeFilter:[self activePrefixFilter]];
+	[self setActivePrefixFilter:nil];
 }
 
 
@@ -532,7 +524,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			// searchstring stuff
 			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_SEARCHSTRING",@"Tags",@"")];
 		}
-		else if ([activeContentTypeFilters count] > 0)
+		else if ([[filterEngine filters] count] > 0)
 		{
 			// no items found for content type
 			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_CONTENTTYPE",@"Tags",@"")];
@@ -598,12 +590,14 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// emptry search field	
 	[self resetSearchFieldString];
 	
-	// remove all filters
-	[filterEngine removeAllFilters];
+	// reset filterEngine
+	[filterEngine reset];
 	
-	// display results	
-	[self showResults];
+	// reset maincontroller
 	[mainController reset];
+	
+	// display all tags
+	[self setDisplayTags:[tags tags]];
 }
 
 - (void)unbindAll

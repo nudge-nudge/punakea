@@ -12,6 +12,7 @@
 #import "NNTagging/NNFile.h"
 #import "NNTagging/NNSelectedTags.h"
 #import "NNTagging/NNQuery.h"
+#import "NNTagging/NNContentTypeTreeQueryFilter.h"
 
 #import "PATagCache.h"
 
@@ -20,8 +21,6 @@
 	
 	NNSelectedTags *selectedTags;
 	NNQuery *query;
-	
-	NSDictionary *simpleGrouping;
 	
 	NSLock *filterLock;
 	

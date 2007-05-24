@@ -34,7 +34,8 @@
 }
 
 - (void)startWithServer:(id <NNBVCServerProtocol>)aServer forID:(int)threadID;
-- (void)setThreadShouldQuit;
+- (void)stopFilterEngine;
+- (void)reset;
 
 - (void)setObjects:(NSArray*)objects;
 

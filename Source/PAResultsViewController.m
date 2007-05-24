@@ -56,7 +56,12 @@
 			   selector:@selector(queryNote:)
 				   name:nil
 				 object:query];
-			
+		
+		[nc addObserver:self
+			 selector:@selector(contentTypeFilterUpdate:)
+				 name:PAContentTypeFilterUpdate
+			   object:nil];
+
 		[self setDisplayMessage:@""];
 		
 		[NSBundle loadNibNamed:@"ResultsView" owner:self];
@@ -171,6 +176,7 @@
 - (void)reset
 {
 	[selectedTags removeAllTags];
+	[query removeAllFilters];
 }
 
 - (void)removeLastTag
@@ -255,6 +261,7 @@
 		[query stopQuery];
 	}
 	
+	// set tags to search for
 	[query setTags:selectedTags];
 	
 	// the query is only started if there are any tags to look for
@@ -332,6 +339,15 @@
 	{
 		[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
 	}
+}
+
+- (void)contentTypeFilterUpdate:(NSNotification*)notification
+{
+	[query removeAllFilters];
+	NSString *contentType = [[notification userInfo] objectForKey:@"contentType"];
+	NNContentTypeTreeQueryFilter *filter = 
+		[NNContentTypeTreeQueryFilter contentTypeTreeQueryFilterForType:contentType];
+	[query addFilter:filter];
 }
 
 

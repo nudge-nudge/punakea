@@ -16,6 +16,7 @@
 #import "NNTagging/NNRelatedTags.h"
 #import "NNTagging/NNSelectedTags.h"
 #import "NNTagging/NNQuery.h"
+#import "NNTagging/NNContentTypeTreeQueryFilter.h"
 
 #import "PAResultsOutlineView.h"
 #import "PADropManager.h"

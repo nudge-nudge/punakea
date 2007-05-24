@@ -131,8 +131,13 @@
 			@catch (NSException *e)
 			{
 				NSLog(@"deadlock avoided");
+				[[buffers lastObject] enqueueObjects:currentlyFilteredObjects];
 			}
 			[threadLock unlock];
+		} 
+		else
+		{
+			[[buffers lastObject] enqueueObjects:currentlyFilteredObjects];
 		}
 				
 		if ([self checkIfDone])
@@ -267,6 +272,12 @@
 	
 	// empty results
 	[filteredObjects removeAllObjects];
+}
+
+- (void)reset
+{
+	[self stopFilterEngine];
+	[filters removeAllObjects];
 }
 
 - (NSMutableArray*)currentlyFilteredObjects

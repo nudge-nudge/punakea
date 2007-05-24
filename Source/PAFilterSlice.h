@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNQuery.h"
+#import "NNTagging/NNContentTypeTreeQueryFilter.h"
 
 #import "PAFilterButton.h"
 #import "PAResultsOutlineView.h"

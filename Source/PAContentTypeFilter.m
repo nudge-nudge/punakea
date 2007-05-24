@@ -41,14 +41,14 @@
 		
 		filterLock = [[NSLock alloc] init];
 		
-		[self createFilters];
+		NNContentTypeTreeQueryFilter *filter = [NNContentTypeTreeQueryFilter contentTypeTreeQueryFilterForType:type];
+		[query addFilter:filter];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[simpleGrouping release];
 	[filterLock release];
 	[query release];
 	[selectedTags release];
@@ -69,24 +69,6 @@
 }
 
 #pragma mark function
-- (void)createFilters
-{
-	// load groupings
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"MDSimpleGrouping" ofType:@"plist"];
-	simpleGrouping = [[NSDictionary alloc] initWithContentsOfFile:path];
-	
-	// add filters for every resource type
-	NSArray *contentValues = [simpleGrouping allKeysForObject:contentType];
-	
-	NSEnumerator *e = [contentValues objectEnumerator];
-	NSString *aContentType;
-	
-	while (aContentType = [e nextObject])
-	{
-		[query addFilter:[NNQueryFilter queryFilterWithAttribute:@"kMDItemContentTypeTree" value:aContentType]];
-	}
-}
-
 - (void)run
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];

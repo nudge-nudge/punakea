@@ -124,6 +124,8 @@
 		486DC7510ACD3B2D00BE0F54 /* PATagManagementViewMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
 		486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486EBA4409D68F16000C154C /* PAFileBox.h */; };
+		486F94C80C057282008AB8BD /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48021BB00C02E50C001CF480 /* NNTagging.framework */; };
+		486F95480C057577008AB8BD /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48021BB00C02E50C001CF480 /* NNTagging.framework */; };
 		4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */; };
 		4870213C0A4FC1EC00CD5E75 /* PASidebarWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */; };
 		4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */; };
@@ -161,8 +163,6 @@
 		48D815F20BF5BFB000821C25 /* NNDistributedObjectProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */; };
 		48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D81DAB09F79C1C0075EE44 /* TaggerController.h */; };
 		48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D81DAC09F79C1C0075EE44 /* TaggerController.m */; };
-		48E145430B5F99FA00859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
-		48E1454C0B5F9A6700859B22 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		48E145AB0B5F9BB400859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		48E145B20B5F9BD400859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		48E145B50B5F9BDB00859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
@@ -429,8 +429,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				486F94C80C057282008AB8BD /* NNTagging.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
-				48E1454C0B5F9A6700859B22 /* NNTagging.framework in Copy Frameworks */,
 				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
 				48893B030AF0A4EE00BA0B50 /* NDResourceFork.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
@@ -933,8 +933,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				486F95480C057577008AB8BD /* NNTagging.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
-				48E145430B5F99FA00859B22 /* NNTagging.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
 				48893B5A0AF0AB1600BA0B50 /* NDResourceFork.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
