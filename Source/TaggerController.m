@@ -68,7 +68,9 @@ adds tag to tagField (use from "outside")
 	
 	// token field wrapping
 	[[[self tagField] cell] setWraps:YES];
-	
+		
+	[self updateTokenFieldEditable];
+		
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	// add observer for updating the threaded icons
 	[nc addObserver:self 
@@ -128,6 +130,8 @@ adds tag to tagField (use from "outside")
 - (void)addTaggableObject:(NNTaggableObject *)anObject
 {
 	[items addObject:anObject];
+	
+	[self updateTokenFieldEditable];
 	[self updateManageFilesFlagOnTaggableObjects];
 	[self updateTags];
 	[tableView reloadData];
@@ -136,6 +140,8 @@ adds tag to tagField (use from "outside")
 - (void)addTaggableObjects:(NSArray *)theObjects
 {
 	[items addObjectsFromArray:theObjects];
+
+	[self updateTokenFieldEditable];
 	[self updateManageFilesFlagOnTaggableObjects];
 	[self updateTags];
 	[tableView reloadData];
@@ -145,6 +151,8 @@ adds tag to tagField (use from "outside")
 {
 	[items release];
 	items = [theObjects mutableCopy];
+	
+	[self updateTokenFieldEditable];
 	[self updateManageFilesFlagOnTaggableObjects];
 	[self updateTags];
 	[tableView reloadData];
@@ -203,7 +211,7 @@ adds tag to tagField (use from "outside")
 	}
 	
 	// Disable manage files button if there are any files present
-	if([items count] > 0 && manageFiles)
+	if([items count] > 0 && manageFiles && [[self currentCompleteTagsInField] count] > 0 )
 		[manageFilesButton setEnabled:NO];
 		
 }
@@ -270,6 +278,8 @@ adds tag to tagField (use from "outside")
 {
 	[items removeObjectsAtIndexes:[tableView selectedRowIndexes]];
 	
+	[self updateTokenFieldEditable];
+	
 	[tableView deselectAll:tableView];
 		
 	[self updateManageFilesFlagOnTaggableObjects];
@@ -287,6 +297,18 @@ adds tag to tagField (use from "outside")
 	[self updateTags];
 }
 
+- (void)updateTokenFieldEditable
+{
+	if ([items count] > 0)
+	{
+		[tagField setEditable:YES];
+		[[self window] makeFirstResponder:tagField];
+	}
+	else
+	{
+		[tagField setEditable:NO];
+	}
+}
 
 #pragma mark Notifications
 -(void)iconWasGenerated:(NSNotification *)notification
@@ -305,9 +327,11 @@ adds tag to tagField (use from "outside")
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)idx
 {	
+	// update currentCompleteTags
+	[currentCompleteTagsInField addObjectsFromArray:tokens];
+	
 	// Update manage files flag if first tag was entered
-	if([[self currentCompleteTagsInField] count] == 0)
-		[self updateManageFilesFlagOnTaggableObjects];
+	[self updateManageFilesFlagOnTaggableObjects];
 	
 	// Add tags to items
 	[items makeObjectsPerformSelector:@selector(addTags:) withObject:tokens];
@@ -398,9 +422,6 @@ adds tag to tagField (use from "outside")
 #pragma mark window delegate
 - (void)windowWillClose:(NSNotification *)aNotification
 {		
-	// unbind stuff
-	[[self tagField] unbind:@"editable"];
-	
 	[self autorelease];
 }
 
@@ -486,6 +507,8 @@ adds tag to tagField (use from "outside")
 	}
 	
 	[self addTaggableObjects:results];
+	
+	[[self window] makeKeyAndOrderFront:self];
 	
 	return YES;
 }
