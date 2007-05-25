@@ -22,15 +22,20 @@
 #import "NNFilterEngine.h"
 #import "PAStringPrefixFilter.h"
 #import "PAContentTypeFilter.h"
+#import "PADropManager.h"
+
 
 typedef enum _PATagCloudSortKey {
 	PATagCloudNameSortKey = 0,
 	PATagCloudRatingSortKey = 1
 } PATagCloudSortKey;
 
+
 @class PATagCloud;
 
+
 extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
+
 
 @interface BrowserViewController : PAViewController <NNBVCServerProtocol>
 {
