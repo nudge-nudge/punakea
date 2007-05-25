@@ -79,7 +79,7 @@
 	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
 																	sendPort:[portArray objectAtIndex:1]];
 	
-	[serverConnection setReplyTimeout:0.2];
+	[serverConnection setReplyTimeout:5.0];
 	
 	[[NSRunLoop currentRunLoop] run];
 	
@@ -111,13 +111,19 @@
 	
 	//  start thread
 	[threadLock unlockWithCondition:NNThreadRunning];
+
+	// reduce timeout to avoid deadlocks
+	[serverConnection setReplyTimeout:0.2];
 	
 	while ([threadLock condition] == NNThreadRunning)
 	{		
 		usleep(50000);
 
 		if (![threadLock condition] == NNThreadRunning)
+		{
+			NSLog(@"was here");
 			break;
+		}
 		
 		if ([threadLock lockWhenCondition:NNThreadRunning 
 							   beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]])
@@ -136,7 +142,8 @@
 				@catch (NSException *e)
 				{
 					NSLog(@"deadlock avoided");
-					//[[buffers lastObject] enqueueObjects:currentlyFilteredObjects];
+					// TODO this is not working!!
+					[[self outBuffer] enqueueObjects:currentlyFilteredObjects];
 				}
 			}
 			[threadLock unlock];
@@ -145,6 +152,9 @@
 		if ([self checkIfDone])
 			break;
 	}
+	
+	// increase timeout again
+	[serverConnection setReplyTimeout:5.0];
 	
 	[threadCountLock lock];
 	threadCount--;
@@ -259,7 +269,7 @@
 	// buffer in position 0 is the main input buffer
 	[[self inBuffer] enqueueObjects:[self filterObjects]];
 	
-	NSLog(@"filterEngine started with filterObjects: %@\ninBuffer: %@\nfilters: %@",[self filterObjects],[self inBuffer],filters);
+	//NSLog(@"filterEngine started with filterObjects: %@\ninBuffer: %@\nfilters: %@",[self filterObjects],[self inBuffer],filters);
 	
 	NNObjectFilter *filter;
 	NSEnumerator *e = [filters objectEnumerator];
@@ -304,7 +314,7 @@
 - (void)reset
 {
 	[self stopFilterEngine];
-	[filters removeAllObjects];
+	[self removeAllFilters];
 }
 
 - (NSMutableArray*)currentlyFilteredObjects

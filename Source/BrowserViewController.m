@@ -487,12 +487,16 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filteringStarted
 {
+	NSLog(@"started");
+	
 	NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_GATHERING_TAGS", @"Global", nil);
 	[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
 }
 
 - (void)filteringFinished
 {
+	NSLog(@"finished");
+	
 	filterEngineIsWorking = NO;
 	
 	[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
@@ -602,11 +606,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)reset
 {
-	// emptry search field	
-	[self resetSearchFieldString];
-	
 	// reset filterEngine
 	[filterEngine reset];
+	
+	// emptry search field	
+	[self resetSearchFieldString];
 	
 	// reset maincontroller
 	[mainController reset];
