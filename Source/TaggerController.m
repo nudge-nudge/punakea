@@ -170,6 +170,10 @@ adds tag to tagField (use from "outside")
 		[tagsOnAllObjects intersectSet:[taggableObject tags]];
 	}
 	
+	// Update manage files flag if at least one tag was added
+	if([[tagsOnAllObjects allObjects] count] > 0)
+		[self updateManageFilesFlagOnTaggableObjects];
+	
 	// update to new value
 	[[self tagField] setObjectValue:[tagsOnAllObjects allObjects]];
 	
@@ -301,6 +305,10 @@ adds tag to tagField (use from "outside")
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)idx
 {	
+	// Update manage files flag if first tag was entered
+	if([[self currentCompleteTagsInField] count] == 0)
+		[self updateManageFilesFlagOnTaggableObjects];
+	
 	// Add tags to items
 	[items makeObjectsPerformSelector:@selector(addTags:) withObject:tokens];
 		

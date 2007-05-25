@@ -655,18 +655,20 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	TaggerController *taggerController = [[TaggerController alloc] init];
 	
+	BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+	
 	// Check if PADropManager is in alternate state
 	if([[PADropManager sharedInstance] alternateState])
-	{
-		BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
 		manageFiles = !manageFiles;
-		[taggerController setManageFiles:manageFiles];
-	}
+	
+	[taggerController setManageFiles:manageFiles];
 	
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	NSWindow *taggerWindow = [taggerController window];
 	[taggerWindow makeKeyAndOrderFront:nil];
 	[taggerController addTaggableObjects:objects];
+	
+	[[PADropManager sharedInstance] setAlternateState:NO];
 }
 
 
