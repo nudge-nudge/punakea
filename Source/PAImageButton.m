@@ -27,7 +27,6 @@
 - (void)dealloc
 {
 	[self removeToolTip:toolTipTag];
-	if(toolTipTag) [toolTipTag release];
 	[super dealloc];
 }
 

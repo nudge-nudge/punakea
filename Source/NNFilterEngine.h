@@ -49,5 +49,6 @@
 
 - (void)lockFilteredObjects;
 - (void)unlockFilteredObjects;
+- (NSMutableArray*)filteredObjects; /**< only access this with lock */
 
 @end

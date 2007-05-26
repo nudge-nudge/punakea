@@ -67,6 +67,7 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 - (IBAction)cancelSheet:(id)sender;
 
 - (IBAction)editTagSet:(id)sender;
+- (IBAction)addTagSet:(id)sender;
 - (IBAction)removeTagSet:(id)sender;
 
 - (void)saveFavorites;

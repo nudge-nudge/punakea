@@ -157,9 +157,6 @@
 #pragma mark Misc
 - (void)toggleSubviewAtIndex:(int)idx
 {		
-	NSRect currentFrame1 = [[[self subviews] objectAtIndex:0] frame];
-	NSRect currentFrame2 = [[[self subviews] objectAtIndex:1] frame];
-	
 	if(([self isVertical] &&
 		((idx == 0 && [[[self subviews] objectAtIndex:0] isHidden]) ||
 		 (idx == 1 && [[[self subviews] objectAtIndex:1] isHidden]))) ||

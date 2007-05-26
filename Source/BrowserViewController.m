@@ -24,8 +24,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (NNTag*)currentBestTag;
 - (void)setCurrentBestTag:(NNTag*)otherTag;
 
-- (void)showTypeAheadView;
-- (void)hideTypeAheadView;
+- (void)updateTagCloudDisplayMessage;
 
 - (NSString*)searchFieldString;
 - (void)resetSearchFieldString;
@@ -269,8 +268,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)resetDisplayTags
 {
-	[self setVisibleTags:[tags tags]];
-	[filterEngine setObjects:[tags tags]];
+	[self filterTags:[tags tags]];
 	//[[[self view] window] makeFirstResponder:tagCloud];
 }
 
@@ -487,16 +485,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filteringStarted
 {
-	NSLog(@"started");
-	
 	NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_GATHERING_TAGS", @"Global", nil);
 	[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
 }
 
 - (void)filteringFinished
 {
-	NSLog(@"finished");
-	
 	filterEngineIsWorking = NO;
 	
 	[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
@@ -507,7 +501,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)objectsFiltered
 {
 	[filterEngine lockFilteredObjects];
-	NSLog(@"objects filtered");
 	[self setVisibleTags:[filterEngine filteredObjects]];
 	[filterEngine unlockFilteredObjects];
 }

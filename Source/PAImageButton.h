@@ -13,7 +13,7 @@
 @interface PAImageButton : NSControl 
 {
 	
-	NSToolTipTag		*toolTipTag;
+	NSToolTipTag		toolTipTag;
 	NSString			*toolTip;
 	
 }

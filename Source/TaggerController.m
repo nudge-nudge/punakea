@@ -3,8 +3,11 @@
 
 @interface TaggerController (PrivateAPI)
 
+- (void)setupStatusBar;
+
 - (void)updateTags;
 - (void)updateManageFilesFlagOnTaggableObjects;
+- (void)updateTokenFieldEditable;
 
 /**
 adds tag to tagField (use from "outside")

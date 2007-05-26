@@ -95,7 +95,6 @@ highlights tag in tagcloud
 is called when a tag is clicked
  */
 - (IBAction)tagButtonClicked:(id)sender;
-- (IBAction)findFieldAction:(id)sender;
 
 - (void)setSearchFieldString:(NSString*)string;
 

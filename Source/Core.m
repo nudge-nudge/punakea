@@ -51,7 +51,7 @@
 		
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		
-		printf("compiled on %s at %s\n",__DATE__,__TIME__);
+		printf("Punakea compiled on %s at %s\n",__DATE__,__TIME__);
 	}
     return self;
 }

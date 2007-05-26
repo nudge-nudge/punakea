@@ -165,6 +165,9 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	}
 	else
 	{
+		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
+		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] showResults];
+		
 		// the sourceItem is a contenttypefilter
 		NSString *contentType = [sourceItem value];
 		
@@ -173,9 +176,6 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 						  object:self
 						userInfo:[NSDictionary dictionaryWithObject:contentType
 															 forKey:@"contentType"]];
-		
-		
-		NSLog(@"filter: %@", contentType);
 	}
 }
 

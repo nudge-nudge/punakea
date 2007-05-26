@@ -262,18 +262,16 @@
 		[query stopQuery];
 	}
 	
-	// set tags to search for
-	[query setTags:selectedTags];
-	
-	// update query to conform to active content type filters
-	NSArray *queryFilters = [self createContentTypeQueryFilters];
-	[query addFilters:queryFilters];
-	
 	// the query is only started if there are any tags to look for
 	if ([selectedTags count] > 0)
 	{
-		[query startQuery];
+		// update query to conform to active content type filters
+		NSArray *queryFilters = [self createContentTypeQueryFilters];
+		[query addFilters:queryFilters];
 		
+		// set tags to search for
+		[query setTags:selectedTags];
+				
 		// empty display tags until new related tags are found
 		if ([delegate respondsToSelector:@selector(clearVisibleTags)])
 		{
@@ -287,6 +285,12 @@
 	}
 	else 
 	{
+		// empty all filters on query
+		[query removeAllFilters];
+		
+		// set tags to search for
+		[query setTags:selectedTags];
+			
 		// there are no selected tags, reset all tags
 		if ([delegate respondsToSelector:@selector(resetDisplayTags)])
 		{
@@ -298,6 +302,8 @@
 						format:@"delegate does not implement resetDisplayTags"];
 		}
 	}
+	
+	[query startQuery];
 }
 
 - (void)relatedTagsHaveChanged:(NSNotification *)notification
@@ -311,14 +317,17 @@
 		[self setDisplayMessage:@""];
 	}
 	
-	if ([delegate respondsToSelector:@selector(setDisplayTags:)])
+	if ([relatedTags count] > 0)
 	{
-		[delegate setDisplayTags:[relatedTags relatedTags]];
-	}
-	else
-	{
-		[NSException raise:NSInternalInconsistencyException
-					format:@"delegate does not implement setDisplayTags:"];
+		if ([delegate respondsToSelector:@selector(setDisplayTags:)])
+		{
+			[delegate setDisplayTags:[relatedTags relatedTags]];
+		}
+		else
+		{
+			[NSException raise:NSInternalInconsistencyException
+						format:@"delegate does not implement setDisplayTags:"];
+		}
 	}
 }
 

@@ -8,6 +8,11 @@
 
 #import "PAStatusBar.h"
 
+@interface PAStatusBar (PrivateAPI)
+
+- (void)updateItems;
+
+@end
 
 @implementation PAStatusBar
 

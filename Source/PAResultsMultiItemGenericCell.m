@@ -30,7 +30,7 @@
 
 
 #pragma mark Class methods
-/*+ (NSSize)cellSize
++ (NSSize)cellSize
 {
 	return NSMakeSize(0, 0);
 }
@@ -38,7 +38,7 @@
 + (NSSize)intercellSpacing
 {
 	return NSMakeSize(0, 0);
-}*/
+}
 
 
 #pragma mark Accessors

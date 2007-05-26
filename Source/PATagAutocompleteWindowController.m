@@ -49,8 +49,8 @@
 
 - (void)dealloc
 {
-	[typeAheadFind release];
 	[currentCompleteTagsInField release];
+	[typeAheadFind release];
 	[super dealloc];
 }
 

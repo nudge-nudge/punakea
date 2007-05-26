@@ -13,7 +13,7 @@
 - (NSMutableArray*)currentlyFilteredObjects;
 
 - (void)runCheck;
-- (void)startFilterEngine;
+- (void)startFilterEngineWithPorts:(NSArray*)portArray;
 - (void)stopFilterEngine;
 
 - (NSConnection*)serverConnection;
@@ -21,7 +21,7 @@
 - (void)setPorts:(NSArray*)portArray;
 - (NSArray*)ports;
 
-- (void)stopThread;
+- (void)setThreadShouldQuit;
 
 - (void)setFilterObjects:(NSMutableArray*)objects;
 - (NSMutableArray*)filterObjects;
@@ -143,7 +143,7 @@
 				{
 					NSLog(@"deadlock avoided");
 					// TODO this is not working!!
-					[[self outBuffer] enqueueObjects:currentlyFilteredObjects];
+					//[[self outBuffer] enqueueObjects:currentlyFilteredObjects];
 				}
 			}
 			[threadLock unlock];
@@ -191,7 +191,7 @@
 	filterObjects = objects;
 }
 
-- (NSMutableArray*)filterObjects
+- (NSArray*)filterObjects
 {
 	return filterObjects;
 }

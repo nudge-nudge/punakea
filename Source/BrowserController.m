@@ -11,8 +11,12 @@
 
 @interface BrowserController (PrivateAPI)
 
+- (void)setupTabPanel;
+- (void)setupFieldEditor;
 - (void)setupToolbar;
 - (void)setupStatusBar;
+
+- (void)loadFavorites;
 
 - (NSString *)pathOfFavoritesFile;
 
@@ -629,8 +633,6 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 - (void)resultsOutlineViewSelectionDidChange:(NSNotification *)notification
 {
-	NSOutlineView *ov = [notification object];
-	
 	NSArray *selectedItems = [[notification userInfo] objectForKey:@"SelectedItems"];
 	
 	// Update Info Pane
