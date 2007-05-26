@@ -390,7 +390,6 @@
 {
 	[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
 	[[browserController browserViewController] reset];
-	//[[browserController window] makeFirstResponder:[browserController sourcePanel]];
 }
 
 - (IBAction)toggleInfo:(id)sender
@@ -509,6 +508,21 @@
 	}
 	[browserController showWindow:self];
 	[[browserController window] makeKeyAndOrderFront:self];
+}
+
+- (IBAction)showBrowserResults:(id)sender
+{
+	[[browserController browserViewController] showResults];
+}
+
+- (IBAction)showBrowserManageTags:(id)sender
+{
+	[[browserController browserViewController] manageTags];
+}
+
+- (IBAction)resetBrowser:(id)sender
+{
+	[[browserController browserViewController] reset];
 }
 
 - (IBAction)showTagger:(id)sender

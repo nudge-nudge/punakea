@@ -143,30 +143,30 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	// Perform actions
 	if([[sourceItem value] isEqualTo:@"ALL_ITEMS"])
 	{
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] showResults];
+		[[[NSApplication sharedApplication] delegate] resetBrowser:self];
+		[[[NSApplication sharedApplication] delegate] showBrowserResults:self];
 	}
 	else if([[sourceItem value] isEqualTo:@"MANAGE_TAGS"])
 	{
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] manageTags];
+		[[[NSApplication sharedApplication] delegate] resetBrowser:self];
+		[[[NSApplication sharedApplication] delegate] showBrowserManageTags:self];
 	}
 	else if([[sourceItem containedObject] isKindOfClass:[NNTag class]])
 	{
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] showResults];
+		[[[NSApplication sharedApplication] delegate] resetBrowser:self];
+		[[[NSApplication sharedApplication] delegate] showBrowserResults:self];
 		[[[NSApplication sharedApplication] delegate] searchForTag:[sourceItem containedObject]];
 	}
 	else if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
 	{
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] showResults];
+		[[[NSApplication sharedApplication] delegate] resetBrowser:self];
+		[[[NSApplication sharedApplication] delegate] showBrowserResults:self];
 		[[[NSApplication sharedApplication] delegate] searchForTags:[[sourceItem containedObject] tags]];
 	}
 	else
 	{
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] reset];
-		[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] showResults];
+		[[[NSApplication sharedApplication] delegate] resetBrowser:self];
+		[[[NSApplication sharedApplication] delegate] showBrowserResults:self];
 		
 		// the sourceItem is a contenttypefilter
 		NSString *contentType = [sourceItem value];

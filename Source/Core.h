@@ -64,6 +64,10 @@
 - (IBAction)tagSearch:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
+- (IBAction)showBrowserResults:(id)sender;
+- (IBAction)showBrowserManageTags:(id)sender;
+- (IBAction)resetBrowser:(id)sender;
+
 - (IBAction)showTagger:(id)sender;
 
 - (IBAction)openWebsite:(id)sender;
