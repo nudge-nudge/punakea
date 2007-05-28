@@ -23,8 +23,8 @@
 
 - (void)setThreadShouldQuit;
 
-- (void)setFilterObjects:(NSMutableArray*)objects;
-- (NSMutableArray*)filterObjects;
+- (void)setFilterObjects:(NSArray*)objects;
+- (NSArray*)filterObjects;
 - (void)setFilteredObjects:(NSMutableArray*)objects;
 - (NSMutableArray*)filteredObjects;
 
@@ -224,6 +224,12 @@
 	[filteredObjectsLock unlock];
 }
 
+- (void)setObjects:(NSArray*)objects
+{
+	[self stopFilterEngine];
+	[self setFilterObjects:objects];
+}
+
 // will be called from outside
 - (void)startWithServer:(id <NNBVCServerProtocol>)aServer
 {	
@@ -250,18 +256,15 @@
 	[self startFilterEngineWithPorts:portArray];
 }
 
-- (void)setObjects:(NSArray*)objects
-{
-	[self stopFilterEngine];
-	[self setFilterObjects:objects];
-}
-
 - (void)startFilterEngineWithPorts:(NSArray*)portArray
 {
 	// buffer in position 0 is the main input buffer
 	[[self inBuffer] enqueueObjects:[self filterObjects]];
 	
-	//NSLog(@"filterEngine started with filterObjects: %@\ninBuffer: %@\nfilters: %@",[self filterObjects],[self inBuffer],filters);
+//	NSLog(@"filterEngine started with %i filterObjects, %i inBuffer, filters: %@",
+//		  [[self filterObjects] count],
+//		  [[self inBuffer] count],
+//		  filters);
 	
 	NNObjectFilter *filter;
 	NSEnumerator *e = [filters objectEnumerator];

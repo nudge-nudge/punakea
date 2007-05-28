@@ -123,7 +123,7 @@
 - (void)objectFiltered:(id)object
 {
 	[outQueue enqueue:object];
-	//NSLog(@"%@ - : - %@",self,object);
+	// NSLog(@"%@ - : - %@",self,object);
 }
 
 - (void)filterObject:(id)object

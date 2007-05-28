@@ -226,7 +226,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 
 #pragma mark Drag & Drop
 - (BOOL)outlineView:(NSOutlineView *)ov
-		 writeItems:(NSArray *)items 
+		 writeItems:(NSArray *)someItems 
 	   toPasteboard:(NSPasteboard *)pboard
 {
 	// Cancel any editing
@@ -235,10 +235,10 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 											   object:nil];
 	
 	// Weak temporary reference to draggedItems
-	draggedItems = items;
+	draggedItems = someItems;
 	
 	// Currently we only support single selection mode
-	PASourceItem *sourceItem = [items objectAtIndex:0];
+	PASourceItem *sourceItem = [someItems objectAtIndex:0];
 	
 	if(![sourceItem containedObject])
 		return NO;

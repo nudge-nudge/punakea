@@ -348,7 +348,8 @@
 	
 	if([thumbItem view] == outlineView)
 	{	
-		[outlineView displayRect:[thumbItem frame]];
+		NSRect rectToDisplay = [thumbItem frame];
+		[outlineView displayRect:rectToDisplay];
 	}
 }
 

@@ -262,16 +262,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// empty visibleTags
 	[self clearVisibleTags];
 	
-	// start filtering if necessary
-	if ([filterEngine hasFilters])
-	{
-		[self filterTags:someTags];
-	}
-	else
-	{
-		// display tags directly
-		[self setVisibleTags:someTags];
-	}
+	// start filtering
+	[self filterTags:someTags];
 }
 
 - (void)resetDisplayTags

@@ -1112,9 +1112,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	//[[NSColor redColor] set];
 	//[[NSBezierPath bezierPathWithRect:NSMakeRect(0, 0, selectedItemsRect.size.width, selectedItemsRect.size.height)] fill];
-	
-	NSRect visibleRect = [self visibleRect];
-	
+		
 	e = [visibleCells objectEnumerator];
 	while(cell = [e nextObject])
 	{

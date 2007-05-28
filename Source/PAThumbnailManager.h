@@ -10,6 +10,7 @@
 #import "PAThumbnailItem.h"
 #import "NNTagging/NNQueue.h"
 
+#include <unistd.h>
 
 extern NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification;
 

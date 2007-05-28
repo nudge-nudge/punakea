@@ -59,7 +59,4 @@
 
 - (PAResultsOutlineView *)outlineView;
 
-//- (NSArray *)selectedItems;
-//- (NSArray *)selectedItems:(id)sender;
-
 @end

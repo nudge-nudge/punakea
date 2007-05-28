@@ -370,7 +370,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		[NSGraphicsContext restoreGraphicsState];
 		[scratch unlockFocus];
 	} else {
-		NSPDFImageRep *pdf = (NSPDFImageRep *)rep;
+		//NSPDFImageRep *pdf = (NSPDFImageRep *)rep;
 		
 		// We need to use a downscaled image instead
 		/*NSData *pdfData = [pdf PDFRepresentation];
