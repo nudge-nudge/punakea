@@ -65,13 +65,33 @@
 	<string>NNPA</string>
 	<key>CFBundleVersion</key>
 	<string>0.3dev</string>
+	<key>LSUIElement</key>
+	<string>0</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>SUFeedURL</key> 
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSKeyEquivalent</key>
+			<string>P</string>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Tag with Punakea</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>tagFiles</string>
+			<key>NSPortName</key>
+			<string>Punakea</string>
+			<key>NSSendTypes</key>
+			<array>
+				<string>NSFilenamesPboardType</string>
+			</array>
+		</dict>
+	</array>
+	<key>SUFeedURL</key>
 	<string>http://download.nudgenudge.eu/punakea-appcast.xml</string>
-	<key>LSUIElement</key>
-	<string>0</string>
 </dict>
 </plist>

@@ -24,6 +24,8 @@
 
 #import "Sparkle/SUUpdater.h"
 
+#import "PAServices.h"
+
 //#import "PANotificationReceiver.h"
 
 @interface Core : NSWindowController
@@ -42,6 +44,8 @@
 	
 	NSNotificationCenter			*nc;	
 	NSUserDefaults					*userDefaults;
+	
+	PAServices						*services;
 	
 	IBOutlet SUUpdater				*updater;
 }
@@ -69,6 +73,7 @@
 - (IBAction)resetBrowser:(id)sender;
 
 - (IBAction)showTagger:(id)sender;
+- (IBAction)showTaggerForObjects:(NSArray*)taggableObjects;
 
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openDonationWebsite:(id)sender;

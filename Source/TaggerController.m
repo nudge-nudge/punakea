@@ -518,7 +518,6 @@ adds tag to tagField (use from "outside")
 
 
 #pragma mark Accessors
-
 - (void)setManageFiles:(BOOL)flag
 {
 	manageFilesAutomatically = NO;

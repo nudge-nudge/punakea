@@ -96,12 +96,18 @@
 	
 	[self createManagedFilesDirIfNeeded];
 	
+	// load services class and set as service provides
+	services =  [[PAServices alloc] init];
+	[NSApp setServicesProvider:services];
+	
 	// TODO DEBUG
 	//[[PANotificationReceiver alloc] init];
 }
 
 - (void)dealloc
 {
+	[services release];
+	
 	[statusMenu release];
 	
 	NSUserDefaultsController *udc = [NSUserDefaultsController sharedUserDefaultsController];
@@ -553,6 +559,13 @@
 	
 	[taggerController showWindow:self];
 	[[taggerController window] makeKeyAndOrderFront:self];
+}
+
+- (IBAction)showTaggerForObjects:(NSArray*)taggableObjects
+{
+	[self showTagger:self];
+	[taggerController setTaggableObjects:taggableObjects];
+	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
 - (IBAction)openWebsite:(id)sender
