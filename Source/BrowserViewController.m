@@ -553,11 +553,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)searchForTag:(NNTag*)aTag
 {
-	[[self mainController] handleTagActivation:aTag];
+	[self searchForTags:[NSArray arrayWithObject:aTag]];
 }
 
 - (void)searchForTags:(NSArray*)someTags
 {
+	[self showResults];	
 	[[self mainController] handleTagActivations:someTags];
 }
 
@@ -631,8 +632,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
 	NSString *currentString = [fieldEditor string];
 	
-	// TODO this has to be handled by filter ...
-	if ([currentString isNotEqualTo:@""]) //&& ![typeAheadFind hasTagsForPrefix:currentString])
+	if ([currentString isNotEqualTo:@""])
 	{
 		NSString *newString = [currentString substringToIndex:[currentString length]-1];
 		[fieldEditor setString:newString];

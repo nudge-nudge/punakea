@@ -168,10 +168,12 @@
 	[selectedTags addTag:tag];
 }
 
+// this behaves differently than handleTagActivation:
+// sets selected tags to new tags instead of adding
 - (void)handleTagActivations:(NSArray*)someTags
 {
 	[someTags makeObjectsPerformSelector:@selector(incrementClickCount)];
-	[selectedTags addTags:someTags];
+	[selectedTags setSelectedTags:someTags];
 }
 
 - (void)reset
