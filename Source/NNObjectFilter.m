@@ -123,13 +123,14 @@
 - (void)objectFiltered:(id)object
 {
 	[outQueue enqueue:object];
-	NSLog(@"%@ - : - %@",self,object);
+	//NSLog(@"%@ - : - %@",self,object);
 }
 
 - (void)filterObject:(id)object
 {
-	NSLog(@"%@ looking at %@",self,object);
 	// nothing, implemented by subclass
+	
+	// NSLog(@"%@ looking at %@",self,object);
 }
 
 @end

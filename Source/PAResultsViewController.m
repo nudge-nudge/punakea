@@ -311,6 +311,17 @@
 	if (![relatedTags isUpdating] && ([relatedTags count] == 0))
 	{
 		[self setDisplayMessage:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")];
+		
+		// empty display tags until new related tags are found
+		if ([delegate respondsToSelector:@selector(clearVisibleTags)])
+		{
+			[delegate clearVisibleTags];
+		}
+		else
+		{
+			[NSException raise:NSInternalInconsistencyException
+						format:@"delegate does not implement clearVisibleTags"];
+		}		
 	}
 	else
 	{
@@ -352,6 +363,15 @@
 	else if([[notification name] isEqualTo:NNQueryDidFinishGatheringNotification])
 	{
 		[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
+		if ([delegate respondsToSelector:@selector(updateTagCloudDisplayMessage)])
+		{
+			[delegate updateTagCloudDisplayMessage];
+		}
+		else
+		{
+			[NSException raise:NSInternalInconsistencyException
+						format:@"delegate does not implement updateTagCloudDisplayMessage"];
+		}
 	}
 }
 
