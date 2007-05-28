@@ -14,3 +14,5 @@
 "CRITICAL_MOVING_ERROR" = "There was an unhandled error while moving the files. Please check the new location and the old location for your files.";
 "MANAGED_FILES_DESTINATION_NOT_FOLDER_ERROR" = "The managed files path ('%@') is no folder. Please make sure the path points to a folder or remove the file. Start this aplication again if this is corrected.";
 "MANAGED_FILES_DEFAULT_NOT_FOLDER_ERROR" = "The default path points to a file. Please remove this file or choose a different location for managed files.";
+
+"SERVICE_NOT_WORKING" = "Punakea could not handle the input given to the System Service";

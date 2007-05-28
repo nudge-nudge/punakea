@@ -32,8 +32,7 @@
 	
 	if (op == NSDragOperationNone)
 	{
-		// TODO
-		*error = @"";
+		*error = NSLocalizedStringFromTable(@"SERVICE_NOT_WORKING", @"FileManager", nil);
 		return;
 	}
 	else
