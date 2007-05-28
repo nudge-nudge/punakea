@@ -262,14 +262,21 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// empty visibleTags
 	[self clearVisibleTags];
 	
-	// start filtering
-	[self filterTags:someTags];
+	// start filtering if necessary
+	if ([filterEngine hasFilters])
+	{
+		[self filterTags:someTags];
+	}
+	else
+	{
+		// display tags directly
+		[self setVisibleTags:someTags];
+	}
 }
 
 - (void)resetDisplayTags
 {
 	[self filterTags:[tags tags]];
-	//[[[self view] window] makeFirstResponder:tagCloud];
 }
 
 - (void)displaySelectedTag:(NNTag*)tag
@@ -524,17 +531,17 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		{
 			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS",@"Tags",@"")];
 		}
-		else if (mainController && [[mainController displayMessage] isNotEqualTo:@""])
-		{
-			// give the mainController a chance to display a message
-			[tagCloud setDisplayMessage:[mainController displayMessage]];
-		}
 		else if (([searchFieldString length] > 0) && 
 				 !filterEngineIsWorking && 
 				 ![mainController isWorking])
 		{
 			// searchstring stuff
 			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_SEARCHSTRING",@"Tags",@"")];
+		}
+		else if (mainController && [[mainController displayMessage] isNotEqualTo:@""])
+		{
+			// give the mainController a chance to display a message
+			[tagCloud setDisplayMessage:[mainController displayMessage]];
 		}
 		else if ([[filterEngine filters] count] > 0)
 		{
@@ -599,6 +606,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)reset
 {
+	// empty active content filters
+	[self setContentTypeFilterIdentifiers:[NSArray array]];
+	
 	// reset filterEngine
 	[filterEngine reset];
 	

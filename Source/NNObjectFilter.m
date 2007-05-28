@@ -30,16 +30,6 @@
 }
 
 #pragma mark accessors
-- (void)markAsCanceled
-{
-	[stateLock lock];
-	
-	if ([stateLock condition] == NNThreadStopped)
-		[stateLock unlock];
-	else
-		[stateLock unlockWithCondition:NNThreadCanceled];
-}
-
 - (void)setInQueue:(NNQueue*)queue
 {
 	[queue retain];
@@ -80,7 +70,7 @@
 	// start filtering until thread gets canceled	
 	while ([stateLock condition] == NNThreadRunning)
 	{
-		id object = [inQueue dequeueWithTimeout:0.5];
+		id object = [inQueue dequeueWithTimeout:0.1];
 		
 		if ([stateLock tryLockWhenCondition:NNThreadRunning])
 		{
@@ -106,15 +96,28 @@
 	[pool release];
 }
 
-- (void)stopFilter
+- (void)markAsCanceled
+{	
+	while(![stateLock lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]]);
+	
+	if ([stateLock condition] == NNThreadStopped)
+		[stateLock unlock];
+	else
+		[stateLock unlockWithCondition:NNThreadCanceled];
+}
+
+- (void)waitForFilter
 {
-	[self markAsCanceled];
+	BOOL stopped = NO;
 	
-	// wait until the thread has stopped
-	[stateLock lockWhenCondition:NNThreadStopped];
-	[stateLock unlock];
-	
-	return;
+	while (!stopped)
+	{
+		if ([stateLock lockWhenCondition:NNThreadStopped
+							  beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]])
+		{
+			stopped = YES;
+		}
+	}
 }
 
 - (void)objectFiltered:(id)object

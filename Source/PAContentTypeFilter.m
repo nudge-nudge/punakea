@@ -79,7 +79,7 @@
 	// start filtering until thread gets canceled	
 	while ([stateLock condition] == NNThreadRunning)
 	{
-		id object = [inQueue dequeueWithTimeout:0.5];
+		id object = [inQueue dequeueWithTimeout:0.1];
 		
 		if ([stateLock condition] == NNThreadCanceled)
 		{

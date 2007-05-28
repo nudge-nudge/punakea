@@ -31,7 +31,7 @@ each filter comes with its own outQueue, and the inQueue will be connected to ot
 	NNQueue *outQueue;
 }
 
-- (void)stopFilter;
+- (void)waitForFilter; /**< this avoids deadlocks */
 - (void)markAsCanceled;
 
 - (void)setInQueue:(NNQueue*)queue;

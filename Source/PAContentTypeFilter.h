@@ -25,6 +25,8 @@
 	NSLock *filterLock;
 	
 	PATagCache *tagCache;
+	
+	BOOL shouldKeepRunning;
 }
 
 + (PAContentTypeFilter*)filterWithContentType:(NSString*)type;

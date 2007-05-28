@@ -171,7 +171,7 @@
 			}
 			@catch (NSException *e)
 			{
-					NSLog(@"main thread not ready yet");
+				NSLog(@"main thread not ready yet");
 			}		
 		}
 	}
@@ -288,6 +288,12 @@
 						   withObject:portArray];
 }
 
+- (void)reset
+{
+	[self stopFilterEngine];
+	[self removeAllFilters];
+}
+
 - (void)stopFilterEngine
 {
 	// stop check thread
@@ -299,7 +305,7 @@
 	
 	while (filter = [filterEnumerator nextObject])
 		[filter markAsCanceled];
-		
+	
 	// empty all buffers
 	NSEnumerator *bufferEnumerator = [buffers objectEnumerator];
 	NNQueue *buffer;
@@ -309,12 +315,6 @@
 	
 	// empty results
 	[filteredObjects removeAllObjects];
-}
-
-- (void)reset
-{
-	[self stopFilterEngine];
-	[self removeAllFilters];
 }
 
 - (NSMutableArray*)currentlyFilteredObjects
@@ -358,6 +358,11 @@
 		[threadLock unlock];
 	else
 		[threadLock unlockWithCondition:NNThreadCanceled];
+}
+
+- (BOOL)hasFilters
+{
+	return ([filters count] > 0);
 }
 
 - (NSMutableArray*)filters
@@ -408,6 +413,9 @@
 	
 	unsigned int slot = [filters indexOfObject:filter];
 	
+	if (slot == NSNotFound)
+		return;
+	
 	// reconnect next filter
 	if (slot < [filters count]-1)
 	{
@@ -416,6 +424,9 @@
 	}
 	
 	// remove filter and buffer
+	// wait for filter to stop
+	[filter waitForFilter];
+	
 	[filters removeObjectAtIndex:slot];
 	[buffers removeObjectAtIndex:slot+1];
 	
@@ -424,13 +435,24 @@
 
 - (void)removeAllFilters
 {
-	// TODO more efficient
+	// stops check thread and resets main buffer
+	[self setObjects:filterObjects];
 	
+	// wait for all filters to stop
 	NSEnumerator *e = [filters objectEnumerator];
 	NNObjectFilter *filter;
 	
 	while (filter = [e nextObject])
-		[self removeFilter:filter];
+		[filter waitForFilter];
+	
+	// all filters are stopped now
+	[filters removeAllObjects];
+	
+	// remove all buffers
+	[buffers removeAllObjects];
+	
+	// re-add inbuffer
+	[buffers addObject:[NNQueue queue]];
 }
 
 @end

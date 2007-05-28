@@ -33,6 +33,8 @@
 	NSLock *threadCountLock;
 }
 
+- (BOOL)hasFilters;
+
 - (void)startWithServer:(id <NNBVCServerProtocol>)aServer;
 - (void)stopFilterEngine;
 - (void)reset;
