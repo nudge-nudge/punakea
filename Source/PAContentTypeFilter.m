@@ -69,36 +69,10 @@
 }
 
 #pragma mark function
-- (void)run
-{
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	[stateLock lockWhenCondition:NNThreadStopped];
-	[stateLock unlockWithCondition:NNThreadRunning];
-	
-	// start filtering until thread gets canceled	
-	while ([stateLock condition] == NNThreadRunning)
-	{
-		id object = [inQueue dequeueWithTimeout:0.1];
-		
-		if ([stateLock condition] == NNThreadCanceled)
-		{
-			break;
-		}
-		else if (object)
-		{
-			[self filterObject:object];
-		}
-	}
-	
-	[stateLock lock];
-	[stateLock unlockWithCondition:NNThreadStopped];
-	
-	[pool release];
-}
-
 - (void)filterObject:(id)object
 {
+	[super filterObject:object];
+	
 	// look if cache can satisfy request
 	PACacheResult result = [tagCache checkFiletype:[self contentType] forTag:object];
 	
