@@ -176,7 +176,7 @@
 }
 
 #pragma mark accessors
-- (void)setFilterObjects:(NSMutableArray*)objects
+- (void)setFilterObjects:(NSArray*)objects
 {	
 	[objects retain];
 	[filterObjects release];
