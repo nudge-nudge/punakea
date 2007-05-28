@@ -98,7 +98,7 @@
 			}
 			@catch (NSException *e)
 			{
-				NSLog(@"main thread not ready yet");
+				// retry
 			}
 		}			
 	}
@@ -119,12 +119,6 @@
 	{		
 		usleep(50000);
 
-		if (![threadLock condition] == NNThreadRunning)
-		{
-			NSLog(@"was here");
-			break;
-		}
-		
 		if ([threadLock lockWhenCondition:NNThreadRunning 
 							   beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]])
 		{
@@ -141,9 +135,7 @@
 				}
 				@catch (NSException *e)
 				{
-					NSLog(@"deadlock avoided");
-					// TODO this is not working!!
-					//[[self outBuffer] enqueueObjects:currentlyFilteredObjects];
+					// retry will happen because of the outer while-loop
 				}
 			}
 			[threadLock unlock];
@@ -171,7 +163,7 @@
 			}
 			@catch (NSException *e)
 			{
-				NSLog(@"main thread not ready yet");
+				// retry
 			}		
 		}
 	}
