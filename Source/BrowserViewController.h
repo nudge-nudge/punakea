@@ -47,7 +47,6 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	
 	NNTags								*tags;
 	
-	NSMutableArray						*activeTags;			/**< holds the unflitered tags which should be displayed */
 	NSMutableArray						*visibleTags;			/**< holds the (filtered) tags for TagCloud */
 	NNTag								*currentBestTag;		/**< holds the tag with the highest absolute rating currently in visibleTags */
 	

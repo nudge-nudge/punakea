@@ -17,9 +17,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)tagsHaveChanged;
 
-- (NSMutableArray*)activeTags;
-- (void)setActiveTags:(NSMutableArray*)someTags;
-
 - (NSMutableArray*)visibleTags;
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
 - (void)clearVisibleTags;
@@ -120,7 +117,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[sortDescriptor release];
 	[mainController release];
 	[visibleTags release];
-	[activeTags release];
 	[activePrefixFilter release];
 	[filterEngineConnection release];
 	[filterEngine release];
@@ -232,17 +228,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	return activePrefixFilter;
 }
 
-- (NSMutableArray*)activeTags
-{
-	return activeTags;
-}
-
-- (void)setActiveTags:(NSMutableArray*)someTags
-{
-	[activeTags release];
-	activeTags = [someTags retain];
-}
-
 - (NSMutableArray*)visibleTags;
 {
 	return visibleTags;
@@ -277,9 +262,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	// empty visibleTags
 	[self clearVisibleTags];
-	
-	// update active tags
-	[self setActiveTags:someTags];
 	
 	// start filtering
 	[self filterTags:someTags];
