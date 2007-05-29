@@ -594,6 +594,7 @@
 #pragma mark Misc
 - (IBAction)searchForTags:(NSArray*)someTags
 {
+	[self showBrowser:self];
 	[[browserController browserViewController] searchForTags:someTags];
 }
 
@@ -606,6 +607,10 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
+	// do not do anything if mouse is in sidebar
+	if ([sidebarController mouseInSidebarWindow])
+		return;
+	
 	NSArray *windows = [[NSApplication sharedApplication] windows];
 
 	NSEnumerator *e = [windows objectEnumerator];

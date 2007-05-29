@@ -103,6 +103,9 @@ action called on dropping files to FileBox
 
 - (IBAction)tagClicked:(id)sender
 {
+	// set window not to activate last front app
+	[[self window] setActivatesLastFrontApp:NO];
+	
 	NNTag *tag;
 	
 	NSTableColumn *column = [[sender tableColumns] objectAtIndex:[sender clickedColumn]];
@@ -131,5 +134,14 @@ action called on dropping files to FileBox
 {
 	return taggerController;
 }
+
+#pragma mark function
+- (BOOL)mouseInSidebarWindow
+{
+	NSPoint mouseLocation = [[self window] mouseLocationOutsideOfEventStream];
+	NSPoint mouseLocationRelativeToWindow = [[self window] convertBaseToScreen:mouseLocation];
+	
+	return (NSPointInRect(mouseLocationRelativeToWindow,[[self window] frame]) || (mouseLocationRelativeToWindow.x == 0));
+}	
 
 @end

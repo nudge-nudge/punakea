@@ -36,4 +36,6 @@
 
 - (id)taggerController;
 
+- (BOOL)mouseInSidebarWindow;
+
 @end
