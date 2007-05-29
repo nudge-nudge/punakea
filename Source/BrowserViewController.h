@@ -47,6 +47,7 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 	
 	NNTags								*tags;
 	
+	NSMutableArray						*activeTags;			/**< holds the unflitered tags which should be displayed */
 	NSMutableArray						*visibleTags;			/**< holds the (filtered) tags for TagCloud */
 	NNTag								*currentBestTag;		/**< holds the tag with the highest absolute rating currently in visibleTags */
 	
@@ -67,15 +68,13 @@ extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
 }
 
 /** 
-delegate method, used by browserViewMainController if it needs
-to set some tags
+delegate method, use this another class needs to update the tag cloud
 @param someTags tags to be displayed
 */
 - (void)setDisplayTags:(NSMutableArray*)someTags; 
 
 /**
-use this method to tell bvc that mainController doesn't need to
- display tags anymore
+use this method to reset the display tags to all available tags
  */
 - (void)resetDisplayTags;
 
@@ -98,7 +97,6 @@ is called when a tag is clicked
 
 - (void)setSearchFieldString:(NSString*)string;
 
-- (void)searchForTag:(NNTag*)aTag;
 - (void)searchForTags:(NSArray*)someTags;
 
 - (void)manageTags;

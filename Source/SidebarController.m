@@ -116,7 +116,7 @@ action called on dropping files to FileBox
 		tag = [[recentTags arrangedObjects] objectAtIndex:[sender clickedRow]];
 	}
 	
-	[[[NSApplication sharedApplication] delegate] searchForTag:tag];
+	[[[NSApplication sharedApplication] delegate] searchForTags:[NSMutableArray arrayWithObject:tag]];
 }
 
 #pragma mark notifications

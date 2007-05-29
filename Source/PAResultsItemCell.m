@@ -49,9 +49,7 @@
 	imageRect.origin = NSZeroPoint;
 	imageRect.size = [icon size];
 	
-	[[self controlView] lockFocus];
 	[icon drawAtPoint:iconFrame.origin fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
-	[[self controlView] unlockFocus];
 	
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];

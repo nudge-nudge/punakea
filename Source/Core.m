@@ -437,7 +437,7 @@
 	
 		if([ov responder])
 			[[[ov responder] target] performSelector:@selector(doubleAction)];
-		else
+		else	
 			[[ov target] performSelector:@selector(doubleAction:)];
 	}
 }
@@ -592,11 +592,6 @@
 
 
 #pragma mark Misc
-- (IBAction)searchForTag:(NNTag*)aTag
-{
-	[[browserController browserViewController] searchForTag:aTag];
-}
-
 - (IBAction)searchForTags:(NSArray*)someTags
 {
 	[[browserController browserViewController] searchForTags:someTags];

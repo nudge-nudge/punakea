@@ -9,6 +9,7 @@
 #import "PASourcePanelController.h"
 
 NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
+NSString * const PAContentTypeFilterReset = @"PAContentTypeFilterReset";
 
 @implementation PASourcePanelController
 
@@ -136,10 +137,12 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	
 	NSOutlineView *ov = (NSOutlineView *)[notification object];
 	
 	PASourceItem *sourceItem = (PASourceItem *)[ov itemAtRow:[ov selectedRow]];
-		
+	
 	// Perform actions
 	if([[sourceItem value] isEqualTo:@"ALL_ITEMS"])
 	{
@@ -153,7 +156,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	}
 	else if([[sourceItem containedObject] isKindOfClass:[NNTag class]])
 	{
-		[[[NSApplication sharedApplication] delegate] searchForTag:[sourceItem containedObject]];
+		[[[NSApplication sharedApplication] delegate] searchForTags:[NSMutableArray arrayWithObject:[sourceItem containedObject]]];
 	}
 	else if([[sourceItem containedObject] isKindOfClass:[NNTagSet class]])
 	{
@@ -167,7 +170,6 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		// the sourceItem is a contenttypefilter
 		NSString *contentType = [sourceItem value];
 		
-		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 		[nc postNotificationName:PAContentTypeFilterUpdate
 						  object:self
 						userInfo:[NSDictionary dictionaryWithObject:contentType

@@ -26,7 +26,8 @@ extern NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification;
 	NSImage						*dummyImageIcon;
 	
 	BOOL						delayNextNotification;
-	
+
+	NSLock						*processLock;
 }
 
 + (PAThumbnailManager *)sharedInstance;

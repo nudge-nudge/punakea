@@ -170,8 +170,10 @@
 
 // this behaves differently than handleTagActivation:
 // sets selected tags to new tags instead of adding
+// also removes filters
 - (void)handleTagActivations:(NSArray*)someTags
 {
+	[query removeAllFilters];
 	[someTags makeObjectsPerformSelector:@selector(incrementClickCount)];
 	[selectedTags setSelectedTags:someTags];
 }
@@ -330,17 +332,14 @@
 		[self setDisplayMessage:@""];
 	}
 	
-	if ([relatedTags count] > 0)
+	if ([delegate respondsToSelector:@selector(setDisplayTags:)])
 	{
-		if ([delegate respondsToSelector:@selector(setDisplayTags:)])
-		{
-			[delegate setDisplayTags:[relatedTags relatedTags]];
-		}
-		else
-		{
-			[NSException raise:NSInternalInconsistencyException
-						format:@"delegate does not implement setDisplayTags:"];
-		}
+		[delegate setDisplayTags:[relatedTags relatedTags]];
+	}
+	else
+	{
+		[NSException raise:NSInternalInconsistencyException
+					format:@"delegate does not implement setDisplayTags:"];
 	}
 }
 
@@ -350,9 +349,19 @@
 	
 	if([thumbItem view] == outlineView)
 	{	
-		NSRect rectToDisplay = [thumbItem frame];
-		[outlineView displayRect:rectToDisplay];
+		[self performSelectorOnMainThread:@selector(drawThumbItem:)
+							   withObject:thumbItem
+							waitUntilDone:NO];
+		
+		//NSRect rectToDisplay = [thumbItem frame];
+//		[outlineView displayRect:rectToDisplay];
 	}
+}
+
+- (void)drawThumbItem:(PAThumbnailItem*)thumbItem
+{
+	NSRect rectToDisplay = [thumbItem frame];
+	[outlineView displayRect:rectToDisplay];
 }
 
 - (void)queryNote:(NSNotification *)notification
@@ -360,11 +369,15 @@
 	// Start or stop progress animation	
 	if([[notification name] isEqualTo:NNQueryDidStartGatheringNotification])
 	{
+		[outlineView reloadData];
+		
 		NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_SEARCHING", @"Global", nil);
 		[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
 	}
 	else if([[notification name] isEqualTo:NNQueryDidFinishGatheringNotification])
 	{
+		[outlineView reloadData];
+		
 		[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
 		if ([delegate respondsToSelector:@selector(updateTagCloudDisplayMessage)])
 		{
@@ -375,6 +388,10 @@
 			[NSException raise:NSInternalInconsistencyException
 						format:@"delegate does not implement updateTagCloudDisplayMessage"];
 		}
+	}
+	else if ([[notification name] isEqualTo:NNQueryDidResetNotification])
+	{
+		[outlineView reloadData];
 	}
 }
 

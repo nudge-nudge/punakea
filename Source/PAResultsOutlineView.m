@@ -324,7 +324,6 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 													  userInfo:userInfo];
 }
 
-// TODO move this to controller
 - (void)queryNote:(NSNotification *)note
 {	
 	if([[note name] isEqualToString:NNQueryDidStartGatheringNotification])
@@ -334,13 +333,6 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		[self setSelectedItemsOfMultiItem:[NSMutableArray array]];
 	}
 
-	if([[note name] isEqualToString:NNQueryDidStartGatheringNotification] ||
-	   [[note name] isEqualToString:NNQueryDidFinishGatheringNotification] ||
-	   [[note name] isEqualToString:NNQueryDidResetNotification])
-	{	
-		[self reloadData];
-	}
-	
 	if([[note name] isEqualToString:NNQueryDidUpdateNotification] ||
 	   [[note name] isEqualToString:NNQueryGatheringProgressNotification])
 	{		

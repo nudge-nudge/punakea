@@ -49,18 +49,21 @@ static PAThumbnailManager *sharedInstance = nil;
 		[NSApplication detachDrawingThread:@selector(processQueue)
 								  toTarget:self
 								withObject:nil];
+		
+		processLock = [[NSLock alloc] init];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	if(stack)					[stack release];
-	if(queue)					[queue release];
-	if(thumbnails)				[thumbnails release];
-	if(icons)					[icons release];
-	if(dummyImageThumbnail)		[dummyImageThumbnail release];
-	if(dummyImageIcon)			[dummyImageIcon release];
+	[processLock release];
+	[stack release];
+	[queue release];
+	[thumbnails release];
+	[icons release];
+	[dummyImageThumbnail release];
+	[dummyImageIcon release];
 	
 	[super dealloc];
 }
@@ -102,13 +105,18 @@ static PAThumbnailManager *sharedInstance = nil;
 	[url release];*/
 
 	// Get icon
+	[processLock lock];
 	NSImage *icon = [icons objectForKey:filename];
+	[processLock unlock];
+	
 	if(icon)
 	{
 		return icon;
 	} else {		
-		// Add filename to queue	
+		// Add filename to queue
+		[processLock lock];
 		[icons setObject:dummyImageIcon forKey:filename];
+		[processLock unlock];
 		
 		PAThumbnailItem *item = [[PAThumbnailItem alloc] initForFile:filename inView:aView frame:aFrame type:PAItemTypeIcon];		
 		
@@ -119,6 +127,7 @@ static PAThumbnailManager *sharedInstance = nil;
 		
 		[queue enqueue:item];
 		[item release];
+		[processLock unlock];
 		
 		return dummyImageIcon;
 	}
@@ -141,17 +150,16 @@ static PAThumbnailManager *sharedInstance = nil;
 		[item release];
 	
 		// If number of cached images exceeds limit, remove first item of stack
-		@synchronized(self)
+		[processLock lock];
+		if([stack count] > NUMBER_OF_CACHED_ITEMS_MAX)
 		{
-			if([stack count] > NUMBER_OF_CACHED_ITEMS_MAX)
-			{
-				NSString *filename = [stack objectAtIndex:0];
-				
-				[thumbnails removeObjectForKey:filename];
-				[icons removeObjectForKey:filename];
-				[stack removeObjectAtIndex:0];
-			}
+			NSString *filename = [stack objectAtIndex:0];
+			
+			[thumbnails removeObjectForKey:filename];
+			[icons removeObjectForKey:filename];
+			[stack removeObjectAtIndex:0];
 		}
+		[processLock unlock];
 	}
 }
 
@@ -162,13 +170,13 @@ static PAThumbnailManager *sharedInstance = nil;
 	NSImage *thumbnail = [self thumbnailFromFileNew:filename maxBounds:NSMakeSize(76,75)];
 	//if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
-	@synchronized(self)
-	{
-		[thumbnails removeObjectForKey:filename];
-		[thumbnails setObject:thumbnail forKey:filename];
+	[processLock lock];
+
+	[thumbnails removeObjectForKey:filename];
+	[thumbnails setObject:thumbnail forKey:filename];
+	[stack addObject:filename];
 	
-		[stack addObject:filename];
-	}
+	[processLock unlock];
 	
 	// Post notification
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -181,13 +189,13 @@ static PAThumbnailManager *sharedInstance = nil;
 
 	NSImage *img = [[NSWorkspace sharedWorkspace] iconForFile:filename];
 	
-	@synchronized(self)
-	{
-		[icons removeObjectForKey:filename];
-		[icons setObject:img forKey:filename];
+	[processLock lock];
+
+	[icons removeObjectForKey:filename];
+	[icons setObject:img forKey:filename];
+	[stack addObject:filename];
 	
-		[stack addObject:filename];
-	}
+	[processLock unlock];
 	
 	// Post notification
 	if(delayNextNotification)
@@ -198,7 +206,6 @@ static PAThumbnailManager *sharedInstance = nil;
 	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
-	// TODO DEBUG not threadsafe?
 	[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
 }
 

@@ -261,10 +261,10 @@
 	// buffer in position 0 is the main input buffer
 	[[self inBuffer] enqueueObjects:[self filterObjects]];
 	
-//	NSLog(@"filterEngine started with %i filterObjects, %i inBuffer, filters: %@",
-//		  [[self filterObjects] count],
-//		  [[self inBuffer] count],
-//		  filters);
+	NSLog(@"filterEngine started with %i filterObjects, %i inBuffer, filters: %@",
+		  [[self filterObjects] count],
+		  [[self inBuffer] count],
+		  filters);
 	
 	NNObjectFilter *filter;
 	NSEnumerator *e = [filters objectEnumerator];

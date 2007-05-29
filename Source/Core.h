@@ -82,7 +82,7 @@
 - (IBAction)runToolbarCustomizationPalette:(id)sender;
 
 
-- (IBAction)searchForTag:(NNTag*)aTag;
+- (IBAction)searchForTags:(NSArray*)someTags;
 
 // misc
 - (BOOL)appHasBrowser;
