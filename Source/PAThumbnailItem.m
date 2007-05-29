@@ -17,8 +17,8 @@
 	self = [super init];
 	if(self)
 	{
-		filename = path;
-		view = aView;
+		filename = [path retain];
+		view = [aView retain];
 		frame = aFrame;
 		type = itemType;
 	}
@@ -27,6 +27,8 @@
 
 - (void)dealloc
 {
+	[view release];
+	[filename release];
 	[super dealloc];
 }
 
