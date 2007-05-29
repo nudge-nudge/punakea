@@ -17,7 +17,6 @@
 #import "PASmartFolder.h"
 
 extern NSString * const PAContentTypeFilterUpdate;
-extern NSString * const PAContentTypeFilterReset;
 
 
 @interface PASourcePanelController : NSObject {

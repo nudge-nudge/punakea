@@ -9,7 +9,6 @@
 #import "PASourcePanelController.h"
 
 NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
-NSString * const PAContentTypeFilterReset = @"PAContentTypeFilterReset";
 
 @implementation PASourcePanelController
 
