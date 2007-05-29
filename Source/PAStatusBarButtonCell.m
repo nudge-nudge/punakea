@@ -9,8 +9,8 @@
 #import "PAStatusBarButtonCell.h"
 
 
-NSSize const PADDING = {10,5};
-NSSize const MIN_SIZE = {30, 22};
+NSSize const STATUSBAR_BUTTON_PADDING = {10,5};
+NSSize const STATUSBAR_BUTTON_MIN_SIZE = {30, 22};
 
 
 @implementation PAStatusBarButtonCell
@@ -63,7 +63,7 @@ NSSize const MIN_SIZE = {30, 22};
 	imageRect.size = [img size];
 	
 	NSRect destRect;
-	destRect.origin.x = cellFrame.origin.x + PADDING.width;
+	destRect.origin.x = cellFrame.origin.x + STATUSBAR_BUTTON_PADDING.width;
 	destRect.origin.y = cellFrame.origin.y + (cellFrame.size.height - imageRect.size.height) / 2;
 	destRect.size = imageRect.size;
 	
@@ -159,14 +159,14 @@ NSSize const MIN_SIZE = {30, 22};
 		NSSize imageSize = [[self image] size];
 		
 		NSSize newSize;
-		newSize.width = MAX(imageSize.width + 2 * PADDING.width, MIN_SIZE.width);
+		newSize.width = MAX(imageSize.width + 2 * STATUSBAR_BUTTON_PADDING.width, STATUSBAR_BUTTON_MIN_SIZE.width);
 		newSize.height = 22;
 		
 		return newSize;
 	}
 	else
 	{
-		return MIN_SIZE;
+		return STATUSBAR_BUTTON_MIN_SIZE;
 	}
 }
 

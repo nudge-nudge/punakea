@@ -9,8 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 
-extern NSSize const PADDING;
-extern NSSize const MIN_SIZE;
+extern NSSize const STATUSBAR_BUTTON_PADDING;
+extern NSSize const STATUSBAR_BUTTON_MIN_SIZE;
 
 
 @interface PAStatusBarButtonCell : NSActionCell {

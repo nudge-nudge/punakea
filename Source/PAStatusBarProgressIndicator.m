@@ -43,7 +43,7 @@ NSSize const STATUSBAR_PROGRESS_INDICATOR_PADDING = {5.0, 0.0};
 
 + (PAStatusBarProgressIndicator *)statusBarProgressIndicator
 {
-	return [[[self alloc] initWithFrame:NSMakeRect(0, 0, MIN_SIZE.width, MIN_SIZE.height)] autorelease];
+	return [[[self alloc] initWithFrame:NSMakeRect(0, 0, STATUSBAR_BUTTON_MIN_SIZE.width, STATUSBAR_BUTTON_MIN_SIZE.height)] autorelease];
 }
 
 - (void)dealloc

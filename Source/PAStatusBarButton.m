@@ -28,7 +28,7 @@
 
 + (PAStatusBarButton *)statusBarButton
 {
-	return [[[[self class] alloc] initWithFrame:NSMakeRect(0, 0, MIN_SIZE.width, MIN_SIZE.height)] autorelease];
+	return [[[[self class] alloc] initWithFrame:NSMakeRect(0, 0, STATUSBAR_BUTTON_MIN_SIZE.width, STATUSBAR_BUTTON_MIN_SIZE.height)] autorelease];
 }
 
 - (void)dealloc
