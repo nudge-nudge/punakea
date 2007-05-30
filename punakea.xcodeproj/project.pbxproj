@@ -1161,6 +1161,8 @@
 				488E80270AF3895800660B7B /* Value Transformers */,
 				65903EF20A4BFDF000ADDC1D /* Custom Controls */,
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
+				48209CA50AB1BEED00F3CF21 /* PADropManager.h */,
+				48209CA60AB1BEED00F3CF21 /* PADropManager.m */,
 				65B78F1A0AF0D8D400AF1102 /* CTGradient.h */,
 				65B78F1B0AF0D8D400AF1102 /* CTGradient.m */,
 				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
@@ -1175,8 +1177,6 @@
 				65AA74BC0BF35D2C0054407D /* NSTextFieldAdditions.m */,
 				48BFF6230B13420500C1A127 /* PADebugView.h */,
 				48BFF6240B13420500C1A127 /* PADebugView.m */,
-				48209CA50AB1BEED00F3CF21 /* PADropManager.h */,
-				48209CA60AB1BEED00F3CF21 /* PADropManager.m */,
 				65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */,
 				65CB09440BBBBF8700799E25 /* PAGenericTableColumn.m */,
 				658ADEB60AF6432900063AE1 /* PALabel.h */,
@@ -2739,6 +2739,267 @@
 			};
 			name = Release;
 		};
+		4822E5040C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PADropHandler-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PADropHandler;
+				ZERO_LINK = YES;
+			};
+			name = Beta;
+		};
+		4822E5050C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "FilenamesDropHandler-Info.plist";
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = FilenamesDropHandler;
+				WRAPPER_EXTENSION = punakeaDropHandler;
+				ZERO_LINK = YES;
+			};
+			name = Beta;
+		};
+		4822E5060C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "NDResourceFork-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = NDResourceFork;
+				ZERO_LINK = YES;
+			};
+			name = Beta;
+		};
+		4822E5070C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "WebURLsWithTitlesPboardTypeDropHandler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = WebURLsWithTitlesPboardTypeDropHandler;
+				WRAPPER_EXTENSION = punakeaDropHandler;
+				ZERO_LINK = YES;
+			};
+			name = Beta;
+		};
+		4822E5080C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "NNFilterEngine-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = NNFilterEngine;
+				ZERO_LINK = YES;
+			};
+			name = Beta;
+		};
+		4822E5090C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(FRAMEWORK_SEARCH_PATHS)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_5)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/Frameworks\"";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Punakea;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Beta;
+		};
+		4822E50A0C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Make DMG";
+			};
+			name = Beta;
+		};
+		4822E50B0C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = Documentation;
+			};
+			name = Beta;
+		};
+		4822E50C0C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Punakea.app/Contents/MacOS/Punakea";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Unit Testing-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Unit Testing";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Beta;
+		};
+		4822E50D0C0CB1C100435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Beta;
+		};
 		4831849B0AEF8D8700C3C672 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3129,6 +3390,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4815A0B40AEF99DA00969296 /* Debug */,
+				4822E5060C0CB1C100435942 /* Beta */,
 				4815A0B50AEF99DA00969296 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3138,6 +3400,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48186F3C0BE4C7C0000B4638 /* Debug */,
+				4822E5080C0CB1C100435942 /* Beta */,
 				48186F3D0BE4C7C0000B4638 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3147,6 +3410,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4831849B0AEF8D8700C3C672 /* Debug */,
+				4822E5040C0CB1C100435942 /* Beta */,
 				4831849C0AEF8D8700C3C672 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3156,6 +3420,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				483184E60AEF91A700C3C672 /* Debug */,
+				4822E5050C0CB1C100435942 /* Beta */,
 				483184E70AEF91A700C3C672 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3165,6 +3430,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48404B040AF8B358001F7BB7 /* Debug */,
+				4822E50C0C0CB1C100435942 /* Beta */,
 				48404B050AF8B358001F7BB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3174,6 +3440,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				488A52EC0A81D9FA005B54A8 /* Debug */,
+				4822E50B0C0CB1C100435942 /* Beta */,
 				488A52ED0A81D9FA005B54A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3183,6 +3450,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48C633BE0AEF9721008F0E94 /* Debug */,
+				4822E5070C0CB1C100435942 /* Beta */,
 				48C633BF0AEF9721008F0E94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3192,6 +3460,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6566CD6F0AFF88E200FEAD7E /* Debug */,
+				4822E50A0C0CB1C100435942 /* Beta */,
 				6566CD700AFF88E200FEAD7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3201,6 +3470,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4B08A954540054247B /* Debug */,
+				4822E5090C0CB1C100435942 /* Beta */,
 				C01FCF4C08A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3210,6 +3480,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
+				4822E50D0C0CB1C100435942 /* Beta */,
 				C01FCF5008A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

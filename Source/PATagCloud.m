@@ -670,12 +670,10 @@ bind to visibleTags
 }
 
 #pragma mark drap & drop stuff
-//code of cocoadevcentral tutorial
-
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
-	// Discard dragging from tag button
-	if([[sender draggingSource] isMemberOfClass:[PATagButton class]])
+	// check if sender should be ignored
+	if(![dropManager acceptsSender:[sender draggingSource]])
 		return NSDragOperationNone;
 	
 	NSDragOperation dragOp =  [dropManager performedDragOperation:[sender draggingPasteboard]];
@@ -691,6 +689,10 @@ bind to visibleTags
 
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
 {
+	// check if sender should be ignored
+	if(![dropManager acceptsSender:[sender draggingSource]])
+		return NSDragOperationNone;
+	
 	// Make sure we are show the latest drag operation - flags may have been changed
 	return [dropManager performedDragOperation:[sender draggingPasteboard]];
 }

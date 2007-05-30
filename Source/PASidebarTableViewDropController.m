@@ -42,6 +42,10 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 				 proposedRow:(int)row 
 	   proposedDropOperation:(NSTableViewDropOperation)op 
 {
+	// check if sender should be ignored
+	if(![dropManager acceptsSender:[info draggingSource]])
+		return NSDragOperationNone;
+	
 	NSEvent *currentEvent = [NSApp currentEvent];
     unsigned flags = [currentEvent modifierFlags];
     if (flags & NSAlternateKeyMask)

@@ -8,6 +8,8 @@
 
 #import "PADropManager.h"
 
+#import "PATagButton.h"
+
 @interface PADropManager (PrivateAPI)
 
 - (void)loadAllPlugins;
@@ -57,6 +59,15 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 - (void)removeDropHandler:(PADropHandler*)handler
 {
 	[dropHandlers removeObject:handler];
+}
+
+- (BOOL)acceptsSender:(id)sender
+{
+	// at the moment only PATagButtons are ignored
+	if([sender isMemberOfClass:[PATagButton class]])
+		return NO;
+	else
+		return YES;
 }
 
 - (NSArray*)handledPboardTypes

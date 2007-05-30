@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "PADropHandler/PADropHandler.h"
 
+@class PATagButton;
+
 /**
 this singleton class handles all drops from the outside.
  it knows which file types are handled and what dragoperations will be performed on a specific file.
@@ -32,6 +34,13 @@ get the singleton instance
 
 - (void)registerDropHandler:(PADropHandler*)handler;
 - (void)removeDropHandler:(PADropHandler*)handler;
+
+/**
+checks if the sender is an internal control which should be
+ ignored
+ @return YES if sender is ok, NO if sender is internal and should be ignored
+ */
+- (BOOL)acceptsSender:(id)sender;
 
 /**
 returns an array of strings with all pboardTypes currently

@@ -475,6 +475,10 @@ adds tag to tagField (use from "outside")
 				 proposedRow:(int)row 
 	   proposedDropOperation:(NSTableViewDropOperation)op
 {
+	// check if sender should be ignored
+	if(![dropManager acceptsSender:[info draggingSource]])
+		return NSDragOperationNone;
+	
 	int fileCount = [items count];
 
 	if (fileCount == 0)

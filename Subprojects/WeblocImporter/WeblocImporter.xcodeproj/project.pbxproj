@@ -192,6 +192,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4822E5360C0CC5F000435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = /Library/Spotlight;
+				LIBRARY_STYLE = Bundle;
+				PRODUCT_NAME = WeblocImporter;
+				WRAPPER_EXTENSION = mdimporter;
+				ZERO_LINK = YES;
+			};
+			name = Beta;
+		};
+		4822E5370C0CC5F000435942 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Beta;
+		};
 		70138C850896BE9A00968C2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -255,6 +287,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				70138C850896BE9A00968C2F /* Debug */,
+				4822E5360C0CC5F000435942 /* Beta */,
 				70138C860896BE9A00968C2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -264,6 +297,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				70138C890896BE9A00968C2F /* Debug */,
+				4822E5370C0CC5F000435942 /* Beta */,
 				70138C8A0896BE9A00968C2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

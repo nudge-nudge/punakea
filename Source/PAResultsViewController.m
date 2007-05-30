@@ -766,8 +766,8 @@
 				  proposedItem:(id)item 
 			proposedChildIndex:(int)idx
 {
-	// Discard dragging from tag button
-	if([[info draggingSource] isMemberOfClass:[PATagButton class]])
+	// check if sender should be ignored
+	if(![dropManager acceptsSender:[info draggingSource]])
 		return NSDragOperationNone;
 		
 	// Discard dragging on self

@@ -31,6 +31,10 @@
 #pragma mark drap & drop stuff
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
+	// check if sender should be ignored
+	if(![dropManager acceptsSender:[sender draggingSource]])
+		return NSDragOperationNone;
+	
 	NSEvent *currentEvent = [NSApp currentEvent];
     unsigned flags = [currentEvent modifierFlags];
     if (flags & NSAlternateKeyMask)
@@ -52,6 +56,10 @@
 
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
 {
+	// check if sender should be ignored
+	if(![dropManager acceptsSender:[sender draggingSource]])
+		return NSDragOperationNone;
+	
 	NSEvent *currentEvent = [NSApp currentEvent];
     unsigned flags = [currentEvent modifierFlags];
     if (flags & NSAlternateKeyMask)
