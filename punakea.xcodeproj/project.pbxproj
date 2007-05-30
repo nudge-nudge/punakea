@@ -166,6 +166,8 @@
 		48E145AB0B5F9BB400859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		48E145B20B5F9BD400859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		48E145B50B5F9BDB00859B22 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
+		48ECD3550C0E0ADE00DF70CE /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48ECD33D0C0DFB6100DF70CE /* NNTagging.framework */; };
+		48ECD3630C0E0AE800DF70CE /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48ECD33D0C0DFB6100DF70CE /* NNTagging.framework */; };
 		650846FC0BE641320046CB89 /* statusbar-button-info.png in Resources */ = {isa = PBXBuildFile; fileRef = 650846FB0BE641320046CB89 /* statusbar-button-info.png */; };
 		6509020B0BEDF1A1005468E0 /* toolbar-sort-by-name.tif in Resources */ = {isa = PBXBuildFile; fileRef = 650902090BEDF1A1005468E0 /* toolbar-sort-by-name.tif */; };
 		6509020C0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6509020A0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif */; };
@@ -422,6 +424,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				48ECD3630C0E0AE800DF70CE /* NNTagging.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
 				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
 				48893B030AF0A4EE00BA0B50 /* NDResourceFork.framework in Copy Frameworks */,
@@ -871,7 +874,7 @@
 		65FB5ADD0BBD4DD80024EE3C /* PASmartFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASmartFolder.h; sourceTree = "<group>"; };
 		65FB5ADE0BBD4DD80024EE3C /* PASmartFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASmartFolder.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* Punakea.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Punakea.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* Punakea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Punakea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -928,6 +931,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48ECD3550C0E0ADE00DF70CE /* NNTagging.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
 				48893B5A0AF0AB1600BA0B50 /* NDResourceFork.framework in Frameworks */,
