@@ -38,7 +38,7 @@
 
 - (void)dealloc
 {
-	if(containedObject) [containedObject release];
+	[containedObject release];
 	[children release];
 	[super dealloc];
 }
