@@ -314,8 +314,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)reloadDataAndSelectItemWithValue:(NSString *)value
 {
-	[self reloadData];	
 	[self selectItemWithValue:value];
+	[self reloadData];	
 }
 
 - (PASourceItem *)itemWithValue:(NSString *)value
