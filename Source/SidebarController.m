@@ -128,7 +128,6 @@ action called on dropping files to FileBox
 	[[self window] reset];
 }
 
-
 #pragma mark Accessors
 - (id)taggerController
 {
@@ -136,11 +135,17 @@ action called on dropping files to FileBox
 }
 
 #pragma mark function
+- (void)appShouldStayFront
+{
+	// set window not to activate last front app
+	[[self window] setActivatesLastFrontApp:NO];
+}
+
 - (BOOL)mouseInSidebarWindow
 {
 	NSPoint mouseLocation = [[self window] mouseLocationOutsideOfEventStream];
 	NSPoint mouseLocationRelativeToWindow = [[self window] convertBaseToScreen:mouseLocation];
-	
+		
 	return (NSPointInRect(mouseLocationRelativeToWindow,[[self window] frame]) || (mouseLocationRelativeToWindow.x == 0));
 }	
 

@@ -171,7 +171,7 @@
 // this behaves differently than handleTagActivation:
 // sets selected tags to new tags instead of adding
 // also removes filters
-- (void)handleTagActivations:(NSArray*)someTags
+- (void)handleTagActivations:(NSMutableArray*)someTags
 {
 	[query removeAllFilters];
 	[someTags makeObjectsPerformSelector:@selector(incrementClickCount)];

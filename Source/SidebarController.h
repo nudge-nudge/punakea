@@ -36,6 +36,7 @@
 
 - (id)taggerController;
 
+- (void)appShouldStayFront;
 - (BOOL)mouseInSidebarWindow;
 
 @end

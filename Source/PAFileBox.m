@@ -82,6 +82,8 @@
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
+	//[[[self window] delegate] appShouldStayFront];
+	
 	NSArray *newObjects = [dropManager handleDrop:[sender draggingPasteboard]];
 	[self setObjects:newObjects];
 	
