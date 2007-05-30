@@ -75,11 +75,24 @@
 	<array>
 		<dict>
 			<key>NSKeyEquivalent</key>
+			<string>T</string>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Punakea/Show Tagger</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>openTagger</string>
+			<key>NSPortName</key>
+			<string>Punakea</string>
+		</dict>
+		<dict>
+			<key>NSKeyEquivalent</key>
 			<string>P</string>
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Tag with Punakea</string>
+				<string>Punakea/Tag File</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>tagFiles</string>

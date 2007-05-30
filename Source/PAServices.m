@@ -42,4 +42,11 @@
 	}
 }
 
+- (void)openTagger:(NSPasteboard *)pboard
+		userData:(NSString *)userData
+		   error:(NSString **)error
+{
+	[[[NSApplication sharedApplication] delegate] showTagger:self];
+}
+
 @end
