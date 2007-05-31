@@ -505,7 +505,7 @@
 			return;
 		}
 	}
-}
+} 
 
 - (IBAction)showBrowser:(id)sender
 {

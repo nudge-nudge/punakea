@@ -74,10 +74,10 @@
 		
 		if ([stateLock tryLockWhenCondition:NNThreadRunning])
 		{
+			[stateLock unlock];
+			
 			if (object)
 				[self filterObject:object];
-			
-			[stateLock unlock];
 		}
 		else
 		{
