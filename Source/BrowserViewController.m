@@ -546,7 +546,8 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			// give the mainController a chance to display a message
 			[tagCloud setDisplayMessage:[mainController displayMessage]];
 		}
-		else if ([[filterEngine filters] count] > 0)
+		else if (!filterEngineIsWorking && 
+				 [[filterEngine filters] count] > 0)
 		{
 			// no items found for content type
 			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_CONTENTTYPE",@"Tags",@"")];
