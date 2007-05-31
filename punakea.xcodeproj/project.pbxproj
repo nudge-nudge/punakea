@@ -343,8 +343,6 @@
 		C6C83C090C0F699B0005F4C3 /* XMLRPCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C83C030C0F699B0005F4C3 /* XMLRPCRequest.m */; };
 		C6C83C0A0C0F699B0005F4C3 /* XMLRPCResponse.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6C83C040C0F699B0005F4C3 /* XMLRPCResponse.h */; };
 		C6C83C0B0C0F699B0005F4C3 /* XMLRPCResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C83C050C0F699B0005F4C3 /* XMLRPCResponse.m */; };
-		C6C83C100C0F69CF0005F4C3 /* StepsTagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6C83C0E0C0F69CE0005F4C3 /* StepsTagCloud.h */; };
-		C6C83C110C0F69CF0005F4C3 /* StepsTagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C83C0F0C0F69CE0005F4C3 /* StepsTagCloud.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -557,7 +555,6 @@
 				C6C83C060C0F699B0005F4C3 /* XMLRPCCall.h in CopyFiles */,
 				C6C83C080C0F699B0005F4C3 /* XMLRPCRequest.h in CopyFiles */,
 				C6C83C0A0C0F699B0005F4C3 /* XMLRPCResponse.h in CopyFiles */,
-				C6C83C100C0F69CF0005F4C3 /* StepsTagCloud.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,8 +894,6 @@
 		C6C83C030C0F699B0005F4C3 /* XMLRPCRequest.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XMLRPCRequest.m; sourceTree = "<group>"; };
 		C6C83C040C0F699B0005F4C3 /* XMLRPCResponse.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XMLRPCResponse.h; sourceTree = "<group>"; };
 		C6C83C050C0F699B0005F4C3 /* XMLRPCResponse.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XMLRPCResponse.m; sourceTree = "<group>"; };
-		C6C83C0E0C0F69CE0005F4C3 /* StepsTagCloud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = StepsTagCloud.h; sourceTree = "<group>"; };
-		C6C83C0F0C0F69CE0005F4C3 /* StepsTagCloud.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = StepsTagCloud.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1400,8 +1395,6 @@
 		48BDCECE09C4A1EE00A57165 /* TagCloud */ = {
 			isa = PBXGroup;
 			children = (
-				C6C83C0E0C0F69CE0005F4C3 /* StepsTagCloud.h */,
-				C6C83C0F0C0F69CE0005F4C3 /* StepsTagCloud.m */,
 				48BDCEE409C4A4E300A57165 /* PATagCloud.h */,
 				48BDCEE509C4A4E300A57165 /* PATagCloud.m */,
 				4842FC0D09DA801500C4A931 /* PATagButton.h */,
@@ -2474,7 +2467,6 @@
 				C6C83C070C0F699B0005F4C3 /* XMLRPCCall.m in Sources */,
 				C6C83C090C0F699B0005F4C3 /* XMLRPCRequest.m in Sources */,
 				C6C83C0B0C0F699B0005F4C3 /* XMLRPCResponse.m in Sources */,
-				C6C83C110C0F69CF0005F4C3 /* StepsTagCloud.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
