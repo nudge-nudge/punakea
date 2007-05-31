@@ -333,8 +333,6 @@ adds tag to tagField (use from "outside")
 	// update currentCompleteTags
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	
-	NSLog(@"%@",currentCompleteTagsInField);
-	
 	// Update manage files flag if first tag was entered
 	[self updateManageFilesFlagOnTaggableObjects];
 	

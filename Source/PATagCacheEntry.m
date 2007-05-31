@@ -17,12 +17,14 @@
 	if (self = [super init])
 	{
 		[self setAssignedFiletypes:[NSMutableDictionary dictionary]];
+		lock = [[NSLock alloc] init];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[lock release];
 	[assignedFiletypes release];
 	[super dealloc];
 }
@@ -46,9 +48,11 @@
 #pragma mark accessors
 - (void)setAssignedFiletypes:(NSMutableDictionary*)dic
 {
+	[lock lock];
 	[dic retain];
 	[assignedFiletypes release];
 	assignedFiletypes = dic;
+	[lock unlock];
 }
 
 - (NSMutableDictionary*)assignedFiletypes
@@ -61,7 +65,9 @@
 {
 	NSArray *values = [NSArray arrayWithObjects:[NSCalendarDate date],[NSNumber numberWithBool:hasFiletype],nil];
 	
+	[lock lock];
 	[assignedFiletypes setObject:values forKey:filetype];
+	[lock unlock];
 }		
 
 - (PACacheResult)hasFiletype:(NSString*)filetype forDate:(NSCalendarDate*)date

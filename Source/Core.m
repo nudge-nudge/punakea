@@ -100,7 +100,7 @@
 	services =  [[PAServices alloc] init];
 	[NSApp setServicesProvider:services];
 	
-	// TODO DEBUG
+	// DEBUG
 	//[[PANotificationReceiver alloc] init];
 }
 

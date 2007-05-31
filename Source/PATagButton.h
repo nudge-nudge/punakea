@@ -15,6 +15,7 @@
 - (id)initWithTag:(NNTag*)tag rating:(float)rating;
 
 // TODO: Why is this called genericTag, not just tag?! --daniel
+// TODO: Because every NSControl has a tag accessor already, that's why your tag accessors give warnings! --johannes
 - (NNTag*)genericTag;
 - (void)setGenericTag:(NNTag*)aTag;
 

@@ -420,7 +420,7 @@
 	
 	// remove filter and buffer
 	// wait for filter to stop
-	[filter waitForFilter];
+	[filter waitForStop];
 	
 	[filters removeObjectAtIndex:slot];
 	[buffers removeObjectAtIndex:slot+1];

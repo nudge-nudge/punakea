@@ -17,13 +17,14 @@ enum
 };
 
 
-// TODO THREADSAFE!!
 @interface PATagCacheEntry : NSObject {
 	/**
 	an array of filetypes corresponding to the values of 
 	 the MDSimpleGrouping.plist
 	 */
 	NSMutableDictionary *assignedFiletypes;
+	
+	NSLock *lock; /**< needed to make this thread safe */
 }
 
 - (void)setAssignedFiletypes:(NSMutableDictionary*)dic;

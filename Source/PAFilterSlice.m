@@ -32,7 +32,6 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	{		
 		buttons = [[NSMutableArray alloc] init];
 		
-		/* TODO not removed on controller change */
 		[[NSNotificationCenter defaultCenter] addObserver:self
 		                                         selector:@selector(update)
 												     name:NNQueryDidUpdateNotification

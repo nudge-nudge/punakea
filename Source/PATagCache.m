@@ -40,6 +40,7 @@ static PATagCache *sharedInstance = nil;
 	if (self = [super init])
 	{
 		cache = [[NSMutableDictionary alloc] init];
+		cacheLock = [[NSLock alloc] init];
 	}
 	return self;
 }
@@ -88,7 +89,11 @@ static PATagCache *sharedInstance = nil;
 		// create new entry
 		entry = [[PATagCacheEntry alloc] init];
 		[entry setHasFiletype:filetype toValue:hasFiletype];
+	
+		[cacheLock lock];
 		[cache setObject:entry forKey:[tag name]];
+		[cacheLock unlock];
+		
 		[entry release];
 	}
 }

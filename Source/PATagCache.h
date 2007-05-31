@@ -14,6 +14,8 @@
 
 @interface PATagCache : NSObject {
 	NSMutableDictionary *cache;
+	
+	NSLock *cacheLock;
 }
 
 + (PATagCache*)sharedInstance;
