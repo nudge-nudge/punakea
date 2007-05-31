@@ -101,21 +101,30 @@
 	while(![stateLock lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]]);
 	
 	if ([stateLock condition] == NNThreadStopped)
+	{
 		[stateLock unlock];
+	}
 	else
+	{
 		[stateLock unlockWithCondition:NNThreadCanceled];
+	}
 }
 
-- (void)waitForFilter
+- (void)waitForStop
 {
 	BOOL stopped = NO;
-	
+		
 	while (!stopped)
 	{
 		if ([stateLock lockWhenCondition:NNThreadStopped
 							  beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]])
 		{
 			stopped = YES;
+		}
+		else
+		{
+			// tell filter to stop
+			[self markAsCanceled];
 		}
 	}
 }

@@ -366,7 +366,7 @@
 }
 
 - (void)addFilter:(NNObjectFilter*)newFilter
-{
+{	
 	// stops check thread and resets main buffer
 	[self setObjects:filterObjects];
 	
@@ -399,7 +399,7 @@
 }
 	
 - (void)removeFilter:(NNObjectFilter*)filter
-{	
+{
 	if (!filter)
 		return;
 
@@ -436,9 +436,9 @@
 	// wait for all filters to stop
 	NSEnumerator *e = [filters objectEnumerator];
 	NNObjectFilter *filter;
-	
+		
 	while (filter = [e nextObject])
-		[filter waitForFilter];
+		[filter waitForStop];
 	
 	// all filters are stopped now
 	[filters removeAllObjects];
