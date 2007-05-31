@@ -11,6 +11,7 @@
 #import "PAStatusBar.h"
 
 
+
 @interface TaggerController : PATagAutocompleteWindowController
 {	
 	IBOutlet NSTableView		*tableView;

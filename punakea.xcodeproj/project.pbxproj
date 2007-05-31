@@ -335,6 +335,16 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		C6C83BFB0C0F69740005F4C3 /* CURLHandle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C83BF50C0F69740005F4C3 /* CURLHandle.framework */; };
+		C6C83BFC0C0F69840005F4C3 /* CURLHandle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C6C83BF50C0F69740005F4C3 /* CURLHandle.framework */; };
+		C6C83C060C0F699B0005F4C3 /* XMLRPCCall.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6C83C000C0F699B0005F4C3 /* XMLRPCCall.h */; };
+		C6C83C070C0F699B0005F4C3 /* XMLRPCCall.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C83C010C0F699B0005F4C3 /* XMLRPCCall.m */; };
+		C6C83C080C0F699B0005F4C3 /* XMLRPCRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6C83C020C0F699B0005F4C3 /* XMLRPCRequest.h */; };
+		C6C83C090C0F699B0005F4C3 /* XMLRPCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C83C030C0F699B0005F4C3 /* XMLRPCRequest.m */; };
+		C6C83C0A0C0F699B0005F4C3 /* XMLRPCResponse.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6C83C040C0F699B0005F4C3 /* XMLRPCResponse.h */; };
+		C6C83C0B0C0F699B0005F4C3 /* XMLRPCResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C83C050C0F699B0005F4C3 /* XMLRPCResponse.m */; };
+		C6C83C100C0F69CF0005F4C3 /* StepsTagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6C83C0E0C0F69CE0005F4C3 /* StepsTagCloud.h */; };
+		C6C83C110C0F69CF0005F4C3 /* StepsTagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C83C0F0C0F69CE0005F4C3 /* StepsTagCloud.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -424,6 +434,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C6C83BFC0C0F69840005F4C3 /* CURLHandle.framework in Copy Frameworks */,
 				48ECD3630C0E0AE800DF70CE /* NNTagging.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
 				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
@@ -543,6 +554,10 @@
 				480219540C02D2EE001CF480 /* PAInstaller.h in CopyFiles */,
 				65B1FC890C0308EC0099D12B /* PAStatusBarProgressIndicator.h in CopyFiles */,
 				489DA0470C0B2EB40027E3FF /* PAServices.h in CopyFiles */,
+				C6C83C060C0F699B0005F4C3 /* XMLRPCCall.h in CopyFiles */,
+				C6C83C080C0F699B0005F4C3 /* XMLRPCRequest.h in CopyFiles */,
+				C6C83C0A0C0F699B0005F4C3 /* XMLRPCResponse.h in CopyFiles */,
+				C6C83C100C0F69CF0005F4C3 /* StepsTagCloud.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,6 +890,15 @@
 		65FB5ADE0BBD4DD80024EE3C /* PASmartFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASmartFolder.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Punakea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Punakea.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6C83BF50C0F69740005F4C3 /* CURLHandle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CURLHandle.framework; sourceTree = "<group>"; };
+		C6C83C000C0F699B0005F4C3 /* XMLRPCCall.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XMLRPCCall.h; sourceTree = "<group>"; };
+		C6C83C010C0F699B0005F4C3 /* XMLRPCCall.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XMLRPCCall.m; sourceTree = "<group>"; };
+		C6C83C020C0F699B0005F4C3 /* XMLRPCRequest.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XMLRPCRequest.h; sourceTree = "<group>"; };
+		C6C83C030C0F699B0005F4C3 /* XMLRPCRequest.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XMLRPCRequest.m; sourceTree = "<group>"; };
+		C6C83C040C0F699B0005F4C3 /* XMLRPCResponse.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XMLRPCResponse.h; sourceTree = "<group>"; };
+		C6C83C050C0F699B0005F4C3 /* XMLRPCResponse.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XMLRPCResponse.m; sourceTree = "<group>"; };
+		C6C83C0E0C0F69CE0005F4C3 /* StepsTagCloud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = StepsTagCloud.h; sourceTree = "<group>"; };
+		C6C83C0F0C0F69CE0005F4C3 /* StepsTagCloud.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = StepsTagCloud.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -939,6 +963,7 @@
 				658EA77D099798A6005F13DE /* Message.framework in Frameworks */,
 				484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */,
 				484497BD0B2D9925009B262C /* Sparkle.framework in Frameworks */,
+				C6C83BFB0C0F69740005F4C3 /* CURLHandle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -964,6 +989,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6C83BF50C0F69740005F4C3 /* CURLHandle.framework */,
 				48E145320B5F99FA00859B22 /* NNTagging.framework */,
 				484497A90B2D9925009B262C /* Sparkle.framework */,
 			);
@@ -1219,6 +1245,7 @@
 		4831849F0AEF8FD800C3C672 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6C83BFF0C0F699B0005F4C3 /* XMLRPC */,
 				48186F480BE4C834000B4638 /* NNFilterEngine */,
 				4815A0C40AEF9A0200969296 /* NDResourceFork */,
 				483184A20AEF8FE500C3C672 /* PADropHandler */,
@@ -1373,6 +1400,8 @@
 		48BDCECE09C4A1EE00A57165 /* TagCloud */ = {
 			isa = PBXGroup;
 			children = (
+				C6C83C0E0C0F69CE0005F4C3 /* StepsTagCloud.h */,
+				C6C83C0F0C0F69CE0005F4C3 /* StepsTagCloud.m */,
 				48BDCEE409C4A4E300A57165 /* PATagCloud.h */,
 				48BDCEE509C4A4E300A57165 /* PATagCloud.m */,
 				4842FC0D09DA801500C4A931 /* PATagButton.h */,
@@ -1854,6 +1883,19 @@
 				6589C5010A9DE6F600CA2CD1 /* sl-status_stop.tiff */,
 			);
 			name = PAButton;
+			sourceTree = "<group>";
+		};
+		C6C83BFF0C0F699B0005F4C3 /* XMLRPC */ = {
+			isa = PBXGroup;
+			children = (
+				C6C83C000C0F699B0005F4C3 /* XMLRPCCall.h */,
+				C6C83C010C0F699B0005F4C3 /* XMLRPCCall.m */,
+				C6C83C020C0F699B0005F4C3 /* XMLRPCRequest.h */,
+				C6C83C030C0F699B0005F4C3 /* XMLRPCRequest.m */,
+				C6C83C040C0F699B0005F4C3 /* XMLRPCResponse.h */,
+				C6C83C050C0F699B0005F4C3 /* XMLRPCResponse.m */,
+			);
+			path = XMLRPC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2429,6 +2471,10 @@
 				480219550C02D2EE001CF480 /* PAInstaller.m in Sources */,
 				65B1FC8A0C0308EC0099D12B /* PAStatusBarProgressIndicator.m in Sources */,
 				489DA0480C0B2EB40027E3FF /* PAServices.m in Sources */,
+				C6C83C070C0F699B0005F4C3 /* XMLRPCCall.m in Sources */,
+				C6C83C090C0F699B0005F4C3 /* XMLRPCRequest.m in Sources */,
+				C6C83C0B0C0F699B0005F4C3 /* XMLRPCResponse.m in Sources */,
+				C6C83C110C0F69CF0005F4C3 /* StepsTagCloud.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2898,10 +2944,12 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_4 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -3286,10 +3334,12 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_4 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -3327,10 +3377,12 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_4 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
