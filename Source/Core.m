@@ -17,6 +17,7 @@
 
 - (BOOL)appHasTagger;
 - (BOOL)appHasPreferences;
+- (BOOL)appIsActive;
 
 - (void)loadTagCache;
 - (void)saveTagCache;
@@ -512,6 +513,10 @@
 	{
 		browserController = [[BrowserController alloc] init];
 	}
+	
+	if (![self appIsActive])
+		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+	
 	[browserController showWindow:self];
 	[[browserController window] makeKeyAndOrderFront:self];
 }
@@ -556,6 +561,9 @@
 	
 	if(!flag)
 		[taggerController resizeTokenField];	
+	
+	if (![self appIsActive])
+		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	
 	[taggerController showWindow:self];
 	[[taggerController window] makeKeyAndOrderFront:self];
@@ -773,6 +781,13 @@
 	return hasPreferences;
 }
 
+- (BOOL)appIsActive
+{
+	NSDictionary *activeAppDict = [[NSWorkspace sharedWorkspace] activeApplication];
+	NSString *strApplicationBundleIdentifier = [activeAppDict objectForKey:@"NSApplicationBundleIdentifier"];
+	
+	return ([strApplicationBundleIdentifier isEqualToString:[[NSBundle mainBundle] bundleIdentifier]]);
+}
 
 #pragma mark Accessors
 - (BrowserController *)browserController
