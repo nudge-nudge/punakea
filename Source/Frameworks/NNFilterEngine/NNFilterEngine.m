@@ -79,7 +79,7 @@
 	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
 																	sendPort:[portArray objectAtIndex:1]];
 	
-	[serverConnection setReplyTimeout:5.0];
+	[serverConnection setReplyTimeout:2.0];
 	
 	[[NSRunLoop currentRunLoop] run];
 	
@@ -146,7 +146,7 @@
 	}
 	
 	// increase timeout again
-	[serverConnection setReplyTimeout:5.0];
+	[serverConnection setReplyTimeout:2.0];
 	
 	[threadCountLock lock];
 	threadCount--;

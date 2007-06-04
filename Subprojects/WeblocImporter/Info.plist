@@ -23,6 +23,7 @@
 			<string>Your Document Kind String</string>
 			<key>UTTypeConformsTo</key>
 			<array>
+				<string>public.url</string>
 				<string>public.data</string>
 				<string>public.content</string>
 			</array>
