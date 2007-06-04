@@ -272,6 +272,7 @@
 		659E8D6B0C1430E300D5ED38 /* source-panel-tag.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8D670C1430E300D5ED38 /* source-panel-tag.tif */; };
 		659E8DB80C143AD000D5ED38 /* source-panel-bookmarks.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8DB70C143AD000D5ED38 /* source-panel-bookmarks.tif */; };
 		659E8DBF0C143D8800D5ED38 /* source-panel-images.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659E8DBE0C143D8800D5ED38 /* source-panel-images.tiff */; };
+		659E8DC40C1440D600D5ED38 /* toolbar-show-tagger.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8DC30C1440D500D5ED38 /* toolbar-show-tagger.tif */; };
 		659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659EBB4109D2D78300879091 /* PAImageButton.h */; };
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
 		659EBBB109D2DC3D00879091 /* MDIconViewOff-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */; };
@@ -838,6 +839,7 @@
 		659E8D670C1430E300D5ED38 /* source-panel-tag.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-tag.tif"; sourceTree = "<group>"; };
 		659E8DB70C143AD000D5ED38 /* source-panel-bookmarks.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-bookmarks.tif"; sourceTree = "<group>"; };
 		659E8DBE0C143D8800D5ED38 /* source-panel-images.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-images.tiff"; sourceTree = "<group>"; };
+		659E8DC30C1440D500D5ED38 /* toolbar-show-tagger.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-show-tagger.tif"; sourceTree = "<group>"; };
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
 		659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOff-1.tiff"; sourceTree = "<group>"; };
@@ -1713,6 +1715,7 @@
 				48CDF4960AA57924002E9E78 /* toolbar-pref-general.tif */,
 				658B58E70BEC847D00E618F1 /* toolbar-pref-tagcloud.tif */,
 				48CFDC310B2ED76A002282D9 /* toolbar-pref-update.tiff */,
+				659E8DC30C1440D500D5ED38 /* toolbar-show-tagger.tif */,
 				650902090BEDF1A1005468E0 /* toolbar-sort-by-name.tif */,
 				6509020A0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif */,
 			);
@@ -2303,6 +2306,7 @@
 				659E8D6B0C1430E300D5ED38 /* source-panel-tag.tif in Resources */,
 				659E8DB80C143AD000D5ED38 /* source-panel-bookmarks.tif in Resources */,
 				659E8DBF0C143D8800D5ED38 /* source-panel-images.tiff in Resources */,
+				659E8DC40C1440D600D5ED38 /* toolbar-show-tagger.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
