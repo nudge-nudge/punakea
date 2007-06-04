@@ -397,6 +397,8 @@
 	
 	[self startWithServer:server];
 }
+
+- (void)removeFilter:(NNObjectFilter*)filter
 	
 - (void)removeFilter:(NNObjectFilter*)filter
 {

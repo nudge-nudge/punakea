@@ -39,7 +39,7 @@
 {
 	NSString *tagName = [object name];
 	
-	if ([tagName hasPrefix:filterPrefix])
+	if ([[tagName lowercaseString] hasPrefix:filterPrefix])
 	{
 		[self objectFiltered:object];
 	}
