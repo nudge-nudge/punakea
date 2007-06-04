@@ -267,6 +267,10 @@
 		659945D00BBAAC4000F146D2 /* PASourcePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659945CE0BBAAC4000F146D2 /* PASourcePanelController.m */; };
 		659945E90BBAB2F000F146D2 /* PASourceItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659945E70BBAB2F000F146D2 /* PASourceItem.h */; };
 		659945EA0BBAB2F000F146D2 /* PASourceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 659945E80BBAB2F000F146D2 /* PASourceItem.m */; };
+		659E8D680C1430E300D5ED38 /* source-panel-manage-tags.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8D640C1430E300D5ED38 /* source-panel-manage-tags.tif */; };
+		659E8D690C1430E300D5ED38 /* source-panel-shelf.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8D650C1430E300D5ED38 /* source-panel-shelf.tif */; };
+		659E8D6A0C1430E300D5ED38 /* source-panel-tag-set.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8D660C1430E300D5ED38 /* source-panel-tag-set.tif */; };
+		659E8D6B0C1430E300D5ED38 /* source-panel-tag.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8D670C1430E300D5ED38 /* source-panel-tag.tif */; };
 		659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659EBB4109D2D78300879091 /* PAImageButton.h */; };
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
 		659EBBB109D2DC3D00879091 /* MDIconViewOff-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */; };
@@ -828,6 +832,10 @@
 		659945CE0BBAAC4000F146D2 /* PASourcePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASourcePanelController.m; sourceTree = "<group>"; };
 		659945E70BBAB2F000F146D2 /* PASourceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASourceItem.h; sourceTree = "<group>"; };
 		659945E80BBAB2F000F146D2 /* PASourceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASourceItem.m; sourceTree = "<group>"; };
+		659E8D640C1430E300D5ED38 /* source-panel-manage-tags.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-manage-tags.tif"; sourceTree = "<group>"; };
+		659E8D650C1430E300D5ED38 /* source-panel-shelf.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-shelf.tif"; sourceTree = "<group>"; };
+		659E8D660C1430E300D5ED38 /* source-panel-tag-set.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-tag-set.tif"; sourceTree = "<group>"; };
+		659E8D670C1430E300D5ED38 /* source-panel-tag.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-tag.tif"; sourceTree = "<group>"; };
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
 		659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOff-1.tiff"; sourceTree = "<group>"; };
@@ -1815,11 +1823,15 @@
 		65CB0A0D0BBBD4E200799E25 /* Source Panel */ = {
 			isa = PBXGroup;
 			children = (
+				659E8D640C1430E300D5ED38 /* source-panel-manage-tags.tif */,
+				659E8D650C1430E300D5ED38 /* source-panel-shelf.tif */,
+				659E8D660C1430E300D5ED38 /* source-panel-tag-set.tif */,
+				659E8D670C1430E300D5ED38 /* source-panel-tag.tif */,
+				65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */,
 				6582F4120C0069E70016AA2D /* triangle-gray-collapsed.tif */,
 				6582F41C0C006AF00016AA2D /* triangle-gray-collapsed-on.tif */,
 				6582F4140C0069E70016AA2D /* triangle-gray-expanded.tif */,
 				6582F41D0C006AF00016AA2D /* triangle-gray-expanded-on.tif */,
-				65CB0A0E0BBBD4FC00799E25 /* SourcePanelSelectionGradient.tif */,
 			);
 			name = "Source Panel";
 			sourceTree = "<group>";
@@ -2283,6 +2295,10 @@
 				6582F41F0C006AF00016AA2D /* triangle-gray-expanded-on.tif in Resources */,
 				653948DC0C0359C4001705D6 /* button-goto.tif in Resources */,
 				653948DD0C0359C4001705D6 /* button-goto-on.tif in Resources */,
+				659E8D680C1430E300D5ED38 /* source-panel-manage-tags.tif in Resources */,
+				659E8D690C1430E300D5ED38 /* source-panel-shelf.tif in Resources */,
+				659E8D6A0C1430E300D5ED38 /* source-panel-tag-set.tif in Resources */,
+				659E8D6B0C1430E300D5ED38 /* source-panel-tag.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
