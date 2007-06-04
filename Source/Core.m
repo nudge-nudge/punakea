@@ -792,7 +792,7 @@
 #pragma mark Accessors
 - (BrowserController *)browserController
 {
-	return browserController;
+	return [self appHasBrowser] ? browserController : nil;
 }
 
 @end
