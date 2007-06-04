@@ -32,16 +32,21 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 
 		PASourceItem *fileKindItem = [PASourceItem itemWithValue:@"IMAGES" displayName:
 			NSLocalizedStringFromTable(@"IMAGES", @"MDSimpleGrouping", nil)];
+		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-images"]];
 		[fileKindItem setEditable:NO];
 		[sourceItem addChild:fileKindItem];
 		
 		fileKindItem = [PASourceItem itemWithValue:@"PDF" displayName:
 			NSLocalizedStringFromTable(@"PDF", @"MDSimpleGrouping", nil)];
+		NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:@"PDF"];
+		[image setSize:NSMakeSize(16,16)];
+		[fileKindItem setImage:image];
 		[fileKindItem setEditable:NO];
 		[sourceItem addChild:fileKindItem];
 		
 		fileKindItem = [PASourceItem itemWithValue:@"BOOKMARKS" displayName:
 			NSLocalizedStringFromTable(@"BOOKMARKS", @"MDSimpleGrouping", nil)];
+		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-bookmarks"]];
 		[fileKindItem setEditable:NO];
 		[sourceItem addChild:fileKindItem];
 		
