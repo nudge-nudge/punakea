@@ -26,6 +26,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		[sourceGroup setHeading:YES];
 		
 		PASourceItem *sourceItem = [PASourceItem itemWithValue:@"ALL_ITEMS" displayName:@"All Items"];
+		[sourceItem setImage:[NSImage imageNamed:@"source-panel-shelf"]];
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
 
@@ -45,6 +46,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		[sourceItem addChild:fileKindItem];
 		
 		sourceItem = [PASourceItem itemWithValue:@"MANAGE_TAGS" displayName:@"Manage Tags"];
+		[sourceItem setImage:[NSImage imageNamed:@"source-panel-manage-tags"]];
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
 		
@@ -419,6 +421,9 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 			
 			[sourceItem setContainedObject:newTagSet];
 			
+			// Set the right image for a single tag or a tag  set
+			[sourceItem setImage:[NSImage imageNamed:@"source-panel-tag-set"]];
+			
 			// If we were using the default display name before, we'll stick to this
 			if(usesDefaultDisplayName)
 				setName = [sourceItem defaultDisplayName];
@@ -432,6 +437,8 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 			
 			newItem = [PASourceItem itemWithValue:[tag name] displayName:[tag name]];
 			[newItem setContainedObject:tag];
+			
+			[newItem setImage:[NSImage imageNamed:@"source-panel-tag"]];
 			
 			[sourceItem addChild:newItem];
 		}
@@ -449,6 +456,12 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		
 		newItem = [PASourceItem itemWithValue:name displayName:name];		
 		[newItem setContainedObject:draggedObject];
+		
+		// Set the right image for a single tag or a tag  set
+		if(tag)
+			[newItem setImage:[NSImage imageNamed:@"source-panel-tag"]];
+		else
+			[newItem setImage:[NSImage imageNamed:@"source-panel-tag-set"]];
 		
 		if(idx != -1 &&
 		   idx < [[sourceItem children] count])

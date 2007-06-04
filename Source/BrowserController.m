@@ -253,6 +253,12 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 			item = [PASourceItem itemWithValue:@"aValue" displayName:@"New Tag Set"];
 		}
 		
+		// Set the right icon for a single tag or a tag set
+		if([[tagSetPanel tags] count] == 1)
+			[item setImage:[NSImage imageNamed:@"source-panel-tag"]];
+		else
+			[item setImage:[NSImage imageNamed:@"source-panel-tag-set"]];
+		
 		NNTagSet *tagSet = [NNTagSet setWithTags:[tagSetPanel tags] name:[item displayName]];
 		[item setContainedObject:tagSet];
 		
@@ -440,6 +446,12 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 			if(tag)
 				[tagSet addTag:tag];
 		}
+		
+		// Set the right image for a single tag or a tag  set
+		if([[tagSet tags] count] == 1)
+			[favorite setImage:[NSImage imageNamed:@"source-panel-tag"]];
+		else
+			[favorite setImage:[NSImage imageNamed:@"source-panel-tag-set"]];
 		
 		[favorite setContainedObject:tagSet];
 		

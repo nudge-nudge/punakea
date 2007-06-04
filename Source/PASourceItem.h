@@ -15,6 +15,8 @@
 
 	NSString				*value;
 	NSString				*displayName;
+	NSImage					*image;
+	
 	BOOL					selectable;
 	BOOL					heading;
 	BOOL					editable;
@@ -46,6 +48,8 @@
 - (void)setValue:(NSString *)aString;
 - (NSString *)displayName;
 - (void)setDisplayName:(NSString *)aString;
+- (NSImage *)image;
+- (void)setImage:(NSImage *)anImage;
 - (BOOL)isSelectable;
 - (void)setSelectable:(BOOL)flag;
 - (BOOL)isHeading;

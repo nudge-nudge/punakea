@@ -109,6 +109,22 @@
 		}
 	}
 	
+	// Draw image if applicable
+	if([item image])
+	{
+		NSRect imageRect;
+		imageRect.origin = NSZeroPoint;
+		imageRect.size = [[item image] size];
+		
+		NSPoint destPoint;
+		destPoint.x = cellFrame.origin.x + 2.0;
+		destPoint.y = cellFrame.origin.y + 2.0;
+		
+		[[item image] setFlipped:YES];
+		
+		[[item image] drawAtPoint:destPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+	}
+	
 	// Font attributes
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	
@@ -136,10 +152,18 @@
 		NSAttributedString *label = [[[NSAttributedString alloc] initWithString:[[item displayName] uppercaseString]
 																	attributes:fontAttributes] autorelease];	
 		
-		[label drawInRect:NSMakeRect(cellFrame.origin.x,
+		NSRect destRect = NSMakeRect(cellFrame.origin.x,
 									 cellFrame.origin.y + cellFrame.size.height - [label size].height - 3,
 									 cellFrame.size.width - 10.0,
-									 cellFrame.size.height)];
+									 cellFrame.size.height);
+		
+		if([item image])
+		{
+			destRect.origin.x += 23.0;
+			destRect.size.width -= 23.0;
+		}
+		
+		[label drawInRect:destRect];
 	}
 	else 
 	{
@@ -166,10 +190,18 @@
 		NSAttributedString *label = [[[NSAttributedString alloc] initWithString:[item displayName]
 																	attributes:fontAttributes] autorelease];	
 		
-		[label drawInRect:NSMakeRect(cellFrame.origin.x,
+		NSRect destRect = NSMakeRect(cellFrame.origin.x,
 									 cellFrame.origin.y + (cellFrame.size.height - [label size].height) / 2,
 									 cellFrame.size.width - 10.0,
-									 cellFrame.size.height)];
+									 cellFrame.size.height);
+		
+		if([item image])
+		{
+			destRect.origin.x += 23.0;
+			destRect.size.width -= 23.0;
+		}
+		
+		[label drawInRect:destRect];
 	} 
 }
 
@@ -184,6 +216,12 @@
 	//frame.origin.x += 0;
 	frame.origin.y += 2;
 	frame.size.width -= 5;
+	
+	if([item image])
+	{
+		frame.origin.x += 23.0;
+		frame.size.width -= 23.0;
+	}
 	
 	[editor setString:[item displayName]];
 	

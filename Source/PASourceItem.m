@@ -40,6 +40,11 @@
 {
 	[containedObject release];
 	[children release];
+	
+	[displayName release];
+	[value release];
+	[image release];
+	
 	[super dealloc];
 }
 
@@ -274,6 +279,16 @@
 {
 	[displayName release];
 	displayName = [aString retain];
+}
+
+- (NSImage *)image
+{
+	return image;
+}
+- (void)setImage:(NSImage *)anImage
+{
+	[image release];
+	image = [anImage retain];
 }
 
 - (BOOL)isSelectable
