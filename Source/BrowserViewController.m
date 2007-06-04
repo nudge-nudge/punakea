@@ -444,16 +444,17 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	NSString *changeOperation = [[notification userInfo] objectForKey:NNTagOperation];
 	
-	if ([changeOperation isEqualToString:NNTagUseChangeOperation])
-	{
-		[NSObject cancelPreviousPerformRequestsWithTarget:self
-												 selector:@selector(setVisibleTags:)
-												   object:[tags tags]];
-		[self performSelector:@selector(setVisibleTags:)
-				   withObject:[tags tags]
-				   afterDelay:0.2];
-	}
-	else if ([changeOperation isNotEqualTo:NNTagClickIncrementOperation])
+	// not updating on tag use count increase, because tag cloud would flicker too much
+	// when editing tags
+		
+//		[NSObject cancelPreviousPerformRequestsWithTarget:self
+//												 selector:@selector(setVisibleTags:)
+//												   object:[tags tags]];
+//		[self performSelector:@selector(setDisplayTags:)
+//				   withObject:[tags tags]
+//				   afterDelay:0.5];
+	if ([changeOperation isNotEqualTo:NNTagClickIncrementOperation] &&
+		[changeOperation isNotEqualTo:NNTagUseChangeOperation])
 	{
 		// clicks are ignored, as they are (normally)
 		// causing the displayed tags to change
