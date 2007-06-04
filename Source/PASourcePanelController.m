@@ -458,7 +458,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		[newItem setContainedObject:draggedObject];
 		
 		// Set the right image for a single tag or a tag  set
-		if(tag)
+		if(tag || [[tagSet tags] count] == 1)
 			[newItem setImage:[NSImage imageNamed:@"source-panel-tag"]];
 		else
 			[newItem setImage:[NSImage imageNamed:@"source-panel-tag-set"]];
