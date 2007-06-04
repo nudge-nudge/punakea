@@ -199,9 +199,10 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[sourcePanelFieldEditor release];
-	
+		
 	// unbind stuff for retain count
 	[browserViewController release];
+		
 	[super dealloc];
 }
 

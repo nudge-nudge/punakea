@@ -104,7 +104,6 @@ is called when a tag is clicked
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller;
 
 - (void)reset;
-- (void)resetToEmptyCloud;
 
 - (void)unbindAll;
 

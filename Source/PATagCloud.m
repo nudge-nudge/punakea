@@ -93,9 +93,6 @@ calculates the starting point in the next row according to the height of all the
 	return self;
 }
 
-/**
-bind to visibleTags
- */
 - (void)awakeFromNib
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];

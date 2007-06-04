@@ -170,6 +170,12 @@
 	[threadCountLock unlock];
 	
 	[threadLock lock];
+	
+	// invalidate stuff
+	[serverConnection invalidate];
+	[[portArray objectAtIndex:0] invalidate];
+	[[portArray objectAtIndex:1] invalidate];
+
 	[threadLock unlockWithCondition:NNThreadStopped];
 	
 	[pool release];

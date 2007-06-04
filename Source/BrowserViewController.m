@@ -633,7 +633,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)unbindAll
 {
-	[self removeObserver:tagCloud forKeyPath:@"visibleTags"];
 	[self removeObserver:self forKeyPath:@"searchFieldString"];
 }
 
