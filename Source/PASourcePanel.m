@@ -331,6 +331,25 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Events
+- (BOOL)performKeyEquivalent:(NSEvent *)theEvent
+{
+	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+	
+	if([theEvent type] == NSKeyDown)
+	{
+		// Delete files on Command + Delete
+		if(key == NSDeleteCharacter &&
+		   ([theEvent modifierFlags] & NSCommandKeyMask) != 0 &&
+		   [(PASourceItem *)[self itemAtRow:[self selectedRow]] isEditable])
+		{			
+			[[[NSApplication sharedApplication] delegate] delete:self];
+			return YES;
+		}
+	}
+	
+	return [super performKeyEquivalent:theEvent];
+}
+
 - (void)keyDown:(NSEvent *)theEvent
 {
 	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
@@ -342,13 +361,6 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		   [[self selectedRowIndexes] count] == 1)
 		{
 			[self beginEditing];
-			return;
-		}
-		
-		if(key == NSDeleteCharacter &&
-		   [(PASourceItem *)[self itemAtRow:[self selectedRow]] isEditable])
-		{
-			[[[NSApplication sharedApplication] delegate] delete:self];
 			return;
 		}
 	}
