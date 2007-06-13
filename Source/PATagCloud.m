@@ -686,6 +686,8 @@ calculates the starting point in the next row according to the height of all the
 
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
 {
+	// If application not key, get keyboard state for option key (Carbon)
+	
 	// check if sender should be ignored
 	if(![dropManager acceptsSender:[sender draggingSource]])
 		return NSDragOperationNone;
