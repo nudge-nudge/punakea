@@ -108,7 +108,7 @@
 		
 		if ([[query flatResults] count] > 0)
 		{
-			// update cache
+			/ / update cache
 			[tagCache updateCacheForTag:object
 							setFiletype:[self contentType]
 								toValue:YES];

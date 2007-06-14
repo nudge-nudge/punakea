@@ -23,6 +23,7 @@
 			<string>Your Document Kind String</string>
 			<key>UTTypeConformsTo</key>
 			<array>
+			<!-- TODO this is wrong, check spotlight getting started session of WWDC 07 -->
 				<string>public.url</string>
 				<string>public.data</string>
 				<string>public.content</string>
