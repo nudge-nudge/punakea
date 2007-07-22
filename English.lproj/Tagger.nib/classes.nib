@@ -10,9 +10,10 @@
             SUPERCLASS = NSView; 
         }, 
         {
+            ACTIONS = {tagEntered = id; }; 
             CLASS = PATagAutocompleteWindowController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {tagField = NSTokenField; }; 
+            OUTLETS = {confirmButton = NSButton; tagField = NSTokenField; }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {

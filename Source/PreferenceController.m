@@ -405,9 +405,10 @@
 			else
 				itemIndex++;
 		}
+		
+		CFRelease(loginItems);
 	}
 	
-	CFRelease(loginItems);
 	CFRelease(url);
 	
 	return itemIndex;

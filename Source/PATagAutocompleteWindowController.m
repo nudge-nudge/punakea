@@ -109,7 +109,7 @@
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString
 {
 	if (editingString && [editingString isNotEqualTo:@""])
-		return [globalTags createTagForName:editingString];
+		return [globalTags tagForName:editingString create:YES];
 	else
 		return nil;
 }
