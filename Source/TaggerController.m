@@ -359,26 +359,27 @@ adds tag to tagField (use from "outside")
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
-	// the test if a tag has been deleted will only be executed if
-	// the edited text in the field editor is empty.
-	// this avoids the spurious creation of tags from prefixes in leopard
+	// adding tags is handled by tokenField:shouldAddObjects:atIndex,
+	// this method handles the deletion of tags
+	
+	// [fieldEditor string] contains \uFFFC (OBJECT REPLACEMENT CHARACTER) for every token
 	NSDictionary *userInfo = [aNotification userInfo];
 	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
-	if ([[fieldEditor string] length] > 0)
-		return;
+	NSString *editorString = [fieldEditor string];
 	
-	// there are two possible cases now:
-	// - a tag has been deleted, then the next test will be true
-	// - entering a new tag was begin but then the text has been deleted fully again
-	//    ( in this case the test will fail)
+	// get a string without the replacement chars
+	NSString *objectReplacementCharacter = [NSString stringWithUTF8String:"\ufffc"];
+	NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:objectReplacementCharacter];
+	NSString *trimmedString = [editorString stringByTrimmingCharactersInSet:charSet];
 	
-	// only do something if a tag has been completely deleted
-	// adding tags is handled by tokenField:shouldAddObjects:atIndex
+	// there are two possible cases:
+	// - a tag has been deleted, then the next test should be true
+	// - entering a new tag was begun but then the text has been deleted fully again
+	//    (in this case the test should fail)
 	
-	// Important: If one tag is present and selected and we type in a new one, the following operator
-	// needs to be LESS THAN, not LESS
-	
-	if ([[tagField objectValue] count] <= [currentCompleteTagsInField count])
+	// if trimmed string length == 0, editorString's length will correspong to the number of tokens
+	if ([trimmedString length] == 0 &&
+		[editorString length] <= [currentCompleteTagsInField count])
 	{
 		// look for deleted tags
 		NSMutableArray *deletedTags = [NSMutableArray array];
