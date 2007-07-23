@@ -313,6 +313,14 @@ adds tag to tagField (use from "outside")
 	}
 }
 
+- (void)validateConfirmButton
+{
+	if(!confirmButton)
+		return;
+	
+	[confirmButton setEnabled:([currentCompleteTagsInField count] > 0)];
+}
+
 #pragma mark Notifications
 -(void)iconWasGenerated:(NSNotification *)notification
 {
@@ -330,8 +338,8 @@ adds tag to tagField (use from "outside")
 	   shouldAddObjects:(NSArray *)tokens 
 				atIndex:(unsigned)idx
 {	
-	// update currentCompleteTags
-	[currentCompleteTagsInField addObjectsFromArray:tokens];
+	// forward call to super - this adds the tags to currentCompleteTagsInField
+	NSArray *returnedTokens = [super tokenField:tokenField shouldAddObjects:tokens atIndex:idx];
 	
 	// Update manage files flag if first tag was entered
 	[self updateManageFilesFlagOnTaggableObjects];
@@ -345,14 +353,27 @@ adds tag to tagField (use from "outside")
 			   afterDelay:0.05];
 	
 	// Forward to super
-	return [super tokenField:tokenField shouldAddObjects:tokens atIndex:idx];
+	return returnedTokens;
 }
 
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
+	// the test if a tag has been deleted will only be executed if
+	// the edited text in the field editor is empty.
+	// this avoids the spurious creation of tags from prefixes in leopard
+	NSDictionary *userInfo = [aNotification userInfo];
+	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
+	if ([[fieldEditor string] length] > 0)
+		return;
+	
+	// there are two possible cases now:
+	// - a tag has been deleted, then the next test will be true
+	// - entering a new tag was begin but then the text has been deleted fully again
+	//    ( in this case the test will fail)
+	
 	// only do something if a tag has been completely deleted
-	// adding tags is handled by ... shouldAddObjects: ...
+	// adding tags is handled by tokenField:shouldAddObjects:atIndex
 	
 	// Important: If one tag is present and selected and we type in a new one, the following operator
 	// needs to be LESS THAN, not LESS

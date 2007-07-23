@@ -17,6 +17,7 @@
 	IBOutlet PAStatusBar		*statusBar;
 	
 	IBOutlet NSButton			*manageFilesButton;
+	
 	BOOL						manageFiles;
 	BOOL						manageFilesAutomatically;
 	BOOL						showsManageFiles;
