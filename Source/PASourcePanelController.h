@@ -15,6 +15,7 @@
 #import "NNTagging/NNTagSet.h"
 #import "NNTagging/NNSelectedTags.h"
 #import "PASmartFolder.h"
+#import "PADropManager.h"
 
 extern NSString * const PAContentTypeFilterUpdate;
 
@@ -28,6 +29,8 @@ extern NSString * const PAContentTypeFilterUpdate;
 	NSArray						*draggedItems;
 	
 	PASourceItem				*oldSelectedItem;
+	
+	PADropManager				*dropManager;
 }
 
 - (void)addItem:(PASourceItem *)anItem;

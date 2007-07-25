@@ -1000,6 +1000,7 @@
 				65851FFF099780E0009C3CA7 /* Main */,
 				6531649B0AF2534B00928BEF /* Common */,
 				4816343D0A5A51E6003B8EE4 /* Tagger */,
+				4816343A0A5A51D2003B8EE4 /* Browser */,
 				488E18BA0A2722E5009D2826 /* Sidebar */,
 				4816346E0A5A52EA003B8EE4 /* Misc */,
 				4831849F0AEF8FD800C3C672 /* Frameworks */,
@@ -1182,7 +1183,6 @@
 				6530FF350AF2229400D7A79A /* PATaggerTableView.m */,
 				48D81DAB09F79C1C0075EE44 /* TaggerController.h */,
 				48D81DAC09F79C1C0075EE44 /* TaggerController.m */,
-				4816343A0A5A51D2003B8EE4 /* Browser */,
 			);
 			name = Tagger;
 			sourceTree = "<group>";

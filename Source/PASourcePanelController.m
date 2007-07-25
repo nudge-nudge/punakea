@@ -17,6 +17,8 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 {
 	if (self = [super init])
 	{
+		dropManager = [PADropManager sharedInstance];
+		
 		// Define Source Items
 		items = [[NSMutableArray alloc] init];
 		
@@ -271,14 +273,13 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 				  proposedItem:(id)item 
 			proposedChildIndex:(int)idx
 {
-	// Allow dragging only from PATagButton or an own item
-	if(!([[info draggingSource] isMemberOfClass:[PATagButton class]] ||
-		 [info draggingSource] == ov))
-		return NSDragOperationNone;
-	
 	BOOL isDroppedOnItem = idx==NSOutlineViewDropOnItemIndex;
 	
 	PASourceItem *sourceItem = (PASourceItem *)item;
+	
+	NNTag			*tag = nil;
+	NNTagSet		*tagSet = nil;
+	id				draggedObject = nil;
 	
 	if(!([[sourceItem value] isEqualTo:@"FAVORITES"] ||
 		 [sourceItem isDescendantOfValue:@"FAVORITES"]))
@@ -287,9 +288,15 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		return NSDragOperationNone;
 	}
 	
-	NNTag			*tag = nil;
-	NNTagSet		*tagSet = nil;
-	id				draggedObject = nil;
+	// check if dragged object can be tagged and is to be dropped on a favorite
+	NSDragOperation *op = [dropManager performedDragOperation:[info draggingPasteboard]];
+	if (op != NSDragOperationNone && isDroppedOnItem)
+		return idx;
+	
+	// Allow dragging only from PATagButton or an own item
+	if(!([[info draggingSource] isMemberOfClass:[PATagButton class]] ||
+		 [info draggingSource] == ov))
+		return NSDragOperationNone;
 	
 	if([[info draggingSource] isMemberOfClass:[PATagButton class]])
 	{
@@ -364,7 +371,31 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	NNTagSet	*tagSet = nil;
 	id			draggedObject = nil;
 	
-	if([[info draggingSource] isMemberOfClass:[PATagButton class]])
+	// check if dropManager can handle drop -> assign tags
+	NSDragOperation op = [dropManager performedDragOperation:[info draggingPasteboard]];
+	
+	if (op != NSDragOperationNone)
+	{
+		// get tags in favorite
+		NSMutableArray *tags = [NSMutableArray array];
+		
+		if ([[(PASourceItem *)item containedObject] isKindOfClass:[NNTag class]])
+		{
+			[tags addObject:[(PASourceItem *)item containedObject]];
+		}
+		else
+		{
+			NNTagSet *set = [(PASourceItem *)item containedObject];
+			[tags addObjectsFromArray:[set tags]];
+		}
+		
+		// add tags to taggable object
+		NSArray *objects = [dropManager handleDrop:[info draggingPasteboard]];
+		[objects makeObjectsPerformSelector:@selector(addTags:) withObject:tags];
+	}
+	
+	// handle case if favorite/TagButton was dropped	
+	else if([[info draggingSource] isMemberOfClass:[PATagButton class]])
 	{
 		PATagButton *tagButton = [info draggingSource];
 		tag = [tagButton genericTag];
