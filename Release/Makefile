@@ -78,6 +78,6 @@ diskimage:
 	rm -f $(ADIUM_DIR)/$(RELEASE_NAME).app/Contents/Frameworks/*.h
 	rm -f $(ADIUM_DIR)/$(RELEASE_NAME).app/Contents/Frameworks/SLA.r
 
-	./make-diskimage.sh $(BUILD_DIR)/$(RELEASE_NAME).dmg $(ADIUM_DIR) "Punakea" dmg.scpt SLAResources
+	./make-diskimage.sh $(BUILD_DIR)/$(RELEASE_NAME).dmg $(ADIUM_DIR) "Punakea" dmg.scpt #SLAResources
 	
 	@echo Build finished

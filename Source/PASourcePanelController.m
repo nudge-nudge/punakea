@@ -289,9 +289,9 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	}
 	
 	// check if dragged object can be tagged and is to be dropped on a favorite
-	NSDragOperation *op = [dropManager performedDragOperation:[info draggingPasteboard]];
+	NSDragOperation op = [dropManager performedDragOperation:[info draggingPasteboard]];
 	if (op != NSDragOperationNone && isDroppedOnItem)
-		return idx;
+		return op;
 	
 	// Allow dragging only from PATagButton or an own item
 	if(!([[info draggingSource] isMemberOfClass:[PATagButton class]] ||
