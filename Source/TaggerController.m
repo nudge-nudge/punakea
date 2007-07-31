@@ -367,19 +367,15 @@ adds tag to tagField (use from "outside")
 	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
 	NSString *editorString = [fieldEditor string];
 	
-	// get a string without the replacement chars
+	// get a count of the tags by replacing the \ufffc occurrences
 	NSString *objectReplacementCharacter = [NSString stringWithUTF8String:"\ufffc"];
-	NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:objectReplacementCharacter];
-	NSString *trimmedString = [editorString stringByTrimmingCharactersInSet:charSet];
-	
-	// there are two possible cases:
-	// - a tag has been deleted, then the next test should be true
-	// - entering a new tag was begun but then the text has been deleted fully again
-	//    (in this case the test should fail)
-	
-	// if trimmed string length == 0, editorString's length will correspong to the number of tokens
-	if ([trimmedString length] == 0 &&
-		[editorString length] <= [currentCompleteTagsInField count])
+	NSMutableString *mutableEditorString = [editorString mutableCopy];
+	unsigned int numberOfTokens = [mutableEditorString replaceOccurrencesOfString:objectReplacementCharacter
+																	   withString:@""
+																		  options:0
+																			range:NSMakeRange(0, [mutableEditorString length])];
+		
+	if (numberOfTokens <= [currentCompleteTagsInField count])
 	{
 		// look for deleted tags
 		NSMutableArray *deletedTags = [NSMutableArray array];
