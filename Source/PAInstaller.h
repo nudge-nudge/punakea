@@ -8,7 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-
+/**
+use this class to do stuff Punakea needs to perform on startup
+ */
 @interface PAInstaller : NSObject {
 
 }

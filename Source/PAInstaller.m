@@ -10,7 +10,7 @@
 
 @interface PAInstaller (PrivateAPI)
 
-+ (void)copyWeblocImporter;
++ (void)removeOldWeblocImporter;
 
 @end
 
@@ -18,7 +18,22 @@
 
 + (void)install
 {
+	// version 0.3 had a webloc importer installed in the user's library directory
+	[PAInstaller removeOldWeblocImporter];
 	//[PAInstaller copyWeblocImporter];
+}
+
++ (void)removeOldWeblocImporter
+{
+	NSFileManager *fm = [NSFileManager defaultManager];
+	
+	NSString *targetPath = [@"~/Library/Spotlight/WeblocImporter.mdimporter" stringByExpandingTildeInPath];
+	
+	if ([fm fileExistsAtPath:targetPath])
+	{
+		[fm removeFileAtPath:targetPath handler:NULL];
+		NSLog(@"cleaned up old WeblocImporter.mdimporter");
+	}
 }
 
 // not used at the moment
