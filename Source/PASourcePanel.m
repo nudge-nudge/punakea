@@ -147,9 +147,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 #pragma mark Mouse Events
 - (int)mouseRowForEvent:(NSEvent *)theEvent
 {
-    NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    
-    return [self rowAtPoint:mouseLoc];
+	NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+
+	return [self rowAtPoint:mouseLoc];
 }
 
 - (void)selectOnlyRowIndexes:(NSIndexSet *)rowIndexes
@@ -270,7 +270,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		
 		if([[item value] isEqualTo:value])
 		{
-			[self selectRow:row byExtendingSelection:NO];
+			[self selectOnlyRowIndexes:[NSIndexSet indexSetWithIndex:row]];
 			return;
 		}
 	}
