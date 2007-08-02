@@ -288,9 +288,11 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		return NSDragOperationNone;
 	}
 	
-	// check if dragged object can be tagged and is to be dropped on a favorite
+	// [FILE DROP] check if dragged object can be tagged and is to be dropped on a favorite
 	NSDragOperation op = [dropManager performedDragOperation:[info draggingPasteboard]];
-	if (op != NSDragOperationNone && isDroppedOnItem)
+	if (op != NSDragOperationNone 
+		&& isDroppedOnItem 
+		&& ![[info draggingSource] isMemberOfClass:[PATagButton class]])
 		return op;
 	
 	// Allow dragging only from PATagButton or an own item
@@ -371,10 +373,11 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	NNTagSet	*tagSet = nil;
 	id			draggedObject = nil;
 	
-	// check if dropManager can handle drop -> assign tags
+	// [FILE DROP] check if dropManager can handle drop -> assign tags
 	NSDragOperation op = [dropManager performedDragOperation:[info draggingPasteboard]];
 	
-	if (op != NSDragOperationNone)
+	if (op != NSDragOperationNone 
+		&& ![[info draggingSource] isMemberOfClass:[PATagButton class]])
 	{
 		// get tags in favorite
 		NSMutableArray *tags = [NSMutableArray array];
@@ -391,6 +394,27 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		
 		// add tags to taggable object
 		NSArray *objects = [dropManager handleDrop:[info draggingPasteboard]];
+		
+		// If dropManager is in alternateState, set manageFiles flag on each object
+		BOOL alternateState = [dropManager alternateState];
+		
+		if(alternateState)
+		{		
+			NSEnumerator *e = [objects objectEnumerator];
+			NNTaggableObject *object;
+			
+			while(object = [e nextObject])
+			{
+				BOOL theDefault = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+				
+				if([[object tags] count] > 0)
+				{
+					BOOL newFlag = !theDefault;
+					[object setShouldManageFiles:newFlag];
+				}
+			}
+		}
+		
 		[objects makeObjectsPerformSelector:@selector(addTags:) withObject:tags];
 	}
 	
