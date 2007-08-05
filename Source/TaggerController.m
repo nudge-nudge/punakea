@@ -375,7 +375,7 @@ adds tag to tagField (use from "outside")
 																		  options:0
 																			range:NSMakeRange(0, [mutableEditorString length])];
 		
-	if (numberOfTokens <= [currentCompleteTagsInField count])
+	if (numberOfTokens < [currentCompleteTagsInField count])
 	{
 		// look for deleted tags
 		NSMutableArray *deletedTags = [NSMutableArray array];
