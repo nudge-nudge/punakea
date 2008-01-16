@@ -248,7 +248,7 @@ should be overridden according to apple docs
 		  slideBack:YES];
 	
 	// Delete smart folder from temp dir
-	[PASmartFolder removeSmartFolderForTag:[self genericTag]];
+	[PASmartFolder performSelector:@selector(removeSmartFolderForTag:) withObject:[self genericTag] afterDelay:3.0];
 	
 	// Fire a custom mouse up event to break tracking loop as this is not done
 	// by dragImage automatically...
