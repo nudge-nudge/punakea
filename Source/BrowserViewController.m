@@ -679,8 +679,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[taggerController setManageFiles:manageFiles];
 	
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-	NSWindow *taggerWindow = [taggerController window];
-	[taggerWindow makeKeyAndOrderFront:nil];
+	
+	[taggerController showWindow:nil];	
+	[[taggerController window] makeKeyAndOrderFront:nil];
+	
 	[taggerController addTaggableObjects:objects];
 	
 	[[PADropManager sharedInstance] setAlternateState:NO];

@@ -15,13 +15,14 @@
 + (BOOL)wasLaunchedAsLoginItem;
 + (BOOL)wasLaunchedByProcess:(NSString*)creator;
 
-- (BOOL)appHasTagger;
 - (BOOL)appHasPreferences;
 - (BOOL)appIsActive;
 
 - (void)loadTagCache;
 - (void)saveTagCache;
 - (NSString*)pathForTagCacheFile;
+
+- (void)setTaggerController:(TaggerController *)controller;
 
 @end
 
@@ -471,7 +472,7 @@
 	{
 		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
 	
-		[taggerController setTaggableObjects:[ov visibleSelectedItems]];
+		[[self taggerController] setTaggableObjects:[ov visibleSelectedItems]];
 		[ov reloadData];
 	}	
 }
@@ -543,36 +544,33 @@
 
 - (void)showTagger:(id)sender enableManageFiles:(BOOL)flag
 {
-	/*
-	 // Implementation of multiple tagger windows 
-	 
-	 TaggerController *taggerController = [[TaggerController alloc] init];
-	 [taggerController showWindow:self];
-	 NSWindow *taggerWindow = [taggerController window];
-	 [taggerWindow makeKeyAndOrderFront:nil];*/
+	TaggerController *taggerController = [self taggerController];
 	
-	// Implementation of single tagger window
-	
-	if(![self appHasTagger])
+	if(!taggerController)
 	{
-		taggerController =  [[TaggerController alloc] init];
+		NSLog(@"no tagger");
+		
+		taggerController = [[TaggerController alloc] init];
+		
+		[taggerController setShowsManageFiles:flag];
+		
+		if(!flag)
+			[taggerController resizeTokenField];
+	} else {
+		NSLog(@"has tagger");
 	}
-	[taggerController setShowsManageFiles:flag];
-	
-	if(!flag)
-		[taggerController resizeTokenField];	
 	
 	if (![self appIsActive])
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	
-	[taggerController showWindow:self];
+	[taggerController showWindow:self];	
 	[[taggerController window] makeKeyAndOrderFront:self];
 }
 
 - (IBAction)showTaggerForObjects:(NSArray*)taggableObjects
 {
 	[self showTagger:self];
-	[taggerController setTaggableObjects:taggableObjects];
+	[[self taggerController] setTaggableObjects:taggableObjects];
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
@@ -659,7 +657,7 @@
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
 {
 	[self showTagger:self];
-	[taggerController setTaggableObjects:[NNFile filesWithFilepaths:filenames]];
+	[[self taggerController] setTaggableObjects:[NNFile filesWithFilepaths:filenames]];
 }
 
 //#pragma mark debug
@@ -745,24 +743,6 @@
 	return hasBrowser;
 }
 
-- (BOOL)appHasTagger
-{
-	BOOL hasTagger = NO;
-	
-	NSArray *windows = [[NSApplication sharedApplication] windows];
-	
-	NSEnumerator *e = [windows objectEnumerator];
-	NSWindow *window;
-	
-	while (window = [e nextObject])
-	{
-		if ([window delegate] && [[window delegate] isKindOfClass:[TaggerController class]])
-			hasTagger = YES;
-	}
-	
-	return hasTagger;
-}
-
 - (BOOL)appHasPreferences
 {
 	BOOL hasPreferences = NO;
@@ -793,6 +773,24 @@
 - (BrowserController *)browserController
 {
 	return [self appHasBrowser] ? browserController : nil;
+}
+
+- (TaggerController *)taggerController
+{
+	_taggerController = nil;
+	
+	NSArray *windows = [[NSApplication sharedApplication] windows];
+	
+	NSEnumerator *e = [windows objectEnumerator];
+	NSWindow *window;
+	
+	while (window = [e nextObject])
+	{
+		if ([window delegate] && [[window delegate] isKindOfClass:[TaggerController class]])
+			_taggerController = [window delegate];
+	}
+	
+	return _taggerController;
 }
 
 @end

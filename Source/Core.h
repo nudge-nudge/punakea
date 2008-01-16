@@ -36,7 +36,7 @@
 	NNTags							*globalTags;
 	
 	BrowserController				*browserController;	
-	TaggerController				*taggerController;
+	TaggerController				*_taggerController;
 	PreferenceController			*preferenceController;	
 	SidebarController				*sidebarController;
 	
@@ -88,5 +88,6 @@
 - (BOOL)appHasBrowser;
 
 - (BrowserController *)browserController;
+- (TaggerController *)taggerController;
 
 @end
