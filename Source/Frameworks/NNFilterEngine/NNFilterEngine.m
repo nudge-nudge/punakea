@@ -255,7 +255,7 @@
 																	  sendPort:port2];
 	
 	[serverConnection setRootObject:server];
-	
+		
 	portArray = [NSArray arrayWithObjects:port2,port1,nil];
 	
 	// start the engine

@@ -16,7 +16,7 @@
 	NSMutableDictionary *sf = [NSMutableDictionary dictionary];
 	[sf setObject:[NSNumber numberWithInt:0] forKey:@"CompatibleVersion"];
 	
-	NSString *rawQuery = [tag queryInSpotlightSyntax];	
+	NSString *rawQuery = [tag query];	
 	[sf setObject:rawQuery forKey:@"RawQuery"];	
 	
 	// Search criteria are needed for editing the folder later on in Finder

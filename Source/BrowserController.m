@@ -580,7 +580,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		if(offset == 1) return 150.0;
 	}
 	
-	return nil;
+	return 0.0;
 }
 
 - (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMin ofSubviewAt:(int)offset
@@ -598,7 +598,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		if(offset == 1) return 200.0;
 	}
 	
-	return nil;
+	return 0.0;
 }
 
 

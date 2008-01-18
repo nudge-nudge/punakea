@@ -87,7 +87,7 @@
 	else
 	{
 		// if this is reached, the cache needs to be updated
-		// take care of this in the queryNote:
+		// take care of this in the qu eryNote:
 		
 		// only one query can be active at a time at the moment
 		[selectedTags setSelectedTags:[NSArray arrayWithObject:object]];

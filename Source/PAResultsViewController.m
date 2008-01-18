@@ -275,6 +275,7 @@
 		
 		// set tags to search for
 		[query setTags:selectedTags];
+		[query startQuery];
 				
 		// empty display tags until new related tags are found
 		if ([delegate respondsToSelector:@selector(clearVisibleTags)])
@@ -294,6 +295,7 @@
 		
 		// set tags to search for
 		[query setTags:selectedTags];
+		[query startQuery];
 			
 		// there are no selected tags, reset all tags
 		if ([delegate respondsToSelector:@selector(resetDisplayTags)])
@@ -306,8 +308,6 @@
 						format:@"delegate does not implement resetDisplayTags"];
 		}
 	}
-	
-	[query startQuery];
 }
 
 - (void)relatedTagsHaveChanged:(NSNotification *)notification

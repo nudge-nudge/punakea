@@ -261,10 +261,10 @@
 {
 	// Read constraint coordinates from delegate
 	
-	minCoordinate1 = nil;
-	minCoordinate2 = nil;
-	maxCoordinate1 = nil;
-	maxCoordinate2 = nil;
+	minCoordinate1 = 0.0;
+	minCoordinate2 = 0.0;
+	maxCoordinate1 = 0.0;
+	maxCoordinate2 = 0.0;
 		
 	// Min constraint
 	if([self delegate] &&
