@@ -548,16 +548,12 @@
 	
 	if(!taggerController)
 	{
-		NSLog(@"no tagger");
-		
 		taggerController = [[TaggerController alloc] init];
 		
 		[taggerController setShowsManageFiles:flag];
 		
 		if(!flag)
 			[taggerController resizeTokenField];
-	} else {
-		NSLog(@"has tagger");
 	}
 	
 	if (![self appIsActive])

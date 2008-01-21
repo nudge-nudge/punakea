@@ -357,7 +357,7 @@ calculates the starting point in the next row according to the height of all the
 	[self calcInitialParametersInRect:rect];
 
 	NSMutableArray *viewsToKeep = [NSMutableArray array];
-	
+	NSMutableArray *viewsToDelete = [NSMutableArray array];
 	
 	NSEnumerator *viewEnumerator = [[self subviews] objectEnumerator];
 	NSControl *subview;
@@ -370,8 +370,15 @@ calculates the starting point in the next row according to the height of all the
 		}
 		else
 		{
-			[self removeTagButton:(PATagButton*)subview];
+			[viewsToDelete addObject:subview];
 		}
+	}
+	
+	NSEnumerator *deleteViewEnumerator = [viewsToDelete objectEnumerator];
+	
+	while (subview = [deleteViewEnumerator nextObject])
+	{
+		[self removeTagButton:(PATagButton*)subview];
 	}
 	
 	NSEnumerator *e = [currentlyVisibleTags objectEnumerator];
