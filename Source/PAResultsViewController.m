@@ -74,7 +74,7 @@
 {
 	// if we are managing files, copy on drag
 	// else move
-	BOOL managingFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+	BOOL managingFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
 	NSDragOperation dragOperation = managingFiles ? NSDragOperationCopy : NSDragOperationMove;
 	
 	[outlineView setQuery:query];
@@ -804,7 +804,7 @@
 		
 		while(object = [e nextObject])
 		{
-			BOOL theDefault = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+			BOOL theDefault = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
 			
 			if([[object tags] count] > 0)
 			{

@@ -2,20 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Appearance.SidebarPosition</key>
+	<key>General.Sidebar.Position</key>
 	<integer>1</integer>
-	<key>General.LoadSidebar</key>
+	<key>General.Sidebar.Enabled</key>
 	<true/>
-	<key>General.LoadStatusItem</key>
+	<key>General.StatusItem.Enabled</key>
 	<true/>
-	<key>General.HideDockIcon</key>
-	<false/>
-	<key>General.ManageFiles</key>
-	<false/>
-	<key>General.ManagedFilesLocation</key>
-	<string>~/Documents/punakea files/</string>
 	<key>General.StartOnLogin</key>
 	<false/>
+	<key>ManageFiles.ManagedFolder.Enabled</key>
+	<false/>
+	<key>ManageFiles.ManagedFolder.Location</key>
+	<string>~/Library/Application Support/Punakea/Files/</string>
+	<key>ManageFiles.TagsFolder.Enabled</key>
+	<true/>
+	<key>ManageFiles.TagsFolder.Location</key>
+	<string>~/Documents/Punakea/Tags/</string>
+	<key>ManageFiles.DropBox.Enabled</key>
+	<true/>
+	<key>ManageFiles.DropBox.Location</key>
+	<string>~/Documents/Punakea/DropBox/</string>
+	<key>ManageFiles.DropBox.Tags</key>
+	<array>
+		<string>untagged</string>
+	</array>
 	<key>PAScheduledUpdateCheckInterval</key>
 	<integer>0</integer>
 	<key>Results</key>
@@ -47,15 +57,13 @@
 		<key>ExpandedItems</key>
 		<array/>
 	</dict>
+	<key>SUCheckAtStartup</key>
+	<true/>
 	<key>SUScheduledCheckInterval</key>
 	<integer>86400</integer>
 	<key>TagCloud.ClickCountWeight</key>
 	<real>0.5</real>
-	<key>TagCloud.EyeCandy</key>
-	<false/>
 	<key>TagCloud.SortKey</key>
-	<string>name</string>
-	<key>Version</key>
-	<integer>1</integer>
+	<integer>0</integer>
 </dict>
 </plist>

@@ -79,7 +79,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 		
 		while(object = [e nextObject])
 		{
-			BOOL theDefault = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+			BOOL theDefault = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
 			
 			if([[object tags] count] > 0)
 			{

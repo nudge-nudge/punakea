@@ -82,7 +82,7 @@ action called on dropping files to FileBox
 	taggerController = [[TaggerController alloc] init];
 	
 	// Check whether to manage files or not
-	BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+	BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
 	[taggerController setManageFiles:manageFiles];
 	
 	NSEvent *currentEvent = [NSApp currentEvent];

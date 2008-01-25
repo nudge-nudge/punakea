@@ -9,6 +9,7 @@
 #import "PASidebarWindow.h"
 
 double const SHOW_DELAY = 0.2;
+NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 
 @interface PASidebarWindow (PrivateAPI)
 
@@ -58,10 +59,10 @@ double const SHOW_DELAY = 0.2;
 	NSView *contentView = [self contentView];
 	[contentView addTrackingRect:[contentView bounds] owner:self userData:NULL assumeInside:NO];
 	
-	sidebarPosition = [[defaultsController valueForKeyPath:@"values.Appearance.SidebarPosition"] intValue];
+	sidebarPosition = [[defaultsController valueForKeyPath:SIDEBAR_POSITION_KEYPATH] intValue];
 	
 	[defaultsController addObserver:self 
-						 forKeyPath:@"values.Appearance.SidebarPosition" 
+						 forKeyPath:SIDEBAR_POSITION_KEYPATH 
 							options:0 
 							context:NULL];
 
@@ -78,15 +79,15 @@ double const SHOW_DELAY = 0.2;
 
 - (void)dealloc
 {
-	[defaultsController removeObserver:self forKeyPath:@"values.Appearance.SidebarPosition"];
+	[defaultsController removeObserver:self forKeyPath:SIDEBAR_POSITION_KEYPATH];
 	[super dealloc];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if ((object == defaultsController) && [keyPath isEqualToString:@"values.Appearance.SidebarPosition"])
+	if ((object == defaultsController) && [keyPath isEqualToString:SIDEBAR_POSITION_KEYPATH])
 	{
-		sidebarPosition = [[defaultsController valueForKeyPath:@"values.Appearance.SidebarPosition"] intValue];
+		sidebarPosition = [[defaultsController valueForKeyPath:SIDEBAR_POSITION_KEYPATH] intValue];
 		[self reset];
 	}
 }			

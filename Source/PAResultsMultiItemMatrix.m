@@ -997,7 +997,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	{
 		return NSDragOperationNone;
 	} else {
-		BOOL managingFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+		BOOL managingFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
 		
 		if(managingFiles)
 			return NSDragOperationCopy | NSDragOperationDelete;

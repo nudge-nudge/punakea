@@ -18,6 +18,9 @@
 - (BOOL)appHasPreferences;
 - (BOOL)appIsActive;
 
+- (void)loadUserDefaults;
+- (void)updateUserDefaultsToVersion:(int)newVersion;
+
 - (void)loadTagCache;
 - (void)saveTagCache;
 - (NSString*)pathForTagCacheFile;
@@ -31,12 +34,6 @@
 #pragma mark init + dealloc
 + (void)initialize
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"];
-	NSDictionary *appDefaults = [NSDictionary dictionaryWithContentsOfFile:path];
-	[defaults registerDefaults:appDefaults];
-	
 	// register value transformers
 	PACollectionNotEmpty *collectionNotEmpty = [[[PACollectionNotEmpty alloc] init] autorelease];
 	[NSValueTransformer setValueTransformer:collectionNotEmpty
@@ -52,6 +49,7 @@
 		globalTags = [NNTags sharedTags];
 		
 		userDefaults = [NSUserDefaults standardUserDefaults];
+		[self loadUserDefaults];
 		
 		printf("Punakea compiled on %s at %s\n",__DATE__,__TIME__);
 	}
@@ -71,13 +69,13 @@
 		[self showBrowser:self];
 	}
 	
-	if ([userDefaults boolForKey:@"General.LoadSidebar"])
+	if ([userDefaults boolForKey:@"General.Sidebar.Enabled"])
 	{
 		sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
 		[sidebarController window];
 	}
 	
-	if ([userDefaults boolForKey:@"General.LoadStatusItem"])
+	if ([userDefaults boolForKey:@"General.StatusItem.Enabled"])
 	{
 		[self showStatusItem];
 	}
@@ -86,13 +84,13 @@
 	
 	// listen for sidebar pref changes
 	[udc addObserver:self 
-		  forKeyPath:@"values.General.LoadSidebar" 
+		  forKeyPath:@"values.General.Sidebar.Enabled" 
 			 options:0 
 			 context:NULL];
 	
 	// listen for status item pref changes
 	[udc addObserver:self 
-		  forKeyPath:@"values.General.LoadStatusItem" 
+		  forKeyPath:@"values.General.StatusItem.Enabled" 
 			 options:0 
 			 context:NULL];
 	
@@ -114,8 +112,8 @@
 	
 	NSUserDefaultsController *udc = [NSUserDefaultsController sharedUserDefaultsController];
 	
-	[udc removeObserver:self forKeyPath:@"values.General.LoadSidebar"];
-	[udc removeObserver:self forKeyPath:@"values.General.LoadStatusItem"];
+	[udc removeObserver:self forKeyPath:@"values.General.Sidebar.Enabled"];
+	[udc removeObserver:self forKeyPath:@"values.General.StatusItem.Enabled"];
 	
 	[preferenceController release];
 	[nc removeObserver:self];
@@ -222,9 +220,9 @@
 #pragma mark events
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {	
-	if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.LoadSidebar"])
+	if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.Sidebar.Enabled"])
 	{
-		BOOL showSidebar = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.LoadSidebar"];
+		BOOL showSidebar = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.Sidebar.Enabled"];
 		BOOL sidebarIsLoaded = NO;
 		
 		// look if sidebar is already loaded
@@ -251,9 +249,9 @@
 			}
 		}
 	}
-	else if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.LoadStatusItem"])
+	else if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.StatusItem.Enabled"])
 	{
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"General.LoadStatusItem"])
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"General.StatusItem.Enabled"])
 			[self showStatusItem];
 		else
 			[self unloadStatusItem];
@@ -262,11 +260,11 @@
 
 - (void)createManagedFilesDirIfNeeded
 {
-	if (![userDefaults boolForKey:@"General.ManageFiles"])
+	if (![userDefaults boolForKey:@"ManageFiles.ManagedFolder.Enabled"])
 		return;
 	
 	// create managed files dir if needed
-	NSString *managedFilesDir = [userDefaults stringForKey:@"General.ManagedFilesLocation"];
+	NSString *managedFilesDir = [userDefaults stringForKey:@"ManageFiles.ManagedFolder.Location"];
 	NSString *standardizedDir = [managedFilesDir stringByStandardizingPath];
 	
 	NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -764,6 +762,81 @@
 	
 	return ([strApplicationBundleIdentifier isEqualToString:[[NSBundle mainBundle] bundleIdentifier]]);
 }
+
+- (void)loadUserDefaults
+{	
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"];
+	NSDictionary *appDefaults = [NSDictionary dictionaryWithContentsOfFile:path];
+	
+	[userDefaults registerDefaults:appDefaults];
+	
+	// Check for Version Information of User Defaults
+	int currentVersion = [userDefaults integerForKey:@"Version"];	
+	if (currentVersion == 0)
+	{
+		// Below v0.4 there was no version information available!		
+		
+		NSDate *suLastCheckTime = [userDefaults objectForKey:@"SULastCheckTime"];
+		
+		if(suLastCheckTime) {
+			// The current defaults are v1
+			[self updateUserDefaultsToVersion:2];
+		} else {
+			// Mark defaults as being v2
+			[userDefaults setObject:[NSNumber numberWithInt:2] forKey:@"Version"];
+		}
+	}
+}
+
+- (void)updateUserDefaultsToVersion:(int)newVersion 
+{
+	// Unfortunately, valueForKeyPath does NOT work for NSUserController.
+	// Chained valueForKey calls do, though... WHAT?!? ;)
+	// So we keep this ugly pseudo-hierarchical structure for now...
+	
+	NSString *key;
+	
+	if(newVersion == 2)
+	{	
+		// General		
+		key = @"Appearance.SidebarPosition";
+		int intValue = [userDefaults integerForKey:key];
+		[userDefaults removeObjectForKey:key];						
+		[userDefaults setValue:[NSNumber numberWithInt:intValue] forKey:@"General.Sidebar.Position"];
+		
+		key = @"General.LoadSidebar";
+		BOOL boolValue = [userDefaults boolForKey:key];
+		[userDefaults removeObjectForKey:key];						
+		[userDefaults setValue:[NSNumber numberWithBool:boolValue] forKey:@"General.Sidebar.Enabled"];
+				
+		key = @"General.LoadStatusItem";
+		boolValue = [userDefaults boolForKey:key];
+		[userDefaults removeObjectForKey:key];	
+		[userDefaults setValue:[NSNumber numberWithBool:boolValue] forKey:@"General.StatusItem.Enabled"];	
+		
+		// Manage Files
+		key = @"General.ManageFiles";
+		boolValue = [userDefaults boolForKey:key];
+		[userDefaults removeObjectForKey:key];	
+		[userDefaults setValue:[NSNumber numberWithBool:boolValue] forKey:@"ManageFiles.ManagedFolder.Enabled"];
+		
+		key = @"General.ManagedFilesLocation";
+		NSString *strValue = [userDefaults stringForKey:key];
+		if(!strValue) strValue = @"~/Documents/punakea files";
+		[userDefaults removeObjectForKey:key];	
+		[userDefaults setValue:strValue forKey:@"ManageFiles.ManagedFolder.Location"];
+		
+		// Update Version Info	
+		// This may not be moved to UserDefaults.plist as a default value, as it is then not
+		// output to the preferences file!
+		[userDefaults setObject:[NSNumber numberWithInt:2] forKey:@"Version"];
+		
+	} else
+	{
+		[NSException raise:NSInvalidArgumentException format:@"User Defaults can only be updated from v1 to v2!"];
+	}
+}
+
 
 #pragma mark Accessors
 - (BrowserController *)browserController

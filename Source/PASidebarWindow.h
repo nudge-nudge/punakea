@@ -25,6 +25,9 @@ typedef enum _PASidebarPosition {
 	PASidebarPositionRight = 1
 } PASidebarPosition;
 
+extern NSString * const SIDEBAR_POSITION_KEYPATH;
+
+
 @interface PASidebarWindow : NSWindow {
 	
 	BOOL								expanded;

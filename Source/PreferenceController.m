@@ -130,7 +130,7 @@
 #pragma mark file location
 - (IBAction)locateDirectory:(id)sender
 {
-	NSString *currentPath = [[userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"] retain];
+	NSString *currentPath = [[userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"] retain];
 	
 	// create open panel with the needed settings
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
@@ -151,13 +151,13 @@
 
 - (IBAction)switchToDefaultDirectory:(id)sender
 {
-	NSString *oldPath = [userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"];
+	NSString *oldPath = [userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
 	
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"];
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithContentsOfFile:path];
 	
 	// set path to default path
-	NSString *defaultPath = [appDefaults objectForKey:@"General.ManagedFilesLocation"];
+	NSString *defaultPath = [appDefaults objectForKey:@"ManageFiles.ManagedFolder.Location"];
 	
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	BOOL isDirectory;
@@ -184,7 +184,7 @@
 {
 	if (returnCode == NSOKButton)
 	{
-		NSString *oldPath = [userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"];
+		NSString *oldPath = [userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
 		NSString *newPath = [[panel filenames] objectAtIndex:0];
 		
 		[self switchManagedLocationFromPath:oldPath toPath:newPath];
@@ -259,7 +259,7 @@
 {
 	id <NSMenuItem> location = [folderButton itemAtIndex:0];
 	
-	NSString *dir = [userDefaultsController valueForKeyPath:@"values.General.ManagedFilesLocation"];
+	NSString *dir = [userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
 	
 	NSString *title = [dir lastPathComponent];
 	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:dir];
@@ -347,7 +347,7 @@
 		[fileManager movePath:directory toPath:newDir handler:self];
 	}
 		
-	[userDefaultsController setValue:newPath forKeyPath:@"values.General.ManagedFilesLocation"];
+	[userDefaultsController setValue:newPath forKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
 	[self updateButtonToCurrentLocation];
 }
 

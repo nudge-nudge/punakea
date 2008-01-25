@@ -86,7 +86,7 @@ adds tag to tagField (use from "outside")
 	
 	// Check manage files
 	if(manageFilesAutomatically)
-		manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];	
+		manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];	
 		
 	if(manageFiles)
 		[manageFilesButton setState:NSOnState];

@@ -59,7 +59,7 @@
 - (BOOL)shouldManageFiles
 {
 	// only manage if there are some tags on the file
-	return [[NSUserDefaults standardUserDefaults] boolForKey:@"General.ManageFiles"];
+	return [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
 }
 
 - (NSString*)destinationForNewFile:(NSString*)fileName
@@ -91,7 +91,7 @@
 
 - (NSString*)pathForFiles
 { 
-	NSString *directory = [[NSUserDefaults standardUserDefaults] objectForKey:@"General.ManagedFilesLocation"];
+	NSString *directory = [[NSUserDefaults standardUserDefaults] objectForKey:@"ManageFiles.ManagedFolder.Location"];
 	directory = [directory stringByExpandingTildeInPath]; 
 	
 	if ([fileManager fileExistsAtPath:directory] == NO) 

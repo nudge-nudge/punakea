@@ -1,26 +1,83 @@
-{
-    IBClasses = (
-        {
-            ACTIONS = {manageTags = id; showPreferences = id; }; 
-            CLASS = Core; 
-            LANGUAGE = ObjC; 
-            SUPERCLASS = NSWindowController; 
-        }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {
-            ACTIONS = {checkForUpdates = id; locateDirectory = id; switchToDefaultDirectory = id; }; 
-            CLASS = PreferenceController; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {folderButton = NSPopUpButton; updateIntervalButton = NSPopUpButton; }; 
-            SUPERCLASS = NSWindowController; 
-        }, 
-        {
-            ACTIONS = {changePanes = id; orderFrontPrefsPanel = id; }; 
-            CLASS = UKPrefsPanel; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {tabView = NSTabView; }; 
-            SUPERCLASS = NSObject; 
-        }
-    ); 
-    IBVersion = 1; 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>CLASS</key>
+			<string>NSTextField</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSControl</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSObject</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>checkForUpdates</key>
+				<string>id</string>
+				<key>locateDirectory</key>
+				<string>id</string>
+				<key>switchToDefaultDirectory</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>PreferenceController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>dropBoxFolderPopUpButton</key>
+				<string>NSPopUpButton</string>
+				<key>folderButton</key>
+				<string>NSPopUpButton</string>
+				<key>managedFolderPopUpButton</key>
+				<string>NSPopUpButton</string>
+				<key>tagsFolderPopUpButton</key>
+				<string>NSPopUpButton</string>
+				<key>updateIntervalButton</key>
+				<string>NSPopUpButton</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSWindowController</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>changePanes</key>
+				<string>id</string>
+				<key>orderFrontPrefsPanel</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>UKPrefsPanel</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>tabView</key>
+				<string>NSTabView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>

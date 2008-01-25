@@ -45,8 +45,7 @@ displays all [datasource visibleTags] in a nice tag cloud view
 	
 	PADropManager					*dropManager;
 	
-	BOOL							showsDropBorder;
-	BOOL							eyeCandy;
+	BOOL							showsDropBorder;	
 }
 
 - (id)datasource;
