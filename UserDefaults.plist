@@ -21,7 +21,7 @@
 	<key>ManageFiles.DropBox.Enabled</key>
 	<true/>
 	<key>ManageFiles.DropBox.Location</key>
-	<string>~/Documents/Punakea/DropBox/</string>
+	<string>~/Documents/Punakea/Drop Box/</string>
 	<key>ManageFiles.DropBox.Tags</key>
 	<array>
 		<string>untagged</string>
