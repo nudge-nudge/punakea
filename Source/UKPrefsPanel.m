@@ -112,6 +112,8 @@
 	
 	// Actually hook up our toolbar and the tabs:
 	[self mapTabsToToolbar];
+	
+	[self resize];
 }
 
 
