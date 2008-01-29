@@ -15,14 +15,23 @@
 - (void)scheduledUpdateCheckIntervalHasChanged;
 
 - (void)updateCurrentLocationForPopUpButton:(NSPopUpButton *)button;
-- (void)switchManagedLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath;
+- (void)switchLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag;
 
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
+
+- (NSString *)controllerKeyPathForMenuItemTag:(int)tag;
+- (NSPopUpButton *)popUpButtonForMenuItemTag:(int)tag;
 
 - (BOOL)isLoginItem;
 - (CFIndex)loginItemIndex;
 
 @end
+
+
+NSString * const MANAGED_FOLDER_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.ManagedFolder.Location";
+NSString * const TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.TagsFolder.Location";
+NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.DropBox.Location";
+
 
 @implementation PreferenceController
 
@@ -156,18 +165,7 @@
 #pragma mark file location
 - (IBAction)locateDirectory:(id)sender
 {
-	NSPopUpButton *popUpButton;
-	switch ([sender tag])
-	{
-		case 1:		popUpButton = tagsFolderPopUpButton; break;
-		case 2:		popUpButton = dropBoxPopUpButton; break;
-		default:	popUpButton = managedFolderPopUpButton;
-	}
-	
-	NSString *keyPath = @"";
-	if(popUpButton == managedFolderPopUpButton)	keyPath = @"values.ManageFiles.ManagedFolder.Location";
-	if(popUpButton == tagsFolderPopUpButton)	keyPath = @"values.ManageFiles.TagsFolder.Location";
-	if(popUpButton == dropBoxPopUpButton)		keyPath = @"values.ManageFiles.DropBox.Location";
+	NSString *keyPath = [self controllerKeyPathForMenuItemTag:[sender tag]];
 	
 	NSString *currentPath = [[userDefaultsController valueForKeyPath:keyPath] retain];
 	
@@ -185,61 +183,60 @@
 						 modalForWindow:[self window]
 						  modalDelegate:self
 						 didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) 
-							contextInfo:popUpButton];
+							contextInfo:sender];
 }
 
 - (IBAction)switchToDefaultDirectory:(id)sender
 {
-	NSString *oldPath = [userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
+	NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:[sender tag]];	
+	NSString *keyPath = [self controllerKeyPathForMenuItemTag:[sender tag]];
+	
+	NSString *oldDir = [userDefaultsController valueForKeyPath:keyPath];
 	
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"];
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithContentsOfFile:path];
 	
 	// set path to default path
-	NSString *defaultPath = [appDefaults objectForKey:@"ManageFiles.ManagedFolder.Location"];
+	NSString *defaultDir = [appDefaults objectForKey:[keyPath substringFromIndex:7]];
+	defaultDir = [defaultDir stringByStandardizingPath];
 	
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	BOOL isDirectory;
 	
-	if ([fileManager fileExistsAtPath:[defaultPath stringByStandardizingPath] isDirectory:&isDirectory])
+	if ([fileManager fileExistsAtPath:defaultDir isDirectory:&isDirectory])
 	{
 		if (!isDirectory)
 		{
 			[self displayWarningWithMessage:NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR",@"FileManager",@"")];
-			[managedFolderPopUpButton selectItemAtIndex:0];
+			[popUpButton selectItemAtIndex:0];
 			return;
 		}
 	}
 	else
 	{
-		[fileManager createDirectoryAtPath:[defaultPath stringByStandardizingPath] withIntermediateDirectories:YES attributes:nil error:NULL];
+		[fileManager createDirectoryAtPath:defaultDir withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
 	
-	[self switchManagedLocationFromPath:oldPath toPath:defaultPath];
-	[managedFolderPopUpButton selectItemAtIndex:0];
+	[self switchLocationFromPath:oldDir toPath:defaultDir tag:[sender tag]];
+	[popUpButton selectItemAtIndex:0];
 }
 
 - (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
-{
-	NSPopUpButton *sender = contextInfo;
-	
+{	
 	if (returnCode == NSOKButton)
 	{
 		NSString *newDir = [[panel filenames] objectAtIndex:0];
 		
-		if(sender == managedFolderPopUpButton)
-		{
-			NSString *oldDir = [userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
+		NSString *keyPath = [self controllerKeyPathForMenuItemTag:[contextInfo tag]];
+		
+		NSString *oldDir = [userDefaultsController valueForKeyPath:keyPath];
 						
-			[self switchManagedLocationFromPath:oldDir toPath:newDir];
-		}
-		else
-		{
-			// TODO
-		}
+		[self switchLocationFromPath:oldDir toPath:newDir tag:[contextInfo tag]];
 	}
 
-	[sender selectItemAtIndex:0];
+	NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:[contextInfo tag]];	
+	
+	[popUpButton selectItemAtIndex:0];
 }
 
 #pragma mark file error handler
@@ -305,9 +302,9 @@
 	id currentLocation = [button itemAtIndex:0];
 	
 	NSString *keyPath = @"";
-	if(button == managedFolderPopUpButton)	keyPath = @"values.ManageFiles.ManagedFolder.Location";
-	if(button == tagsFolderPopUpButton)		keyPath = @"values.ManageFiles.TagsFolder.Location";
-	if(button == dropBoxPopUpButton)		keyPath = @"values.ManageFiles.DropBox.Location";
+	if(button == managedFolderPopUpButton)	keyPath = MANAGED_FOLDER_LOCATION_CONTROLLER_KEYPATH;
+	if(button == tagsFolderPopUpButton)		keyPath = TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH;
+	if(button == dropBoxPopUpButton)		keyPath = DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
 	   
 	NSString *dir = [userDefaultsController valueForKeyPath:keyPath];
 	dir = [dir stringByExpandingTildeInPath];
@@ -319,7 +316,7 @@
 	[currentLocation setImage:icon];
 }
 
-- (void)switchManagedLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath
+- (void)switchLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag
 {
 	NSString *standardizedOldPath = [oldPath stringByStandardizingPath];
 	NSString *standardizedNewPath = [newPath stringByStandardizingPath];
@@ -339,37 +336,60 @@
 	}
 			
 	// then collect all dirs to move
-	NSMutableArray *directories = [NSMutableArray array];
+	// for tag == 0 (Managed Folder) we collect only numbered directories
+	
+	NSMutableArray *directories;
 	int i = 1;
 	NSString *currentNumberedDir;
 	NSString *directory;
 	BOOL isDirectory;
 	
-	while (true)
-	{
-		currentNumberedDir = [NSString stringWithFormat:@"/%i/",i];
-		directory = [standardizedOldPath stringByAppendingPathComponent:currentNumberedDir];
-	
-		if ([fileManager fileExistsAtPath:directory isDirectory:&isDirectory])
+	if(tag == 0) 
+	{	
+		// Copy only the numbered dirs
+		
+		directories = [NSMutableArray array];
+		
+		while (true)
 		{
-			if (isDirectory)
+			currentNumberedDir = [NSString stringWithFormat:@"/%i/",i];
+			directory = [standardizedOldPath stringByAppendingPathComponent:currentNumberedDir];
+		
+			if ([fileManager fileExistsAtPath:directory isDirectory:&isDirectory])
 			{
-				[directories addObject:directory];
-				i++;
+				if (isDirectory)
+				{
+					[directories addObject:directory];
+					i++;
+				}
+			}
+			else
+			{
+				break;
 			}
 		}
-		else
+	}
+	else
+	{
+		// We'll copy all stuff
+		
+		directories = [NSMutableArray arrayWithArray:[fileManager contentsOfDirectoryAtPath:standardizedOldPath error:NULL]];
+		
+		for(int j=0; j < [directories count]; j++)
 		{
-			break;
+			// Prefix each dir with its full path
+			NSString *fullPath = [standardizedOldPath stringByAppendingPathComponent:[directories objectAtIndex:j]];
+			[directories replaceObjectAtIndex:j withObject:fullPath];
 		}
 	}
 	
 	// now all dirs are in directories 
 	// check if destination is void of all those dirnames
+	
 	NSEnumerator *dirEnumerator = [directories objectEnumerator];
 	NSString *dirName;
 	NSString *newDir;
-	
+
 	while (directory = [dirEnumerator nextObject])
 	{
 		dirName = [directory lastPathComponent];
@@ -387,18 +407,49 @@
 	}
 	
 	// if everything is ok, move them
+	
 	dirEnumerator = [directories objectEnumerator];
 	
 	while (directory = [dirEnumerator nextObject])
 	{
+		directory = [directory stringByStandardizingPath];
+		
 		dirName = [directory lastPathComponent];
 		newDir = [standardizedNewPath stringByAppendingPathComponent:dirName];
 		
 		[fileManager movePath:directory toPath:newDir handler:self];
 	}
 		
-	[userDefaultsController setValue:newPath forKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
-	[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
+	NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:tag];	
+	NSString *keyPath = [self controllerKeyPathForMenuItemTag:tag];
+	
+	[userDefaultsController setValue:newPath forKeyPath:keyPath];
+	[self updateCurrentLocationForPopUpButton:popUpButton];
+	
+	// If tag == 1 (Tags Folder), we update the folder's icon
+	[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
+								   forFile:standardizedNewPath
+								   options:NSExclude10_4ElementsIconCreationOption];
+}
+
+- (NSString *)controllerKeyPathForMenuItemTag:(int)tag
+{
+	switch (tag)
+	{
+		case 1:		return TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH;
+		case 2:		return DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
+		default:	return MANAGED_FOLDER_LOCATION_CONTROLLER_KEYPATH;
+	}
+}
+
+- (NSPopUpButton *)popUpButtonForMenuItemTag:(int)tag
+{
+	switch (tag)
+	{
+		case 1:		return tagsFolderPopUpButton;
+		case 2:		return dropBoxPopUpButton;
+		default:	return managedFolderPopUpButton;
+	}
 }
 
 - (BOOL)isLoginItem

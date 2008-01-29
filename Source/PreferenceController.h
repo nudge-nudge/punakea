@@ -16,6 +16,10 @@ typedef enum _PAScheduledUpdateCheckInterval {
 	PAScheduledUpdateCheckMonthly = 2
 } PAScheduledUpdateCheckInterval;
 
+extern NSString * const MANAGED_FOLDER_LOCATION_CONTROLLER_KEYPATH;
+extern NSString * const TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH;
+extern NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
+
 @class Core;
 
 @interface PreferenceController : PATagAutocompleteWindowController
