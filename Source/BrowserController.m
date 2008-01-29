@@ -469,7 +469,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 - (void)startProgressAnimationWithDescription:(NSString *)aString
 {
-	[statusBarProgressIndicator setStringValue:aString];	
+	if([aString isNotEqualTo:[statusBarProgressIndicator stringValue]])
+		[statusBarProgressIndicator setStringValue:aString];	
 	[statusBarProgressIndicator setHidden:NO];
 	[rightStatusBar setNeedsDisplay:YES];
 }
