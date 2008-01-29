@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LoginItemsAE.h"
+#import "PATagAutocompleteWindowController.h"
 
 typedef enum _PAScheduledUpdateCheckInterval {
 	PAScheduledUpdateCheckDaily = 0,
@@ -17,7 +18,7 @@ typedef enum _PAScheduledUpdateCheckInterval {
 
 @class Core;
 
-@interface PreferenceController : NSWindowController
+@interface PreferenceController : PATagAutocompleteWindowController
 {
 	IBOutlet NSPopUpButton *managedFolderPopUpButton;
 	IBOutlet NSPopUpButton *tagsFolderPopUpButton;

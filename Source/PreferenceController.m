@@ -156,7 +156,20 @@
 #pragma mark file location
 - (IBAction)locateDirectory:(id)sender
 {
-	NSString *currentPath = [[userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"] retain];
+	NSPopUpButton *popUpButton;
+	switch ([sender tag])
+	{
+		case 1:		popUpButton = tagsFolderPopUpButton; break;
+		case 2:		popUpButton = dropBoxPopUpButton; break;
+		default:	popUpButton = managedFolderPopUpButton;
+	}
+	
+	NSString *keyPath = @"";
+	if(popUpButton == managedFolderPopUpButton)	keyPath = @"values.ManageFiles.ManagedFolder.Location";
+	if(popUpButton == tagsFolderPopUpButton)	keyPath = @"values.ManageFiles.TagsFolder.Location";
+	if(popUpButton == dropBoxPopUpButton)		keyPath = @"values.ManageFiles.DropBox.Location";
+	
+	NSString *currentPath = [[userDefaultsController valueForKeyPath:keyPath] retain];
 	
 	// create open panel with the needed settings
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
@@ -172,7 +185,7 @@
 						 modalForWindow:[self window]
 						  modalDelegate:self
 						 didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) 
-							contextInfo:NULL];
+							contextInfo:popUpButton];
 }
 
 - (IBAction)switchToDefaultDirectory:(id)sender
@@ -206,21 +219,27 @@
 	[managedFolderPopUpButton selectItemAtIndex:0];
 }
 
-- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo
+- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
 {
+	NSPopUpButton *sender = contextInfo;
+	
 	if (returnCode == NSOKButton)
 	{
-		NSString *oldPath = [userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
-		NSString *newPath = [[panel filenames] objectAtIndex:0];
+		NSString *newDir = [[panel filenames] objectAtIndex:0];
 		
-		[self switchManagedLocationFromPath:oldPath toPath:newPath];
-		
-		[managedFolderPopUpButton selectItemAtIndex:0];
+		if(sender == managedFolderPopUpButton)
+		{
+			NSString *oldDir = [userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
+						
+			[self switchManagedLocationFromPath:oldDir toPath:newDir];
+		}
+		else
+		{
+			// TODO
+		}
 	}
-	else if (returnCode == NSCancelButton)
-	{
-		[managedFolderPopUpButton selectItemAtIndex:0];
-	}
+
+	[sender selectItemAtIndex:0];
 }
 
 #pragma mark file error handler
