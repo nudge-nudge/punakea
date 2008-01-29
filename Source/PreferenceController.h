@@ -19,7 +19,10 @@ typedef enum _PAScheduledUpdateCheckInterval {
 
 @interface PreferenceController : NSWindowController
 {
-	IBOutlet NSPopUpButton *folderButton;
+	IBOutlet NSPopUpButton *managedFolderPopUpButton;
+	IBOutlet NSPopUpButton *tagsFolderPopUpButton;
+	IBOutlet NSPopUpButton *dropBoxPopUpButton;
+	
 	IBOutlet NSPopUpButton *updateIntervalButton;
 	
 	NSUserDefaultsController *userDefaultsController;

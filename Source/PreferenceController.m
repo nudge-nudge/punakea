@@ -14,7 +14,7 @@
 - (void)startOnLoginHasChanged;
 - (void)scheduledUpdateCheckIntervalHasChanged;
 
-- (void)updateButtonToCurrentLocation;
+- (void)updateCurrentLocationForPopUpButton:(NSPopUpButton *)button;
 - (void)switchManagedLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath;
 
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
@@ -54,7 +54,24 @@
 								options:0
 								context:NULL];
 	
-	[self updateButtonToCurrentLocation];
+	[userDefaultsController addObserver:self
+							 forKeyPath:@"values.ManageFiles.ManagedFolder.Enabled"
+								options:0
+								context:NULL];
+	
+	[userDefaultsController addObserver:self
+							 forKeyPath:@"values.ManageFiles.TagsFolder.Enabled"
+								options:0
+								context:NULL];
+	
+	[userDefaultsController addObserver:self
+							 forKeyPath:@"values.ManageFiles.DropBox.Enabled"
+								options:0
+								context:NULL];
+	
+	[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
+	[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
+	[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
 }
 
 - (void)dealloc
@@ -76,6 +93,15 @@
 	else if ([keyPath isEqualToString:@"values.PAScheduledUpdateCheckInterval"])
 	{
 		[self scheduledUpdateCheckIntervalHasChanged];
+	}
+	else if ([keyPath isEqualToString:@"values.ManageFiles.ManagedFolder.Enabled"] ||
+			 [keyPath isEqualToString:@"values.ManageFiles.TagsFolder.Enabled"] ||
+			 [keyPath isEqualToString:@"values.ManageFiles.DropBox.Enabled"])
+	{
+		[core createDirectoriesIfNeeded];
+		[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
+		[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
+		[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
 	}
 }
 
@@ -166,18 +192,18 @@
 	{
 		if (!isDirectory)
 		{
-			[self displayWarningWithMessage:NSLocalizedStringFromTable(@"MANAGED_FILES_DEFAULT_NOT_FOLDER_ERROR",@"FileManager",@"")];
-			[folderButton selectItemAtIndex:0];
+			[self displayWarningWithMessage:NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR",@"FileManager",@"")];
+			[managedFolderPopUpButton selectItemAtIndex:0];
 			return;
 		}
 	}
 	else
 	{
-		[fileManager createDirectoryAtPath:[defaultPath stringByStandardizingPath] attributes:nil];
+		[fileManager createDirectoryAtPath:[defaultPath stringByStandardizingPath] withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
 	
 	[self switchManagedLocationFromPath:oldPath toPath:defaultPath];
-	[folderButton selectItemAtIndex:0];
+	[managedFolderPopUpButton selectItemAtIndex:0];
 }
 
 - (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo
@@ -189,11 +215,11 @@
 		
 		[self switchManagedLocationFromPath:oldPath toPath:newPath];
 		
-		[folderButton selectItemAtIndex:0];
+		[managedFolderPopUpButton selectItemAtIndex:0];
 	}
 	else if (returnCode == NSCancelButton)
 	{
-		[folderButton selectItemAtIndex:0];
+		[managedFolderPopUpButton selectItemAtIndex:0];
 	}
 }
 
@@ -255,18 +281,23 @@
 }
 
 #pragma mark helper
-- (void)updateButtonToCurrentLocation
+- (void)updateCurrentLocationForPopUpButton:(NSPopUpButton *)button
 {
-	id <NSMenuItem> location = [folderButton itemAtIndex:0];
+	id currentLocation = [button itemAtIndex:0];
 	
-	NSString *dir = [userDefaultsController valueForKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
+	NSString *keyPath = @"";
+	if(button == managedFolderPopUpButton)	keyPath = @"values.ManageFiles.ManagedFolder.Location";
+	if(button == tagsFolderPopUpButton)		keyPath = @"values.ManageFiles.TagsFolder.Location";
+	if(button == dropBoxPopUpButton)		keyPath = @"values.ManageFiles.DropBox.Location";
+	   
+	NSString *dir = [userDefaultsController valueForKeyPath:keyPath];
+	dir = [dir stringByExpandingTildeInPath];
 	
-	NSString *title = [dir lastPathComponent];
 	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:dir];
 	[icon setSize:NSMakeSize(16.0,16.0)];
 	
-	[location setTitle:title];
-	[location setImage:icon];
+	[currentLocation setTitle:[dir lastPathComponent]];
+	[currentLocation setImage:icon];
 }
 
 - (void)switchManagedLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath
@@ -348,7 +379,7 @@
 	}
 		
 	[userDefaultsController setValue:newPath forKeyPath:@"values.ManageFiles.ManagedFolder.Location"];
-	[self updateButtonToCurrentLocation];
+	[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
 }
 
 - (BOOL)isLoginItem

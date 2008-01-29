@@ -246,6 +246,8 @@
 		658ADEB90AF6432900063AE1 /* PALabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 658ADEB70AF6432900063AE1 /* PALabel.m */; };
 		658ADF600AF6610A00063AE1 /* RemoveRound.tif in Resources */ = {isa = PBXBuildFile; fileRef = 658ADF5E0AF6610A00063AE1 /* RemoveRound.tif */; };
 		658ADF610AF6610A00063AE1 /* RemoveRoundPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 658ADF5F0AF6610A00063AE1 /* RemoveRoundPressed.tif */; };
+		658B39A60D4F5BC4003BFCA5 /* TagFolder.icns in Resources */ = {isa = PBXBuildFile; fileRef = 658B39A50D4F5BC4003BFCA5 /* TagFolder.icns */; };
+		658B39E70D4F64D0003BFCA5 /* PABoolToColorTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B39E60D4F64D0003BFCA5 /* PABoolToColorTransformer.m */; };
 		658B58E90BEC847D00E618F1 /* toolbar-manage-tags.tif in Resources */ = {isa = PBXBuildFile; fileRef = 658B58E60BEC847D00E618F1 /* toolbar-manage-tags.tif */; };
 		658B58EA0BEC847D00E618F1 /* toolbar-pref-tagcloud.tif in Resources */ = {isa = PBXBuildFile; fileRef = 658B58E70BEC847D00E618F1 /* toolbar-pref-tagcloud.tif */; };
 		658DCD1A09E25A4F008FBC2C /* MDSimpleGrouping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */; };
@@ -824,6 +826,9 @@
 		658ADEB70AF6432900063AE1 /* PALabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PALabel.m; sourceTree = "<group>"; };
 		658ADF5E0AF6610A00063AE1 /* RemoveRound.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RemoveRound.tif; sourceTree = "<group>"; };
 		658ADF5F0AF6610A00063AE1 /* RemoveRoundPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RemoveRoundPressed.tif; sourceTree = "<group>"; };
+		658B39A50D4F5BC4003BFCA5 /* TagFolder.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TagFolder.icns; sourceTree = "<group>"; };
+		658B39E50D4F64D0003BFCA5 /* PABoolToColorTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PABoolToColorTransformer.h; sourceTree = "<group>"; };
+		658B39E60D4F64D0003BFCA5 /* PABoolToColorTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABoolToColorTransformer.m; sourceTree = "<group>"; };
 		658B58E60BEC847D00E618F1 /* toolbar-manage-tags.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-manage-tags.tif"; sourceTree = "<group>"; };
 		658B58E70BEC847D00E618F1 /* toolbar-pref-tagcloud.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-pref-tagcloud.tif"; sourceTree = "<group>"; };
 		658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = MDSimpleGrouping.plist; sourceTree = "<group>"; };
@@ -1395,6 +1400,8 @@
 		488E80270AF3895800660B7B /* Value Transformers */ = {
 			isa = PBXGroup;
 			children = (
+				658B39E50D4F64D0003BFCA5 /* PABoolToColorTransformer.h */,
+				658B39E60D4F64D0003BFCA5 /* PABoolToColorTransformer.m */,
 				488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */,
 				488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */,
 			);
@@ -1611,6 +1618,7 @@
 			isa = PBXGroup;
 			children = (
 				653948D90C035993001705D6 /* Buttons */,
+				658B39950D4F5B98003BFCA5 /* Misc */,
 				658B58DD0BEC842900E618F1 /* Toolbar */,
 				65CB0A0D0BBBD4E200799E25 /* Source Panel */,
 				486177430B85B3DC00A03CAA /* StatusItem */,
@@ -1708,6 +1716,14 @@
 				658ADF5F0AF6610A00063AE1 /* RemoveRoundPressed.tif */,
 			);
 			name = "Tag Management";
+			sourceTree = "<group>";
+		};
+		658B39950D4F5B98003BFCA5 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				658B39A50D4F5BC4003BFCA5 /* TagFolder.icns */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		658B58DD0BEC842900E618F1 /* Toolbar */ = {
@@ -2301,6 +2317,7 @@
 				659E8DB80C143AD000D5ED38 /* source-panel-bookmarks.tif in Resources */,
 				659E8DBF0C143D8800D5ED38 /* source-panel-images.tiff in Resources */,
 				659E8DC40C1440D600D5ED38 /* toolbar-show-tagger.tif in Resources */,
+				658B39A60D4F5BC4003BFCA5 /* TagFolder.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2490,6 +2507,7 @@
 				480219550C02D2EE001CF480 /* PAInstaller.m in Sources */,
 				65B1FC8A0C0308EC0099D12B /* PAStatusBarProgressIndicator.m in Sources */,
 				489DA0480C0B2EB40027E3FF /* PAServices.m in Sources */,
+				658B39E70D4F64D0003BFCA5 /* PABoolToColorTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

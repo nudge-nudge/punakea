@@ -19,6 +19,7 @@
 #import "PATagCache.h"
 
 #import "PACollectionNotEmpty.h"
+#import "PABoolToColorTransformer.h"
 
 #import "PAInstaller.h"
 
@@ -51,6 +52,8 @@
 }
 
 - (SUUpdater*)updater;
+
+- (void)createDirectoriesIfNeeded;
 
 // Menu Actions
 - (IBAction)addTagSet:(id)sender;

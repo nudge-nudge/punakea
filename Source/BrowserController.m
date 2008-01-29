@@ -368,7 +368,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	folder = [folder stringByExpandingTildeInPath]; 
 	
 	if ([fileManager fileExistsAtPath: folder] == NO) 
-		[fileManager createDirectoryAtPath: folder attributes: nil];
+		[fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:NULL];
 	
 	return [folder stringByAppendingPathComponent:FILENAME_FAVORITES_PLIST]; 
 }

@@ -34,9 +34,7 @@
 			<string>ObjC</string>
 			<key>OUTLETS</key>
 			<dict>
-				<key>dropBoxFolderPopUpButton</key>
-				<string>NSPopUpButton</string>
-				<key>folderButton</key>
+				<key>dropBoxPopUpButton</key>
 				<string>NSPopUpButton</string>
 				<key>managedFolderPopUpButton</key>
 				<string>NSPopUpButton</string>

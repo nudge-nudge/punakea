@@ -6,7 +6,6 @@
 - (void)showStatusItem;
 
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
-- (void)createManagedFilesDirIfNeeded;
 
 - (void)showTagger:(id)sender enableManageFiles:(BOOL)flag;
 
@@ -35,9 +34,14 @@
 + (void)initialize
 {
 	// register value transformers
+	
 	PACollectionNotEmpty *collectionNotEmpty = [[[PACollectionNotEmpty alloc] init] autorelease];
 	[NSValueTransformer setValueTransformer:collectionNotEmpty
 									forName:@"PACollectionNotEmpty"];
+	
+	PABoolToColorTransformer *boolToColorTransformer = [[[PABoolToColorTransformer alloc] init] autorelease];
+	[NSValueTransformer setValueTransformer:boolToColorTransformer
+									forName:@"PABoolToColorTransformer"];
 }
 
 - (id)init
@@ -94,7 +98,7 @@
 			 options:0 
 			 context:NULL];
 	
-	[self createManagedFilesDirIfNeeded];
+	[self createDirectoriesIfNeeded];
 	
 	// load services class and set as service provides
 	services =  [[PAServices alloc] init];
@@ -212,7 +216,7 @@
 	folder = [folder stringByExpandingTildeInPath]; 
 		
 	if ([fileManager fileExistsAtPath: folder] == NO) 
-		[fileManager createDirectoryAtPath: folder attributes: nil];
+		[fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:NULL];
 		
 	return [folder stringByAppendingPathComponent:fileName]; 
 }
@@ -258,30 +262,74 @@
 	}
 }			
 
-- (void)createManagedFilesDirIfNeeded
+- (void)createDirectoriesIfNeeded
 {
-	if (![userDefaults boolForKey:@"ManageFiles.ManagedFolder.Enabled"])
-		return;
-	
-	// create managed files dir if needed
-	NSString *managedFilesDir = [userDefaults stringForKey:@"ManageFiles.ManagedFolder.Location"];
-	NSString *standardizedDir = [managedFilesDir stringByStandardizingPath];
-	
 	NSFileManager *fileManager = [NSFileManager defaultManager];
-	BOOL isDirectory;
+	BOOL isDirectory = NO;
+	NSString *dir = nil;
 	
-	if ([fileManager fileExistsAtPath:standardizedDir isDirectory:&isDirectory])
-	{
-		if (!isDirectory)
+	// Managed Folder
+	if ([userDefaults boolForKey:@"ManageFiles.ManagedFolder.Enabled"])
+	{	
+		dir = [userDefaults stringForKey:@"ManageFiles.ManagedFolder.Location"];
+		dir = [dir stringByStandardizingPath];		
+		
+		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
 		{
-			[self displayWarningWithMessage:[NSString stringWithFormat:
-				NSLocalizedStringFromTable(@"MANAGED_FILES_DESTINATION_NOT_FOLDER_ERROR",@"FileManager",@""),standardizedDir]];
+			if (!isDirectory)
+			{
+				[self displayWarningWithMessage:[NSString stringWithFormat:
+					NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR", @"FileManager", @""), dir]];
+			}
+		}
+		else
+		{
+			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
 		}
 	}
-	else
-	{
-		[fileManager createDirectoryAtPath:standardizedDir
-								attributes:nil];
+	
+	// Tags Folder
+	if ([userDefaults boolForKey:@"ManageFiles.TagsFolder.Enabled"])
+	{	
+		dir = [userDefaults stringForKey:@"ManageFiles.TagsFolder.Location"];
+		dir = [dir stringByStandardizingPath];		
+		
+		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
+		{
+			if (!isDirectory)
+			{
+				[self displayWarningWithMessage:[NSString stringWithFormat:
+												 NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR", @"FileManager", @""), dir]];
+			}
+		}
+		else
+		{
+			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+			
+			[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
+										   forFile:dir
+										   options:0];
+		}
+	}
+	
+	// Drop Box
+	if ([userDefaults boolForKey:@"ManageFiles.DropBox.Enabled"])
+	{	
+		dir = [userDefaults stringForKey:@"ManageFiles.DropBox.Location"];
+		dir = [dir stringByStandardizingPath];		
+		
+		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
+		{
+			if (!isDirectory)
+			{
+				[self displayWarningWithMessage:[NSString stringWithFormat:
+												 NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR", @"FileManager", @""), dir]];
+			}
+		}
+		else
+		{
+			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+		}
 	}
 }
 

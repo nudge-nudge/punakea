@@ -75,7 +75,7 @@
 		NSString *directory = [managedRoot stringByAppendingFormat:@"/%i/",i];
 		
 		if ([fileManager fileExistsAtPath:directory] == NO) 
-			[fileManager createDirectoryAtPath:directory attributes:nil];
+			[fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL];
 		
 		destination = [directory stringByAppendingPathComponent:fileName];
 		
@@ -95,7 +95,7 @@
 	directory = [directory stringByExpandingTildeInPath]; 
 	
 	if ([fileManager fileExistsAtPath:directory] == NO) 
-		[fileManager createDirectoryAtPath:directory attributes: nil];
+		[fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL];
 	
 	return directory; 
 }
