@@ -88,9 +88,16 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 - (void)dealloc
 {
 	[userDefaultsController removeObserver:self
+								forKeyPath:@"values.General.StartOnLogin"];
+	[userDefaultsController removeObserver:self
 								forKeyPath:@"values.PAScheduledUpdateCheckInterval"];
 	[userDefaultsController removeObserver:self
-								forKeyPath:@"values.General.StartOnLogin"];
+								forKeyPath:@"values.ManageFiles.ManagedFolder.Enabled"];
+	[userDefaultsController removeObserver:self
+								forKeyPath:@"values.ManageFiles.TagsFolder.Enabled"];
+	[userDefaultsController removeObserver:self
+								forKeyPath:@"values.ManageFiles.DropBox.Enabled"];
+
 	[super dealloc];
 }
 
@@ -358,11 +365,23 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	NSString *dir = [userDefaultsController valueForKeyPath:keyPath];
 	dir = [dir stringByExpandingTildeInPath];
 	
-	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:dir];
-	[icon setSize:NSMakeSize(16.0,16.0)];
+	BOOL isDirectory;
 	
-	[currentLocation setTitle:[dir lastPathComponent]];
-	[currentLocation setImage:icon];
+	if([[NSFileManager defaultManager] fileExistsAtPath:dir isDirectory:&isDirectory] && isDirectory)
+	{	
+		NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:dir];
+		[icon setSize:NSMakeSize(16.0,16.0)];
+		
+		[currentLocation setImage:icon];
+		[currentLocation setTitle:[dir lastPathComponent]];
+	}
+	else
+	{
+		[currentLocation setImage:nil];
+		[currentLocation setTitle:@""];
+	}
+	
+	
 }
 
 - (void)switchLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag
