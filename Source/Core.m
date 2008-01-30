@@ -103,7 +103,7 @@
 	// load services class and set as service provides
 	services =  [[PAServices alloc] init];
 	[NSApp setServicesProvider:services];
-	
+
 	// DEBUG
 	//[[PANotificationReceiver alloc] init];
 }
@@ -651,42 +651,6 @@
 {
 	[self showBrowser:self];
 	return YES;
-}
-
-- (void)applicationDidBecomeActive:(NSNotification *)aNotification
-{
-	// do not do anything if mouse is in sidebar
-	if ([sidebarController mouseInSidebarWindow])
-		return;
-	
-	NSArray *windows = [[NSApplication sharedApplication] windows];
-
-	NSEnumerator *e = [windows objectEnumerator];
-	NSWindow *window;
-	
-	NSWindow *lastTaggerWindow = nil;
-	
-	while (window = [e nextObject])
-	{
-		if ([[window title] isEqualTo:@"Punakea : Tagger"])
-		{
-			[window orderFront:self];
-			lastTaggerWindow = window;
-		}
-		
-		if	([[window title] isEqualTo:@"Punakea : Browser"] ||
-			[[window title] hasPrefix:@"Preferences :"])
-		{
-			[window orderFront:self];
-		}
-	}
-	
-	// if tagger window exists, make key, otherwise make browser key (if exists)
-	if (lastTaggerWindow)
-		[lastTaggerWindow makeKeyAndOrderFront:self];
-	else if ([self appHasBrowser])
-		[self showBrowser:self];
-	
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
