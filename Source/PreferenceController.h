@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "LoginItemsAE.h"
 #import "PATagAutocompleteWindowController.h"
+//#import "NNTagging/NSFileManager+TrashFile.h"
+#import "BusyWindowController.h"
+
 
 typedef enum _PAScheduledUpdateCheckInterval {
 	PAScheduledUpdateCheckDaily = 0,
@@ -24,13 +27,15 @@ extern NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
 
 @interface PreferenceController : PATagAutocompleteWindowController
 {
-	IBOutlet NSPopUpButton *managedFolderPopUpButton;
-	IBOutlet NSPopUpButton *tagsFolderPopUpButton;
-	IBOutlet NSPopUpButton *dropBoxPopUpButton;
+	IBOutlet NSPopUpButton		*managedFolderPopUpButton;
+	IBOutlet NSPopUpButton		*tagsFolderPopUpButton;
+	IBOutlet NSPopUpButton		*dropBoxPopUpButton;
 	
-	IBOutlet NSPopUpButton *updateIntervalButton;
+	IBOutlet NSPopUpButton		*updateIntervalButton;
 	
-	NSUserDefaultsController *userDefaultsController;
+	IBOutlet NSWindow			*busyWindow;
+	
+	NSUserDefaultsController	*userDefaultsController;
 	
 	Core *core;
 }

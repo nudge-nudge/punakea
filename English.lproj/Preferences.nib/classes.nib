@@ -19,6 +19,23 @@
 			<string>ObjC</string>
 		</dict>
 		<dict>
+			<key>CLASS</key>
+			<string>BusyWindowController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>busyObject</key>
+				<string>id</string>
+				<key>progressIndicator</key>
+				<string>NSProgressIndicator</string>
+				<key>textField</key>
+				<string>NSTextField</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSWindowController</string>
+		</dict>
+		<dict>
 			<key>ACTIONS</key>
 			<dict>
 				<key>checkForUpdates</key>
@@ -34,6 +51,8 @@
 			<string>ObjC</string>
 			<key>OUTLETS</key>
 			<dict>
+				<key>busyWindow</key>
+				<string>NSWindow</string>
 				<key>dropBoxPopUpButton</key>
 				<string>NSPopUpButton</string>
 				<key>managedFolderPopUpButton</key>

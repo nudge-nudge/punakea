@@ -13,6 +13,8 @@
 
 - (void)startOnLoginHasChanged;
 - (void)scheduledUpdateCheckIntervalHasChanged;
+- (void)tagsFolderStateHasChanged;
+- (void)dropBoxStateHasChanged;
 
 - (void)updateCurrentLocationForPopUpButton:(NSPopUpButton *)button;
 - (void)switchLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag;
@@ -47,7 +49,7 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 }
 
 - (void)awakeFromNib
-{
+{	
 	BOOL isLoginItem = [self isLoginItem];
 	
 	[[NSUserDefaults standardUserDefaults] setBool:isLoginItem
@@ -103,14 +105,18 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	{
 		[self scheduledUpdateCheckIntervalHasChanged];
 	}
-	else if ([keyPath isEqualToString:@"values.ManageFiles.ManagedFolder.Enabled"] ||
-			 [keyPath isEqualToString:@"values.ManageFiles.TagsFolder.Enabled"] ||
-			 [keyPath isEqualToString:@"values.ManageFiles.DropBox.Enabled"])
+	else if ([keyPath isEqualToString:@"values.ManageFiles.ManagedFolder.Enabled"])
 	{
 		[core createDirectoriesIfNeeded];
 		[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
-		[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
-		[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
+	}
+	else if ([keyPath isEqualToString:@"values.ManageFiles.TagsFolder.Enabled"])
+	{
+		[self tagsFolderStateHasChanged];
+	}
+	else if ([keyPath isEqualToString:@"values.ManageFiles.DropBox.Enabled"])
+	{
+		[self dropBoxStateHasChanged];
 	}
 }
 
@@ -160,7 +166,50 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	
 	[[NSUserDefaults standardUserDefaults] setInteger:(int)timeInterval forKey:@"SUScheduledCheckInterval"];
 	[[core updater] scheduleCheckWithInterval:timeInterval];
-}			
+}		
+
+- (void)tagsFolderStateHasChanged
+{	
+	[core createDirectoriesIfNeeded];
+	[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
+	
+	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.TagsFolder.Enabled"] boolValue])
+	{	
+		BusyWindowController *busyWindowController = [busyWindow delegate];
+		
+		[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
+		[busyWindowController performBusySelector:@selector(dummy:) onObject:busyWindowController];
+		
+		[busyWindow center];
+		[NSApp runModalForWindow:busyWindow];
+	}
+	else 
+	{
+		NSString *tagsFolderDir = [userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH];
+		tagsFolderDir = [tagsFolderDir stringByStandardizingPath];
+		
+		[[NSFileManager defaultManager] removeFileAtPath:tagsFolderDir handler:NULL];
+	}	
+}
+
+- (void)dropBoxStateHasChanged
+{	
+	[core createDirectoriesIfNeeded];
+	[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
+	
+	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Enabled"] boolValue])
+	{	
+		// Nothing
+	}
+	else 
+	{
+		/* NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
+		dropBoxDir = [dropBoxDir stringByStandardizingPath];
+		
+		[[NSFileManager defaultManager] trashFileAtPath:dropBoxDir]; */
+	}	
+}
+
 
 #pragma mark file location
 - (IBAction)locateDirectory:(id)sender

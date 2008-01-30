@@ -16,3 +16,5 @@
 "DESTINATION_NOT_FOLDER_ERROR" = "The path '%@' does not point to a folder. Please make sure to remove this file. When done, restart this application.";
 
 "SERVICE_NOT_WORKING" = "Punakea could not handle the input given to the System Service";
+
+"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER" = "Punakea is setting up the Tags Folder. This may take some minutes.";
