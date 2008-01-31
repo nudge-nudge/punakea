@@ -185,7 +185,7 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 		BusyWindowController *busyWindowController = [busyWindow delegate];
 		
 		[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
-		[busyWindowController performBusySelector:@selector(dummy:) onObject:busyWindowController];
+		[busyWindowController performBusySelector:@selector(createDirectoryStructure) onObject:[NNTagging tagging]];
 		
 		[busyWindow center];
 		[NSApp runModalForWindow:busyWindow];

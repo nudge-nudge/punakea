@@ -46,8 +46,9 @@
 								 withObject:nil
 							  waitUntilDone:NO];
 	
-	[progressIndicator setIndeterminate:NO];
-	[progressIndicator setMaxValue:1.0];
+	[progressIndicator setIndeterminate:YES];
+	[progressIndicator setUsesThreadedAnimation:YES];
+	[progressIndicator startAnimation:self];
 	
 	// Ensure we get this notification only once
 	[[NSNotificationCenter defaultCenter] removeObserver:self
@@ -57,10 +58,14 @@
 
 - (void)progressUpdated:(NSNotification *)notification
 {
-	NSDictionary *dict = [notification object];
+	[progressIndicator stopAnimation:self];
+	[progressIndicator setUsesThreadedAnimation:NO];
+	[progressIndicator setIndeterminate:NO];
 	
-	double doubleValue = [[dict objectForKey:@"doubleValue"] doubleValue];
-	double maxValue = [[dict objectForKey:@"maxValue"] doubleValue];
+	NSDictionary *dict = [notification userInfo];
+	
+	double doubleValue = [[dict objectForKey:@"currentProgress"] doubleValue];
+	double maxValue = [[dict objectForKey:@"maximumProgress"] doubleValue];
 	
 	if(maxValue != [progressIndicator maxValue])
 		[progressIndicator setMaxValue:maxValue];

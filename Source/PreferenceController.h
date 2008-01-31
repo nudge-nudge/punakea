@@ -11,6 +11,7 @@
 #import "PATagAutocompleteWindowController.h"
 //#import "NNTagging/NSFileManager+TrashFile.h"
 #import "BusyWindowController.h"
+#import "NNTagging/NNTagging.h"
 
 
 typedef enum _PAScheduledUpdateCheckInterval {
