@@ -43,7 +43,7 @@
 - (void)performBusyAction:(NSNotification *)notification
 {
 	[busyObject performSelectorOnMainThread:busySelector
-								 withObject:nil
+								 withObject:busyArg
 							  waitUntilDone:NO];
 	
 	[progressIndicator setIndeterminate:YES];
@@ -81,8 +81,14 @@
 #pragma mark Actions
 - (void)performBusySelector:(SEL)aSelector onObject:(id)anObject
 {
+	[self performBusySelector:aSelector onObject:anObject withObject:nil];
+}
+
+- (void)performBusySelector:(SEL)aSelector onObject:(id)anObject withObject:(id)arg
+{
 	busySelector = aSelector;
 	busyObject = anObject;
+	busyArg = arg;
 }
 
 - (void)stopModal

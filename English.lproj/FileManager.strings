@@ -18,3 +18,4 @@
 "SERVICE_NOT_WORKING" = "Punakea could not handle the input given to the System Service";
 
 "BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER" = "Punakea is setting up the Tags Folder. This may take some minutes.";
+"BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER" = "Punakea is cleaning up the Tags Folder.";

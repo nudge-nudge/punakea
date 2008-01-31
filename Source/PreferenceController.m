@@ -26,6 +26,7 @@
 
 - (BOOL)isLoginItem;
 - (CFIndex)loginItemIndex;
+- (void)removeTagsFolder:(NSString *)dir;
 
 @end
 
@@ -180,23 +181,27 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	[core createDirectoriesIfNeeded];
 	[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
 	
+	BusyWindowController *busyWindowController = [busyWindow delegate];
+	
 	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.TagsFolder.Enabled"] boolValue])
 	{	
-		BusyWindowController *busyWindowController = [busyWindow delegate];
-		
 		[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
-		[busyWindowController performBusySelector:@selector(createDirectoryStructure) onObject:[NNTagging tagging]];
-		
-		[busyWindow center];
-		[NSApp runModalForWindow:busyWindow];
+		[busyWindowController performBusySelector:@selector(createDirectoryStructure)
+										 onObject:[NNTagging tagging]];
 	}
 	else 
 	{
 		NSString *tagsFolderDir = [userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH];
 		tagsFolderDir = [tagsFolderDir stringByStandardizingPath];
 		
-		[[NSFileManager defaultManager] removeFileAtPath:tagsFolderDir handler:NULL];
+		[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER", @"FileManager", nil)];
+		[busyWindowController performBusySelector:@selector(removeTagsFolder:)
+										 onObject:self
+									   withObject:tagsFolderDir];
 	}	
+	
+	[busyWindow center];
+	[NSApp runModalForWindow:busyWindow];
 }
 
 - (void)dropBoxStateHasChanged
@@ -586,6 +591,18 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 - (IBAction)checkForUpdates:(id)sender
 {
 	[[core updater] checkForUpdates:self];
+}
+
+- (void)removeTagsFolder:(NSString *)dir
+{
+	[[NSFileManager defaultManager] removeFileAtPath:dir handler:NULL];
+	
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	[dict setObject:[NSNumber numberWithDouble:1.0] forKey:@"doubleValue"];
+	[dict setObject:[NSNumber numberWithDouble:1.0] forKey:@"maxValue"];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:NNProgressDidUpdateNotification
+														object:dict];
 }
 
 @end

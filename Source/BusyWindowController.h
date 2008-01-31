@@ -18,10 +18,12 @@
 	
 	SEL									busySelector;
 	id									busyObject;
+	id									busyArg;
 	
 }
 
 - (void)setMessage:(NSString *)aMessage;
 - (void)performBusySelector:(SEL)aSelector onObject:(id)anObject;
+- (void)performBusySelector:(SEL)aSelector onObject:(id)anObject withObject:(id)arg;
 
 @end
