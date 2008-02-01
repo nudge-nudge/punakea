@@ -261,6 +261,7 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 		s = [s stringByAppendingString:@"attach action to \""];
 		s = [s stringByAppendingString:dropBoxDir];
 		s = [s stringByAppendingString:@"\" using file scriptPath\n"];
+		
 		s = [s stringByAppendingString:@"end tell"];
 
 		NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
@@ -289,6 +290,19 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	}
 	else 
 	{
+		// Remove Folder Action
+		
+		NSString *s = @"tell application \"System Events\"\n";
+				
+		s = [s stringByAppendingString:@"remove action from folder \""];
+		s = [s stringByAppendingString:dropBoxDir];
+		s = [s stringByAppendingString:@"\"\n"];
+		
+		s = [s stringByAppendingString:@"end tell"];
+		
+		NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
+		[folderActionScript executeAndReturnError:nil];
+		
 		// Remove Script File		
 		[fileManager removeFileAtPath:targetPath handler:NULL];
 		
