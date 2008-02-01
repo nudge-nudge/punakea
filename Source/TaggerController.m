@@ -99,6 +99,8 @@ adds tag to tagField (use from "outside")
 	} else {
 		[manageFilesButton setHidden:YES];
 	}
+	
+	[self resizeTokenField];
 }
 
 - (void)setupStatusBar
