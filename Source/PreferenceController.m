@@ -209,16 +209,90 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	[core createDirectoriesIfNeeded];
 	[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
 	
+	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
+	dropBoxDir = [dropBoxDir stringByStandardizingPath];
+	
+	NSString *targetDir = @"~/Library/Scripts/Folder Action Scripts/";
+	targetDir = [targetDir stringByStandardizingPath];
+	
+	NSString *targetScriptName = @"Punakea - Drop Box.scpt";
+	
+	NSString *targetPath = [targetDir stringByAppendingPathComponent:targetScriptName];
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	
 	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Enabled"] boolValue])
 	{	
-		// Nothing
+		// Copy Folder Action Script to Library
+		
+		NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"DropBox" ofType:@"scpt"];
+		
+		BOOL isDir;
+		
+		if(!([fileManager fileExistsAtPath:targetDir isDirectory:&isDir] && isDir))
+		{
+			[fileManager createDirectoryAtPath:targetDir
+				   withIntermediateDirectories:YES
+									attributes:nil
+										 error:NULL];
+		}
+		
+		[fileManager copyItemAtPath:scriptPath
+							 toPath:targetPath
+							  error:NULL];
+		
+		// Make executable??
+		
+		//NSDictionary *attr = [NSMutableDictionary dictionaryWithCapacity:1];
+		//[attr setValue:[NSNumber numberWithInt:511] forKey:NSFilePosixPermissions];
+		
+		//[fileManager changeFileAttributes:attr atPath:targetPath];
+		
+		// Attach Folder Action
+		
+		NSString *s = @"tell application \"System Events\"\n";
+		
+		s = [s stringByAppendingString:@"set folder actions enabled to true\n"];
+		
+		s = [s stringByAppendingString:@"set scriptPath to (path to Folder Action scripts as Unicode text) & \""];
+		s = [s stringByAppendingString:targetScriptName];
+		s = [s stringByAppendingString:@"\"\n"];
+		
+		s = [s stringByAppendingString:@"attach action to \""];
+		s = [s stringByAppendingString:dropBoxDir];
+		s = [s stringByAppendingString:@"\" using file scriptPath\n"];
+		s = [s stringByAppendingString:@"end tell"];
+
+		NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
+		[folderActionScript executeAndReturnError:nil];
+		
+		/*
+		 
+		// Scripting Bridge Version
+		// Couldn't get this piece of code to work :(
+		 
+		SystemEventsApplication *systemEvents = [SBApplication applicationWithBundleIdentifier:@"com.apple.systemevents"];
+		
+		SBElementArray *folderActions = [systemEvents folderActions];
+		for(SystemEventsFolderAction *folderAction in folderActions)
+		{
+			NSLog(folderAction.name);
+		}
+		
+		SystemEventsFolder *homeFolder = systemEvents.homeFolder;
+		
+		//SystemEventsFolder *item = [[homeFolder folders] obje:@"Documents"];
+		NSLog(@"TEST: %@", homeFolder.name);
+		[homeFolder attachActionToUsing:@"/Users/daniel/Desktop/Punakea - Drop Box.scpt"];*/		
+		
+		
 	}
 	else 
 	{
-		/* NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
-		dropBoxDir = [dropBoxDir stringByStandardizingPath];
+		// Remove Script File		
+		[fileManager removeFileAtPath:targetPath handler:NULL];
 		
-		[[NSFileManager defaultManager] trashFileAtPath:dropBoxDir]; */
+		// [fileManager trashFileAtPath:dropBoxDir];
 	}	
 }
 

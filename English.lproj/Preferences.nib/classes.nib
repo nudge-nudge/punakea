@@ -25,6 +25,8 @@
 			<string>ObjC</string>
 			<key>OUTLETS</key>
 			<dict>
+				<key>busyArg</key>
+				<string>id</string>
 				<key>busyObject</key>
 				<string>id</string>
 				<key>progressIndicator</key>

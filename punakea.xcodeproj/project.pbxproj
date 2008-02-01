@@ -295,6 +295,7 @@
 		65B78F1C0AF0D8D400AF1102 /* CTGradient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B78F1A0AF0D8D400AF1102 /* CTGradient.h */; };
 		65B78F1D0AF0D8D400AF1102 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B78F1B0AF0D8D400AF1102 /* CTGradient.m */; };
 		65B78F330AF0DA4600AF1102 /* statusbar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65B78F320AF0DA4600AF1102 /* statusbar.tiff */; };
+		65BCDB8E0D532B8F003D4C65 /* DropBox.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 65BCDB890D532A6D003D4C65 /* DropBox.scpt */; };
 		65BD569C0BF3155F00E202F8 /* PAInfoPaneSubview.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65BD569A0BF3155F00E202F8 /* PAInfoPaneSubview.h */; };
 		65BD569D0BF3155F00E202F8 /* PAInfoPaneSubview.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BD569B0BF3155F00E202F8 /* PAInfoPaneSubview.m */; };
 		65BD56D70BF31BF600E202F8 /* PAInfoPaneSingleSelectionView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65BD56D50BF31BF600E202F8 /* PAInfoPaneSingleSelectionView.h */; };
@@ -879,6 +880,7 @@
 		65B78F1A0AF0D8D400AF1102 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
 		65B78F1B0AF0D8D400AF1102 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
 		65B78F320AF0DA4600AF1102 /* statusbar.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = statusbar.tiff; sourceTree = "<group>"; };
+		65BCDB890D532A6D003D4C65 /* DropBox.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; name = DropBox.scpt; path = Resources/DropBox.scpt; sourceTree = "<group>"; };
 		65BD569A0BF3155F00E202F8 /* PAInfoPaneSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInfoPaneSubview.h; sourceTree = "<group>"; };
 		65BD569B0BF3155F00E202F8 /* PAInfoPaneSubview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAInfoPaneSubview.m; sourceTree = "<group>"; };
 		65BD56D50BF31BF600E202F8 /* PAInfoPaneSingleSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInfoPaneSingleSelectionView.h; sourceTree = "<group>"; };
@@ -1079,6 +1081,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65BCDB890D532A6D003D4C65 /* DropBox.scpt */,
 				6572864C0BC427D1000034D2 /* Strings */,
 				48D75A250B01FA0300D13CAD /* Scripts */,
 				65943F980AFA56AA00A8922F /* appicon.icns */,
@@ -2242,6 +2245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65BCDB8E0D532B8F003D4C65 /* DropBox.scpt in Resources */,
 				48893B110AF0A59900BA0B50 /* Info.plist in Resources */,
 				65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
