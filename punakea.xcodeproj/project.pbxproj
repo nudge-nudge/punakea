@@ -221,6 +221,7 @@
 		656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */; };
 		656C20030AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */; };
 		656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */; };
+		6571138D0D5371A600076543 /* TagAutoCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6571138C0D5371A600076543 /* TagAutoCompleteController.m */; };
 		657CBD770AA5C4A800701D47 /* PAThumbnailManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */; };
 		657CBD780AA5C4A800701D47 /* PAThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */; };
 		6581C3030BDFD51E0001455D /* PAStatusBar.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6581C3010BDFD51E0001455D /* PAStatusBar.h */; };
@@ -804,6 +805,8 @@
 		656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+FriendlyFormat.h"; sourceTree = "<group>"; };
 		656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+FriendlyFormat.m"; sourceTree = "<group>"; };
 		656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOn-1.tiff"; sourceTree = "<group>"; };
+		6571138B0D5371A600076543 /* TagAutoCompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagAutoCompleteController.h; sourceTree = "<group>"; };
+		6571138C0D5371A600076543 /* TagAutoCompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagAutoCompleteController.m; sourceTree = "<group>"; };
 		657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAThumbnailManager.h; sourceTree = "<group>"; };
 		657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAThumbnailManager.m; sourceTree = "<group>"; };
 		6581C3010BDFD51E0001455D /* PAStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBar.h; sourceTree = "<group>"; };
@@ -1854,6 +1857,8 @@
 			children = (
 				65C8A1FD0BEB4D6400DC032F /* PATagAutocompleteWindowController.h */,
 				65C8A1FE0BEB4D6400DC032F /* PATagAutocompleteWindowController.m */,
+				6571138B0D5371A600076543 /* TagAutoCompleteController.h */,
+				6571138C0D5371A600076543 /* TagAutoCompleteController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2526,6 +2531,7 @@
 				489DA0480C0B2EB40027E3FF /* PAServices.m in Sources */,
 				658B39E70D4F64D0003BFCA5 /* PABoolToColorTransformer.m in Sources */,
 				6508EB680D50C336004DA882 /* BusyWindowController.m in Sources */,
+				6571138D0D5371A600076543 /* TagAutoCompleteController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

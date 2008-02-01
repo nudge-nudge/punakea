@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LoginItemsAE.h"
-#import "PATagAutocompleteWindowController.h"
 //#import "NNTagging/NSFileManager+TrashFile.h"
 #import "BusyWindowController.h"
 #import "NNTagging/NNTagging.h"
@@ -26,7 +25,7 @@ extern NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
 
 @class Core;
 
-@interface PreferenceController : PATagAutocompleteWindowController
+@interface PreferenceController : NSWindowController
 {
 	IBOutlet NSPopUpButton		*managedFolderPopUpButton;
 	IBOutlet NSPopUpButton		*tagsFolderPopUpButton;

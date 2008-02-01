@@ -127,7 +127,6 @@ static PAThumbnailManager *sharedInstance = nil;
 		
 		[queue enqueue:item];
 		[item release];
-		[processLock unlock];
 		
 		return dummyImageIcon;
 	}
