@@ -453,9 +453,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 //		[self performSelector:@selector(setDisplayTags:)
 //				   withObject:[tags tags]
 //				   afterDelay:0.5];
-	
-	// TODO handle case when tags are selected
-	
 	if ([changeOperation isNotEqualTo:NNTagClickIncrementOperation] &&
 		[changeOperation isNotEqualTo:NNTagUseChangeOperation])
 	{

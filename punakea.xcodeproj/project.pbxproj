@@ -739,7 +739,6 @@
 		48D16FED0A5A6468006C667B /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
 		48D16FEE0A5A6468006C667B /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
-		48D75A5B0B01FBEC00D13CAD /* PunakeaSidebar.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = PunakeaSidebar.command; sourceTree = "<group>"; };
 		48D81DAB09F79C1C0075EE44 /* TaggerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerController.h; sourceTree = "<group>"; };
 		48D81DAC09F79C1C0075EE44 /* TaggerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerController.m; sourceTree = "<group>"; };
 		48E145320B5F99FA00859B22 /* NNTagging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NNTagging.framework; path = ../build/Debug/NNTagging.framework; sourceTree = "<group>"; };
@@ -1086,7 +1085,6 @@
 			children = (
 				65BCDB890D532A6D003D4C65 /* DropBox.scpt */,
 				6572864C0BC427D1000034D2 /* Strings */,
-				48D75A250B01FA0300D13CAD /* Scripts */,
 				65943F980AFA56AA00A8922F /* appicon.icns */,
 				48F980700AEF5C9F003BA2DC /* DropHandlerPlugins */,
 				4860293B0AEE0AF600B7DC6F /* SLA.r */,
@@ -1448,15 +1446,6 @@
 				4842FC1209DA804100C4A931 /* PATagButtonCell.m */,
 			);
 			name = TagCloud;
-			sourceTree = "<group>";
-		};
-		48D75A250B01FA0300D13CAD /* Scripts */ = {
-			isa = PBXGroup;
-			children = (
-				48D75A5B0B01FBEC00D13CAD /* PunakeaSidebar.command */,
-			);
-			name = Scripts;
-			path = Resources/Scripts;
 			sourceTree = "<group>";
 		};
 		48EDB82A0BF5A660008452FF /* TagFilter */ = {
