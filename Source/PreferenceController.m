@@ -27,6 +27,7 @@
 - (BOOL)isLoginItem;
 - (CFIndex)loginItemIndex;
 - (void)removeTagsFolder:(NSString *)dir;
+- (void)updateDropBoxTagField;
 
 @end
 
@@ -84,6 +85,13 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
 	[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
 	[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
+	
+	[self updateDropBoxTagField];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(dropBoxTagsHaveChanged:)
+												 name:NNSelectedTagsHaveChangedNotification
+											   object:nil];
 }
 
 - (void)dealloc
@@ -98,6 +106,8 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 								forKeyPath:@"values.ManageFiles.TagsFolder.Enabled"];
 	[userDefaultsController removeObserver:self
 								forKeyPath:@"values.ManageFiles.DropBox.Enabled"];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	[super dealloc];
 }
@@ -105,34 +115,58 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 #pragma mark observing
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if ([keyPath isEqualToString:@"values.General.StartOnLogin"])
+	if (object == userDefaultsController) 
 	{
-		[self startOnLoginHasChanged];
-	}
-	else if ([keyPath isEqualToString:@"values.PAScheduledUpdateCheckInterval"])
-	{
-		[self scheduledUpdateCheckIntervalHasChanged];
-	}
-	else if ([keyPath isEqualToString:@"values.ManageFiles.ManagedFolder.Enabled"])
-	{
-		[core createDirectoriesIfNeeded];
-		[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
-	}
-	else if ([keyPath isEqualToString:@"values.ManageFiles.TagsFolder.Enabled"])
-	{
-		[self tagsFolderStateHasChanged];
-	}
-	else if ([keyPath isEqualToString:@"values.ManageFiles.DropBox.Enabled"])
-	{
-		[self dropBoxStateHasChanged];
+		if ([keyPath isEqualToString:@"values.General.StartOnLogin"])
+		{
+			[self startOnLoginHasChanged];
+		}
+		else if ([keyPath isEqualToString:@"values.PAScheduledUpdateCheckInterval"])
+		{
+			[self scheduledUpdateCheckIntervalHasChanged];
+		}
+		else if ([keyPath isEqualToString:@"values.ManageFiles.ManagedFolder.Enabled"])
+		{
+			[core createDirectoriesIfNeeded];
+			[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
+		}
+		else if ([keyPath isEqualToString:@"values.ManageFiles.TagsFolder.Enabled"])
+		{
+			[self tagsFolderStateHasChanged];
+		}
+		else if ([keyPath isEqualToString:@"values.ManageFiles.DropBox.Enabled"])
+		{
+			[self dropBoxStateHasChanged];
+		}
 	}
 }
 
-#pragma mark window delegate
+
+#pragma mark Notifications
+- (void)dropBoxTagsHaveChanged:(NSNotification *)notification
+{
+	// Write tags to User Defaults
+	
+	TagAutoCompleteController *tagAutoCompleteController = [tagField delegate];
+	
+	NNSelectedTags *selectedTags = [tagAutoCompleteController currentCompleteTagsInField];
+	
+	NSMutableArray *tagNames = [NSMutableArray array];
+	
+	for(NNTag *tag in [selectedTags selectedTags])
+	{
+		[tagNames addObject:[tag name]];
+	}
+	
+	[userDefaultsController setValue:tagNames
+						  forKeyPath:@"values.ManageFiles.DropBox.Tags"];
+}
+
 - (void)windowWillClose:(NSNotification *)aNotification
 {		
 	[self autorelease];
 }
+
 
 #pragma mark event handling
 - (void)startOnLoginHasChanged
@@ -286,7 +320,16 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 		NSLog(@"TEST: %@", homeFolder.name);
 		[homeFolder attachActionToUsing:@"/Users/daniel/Desktop/Punakea - Drop Box.scpt"];*/		
 		
+		// Make sure the tags that are written by the script are also available in Punakea,
+		// i.e. tags exist
 		
+		NSArray *tagNames = [userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Tags"];
+		
+		for (NSString *tagName in tagNames)
+		{
+			// Create tag if not exists
+			[[NNTags sharedTags] tagForName:tagName create:YES];
+		}
 	}
 	else 
 	{
@@ -691,6 +734,27 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:NNProgressDidUpdateNotification
 														object:dict];
+}
+
+- (void)updateDropBoxTagField
+{
+	// Get tags from User Defaults and set them for Tag Field
+	
+	TagAutoCompleteController *tagAutoCompleteController = [tagField delegate];
+	
+	NSArray *tagNames = [userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Tags"];
+	NSMutableArray *tags = [NSMutableArray array];
+	
+	for (NSString *tagName in tagNames)
+	{
+		NNTag *tag = [[NNTags sharedTags] tagForName:tagName create:YES];
+		[tags addObject:tag];
+	}
+	
+	NNSelectedTags *selectedTags = [[[NNSelectedTags alloc] initWithTags:tags] autorelease];
+	
+	[tagField setObjectValue:tags];
+	[tagAutoCompleteController setCurrentCompleteTagsInField:selectedTags];
 }
 
 @end

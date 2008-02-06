@@ -11,6 +11,8 @@
 //#import "NNTagging/NSFileManager+TrashFile.h"
 #import "BusyWindowController.h"
 #import "NNTagging/NNTagging.h"
+#import "NNTagging/NNTags.h"
+#import "TagAutoCompleteController.h"
 
 
 typedef enum _PAScheduledUpdateCheckInterval {
@@ -27,6 +29,8 @@ extern NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
 
 @interface PreferenceController : NSWindowController
 {
+	IBOutlet NSTokenField		*tagField;
+	
 	IBOutlet NSPopUpButton		*managedFolderPopUpButton;
 	IBOutlet NSPopUpButton		*tagsFolderPopUpButton;
 	IBOutlet NSPopUpButton		*dropBoxPopUpButton;

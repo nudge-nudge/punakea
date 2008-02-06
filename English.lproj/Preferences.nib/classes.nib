@@ -72,13 +72,15 @@
 				<string>NSPopUpButton</string>
 				<key>managedFolderPopUpButton</key>
 				<string>NSPopUpButton</string>
+				<key>tagField</key>
+				<string>NSTokenField</string>
 				<key>tagsFolderPopUpButton</key>
 				<string>NSPopUpButton</string>
 				<key>updateIntervalButton</key>
 				<string>NSPopUpButton</string>
 			</dict>
 			<key>SUPERCLASS</key>
-			<string>PATagAutocompleteWindowController</string>
+			<string>NSWindowController</string>
 		</dict>
 		<dict>
 			<key>CLASS</key>
@@ -87,21 +89,6 @@
 			<string>ObjC</string>
 			<key>SUPERCLASS</key>
 			<string>NSObject</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>PATagAutocompleteWindowController</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>confirmButton</key>
-				<string>NSButton</string>
-				<key>tagField</key>
-				<string>NSTokenField</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSWindowController</string>
 		</dict>
 		<dict>
 			<key>ACTIONS</key>
