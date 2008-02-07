@@ -101,19 +101,19 @@
 		// look for deleted tags
 		NSMutableArray *deletedTags = [NSMutableArray array];
 		
-		NSEnumerator *e = [[self currentCompleteTagsInField] objectEnumerator];
+		NSEnumerator *e = [currentCompleteTagsInField objectEnumerator];
 		NNSimpleTag *tag;
 		
 		while (tag = [e nextObject])
 		{
-			if (![[[self tagField] objectValue] containsObject:tag])
+			if (![[tagField objectValue] containsObject:tag])
 			{
 				[deletedTags addObject:tag];
 			}
 		}
 		
 		// now remove the tags to be deleted from currentCompleteTagsInField - to keep in sync with tagField
-		[[self currentCompleteTagsInField] removeObjectsInArray:deletedTags];
+		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
 	}
 }
 
