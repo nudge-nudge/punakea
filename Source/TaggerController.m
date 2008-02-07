@@ -100,6 +100,14 @@ adds tag to tagField (use from "outside")
 		[manageFilesButton setHidden:YES];
 	}
 	
+	// Drop manager should reflect the current manage files state
+	BOOL generalManageFilesFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
+	
+	if(generalManageFilesFlag != manageFiles)
+		[dropManager setAlternateState:YES];
+	else
+		[dropManager setAlternateState:NO];
+	
 	[self resizeTokenField];
 }
 
@@ -297,6 +305,14 @@ adds tag to tagField (use from "outside")
 	manageFilesAutomatically = NO;
 	
 	[self updateManageFilesFlagOnTaggableObjects];
+	
+	// Update Drop Manager to reflect current manage files state
+	BOOL generalManageFilesFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];	
+
+	if(generalManageFilesFlag != manageFiles)
+		[dropManager setAlternateState:YES];
+	else
+		[dropManager setAlternateState:NO];
 	
 	// Make all objects perform an update so that they are moved
 	[self updateTags];
@@ -508,8 +524,8 @@ adds tag to tagField (use from "outside")
 	else if (fileCount > 0 && row < fileCount)
 	{
 		[tableView setDropRow:fileCount dropOperation:NSTableViewDropAbove];
-	}
-	
+	}	
+
 	return [dropManager performedDragOperation:[info draggingPasteboard]];
 }
 	
