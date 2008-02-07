@@ -80,30 +80,40 @@
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
-	// only do something if a tag has been completely deleted
-	// adding tags is handled by ... shouldAddObjects: ...
+	// adding tags is handled by tokenField:shouldAddObjects:atIndex,
+	// this method handles the deletion of tags
 	
-	// Important: If one tag is present and selected and we type in a new one, the following operator
-	// needs to be LESS THAN, not LESS
+	// [fieldEditor string] contains \uFFFC (OBJECT REPLACEMENT CHARACTER) for every token
+	NSDictionary *userInfo = [aNotification userInfo];
+	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
+	NSString *editorString = [fieldEditor string];
 	
-	if ([[tagField objectValue] count] <= [currentCompleteTagsInField count])
-	{		
+	// get a count of the tags by replacing the \ufffc occurrences
+	NSString *objectReplacementCharacter = [NSString stringWithUTF8String:"\ufffc"];
+	NSMutableString *mutableEditorString = [editorString mutableCopy];
+	unsigned int numberOfTokens = [mutableEditorString replaceOccurrencesOfString:objectReplacementCharacter
+																	   withString:@""
+																		  options:0
+																			range:NSMakeRange(0, [mutableEditorString length])];
+	
+	if (numberOfTokens < [currentCompleteTagsInField count])
+	{
 		// look for deleted tags
 		NSMutableArray *deletedTags = [NSMutableArray array];
 		
-		NSEnumerator *e = [currentCompleteTagsInField objectEnumerator];
+		NSEnumerator *e = [[self currentCompleteTagsInField] objectEnumerator];
 		NNSimpleTag *tag;
 		
 		while (tag = [e nextObject])
 		{
-			if (![[tagField objectValue] containsObject:tag])
+			if (![[[self tagField] objectValue] containsObject:tag])
 			{
 				[deletedTags addObject:tag];
 			}
 		}
 		
 		// now remove the tags to be deleted from currentCompleteTagsInField - to keep in sync with tagField
-		[currentCompleteTagsInField removeObjectsInArray:deletedTags];
+		[[self currentCompleteTagsInField] removeObjectsInArray:deletedTags];
 	}
 }
 

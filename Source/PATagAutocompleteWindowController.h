@@ -1,3 +1,7 @@
+// *** D E P R E C A T E D ***
+// Use TagAutoCompleteController instead.
+// This class is still used in TaggerController. Needs to be replaced somewhere along the way...
+
 //
 //  PATagAutocompleteWindowController.h
 //  punakea
