@@ -242,6 +242,7 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 {	
 	[core createDirectoriesIfNeeded];
 	[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
+	[self updateDropBoxTagField];
 	
 	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
 	dropBoxDir = [dropBoxDir stringByStandardizingPath];
@@ -738,6 +739,13 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 
 - (void)updateDropBoxTagField
 {
+	BOOL createTags = YES;
+	
+	// Do not create tags if Drop Box is disabled	
+	BOOL dropBoxEnabled = [[userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Enabled"] boolValue];
+	if (!dropBoxEnabled)
+		createTags = NO;	
+	
 	// Get tags from User Defaults and set them for Tag Field
 	
 	TagAutoCompleteController *tagAutoCompleteController = [tagField delegate];
@@ -747,8 +755,10 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	
 	for (NSString *tagName in tagNames)
 	{
-		NNTag *tag = [[NNTags sharedTags] tagForName:tagName create:YES];
-		[tags addObject:tag];
+		NNTag *tag = [[NNTags sharedTags] tagForName:tagName create:createTags];
+		
+		if(tag)
+			[tags addObject:tag];
 	}
 	
 	NNSelectedTags *selectedTags = [[[NNSelectedTags alloc] initWithTags:tags] autorelease];
