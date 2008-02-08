@@ -96,7 +96,7 @@
 	[progressIndicator setDoubleValue:0.0];
 	
 	[[self window] close];
-	[NSApp stopModal];
+	[NSApp abortModal];
 	
 	// Register again for notification
 	[[NSNotificationCenter defaultCenter] addObserver:self 

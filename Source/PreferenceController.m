@@ -16,8 +16,10 @@
 - (void)tagsFolderStateHasChanged;
 - (void)dropBoxStateHasChanged;
 
+- (void)switchSpecialFolderDir:(NSDictionary *)userInfo;
+
 - (void)updateCurrentLocationForPopUpButton:(NSPopUpButton *)button;
-- (void)switchLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag;
+- (void)moveSubdirectoriesFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag;
 
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 
@@ -28,6 +30,12 @@
 - (CFIndex)loginItemIndex;
 - (void)removeTagsFolder:(NSString *)dir;
 - (void)updateDropBoxTagField;
+
+- (void)createTagsFolderStructure;
+- (void)removeTagsFolder;
+
+- (void)attachDropBoxFolderAction;
+- (void)removeDropBoxFolderAction;
 
 @end
 
@@ -214,28 +222,11 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 {	
 	[core createDirectoriesIfNeeded];
 	[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
-	
-	BusyWindowController *busyWindowController = [busyWindow delegate];
-	
+
 	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.TagsFolder.Enabled"] boolValue])
-	{	
-		[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
-		[busyWindowController performBusySelector:@selector(createDirectoryStructure)
-										 onObject:[NNTagging tagging]];
-	}
+		[self createTagsFolderStructure];
 	else 
-	{
-		NSString *tagsFolderDir = [userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH];
-		tagsFolderDir = [tagsFolderDir stringByStandardizingPath];
-		
-		[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER", @"FileManager", nil)];
-		[busyWindowController performBusySelector:@selector(removeTagsFolder:)
-										 onObject:self
-									   withObject:tagsFolderDir];
-	}	
-	
-	[busyWindow center];
-	[NSApp runModalForWindow:busyWindow];
+		[self removeTagsFolder];
 }
 
 - (void)dropBoxStateHasChanged
@@ -244,9 +235,6 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
 	[self updateDropBoxTagField];
 	
-	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
-	dropBoxDir = [dropBoxDir stringByStandardizingPath];
-	
 	NSString *targetDir = @"~/Library/Scripts/Folder Action Scripts/";
 	targetDir = [targetDir stringByStandardizingPath];
 	
@@ -254,10 +242,10 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	
 	NSString *targetPath = [targetDir stringByAppendingPathComponent:targetScriptName];
 	
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	
 	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Enabled"] boolValue])
-	{	
+	{		
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+		
 		// Copy Folder Action Script to Library
 		
 		NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"DropBox" ofType:@"scpt"];
@@ -285,73 +273,16 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 		
 		// Attach Folder Action
 		
-		NSString *s = @"tell application \"System Events\"\n";
-		
-		s = [s stringByAppendingString:@"set folder actions enabled to true\n"];
-		
-		s = [s stringByAppendingString:@"set scriptPath to (path to Folder Action scripts as Unicode text) & \""];
-		s = [s stringByAppendingString:targetScriptName];
-		s = [s stringByAppendingString:@"\"\n"];
-		
-		s = [s stringByAppendingString:@"attach action to \""];
-		s = [s stringByAppendingString:dropBoxDir];
-		s = [s stringByAppendingString:@"\" using file scriptPath\n"];
-		
-		s = [s stringByAppendingString:@"end tell"];
-
-		NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
-		[folderActionScript executeAndReturnError:nil];
-		
-		/*
-		 
-		// Scripting Bridge Version
-		// Couldn't get this piece of code to work :(
-		 
-		SystemEventsApplication *systemEvents = [SBApplication applicationWithBundleIdentifier:@"com.apple.systemevents"];
-		
-		SBElementArray *folderActions = [systemEvents folderActions];
-		for(SystemEventsFolderAction *folderAction in folderActions)
-		{
-			NSLog(folderAction.name);
-		}
-		
-		SystemEventsFolder *homeFolder = systemEvents.homeFolder;
-		
-		//SystemEventsFolder *item = [[homeFolder folders] obje:@"Documents"];
-		NSLog(@"TEST: %@", homeFolder.name);
-		[homeFolder attachActionToUsing:@"/Users/daniel/Desktop/Punakea - Drop Box.scpt"];*/		
-		
-		// Make sure the tags that are written by the script are also available in Punakea,
-		// i.e. tags exist
-		
-		NSArray *tagNames = [userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Tags"];
-		
-		for (NSString *tagName in tagNames)
-		{
-			// Create tag if not exists
-			[[NNTags sharedTags] tagForName:tagName create:YES];
-		}
+		[self attachDropBoxFolderAction];
 	}
 	else 
 	{
-		// Remove Folder Action
-		
-		NSString *s = @"tell application \"System Events\"\n";
-				
-		s = [s stringByAppendingString:@"remove action from folder \""];
-		s = [s stringByAppendingString:dropBoxDir];
-		s = [s stringByAppendingString:@"\"\n"];
-		
-		s = [s stringByAppendingString:@"end tell"];
-		
-		NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
-		[folderActionScript executeAndReturnError:nil];
+		[self removeDropBoxFolderAction];
 		
 		// Remove Script File		
-		[fileManager removeFileAtPath:targetPath handler:NULL];
 		
-		// [fileManager trashFileAtPath:dropBoxDir];
-	}	
+		[[NSFileManager defaultManager] removeFileAtPath:targetPath handler:NULL];
+	}
 }
 
 
@@ -379,9 +310,125 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 							contextInfo:sender];
 }
 
-- (IBAction)switchToDefaultDirectory:(id)sender
+- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+{	
+	NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+	
+	if (returnCode == NSOKButton)
+	{
+		NSString *newDir = [[panel filenames] objectAtIndex:0];
+		
+		NSString *keyPath = [self controllerKeyPathForMenuItemTag:[(id)contextInfo tag]];
+		
+		NSString *oldDir = [userDefaultsController valueForKeyPath:keyPath];
+						
+		[userInfo setObject:oldDir forKey:@"oldDir"];
+		[userInfo setObject:newDir forKey:@"newDir"];
+		[userInfo setObject:[NSNumber numberWithInt:[(id)contextInfo tag]] forKey:@"tag"];
+	}
+	else
+	{
+		// Update UI
+		NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:[(id)contextInfo tag]];
+		[popUpButton selectItemAtIndex:0];
+	}
+	
+	// Perform the actual dir switch outside of this method to ensure neat closing of the Open Panel	
+	if (returnCode == NSOKButton)
+	{
+		[self performSelectorInBackground:@selector(switchSpecialFolderDir:)
+							   withObject:userInfo];
+	}
+}
+
+- (void)switchSpecialFolderDir:(NSDictionary *)userInfo
 {
-	NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:[sender tag]];	
+	int		 tag	 = [[userInfo objectForKey:@"tag"] intValue];
+	NSString *oldDir = [userInfo objectForKey:@"oldDir"];
+	NSString *newDir = [userInfo objectForKey:@"newDir"];
+	
+	NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:tag];
+	NSString *keyPath = [self controllerKeyPathForMenuItemTag:tag];
+	
+	// Break if nothing to do
+	if([oldDir isEqualTo:newDir])
+	{
+		[popUpButton selectItemAtIndex:0];
+		return;
+	}
+	
+	if (tag == 0)			// Manage Files
+	{
+		// Create new dir
+		[[NSFileManager defaultManager] createDirectoryAtPath:newDir
+								  withIntermediateDirectories:YES
+												   attributes:0
+													    error:NULL];
+		
+		// Update UserDefaults
+		[userDefaultsController setValue:newDir forKeyPath:keyPath];
+		
+		// Update UI
+		[self updateCurrentLocationForPopUpButton:popUpButton];		
+		[popUpButton selectItemAtIndex:0];		
+		[popUpButton display];
+		
+		// Do It!				
+		[self moveSubdirectoriesFromPath:oldDir toPath:newDir tag:tag];
+	}
+	else if (tag == 1)		// Tags Folder
+	{
+		// Remove old dir
+		[self removeTagsFolder];
+		
+		// Create new dir
+		[[NSFileManager defaultManager] createDirectoryAtPath:newDir
+								  withIntermediateDirectories:YES
+												   attributes:0
+													    error:NULL];
+		
+		[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
+									   forFile:newDir
+									   options:NSExclude10_4ElementsIconCreationOption];
+		
+		// Update UserDefaults
+		[userDefaultsController setValue:newDir forKeyPath:keyPath];
+		
+		// Update UI
+		[self updateCurrentLocationForPopUpButton:popUpButton];
+		[popUpButton selectItemAtIndex:0];		
+		[popUpButton display];
+		
+		// Do It!				
+		[self createTagsFolderStructure];
+	}
+	else if (tag == 2)		// Drop Box
+	{
+		[self removeDropBoxFolderAction];
+		
+		// Create new dir
+		[[NSFileManager defaultManager] createDirectoryAtPath:newDir
+								  withIntermediateDirectories:YES
+												   attributes:0
+													    error:NULL];
+		
+		// Update UserDefaults
+		[userDefaultsController setValue:newDir forKeyPath:keyPath];
+		
+		// Update UI
+		[self updateCurrentLocationForPopUpButton:popUpButton];
+		[popUpButton selectItemAtIndex:0];		
+		[popUpButton display];
+		
+		// Do It!				
+		[self moveSubdirectoriesFromPath:oldDir toPath:newDir tag:tag];
+		
+		[self attachDropBoxFolderAction];
+	}
+}
+
+- (IBAction)switchSpecialFolderDirToDefault:(id)sender
+{
 	NSString *keyPath = [self controllerKeyPathForMenuItemTag:[sender tag]];
 	
 	NSString *oldDir = [userDefaultsController valueForKeyPath:keyPath];
@@ -393,44 +440,16 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	NSString *defaultDir = [appDefaults objectForKey:[keyPath substringFromIndex:7]];
 	defaultDir = [defaultDir stringByStandardizingPath];
 	
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	BOOL isDirectory;
+	// Do it!
+	NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
 	
-	if ([fileManager fileExistsAtPath:defaultDir isDirectory:&isDirectory])
-	{
-		if (!isDirectory)
-		{
-			[self displayWarningWithMessage:NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR",@"FileManager",@"")];
-			[popUpButton selectItemAtIndex:0];
-			return;
-		}
-	}
-	else
-	{
-		[fileManager createDirectoryAtPath:defaultDir withIntermediateDirectories:YES attributes:nil error:NULL];
-	}
+	[userInfo setObject:oldDir forKey:@"oldDir"];
+	[userInfo setObject:defaultDir forKey:@"newDir"];
+	[userInfo setObject:[NSNumber numberWithInt:[sender tag]] forKey:@"tag"];
 	
-	[self switchLocationFromPath:oldDir toPath:defaultDir tag:[sender tag]];
-	[popUpButton selectItemAtIndex:0];
+	[self switchSpecialFolderDir:userInfo];		
 }
 
-- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
-{	
-	if (returnCode == NSOKButton)
-	{
-		NSString *newDir = [[panel filenames] objectAtIndex:0];
-		
-		NSString *keyPath = [self controllerKeyPathForMenuItemTag:[contextInfo tag]];
-		
-		NSString *oldDir = [userDefaultsController valueForKeyPath:keyPath];
-						
-		[self switchLocationFromPath:oldDir toPath:newDir tag:[contextInfo tag]];
-	}
-
-	NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:[contextInfo tag]];	
-	
-	[popUpButton selectItemAtIndex:0];
-}
 
 #pragma mark file error handler
 - (BOOL)fileManager:(NSFileManager *)manager shouldProceedAfterError:(NSDictionary *)errorInfo
@@ -521,7 +540,7 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	
 }
 
-- (void)switchLocationFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag
+- (void)moveSubdirectoriesFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag
 {
 	NSString *standardizedOldPath = [oldPath stringByStandardizingPath];
 	NSString *standardizedNewPath = [newPath stringByStandardizingPath];
@@ -529,8 +548,6 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	if ([standardizedOldPath isEqualToString:standardizedNewPath])
 		return;
 		
-	// move old files if there are any - 
-	// only copy the numbered folders!
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 		
 	// first check if the destination is writable and a directory
@@ -540,8 +557,10 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 		return;
 	}
 			
-	// then collect all dirs to move
-	// for tag == 0 (Managed Folder) we collect only numbered directories
+	// Move Dirs
+	// Managed Folder:	Copy only continuously numbered directories
+	// Tags Folder:		Copy nothing, recreate structure from scratch (symlinks will break otherwiese!)
+	// Drop Box:		Copy all
 	
 	NSMutableArray *directories;
 	int i = 1;
@@ -549,10 +568,8 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	NSString *directory;
 	BOOL isDirectory;
 	
-	if(tag == 0) 
-	{	
-		// Copy only the numbered dirs
-		
+	if (tag == 0)		// Managed Folder - Copy only the numbered dirs
+	{		
 		directories = [NSMutableArray array];
 		
 		while (true)
@@ -574,10 +591,12 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 			}
 		}
 	}
-	else
+	else if (tag == 1)	// Tags Folder - Copy nothing
 	{
-		// We'll copy all stuff
-		
+		directories = [NSMutableArray array];
+	}
+	else if (tag == 2)	// Drop Box - Copy everything
+	{		
 		directories = [NSMutableArray arrayWithArray:[fileManager contentsOfDirectoryAtPath:standardizedOldPath error:NULL]];
 		
 		for(int j=0; j < [directories count]; j++)
@@ -588,7 +607,7 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 		}
 	}
 	
-	// now all dirs are in directories 
+	// Now all dirs to copy are in array 'directories'
 	// check if destination is void of all those dirnames
 	
 	NSEnumerator *dirEnumerator = [directories objectEnumerator];
@@ -611,7 +630,7 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 		}
 	}
 	
-	// if everything is ok, move them
+	// Now move
 	
 	dirEnumerator = [directories objectEnumerator];
 	
@@ -624,17 +643,6 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 		
 		[fileManager movePath:directory toPath:newDir handler:self];
 	}
-		
-	NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:tag];	
-	NSString *keyPath = [self controllerKeyPathForMenuItemTag:tag];
-	
-	[userDefaultsController setValue:newPath forKeyPath:keyPath];
-	[self updateCurrentLocationForPopUpButton:popUpButton];
-	
-	// If tag == 1 (Tags Folder), we update the folder's icon
-	[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
-								   forFile:standardizedNewPath
-								   options:NSExclude10_4ElementsIconCreationOption];
 }
 
 - (NSString *)controllerKeyPathForMenuItemTag:(int)tag
@@ -765,6 +773,114 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	
 	[tagField setObjectValue:tags];
 	[tagAutoCompleteController setCurrentCompleteTagsInField:selectedTags];
+}
+
+- (void)createTagsFolderStructure
+{
+	// Recreate folder structure from scratch
+	
+	BusyWindowController *busyWindowController = [busyWindow delegate];
+	
+	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
+	[busyWindowController performBusySelector:@selector(createDirectoryStructure)
+									 onObject:[NNTagging tagging]];
+	
+	[busyWindow center];
+	[NSApp runModalForWindow:busyWindow];
+}
+
+- (void)removeTagsFolder
+{
+	// Removes all subdirs of tags folder
+	
+	BusyWindowController *busyWindowController = [busyWindow delegate];
+	
+	NSString *tagsFolderDir = [userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH];
+	tagsFolderDir = [tagsFolderDir stringByStandardizingPath];
+	
+	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER", @"FileManager", nil)];
+	[busyWindowController performBusySelector:@selector(removeTagsFolder:)
+									 onObject:self
+								   withObject:tagsFolderDir];
+	
+	[busyWindow center];
+	[NSApp runModalForWindow:busyWindow];
+}
+
+- (void)attachDropBoxFolderAction
+{
+	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
+	dropBoxDir = [dropBoxDir stringByStandardizingPath];
+	
+	NSString *targetScriptName = @"Punakea - Drop Box.scpt";
+	
+	// Attach Folder Action
+	
+	NSString *s = @"tell application \"System Events\"\n";
+	
+	s = [s stringByAppendingString:@"set folder actions enabled to true\n"];
+	
+	s = [s stringByAppendingString:@"set scriptPath to (path to Folder Action scripts as Unicode text) & \""];
+	s = [s stringByAppendingString:targetScriptName];
+	s = [s stringByAppendingString:@"\"\n"];
+	
+	s = [s stringByAppendingString:@"attach action to \""];
+	s = [s stringByAppendingString:dropBoxDir];
+	s = [s stringByAppendingString:@"\" using file scriptPath\n"];
+	
+	s = [s stringByAppendingString:@"end tell"];
+	
+	NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
+	[folderActionScript executeAndReturnError:nil];
+	
+	/*
+	 
+	 // Scripting Bridge Version
+	 // Couldn't get this piece of code to work :(
+	 
+	 SystemEventsApplication *systemEvents = [SBApplication applicationWithBundleIdentifier:@"com.apple.systemevents"];
+	 
+	 SBElementArray *folderActions = [systemEvents folderActions];
+	 for(SystemEventsFolderAction *folderAction in folderActions)
+	 {
+	 NSLog(folderAction.name);
+	 }
+	 
+	 SystemEventsFolder *homeFolder = systemEvents.homeFolder;
+	 
+	 //SystemEventsFolder *item = [[homeFolder folders] obje:@"Documents"];
+	 NSLog(@"TEST: %@", homeFolder.name);
+	 [homeFolder attachActionToUsing:@"/Users/daniel/Desktop/Punakea - Drop Box.scpt"];*/		
+	
+	// Make sure the tags that are written by the script are also available in Punakea,
+	// i.e. tags exist
+	
+	NSArray *tagNames = [userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Tags"];
+	
+	for (NSString *tagName in tagNames)
+	{
+		// Create tag if not exists
+		[[NNTags sharedTags] tagForName:tagName create:YES];
+	}
+}
+
+- (void)removeDropBoxFolderAction
+{
+	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
+	dropBoxDir = [dropBoxDir stringByStandardizingPath];
+	
+	// Remove Folder Action
+	
+	NSString *s = @"tell application \"System Events\"\n";
+	
+	s = [s stringByAppendingString:@"remove action from folder \""];
+	s = [s stringByAppendingString:dropBoxDir];
+	s = [s stringByAppendingString:@"\"\n"];
+	
+	s = [s stringByAppendingString:@"end tell"];
+	
+	NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
+	[folderActionScript executeAndReturnError:nil];
 }
 
 @end

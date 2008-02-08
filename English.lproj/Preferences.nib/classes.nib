@@ -57,6 +57,8 @@
 				<string>id</string>
 				<key>locateDirectory</key>
 				<string>id</string>
+				<key>switchSpecialFolderDirToDefault</key>
+				<string>id</string>
 				<key>switchToDefaultDirectory</key>
 				<string>id</string>
 			</dict>

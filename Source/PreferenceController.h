@@ -47,7 +47,8 @@ extern NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
 - (id)initWithCore:(Core*)aCore;
 
 - (IBAction)locateDirectory:(id)sender;
-- (IBAction)switchToDefaultDirectory:(id)sender;
+- (IBAction)switchSpecialFolderDirToDefault:(id)sender;
+
 - (IBAction)checkForUpdates:(id)sender;
 
 @end
