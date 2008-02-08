@@ -81,9 +81,6 @@ adds tag to tagField (use from "outside")
 			   name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
 			 object:nil];
 	
-	// Setup status bar
-	[self setupStatusBar];
-	
 	// Check manage files
 	if(manageFilesAutomatically)
 		manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];	
@@ -108,23 +105,28 @@ adds tag to tagField (use from "outside")
 	else
 		[dropManager setAlternateState:NO];
 	
+	// Setup status bar
+	[self setupStatusBar];
+	
 	[self resizeTokenField];
 }
 
 - (void)setupStatusBar
 {
-	PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
-	[sbitem setToolTip:@"Add files to tag"];
-	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
-	[sbitem setAction:@selector(addFiles:)];
-	[statusBar addItem:sbitem];
-	
-	sbitem = [PAStatusBarButton statusBarButton];
-	[sbitem setToolTip:@"Remove files from Tagger"];
-	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-minus"]];
-	[sbitem setAction:@selector(removeFiles:)];
-	
-	[statusBar addItem:sbitem];
+	if(![self isEditingTagsOnFiles])
+	{
+		PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
+		[sbitem setToolTip:@"Add files to tag"];
+		[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
+		[sbitem setAction:@selector(addFiles:)];
+		[statusBar addItem:sbitem];
+		
+		sbitem = [PAStatusBarButton statusBarButton];
+		[sbitem setToolTip:@"Remove files from Tagger"];
+		[sbitem setImage:[NSImage imageNamed:@"statusbar-button-minus"]];
+		[sbitem setAction:@selector(removeFiles:)];	
+		[statusBar addItem:sbitem];
+	}
 }
 
 - (void)dealloc
@@ -511,6 +513,10 @@ adds tag to tagField (use from "outside")
 				 proposedRow:(int)row 
 	   proposedDropOperation:(NSTableViewDropOperation)op
 {
+	// If we're just editing tags on files, don't allow drop
+	if([self isEditingTagsOnFiles])
+		return NSDragOperationNone;
+	
 	// check if sender should be ignored
 	if(![dropManager acceptsSender:[info draggingSource]])
 		return NSDragOperationNone;
@@ -572,6 +578,11 @@ adds tag to tagField (use from "outside")
 		[manageFilesButton setHidden:NO];
 	else
 		[manageFilesButton setHidden:YES];
+}
+
+- (BOOL)isEditingTagsOnFiles
+{
+	return [manageFilesButton isHidden];
 }
 
 @end

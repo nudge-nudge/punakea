@@ -41,5 +41,6 @@
 
 - (void)setManageFiles:(BOOL)flag;
 - (void)setShowsManageFiles:(BOOL)flag;
+- (BOOL)isEditingTagsOnFiles;
 
 @end
