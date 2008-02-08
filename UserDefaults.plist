@@ -15,7 +15,7 @@
 	<key>ManageFiles.ManagedFolder.Location</key>
 	<string>~/Library/Application Support/Punakea/Files/</string>
 	<key>ManageFiles.TagsFolder.Enabled</key>
-	<false/>
+	<true/>
 	<key>ManageFiles.TagsFolder.Location</key>
 	<string>~/Documents/Punakea/Tags/</string>
 	<key>ManageFiles.DropBox.Enabled</key>

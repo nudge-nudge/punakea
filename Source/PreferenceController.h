@@ -37,11 +37,9 @@ extern NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
 	
 	IBOutlet NSPopUpButton		*updateIntervalButton;
 	
-	IBOutlet NSWindow			*busyWindow;
-	
 	NSUserDefaultsController	*userDefaultsController;
 	
-	Core *core;
+	Core						*core;
 }
 
 - (id)initWithCore:(Core*)aCore;

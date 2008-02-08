@@ -49,6 +49,7 @@
 	PAServices						*services;
 	
 	IBOutlet SUUpdater				*updater;
+	IBOutlet NSWindow				*busyWindow;
 }
 
 - (SUUpdater*)updater;
@@ -92,5 +93,6 @@
 
 - (BrowserController *)browserController;
 - (TaggerController *)taggerController;
+- (NSWindow *)busyWindow;
 
 @end

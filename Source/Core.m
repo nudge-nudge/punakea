@@ -5,6 +5,7 @@
 - (void)setupToolbar;
 - (void)showStatusItem;
 
+- (void)createDirectoriesIfNeeded:(BOOL)flag generateContent:(BOOL)generateContent;
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 
 - (void)showTagger:(id)sender enableManageFiles:(BOOL)flag;
@@ -97,8 +98,6 @@
 		  forKeyPath:@"values.General.StatusItem.Enabled" 
 			 options:0 
 			 context:NULL];
-	
-	[self createDirectoriesIfNeeded];
 	
 	// load services class and set as service provides
 	services =  [[PAServices alloc] init];
@@ -262,76 +261,6 @@
 	}
 }			
 
-- (void)createDirectoriesIfNeeded
-{
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	BOOL isDirectory = NO;
-	NSString *dir = nil;
-	
-	// Managed Folder
-	if ([userDefaults boolForKey:@"ManageFiles.ManagedFolder.Enabled"])
-	{	
-		dir = [userDefaults stringForKey:@"ManageFiles.ManagedFolder.Location"];
-		dir = [dir stringByStandardizingPath];		
-		
-		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
-		{
-			if (!isDirectory)
-			{
-				[self displayWarningWithMessage:[NSString stringWithFormat:
-					NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR", @"FileManager", @""), dir]];
-			}
-		}
-		else
-		{
-			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
-		}
-	}
-	
-	// Tags Folder
-	if ([userDefaults boolForKey:@"ManageFiles.TagsFolder.Enabled"])
-	{	
-		dir = [userDefaults stringForKey:@"ManageFiles.TagsFolder.Location"];
-		dir = [dir stringByStandardizingPath];		
-		
-		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
-		{
-			if (!isDirectory)
-			{
-				[self displayWarningWithMessage:[NSString stringWithFormat:
-												 NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR", @"FileManager", @""), dir]];
-			}
-		}
-		else
-		{
-			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
-			
-			[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
-										   forFile:dir
-										   options:NSExclude10_4ElementsIconCreationOption];
-		}
-	}
-	
-	// Drop Box
-	if ([userDefaults boolForKey:@"ManageFiles.DropBox.Enabled"])
-	{	
-		dir = [userDefaults stringForKey:@"ManageFiles.DropBox.Location"];
-		dir = [dir stringByStandardizingPath];		
-		
-		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
-		{
-			if (!isDirectory)
-			{
-				[self displayWarningWithMessage:[NSString stringWithFormat:
-												 NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR", @"FileManager", @""), dir]];
-			}
-		}
-		else
-		{
-			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
-		}
-	}
-}
 
 #pragma mark MainMenu actions
 - (BOOL)validateMenuItem:(id <NSMenuItem>)item
@@ -646,7 +575,7 @@
 	[[browserController browserViewController] searchForTags:someTags];
 }
 
-#pragma mark NSApplication delegate
+#pragma mark NSApplication Delegate
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
 	[self showBrowser:self];
@@ -666,13 +595,109 @@
 	[[self taggerController] setTaggableObjects:[NNFile filesWithFilepaths:filenames]];
 }
 
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+	[self createDirectoriesIfNeeded:YES generateContent:YES];
+	
+	[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
+}
+
 //#pragma mark debug
 //- (void)keyDown:(NSEvent*)event 
 //{
 //	NSLog(@"NSApp keydown: %@",event);
 //}
 
-#pragma mark helper
+#pragma mark Helpers
+- (void)createDirectoriesIfNeeded
+{
+	[self createDirectoriesIfNeeded:YES generateContent:NO];
+}
+
+- (void)createDirectoriesIfNeeded:(BOOL)flag generateContent:(BOOL)generateContent
+{
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	BOOL isDirectory = NO;
+	NSString *dir = nil;
+	
+	// Managed Folder
+	if ([userDefaults boolForKey:@"ManageFiles.ManagedFolder.Enabled"])
+	{	
+		dir = [userDefaults stringForKey:@"ManageFiles.ManagedFolder.Location"];
+		dir = [dir stringByStandardizingPath];		
+		
+		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
+		{
+			if (!isDirectory)
+			{
+				[self displayWarningWithMessage:[NSString stringWithFormat:
+												 NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR", @"FileManager", @""), dir]];
+			}
+		}
+		else
+		{
+			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+		}
+	}
+	
+	// Tags Folder
+	if ([userDefaults boolForKey:@"ManageFiles.TagsFolder.Enabled"])
+	{	
+		dir = [userDefaults stringForKey:@"ManageFiles.TagsFolder.Location"];
+		dir = [dir stringByStandardizingPath];		
+		
+		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
+		{
+			if (!isDirectory)
+			{
+				[self displayWarningWithMessage:[NSString stringWithFormat:
+												 NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR", @"FileManager", @""), dir]];
+			}
+		}
+		else
+		{
+			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+			
+			[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
+										   forFile:dir
+										   options:NSExclude10_4ElementsIconCreationOption];
+		
+			if(generateContent)
+			{
+				// Generate folder hierarchy from scratch
+				BusyWindowController *busyWindowController = [busyWindow delegate];
+				
+				[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
+				[busyWindowController performBusySelector:@selector(createDirectoryStructure)
+												 onObject:[NNTagging tagging]];
+				
+				[busyWindow center];
+				[NSApp runModalForWindow:busyWindow];
+			}
+		}
+	}
+	
+	// Drop Box
+	if ([userDefaults boolForKey:@"ManageFiles.DropBox.Enabled"])
+	{	
+		dir = [userDefaults stringForKey:@"ManageFiles.DropBox.Location"];
+		dir = [dir stringByStandardizingPath];		
+		
+		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
+		{
+			if (!isDirectory)
+			{
+				[self displayWarningWithMessage:[NSString stringWithFormat:
+												 NSLocalizedStringFromTable(@"DESTINATION_NOT_FOLDER_ERROR", @"FileManager", @""), dir]];
+			}
+		}
+		else
+		{
+			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+		}
+	}
+}
+
 - (void)displayWarningWithMessage:(NSString*)messageInfo
 {
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
@@ -872,6 +897,11 @@
 	}
 	
 	return _taggerController;
+}
+
+- (NSWindow *)busyWindow
+{
+	return busyWindow;
 }
 
 @end

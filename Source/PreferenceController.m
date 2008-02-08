@@ -779,21 +779,21 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 {
 	// Recreate folder structure from scratch
 	
-	BusyWindowController *busyWindowController = [busyWindow delegate];
+	BusyWindowController *busyWindowController = [[core busyWindow] delegate];
 	
 	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
 	[busyWindowController performBusySelector:@selector(createDirectoryStructure)
 									 onObject:[NNTagging tagging]];
 	
-	[busyWindow center];
-	[NSApp runModalForWindow:busyWindow];
+	[[core busyWindow] center];
+	[NSApp runModalForWindow:[core busyWindow]];
 }
 
 - (void)removeTagsFolder
 {
 	// Removes all subdirs of tags folder
 	
-	BusyWindowController *busyWindowController = [busyWindow delegate];
+	BusyWindowController *busyWindowController = [[core busyWindow] delegate];
 	
 	NSString *tagsFolderDir = [userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH];
 	tagsFolderDir = [tagsFolderDir stringByStandardizingPath];
@@ -803,8 +803,8 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 									 onObject:self
 								   withObject:tagsFolderDir];
 	
-	[busyWindow center];
-	[NSApp runModalForWindow:busyWindow];
+	[[core busyWindow] center];
+	[NSApp runModalForWindow:[core busyWindow]];
 }
 
 - (void)attachDropBoxFolderAction
