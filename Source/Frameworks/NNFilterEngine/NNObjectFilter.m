@@ -131,15 +131,15 @@
 
 - (void)objectFiltered:(id)object
 {
+	//NSLog(@"%@ - : - %@",self,object);
 	[outQueue enqueue:object];
-	// NSLog(@"%@ - : - %@",self,object);
 }
 
 - (void)filterObject:(id)object
 {
 	// nothing, implemented by subclass
 	
-	// NSLog(@"%@ looking at %@",self,object);
+	//NSLog(@"%@ looking at %@",self,object);
 }
 
 @end

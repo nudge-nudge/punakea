@@ -86,50 +86,13 @@
 	}
 	else
 	{
-		// if this is reached, the cache needs to be updated
-		// take care of this in the qu eryNote:
-		
-		// only one query can be active at a time at the moment
+		// execute a query with the given tag to see if it has any files
+		// matching the content type
 		[selectedTags setSelectedTags:[NSArray arrayWithObject:object]];
-		[query startQuery];
-		CFRunLoopRun();
-	}
-}
-
-- (void)queryNote:(NSNotification*)notification
-{
-	// filtered tag is in selected Tags
-	id object = [[[query tags] selectedTags] objectAtIndex:0];
-	
-	if ([[notification name] isEqualTo:NNQueryDidFinishGatheringNotification])
-	{		
-		CFRunLoopStop(CFRunLoopGetCurrent ());
-		[query stopQuery];
+		NSArray *results = [query executeSynchronousQuery];
 		
-		if ([[query flatResults] count] > 0)
+		if ([results count] > 0)
 		{
-			// update cache
-			[tagCache updateCacheForTag:object
-							setFiletype:[self contentType]
-								toValue:YES];
-			
-			[self objectFiltered:object];
-		}
-		else
-		{
-			// update cache
-			[tagCache updateCacheForTag:object
-							setFiletype:[self contentType]
-								toValue:NO];
-		}
-	}
-	else if ([[notification name] isEqualTo:NNQueryGatheringProgressNotification])
-	{
-		if ([[query flatResults] count] > 0)
-		{
-			CFRunLoopStop(CFRunLoopGetCurrent ());
-			[query stopQuery];
-			
 			// update cache
 			[tagCache updateCacheForTag:object
 							setFiletype:[self contentType]
