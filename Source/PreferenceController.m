@@ -873,9 +873,10 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	
 	NSString *s = @"tell application \"System Events\"\n";
 	
-	s = [s stringByAppendingString:@"remove action from folder \""];
+	s = [s stringByAppendingString:@"remove action from \""];
 	s = [s stringByAppendingString:dropBoxDir];
-	s = [s stringByAppendingString:@"\"\n"];
+	s = [s stringByAppendingString:@"\" using action name \"Punakea - Drop Box.scpt\""];
+	s = [s stringByAppendingString:@"\n"];
 	
 	s = [s stringByAppendingString:@"end tell"];
 	
