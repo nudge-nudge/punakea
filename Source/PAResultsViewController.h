@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PABrowserViewMainController.h"
 
-#import "NNTagging/NSFileManager+TrashFile.h"
+#import "NNTagging/NSFileManager+Extensions.h"
 
 #import "NNTagging/NNTags.h"
 #import "NNTagging/NNTag.h"
