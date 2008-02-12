@@ -44,6 +44,8 @@ NSString * const MANAGED_FOLDER_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFil
 NSString * const TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.TagsFolder.Location";
 NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.DropBox.Location";
 
+NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
+
 
 @implementation PreferenceController
 
@@ -250,9 +252,7 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	NSString *targetDir = @"~/Library/Scripts/Folder Action Scripts/";
 	targetDir = [targetDir stringByStandardizingPath];
 	
-	NSString *targetScriptName = @"Punakea - Drop Box.scpt";
-	
-	NSString *targetPath = [targetDir stringByAppendingPathComponent:targetScriptName];
+	NSString *targetPath = [targetDir stringByAppendingPathComponent:DROP_BOX_SCRIPTNAME];
 	
 	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Enabled"] boolValue])
 	{		
@@ -824,8 +824,6 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
 	dropBoxDir = [dropBoxDir stringByStandardizingPath];
 	
-	NSString *targetScriptName = @"Punakea - Drop Box.scpt";
-	
 	// Attach Folder Action
 	
 	NSString *s = @"tell application \"System Events\"\n";
@@ -833,7 +831,7 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	s = [s stringByAppendingString:@"set folder actions enabled to true\n"];
 	
 	s = [s stringByAppendingString:@"set scriptPath to (path to Folder Action scripts as Unicode text) & \""];
-	s = [s stringByAppendingString:targetScriptName];
+	s = [s stringByAppendingString:DROP_BOX_SCRIPTNAME];
 	s = [s stringByAppendingString:@"\"\n"];
 	
 	s = [s stringByAppendingString:@"attach action to \""];
@@ -887,7 +885,9 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 	
 	s = [s stringByAppendingString:@"remove action from \""];
 	s = [s stringByAppendingString:dropBoxDir];
-	s = [s stringByAppendingString:@"\" using action name \"Punakea - Drop Box.scpt\""];
+	s = [s stringByAppendingString:@"\" using action name \""];
+	s = [s stringByAppendingString:DROP_BOX_SCRIPTNAME];
+	s = [s stringByAppendingString:@"\""];
 	s = [s stringByAppendingString:@"\n"];
 	
 	s = [s stringByAppendingString:@"end tell"];
