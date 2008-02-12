@@ -90,6 +90,11 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 								options:0
 								context:NULL];
 	
+	[userDefaultsController addObserver:self
+							 forKeyPath:@"values.ManageFiles.DropBox.Tags"
+								options:0
+								context:NULL];
+	
 	[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
 	[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
 	[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
@@ -114,6 +119,8 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 								forKeyPath:@"values.ManageFiles.TagsFolder.Enabled"];
 	[userDefaultsController removeObserver:self
 								forKeyPath:@"values.ManageFiles.DropBox.Enabled"];
+	[userDefaultsController removeObserver:self
+								forKeyPath:@"values.ManageFiles.DropBox.Tags"];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
@@ -145,6 +152,11 @@ NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.Dro
 		else if ([keyPath isEqualToString:@"values.ManageFiles.DropBox.Enabled"])
 		{
 			[self dropBoxStateHasChanged];
+		}
+		else if ([keyPath isEqualToString:@"values.ManageFiles.DropBox.Tags"])
+		{
+			// Write defaults to disk, so that the drop box script can work with the latest tag set
+			[[NSUserDefaults standardUserDefaults] synchronize];
 		}
 	}
 }
