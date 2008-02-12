@@ -9,6 +9,8 @@
 - (void)updateManageFilesFlagOnTaggableObjects;
 - (void)updateTokenFieldEditable;
 
+- (float)discreteTokenFieldHeight:(float)theHeight;
+
 /**
 adds tag to tagField (use from "outside")
  @param tag tag to add 
@@ -204,6 +206,8 @@ adds tag to tagField (use from "outside")
 	[[self currentCompleteTagsInField] addObjectsFromArray:[tagsOnAllObjects allObjects]];
 	
 	[[self window] makeFirstResponder:tagField];
+	
+	[self resizeTokenField];
 }
 
 - (void)updateManageFilesFlagOnTaggableObjects
@@ -426,8 +430,10 @@ adds tag to tagField (use from "outside")
 - (void)resizeTokenField
 {
 	NSRect oldTokenFieldFrame = [[self tagField] frame];
-	NSSize cellSize = [[[self tagField] cell] cellSizeForBounds:[[self tagField] bounds]];
-	cellSize.height = (cellSize.height > 22) ? cellSize.height : 22;
+	
+	NSSize cellSize = [[[self tagField] cell] cellSizeForBounds:[[self tagField] bounds]];	
+	cellSize.height = [self discreteTokenFieldHeight:cellSize.height];
+	
 	float sizeDifference = cellSize.height - oldTokenFieldFrame.size.height;
 	
 	// Resize tag field
@@ -457,6 +463,26 @@ adds tag to tagField (use from "outside")
 	
 	// Set needs display
 	[[[self window] contentView] setNeedsDisplay:YES];
+}
+
+- (float)discreteTokenFieldHeight:(float)height
+{
+	height -= 23.0;
+	
+	// Minimum height is 23px
+	if (height <= 0.0)
+		return 23.0;
+	
+	// Determine how many lines are necessary
+	int steps = 1;
+	
+	while(height > 17.0)
+	{
+		height -= 17.0;
+		steps++;
+	}
+	
+	return 23.0 + steps * 17.0;
 }
 
 
