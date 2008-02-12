@@ -9,6 +9,8 @@
 #import "PreferenceController.h"
 #import "Core.h"
 
+#import "NNTagging/NNTags.h"
+
 @interface PreferenceController (PrivateAPI)
 
 - (void)startOnLoginHasChanged;
@@ -759,12 +761,12 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 
 - (void)updateDropBoxTagField
 {
-	BOOL createTags = YES;
+	NNTagsCreationOptions creationOptions = NNTagsCreationOptionFull;
 	
 	// Do not create tags if Drop Box is disabled	
 	BOOL dropBoxEnabled = [[userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Enabled"] boolValue];
 	if (!dropBoxEnabled)
-		createTags = NO;	
+		creationOptions = NNTagsCreationOptionNone;	
 	
 	// Get tags from User Defaults and set them for Tag Field
 	
@@ -775,7 +777,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	
 	for (NSString *tagName in tagNames)
 	{
-		NNTag *tag = [[NNTags sharedTags] tagForName:tagName create:createTags];
+		NNTag *tag = [[NNTags sharedTags] tagForName:tagName creationOptions:creationOptions];
 		
 		if(tag)
 			[tags addObject:tag];
@@ -870,7 +872,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	for (NSString *tagName in tagNames)
 	{
 		// Create tag if not exists
-		[[NNTags sharedTags] tagForName:tagName create:YES];
+		[[NNTags sharedTags] tagForName:tagName creationOptions:NNTagsCreationOptionFull];
 	}
 }
 

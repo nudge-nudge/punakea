@@ -73,7 +73,7 @@
 - (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString
 {
 	if (editingString && [editingString isNotEqualTo:@""])
-		return [globalTags tagForName:editingString create:YES];
+		return [globalTags tagForName:editingString creationOptions:NNTagsCreationOptionFull];
 	else
 		return nil;
 }
