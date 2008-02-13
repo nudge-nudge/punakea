@@ -109,6 +109,14 @@ data is NSDictionary with keys:
 	[resource addData:[self dragDataWithEntries:entryArray] type:kDragWeblocType Id:128 name:filename];
 	[resource release];
 	
+	// Hide WEBLOC extension
+	NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
+															   forKey:NSFileExtensionHidden];
+	
+	[[NSFileManager defaultManager] setAttributes:fileAttributes
+									 ofItemAtPath:filePath
+											error:NULL];
+	
 	return [NNFile fileWithPath:filePath];
 }
 
