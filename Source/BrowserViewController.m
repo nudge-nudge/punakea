@@ -65,7 +65,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		
 		searchFieldString = [[NSMutableString alloc] init];
 		
-		[self addObserver:self forKeyPath:@"searchFieldString" options:nil context:NULL];
+		[self addObserver:self forKeyPath:@"searchFieldString" options:0 context:NULL];
 	
 		sortKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"TagCloud.SortKey"];
 		[self updateSortDescriptor];
