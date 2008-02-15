@@ -14,7 +14,7 @@
 // data is NSString (filepath)
 - (NNTaggableObject*)fileDropData:(id)data
 {
-	NNFile *file = [[NNFile alloc] initUsingSpotlightDBWithPath:data];
+	NNFile *file = [[NNFile alloc] initWithPath:data useStore:NNFinderCommentSpotlightStore];
 	return [file autorelease];
 }
 
