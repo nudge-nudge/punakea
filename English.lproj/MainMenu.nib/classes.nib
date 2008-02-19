@@ -55,6 +55,8 @@
 			<dict>
 				<key>addTagSet</key>
 				<string>id</string>
+				<key>cleanTagDB</key>
+				<string>id</string>
 				<key>delete</key>
 				<string>id</string>
 				<key>editTagsOnFiles</key>
@@ -74,8 +76,6 @@
 				<key>resetBrowser</key>
 				<string>id</string>
 				<key>runToolbarCustomizationPalette</key>
-				<string>id</string>
-				<key>searchForTag</key>
 				<string>id</string>
 				<key>searchForTags</key>
 				<string>NSArray</string>

@@ -82,6 +82,8 @@
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)openDonationWebsite:(id)sender;
 
+- (IBAction)cleanTagDB:(id)sender;
+
 - (IBAction)toggleToolbarShown:(id)sender;
 - (IBAction)runToolbarCustomizationPalette:(id)sender;
 

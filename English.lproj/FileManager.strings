@@ -19,3 +19,4 @@
 
 "BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER" = "Punakea is setting up the Tags Folder. This may take some minutes.";
 "BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER" = "Punakea is cleaning up the Tags Folder.";
+"BUSY_WINDOW_MESSAGE_CLEANING_TAG_DB" = "Punakea is cleaning up the Tag Database.";

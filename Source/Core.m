@@ -263,7 +263,7 @@
 
 
 #pragma mark MainMenu actions
-- (BOOL)validateMenuItem:(id <NSMenuItem>)item
+- (BOOL)validateMenuItem:(id<NSMenuItem>)item
 {
 	// Adjust dynamic titles
 	if([item action] == @selector(toggleToolbarShown:))
@@ -553,6 +553,18 @@
 - (IBAction)openDonationWebsite:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/donate"]];
+}
+
+- (IBAction)cleanTagDB:(id)sender
+{
+	BusyWindowController *busyWindowController = [[self busyWindow] delegate];
+	
+	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_CLEANING_TAG_DB", @"FileManager", nil)];
+	[busyWindowController performBusySelector:@selector(cleanTagDB)
+									 onObject:[NNTagging tagging]];
+	
+	[[self busyWindow] center];
+	[NSApp runModalForWindow:[self busyWindow]];
 }
 
 - (IBAction)toggleToolbarShown:(id)sender
