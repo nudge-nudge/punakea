@@ -125,9 +125,9 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 		}
 		
 		// Determine button's title
-		NSString *title = [[NSBundle mainBundle] localizedStringForKey:[filter objectForKey:@"title"]
-																 value:[filter objectForKey:@"title"]
-																 table:@"MDSimpleGrouping"];
+		NSString *title = [[NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"] localizedStringForKey:[filter objectForKey:@"title"]
+																									  value:[filter objectForKey:@"title"]
+																									  table:@"MDSimpleGrouping"];
 		if(!title) title = @"All";
 		[button setTitle:title];
 		[button sizeToFit];
