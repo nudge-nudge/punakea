@@ -179,9 +179,7 @@
 #pragma mark Helpers
 - (NSString *)naturalLanguageGroupValue
 {	
-	return [[NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"] localizedStringForKey:[bundle value]
-																					   value:[bundle value]
-																					   table:@"MDSimpleGrouping"];
+	return [bundle displayName];
 }
 
 - (PAImageButtonCell *)segmentForDisplayMode:(NSString *)mode
