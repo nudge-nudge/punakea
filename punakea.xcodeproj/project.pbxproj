@@ -81,6 +81,12 @@
 		483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483272330AA42DC6003D98A6 /* UKPrefsPanel.m */; };
 		4832723D0AA42E8C003D98A6 /* PreferenceController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4832723B0AA42E8C003D98A6 /* PreferenceController.h */; };
 		4832723E0AA42E8C003D98A6 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832723C0AA42E8C003D98A6 /* PreferenceController.m */; };
+		483C8A440D6C517C0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 483C8A250D6C50BC0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler */; };
+		483C8AA20D6C51EA0051C8C3 /* PAPublicURLDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C8A090D6C4F8D0051C8C3 /* PAPublicURLDropHandler.m */; };
+		483C8AA30D6C51EB0051C8C3 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
+		483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
+		483C8AB30D6C520B0051C8C3 /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
+		483C8ABC0D6C52260051C8C3 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */; };
 		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
 		48404B100AF8B392001F7BB7 /* PATaggerUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 48404A0B0AF8A722001F7BB7 /* PATaggerUnitTest.m */; };
@@ -399,6 +405,27 @@
 			remoteGlobalIDString = 483184E20AEF91A700C3C672;
 			remoteInfo = FilenamesDropHandler;
 		};
+		483C8A2B0D6C50C50051C8C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4815A0B00AEF99D900969296 /* NDResourceFork */;
+			remoteInfo = NDResourceFork;
+		};
+		483C8A2D0D6C50C80051C8C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 483184970AEF8D8600C3C672 /* PADropHandler */;
+			remoteInfo = PADropHandler;
+		};
+		483C8A3D0D6C51630051C8C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 483C8A240D6C50BC0051C8C3 /* PublicUrlDropHandler */;
+			remoteInfo = PublicUrlDropHandler;
+		};
 		48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -483,6 +510,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				483C8A440D6C517C0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler in Copy Plugins */,
 				48893B020AF0A4E400BA0B50 /* FilenamesDropHandler.punakeaDropHandler in Copy Plugins */,
 				4807215E0AEFE5600024118D /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler in Copy Plugins */,
 			);
@@ -661,6 +689,10 @@
 		483272330AA42DC6003D98A6 /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
 		4832723B0AA42E8C003D98A6 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
 		4832723C0AA42E8C003D98A6 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
+		483C8A080D6C4F8D0051C8C3 /* PAPublicURLDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAPublicURLDropHandler.h; path = URLDropHandler/PAPublicURLDropHandler.h; sourceTree = "<group>"; };
+		483C8A090D6C4F8D0051C8C3 /* PAPublicURLDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAPublicURLDropHandler.m; path = URLDropHandler/PAPublicURLDropHandler.m; sourceTree = "<group>"; };
+		483C8A250D6C50BC0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PublicUrlDropHandler.punakeaDropHandler; sourceTree = BUILT_PRODUCTS_DIR; };
+		483C8A260D6C50BC0051C8C3 /* PublicUrlDropHandler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PublicUrlDropHandler-Info.plist"; sourceTree = "<group>"; };
 		484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadView.h; sourceTree = "<group>"; };
 		484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadView.m; sourceTree = "<group>"; };
 		48404A0A0AF8A722001F7BB7 /* PATaggerUnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerUnitTest.h; sourceTree = "<group>"; };
@@ -704,8 +736,8 @@
 		486063DD0AA0553000D9E103 /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableView.m; sourceTree = "<group>"; };
 		4860846B0AB4371200CB0352 /* PAFilenamesDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAFilenamesDropDataHandler.h; path = ../../PAFilenamesDropDataHandler.h; sourceTree = "<group>"; };
 		4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAFilenamesDropDataHandler.m; path = ../../PAFilenamesDropDataHandler.m; sourceTree = "<group>"; };
-		4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAURLDropDataHandler.h; sourceTree = "<group>"; };
-		4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAURLDropDataHandler.m; sourceTree = "<group>"; };
+		4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAURLDropDataHandler.h; path = URLDropHandler/PAURLDropDataHandler.h; sourceTree = "<group>"; };
+		4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAURLDropDataHandler.m; path = URLDropHandler/PAURLDropDataHandler.m; sourceTree = "<group>"; };
 		486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementViewMainView.h; sourceTree = "<group>"; };
 		486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementViewMainView.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
@@ -967,6 +999,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		483C8A230D6C50BC0051C8C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				483C8ABC0D6C52260051C8C3 /* NNTagging.framework in Frameworks */,
+				483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */,
+				483C8AB30D6C520B0051C8C3 /* NDResourceFork.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		48404AFD0AF8B357001F7BB7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1050,6 +1092,7 @@
 				4815A0B10AEF99D900969296 /* NDResourceFork.framework */,
 				48186F390BE4C7BE000B4638 /* NNFilterEngine.framework */,
 				65A292100D3E4BD900DE9F03 /* Unit Testing.octest */,
+				483C8A250D6C50BC0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1070,6 +1113,7 @@
 				4815A0B20AEF99D900969296 /* NDResourceFork-Info.plist */,
 				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
 				48186F3A0BE4C7BE000B4638 /* NNFilterEngine-Info.plist */,
+				483C8A260D6C50BC0051C8C3 /* PublicUrlDropHandler-Info.plist */,
 			);
 			name = Punakea;
 			sourceTree = "<group>";
@@ -1297,6 +1341,7 @@
 		483184F20AEF91E100C3C672 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				483C8A120D6C507B0051C8C3 /* PublicUrlDropHandler */,
 				483184F50AEF91F200C3C672 /* FilenamesDropHandler */,
 				483185320AEF966B00C3C672 /* WebURLsWithTitlesPboardTypeDropHandler */,
 			);
@@ -1319,8 +1364,6 @@
 			children = (
 				485F402C0AB6D61300E230DC /* PAWebURLsWithTitlesPboardTypeDropHandler.h */,
 				485F402D0AB6D61300E230DC /* PAWebURLsWithTitlesPboardTypeDropHandler.m */,
-				4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */,
-				4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */,
 			);
 			name = WebURLsWithTitlesPboardTypeDropHandler;
 			path = URLDropHandler;
@@ -1336,6 +1379,17 @@
 				4832723C0AA42E8C003D98A6 /* PreferenceController.m */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		483C8A120D6C507B0051C8C3 /* PublicUrlDropHandler */ = {
+			isa = PBXGroup;
+			children = (
+				483C8A080D6C4F8D0051C8C3 /* PAPublicURLDropHandler.h */,
+				483C8A090D6C4F8D0051C8C3 /* PAPublicURLDropHandler.m */,
+				4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */,
+				4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */,
+			);
+			name = PublicUrlDropHandler;
 			sourceTree = "<group>";
 		};
 		484003C90A9B3A6500C0AD99 /* TypeAheadView */ = {
@@ -2064,6 +2118,25 @@
 			productReference = 483184E30AEF91A700C3C672 /* FilenamesDropHandler.punakeaDropHandler */;
 			productType = "com.apple.product-type.bundle";
 		};
+		483C8A240D6C50BC0051C8C3 /* PublicUrlDropHandler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 483C8A2A0D6C50BD0051C8C3 /* Build configuration list for PBXNativeTarget "PublicUrlDropHandler" */;
+			buildPhases = (
+				483C8A210D6C50BC0051C8C3 /* Resources */,
+				483C8A220D6C50BC0051C8C3 /* Sources */,
+				483C8A230D6C50BC0051C8C3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				483C8A2C0D6C50C50051C8C3 /* PBXTargetDependency */,
+				483C8A2E0D6C50C80051C8C3 /* PBXTargetDependency */,
+			);
+			name = PublicUrlDropHandler;
+			productName = PublicUrlDropHandler;
+			productReference = 483C8A250D6C50BC0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler */;
+			productType = "com.apple.product-type.bundle";
+		};
 		48404AFF0AF8B357001F7BB7 /* Unit Testing */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48404B030AF8B358001F7BB7 /* Build configuration list for PBXNativeTarget "Unit Testing" */;
@@ -2122,6 +2195,7 @@
 				480721EC0AEFE8F40024118D /* PBXTargetDependency */,
 				48186F8F0BE4C930000B4638 /* PBXTargetDependency */,
 				4802194C0C02CE85001CF480 /* PBXTargetDependency */,
+				483C8A3E0D6C51630051C8C3 /* PBXTargetDependency */,
 			);
 			name = Punakea;
 			productInstallPath = "$(HOME)/Applications";
@@ -2174,6 +2248,7 @@
 				4815A0B00AEF99D900969296 /* NDResourceFork */,
 				48404AFF0AF8B357001F7BB7 /* Unit Testing */,
 				48186F380BE4C7BE000B4638 /* NNFilterEngine */,
+				483C8A240D6C50BC0051C8C3 /* PublicUrlDropHandler */,
 			);
 		};
 /* End PBXProject section */
@@ -2218,6 +2293,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		483184DF0AEF91A700C3C672 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483C8A210D6C50BC0051C8C3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2409,6 +2491,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		483C8A220D6C50BC0051C8C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				483C8AA20D6C51EA0051C8C3 /* PAPublicURLDropHandler.m in Sources */,
+				483C8AA30D6C51EB0051C8C3 /* PAURLDropDataHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		48404AFC0AF8B357001F7BB7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2560,6 +2651,21 @@
 			isa = PBXTargetDependency;
 			target = 483184E20AEF91A700C3C672 /* FilenamesDropHandler */;
 			targetProxy = 483185020AEF92FD00C3C672 /* PBXContainerItemProxy */;
+		};
+		483C8A2C0D6C50C50051C8C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4815A0B00AEF99D900969296 /* NDResourceFork */;
+			targetProxy = 483C8A2B0D6C50C50051C8C3 /* PBXContainerItemProxy */;
+		};
+		483C8A2E0D6C50C80051C8C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
+			targetProxy = 483C8A2D0D6C50C80051C8C3 /* PBXContainerItemProxy */;
+		};
+		483C8A3E0D6C51630051C8C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 483C8A240D6C50BC0051C8C3 /* PublicUrlDropHandler */;
+			targetProxy = 483C8A3D0D6C51630051C8C3 /* PBXContainerItemProxy */;
 		};
 		48404B140AF8B3A6001F7BB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3231,6 +3337,89 @@
 			};
 			name = Release;
 		};
+		483C8A270D6C50BC0051C8C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Debug\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PublicUrlDropHandler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PublicUrlDropHandler;
+				WRAPPER_EXTENSION = punakeaDropHandler;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		483C8A280D6C50BC0051C8C3 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Debug\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PublicUrlDropHandler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PublicUrlDropHandler;
+				WRAPPER_EXTENSION = punakeaDropHandler;
+				ZERO_LINK = YES;
+			};
+			name = Beta;
+		};
+		483C8A290D6C50BC0051C8C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Debug\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PublicUrlDropHandler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PublicUrlDropHandler;
+				WRAPPER_EXTENSION = punakeaDropHandler;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		48404B040AF8B358001F7BB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3544,6 +3733,16 @@
 				483184E60AEF91A700C3C672 /* Debug */,
 				4822E5050C0CB1C100435942 /* Beta */,
 				483184E70AEF91A700C3C672 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		483C8A2A0D6C50BD0051C8C3 /* Build configuration list for PBXNativeTarget "PublicUrlDropHandler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				483C8A270D6C50BC0051C8C3 /* Debug */,
+				483C8A280D6C50BC0051C8C3 /* Beta */,
+				483C8A290D6C50BC0051C8C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
