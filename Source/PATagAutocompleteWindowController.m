@@ -82,7 +82,7 @@
 	
 	while (tag = [e nextObject])
 	{
-		[results addObject:[tag name]];
+		[results addObject:[tag precomposedName]];
 	}
 	
 	return results;

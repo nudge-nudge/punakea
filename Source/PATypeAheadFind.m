@@ -101,7 +101,9 @@
 	
 	while (tag = [e nextObject])
 	{
-		if (!NSEqualRanges([[tag name] rangeOfString:prefix options:(NSCaseInsensitiveSearch | NSAnchoredSearch)],
+		NSString *precomposedTagName = [[tag name] precomposedStringWithCanonicalMapping];
+		
+		if (!NSEqualRanges([precomposedTagName rangeOfString:prefix options:(NSCaseInsensitiveSearch | NSAnchoredSearch)],
 						   NSMakeRange(NSNotFound,0)))
 		{
 			[result addObject:tag];
