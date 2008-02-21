@@ -23,9 +23,11 @@
 
 - (BOOL)willHandleDrop:(NSPasteboard*)pasteboard
 {
+	// check for url	
 	NSString *url = [pasteboard stringForType:pboardType];
 	
-	if (url)
+	// ignore files
+	if (url && ![pasteboard propertyListForType:NSFilenamesPboardType])
 		return YES;
 	else
 		return NO;
