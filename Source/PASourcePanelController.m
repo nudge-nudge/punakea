@@ -34,6 +34,12 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		
 		PASourceItem *fileKindItem;
 		
+//		fileKindItem = [PASourceItem itemWithValue:@"DOCUMENTS" displayName:
+//						NSLocalizedStringFromTableInBundle(@"Documents", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
+//		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-documents"]];
+//		[fileKindItem setEditable:NO];
+//		[sourceItem addChild:fileKindItem];
+		
 		fileKindItem = [PASourceItem itemWithValue:@"PDF" displayName:
 						NSLocalizedStringFromTableInBundle(@"PDF", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
 		NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:@"PDF"];
