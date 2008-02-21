@@ -100,10 +100,8 @@
 	NNTag *tag;
 	
 	while (tag = [e nextObject])
-	{
-		NSString *precomposedTagName = [[tag name] precomposedStringWithCanonicalMapping];
-		
-		if (!NSEqualRanges([precomposedTagName rangeOfString:prefix options:(NSCaseInsensitiveSearch | NSAnchoredSearch)],
+	{	
+		if (!NSEqualRanges([[tag precomposedName] rangeOfString:prefix options:(NSCaseInsensitiveSearch | NSAnchoredSearch)],
 						   NSMakeRange(NSNotFound,0)))
 		{
 			[result addObject:tag];
