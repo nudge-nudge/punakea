@@ -174,6 +174,8 @@
 		48D815F20BF5BFB000821C25 /* NNDistributedObjectProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */; };
 		48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D81DAB09F79C1C0075EE44 /* TaggerController.h */; };
 		48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D81DAC09F79C1C0075EE44 /* TaggerController.m */; };
+		48E386750D6DC45300204CDB /* source-panel-documents.tif in Resources */ = {isa = PBXBuildFile; fileRef = 48E386730D6DC45300204CDB /* source-panel-documents.tif */; };
+		48E386760D6DC45300204CDB /* source-panel-images.tif in Resources */ = {isa = PBXBuildFile; fileRef = 48E386740D6DC45300204CDB /* source-panel-images.tif */; };
 		650846FC0BE641320046CB89 /* statusbar-button-info.png in Resources */ = {isa = PBXBuildFile; fileRef = 650846FB0BE641320046CB89 /* statusbar-button-info.png */; };
 		6508EB680D50C336004DA882 /* BusyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6508EB670D50C336004DA882 /* BusyWindowController.m */; };
 		6509020B0BEDF1A1005468E0 /* toolbar-sort-by-name.tif in Resources */ = {isa = PBXBuildFile; fileRef = 650902090BEDF1A1005468E0 /* toolbar-sort-by-name.tif */; };
@@ -281,7 +283,6 @@
 		659E8D6A0C1430E300D5ED38 /* source-panel-tag-set.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8D660C1430E300D5ED38 /* source-panel-tag-set.tif */; };
 		659E8D6B0C1430E300D5ED38 /* source-panel-tag.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8D670C1430E300D5ED38 /* source-panel-tag.tif */; };
 		659E8DB80C143AD000D5ED38 /* source-panel-bookmarks.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8DB70C143AD000D5ED38 /* source-panel-bookmarks.tif */; };
-		659E8DBF0C143D8800D5ED38 /* source-panel-images.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659E8DBE0C143D8800D5ED38 /* source-panel-images.tiff */; };
 		659E8DC40C1440D600D5ED38 /* toolbar-show-tagger.tif in Resources */ = {isa = PBXBuildFile; fileRef = 659E8DC30C1440D500D5ED38 /* toolbar-show-tagger.tif */; };
 		659EBB4309D2D78300879091 /* PAImageButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659EBB4109D2D78300879091 /* PAImageButton.h */; };
 		659EBB4409D2D78300879091 /* PAImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 659EBB4209D2D78300879091 /* PAImageButton.m */; };
@@ -774,6 +775,8 @@
 		48D81DAB09F79C1C0075EE44 /* TaggerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerController.h; sourceTree = "<group>"; };
 		48D81DAC09F79C1C0075EE44 /* TaggerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerController.m; sourceTree = "<group>"; };
 		48E145320B5F99FA00859B22 /* NNTagging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NNTagging.framework; path = ../build/Debug/NNTagging.framework; sourceTree = "<group>"; };
+		48E386730D6DC45300204CDB /* source-panel-documents.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-documents.tif"; sourceTree = "<group>"; };
+		48E386740D6DC45300204CDB /* source-panel-images.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-images.tif"; sourceTree = "<group>"; };
 		48EDB8330BF5A68C008452FF /* PAStringPrefixFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAStringPrefixFilter.h; sourceTree = "<group>"; };
 		48EDB8360BF5A693008452FF /* PAStringPrefixFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAStringPrefixFilter.m; sourceTree = "<group>"; };
 		48EDB8390BF5A698008452FF /* PAContentTypeFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAContentTypeFilter.h; sourceTree = "<group>"; };
@@ -892,7 +895,6 @@
 		659E8D660C1430E300D5ED38 /* source-panel-tag-set.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-tag-set.tif"; sourceTree = "<group>"; };
 		659E8D670C1430E300D5ED38 /* source-panel-tag.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-tag.tif"; sourceTree = "<group>"; };
 		659E8DB70C143AD000D5ED38 /* source-panel-bookmarks.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-bookmarks.tif"; sourceTree = "<group>"; };
-		659E8DBE0C143D8800D5ED38 /* source-panel-images.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-images.tiff"; sourceTree = "<group>"; };
 		659E8DC30C1440D500D5ED38 /* toolbar-show-tagger.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-show-tagger.tif"; sourceTree = "<group>"; };
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
@@ -1909,8 +1911,9 @@
 			isa = PBXGroup;
 			children = (
 				6509020A0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif */,
+				48E386730D6DC45300204CDB /* source-panel-documents.tif */,
+				48E386740D6DC45300204CDB /* source-panel-images.tif */,
 				659E8DB70C143AD000D5ED38 /* source-panel-bookmarks.tif */,
-				659E8DBE0C143D8800D5ED38 /* source-panel-images.tiff */,
 				659E8D640C1430E300D5ED38 /* source-panel-manage-tags.tif */,
 				659E8D650C1430E300D5ED38 /* source-panel-shelf.tif */,
 				659E8D660C1430E300D5ED38 /* source-panel-tag-set.tif */,
@@ -2407,10 +2410,11 @@
 				659E8D6A0C1430E300D5ED38 /* source-panel-tag-set.tif in Resources */,
 				659E8D6B0C1430E300D5ED38 /* source-panel-tag.tif in Resources */,
 				659E8DB80C143AD000D5ED38 /* source-panel-bookmarks.tif in Resources */,
-				659E8DBF0C143D8800D5ED38 /* source-panel-images.tiff in Resources */,
 				659E8DC40C1440D600D5ED38 /* toolbar-show-tagger.tif in Resources */,
 				655FBB920D4F841E0004CED7 /* TagFolder.icns in Resources */,
 				650C84190D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff in Resources */,
+				48E386750D6DC45300204CDB /* source-panel-documents.tif in Resources */,
+				48E386760D6DC45300204CDB /* source-panel-images.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
