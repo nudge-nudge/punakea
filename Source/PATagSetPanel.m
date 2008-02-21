@@ -10,6 +10,13 @@
 #import "NNTagging/NNSelectedTags.h"
 
 
+@interface PATagSetPanel (PrivateAPI)
+
+- (void)validateConfirmButton;
+
+@end
+
+
 @implementation PATagSetPanel
 
 #pragma mark Init + Dealloc
@@ -24,6 +31,19 @@
 	[tagField setFrame:frame];
 	
 	[tagLabel setStringValue:NSLocalizedStringFromTable(@"TAGSETPANEL_ADD_TAG_SET_LABEL", @"Global", nil)];
+	
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self 
+		   selector:@selector(tagsHaveChanged:)
+		       name:NNSelectedTagsHaveChangedNotification
+		     object:nil];
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[super dealloc];
 }
 
 
@@ -31,16 +51,31 @@
 - (void)removeAllTags
 {
 	[tagField setStringValue:@""];
-	[[self delegate] setCurrentCompleteTagsInField:[[[NNSelectedTags alloc] init] autorelease]];
+	[tagAutoCompleteController setCurrentCompleteTagsInField:[[[NNSelectedTags alloc] init] autorelease]];
 	
-	[[self delegate] validateConfirmButton];
+	[self validateConfirmButton];
+}
+
+- (void)validateConfirmButton
+{
+	if(!confirmButton)
+		return;
+	
+	[confirmButton setEnabled:([[tagAutoCompleteController currentCompleteTagsInField] count] > 0)];
+}
+
+
+#pragma mark Notifications
+- (void)tagsHaveChanged:(NSNotification *)notification
+{
+	[self validateConfirmButton];
 }
 
 
 #pragma mark Accessors
 - (NSArray *)tags
 {
-	return [[[self delegate] currentCompleteTagsInField] selectedTags];
+	return [[tagAutoCompleteController currentCompleteTagsInField] selectedTags];
 }
 
 - (void)setTags:(NSArray *)someTags
@@ -50,7 +85,9 @@
 	NNSelectedTags *selTags = [[[NNSelectedTags alloc] initWithTags:someTags] autorelease];
 	
 	// Update tagField
-	[tagField setStringValue:[selTags selectedTags]];
+	[tagAutoCompleteController setCurrentCompleteTagsInField:selTags];
+	[tagField setObjectValue:[selTags selectedTags]];
+	[self validateConfirmButton];
 	
 	// Move cursor to end
 	[tagField selectText:self];
