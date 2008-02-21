@@ -16,6 +16,9 @@
 - (void)setupToolbar;
 - (void)setupStatusBar;
 
+- (void)togglePaneWithIdentifier:(NSString *)identifier;
+- (BOOL)paneWithIdentifierIsVisible:(NSString *)identifier;
+
 - (void)loadFavorites;
 
 - (NSString *)pathOfFavoritesFile;
@@ -91,6 +94,9 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	// Load favorites
 	[self loadFavorites];
+	
+	// Load User Defaults
+	[self loadUserDefaults];
 }
 
 - (void)windowDidLoad
@@ -124,8 +130,15 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[sbitem setButtonType:NSToggleButton];
 	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-info"]];
 	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-info-on"]];
-	[sbitem setAction:@selector(toggleInfo:)];
+	[sbitem setAction:@selector(toggleInfoPane:)];
+	[sourcePanelStatusBar addItem:sbitem];
 	
+	sbitem = [PAStatusBarButton statusBarButton];
+	[sbitem setToolTip:@"Toggle tags panel"];
+	[sbitem setButtonType:NSToggleButton];
+	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-info"]];
+	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-info-on"]];
+	[sbitem setAction:@selector(toggleTagsPane:)];
 	[sourcePanelStatusBar addItem:sbitem];
 	
 	// Right StatusBar
@@ -138,9 +151,10 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 - (void)setupTabPanel
 {
+	//-- First, set up the INFO tabview item
+	
 	NSTabViewItem *infoItem = [tabPanel tabViewItemAtIndex:[tabPanel indexOfTabViewItemWithIdentifier:@"INFO"]];
 	
-	// Add tabview that holds infoPanePlaceholderView, infoPaneSingleSelectionView, infoPaneMultipleSelectionView
 	infoPane = [[NSTabView alloc] initWithFrame:[[infoItem view] frame]];
 	[infoPane setTabViewType:NSNoTabsNoBorder];
 	
@@ -164,6 +178,28 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	[infoItem setView:infoPane];
 	[infoPane release];
+	
+	//-- Next, we set up the TAGS item
+	
+	NSTabViewItem *tagsItem = [tabPanel tabViewItemAtIndex:[tabPanel indexOfTabViewItemWithIdentifier:@"TAGS"]];
+	
+	tagsPane = [[NSTabView alloc] initWithFrame:[[tagsItem view] frame]];
+	[tagsPane setTabViewType:NSNoTabsNoBorder];
+	
+	// Placeholder
+	item = [[NSTabViewItem alloc] initWithIdentifier:@"PLACEHOLDER"];
+	[item setView:tagsPanePlaceholderView];
+	[tagsPane addTabViewItem:item];
+	[item release];
+	
+	// Tags
+	item = [[NSTabViewItem alloc] initWithIdentifier:@"TAGS"];
+	[item setView:tagsPaneTagsView];
+	[tagsPane addTabViewItem:item];
+	[item release];
+	
+	[tagsItem setView:tagsPane];
+	[tagsPane release];
 }
 
 - (void)setupFieldEditor
@@ -188,6 +224,15 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[editor setHorizontallyResizable:YES];
 	
 	sourcePanelFieldEditor = editor;
+}
+
+- (void)loadUserDefaults
+{
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	
+	// Make the right pane appear	
+	NSString *identifier = [userDefaults stringForKey:@"Appearance.InfoPane.Active"];	
+	[tabPanel selectTabViewItemWithIdentifier:identifier];
 }
 
 - (void)dealloc
@@ -299,9 +344,56 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		  contextInfo:NULL];
 }
 
-- (void)toggleInfo:(id)sender
+- (void)toggleInfoPane:(id)sender
 {
-	[horizontalSplitView toggleSubviewAtIndex:1];
+	[self togglePaneWithIdentifier:@"INFO"];
+}
+
+- (void)toggleTagsPane:(id)sender
+{
+	[self togglePaneWithIdentifier:@"TAGS"];
+}
+
+- (void)togglePaneWithIdentifier:(NSString *)identifier
+{
+	BOOL paneSelected = [[tabPanel selectedTabViewItem] isEqualTo:[tabPanel tabViewItemAtIndex:[tabPanel indexOfTabViewItemWithIdentifier:identifier]]];
+	
+	if(paneSelected)
+	{
+		[horizontalSplitView toggleSubviewAtIndex:1];
+	}
+	else
+	{
+		[tabPanel selectTabViewItemWithIdentifier:identifier];
+		
+		// Ensure pane is visible
+		if([[[horizontalSplitView subviews] objectAtIndex:1] isHidden])
+			[horizontalSplitView toggleSubviewAtIndex:1];
+	}
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:identifier forKey:@"Appearance.InfoPane.Active"];
+}
+
+- (BOOL)infoPaneIsVisible
+{
+	return [self paneWithIdentifierIsVisible:@"INFO"];
+}
+
+- (BOOL)tagsPaneIsVisible
+{
+	return [self paneWithIdentifierIsVisible:@"TAGS"];
+}
+
+- (BOOL)paneWithIdentifierIsVisible:(NSString *)identifier
+{
+	// Any pane is visible?
+	if([[[horizontalSplitView subviews] objectAtIndex:1] isHidden])
+		return NO;
+
+	BOOL paneSelected = [[tabPanel selectedTabViewItem] isEqualTo:[tabPanel tabViewItemAtIndex:[tabPanel indexOfTabViewItemWithIdentifier:identifier]]];
+	
+	return paneSelected;
 }
 
 - (void)sortByName:(id)sender
@@ -670,6 +762,46 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		[view setFiles:selectedItems];
 		
 		[infoPane selectTabViewItemWithIdentifier:@"MULTIPLE_SELECTION"];
+	}
+	
+	// Update Tags Pane
+	if([selectedItems count] == 0)
+	{
+		// If no selection, use placeholder
+		[tagsPane selectTabViewItemWithIdentifier:@"PLACEHOLDER"];
+	}
+	else if([selectedItems count] == 1)
+	{
+		// Show all tags from file		
+		NNTaggableObject *taggableObject = [selectedItems objectAtIndex:0];
+		[tagsPaneTagsView setTags:[[taggableObject tags] allObjects]];
+		
+		[tagsPaneTagsView setLabel:NSLocalizedStringFromTable(@"EDIT_TAGS", @"Tags", nil)];
+		
+		[tagsPane selectTabViewItemWithIdentifier:@"TAGS"];
+	}
+	else
+	{
+		// Show common tags				
+		NSMutableSet *commonTagSet = [NSMutableSet set];
+		BOOL firstLoop = YES;
+		
+		for(NNTaggableObject *taggableObject in selectedItems)
+		{		
+			if(firstLoop)
+			{
+				[commonTagSet unionSet:[taggableObject tags]];
+				firstLoop = NO;
+			} else {
+				[commonTagSet intersectSet:[taggableObject tags]];
+			}
+		}
+		
+		[tagsPaneTagsView setTags:[commonTagSet allObjects]];
+		
+		[tagsPaneTagsView setLabel:NSLocalizedStringFromTable(@"EDIT_COMMON_TAGS", @"Tags", nil)];
+
+		[tagsPane selectTabViewItemWithIdentifier:@"TAGS"];
 	}
 	
 	// Update right statusbar to reveal location of the selected file (if applicable)

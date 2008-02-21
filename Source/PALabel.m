@@ -30,7 +30,6 @@
 {
 	[self setFont:[NSFont boldSystemFontOfSize:11]];
 	[self setTextColor:[NSColor grayColor]];
-	[self setAlignment:NSRightTextAlignment];
 }
 
 @end

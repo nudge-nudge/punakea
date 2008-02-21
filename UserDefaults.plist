@@ -10,6 +10,8 @@
 	<true/>
 	<key>General.StartOnLogin</key>
 	<false/>
+	<key>Appearance.InfoPane.Active</key>
+	<string>INFO</string>
 	<key>ManageFiles.ManagedFolder.Enabled</key>
 	<false/>
 	<key>ManageFiles.ManagedFolder.Location</key>

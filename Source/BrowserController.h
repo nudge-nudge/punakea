@@ -24,6 +24,7 @@
 #import "PAInfoPaneSubview.h"
 #import "PAInfoPaneSingleSelectionView.h"
 #import "PAInfoPaneMultipleSelectionView.h"
+#import "PATagsPaneTagsView.h"
 #import "PADropManager.h"
 
 
@@ -54,10 +55,13 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 	IBOutlet PASourcePanel						*sourcePanel;
 	IBOutlet PATabPanel							*tabPanel;
 	
-	NSTabView									*infoPane;
+	NSTabView									*infoPane;					/**< A pane may contain multiple tabs like placeholder view, single selection view, multiple selection view, ... */
 	IBOutlet NSView								*infoPanePlaceholderView;
 	IBOutlet PAInfoPaneSingleSelectionView		*infoPaneSingleSelectionView;
 	IBOutlet PAInfoPaneMultipleSelectionView	*infoPaneMultipleSelectionView;
+	NSTabView									*tagsPane;					/**< A pane may contain multiple tabs like quick drop view, tags view, ... */
+	IBOutlet NSView								*tagsPanePlaceholderView;
+	IBOutlet PATagsPaneTagsView					*tagsPaneTagsView;
 	
 	NSSearchField								*searchField;
 
@@ -69,6 +73,12 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 - (IBAction)editTagSet:(id)sender;
 - (IBAction)addTagSet:(id)sender;
 - (IBAction)removeTagSet:(id)sender;
+
+- (void)toggleInfoPane:(id)sender;
+- (void)toggleTagsPane:(id)sender;
+
+- (BOOL)infoPaneIsVisible;
+- (BOOL)tagsPaneIsVisible;
 
 - (void)saveFavorites;
 

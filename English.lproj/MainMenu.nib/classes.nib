@@ -97,6 +97,10 @@
 				<string>id</string>
 				<key>toggleInfo</key>
 				<string>id</string>
+				<key>toggleInfoPane</key>
+				<string>id</string>
+				<key>toggleTagsPane</key>
+				<string>id</string>
 				<key>toggleToolbarShown</key>
 				<string>id</string>
 			</dict>

@@ -8,3 +8,6 @@
 "NO_TAGS" = "to get started\ndrop files here \nor on the sidebar drop zone";
 "NO_TAGS_FOR_SEARCHSTRING" = "no tags found";
 "NO_TAGS_FOR_CONTENTTYPE" = "no tags\nfor this content type";
+
+"EDIT_TAGS" = "Edit tags:";
+"EDIT_COMMON_TAGS" = "Edit common tags:";

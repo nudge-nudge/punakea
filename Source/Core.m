@@ -263,7 +263,7 @@
 
 
 #pragma mark MainMenu actions
-- (BOOL)validateMenuItem:(id<NSMenuItem>)item
+- (BOOL)validateMenuItem:(NSMenuItem *)item
 {
 	// Adjust dynamic titles
 	if([item action] == @selector(toggleToolbarShown:))
@@ -280,7 +280,6 @@
 		// File menu
 		if([item action] == @selector(addTagSet:)) return NO;
 		if([item action] == @selector(openFiles:)) return NO;
-		if([item action] == @selector(editTagsOnFiles:)) return NO;
 		
 		// Edit menu
 		if([item action] == @selector(delete:)) return NO;
@@ -289,7 +288,8 @@
 		
 		// View menu
 		if([item action] == @selector(goHome:)) return NO;
-		if([item action] == @selector(toggleInfo:)) return NO;
+		if([item action] == @selector(toggleInfoPane:)) return NO;
+		if([item action] == @selector(toggleTagsPane:)) return NO;
 		if([item action] == @selector(goToAllItems:)) return NO;
 		if([item action] == @selector(goToManageTags:)) return NO;
 		if([item action] == @selector(toggleToolbarShown:)) return NO;
@@ -321,8 +321,7 @@
 				
 			return NO;
 		}
-		else if([item action] == @selector(openFiles:) ||
-				[item action] == @selector(editTagsOnFiles:))
+		else if([item action] == @selector(openFiles:))
 		{
 			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 			{
@@ -335,13 +334,19 @@
 		}
 		
 		// View menu
-		if([item action] == @selector(toggleInfo:))
+		if([item action] == @selector(toggleInfoPane:))
 		{
-			NSView *subview = [[[browserController horizontalSplitView] subviews] objectAtIndex:1];
-			if([subview isHidden])
+			if(![browserController infoPaneIsVisible])
 				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_SHOW_INFO", @"Menus", nil)];
 			else
 				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_HIDE_INFO", @"Menus", nil)];
+		}
+		else if([item action] == @selector(toggleTagsPane:))
+		{
+			if(![browserController tagsPaneIsVisible])
+				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_SHOW_TAGS", @"Menus", nil)];
+			else
+				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_HIDE_TAGS", @"Menus", nil)];
 		}
 		else if([item action] == @selector(goToAllItems:))
 		{			
@@ -375,9 +380,15 @@
 	[[browserController browserViewController] reset];
 }
 
-- (IBAction)toggleInfo:(id)sender
+- (IBAction)toggleInfoPane:(id)sender
 {
-	[[browserController horizontalSplitView] toggleSubviewAtIndex:1];
+	[browserController toggleInfoPane:sender];
+	[[browserController sourcePanelStatusBar] reloadData];
+}
+
+- (IBAction)toggleTagsPane:(id)sender
+{
+	[browserController toggleTagsPane:sender];
 	[[browserController sourcePanelStatusBar] reloadData];
 }
 
@@ -435,21 +446,6 @@
 		[sp removeSelectedItem];
 		[browserController saveFavorites];
 	}
-}
-
-- (IBAction)editTagsOnFiles:(id)sender
-{	
-	[self showTagger:self enableManageFiles:NO];
-	
-	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
-	
-	if ([mainController isKindOfClass:[PAResultsViewController class]])
-	{
-		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
-	
-		[[self taggerController] setTaggableObjects:[ov visibleSelectedItems]];
-		[ov reloadData];
-	}	
 }
 
 - (IBAction)selectAll:(id)sender

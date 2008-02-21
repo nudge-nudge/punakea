@@ -89,6 +89,23 @@
 		</dict>
 		<dict>
 			<key>CLASS</key>
+			<string>PATagsPaneTagsView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>editTagsLabel</key>
+				<string>NSTextField</string>
+				<key>tagAutoCompleteController</key>
+				<string>TagAutoCompleteController</string>
+				<key>tagField</key>
+				<string>NSTokenField</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
 			<string>PASourcePanel</string>
 			<key>LANGUAGE</key>
 			<string>ObjC</string>
@@ -107,6 +124,10 @@
 				<key>editTagSet</key>
 				<string>id</string>
 				<key>removeTagSet</key>
+				<string>id</string>
+				<key>toggleInfoPane</key>
+				<string>id</string>
+				<key>toggleTagsPane</key>
 				<string>id</string>
 			</dict>
 			<key>CLASS</key>
@@ -137,6 +158,12 @@
 				<string>PATabPanel</string>
 				<key>tagSetPanel</key>
 				<string>PATagSetPanel</string>
+				<key>tagsPane</key>
+				<string>PATagsPane</string>
+				<key>tagsPanePlaceholderView</key>
+				<string>NSView</string>
+				<key>tagsPaneTagsView</key>
+				<string>PATagsPaneTagsView</string>
 				<key>verticalSplitView</key>
 				<string>PASplitView</string>
 			</dict>
@@ -150,6 +177,21 @@
 			<string>ObjC</string>
 			<key>SUPERCLASS</key>
 			<string>NSSplitView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PATagsPane</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>tagAutoCompleteController</key>
+				<string>TagAutoCompleteController</string>
+				<key>tagField</key>
+				<string>NSTokenField</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
 		</dict>
 		<dict>
 			<key>CLASS</key>
