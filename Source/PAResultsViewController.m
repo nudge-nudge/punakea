@@ -371,14 +371,14 @@
 	{
 		[outlineView reloadData];
 		
-		NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_SEARCHING", @"Global", nil);
-		[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
+		//NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_SEARCHING", @"Global", nil);
+		//[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
 	}
 	else if([[notification name] isEqualTo:NNQueryDidFinishGatheringNotification])
 	{
 		[outlineView reloadData];
 		
-		[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
+		//[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
 		if ([delegate respondsToSelector:@selector(updateTagCloudDisplayMessage)])
 		{
 			[delegate updateTagCloudDisplayMessage];
