@@ -775,6 +775,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		// Show all tags from file		
 		NNTaggableObject *taggableObject = [selectedItems objectAtIndex:0];
 		[tagsPaneTagsView setTags:[[taggableObject tags] allObjects]];
+		[tagsPaneTagsView setTaggableObject:taggableObject];
 		
 		[tagsPaneTagsView setLabel:NSLocalizedStringFromTable(@"EDIT_TAGS", @"Tags", nil)];
 		
@@ -798,6 +799,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		}
 		
 		[tagsPaneTagsView setTags:[commonTagSet allObjects]];
+		[tagsPaneTagsView setTaggableObjects:selectedItems];
 		
 		[tagsPaneTagsView setLabel:NSLocalizedStringFromTable(@"EDIT_COMMON_TAGS", @"Tags", nil)];
 

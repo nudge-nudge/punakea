@@ -102,7 +102,7 @@
 				<string>NSTokenField</string>
 			</dict>
 			<key>SUPERCLASS</key>
-			<string>NSView</string>
+			<string>PAInfoPaneSubview</string>
 		</dict>
 		<dict>
 			<key>CLASS</key>

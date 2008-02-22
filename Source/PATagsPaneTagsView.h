@@ -10,6 +10,7 @@
 #import "PAInfoPaneSubview.h"
 #import "TagAutoCompleteController.h"
 #import "NNTagging/NNSelectedTags.h"
+#import "NNTagging/NNTaggableObject.h"
 
 
 @interface PATagsPaneTagsView : PAInfoPaneSubview {
@@ -19,7 +20,8 @@
 	
 	IBOutlet TagAutoCompleteController	*tagAutoCompleteController;
 	
-	NNSelectedTags						*selectedTags;
+	NSArray								*taggableObjects;
+	NSArray								*initialTags;						/**< Tags that are present before editing. */
 	
 }
 
@@ -27,6 +29,11 @@
 - (void)setTags:(NSArray *)someTags;
 - (NSString *)label;
 - (void)setLabel:(NSString *)aString;
+
+- (NSArray *)taggableObjects;
+- (void)setTaggableObject:(NNTaggableObject *)object;
+- (void)setTaggableObjects:(NSArray *)objects;
+
 - (NSTokenField *)tagField;
 
 @end
