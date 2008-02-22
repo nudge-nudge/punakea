@@ -300,6 +300,8 @@
 #pragma mark Misc
 - (void)addItem:(NSView *)anItem
 {
+	[anItem setStatusBar:self];
+	
 	[items addObject:anItem];
 	[self updateItems];
 }

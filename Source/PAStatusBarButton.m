@@ -46,6 +46,8 @@
 	if(![self canDraw]) return;
 	
 	[super mouseDown:event];
+	
+	[statusBar reloadData];
 }
 
 
@@ -60,6 +62,16 @@
 
 
 #pragma mark Accessors
+- (PAStatusBar *)statusBar
+{
+	return statusBar;
+}
+
+-(void)setStatusBar:(PAStatusBar *)sb
+{
+	statusBar = sb;
+}
+
 - (NSString *)identifier
 {
 	return identifier;

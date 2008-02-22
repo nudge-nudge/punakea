@@ -136,8 +136,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	sbitem = [PAStatusBarButton statusBarButton];
 	[sbitem setToolTip:@"Toggle tags panel"];
 	[sbitem setButtonType:NSToggleButton];
-	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-info"]];
-	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-info-on"]];
+	[sbitem setImage:[NSImage imageNamed:@"statusbar-button-tags"]];
+	[sbitem setAlternateImage:[NSImage imageNamed:@"statusbar-button-tags-on"]];
 	[sbitem setAction:@selector(toggleTagsPane:)];
 	[sourcePanelStatusBar addItem:sbitem];
 	
@@ -233,6 +233,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	// Make the right pane appear	
 	NSString *identifier = [userDefaults stringForKey:@"Appearance.InfoPane.Active"];	
 	[tabPanel selectTabViewItemWithIdentifier:identifier];
+	
+	[sourcePanelStatusBar reloadData];
 }
 
 - (void)dealloc
@@ -698,12 +700,20 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 #pragma mark StatusBar Delegate
 - (BOOL)statusBar:(PAStatusBar *)sender validateItem:(PAStatusBarButton *)item
 {	
-	if([item action] == @selector(toggleInfo:))
+	if([item action] == @selector(toggleInfoPane:))
 	{
-		if([[[horizontalSplitView subviews] objectAtIndex:1] isHidden])
-			[item setAlternateState:NO];
-		else
+		if([self infoPaneIsVisible])
 			[item setAlternateState:YES];
+		else
+			[item setAlternateState:NO];
+	}
+	
+	if([item action] == @selector(toggleTagsPane:))
+	{
+		if([self tagsPaneIsVisible])
+			[item setAlternateState:YES];
+		else
+			[item setAlternateState:NO];
 	}
 	
 	return YES;

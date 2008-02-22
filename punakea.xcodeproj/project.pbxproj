@@ -338,6 +338,8 @@
 		65E38D2F0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E38D2D0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m */; };
 		65E38E530BFB390E000C1976 /* NSNumberFormatterAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E38E510BFB390E000C1976 /* NSNumberFormatterAdditions.h */; };
 		65E38E540BFB390E000C1976 /* NSNumberFormatterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E38E520BFB390E000C1976 /* NSNumberFormatterAdditions.m */; };
+		65E744030D6EDAB000E9EBA0 /* statusbar-button-tags.tif in Resources */ = {isa = PBXBuildFile; fileRef = 65E744010D6EDAB000E9EBA0 /* statusbar-button-tags.tif */; };
+		65E744040D6EDAB000E9EBA0 /* statusbar-button-tags-on.tif in Resources */ = {isa = PBXBuildFile; fileRef = 65E744020D6EDAB000E9EBA0 /* statusbar-button-tags-on.tif */; };
 		65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B0190994D02E00565251 /* MainMenu.nib */; };
 		65E7B0200994D0AE00565251 /* Sidebar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 65E7B01E0994D0AE00565251 /* Sidebar.nib */; };
 		65E7B06B0994D5AA00565251 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E7B06A0994D5AA00565251 /* Core.m */; };
@@ -952,6 +954,8 @@
 		65E38D2D0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAInfoPaneMultipleSelectionView.m; sourceTree = "<group>"; };
 		65E38E510BFB390E000C1976 /* NSNumberFormatterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberFormatterAdditions.h; sourceTree = "<group>"; };
 		65E38E520BFB390E000C1976 /* NSNumberFormatterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberFormatterAdditions.m; sourceTree = "<group>"; };
+		65E744010D6EDAB000E9EBA0 /* statusbar-button-tags.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "statusbar-button-tags.tif"; sourceTree = "<group>"; };
+		65E744020D6EDAB000E9EBA0 /* statusbar-button-tags-on.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "statusbar-button-tags-on.tif"; sourceTree = "<group>"; };
 		65E7B01F0994D0AE00565251 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Sidebar.nib; sourceTree = "<group>"; };
 		65E7B06A0994D5AA00565251 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
 		65EB72140BE20D86007FF40C /* PAStatusBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBarButton.h; sourceTree = "<group>"; };
@@ -1962,6 +1966,8 @@
 				655541B10BF1F9C800D3AF8E /* statusbar-button-info-on.tif */,
 				65CF5E4D0BFF1A57006F7B2D /* statusbar-button-minus.pdf */,
 				6539B9FA0BE35A3B00B1D216 /* statusbar-button-plus.pdf */,
+				65E744010D6EDAB000E9EBA0 /* statusbar-button-tags.tif */,
+				65E744020D6EDAB000E9EBA0 /* statusbar-button-tags-on.tif */,
 				65CC15670BE0A87C00866AF7 /* statusbar-grip.tif */,
 			);
 			name = PAStatusBar;
@@ -2416,6 +2422,8 @@
 				655FBB920D4F841E0004CED7 /* TagFolder.icns in Resources */,
 				650C84190D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff in Resources */,
 				48E386760D6DC45300204CDB /* source-panel-images.tif in Resources */,
+				65E744030D6EDAB000E9EBA0 /* statusbar-button-tags.tif in Resources */,
+				65E744040D6EDAB000E9EBA0 /* statusbar-button-tags-on.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

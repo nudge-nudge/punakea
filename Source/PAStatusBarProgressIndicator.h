@@ -9,8 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import "PAStatusBarButtonCell.h"
 
+@class PAStatusBar;
 
 @interface PAStatusBarProgressIndicator : NSControl {
+	
+	PAStatusBar					*statusBar;
 
 	NSString					*identifier;
 	
@@ -24,6 +27,8 @@
 
 + (PAStatusBarProgressIndicator *)statusBarProgressIndicator;	/**< Use this for init */
 
+- (PAStatusBar *)statusBar;
+-(void)setStatusBar:(PAStatusBar *)sb;
 - (NSString *)identifier;
 - (void)setIdentifier:(NSString *)anIdentifier;
 - (NSControlSize)controlSize;

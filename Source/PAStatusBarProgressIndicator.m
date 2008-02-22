@@ -128,6 +128,16 @@ NSSize const STATUSBAR_PROGRESS_INDICATOR_PADDING = {5.0, 0.0};
 
 
 #pragma mark Accessors
+- (PAStatusBar *)statusBar
+{
+	return statusBar;
+}
+
+-(void)setStatusBar:(PAStatusBar *)sb
+{
+	statusBar = sb;
+}
+
 - (NSString *)identifier
 {
 	return identifier;
