@@ -35,6 +35,22 @@
 			   selector:@selector(editingDidEnd:)
 				   name:NSControlTextDidEndEditingNotification
 				 object:tagField];
+		
+		[nc addObserver:self
+			   selector:@selector(editingDidEnd:)
+				   name:NSWindowDidResignKeyNotification
+				 object:[self window]];
+		
+		[nc addObserver:self
+			   selector:@selector(editingDidEnd:)
+				   name:NSWindowDidMiniaturizeNotification
+				 object:[self window]];
+		
+		// call editingDidEnd on app termination to make sure tags are written
+		[nc addObserver:self
+			   selector:@selector(editingDidEnd:)
+				   name:NSApplicationWillTerminateNotification
+				 object:[NSApplication sharedApplication]];
     }
     return self;
 }
@@ -76,7 +92,6 @@
 	[diffSetToRemove minusSet:unchangedSet];
 	
 	// Write tags on files
-	// Write tags to files
 	if ([diffSetToRemove count] > 0)
 	{
 		for (NNTaggableObject* taggableObject in taggableObjects)
@@ -89,7 +104,6 @@
 			[taggableObject addTags:[diffSetToAdd allObjects]];
 	}
 }
-
 
 #pragma mark Accessors
 - (NSArray *)tags

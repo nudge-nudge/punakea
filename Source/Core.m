@@ -674,7 +674,7 @@
 																		   forKey:NSFilePosixPermissions];
 			success = [fileManager setAttributes:writableAttributes
 									ofItemAtPath:dir
-										   error:&errorw];
+										   error:&error];
 			
 			// set the icon
 			[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
