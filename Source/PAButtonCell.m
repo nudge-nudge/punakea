@@ -130,7 +130,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	NSShadow *shdw = [[NSShadow alloc] init];
 	
 	NSSize shadowOffset;
-	if([controlView isFlipped]) { shadowOffset = NSMakeSize(0,-1.5); } else { shadowOffset = NSMakeSize(0,1.5); }
+	if([controlView isFlipped]) { shadowOffset = NSMakeSize(0, -1); } else { shadowOffset = NSMakeSize(0, 1); }
 	[shdw setShadowOffset:shadowOffset];
 	[shdw setShadowColor:shadowColor];
 	[label addAttribute:NSShadowAttributeName
@@ -161,26 +161,23 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 		if([controlView isFlipped]) [bezelImage setFlipped:YES];
 		
 		NSRect imgRect;
-		NSRect destRect = cellFrame;
+		NSRect destRect;
 		
 		// Draw left edge
 		imgRect.origin = NSZeroPoint;
-		imgRect.size = NSMakeSize(7,15);		
-		destRect = cellFrame;
-		destRect.size.width = 7;		
+		imgRect.size = NSMakeSize(7, 15);		
+		destRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, 7, 15);
 		[bezelImage drawInRect:destRect fromRect:imgRect operation:NSCompositeSourceOver fraction:1.0];
 		
 		// Draw scaled background
-		imgRect.origin = NSMakePoint(7,0);
-		imgRect.size = NSMakeSize(1,15);
-		destRect = cellFrame;
-		destRect.origin.x += 7;
-		destRect.size.width -= 16;
+		imgRect.origin = NSMakePoint(7, 0);
+		imgRect.size = NSMakeSize(1, 15);
+		destRect = NSMakeRect(cellFrame.origin.x + 7, cellFrame.origin.y, cellFrame.size.width - 16, 15);
 		[bezelImage drawInRect:destRect fromRect:imgRect operation:NSCompositeSourceOver fraction:1.0];
 		
 		// Draw right edge
-		imgRect.origin = NSMakePoint(8,0);
-		imgRect.size = NSMakeSize(7,15);
+		imgRect.origin = NSMakePoint(8, 0);
+		imgRect.size = NSMakeSize(7, 15);
 		destRect = cellFrame;
 		destRect.origin.x = destRect.size.width - 8;
 		destRect.size.width = 7;

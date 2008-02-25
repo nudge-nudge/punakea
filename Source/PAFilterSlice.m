@@ -143,10 +143,9 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	// Show or hide buttons
 	[self updateButtons];
 	
-	NSEnumerator *enumerator = [buttons objectEnumerator];
-	PAButton *button;
 	PAButton *selectedButton = nil;
-	while(button = [enumerator nextObject])
+	
+	for(PAButton *button in buttons)
 	{
 		if([button isHighlighted])
 		{
@@ -158,7 +157,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	if(!selectedButton || [selectedButton superview] != self)
 	{
 		// Select the ALL tab
-		button = [buttons objectAtIndex:0];
+		PAButton *button = [buttons objectAtIndex:0];
 		[self buttonClick:button];
 	}
 }
@@ -194,7 +193,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 		if(hasResults)
 		{
 			NSRect buttonFrame = [button frame];
-			x += buttonFrame.size.width + FILTERSLICE_BUTTON_SPACING;
+			x += ceilf(buttonFrame.size.width) + FILTERSLICE_BUTTON_SPACING;
 		
 			if([button superview] != self) [self addSubview:button];
 			
