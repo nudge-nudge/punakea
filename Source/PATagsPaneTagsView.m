@@ -76,13 +76,17 @@
 	[diffSetToRemove minusSet:unchangedSet];
 	
 	// Write tags on files
-	if([diffSetToAdd count] > 0 || [diffSetToRemove count] > 0)
+	// Write tags to files
+	if ([diffSetToRemove count] > 0)
+	{
+		for (NNTaggableObject* taggableObject in taggableObjects)
+			[taggableObject removeTags:[diffSetToRemove allObjects]];
+	}
+	
+	if([diffSetToAdd count] > 0)
 	{
 		for(NNTaggableObject *taggableObject in taggableObjects)
-		{
-			[taggableObject removeTags:[diffSetToRemove allObjects]];
 			[taggableObject addTags:[diffSetToAdd allObjects]];
-		}
 	}
 }
 

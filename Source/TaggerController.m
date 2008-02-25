@@ -184,13 +184,16 @@ toTaggableObjects:(NSArray*)someTaggableObjects
 	[diffSetToRemove minusSet:unchangedSet];
 	
 	// Write tags to files
-	if([diffSetToAdd count] > 0 || [diffSetToRemove count] > 0)
+	if ([diffSetToRemove count] > 0)
+	{
+		for (NNTaggableObject* taggableObject in taggableObjects)
+			[taggableObject removeTags:[diffSetToRemove allObjects]];
+	}
+	
+	if([diffSetToAdd count] > 0)
 	{
 		for(NNTaggableObject *taggableObject in taggableObjects)
-		{
-			[taggableObject removeTags:[diffSetToRemove allObjects]];
 			[taggableObject addTags:[diffSetToAdd allObjects]];
-		}
 	}
 	
 }
