@@ -314,8 +314,6 @@
 		65C0E04409E3EF11006C5A7C /* PAResultsGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */; };
 		65C4890609E2C30F00A45A17 /* PAResultsOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */; };
 		65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */; };
-		65C8A1FF0BEB4D6400DC032F /* PATagAutocompleteWindowController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C8A1FD0BEB4D6400DC032F /* PATagAutocompleteWindowController.h */; };
-		65C8A2000BEB4D6400DC032F /* PATagAutocompleteWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C8A1FE0BEB4D6400DC032F /* PATagAutocompleteWindowController.m */; };
 		65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CA80100AAEEF8A002117C0 /* PAFilterButton.h */; };
 		65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA80110AAEEF8A002117C0 /* PAFilterButton.m */; };
 		65CB093B0BBBBDA800799E25 /* PASourceItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB09390BBBBDA800799E25 /* PASourceItemCell.h */; };
@@ -602,7 +600,6 @@
 				655631660BE3B099004D3B33 /* PABrowserWindow.h in CopyFiles */,
 				658AB8340BE60D4E0036FCA2 /* PATabPanel.h in CopyFiles */,
 				655FD6090BEA229C00095532 /* PATagSetPanel.h in CopyFiles */,
-				65C8A1FF0BEB4D6400DC032F /* PATagAutocompleteWindowController.h in CopyFiles */,
 				65BD569C0BF3155F00E202F8 /* PAInfoPaneSubview.h in CopyFiles */,
 				65BD56D70BF31BF600E202F8 /* PAInfoPaneSingleSelectionView.h in CopyFiles */,
 				65AA74BD0BF35D2C0054407D /* NSTextFieldAdditions.h in CopyFiles */,
@@ -930,8 +927,6 @@
 		65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsGroupCell.m; sourceTree = "<group>"; };
 		65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsOutlineView.h; sourceTree = "<group>"; };
 		65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsOutlineView.m; sourceTree = "<group>"; };
-		65C8A1FD0BEB4D6400DC032F /* PATagAutocompleteWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagAutocompleteWindowController.h; sourceTree = "<group>"; };
-		65C8A1FE0BEB4D6400DC032F /* PATagAutocompleteWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagAutocompleteWindowController.m; sourceTree = "<group>"; };
 		65CA80100AAEEF8A002117C0 /* PAFilterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilterButton.h; sourceTree = "<group>"; };
 		65CA80110AAEEF8A002117C0 /* PAFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilterButton.m; sourceTree = "<group>"; };
 		65CB09390BBBBDA800799E25 /* PASourceItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASourceItemCell.h; sourceTree = "<group>"; };
@@ -1906,8 +1901,6 @@
 		65C8A1FB0BEB4D3000DC032F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				65C8A1FD0BEB4D6400DC032F /* PATagAutocompleteWindowController.h */,
-				65C8A1FE0BEB4D6400DC032F /* PATagAutocompleteWindowController.m */,
 				6571138B0D5371A600076543 /* TagAutoCompleteController.h */,
 				6571138C0D5371A600076543 /* TagAutoCompleteController.m */,
 			);
@@ -2608,7 +2601,6 @@
 				655631670BE3B099004D3B33 /* PABrowserWindow.m in Sources */,
 				658AB8350BE60D4E0036FCA2 /* PATabPanel.m in Sources */,
 				655FD60A0BEA229C00095532 /* PATagSetPanel.m in Sources */,
-				65C8A2000BEB4D6400DC032F /* PATagAutocompleteWindowController.m in Sources */,
 				65BD569D0BF3155F00E202F8 /* PAInfoPaneSubview.m in Sources */,
 				65BD56D80BF31BF600E202F8 /* PAInfoPaneSingleSelectionView.m in Sources */,
 				65AA74BE0BF35D2C0054407D /* NSTextFieldAdditions.m in Sources */,

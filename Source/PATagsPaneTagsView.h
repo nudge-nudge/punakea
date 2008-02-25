@@ -12,7 +12,7 @@
 #import "NNTagging/NNSelectedTags.h"
 #import "NNTagging/NNTaggableObject.h"
 
-
+// TODO actually this is in total violation of the MVC pattern? does that matter? should have its own controller maybe
 @interface PATagsPaneTagsView : PAInfoPaneSubview {
 
 	IBOutlet NSTokenField				*tagField;

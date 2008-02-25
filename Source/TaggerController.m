@@ -5,17 +5,21 @@
 
 - (void)setupStatusBar;
 
+- (void)writeTags:(NSArray*)currentTags 
+  withInitialTags:(NSArray*)someInitialTags
+toTaggableObjects:(NSArray*)someTaggableObjects;
+
+- (NSArray *)initialTags;
+- (void)setInitialTags:(NSArray *)someTags;
+
+- (NNSelectedTags*)currentCompleteTagsInField;
+
 - (void)updateTags;
 - (void)updateManageFilesFlagOnTaggableObjects;
 - (void)updateTokenFieldEditable;
 
+- (NSTokenField*)tagField;
 - (float)discreteTokenFieldHeight:(float)theHeight;
-
-/**
-adds tag to tagField (use from "outside")
- @param tag tag to add 
- */
-- (void)addTagToField:(NNSimpleTag*)tag;
 
 - (void)itemsHaveChanged;							/**< called when items have changed */
 - (void)resetTaggerContent;							/**< resets the tagger window (called when window is closed) */
@@ -28,12 +32,14 @@ adds tag to tagField (use from "outside")
 @implementation TaggerController
 
 #pragma mark init + dealloc
-// TODO: Why are we using this non-designated initializer for a NSWindowController subclass?!
+// TODO: Why are we using this non-designated initializer for a NSWindowController subclass?! - because we are always loading the Tagger window ...
 - (id)init
 {
 	if (self = [super initWithWindowNibName:@"Tagger"])
 	{
-		items = [[NSMutableArray alloc] init];
+		taggableObjects = [[NSMutableArray alloc] init];
+		
+		[self setInitialTags:[NSArray array]];
 		
 		dropManager = [PADropManager sharedInstance];
 		
@@ -82,6 +88,17 @@ adds tag to tagField (use from "outside")
 		   selector:@selector(iconWasGenerated:)
 			   name:@"PAThumbnailManagerDidFinishGeneratingItemNotification"
 			 object:nil];
+	
+	// add observer for TagAutoCompleteController
+	[nc addObserver:self 
+		   selector:@selector(tagsHaveChanged:)
+			   name:NNSelectedTagsHaveChangedNotification
+			 object:[tagAutoCompleteController currentCompleteTagsInField]];
+	
+	[nc addObserver:self
+		   selector:@selector(editingDidEnd:)
+			   name:NSControlTextDidEndEditingNotification
+			 object:[self tagField]];
 	
 	// Check manage files
 	if(manageFilesAutomatically)
@@ -133,9 +150,14 @@ adds tag to tagField (use from "outside")
 
 - (void)dealloc
 {
+	// make sure the tags are written
+	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
+	withInitialTags:[self initialTags]
+  toTaggableObjects:taggableObjects];
+	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	[items release];
+	[taggableObjects release];
 	[headerCell release];
 	[tableView unregisterDraggedTypes];
 	[fileCell release];
@@ -144,9 +166,39 @@ adds tag to tagField (use from "outside")
 
 
 #pragma mark Actions
+- (void)writeTags:(NSArray*)currentTags 
+  withInitialTags:(NSArray*)someInitialTags
+toTaggableObjects:(NSArray*)someTaggableObjects
+{
+	// Tag sets
+	NSSet *initialTagSet = [NSSet setWithArray:someInitialTags];
+	NSSet *tagSet = [NSSet setWithArray:[[tagAutoCompleteController currentCompleteTagsInField] selectedTags]];
+	
+	// Get diff set (tags that have been added or removed)
+	NSMutableSet *unchangedSet = [NSMutableSet setWithSet:tagSet];
+	[unchangedSet intersectSet:initialTagSet];
+	
+	NSMutableSet *diffSetToAdd = [NSMutableSet setWithSet:tagSet];
+	[diffSetToAdd minusSet:unchangedSet];
+	
+	NSMutableSet *diffSetToRemove = [NSMutableSet setWithSet:initialTagSet];
+	[diffSetToRemove minusSet:unchangedSet];
+	
+	// Write tags to files
+	if([diffSetToAdd count] > 0 || [diffSetToRemove count] > 0)
+	{
+		for(NNTaggableObject *taggableObject in taggableObjects)
+		{
+			[taggableObject removeTags:[diffSetToRemove allObjects]];
+			[taggableObject addTags:[diffSetToAdd allObjects]];
+		}
+	}
+	
+}
+
 - (void)addTaggableObject:(NNTaggableObject *)anObject
 {
-	[items addObject:anObject];
+	[taggableObjects addObject:anObject];
 	
 	[self updateTokenFieldEditable];
 	[self updateManageFilesFlagOnTaggableObjects];
@@ -156,7 +208,7 @@ adds tag to tagField (use from "outside")
 
 - (void)addTaggableObjects:(NSArray *)theObjects
 {
-	[items addObjectsFromArray:theObjects];
+	[taggableObjects addObjectsFromArray:theObjects];
 
 	[self updateTokenFieldEditable];
 	[self updateManageFilesFlagOnTaggableObjects];
@@ -166,8 +218,8 @@ adds tag to tagField (use from "outside")
 
 - (void)setTaggableObjects:(NSArray *)theObjects
 {
-	[items release];
-	items = [theObjects mutableCopy];
+	[taggableObjects release];
+	taggableObjects = [theObjects mutableCopy];
 	
 	[self updateTokenFieldEditable];
 	[self updateManageFilesFlagOnTaggableObjects];
@@ -180,7 +232,7 @@ adds tag to tagField (use from "outside")
 	// only tags present on every object are shown
 	NSMutableSet *tagsOnAllObjects = [NSMutableSet set];
 	
-	NSEnumerator *itemsEnumerator = [items objectEnumerator];
+	NSEnumerator *itemsEnumerator = [taggableObjects objectEnumerator];
 	NNTaggableObject *taggableObject;
 	
 	// set all tags to tags on first object
@@ -205,8 +257,8 @@ adds tag to tagField (use from "outside")
 	[[self currentCompleteTagsInField] removeAllTags];
 	[[self currentCompleteTagsInField] addObjectsFromArray:[tagsOnAllObjects allObjects]];
 	
-	[[self window] makeFirstResponder:tagField];
-	
+	[self setInitialTags:[tagsOnAllObjects allObjects]];
+		
 	[self resizeTokenField];
 }
 
@@ -221,7 +273,7 @@ adds tag to tagField (use from "outside")
 	if([manageFilesButton state] == NSOnState)
 		manageFiles = YES;		
 	
-	NSEnumerator *e = [items objectEnumerator];
+	NSEnumerator *e = [taggableObjects objectEnumerator];
 	NNTaggableObject *object;
 	
 	while(object = [e nextObject])
@@ -230,9 +282,8 @@ adds tag to tagField (use from "outside")
 	}
 	
 	// Disable manage files button if there are any files present
-	if([items count] > 0 && manageFiles && [[self currentCompleteTagsInField] count] > 0 )
-		[manageFilesButton setEnabled:NO];
-		
+	if([taggableObjects count] > 0 && manageFiles && [[self currentCompleteTagsInField] count] > 0 )
+		[manageFilesButton setEnabled:NO];		
 }
 
 - (void)doubleAction:(id)sender
@@ -284,7 +335,7 @@ adds tag to tagField (use from "outside")
 	{
 		NNFile *file = [NNFile fileWithPath:filename];
 		
-		if (![items containsObject:file])
+		if (![taggableObjects containsObject:file])
 		{
 			[results addObject:file];
 		}
@@ -295,7 +346,7 @@ adds tag to tagField (use from "outside")
 
 - (void)removeFiles:(id)sender
 {
-	[items removeObjectsAtIndexes:[tableView selectedRowIndexes]];
+	[taggableObjects removeObjectsAtIndexes:[tableView selectedRowIndexes]];
 	
 	[self updateTokenFieldEditable];
 	
@@ -320,30 +371,31 @@ adds tag to tagField (use from "outside")
 	else
 		[dropManager setAlternateState:NO];
 	
-	// Make all objects perform an update so that they are moved
-	[self updateTags];
+	// Update manage files flag on taggable objects
+	[self updateManageFilesFlagOnTaggableObjects];
 }
 
 - (void)updateTokenFieldEditable
 {
-	if ([items count] > 0)
+	if ([taggableObjects count] > 0)
 	{
-		[tagField setEditable:YES];
-		[[self window] makeFirstResponder:tagField];
+		[[self tagField] setEditable:YES];
+		[[self window] makeFirstResponder:[self tagField]];
 	}
 	else
 	{
-		[tagField setEditable:NO];
+		[[self tagField] setEditable:NO];
 	}
 }
 
-- (void)validateConfirmButton
-{
-	if(!confirmButton)
-		return;
-	
-	[confirmButton setEnabled:([currentCompleteTagsInField count] > 0)];
-}
+// TODO what does tis do?
+//- (void)validateConfirmButton
+//{
+//	if(!confirmButton)
+//		return;
+//	
+//	[confirmButton setEnabled:([[self currentCompleteTagsInField] count] > 0)];
+//}
 
 #pragma mark Notifications
 -(void)iconWasGenerated:(NSNotification *)notification
@@ -356,75 +408,41 @@ adds tag to tagField (use from "outside")
 	}
 }
 
-
-#pragma mark tokenField delegate
-- (NSArray *)tokenField:(NSTokenField *)tokenField 
-	   shouldAddObjects:(NSArray *)tokens 
-				atIndex:(unsigned)idx
-{	
-	// forward call to super - this adds the tags to currentCompleteTagsInField
-	NSArray *returnedTokens = [super tokenField:tokenField shouldAddObjects:tokens atIndex:idx];
-	
+- (void)tagsHaveChanged:(NSNotification *)notification
+{
 	// Update manage files flag if first tag was entered
 	[self updateManageFilesFlagOnTaggableObjects];
-	
-	// Add tags to items
-	[items makeObjectsPerformSelector:@selector(addTags:) withObject:tokens];
 		
 	// resize field if neccessary
 	[self performSelector:@selector(resizeTokenField) 
 			   withObject:nil 
 			   afterDelay:0.05];
-	
-	// Forward to super
-	return returnedTokens;
 }
 
-
-- (void)controlTextDidChange:(NSNotification *)aNotification
+- (void)editingDidEnd:(NSNotification *)aNotification
 {
-	// adding tags is handled by tokenField:shouldAddObjects:atIndex,
-	// this method handles the deletion of tags
+	// DO THE ACTUAL WRITING OF TAGS TO FILES AFTER LOSING FOCUS
+	// this will help decrease the load on spotlight (which is currently very unstable)
 	
-	// [fieldEditor string] contains \uFFFC (OBJECT REPLACEMENT CHARACTER) for every token
-	NSDictionary *userInfo = [aNotification userInfo];
-	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
-	NSString *editorString = [fieldEditor string];
+	NSLog(@"writing %@ to %@ on %@",[[self currentCompleteTagsInField] selectedTags], [self initialTags], taggableObjects);
 	
-	// get a count of the tags by replacing the \ufffc occurrences
-	NSString *objectReplacementCharacter = [NSString stringWithUTF8String:"\ufffc"];
-	NSMutableString *mutableEditorString = [editorString mutableCopy];
-	unsigned int numberOfTokens = [mutableEditorString replaceOccurrencesOfString:objectReplacementCharacter
-																	   withString:@""
-																		  options:0
-																			range:NSMakeRange(0, [mutableEditorString length])];
-		
-	if (numberOfTokens < [currentCompleteTagsInField count])
-	{
-		// look for deleted tags
-		NSMutableArray *deletedTags = [NSMutableArray array];
-		
-		NSEnumerator *e = [[self currentCompleteTagsInField] objectEnumerator];
-		NNSimpleTag *tag;
-		
-		while (tag = [e nextObject])
-		{
-			if (![[[self tagField] objectValue] containsObject:tag])
-			{
-				[deletedTags addObject:tag];
-			}
-		}
-		
-		// now remove the tags to be deleted from currentCompleteTagsInField - to keep in sync with tagField
-		[[self currentCompleteTagsInField] removeObjectsInArray:deletedTags];
+	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
+	withInitialTags:[self initialTags]
+  toTaggableObjects:taggableObjects];
+	
+	// update inital tags to current tags - other changes have been written
+	NSArray *currentTags = [[[[self currentCompleteTagsInField] selectedTags] copy] autorelease];
+	[self setInitialTags:currentTags];
+}
 
-		// remove the deleted tags from all files
-		[items makeObjectsPerformSelector:@selector(removeTags:)
-												withObject:deletedTags];
+- (void)windowDidResignKey:(NSNotification *)notification
+{
+	[self editingDidEnd:notification];
+}
 
-		// resize tokenfield if neccessary
-		[self resizeTokenField];
-	}
+- (void)windowDidMiniaturize:(NSNotification *)notification
+{
+	[self editingDidEnd:notification];
 }
 
 - (void)resizeTokenField
@@ -501,14 +519,14 @@ adds tag to tagField (use from "outside")
 #pragma mark TableView Data Source
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [items count];
+	return [taggableObjects count];
 }
 
 -      	      (id)tableView:(NSTableView *)aTableView 
   objectValueForTableColumn:(NSTableColumn *)aTableColumn
 						row:(int)rowIndex
 {
-	return [items objectAtIndex:rowIndex];
+	return [taggableObjects objectAtIndex:rowIndex];
 }
 
 
@@ -518,7 +536,7 @@ adds tag to tagField (use from "outside")
    forTableColumn:(NSTableColumn *)aTableColumn 
 			  row:(int)rowIndex
 {
-	NNTaggableObject *taggableObject = [items objectAtIndex:rowIndex];
+	NNTaggableObject *taggableObject = [taggableObjects objectAtIndex:rowIndex];
 	NSString *value = anObject;
 	
 	[taggableObject renameTo:value errorWindow:[aTableView window]];
@@ -547,7 +565,7 @@ adds tag to tagField (use from "outside")
 	if(![dropManager acceptsSender:[info draggingSource]])
 		return NSDragOperationNone;
 	
-	int fileCount = [items count];
+	int fileCount = [taggableObjects count];
 
 	if (fileCount == 0)
 	{
@@ -575,7 +593,7 @@ adds tag to tagField (use from "outside")
 	
 	while (file = [e nextObject])
 	{
-		if (![items containsObject:file])
+		if (![taggableObjects containsObject:file])
 		{
 			[results addObject:file];
 		}
@@ -590,6 +608,16 @@ adds tag to tagField (use from "outside")
 
 
 #pragma mark Accessors
+- (NSTokenField*)tagField
+{
+	return [tagAutoCompleteController tagField];
+}
+
+- (NNSelectedTags*)currentCompleteTagsInField
+{
+	return [tagAutoCompleteController currentCompleteTagsInField];
+}
+
 - (void)setManageFiles:(BOOL)flag
 {
 	manageFilesAutomatically = NO;
@@ -609,6 +637,17 @@ adds tag to tagField (use from "outside")
 - (BOOL)isEditingTagsOnFiles
 {
 	return [manageFilesButton isHidden];
+}
+				 
+- (NSArray *)initialTags
+{
+	return initialTags;
+}
+
+- (void)setInitialTags:(NSArray *)someTags
+{
+	[initialTags release];
+	initialTags = [someTags retain];
 }
 
 @end

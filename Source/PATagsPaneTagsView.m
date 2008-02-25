@@ -8,6 +8,12 @@
 
 #import "PATagsPaneTagsView.h"
 
+@interface PATagsPaneTagsView (PrivateAPI)
+
+- (NSArray *)initialTags;
+- (void)setInitialTags:(NSArray *)someTags;
+
+@end
 
 @implementation PATagsPaneTagsView
 
@@ -17,7 +23,7 @@
     self = [super initWithFrame:frame];
     if(self)
 	{		
-		initialTags = [[NSArray alloc] init];
+		[self setInitialTags:[NSArray array]];
 		
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self 
@@ -96,9 +102,20 @@
 	[tagField setObjectValue:[selTags selectedTags]];
 	
 	// Update initialTags
-	initialTags = [someTags retain];
+	[self setInitialTags:someTags];
 	
 	[selTags release];
+}
+
+- (NSArray *)initialTags
+{
+	return initialTags;
+}
+
+- (void)setInitialTags:(NSArray *)someTags
+{
+	[initialTags release];
+	initialTags = [someTags retain];
 }
 
 - (NSString *)label

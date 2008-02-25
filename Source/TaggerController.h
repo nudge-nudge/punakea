@@ -1,7 +1,7 @@
 /* TaggerController */
 
 #import <Cocoa/Cocoa.h>
-#import "PATagAutocompleteWindowController.h"
+#import "TagAutoCompleteController.h"
 #import "NNTagging/NNTaggableObject.h"
 #import "PATypeAheadFind.h"
 #import "PADropManager.h"
@@ -10,24 +10,28 @@
 #import "PAThumbnailItem.h"
 #import "PAStatusBar.h"
 
-
-@interface TaggerController : PATagAutocompleteWindowController
+// TODO send controlTextDidEndEditing on app termination!
+@interface TaggerController : NSWindowController
 {	
-	IBOutlet NSTableView		*tableView;
-	IBOutlet PAStatusBar		*statusBar;
+	IBOutlet NSTableView				*tableView;
+	IBOutlet PAStatusBar				*statusBar;
 	
-	IBOutlet NSButton			*manageFilesButton;
+	IBOutlet NSButton					*manageFilesButton;
 	
-	BOOL						manageFiles;
-	BOOL						manageFilesAutomatically;
-	BOOL						showsManageFiles;
+	IBOutlet TagAutoCompleteController	*tagAutoCompleteController;
 	
-	PATaggerItemCell			*fileCell;
-	PATaggerHeaderCell			*headerCell;
+	NSArray								*initialTags;						/**< Tags that are present before editing. */
 	
-	NSMutableArray				*items;
+	BOOL								manageFiles;
+	BOOL								manageFilesAutomatically;
+	BOOL								showsManageFiles;
+	
+	PATaggerItemCell					*fileCell;
+	PATaggerHeaderCell					*headerCell;
+	
+	NSMutableArray						*taggableObjects;
 
-	PADropManager				*dropManager;
+	PADropManager						*dropManager;
 	
 }
 

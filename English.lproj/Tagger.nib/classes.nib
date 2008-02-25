@@ -1,38 +1,106 @@
-{
-    IBClasses = (
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = NSObject; LANGUAGE = ObjC; }, 
-        {CLASS = PAFileCell; LANGUAGE = ObjC; SUPERCLASS = NSTextFieldCell; }, 
-        {
-            CLASS = PAStatusBar; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {delegate = id; resizableSplitView = NSSplitView; }; 
-            SUPERCLASS = NSView; 
-        }, 
-        {
-            CLASS = PATagAutocompleteWindowController; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {confirmButton = NSButton; tagField = NSTokenField; }; 
-            SUPERCLASS = NSWindowController; 
-        }, 
-        {
-            CLASS = PATaggerBackgroundView; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {controller = TaggerController; }; 
-            SUPERCLASS = NSView; 
-        }, 
-        {CLASS = PATaggerTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
-        {
-            ACTIONS = {changeManageFilesFlag = id; }; 
-            CLASS = TaggerController; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {
-                manageFilesButton = NSButton; 
-                statusBar = PAStatusBar; 
-                tableView = NSTableView; 
-            }; 
-            SUPERCLASS = PATagAutocompleteWindowController; 
-        }
-    ); 
-    IBVersion = 1; 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>CLASS</key>
+			<string>TagAutoCompleteController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>tagField</key>
+				<string>NSTokenField</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSTextField</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSControl</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSObject</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>changeManageFilesFlag</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>TaggerController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>manageFilesButton</key>
+				<string>NSButton</string>
+				<key>statusBar</key>
+				<string>PAStatusBar</string>
+				<key>tableView</key>
+				<string>NSTableView</string>
+				<key>tagAutoCompleteController</key>
+				<string>TagAutoCompleteController</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSWindowController</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PATaggerTableView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSTableView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PAStatusBar</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>delegate</key>
+				<string>id</string>
+				<key>resizableSplitView</key>
+				<string>NSSplitView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PATaggerBackgroundView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>controller</key>
+				<string>TaggerController</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>
