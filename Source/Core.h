@@ -68,7 +68,6 @@
 
 - (IBAction)openFiles:(id)sender;
 - (IBAction)delete:(id)sender;
-- (IBAction)editTagsOnFiles:(id)sender;
 - (IBAction)selectAll:(id)sender;
 - (IBAction)tagSearch:(id)sender;
 

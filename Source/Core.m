@@ -628,6 +628,9 @@
 	BOOL isDirectory = NO;
 	NSString *dir = nil;
 	
+	BOOL success;
+	NSError *error;
+	
 	// Managed Folder
 	if ([userDefaults boolForKey:@"ManageFiles.ManagedFolder.Enabled"])
 	{	
@@ -666,9 +669,17 @@
 		{
 			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
 			
+			// make sure the directory is writable before setting the icon
+			NSDictionary *writableAttributes = [NSDictionary dictionaryWithObject:[NSNumber numberWithLong:448]
+																		   forKey:NSFilePosixPermissions];
+			success = [fileManager setAttributes:writableAttributes
+									ofItemAtPath:dir
+										   error:&errorw];
+			
+			// set the icon
 			[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
 										   forFile:dir
-										   options:NSExclude10_4ElementsIconCreationOption];
+										   options:0];
 		
 			if(generateContent)
 			{
