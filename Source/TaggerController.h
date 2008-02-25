@@ -10,7 +10,6 @@
 #import "PAThumbnailItem.h"
 #import "PAStatusBar.h"
 
-// TODO send controlTextDidEndEditing on app termination!
 @interface TaggerController : NSWindowController
 {	
 	IBOutlet NSTableView				*tableView;

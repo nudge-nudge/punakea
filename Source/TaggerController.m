@@ -32,7 +32,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 @implementation TaggerController
 
 #pragma mark init + dealloc
-// TODO: Why are we using this non-designated initializer for a NSWindowController subclass?! - because we are always loading the Tagger window ...
 - (id)init
 {
 	if (self = [super initWithWindowNibName:@"Tagger"])
@@ -387,15 +386,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects
 		[[self tagField] setEditable:NO];
 	}
 }
-
-// TODO what does tis do?
-//- (void)validateConfirmButton
-//{
-//	if(!confirmButton)
-//		return;
-//	
-//	[confirmButton setEnabled:([[self currentCompleteTagsInField] count] > 0)];
-//}
 
 #pragma mark Notifications
 -(void)iconWasGenerated:(NSNotification *)notification

@@ -36,7 +36,6 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 @implementation BrowserController
 
 #pragma mark Init + Dealloc
-// TODO: Why are we using this non-designated initializer???
 - (id)init
 {
 	if (self = [super initWithWindowNibName:@"Browser"])
