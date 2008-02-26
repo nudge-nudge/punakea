@@ -99,6 +99,12 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 			   name:NSControlTextDidEndEditingNotification
 			 object:[self tagField]];
 	
+	// call editingDidEnd on app termination to make sure tags are written
+	[nc addObserver:self
+		   selector:@selector(editingDidEnd:)
+			   name:NSApplicationWillTerminateNotification
+			 object:[NSApplication sharedApplication]];
+	
 	// Check manage files
 	if(manageFilesAutomatically)
 		manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];	
@@ -416,9 +422,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects
 {
 	// DO THE ACTUAL WRITING OF TAGS TO FILES AFTER LOSING FOCUS
 	// this will help decrease the load on spotlight (which is currently very unstable)
-	
-	NSLog(@"writing %@ to %@ on %@",[[self currentCompleteTagsInField] selectedTags], [self initialTags], taggableObjects);
-	
 	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
 	withInitialTags:[self initialTags]
   toTaggableObjects:taggableObjects];
