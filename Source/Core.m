@@ -607,7 +607,8 @@
 {
 	[self createDirectoriesIfNeeded:YES generateContent:YES];
 	
-	[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
+	if ([self appHasBrowser])
+		[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
 }
 
 //#pragma mark debug
