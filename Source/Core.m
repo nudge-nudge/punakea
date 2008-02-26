@@ -679,7 +679,7 @@
 			// set the icon
 			[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
 										   forFile:dir
-										   options:0];
+										   options:NSExclude10_4ElementsIconCreationOption];
 		
 			if(generateContent)
 			{
