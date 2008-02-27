@@ -14,6 +14,9 @@
 // data is NSString (filepath)
 - (NNTaggableObject*)fileDropData:(id)data
 {
+	if (![[NSFileManager defaultManager] fileExistsAtPath:data])
+		return nil;
+	
 	NNFile *file = [[NNFile alloc] initWithPath:data useStore:NNFinderCommentFinderStore];
 	return [file autorelease];
 }

@@ -498,6 +498,11 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
 	
 	[self updateTagCloudDisplayMessage];
+	
+	// TODO workaround for missing thumbs/icons
+	[self performSelector:@selector(reloadView)
+			   withObject:nil
+			   afterDelay:0.2];
 }
 
 - (void)reloadView

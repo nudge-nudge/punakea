@@ -45,7 +45,10 @@
 	
 	while (data = [e nextObject])
 	{
-		[newObjects addObject:[self fileDropData:data]];
+		NNTaggableObject *taggableObject = [self fileDropData:data];
+		
+		if (taggableObject != nil)
+			[newObjects addObject:taggableObject];
 	}
 	
 	return newObjects;
