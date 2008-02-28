@@ -183,9 +183,8 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	
 	// Restore selection
 	[self deselectAll:self];
-	NSEnumerator *enumerator = [[self selectedItems] objectEnumerator];
-	NNTaggableObject *item;
-	while(item = [enumerator nextObject])
+
+	for (NNTaggableObject *item in [self selectedItems])
 	{
 		row = [self rowForItem:item];
 		[self selectRow:row byExtendingSelection:YES];
@@ -326,16 +325,15 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 
 - (void)queryNote:(NSNotification *)note
 {	
-	if([[note name] isEqualToString:NNQueryDidStartGatheringNotification])
+	if ([[note name] isEqualToString:NNQueryDidStartGatheringNotification])
 	{
 		// Reset selectedItems
 		[self setSelectedItems:[NSMutableArray array]];
 		[self setSelectedItemsOfMultiItem:[NSMutableArray array]];
 	}
 
-	if([[note name] isEqualToString:NNQueryDidUpdateNotification] ||
-	   [[note name] isEqualToString:NNQueryGatheringProgressNotification])
-	{		
+	if ([[note name] isEqualToString:NNQueryDidUpdateNotification])
+	{				
 		[self saveSelection];
 		NSRect visibleRect = [self visibleRect];
 		
