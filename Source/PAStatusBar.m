@@ -24,9 +24,17 @@
 	{
 		items = [[NSMutableArray alloc] init];
 		
+		stringValue = nil;
+		filePath = nil;
+		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(frameDidChange:)
 													 name:NSViewFrameDidChangeNotification
+												   object:self];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(outlineViewSelectionDidChange:)
+													 name:PAResultsOutlineViewSelectionDidChangeNotification
 												   object:self];
 		
 		gotoButton = [[PAImageButton alloc] initWithFrame:NSMakeRect(0,0,12,12)];
@@ -48,6 +56,9 @@
 	
 	[gotoButton removeFromSuperviewWithoutNeedingDisplay];
 	[gotoButton release];
+	
+	[stringValue release];
+	[filePath release];
 	
 	[items release];
 	[super dealloc];
@@ -296,6 +307,15 @@
 	[self updateItems];
 }
 
+- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+	NSArray *selectedItems = [notification object];
+	
+	NNTaggableObject *taggableObject = [selectedItems objectAtIndex:0];
+	
+	[self setFilePath:[taggableObject path]];
+}
+
 
 #pragma mark Misc
 - (void)addItem:(NSView *)anItem
@@ -375,7 +395,15 @@
 #pragma mark Actions
 - (void)revealInFinder:(id)sender
 {
-	NSString *path = [[self stringValue] stringByExpandingTildeInPath];
+	NSString *path;
+	
+	if ([self filePath])
+		path = [self filePath];
+	else
+		path = [self stringValue];
+	
+	path = [path stringByExpandingTildeInPath];
+	
 	[[NSWorkspace sharedWorkspace] selectFile:path inFileViewerRootedAtPath:nil];
 }
 
@@ -421,6 +449,17 @@
 	[self setToolTip:nil];
 	
 	[self setNeedsDisplay:YES];
+}
+
+- (NSString *)filePath
+{
+	return filePath;
+}
+
+- (void)setFilePath:(NSString *)value;
+{
+	[filePath release];
+	filePath = [value retain];
 }
 
 - (BOOL)isFlipped

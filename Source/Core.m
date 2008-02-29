@@ -280,6 +280,7 @@
 		// File menu
 		if([item action] == @selector(addTagSet:)) return NO;
 		if([item action] == @selector(openFiles:)) return NO;
+		if([item action] == @selector(revealInFinder:)) return NO;
 		
 		// Edit menu
 		if([item action] == @selector(delete:)) return NO;
@@ -300,6 +301,19 @@
 	if([self appHasBrowser])
 	{
 		NSResponder *firstResponder = [[browserController window] firstResponder];
+		
+		// File menu
+		if([item action] == @selector(revealInFinder:))
+		{
+			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
+			{
+				PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
+				if([ov numberOfSelectedRows] == 1)
+					return YES;
+			}
+			
+			return NO;
+		}
 		
 		// Edit menu
 		if([item action] == @selector(delete:))
@@ -561,6 +575,11 @@
 	
 	[[self busyWindow] center];
 	[NSApp runModalForWindow:[self busyWindow]];
+}
+
+- (IBAction)revealInFinder:(id)sender
+{
+	[[browserController rightStatusBar] revealInFinder:self];
 }
 
 - (IBAction)toggleToolbarShown:(id)sender

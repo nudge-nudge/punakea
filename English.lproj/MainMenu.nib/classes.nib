@@ -75,6 +75,8 @@
 				<string>id</string>
 				<key>resetBrowser</key>
 				<string>id</string>
+				<key>revealInFinder</key>
+				<string>id</string>
 				<key>runToolbarCustomizationPalette</key>
 				<string>id</string>
 				<key>searchForTags</key>

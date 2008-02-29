@@ -822,8 +822,10 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		NSString *path = [[[file path] stringByAbbreviatingWithTildeInPath] stringByDeletingLastPathComponent];
 		
 		[rightStatusBar setStringValue:path];
+		[rightStatusBar setFilePath:[file path]];
 	} else {
 		[rightStatusBar setStringValue:nil];
+		[rightStatusBar setFilePath:nil];
 	}
 }
 
@@ -847,6 +849,11 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 - (PAStatusBar *)sourcePanelStatusBar
 {
 	return sourcePanelStatusBar;
+}
+
+- (PAStatusBar *)rightStatusBar
+{
+	return rightStatusBar;
 }
 
 - (PASourcePanel *)sourcePanel

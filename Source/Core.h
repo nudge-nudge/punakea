@@ -84,6 +84,8 @@
 
 - (IBAction)cleanTagDB:(id)sender;
 
+- (IBAction)revealInFinder:(id)sender;
+
 - (IBAction)toggleToolbarShown:(id)sender;
 - (IBAction)runToolbarCustomizationPalette:(id)sender;
 

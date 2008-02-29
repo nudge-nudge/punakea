@@ -10,6 +10,7 @@
 #import "PAStatusBarButton.h"
 #import "PAStatusBarProgressIndicator.h"
 #import "PAImageButton.h"
+#import "PAResultsOutlineView.h"
 
 
 @interface NSObject (PAStatusBarDelegate)
@@ -33,6 +34,7 @@
 	NSMutableArray				*items;
 	
 	NSString					*stringValue;
+	NSString					*filePath;
 	
 	PAImageButton				*gotoButton;
 	
@@ -46,7 +48,11 @@
 
 - (void)setAlternateState:(BOOL)flag;
 
+- (void)revealInFinder:(id)sender;
+
 - (NSString *)stringValue;
 - (void)setStringValue:(NSString *)value;
+- (NSString *)filePath;
+- (void)setFilePath:(NSString *)value;
 
 @end

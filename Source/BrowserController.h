@@ -89,6 +89,7 @@ extern unsigned const VERSION_FAVORITES_PLIST;
 - (PASplitView *)verticalSplitView;
 - (PASplitView *)horizontalSplitView;
 - (PAStatusBar *)sourcePanelStatusBar;
+- (PAStatusBar *)rightStatusBar;
 - (PASourcePanel *)sourcePanel;
 
 @end
