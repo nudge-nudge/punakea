@@ -272,8 +272,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[selectedIndexes addIndex:idx];
 		[selectedCells addObject:cell];
 		
-		if (![[outlineView selectedItems] containsObject:[items objectAtIndex:idx]])
-			[[outlineView selectedItems] addObject:[items objectAtIndex:idx]];
+		[outlineView addSelectedItem:[items objectAtIndex:idx]];
 		
 		[self scrollCellToVisibleAtRow:row column:column];
 		
@@ -281,7 +280,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[selectedIndexes removeIndex:idx];
 		[selectedCells removeObject:cell];
 		
-		[[outlineView selectedItems] removeObject:[items objectAtIndex:idx]];
+		[outlineView removeSelectedItem:[items objectAtIndex:idx]];
 	}
 	
 	// Post notification

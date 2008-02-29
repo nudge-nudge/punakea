@@ -224,12 +224,11 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		{
 			if([[self selectedRowIndexes] containsIndex:row])
 			{
-				if (![selectedItems containsObject:item])
-					[selectedItems addObject:item];
+				[self addSelectedItem:item];
 			}
 			else 
 			{
-				[selectedItems removeObject:item];
+				[self removeSelectedItem:item];
 			}
 		}
 	}
@@ -283,6 +282,17 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		[responder selectAll:sender];
 	else
 		[super selectAll:sender];
+}
+
+- (void)addSelectedItem:(NNTaggableObject *)item
+{
+	if (![selectedItems containsObject:item])
+		[selectedItems addObject:item];
+}
+
+- (void)removeSelectedItem:(NNTaggableObject *)item
+{
+	[selectedItems removeObject:item];
 }
 
 
@@ -579,16 +589,16 @@ needed for supporting dragging to trash
 	displayMode = mode;
 }
 
-- (NSMutableArray *)selectedItems
+- (NSArray *)selectedItems
 {
-	//[self saveSelection];
-	return selectedItems;
+	return [NSArray arrayWithArray:selectedItems];
 }
 
-- (void)setSelectedItems:(NSMutableArray *)theItems
+- (void)setSelectedItems:(NSArray *)theItems
 {
 	if(selectedItems) [selectedItems release];
-	selectedItems = [theItems retain];
+	
+	selectedItems = [[NSMutableArray alloc] initWithArray:theItems];
 }
 
 

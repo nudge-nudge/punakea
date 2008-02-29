@@ -12,19 +12,21 @@
 #import "NNTagging/NNTaggableObject.h"
 #import "PAThumbnailItem.h"
 
+@class PAResultsOutlineView;
+
 
 @interface PAResultsMultiItemMatrix : NSMatrix {
 
-	NSOutlineView			*outlineView;
+	PAResultsOutlineView			*outlineView;
 
-	NSMutableArray			*items;
-	NSCell					*multiItemCell;
+	NSMutableArray					*items;
+	NSCell							*multiItemCell;
 	
-	NSCell					*selectedCell;
-	NSMutableIndexSet		*selectedIndexes;
-	NSMutableArray			*selectedCells;
+	NSCell							*selectedCell;
+	NSMutableIndexSet				*selectedIndexes;
+	NSMutableArray					*selectedCells;
 	
-	NSEvent					*mouseDownEvent;
+	NSEvent							*mouseDownEvent;
 	
 }
 
