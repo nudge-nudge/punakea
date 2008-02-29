@@ -233,8 +233,6 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 			}
 		}
 	}
-	
-	NSLog(@"%i", [selectedItems count]);
 }
 
 - (void)restoreSelection
@@ -243,9 +241,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	
 	// Start with an empty selection	
 	[self deselectAll:self];
-	
-	NSLog(@"restore");
-	
+
 	// Only do something if there are results
 	if ([self numberOfRows] > 0) 
 	{
@@ -311,44 +307,16 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 {	
 	if ([[note name] isEqualToString:NNQueryDidStartGatheringNotification])
 	{
-		// Reset selectedItems
-		//[self setSelectedItems:[NSMutableArray array]];
-		//[self setSelectedItemsOfMultiItem:[NSMutableArray array]];
+		// Nothing yet
 	}
 
 	if ([[note name] isEqualToString:NNQueryDidUpdateNotification])
 	{				
-		//[self saveSelection];
 		NSRect visibleRect = [self visibleRect];
-		
-		//NSDictionary *userInfo = [note userInfo];
-		
-		/*NSArray *userInfoAddedItems = [userInfo objectForKey:(id)kMDQueryUpdateAddedItems];
-		NSEnumerator *enumerator = [userInfoAddedItems objectEnumerator];
-		NNQueryItem *item;
-		while(item = [enumerator nextObject]) {
-			NSLog(@"added: %@",[item valueForAttribute:(id)kMDItemDisplayName]);
-		}*/
-		
-		/*NSArray *userInfoRemovedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
-
-		for (NNTaggableObject *item in userInfoRemovedItems)
-		{
-			if([[self selectedItems] containsObject:item])
-				[[self selectedItems] removeObject:item];
-			
-			if([[self selectedItemsOfMultiItem] containsObject:item])
-				[[self selectedItemsOfMultiItem] removeObject:item];
-			
-			NSLog(@"ri: %@", [item displayName]);
-		}*/
-		
+				
 		[self reloadData];
 		
 		[self scrollPoint:visibleRect.origin];
-		//[self restoreSelection];
-
-		//[[self window] makeFirstResponder:self];
 	}
 }
 
