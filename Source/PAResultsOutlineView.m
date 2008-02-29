@@ -228,15 +228,31 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		{
 			id item = [self itemAtRow:row];
 			
-			if (![item isKindOfClass:[NSArray class]]) 
-			{
-				if([[self selectedRowIndexes] containsIndex:row])
-				{
+			if([[self selectedRowIndexes] containsIndex:row])
+			{			
+				// Add to selection
+				
+				if (![item isKindOfClass:[NSArray class]]) 
+				{					
 					[self addSelectedItem:item];
 				}
-				else 
+			}
+			else
+			{
+				// Remove from selection
+				
+				if (![item isKindOfClass:[NSArray class]])
 				{
 					[self removeSelectedItem:item];
+				}
+				else
+				{
+					for (NNTaggableObject *subitem in (NSArray *)item)
+					{
+						[self removeSelectedItem:subitem];
+					}
+					
+					[[self responder] setSelectedItems:[NSArray array]];
 				}
 			}
 		}
@@ -302,6 +318,11 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 - (void)removeSelectedItem:(NNTaggableObject *)item
 {
 	[selectedItems removeObject:item];
+}
+
+- (unsigned)numberOfSelectedItems
+{
+	return [selectedItems count];
 }
 
 

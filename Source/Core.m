@@ -308,7 +308,7 @@
 			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 			{
 				PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
-				if([ov numberOfSelectedRows] == 1)
+				if([ov numberOfSelectedItems] == 1)
 					return YES;
 			}
 			
@@ -321,7 +321,7 @@
 			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 			{
 				PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
-				if([ov numberOfSelectedRows] > 0)
+				if([ov numberOfSelectedItems] > 0)
 					return YES;
 			}
 			
@@ -340,7 +340,7 @@
 			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 			{
 				PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
-				if([ov numberOfSelectedRows] > 0)
+				if([ov numberOfSelectedItems] > 0)
 					return YES;
 			}
 			

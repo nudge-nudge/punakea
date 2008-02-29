@@ -10,6 +10,9 @@
 #import "NNTagging/NNQuery.h"
 
 
+@class PAResultsMultiItemMatrix;
+
+
 /** Notification is posted when the selection changed.
 	userInfo dictionary: Key "SelectedItems" contains the current selection */
 extern NSString *PAResultsOutlineViewSelectionDidChangeNotification;
@@ -31,20 +34,20 @@ typedef enum _PAResultsDisplayMode
 
 @interface PAResultsOutlineView : NSOutlineView
 {
-	NNQuery					*query;
-	PAResultsDisplayMode	displayMode;
-	
+	NNQuery							*query;
+	PAResultsDisplayMode			displayMode;
+			
 	// Stores the last up or down arrow function key to get the direction of key navigation
-	unsigned int			lastUpDownArrowFunctionKey;
+	unsigned int					lastUpDownArrowFunctionKey;
 	
 	// If not nil, forward keyboard events to responder
-	NSView					*responder;
+	PAResultsMultiItemMatrix		*responder;
 	
 	// A collection of selected NNTaggableObjects. OutlineView stores them for various responders,
 	// so that they are able to restore their selection if necessary.
-	NSMutableArray			*selectedItems;
+	NSMutableArray					*selectedItems;
 	
-	BOOL					skipSaveSelection;				/**< Indicates that OutlineView should not save its selection. */
+	BOOL							skipSaveSelection;				/**< Indicates that OutlineView should not save its selection. */
 }
 
 - (NNQuery *)query;
@@ -62,6 +65,8 @@ typedef enum _PAResultsDisplayMode
 
 - (void)addSelectedItem:(NNTaggableObject *)item;
 - (void)removeSelectedItem:(NNTaggableObject *)item;
+
+- (unsigned)numberOfSelectedItems;
 
 - (NSArray *)selectedItems;
 - (void)setSelectedItems:(NSArray *)theItems;
