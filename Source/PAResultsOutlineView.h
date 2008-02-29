@@ -63,7 +63,7 @@ typedef enum _PAResultsDisplayMode
 - (void)addSelectedItem:(NNTaggableObject *)item;
 - (void)removeSelectedItem:(NNTaggableObject *)item;
 
-- (NSMutableArray *)selectedItems;
-- (void)setSelectedItems:(NSMutableArray *)theItems;
+- (NSArray *)selectedItems;
+- (void)setSelectedItems:(NSArray *)theItems;
 
 @end

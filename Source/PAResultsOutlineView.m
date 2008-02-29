@@ -216,19 +216,28 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 
 - (void)saveSelection
 {
-	for(unsigned row = 0; row < [self numberOfRows]; row++)
+	// Just clear the selection if there are no tags selected.
+	if ([[query tags] count] == 0)
 	{
-		id item = [self itemAtRow:row];
-		
-		if (![item isKindOfClass:[NSArray class]]) 
+		[self setSelectedItems:[NSArray array]];
+	}
+	else
+	{	
+		// Otherwise proceed. 
+		for(unsigned row = 0; row < [self numberOfRows]; row++)
 		{
-			if([[self selectedRowIndexes] containsIndex:row])
+			id item = [self itemAtRow:row];
+			
+			if (![item isKindOfClass:[NSArray class]]) 
 			{
-				[self addSelectedItem:item];
-			}
-			else 
-			{
-				[self removeSelectedItem:item];
+				if([[self selectedRowIndexes] containsIndex:row])
+				{
+					[self addSelectedItem:item];
+				}
+				else 
+				{
+					[self removeSelectedItem:item];
+				}
 			}
 		}
 	}
