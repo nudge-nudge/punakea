@@ -17,6 +17,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 
 - (void)setupButtons;
 - (void)update;
+- (void)performUpdate;
 - (void)updateButtons;
 
 @end
@@ -140,6 +141,15 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 
 - (void)update
 {
+	// Give query some time to gather results. So we may try to keep the current filter selection.
+	
+	[self performSelector:@selector(performUpdate)
+			   withObject:self
+			   afterDelay:0.2];
+}
+
+- (void)performUpdate
+{
 	// Show or hide buttons
 	[self updateButtons];
 	
@@ -154,12 +164,14 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 		}
 	}
 	
-	if(!selectedButton || [selectedButton superview] != self)
+	if(!selectedButton)
 	{
-		// Select the ALL tab
-		PAButton *button = [buttons objectAtIndex:0];
-		[self buttonClick:button];
+		// Select the ALL tab by default
+		selectedButton = [buttons objectAtIndex:0];
 	}
+	
+	// Perform filtering
+	[self buttonClick:selectedButton];
 }
 
 - (void)updateButtons
@@ -171,9 +183,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	
 	NSMutableArray *orderedItems = [[spotlightDict objectForKey:@"orderedItems"] mutableCopy];*/
 	
-	NSEnumerator *enumerator = [buttons objectEnumerator];
-	PAFilterButton *button;
-	while(button = [enumerator nextObject])
+	for (PAFilterButton *button in buttons)
 	{
 		NSDictionary *filter = [button filter];
 	
@@ -192,14 +202,24 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 		
 		if(hasResults)
 		{
+			// Adjust button's frame and make visible if needed
+			
 			NSRect buttonFrame = [button frame];
 			x += ceilf(buttonFrame.size.width) + FILTERSLICE_BUTTON_SPACING;
 		
-			if([button superview] != self) [self addSubview:button];
+			if([button superview] != self)
+				[self addSubview:button];
 			
 			[button setFrame:frame];
-		} else {
-			if([button superview] == self) [button removeFromSuperview];
+		}
+		else
+		{
+			// Deselect and hide button			
+			
+			[button highlight:NO];			
+			
+			if([button superview] == self) 
+				[button removeFromSuperview];
 		}
 	}
 	
@@ -211,9 +231,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	//[[self window] makeFirstResponder:self];
 
 	// Highlight active filter button
-	NSEnumerator *enumerator = [buttons objectEnumerator];
-	NSButton *button;
-	while(button = [enumerator nextObject])
+	for (NSButton *button in buttons)
 	{
 		if(button != sender)
 		{
@@ -235,12 +253,15 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	// NNQuery's bundleResults:byAttributes:objectWrapping!! Only a few are there yet! TODO!
 	if([[buttons objectAtIndex:0] isEqualTo:sender])
 	{
-		[query filterResults:NO usingValues:nil forBundlingAttribute:nil
+		[query filterResults:NO 
+				 usingValues:nil
+		forBundlingAttribute:nil
 	   newBundlingAttributes:nil];
 	} else {
-		[query filterResults:YES usingValues:[filter objectForKey:@"filterValues"]
+		[query filterResults:YES
+				 usingValues:[filter objectForKey:@"filterValues"]
 		forBundlingAttribute:[filter objectForKey:@"filterBundlingAttribute"]
-				   newBundlingAttributes:[filter objectForKey:@"filterNewBundlingAttributes"]];
+	   newBundlingAttributes:[filter objectForKey:@"filterNewBundlingAttributes"]];
 	}
 	
 	// Set display mode
