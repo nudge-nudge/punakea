@@ -44,9 +44,7 @@ typedef enum _PAResultsDisplayMode
 	// so that they are able to restore their selection if necessary.
 	NSMutableArray			*selectedItems;
 	
-	// Collection of NNTaggableObjects that have been selected in a MultiItemMatrix. Workaround
-	// as those matrixes are released on reloadData and lose their selectedItems.
-	NSMutableArray			*selectedItemsOfMultiItem;
+	BOOL					skipSaveSelection;				/**< Indicates that OutlineView should not save its selection. */
 }
 
 - (NNQuery *)query;
@@ -61,11 +59,8 @@ typedef enum _PAResultsDisplayMode
 
 - (void)saveSelection;
 - (void)restoreSelection;
-- (NSArray *)visibleSelectedItems;
 
 - (NSMutableArray *)selectedItems;
 - (void)setSelectedItems:(NSMutableArray *)theItems;
-- (NSMutableArray *)selectedItemsOfMultiItem;
-- (void)setSelectedItemsOfMultiItem:(NSMutableArray *)theItems;
 
 @end

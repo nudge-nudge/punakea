@@ -64,7 +64,7 @@
 		[matrix setDelegate:[controlView delegate]];
 		
 		[matrix setItems:items];	
-		[matrix setSelectedItems:[controlView selectedItemsOfMultiItem]];
+		[matrix setSelectedItems:[controlView selectedItems]];
 		[controlView addSubview:matrix];
 	}
 	else

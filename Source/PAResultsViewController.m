@@ -287,6 +287,9 @@
 			[NSException raise:NSInternalInconsistencyException
 						format:@"delegate does not implement clearVisibleTags"];
 		}
+		
+		// Focus OutlineView
+		[[outlineView window] makeFirstResponder:outlineView];
 	}
 	else 
 	{
@@ -649,12 +652,9 @@
 	}
 }
 
-- (void)deleteFilesForVisibleSelectedItems:(id)sender
+- (void)deleteFilesForSelectedItems:(id)sender
 {
-	NSEnumerator *enumerator = [[outlineView visibleSelectedItems] objectEnumerator];
-	
-	NNTaggableObject *item;
-	while(item = [enumerator nextObject])
+	for (NNTaggableObject *item in [outlineView selectedItems])
 	{
 		[item moveToTrash:YES errorWindow:[outlineView window]];
 	}

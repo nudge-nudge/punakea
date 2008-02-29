@@ -29,7 +29,7 @@
         {CLASS = PAResultsOutlineView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
         {CLASS = PAResultsTableColumn; LANGUAGE = ObjC; SUPERCLASS = NSTableColumn; }, 
         {
-            ACTIONS = {deleteFilesForVisibleSelectedItems = id; setGroupingAttributes = id; }; 
+            ACTIONS = {deleteFilesForSelectedItems = id; setGroupingAttributes = id; }; 
             CLASS = PAResultsViewController; 
             LANGUAGE = ObjC; 
             OUTLETS = {outlineView = PAResultsOutlineView; }; 

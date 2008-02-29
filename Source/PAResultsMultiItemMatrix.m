@@ -272,7 +272,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[selectedIndexes addIndex:idx];
 		[selectedCells addObject:cell];
 		
-		[[outlineView selectedItemsOfMultiItem] addObject:[items objectAtIndex:idx]];
+		if (![[outlineView selectedItems] containsObject:[items objectAtIndex:idx]])
+			[[outlineView selectedItems] addObject:[items objectAtIndex:idx]];
 		
 		[self scrollCellToVisibleAtRow:row column:column];
 		
@@ -280,7 +281,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[selectedIndexes removeIndex:idx];
 		[selectedCells removeObject:cell];
 		
-		[[outlineView selectedItemsOfMultiItem] removeObject:[items objectAtIndex:idx]];
+		[[outlineView selectedItems] removeObject:[items objectAtIndex:idx]];
 	}
 	
 	// Post notification
@@ -1202,14 +1203,13 @@ needed for supporting dragging to trash
 
 - (void)setSelectedItems:(NSArray *)theSelectedItems
 {
-	NSEnumerator *enumerator = [theSelectedItems objectEnumerator];
-	NNTaggableObject *item;
-	
 	[selectedIndexes removeAllIndexes];
 	
-	while(item = [enumerator nextObject])
+	for (NNTaggableObject *item in theSelectedItems)
 	{
-		[selectedIndexes addIndex:[items indexOfObjectIdenticalTo:item]];
+		unsigned idx = [items indexOfObjectIdenticalTo:item];
+		if (idx != NSNotFound)
+			[selectedIndexes addIndex:idx];
 	}
 	
 	[self displayCellsForItems];

@@ -55,7 +55,7 @@
 - (IBAction)setGroupingAttributes:(id)sender;
 
 - (void)deleteDraggedItems;
-- (void)deleteFilesForVisibleSelectedItems:(id)sender;
+- (void)deleteFilesForSelectedItems:(id)sender;
 
 - (PAResultsOutlineView *)outlineView;
 

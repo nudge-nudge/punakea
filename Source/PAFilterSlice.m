@@ -208,7 +208,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 
 - (void)buttonClick:(id)sender
 {
-	[[self window] makeFirstResponder:self];
+	//[[self window] makeFirstResponder:self];
 
 	// Highlight active filter button
 	NSEnumerator *enumerator = [buttons objectEnumerator];
@@ -252,8 +252,6 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	}
 	
 	[outlineView reloadData]; // TODO needed?
-	[outlineView deselectAll:self];
-	[outlineView setSelectedItemsOfMultiItem:[NSMutableArray array]];
 	
 	// Scrolling - if item is an array, it handles scrolling itself
 	/*if(![[outlineView itemAtRow:[outlineView selectedRow]] isKindOfClass:[NSArray class]])

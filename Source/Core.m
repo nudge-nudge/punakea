@@ -437,7 +437,7 @@
 	if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 	{
 		PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
-		[[ov target] performSelector:@selector(deleteFilesForVisibleSelectedItems:)];
+		[[ov target] performSelector:@selector(deleteFilesForSelectedItems:)];
 	}
 	
 	if([firstResponder isMemberOfClass:[PASourcePanel class]])

@@ -57,7 +57,8 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	// Misc
 	[self setDisplayMode:PAListMode];
 	[self setSelectedItems:[NSMutableArray array]];
-	[self setSelectedItemsOfMultiItem:[NSMutableArray array]];
+	
+	skipSaveSelection = NO;
 }
 
 - (void)dealloc
@@ -65,7 +66,6 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	if(selectedItems) [selectedItems release];
-	if(selectedItemsOfMultiItem) [selectedItemsOfMultiItem release];
 	
 	[super dealloc];
 }
@@ -158,38 +158,18 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 
 - (void)reloadData
 {
+	// Change global flag
+	skipSaveSelection = YES;
+	
     while ([[self subviews] count] > 0)
     {
 		[[[self subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
     }
 	[self setResponder:nil];
-	
-	// Save selected items - outlineview only stores indexes of selected rows. thus selection is
-	// incorrect when adding an item above selection. we'll do this by hand as workaround
-	[self setSelectedItems:[NSMutableArray array]];
-	
-	NSIndexSet *selectedRowIndexes = [self selectedRowIndexes];
-	int row = [selectedRowIndexes firstIndex];
-	
-	while(row != NSNotFound)
-	{
-		[[self selectedItems] addObject:[self itemAtRow:row]];
-		
-		row = [selectedRowIndexes indexGreaterThanIndex:row];
-	}
-    
+	  
 	// Forward reload request to super
 	[super reloadData];
-	
-	// Restore selection
-	[self deselectAll:self];
-
-	for (NNTaggableObject *item in [self selectedItems])
-	{
-		row = [self rowForItem:item];
-		[self selectRow:row byExtendingSelection:YES];
-	}	
-	
+		
 	// Restore group's state from user defaults
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];	
@@ -202,6 +182,15 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 				[self expandItem:item];
 		}
 	}
+	
+	// Restore selection
+	[self restoreSelection];	
+	
+	// Change global flag
+	skipSaveSelection = NO;
+	
+	// Now call notification handler that selection may have changed
+	[self selectionDidChange:nil];
 }
 
 - (void)viewWillMoveToWindow:(NSWindow *)newWindow
@@ -231,76 +220,65 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	{
 		id item = [self itemAtRow:row];
 		
-		if([[self selectedRowIndexes] containsIndex:row])
+		if (![item isKindOfClass:[NSArray class]]) 
 		{
-			//if (![selectedItems containsObject:item])
-			[[self selectedItems] addObject:item];
-		}
-		else 
-		{
-			[[self selectedItems] removeObject:item];
+			if([[self selectedRowIndexes] containsIndex:row])
+			{
+				if (![selectedItems containsObject:item])
+					[selectedItems addObject:item];
+			}
+			else 
+			{
+				[selectedItems removeObject:item];
+			}
 		}
 	}
+	
+	NSLog(@"%i", [selectedItems count]);
 }
 
 - (void)restoreSelection
 {
-	/*[self deselectAll:self];		
-	NSEnumerator *itemsEnumerator = [[self selectedItems] objectEnumerator];
-	NNTaggableObject *item;
-	while(item = [itemsEnumerator nextObject])
-	{	
-		for(int i = 0; i < [self numberOfRows]; i++)
-		{
-			id thisItem = [self itemAtRow:i];
-			
-			// If this is our item, select it
-			if([thisItem isEqualTo:item])
+	skipSaveSelection = YES;	
+	
+	// Start with an empty selection	
+	[self deselectAll:self];
+	
+	NSLog(@"restore");
+	
+	// Only do something if there are results
+	if ([self numberOfRows] > 0) 
+	{
+		// There may be a new result set with less items, so we need to check which items are still valid
+		NSMutableArray *validSelectedItems = [NSMutableArray array];
+		
+		for (NNTaggableObject *item in selectedItems)
+		{			
+			for(int i = 0; i < [self numberOfRows]; i++)
 			{
-				int row = [self rowForItem:thisItem];
-				[self selectRow:row byExtendingSelection:YES];
-				break;
-			}
-			
-			// If this is an array, check if it contains our item
-			if([thisItem isKindOfClass:[NSArray class]])
-			{
-				if([thisItem containsObject:item])
-				{
+				id thisItem = [self itemAtRow:i];
+				
+				// If this is our item, select it.
+				// If it's an array, check if it contains our item.
+				if ([thisItem isEqualTo:item] ||
+					([thisItem isKindOfClass:[NSArray class]] && [thisItem containsObject:item]))
+				{					
 					int row = [self rowForItem:thisItem];
+					
 					[self selectRow:row byExtendingSelection:YES];
+					
+					[validSelectedItems addObject:item];
+					
 					break;
 				}
 			}
 		}
-	}*/
-}
-
-- (NSArray *)visibleSelectedItems
-{
-	[self saveSelection];
-	
-	NSMutableArray *selItems = [NSMutableArray array];
-	
-	for(unsigned row = 0; row < [self numberOfRows]; row++)
-	{
-		id item = [self itemAtRow:row];
 		
-		if([[self selectedRowIndexes] containsIndex:row])
-		{
-			if([item isKindOfClass:[NSArray class]] && [self responder])
-			{
-				NSArray *responderItems = [[self responder] selectedItems];
-				[selItems addObjectsFromArray:responderItems];
-			}
-			else
-			{
-				[selItems addObject:item];		
-			}
-		}
+		// Update selected items
+		[self setSelectedItems:validSelectedItems];
 	}
 	
-	return selItems;
+	skipSaveSelection = NO;
 }
 
 - (void)selectAll:(id)sender
@@ -315,12 +293,18 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 #pragma mark Notifications
 - (void)selectionDidChange:(NSNotification *)notification
 {
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[self visibleSelectedItems]
-														 forKey:@"SelectedItems"];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:PAResultsOutlineViewSelectionDidChangeNotification 
-														object:self
-													  userInfo:userInfo];
+	// Do not send notification if OutlineView is currently reloading data.
+	if(!skipSaveSelection)
+	{
+		[self saveSelection];
+		
+		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[self selectedItems]
+															 forKey:@"SelectedItems"];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:PAResultsOutlineViewSelectionDidChangeNotification 
+															object:self
+														  userInfo:userInfo];
+	}
 }
 
 - (void)queryNote:(NSNotification *)note
@@ -328,16 +312,16 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	if ([[note name] isEqualToString:NNQueryDidStartGatheringNotification])
 	{
 		// Reset selectedItems
-		[self setSelectedItems:[NSMutableArray array]];
-		[self setSelectedItemsOfMultiItem:[NSMutableArray array]];
+		//[self setSelectedItems:[NSMutableArray array]];
+		//[self setSelectedItemsOfMultiItem:[NSMutableArray array]];
 	}
 
 	if ([[note name] isEqualToString:NNQueryDidUpdateNotification])
 	{				
-		[self saveSelection];
+		//[self saveSelection];
 		NSRect visibleRect = [self visibleRect];
 		
-		NSDictionary *userInfo = [note userInfo];
+		//NSDictionary *userInfo = [note userInfo];
 		
 		/*NSArray *userInfoAddedItems = [userInfo objectForKey:(id)kMDQueryUpdateAddedItems];
 		NSEnumerator *enumerator = [userInfoAddedItems objectEnumerator];
@@ -346,22 +330,23 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 			NSLog(@"added: %@",[item valueForAttribute:(id)kMDItemDisplayName]);
 		}*/
 		
-		NSArray *userInfoRemovedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
-		NSEnumerator *enumerator = [userInfoRemovedItems objectEnumerator];
-		NNTaggableObject *item;
-		while(item = [enumerator nextObject])
+		/*NSArray *userInfoRemovedItems = [userInfo objectForKey:(id)kMDQueryUpdateRemovedItems];
+
+		for (NNTaggableObject *item in userInfoRemovedItems)
 		{
 			if([[self selectedItems] containsObject:item])
 				[[self selectedItems] removeObject:item];
 			
 			if([[self selectedItemsOfMultiItem] containsObject:item])
 				[[self selectedItemsOfMultiItem] removeObject:item];
-		}
+			
+			NSLog(@"ri: %@", [item displayName]);
+		}*/
 		
 		[self reloadData];
 		
 		[self scrollPoint:visibleRect.origin];
-		[self restoreSelection];
+		//[self restoreSelection];
 
 		//[[self window] makeFirstResponder:self];
 	}
@@ -400,7 +385,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		   [[self selectedRowIndexes] count] > 0)
 		{			
 			if([[self selectedRowIndexes] count] > 0)
-				[[self target] deleteFilesForVisibleSelectedItems:self];
+				[[self target] deleteFilesForSelectedItems:self];
 			
 			return YES;
 		}
@@ -636,17 +621,6 @@ needed for supporting dragging to trash
 {
 	if(selectedItems) [selectedItems release];
 	selectedItems = [theItems retain];
-}
-
-- (NSMutableArray *)selectedItemsOfMultiItem
-{
-	return selectedItemsOfMultiItem;
-}
-
-- (void)setSelectedItemsOfMultiItem:(NSMutableArray *)theItems
-{
-	if(selectedItemsOfMultiItem) [selectedItemsOfMultiItem release];
-	selectedItemsOfMultiItem = [theItems retain];
 }
 
 
