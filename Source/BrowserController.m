@@ -20,6 +20,7 @@
 - (BOOL)paneWithIdentifierIsVisible:(NSString *)identifier;
 
 - (void)loadFavorites;
+- (void)loadUserDefaults;
 
 - (NSString *)pathOfFavoritesFile;
 
@@ -96,11 +97,6 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	// Load User Defaults
 	[self loadUserDefaults];
-}
-
-- (void)windowDidLoad
-{
-	[[self window] makeFirstResponder:[browserViewController tagCloud]];
 }
 
 - (void)setupToolbar

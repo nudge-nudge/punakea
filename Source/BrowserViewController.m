@@ -103,7 +103,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[splitView setAutosaveName:@"PASplitView Configuration BrowserSplitView" defaults:@"0 0 200 200 0 0 0 200 200 0"];
 	
 	[self showResults];
-	[[[self view] window] setInitialFirstResponder:tagCloud];
 }	
 
 - (void)dealloc

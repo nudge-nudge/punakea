@@ -624,10 +624,14 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+	// Ensure all necessary directories are ready
 	[self createDirectoriesIfNeeded:YES generateContent:YES];
 	
 	if ([self appHasBrowser])
-		[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
+	{
+		// Select all items of library
+		[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];		
+	}
 }
 
 //#pragma mark debug

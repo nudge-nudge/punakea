@@ -202,6 +202,11 @@
 			<string>NSWindow</string>
 		</dict>
 		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>revealInFinder</key>
+				<string>id</string>
+			</dict>
 			<key>CLASS</key>
 			<string>PAStatusBar</string>
 			<key>LANGUAGE</key>

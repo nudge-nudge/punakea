@@ -288,7 +288,11 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	}*/
 	[outlineView scrollPoint:NSZeroPoint];
 	
-	[[self window] makeFirstResponder:outlineView];
+	// Focus outlineView or tag cloud, depending on number of selected tags
+	if ([[[controller query] tags] count] > 0)
+		[[self window] makeFirstResponder:outlineView];
+	else
+		[[self window] makeFirstResponder:[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] tagCloud]];
 }
 
 
