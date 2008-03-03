@@ -34,8 +34,13 @@ adds all the tags in [controller visibleTags]
 - (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin;
 - (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin;
 
+- (NNTag*)selectedTag;
+- (void)setSelectedTag:(NNTag*)aTag;
+
 - (PATagButton*)activeButton;
 - (void)setActiveButton:(PATagButton*)aTag;
+
+- (void)displayActiveButton;
 
 /**
 determines the oigin point for the next tag button to display;
@@ -150,7 +155,7 @@ calculates the starting point in the next row according to the height of all the
 	[self updateButtons];
 	[self setFrame:[self calcFrame]];
 	[self updateViewHierarchy];
-	[self setActiveButton:nil];
+	[self displayActiveButton];
 	[self scrollToTop];
 }
 
@@ -422,21 +427,11 @@ calculates the starting point in the next row according to the height of all the
 	[self addSubview:tagButton];
 }
 
-- (void)selectTag:(NNTag*)tag
+- (void)displayActiveButton
 {
-	// make sure all buttons are updated
-	[self handleTagsChange];
+	PATagButton *tagButton = [tagButtonDict objectForKey:[[self selectedTag] name]];
 	
-	PATagButton *button = [tagButtonDict objectForKey:[tag name]];
-	[self setActiveButton:button];
-}
-
-// work around until tagcloud supports tag renaming correctly
-- (void)removeActiveTagButton
-{
-	NNTag *activeTag = [activeButton genericTag];
-	[activeButton removeFromSuperview];
-	[tagButtonDict removeObjectForKey:[activeTag name]];
+	[self setActiveButton:tagButton];
 }
 		
 #pragma mark calculation
@@ -558,6 +553,17 @@ calculates the starting point in the next row according to the height of all the
 	return tagButtonDict;
 }
 
+- (NNTag*)selectedTag
+{
+	return selectedTag;
+}
+
+- (void)setSelectedTag:(NNTag*)aTag
+{
+	[selectedTag release];
+	selectedTag = [aTag retain];
+}
+
 - (void)setTagButtonDict:(NSMutableDictionary*)aDict
 {
 	[aDict retain];
@@ -595,6 +601,31 @@ calculates the starting point in the next row according to the height of all the
 	[displayMessage release];
 	[message retain];
 	displayMessage = message;
+}
+
+#pragma mark functionality
+- (void)selectTag:(NNTag*)tag
+{
+	// remember selected tag
+	[self setSelectedTag:tag];
+	
+	// make sure all buttons are updated
+	[self handleTagsChange];
+	
+	PATagButton *button = [tagButtonDict objectForKey:[tag name]];
+	[self setActiveButton:button];
+}
+
+// work around until tagcloud supports tag renaming correctly
+- (void)removeActiveTagButton
+{
+	NNTag *activeTag = [activeButton genericTag];
+	
+	if (activeTag != nil)
+	{
+		[activeButton removeFromSuperview];
+		[tagButtonDict removeObjectForKey:[activeTag name]];
+	}
 }
 
 #pragma mark event handling

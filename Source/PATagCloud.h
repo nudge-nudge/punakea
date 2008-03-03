@@ -34,7 +34,8 @@ displays all [datasource visibleTags] in a nice tag cloud view
 	id								datasource;
 
 	NSMutableDictionary				*tagButtonDict; /**< holds the current controls in the view */
-	PATagButton						*activeButton; /**< currently selected tag */
+	NNTag							*selectedTag; /**< currently selected tag */
+	PATagButton						*activeButton; /**< currently selected tagButton */
 	
 	NSPoint							pointForNextTagRect; /**< saves the point for the next tag to be displayed */
 	int								tagPosition; /**< holds the position where the new line starts */
