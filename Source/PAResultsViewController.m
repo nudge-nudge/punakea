@@ -32,7 +32,7 @@
 		
 		dropManager = [PADropManager sharedInstance];
 		
-		relatedTags = [[NNRelatedTags alloc] initWithSelectedTags:selectedTags query:query];
+		relatedTags = [[NNRelatedTags alloc] initWithQuery:query];
 		
 		draggedItems = nil;
 		

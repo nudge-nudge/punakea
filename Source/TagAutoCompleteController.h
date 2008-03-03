@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNTags.h"
 #import "NNTagging/NNSelectedTags.h"
-#import "NNTagging/NNRelatedTagsStandalone.h"
 #import "PATypeAheadFind.h"
 
 
