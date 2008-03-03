@@ -150,6 +150,10 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 
 - (void)performUpdate
 {
+	// Break if view is not available
+	if (![self canDraw])
+		return;	
+	
 	// Show or hide buttons
 	[self updateButtons];
 	
@@ -175,7 +179,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 }
 
 - (void)updateButtons
-{
+{	
 	float x = FILTERSLICE_PADDING.width;
 
 	/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
