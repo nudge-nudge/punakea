@@ -140,7 +140,7 @@
 		
 		NSShadow *shdw = [[[NSShadow alloc] init] autorelease];
 		NSSize shadowOffset;
-		if([controlView isFlipped]) { shadowOffset = NSMakeSize(0,-1.5); } else { shadowOffset = NSMakeSize(0,1.5); }
+		if([controlView isFlipped]) { shadowOffset = NSMakeSize(0, -1); } else { shadowOffset = NSMakeSize(0, 1); }
 		[shdw setShadowOffset:shadowOffset];
 		[shdw setShadowColor:[NSColor colorWithCalibratedWhite:0.95 alpha:1.0]];
 		
