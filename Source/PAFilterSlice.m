@@ -142,7 +142,6 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 - (void)update
 {
 	// Give query some time to gather results. So we may try to keep the current filter selection.
-	
 	[self performSelector:@selector(performUpdate)
 			   withObject:self
 			   afterDelay:0.2];
