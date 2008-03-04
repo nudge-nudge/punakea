@@ -410,9 +410,11 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
 
 	if([theEvent type] == NSKeyDown)
-	{						
-		// Forward request to responder
-		if([self responder])
+	{			
+		// Forward request to responder,
+		// except: Backspace key - called NSDeleteCharacter!! - action: clear latest selected tag
+		if([self responder] &&
+			key != NSDeleteCharacter)
 		{
 			return [[self responder] keyDown:theEvent];
 		}
