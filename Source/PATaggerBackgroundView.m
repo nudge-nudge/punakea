@@ -32,11 +32,12 @@
 - (void)drawRect:(NSRect)aRect
 {	
 	aRect = [self bounds];
-
-	[[NSColor clearColor] set];
+	
+	[[NSColor windowBackgroundColor] set];
 	NSBezierPath *path = [NSBezierPath bezierPathWithRect:aRect];
 	[path fill];
 
+	// Fill with gradient
 	CTGradient *gradient = [CTGradient unifiedSelectedGradient];
 	[gradient fillRect:aRect angle:90.0];
 }
