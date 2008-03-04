@@ -79,8 +79,6 @@ action called on dropping files to FileBox
 	[[self window] setActivatesLastFrontApp:NO];
 	// show Tagger - creates if needed
 	id core = [[NSApplication sharedApplication] delegate];
-	[core showTagger:self];
-	TaggerController *taggerController = [core taggerController];
 	
 	// Check whether to manage files or not
 	BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
@@ -89,9 +87,9 @@ action called on dropping files to FileBox
     if (flags & NSAlternateKeyMask)
 	{
 		manageFiles = !manageFiles;
-		[taggerController setManageFiles:manageFiles];
 	}
 	
+	[core showTagger:self enableManageFiles:manageFiles];
 	[core showTaggerForObjects:[fileBox objects]];
 }
 
