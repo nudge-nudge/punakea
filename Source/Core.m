@@ -551,7 +551,7 @@
 - (IBAction)showTaggerForObjects:(NSArray*)taggableObjects
 {
 	[self showTagger:self];
-	[[self taggerController] setTaggableObjects:taggableObjects];
+	[[self taggerController] addTaggableObjects:taggableObjects];
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 

@@ -26,15 +26,11 @@
 	
 	PASidebarTableViewDropController *popularTagTableController;
 	PASidebarTableViewDropController *recentTagTableController;
-	
-	TaggerController *taggerController; /**< there is at most one instance at any time */
 }
 
 - (void)newTaggableObjectsHaveBeenDropped;
 
 - (IBAction)tagClicked:(id)sender;
-
-- (id)taggerController;
 
 - (void)appShouldStayFront;
 - (BOOL)mouseInSidebarWindow;
