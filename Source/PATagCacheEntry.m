@@ -70,7 +70,7 @@
 	[lock unlock];
 }		
 
-- (PACacheResult)hasFiletype:(NSString*)filetype forDate:(NSCalendarDate*)date
+- (PACacheResult)hasFiletype:(NSString*)filetype forDate:(NSDate*)date
 {
 	PACacheResult result = 0;
 	

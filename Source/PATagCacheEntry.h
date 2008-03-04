@@ -32,6 +32,6 @@ enum
 
 - (void)setHasFiletype:(NSString*)filetype toValue:(BOOL)hasFiletype;
 
-- (PACacheResult)hasFiletype:(NSString*)filetype forDate:(NSCalendarDate*)date;
+- (PACacheResult)hasFiletype:(NSString*)filetype forDate:(NSDate*)date;
 
 @end
