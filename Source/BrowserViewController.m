@@ -628,6 +628,9 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// reset maincontroller
 	[mainController reset];
 	
+	// reset selected tag
+	[self displaySelectedTag:nil];
+	
 	// display all tags
 	[self setDisplayTags:[tags tags]];
 }
