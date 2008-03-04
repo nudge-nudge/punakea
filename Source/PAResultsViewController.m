@@ -164,8 +164,8 @@
 #pragma mark actions
 - (void)handleTagActivation:(NNTag*)tag
 {
-	[tag incrementClickCount];
 	[selectedTags addTag:tag];
+	[tag incrementClickCount];
 }
 
 // this behaves differently than handleTagActivation:

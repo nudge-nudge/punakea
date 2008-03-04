@@ -663,7 +663,7 @@
 		48186F3A0BE4C7BE000B4638 /* NNFilterEngine-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "NNFilterEngine-Info.plist"; sourceTree = "<group>"; };
 		48186F490BE4C834000B4638 /* NNFilterEngine.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NNFilterEngine.h; sourceTree = "<group>"; };
 		48186F4A0BE4C834000B4638 /* NNFilterEngine.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NNFilterEngine.m; sourceTree = "<group>"; };
-		48186F4B0BE4C834000B4638 /* NNObjectFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = NNObjectFilter.h; path = Frameworks/NNFilterEngine/NNObjectFilter.h; sourceTree = "<group>"; };
+		48186F4B0BE4C834000B4638 /* NNObjectFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NNObjectFilter.h; sourceTree = "<group>"; };
 		48186F4C0BE4C834000B4638 /* NNObjectFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NNObjectFilter.m; sourceTree = "<group>"; };
 		48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NNDistributedObjectProtocols.h; sourceTree = "<group>"; };
 		481A642F0ABFD16F005516E7 /* LoginItemsAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LoginItemsAE.c; sourceTree = "<group>"; };
@@ -1302,6 +1302,7 @@
 			children = (
 				48186F490BE4C834000B4638 /* NNFilterEngine.h */,
 				48186F4A0BE4C834000B4638 /* NNFilterEngine.m */,
+				48186F4B0BE4C834000B4638 /* NNObjectFilter.h */,
 				48186F4C0BE4C834000B4638 /* NNObjectFilter.m */,
 				48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */,
 			);
@@ -1745,7 +1746,6 @@
 				6540FA570AEE0F5C00EF51F3 /* MultiItem Stuff */,
 				65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */,
 				65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */,
-				48186F4B0BE4C834000B4638 /* NNObjectFilter.h */,
 				65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */,
 				65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */,
 				488CBBDF0AC9676C00F6D20E /* PAResultsViewController.h */,
