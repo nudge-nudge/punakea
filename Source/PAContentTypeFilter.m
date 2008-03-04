@@ -28,16 +28,6 @@
 		
 		selectedTags = [[NNSelectedTags alloc] init];
 		query = [[NNQuery alloc] initWithTags:selectedTags];
-
-		[[NSNotificationCenter defaultCenter] addObserver:self 
-												 selector:@selector(queryNote:) 
-													 name:NNQueryGatheringProgressNotification 
-												   object:query];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self 
-												 selector:@selector(queryNote:) 
-													 name:NNQueryDidFinishGatheringNotification 
-												   object:query];
 		
 		filterLock = [[NSLock alloc] init];
 		
