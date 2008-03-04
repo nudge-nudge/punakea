@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNTag.h"
 #import "NNTagging/NNTagSet.h"
+#import "NNTagging/NNTagStoreManager.h"
 
 
 @interface PASmartFolder : NSObject {

@@ -14,35 +14,53 @@
 + (NSString *)smartFolderFilenameForTag:(NNTag *)tag
 {
 	NSMutableDictionary *sf = [NSMutableDictionary dictionary];
-	[sf setObject:[NSNumber numberWithInt:0] forKey:@"CompatibleVersion"];
+	[sf setObject:[NSNumber numberWithInt:1] forKey:@"CompatibleVersion"];
 	
-	NSString *rawQuery = [tag query];	
-	[sf setObject:rawQuery forKey:@"RawQuery"];	
+	NSString *rawQuery = [NSString stringWithFormat:@"(((%@))) &amp;&amp; (true)",[tag query]];
+	[sf setObject:rawQuery forKey:@"RawQuery"];
+	
+	NSMutableDictionary *rawQueryDict = [NSMutableDictionary dictionary];
+	[rawQueryDict setObject:[NSNumber numberWithBool:YES] forKey:@"FinderFilesOnly"];
+	[rawQueryDict setObject:rawQuery forKey:@"RawQuery"];
+	[rawQueryDict setObject:[NSArray arrayWithObject:@"kMDQueryScopeComputer"] forKey:@"SearchScopes"];
+	[rawQueryDict setObject:[NSNumber numberWithBool:YES] forKey:@"UserFilesOnly"];
 	
 	// Search criteria are needed for editing the folder later on in Finder
-	NSMutableDictionary *criteria = [NSMutableDictionary dictionary];
+	NSMutableDictionary *searchCriteria = [NSMutableDictionary dictionary];
 	
+	[searchCriteria setObject:@"" forKey:@"AnyAttributeContains"];
+		
 	NSString *currentFolderPath = @"~";
 	NSMutableArray *currentFolderPathArray = [NSMutableArray arrayWithObject:[currentFolderPath stringByExpandingTildeInPath]];
-	[criteria setObject:currentFolderPathArray forKey:@"CurrentFolderPath"];
+	[searchCriteria setObject:currentFolderPathArray forKey:@"CurrentFolderPath"];
 	
-	[criteria setObject:[NSNumber numberWithLongLong:1396926573] forKey:@"FXScope"];
+	[searchCriteria setObject:[NSNumber numberWithLongLong:1396926573] forKey:@"FXScope"];
 	
-	NSMutableArray *scopeArrayOfPaths = [NSMutableArray arrayWithObject:@"kMDQueryScopeHome"];
-	[criteria setObject:scopeArrayOfPaths forKey:@"FXScopeArrayOfPaths"];
+	NSMutableArray *scopeArrayOfPaths = [NSMutableArray arrayWithObject:@"kMDQueryScopeComputer"];
+	[searchCriteria setObject:scopeArrayOfPaths forKey:@"FXScopeArrayOfPaths"];
 	
 	NSMutableDictionary *criteriaSlice = [NSMutableDictionary dictionary];
-	[criteriaSlice setObject:@"kMDItemFinderComment" forKey:@"FXAttribute"];
-	[criteriaSlice setObject:@"Othr" forKey:@"FXSliceKind"];
-	[criteriaSlice setObject:@"S:**" forKey:@"Operator"];
 	
-	NSString *value = @"@";
-	[criteriaSlice setObject:[value stringByAppendingString:[[tag name] stringByAppendingString:@";"]] forKey:@"Value"];
+	NSMutableArray *criteria = [NSMutableArray array];
+	[criteria addObject:@"kMDItemFinderComment"];
+	[criteria addObject:[NSNumber numberWithInt:100]];
+	[criteria addObject:[NSNumber numberWithInt:104]];
+	[criteriaSlice setObject:criteria forKey:@"criteria"];
+	
+	NSString *tagPrefix = [[NNTagStoreManager defaultManager] tagPrefix];
+	NSMutableArray *displayValues = [NSMutableArray array];
+	[displayValues addObject:@"Spotlight-Kommentar"];
+	[displayValues addObject:@"contains"];
+	[displayValues addObject:[NSString stringWithFormat:@"%@%@",tagPrefix,[tag name]]];
+	[criteriaSlice setObject:displayValues forKey:@"displayValues"];
+	
+	[criteriaSlice setObject:[NSNumber numberWithInt:0] forKey:@"rowType"];
+	[criteriaSlice setObject:[NSArray array] forKey:@"subrows"];
 	
 	NSMutableArray *criteriaSlices = [NSMutableArray arrayWithObject:criteriaSlice];
-	[criteria setObject:criteriaSlices forKey:@"FXCriteriaSlices"];
+	[searchCriteria setObject:criteriaSlices forKey:@"FXCriteriaSlices"];
 	
-	[sf setObject:criteria forKey:@"SearchCriteria"];
+	[sf setObject:searchCriteria forKey:@"SearchCriteria"];
 	
 	// Output file to temp dir
 	NSString *filename = NSTemporaryDirectory();
