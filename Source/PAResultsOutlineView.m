@@ -441,7 +441,16 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		}
 		
 		// Disable forwarding of alphanumeric keys to super (otherwise typeahead find starts)
-		if((key >= 48 && key <= 122) || key == 27) return;  
+		if((key >= 48 && key <= 122) || key == 27)
+			return;  
+		
+		// Handle tab character by hand, as otherwise - with Leopard - editing begins.
+		if(key == NSTabCharacter)
+		{
+			NSView *nextValidKeyView = [self nextValidKeyView];			
+			[[self window] makeFirstResponder:nextValidKeyView];			
+			return;
+		}
 	}
 	
 	[super keyDown:theEvent];

@@ -467,4 +467,9 @@
 	return YES;
 }
 
+- (BOOL)canBecomeKeyView
+{
+	return NO;
+}
+
 @end
