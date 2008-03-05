@@ -56,17 +56,22 @@
 	
 	NSColor *textColor = [NSColor blackColor];
 	
-	if([self isHighlighted] &&
-	   [[[controlView window] firstResponder] isDescendantOf:[controlView superview]] &&
-	   [[controlView window] isKeyWindow]) 
+	// isDescendantOf may fail
+	@try
 	{
-		// This depends on whether it is used in an OutlineView or a TableView or somewhere else
-		if([controlView isKindOfClass:[NSOutlineView class]])
+		if([self isHighlighted] &&
+		   [[[controlView window] firstResponder] isDescendantOf:[controlView superview]] &&
+		   [[controlView window] isKeyWindow]) 
 		{
-			if(![[(NSOutlineView *)controlView itemAtRow:[controlView editedRow]] isEqualTo:item])
-				textColor = [NSColor whiteColor];
+			// This depends on whether it is used in an OutlineView or a TableView or somewhere else
+			if([controlView isKindOfClass:[NSOutlineView class]])
+			{
+				if(![[(NSOutlineView *)controlView itemAtRow:[controlView editedRow]] isEqualTo:item])
+					textColor = [NSColor whiteColor];
+			}
 		}
 	}
+	@catch(NSException *e) {}
 	
 	[fontAttributes setObject:textColor forKey:NSForegroundColorAttributeName];	
 	[fontAttributes setObject:[NSFont systemFontOfSize:11] forKey:NSFontAttributeName];
@@ -96,6 +101,7 @@
 	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 170, cellFrame.origin.y + 2)
 	  	withAttributes:fontAttributes];
 }
+
 
 #pragma mark Renaming Stuff
 - (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent

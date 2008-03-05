@@ -287,9 +287,6 @@
 			[NSException raise:NSInternalInconsistencyException
 						format:@"delegate does not implement clearVisibleTags"];
 		}
-		
-		// Focus OutlineView
-		[[outlineView window] makeFirstResponder:outlineView];
 	}
 	else 
 	{

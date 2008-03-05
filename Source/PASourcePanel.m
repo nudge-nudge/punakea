@@ -73,8 +73,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	//[super highlightSelectionInClipRect:clipRect];
 }
 
--(void)_drawDropHighlightOnRow:(int)rowIndex
+// WE DOT NEED THIS HACK ON LEOPARD ANY MORE
+
+/*-(void)_drawDropHighlightOnRow:(int)rowIndex
 {
+	NSLog(@"on row");
+	
 	NSSize offset = NSMakeSize(2.0, 2.0);
 	
 	NSRect drawRect = [self rectOfRow:rowIndex];
@@ -101,8 +105,10 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[self drawRow:rowIndex clipRect:drawRect];
 }
 
-- (void)_drawDropHighlightBetweenUpperRow:(int)inUpper andLowerRow:(int)inLower atOffset:(float)inOffset
+- (void)_drawDropHighlightBetweenUpperRow:(int)inUpper andLowerRow:(int)inLower onRow:(int)theRow atOffset:(float)inOffset
 {	
+	NSLog(@"between");
+	
 	// Remember lineWidth	float lineWidth = [NSBezierPath defaultLineWidth];
 	float lineWidth = [NSBezierPath defaultLineWidth];
 	[NSBezierPath setDefaultLineWidth:2.0];
@@ -141,7 +147,10 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[path stroke];
 	
 	[NSBezierPath setDefaultLineWidth:lineWidth];
-}
+}*/
+
+// Also new for Leopard, also private
+/* +(id)_dropHighlightBackgroundColor {} */
 
 
 #pragma mark Mouse Events
@@ -198,20 +207,25 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 												 selector:@selector(beginEditing)
 												   object:nil];
 		
-		int count = [[self selectedRowIndexes] count];
-		if([self selectedRow] == mouseRow && count <= 1)
+		// Do only something if this row is not being edited and the user wants to
+		// cancel the editing by clicking again on the item
+		if ([self editedRow] != mouseRow)
 		{
-			// perform editing like finder
-			[self performSelector:@selector(beginEditing)
-			           withObject:nil
-					   afterDelay:doubleClickThreshold];   
-		}
-		else if([[self selectedRowIndexes] containsIndex:mouseRow])
-		{
-			// wait to see if there is a double-click: if not, select the row as usual
-			[self performSelector:@selector(selectOnlyRowIndexes:)
-					   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
-					   afterDelay:doubleClickThreshold];
+			int count = [[self selectedRowIndexes] count];
+			if([self selectedRow] == mouseRow && count <= 1)
+			{
+				// perform editing like finder
+				[self performSelector:@selector(beginEditing)
+						   withObject:nil
+						   afterDelay:doubleClickThreshold];   
+			}
+			else if([[self selectedRowIndexes] containsIndex:mouseRow])
+			{
+				// wait to see if there is a double-click: if not, select the row as usual
+				[self performSelector:@selector(selectOnlyRowIndexes:)
+						   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
+						   afterDelay:doubleClickThreshold];
+			}
 		}
 		
 		// we still need to pass the event to super, to handle things like dragging, but 

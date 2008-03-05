@@ -71,4 +71,6 @@ typedef enum _PAResultsDisplayMode
 - (NSArray *)selectedItems;
 - (void)setSelectedItems:(NSArray *)theItems;
 
+- (BOOL)isEditingRow:(int)row;
+
 @end

@@ -146,7 +146,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 }
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
-{
+{	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
 	NSOutlineView *ov = (NSOutlineView *)[notification object];
@@ -283,14 +283,18 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	NNTagSet		*tagSet = nil;
 	id				draggedObject = nil;
 	
+	// Allow dragging only to FAVORITES group, everything else is read-only	
 	if(!([[sourceItem value] isEqualTo:@"FAVORITES"] ||
 		 [sourceItem isDescendantOfValue:@"FAVORITES"]))
-	{
-		// Allow dragging only to FAVORITES group
+	{		
 		return NSDragOperationNone;
 	}
 	
-	// [FILE DROP] check if dragged object can be tagged and is to be dropped on a favorite
+	// Deny dragging to group header
+	if ([[sourceItem value] isEqualToString:@"FAVORITES"] && isDroppedOnItem && idx == -1)
+		return NSDragOperationNone;
+	
+	// File Drop - Check if dragged object can be tagged and is to be dropped on a favorite
 	NSDragOperation op = [dropManager performedDragOperation:[info draggingPasteboard]];
 	if (op != NSDragOperationNone 
 		&& isDroppedOnItem 
@@ -348,10 +352,9 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		return NSDragOperationNone;
 	}
 	else
-	{
+	{		
 		// Deny adding duplicates
-		// Set drag action to MOVE if source is self (reordering of items)
-		
+		// Set drag action to MOVE if source is self (reordering of items)		
 		if([sourceItem hasChildContainingObject:draggedObject])
 		{
 		   if([info draggingSource] == ov && !isDroppedOnItem)
@@ -368,44 +371,46 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		 acceptDrop:(id <NSDraggingInfo>)info 
 			   item:(id)item 
 		 childIndex:(int)idx
-{
+{	
 	BOOL isDroppedOnItem = idx==NSOutlineViewDropOnItemIndex;
 	
-	NNTag		*tag = nil;
-	NNTagSet	*tagSet = nil;
-	id			draggedObject = nil;
+	NNTag			*tag = nil;
+	NNTagSet		*tagSet = nil;
+	id				draggedObject = nil;
 	
-	// [FILE DROP] check if dropManager can handle drop -> assign tags
+	PASourceItem	*sourceItem = (PASourceItem *)item;
+	PASourceItem	*newItem = nil;
+	
+	// Check if Drop Manager can handle drop
 	NSDragOperation op = [dropManager performedDragOperation:[info draggingPasteboard]];
 	
-	if (op != NSDragOperationNone 
-		&& ![[info draggingSource] isMemberOfClass:[PATagButton class]])
+	// Case 1: Files have been dropped on favorite
+	if (op != NSDragOperationNone &&
+		!([[info draggingSource] isMemberOfClass:[PATagButton class]] ||
+		  [[info draggingSource] isKindOfClass:[PASourcePanel class]]))
 	{
-		// get tags in favorite
+		// Get tags of this favorite item
 		NSMutableArray *tags = [NSMutableArray array];
 		
-		if ([[(PASourceItem *)item containedObject] isKindOfClass:[NNTag class]])
+		if ([[sourceItem containedObject] isKindOfClass:[NNTag class]])
 		{
-			[tags addObject:[(PASourceItem *)item containedObject]];
+			[tags addObject:[sourceItem containedObject]];
 		}
 		else
 		{
-			NNTagSet *set = [(PASourceItem *)item containedObject];
+			NNTagSet *set = [sourceItem containedObject];
 			[tags addObjectsFromArray:[set tags]];
 		}
 		
-		// add tags to taggable object
+		// Add tags to taggable object
 		NSArray *objects = [dropManager handleDrop:[info draggingPasteboard]];
 		
 		// If dropManager is in alternateState, set manageFiles flag on each object
 		BOOL alternateState = [dropManager alternateState];
 		
 		if(alternateState)
-		{		
-			NSEnumerator *e = [objects objectEnumerator];
-			NNTaggableObject *object;
-			
-			while(object = [e nextObject])
+		{					
+			for (NNTaggableObject *object in objects)
 			{
 				BOOL theDefault = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
 				
@@ -418,16 +423,21 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		}
 		
 		[objects makeObjectsPerformSelector:@selector(addTags:) withObject:tags];
-	}
-	
-	// handle case if favorite/TagButton was dropped	
+	}	
+	//-- Case 2: TagButton from Cloud has been dropped	
 	else if([[info draggingSource] isMemberOfClass:[PATagButton class]])
 	{
 		PATagButton *tagButton = [info draggingSource];
+		
 		tag = [tagButton genericTag];
 		draggedObject = tag;
-	} else {
-		// We currently support only single selection
+	}
+	//-- Case 3: Favorite has been dropped
+	else
+	{
+		// We currently support only single selection mode in Source Panel, so there
+		// may be at most one item that has been dropped
+
 		PASourceItem *draggedItem = [[[[info draggingSource] dataSource] draggedItems] objectAtIndex:0];
 		draggedObject = [draggedItem containedObject];
 		
@@ -436,9 +446,6 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		else
 			tagSet = (NNTagSet *)draggedObject;
 	}	
-	
-	PASourceItem		*sourceItem = (PASourceItem *)item;
-	PASourceItem		*newItem = nil;
 	
 	if(isDroppedOnItem)
 	{
@@ -562,7 +569,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	// Save favorites
 	[[[[NSApplication sharedApplication] delegate] browserController] saveFavorites];
 	
-	// TODO: Delete smart folder if necessary
+	// Delete smart folder if necessary?
 	
     return YES;    
 }

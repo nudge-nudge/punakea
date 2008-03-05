@@ -57,7 +57,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	// Misc
 	[self setDisplayMode:PAListMode];
 	[self setSelectedItems:[NSMutableArray array]];
-	
+
 	skipSaveSelection = NO;
 }
 
@@ -516,20 +516,25 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 												 selector:@selector(beginEditing)
 												   object:nil];
 	
-		int count = [[self selectedRowIndexes] count];
-		if([self selectedRow] == mouseRow && count <= 1)
+		// Do only something if this row is not being edited and the user wants to
+		// cancel the editing by clicking again on the item
+		if (![self isEditingRow:mouseRow])
 		{
-			// perform editing like finder
-			[self performSelector:@selector(beginEditing)
-			           withObject:nil
-					   afterDelay:doubleClickThreshold];   
-		}
-		else if([[self selectedRowIndexes] containsIndex:mouseRow])
-		{
-			// wait to see if there is a double-click: if not, select the row as usual
-			[self performSelector:@selector(selectOnlyRowIndexes:)
-					   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
-					   afterDelay:doubleClickThreshold];
+			int count = [[self selectedRowIndexes] count];
+			if([self selectedRow] == mouseRow && count <= 1)
+			{
+				// perform editing like finder
+				[self performSelector:@selector(beginEditing)
+						   withObject:nil
+						   afterDelay:doubleClickThreshold];   
+			}
+			else if([[self selectedRowIndexes] containsIndex:mouseRow])
+			{
+				// wait to see if there is a double-click: if not, select the row as usual
+				[self performSelector:@selector(selectOnlyRowIndexes:)
+						   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
+						   afterDelay:doubleClickThreshold];
+			}
 		}
 		
 		// we still need to pass the event to super, to handle things like dragging, but 
@@ -642,12 +647,24 @@ needed for supporting dragging to trash
 	selectedItems = [[NSMutableArray alloc] initWithArray:theItems];
 }
 
+- (BOOL)isEditingRow:(int)row
+{
+	if ([self numberOfSelectedItems] != 1)
+		return NO;
+	
+	if ([self rowForItem:[[self selectedItems] objectAtIndex:0]] != row)
+		return NO;
+	
+	NSText *textView = [[self window] fieldEditor:NO forObject:self];
+	return [textView isFieldEditor];
+}
+
 
 #pragma mark Editing
 - (void)beginEditing
 {		
 	if(![[self selectedRowIndexes] count] == 1) return;
-
+	
 	[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
 }
 

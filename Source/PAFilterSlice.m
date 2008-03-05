@@ -292,10 +292,10 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	[outlineView scrollPoint:NSZeroPoint];
 	
 	// Focus outlineView or tag cloud, depending on number of selected tags
-	if ([[[controller query] tags] count] > 0)
+	/*if ([[[controller query] tags] count] > 0)
 		[[self window] makeFirstResponder:outlineView];
 	else
-		[[self window] makeFirstResponder:[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] tagCloud]];
+		[[self window] makeFirstResponder:[[[[[NSApplication sharedApplication] delegate] browserController] browserViewController] tagCloud]]; */
 }
 
 
