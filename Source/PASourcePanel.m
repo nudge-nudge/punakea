@@ -377,6 +377,14 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			[self beginEditing];
 			return;
 		}
+		
+		// Handle tab character by hand, as otherwise - with Leopard - editing begins.
+		if(key == NSTabCharacter)
+		{
+			NSView *nextValidKeyView = [self nextValidKeyView];			
+			[[self window] makeFirstResponder:nextValidKeyView];			
+			return;
+		}
 	}
 	
 	[super keyDown:theEvent];
