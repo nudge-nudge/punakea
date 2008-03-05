@@ -40,6 +40,11 @@
 		value = [value stringByAppendingString:@" "];
 		value = [value stringByAppendingString:[self stringFromDate:date]];
 	}
+	else if ([date isEqualToDate:[NSDate dateWithTimeIntervalSince1970:0]])
+	{
+		// date was created by passing 0 - display never
+		  value = NSLocalizedStringFromTable(@"NEVER",@"Global",@"");
+	}
 	else
 	{
 		// Show only month and year if this is an older date		

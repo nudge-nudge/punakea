@@ -5,6 +5,7 @@
 "NO_DATE" = "Ohne Datum";
 "TODAY" = "Heute";
 "YESTERDAY" = "Gestern";
+"NEVER" = "Niemals";
 
 "FROM" = "From";
 "TO" = "To";
