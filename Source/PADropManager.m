@@ -52,7 +52,6 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 	else
 	{
 		[dropHandlers addObject:handler];
-		NSLog(@"dropHandler %@ registered",handler);
 	}
 }
 	
