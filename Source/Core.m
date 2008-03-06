@@ -495,7 +495,9 @@
 
 - (IBAction)showBrowser:(id)sender
 {
-	if (![self appHasBrowser])
+	BOOL appHadBrowser = [self appHasBrowser];
+	
+	if (!appHadBrowser)
 	{
 		browserController = [[BrowserController alloc] init];
 	}
@@ -503,7 +505,18 @@
 	if (![self appIsActive])
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	
+	// Show window
 	[browserController showWindow:self];
+	
+	if(!appHadBrowser) 
+	{
+		// Select all items of library
+		[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];	
+			
+		// Focus tag cloud
+		[[browserController window] makeFirstResponder:[[browserController browserViewController] tagCloud]];
+	}
+	
 	[[browserController window] makeKeyAndOrderFront:self];
 }
 
@@ -626,15 +639,6 @@
 {
 	// Ensure all necessary directories are ready
 	[self createDirectoriesIfNeeded:YES generateContent:YES];
-	
-	if ([self appHasBrowser])
-	{
-		// Select all items of library
-		[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];	
-		
-		// Focus tag cloud
-		[[browserController window] makeFirstResponder:[[browserController browserViewController] tagCloud]];
-	}
 }
 
 //#pragma mark debug
