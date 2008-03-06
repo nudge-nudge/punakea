@@ -630,7 +630,10 @@
 	if ([self appHasBrowser])
 	{
 		// Select all items of library
-		[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];		
+		[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];	
+		
+		// Focus tag cloud
+		[[browserController window] makeFirstResponder:[[browserController browserViewController] tagCloud]];
 	}
 }
 
