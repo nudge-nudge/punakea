@@ -290,8 +290,9 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		return NSDragOperationNone;
 	}
 	
-	// Deny dragging to group header
-	if ([[sourceItem value] isEqualToString:@"FAVORITES"] && isDroppedOnItem && idx == -1)
+	// Deny dragging to group header except for tag buttons
+	if ([[sourceItem value] isEqualToString:@"FAVORITES"] && isDroppedOnItem && idx == -1 &&
+		![[info draggingSource] isMemberOfClass:[PATagButton class]])
 		return NSDragOperationNone;
 	
 	// File Drop - Check if dragged object can be tagged and is to be dropped on a favorite
@@ -301,7 +302,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		&& ![[info draggingSource] isMemberOfClass:[PATagButton class]])
 		return op;
 	
-	// Allow dragging only from PATagButton or an own item
+	// Allow dragging only PATagButton or self as source
 	if(!([[info draggingSource] isMemberOfClass:[PATagButton class]] ||
 		 [info draggingSource] == ov))
 		return NSDragOperationNone;
