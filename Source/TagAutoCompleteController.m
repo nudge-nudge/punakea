@@ -40,12 +40,15 @@
 {
 	NSMutableArray *results = [NSMutableArray array];
 	
-	NSEnumerator *e = [[typeAheadFind tagsForPrefix:substring] objectEnumerator];
-	NNSimpleTag *tag;
-	
-	while (tag = [e nextObject])
+	for (NNSimpleTag *tag in [typeAheadFind tagsForPrefix:substring])
 	{
-		[results addObject:[tag precomposedName]];
+		// We need to keep all characters that the user has typed in (case-sensitive!)...
+		NSString *name = [NSString stringWithString:substring];
+		
+		// ...then append all matching suffixes
+		name = [name stringByAppendingString:[[tag precomposedName] substringFromIndex:[substring length]]];
+		
+		[results addObject:name];
 	}
 	
 	return results;
