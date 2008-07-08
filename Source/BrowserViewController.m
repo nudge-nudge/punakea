@@ -410,7 +410,10 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		{
 			[filterEngine removeFilter:[self activePrefixFilter]];
 		}
-		PAStringPrefixFilter *newFilter = [[[PAStringPrefixFilter alloc] initWithFilterPrefix:searchFieldString] autorelease];
+		
+		NSString *decomposedSearchString = [searchFieldString decomposedStringWithCanonicalMapping];
+		
+		PAStringPrefixFilter *newFilter = [[[PAStringPrefixFilter alloc] initWithFilterPrefix:decomposedSearchString] autorelease];
 		[filterEngine addFilter:newFilter];
 		[self setActivePrefixFilter:newFilter];
 		
