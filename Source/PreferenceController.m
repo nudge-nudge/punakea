@@ -30,11 +30,10 @@
 
 - (BOOL)isLoginItem;
 - (CFIndex)loginItemIndex;
-- (void)removeTagsFolder:(NSString *)dir;
 - (void)updateDropBoxTagField;
 
 - (void)createTagsFolderStructure;
-- (void)removeTagsFolder;
+- (void)cleanTagsFolder;
 
 - (void)attachDropBoxFolderAction;
 - (void)removeDropBoxFolderAction;
@@ -425,7 +424,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	else if (tag == 1)		// Tags Folder
 	{
 		// Remove old dir
-		[self removeTagsFolder];
+		[self cleanTagsFolder];
 		
 		// Create new dir
 		[[NSFileManager defaultManager] createDirectoryAtPath:newDir
