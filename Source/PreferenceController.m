@@ -242,7 +242,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.TagsFolder.Enabled"] boolValue])
 		[self createTagsFolderStructure];
 	else 
-		[self removeTagsFolder];
+		[self cleanTagsFolder];
 }
 
 - (void)dropBoxStateHasChanged
@@ -747,18 +747,6 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	[[core updater] checkForUpdates:self];
 }
 
-- (void)removeTagsFolder:(NSString *)dir
-{
-	[[NSFileManager defaultManager] removeFileAtPath:dir handler:NULL];
-	
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	[dict setObject:[NSNumber numberWithDouble:1.0] forKey:@"doubleValue"];
-	[dict setObject:[NSNumber numberWithDouble:1.0] forKey:@"maxValue"];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:NNProgressDidUpdateNotification
-														object:dict];
-}
-
 - (void)updateDropBoxTagField
 {
 	NNTagsCreationOptions creationOptions = NNTagsCreationOptionFull;
@@ -803,7 +791,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	[NSApp runModalForWindow:[core busyWindow]];
 }
 
-- (void)removeTagsFolder
+- (void)cleanTagsFolder
 {
 	// Removes all subdirs of tags folder
 	
@@ -813,9 +801,8 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	tagsFolderDir = [tagsFolderDir stringByStandardizingPath];
 	
 	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER", @"FileManager", nil)];
-	[busyWindowController performBusySelector:@selector(removeTagsFolder:)
-									 onObject:self
-								   withObject:tagsFolderDir];
+	[busyWindowController performBusySelector:@selector(cleanTagsFolder)
+									 onObject:[NNTagging tagging]];
 	
 	[[core busyWindow] center];
 	[NSApp runModalForWindow:[core busyWindow]];
