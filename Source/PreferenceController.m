@@ -348,15 +348,47 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	}
 	
 	// Perform the actual dir switch outside of this method to ensure neat closing of the Open Panel	
+	// For the Tags Folder, tagsFolderWarningDidEnd: does perfom this action after presenting an alert.
 	if (returnCode == NSOKButton)
 	{
-		[self performSelectorInBackground:@selector(switchSpecialFolderDir:)
-							   withObject:userInfo];
+		// For the Tags Folder, show an alert, as files might be deleted from within this folder
+		if ((int)[(id)contextInfo tag] == 1)
+		{		
+			NSLog(@"1 %@",[userInfo objectForKey:@"oldDir"]);
+			[self performSelector:@selector(showTagsFolderWarning:)
+					   withObject:userInfo
+					   afterDelay:0.2];
+		}
+		else
+		{
+			[self performSelectorInBackground:@selector(switchSpecialFolderDir:)
+								   withObject:userInfo];
+		}
 	}
+}
+
+- (void)showTagsFolderWarning:(NSDictionary *)userInfo
+{
+	NSLog(@"2 %@",[userInfo objectForKey:@"oldDir"]);
+
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert setMessageText:NSLocalizedStringFromTable(@"DESTINATION_MAY_GET_DELETED",@"FileManager",@"")];
+	[alert setInformativeText:NSLocalizedStringFromTable(@"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE",@"FileManager",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OK",@"Global",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"CANCEL",@"Global",@"")];
+	
+	[alert setAlertStyle:NSWarningAlertStyle];
+	
+	[alert beginSheetModalForWindow:[self window]
+					  modalDelegate:self 
+					 didEndSelector:@selector(tagsFolderWarningDidEnd:returnCode:contextInfo:)
+						contextInfo:[userInfo retain]];
 }
 
 - (void)switchSpecialFolderDir:(NSDictionary *)userInfo
 {
+	NSLog(@"4 %@",[userInfo objectForKey:@"oldDir"]);
+	
 	int		 tag	 = [[userInfo objectForKey:@"tag"] intValue];
 	NSString *oldDir = [userInfo objectForKey:@"oldDir"];
 	NSString *newDir = [userInfo objectForKey:@"newDir"];
@@ -520,6 +552,19 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 {
 	// noting
 	return;
+}
+
+- (void)tagsFolderWarningDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{	
+	NSDictionary* userInfo = (NSDictionary*)contextInfo;
+	
+	NSLog([(id)contextInfo objectForKey:@"oldDir"]);
+	
+	if (returnCode == NSAlertFirstButtonReturn)
+	{		
+		[self performSelectorInBackground:@selector(switchSpecialFolderDir:)
+							   withObject:userInfo];
+	}
 }
 
 #pragma mark helper
