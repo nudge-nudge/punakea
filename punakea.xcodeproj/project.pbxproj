@@ -809,7 +809,6 @@
 		6540FA660AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemGenericCell.m; sourceTree = "<group>"; };
 		65461C9309D0418F0076778E /* PAImageButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButtonCell.h; sourceTree = "<group>"; };
 		65461C9409D0418F0076778E /* PAImageButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButtonCell.m; sourceTree = "<group>"; };
-		654A74210AECFA420076E2EE /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Global.strings; sourceTree = "<group>"; };
 		654B4CF90AF1FD37001082BA /* PATaggerHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerHeaderCell.h; sourceTree = "<group>"; };
 		654B4CFA0AF1FD37001082BA /* PATaggerHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerHeaderCell.m; sourceTree = "<group>"; };
 		654DBC1A09C9D0620061BFA4 /* index.html */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = index.html; path = html/index.html; sourceTree = "<group>"; };
@@ -2770,7 +2769,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				48B0F1D50ACC020000738053 /* English */,
-				654A74210AECFA420076E2EE /* German */,
 			);
 			name = Global.strings;
 			sourceTree = "<group>";
