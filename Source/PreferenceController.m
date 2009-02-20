@@ -353,7 +353,6 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		// For the Tags Folder, show an alert, as files might be deleted from within this folder
 		if ((int)[(id)contextInfo tag] == 1)
 		{		
-			NSLog(@"1 %@",[userInfo objectForKey:@"oldDir"]);
 			[self performSelector:@selector(showTagsFolderWarning:)
 					   withObject:userInfo
 					   afterDelay:0.2];
@@ -368,10 +367,9 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 
 - (void)showTagsFolderWarning:(NSDictionary *)userInfo
 {
-	NSLog(@"2 %@",[userInfo objectForKey:@"oldDir"]);
-
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-	[alert setMessageText:NSLocalizedStringFromTable(@"DESTINATION_MAY_GET_DELETED",@"FileManager",@"")];
+	[alert setMessageText:[NSString stringWithFormat:
+						   NSLocalizedStringFromTable(@"DESTINATION_FOLDER_MAY_GET_DELETED",@"FileManager",@""),[userInfo objectForKey:@"newDir"]]];
 	[alert setInformativeText:NSLocalizedStringFromTable(@"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE",@"FileManager",@"")];
 	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OK",@"Global",@"")];
 	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"CANCEL",@"Global",@"")];
@@ -385,9 +383,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 }
 
 - (void)switchSpecialFolderDir:(NSDictionary *)userInfo
-{
-	NSLog(@"4 %@",[userInfo objectForKey:@"oldDir"]);
-	
+{	
 	int		 tag	 = [[userInfo objectForKey:@"tag"] intValue];
 	NSString *oldDir = [userInfo objectForKey:@"oldDir"];
 	NSString *newDir = [userInfo objectForKey:@"newDir"];
@@ -556,13 +552,18 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 - (void)tagsFolderWarningDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {	
 	NSDictionary* userInfo = (NSDictionary*)contextInfo;
-	
-	NSLog([(id)contextInfo objectForKey:@"oldDir"]);
-	
+		
 	if (returnCode == NSAlertFirstButtonReturn)
 	{		
 		[self performSelectorInBackground:@selector(switchSpecialFolderDir:)
 							   withObject:userInfo];
+	}
+	else
+	{
+		// Update UI - show original state in tags folder dropdown
+		int		 tag	 = [[userInfo objectForKey:@"tag"] intValue];
+		NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:tag];
+		[popUpButton selectItemAtIndex:0];
 	}
 }
 

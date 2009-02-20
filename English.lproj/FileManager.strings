@@ -21,5 +21,5 @@
 "BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER" = "Punakea is cleaning up the Tags Folder.";
 "BUSY_WINDOW_MESSAGE_CLEANING_TAG_DB" = "Punakea is cleaning up the Tags Database.";
 
-"DESTINATION_FOLDER_MAY_GET_DELETED" = "The folder you chose may get deleted during";
-"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "informative blub";
+"DESTINATION_FOLDER_MAY_GET_DELETED" = "Make sure that \"%@\" is really empty!";
+"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "Punakea might delete contents in the \"Tags Folder\".";
