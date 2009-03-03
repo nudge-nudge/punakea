@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CTGradient.h"
+
+@class CTGradient;
 
 
 @interface PATaggerHeaderCell : NSTextFieldCell {

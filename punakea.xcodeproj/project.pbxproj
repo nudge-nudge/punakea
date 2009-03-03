@@ -175,6 +175,13 @@
 		48D81DAD09F79C1C0075EE44 /* TaggerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D81DAB09F79C1C0075EE44 /* TaggerController.h */; };
 		48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D81DAC09F79C1C0075EE44 /* TaggerController.m */; };
 		48E386760D6DC45300204CDB /* source-panel-images.tif in Resources */ = {isa = PBXBuildFile; fileRef = 48E386740D6DC45300204CDB /* source-panel-images.tif */; };
+		650359150F5D7B1F00BC204D /* SRRecorderControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6503590A0F5D7B1F00BC204D /* SRRecorderControl.m */; };
+		650359160F5D7B1F00BC204D /* SRRecorderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6503590C0F5D7B1F00BC204D /* SRRecorderCell.m */; };
+		650359170F5D7B1F00BC204D /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6503590E0F5D7B1F00BC204D /* CTGradient.m */; };
+		650359180F5D7B1F00BC204D /* SRKeyCodeTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 650359100F5D7B1F00BC204D /* SRKeyCodeTransformer.m */; };
+		650359190F5D7B1F00BC204D /* SRValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 650359120F5D7B1F00BC204D /* SRValidator.m */; };
+		6503591A0F5D7B1F00BC204D /* SRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 650359140F5D7B1F00BC204D /* SRCommon.m */; };
+		650359A00F5D832F00BC204D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6503599F0F5D832F00BC204D /* Carbon.framework */; };
 		650846FC0BE641320046CB89 /* statusbar-button-info.png in Resources */ = {isa = PBXBuildFile; fileRef = 650846FB0BE641320046CB89 /* statusbar-button-info.png */; };
 		6508EB680D50C336004DA882 /* BusyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6508EB670D50C336004DA882 /* BusyWindowController.m */; };
 		6509020B0BEDF1A1005468E0 /* toolbar-sort-by-name.tif in Resources */ = {isa = PBXBuildFile; fileRef = 650902090BEDF1A1005468E0 /* toolbar-sort-by-name.tif */; };
@@ -300,8 +307,6 @@
 		65B1FC8A0C0308EC0099D12B /* PAStatusBarProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B1FC880C0308EC0099D12B /* PAStatusBarProgressIndicator.m */; };
 		65B78E6A0AF0D32700AF1102 /* PATaggerBackgroundView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B78E680AF0D32700AF1102 /* PATaggerBackgroundView.h */; };
 		65B78E6B0AF0D32700AF1102 /* PATaggerBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B78E690AF0D32700AF1102 /* PATaggerBackgroundView.m */; };
-		65B78F1C0AF0D8D400AF1102 /* CTGradient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B78F1A0AF0D8D400AF1102 /* CTGradient.h */; };
-		65B78F1D0AF0D8D400AF1102 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B78F1B0AF0D8D400AF1102 /* CTGradient.m */; };
 		65B78F330AF0DA4600AF1102 /* statusbar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65B78F320AF0DA4600AF1102 /* statusbar.tiff */; };
 		65BCDB8E0D532B8F003D4C65 /* DropBox.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 65BCDB890D532A6D003D4C65 /* DropBox.scpt */; };
 		65BD569C0BF3155F00E202F8 /* PAInfoPaneSubview.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65BD569A0BF3155F00E202F8 /* PAInfoPaneSubview.h */; };
@@ -580,7 +585,6 @@
 				6540FA550AEE0F5100EF51F3 /* PAResultsBookmarkCell.h in CopyFiles */,
 				6540FA670AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h in CopyFiles */,
 				65B78E6A0AF0D32700AF1102 /* PATaggerBackgroundView.h in CopyFiles */,
-				65B78F1C0AF0D8D400AF1102 /* CTGradient.h in CopyFiles */,
 				654B4CFB0AF1FD37001082BA /* PATaggerHeaderCell.h in CopyFiles */,
 				6530FF360AF2229400D7A79A /* PATaggerTableView.h in CopyFiles */,
 				488E802C0AF3898400660B7B /* PACollectionNotEmpty.h in CopyFiles */,
@@ -781,6 +785,19 @@
 		48EDB83E0BF5A6A2008452FF /* PAContentTypeFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAContentTypeFilter.m; sourceTree = "<group>"; };
 		48F980760AEF5CAF003BA2DC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		48F980780AEF5CAF003BA2DC /* FileDropHandler */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; path = FileDropHandler; sourceTree = "<group>"; };
+		650359090F5D7B1F00BC204D /* SRRecorderControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRecorderControl.h; sourceTree = "<group>"; };
+		6503590A0F5D7B1F00BC204D /* SRRecorderControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRecorderControl.m; sourceTree = "<group>"; };
+		6503590B0F5D7B1F00BC204D /* SRRecorderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRecorderCell.h; sourceTree = "<group>"; };
+		6503590C0F5D7B1F00BC204D /* SRRecorderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRecorderCell.m; sourceTree = "<group>"; };
+		6503590D0F5D7B1F00BC204D /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
+		6503590E0F5D7B1F00BC204D /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
+		6503590F0F5D7B1F00BC204D /* SRKeyCodeTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRKeyCodeTransformer.h; sourceTree = "<group>"; };
+		650359100F5D7B1F00BC204D /* SRKeyCodeTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRKeyCodeTransformer.m; sourceTree = "<group>"; };
+		650359110F5D7B1F00BC204D /* SRValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRValidator.h; sourceTree = "<group>"; };
+		650359120F5D7B1F00BC204D /* SRValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRValidator.m; sourceTree = "<group>"; };
+		650359130F5D7B1F00BC204D /* SRCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRCommon.h; sourceTree = "<group>"; };
+		650359140F5D7B1F00BC204D /* SRCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRCommon.m; sourceTree = "<group>"; };
+		6503599F0F5D832F00BC204D /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		650846FB0BE641320046CB89 /* statusbar-button-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statusbar-button-info.png"; sourceTree = "<group>"; };
 		6508EB660D50C336004DA882 /* BusyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusyWindowController.h; sourceTree = "<group>"; };
 		6508EB670D50C336004DA882 /* BusyWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusyWindowController.m; sourceTree = "<group>"; };
@@ -912,8 +929,6 @@
 		65B1FC880C0308EC0099D12B /* PAStatusBarProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBarProgressIndicator.m; sourceTree = "<group>"; };
 		65B78E680AF0D32700AF1102 /* PATaggerBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerBackgroundView.h; sourceTree = "<group>"; };
 		65B78E690AF0D32700AF1102 /* PATaggerBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerBackgroundView.m; sourceTree = "<group>"; };
-		65B78F1A0AF0D8D400AF1102 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
-		65B78F1B0AF0D8D400AF1102 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
 		65B78F320AF0DA4600AF1102 /* statusbar.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = statusbar.tiff; sourceTree = "<group>"; };
 		65BCDB890D532A6D003D4C65 /* DropBox.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; name = DropBox.scpt; path = Resources/DropBox.scpt; sourceTree = "<group>"; };
 		65BD569A0BF3155F00E202F8 /* PAInfoPaneSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInfoPaneSubview.h; sourceTree = "<group>"; };
@@ -1037,6 +1052,7 @@
 				658EA77D099798A6005F13DE /* Message.framework in Frameworks */,
 				484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */,
 				484497BD0B2D9925009B262C /* Sparkle.framework in Frameworks */,
+				650359A00F5D832F00BC204D /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1071,6 +1087,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6503599F0F5D832F00BC204D /* Carbon.framework */,
 				658EA77C099798A6005F13DE /* Message.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				484496300B2D56CE009B262C /* ApplicationServices.framework */,
@@ -1249,8 +1266,6 @@
 				4870698B0A0C930700A3ADE2 /* Type-Ahead Find */,
 				48209CA50AB1BEED00F3CF21 /* PADropManager.h */,
 				48209CA60AB1BEED00F3CF21 /* PADropManager.m */,
-				65B78F1A0AF0D8D400AF1102 /* CTGradient.h */,
-				65B78F1B0AF0D8D400AF1102 /* CTGradient.m */,
 				65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */,
 				65823B830A67CCFF0004DC39 /* NSBezierPathCategory.m */,
 				656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */,
@@ -1320,6 +1335,7 @@
 		4831849F0AEF8FD800C3C672 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				650359070F5D7AD000BC204D /* SRRecorderControl */,
 				48186F480BE4C834000B4638 /* NNFilterEngine */,
 				4815A0C40AEF9A0200969296 /* NDResourceFork */,
 				483184A20AEF8FE500C3C672 /* PADropHandler */,
@@ -1554,6 +1570,25 @@
 			children = (
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		650359070F5D7AD000BC204D /* SRRecorderControl */ = {
+			isa = PBXGroup;
+			children = (
+				650359090F5D7B1F00BC204D /* SRRecorderControl.h */,
+				6503590A0F5D7B1F00BC204D /* SRRecorderControl.m */,
+				6503590B0F5D7B1F00BC204D /* SRRecorderCell.h */,
+				6503590C0F5D7B1F00BC204D /* SRRecorderCell.m */,
+				6503590D0F5D7B1F00BC204D /* CTGradient.h */,
+				6503590E0F5D7B1F00BC204D /* CTGradient.m */,
+				6503590F0F5D7B1F00BC204D /* SRKeyCodeTransformer.h */,
+				650359100F5D7B1F00BC204D /* SRKeyCodeTransformer.m */,
+				650359110F5D7B1F00BC204D /* SRValidator.h */,
+				650359120F5D7B1F00BC204D /* SRValidator.m */,
+				650359130F5D7B1F00BC204D /* SRCommon.h */,
+				650359140F5D7B1F00BC204D /* SRCommon.m */,
+			);
+			path = SRRecorderControl;
 			sourceTree = "<group>";
 		};
 		6508EB650D50C316004DA882 /* Misc */ = {
@@ -2580,7 +2615,6 @@
 				6540FA560AEE0F5100EF51F3 /* PAResultsBookmarkCell.m in Sources */,
 				6540FA680AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m in Sources */,
 				65B78E6B0AF0D32700AF1102 /* PATaggerBackgroundView.m in Sources */,
-				65B78F1D0AF0D8D400AF1102 /* CTGradient.m in Sources */,
 				654B4CFC0AF1FD37001082BA /* PATaggerHeaderCell.m in Sources */,
 				6530FF370AF2229400D7A79A /* PATaggerTableView.m in Sources */,
 				488E802D0AF3898400660B7B /* PACollectionNotEmpty.m in Sources */,
@@ -2617,6 +2651,12 @@
 				6508EB680D50C336004DA882 /* BusyWindowController.m in Sources */,
 				6571138D0D5371A600076543 /* TagAutoCompleteController.m in Sources */,
 				656BAADD0D6DE4B600AB3FDF /* PATagsPaneTagsView.m in Sources */,
+				650359150F5D7B1F00BC204D /* SRRecorderControl.m in Sources */,
+				650359160F5D7B1F00BC204D /* SRRecorderCell.m in Sources */,
+				650359170F5D7B1F00BC204D /* CTGradient.m in Sources */,
+				650359180F5D7B1F00BC204D /* SRKeyCodeTransformer.m in Sources */,
+				650359190F5D7B1F00BC204D /* SRValidator.m in Sources */,
+				6503591A0F5D7B1F00BC204D /* SRCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

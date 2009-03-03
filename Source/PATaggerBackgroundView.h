@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CTGradient.h"
 #import "PAImageButton.h"
 #import "TaggerController.h"
+
+@class CTGradient;
 
 
 @interface PATaggerBackgroundView : NSView {
