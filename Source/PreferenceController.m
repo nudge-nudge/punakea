@@ -108,6 +108,11 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 											 selector:@selector(dropBoxTagsHaveChanged:)
 												 name:NNSelectedTagsHaveChangedNotification
 											   object:nil];
+	
+	// Hotkey Recorder Control
+	[hotkeyRecorderControl setAutosaveName:@"hotkeyForTagger"];		// Doesn't work - deprecated, anyway
+	[hotkeyRecorderControl setAnimates:YES];
+	[hotkeyRecorderControl setStyle:SRGreyStyle];
 }
 
 - (void)dealloc
@@ -566,6 +571,21 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		[popUpButton selectItemAtIndex:0];
 	}
 }
+
+
+#pragma mark Shortcut Recorder
+- (void)shortcutRecorder:(SRRecorderControl *)aRecorder keyComboDidChange:(KeyCombo)newKeyCombo
+{
+	NSLog(@"%d", newKeyCombo.code);
+	
+	if (newKeyCombo.code == -1)
+	{
+		// Unregister hotkey
+	} else {
+		// Register/update hotkey
+	}
+}
+
 
 #pragma mark helper
 - (void)updateCurrentLocationForPopUpButton:(NSPopUpButton *)button

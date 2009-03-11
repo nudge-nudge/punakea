@@ -13,6 +13,7 @@
 #import "NNTagging/NNTagging.h"
 #import "NNTagging/NNTags.h"
 #import "TagAutoCompleteController.h"
+#import "SRRecorderControl.h";
 
 
 typedef enum _PAScheduledUpdateCheckInterval {
@@ -40,6 +41,8 @@ extern NSString * const DROP_BOX_SCRIPTNAME;
 	IBOutlet NSPopUpButton		*dropBoxPopUpButton;
 	
 	IBOutlet NSPopUpButton		*updateIntervalButton;
+	
+	IBOutlet SRRecorderControl	*hotkeyRecorderControl;
 	
 	NSUserDefaultsController	*userDefaultsController;
 	

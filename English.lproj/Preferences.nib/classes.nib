@@ -18,6 +18,24 @@
 			<string>NSObject</string>
 		</dict>
 		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>forIBuse__nilOutDeprecatedAutosaveName</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>SRRecorderControl</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>delegate</key>
+				<string>id</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSControl</string>
+		</dict>
+		<dict>
 			<key>CLASS</key>
 			<string>NSTextField</string>
 			<key>LANGUAGE</key>
@@ -53,6 +71,8 @@
 				<string>NSWindow</string>
 				<key>dropBoxPopUpButton</key>
 				<string>NSPopUpButton</string>
+				<key>hotkeyRecorderControl</key>
+				<string>SRRecorderControl</string>
 				<key>managedFolderPopUpButton</key>
 				<string>NSPopUpButton</string>
 				<key>tagField</key>
