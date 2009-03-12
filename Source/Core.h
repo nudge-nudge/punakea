@@ -27,6 +27,8 @@
 
 #import "PAServices.h"
 
+#import "PTHotkey.h"
+
 //#import "PANotificationReceiver.h"
 
 @interface Core : NSWindowController
@@ -40,6 +42,8 @@
 	TaggerController				*_taggerController;
 	PreferenceController			*preferenceController;	
 	SidebarController				*sidebarController;
+	
+	PTHotKey						*taggerHotkey;
 	
 	NSStatusItem					*statusItem;
 	

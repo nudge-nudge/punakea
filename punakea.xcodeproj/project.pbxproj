@@ -350,6 +350,10 @@
 		65EB72170BE20D86007FF40C /* PAStatusBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EB72150BE20D86007FF40C /* PAStatusBarButton.m */; };
 		65EB722C0BE20ECC007FF40C /* PAStatusBarButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65EB722A0BE20ECC007FF40C /* PAStatusBarButtonCell.h */; };
 		65EB722D0BE20ECC007FF40C /* PAStatusBarButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EB722B0BE20ECC007FF40C /* PAStatusBarButtonCell.m */; };
+		65EF60C40F69531500AAE151 /* PTHotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF60BF0F69531500AAE151 /* PTHotKey.m */; };
+		65EF60C50F69531500AAE151 /* PTHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF60C10F69531500AAE151 /* PTHotKeyCenter.m */; };
+		65EF60C60F69531500AAE151 /* PTKeyCombo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF60C30F69531500AAE151 /* PTKeyCombo.m */; };
+		65EF60EE0F6958C100AAE151 /* HotkeyDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF60ED0F6958C100AAE151 /* HotkeyDelegateCategory.m */; };
 		65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */; };
 		65F9B96309D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */; };
 		65F9B96409D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */; };
@@ -971,6 +975,14 @@
 		65EB72150BE20D86007FF40C /* PAStatusBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBarButton.m; sourceTree = "<group>"; };
 		65EB722A0BE20ECC007FF40C /* PAStatusBarButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBarButtonCell.h; sourceTree = "<group>"; };
 		65EB722B0BE20ECC007FF40C /* PAStatusBarButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBarButtonCell.m; sourceTree = "<group>"; };
+		65EF60BE0F69531500AAE151 /* PTHotKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTHotKey.h; sourceTree = "<group>"; };
+		65EF60BF0F69531500AAE151 /* PTHotKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTHotKey.m; sourceTree = "<group>"; };
+		65EF60C00F69531500AAE151 /* PTHotKeyCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTHotKeyCenter.h; sourceTree = "<group>"; };
+		65EF60C10F69531500AAE151 /* PTHotKeyCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTHotKeyCenter.m; sourceTree = "<group>"; };
+		65EF60C20F69531500AAE151 /* PTKeyCombo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKeyCombo.h; sourceTree = "<group>"; };
+		65EF60C30F69531500AAE151 /* PTKeyCombo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKeyCombo.m; sourceTree = "<group>"; };
+		65EF60EC0F6958C100AAE151 /* HotkeyDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotkeyDelegateCategory.h; sourceTree = "<group>"; };
+		65EF60ED0F6958C100AAE151 /* HotkeyDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotkeyDelegateCategory.m; sourceTree = "<group>"; };
 		65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewPressed-1.tiff"; sourceTree = "<group>"; };
 		65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
 		65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
@@ -1575,6 +1587,7 @@
 		650359070F5D7AD000BC204D /* SRRecorderControl */ = {
 			isa = PBXGroup;
 			children = (
+				65EF609B0F6952F200AAE151 /* Hotkey */,
 				650359090F5D7B1F00BC204D /* SRRecorderControl.h */,
 				6503590A0F5D7B1F00BC204D /* SRRecorderControl.m */,
 				6503590B0F5D7B1F00BC204D /* SRRecorderCell.h */,
@@ -1763,6 +1776,8 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				48D170520A5A68BA006C667B /* Core.h */,
 				65E7B06A0994D5AA00565251 /* Core.m */,
+				65EF60EC0F6958C100AAE151 /* HotkeyDelegateCategory.h */,
+				65EF60ED0F6958C100AAE151 /* HotkeyDelegateCategory.m */,
 				65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */,
 				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
 				489DA0450C0B2EB40027E3FF /* PAServices.h */,
@@ -2021,6 +2036,19 @@
 				6589C5010A9DE6F600CA2CD1 /* sl-status_stop.tiff */,
 			);
 			name = PAButton;
+			sourceTree = "<group>";
+		};
+		65EF609B0F6952F200AAE151 /* Hotkey */ = {
+			isa = PBXGroup;
+			children = (
+				65EF60BE0F69531500AAE151 /* PTHotKey.h */,
+				65EF60BF0F69531500AAE151 /* PTHotKey.m */,
+				65EF60C00F69531500AAE151 /* PTHotKeyCenter.h */,
+				65EF60C10F69531500AAE151 /* PTHotKeyCenter.m */,
+				65EF60C20F69531500AAE151 /* PTKeyCombo.h */,
+				65EF60C30F69531500AAE151 /* PTKeyCombo.m */,
+			);
+			path = Hotkey;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2657,6 +2685,10 @@
 				650359180F5D7B1F00BC204D /* SRKeyCodeTransformer.m in Sources */,
 				650359190F5D7B1F00BC204D /* SRValidator.m in Sources */,
 				6503591A0F5D7B1F00BC204D /* SRCommon.m in Sources */,
+				65EF60C40F69531500AAE151 /* PTHotKey.m in Sources */,
+				65EF60C50F69531500AAE151 /* PTHotKeyCenter.m in Sources */,
+				65EF60C60F69531500AAE151 /* PTKeyCombo.m in Sources */,
+				65EF60EE0F6958C100AAE151 /* HotkeyDelegateCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -113,6 +113,11 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	[hotkeyRecorderControl setAutosaveName:@"hotkeyForTagger"];		// Doesn't work - deprecated, anyway
 	[hotkeyRecorderControl setAnimates:YES];
 	[hotkeyRecorderControl setStyle:SRGreyStyle];
+	
+	KeyCombo keyCombo;
+	keyCombo.code = [[userDefaultsController valueForKeyPath:@"values.General.Hotkey.Tagger.KeyCode"] shortValue];
+	keyCombo.flags = [[userDefaultsController valueForKeyPath:@"values.General.Hotkey.Tagger.Modifiers"] intValue];
+	[hotkeyRecorderControl setKeyCombo:keyCombo];
 }
 
 - (void)dealloc
@@ -578,12 +583,11 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 {
 	NSLog(@"%d", newKeyCombo.code);
 	
-	if (newKeyCombo.code == -1)
-	{
-		// Unregister hotkey
-	} else {
-		// Register/update hotkey
-	}
+	[userDefaultsController setValue:[NSNumber numberWithShort:newKeyCombo.code]
+						  forKeyPath:@"values.General.Hotkey.Tagger.KeyCode"];
+	[userDefaultsController setValue:[NSNumber numberWithInt:newKeyCombo.flags]
+						  forKeyPath:@"values.General.Hotkey.Tagger.Modifiers"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

@@ -1,4 +1,4 @@
-#import "Core.h"
+#import "Core.h";
 
 @interface Core (PrivateAPI)
 
@@ -99,6 +99,17 @@
 			 options:0 
 			 context:NULL];
 	
+	// Listen for Tagger Hotkey Changes and initialize hotkey
+	[udc addObserver:self 
+		  forKeyPath:@"values.General.Hotkey.Tagger.KeyCode" 
+			 options:0 
+			 context:NULL];
+	[udc addObserver:self 
+		  forKeyPath:@"values.General.Hotkey.Tagger.Modifiers" 
+			 options:0 
+			 context:NULL];
+	[self registerHotkeyForTagger];
+	
 	// load services class and set as service provides
 	services =  [[PAServices alloc] init];
 	[NSApp setServicesProvider:services];
@@ -117,6 +128,9 @@
 	
 	[udc removeObserver:self forKeyPath:@"values.General.Sidebar.Enabled"];
 	[udc removeObserver:self forKeyPath:@"values.General.StatusItem.Enabled"];
+	
+	[udc removeObserver:self forKeyPath:@"values.General.Hotkey.Tagger.KeyCode"];
+	[udc removeObserver:self forKeyPath:@"values.General.Hotkey.Tagger.Modifiers"];
 	
 	[preferenceController release];
 	[nc removeObserver:self];
@@ -223,41 +237,49 @@
 #pragma mark events
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {	
-	if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.Sidebar.Enabled"])
+	if (object == [NSUserDefaultsController sharedUserDefaultsController])
 	{
-		BOOL showSidebar = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.Sidebar.Enabled"];
-		BOOL sidebarIsLoaded = NO;
-		
-		// look if sidebar is already loaded
-		NSEnumerator *windowEnumerator = [[[NSApplication sharedApplication] windows] objectEnumerator];
-		NSWindow *window;
-		
-		while (window = [windowEnumerator nextObject])
+		if ([keyPath isEqualToString:@"values.General.Sidebar.Enabled"])
 		{
-			if ([[window title] isEqualToString:@"Punakea : Sidebar"])
-				sidebarIsLoaded = YES;
-		}
-		
-		// don't do anything if flags are equal
-		if (showSidebar != sidebarIsLoaded)
-		{
-			if (showSidebar)
+			BOOL showSidebar = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.Sidebar.Enabled"];
+			BOOL sidebarIsLoaded = NO;
+			
+			// look if sidebar is already loaded
+			NSEnumerator *windowEnumerator = [[[NSApplication sharedApplication] windows] objectEnumerator];
+			NSWindow *window;
+			
+			while (window = [windowEnumerator nextObject])
 			{
-				sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
-				[sidebarController window];
+				if ([[window title] isEqualToString:@"Punakea : Sidebar"])
+					sidebarIsLoaded = YES;
 			}
+			
+			// don't do anything if flags are equal
+			if (showSidebar != sidebarIsLoaded)
+			{
+				if (showSidebar)
+				{
+					sidebarController = [[SidebarController alloc] initWithWindowNibName:@"Sidebar"];
+					[sidebarController window];
+				}
+				else
+				{
+					[sidebarController release];
+				}
+			}
+		}
+		else if ([keyPath isEqualToString:@"values.General.StatusItem.Enabled"])
+		{
+			if ([[NSUserDefaults standardUserDefaults] boolForKey:@"General.StatusItem.Enabled"])
+				[self showStatusItem];
 			else
-			{
-				[sidebarController release];
-			}
+				[self unloadStatusItem];
 		}
-	}
-	else if ((object == [NSUserDefaultsController sharedUserDefaultsController]) && [keyPath isEqualToString:@"values.General.StatusItem.Enabled"])
-	{
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"General.StatusItem.Enabled"])
-			[self showStatusItem];
-		else
-			[self unloadStatusItem];
+		else if ([keyPath isEqualToString:@"values.General.Hotkey.Tagger.KeyCode"] ||
+				 [keyPath isEqualToString:@"values.General.Hotkey.Tagger.Modifiers"])
+		{
+			[self registerHotkeyForTagger];
+		}
 	}
 }			
 
