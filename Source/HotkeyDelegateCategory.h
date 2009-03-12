@@ -2,6 +2,8 @@
 #import "Core.h";
 #import "PTHotKeyCenter.h";
 
+@class SRRecorderControl;
+
 
 @interface Core (HotkeyDelegateCategory)
 

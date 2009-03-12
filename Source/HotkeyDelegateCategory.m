@@ -17,9 +17,9 @@
 	
 	// Eventually register new hotkey
 	if (keyCode > -1)
-	{
-		PTKeyCombo *keyCombo = [PTKeyCombo keyComboWithKeyCode:40
-													 modifiers:cmdKey+shiftKey];
+	{		
+		PTKeyCombo *keyCombo = [PTKeyCombo keyComboWithKeyCode:keyCode
+													 modifiers:[[[SRRecorderControl alloc] init] cocoaToCarbonFlags:modifiers]];
 		
 		taggerHotkey = [[PTHotKey alloc] initWithIdentifier:@"TaggerHotkey"
 												   keyCombo:keyCombo];
@@ -34,6 +34,16 @@
 - (void)hitTaggerHotkey:(PTHotKey *)hotKey
 {
 	NSLog(@"Hit Me, Baby!");
+	
+	// Get selected items from Finder
+	NSString *s = @"tell application \"Finder\"\n";	
+	s = [s stringByAppendingString:@"set selectedItem to (posix path of (the selection as alias))\n"];	
+	s = [s stringByAppendingString:@"end tell"];
+	
+	NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
+	NSAppleEventDescriptor *descriptor = [folderActionScript executeAndReturnError:nil];
+	
+	NSLog(@"descriptor: %@", [descriptor stringValue]);	
 }
 
 - (PTHotKey *)taggerHotkey

@@ -581,11 +581,9 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 #pragma mark Shortcut Recorder
 - (void)shortcutRecorder:(SRRecorderControl *)aRecorder keyComboDidChange:(KeyCombo)newKeyCombo
 {
-	NSLog(@"%d", newKeyCombo.code);
-	
 	[userDefaultsController setValue:[NSNumber numberWithShort:newKeyCombo.code]
 						  forKeyPath:@"values.General.Hotkey.Tagger.KeyCode"];
-	[userDefaultsController setValue:[NSNumber numberWithInt:newKeyCombo.flags]
+	[userDefaultsController setValue:[NSNumber numberWithUnsignedInt:newKeyCombo.flags]
 						  forKeyPath:@"values.General.Hotkey.Tagger.Modifiers"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
