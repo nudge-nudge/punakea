@@ -19,7 +19,7 @@
 	if (keyCode > -1)
 	{		
 		PTKeyCombo *keyCombo = [PTKeyCombo keyComboWithKeyCode:keyCode
-													 modifiers:[[[SRRecorderControl alloc] init] cocoaToCarbonFlags:modifiers]];
+													 modifiers:[[[[SRRecorderControl alloc] init] autorelease] cocoaToCarbonFlags:modifiers]];
 		
 		taggerHotkey = [[PTHotKey alloc] initWithIdentifier:@"TaggerHotkey"
 												   keyCombo:keyCombo];
