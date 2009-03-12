@@ -34,6 +34,8 @@ extern NSString * const DROP_BOX_SCRIPTNAME;
 
 @interface PreferenceController : NSWindowController
 {
+	IBOutlet NSTabView			*tabView;
+	
 	IBOutlet NSTokenField		*tagField;
 	
 	IBOutlet NSPopUpButton		*managedFolderPopUpButton;

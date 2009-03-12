@@ -75,6 +75,8 @@
 				<string>SRRecorderControl</string>
 				<key>managedFolderPopUpButton</key>
 				<string>NSPopUpButton</string>
+				<key>tabView</key>
+				<string>NSTabView</string>
 				<key>tagField</key>
 				<string>NSTokenField</string>
 				<key>tagsFolderPopUpButton</key>

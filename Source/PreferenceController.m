@@ -57,6 +57,14 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	{
 		userDefaultsController = [NSUserDefaultsController sharedUserDefaultsController];
 		core = aCore;
+		
+		// Check if recentPage from UserDefaults is valid
+		int recentPage = [[NSUserDefaults standardUserDefaults] integerForKey:@"punakea.preferences.prefspanel.recentpage"];
+		if (recentPage > [tabView numberOfTabViewItems])
+		{
+			[[NSUserDefaults standardUserDefaults] setInteger:0
+													   forKey:@"punakea.preferences.prefspanel.recentpage"];
+		}
 	}
 	return self;
 }
@@ -110,7 +118,6 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 											   object:nil];
 	
 	// Hotkey Recorder Control
-	[hotkeyRecorderControl setAutosaveName:@"hotkeyForTagger"];		// Doesn't work - deprecated, anyway
 	[hotkeyRecorderControl setAnimates:YES];
 	[hotkeyRecorderControl setStyle:SRGreyStyle];
 	
