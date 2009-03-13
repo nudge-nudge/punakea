@@ -39,7 +39,7 @@
 	NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"CurrentSelection" ofType:@"scpt"];
 	NSURL *scriptURL = [NSURL fileURLWithPath:scriptPath];	
 	
-	NSAppleScript *script = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:nil];
+	NSAppleScript *script = [[[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:nil] autorelease];
 	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:nil];
 	
 	NSMutableArray *items = [NSMutableArray array];
