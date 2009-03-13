@@ -188,6 +188,7 @@
 		6509020C0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6509020A0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif */; };
 		650902130BEDF429005468E0 /* Toolbars.strings in Resources */ = {isa = PBXBuildFile; fileRef = 650902120BEDF429005468E0 /* Toolbars.strings */; };
 		650C84190D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 650C84180D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff */; };
+		650D52A30F6ACD3600E67680 /* CurrentSelection.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */; };
 		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
 		651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */; };
 		6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */; };
@@ -809,6 +810,7 @@
 		6509020A0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-sort-by-rating.tif"; sourceTree = "<group>"; };
 		650902100BEDF41B005468E0 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Toolbars.strings; sourceTree = "<group>"; };
 		650C84180D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-pref-managefiles.tiff"; sourceTree = "<group>"; };
+		650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; path = CurrentSelection.scpt; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite.tiff; sourceTree = "<group>"; };
 		6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASegmentedImageControl.h; sourceTree = "<group>"; };
@@ -1157,7 +1159,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				65BCDB890D532A6D003D4C65 /* DropBox.scpt */,
+				650D52660F6ACB8800E67680 /* Scripts */,
 				6572864C0BC427D1000034D2 /* Strings */,
 				65943F980AFA56AA00A8922F /* appicon.icns */,
 				48F980700AEF5C9F003BA2DC /* DropHandlerPlugins */,
@@ -1619,6 +1621,15 @@
 				65D6ACD30A89E25800FDAC8A /* BlueGradient24.png */,
 			);
 			name = "Filter Slice";
+			sourceTree = "<group>";
+		};
+		650D52660F6ACB8800E67680 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				65BCDB890D532A6D003D4C65 /* DropBox.scpt */,
+				650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */,
+			);
+			name = Scripts;
 			sourceTree = "<group>";
 		};
 		6531649B0AF2534B00928BEF /* Common */ = {
@@ -2387,6 +2398,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650D52A30F6ACD3600E67680 /* CurrentSelection.scpt in Resources */,
 				65BCDB8E0D532B8F003D4C65 /* DropBox.scpt in Resources */,
 				48893B110AF0A59900BA0B50 /* Info.plist in Resources */,
 				65E7B01A0994D02E00565251 /* MainMenu.nib in Resources */,

@@ -35,15 +35,21 @@
 {
 	NSLog(@"Hit Me, Baby!");
 	
-	// Get selected items from Finder
-	NSString *s = @"tell application \"Finder\"\n";	
-	s = [s stringByAppendingString:@"set selectedItem to (posix path of (the selection as alias))\n"];	
-	s = [s stringByAppendingString:@"end tell"];
+	// Get selected items from Finder	
+	NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"CurrentSelection" ofType:@"scpt"];
+	NSURL *scriptURL = [NSURL fileURLWithPath:scriptPath];	
 	
-	NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
-	NSAppleEventDescriptor *descriptor = [folderActionScript executeAndReturnError:nil];
+	NSAppleScript *script = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:nil];
+	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:nil];
 	
-	NSLog(@"descriptor: %@", [descriptor stringValue]);	
+	NSMutableArray *items = [NSMutableArray array];
+	
+	// Note: AppleScript arrays are one-based!
+	for (int i = 1; i <= [descriptor numberOfItems]; i++)
+	{
+		NSLog(@"%@", [[descriptor descriptorAtIndex:i] stringValue]);	
+		[items addObject:[[descriptor descriptorAtIndex:i] stringValue]];
+	}
 }
 
 - (PTHotKey *)taggerHotkey
