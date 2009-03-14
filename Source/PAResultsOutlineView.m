@@ -23,6 +23,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlineViewSelectionDidChangeNotification";
 
+#define QLPreviewPanel NSClassFromString(@"QLPreviewPanel")
+
 
 @implementation PAResultsOutlineView
 
@@ -325,6 +327,27 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	return [selectedItems count];
 }
 
+- (void)triggerQuickLook
+{
+	if ([[QLPreviewPanel sharedPreviewPanel] isOpen])
+	{
+		[[QLPreviewPanel sharedPreviewPanel] closeWithEffect:1];
+	} else {
+		NSMutableArray *urls = [NSMutableArray array];
+		
+		for (NNFile *file in [self selectedItems])
+		{
+			[urls addObject:[NSURL fileURLWithPath:[file path]]];
+		}
+		
+		[[QLPreviewPanel sharedPreviewPanel] setURLs:urls
+										currentIndex:0
+							  preservingDisplayState:YES];
+		
+		[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFrontWithEffect:1];
+	}
+}
+
 
 #pragma mark Notifications
 - (void)selectionDidChange:(NSNotification *)notification
@@ -452,6 +475,12 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 			NSView *nextValidKeyView = [self nextValidKeyView];			
 			[[self window] makeFirstResponder:nextValidKeyView];			
 			return;
+		}
+		
+		// Open/close Quick Look on Space
+		if (key == 32)
+		{			
+			[self triggerQuickLook];			
 		}
 	}
 	

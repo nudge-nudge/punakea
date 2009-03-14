@@ -659,6 +659,12 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 				break;
 		}
 		
+		// Open/close Quick Look on Space
+		if (key == 32)
+		{			
+			[outlineView triggerQuickLook];
+		}
+		
 		// TODO: Too slow, but we need to invalidate our visibleRect if key was pressed for a while
 		//[outlineView setNeedsDisplayInRect:[outlineView visibleRect]];
 	}

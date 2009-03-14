@@ -6,8 +6,8 @@
 #import "PAResultsBookmarkCell.h"
 #import "PAResultsMultiItemCell.h"
 #import "PAResultsMultiItemThumbnailCell.h"
-
 #import "NNTagging/NNQuery.h"
+#import "QuickLook.h";
 
 
 @class PAResultsMultiItemMatrix;

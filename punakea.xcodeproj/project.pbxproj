@@ -324,6 +324,7 @@
 		65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */; };
 		65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CA80100AAEEF8A002117C0 /* PAFilterButton.h */; };
 		65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA80110AAEEF8A002117C0 /* PAFilterButton.m */; };
+		65CAAEF10F6C2E2500B4FFAA /* QuickLookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65CAAEF00F6C2E2500B4FFAA /* QuickLookUI.framework */; };
 		65CB093B0BBBBDA800799E25 /* PASourceItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB09390BBBBDA800799E25 /* PASourceItemCell.h */; };
 		65CB093C0BBBBDA800799E25 /* PASourceItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB093A0BBBBDA800799E25 /* PASourceItemCell.m */; };
 		65CB09450BBBBF8700799E25 /* PAGenericTableColumn.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */; };
@@ -954,6 +955,8 @@
 		65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsOutlineView.m; sourceTree = "<group>"; };
 		65CA80100AAEEF8A002117C0 /* PAFilterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilterButton.h; sourceTree = "<group>"; };
 		65CA80110AAEEF8A002117C0 /* PAFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilterButton.m; sourceTree = "<group>"; };
+		65CAAEDE0F6C2D9700B4FFAA /* QuickLook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickLook.h; sourceTree = "<group>"; };
+		65CAAEF00F6C2E2500B4FFAA /* QuickLookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookUI.framework; path = /System/Library/PrivateFrameworks/QuickLookUI.framework; sourceTree = "<absolute>"; };
 		65CB09390BBBBDA800799E25 /* PASourceItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASourceItemCell.h; sourceTree = "<group>"; };
 		65CB093A0BBBBDA800799E25 /* PASourceItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASourceItemCell.m; sourceTree = "<group>"; };
 		65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAGenericTableColumn.h; sourceTree = "<group>"; };
@@ -1072,6 +1075,7 @@
 				484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */,
 				484497BD0B2D9925009B262C /* Sparkle.framework in Frameworks */,
 				650359A00F5D832F00BC204D /* Carbon.framework in Frameworks */,
+				65CAAEF10F6C2E2500B4FFAA /* QuickLookUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,6 +1110,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65CAAEF00F6C2E2500B4FFAA /* QuickLookUI.framework */,
 				6503599F0F5D832F00BC204D /* Carbon.framework */,
 				658EA77C099798A6005F13DE /* Message.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
@@ -1278,6 +1283,7 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				65CAAEDC0F6C2D7600B4FFAA /* Quick Look */,
 				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
 				48EDB82A0BF5A660008452FF /* TagFilter */,
 				480C40430BF4482700C90B2C /* TagCache */,
@@ -1981,6 +1987,14 @@
 				6571138C0D5371A600076543 /* TagAutoCompleteController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		65CAAEDC0F6C2D7600B4FFAA /* Quick Look */ = {
+			isa = PBXGroup;
+			children = (
+				65CAAEDE0F6C2D9700B4FFAA /* QuickLook.h */,
+			);
+			name = "Quick Look";
 			sourceTree = "<group>";
 		};
 		65CB0A0D0BBBD4E200799E25 /* Source Panel */ = {
@@ -3416,6 +3430,7 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
 					"\"$(SRCROOT)/build/Debug\"",
+					"\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
@@ -3460,6 +3475,7 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_3)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_4)",
 					"\"$(SRCROOT)/build/Debug\"",
+					"\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
