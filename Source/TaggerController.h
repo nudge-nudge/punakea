@@ -13,7 +13,6 @@
 @interface TaggerController : NSWindowController
 {	
 	IBOutlet NSTableView				*tableView;
-	IBOutlet PAStatusBar				*statusBar;
 	
 	IBOutlet NSButton					*manageFilesButton;
 	
@@ -26,7 +25,6 @@
 	BOOL								showsManageFiles;
 	
 	PATaggerItemCell					*fileCell;
-	PATaggerHeaderCell					*headerCell;
 	
 	NSMutableArray						*taggableObjects;
 
@@ -37,8 +35,6 @@
 - (void)addTaggableObject:(NNTaggableObject *)anObject;
 - (void)addTaggableObjects:(NSArray *)theObjects;
 - (void)setTaggableObjects:(NSArray *)theObjects;
-
-- (void)resizeTokenField;
 
 - (IBAction)changeManageFilesFlag:(id)sender;
 

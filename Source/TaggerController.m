@@ -68,11 +68,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	NSArray *columns = [tableView tableColumns];
 	[[columns objectAtIndex:0] setDataCell:fileCell];
 	
-	NSString *title = [[[columns objectAtIndex:0] headerCell] stringValue];
-	headerCell = [[PATaggerHeaderCell alloc] initTextCell:title];
-
-	[[columns objectAtIndex:0] setHeaderCell:headerCell];
-	
 	// Fix column width
 	[[columns objectAtIndex:0] setWidth:[tableView frame].size.width];
 	
@@ -128,42 +123,18 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 		[dropManager setAlternateState:YES];
 	else
 		[dropManager setAlternateState:NO];
-	
-	// Setup status bar
-	[self setupStatusBar];
-	
-	[self resizeTokenField];
-}
-
-- (void)setupStatusBar
-{
-	if(![self isEditingTagsOnFiles])
-	{
-		PAStatusBarButton *sbitem = [PAStatusBarButton statusBarButton];
-		[sbitem setToolTip:@"Add files to tag"];
-		[sbitem setImage:[NSImage imageNamed:@"statusbar-button-plus"]];
-		[sbitem setAction:@selector(addFiles:)];
-		[statusBar addItem:sbitem];
-		
-		sbitem = [PAStatusBarButton statusBarButton];
-		[sbitem setToolTip:@"Remove files from Tagger"];
-		[sbitem setImage:[NSImage imageNamed:@"statusbar-button-minus"]];
-		[sbitem setAction:@selector(removeFiles:)];	
-		[statusBar addItem:sbitem];
-	}
 }
 
 - (void)dealloc
 {
 	// make sure the tags are written
-	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
-	withInitialTags:[self initialTags]
-  toTaggableObjects:taggableObjects];
+	[self	 writeTags:[[self currentCompleteTagsInField] selectedTags]
+	   withInitialTags:[self initialTags]
+     toTaggableObjects:taggableObjects];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[taggableObjects release];
-	[headerCell release];
 	[tableView unregisterDraggedTypes];
 	[fileCell release];
 	[super dealloc];
@@ -171,9 +142,9 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 
 
 #pragma mark Actions
-- (void)writeTags:(NSArray*)currentTags 
-  withInitialTags:(NSArray*)someInitialTags
-toTaggableObjects:(NSArray*)someTaggableObjects
+- (void)   writeTags:(NSArray*)currentTags 
+     withInitialTags:(NSArray*)someInitialTags
+   toTaggableObjects:(NSArray*)someTaggableObjects
 {
 	// Tag sets
 	NSSet *initialTagSet = [NSSet setWithArray:someInitialTags];
@@ -266,8 +237,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects
 	[[self currentCompleteTagsInField] addObjectsFromArray:[tagsOnAllObjects allObjects]];
 	
 	[self setInitialTags:[tagsOnAllObjects allObjects]];
-		
-	[self resizeTokenField];
 }
 
 - (void)updateManageFilesFlagOnTaggableObjects
@@ -411,11 +380,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects
 {
 	// Update manage files flag if first tag was entered
 	[self updateManageFilesFlagOnTaggableObjects];
-		
-	// resize field if neccessary
-	[self performSelector:@selector(resizeTokenField) 
-			   withObject:nil 
-			   afterDelay:0.05];
 }
 
 - (void)editingDidEnd:(NSNotification *)aNotification
@@ -441,74 +405,11 @@ toTaggableObjects:(NSArray*)someTaggableObjects
 	[self editingDidEnd:notification];
 }
 
-- (void)resizeTokenField
-{
-	NSRect oldTokenFieldFrame = [[self tagField] frame];
-	
-	NSSize cellSize = [[[self tagField] cell] cellSizeForBounds:[[self tagField] bounds]];	
-	cellSize.height = [self discreteTokenFieldHeight:cellSize.height];
-	
-	float sizeDifference = cellSize.height - oldTokenFieldFrame.size.height;
-	
-	// Resize tag field
-	[[self tagField] setFrame:NSMakeRect(oldTokenFieldFrame.origin.x,
-										 oldTokenFieldFrame.origin.y - sizeDifference,
-										 oldTokenFieldFrame.size.width,
-										 cellSize.height)];
-	
-	// Resize table view
-	NSRect oldTableViewFrame = [[tableView enclosingScrollView] frame];
-	
-	NSRect tvFrame = NSMakeRect(oldTableViewFrame.origin.x,
-								oldTableViewFrame.origin.y,
-								oldTableViewFrame.size.width,
-								[[self tagField] frame].origin.y - oldTableViewFrame.origin.y - 42.0);
-	
-	if(!showsManageFiles)
-		tvFrame.size.height += [manageFilesButton frame].size.height;
-	
-	[[tableView enclosingScrollView] setFrame:tvFrame];
-	
-	// Move manage files button	
-	NSRect manageFilesFrame = [manageFilesButton frame];
-	manageFilesFrame.origin.y = tvFrame.origin.y + tvFrame.size.height + 13.0;
-	
-	[manageFilesButton setFrame:manageFilesFrame];
-	
-	// Set needs display
-	[[[self window] contentView] setNeedsDisplay:YES];
-}
-
-- (float)discreteTokenFieldHeight:(float)height
-{
-	height -= 23.0;
-	
-	// Minimum height is 23px
-	if (height <= 0.0)
-		return 23.0;
-	
-	// Determine how many lines are necessary
-	int steps = 1;
-	
-	while(height > 17.0)
-	{
-		height -= 17.0;
-		steps++;
-	}
-	
-	return 23.0 + steps * 17.0;
-}
-
 
 #pragma mark window delegate
 - (void)windowWillClose:(NSNotification *)aNotification
 {		
 	[self autorelease];
-}
-
-- (void)windowDidResize:(NSNotification *)aNotification
-{
-	[self resizeTokenField];
 }
 
 

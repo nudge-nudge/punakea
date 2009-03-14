@@ -7,10 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "BGHUDAppKit/BGHUDTableView.h"
 #import "NNTagging/NNTaggableObject.h"
 
 
-@interface PATaggerTableView : NSTableView {
+@interface PATaggerTableView : BGHUDTableView {
 
 }
 

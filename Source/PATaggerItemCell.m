@@ -49,7 +49,7 @@
 	   [[controlView window] isKeyWindow]) 
 		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 	else
-		[fontAttributes setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+		[fontAttributes setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 	
 	[fontAttributes setObject:[NSFont systemFontOfSize:11] forKey:NSFontAttributeName];
 	
