@@ -10,6 +10,9 @@
 
 @interface PAResultsOutlineView (PrivateAPI)
 
+- (void)triggerQuickLook;
+- (void)updateQuickLookUrls;
+
 - (int)mouseRowForEvent:(NSEvent *)theEvent;
 - (void)selectOnlyRowIndexes:(NSIndexSet *)rowIndexes;
 - (void)selectRowIndexes:(NSIndexSet *)rowIndexes byExtendingSelection:(BOOL)flag;
@@ -333,19 +336,23 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	{
 		[[QLPreviewPanel sharedPreviewPanel] closeWithEffect:1];
 	} else {
-		NSMutableArray *urls = [NSMutableArray array];
-		
-		for (NNFile *file in [self selectedItems])
-		{
-			[urls addObject:[NSURL fileURLWithPath:[file path]]];
-		}
-		
-		[[QLPreviewPanel sharedPreviewPanel] setURLs:urls
-										currentIndex:0
-							  preservingDisplayState:YES];
-		
+		[self updateQuickLookUrls];		
 		[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFrontWithEffect:1];
 	}
+}
+
+- (void)updateQuickLookUrls
+{
+	NSMutableArray *urls = [NSMutableArray array];
+	
+	for (NNFile *file in [self selectedItems])
+	{
+		[urls addObject:[NSURL fileURLWithPath:[file path]]];
+	}
+	
+	[[QLPreviewPanel sharedPreviewPanel] setURLs:urls
+									currentIndex:0
+						  preservingDisplayState:YES];
 }
 
 
@@ -363,6 +370,12 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		[[NSNotificationCenter defaultCenter] postNotificationName:PAResultsOutlineViewSelectionDidChangeNotification 
 															object:self
 														  userInfo:userInfo];
+		
+		// Update Quick Look URLs
+		if ([[QLPreviewPanel sharedPreviewPanel] isOpen])
+		{
+			[self updateQuickLookUrls];
+		}
 	}
 }
 
