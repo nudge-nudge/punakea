@@ -106,5 +106,7 @@
 	</array>
 	<key>SUFeedURL</key>
 	<string>http://download.nudgenudge.eu/punakea-appcast.xml</string>
+	<key>NSAppleScriptEnabled</key>
+	<true/>
 </dict>
 </plist>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="">
+	<suite name="Punakea Suite" code="NNPA" description="Commands and classes for Punakea Scripting">
+		<class name="application" code="papp" description="The application&apos;s top level scripting object" inherits="NSCoreSuite.NSApplication">
+			<cocoa class="NSApplication"/>
+			<property name="selection" code="seLE" type="text" access="r">
+				<cocoa key="selection"/>
+			</property>
+		</class>
+	</suite>
+</dictionary>

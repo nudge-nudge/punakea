@@ -210,6 +210,7 @@
 		6540FA680AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6540FA660AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m */; };
 		65461C9509D0418F0076778E /* PAImageButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65461C9309D0418F0076778E /* PAImageButtonCell.h */; };
 		65461C9609D0418F0076778E /* PAImageButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65461C9409D0418F0076778E /* PAImageButtonCell.m */; };
+		65473AA90F6BE16200168A0E /* AppleScriptDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65473AA80F6BE16200168A0E /* AppleScriptDelegateCategory.m */; };
 		654B4CFB0AF1FD37001082BA /* PATaggerHeaderCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 654B4CF90AF1FD37001082BA /* PATaggerHeaderCell.h */; };
 		654B4CFC0AF1FD37001082BA /* PATaggerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 654B4CFA0AF1FD37001082BA /* PATaggerHeaderCell.m */; };
 		655377CD0AAD8C5000C6376B /* dummyThumbSmall.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655377CB0AAD8C5000C6376B /* dummyThumbSmall.gif */; };
@@ -240,6 +241,7 @@
 		6571138D0D5371A600076543 /* TagAutoCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6571138C0D5371A600076543 /* TagAutoCompleteController.m */; };
 		657CBD770AA5C4A800701D47 /* PAThumbnailManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */; };
 		657CBD780AA5C4A800701D47 /* PAThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */; };
+		657E6E140F6BC10300AAD236 /* Punakea.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 657E6E130F6BC10300AAD236 /* Punakea.sdef */; };
 		6581C3030BDFD51E0001455D /* PAStatusBar.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6581C3010BDFD51E0001455D /* PAStatusBar.h */; };
 		6581C3040BDFD51E0001455D /* PAStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6581C3020BDFD51E0001455D /* PAStatusBar.m */; };
 		65823B840A67CCFF0004DC39 /* NSBezierPathCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */; };
@@ -832,6 +834,8 @@
 		6540FA660AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemGenericCell.m; sourceTree = "<group>"; };
 		65461C9309D0418F0076778E /* PAImageButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButtonCell.h; sourceTree = "<group>"; };
 		65461C9409D0418F0076778E /* PAImageButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButtonCell.m; sourceTree = "<group>"; };
+		65473AA70F6BE16200168A0E /* AppleScriptDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleScriptDelegateCategory.h; sourceTree = "<group>"; };
+		65473AA80F6BE16200168A0E /* AppleScriptDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleScriptDelegateCategory.m; sourceTree = "<group>"; };
 		654B4CF90AF1FD37001082BA /* PATaggerHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerHeaderCell.h; sourceTree = "<group>"; };
 		654B4CFA0AF1FD37001082BA /* PATaggerHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerHeaderCell.m; sourceTree = "<group>"; };
 		654DBC1A09C9D0620061BFA4 /* index.html */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = index.html; path = html/index.html; sourceTree = "<group>"; };
@@ -865,6 +869,7 @@
 		6571138C0D5371A600076543 /* TagAutoCompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagAutoCompleteController.m; sourceTree = "<group>"; };
 		657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAThumbnailManager.h; sourceTree = "<group>"; };
 		657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAThumbnailManager.m; sourceTree = "<group>"; };
+		657E6E130F6BC10300AAD236 /* Punakea.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.sdef; path = Punakea.sdef; sourceTree = "<group>"; };
 		6581C3010BDFD51E0001455D /* PAStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBar.h; sourceTree = "<group>"; };
 		6581C3020BDFD51E0001455D /* PAStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBar.m; sourceTree = "<group>"; };
 		65823B820A67CCFF0004DC39 /* NSBezierPathCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBezierPathCategory.h; sourceTree = "<group>"; };
@@ -1159,6 +1164,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				657E6E120F6BC0E300AAD236 /* Resources */,
 				650D52660F6ACB8800E67680 /* Scripts */,
 				6572864C0BC427D1000034D2 /* Strings */,
 				65943F980AFA56AA00A8922F /* appicon.icns */,
@@ -1781,12 +1787,22 @@
 			name = "Thumbnail Manager";
 			sourceTree = "<group>";
 		};
+		657E6E120F6BC0E300AAD236 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				657E6E130F6BC10300AAD236 /* Punakea.sdef */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		65851FFF099780E0009C3CA7 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				48D170520A5A68BA006C667B /* Core.h */,
 				65E7B06A0994D5AA00565251 /* Core.m */,
+				65473AA70F6BE16200168A0E /* AppleScriptDelegateCategory.h */,
+				65473AA80F6BE16200168A0E /* AppleScriptDelegateCategory.m */,
 				65EF60EC0F6958C100AAE151 /* HotkeyDelegateCategory.h */,
 				65EF60ED0F6958C100AAE151 /* HotkeyDelegateCategory.m */,
 				65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */,
@@ -2260,6 +2276,7 @@
 				48F97FEC0AEF5638003BA2DC /* Copy Frameworks */,
 				48F9807F0AEF5CC4003BA2DC /* Copy Plugins */,
 				4895153B0C3BFD1100463D01 /* Copy MDImporter */,
+				657E6DFA0F6BBF3F00AAD236 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2491,6 +2508,7 @@
 				48E386760D6DC45300204CDB /* source-panel-images.tif in Resources */,
 				65E744030D6EDAB000E9EBA0 /* statusbar-button-tags.tif in Resources */,
 				65E744040D6EDAB000E9EBA0 /* statusbar-button-tags-on.tif in Resources */,
+				657E6E140F6BC10300AAD236 /* Punakea.sdef in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2523,6 +2541,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/Applications/Doxygen.app/Contents/Resources/doxygen Doxyfile";
+		};
+		657E6DFA0F6BBF3F00AAD236 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/usr/bin/sdp -f st -o $BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME/Contents/Resources $SOURCE_ROOT/Resources/Punakea.sdef";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2701,6 +2732,7 @@
 				65EF60C50F69531500AAE151 /* PTHotKeyCenter.m in Sources */,
 				65EF60C60F69531500AAE151 /* PTKeyCombo.m in Sources */,
 				65EF60EE0F6958C100AAE151 /* HotkeyDelegateCategory.m in Sources */,
+				65473AA90F6BE16200168A0E /* AppleScriptDelegateCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
