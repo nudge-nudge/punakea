@@ -338,6 +338,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	} else {
 		[self updateQuickLookUrls];		
 		[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFrontWithEffect:1];
+		[[self window] makeKeyWindow];
 	}
 }
 
