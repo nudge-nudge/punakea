@@ -302,6 +302,7 @@
 		// File menu
 		if([item action] == @selector(addTagSet:)) return NO;
 		if([item action] == @selector(openFiles:)) return NO;
+		if([item action] == @selector(getInfo:)) return NO;
 		if([item action] == @selector(revealInFinder:)) return NO;
 		
 		// Edit menu
@@ -325,7 +326,18 @@
 		NSResponder *firstResponder = [[browserController window] firstResponder];
 		
 		// File menu
-		if([item action] == @selector(revealInFinder:))
+		if([item action] == @selector(getInfo:))
+		{
+			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
+			{
+				PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
+				if([ov numberOfSelectedItems] >= 1)
+					return YES;
+			}
+			
+			return NO;
+		}
+		else if([item action] == @selector(revealInFinder:))
 		{
 			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 			{
@@ -610,6 +622,30 @@
 	
 	[[self busyWindow] center];
 	[NSApp runModalForWindow:[self busyWindow]];
+}
+
+- (IBAction)getInfo:(id)sender
+{
+	PAResultsOutlineView *ov = (PAResultsOutlineView *)[[browserController window] firstResponder];
+	
+	for (NNFile *file in [ov selectedItems])
+	{
+		NSString *s = @"tell application \"Finder\"\n";
+		
+		s = [s stringByAppendingString:@"set p to \""];
+		s = [s stringByAppendingString:[file path]];
+		s = [s stringByAppendingString:@"\"\n"];
+		
+		s = [s stringByAppendingString:@"set f to POSIX file p as string\n"];
+		
+		s = [s stringByAppendingString:@"activate\n"];
+		s = [s stringByAppendingString:@"open information window of alias f\n"];
+		
+		s = [s stringByAppendingString:@"end tell"];
+		
+		NSAppleScript *folderActionScript = [[NSAppleScript alloc] initWithSource:s];
+		[folderActionScript executeAndReturnError:nil];
+	}
 }
 
 - (IBAction)revealInFinder:(id)sender

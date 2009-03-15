@@ -62,6 +62,7 @@
 
 // Menu Actions
 - (IBAction)addTagSet:(id)sender;
+- (IBAction)getInfo:(id)sender;
 
 - (IBAction)goHome:(id)sender;
 - (IBAction)toggleInfoPane:(id)sender;

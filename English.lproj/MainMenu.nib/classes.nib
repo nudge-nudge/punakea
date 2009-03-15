@@ -61,6 +61,8 @@
 				<string>id</string>
 				<key>editTagsOnFiles</key>
 				<string>id</string>
+				<key>getInfo</key>
+				<string>id</string>
 				<key>goHome</key>
 				<string>id</string>
 				<key>goToAllItems</key>
