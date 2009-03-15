@@ -3,7 +3,7 @@
 
 @interface TaggerController (PrivateAPI)
 
-- (void)setupStatusBar;
+- (void)updateQuickLookPreview;
 
 - (void)writeTags:(NSArray*)currentTags 
   withInitialTags:(NSArray*)someInitialTags
@@ -19,10 +19,9 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 - (void)updateTokenFieldEditable;
 
 - (NSTokenField*)tagField;
-- (float)discreteTokenFieldHeight:(float)theHeight;
 
-- (void)itemsHaveChanged;							/**< called when items have changed */
-- (void)resetTaggerContent;							/**< resets the tagger window (called when window is closed) */
+- (void)taggableObjectsHaveChanged;							/**< called when items have changed */
+- (void)resetTaggerContent;									/**< resets the tagger window (called when window is closed) */
 - (void)displayRestTags:(NSArray*)restTags;
 
 @end
@@ -179,20 +178,14 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 {
 	[taggableObjects addObject:anObject];
 	
-	[self updateTokenFieldEditable];
-	[self updateManageFilesFlagOnTaggableObjects];
-	[self updateTags];
-	[tableView reloadData];
+	[self taggableObjectsHaveChanged];
 }
 
 - (void)addTaggableObjects:(NSArray *)theObjects
 {
 	[taggableObjects addObjectsFromArray:theObjects];
 
-	[self updateTokenFieldEditable];
-	[self updateManageFilesFlagOnTaggableObjects];
-	[self updateTags];
-	[tableView reloadData];
+	[self taggableObjectsHaveChanged];
 }
 
 - (void)setTaggableObjects:(NSArray *)theObjects
@@ -200,10 +193,25 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	[taggableObjects release];
 	taggableObjects = [theObjects mutableCopy];
 	
+	[self taggableObjectsHaveChanged];
+}
+
+- (void)removeTaggableObjects:(id)sender
+{
+	[taggableObjects removeObjectsAtIndexes:[tableView selectedRowIndexes]];
+		               
+	[tableView deselectAll:self];
+	[self taggableObjectsHaveChanged];
+	[[tableView window] makeFirstResponder:tableView];
+}
+
+- (void)taggableObjectsHaveChanged
+{
 	[self updateTokenFieldEditable];
 	[self updateManageFilesFlagOnTaggableObjects];
 	[self updateTags];
 	[tableView reloadData];
+	[self updateQuickLookPreview];
 }
 
 - (void)updateTags
@@ -263,6 +271,28 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 		[manageFilesButton setEnabled:NO];		
 }
 
+- (void)updateQuickLookPreview
+{
+	if ([taggableObjects count] == 0)
+	{
+		[quickLookPreviewImage setImage:nil];
+	} else {
+		int row = [tableView selectedRow];
+		if (row == -1) { row = 0; }
+		
+		NNFile *file = [tableView itemAtRow:row];
+		
+		NSImage *img = [NSImage imageWithPreviewOfFileAtPath:[file path]
+													  ofSize:[quickLookPreviewImage frame].size
+													  asIcon:YES];
+		
+		[quickLookPreviewImage setImage:img];
+	}
+}
+
+
+#pragma mark Events
+
 - (void)doubleAction:(id)sender
 {
 	NSIndexSet *selectedRowIndexes = [tableView selectedRowIndexes];	
@@ -277,6 +307,9 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 		row = [selectedRowIndexes indexGreaterThanIndex:row];
 	}
 }
+
+
+#pragma mark Misc
 
 - (void)addFiles:(id)sender
 {
@@ -319,19 +352,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	}
 	
 	[self addTaggableObjects:results];
-}
-
-- (void)removeFiles:(id)sender
-{
-	[taggableObjects removeObjectsAtIndexes:[tableView selectedRowIndexes]];
-	
-	[self updateTokenFieldEditable];
-	
-	[tableView deselectAll:tableView];
-		
-	[self updateManageFilesFlagOnTaggableObjects];
-	[self updateTags];
-	[tableView reloadData];
 }
 
 - (IBAction)changeManageFilesFlag:(id)sender
@@ -403,6 +423,11 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 - (void)windowDidMiniaturize:(NSNotification *)notification
 {
 	[self editingDidEnd:notification];
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)aNotification
+{
+	[self updateQuickLookPreview];
 }
 
 

@@ -375,7 +375,9 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		// Update Quick Look URLs
 		if ([[QLPreviewPanel sharedPreviewPanel] isOpen])
 		{
-			[self updateQuickLookUrls];
+			[self performSelector:@selector(updateQuickLookUrls)
+					   withObject:nil
+					   afterDelay:0.1];
 		}
 	}
 }

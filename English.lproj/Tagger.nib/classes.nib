@@ -36,6 +36,8 @@
 			<dict>
 				<key>changeManageFilesFlag</key>
 				<string>id</string>
+				<key>removeTaggableObjects</key>
+				<string>id</string>
 			</dict>
 			<key>CLASS</key>
 			<string>TaggerController</string>
@@ -45,6 +47,8 @@
 			<dict>
 				<key>manageFilesButton</key>
 				<string>NSButton</string>
+				<key>quickLookPreviewImage</key>
+				<string>NSImageView</string>
 				<key>statusBar</key>
 				<string>PAStatusBar</string>
 				<key>tableView</key>

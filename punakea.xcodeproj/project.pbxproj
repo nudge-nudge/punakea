@@ -341,6 +341,7 @@
 		65D86D5B09F15BA8006BCC8D /* PAResultsMultiItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */; };
 		65D86D5C09F15BA8006BCC8D /* PAResultsMultiItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */; };
 		65D86E3E09F15E1B006BCC8D /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */; };
+		65DAB3A00F6D11A60003964B /* NSImage+QuickLook.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DAB39E0F6D11A60003964B /* NSImage+QuickLook.m */; };
 		65E38D2E0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E38D2C0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h */; };
 		65E38D2F0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E38D2D0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m */; };
 		65E38E530BFB390E000C1976 /* NSNumberFormatterAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65E38E510BFB390E000C1976 /* NSNumberFormatterAdditions.h */; };
@@ -972,6 +973,8 @@
 		65D86D5909F15BA7006BCC8D /* PAResultsMultiItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemCell.h; sourceTree = "<group>"; };
 		65D86D5A09F15BA7006BCC8D /* PAResultsMultiItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemCell.m; sourceTree = "<group>"; };
 		65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
+		65DAB39E0F6D11A60003964B /* NSImage+QuickLook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+QuickLook.m"; sourceTree = "<group>"; };
+		65DAB39F0F6D11A60003964B /* NSImage+QuickLook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+QuickLook.h"; sourceTree = "<group>"; };
 		65E38D2C0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInfoPaneMultipleSelectionView.h; sourceTree = "<group>"; };
 		65E38D2D0BFB04CB000C1976 /* PAInfoPaneMultipleSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAInfoPaneMultipleSelectionView.m; sourceTree = "<group>"; };
 		65E38E510BFB390E000C1976 /* NSNumberFormatterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberFormatterAdditions.h; sourceTree = "<group>"; };
@@ -1992,6 +1995,8 @@
 			isa = PBXGroup;
 			children = (
 				65CAAEDE0F6C2D9700B4FFAA /* QuickLook.h */,
+				65DAB39E0F6D11A60003964B /* NSImage+QuickLook.m */,
+				65DAB39F0F6D11A60003964B /* NSImage+QuickLook.h */,
 			);
 			name = "Quick Look";
 			sourceTree = "<group>";
@@ -2745,6 +2750,7 @@
 				65EF60C60F69531500AAE151 /* PTKeyCombo.m in Sources */,
 				65EF60EE0F6958C100AAE151 /* HotkeyDelegateCategory.m in Sources */,
 				65473AA90F6BE16200168A0E /* AppleScriptDelegateCategory.m in Sources */,
+				65DAB3A00F6D11A60003964B /* NSImage+QuickLook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

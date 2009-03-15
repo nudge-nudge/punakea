@@ -9,10 +9,12 @@
 #import "PATaggerHeaderCell.h"
 #import "PAThumbnailItem.h"
 #import "PAStatusBar.h"
+#import "NSImage+QuickLook.h"
 
 @interface TaggerController : NSWindowController
 {	
 	IBOutlet NSTableView				*tableView;
+	IBOutlet NSImageView				*quickLookPreviewImage;
 	
 	IBOutlet NSButton					*manageFilesButton;
 	
@@ -35,6 +37,7 @@
 - (void)addTaggableObject:(NNTaggableObject *)anObject;
 - (void)addTaggableObjects:(NSArray *)theObjects;
 - (void)setTaggableObjects:(NSArray *)theObjects;
+- (void)removeTaggableObjects:(id)sender;
 
 - (IBAction)changeManageFilesFlag:(id)sender;
 

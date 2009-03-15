@@ -32,6 +32,25 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Events
+- (BOOL)performKeyEquivalent:(NSEvent *)theEvent
+{
+	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+	
+	if([theEvent type] == NSKeyDown)
+	{
+		// Delete files on Delete
+		if(key == NSDeleteCharacter &&
+		   [[self selectedRowIndexes] count] > 0)
+		{			
+			[[self delegate] removeTaggableObjects:self];
+			
+			return YES;
+		}
+	}
+	
+	return [super performKeyEquivalent:theEvent];
+}
+
 - (void)keyDown:(NSEvent *)theEvent
 {
 	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
