@@ -8,6 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "NNTagging/NNTagStoreManager.h"
+
+@class NNTagToFileWriter;
+@class NNSecureTagToFileWriter;
+@class NNTagToOpenMetaWriter;
+@class NNFile;
+
 /**
 use this class to do stuff Punakea needs to perform on startup
  */

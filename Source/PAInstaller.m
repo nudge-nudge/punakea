@@ -8,9 +8,15 @@
 
 #import "PAInstaller.h"
 
+#import "NNTagging/NNTagToFileWriter.h"
+#import "NNTagging/NNSecureTagToFileWriter.h"
+#import "NNTagging/NNTagToOpenMetaWriter.h"
+#import "NNTagging/NNFile.h"
+
 @interface PAInstaller (PrivateAPI)
 
 + (void)removeOldWeblocImporter;
++ (void)migrateSpotlightCommentsToOpenMeta;
 
 @end
 
@@ -21,6 +27,12 @@
 	// version 0.3 had a webloc importer installed in the user's library directory
 	[PAInstaller removeOldWeblocImporter];
 	//[PAInstaller copyWeblocImporter];
+	
+	// TODO check if upgrade to openmeta has already been done
+	
+	// upgrade if needed
+	
+	// write Settings with OpenMetaWriter to disk
 }
 
 + (void)removeOldWeblocImporter
@@ -36,52 +48,36 @@
 	}
 }
 
-// not used at the moment
-//+ (void)copyWeblocImporter
-//{
-//	NSFileManager *fm = [NSFileManager defaultManager];
-//	
-//	// get path of webloc importer bundle
-//	NSString *importerPath = [NSBundle pathForResource:@"WeblocImporter"
-//												ofType:@"mdimporter"
-//										   inDirectory:[[NSBundle mainBundle] builtInPlugInsPath]];
-//	
-//	NSString *targetPath = [@"~/Library/Spotlight" stringByExpandingTildeInPath];
-//	BOOL isDirectory;
-//	
-//	// create dir if it does not exits
-//	if (![fm fileExistsAtPath:targetPath isDirectory:&isDirectory])
-//	{
-//		[fm createDirectoryAtPath:targetPath attributes:nil];
-//	}
-//	else if (!isDirectory)
-//	{
-//		NSLog(@"critical error: Please make sure that '%@' is a directory",targetPath);
-//		return;
-//	}
-//
-//	// targetPath is now a directory
-//	NSString *target = [targetPath stringByAppendingPathComponent:[importerPath lastPathComponent]];
-//	
-//	if ([fm fileExistsAtPath:target])
-//	{
-//		// check creation date
-//		NSDictionary *targetAttribute = [fm fileAttributesAtPath:target traverseLink:NO];
-//		NSDate *targetCreation = [targetAttribute objectForKey:NSFileCreationDate];
-//		
-//		NSDictionary *sourceAttribute = [fm fileAttributesAtPath:importerPath traverseLink:NO];
-//		NSDate *sourceCreation = [sourceAttribute objectForKey:NSFileCreationDate];
-//		
-//		if ([targetCreation compare:sourceCreation] == NSOrderedAscending)
-//		{
-//			[fm removeFileAtPath:target handler:NULL];
-//			[fm copyPath:importerPath toPath:target handler:NULL];	
-//		}			
-//	}
-//	else
-//	{
-//		[fm copyPath:importerPath toPath:target handler:NULL];	
-//	}
-//}
+// TODO this should give user feedback, right?
+- (void)migrateSpotlightCommentsToOpenMeta
+{
+	NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
+	
+	// get all old files 
+	NNSecureTagToFileWriter *oldTagToFileWriter = [[NNSecureTagToFileWriter alloc] init];
+	[tagStoreManager setTagPrefix:@"@"];
+	[tagStoreManager setTagToFileWriter:oldTagToFileWriter];
+	[oldTagToFileWriter release];
+	
+	NSArray *taggedFiles = [oldTagToFileWriter allTaggedObjects];
+	
+	// now all files are loaded, including their tags
+	// switch to new tagToOpenMetaWriter
+	NNTagToFileWriter *newTagToFileWriter = [[NNTagToOpenMetaWriter alloc] init];
+	[tagStoreManager setTagToFileWriter:newTagToFileWriter];
+	[newTagToFileWriter release];
+	
+	// now save all files using the new tagToFileWriter
+	// this writes all tags to the new storage and we're good
+	// to go!
+	for (NNFile *file in taggedFiles)
+	{
+		[file initiateSave];
+		
+		// clean up finder comments
+		NSString *finderCommentWithoutTags = [oldTagToFileWriter finderCommentIgnoringKeywordsForFile:file];
+		[oldTagToFileWriter setComment:finderCommentWithoutTags	forURL:[file url]];
+	}
+}
 
 @end

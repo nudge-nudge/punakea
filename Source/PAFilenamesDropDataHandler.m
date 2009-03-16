@@ -17,7 +17,7 @@
 	if (![[NSFileManager defaultManager] fileExistsAtPath:data])
 		return nil;
 	
-	NNFile *file = [[NNFile alloc] initWithPath:data useStore:NNFinderCommentFinderStore];
+	NNFile *file = [[NNFile alloc] initWithPath:data];
 	return [file autorelease];
 }
 
