@@ -122,6 +122,10 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 		[dropManager setAlternateState:YES];
 	else
 		[dropManager setAlternateState:NO];
+	
+	// Set insertion pointer color for NSTokenField
+	NSTextView *e = (NSTextView *)[[self window] fieldEditor:YES forObject:[tagAutoCompleteController tagField]];
+	[e setInsertionPointColor:[NSColor whiteColor]];
 }
 
 - (void)dealloc
