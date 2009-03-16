@@ -205,8 +205,9 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	[taggableObjects removeObjectsAtIndexes:[tableView selectedRowIndexes]];
 		               
 	[tableView deselectAll:self];
+	[[tableView window] makeFirstResponder:[tagAutoCompleteController tagField]];
+
 	[self taggableObjectsHaveChanged];
-	[[tableView window] makeFirstResponder:tableView];
 }
 
 - (void)taggableObjectsHaveChanged
@@ -249,6 +250,11 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	[[self currentCompleteTagsInField] addObjectsFromArray:[tagsOnAllObjects allObjects]];
 	
 	[self setInitialTags:[tagsOnAllObjects allObjects]];
+	
+	// Deselect tags
+	NSText* fieldEditor = [[tagAutoCompleteController tagField] currentEditor]; 
+	if (fieldEditor) 
+		[fieldEditor setSelectedRange:NSMakeRange([[fieldEditor string] length], 0)]; 
 }
 
 - (void)updateManageFilesFlagOnTaggableObjects

@@ -1649,7 +1649,7 @@
 		6531649B0AF2534B00928BEF /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				65C8A1FB0BEB4D3000DC032F /* Controllers */,
+				65C8A1FB0BEB4D3000DC032F /* Tag Field */,
 				65CC15530BE0A5B800866AF7 /* Controls */,
 				483272220AA42C7E003D98A6 /* Preferences */,
 			);
@@ -1982,13 +1982,13 @@
 			name = Panes;
 			sourceTree = "<group>";
 		};
-		65C8A1FB0BEB4D3000DC032F /* Controllers */ = {
+		65C8A1FB0BEB4D3000DC032F /* Tag Field */ = {
 			isa = PBXGroup;
 			children = (
 				6571138B0D5371A600076543 /* TagAutoCompleteController.h */,
 				6571138C0D5371A600076543 /* TagAutoCompleteController.m */,
 			);
-			name = Controllers;
+			name = "Tag Field";
 			sourceTree = "<group>";
 		};
 		65CAAEDC0F6C2D7600B4FFAA /* Quick Look */ = {
