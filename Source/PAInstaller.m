@@ -8,15 +8,15 @@
 
 #import "PAInstaller.h"
 
-#import "NNTagging/NNTagToFileWriter.h"
-#import "NNTagging/NNSecureTagToFileWriter.h"
-#import "NNTagging/NNTagToOpenMetaWriter.h"
-#import "NNTagging/NNFile.h"
+//#import "NNTagging/NNTagToFileWriter.h"
+//#import "NNTagging/NNSecureTagToFileWriter.h"
+//#import "NNTagging/NNTagToOpenMetaWriter.h"
+//#import "NNTagging/NNFile.h"
 
 @interface PAInstaller (PrivateAPI)
 
 + (void)removeOldWeblocImporter;
-+ (void)migrateSpotlightCommentsToOpenMeta;
+//+ (void)migrateSpotlightCommentsToOpenMeta;
 
 @end
 
@@ -49,35 +49,35 @@
 }
 
 // TODO this should give user feedback, right?
-- (void)migrateSpotlightCommentsToOpenMeta
-{
-	NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
-	
-	// get all old files 
-	NNSecureTagToFileWriter *oldTagToFileWriter = [[NNSecureTagToFileWriter alloc] init];
-	[tagStoreManager setTagPrefix:@"@"];
-	[tagStoreManager setTagToFileWriter:oldTagToFileWriter];
-	[oldTagToFileWriter release];
-	
-	NSArray *taggedFiles = [oldTagToFileWriter allTaggedObjects];
-	
-	// now all files are loaded, including their tags
-	// switch to new tagToOpenMetaWriter
-	NNTagToFileWriter *newTagToFileWriter = [[NNTagToOpenMetaWriter alloc] init];
-	[tagStoreManager setTagToFileWriter:newTagToFileWriter];
-	[newTagToFileWriter release];
-	
-	// now save all files using the new tagToFileWriter
-	// this writes all tags to the new storage and we're good
-	// to go!
-	for (NNFile *file in taggedFiles)
-	{
-		[file initiateSave];
-		
-		// clean up finder comments
-		NSString *finderCommentWithoutTags = [oldTagToFileWriter finderCommentIgnoringKeywordsForFile:file];
-		[oldTagToFileWriter setComment:finderCommentWithoutTags	forURL:[file url]];
-	}
-}
+//- (void)migrateSpotlightCommentsToOpenMeta
+//{
+//	NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
+//	
+//	// get all old files 
+//	NNSecureTagToFileWriter *oldTagToFileWriter = [[NNSecureTagToFileWriter alloc] init];
+//	[tagStoreManager setTagPrefix:@"@"];
+//	[tagStoreManager setTagToFileWriter:oldTagToFileWriter];
+//	[oldTagToFileWriter release];
+//	
+//	NSArray *taggedFiles = [oldTagToFileWriter allTaggedObjects];
+//	
+//	// now all files are loaded, including their tags
+//	// switch to new tagToOpenMetaWriter
+//	NNTagToFileWriter *newTagToFileWriter = [[NNTagToOpenMetaWriter alloc] init];
+//	[tagStoreManager setTagToFileWriter:newTagToFileWriter];
+//	[newTagToFileWriter release];
+//	
+//	// now save all files using the new tagToFileWriter
+//	// this writes all tags to the new storage and we're good
+//	// to go!
+//	for (NNFile *file in taggedFiles)
+//	{
+//		[file initiateSave];
+//		
+//		// clean up finder comments
+//		NSString *finderCommentWithoutTags = [oldTagToFileWriter finderCommentIgnoringKeywordsForFile:file];
+//		[oldTagToFileWriter setComment:finderCommentWithoutTags	forURL:[file url]];
+//	}
+//}
 
 @end
