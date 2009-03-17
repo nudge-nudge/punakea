@@ -5,7 +5,7 @@
 	<key>General.Sidebar.Position</key>
 	<integer>1</integer>
 	<key>General.Sidebar.Enabled</key>
-	<true/>
+	<false/>
 	<key>General.StatusItem.Enabled</key>
 	<true/>
 	<key>General.StartOnLogin</key>
