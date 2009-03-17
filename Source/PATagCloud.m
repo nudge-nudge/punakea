@@ -454,7 +454,9 @@ calculates the starting point in the next row according to the height of all the
 	NSRect frame = [tagButton frame];
 	float width = frame.size.width;
 	
-	float xValue = pointForNextTagRect.x + width + TAGCLOUD_SPACING.width + TAGCLOUD_PADDING.width;
+	// We're going to use full pixels for CoreAnimation to produce nice results and no
+	// half-pixel antialiasing.
+	float xValue = ceil(pointForNextTagRect.x + width + TAGCLOUD_SPACING.width + TAGCLOUD_PADDING.width);
 	
 	//if the tag doesn't fit in this row, get first point in next row
 	if (xValue > rect.size.width)
@@ -463,10 +465,11 @@ calculates the starting point in the next row according to the height of all the
 	}
 	
 	//save this value
-	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x,pointForNextTagRect.y);
+	NSPoint newOrigin = NSMakePoint(pointForNextTagRect.x, pointForNextTagRect.y);
 	
 	//then calc the point for the next tag
-	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + TAGCLOUD_SPACING.width,pointForNextTagRect.y);
+	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + TAGCLOUD_SPACING.width,
+									  pointForNextTagRect.y);
 	
 	return newOrigin;
 }
@@ -506,7 +509,8 @@ calculates the starting point in the next row according to the height of all the
 			maxHeight = tagSize.height;
 		}
 	
-	return NSMakePoint(TAGCLOUD_SPACING.width,pointForNextTagRect.y-maxHeight-TAGCLOUD_SPACING.height);
+	return NSMakePoint(TAGCLOUD_SPACING.width,
+					   pointForNextTagRect.y - maxHeight - TAGCLOUD_SPACING.height);
 }
 
 - (NNTag*)tagWithBestAbsoluteRating:(NSArray*)tagSet
