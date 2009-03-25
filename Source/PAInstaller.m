@@ -29,8 +29,10 @@
 	//[PAInstaller copyWeblocImporter];
 	
 	// TODO check if upgrade to openmeta has already been done
+	// check if Settings exist at default location
 	
-	// upgrade if needed
+	// upgrade if needed - TODO make sure that no tag is accidently overwritten?
+	// what happens when update was interrrupted? Best to store all the tag-file relations!
 	
 	// write Settings with OpenMetaWriter to disk
 }
