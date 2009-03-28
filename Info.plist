@@ -65,8 +65,6 @@
 	<string>NNPA</string>
 	<key>CFBundleVersion</key>
 	<string>0.4.1</string>
-	<key>LSUIElement</key>
-	<string>0</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
