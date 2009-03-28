@@ -17,7 +17,7 @@
 	<key>ManageFiles.ManagedFolder.Enabled</key>
 	<false/>
 	<key>ManageFiles.ManagedFolder.Location</key>
-	<string>~/Library/Application Support/Punakea/Files/</string>
+	<string>~/Documents/Punakea/Files/</string>
 	<key>ManageFiles.TagsFolder.Enabled</key>
 	<true/>
 	<key>ManageFiles.TagsFolder.Location</key>
