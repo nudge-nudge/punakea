@@ -25,7 +25,6 @@
 		480219550C02D2EE001CF480 /* PAInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 480219530C02D2EE001CF480 /* PAInstaller.m */; };
 		480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy MDImporter */ = {isa = PBXBuildFile; fileRef = 480219480C02CE7B001CF480 /* WeblocImporter.mdimporter */; };
 		4807215E0AEFE5600024118D /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */; };
-		480721FB0AEFE9470024118D /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
 		480C40300BF4469A00C90B2C /* PATagCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 480C402E0BF4469A00C90B2C /* PATagCache.h */; };
 		480C40310BF4469A00C90B2C /* PATagCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C402F0BF4469A00C90B2C /* PATagCache.m */; };
 		480C403B0BF4471300C90B2C /* PASingleton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 480C40390BF4471300C90B2C /* PASingleton.h */; };
@@ -36,18 +35,6 @@
 		4815A0690AEF991A00969296 /* PAFilenamesDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */; };
 		4815A06B0AEF992300969296 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
 		4815A0A20AEF993B00969296 /* PAWebURLsWithTitlesPboardTypeDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F402D0AB6D61300E230DC /* PAWebURLsWithTitlesPboardTypeDropHandler.m */; };
-		4815A0D50AEF9A5D00969296 /* NDResourceFork.h in Headers */ = {isa = PBXBuildFile; fileRef = 4815A0CD0AEF9A5D00969296 /* NDResourceFork.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4815A0D60AEF9A5D00969296 /* NDResourceFork.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815A0CE0AEF9A5D00969296 /* NDResourceFork.m */; };
-		4815A0D70AEF9A5D00969296 /* NDResourceFork+OtherSorces.h in Headers */ = {isa = PBXBuildFile; fileRef = 4815A0CF0AEF9A5D00969296 /* NDResourceFork+OtherSorces.h */; settings = {ATTRIBUTES = (); }; };
-		4815A0D80AEF9A5D00969296 /* NDResourceFork+OtherSorces.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815A0D00AEF9A5D00969296 /* NDResourceFork+OtherSorces.m */; };
-		4815A0D90AEF9A5D00969296 /* NDResourceFork+PascalStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 4815A0D10AEF9A5D00969296 /* NDResourceFork+PascalStrings.h */; settings = {ATTRIBUTES = (); }; };
-		4815A0DA0AEF9A5D00969296 /* NDResourceFork+PascalStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815A0D20AEF9A5D00969296 /* NDResourceFork+PascalStrings.m */; };
-		4815A0DB0AEF9A5D00969296 /* NDResourceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 4815A0D30AEF9A5D00969296 /* NDResourceInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4815A0DC0AEF9A5D00969296 /* NDResourceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815A0D40AEF9A5D00969296 /* NDResourceInfo.m */; };
-		4815A0E10AEF9A7600969296 /* NSString+NDCarbonUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4815A0DD0AEF9A7600969296 /* NSString+NDCarbonUtilities.h */; settings = {ATTRIBUTES = (); }; };
-		4815A0E20AEF9A7600969296 /* NSString+NDCarbonUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815A0DE0AEF9A7600969296 /* NSString+NDCarbonUtilities.m */; };
-		4815A0E30AEF9A7600969296 /* NSURL+NDCarbonUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4815A0DF0AEF9A7600969296 /* NSURL+NDCarbonUtilities.h */; settings = {ATTRIBUTES = (); }; };
-		4815A0E40AEF9A7600969296 /* NSURL+NDCarbonUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4815A0E00AEF9A7600969296 /* NSURL+NDCarbonUtilities.m */; };
 		4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
 		4815A1CA0AEFA06400969296 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
 		481634140A5A48A1003B8EE4 /* Tagger.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4816340E0A5A48A1003B8EE4 /* Tagger.nib */; };
@@ -85,8 +72,8 @@
 		483C8AA20D6C51EA0051C8C3 /* PAPublicURLDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C8A090D6C4F8D0051C8C3 /* PAPublicURLDropHandler.m */; };
 		483C8AA30D6C51EB0051C8C3 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
 		483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
-		483C8AB30D6C520B0051C8C3 /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
 		483C8ABC0D6C52260051C8C3 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
+		483DC0A70F811E1E00CF8AD0 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */; };
 		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
 		48404B100AF8B392001F7BB7 /* PATaggerUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 48404A0B0AF8A722001F7BB7 /* PATaggerUnitTest.m */; };
@@ -135,10 +122,8 @@
 		4870698F0A0C933C00A3ADE2 /* PATypeAheadFind.m in Sources */ = {isa = PBXBuildFile; fileRef = 4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */; };
 		4871792F0A5A619900A988DE /* BrowserView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 4871792D0A5A619900A988DE /* BrowserView.nib */; };
 		48893B020AF0A4E400BA0B50 /* FilenamesDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 483184E30AEF91A700C3C672 /* FilenamesDropHandler.punakeaDropHandler */; };
-		48893B030AF0A4EE00BA0B50 /* NDResourceFork.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
 		48893B110AF0A59900BA0B50 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Info.plist */; };
 		48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
-		48893B5A0AF0AB1600BA0B50 /* NDResourceFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */; };
 		488CBBDE0AC9674400F6D20E /* PABrowserViewMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488CBBDD0AC9674400F6D20E /* PABrowserViewMainController.m */; };
 		488CBBE10AC9676C00F6D20E /* PAResultsViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488CBBDF0AC9676C00F6D20E /* PAResultsViewController.h */; };
 		488CBBE20AC9676C00F6D20E /* PAResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488CBBE00AC9676C00F6D20E /* PAResultsViewController.m */; };
@@ -404,13 +389,6 @@
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = NNTagging;
 		};
-		4815A0E70AEF9A8800969296 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4815A0B00AEF99D900969296;
-			remoteInfo = NDResourceFork;
-		};
 		48186F8E0BE4C930000B4638 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -431,13 +409,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 483184E20AEF91A700C3C672;
 			remoteInfo = FilenamesDropHandler;
-		};
-		483C8A2B0D6C50C50051C8C3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4815A0B00AEF99D900969296;
-			remoteInfo = NDResourceFork;
 		};
 		483C8A2D0D6C50C80051C8C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -501,11 +472,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				483DC0A70F811E1E00CF8AD0 /* NNTagging.framework in Copy Frameworks */,
 				48E760DA0F7F8BC900F9EEBA /* OpenMeta.framework in Copy Frameworks */,
 				651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
 				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
-				48893B030AF0A4EE00BA0B50 /* NDResourceFork.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -642,20 +613,6 @@
 		480C403A0BF4471300C90B2C /* PASingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASingleton.m; sourceTree = "<group>"; };
 		480C40460BF4484400C90B2C /* PATagCacheEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCacheEntry.h; sourceTree = "<group>"; };
 		480C40470BF4484400C90B2C /* PATagCacheEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCacheEntry.m; sourceTree = "<group>"; };
-		4815A0B10AEF99D900969296 /* NDResourceFork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NDResourceFork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4815A0B20AEF99D900969296 /* NDResourceFork-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NDResourceFork-Info.plist"; sourceTree = "<group>"; };
-		4815A0CD0AEF9A5D00969296 /* NDResourceFork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDResourceFork.h; sourceTree = "<group>"; };
-		4815A0CE0AEF9A5D00969296 /* NDResourceFork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDResourceFork.m; sourceTree = "<group>"; };
-		4815A0CF0AEF9A5D00969296 /* NDResourceFork+OtherSorces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NDResourceFork+OtherSorces.h"; sourceTree = "<group>"; };
-		4815A0D00AEF9A5D00969296 /* NDResourceFork+OtherSorces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NDResourceFork+OtherSorces.m"; sourceTree = "<group>"; };
-		4815A0D10AEF9A5D00969296 /* NDResourceFork+PascalStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NDResourceFork+PascalStrings.h"; sourceTree = "<group>"; };
-		4815A0D20AEF9A5D00969296 /* NDResourceFork+PascalStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NDResourceFork+PascalStrings.m"; sourceTree = "<group>"; };
-		4815A0D30AEF9A5D00969296 /* NDResourceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDResourceInfo.h; sourceTree = "<group>"; };
-		4815A0D40AEF9A5D00969296 /* NDResourceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDResourceInfo.m; sourceTree = "<group>"; };
-		4815A0DD0AEF9A7600969296 /* NSString+NDCarbonUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NDCarbonUtilities.h"; sourceTree = "<group>"; };
-		4815A0DE0AEF9A7600969296 /* NSString+NDCarbonUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NDCarbonUtilities.m"; sourceTree = "<group>"; };
-		4815A0DF0AEF9A7600969296 /* NSURL+NDCarbonUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+NDCarbonUtilities.h"; sourceTree = "<group>"; };
-		4815A0E00AEF9A7600969296 /* NSURL+NDCarbonUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+NDCarbonUtilities.m"; sourceTree = "<group>"; };
 		4816340F0A5A48A1003B8EE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Tagger.nib; sourceTree = "<group>"; };
 		481634160A5A4EEB003B8EE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Browser.nib; sourceTree = "<group>"; };
 		4817B29C0ABE849D00ACBBC6 /* PATagGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagGroup.h; sourceTree = "<group>"; };
@@ -1007,13 +964,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4815A0AF0AEF99D900969296 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		48186F370BE4C7BE000B4638 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1044,7 +994,6 @@
 			files = (
 				483C8ABC0D6C52260051C8C3 /* NNTagging.framework in Frameworks */,
 				483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */,
-				483C8AB30D6C520B0051C8C3 /* NDResourceFork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,7 +1009,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				48F53E370F6EE869001C8C6F /* NNTagging.framework in Frameworks */,
-				480721FB0AEFE9470024118D /* NDResourceFork.framework in Frameworks */,
 				4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1072,7 +1020,6 @@
 				48F53E3C0F6EE894001C8C6F /* NNTagging.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
-				48893B5A0AF0AB1600BA0B50 /* NDResourceFork.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				658EA77D099798A6005F13DE /* Message.framework in Frameworks */,
 				484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */,
@@ -1138,7 +1085,6 @@
 				483184980AEF8D8600C3C672 /* PADropHandler.framework */,
 				483184E30AEF91A700C3C672 /* FilenamesDropHandler.punakeaDropHandler */,
 				48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */,
-				4815A0B10AEF99D900969296 /* NDResourceFork.framework */,
 				48186F390BE4C7BE000B4638 /* NNFilterEngine.framework */,
 				65A292100D3E4BD900DE9F03 /* Unit Testing.octest */,
 				483C8A250D6C50BC0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler */,
@@ -1159,7 +1105,6 @@
 				483184990AEF8D8600C3C672 /* PADropHandler-Info.plist */,
 				483184E40AEF91A700C3C672 /* FilenamesDropHandler-Info.plist */,
 				48C633BC0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler-Info.plist */,
-				4815A0B20AEF99D900969296 /* NDResourceFork-Info.plist */,
 				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
 				48186F3A0BE4C7BE000B4638 /* NNFilterEngine-Info.plist */,
 				483C8A260D6C50BC0051C8C3 /* PublicURLDropHandler-Info.plist */,
@@ -1239,25 +1184,6 @@
 				480C40470BF4484400C90B2C /* PATagCacheEntry.m */,
 			);
 			name = TagCache;
-			sourceTree = "<group>";
-		};
-		4815A0C40AEF9A0200969296 /* NDResourceFork */ = {
-			isa = PBXGroup;
-			children = (
-				4815A0DD0AEF9A7600969296 /* NSString+NDCarbonUtilities.h */,
-				4815A0DE0AEF9A7600969296 /* NSString+NDCarbonUtilities.m */,
-				4815A0DF0AEF9A7600969296 /* NSURL+NDCarbonUtilities.h */,
-				4815A0E00AEF9A7600969296 /* NSURL+NDCarbonUtilities.m */,
-				4815A0CD0AEF9A5D00969296 /* NDResourceFork.h */,
-				4815A0CE0AEF9A5D00969296 /* NDResourceFork.m */,
-				4815A0CF0AEF9A5D00969296 /* NDResourceFork+OtherSorces.h */,
-				4815A0D00AEF9A5D00969296 /* NDResourceFork+OtherSorces.m */,
-				4815A0D10AEF9A5D00969296 /* NDResourceFork+PascalStrings.h */,
-				4815A0D20AEF9A5D00969296 /* NDResourceFork+PascalStrings.m */,
-				4815A0D30AEF9A5D00969296 /* NDResourceInfo.h */,
-				4815A0D40AEF9A5D00969296 /* NDResourceInfo.m */,
-			);
-			path = NDResourceFork;
 			sourceTree = "<group>";
 		};
 		4816343A0A5A51D2003B8EE4 /* Browser */ = {
@@ -1373,7 +1299,6 @@
 			children = (
 				650359070F5D7AD000BC204D /* SRRecorderControl */,
 				48186F480BE4C834000B4638 /* NNFilterEngine */,
-				4815A0C40AEF9A0200969296 /* NDResourceFork */,
 				483184A20AEF8FE500C3C672 /* PADropHandler */,
 			);
 			path = Frameworks;
@@ -2120,19 +2045,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4815A0AC0AEF99D900969296 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4815A0D50AEF9A5D00969296 /* NDResourceFork.h in Headers */,
-				4815A0D70AEF9A5D00969296 /* NDResourceFork+OtherSorces.h in Headers */,
-				4815A0D90AEF9A5D00969296 /* NDResourceFork+PascalStrings.h in Headers */,
-				4815A0DB0AEF9A5D00969296 /* NDResourceInfo.h in Headers */,
-				4815A0E10AEF9A7600969296 /* NSString+NDCarbonUtilities.h in Headers */,
-				4815A0E30AEF9A7600969296 /* NSURL+NDCarbonUtilities.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		48186F340BE4C7BE000B4638 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2173,24 +2085,6 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
-		4815A0B00AEF99D900969296 /* NDResourceFork */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4815A0B30AEF99DA00969296 /* Build configuration list for PBXNativeTarget "NDResourceFork" */;
-			buildPhases = (
-				4815A0AC0AEF99D900969296 /* Headers */,
-				4815A0AD0AEF99D900969296 /* Resources */,
-				4815A0AE0AEF99D900969296 /* Sources */,
-				4815A0AF0AEF99D900969296 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = NDResourceFork;
-			productName = NDResourceFork;
-			productReference = 4815A0B10AEF99D900969296 /* NDResourceFork.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		48186F380BE4C7BE000B4638 /* NNFilterEngine */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48186F3B0BE4C7C0000B4638 /* Build configuration list for PBXNativeTarget "NNFilterEngine" */;
@@ -2256,7 +2150,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				483C8A2C0D6C50C50051C8C3 /* PBXTargetDependency */,
 				483C8A2E0D6C50C80051C8C3 /* PBXTargetDependency */,
 			);
 			name = PublicURLDropHandler;
@@ -2295,7 +2188,6 @@
 			);
 			dependencies = (
 				48C633C10AEF9724008F0E94 /* PBXTargetDependency */,
-				4815A0E80AEF9A8800969296 /* PBXTargetDependency */,
 			);
 			name = WebURLsWithTitlesPboardTypeDropHandler;
 			productName = SafariBookmarkDropHandler;
@@ -2373,7 +2265,6 @@
 				483184970AEF8D8600C3C672 /* PADropHandler */,
 				483184E20AEF91A700C3C672 /* FilenamesDropHandler */,
 				48C633BA0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler */,
-				4815A0B00AEF99D900969296 /* NDResourceFork */,
 				48404AFF0AF8B357001F7BB7 /* Unit Testing */,
 				48186F380BE4C7BE000B4638 /* NNFilterEngine */,
 				483C8A240D6C50BC0051C8C3 /* PublicURLDropHandler */,
@@ -2399,13 +2290,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4815A0AD0AEF99D900969296 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		48186F350BE4C7BE000B4638 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2597,19 +2481,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4815A0AE0AEF99D900969296 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4815A0D60AEF9A5D00969296 /* NDResourceFork.m in Sources */,
-				4815A0D80AEF9A5D00969296 /* NDResourceFork+OtherSorces.m in Sources */,
-				4815A0DA0AEF9A5D00969296 /* NDResourceFork+PascalStrings.m in Sources */,
-				4815A0DC0AEF9A5D00969296 /* NDResourceInfo.m in Sources */,
-				4815A0E20AEF9A7600969296 /* NSString+NDCarbonUtilities.m in Sources */,
-				4815A0E40AEF9A7600969296 /* NSURL+NDCarbonUtilities.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		48186F360BE4C7BE000B4638 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2796,11 +2667,6 @@
 			name = NNTagging;
 			targetProxy = 4807E3AD0F7D17C000165CA9 /* PBXContainerItemProxy */;
 		};
-		4815A0E80AEF9A8800969296 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4815A0B00AEF99D900969296 /* NDResourceFork */;
-			targetProxy = 4815A0E70AEF9A8800969296 /* PBXContainerItemProxy */;
-		};
 		48186F8F0BE4C930000B4638 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 48186F380BE4C7BE000B4638 /* NNFilterEngine */;
@@ -2815,11 +2681,6 @@
 			isa = PBXTargetDependency;
 			target = 483184E20AEF91A700C3C672 /* FilenamesDropHandler */;
 			targetProxy = 483185020AEF92FD00C3C672 /* PBXContainerItemProxy */;
-		};
-		483C8A2C0D6C50C50051C8C3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4815A0B00AEF99D900969296 /* NDResourceFork */;
-			targetProxy = 483C8A2B0D6C50C50051C8C3 /* PBXContainerItemProxy */;
 		};
 		483C8A2E0D6C50C80051C8C3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2980,60 +2841,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4815A0B40AEF99DA00969296 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "NDResourceFork-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = NDResourceFork;
-				ZERO_LINK = YES;
-			};
-			name = Debug;
-		};
-		4815A0B50AEF99DA00969296 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "NDResourceFork-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = NDResourceFork;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		48186F3C0BE4C7C0000B4638 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3562,15 +3369,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4815A0B30AEF99DA00969296 /* Build configuration list for PBXNativeTarget "NDResourceFork" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4815A0B40AEF99DA00969296 /* Debug */,
-				4815A0B50AEF99DA00969296 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		48186F3B0BE4C7C0000B4638 /* Build configuration list for PBXNativeTarget "NNFilterEngine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
