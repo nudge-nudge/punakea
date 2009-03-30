@@ -18,13 +18,12 @@ extern OSStatus CGSGetWindowTags(const CGSConnectionID cid, const CGSWindowID wi
 extern OSStatus CGSSetWindowTags(const CGSConnectionID cid, const CGSWindowID wid, int *tags, int thirtyTwo);
 extern OSStatus CGSClearWindowTags(const CGSConnectionID cid, const CGSWindowID wid, int *tags, int thirtyTwo);
 
-extern double const SHOW_DELAY;
-
 typedef enum _PASidebarPosition {
 	PASidebarPositionLeft = 0,
 	PASidebarPositionRight = 1
 } PASidebarPosition;
 
+extern NSString * const SIDEBAR_SHOW_DELAY_KEYPATH;
 extern NSString * const SIDEBAR_POSITION_KEYPATH;
 
 
@@ -39,6 +38,7 @@ extern NSString * const SIDEBAR_POSITION_KEYPATH;
 	BOOL								activatesLastFrontApp;
 	ProcessSerialNumber					lastFrontProcess;	/**< Indicates the process that was front before showing the sidebar */
 	
+	double								sidebarShowDelay;
 }
 
 - (BOOL)isExpanded;

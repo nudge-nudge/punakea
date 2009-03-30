@@ -8,7 +8,7 @@
 
 #import "PASidebarWindow.h"
 
-double const SHOW_DELAY = 0.2;
+NSString * const SIDEBAR_SHOW_DELAY_KEYPATH = @"values.General.Sidebar.Delay";
 NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 
 @interface PASidebarWindow (PrivateAPI)
@@ -71,6 +71,8 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 			   name:NSApplicationDidHideNotification
 			 object:nil];
 	
+	sidebarShowDelay = [[defaultsController valueForKeyPath:SIDEBAR_SHOW_DELAY_KEYPATH] doubleValue];
+	
 	// move to screen edge - according to prefs
 	[self reset];
 	
@@ -101,7 +103,7 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 	}
 	else
 	{
-		[self performSelector:@selector(show) withObject:nil afterDelay:SHOW_DELAY];
+		[self performSelector:@selector(show) withObject:nil afterDelay:sidebarShowDelay];
 	}
 }
 

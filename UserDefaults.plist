@@ -6,6 +6,8 @@
 	<integer>1</integer>
 	<key>General.Sidebar.Enabled</key>
 	<false/>
+	<key>General.Sidebar.Delay</key>
+	<real>0.3</real>
 	<key>General.StatusItem.Enabled</key>
 	<true/>
 	<key>General.StartOnLogin</key>
