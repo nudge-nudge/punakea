@@ -72,8 +72,6 @@
 		483C8AA20D6C51EA0051C8C3 /* PAPublicURLDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C8A090D6C4F8D0051C8C3 /* PAPublicURLDropHandler.m */; };
 		483C8AA30D6C51EB0051C8C3 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
 		483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
-		483C8ABC0D6C52260051C8C3 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
-		483DC0A70F811E1E00CF8AD0 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48E145320B5F99FA00859B22 /* NNTagging.framework */; };
 		484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */; };
 		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
 		48404B100AF8B392001F7BB7 /* PATaggerUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 48404A0B0AF8A722001F7BB7 /* PATaggerUnitTest.m */; };
@@ -131,10 +129,6 @@
 		488E18BE0A27231F009D2826 /* PATagTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */; };
 		488E802C0AF3898400660B7B /* PACollectionNotEmpty.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */; };
 		488E802D0AF3898400660B7B /* PACollectionNotEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */; };
-		48990E5F0F8252BD00E3613B /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
-		48990E730F8252DB00E3613B /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
-		48990E750F8252E700E3613B /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
-		48990E7A0F8252F000E3613B /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
 		489A603F0ADA4AF500C6CE36 /* drop_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 489A603E0ADA4AF500C6CE36 /* drop_highlight.png */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
@@ -249,6 +243,13 @@
 		6588EE170A07463D00082718 /* MDIconViewOnDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE130A07463D00082718 /* MDIconViewOnDisabled.tiff */; };
 		6588EE180A07463D00082718 /* MDListViewOffDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE140A07463D00082718 /* MDListViewOffDisabled.tiff */; };
 		6588EE190A07463D00082718 /* MDListViewOnDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE150A07463D00082718 /* MDListViewOnDisabled.tiff */; };
+		6589AE210F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
+		6589AE220F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
+		6589AE230F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
+		6589AE240F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
+		6589AE250F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
+		6589AE260F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
+		6589AE270F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
 		6589C5020A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C4FF0A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff */; };
 		6589C5030A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C5000A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff */; };
 		6589C5040A9DE6F600CA2CD1 /* sl-status_stop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C5010A9DE6F600CA2CD1 /* sl-status_stop.tiff */; };
@@ -428,7 +429,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* NNTagging.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = NNTagging;
 		};
 		48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */ = {
@@ -465,7 +466,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				483DC0A70F811E1E00CF8AD0 /* NNTagging.framework in Copy Frameworks */,
 				48E760DA0F7F8BC900F9EEBA /* OpenMeta.framework in Copy Frameworks */,
 				651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
@@ -728,7 +728,6 @@
 		48D170520A5A68BA006C667B /* Core.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
 		48D81DAB09F79C1C0075EE44 /* TaggerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggerController.h; sourceTree = "<group>"; };
 		48D81DAC09F79C1C0075EE44 /* TaggerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggerController.m; sourceTree = "<group>"; };
-		48E145320B5F99FA00859B22 /* NNTagging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NNTagging.framework; path = ../build/Debug/NNTagging.framework; sourceTree = "<group>"; };
 		48E386740D6DC45300204CDB /* source-panel-images.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-images.tif"; sourceTree = "<group>"; };
 		48E75FF70F7F825300F9EEBA /* UKCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKCrashReporter.m; sourceTree = "<group>"; };
 		48E75FF80F7F825300F9EEBA /* UKCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKCrashReporter.h; sourceTree = "<group>"; };
@@ -839,6 +838,7 @@
 		6588EE130A07463D00082718 /* MDIconViewOnDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDIconViewOnDisabled.tiff; sourceTree = "<group>"; };
 		6588EE140A07463D00082718 /* MDListViewOffDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDListViewOffDisabled.tiff; sourceTree = "<group>"; };
 		6588EE150A07463D00082718 /* MDListViewOnDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDListViewOnDisabled.tiff; sourceTree = "<group>"; };
+		6589AE200F826862009821AC /* NNTagging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NNTagging.framework; path = build/Release/NNTagging.framework; sourceTree = SOURCE_ROOT; };
 		6589C4FF0A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_stop-pressed.tiff"; sourceTree = "<group>"; };
 		6589C5000A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_stop-rollover.tiff"; sourceTree = "<group>"; };
 		6589C5010A9DE6F600CA2CD1 /* sl-status_stop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_stop.tiff"; sourceTree = "<group>"; };
@@ -961,7 +961,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48990E7A0F8252F000E3613B /* NNTagging.framework in Frameworks */,
+				6589AE230F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,6 +969,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6589AE270F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,8 +977,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48990E730F8252DB00E3613B /* NNTagging.framework in Frameworks */,
 				4815A1CA0AEFA06400969296 /* PADropHandler.framework in Frameworks */,
+				6589AE260F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -985,8 +986,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				483C8ABC0D6C52260051C8C3 /* NNTagging.framework in Frameworks */,
 				483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */,
+				6589AE220F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +995,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6589AE240F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,8 +1003,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48990E750F8252E700E3613B /* NNTagging.framework in Frameworks */,
 				4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */,
+				6589AE250F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,7 +1012,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48990E5F0F8252BD00E3613B /* NNTagging.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
@@ -1022,6 +1023,7 @@
 				6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */,
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
 				48E760CE0F7F8BAA00F9EEBA /* OpenMeta.framework in Frameworks */,
+				6589AE210F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1047,9 +1049,9 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6589AE200F826862009821AC /* NNTagging.framework */,
 				48E760CD0F7F8BAA00F9EEBA /* OpenMeta.framework */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
-				48E145320B5F99FA00859B22 /* NNTagging.framework */,
 				484497A90B2D9925009B262C /* Sparkle.framework */,
 			);
 			name = "Linked Frameworks";
@@ -2837,6 +2839,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -2871,6 +2874,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -2903,6 +2907,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -2936,6 +2941,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -2965,6 +2971,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2996,6 +3003,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -3025,6 +3033,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/build/Debug\"",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -3055,6 +3064,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/build/Debug\"",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
@@ -3083,6 +3093,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(value)",
 					"$(DEVELOPER_FRAMEWORKS_DIR_QUOTED)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -3115,6 +3126,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(value)",
 					"$(DEVELOPER_FRAMEWORKS_DIR_QUOTED)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -3167,6 +3179,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3198,6 +3211,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -3260,6 +3274,7 @@
 					"\"$(SRCROOT)/build/Debug\"",
 					"\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
@@ -3306,6 +3321,7 @@
 					"\"$(SRCROOT)/build/Debug\"",
 					"\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SRCROOT)/build/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
