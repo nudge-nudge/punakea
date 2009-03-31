@@ -1213,6 +1213,7 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				650359070F5D7AD000BC204D /* SRRecorderControl */,
 				48E75FF10F7F821200F9EEBA /* CrashReporter */,
 				65CAAEDC0F6C2D7600B4FFAA /* Quick Look */,
 				657CBD740AA5C48E00701D47 /* Thumbnail Manager */,
@@ -1292,7 +1293,6 @@
 		4831849F0AEF8FD800C3C672 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				650359070F5D7AD000BC204D /* SRRecorderControl */,
 				48186F480BE4C834000B4638 /* NNFilterEngine */,
 				483184A20AEF8FE500C3C672 /* PADropHandler */,
 			);
@@ -1558,7 +1558,8 @@
 				650359130F5D7B1F00BC204D /* SRCommon.h */,
 				650359140F5D7B1F00BC204D /* SRCommon.m */,
 			);
-			path = SRRecorderControl;
+			name = SRRecorderControl;
+			path = Frameworks/SRRecorderControl;
 			sourceTree = "<group>";
 		};
 		6508EB650D50C316004DA882 /* Misc */ = {
