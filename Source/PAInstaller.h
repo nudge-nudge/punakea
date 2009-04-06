@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "NNTagging/NNTagStoreManager.h"
+#import "NNTagging/NNTagBackup.h"
 
 @class NNTagToFileWriter;
 @class NNSecureTagToFileWriter;

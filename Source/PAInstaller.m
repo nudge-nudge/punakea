@@ -41,7 +41,7 @@
 	// Punakea 1.0 switched to OpenMeta -> migrate
 	if ([self migrationToOpenMetaIsNecessary])
 	{
-		[self displayOpenMetaMigrationMessage];
+		//[self displayOpenMetaMigrationMessage];
 	}
 }
 
@@ -60,12 +60,17 @@
 
 - (BOOL)migrationToOpenMetaIsNecessary
 {
-	// TODO check if preferences version <= 2 (corresponds to Punakea version <= 0.4.1)
 	BOOL necessary  = NO;
 	
-	if (necessary)
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	int currentVersion = [userDefaults integerForKey:@"Version"];
+	
+	// This will break if someone removes his preferences.plist ...
+	// but actually this shouldn't matter, once the update is finished,
+	// it doesn't matter if run again.
+	if (currentVersion < 3)
 	{
-		// TODO increment preferences
+		necessary = YES;
 	}
 	
 	return necessary;
@@ -86,15 +91,7 @@
 	// check if upgrade shall procede
 	if (button == NSAlertFirstButtonReturn)
 	{
-		//  migrate comments to OpenMeta
-		//	BusyWindowController *busyWindowController = [busyWindow delegate];
-		//	
-		//	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
-		//	[busyWindowController performBusySelector:@selector(createDirectoryStructure)
-		//									 onObject:[NNTagging tagging]];
-		//	
-		//	[busyWindow center];
-		//	[NSApp runModalForWindow:busyWindow];
+		[self migrateSpotlightCommentsToOpenMeta];
 	}
 	else
 	{
@@ -115,6 +112,11 @@
 	
 	NSArray *taggedFiles = [oldTagToFileWriter allTaggedObjects];
 	
+	// create a backup of all current assignments
+	NNTagBackup *backup = [[NNTagBackup alloc] init];
+	[backup createBackup];
+	[backup release];
+	
 	// now all files are loaded, including their tags
 	// switch to new tagToOpenMetaWriter
 	NNTagToFileWriter *newTagToFileWriter = [[NNTagToOpenMetaWriter alloc] init];
@@ -131,6 +133,14 @@
 		// clean up finder comments
 		NSString *finderCommentWithoutTags = [oldTagToFileWriter finderCommentIgnoringKeywordsForFile:file];
 		[oldTagToFileWriter setComment:finderCommentWithoutTags	forURL:[file url]];
+	}
+	
+	// once done, increment pref version so that the migration won't happen again
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	
+	if ([userDefaults integerForKey:@"Version"] < 3)
+	{
+		[userDefaults setInteger:3 forKey:@"Version"];
 	}
 }
 

@@ -24,7 +24,7 @@
 "DESTINATION_FOLDER_MAY_GET_DELETED" = "Make sure that \"%@\" is really empty!";
 "DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "Punakea might delete contents in the \"Tags Folder\".";
 
-"OPEN_META_MIGRATION_MESSAGE" = "TODO";
-"OPEN_META_MIGRATION_MESSAGE_INFORMATIVE" = "TODO";
+"OPEN_META_MIGRATION_MESSAGE" = "IMPORTANT: Punakea needs to update the tags. Please connect any external drives containing tagged files before proceeding! You should also rebuild your Spotlight Index.";
+"OPEN_META_MIGRATION_MESSAGE_INFORMATIVE" = "Tags will be migrated from the Finder comments to the extended attributes. If this doesn't mean anything to you, just ignore it.";
 "OPEN_META_CONFIRM" = "Update Tags";
 "OPEN_META_CANCEL" = "Quit Punakea";

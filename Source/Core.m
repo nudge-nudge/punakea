@@ -49,12 +49,12 @@
 {
     if (self = [super init])
     {
+		userDefaults = [NSUserDefaults standardUserDefaults];
+		[self loadUserDefaults];
+		
 		[PAInstaller install];
 		
 		globalTags = [NNTags sharedTags];
-		
-		userDefaults = [NSUserDefaults standardUserDefaults];
-		[self loadUserDefaults];
 		
 		// printf("Punakea compiled on %s at %s\n",__DATE__,__TIME__);
 	}

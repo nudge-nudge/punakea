@@ -71,5 +71,7 @@
 	<real>0.5</real>
 	<key>TagCloud.SortKey</key>
 	<integer>0</integer>
+	<key>Version</key>
+	<integer>3</integer>
 </dict>
 </plist>
