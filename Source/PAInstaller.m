@@ -15,9 +15,11 @@
 
 @interface PAInstaller (PrivateAPI)
 
-+ (void)removeOldWeblocImporter;
-+ (BOOL)migrationToOpenMetaIsNecessary;
-+ (void)migrateSpotlightCommentsToOpenMeta;
+- (void)runInstallation;
+- (void)removeOldWeblocImporter;
+- (BOOL)migrationToOpenMetaIsNecessary;
+- (void)migrateSpotlightCommentsToOpenMeta;
+- (void)displayOpenMetaMigrationMessage;
 
 @end
 
@@ -25,18 +27,25 @@
 
 + (void)install
 {
+	PAInstaller *installer = [[PAInstaller alloc] init];
+	[installer runInstallation];
+	[installer release];
+}
+
+- (void)runInstallation
+{
 	// version 0.3 had a webloc importer installed in the user's library directory,
 	// remove it
-	[PAInstaller removeOldWeblocImporter];
+	[self removeOldWeblocImporter];
 	
 	// Punakea 1.0 switched to OpenMeta -> migrate
-	if ([PAInstaller migrationToOpenMetaIsNecessary])
+	if ([self migrationToOpenMetaIsNecessary])
 	{
-		[PAInstaller migrateSpotlightCommentsToOpenMeta];
+		[self displayOpenMetaMigrationMessage];
 	}
 }
 
-+ (void)removeOldWeblocImporter
+- (void)removeOldWeblocImporter
 {
 	NSFileManager *fm = [NSFileManager defaultManager];
 	
@@ -49,7 +58,7 @@
 	}
 }
 
-+ (BOOL)migrationToOpenMetaIsNecessary
+- (BOOL)migrationToOpenMetaIsNecessary
 {
 	// TODO check if preferences version <= 2 (corresponds to Punakea version <= 0.4.1)
 	BOOL necessary  = NO;
@@ -62,16 +71,39 @@
 	return necessary;
 }
 
-// TODO this should give user feedback, right? - use busyWindow
-//	BusyWindowController *busyWindowController = [busyWindow delegate];
-//	
-//	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
-//	[busyWindowController performBusySelector:@selector(createDirectoryStructure)
-//									 onObject:[NNTagging tagging]];
-//	
-//	[busyWindow center];
-//	[NSApp runModalForWindow:busyWindow];
-+ (void)migrateSpotlightCommentsToOpenMeta
+- (void)displayOpenMetaMigrationMessage
+{
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert setMessageText:NSLocalizedStringFromTable(@"OPEN_META_MIGRATION_MESSAGE",@"FileManager",@"")];
+	[alert setInformativeText:NSLocalizedStringFromTable(@"OPEN_META_MIGRATION_MESSAGE_INFORMATIVE",@"FileManager",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OPEN_META_CONFIRM",@"FileManager",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OPEN_META_CANCEL",@"FileManager",@"")];
+	
+	[alert setAlertStyle:NSWarningAlertStyle];
+	
+	int button = [alert runModal];
+	
+	// check if upgrade shall procede
+	if (button == NSAlertFirstButtonReturn)
+	{
+		//  migrate comments to OpenMeta
+		//	BusyWindowController *busyWindowController = [busyWindow delegate];
+		//	
+		//	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
+		//	[busyWindowController performBusySelector:@selector(createDirectoryStructure)
+		//									 onObject:[NNTagging tagging]];
+		//	
+		//	[busyWindow center];
+		//	[NSApp runModalForWindow:busyWindow];
+	}
+	else
+	{
+		// quit Punakea -> update is MANDATORY
+		[[NSApplication sharedApplication] terminate:self];
+	}
+}
+
+- (void)migrateSpotlightCommentsToOpenMeta
 {
 	NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
 	

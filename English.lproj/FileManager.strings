@@ -23,3 +23,8 @@
 
 "DESTINATION_FOLDER_MAY_GET_DELETED" = "Make sure that \"%@\" is really empty!";
 "DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "Punakea might delete contents in the \"Tags Folder\".";
+
+"OPEN_META_MIGRATION_MESSAGE" = "TODO";
+"OPEN_META_MIGRATION_MESSAGE_INFORMATIVE" = "TODO";
+"OPEN_META_CONFIRM" = "Update Tags";
+"OPEN_META_CANCEL" = "Quit Punakea";
