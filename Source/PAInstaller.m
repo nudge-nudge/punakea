@@ -65,7 +65,8 @@
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	int currentVersion = [userDefaults integerForKey:@"Version"];
 	
-	// This will break if someone removes his preferences.plist ...
+	// This will only update if the preferences contain version 2 (TODO discuss with Daniel if this is allright -> what to do
+	// on the next update when we store the version in the UserDefaults.plist?)
 	// but actually this shouldn't matter, once the update is finished,
 	// it doesn't matter if run again.
 	if (currentVersion < 3)
