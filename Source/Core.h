@@ -29,6 +29,8 @@
 
 #import "PTHotkey.h"
 
+#import "UKCrashReporter.h"
+
 //#import "PANotificationReceiver.h"
 
 @interface Core : NSWindowController

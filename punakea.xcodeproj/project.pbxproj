@@ -1138,7 +1138,6 @@
 				4832722B0AA42D19003D98A6 /* Preferences.nib */,
 				482B31130AC6C70D0071C33B /* ResultsView.nib */,
 				485944A60AE4B41100AFB18F /* Credits.html */,
-				48E760040F7F834000F9EEBA /* UKCrashReporter.strings */,
 				48E760060F7F834000F9EEBA /* UKCrashReporter.nib */,
 			);
 			name = Resources;
@@ -1717,6 +1716,7 @@
 		6572864C0BC427D1000034D2 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
+				48E760040F7F834000F9EEBA /* UKCrashReporter.strings */,
 				655B2ABE0ABFE8AC000A3AA4 /* FileManager.strings */,
 				48B0F1D70ACC020800738053 /* Global.strings */,
 				655540F20BF1EEA200D3AF8E /* Menus.strings */,

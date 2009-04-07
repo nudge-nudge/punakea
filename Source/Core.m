@@ -116,6 +116,8 @@
 
 	// DEBUG
 	//[[PANotificationReceiver alloc] init];
+	
+	UKCrashReporterCheckForCrash();
 }
 
 - (void)dealloc
