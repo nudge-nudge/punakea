@@ -19,10 +19,18 @@
 /**
 use this class to do stuff Punakea needs to perform on startup
  */
-@interface PAInstaller : NSObject {
+@interface PAInstaller : NSWindowController {
 
+	IBOutlet NSWindow				*openMetaMigrationWindow;
+	IBOutlet NSProgressIndicator	*openMetaProgressIndicator;
+	
 }
 
 + (void)install;
+
+- (IBAction)migrateSpotlightCommentsToOpenMeta:(id)sender;
+
+- (IBAction)stopModal:(id)sender;
+- (IBAction)terminate:(id)sender;
 
 @end

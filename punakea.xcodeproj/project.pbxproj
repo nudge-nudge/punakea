@@ -172,6 +172,13 @@
 		6509020B0BEDF1A1005468E0 /* toolbar-sort-by-name.tif in Resources */ = {isa = PBXBuildFile; fileRef = 650902090BEDF1A1005468E0 /* toolbar-sort-by-name.tif */; };
 		6509020C0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6509020A0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif */; };
 		650902130BEDF429005468E0 /* Toolbars.strings in Resources */ = {isa = PBXBuildFile; fileRef = 650902120BEDF429005468E0 /* Toolbars.strings */; };
+		650A72800F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
+		650A72810F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
+		650A72820F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
+		650A72830F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
+		650A72840F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
+		650A72850F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
+		650A72860F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
 		650C84190D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 650C84180D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff */; };
 		650D52A30F6ACD3600E67680 /* CurrentSelection.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */; };
 		6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */; };
@@ -225,6 +232,13 @@
 		656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */; };
 		656C20030AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */; };
 		656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */; };
+		656DDED30F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
+		656DDED40F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
+		656DDED50F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
+		656DDED60F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
+		656DDED70F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
+		656DDED80F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
+		656DDED90F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
 		6571138D0D5371A600076543 /* TagAutoCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6571138C0D5371A600076543 /* TagAutoCompleteController.m */; };
 		657CBD770AA5C4A800701D47 /* PAThumbnailManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */; };
 		657CBD780AA5C4A800701D47 /* PAThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */; };
@@ -764,6 +778,7 @@
 		650902090BEDF1A1005468E0 /* toolbar-sort-by-name.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-sort-by-name.tif"; sourceTree = "<group>"; };
 		6509020A0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-sort-by-rating.tif"; sourceTree = "<group>"; };
 		650902100BEDF41B005468E0 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Toolbars.strings; sourceTree = "<group>"; };
+		650A72500F826A770082664D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Registration.xib; sourceTree = "<group>"; };
 		650C84180D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-pref-managefiles.tiff"; sourceTree = "<group>"; };
 		650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; path = CurrentSelection.scpt; sourceTree = "<group>"; };
 		6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BGHUDAppKit.framework; sourceTree = "<group>"; };
@@ -819,6 +834,7 @@
 		656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+FriendlyFormat.h"; sourceTree = "<group>"; };
 		656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+FriendlyFormat.m"; sourceTree = "<group>"; };
 		656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOn-1.tiff"; sourceTree = "<group>"; };
+		656DDED20F8BCB7D00273700 /* Installer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Installer.xib; sourceTree = "<group>"; };
 		6571138B0D5371A600076543 /* TagAutoCompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagAutoCompleteController.h; sourceTree = "<group>"; };
 		6571138C0D5371A600076543 /* TagAutoCompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagAutoCompleteController.m; sourceTree = "<group>"; };
 		657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAThumbnailManager.h; sourceTree = "<group>"; };
@@ -1103,6 +1119,8 @@
 				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
 				48186F3A0BE4C7BE000B4638 /* NNFilterEngine-Info.plist */,
 				483C8A260D6C50BC0051C8C3 /* PublicURLDropHandler-Info.plist */,
+				650A727F0F826BD70082664D /* Registration.xib */,
+				656DDED20F8BCB7D00273700 /* Installer.xib */,
 			);
 			name = Punakea;
 			sourceTree = "<group>";
@@ -2289,6 +2307,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650A72850F826BD70082664D /* Registration.xib in Resources */,
+				656DDED60F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2296,6 +2316,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650A72810F826BD70082664D /* Registration.xib in Resources */,
+				656DDED70F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2303,6 +2325,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650A72820F826BD70082664D /* Registration.xib in Resources */,
+				656DDED80F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2310,6 +2334,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650A72860F826BD70082664D /* Registration.xib in Resources */,
+				656DDED40F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2317,6 +2343,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650A72840F826BD70082664D /* Registration.xib in Resources */,
+				656DDED90F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2324,6 +2352,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650A72830F826BD70082664D /* Registration.xib in Resources */,
+				656DDED30F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2427,6 +2457,8 @@
 				657E6E140F6BC10300AAD236 /* Punakea.sdef in Resources */,
 				48E760080F7F834000F9EEBA /* UKCrashReporter.strings in Resources */,
 				48E760090F7F834000F9EEBA /* UKCrashReporter.nib in Resources */,
+				650A72800F826BD70082664D /* Registration.xib in Resources */,
+				656DDED50F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2794,6 +2826,14 @@
 				650902100BEDF41B005468E0 /* English */,
 			);
 			name = Toolbars.strings;
+			sourceTree = "<group>";
+		};
+		650A727F0F826BD70082664D /* Registration.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				650A72500F826A770082664D /* English */,
+			);
+			name = Registration.xib;
 			sourceTree = "<group>";
 		};
 		655540F20BF1EEA200D3AF8E /* Menus.strings */ = {

@@ -27,9 +27,23 @@
 
 + (void)install
 {
-	PAInstaller *installer = [[PAInstaller alloc] init];
-	[installer runInstallation];
+	PAInstaller *installer = [[PAInstaller alloc] initWithWindowNibName:@"Installer"];
 	[installer release];
+}
+
+- (id)initWithWindowNibName:(NSString *)windowNibName
+{
+	if (self = [super initWithWindowNibName:windowNibName])
+	{
+		// Reference the window once to enforce loading of the Nib
+		[self window];
+	}
+	return self;
+}
+
+- (void)awakeFromNib
+{
+	[self runInstallation];
 }
 
 - (void)runInstallation
@@ -41,7 +55,7 @@
 	// Punakea 1.0 switched to OpenMeta -> migrate
 	if ([self migrationToOpenMetaIsNecessary])
 	{
-		//[self displayOpenMetaMigrationMessage];
+		[self displayOpenMetaMigrationMessage];
 	}
 }
 
@@ -79,31 +93,26 @@
 
 - (void)displayOpenMetaMigrationMessage
 {
-	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-	[alert setMessageText:NSLocalizedStringFromTable(@"OPEN_META_MIGRATION_MESSAGE",@"FileManager",@"")];
-	[alert setInformativeText:NSLocalizedStringFromTable(@"OPEN_META_MIGRATION_MESSAGE_INFORMATIVE",@"FileManager",@"")];
-	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OPEN_META_CONFIRM",@"FileManager",@"")];
-	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OPEN_META_CANCEL",@"FileManager",@"")];
-	
-	[alert setAlertStyle:NSWarningAlertStyle];
-	
-	int button = [alert runModal];
-	
-	// check if upgrade shall procede
-	if (button == NSAlertFirstButtonReturn)
-	{
-		[self migrateSpotlightCommentsToOpenMeta];
-	}
-	else
-	{
-		// quit Punakea -> update is MANDATORY
-		[[NSApplication sharedApplication] terminate:self];
-	}
+	[openMetaMigrationWindow center];
+	[[NSApplication sharedApplication] runModalForWindow:openMetaMigrationWindow];
 }
 
-- (void)migrateSpotlightCommentsToOpenMeta
+- (IBAction)stopModal:(id)sender
 {
-	NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
+	[[NSApplication sharedApplication] stopModal];
+}
+
+- (IBAction)terminate:(id)sender
+{
+	[[NSApplication sharedApplication] terminate:self];
+}
+
+- (IBAction)migrateSpotlightCommentsToOpenMeta:(id)sender
+{
+	[openMetaProgressIndicator setIndeterminate:YES];
+	[openMetaProgressIndicator startAnimation:self];
+	
+	/*NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
 	
 	// get all old files 
 	NNSecureTagToFileWriter *oldTagToFileWriter = [[NNSecureTagToFileWriter alloc] init];
@@ -142,7 +151,12 @@
 	if ([userDefaults integerForKey:@"Version"] < 3)
 	{
 		[userDefaults setInteger:3 forKey:@"Version"];
-	}
+	}*/
+	
+	[self performSelector:@selector(stopModal:)
+			   withObject:self
+			   afterDelay:5.0];
+	//[self stopModal:self];
 }
 
 @end
