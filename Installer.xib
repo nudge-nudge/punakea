@@ -170,7 +170,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="264557527">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">272760832</int>
-								<string key="NSContents">Tags cannot be read by previous versions of Punakea after the upgrade. Punakea is now using extended attributes instead of Finder comments to store tags.</string>
+								<string key="NSContents">Tags cannot be read by previous versions of Punakea after the upgrade. Punakea is now using extended attributes instead of Spotlight comments to store tags.</string>
 								<object class="NSFont" key="NSSupport" id="26">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">1.100000e+01</double>
