@@ -112,13 +112,12 @@
 	[openMetaProgressIndicator setIndeterminate:YES];
 	[openMetaProgressIndicator startAnimation:self];
 	
-	/*NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
+	NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
 	
 	// get all old files 
 	NNSecureTagToFileWriter *oldTagToFileWriter = [[NNSecureTagToFileWriter alloc] init];
 	[tagStoreManager setTagPrefix:@"@"];
 	[tagStoreManager setTagToFileWriter:oldTagToFileWriter];
-	[oldTagToFileWriter release];
 	
 	NSArray *taggedFiles = [oldTagToFileWriter allTaggedObjects];
 	
@@ -131,32 +130,33 @@
 	// switch to new tagToOpenMetaWriter
 	NNTagToFileWriter *newTagToFileWriter = [[NNTagToOpenMetaWriter alloc] init];
 	[tagStoreManager setTagToFileWriter:newTagToFileWriter];
+	
+//	// now save all files using the new tagToFileWriter
+//	// this writes all tags to the new storage and we're good
+//	// to go!
+//	for (NNFile *file in taggedFiles)
+//	{
+//		//NSLog(@"Writing %@: %@",file,[file tags]);
+//		
+//		[file initiateSave];
+//		
+//		// clean up finder comments
+//		NSString *finderCommentWithoutTags = [oldTagToFileWriter finderCommentIgnoringKeywordsForFile:file];
+//		[oldTagToFileWriter setComment:finderCommentWithoutTags	forURL:[file url]];
+//	}
+//	
+//	// once done, increment pref version so that the migration won't happen again
+//	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//	
+//	if ([userDefaults integerForKey:@"Version"] < 3)
+//	{
+//		[userDefaults setInteger:3 forKey:@"Version"];
+//	}
+	
+	[oldTagToFileWriter release];
 	[newTagToFileWriter release];
 	
-	// now save all files using the new tagToFileWriter
-	// this writes all tags to the new storage and we're good
-	// to go!
-	for (NNFile *file in taggedFiles)
-	{
-		[file initiateSave];
-		
-		// clean up finder comments
-		NSString *finderCommentWithoutTags = [oldTagToFileWriter finderCommentIgnoringKeywordsForFile:file];
-		[oldTagToFileWriter setComment:finderCommentWithoutTags	forURL:[file url]];
-	}
-	
-	// once done, increment pref version so that the migration won't happen again
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-	
-	if ([userDefaults integerForKey:@"Version"] < 3)
-	{
-		[userDefaults setInteger:3 forKey:@"Version"];
-	}*/
-	
-	[self performSelector:@selector(stopModal:)
-			   withObject:self
-			   afterDelay:5.0];
-	//[self stopModal:self];
+	[self stopModal:self];
 }
 
 @end
