@@ -109,28 +109,37 @@
 
 - (IBAction)migrateSpotlightCommentsToOpenMeta:(id)sender
 {
+	NSLog(@"1");
+	
 	[openMetaProgressIndicator setIndeterminate:YES];
 	[openMetaProgressIndicator startAnimation:self];
-	
+	NSLog(@"2");
+
 	NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
-	
+	NSLog(@"4");
+
 	// get all old files 
 	NNSecureTagToFileWriter *oldTagToFileWriter = [[NNSecureTagToFileWriter alloc] init];
 	[tagStoreManager setTagPrefix:@"@"];
 	[tagStoreManager setTagToFileWriter:oldTagToFileWriter];
-	
-	NSArray *taggedFiles = [oldTagToFileWriter allTaggedObjects];
+	NSLog(@"5");
 	
 	// create a backup of all current assignments
-	NNTagBackup *backup = [[NNTagBackup alloc] init];
-	[backup createBackup];
-	[backup release];
+	NSLog(@"5.1");
+	[NNTagBackup createBackup];
+	
+	NSLog(@"5.5");
+
+	NSArray *taggedFiles = [oldTagToFileWriter allTaggedObjects];	
+	NSLog(@"6");
+
 	
 	// now all files are loaded, including their tags
 	// switch to new tagToOpenMetaWriter
 	NNTagToFileWriter *newTagToFileWriter = [[NNTagToOpenMetaWriter alloc] init];
 	[tagStoreManager setTagToFileWriter:newTagToFileWriter];
-	
+	NSLog(@"7");
+
 //	// now save all files using the new tagToFileWriter
 //	// this writes all tags to the new storage and we're good
 //	// to go!
@@ -152,11 +161,15 @@
 //	{
 //		[userDefaults setInteger:3 forKey:@"Version"];
 //	}
-	
+	NSLog(@"8");
+
 	[oldTagToFileWriter release];
 	[newTagToFileWriter release];
-	
+	NSLog(@"9");
+
 	[self stopModal:self];
+	NSLog(@"10");
+
 }
 
 @end

@@ -129,6 +129,12 @@
 		488E18BE0A27231F009D2826 /* PATagTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */; };
 		488E802C0AF3898400660B7B /* PACollectionNotEmpty.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */; };
 		488E802D0AF3898400660B7B /* PACollectionNotEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */; };
+		4896E60E0F9F5AD80015316F /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
+		4896E61E0F9F5AE30015316F /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
+		4896E6210F9F5B060015316F /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
+		4896E6240F9F5B0F0015316F /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
+		4896E6270F9F5B160015316F /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
+		4896E62A0F9F5B200015316F /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
 		489A603F0ADA4AF500C6CE36 /* drop_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 489A603E0ADA4AF500C6CE36 /* drop_highlight.png */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
@@ -257,13 +263,7 @@
 		6588EE170A07463D00082718 /* MDIconViewOnDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE130A07463D00082718 /* MDIconViewOnDisabled.tiff */; };
 		6588EE180A07463D00082718 /* MDListViewOffDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE140A07463D00082718 /* MDListViewOffDisabled.tiff */; };
 		6588EE190A07463D00082718 /* MDListViewOnDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE150A07463D00082718 /* MDListViewOnDisabled.tiff */; };
-		6589AE210F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
-		6589AE220F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
-		6589AE230F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
 		6589AE240F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
-		6589AE250F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
-		6589AE260F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
-		6589AE270F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
 		6589C5020A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C4FF0A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff */; };
 		6589C5030A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C5000A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff */; };
 		6589C5040A9DE6F600CA2CD1 /* sl-status_stop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C5010A9DE6F600CA2CD1 /* sl-status_stop.tiff */; };
@@ -438,6 +438,48 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Punakea;
+		};
+		4896E5E60F9F4B370015316F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
+		4896E5F70F9F4B570015316F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
+		4896E5F90F9F4B5F0015316F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
+		4896E5FD0F9F4B660015316F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
+		4896E5FF0F9F4B6C0015316F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
+		4896E6030F9F4B740015316F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
 		};
 		48990E530F8252A500E3613B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -977,7 +1019,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6589AE230F826862009821AC /* NNTagging.framework in Frameworks */,
+				4896E61E0F9F5AE30015316F /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -985,7 +1027,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6589AE270F826862009821AC /* NNTagging.framework in Frameworks */,
+				4896E6270F9F5B160015316F /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -993,8 +1035,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4896E6240F9F5B0F0015316F /* NNTagging.framework in Frameworks */,
 				4815A1CA0AEFA06400969296 /* PADropHandler.framework in Frameworks */,
-				6589AE260F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1002,8 +1044,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4896E60E0F9F5AD80015316F /* NNTagging.framework in Frameworks */,
 				483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */,
-				6589AE220F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1019,8 +1061,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4896E6210F9F5B060015316F /* NNTagging.framework in Frameworks */,
 				4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */,
-				6589AE250F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1028,6 +1070,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4896E62A0F9F5B200015316F /* NNTagging.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
@@ -1039,7 +1082,6 @@
 				6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */,
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
 				48E760CE0F7F8BAA00F9EEBA /* OpenMeta.framework in Frameworks */,
-				6589AE210F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2111,6 +2153,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4896E6000F9F4B6C0015316F /* PBXTargetDependency */,
 			);
 			name = NNFilterEngine;
 			productName = NNFilterEngine;
@@ -2129,6 +2172,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4896E5F80F9F4B570015316F /* PBXTargetDependency */,
 			);
 			name = PADropHandler;
 			productName = PADropHandler;
@@ -2147,6 +2191,7 @@
 			);
 			dependencies = (
 				483184E90AEF91AE00C3C672 /* PBXTargetDependency */,
+				4896E5FA0F9F4B5F0015316F /* PBXTargetDependency */,
 			);
 			name = FilenamesDropHandler;
 			productName = FilenamesDropHandler;
@@ -2165,6 +2210,7 @@
 			);
 			dependencies = (
 				483C8A2E0D6C50C80051C8C3 /* PBXTargetDependency */,
+				4896E6040F9F4B740015316F /* PBXTargetDependency */,
 			);
 			name = PublicURLDropHandler;
 			productName = PublicUrlDropHandler;
@@ -2202,6 +2248,7 @@
 			);
 			dependencies = (
 				48C633C10AEF9724008F0E94 /* PBXTargetDependency */,
+				4896E5FE0F9F4B660015316F /* PBXTargetDependency */,
 			);
 			name = WebURLsWithTitlesPboardTypeDropHandler;
 			productName = SafariBookmarkDropHandler;
@@ -2229,6 +2276,7 @@
 				48186F8F0BE4C930000B4638 /* PBXTargetDependency */,
 				4802194C0C02CE85001CF480 /* PBXTargetDependency */,
 				483C8A3E0D6C51630051C8C3 /* PBXTargetDependency */,
+				4896E5E70F9F4B370015316F /* PBXTargetDependency */,
 			);
 			name = Punakea;
 			productInstallPath = "$(HOME)/Applications";
@@ -2718,6 +2766,36 @@
 			isa = PBXTargetDependency;
 			target = 8D1107260486CEB800E47090 /* Punakea */;
 			targetProxy = 48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */;
+		};
+		4896E5E70F9F4B370015316F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 4896E5E60F9F4B370015316F /* PBXContainerItemProxy */;
+		};
+		4896E5F80F9F4B570015316F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 4896E5F70F9F4B570015316F /* PBXContainerItemProxy */;
+		};
+		4896E5FA0F9F4B5F0015316F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 4896E5F90F9F4B5F0015316F /* PBXContainerItemProxy */;
+		};
+		4896E5FE0F9F4B660015316F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 4896E5FD0F9F4B660015316F /* PBXContainerItemProxy */;
+		};
+		4896E6000F9F4B6C0015316F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 4896E5FF0F9F4B6C0015316F /* PBXContainerItemProxy */;
+		};
+		4896E6040F9F4B740015316F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 4896E6030F9F4B740015316F /* PBXContainerItemProxy */;
 		};
 		48C633C10AEF9724008F0E94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
