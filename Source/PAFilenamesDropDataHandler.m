@@ -14,11 +14,17 @@
 // data is NSString (filepath)
 - (NNTaggableObject*)fileDropData:(id)data
 {
-	if (![[NSFileManager defaultManager] fileExistsAtPath:data])
+	if (([[NSFileManager defaultManager] fileExistsAtPath:data])
+		&& [[NSFileManager defaultManager] isReadableFileAtPath:data])
+	{	
+		NNFile *file = [[NNFile alloc] initWithPath:data];
+		return [file autorelease];
+	}
+	else
+	{
+		// TODO - logging
 		return nil;
-	
-	NNFile *file = [[NNFile alloc] initWithPath:data];
-	return [file autorelease];
+	}
 }
 
 - (NSDragOperation)performedDragOperation
