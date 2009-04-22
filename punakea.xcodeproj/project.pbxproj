@@ -135,6 +135,7 @@
 		4896E6240F9F5B0F0015316F /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
 		4896E6270F9F5B160015316F /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
 		4896E62A0F9F5B200015316F /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
+		4896E6680F9F79070015316F /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48990E540F8252A500E3613B /* NNTagging.framework */; };
 		489A603F0ADA4AF500C6CE36 /* drop_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 489A603E0ADA4AF500C6CE36 /* drop_highlight.png */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
@@ -263,7 +264,6 @@
 		6588EE170A07463D00082718 /* MDIconViewOnDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE130A07463D00082718 /* MDIconViewOnDisabled.tiff */; };
 		6588EE180A07463D00082718 /* MDListViewOffDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE140A07463D00082718 /* MDListViewOffDisabled.tiff */; };
 		6588EE190A07463D00082718 /* MDListViewOnDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE150A07463D00082718 /* MDListViewOnDisabled.tiff */; };
-		6589AE240F826862009821AC /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6589AE200F826862009821AC /* NNTagging.framework */; };
 		6589C5020A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C4FF0A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff */; };
 		6589C5030A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C5000A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff */; };
 		6589C5040A9DE6F600CA2CD1 /* sl-status_stop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6589C5010A9DE6F600CA2CD1 /* sl-status_stop.tiff */; };
@@ -443,42 +443,42 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = NNTagging;
 		};
 		4896E5F70F9F4B570015316F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = NNTagging;
 		};
 		4896E5F90F9F4B5F0015316F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = NNTagging;
 		};
 		4896E5FD0F9F4B660015316F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = NNTagging;
 		};
 		4896E5FF0F9F4B6C0015316F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = NNTagging;
 		};
 		4896E6030F9F4B740015316F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = NNTagging;
 		};
 		48990E530F8252A500E3613B /* PBXContainerItemProxy */ = {
@@ -522,6 +522,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4896E6680F9F79070015316F /* NNTagging.framework in Copy Frameworks */,
 				48E760DA0F7F8BC900F9EEBA /* OpenMeta.framework in Copy Frameworks */,
 				651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
@@ -715,7 +716,7 @@
 		4842FC1109DA804100C4A931 /* PATagButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButtonCell.h; sourceTree = "<group>"; };
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
 		484496300B2D56CE009B262C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
-		484497A90B2D9925009B262C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		484497A90B2D9925009B262C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = SOURCE_ROOT; };
 		4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PANotificationReceiver.h; sourceTree = "<group>"; };
 		4845CBA80B4A7B8F003D242C /* PANotificationReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PANotificationReceiver.m; sourceTree = "<group>"; };
 		48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CharacterSetChecks.h"; sourceTree = "<group>"; };
@@ -794,7 +795,7 @@
 		48E760050F7F834000F9EEBA /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/UKCrashReporter.strings; sourceTree = "<group>"; };
 		48E760070F7F834000F9EEBA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/UKCrashReporter.nib; sourceTree = "<group>"; };
 		48E760980F7F8B4400F9EEBA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
-		48E760CD0F7F8BAA00F9EEBA /* OpenMeta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenMeta.framework; sourceTree = "<group>"; };
+		48E760CD0F7F8BAA00F9EEBA /* OpenMeta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenMeta.framework; path = Frameworks/OpenMeta.framework; sourceTree = SOURCE_ROOT; };
 		48EDB8330BF5A68C008452FF /* PAStringPrefixFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAStringPrefixFilter.h; sourceTree = "<group>"; };
 		48EDB8360BF5A693008452FF /* PAStringPrefixFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAStringPrefixFilter.m; sourceTree = "<group>"; };
 		48EDB8390BF5A698008452FF /* PAContentTypeFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAContentTypeFilter.h; sourceTree = "<group>"; };
@@ -896,7 +897,6 @@
 		6588EE130A07463D00082718 /* MDIconViewOnDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDIconViewOnDisabled.tiff; sourceTree = "<group>"; };
 		6588EE140A07463D00082718 /* MDListViewOffDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDListViewOffDisabled.tiff; sourceTree = "<group>"; };
 		6588EE150A07463D00082718 /* MDListViewOnDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDListViewOnDisabled.tiff; sourceTree = "<group>"; };
-		6589AE200F826862009821AC /* NNTagging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NNTagging.framework; path = build/Release/NNTagging.framework; sourceTree = SOURCE_ROOT; };
 		6589C4FF0A9DE6F600CA2CD1 /* sl-status_stop-pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_stop-pressed.tiff"; sourceTree = "<group>"; };
 		6589C5000A9DE6F600CA2CD1 /* sl-status_stop-rollover.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_stop-rollover.tiff"; sourceTree = "<group>"; };
 		6589C5010A9DE6F600CA2CD1 /* sl-status_stop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_stop.tiff"; sourceTree = "<group>"; };
@@ -1053,7 +1053,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6589AE240F826862009821AC /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,7 +1106,6 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6589AE200F826862009821AC /* NNTagging.framework */,
 				48E760CD0F7F8BAA00F9EEBA /* OpenMeta.framework */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
 				484497A90B2D9925009B262C /* Sparkle.framework */,
@@ -2289,6 +2287,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */;
 			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
