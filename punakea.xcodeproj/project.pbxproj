@@ -165,8 +165,6 @@
 		48E760080F7F834000F9EEBA /* UKCrashReporter.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48E760040F7F834000F9EEBA /* UKCrashReporter.strings */; };
 		48E760090F7F834000F9EEBA /* UKCrashReporter.nib in Resources */ = {isa = PBXBuildFile; fileRef = 48E760060F7F834000F9EEBA /* UKCrashReporter.nib */; };
 		48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E760980F7F8B4400F9EEBA /* AddressBook.framework */; };
-		48E760CE0F7F8BAA00F9EEBA /* OpenMeta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E760CD0F7F8BAA00F9EEBA /* OpenMeta.framework */; };
-		48E760DA0F7F8BC900F9EEBA /* OpenMeta.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48E760CD0F7F8BAA00F9EEBA /* OpenMeta.framework */; };
 		650359150F5D7B1F00BC204D /* SRRecorderControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6503590A0F5D7B1F00BC204D /* SRRecorderControl.m */; };
 		650359160F5D7B1F00BC204D /* SRRecorderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6503590C0F5D7B1F00BC204D /* SRRecorderCell.m */; };
 		650359170F5D7B1F00BC204D /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6503590E0F5D7B1F00BC204D /* CTGradient.m */; };
@@ -523,7 +521,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				4896E6680F9F79070015316F /* NNTagging.framework in Copy Frameworks */,
-				48E760DA0F7F8BC900F9EEBA /* OpenMeta.framework in Copy Frameworks */,
 				651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
 				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
@@ -795,7 +792,6 @@
 		48E760050F7F834000F9EEBA /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/UKCrashReporter.strings; sourceTree = "<group>"; };
 		48E760070F7F834000F9EEBA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/UKCrashReporter.nib; sourceTree = "<group>"; };
 		48E760980F7F8B4400F9EEBA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
-		48E760CD0F7F8BAA00F9EEBA /* OpenMeta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenMeta.framework; path = Frameworks/OpenMeta.framework; sourceTree = SOURCE_ROOT; };
 		48EDB8330BF5A68C008452FF /* PAStringPrefixFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAStringPrefixFilter.h; sourceTree = "<group>"; };
 		48EDB8360BF5A693008452FF /* PAStringPrefixFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAStringPrefixFilter.m; sourceTree = "<group>"; };
 		48EDB8390BF5A698008452FF /* PAContentTypeFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAContentTypeFilter.h; sourceTree = "<group>"; };
@@ -1080,7 +1076,6 @@
 				65CAAEF10F6C2E2500B4FFAA /* QuickLookUI.framework in Frameworks */,
 				6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */,
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
-				48E760CE0F7F8BAA00F9EEBA /* OpenMeta.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,7 +1101,6 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				48E760CD0F7F8BAA00F9EEBA /* OpenMeta.framework */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
 				484497A90B2D9925009B262C /* Sparkle.framework */,
 			);
