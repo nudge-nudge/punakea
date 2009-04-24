@@ -134,9 +134,8 @@
 //	// to go!
 //	for (NNFile *file in taggedFiles)
 //	{
-//		//NSLog(@"Writing %@: %@",file,[file tags]);
-//		
-//		[file initiateSave];
+//		// call save tags directly, we do not need any additinal updates
+//		[file saveTags];
 //		
 //		// clean up finder comments
 //		NSString *finderCommentWithoutTags = [oldTagToFileWriter finderCommentIgnoringKeywordsForFile:file];
