@@ -16,7 +16,7 @@
 	NSMutableDictionary *sf = [NSMutableDictionary dictionary];
 	[sf setObject:[NSNumber numberWithInt:1] forKey:@"CompatibleVersion"];
 	
-	NSString *rawQuery = [NSString stringWithFormat:@"(((%@))) &amp;&amp; (true)",[tag query]];
+	NSString *rawQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
 	[sf setObject:rawQuery forKey:@"RawQuery"];
 	
 	NSMutableDictionary *rawQueryDict = [NSMutableDictionary dictionary];
