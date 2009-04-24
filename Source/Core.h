@@ -22,6 +22,7 @@
 #import "PABoolToColorTransformer.h"
 
 #import "PAInstaller.h"
+#import "PARegistrationManager.h"
 
 #import "Sparkle/SUUpdater.h"
 
@@ -63,6 +64,9 @@
 - (void)createDirectoriesIfNeeded;
 
 // Menu Actions
+- (IBAction)purchase:(id)sender;
+- (IBAction)enterLicenseKey:(id)sender;
+
 - (IBAction)addTagSet:(id)sender;
 - (IBAction)getInfo:(id)sender;
 
@@ -87,7 +91,6 @@
 - (IBAction)showTaggerForObjects:(NSArray*)taggableObjects;
 
 - (IBAction)openWebsite:(id)sender;
-- (IBAction)openDonationWebsite:(id)sender;
 
 - (IBAction)cleanTagDB:(id)sender;
 

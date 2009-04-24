@@ -52,6 +52,9 @@
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		[self loadUserDefaults];
 		
+		//if ([[PARegistrationManager defaultManager] hasExpired])
+		//	[[PARegistrationManager defaultManager] showVersionHasExpiredWindow:self];
+		
 		[PAInstaller install];
 		
 		globalTags = [NNTags sharedTags];
@@ -419,6 +422,16 @@
 	return YES;
 }
 
+- (IBAction)purchase:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/store"]];
+}
+
+- (IBAction)enterLicenseKey:(id)sender
+{
+	[[PARegistrationManager defaultManager] showEnterLicenseKeyWindow:self];
+}
+
 - (IBAction)addTagSet:(id)sender
 {
 	[browserController addTagSet:sender];
@@ -607,11 +620,6 @@
 - (IBAction)openWebsite:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/punakea"]];
-}
-
-- (IBAction)openDonationWebsite:(id)sender
-{
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/donate"]];
 }
 
 - (IBAction)cleanTagDB:(id)sender

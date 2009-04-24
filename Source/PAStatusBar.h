@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PAStatusBarButton.h"
+#import "PAStatusBarLink.h"
 #import "PAStatusBarProgressIndicator.h"
 #import "PAImageButton.h"
 #import "PAResultsOutlineView.h"

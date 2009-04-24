@@ -61,6 +61,8 @@
 				<string>id</string>
 				<key>editTagsOnFiles</key>
 				<string>id</string>
+				<key>enterLicenseKey</key>
+				<string>id</string>
 				<key>getInfo</key>
 				<string>id</string>
 				<key>goHome</key>
@@ -74,6 +76,8 @@
 				<key>openFiles</key>
 				<string>id</string>
 				<key>openWebsite</key>
+				<string>id</string>
+				<key>purchase</key>
 				<string>id</string>
 				<key>resetBrowser</key>
 				<string>id</string>

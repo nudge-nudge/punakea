@@ -71,6 +71,10 @@
 	<real>0.5</real>
 	<key>TagCloud.SortKey</key>
 	<integer>0</integer>
+	<key>License.Name</key>
+	<string></string>
+	<key>License.Key</key>
+	<string></string>
 	<key>Version</key>
 	<integer>3</integer>
 </dict>

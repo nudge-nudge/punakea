@@ -197,6 +197,11 @@
 		6525F47009EA4FBD006E1FB7 /* MDListViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6525F46D09EA4FBD006E1FB7 /* MDListViewPressed-1.tiff */; };
 		6530FF360AF2229400D7A79A /* PATaggerTableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6530FF340AF2229400D7A79A /* PATaggerTableView.h */; };
 		6530FF370AF2229400D7A79A /* PATaggerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6530FF350AF2229400D7A79A /* PATaggerTableView.m */; };
+		6531BB6D0FA05ED20038D287 /* PAStatusBarLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 6531BB6C0FA05ED20038D287 /* PAStatusBarLink.m */; };
+		6531BB740FA05F0C0038D287 /* PARegistrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6531BB730FA05F0C0038D287 /* PARegistrationManager.m */; };
+		6531BB7C0FA05F3C0038D287 /* libEWS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7A0FA05F3C0038D287 /* libEWS.a */; };
+		6531BB7D0FA05F3C0038D287 /* libValidateUniversal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */; };
+		6531BC120FA0A9C00038D287 /* PALicense.m in Sources */ = {isa = PBXBuildFile; fileRef = 6531BC110FA0A9C00038D287 /* PALicense.m */; };
 		6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */; };
 		6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */; };
 		653948DC0C0359C4001705D6 /* button-goto.tif in Resources */ = {isa = PBXBuildFile; fileRef = 653948DA0C0359C4001705D6 /* button-goto.tif */; };
@@ -363,6 +368,12 @@
 		65EF60C50F69531500AAE151 /* PTHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF60C10F69531500AAE151 /* PTHotKeyCenter.m */; };
 		65EF60C60F69531500AAE151 /* PTKeyCombo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF60C30F69531500AAE151 /* PTKeyCombo.m */; };
 		65EF60EE0F6958C100AAE151 /* HotkeyDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF60ED0F6958C100AAE151 /* HotkeyDelegateCategory.m */; };
+		65F6596B0FA1AF9F0006E229 /* PATrialLicense.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6596A0FA1AF9F0006E229 /* PATrialLicense.m */; };
+		65F6596E0FA1AFE20006E229 /* PARegisteredLicense.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6596D0FA1AFE20006E229 /* PARegisteredLicense.m */; };
+		65F65A110FA1C0C40006E229 /* SSCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F65A100FA1C0C40006E229 /* SSCrypto.framework */; };
+		65F65AC10FA1E2230006E229 /* SSCrypto.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65F65A100FA1C0C40006E229 /* SSCrypto.framework */; };
+		65F65AC20FA1E2270006E229 /* libEWS.a in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7A0FA05F3C0038D287 /* libEWS.a */; };
+		65F65AC30FA1E22A0006E229 /* libValidateUniversal.a in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */; };
 		65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */; };
 		65F9B96309D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */; };
 		65F9B96409D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */; };
@@ -520,6 +531,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				65F65AC20FA1E2270006E229 /* libEWS.a in Copy Frameworks */,
+				65F65AC30FA1E22A0006E229 /* libValidateUniversal.a in Copy Frameworks */,
+				65F65AC10FA1E2230006E229 /* SSCrypto.framework in Copy Frameworks */,
 				4896E6680F9F79070015316F /* NNTagging.framework in Copy Frameworks */,
 				651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
@@ -830,6 +844,14 @@
 		6525F46D09EA4FBD006E1FB7 /* MDListViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDListViewPressed-1.tiff"; sourceTree = "<group>"; };
 		6530FF340AF2229400D7A79A /* PATaggerTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATaggerTableView.h; sourceTree = "<group>"; };
 		6530FF350AF2229400D7A79A /* PATaggerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerTableView.m; sourceTree = "<group>"; };
+		6531BB6B0FA05ED20038D287 /* PAStatusBarLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBarLink.h; sourceTree = "<group>"; };
+		6531BB6C0FA05ED20038D287 /* PAStatusBarLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBarLink.m; sourceTree = "<group>"; };
+		6531BB720FA05F0C0038D287 /* PARegistrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARegistrationManager.h; sourceTree = "<group>"; };
+		6531BB730FA05F0C0038D287 /* PARegistrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARegistrationManager.m; sourceTree = "<group>"; };
+		6531BB7A0FA05F3C0038D287 /* libEWS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEWS.a; sourceTree = "<group>"; };
+		6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libValidateUniversal.a; sourceTree = "<group>"; };
+		6531BC100FA0A9C00038D287 /* PALicense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PALicense.h; sourceTree = "<group>"; };
+		6531BC110FA0A9C00038D287 /* PALicense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PALicense.m; sourceTree = "<group>"; };
 		6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIcon.tif; sourceTree = "<group>"; };
 		6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIconAlt.tif; sourceTree = "<group>"; };
 		653948DA0C0359C4001705D6 /* button-goto.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "button-goto.tif"; sourceTree = "<group>"; };
@@ -1001,6 +1023,11 @@
 		65EF60C30F69531500AAE151 /* PTKeyCombo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKeyCombo.m; sourceTree = "<group>"; };
 		65EF60EC0F6958C100AAE151 /* HotkeyDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotkeyDelegateCategory.h; sourceTree = "<group>"; };
 		65EF60ED0F6958C100AAE151 /* HotkeyDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotkeyDelegateCategory.m; sourceTree = "<group>"; };
+		65F659690FA1AF9F0006E229 /* PATrialLicense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATrialLicense.h; sourceTree = "<group>"; };
+		65F6596A0FA1AF9F0006E229 /* PATrialLicense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATrialLicense.m; sourceTree = "<group>"; };
+		65F6596C0FA1AFE20006E229 /* PARegisteredLicense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARegisteredLicense.h; sourceTree = "<group>"; };
+		65F6596D0FA1AFE20006E229 /* PARegisteredLicense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARegisteredLicense.m; sourceTree = "<group>"; };
+		65F65A100FA1C0C40006E229 /* SSCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SSCrypto.framework; sourceTree = "<group>"; };
 		65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewPressed-1.tiff"; sourceTree = "<group>"; };
 		65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
 		65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
@@ -1076,6 +1103,9 @@
 				65CAAEF10F6C2E2500B4FFAA /* QuickLookUI.framework in Frameworks */,
 				6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */,
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
+				6531BB7C0FA05F3C0038D287 /* libEWS.a in Frameworks */,
+				6531BB7D0FA05F3C0038D287 /* libValidateUniversal.a in Frameworks */,
+				65F65A110FA1C0C40006E229 /* SSCrypto.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1101,6 +1131,9 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65F65A100FA1C0C40006E229 /* SSCrypto.framework */,
+				6531BB7A0FA05F3C0038D287 /* libEWS.a */,
+				6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
 				484497A90B2D9925009B262C /* Sparkle.framework */,
 			);
@@ -1264,6 +1297,7 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				6531BB710FA05EEB0038D287 /* PARegistrationManager */,
 				650359070F5D7AD000BC204D /* SRRecorderControl */,
 				48E75FF10F7F821200F9EEBA /* CrashReporter */,
 				65CAAEDC0F6C2D7600B4FFAA /* Quick Look */,
@@ -1649,6 +1683,21 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		6531BB710FA05EEB0038D287 /* PARegistrationManager */ = {
+			isa = PBXGroup;
+			children = (
+				6531BC100FA0A9C00038D287 /* PALicense.h */,
+				6531BC110FA0A9C00038D287 /* PALicense.m */,
+				65F6596C0FA1AFE20006E229 /* PARegisteredLicense.h */,
+				65F6596D0FA1AFE20006E229 /* PARegisteredLicense.m */,
+				65F659690FA1AF9F0006E229 /* PATrialLicense.h */,
+				65F6596A0FA1AF9F0006E229 /* PATrialLicense.m */,
+				6531BB720FA05F0C0038D287 /* PARegistrationManager.h */,
+				6531BB730FA05F0C0038D287 /* PARegistrationManager.m */,
+			);
+			name = PARegistrationManager;
+			sourceTree = "<group>";
+		};
 		653948D90C035993001705D6 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -2032,6 +2081,8 @@
 				65EB72150BE20D86007FF40C /* PAStatusBarButton.m */,
 				65EB722A0BE20ECC007FF40C /* PAStatusBarButtonCell.h */,
 				65EB722B0BE20ECC007FF40C /* PAStatusBarButtonCell.m */,
+				6531BB6B0FA05ED20038D287 /* PAStatusBarLink.h */,
+				6531BB6C0FA05ED20038D287 /* PAStatusBarLink.m */,
 				65B1FC870C0308EC0099D12B /* PAStatusBarProgressIndicator.h */,
 				65B1FC880C0308EC0099D12B /* PAStatusBarProgressIndicator.m */,
 			);
@@ -2716,6 +2767,11 @@
 				48E75FFD0F7F825300F9EEBA /* UKCrashReporter.m in Sources */,
 				48E75FFE0F7F825300F9EEBA /* UKNibOwner.m in Sources */,
 				48E75FFF0F7F825300F9EEBA /* UKSystemInfo.m in Sources */,
+				6531BB6D0FA05ED20038D287 /* PAStatusBarLink.m in Sources */,
+				6531BB740FA05F0C0038D287 /* PARegistrationManager.m in Sources */,
+				6531BC120FA0A9C00038D287 /* PALicense.m in Sources */,
+				65F6596B0FA1AF9F0006E229 /* PATrialLicense.m in Sources */,
+				65F6596E0FA1AFE20006E229 /* PARegisteredLicense.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3408,6 +3464,10 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				PRODUCT_NAME = Punakea;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
@@ -3448,6 +3508,10 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				PRODUCT_NAME = Punakea;
 				WRAPPER_EXTENSION = app;
 			};

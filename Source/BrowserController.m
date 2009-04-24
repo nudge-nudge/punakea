@@ -137,11 +137,29 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[sourcePanelStatusBar addItem:sbitem];
 	
 	// Right StatusBar
+	/*PARegistrationManager *rm = [PARegistrationManager defaultManager];
+	if (![rm isRegistered])
+	{
+		PAStatusBarLink *sbLink = [PAStatusBarLink statusBarLink];
+
+		if ([rm isTimeLimitedBeta])
+		{
+			NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+			[dateFormatter setDateFormat:@"MMM d"];
+			
+			NSString *expirationDateString = [dateFormatter stringFromDate:[rm time]];
+			[sbLink setStringValue:@"This version expires on !"];
+		} else {
+			[sbLink setStringValue:@"21 days left. Buy Now!"];
+		}
+	
+		[rightStatusBar addItem:sbLink];
+	}*/
 	
 	statusBarProgressIndicator = [[PAStatusBarProgressIndicator statusBarProgressIndicator] retain];
 	[statusBarProgressIndicator setStringValue:@"Gathering Tags"];
 	[statusBarProgressIndicator setHidden:YES];
-	[rightStatusBar addItem:statusBarProgressIndicator];
+	[rightStatusBar addItem:statusBarProgressIndicator];	
 }
 
 - (void)setupTabPanel
