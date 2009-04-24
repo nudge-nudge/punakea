@@ -626,7 +626,7 @@
 {
 	BusyWindowController *busyWindowController = [[self busyWindow] delegate];
 	
-	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_CLEANING_TAG_DB", @"FileManager", nil)];
+	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB", @"FileManager", nil)];
 	[busyWindowController performBusySelector:@selector(cleanTagDB)
 									 onObject:[NNTagging tagging]];
 	
