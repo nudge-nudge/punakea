@@ -45,6 +45,8 @@
 		4817B2B10ABE864B00ACBBC6 /* PARecentTagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B2AF0ABE864B00ACBBC6 /* PARecentTagGroup.m */; };
 		4817B3A60ABE8C4A00ACBBC6 /* PAPopularTagGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4817B3A40ABE8C4A00ACBBC6 /* PAPopularTagGroup.h */; };
 		4817B3A70ABE8C4A00ACBBC6 /* PAPopularTagGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */; };
+		4817DC5F0FA3826E0067524D /* LCLLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817DC5B0FA3826E0067524D /* LCLLogFile.m */; };
+		4817DC600FA3826E0067524D /* lcl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4817DC5D0FA3826E0067524D /* lcl.m */; };
 		48186F510BE4C834000B4638 /* NNFilterEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F490BE4C834000B4638 /* NNFilterEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48186F520BE4C834000B4638 /* NNFilterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 48186F4A0BE4C834000B4638 /* NNFilterEngine.m */; };
 		48186F530BE4C834000B4638 /* NNObjectFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F4B0BE4C834000B4638 /* NNObjectFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -682,6 +684,12 @@
 		4817B2AF0ABE864B00ACBBC6 /* PARecentTagGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARecentTagGroup.m; sourceTree = "<group>"; };
 		4817B3A40ABE8C4A00ACBBC6 /* PAPopularTagGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPopularTagGroup.h; sourceTree = "<group>"; };
 		4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPopularTagGroup.m; sourceTree = "<group>"; };
+		4817DC590FA3826E0067524D /* lcl_config_logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lcl_config_logger.h; sourceTree = "<group>"; };
+		4817DC5A0FA3826E0067524D /* LCLLogFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCLLogFile.h; sourceTree = "<group>"; };
+		4817DC5B0FA3826E0067524D /* LCLLogFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCLLogFile.m; sourceTree = "<group>"; };
+		4817DC5C0FA3826E0067524D /* lcl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lcl.h; sourceTree = "<group>"; };
+		4817DC5D0FA3826E0067524D /* lcl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lcl.m; sourceTree = "<group>"; };
+		4817DC5E0FA3826E0067524D /* lcl_config_components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lcl_config_components.h; sourceTree = "<group>"; };
 		48186F390BE4C7BE000B4638 /* NNFilterEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NNFilterEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48186F3A0BE4C7BE000B4638 /* NNFilterEngine-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NNFilterEngine-Info.plist"; sourceTree = "<group>"; };
 		48186F490BE4C834000B4638 /* NNFilterEngine.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NNFilterEngine.h; sourceTree = "<group>"; };
@@ -1297,6 +1305,7 @@
 		4816346E0A5A52EA003B8EE4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				4817DC580FA3826E0067524D /* Logging */,
 				6531BB710FA05EEB0038D287 /* PARegistrationManager */,
 				650359070F5D7AD000BC204D /* SRRecorderControl */,
 				48E75FF10F7F821200F9EEBA /* CrashReporter */,
@@ -1352,6 +1361,19 @@
 				4817B3A50ABE8C4A00ACBBC6 /* PAPopularTagGroup.m */,
 			);
 			name = TagGroups;
+			sourceTree = "<group>";
+		};
+		4817DC580FA3826E0067524D /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				4817DC590FA3826E0067524D /* lcl_config_logger.h */,
+				4817DC5A0FA3826E0067524D /* LCLLogFile.h */,
+				4817DC5B0FA3826E0067524D /* LCLLogFile.m */,
+				4817DC5C0FA3826E0067524D /* lcl.h */,
+				4817DC5D0FA3826E0067524D /* lcl.m */,
+				4817DC5E0FA3826E0067524D /* lcl_config_components.h */,
+			);
+			name = Logging;
 			sourceTree = "<group>";
 		};
 		48186F480BE4C834000B4638 /* NNFilterEngine */ = {
@@ -2772,6 +2794,8 @@
 				6531BC120FA0A9C00038D287 /* PALicense.m in Sources */,
 				65F6596B0FA1AF9F0006E229 /* PATrialLicense.m in Sources */,
 				65F6596E0FA1AFE20006E229 /* PARegisteredLicense.m in Sources */,
+				4817DC5F0FA3826E0067524D /* LCLLogFile.m in Sources */,
+				4817DC600FA3826E0067524D /* lcl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
