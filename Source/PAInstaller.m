@@ -110,6 +110,7 @@
 - (IBAction)migrateSpotlightCommentsToOpenMeta:(id)sender
 {
 	[openMetaProgressIndicator setIndeterminate:YES];
+	[openMetaProgressIndicator setUsesThreadedAnimation:YES];
 	[openMetaProgressIndicator startAnimation:self];
 
 	NNTagStoreManager *tagStoreManager = [NNTagStoreManager defaultManager];
@@ -153,6 +154,7 @@
 	[oldTagToFileWriter release];
 	[newTagToFileWriter release];
 
+	[openMetaProgressIndicator stopAnimation:self];
 	[self stopModal:self];
 }
 
