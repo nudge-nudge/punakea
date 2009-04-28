@@ -38,7 +38,7 @@
 			<object class="NSWindowTemplate" id="605019593">
 				<int key="NSWindowStyleMask">1</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{196, 222}, {503, 288}}</string>
+				<string key="NSWindowRect">{{196, 212}, {503, 298}}</string>
 				<int key="NSWTFlags">603980800</int>
 				<string key="NSWindowTitle">Migration Assistant</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -96,7 +96,7 @@
 						<object class="NSTextField" id="715472518">
 							<reference key="NSNextResponder" ref="854750361"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{127, 236}, {359, 34}}</string>
+							<string key="NSFrame">{{127, 246}, {359, 34}}</string>
 							<reference key="NSSuperview" ref="854750361"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="143564503">
@@ -144,7 +144,7 @@
 									<string>NeXT TIFF v4.0 pasteboard type</string>
 								</object>
 							</object>
-							<string key="NSFrame">{{20, 190}, {80, 80}}</string>
+							<string key="NSFrame">{{20, 200}, {80, 80}}</string>
 							<reference key="NSSuperview" ref="854750361"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="554707285">
@@ -164,7 +164,7 @@
 						<object class="NSTextField" id="516973476">
 							<reference key="NSNextResponder" ref="854750361"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{127, 177}, {359, 51}}</string>
+							<string key="NSFrame">{{127, 195}, {359, 43}}</string>
 							<reference key="NSSuperview" ref="854750361"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="264557527">
@@ -184,7 +184,7 @@
 						<object class="NSTextField" id="389041959">
 							<reference key="NSNextResponder" ref="854750361"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{127, 142}, {359, 42}}</string>
+							<string key="NSFrame">{{127, 145}, {359, 42}}</string>
 							<reference key="NSSuperview" ref="854750361"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="380680816">
@@ -203,7 +203,7 @@
 						<object class="NSTextField" id="295987738">
 							<reference key="NSNextResponder" ref="854750361"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{127, 84}, {359, 50}}</string>
+							<string key="NSFrame">{{127, 87}, {359, 50}}</string>
 							<reference key="NSSuperview" ref="854750361"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="1002732468">
@@ -229,13 +229,13 @@ QSBXSElMRS4gRE8gTk9UIFBBTklDIEFORCBXQUlUIQo</string>
 							<reference key="NSNextResponder" ref="854750361"/>
 							<int key="NSvFlags">1292</int>
 							<object class="NSPSMatrix" key="NSDrawMatrix"/>
-							<string key="NSFrame">{{128, 56}, {357, 20}}</string>
+							<string key="NSFrame">{{128, 59}, {357, 20}}</string>
 							<reference key="NSSuperview" ref="854750361"/>
 							<int key="NSpiFlags">16392</int>
 							<double key="NSMaxValue">1.000000e+02</double>
 						</object>
 					</object>
-					<string key="NSFrameSize">{503, 288}</string>
+					<string key="NSFrameSize">{503, 298}</string>
 					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
@@ -376,11 +376,11 @@ QSBXSElMRS4gRE8gTk9UIFBBTklDIEFORCBXQUlUIQo</string>
 							<reference ref="169063291"/>
 							<reference ref="715472518"/>
 							<reference ref="516973476"/>
-							<reference ref="525050186"/>
-							<reference ref="765521693"/>
-							<reference ref="913211796"/>
 							<reference ref="389041959"/>
 							<reference ref="295987738"/>
+							<reference ref="913211796"/>
+							<reference ref="765521693"/>
+							<reference ref="525050186"/>
 						</object>
 						<reference key="parent" ref="605019593"/>
 					</object>
@@ -527,9 +527,9 @@ QSBXSElMRS4gRE8gTk9UIFBBTklDIEFORCBXQUlUIQo</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilderKit</string>
 					<string>com.apple.InterfaceBuilderKit</string>
-					<string>{{291, 403}, {503, 288}}</string>
+					<string>{{291, 393}, {503, 298}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{291, 403}, {503, 288}}</string>
+					<string>{{291, 393}, {503, 298}}</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
