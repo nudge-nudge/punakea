@@ -7,8 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-//ka #import "PASingleton.h"
-
 #import "PALicense.h"
 #import "PATrialLicense.h"
 #import "PARegisteredLicense.h"
@@ -34,7 +32,7 @@
 + (PARegistrationManager *)defaultManager;
 
 - (IBAction)confirmNewLicenseKey:(id)sender;
-- (void)writeLicenseToDefaults:(PALicense *)license;
+- (void)writeLicenseToDefaults;
 
 - (IBAction)showEnterLicenseKeyWindow:(id)sender;
 - (IBAction)showVersionHasExpiredWindow:(id)sender;

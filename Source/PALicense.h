@@ -28,6 +28,8 @@ typedef enum _PALicenseType {
 
 - (BOOL)isValidForThisAppVersion;
 
+- (void)updateChecksum;
+
 - (PALicenseType)type;
 - (void)setType:(PALicenseType)theType;
 - (int)majorAppVersion;

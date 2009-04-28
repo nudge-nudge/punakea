@@ -13,11 +13,21 @@
 int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 
 
+@interface PATrialLicense (PrivateAPI)
+
++ (PATrialLicense *)license;
+
+- (NSString *)checksumWithStartDate:(NSDate *)aDate andMajorAppVersion:(int)version;
+
+@end
+
+
+
 @implementation PATrialLicense
 
 #pragma mark Init + dealloc
 + (PATrialLicense *)license
-{	
+{
 	return [[[PATrialLicense alloc] init] autorelease];
 }
 
@@ -61,9 +71,15 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 #pragma mark Actions
 - (BOOL)hasValidStartDate
 {
-	NSString *checksumString = [NSString stringWithFormat:@"%@ %@",
-								(NSString *)[userDefaults objectForKey:@"License.StartDate"],
-								(NSString *)[userDefaults objectForKey:@"License.MajorAppVersion"]];
+	// Check if there are any values in user defaults
+	if (!([userDefaults objectForKey:@"License.StartDate"] &&
+		  [userDefaults objectForKey:@"License.MajorAppVersion"]))
+	{
+		return NO;
+	}
+	
+	NSString *checksumString = [self checksumWithStartDate:(NSDate *)[userDefaults objectForKey:@"License.StartDate"]
+										andMajorAppVersion:(int)[userDefaults objectForKey:@"License.MajorAppVersion"]];
 	
 	SSCrypto *crypto = [[[SSCrypto alloc] init] autorelease];
 	[crypto setClearTextWithString:checksumString];
@@ -86,6 +102,41 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 - (int)daysLeftForEvaluation
 {
 	return 7;
+}
+
+- (void)updateChecksum
+{
+	NSString *aChecksum = [self checksumWithStartDate:[self startDate]
+								   andMajorAppVersion:[self majorAppVersion]];
+	
+	[self setChecksum:aChecksum];
+}
+
+- (NSString *)checksumWithStartDate:(NSDate *)aDate andMajorAppVersion:(int)version
+{
+	NSString *checksumString = [NSString stringWithFormat:@"%@ %i",
+								[self startDate],
+								[self majorAppVersion]];
+	
+	SSCrypto *crypto = [[[SSCrypto alloc] init] autorelease];
+	[crypto setClearTextWithString:checksumString];
+	
+	NSString *digest = [[crypto digest:@"SHA1"] hexval];
+	
+	return digest;
+}
+
+
+#pragma mark Accessors
+- (NSDate *)startDate
+{
+	return startDate;
+}
+
+- (void)setStartDate:(NSDate *)aDate
+{
+	[startDate release];
+	startDate = [aDate retain];
 }
 
 @end

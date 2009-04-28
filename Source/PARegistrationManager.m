@@ -14,6 +14,8 @@
 
 - (void)checkRegistrationInformation;
 
+- (void)writeLicenseToDefaults;
+
 @end
 
 
@@ -67,9 +69,7 @@ static PARegistrationManager *sharedInstance = nil;
 - (void)checkRegistrationInformation
 {	
 	// First, check if there's a valid registered license
-	
 	PARegisteredLicense *registeredLicense = [PARegisteredLicense licenseFromUserDefaults];
-	
 	if (registeredLicense)	// There was a valid registered license found
 	{
 		if ([registeredLicense isValidForThisAppVersion])
@@ -83,9 +83,7 @@ static PARegistrationManager *sharedInstance = nil;
 	}
 		
 	// Next, check for a trial license
-	
 	PATrialLicense *trialLicense = [PATrialLicense licenseFromUserDefaults];
-	
 	if (trialLicense)	// There was a valid trial license found
 	{		
 		if ([license isValidForThisAppVersion])
@@ -98,7 +96,24 @@ static PARegistrationManager *sharedInstance = nil;
 		}
 	}
 	
-	NSLog([self license]);
+	// No registration information could be found in user defaults?
+	if (![self license])
+	{
+		// Create a new trial license
+		
+		NSString *bundleVersionString = [[[NSBundle bundleForClass:[self class]] infoDictionary] 
+										  objectForKey:@"CFBundleVersion"];
+		
+		int majorAppVersion = [[bundleVersionString substringToIndex:1] intValue];
+		
+		PATrialLicense *l = [PATrialLicense license];
+		[l setStartDate:[NSDate date]];
+		[l setMajorAppVersion:majorAppVersion];
+		[l updateChecksum];
+		
+		[self setLicense:l];
+		[self writeLicenseToDefaults];
+	}
 }
 
 - (IBAction)confirmNewLicenseKey:(id)sender
@@ -209,7 +224,7 @@ static PARegistrationManager *sharedInstance = nil;
 - (void)setLicense:(PALicense *)aLicense
 {
 	[license release];
-	[self setLicense:[aLicense retain]];
+	license = [aLicense retain];
 }
 
 
@@ -231,6 +246,31 @@ static PARegistrationManager *sharedInstance = nil;
         }
     }
     return sharedInstance;
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return self;
+}
+
+- (id)retain
+{
+    return self;
+}
+
+- (unsigned)retainCount
+{
+    return UINT_MAX;  //denotes an object that cannot be released
+}
+
+- (void)release
+{
+    //do nothing
+}
+
+- (id)autorelease
+{
+    return self;
 }
 
 @end
