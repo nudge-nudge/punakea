@@ -40,11 +40,11 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 	if ([[userDefaults objectForKey:@"License.Type"] isEqualTo:@"Trial"])
 	{
 		[license setStartDate:(NSDate *)[userDefaults objectForKey:@"License.StartDate"]];
-		[license setMajorAppVersion:(int)[userDefaults objectForKey:@"License.MajorAppVersion"]];
+		[license setMajorAppVersion:[(NSNumber *)[userDefaults objectForKey:@"License.MajorAppVersion"] intValue]];
 		[license setChecksum:(NSString *)[userDefaults objectForKey:@"License.Checksum"]];
 	}
 	
-	if ([license hasValidStartDate])
+	if ([license hasValidChecksum])
 		return license;
 	else 
 		return nil;
@@ -69,28 +69,23 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 
 
 #pragma mark Actions
-- (BOOL)hasValidStartDate
-{
-	// Check if there are any values in user defaults
-	if (!([userDefaults objectForKey:@"License.StartDate"] &&
-		  [userDefaults objectForKey:@"License.MajorAppVersion"]))
-	{
-		return NO;
-	}
+- (BOOL)hasValidChecksum
+{	
+	NSString *oldChecksum = [self checksum];
 	
-	NSString *checksumString = [self checksumWithStartDate:(NSDate *)[userDefaults objectForKey:@"License.StartDate"]
-										andMajorAppVersion:(int)[userDefaults objectForKey:@"License.MajorAppVersion"]];
+	[self updateChecksum];
 	
-	SSCrypto *crypto = [[[SSCrypto alloc] init] autorelease];
-	[crypto setClearTextWithString:checksumString];
-	
-	NSString *digest = [[crypto digest:@"SHA1"] hexval];
-	
-	return [[self checksum] isEqualTo:digest];
+	return [[self checksum] isEqualTo:oldChecksum];
 }
 
 - (BOOL)isValidForThisAppVersion
 {
+	NSString *bundleVersionString = [[[NSBundle bundleForClass:[self class]] infoDictionary] 
+									 objectForKey:@"CFBundleVersion"];
+	
+	int v = [[bundleVersionString substringToIndex:1] intValue];
+	
+	return [self hasValidChecksum] && ([self majorAppVersion] == v);
 }
 
 - (BOOL)hasExpired
@@ -115,8 +110,8 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 - (NSString *)checksumWithStartDate:(NSDate *)aDate andMajorAppVersion:(int)version
 {
 	NSString *checksumString = [NSString stringWithFormat:@"%@ %i",
-								[self startDate],
-								[self majorAppVersion]];
+								aDate,
+								version];
 	
 	SSCrypto *crypto = [[[SSCrypto alloc] init] autorelease];
 	[crypto setClearTextWithString:checksumString];

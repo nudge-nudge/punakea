@@ -22,7 +22,7 @@ extern int const NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD;
 + (PATrialLicense *)license;
 + (PATrialLicense *)licenseFromUserDefaults;
 
-- (BOOL)hasValidStartDate;
+- (BOOL)hasValidChecksum;
 
 - (NSDate *)startDate;
 - (void)setStartDate:(NSDate *)aDate;

@@ -86,7 +86,7 @@ static PARegistrationManager *sharedInstance = nil;
 	PATrialLicense *trialLicense = [PATrialLicense licenseFromUserDefaults];
 	if (trialLicense)	// There was a valid trial license found
 	{		
-		if ([license isValidForThisAppVersion])
+		if ([trialLicense isValidForThisAppVersion])
 		{
 			[self setLicense:trialLicense];
 		}
@@ -139,7 +139,27 @@ static PARegistrationManager *sharedInstance = nil;
 
 - (void)writeLicenseToDefaults
 {
+	if (![self license]) return;
 	
+	if([[self license] type] == PALicenseTypeTrial)
+	{
+		PATrialLicense *l = (PATrialLicense *)[self license];
+		
+		[userDefaults setObject:@"Trial" forKey:@"License.Type"];
+		[userDefaults setObject:[l startDate] forKey:@"License.StartDate"];
+		[userDefaults setObject:[NSNumber numberWithInt:[l majorAppVersion]] forKey:@"License.MajorAppVersion"];
+		[userDefaults setObject:[l checksum] forKey:@"License.Checksum"];
+	}
+	else
+	{
+		PARegisteredLicense *l = (PARegisteredLicense *)[self license];
+		
+		[userDefaults setObject:@"Registered" forKey:@"License.Type"];
+		[userDefaults setObject:[l name] forKey:@"License.Name"];
+		[userDefaults setObject:[l key] forKey:@"License.Key"];
+		[userDefaults setObject:[NSNumber numberWithInt:[l majorAppVersion]] forKey:@"License.MajorAppVersion"];
+		[userDefaults setObject:[l checksum] forKey:@"License.Checksum"];
+	}
 }
 
 - (BOOL)hasRegisteredLicense

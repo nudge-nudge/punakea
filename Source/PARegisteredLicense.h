@@ -24,7 +24,7 @@
 + (PARegisteredLicense *)license;
 + (PARegisteredLicense *)licenseFromUserDefaults;
 
-- (BOOL)hasValidKey;
+- (BOOL)hasValidChecksum;
 
 - (NSString *)name;
 - (void)setName:(NSString *)aName;
