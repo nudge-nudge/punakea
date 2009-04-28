@@ -68,7 +68,7 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 	SSCrypto *crypto = [[[SSCrypto alloc] init] autorelease];
 	[crypto setClearTextWithString:checksumString];
 	
-	NSString *digest = [[crypto digest:@"SHA-1"] hexval];
+	NSString *digest = [[crypto digest:@"SHA1"] hexval];
 	
 	return [[self checksum] isEqualTo:digest];
 }

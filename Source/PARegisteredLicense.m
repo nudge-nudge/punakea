@@ -80,7 +80,7 @@
 	SSCrypto *crypto = [[[SSCrypto alloc] init] autorelease];
 	[crypto setClearTextWithString:checksumString];
 	
-	NSString *digest = [[crypto digest:@"SHA-1"] hexval];
+	NSString *digest = [[crypto digest:@"SHA1"] hexval];
 	
 	return [[self checksum] isEqualTo:digest];
 }

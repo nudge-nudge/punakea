@@ -10,11 +10,17 @@
 #import "PALicense.h"
 
 
+extern int const NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD;
+
+
 @interface PATrialLicense : PALicense {
 
 	NSDate								*startDate;
 	
 }
+
++ (PATrialLicense *)license;
++ (PATrialLicense *)licenseFromUserDefaults;
 
 - (BOOL)hasValidStartDate;
 

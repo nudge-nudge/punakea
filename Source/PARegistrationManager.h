@@ -41,9 +41,11 @@
 - (IBAction)stopModal:(id)sender;
 - (IBAction)terminate:(id)sender;
 
+- (BOOL)hasRegisteredLicense;
+- (BOOL)hasTrialLicense;
+- (BOOL)isTimeLimitedBeta;
+
 - (BOOL)hasExpired;
-- (NSDate *)expirationDate;						/**< Expiration date of both a trial and a time limited version. */
-- (NSDate *)trialStartDate;						/**< Date when trial for this major app version started. */
 
 - (PALicense *)license;
 - (void)setLicense:(PALicense *)aLicense;

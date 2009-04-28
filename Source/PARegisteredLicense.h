@@ -21,6 +21,9 @@
 	
 }
 
++ (PARegisteredLicense *)license;
++ (PARegisteredLicense *)licenseFromUserDefaults;
+
 - (BOOL)hasValidKey;
 
 - (NSString *)name;

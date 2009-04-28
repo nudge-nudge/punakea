@@ -31,7 +31,7 @@ static PARegistrationManager *sharedInstance = nil;
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		
 		// EITHER - OR - Uncomment the respective line
-		//timeLimitedBetaExpirationDate = [[NSDate alloc] initWithString:@"2009-06-30 23:59:59 +0200"];	// CEST = +0200!
+		//timeLimitedBetaExpirationDate = [[NSDate alloc] initWithString:@"2008-06-30 23:59:59 +0200"];	// CEST = +0200!
 		[self checkRegistrationInformation];
 	}
 	return self;
@@ -97,6 +97,8 @@ static PARegistrationManager *sharedInstance = nil;
 			// TODO: Handle case that license is out-of-date
 		}
 	}
+	
+	NSLog([self license]);
 }
 
 - (IBAction)confirmNewLicenseKey:(id)sender
@@ -123,6 +125,45 @@ static PARegistrationManager *sharedInstance = nil;
 - (void)writeLicenseToDefaults
 {
 	
+}
+
+- (BOOL)hasRegisteredLicense
+{
+	return [[self license] isKindOfClass:[PARegisteredLicense class]]; 
+}
+	
+- (BOOL)hasTrialLicense
+{
+	return [[self license] isKindOfClass:[PATrialLicense class]]; 
+}
+
+- (BOOL)isTimeLimitedBeta
+{
+	return timeLimitedBetaExpirationDate != nil;
+}
+
+- (BOOL)hasExpired
+{
+	NSDate *now = [NSDate date];
+	
+	if ([self hasTrialLicense])
+	{
+		PATrialLicense *l = (PATrialLicense *)[self license];
+		
+		NSDate *dateOfExpiration = [[l startDate] addTimeInterval:NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD * 60 * 60 * 24];
+		NSDate *laterDate = [dateOfExpiration laterDate:now];
+		
+		return [now isEqualToDate:laterDate];
+	}
+	else if ([self isTimeLimitedBeta])
+	{
+		NSDate *laterDate = [timeLimitedBetaExpirationDate laterDate:now];
+		
+		return [now isEqualToDate:laterDate];
+	}
+	else {
+		return NO;
+	}
 }
 
 

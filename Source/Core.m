@@ -52,8 +52,8 @@
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		[self loadUserDefaults];
 		
-		//if ([[PARegistrationManager defaultManager] hasExpired])
-		//	[[PARegistrationManager defaultManager] showVersionHasExpiredWindow:self];
+		if ([[PARegistrationManager defaultManager] hasExpired])
+			[[PARegistrationManager defaultManager] showVersionHasExpiredWindow:self];
 		
 		[PAInstaller install];
 		
