@@ -90,6 +90,8 @@
 - (IBAction)showTagger:(id)sender;
 - (IBAction)showTaggerForObjects:(NSArray*)taggableObjects;
 
+- (IBAction)openFAQ:(id)sender;
+- (IBAction)openScreencast:(id)sender;
 - (IBAction)openWebsite:(id)sender;
 
 - (IBAction)cleanTagDB:(id)sender;

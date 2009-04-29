@@ -73,7 +73,11 @@
 				<string>id</string>
 				<key>openDonationWebsite</key>
 				<string>id</string>
+				<key>openFAQ</key>
+				<string>id</string>
 				<key>openFiles</key>
+				<string>id</string>
+				<key>openScreencast</key>
 				<string>id</string>
 				<key>openWebsite</key>
 				<string>id</string>

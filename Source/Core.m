@@ -629,6 +629,18 @@
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
+- (IBAction)openFAQ:(id)sender
+{
+	NSURL *url = [NSURL URLWithString:NSLocalizedStringFromTable(@"FAQ", @"Urls", nil)];
+	[[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+- (IBAction)openScreencast:(id)sender
+{
+	NSURL *url = [NSURL URLWithString:NSLocalizedStringFromTable(@"SCREENCAST", @"Urls", nil)];
+	[[NSWorkspace sharedWorkspace] openURL:url];
+}
+
 - (IBAction)openWebsite:(id)sender
 {
 	NSURL *url = [NSURL URLWithString:NSLocalizedStringFromTable(@"PUNAKEA", @"Urls", nil)];
