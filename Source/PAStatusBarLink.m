@@ -10,7 +10,7 @@
 
 
 
-NSSize const STATUSBAR_LINK_PADDING = {5.0, 0.0};
+NSSize const STATUSBAR_LINK_PADDING = {10.0, 0.0};
 NSSize const STATUSBAR_LINK_MIN_SIZE = {0.0, 22};
 
 
@@ -43,13 +43,19 @@ NSSize const STATUSBAR_LINK_MIN_SIZE = {0.0, 22};
 #pragma mark Drawing
 - (void)drawRect:(NSRect)aRect
 {
-	NSColor *color = [NSColor colorWithCalibratedWhite:0.05 alpha:1.0];		
-	
+	NSColor *color = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];			
 	NSFont *font = [NSFont systemFontOfSize:11.0];
 	
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];	
 	[fontAttributes setObject:color forKey:NSForegroundColorAttributeName];
 	[fontAttributes setObject:font forKey:NSFontAttributeName];
+	
+	// Underline only if there's an action present
+	if ([self action])
+	{
+		[fontAttributes setObject:[NSNumber numberWithInt:NSUnderlineStyleSingle]
+						   forKey:NSUnderlineStyleAttributeName];
+	}
 	
 	NSAttributedString *attrStr = [[[NSAttributedString alloc] initWithString:[self stringValue]
 																   attributes:fontAttributes] autorelease];
@@ -83,6 +89,13 @@ NSSize const STATUSBAR_LINK_MIN_SIZE = {0.0, 22};
 }
 
 
+#pragma mark Events
+- (void)mouseUp:(NSEvent *)event
+{
+	[[self target] performSelector:[self action]];
+}
+
+
 #pragma mark Accessors
 - (PAStatusBar *)statusBar
 {
@@ -92,6 +105,27 @@ NSSize const STATUSBAR_LINK_MIN_SIZE = {0.0, 22};
 -(void)setStatusBar:(PAStatusBar *)sb
 {
 	statusBar = sb;
+}
+
+- (id)target
+{
+	return target;
+}
+
+- (void)setTarget:(id)aTarget
+{
+	// Weak reference
+	target = aTarget;
+}
+
+- (SEL)action
+{
+	return action;
+}
+
+- (void)setAction:(SEL)selector
+{
+	action = selector;
 }
 
 - (NSString *)identifier

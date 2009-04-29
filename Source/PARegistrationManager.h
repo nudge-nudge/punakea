@@ -21,7 +21,8 @@
 	NSDate								*timeLimitedBetaExpirationDate;
 	
 	IBOutlet NSWindow					*licenseKeyWindow;
-	IBOutlet NSWindow					*expirationWindow;
+	IBOutlet NSWindow					*trialExpirationWindow;
+	IBOutlet NSWindow					*timeLimitedExpirationWindow;
 	
 	IBOutlet NSProgressIndicator		*licenseKeyWindowProgressIndicator;
 	IBOutlet NSTextField				*licenseKeyWindowNameTextField;
@@ -36,8 +37,10 @@
 
 - (IBAction)showEnterLicenseKeyWindow:(id)sender;
 - (IBAction)showVersionHasExpiredWindow:(id)sender;
-- (IBAction)stopModal:(id)sender;
+- (IBAction)closeWindowAndStopModal:(id)sender;
 - (IBAction)terminate:(id)sender;
+- (IBAction)purchase:(id)sender;
+- (IBAction)upgrade:(id)sender;
 
 - (BOOL)hasRegisteredLicense;
 - (BOOL)hasTrialLicense;
@@ -47,5 +50,6 @@
 
 - (PALicense *)license;
 - (void)setLicense:(PALicense *)aLicense;
+- (NSDate *)timeLimitedBetaExpirationDate;
 
 @end

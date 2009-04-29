@@ -23,6 +23,8 @@ extern int const NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD;
 + (PATrialLicense *)licenseFromUserDefaults;
 
 - (BOOL)hasValidChecksum;
+- (BOOL)hasExpired;
+- (int)daysLeftForEvaluation;
 
 - (NSDate *)startDate;
 - (void)setStartDate:(NSDate *)aDate;

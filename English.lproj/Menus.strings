@@ -3,3 +3,5 @@
 "MAINMENU_SHOW_TAGS" = "Show Tags";
 "MAINMENU_HIDE_TAGS" = "Hide Tags";
 "MAINMENU_HOME" = "Home";
+"MAINMENU_PURCHASE" = "Purchase...";
+"MAINMENU_UPGRADE" = "Upgrade...";

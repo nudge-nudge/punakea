@@ -33,7 +33,7 @@ static PARegistrationManager *sharedInstance = nil;
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		
 		// EITHER - OR - Uncomment the respective line
-		//timeLimitedBetaExpirationDate = [[NSDate alloc] initWithString:@"2008-06-30 23:59:59 +0200"];	// CEST = +0200!
+		//timeLimitedBetaExpirationDate = [[NSDate alloc] initWithString:@"2009-06-30 23:59:59 +0200"];	// CEST = +0200!
 		[self checkRegistrationInformation];
 	}
 	return self;
@@ -119,7 +119,12 @@ static PARegistrationManager *sharedInstance = nil;
 - (IBAction)confirmNewLicenseKey:(id)sender
 {
 	// TODO: Update GUI
+	[licenseKeyWindow makeFirstResponder:licenseKeyWindowProgressIndicator];
+	
+	[licenseKeyWindowProgressIndicator setHidden:NO];
 	[licenseKeyWindowProgressIndicator startAnimation:self];
+	
+	[self showThankYouSheet];
 	
 	BOOL validKey = [self validateLicenseKey:[licenseKeyWindowKeyTextField stringValue]];
 	
@@ -178,64 +183,117 @@ static PARegistrationManager *sharedInstance = nil;
 }
 
 - (BOOL)hasExpired
-{
-	NSDate *now = [NSDate date];
-	
+{	
 	if ([self hasTrialLicense])
 	{
 		PATrialLicense *l = (PATrialLicense *)[self license];
-		
-		NSDate *dateOfExpiration = [[l startDate] addTimeInterval:NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD * 60 * 60 * 24];
-		NSDate *laterDate = [dateOfExpiration laterDate:now];
-		
-		return [now isEqualToDate:laterDate];
+		return [l hasExpired];
 	}
 	else if ([self isTimeLimitedBeta])
 	{
+		NSDate *now = [NSDate date];
 		NSDate *laterDate = [timeLimitedBetaExpirationDate laterDate:now];
-		
 		return [now isEqualToDate:laterDate];
 	}
-	else {
+	else
+	{
 		return NO;
 	}
+}
+
+- (void)relaunch
+{
+	// Code from
+	// http://vgable.com/blog/2008/10/05/restarting-your-cocoa-application/
+	
+	NSString *killArg1AndOpenArg2Script = @"kill -9 $1 \n open \"$2\"";
+	
+	// NSTask needs its arguments to be strings
+	NSString *ourPID = [NSString stringWithFormat:@"%d",
+						[[NSProcessInfo processInfo] processIdentifier]];
+	
+	// This will be the path to the app bundle,
+	// not the executable inside it; exactly what "open" wants
+	NSString * pathToUs = [[NSBundle mainBundle] bundlePath];
+	
+	NSArray *shArgs = [NSArray arrayWithObjects:@"-c",						// -c tells sh to execute the next argument, passing it the remaining arguments.
+												killArg1AndOpenArg2Script,
+												@"",						//$0 path to script (ignored)
+												ourPID,						//$1 in restartScript
+												pathToUs,					//$2 in the restartScript
+												nil];
+
+	NSTask *restartTask = [NSTask launchedTaskWithLaunchPath:@"/bin/sh" arguments:shArgs];
+	
+	[restartTask waitUntilExit];
 }
 
 
 #pragma mark Modal Windows
 - (IBAction)showEnterLicenseKeyWindow:(id)sender
 {
-	[licenseKeyWindow center];
-	[licenseKeyWindow makeKeyAndOrderFront:self];
+	// Reset window
+	[licenseKeyWindowProgressIndicator setHidden:YES];
+	[licenseKeyWindowNameTextField setStringValue:@""];
+	[licenseKeyWindowKeyTextField setStringValue:@""];
+	
+	[NSApp runModalForWindow:licenseKeyWindow];
+}
+
+- (void)showThankYouSheet
+{
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert setMessageText:NSLocalizedStringFromTable(@"THANK_YOU",@"Registration",@"")];
+	[alert setInformativeText:NSLocalizedStringFromTable(@"THANK_YOU_INFORMATIVE",@"Registration",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"THANK_YOU_QUIT_AND_RELAUNCH_BUTTON",@"Registration",@"")];
+	
+	[alert setAlertStyle:NSInformationalAlertStyle];
+	
+	[alert beginSheetModalForWindow:licenseKeyWindow
+					  modalDelegate:self 
+					 didEndSelector:@selector(relaunch)
+						contextInfo:nil];
 }
 
 - (IBAction)showVersionHasExpiredWindow:(id)sender
 {
-	[[NSApplication sharedApplication] runModalForWindow:expirationWindow];
-}
-
-- (IBAction)stopModal:(id)sender
-{
-	[[NSApplication sharedApplication] stopModal];
+	NSWindow *w;
+	if ([self isTimeLimitedBeta])
+		w = timeLimitedExpirationWindow;
+	else
+		w = trialExpirationWindow;
+		
+	[NSApp runModalForWindow:w];
 }
 
 - (IBAction)terminate:(id)sender
 {
-	[[NSApplication sharedApplication] terminate:self];
+	[NSApp terminate:self];
+}
+
+
+#pragma mark Window Delegate
+- (void)windowWillClose:(NSNotification *)notification
+{
+	[NSApp stopModal];
+}
+
+- (IBAction)purchase:(id)sender
+{
+	NSURL *url = [NSURL URLWithString:NSLocalizedStringFromTable(@"STORE", @"Urls", nil)];
+	[[NSWorkspace sharedWorkspace] openURL:url];
+	[NSApp terminate:self];
+}
+
+- (IBAction)upgrade:(id)sender
+{
+	NSURL *url = [NSURL URLWithString:NSLocalizedStringFromTable(@"UPGRADE", @"Urls", nil)];
+	[[NSWorkspace sharedWorkspace] openURL:url];
+	[NSApp terminate:self];
 }
 
 
 #pragma mark Accessors
-- (NSString *)licenseName
-{
-	
-}
-
-- (NSString *)licenseKey
-{
-	
-}
-
 - (PALicense *)license
 {
 	return license;
@@ -245,6 +303,11 @@ static PARegistrationManager *sharedInstance = nil;
 {
 	[license release];
 	license = [aLicense retain];
+}
+
+- (NSDate *)timeLimitedBetaExpirationDate
+{
+	return timeLimitedBetaExpirationDate;
 }
 
 

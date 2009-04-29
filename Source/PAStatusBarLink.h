@@ -15,10 +15,11 @@
 
 	PAStatusBar					*statusBar;
 	
+	id							target;
+	SEL							action;
+	
 	NSString					*identifier;
-	
-	NSString					*stringValue;
-	
+	NSString					*stringValue;	
 	NSTextAlignment				alignment;
 	
 }
@@ -27,6 +28,12 @@
 
 - (PAStatusBar *)statusBar;
 - (void)setStatusBar:(PAStatusBar *)sb;
+
+- (id)target;
+- (void)setTarget:(id)aTarget;
+- (SEL)action;
+- (void)setAction:(SEL)selector;
+
 - (NSString *)identifier;
 - (void)setIdentifier:(NSString *)anIdentifier;
 - (NSString *)stringValue;

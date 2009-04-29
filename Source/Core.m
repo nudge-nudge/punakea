@@ -331,7 +331,18 @@
 		NSResponder *firstResponder = [[browserController window] firstResponder];
 		
 		// File menu
-		if([item action] == @selector(getInfo:))
+		if ([[item title] isEqualToString:@"REGISTRATION_SPACER"] ||
+			[item action] == @selector(purchase:) ||
+			[item action] == @selector(enterLicenseKey:))
+		{			
+			if (![[PARegistrationManager defaultManager] hasTrialLicense])
+			{
+				[item setHidden:YES];
+				return NO;
+			}
+			return YES;
+		}
+		else if([item action] == @selector(getInfo:))
 		{
 			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 			{
@@ -424,7 +435,8 @@
 
 - (IBAction)purchase:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/store"]];
+	NSURL *url = [NSURL URLWithString:NSLocalizedStringFromTable(@"STORE", @"Urls", nil)];
+	[[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 - (IBAction)enterLicenseKey:(id)sender
@@ -619,7 +631,8 @@
 
 - (IBAction)openWebsite:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/punakea"]];
+	NSURL *url = [NSURL URLWithString:NSLocalizedStringFromTable(@"PUNAKEA", @"Urls", nil)];
+	[[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 - (IBAction)cleanTagDB:(id)sender

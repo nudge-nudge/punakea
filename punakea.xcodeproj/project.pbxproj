@@ -375,6 +375,8 @@
 		65F65AC10FA1E2230006E229 /* SSCrypto.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65F65A100FA1C0C40006E229 /* SSCrypto.framework */; };
 		65F65AC20FA1E2270006E229 /* libEWS.a in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7A0FA05F3C0038D287 /* libEWS.a */; };
 		65F65AC30FA1E22A0006E229 /* libValidateUniversal.a in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */; };
+		65F6746A0FA84A1D00F1C450 /* Urls.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F674690FA84A1D00F1C450 /* Urls.strings */; };
+		65F6764C0FA88C9D00F1C450 /* Registration.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F6764B0FA88C9D00F1C450 /* Registration.strings */; };
 		65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */; };
 		65F9B96309D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */; };
 		65F9B96409D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */; };
@@ -1035,6 +1037,8 @@
 		65F6596C0FA1AFE20006E229 /* PARegisteredLicense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARegisteredLicense.h; sourceTree = "<group>"; };
 		65F6596D0FA1AFE20006E229 /* PARegisteredLicense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARegisteredLicense.m; sourceTree = "<group>"; };
 		65F65A100FA1C0C40006E229 /* SSCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SSCrypto.framework; sourceTree = "<group>"; };
+		65F674660FA84A1200F1C450 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Urls.strings; sourceTree = "<group>"; };
+		65F676480FA88C4E00F1C450 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Registration.strings; sourceTree = "<group>"; };
 		65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewPressed-1.tiff"; sourceTree = "<group>"; };
 		65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
 		65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
@@ -1844,6 +1848,8 @@
 				655540F20BF1EEA200D3AF8E /* Menus.strings */,
 				48B0F1C20ACBFA6200738053 /* Tags.strings */,
 				650902120BEDF429005468E0 /* Toolbars.strings */,
+				65F674690FA84A1D00F1C450 /* Urls.strings */,
+				65F6764B0FA88C9D00F1C450 /* Registration.strings */,
 			);
 			name = Strings;
 			sourceTree = "<group>";
@@ -2573,6 +2579,8 @@
 				48E760090F7F834000F9EEBA /* UKCrashReporter.nib in Resources */,
 				650A72800F826BD70082664D /* Registration.xib in Resources */,
 				656DDED50F8BCB7D00273700 /* Installer.xib in Resources */,
+				65F6746A0FA84A1D00F1C450 /* Urls.strings in Resources */,
+				65F6764C0FA88C9D00F1C450 /* Registration.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3017,6 +3025,22 @@
 				65E7B01F0994D0AE00565251 /* English */,
 			);
 			name = Sidebar.nib;
+			sourceTree = "<group>";
+		};
+		65F674690FA84A1D00F1C450 /* Urls.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65F674660FA84A1200F1C450 /* English */,
+			);
+			name = Urls.strings;
+			sourceTree = "<group>";
+		};
+		65F6764B0FA88C9D00F1C450 /* Registration.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65F676480FA88C4E00F1C450 /* English */,
+			);
+			name = Registration.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

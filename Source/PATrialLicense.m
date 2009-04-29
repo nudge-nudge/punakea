@@ -90,13 +90,26 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 
 - (BOOL)hasExpired
 {
-	NSDate *laterDate = [[NSDate date] laterDate:startDate];
-	return ![laterDate isEqualToDate:startDate];
+	return [self daysLeftForEvaluation] <= 0;
 }
 
 - (int)daysLeftForEvaluation
 {
-	return 7;
+	NSCalendar *cal = [NSCalendar currentCalendar];
+	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+
+	// Strip of any time information from the expiration date
+	NSDate *expirationDate = [[self startDate] addTimeInterval:NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD * 60 * 60 * 24];
+	NSDateComponents *dateComponents = [cal components:unitFlags fromDate:expirationDate];
+	expirationDate = [cal dateFromComponents:dateComponents];
+	
+	// Do the same for today's date
+	dateComponents = [cal components:unitFlags fromDate:[NSDate date]];
+	NSDate *now = [cal dateFromComponents:dateComponents];
+
+	NSTimeInterval timeDiff = [now timeIntervalSinceDate:expirationDate] / (60 * 60 * 24 * -1);
+
+	return timeDiff;
 }
 
 - (void)updateChecksum
