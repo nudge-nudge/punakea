@@ -30,7 +30,7 @@
 // Tell LCLLogFile the path of the log file as an NSString.
 #define _LCLLogFile_LogFilePath                                                \
     [NSHomeDirectory() stringByAppendingPathComponent:                         \
-        @"Library/Logs/NNTagging.log"]
+        @"Library/Logs/Punakea.log"]
 
 // Tell LCLLogFile the maximum size of a log file in bytes.
 #define _LCLLogFile_MaxLogFileSizeInBytes                                      \

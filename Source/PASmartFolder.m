@@ -16,7 +16,7 @@
 	NSMutableDictionary *sf = [NSMutableDictionary dictionary];
 	[sf setObject:[NSNumber numberWithInt:1] forKey:@"CompatibleVersion"];
 	
-	NSString *rawQuery = [NSString stringWithFormat:@"(%@)",[tag query]];
+	NSString *rawQuery = [NSString stringWithFormat:@"(((%@))) &amp;&amp; (true)",[tag query]];
 	[sf setObject:rawQuery forKey:@"RawQuery"];
 	
 	NSMutableDictionary *rawQueryDict = [NSMutableDictionary dictionary];
@@ -24,6 +24,7 @@
 	[rawQueryDict setObject:rawQuery forKey:@"RawQuery"];
 	[rawQueryDict setObject:[NSArray arrayWithObject:@"kMDQueryScopeComputer"] forKey:@"SearchScopes"];
 	[rawQueryDict setObject:[NSNumber numberWithBool:YES] forKey:@"UserFilesOnly"];
+	[sf setObject:rawQueryDict forKey:@"RawQueryDict"];
 	
 	// Search criteria are needed for editing the folder later on in Finder
 	NSMutableDictionary *searchCriteria = [NSMutableDictionary dictionary];
@@ -42,16 +43,15 @@
 	NSMutableDictionary *criteriaSlice = [NSMutableDictionary dictionary];
 	
 	NSMutableArray *criteria = [NSMutableArray array];
-	[criteria addObject:@"kMDItemFinderComment"];
-	[criteria addObject:[NSNumber numberWithInt:100]];
+	[criteria addObject:@"kOMUserTags"];
+	[criteria addObject:[NSNumber numberWithInt:103]];
 	[criteria addObject:[NSNumber numberWithInt:104]];
 	[criteriaSlice setObject:criteria forKey:@"criteria"];
 	
-	NSString *tagPrefix = [[NNTagStoreManager defaultManager] tagPrefix];
 	NSMutableArray *displayValues = [NSMutableArray array];
-	[displayValues addObject:@"Spotlight-Kommentar"];
-	[displayValues addObject:@"contains"];
-	[displayValues addObject:[NSString stringWithFormat:@"%@%@",tagPrefix,[tag name]]];
+	[displayValues addObject:@"Tags"];
+	[displayValues addObject:@"is"];
+	[displayValues addObject:[NSString stringWithFormat:@"%@",[tag name]]];
 	[criteriaSlice setObject:displayValues forKey:@"displayValues"];
 	
 	[criteriaSlice setObject:[NSNumber numberWithInt:0] forKey:@"rowType"];

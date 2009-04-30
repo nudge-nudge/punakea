@@ -47,4 +47,4 @@
 //
 // Example
 //
-_lcl_component(global, "global", "punakea/global")
+_lcl_component(global, "GL/PA", "Global/Punakea")
