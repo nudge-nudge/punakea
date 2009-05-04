@@ -28,6 +28,7 @@ typedef enum _PALicenseType {
 
 - (BOOL)isValidForThisAppVersion;
 
+- (BOOL)hasValidChecksum;
 - (void)updateChecksum;
 
 - (PALicenseType)type;

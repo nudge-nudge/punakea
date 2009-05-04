@@ -200,9 +200,9 @@
 		6530FF370AF2229400D7A79A /* PATaggerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6530FF350AF2229400D7A79A /* PATaggerTableView.m */; };
 		6531BB6D0FA05ED20038D287 /* PAStatusBarLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 6531BB6C0FA05ED20038D287 /* PAStatusBarLink.m */; };
 		6531BB740FA05F0C0038D287 /* PARegistrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6531BB730FA05F0C0038D287 /* PARegistrationManager.m */; };
-		6531BB7C0FA05F3C0038D287 /* libEWS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7A0FA05F3C0038D287 /* libEWS.a */; };
 		6531BB7D0FA05F3C0038D287 /* libValidateUniversal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */; };
 		6531BC120FA0A9C00038D287 /* PALicense.m in Sources */ = {isa = PBXBuildFile; fileRef = 6531BC110FA0A9C00038D287 /* PALicense.m */; };
+		653216F90FAF739000FC2117 /* libEWS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 653216F80FAF739000FC2117 /* libEWS.a */; };
 		6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */; };
 		6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */; };
 		653948DC0C0359C4001705D6 /* button-goto.tif in Resources */ = {isa = PBXBuildFile; fileRef = 653948DA0C0359C4001705D6 /* button-goto.tif */; };
@@ -373,7 +373,6 @@
 		65F6596E0FA1AFE20006E229 /* PARegisteredLicense.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6596D0FA1AFE20006E229 /* PARegisteredLicense.m */; };
 		65F65A110FA1C0C40006E229 /* SSCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F65A100FA1C0C40006E229 /* SSCrypto.framework */; };
 		65F65AC10FA1E2230006E229 /* SSCrypto.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65F65A100FA1C0C40006E229 /* SSCrypto.framework */; };
-		65F65AC20FA1E2270006E229 /* libEWS.a in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7A0FA05F3C0038D287 /* libEWS.a */; };
 		65F65AC30FA1E22A0006E229 /* libValidateUniversal.a in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */; };
 		65F6746A0FA84A1D00F1C450 /* Urls.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F674690FA84A1D00F1C450 /* Urls.strings */; };
 		65F6764C0FA88C9D00F1C450 /* Registration.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F6764B0FA88C9D00F1C450 /* Registration.strings */; };
@@ -534,7 +533,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				65F65AC20FA1E2270006E229 /* libEWS.a in Copy Frameworks */,
 				65F65AC30FA1E22A0006E229 /* libValidateUniversal.a in Copy Frameworks */,
 				65F65AC10FA1E2230006E229 /* SSCrypto.framework in Copy Frameworks */,
 				4896E6680F9F79070015316F /* NNTagging.framework in Copy Frameworks */,
@@ -857,10 +855,10 @@
 		6531BB6C0FA05ED20038D287 /* PAStatusBarLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBarLink.m; sourceTree = "<group>"; };
 		6531BB720FA05F0C0038D287 /* PARegistrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARegistrationManager.h; sourceTree = "<group>"; };
 		6531BB730FA05F0C0038D287 /* PARegistrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARegistrationManager.m; sourceTree = "<group>"; };
-		6531BB7A0FA05F3C0038D287 /* libEWS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEWS.a; sourceTree = "<group>"; };
 		6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libValidateUniversal.a; sourceTree = "<group>"; };
 		6531BC100FA0A9C00038D287 /* PALicense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PALicense.h; sourceTree = "<group>"; };
 		6531BC110FA0A9C00038D287 /* PALicense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PALicense.m; sourceTree = "<group>"; };
+		653216F80FAF739000FC2117 /* libEWS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEWS.a; sourceTree = "<group>"; };
 		6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIcon.tif; sourceTree = "<group>"; };
 		6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIconAlt.tif; sourceTree = "<group>"; };
 		653948DA0C0359C4001705D6 /* button-goto.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "button-goto.tif"; sourceTree = "<group>"; };
@@ -1114,9 +1112,9 @@
 				65CAAEF10F6C2E2500B4FFAA /* QuickLookUI.framework in Frameworks */,
 				6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */,
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
-				6531BB7C0FA05F3C0038D287 /* libEWS.a in Frameworks */,
 				6531BB7D0FA05F3C0038D287 /* libValidateUniversal.a in Frameworks */,
 				65F65A110FA1C0C40006E229 /* SSCrypto.framework in Frameworks */,
+				653216F90FAF739000FC2117 /* libEWS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1142,8 +1140,8 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				653216F80FAF739000FC2117 /* libEWS.a */,
 				65F65A100FA1C0C40006E229 /* SSCrypto.framework */,
-				6531BB7A0FA05F3C0038D287 /* libEWS.a */,
 				6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
 				484497A90B2D9925009B262C /* Sparkle.framework */,

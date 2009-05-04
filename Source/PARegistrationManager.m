@@ -35,8 +35,18 @@ static PARegistrationManager *sharedInstance = nil;
 		// EITHER - OR - Uncomment the respective line
 		//timeLimitedBetaExpirationDate = [[NSDate alloc] initWithString:@"2009-06-30 23:59:59 +0200"];	// CEST = +0200!
 		[self checkRegistrationInformation];
+		
+		[self tempMethod];
 	}
 	return self;
+}
+
+- (void)tempMethod
+{
+	NSString *name = @"Daniel Bar";
+	NSString *key = @"NNPA-1-GG6G-9134-FK87-LHPA-WWN1";
+
+	[PARegisteredLicense validateLicenseKey:key forName:name];
 }
 
 - (id)initWithWindowNibName:(NSString *)windowNibName

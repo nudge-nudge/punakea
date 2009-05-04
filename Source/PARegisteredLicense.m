@@ -16,7 +16,7 @@
 
 @interface PARegisteredLicense (PrivateAPI)
 
-- (OSStatus)installEngine;
++ (OSStatus)installEngine;
 
 @end
 
@@ -44,7 +44,7 @@
 		[license setChecksum:(NSString *)[userDefaults objectForKey:@"License.Checksum"]];
 	}
 	
-	if ([license hasValidKey])
+	if ([license hasValidChecksum])
 		return license;
 	else 
 		return nil;
@@ -53,10 +53,7 @@
 - (id)init
 {
 	if (self = [super init])
-	{
-		// Initialize the eSellerate system
-		[self installEngine];
-		
+	{		
 		[self setType:PALicenseTypeRegistered];
 	}
 	
@@ -70,7 +67,7 @@
 
 
 #pragma mark Actions
-- (BOOL)hasValidKey
+- (BOOL)hasValidChecksum
 {
 	NSString *checksumString = [NSString stringWithFormat:@"%@ %@ %@",
 					(NSString *)[userDefaults objectForKey:@"License.Name"],
@@ -85,14 +82,25 @@
 	return [[self checksum] isEqualTo:digest];
 }
 
-- (BOOL)validateLicenseKey:(NSString *)key
-{
-	/*return eWeb_ValidateSerialNumber ([key UTF8String],		// Serial number
-									  nil,					// No name based key in this example
-									  nil,					// No extra data in this example
-									  PUBLISHER_KEY);		// Publisher Key
-	 */
-	return YES;
++ (BOOL)validateLicenseKey:(NSString *)aKey forName:(NSString *)aName
+{	
+	eSellerate_DaysSince2000 timestamp; 
+
+	// TODO: Strip off any whitespace
+	
+	timestamp = eWeb_ValidateSerialNumber([aKey UTF8String],
+												[aName UTF8String],
+												nil, 
+												PUBLISHER_KEY); 
+	if (timestamp) { 
+		/* TO DO: handle validation success */ 
+		NSLog(@"valid");
+		return YES;
+	} else { 
+		/* TO DO: handle validation failure */ 
+		NSLog(@"invalid");
+		return NO;
+	} 
 }
 
 - (BOOL)isValidForThisAppVersion
@@ -137,27 +145,6 @@
 {
 	[key release];
 	key = [aKey retain];
-}
-
-
-#pragma mark eSellerate
-
-/** 
- This function will ensure that the eSellerate engine is installed on the user's machine
- before attempting to do anything.
- 
- @return OSStatus indicating the installation result
- */
-- (OSStatus)installEngine
-{	
-	NSString *fwPath = [[NSBundle mainBundle] pathForResource:@"EWSMacCompress.tar.gz" ofType:nil];
-	
-	OSStatus error =  eWeb_InstallEngineFromPath([fwPath UTF8String]);
-	
-	if (error < E_SUCCESS) 
-		NSRunAlertPanel(@"Punakea was unable to install the eSellerate engine.", @"", @"Ok", nil, nil);
-	
-	return error;
 }
 
 @end

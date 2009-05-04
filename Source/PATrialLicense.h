@@ -22,7 +22,6 @@ extern int const NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD;
 + (PATrialLicense *)license;
 + (PATrialLicense *)licenseFromUserDefaults;
 
-- (BOOL)hasValidChecksum;
 - (BOOL)hasExpired;
 - (int)daysLeftForEvaluation;
 
