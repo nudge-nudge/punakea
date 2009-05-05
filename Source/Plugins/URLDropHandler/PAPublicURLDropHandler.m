@@ -37,6 +37,13 @@
 {
 	NSString *url = [pasteboard stringForType:pboardType];
 	NSString *urlTitle = [pasteboard stringForType:@"public.url-name"];
+	
+	if (!urlTitle) 
+	{
+		// public.url-name is not available when dragging from Opera!
+		// So just get the textual representation for the title matter
+		urlTitle = [pasteboard stringForType:NSStringPboardType];
+	}
 		
 	NSDictionary *urlDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:url,urlTitle,nil]
 																  forKeys:[NSArray arrayWithObjects:@"url",@"title",nil]];
