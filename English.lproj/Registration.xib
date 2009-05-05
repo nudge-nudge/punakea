@@ -8,9 +8,9 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="26"/>
+			<integer value="114"/>
 			<integer value="2"/>
-			<integer value="115"/>
+			<integer value="26"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -42,7 +42,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{412, 496}, {536, 265}}</string>
 				<int key="NSWTFlags">611844096</int>
-				<string key="NSWindowTitle">Trial Version</string>
+				<string key="NSWindowTitle"/>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -290,8 +290,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="144358724">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">272629760</int>
-								<string type="base64-UTF8" key="NSContents">UGxlYXNlIGVudGVyIHlvdXIgbmFtZSBhbmQgeW91ciBsaWNlbnNlIGtleSBiZWxvdy4KVGhlIGRhdGEg
-eW91IGVudGVyIGlzIHZlcmlmaWVkIG9ubGluZS4</string>
+								<string key="NSContents">Please enter your name and your license key below.</string>
 								<object class="NSFont" key="NSSupport" id="890692386">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">1.300000e+01</double>
@@ -302,34 +301,27 @@ eW91IGVudGVyIGlzIHZlcmlmaWVkIG9ubGluZS4</string>
 								<reference key="NSTextColor" ref="489136576"/>
 							</object>
 						</object>
-						<object class="NSProgressIndicator" id="347026509">
+						<object class="NSTextField" id="521253767">
 							<reference key="NSNextResponder" ref="619366552"/>
-							<int key="NSvFlags">1292</int>
-							<object class="NSPSMatrix" key="NSDrawMatrix"/>
-							<string key="NSFrame">{{149, 22}, {16, 16}}</string>
-							<reference key="NSSuperview" ref="619366552"/>
-							<int key="NSpiFlags">20746</int>
-							<double key="NSMinValue">1.600000e+01</double>
-							<double key="NSMaxValue">1.000000e+02</double>
-						</object>
-						<object class="NSTextField" id="448197602">
-							<reference key="NSNextResponder" ref="619366552"/>
-							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{170, 23}, {69, 14}}</string>
+							<int key="NSvFlags">-2147483380</int>
+							<string key="NSFrame">{{146, 23}, {127, 14}}</string>
 							<reference key="NSSuperview" ref="619366552"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSTextFieldCell" key="NSCell" id="174788282">
+							<object class="NSTextFieldCell" key="NSCell" id="658605602">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">272761856</int>
-								<string key="NSContents">Validating...</string>
+								<string key="NSContents">License key not valid!</string>
 								<object class="NSFont" key="NSSupport">
-									<string key="NSName">LucidaGrande</string>
+									<string key="NSName">LucidaGrande-Bold</string>
 									<double key="NSSize">1.100000e+01</double>
 									<int key="NSfFlags">16</int>
 								</object>
-								<reference key="NSControlView" ref="448197602"/>
+								<reference key="NSControlView" ref="521253767"/>
 								<reference key="NSBackgroundColor" ref="964063293"/>
-								<reference key="NSTextColor" ref="489136576"/>
+								<object class="NSColor" key="NSTextColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC40MTMwNDM1IDAuNDEzMDQzNSAwLjQxMzA0MzUAA</bytes>
+								</object>
 							</object>
 						</object>
 					</object>
@@ -344,7 +336,7 @@ eW91IGVudGVyIGlzIHZlcmlmaWVkIG9ubGluZS4</string>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{196, 312}, {542, 193}}</string>
 				<int key="NSWTFlags">603979776</int>
-				<string key="NSWindowTitle">Trial Version</string>
+				<string key="NSWindowTitle"/>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -509,7 +501,7 @@ cm9jZWVkIHdpdGggcHVyY2hhc2luZyBhIGZ1bGwgbGljZW5zZSBmcm9tIG91ciBXZWIgc3RvcmUuA</s
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{196, 349}, {542, 156}}</string>
 				<int key="NSWTFlags">603979776</int>
-				<string key="NSWindowTitle">Trial Version</string>
+				<string key="NSWindowTitle"/>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -657,14 +649,6 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">licenseKeyWindowProgressIndicator</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="347026509"/>
-					</object>
-					<int key="connectionID">60</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">licenseKeyWindowNameTextField</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="7255554"/>
@@ -712,70 +696,6 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 					<int key="connectionID">82</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled: licenseKeyWindowProgressIndicator.hidden</string>
-						<reference key="source" ref="7255554"/>
-						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="7255554"/>
-							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">enabled: licenseKeyWindowProgressIndicator.hidden</string>
-							<string key="NSBinding">enabled</string>
-							<string key="NSKeyPath">licenseKeyWindowProgressIndicator.hidden</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">98</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled: licenseKeyWindowProgressIndicator.hidden</string>
-						<reference key="source" ref="424502183"/>
-						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="424502183"/>
-							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">enabled: licenseKeyWindowProgressIndicator.hidden</string>
-							<string key="NSBinding">enabled</string>
-							<string key="NSKeyPath">licenseKeyWindowProgressIndicator.hidden</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">99</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">hidden: licenseKeyWindowProgressIndicator.hidden</string>
-						<reference key="source" ref="448197602"/>
-						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="448197602"/>
-							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">hidden: licenseKeyWindowProgressIndicator.hidden</string>
-							<string key="NSBinding">hidden</string>
-							<string key="NSKeyPath">licenseKeyWindowProgressIndicator.hidden</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled: licenseKeyWindowProgressIndicator.hidden</string>
-						<reference key="source" ref="146249674"/>
-						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="146249674"/>
-							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">enabled: licenseKeyWindowProgressIndicator.hidden</string>
-							<string key="NSBinding">enabled</string>
-							<string key="NSKeyPath">licenseKeyWindowProgressIndicator.hidden</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">106</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">timeLimitedExpirationWindow</string>
 						<reference key="source" ref="1001"/>
@@ -814,6 +734,14 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 						<reference key="destination" ref="178991000"/>
 					</object>
 					<int key="connectionID">135</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">licenseKeyWindowErrorTextField</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="521253767"/>
+					</object>
+					<int key="connectionID">138</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -866,8 +794,7 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 							<reference ref="146249674"/>
 							<reference ref="993446836"/>
 							<reference ref="993576392"/>
-							<reference ref="448197602"/>
-							<reference ref="347026509"/>
+							<reference ref="521253767"/>
 						</object>
 						<reference key="parent" ref="149062698"/>
 					</object>
@@ -1010,11 +937,6 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 						<reference key="parent" ref="993576392"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">22</int>
-						<reference key="object" ref="347026509"/>
-						<reference key="parent" ref="619366552"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">26</int>
 						<reference key="object" ref="824726370"/>
 						<object class="NSMutableArray" key="children">
@@ -1038,20 +960,6 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 							<reference ref="538500547"/>
 						</object>
 						<reference key="parent" ref="824726370"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">35</int>
-						<reference key="object" ref="448197602"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="174788282"/>
-						</object>
-						<reference key="parent" ref="619366552"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">36</int>
-						<reference key="object" ref="174788282"/>
-						<reference key="parent" ref="448197602"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
@@ -1254,6 +1162,20 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 						<reference key="object" ref="903830115"/>
 						<reference key="parent" ref="403951556"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">136</int>
+						<reference key="object" ref="521253767"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="658605602"/>
+						</object>
+						<reference key="parent" ref="619366552"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">137</int>
+						<reference key="object" ref="658605602"/>
+						<reference key="parent" ref="521253767"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1286,6 +1208,8 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 					<string>127.IBPluginDependency</string>
 					<string>128.IBPluginDependency</string>
 					<string>13.IBPluginDependency</string>
+					<string>136.IBPluginDependency</string>
+					<string>137.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
 					<string>16.IBPluginDependency</string>
@@ -1295,15 +1219,12 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 					<string>2.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
 					<string>21.IBPluginDependency</string>
-					<string>22.IBPluginDependency</string>
 					<string>26.IBEditorWindowLastContentRect</string>
 					<string>26.IBPluginDependency</string>
 					<string>26.IBWindowTemplateEditedContentRect</string>
 					<string>26.NSWindowTemplate.visibleAtLaunch</string>
 					<string>27.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
-					<string>35.IBPluginDependency</string>
-					<string>36.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>52.IBPluginDependency</string>
@@ -1331,9 +1252,9 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilderKit</string>
 					<string>com.apple.InterfaceBuilderKit</string>
-					<string>{{24, 557}, {536, 265}}</string>
+					<string>{{23, 559}, {536, 265}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{24, 557}, {536, 265}}</string>
+					<string>{{23, 559}, {536, 265}}</string>
 					<boolean value="NO" id="6"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1364,12 +1285,11 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{261, 312}, {542, 193}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{261, 312}, {542, 193}}</string>
 					<reference ref="6"/>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1415,7 +1335,7 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">135</int>
+			<int key="maxID">138</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1535,6 +1455,7 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>licenseKeyWindow</string>
+							<string>licenseKeyWindowErrorTextField</string>
 							<string>licenseKeyWindowKeyTextField</string>
 							<string>licenseKeyWindowNameTextField</string>
 							<string>licenseKeyWindowProgressIndicator</string>
@@ -1544,6 +1465,7 @@ aGVjayBmb3IgdXBncmFkZXMuA</string>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSWindow</string>
+							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSProgressIndicator</string>

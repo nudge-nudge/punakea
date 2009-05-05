@@ -13,8 +13,8 @@
 @interface PARegistrationManager (PrivateAPI)
 
 - (void)checkRegistrationInformation;
-
 - (void)writeLicenseToDefaults;
+- (void)showThankYouSheet;
 
 @end
 
@@ -35,18 +35,8 @@ static PARegistrationManager *sharedInstance = nil;
 		// EITHER - OR - Uncomment the respective line
 		//timeLimitedBetaExpirationDate = [[NSDate alloc] initWithString:@"2009-06-30 23:59:59 +0200"];	// CEST = +0200!
 		[self checkRegistrationInformation];
-		
-		[self tempMethod];
 	}
 	return self;
-}
-
-- (void)tempMethod
-{
-	NSString *name = @"Daniel Bar";
-	NSString *key = @"NNPA-1-GG6G-9134-FK87-LHPA-WWN1";
-
-	[PARegisteredLicense validateLicenseKey:key forName:name];
 }
 
 - (id)initWithWindowNibName:(NSString *)windowNibName
@@ -129,27 +119,40 @@ static PARegistrationManager *sharedInstance = nil;
 - (IBAction)confirmNewLicenseKey:(id)sender
 {
 	// TODO: Update GUI
-	[licenseKeyWindow makeFirstResponder:licenseKeyWindowProgressIndicator];
+	[licenseKeyWindowErrorTextField setHidden:YES];
 	
-	[licenseKeyWindowProgressIndicator setHidden:NO];
-	[licenseKeyWindowProgressIndicator startAnimation:self];
-	
-	[self showThankYouSheet];
-	
-	BOOL validKey = [self validateLicenseKey:[licenseKeyWindowKeyTextField stringValue]];
+	// Trim strings
+	NSString *aKey = [[licenseKeyWindowKeyTextField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	NSString *aName = [[licenseKeyWindowNameTextField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];	
+
+	BOOL validKey = [PARegisteredLicense validateLicenseKey:aKey forName:aName];
 	
 	if (validKey)
 	{
-		[self saveLicenseKey:[licenseKeyWindowKeyTextField stringValue]
-					withName:[licenseKeyWindowNameTextField stringValue]];
+		PARegisteredLicense *l = [PARegisteredLicense license];
+		[l setName:aName];
+		[l setKey:aKey];
 		
-		NSLog(@"valid");
+		NSString *bundleVersionString = [[[NSBundle bundleForClass:[self class]] infoDictionary] 
+										 objectForKey:@"CFBundleVersion"];
+		
+		int majorAppVersion = [[bundleVersionString substringToIndex:1] intValue];
+		[l setMajorAppVersion:majorAppVersion];
+		
+		[l updateChecksum];
+		
+		[self setLicense:l];
+		[self writeLicenseToDefaults];
 				
+		[self showThankYouSheet];
+		
 		[licenseKeyWindow performClose:self];
 	}
-	
-	// TODO: Update GUI
-	[licenseKeyWindowProgressIndicator stopAnimation:self];
+	else
+	{
+		// Update GUI
+		[licenseKeyWindowErrorTextField setHidden:NO];
+	}
 }
 
 - (void)writeLicenseToDefaults
@@ -175,6 +178,8 @@ static PARegistrationManager *sharedInstance = nil;
 		[userDefaults setObject:[NSNumber numberWithInt:[l majorAppVersion]] forKey:@"License.MajorAppVersion"];
 		[userDefaults setObject:[l checksum] forKey:@"License.Checksum"];
 	}
+	
+	[userDefaults synchronize];
 }
 
 - (BOOL)hasRegisteredLicense
@@ -243,7 +248,7 @@ static PARegistrationManager *sharedInstance = nil;
 - (IBAction)showEnterLicenseKeyWindow:(id)sender
 {
 	// Reset window
-	[licenseKeyWindowProgressIndicator setHidden:YES];
+	[licenseKeyWindowErrorTextField setHidden:YES];
 	[licenseKeyWindowNameTextField setStringValue:@""];
 	[licenseKeyWindowKeyTextField setStringValue:@""];
 	

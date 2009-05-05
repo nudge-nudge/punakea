@@ -15,8 +15,6 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 
 @interface PATrialLicense (PrivateAPI)
 
-+ (PATrialLicense *)license;
-
 - (NSString *)checksumWithStartDate:(NSDate *)aDate andMajorAppVersion:(int)version;
 
 @end
@@ -69,25 +67,6 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 
 
 #pragma mark Actions
-- (BOOL)hasValidChecksum
-{	
-	NSString *oldChecksum = [self checksum];
-	
-	[self updateChecksum];
-	
-	return [[self checksum] isEqualTo:oldChecksum];
-}
-
-- (BOOL)isValidForThisAppVersion
-{
-	NSString *bundleVersionString = [[[NSBundle bundleForClass:[self class]] infoDictionary] 
-									 objectForKey:@"CFBundleVersion"];
-	
-	int v = [[bundleVersionString substringToIndex:1] intValue];
-	
-	return [self hasValidChecksum] && ([self majorAppVersion] == v);
-}
-
 - (BOOL)hasExpired
 {
 	return [self daysLeftForEvaluation] <= 0;

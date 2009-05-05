@@ -16,7 +16,7 @@
 
 @interface PARegisteredLicense (PrivateAPI)
 
-+ (OSStatus)installEngine;
+- (NSString *)checksumWithKey:(NSString *)aKey forName:(NSString *)aName andMajorAppVersion:(int)version;
 
 @end
 
@@ -40,7 +40,7 @@
 	{
 		[license setName:(NSString *)[userDefaults objectForKey:@"License.Name"]];
 		[license setKey:(NSString *)[userDefaults objectForKey:@"License.Key"]];
-		[license setMajorAppVersion:(NSString *)[userDefaults objectForKey:@"License.MajorAppVersion"]];
+		[license setMajorAppVersion:[(NSNumber *)[userDefaults objectForKey:@"License.MajorAppVersion"] intValue]];
 		[license setChecksum:(NSString *)[userDefaults objectForKey:@"License.Checksum"]];
 	}
 	
@@ -67,60 +67,41 @@
 
 
 #pragma mark Actions
-- (BOOL)hasValidChecksum
++ (BOOL)validateLicenseKey:(NSString *)aKey forName:(NSString *)aName
+{	
+	eSellerate_DaysSince2000 timestamp; 
+	
+	timestamp = eWeb_ValidateSerialNumber([aKey UTF8String],
+										  [aName UTF8String],
+										  nil, 
+										  PUBLISHER_KEY); 
+	if (timestamp) { 
+		return YES;
+	} else { 
+		return NO;
+	} 
+}
+
+- (void)updateChecksum
 {
-	NSString *checksumString = [NSString stringWithFormat:@"%@ %@ %@",
-					(NSString *)[userDefaults objectForKey:@"License.Name"],
-					(NSString *)[userDefaults objectForKey:@"License.Key"],
-					(NSString *)[userDefaults objectForKey:@"License.MajorAppVersion"]];
+	NSString *aChecksum = [self checksumWithKey:[self key] 
+										forName:[self name]
+							 andMajorAppVersion:[self majorAppVersion]];
+	
+	[self setChecksum:aChecksum];
+}
+
+- (NSString *)checksumWithKey:(NSString *)aKey forName:(NSString *)aName andMajorAppVersion:(int)version
+{
+	NSString *checksumString = [NSString stringWithFormat:@"%@ %@ %i",
+								aKey, aName, version];
 	
 	SSCrypto *crypto = [[[SSCrypto alloc] init] autorelease];
 	[crypto setClearTextWithString:checksumString];
 	
 	NSString *digest = [[crypto digest:@"SHA1"] hexval];
 	
-	return [[self checksum] isEqualTo:digest];
-}
-
-+ (BOOL)validateLicenseKey:(NSString *)aKey forName:(NSString *)aName
-{	
-	eSellerate_DaysSince2000 timestamp; 
-
-	// TODO: Strip off any whitespace
-	
-	timestamp = eWeb_ValidateSerialNumber([aKey UTF8String],
-												[aName UTF8String],
-												nil, 
-												PUBLISHER_KEY); 
-	if (timestamp) { 
-		/* TO DO: handle validation success */ 
-		NSLog(@"valid");
-		return YES;
-	} else { 
-		/* TO DO: handle validation failure */ 
-		NSLog(@"invalid");
-		return NO;
-	} 
-}
-
-- (BOOL)isValidForThisAppVersion
-{
-	return YES;
-}
-
-- (void)updateChecksum
-{
-	NSString *checksumString = [NSString stringWithFormat:@"%@ %@ %@",
-								[self name],
-								[self key],
-								[self majorAppVersion]];
-	
-	SSCrypto *crypto = [[[SSCrypto alloc] init] autorelease];
-	[crypto setClearTextWithString:checksumString];
-	
-	NSString *digest = [[crypto digest:@"SHA-1"] hexval];
-	
-	[self setChecksum:digest];
+	return digest;
 }
 
 

@@ -12,8 +12,6 @@
 
 @interface PALicense (PrivateAPI)
 
-- (BOOL)validateLicenseKey:(NSString *)key;
-
 @end
 
 
@@ -40,9 +38,28 @@
 
 
 #pragma mark Action
+- (BOOL)hasValidChecksum
+{	
+	NSString *oldChecksum = [self checksum];
+	
+	[self updateChecksum];
+	
+	return [[self checksum] isEqualTo:oldChecksum];
+}
+
+- (void)updateChecksum
+{
+	NSLog(@"ERROR - updateChecksum needs to be implemented by subclasses.");
+}
+
 - (BOOL)isValidForThisAppVersion
 {
-	NSLog(@"ERROR - isValidForThisAppVersion needs to be implemented by subclasses.");
+	NSString *bundleVersionString = [[[NSBundle bundleForClass:[self class]] infoDictionary] 
+									 objectForKey:@"CFBundleVersion"];
+	
+	int v = [[bundleVersionString substringToIndex:1] intValue];
+	
+	return [self hasValidChecksum] && ([self majorAppVersion] == v);
 }
 
 

@@ -24,7 +24,7 @@
 	IBOutlet NSWindow					*trialExpirationWindow;
 	IBOutlet NSWindow					*timeLimitedExpirationWindow;
 	
-	IBOutlet NSProgressIndicator		*licenseKeyWindowProgressIndicator;
+	IBOutlet NSTextField				*licenseKeyWindowErrorTextField;
 	IBOutlet NSTextField				*licenseKeyWindowNameTextField;
 	IBOutlet NSTextField				*licenseKeyWindowKeyTextField;
 	
@@ -37,7 +37,6 @@
 
 - (IBAction)showEnterLicenseKeyWindow:(id)sender;
 - (IBAction)showVersionHasExpiredWindow:(id)sender;
-- (IBAction)closeWindowAndStopModal:(id)sender;
 - (IBAction)terminate:(id)sender;
 - (IBAction)purchase:(id)sender;
 - (IBAction)upgrade:(id)sender;
