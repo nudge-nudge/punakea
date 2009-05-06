@@ -1,7 +1,10 @@
-"MAINMENU_SHOW_INFO" = "Show Info";
-"MAINMENU_HIDE_INFO" = "Hide Info";
-"MAINMENU_SHOW_TAGS" = "Show Tags";
-"MAINMENU_HIDE_TAGS" = "Hide Tags";
-"MAINMENU_HOME" = "Home";
-"MAINMENU_PURCHASE" = "Purchase...";
-"MAINMENU_UPGRADE" = "Upgrade...";
+"PURCHASE" = "Purchase...";
+"ENTER_LICENSE_KEY" = "Enter License Key...";
+"MANAGE_LICENSE_KEY" = "Manage License Key...";
+
+"SHOW_INFO" = "Show Info";
+"HIDE_INFO" = "Hide Info";
+"SHOW_TAGS" = "Show Tags";
+"HIDE_TAGS" = "Hide Tags";
+"HOME" = "Home";
+

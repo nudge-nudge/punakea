@@ -20,13 +20,20 @@
 	PALicense							*license;
 	NSDate								*timeLimitedBetaExpirationDate;
 	
+	// Window Outlets
 	IBOutlet NSWindow					*licenseKeyWindow;
 	IBOutlet NSWindow					*trialExpirationWindow;
 	IBOutlet NSWindow					*timeLimitedExpirationWindow;
 	
-	IBOutlet NSTextField				*licenseKeyWindowErrorTextField;
-	IBOutlet NSTextField				*licenseKeyWindowNameTextField;
-	IBOutlet NSTextField				*licenseKeyWindowKeyTextField;
+	// Outlets for License Key Window
+	IBOutlet NSTabView					*tabView;
+	IBOutlet NSTextField				*informativeTextField;
+	IBOutlet NSButton					*unregisterButton;
+	IBOutlet NSButton					*buyNowButton;
+	IBOutlet NSTextField				*registeredToTextField;
+	IBOutlet NSImageView				*warningImageView;
+	IBOutlet NSTextField				*nameTextField;
+	IBOutlet NSTextField				*keyTextField;
 	
 }
 
@@ -35,11 +42,13 @@
 - (IBAction)confirmNewLicenseKey:(id)sender;
 - (void)writeLicenseToDefaults;
 
-- (IBAction)showEnterLicenseKeyWindow:(id)sender;
+- (IBAction)showLicenseManagerWindow:(id)sender;
 - (IBAction)showVersionHasExpiredWindow:(id)sender;
 - (IBAction)terminate:(id)sender;
 - (IBAction)purchase:(id)sender;
 - (IBAction)upgrade:(id)sender;
+- (IBAction)unregister:(id)sender;
+- (IBAction)switchToEnterTab:(id)sender;
 
 - (BOOL)hasRegisteredLicense;
 - (BOOL)hasTrialLicense;

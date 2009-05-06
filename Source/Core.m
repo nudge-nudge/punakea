@@ -299,7 +299,38 @@
 			[item setTitle:@"Hide Toolbar"];
 		else
 			[item setTitle:@"Show Toolbar"];
-	}	
+	}
+	else if ([item action] == @selector(enterLicenseKey:))
+	{
+		if ([[PARegistrationManager defaultManager] hasRegisteredLicense])
+			[item setTitle:NSLocalizedStringFromTable(@"MANAGE_LICENSE_KEY", @"Menus", @"")];
+		else
+			[item setTitle:NSLocalizedStringFromTable(@"ENTER_LICENSE_KEY", @"Menus", @"")];
+	}
+	
+	// Check on common stuff first
+	
+	// App menu
+	if ([[item title] isEqualToString:@"REGISTRATION_SPACER"] ||
+		[item action] == @selector(enterLicenseKey:))
+	{			
+		if ([[PARegistrationManager defaultManager] isTimeLimitedBeta])
+		{
+			[item setHidden:YES];
+			return NO;
+		}
+		return YES;
+	}
+	else if ([item action] == @selector(purchase:))
+	{
+		if ([[PARegistrationManager defaultManager] isTimeLimitedBeta] ||
+			[[PARegistrationManager defaultManager] hasRegisteredLicense])
+		{
+			[item setHidden:YES];
+			return NO;
+		}
+		return YES;
+	}
 	
 	// Check all items that are browser-specific
 	if(![self appHasBrowser])
@@ -331,18 +362,7 @@
 		NSResponder *firstResponder = [[browserController window] firstResponder];
 		
 		// File menu
-		if ([[item title] isEqualToString:@"REGISTRATION_SPACER"] ||
-			[item action] == @selector(purchase:) ||
-			[item action] == @selector(enterLicenseKey:))
-		{			
-			if (![[PARegistrationManager defaultManager] hasTrialLicense])
-			{
-				[item setHidden:YES];
-				return NO;
-			}
-			return YES;
-		}
-		else if([item action] == @selector(getInfo:))
+		if([item action] == @selector(getInfo:))
 		{
 			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 			{
@@ -401,16 +421,16 @@
 		if([item action] == @selector(toggleInfoPane:))
 		{
 			if(![browserController infoPaneIsVisible])
-				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_SHOW_INFO", @"Menus", nil)];
+				[item setTitle:NSLocalizedStringFromTable(@"SHOW_INFO", @"Menus", nil)];
 			else
-				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_HIDE_INFO", @"Menus", nil)];
+				[item setTitle:NSLocalizedStringFromTable(@"HIDE_INFO", @"Menus", nil)];
 		}
 		else if([item action] == @selector(toggleTagsPane:))
 		{
 			if(![browserController tagsPaneIsVisible])
-				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_SHOW_TAGS", @"Menus", nil)];
+				[item setTitle:NSLocalizedStringFromTable(@"SHOW_TAGS", @"Menus", nil)];
 			else
-				[item setTitle:NSLocalizedStringFromTable(@"MAINMENU_HIDE_TAGS", @"Menus", nil)];
+				[item setTitle:NSLocalizedStringFromTable(@"HIDE_TAGS", @"Menus", nil)];
 		}
 		else if([item action] == @selector(goToAllItems:))
 		{			
@@ -441,7 +461,7 @@
 
 - (IBAction)enterLicenseKey:(id)sender
 {
-	[[PARegistrationManager defaultManager] showEnterLicenseKeyWindow:self];
+	[[PARegistrationManager defaultManager] showLicenseManagerWindow:self];
 }
 
 - (IBAction)addTagSet:(id)sender

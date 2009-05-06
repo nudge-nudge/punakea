@@ -231,7 +231,7 @@ int const PADDING_TO_RIGHT = 60;
 	[homeButton setImage:[NSImage imageNamed:@"SnapBack.tif"] forState:PAOffState];
 	[homeButton setImage:[NSImage imageNamed:@"SnapBackPressed.tif"] forState:PAOnState];
 
-	[homeButton setToolTip:NSLocalizedStringFromTable(@"MAINMENU_HOME", @"Menus", nil)];
+	[homeButton setToolTip:NSLocalizedStringFromTable(@"HOME", @"Menus", nil)];
 	
 	[homeButton setTarget:[[NSApplication sharedApplication] delegate]];
 	[homeButton setAction:@selector(goHome:)];

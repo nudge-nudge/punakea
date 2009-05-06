@@ -14,6 +14,9 @@
 
 - (void)checkRegistrationInformation;
 - (void)writeLicenseToDefaults;
+
+- (void)showLicenseManagerWindowForRegisteredVersion;
+- (void)showLicenseManagerWindowForTrialVersion;
 - (void)showThankYouSheet;
 
 @end
@@ -119,11 +122,12 @@ static PARegistrationManager *sharedInstance = nil;
 - (IBAction)confirmNewLicenseKey:(id)sender
 {
 	// TODO: Update GUI
-	[licenseKeyWindowErrorTextField setHidden:YES];
+	[warningImageView setHidden:YES];
+	[licenseKeyWindow display];
 	
 	// Trim strings
-	NSString *aKey = [[licenseKeyWindowKeyTextField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-	NSString *aName = [[licenseKeyWindowNameTextField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];	
+	NSString *aKey = [[keyTextField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	NSString *aName = [[nameTextField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];	
 
 	BOOL validKey = [PARegisteredLicense validateLicenseKey:aKey forName:aName];
 	
@@ -151,8 +155,35 @@ static PARegistrationManager *sharedInstance = nil;
 	else
 	{
 		// Update GUI
-		[licenseKeyWindowErrorTextField setHidden:NO];
+		[warningImageView setHidden:NO];
 	}
+}
+
+- (IBAction)unregister:(id)sender
+{
+	if ([self hasRegisteredLicense])
+	{
+		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		[alert setMessageText:NSLocalizedStringFromTable(@"REALLY_UNREGISTER",@"Registration",@"")];
+		[alert setInformativeText:NSLocalizedStringFromTable(@"REALLY_UNREGISTER_INFORMATIVE",@"Registration",@"")];
+		[alert addButtonWithTitle:NSLocalizedStringFromTable(@"YES",@"Global",@"")];
+		NSButton *discardButton = [alert addButtonWithTitle:NSLocalizedStringFromTable(@"NO",@"Global",@"")];
+		[alert setAlertStyle:NSWarningAlertStyle];
+		
+		[alert beginSheetModalForWindow:licenseKeyWindow
+						  modalDelegate:self 
+						 didEndSelector:@selector(unregisterAlertDidEnd:returnCode:contextInfo:)
+							contextInfo:nil];
+	}
+	else
+	{
+		[self switchToEnterTab:sender];
+	}
+}
+
+- (void)unregisterAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	
 }
 
 - (void)writeLicenseToDefaults
@@ -245,14 +276,37 @@ static PARegistrationManager *sharedInstance = nil;
 
 
 #pragma mark Modal Windows
-- (IBAction)showEnterLicenseKeyWindow:(id)sender
+- (IBAction)showLicenseManagerWindow:(id)sender;
 {
-	// Reset window
-	[licenseKeyWindowErrorTextField setHidden:YES];
-	[licenseKeyWindowNameTextField setStringValue:@""];
-	[licenseKeyWindowKeyTextField setStringValue:@""];
+	if ([self hasRegisteredLicense])
+		[self showLicenseManagerWindowForRegisteredVersion];
+	else
+		[self showLicenseManagerWindowForTrialVersion];
+}
+
+- (void)showLicenseManagerWindowForRegisteredVersion
+{
+	// Reset Window
+	[tabView selectTabViewItemAtIndex:0];
+	[informativeTextField setStringValue:NSLocalizedStringFromTable(@"LICENSE_KEY_WINDOW_INFORMATIVE_REGISTERED",@"Registration",@"")];
+	[registeredToTextField setStringValue:[NSString stringWithFormat:NSLocalizedStringFromTable(@"REGISTERED_TO",@"Registration",@""),
+										   [(PARegisteredLicense *)[self license] name]]];
+	[buyNowButton setHidden:YES];
 	
-	[NSApp runModalForWindow:licenseKeyWindow];
+	[licenseKeyWindow center];
+	[licenseKeyWindow makeKeyAndOrderFront:self];
+}
+
+- (void)showLicenseManagerWindowForTrialVersion
+{
+	// Reset Window
+	[tabView selectTabViewItemAtIndex:1];
+	[informativeTextField setStringValue:NSLocalizedStringFromTable(@"LICENSE_KEY_WINDOW_INFORMATIVE_NOT_REGISTERED",@"Registration",@"")];
+	[warningImageView setHidden:YES];
+	[buyNowButton setHidden:NO];
+	
+	[licenseKeyWindow center];
+	[licenseKeyWindow makeKeyAndOrderFront:self];
 }
 
 - (void)showThankYouSheet
@@ -286,6 +340,11 @@ static PARegistrationManager *sharedInstance = nil;
 	[NSApp terminate:self];
 }
 
+- (IBAction)switchToEnterTab:(id)sender
+{
+	[tabView selectTabViewItemAtIndex:1];
+}
+
 
 #pragma mark Window Delegate
 - (void)windowWillClose:(NSNotification *)notification
@@ -297,7 +356,9 @@ static PARegistrationManager *sharedInstance = nil;
 {
 	NSURL *url = [NSURL URLWithString:NSLocalizedStringFromTable(@"STORE", @"Urls", nil)];
 	[[NSWorkspace sharedWorkspace] openURL:url];
-	[NSApp terminate:self];
+	
+	if ([sender isNotEqualTo:buyNowButton])
+		[NSApp terminate:self];
 }
 
 - (IBAction)upgrade:(id)sender

@@ -376,6 +376,7 @@
 		65F65AC30FA1E22A0006E229 /* libValidateUniversal.a in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */; };
 		65F6746A0FA84A1D00F1C450 /* Urls.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F674690FA84A1D00F1C450 /* Urls.strings */; };
 		65F6764C0FA88C9D00F1C450 /* Registration.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F6764B0FA88C9D00F1C450 /* Registration.strings */; };
+		65F83DCB0FB1881B00CBA02E /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F83DCA0FB1881B00CBA02E /* warning.png */; };
 		65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */; };
 		65F9B96309D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */; };
 		65F9B96409D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */; };
@@ -1037,6 +1038,7 @@
 		65F65A100FA1C0C40006E229 /* SSCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SSCrypto.framework; sourceTree = "<group>"; };
 		65F674660FA84A1200F1C450 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Urls.strings; sourceTree = "<group>"; };
 		65F676480FA88C4E00F1C450 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Registration.strings; sourceTree = "<group>"; };
+		65F83DCA0FB1881B00CBA02E /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewPressed-1.tiff"; sourceTree = "<group>"; };
 		65F9B96109D41B40008BF1BD /* CollapsedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
 		65F9B96209D41B40008BF1BD /* ExpandedTriangleWhite_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite_Pressed.tiff; sourceTree = "<group>"; };
@@ -1819,6 +1821,7 @@
 		6562A1D40996399100DBE7DB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				65F83DC90FB1881200CBA02E /* Common */,
 				653948D90C035993001705D6 /* Buttons */,
 				658B39950D4F5B98003BFCA5 /* Misc */,
 				658B58DD0BEC842900E618F1 /* Toolbar */,
@@ -2164,6 +2167,14 @@
 				65EF60C30F69531500AAE151 /* PTKeyCombo.m */,
 			);
 			path = Hotkey;
+			sourceTree = "<group>";
+		};
+		65F83DC90FB1881200CBA02E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				65F83DCA0FB1881B00CBA02E /* warning.png */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2579,6 +2590,7 @@
 				656DDED50F8BCB7D00273700 /* Installer.xib in Resources */,
 				65F6746A0FA84A1D00F1C450 /* Urls.strings in Resources */,
 				65F6764C0FA88C9D00F1C450 /* Registration.strings in Resources */,
+				65F83DCB0FB1881B00CBA02E /* warning.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

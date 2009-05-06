@@ -2,6 +2,9 @@
 "CANCEL" = "Cancel";
 "ERROR" = "Error";
 
+"YES" = "Yes";
+"NO" = "No";
+
 "NO_DATE" = "No Date";
 "TODAY" = "Today";
 "YESTERDAY" = "Yesterday";

@@ -130,26 +130,26 @@
 	NNTagToFileWriter *newTagToFileWriter = [[NNTagToOpenMetaWriter alloc] init];
 	[tagStoreManager setTagToFileWriter:newTagToFileWriter];
 
-//	// now save all files using the new tagToFileWriter
-//	// this writes all tags to the new storage and we're good
-//	// to go!
-//	for (NNFile *file in taggedFiles)
-//	{
-//		// call save tags directly, we do not need any additinal updates
-//		[file saveTags];
-//		
-//		// clean up finder comments
-//		NSString *finderCommentWithoutTags = [oldTagToFileWriter finderCommentIgnoringKeywordsForFile:file];
-//		[oldTagToFileWriter setComment:finderCommentWithoutTags	forURL:[file url]];
-//	}
-//	
-//	// once done, increment pref version so that the migration won't happen again
-//	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//	
-//	if ([userDefaults integerForKey:@"Version"] < 3)
-//	{
-//		[userDefaults setInteger:3 forKey:@"Version"];
-//	}
+	// now save all files using the new tagToFileWriter
+	// this writes all tags to the new storage and we're good
+	// to go!
+	for (NNFile *file in taggedFiles)
+	{
+		// call save tags directly, we do not need any additinal updates
+		[file saveTags];
+		
+		// clean up finder comments
+		NSString *finderCommentWithoutTags = [oldTagToFileWriter finderCommentIgnoringKeywordsForFile:file];
+		[oldTagToFileWriter setComment:finderCommentWithoutTags	forURL:[file url]];
+	}
+	
+	// once done, increment pref version so that the migration won't happen again
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	
+	if ([userDefaults integerForKey:@"Version"] < 3)
+	{
+		[userDefaults setInteger:3 forKey:@"Version"];
+	}
 
 	[oldTagToFileWriter release];
 	[newTagToFileWriter release];
