@@ -734,7 +734,7 @@
 		4842FC1109DA804100C4A931 /* PATagButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButtonCell.h; sourceTree = "<group>"; };
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
 		484496300B2D56CE009B262C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
-		484497A90B2D9925009B262C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = SOURCE_ROOT; };
+		484497A90B2D9925009B262C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PANotificationReceiver.h; sourceTree = "<group>"; };
 		4845CBA80B4A7B8F003D242C /* PANotificationReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PANotificationReceiver.m; sourceTree = "<group>"; };
 		48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CharacterSetChecks.h"; sourceTree = "<group>"; };
@@ -1140,11 +1140,15 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				653216F80FAF739000FC2117 /* libEWS.a */,
-				65F65A100FA1C0C40006E229 /* SSCrypto.framework */,
-				6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */,
-				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
-				484497A90B2D9925009B262C /* Sparkle.framework */,
+				48E760980F7F8B4400F9EEBA /* AddressBook.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				484496300B2D56CE009B262C /* ApplicationServices.framework */,
+				6503599F0F5D832F00BC204D /* Carbon.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				658EA77C099798A6005F13DE /* Message.framework */,
+				65CAAEF00F6C2E2500B4FFAA /* QuickLookUI.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -1152,15 +1156,11 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				48E760980F7F8B4400F9EEBA /* AddressBook.framework */,
-				65CAAEF00F6C2E2500B4FFAA /* QuickLookUI.framework */,
-				6503599F0F5D832F00BC204D /* Carbon.framework */,
-				658EA77C099798A6005F13DE /* Message.framework */,
-				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-				484496300B2D56CE009B262C /* ApplicationServices.framework */,
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
-				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
-				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
+				653216F80FAF739000FC2117 /* libEWS.a */,
+				6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */,
+				484497A90B2D9925009B262C /* Sparkle.framework */,
+				65F65A100FA1C0C40006E229 /* SSCrypto.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
