@@ -27,6 +27,7 @@
 	
 	// Outlets for License Key Window
 	IBOutlet NSTabView					*tabView;
+	IBOutlet NSTextField				*titleTextField;
 	IBOutlet NSTextField				*informativeTextField;
 	IBOutlet NSButton					*unregisterButton;
 	IBOutlet NSButton					*buyNowButton;

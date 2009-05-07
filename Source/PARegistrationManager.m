@@ -288,9 +288,17 @@ static PARegistrationManager *sharedInstance = nil;
 {
 	// Reset Window
 	[tabView selectTabViewItemAtIndex:0];
+	NSRect frame = [tabView frame];
+	frame.size.height = 72;
+	[tabView setFrame:frame];
+	
+	frame = [licenseKeyWindow frame];
+	frame.size.height = 267;
+	[licenseKeyWindow setFrame:frame display:YES];
+	
+	[titleTextField setStringValue:NSLocalizedStringFromTable(@"LICENSE_KEY_WINDOW_TITLE_REGISTERED",@"Registration",@"")];
 	[informativeTextField setStringValue:NSLocalizedStringFromTable(@"LICENSE_KEY_WINDOW_INFORMATIVE_REGISTERED",@"Registration",@"")];
-	[registeredToTextField setStringValue:[NSString stringWithFormat:NSLocalizedStringFromTable(@"REGISTERED_TO",@"Registration",@""),
-										   [(PARegisteredLicense *)[self license] name]]];
+	[registeredToTextField setStringValue:[(PARegisteredLicense *)[self license] name]];
 	[buyNowButton setHidden:YES];
 	
 	[licenseKeyWindow center];
@@ -301,6 +309,15 @@ static PARegistrationManager *sharedInstance = nil;
 {
 	// Reset Window
 	[tabView selectTabViewItemAtIndex:1];
+	NSRect frame = [tabView frame];
+	frame.size.height = 120;
+	[tabView setFrame:frame];
+	
+	frame = [licenseKeyWindow frame];
+	frame.size.height = 315;
+	[licenseKeyWindow setFrame:frame display:YES];
+
+	[titleTextField setStringValue:NSLocalizedStringFromTable(@"LICENSE_KEY_WINDOW_TITLE_NOT_REGISTERED",@"Registration",@"")];
 	[informativeTextField setStringValue:NSLocalizedStringFromTable(@"LICENSE_KEY_WINDOW_INFORMATIVE_NOT_REGISTERED",@"Registration",@"")];
 	[warningImageView setHidden:YES];
 	[buyNowButton setHidden:NO];
