@@ -31,6 +31,7 @@
 	IBOutlet NSTextField				*informativeTextField;
 	IBOutlet NSButton					*unregisterButton;
 	IBOutlet NSButton					*buyNowButton;
+	IBOutlet NSButton					*closeButton;
 	IBOutlet NSTextField				*registeredToTextField;
 	IBOutlet NSImageView				*warningImageView;
 	IBOutlet NSTextField				*nameTextField;

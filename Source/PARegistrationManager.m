@@ -14,6 +14,7 @@
 
 - (void)checkRegistrationInformation;
 - (void)writeLicenseToDefaults;
+- (void)relaunch;
 
 - (void)showLicenseManagerWindowForRegisteredVersion;
 - (void)showLicenseManagerWindowForTrialVersion;
@@ -166,8 +167,8 @@ static PARegistrationManager *sharedInstance = nil;
 		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 		[alert setMessageText:NSLocalizedStringFromTable(@"REALLY_UNREGISTER",@"Registration",@"")];
 		[alert setInformativeText:NSLocalizedStringFromTable(@"REALLY_UNREGISTER_INFORMATIVE",@"Registration",@"")];
-		[alert addButtonWithTitle:NSLocalizedStringFromTable(@"YES",@"Global",@"")];
-		NSButton *discardButton = [alert addButtonWithTitle:NSLocalizedStringFromTable(@"NO",@"Global",@"")];
+		[alert addButtonWithTitle:NSLocalizedStringFromTable(@"REALLY_UNREGISTER_RELAUNCH",@"Registration",@"")];
+		[alert addButtonWithTitle:NSLocalizedStringFromTable(@"NO",@"Global",@"")];
 		[alert setAlertStyle:NSWarningAlertStyle];
 		
 		[alert beginSheetModalForWindow:licenseKeyWindow
@@ -183,7 +184,18 @@ static PARegistrationManager *sharedInstance = nil;
 
 - (void)unregisterAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
-	
+	if (returnCode == NSAlertFirstButtonReturn) {
+		// Remove any license information from user defaults
+		[userDefaults removeObjectForKey:@"License.Type"];
+		[userDefaults removeObjectForKey:@"License.Name"];
+		[userDefaults removeObjectForKey:@"License.Key"];
+		[userDefaults removeObjectForKey:@"License.Checksum"];
+		[userDefaults removeObjectForKey:@"License.StartDate"];
+		[userDefaults removeObjectForKey:@"License.MajorAppVersion"];
+		[userDefaults synchronize];
+		
+		[self relaunch];
+	}
 }
 
 - (void)writeLicenseToDefaults
@@ -301,6 +313,8 @@ static PARegistrationManager *sharedInstance = nil;
 	[registeredToTextField setStringValue:[(PARegisteredLicense *)[self license] name]];
 	[buyNowButton setHidden:YES];
 	
+	[licenseKeyWindow makeFirstResponder:closeButton];
+	
 	[licenseKeyWindow center];
 	[licenseKeyWindow makeKeyAndOrderFront:self];
 }
@@ -321,6 +335,11 @@ static PARegistrationManager *sharedInstance = nil;
 	[informativeTextField setStringValue:NSLocalizedStringFromTable(@"LICENSE_KEY_WINDOW_INFORMATIVE_NOT_REGISTERED",@"Registration",@"")];
 	[warningImageView setHidden:YES];
 	[buyNowButton setHidden:NO];
+	
+	[nameTextField setStringValue:@""];
+	[keyTextField setStringValue:@""];
+	
+	[licenseKeyWindow makeFirstResponder:nameTextField];
 	
 	[licenseKeyWindow center];
 	[licenseKeyWindow makeKeyAndOrderFront:self];
