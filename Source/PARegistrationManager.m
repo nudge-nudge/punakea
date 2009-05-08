@@ -301,11 +301,11 @@ static PARegistrationManager *sharedInstance = nil;
 	// Reset Window
 	[tabView selectTabViewItemAtIndex:0];
 	NSRect frame = [tabView frame];
-	frame.size.height = 72;
+	frame.size.height = 70;
 	[tabView setFrame:frame];
 	
 	frame = [licenseKeyWindow frame];
-	frame.size.height = 267;
+	frame.size.height = 235;
 	[licenseKeyWindow setFrame:frame display:YES];
 	
 	[titleTextField setStringValue:NSLocalizedStringFromTable(@"LICENSE_KEY_WINDOW_TITLE_REGISTERED",@"Registration",@"")];
@@ -328,7 +328,7 @@ static PARegistrationManager *sharedInstance = nil;
 	[tabView setFrame:frame];
 	
 	frame = [licenseKeyWindow frame];
-	frame.size.height = 315;
+	frame.size.height = 285;
 	[licenseKeyWindow setFrame:frame display:YES];
 
 	[titleTextField setStringValue:NSLocalizedStringFromTable(@"LICENSE_KEY_WINDOW_TITLE_NOT_REGISTERED",@"Registration",@"")];
