@@ -138,7 +138,7 @@
 	[udc removeObserver:self forKeyPath:@"values.General.Hotkey.Tagger.Modifiers"];
 	
 	[preferenceController release];
-	[nc removeObserver:self];
+	
     [super dealloc];
 }
 

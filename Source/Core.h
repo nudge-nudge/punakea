@@ -49,8 +49,7 @@
 	PTHotKey						*taggerHotkey;
 	
 	NSStatusItem					*statusItem;
-	
-	NSNotificationCenter			*nc;	
+		
 	NSUserDefaults					*userDefaults;
 	
 	PAServices						*services;
