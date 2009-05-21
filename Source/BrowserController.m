@@ -41,8 +41,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 {
 	if (self = [super initWithWindowNibName:@"Browser"])
 	{
-		// Setup search field
-		searchField = [[[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)] autorelease];
+		searchField = [[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)];
 		[[searchField cell] setSendsSearchStringImmediately:YES];
 		[searchField setDelegate:self];
 	}	
@@ -267,6 +266,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[statusBarProgressIndicator release];
 	
 	[searchField unbind:@"value"];
+	if (searchField) [searchField release];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
@@ -653,7 +653,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		[item setAction:@selector(sortByRating:)];
 	}
 	else if([itemIdentifier isEqualTo:@"Search"])
-	{		
+	{				
 		item = [[[NSToolbarItem alloc] initWithItemIdentifier:@"Search"] autorelease];
 		[item setLabel:NSLocalizedStringFromTable(@"SEARCH", @"Toolbars", nil)];
 		[item setToolTip:NSLocalizedStringFromTable(@"SEARCH_TOOLTIP", @"Toolbars", nil)];
