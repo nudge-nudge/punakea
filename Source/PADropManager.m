@@ -164,26 +164,21 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 
 - (NSMutableArray *)allBundles
 {
-    NSArray *librarySearchPaths;
-    NSEnumerator *searchPathEnum;
-    NSString *currPath;
-    NSMutableArray *bundleSearchPaths = [NSMutableArray array];
-    NSMutableArray *allBundles = [NSMutableArray array];
+    NSArray			*librarySearchPaths;
     
-    librarySearchPaths = NSSearchPathForDirectoriesInDomains(
-															 NSLibraryDirectory, NSAllDomainsMask - NSSystemDomainMask, YES);
+    NSMutableArray	*bundleSearchPaths = [NSMutableArray array];
+    NSMutableArray	*allBundles = [NSMutableArray array];
     
-    searchPathEnum = [librarySearchPaths objectEnumerator];
-    while(currPath = [searchPathEnum nextObject])
+    librarySearchPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSAllDomainsMask - NSSystemDomainMask, YES);
+    
+    for (NSString *currPath in librarySearchPaths)
     {
         [bundleSearchPaths addObject:
             [currPath stringByAppendingPathComponent:appSupportSubpath]];
     }
-    [bundleSearchPaths addObject:
-        [[NSBundle mainBundle] builtInPlugInsPath]];
+    [bundleSearchPaths addObject:[[NSBundle mainBundle] builtInPlugInsPath]];
     
-    searchPathEnum = [bundleSearchPaths objectEnumerator];
-    while(currPath = [searchPathEnum nextObject])
+	for (NSString *currPath in bundleSearchPaths)
     {
         NSDirectoryEnumerator *bundleEnum;
         NSString *currBundlePath;
