@@ -93,12 +93,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 			   name:NSControlTextDidEndEditingNotification
 			 object:[self tagField]];
 	
-	// call editingDidEnd on app termination to make sure tags are written
-	[nc addObserver:self
-		   selector:@selector(editingDidEnd:)
-			   name:NSApplicationWillTerminateNotification
-			 object:[NSApplication sharedApplication]];
-	
 	// Check manage files
 	if(manageFilesAutomatically)
 		manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];	
@@ -380,6 +374,19 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	
 	// Update manage files flag on taggable objects
 	[self updateManageFilesFlagOnTaggableObjects];
+}
+
+/**
+ This method is called when the 'Return' key is pressed in the tag field,
+ confirming the currently added tags and closing the tagger window
+ */
+- (IBAction)confirmTags:(id)sender
+{
+	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
+	withInitialTags:[self initialTags]
+  toTaggableObjects:taggableObjects];
+	
+	[self close];
 }
 
 - (void)updateTokenFieldEditable

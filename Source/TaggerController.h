@@ -40,6 +40,7 @@
 - (void)removeTaggableObjects:(id)sender;
 
 - (IBAction)changeManageFilesFlag:(id)sender;
+- (IBAction)confirmTags:(id)sender;
 
 - (void)setManageFiles:(BOOL)flag;
 - (void)setShowsManageFiles:(BOOL)flag;

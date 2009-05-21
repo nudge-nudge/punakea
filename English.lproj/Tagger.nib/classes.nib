@@ -36,6 +36,8 @@
 			<dict>
 				<key>changeManageFilesFlag</key>
 				<string>id</string>
+				<key>confirmTags</key>
+				<string>id</string>
 				<key>removeTaggableObjects</key>
 				<string>id</string>
 			</dict>
