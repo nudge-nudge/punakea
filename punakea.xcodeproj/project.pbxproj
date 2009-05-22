@@ -1214,7 +1214,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				657E6E120F6BC0E300AAD236 /* Resources */,
+				657E6E120F6BC0E300AAD236 /* AppleScript */,
 				650D52660F6ACB8800E67680 /* Scripts */,
 				6572864C0BC427D1000034D2 /* Strings */,
 				65943F980AFA56AA00A8922F /* appicon.icns */,
@@ -1866,11 +1866,12 @@
 			name = "Thumbnail Manager";
 			sourceTree = "<group>";
 		};
-		657E6E120F6BC0E300AAD236 /* Resources */ = {
+		657E6E120F6BC0E300AAD236 /* AppleScript */ = {
 			isa = PBXGroup;
 			children = (
 				657E6E130F6BC10300AAD236 /* Punakea.sdef */,
 			);
+			name = AppleScript;
 			path = Resources;
 			sourceTree = "<group>";
 		};
