@@ -169,7 +169,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 		for(NNTaggableObject *taggableObject in taggableObjects)
 			[taggableObject addTags:[diffSetToAdd allObjects]];
 	}
-	
 }
 
 - (void)addTaggableObject:(NNTaggableObject *)anObject
@@ -377,15 +376,12 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 }
 
 /**
- This method is called when the 'Return' key is pressed in the tag field,
- confirming the currently added tags and closing the tagger window
+ This method is called when the 'Return' key is pressed in the tag field.
+ A EditingDidEnd notification is also send, which takes care of writing the tags.
+ The only thing that needs to be done here is to close the tagger window.
  */
 - (IBAction)confirmTags:(id)sender
 {
-	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
-	withInitialTags:[self initialTags]
-  toTaggableObjects:taggableObjects];
-	
 	[self close];
 }
 
@@ -419,10 +415,12 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	[self updateManageFilesFlagOnTaggableObjects];
 }
 
+/**
+ The only time the tags are written is when the user 
+ finishes editing the tags in the tokenfield
+ */
 - (void)editingDidEnd:(NSNotification *)aNotification
 {
-	// DO THE ACTUAL WRITING OF TAGS TO FILES AFTER LOSING FOCUS
-	// this will help decrease the load on spotlight (which is currently very unstable)
 	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
 	withInitialTags:[self initialTags]
   toTaggableObjects:taggableObjects];
@@ -430,16 +428,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	// update inital tags to current tags - other changes have been written
 	NSArray *currentTags = [[[[self currentCompleteTagsInField] selectedTags] copy] autorelease];
 	[self setInitialTags:currentTags];
-}
-
-- (void)windowDidResignKey:(NSNotification *)notification
-{
-	[self editingDidEnd:notification];
-}
-
-- (void)windowDidMiniaturize:(NSNotification *)notification
-{
-	[self editingDidEnd:notification];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
