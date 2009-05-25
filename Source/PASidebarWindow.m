@@ -152,8 +152,10 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 {
 	if (![self isExpanded] && [self mouseInWindow])
 	{
-		GetFrontProcess(&lastFrontProcess);
-		[self setActivatesLastFrontApp:YES];
+		ProcessSerialNumber serialNumber;
+		GetFrontProcess(&serialNumber);
+		[self setLastActiveApp:serialNumber];
+		[self setActivatesLastActiveApp:YES];
 		
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 		
@@ -202,8 +204,10 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 		// won't be drop notifications
 		[self setAlphaValue:0.06];
 		
-		if(animate && [self activatesLastFrontApp])
-			SetFrontProcess(&lastFrontProcess);
+		if(animate && [self activatesLastActiveApp])
+		{
+			[self activateLastActiveApp];
+		}
 	}
 }
 
@@ -257,18 +261,6 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 		}
 		CGSSetWindowTags(cid, wid, tags, 32);
 	}
-}
-
-
-#pragma mark Accessors
-- (BOOL)activatesLastFrontApp
-{
-	return activatesLastFrontApp;
-}
-
-- (void)setActivatesLastFrontApp:(BOOL)flag
-{
-	activatesLastFrontApp = flag;
 }
 
 @end

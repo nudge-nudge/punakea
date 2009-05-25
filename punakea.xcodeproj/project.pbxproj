@@ -148,6 +148,7 @@
 		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
 		48BFF6250B13420500C1A127 /* PADebugView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BFF6230B13420500C1A127 /* PADebugView.h */; };
 		48BFF6260B13420500C1A127 /* PADebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BFF6240B13420500C1A127 /* PADebugView.m */; };
+		48C2BE5A0FCB0C8600C48F03 /* NNActiveAppSavingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C2BE590FCB0C8600C48F03 /* NNActiveAppSavingWindow.m */; };
 		48CDF4970AA57924002E9E78 /* toolbar-pref-general.tif in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4960AA57924002E9E78 /* toolbar-pref-general.tif */; };
 		48CFDC320B2ED76A002282D9 /* toolbar-pref-update.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CFDC310B2ED76A002282D9 /* toolbar-pref-update.tiff */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
@@ -795,6 +796,8 @@
 		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
 		48BFF6230B13420500C1A127 /* PADebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADebugView.h; sourceTree = "<group>"; };
 		48BFF6240B13420500C1A127 /* PADebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADebugView.m; sourceTree = "<group>"; };
+		48C2BE580FCB0C8600C48F03 /* NNActiveAppSavingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNActiveAppSavingWindow.h; sourceTree = "<group>"; };
+		48C2BE590FCB0C8600C48F03 /* NNActiveAppSavingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNActiveAppSavingWindow.m; sourceTree = "<group>"; };
 		48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler; sourceTree = BUILT_PRODUCTS_DIR; };
 		48C633BC0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WebURLsWithTitlesPboardTypeDropHandler-Info.plist"; sourceTree = "<group>"; };
 		48CDF4960AA57924002E9E78 /* toolbar-pref-general.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-pref-general.tif"; sourceTree = "<group>"; };
@@ -1586,6 +1589,15 @@
 			name = TagCloud;
 			sourceTree = "<group>";
 		};
+		48C2BE570FCB0C4900C48F03 /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				48C2BE580FCB0C8600C48F03 /* NNActiveAppSavingWindow.h */,
+				48C2BE590FCB0C8600C48F03 /* NNActiveAppSavingWindow.m */,
+			);
+			name = Windows;
+			sourceTree = "<group>";
+		};
 		48E75FF10F7F821200F9EEBA /* CrashReporter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1701,6 +1713,7 @@
 		6531649B0AF2534B00928BEF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				48C2BE570FCB0C4900C48F03 /* Windows */,
 				65C8A1FB0BEB4D3000DC032F /* Tag Field */,
 				65CC15530BE0A5B800866AF7 /* Controls */,
 				483272220AA42C7E003D98A6 /* Preferences */,
@@ -2813,6 +2826,7 @@
 				65F6596E0FA1AFE20006E229 /* PARegisteredLicense.m in Sources */,
 				4817DC5F0FA3826E0067524D /* LCLLogFile.m in Sources */,
 				4817DC600FA3826E0067524D /* lcl.m in Sources */,
+				48C2BE5A0FCB0C8600C48F03 /* NNActiveAppSavingWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

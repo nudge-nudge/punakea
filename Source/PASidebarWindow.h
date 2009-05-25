@@ -10,6 +10,8 @@
 #import <Carbon/Carbon.h>
 #import <ApplicationServices/ApplicationServices.h>
 
+#import "NNActiveAppSavingWindow.h"
+
 // setSticky stuff
 typedef int CGSConnectionID;
 typedef int CGSWindowID;
@@ -27,16 +29,13 @@ extern NSString * const SIDEBAR_SHOW_DELAY_KEYPATH;
 extern NSString * const SIDEBAR_POSITION_KEYPATH;
 
 
-@interface PASidebarWindow : NSWindow {
+@interface PASidebarWindow : NNActiveAppSavingWindow {
 	
 	BOOL								expanded;
 	PASidebarPosition					sidebarPosition;
 	
 	NSNotificationCenter				*nc;
 	NSUserDefaultsController			*defaultsController;
-	
-	BOOL								activatesLastFrontApp;
-	ProcessSerialNumber					lastFrontProcess;	/**< Indicates the process that was front before showing the sidebar */
 	
 	double								sidebarShowDelay;
 }
@@ -54,8 +53,5 @@ should be called after a mouse event inside the sidebar
 should be called if the resolution or display setup changes
  */
 - (void)reset;
-
-- (BOOL)activatesLastFrontApp;
-- (void)setActivatesLastFrontApp:(BOOL)flag;
 
 @end
