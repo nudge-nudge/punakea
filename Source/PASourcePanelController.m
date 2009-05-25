@@ -54,6 +54,18 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		[fileKindItem setEditable:NO];
 		[sourceItem addChild:fileKindItem];
 		
+		fileKindItem = [PASourceItem itemWithValue:@"MOVIES" displayName:
+						NSLocalizedStringFromTableInBundle(@"MOVIES", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
+		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-movies"]];
+		[fileKindItem setEditable:NO];
+		[sourceItem addChild:fileKindItem];
+		
+		fileKindItem = [PASourceItem itemWithValue:@"MUSIC" displayName:
+						NSLocalizedStringFromTableInBundle(@"MUSIC", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
+		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-music"]];
+		[fileKindItem setEditable:NO];
+		[sourceItem addChild:fileKindItem];
+		
 		sourceItem = [PASourceItem itemWithValue:@"MANAGE_TAGS" displayName:@"Manage Tags"];
 		[sourceItem setImage:[NSImage imageNamed:@"source-panel-manage-tags"]];
 		[sourceItem setEditable:NO];
