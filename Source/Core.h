@@ -32,6 +32,8 @@
 
 #import "UKCrashReporter.h"
 
+#import "NNActiveAppSavingPanel.h"
+
 //#import "PANotificationReceiver.h"
 
 @interface Core : NSWindowController
@@ -87,6 +89,7 @@
 - (IBAction)resetBrowser:(id)sender;
 
 - (IBAction)showTagger:(id)sender;
+- (IBAction)showTaggerActivatingLastActiveApp:(BOOL)activatesLastActiveApp;
 - (IBAction)showTaggerForObjects:(NSArray*)taggableObjects;
 
 - (IBAction)openFAQ:(id)sender;

@@ -11,6 +11,17 @@
 
 @implementation NNActiveAppSavingPanel
 
+#pragma mark init
+- (void)dealloc
+{
+	if ([self activatesLastActiveApp])
+	{
+		[self activateLastActiveApp];
+	}
+	
+	[super dealloc];
+}
+
 #pragma mark Accessors
 - (BOOL)activatesLastActiveApp
 {

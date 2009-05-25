@@ -41,7 +41,7 @@
 	NSMutableDictionary *err = [NSMutableDictionary dictionary];
 	NSAppleEventDescriptor *descriptor = [script executeAndReturnError:&err];
 	
-	[self showTagger:self];
+	[self showTaggerActivatingLastActiveApp:YES];
 	TaggerController *tagger = [self taggerController];
 	
 	/* Note: AppleScript arrays are one-based! (OMFG)

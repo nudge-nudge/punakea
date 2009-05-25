@@ -8,7 +8,7 @@
 - (void)createDirectoriesIfNeeded:(BOOL)flag generateContent:(BOOL)generateContent;
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 
-- (void)showTagger:(id)sender enableManageFiles:(BOOL)flag;
+- (void)showTagger:(id)sender enableManageFiles:(BOOL)flag activatesLastActiveApp:(BOOL)activatesLastActiveApp;
 
 - (void)applicationWillTerminate:(NSNotification *)note;
 
@@ -618,10 +618,15 @@
 
 - (IBAction)showTagger:(id)sender
 {
-	[self showTagger:sender enableManageFiles:YES];
+	[self showTagger:sender enableManageFiles:YES activatesLastActiveApp:NO];
 }
 
-- (void)showTagger:(id)sender enableManageFiles:(BOOL)flag
+- (IBAction)showTaggerActivatingLastActiveApp:(BOOL)activatesLastActiveApp
+{
+	[self showTagger:self enableManageFiles:YES activatesLastActiveApp:activatesLastActiveApp];
+}
+
+- (void)showTagger:(id)sender enableManageFiles:(BOOL)flag activatesLastActiveApp:(BOOL)activatesLastActiveApp
 {
 	TaggerController *taggerController = [self taggerController];
 	
@@ -633,6 +638,16 @@
 		
 		if(!flag)
 			[taggerController resizeTokenField];
+	}
+	
+	if (activatesLastActiveApp)
+	{
+		ProcessSerialNumber psn;
+		GetFrontProcess(&psn);
+		
+		NNActiveAppSavingPanel *taggerWindow = (NNActiveAppSavingPanel*) [taggerController window];
+		[taggerWindow setLastActiveApp:psn];
+		[taggerWindow setActivatesLastActiveApp:YES];
 	}
 	
 	if (![self appIsActive])

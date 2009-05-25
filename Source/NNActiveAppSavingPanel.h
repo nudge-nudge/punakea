@@ -12,10 +12,9 @@
  A panel that can save the last active app that was active before it.
  This can be used for invoking e.g. the Tagger and the Sidebar.
  */
-@interface NNActiveAppSavingPanel : NSWindow {
+@interface NNActiveAppSavingPanel : NSPanel {
 	BOOL								activatesLastActiveApp;
 	
-	ProcessSerialNumber					currentApp;
 	ProcessSerialNumber					lastActiveProcess;	/**< Indicates the process that was front before showing the sidebar */
 }
 
