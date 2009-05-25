@@ -10,7 +10,7 @@
 #import <Carbon/Carbon.h>
 #import <ApplicationServices/ApplicationServices.h>
 
-#import "NNActiveAppSavingWindow.h"
+#import "NNActiveAppSavingPanel.h"
 
 // setSticky stuff
 typedef int CGSConnectionID;
@@ -29,7 +29,7 @@ extern NSString * const SIDEBAR_SHOW_DELAY_KEYPATH;
 extern NSString * const SIDEBAR_POSITION_KEYPATH;
 
 
-@interface PASidebarWindow : NNActiveAppSavingWindow {
+@interface PASidebarWindow : NNActiveAppSavingPanel {
 	
 	BOOL								expanded;
 	PASidebarPosition					sidebarPosition;

@@ -1,15 +1,15 @@
 //
-//  NNActiveAppSavingWindow.m
+//  NNActiveAppSavingPanel.m
 //  punakea
 //
 //  Created by Johannes Hoffart on 25.05.09.
 //  Copyright 2009 nudge:nudge. All rights reserved.
 //
 
-#import "NNActiveAppSavingWindow.h"
+#import "NNActiveAppSavingPanel.h"
 
 
-@implementation NNActiveAppSavingWindow
+@implementation NNActiveAppSavingPanel
 
 #pragma mark Accessors
 - (BOOL)activatesLastActiveApp
