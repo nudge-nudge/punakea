@@ -18,6 +18,7 @@
 	
 	// Get reference to file
 	NNFile *file = [NNFile fileWithPath:(NSString *)[args objectForKey:@"filename"]];
+	[file setShouldManageFiles:NO];
 	
 	// Add tags to file
 	NSArray *tagNames = [args objectForKey:@""];
