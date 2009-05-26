@@ -293,6 +293,7 @@
 		6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */; };
 		6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */; };
 		65943F990AFA56AA00A8922F /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 65943F980AFA56AA00A8922F /* appicon.icns */; };
+		6597D9D70FCC51F6003AE414 /* PAAddTagsCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6597D9D60FCC51F6003AE414 /* PAAddTagsCommand.m */; };
 		65988C6B0A875A11000270E6 /* PAButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65988C690A875A11000270E6 /* PAButton.h */; };
 		65988C6C0A875A11000270E6 /* PAButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65988C6A0A875A11000270E6 /* PAButton.m */; };
 		65988C810A875C53000270E6 /* PAButtonCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65988C7F0A875C53000270E6 /* PAButtonCell.h */; };
@@ -953,6 +954,8 @@
 		6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemMatrix.h; sourceTree = "<group>"; };
 		6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemMatrix.m; sourceTree = "<group>"; };
 		65943F980AFA56AA00A8922F /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = appicon.icns; sourceTree = "<group>"; };
+		6597D9D50FCC51F6003AE414 /* PAAddTagsCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAddTagsCommand.h; sourceTree = "<group>"; };
+		6597D9D60FCC51F6003AE414 /* PAAddTagsCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAddTagsCommand.m; sourceTree = "<group>"; };
 		65988C690A875A11000270E6 /* PAButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAButton.h; sourceTree = "<group>"; };
 		65988C6A0A875A11000270E6 /* PAButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAButton.m; sourceTree = "<group>"; };
 		65988C7F0A875C53000270E6 /* PAButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAButtonCell.h; sourceTree = "<group>"; };
@@ -1717,8 +1720,7 @@
 		6531649B0AF2534B00928BEF /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				48C2BE570FCB0C4900C48F03 /* Windows */,
-				65C8A1FB0BEB4D3000DC032F /* Tag Field */,
+				6597D9D40FCC51AB003AE414 /* AppleScript */,
 				65CC15530BE0A5B800866AF7 /* Controls */,
 				483272220AA42C7E003D98A6 /* Preferences */,
 			);
@@ -2008,6 +2010,15 @@
 			name = SelectedTagsView;
 			sourceTree = "<group>";
 		};
+		6597D9D40FCC51AB003AE414 /* AppleScript */ = {
+			isa = PBXGroup;
+			children = (
+				6597D9D50FCC51F6003AE414 /* PAAddTagsCommand.h */,
+				6597D9D60FCC51F6003AE414 /* PAAddTagsCommand.m */,
+			);
+			name = AppleScript;
+			sourceTree = "<group>";
+		};
 		659945C60BBAA9ED00F146D2 /* SourcePanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2114,8 +2125,10 @@
 		65CC15530BE0A5B800866AF7 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				658AB8310BE60D000036FCA2 /* TabPanel */,
 				65CC15540BE0A5C800866AF7 /* StatusBar */,
+				658AB8310BE60D000036FCA2 /* TabPanel */,
+				65C8A1FB0BEB4D3000DC032F /* Tag Field */,
+				48C2BE570FCB0C4900C48F03 /* Windows */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -2835,6 +2848,7 @@
 				4817DC5F0FA3826E0067524D /* LCLLogFile.m in Sources */,
 				4817DC600FA3826E0067524D /* lcl.m in Sources */,
 				48C2BF020FCB133900C48F03 /* NNActiveAppSavingPanel.m in Sources */,
+				6597D9D70FCC51F6003AE414 /* PAAddTagsCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

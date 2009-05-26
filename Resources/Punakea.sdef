@@ -8,5 +8,14 @@
 				<cocoa key="selection"/>
 			</property>
 		</class>
+		<command name="add_tags" code="nnpaadtg" description="Add a list of tags to a file.">
+			<cocoa class="PAAddTagsCommand"/>
+			<direct-parameter type="text">
+				<cocoa key="tags" />
+			</direct-parameter>
+			<parameter name="to" code="to  " type="text" description="Location of the file that the tags should be added to">
+                <cocoa key="filename" />
+            </parameter>
+		</command>
 	</suite>
 </dictionary>
