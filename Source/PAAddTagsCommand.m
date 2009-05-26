@@ -21,10 +21,10 @@
 	
 	// Add tags to file
 	NSArray *tagNames = [args objectForKey:@""];
-	for (NSString *tagName in tagNames)
-	{
-		[file addTag:[[NNTags sharedTags] tagForName:tagName creationOptions:NNTagsCreationOptionFull]];
-	}
+	
+	NSArray *tags = [[NNTags sharedTags] tagsForNames:tagNames creationOptions:NNTagsCreationOptionFull];
+	
+	[file addTags:tags];
 	
 	return nil;
 }
