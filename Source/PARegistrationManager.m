@@ -37,8 +37,8 @@ static PARegistrationManager *sharedInstance = nil;
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		
 		// EITHER - OR - Uncomment the respective line
-		timeLimitedBetaExpirationDate = [[NSDate alloc] initWithString:@"2009-07-15 23:59:59 +0200"];	// CEST = +0200!
-		//[self checkRegistrationInformation];
+		//timeLimitedBetaExpirationDate = [[NSDate alloc] initWithString:@"2009-07-15 23:59:59 +0200"];	// CEST = +0200!
+		[self checkRegistrationInformation];
 	}
 	return self;
 }
@@ -316,7 +316,7 @@ static PARegistrationManager *sharedInstance = nil;
 	[licenseKeyWindow makeFirstResponder:closeButton];
 	
 	[licenseKeyWindow center];
-	[licenseKeyWindow makeKeyAndOrderFront:self];
+	[NSApp runModalForWindow:licenseKeyWindow];
 }
 
 - (void)showLicenseManagerWindowForTrialVersion
@@ -340,9 +340,9 @@ static PARegistrationManager *sharedInstance = nil;
 	[keyTextField setStringValue:@""];
 	
 	[licenseKeyWindow makeFirstResponder:nameTextField];
-	
+
 	[licenseKeyWindow center];
-	[licenseKeyWindow makeKeyAndOrderFront:self];
+	[NSApp runModalForWindow:licenseKeyWindow];
 }
 
 - (void)showThankYouSheet
