@@ -7,6 +7,7 @@
 #import "PARecentTagGroup.h"
 #import "PAPopularTagGroup.h"
 #import "PADropManager.h"
+#import "NNActiveAppSavingPanel.h";
 
 @interface SidebarController : NSWindowController {
 	NNTags *tags;

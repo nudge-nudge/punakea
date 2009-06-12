@@ -76,7 +76,7 @@ action called on dropping files to FileBox
 - (void)newTaggableObjectsHaveBeenDropped
 {	
 	// set window not to activate last front app
-	[[self window] setActivatesLastFrontApp:NO];
+	[(NNActiveAppSavingPanel *)[self window] setActivatesLastActiveApp:NO];
 	
 	// create new tagger window
 	taggerController = [[TaggerController alloc] init];
@@ -104,7 +104,7 @@ action called on dropping files to FileBox
 - (IBAction)tagClicked:(id)sender
 {
 	// set window not to activate last front app
-	[[self window] setActivatesLastFrontApp:NO];
+	[[self window] setActivatesLastActiveApp:NO];
 	
 	NNTag *tag;
 	
@@ -138,7 +138,7 @@ action called on dropping files to FileBox
 - (void)appShouldStayFront
 {
 	// set window not to activate last front app
-	[[self window] setActivatesLastFrontApp:NO];
+	[[self window] setActivatesLastActiveApp:NO];
 }
 
 - (BOOL)mouseInSidebarWindow
