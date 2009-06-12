@@ -34,25 +34,17 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		
 		PASourceItem *fileKindItem;
 		
-		fileKindItem = [PASourceItem itemWithValue:@"PDF" displayName:
-						NSLocalizedStringFromTableInBundle(@"PDF", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
-		NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:@"PDF"];
-		[image setSize:NSMakeSize(16,16)];
-		[fileKindItem setImage:image];
-		[fileKindItem setEditable:NO];
-		[sourceItem addChild:fileKindItem];
-		
 		fileKindItem = [PASourceItem itemWithValue:@"BOOKMARKS" displayName:
-			NSLocalizedStringFromTableInBundle(@"BOOKMARKS", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
+						NSLocalizedStringFromTableInBundle(@"BOOKMARKS", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
 		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-bookmarks"]];
 		[fileKindItem setEditable:NO];
 		[sourceItem addChild:fileKindItem];
 		
 		fileKindItem = [PASourceItem itemWithValue:@"IMAGES" displayName:
-									  NSLocalizedStringFromTableInBundle(@"IMAGES", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
+						NSLocalizedStringFromTableInBundle(@"IMAGES", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
 		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-images"]];
 		[fileKindItem setEditable:NO];
-		[sourceItem addChild:fileKindItem];
+		[sourceItem addChild:fileKindItem];		
 		
 		fileKindItem = [PASourceItem itemWithValue:@"MOVIES" displayName:
 						NSLocalizedStringFromTableInBundle(@"MOVIES", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
@@ -63,6 +55,14 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		fileKindItem = [PASourceItem itemWithValue:@"MUSIC" displayName:
 						NSLocalizedStringFromTableInBundle(@"MUSIC", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
 		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-music"]];
+		[fileKindItem setEditable:NO];
+		[sourceItem addChild:fileKindItem];
+		
+		fileKindItem = [PASourceItem itemWithValue:@"PDF" displayName:
+						NSLocalizedStringFromTableInBundle(@"PDF", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
+		NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:@"PDF"];
+		[image setSize:NSMakeSize(16,16)];
+		[fileKindItem setImage:image];
 		[fileKindItem setEditable:NO];
 		[sourceItem addChild:fileKindItem];
 		
