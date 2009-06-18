@@ -385,6 +385,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			[[self window] makeFirstResponder:nextValidKeyView];			
 			return;
 		}
+		
+		// Prevent alphanumeric keys to be sent to tag cloud whenever a modifierkey is pressed
+		if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:key] &&
+			([theEvent modifierFlags] & PAModifierKeyMask) != 0) 
+		{
+			return;
+		}
 	}
 	
 	[super keyDown:theEvent];

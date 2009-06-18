@@ -364,9 +364,6 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// get the pressed key
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	
-	// create character set for testing
-	NSCharacterSet *alphanumericCharacterSet = [NSCharacterSet alphanumericCharacterSet];
-	
 	if (key == NSDeleteCharacter) 
 	{
 		// if searchFieldString has any content (i.e. user is using type-ahead-find), delete last char
@@ -381,7 +378,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			[(PAResultsViewController*)mainController removeLastTag];
 		}
 	}
-	else if ([alphanumericCharacterSet characterIsMember:key]) 
+	else if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:key]) 
 	{
 		// only add to searchFieldString if there are any tags, otherwise do nothing
 		NSMutableString *tmpsearchFieldString = [searchFieldString mutableCopy];
