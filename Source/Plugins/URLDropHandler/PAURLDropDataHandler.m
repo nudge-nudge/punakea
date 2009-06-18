@@ -89,20 +89,20 @@ data is NSDictionary with keys:
 	
 	NDResourceFork *resource = [[NDResourceFork alloc] initForWritingAtPath:filePath];
 	NSMutableArray *entryArray = [NSMutableArray array];
-	NSData *resouceData;
+	NSData *resourceData;
 	
 	// add the 'TEXT' resource
-	resouceData = [NSData dataWithBytes:[url UTF8String] length:strlen([url UTF8String])];
-	[resource addData:resouceData type:kTEXTWeblocType Id:256 name:filename];
+	resourceData = [NSData dataWithBytes:[url UTF8String] length:strlen([url UTF8String])];
+	[resource addData:resourceData type:kTEXTWeblocType Id:256 name:filename];
 	[entryArray addObject:[WLDragMapEntry entryWithType:kTEXTWeblocType resID:256]];
 	
 	// add the 'url ' resource
-	[resource addData:resouceData type:kURLWeblocType Id:256 name:filename];
+	[resource addData:resourceData type:kURLWeblocType Id:256 name:filename];
 	[entryArray addObject:[WLDragMapEntry entryWithType:kURLWeblocType resID:256]];
 	
 	// add the 'urln' resource
-	resouceData = [NSData dataWithBytes:[filename UTF8String] length:strlen([filename UTF8String])];
-	[resource addData:resouceData type:kURLNWeblocType Id:256 name:filename];
+	resourceData = [NSData dataWithBytes:[filename UTF8String] length:strlen([filename UTF8String])];
+	[resource addData:resourceData type:kURLNWeblocType Id:256 name:filename];
 	[entryArray addObject:[WLDragMapEntry entryWithType:kURLNWeblocType resID:256]];
 	
 	// add the 'drag' resource

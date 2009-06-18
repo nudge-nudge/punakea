@@ -97,6 +97,7 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 		if ([dropHandler willHandleDrop:pasteboard])
 		{
 			result = [dropHandler handleDrop:pasteboard];
+			break;
 		}
 	}
 
