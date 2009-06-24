@@ -19,7 +19,7 @@
 
 "BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER" = "Punakea is setting up the Tags Folder. This may take some minutes.";
 "BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER" = "Punakea is cleaning up the Tags Folder.";
-"BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB" = "Punakea is rebuilding up the Tags Database.";
+"BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB" = "Punakea is rebuilding the tags database.";
 
 "DESTINATION_FOLDER_MAY_GET_DELETED" = "Make sure that \"%@\" is really empty!";
 "DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "Punakea might delete contents in the \"Tags Folder\".";
