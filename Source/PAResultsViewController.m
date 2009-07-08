@@ -164,7 +164,16 @@
 #pragma mark actions
 - (void)handleTagActivation:(NNTag*)tag
 {
+	NSEvent *currentEvent = [NSApp currentEvent];
+	BOOL alternateKeyDown = ([currentEvent modifierFlags] & NSAlternateKeyMask) != 0;
+		
 	[selectedTags addTag:tag];
+	
+	if (alternateKeyDown)
+	{
+		[selectedTags negateTag:tag];
+	}
+	
 	[tag incrementClickCount];
 }
 
