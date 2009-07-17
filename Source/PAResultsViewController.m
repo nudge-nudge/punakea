@@ -167,12 +167,7 @@
 	NSEvent *currentEvent = [NSApp currentEvent];
 	BOOL alternateKeyDown = ([currentEvent modifierFlags] & NSAlternateKeyMask) != 0;
 		
-	[selectedTags addTag:tag];
-	
-	if (alternateKeyDown)
-	{
-		[selectedTags negateTag:tag];
-	}
+	[selectedTags addTag:tag negated:alternateKeyDown];
 	
 	[tag incrementClickCount];
 }
