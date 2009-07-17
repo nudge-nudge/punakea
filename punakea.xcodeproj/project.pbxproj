@@ -23,7 +23,7 @@
 /* Begin PBXBuildFile section */
 		480219540C02D2EE001CF480 /* PAInstaller.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 480219520C02D2EE001CF480 /* PAInstaller.h */; };
 		480219550C02D2EE001CF480 /* PAInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 480219530C02D2EE001CF480 /* PAInstaller.m */; };
-		480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy MDImporter */ = {isa = PBXBuildFile; fileRef = 480219480C02CE7B001CF480 /* WeblocImporter.mdimporter */; };
+		480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy Spotlight Importers */ = {isa = PBXBuildFile; fileRef = 480219480C02CE7B001CF480 /* WeblocImporter.mdimporter */; };
 		4807215E0AEFE5600024118D /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */; };
 		480C40300BF4469A00C90B2C /* PATagCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 480C402E0BF4469A00C90B2C /* PATagCache.h */; };
 		480C40310BF4469A00C90B2C /* PATagCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C402F0BF4469A00C90B2C /* PATagCache.m */; };
@@ -336,6 +336,8 @@
 		65C0E04409E3EF11006C5A7C /* PAResultsGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */; };
 		65C4890609E2C30F00A45A17 /* PAResultsOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */; };
 		65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */; };
+		65C50A17101088CB005C73D4 /* OpenMetaSpotlight.mdimporter in Resources */ = {isa = PBXBuildFile; fileRef = 65C50A0F101088CB005C73D4 /* OpenMetaSpotlight.mdimporter */; };
+		65C50A18101088D2005C73D4 /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */ = {isa = PBXBuildFile; fileRef = 65C50A0F101088CB005C73D4 /* OpenMetaSpotlight.mdimporter */; };
 		65CA6A750FB2CA47007B509C /* warning.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 65CA6A740FB2CA47007B509C /* warning.pdf */; };
 		65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CA80100AAEEF8A002117C0 /* PAFilterButton.h */; };
 		65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA80110AAEEF8A002117C0 /* PAFilterButton.m */; };
@@ -521,15 +523,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4895153B0C3BFD1100463D01 /* Copy MDImporter */ = {
+		4895153B0C3BFD1100463D01 /* Copy Spotlight Importers */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Contents/Library/Spotlight;
 			dstSubfolderSpec = 1;
 			files = (
-				480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy MDImporter */,
+				65C50A18101088D2005C73D4 /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */,
+				480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy Spotlight Importers */,
 			);
-			name = "Copy MDImporter";
+			name = "Copy Spotlight Importers";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		48F97FEC0AEF5638003BA2DC /* Copy Frameworks */ = {
@@ -999,6 +1002,7 @@
 		65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsGroupCell.m; sourceTree = "<group>"; };
 		65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsOutlineView.h; sourceTree = "<group>"; };
 		65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsOutlineView.m; sourceTree = "<group>"; };
+		65C50A0F101088CB005C73D4 /* OpenMetaSpotlight.mdimporter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OpenMetaSpotlight.mdimporter; sourceTree = SOURCE_ROOT; };
 		65CA6A740FB2CA47007B509C /* warning.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = warning.pdf; sourceTree = "<group>"; };
 		65CA80100AAEEF8A002117C0 /* PAFilterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilterButton.h; sourceTree = "<group>"; };
 		65CA80110AAEEF8A002117C0 /* PAFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilterButton.m; sourceTree = "<group>"; };
@@ -1168,6 +1172,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65C50A0F101088CB005C73D4 /* OpenMetaSpotlight.mdimporter */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
 				653216F80FAF739000FC2117 /* libEWS.a */,
 				6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */,
@@ -2377,7 +2382,7 @@
 				65E7B37C0994D97500565251 /* CopyFiles */,
 				48F97FEC0AEF5638003BA2DC /* Copy Frameworks */,
 				48F9807F0AEF5CC4003BA2DC /* Copy Plugins */,
-				4895153B0C3BFD1100463D01 /* Copy MDImporter */,
+				4895153B0C3BFD1100463D01 /* Copy Spotlight Importers */,
 				657E6DFA0F6BBF3F00AAD236 /* ShellScript */,
 			);
 			buildRules = (
@@ -2626,6 +2631,7 @@
 				65CA6A750FB2CA47007B509C /* warning.pdf in Resources */,
 				48EE0A760FCB1F8C0039154B /* source-panel-movies.tif in Resources */,
 				48EE0A770FCB1F8C0039154B /* source-panel-music.tif in Resources */,
+				65C50A17101088CB005C73D4 /* OpenMetaSpotlight.mdimporter in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
