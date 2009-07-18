@@ -336,8 +336,6 @@
 		65C0E04409E3EF11006C5A7C /* PAResultsGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */; };
 		65C4890609E2C30F00A45A17 /* PAResultsOutlineView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */; };
 		65C4890709E2C30F00A45A17 /* PAResultsOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */; };
-		65C50A17101088CB005C73D4 /* OpenMetaSpotlight.mdimporter in Resources */ = {isa = PBXBuildFile; fileRef = 65C50A0F101088CB005C73D4 /* OpenMetaSpotlight.mdimporter */; };
-		65C50A18101088D2005C73D4 /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */ = {isa = PBXBuildFile; fileRef = 65C50A0F101088CB005C73D4 /* OpenMetaSpotlight.mdimporter */; };
 		65CA6A750FB2CA47007B509C /* warning.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 65CA6A740FB2CA47007B509C /* warning.pdf */; };
 		65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CA80100AAEEF8A002117C0 /* PAFilterButton.h */; };
 		65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA80110AAEEF8A002117C0 /* PAFilterButton.m */; };
@@ -529,7 +527,6 @@
 			dstPath = Contents/Library/Spotlight;
 			dstSubfolderSpec = 1;
 			files = (
-				65C50A18101088D2005C73D4 /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */,
 				480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy Spotlight Importers */,
 			);
 			name = "Copy Spotlight Importers";
@@ -1002,7 +999,6 @@
 		65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsGroupCell.m; sourceTree = "<group>"; };
 		65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsOutlineView.h; sourceTree = "<group>"; };
 		65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsOutlineView.m; sourceTree = "<group>"; };
-		65C50A0F101088CB005C73D4 /* OpenMetaSpotlight.mdimporter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OpenMetaSpotlight.mdimporter; sourceTree = SOURCE_ROOT; };
 		65CA6A740FB2CA47007B509C /* warning.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = warning.pdf; sourceTree = "<group>"; };
 		65CA80100AAEEF8A002117C0 /* PAFilterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilterButton.h; sourceTree = "<group>"; };
 		65CA80110AAEEF8A002117C0 /* PAFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilterButton.m; sourceTree = "<group>"; };
@@ -1172,7 +1168,6 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				65C50A0F101088CB005C73D4 /* OpenMetaSpotlight.mdimporter */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
 				653216F80FAF739000FC2117 /* libEWS.a */,
 				6531BB7B0FA05F3C0038D287 /* libValidateUniversal.a */,
@@ -2631,7 +2626,6 @@
 				65CA6A750FB2CA47007B509C /* warning.pdf in Resources */,
 				48EE0A760FCB1F8C0039154B /* source-panel-movies.tif in Resources */,
 				48EE0A770FCB1F8C0039154B /* source-panel-music.tif in Resources */,
-				65C50A17101088CB005C73D4 /* OpenMetaSpotlight.mdimporter in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
