@@ -194,6 +194,8 @@
 		651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */; };
 		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
 		651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */; };
+		65254D76101624360085A93C /* OpenMetaSpotlight.mdimporter in Resources */ = {isa = PBXBuildFile; fileRef = 65254D67101624360085A93C /* OpenMetaSpotlight.mdimporter */; };
+		65254D7D1016246B0085A93C /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */ = {isa = PBXBuildFile; fileRef = 65254D67101624360085A93C /* OpenMetaSpotlight.mdimporter */; };
 		6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */; };
 		6525F34F09EA3C2B006E1FB7 /* PASegmentedImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */; };
 		6525F46E09EA4FBD006E1FB7 /* MDListViewOff-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6525F46B09EA4FBD006E1FB7 /* MDListViewOff-1.tiff */; };
@@ -528,6 +530,7 @@
 			dstSubfolderSpec = 1;
 			files = (
 				480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy Spotlight Importers */,
+				65254D7D1016246B0085A93C /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */,
 			);
 			name = "Copy Spotlight Importers";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -853,6 +856,7 @@
 		6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BGHUDAppKit.framework; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite.tiff; sourceTree = "<group>"; };
+		65254D67101624360085A93C /* OpenMetaSpotlight.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = OpenMetaSpotlight.mdimporter; sourceTree = "<group>"; };
 		6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASegmentedImageControl.h; sourceTree = "<group>"; };
 		6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASegmentedImageControl.m; sourceTree = "<group>"; };
 		6525F46B09EA4FBD006E1FB7 /* MDListViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDListViewOff-1.tiff"; sourceTree = "<group>"; };
@@ -1224,6 +1228,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65254D67101624360085A93C /* OpenMetaSpotlight.mdimporter */,
 				657E6E120F6BC0E300AAD236 /* AppleScript */,
 				650D52660F6ACB8800E67680 /* Scripts */,
 				6572864C0BC427D1000034D2 /* Strings */,
@@ -2626,6 +2631,7 @@
 				65CA6A750FB2CA47007B509C /* warning.pdf in Resources */,
 				48EE0A760FCB1F8C0039154B /* source-panel-movies.tif in Resources */,
 				48EE0A770FCB1F8C0039154B /* source-panel-music.tif in Resources */,
+				65254D76101624360085A93C /* OpenMetaSpotlight.mdimporter in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
