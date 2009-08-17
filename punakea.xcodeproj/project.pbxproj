@@ -55,6 +55,8 @@
 		48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48186F390BE4C7BE000B4638 /* NNFilterEngine.framework */; };
 		481A64310ABFD16F005516E7 /* LoginItemsAE.c in Sources */ = {isa = PBXBuildFile; fileRef = 481A642F0ABFD16F005516E7 /* LoginItemsAE.c */; };
 		481A64320ABFD16F005516E7 /* LoginItemsAE.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481A64300ABFD16F005516E7 /* LoginItemsAE.h */; };
+		4820107A103960BB00BE2FA3 /* NSApplication+SystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 48201079103960BB00BE2FA3 /* NSApplication+SystemVersion.m */; };
+		482010C7103966D400BE2FA3 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482010C6103966D400BE2FA3 /* QuickLook.framework */; };
 		48209CAB0AB1BEED00F3CF21 /* PADropManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48209CA50AB1BEED00F3CF21 /* PADropManager.h */; };
 		48209CAC0AB1BEED00F3CF21 /* PADropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 48209CA60AB1BEED00F3CF21 /* PADropManager.m */; };
 		482B31150AC6C70D0071C33B /* ResultsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 482B31130AC6C70D0071C33B /* ResultsView.nib */; };
@@ -341,7 +343,6 @@
 		65CA6A750FB2CA47007B509C /* warning.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 65CA6A740FB2CA47007B509C /* warning.pdf */; };
 		65CA80120AAEEF8A002117C0 /* PAFilterButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CA80100AAEEF8A002117C0 /* PAFilterButton.h */; };
 		65CA80130AAEEF8A002117C0 /* PAFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA80110AAEEF8A002117C0 /* PAFilterButton.m */; };
-		65CAAEF10F6C2E2500B4FFAA /* QuickLookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65CAAEF00F6C2E2500B4FFAA /* QuickLookUI.framework */; };
 		65CB093B0BBBBDA800799E25 /* PASourceItemCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB09390BBBBDA800799E25 /* PASourceItemCell.h */; };
 		65CB093C0BBBBDA800799E25 /* PASourceItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB093A0BBBBDA800799E25 /* PASourceItemCell.m */; };
 		65CB09450BBBBF8700799E25 /* PAGenericTableColumn.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */; };
@@ -706,6 +707,9 @@
 		48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NNDistributedObjectProtocols.h; sourceTree = "<group>"; };
 		481A642F0ABFD16F005516E7 /* LoginItemsAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LoginItemsAE.c; sourceTree = "<group>"; };
 		481A64300ABFD16F005516E7 /* LoginItemsAE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginItemsAE.h; sourceTree = "<group>"; };
+		48201078103960BB00BE2FA3 /* NSApplication+SystemVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+SystemVersion.h"; sourceTree = "<group>"; };
+		48201079103960BB00BE2FA3 /* NSApplication+SystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+SystemVersion.m"; sourceTree = "<group>"; };
+		482010C6103966D400BE2FA3 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = /System/Library/Frameworks/QuickLook.framework; sourceTree = "<absolute>"; };
 		48209CA50AB1BEED00F3CF21 /* PADropManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADropManager.h; sourceTree = "<group>"; };
 		48209CA60AB1BEED00F3CF21 /* PADropManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADropManager.m; sourceTree = "<group>"; };
 		48209CA70AB1BEED00F3CF21 /* PAFilenamesDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAFilenamesDropHandler.h; path = ../../PAFilenamesDropHandler.h; sourceTree = "<group>"; };
@@ -1007,7 +1011,6 @@
 		65CA80100AAEEF8A002117C0 /* PAFilterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilterButton.h; sourceTree = "<group>"; };
 		65CA80110AAEEF8A002117C0 /* PAFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFilterButton.m; sourceTree = "<group>"; };
 		65CAAEDE0F6C2D9700B4FFAA /* QuickLook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickLook.h; sourceTree = "<group>"; };
-		65CAAEF00F6C2E2500B4FFAA /* QuickLookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookUI.framework; path = /System/Library/PrivateFrameworks/QuickLookUI.framework; sourceTree = "<absolute>"; };
 		65CB09390BBBBDA800799E25 /* PASourceItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASourceItemCell.h; sourceTree = "<group>"; };
 		65CB093A0BBBBDA800799E25 /* PASourceItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASourceItemCell.m; sourceTree = "<group>"; };
 		65CB09430BBBBF8700799E25 /* PAGenericTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAGenericTableColumn.h; sourceTree = "<group>"; };
@@ -1125,12 +1128,12 @@
 				484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */,
 				484497BD0B2D9925009B262C /* Sparkle.framework in Frameworks */,
 				650359A00F5D832F00BC204D /* Carbon.framework in Frameworks */,
-				65CAAEF10F6C2E2500B4FFAA /* QuickLookUI.framework in Frameworks */,
 				6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */,
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
 				6531BB7D0FA05F3C0038D287 /* libValidateUniversal.a in Frameworks */,
 				65F65A110FA1C0C40006E229 /* SSCrypto.framework in Frameworks */,
 				653216F90FAF739000FC2117 /* libEWS.a in Frameworks */,
+				482010C7103966D400BE2FA3 /* QuickLook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1164,7 +1167,7 @@
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				658EA77C099798A6005F13DE /* Message.framework */,
-				65CAAEF00F6C2E2500B4FFAA /* QuickLookUI.framework */,
+				482010C6103966D400BE2FA3 /* QuickLook.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -1364,6 +1367,8 @@
 				480C403A0BF4471300C90B2C /* PASingleton.m */,
 				480219520C02D2EE001CF480 /* PAInstaller.h */,
 				480219530C02D2EE001CF480 /* PAInstaller.m */,
+				48201078103960BB00BE2FA3 /* NSApplication+SystemVersion.h */,
+				48201079103960BB00BE2FA3 /* NSApplication+SystemVersion.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -2408,6 +2413,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				ORGANIZATIONNAME = "nudge:nudge";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */;
 			compatibilityVersion = "Xcode 3.0";
@@ -2855,6 +2861,7 @@
 				4817DC600FA3826E0067524D /* lcl.m in Sources */,
 				48C2BF020FCB133900C48F03 /* NNActiveAppSavingPanel.m in Sources */,
 				6597D9D70FCC51F6003AE414 /* PAAddTagsCommand.m in Sources */,
+				4820107A103960BB00BE2FA3 /* NSApplication+SystemVersion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

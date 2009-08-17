@@ -49,6 +49,9 @@
 {
     if (self = [super init])
     {
+		// dynamically load QuickLook framework to keep 10.5 compatibility
+		[self loadQuickLookFramework];
+		
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		[self loadUserDefaults];
 		
@@ -1001,6 +1004,36 @@
 			[userDefaults setObject:[NSNumber numberWithInt:2] forKey:@"Version"];
 		}
 	}
+}
+
+- (void)loadQuickLookFramework 
+{
+	unsigned major = 0;
+	unsigned minor = 0;
+	unsigned bugFix = 0;
+	
+	[NSApp getSystemVersionMajor:&major
+						   minor:&minor
+						  bugFix:&bugFix];
+	
+	NSString *qlFrameworkPath;
+	
+	if (major < 5 ) 
+	{
+		// pre-leopard do nothing
+		return;
+	}
+	else if (major == 5) 
+	{
+		qlFrameworkPath = [NSString stringWithString:@"/System/Library/PrivateFrameworks/QuickLookUI.framework"];
+	} 
+	else if (major > 6)
+	{
+		qlFrameworkPath = [NSString stringWithString:@"/System/Library/Frameworks/QuickLook.framework"];
+	}
+	
+	NSBundle *qlFrameworkBundle = [NSBundle bundleWithPath:qlFrameworkPath];
+	[qlFrameworkBundle load];
 }
 
 - (void)updateUserDefaultsToVersion:(int)newVersion 

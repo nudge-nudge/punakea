@@ -3,6 +3,8 @@
 #import "NNTagging/NNTags.h"
 #import "NNTagging/NNTaggableObject.h"
 
+#import "NSApplication+SystemVersion.h"
+
 #import "SidebarController.h"
 #import "BrowserController.h"
 #import "TaggerController.h"

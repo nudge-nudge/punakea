@@ -19,7 +19,7 @@
 
 #import "PASourcePanelController.h"
 
-#import "NNFilterEngine.h"
+#import "NNFilterEngine/NNFilterEngine.h"
 #import "PAStringPrefixFilter.h"
 #import "PAContentTypeFilter.h"
 #import "PADropManager.h"
