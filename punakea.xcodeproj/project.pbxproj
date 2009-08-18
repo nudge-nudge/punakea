@@ -56,7 +56,6 @@
 		481A64310ABFD16F005516E7 /* LoginItemsAE.c in Sources */ = {isa = PBXBuildFile; fileRef = 481A642F0ABFD16F005516E7 /* LoginItemsAE.c */; };
 		481A64320ABFD16F005516E7 /* LoginItemsAE.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 481A64300ABFD16F005516E7 /* LoginItemsAE.h */; };
 		4820107A103960BB00BE2FA3 /* NSApplication+SystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 48201079103960BB00BE2FA3 /* NSApplication+SystemVersion.m */; };
-		482010C7103966D400BE2FA3 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482010C6103966D400BE2FA3 /* QuickLook.framework */; };
 		48209CAB0AB1BEED00F3CF21 /* PADropManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48209CA50AB1BEED00F3CF21 /* PADropManager.h */; };
 		48209CAC0AB1BEED00F3CF21 /* PADropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 48209CA60AB1BEED00F3CF21 /* PADropManager.m */; };
 		482B31150AC6C70D0071C33B /* ResultsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 482B31130AC6C70D0071C33B /* ResultsView.nib */; };
@@ -107,6 +106,7 @@
 		48557AD80ADB8ADA0025CE9C /* PATaggerItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48557AD60ADB8ADA0025CE9C /* PATaggerItemCell.m */; };
 		4856C6740A516D8300E1D568 /* BrowserViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C6720A516D8300E1D568 /* BrowserViewController.h */; };
 		4856C6750A516D8300E1D568 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C6730A516D8300E1D568 /* BrowserViewController.m */; };
+		485710FE103B149D00C5CB4C /* QuickLookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 485710FD103B149D00C5CB4C /* QuickLookUI.framework */; };
 		485944A70AE4B41100AFB18F /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 485944A60AE4B41100AFB18F /* Credits.html */; };
 		485C09870ABAC830002CB2C2 /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = 485C09860ABAC830002CB2C2 /* drop.png */; };
 		485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */; };
@@ -709,7 +709,6 @@
 		481A64300ABFD16F005516E7 /* LoginItemsAE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginItemsAE.h; sourceTree = "<group>"; };
 		48201078103960BB00BE2FA3 /* NSApplication+SystemVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+SystemVersion.h"; sourceTree = "<group>"; };
 		48201079103960BB00BE2FA3 /* NSApplication+SystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+SystemVersion.m"; sourceTree = "<group>"; };
-		482010C6103966D400BE2FA3 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = /System/Library/Frameworks/QuickLook.framework; sourceTree = "<absolute>"; };
 		48209CA50AB1BEED00F3CF21 /* PADropManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADropManager.h; sourceTree = "<group>"; };
 		48209CA60AB1BEED00F3CF21 /* PADropManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADropManager.m; sourceTree = "<group>"; };
 		48209CA70AB1BEED00F3CF21 /* PAFilenamesDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAFilenamesDropHandler.h; path = ../../PAFilenamesDropHandler.h; sourceTree = "<group>"; };
@@ -766,6 +765,7 @@
 		48557AD60ADB8ADA0025CE9C /* PATaggerItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerItemCell.m; sourceTree = "<group>"; };
 		4856C6720A516D8300E1D568 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		4856C6730A516D8300E1D568 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
+		485710FD103B149D00C5CB4C /* QuickLookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookUI.framework; path = /System/Library/PrivateFrameworks/QuickLookUI.framework; sourceTree = "<absolute>"; };
 		485944A60AE4B41100AFB18F /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		485C09860ABAC830002CB2C2 /* drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop.png; sourceTree = "<group>"; };
 		485F402C0AB6D61300E230DC /* PAWebURLsWithTitlesPboardTypeDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAWebURLsWithTitlesPboardTypeDropHandler.h; sourceTree = "<group>"; };
@@ -1133,7 +1133,7 @@
 				6531BB7D0FA05F3C0038D287 /* libValidateUniversal.a in Frameworks */,
 				65F65A110FA1C0C40006E229 /* SSCrypto.framework in Frameworks */,
 				653216F90FAF739000FC2117 /* libEWS.a in Frameworks */,
-				482010C7103966D400BE2FA3 /* QuickLook.framework in Frameworks */,
+				485710FE103B149D00C5CB4C /* QuickLookUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1159,6 +1159,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				485710FD103B149D00C5CB4C /* QuickLookUI.framework */,
 				48E760980F7F8B4400F9EEBA /* AddressBook.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				484496300B2D56CE009B262C /* ApplicationServices.framework */,
@@ -1167,7 +1168,6 @@
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				658EA77C099798A6005F13DE /* Message.framework */,
-				482010C6103966D400BE2FA3 /* QuickLook.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
