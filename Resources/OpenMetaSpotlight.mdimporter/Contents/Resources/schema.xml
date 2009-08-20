@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<schema version="1.0" xmlns="http://www.apple.com/metadata"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://www.apple.com/metadata file:///System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Resources/MetadataSchema.xsd">
+     <note>
+        Open meta schema for user added data to 'any' file.
+    </note>
+    <!--
+        Open Meta - why duplicate attributes that are already defined?
+        
+        To answer this, look at an example. kMDItemKeywords:
+        
+        When a file with keywords embedded in it is created or lands on the computer, say for example a PDF file, Spotlight
+        will import it. The keywords will be stored under kMDItemKeywords in the Spotlight DB. 
+        
+        Now a user wants to set keywords (ie tags) on a file - any file on their computer - whether or not
+        the file type supports keywords or not. If Open Meta used kMDItemKeywords to store these - it will work pretty well,
+        until the user stored their own tags, on that PDF file that already had embedded keywords. Then all sorts of problems happen:
+        1) The existing keywords are hidden from the user, as keywords set on the xattr will override the ones set in the meta data. 
+        2) These hidden keywords will come back when the file is viewed with Preview, or Acrobat, etc. 
+        3) If the keywords on the the file are changed inside Preview, then these changes will not show up in spotlight
+        
+        There are two solutions to this sort of problem. 
+        
+        One is to edit the 'actual keywords' inside the PDF. This solution quickly gets
+        complicated, as for each file type there may be none (eg: text file), one (eg:PDF), several (eg: jpeg, word?) places to store keywords,
+        and the software to read and write keywords into all supported file types quickly grows to be unmanagable. The solution for text and other non 
+        keywordable files is to write the tags somewhere else (eg sidecar files). 
+        
+        The other solution is the tact taken by Open Meta. 
+        Keywords are written to their own tag, which is indexed by Spotlight, (kOMUserTags). These tags are independent of kMDItemkeywords. 
+        They can be written in the exact same very simple manner to each and every file on the file system. They do not hide the keywords set on the file. 
+        Since they are stored in xattrs, they can easily be included or excluded from a file, when that file is for instance shipped off to a third party. 
+        This is useful in order to keep metadata 'in house'. BUT - the data set by OpenMeta is not 'in the file' the same 
+        way that tags set on a jpeg are 'in' the EXIF portion of the file when bridge does it. 
+        The Open Meta tags follow the file around on the OS - through backups, copies and moves. 
+        
+		Other keys
+		**********************
+		 I used to consider it 'wrong' to be able to override kMDItem* stuff with OpenMeta, and it is for tags. Tags though are a special case,
+		 in that there could be for instance 6 keywords (relevant - ish) set on a PDF, and you want to add the open meta tag 'special' to it. You don't want to 
+		 lose the 6 keywords do you? There are also lots of images from image houses that have a lot of keyword 'noise' in them that you might not want
+		 cluttering up your tags that you have set. i have found png files with 50 keywords set. html can also be bad for this. So users want the ability to only look at tags that they have set,
+		 or a combination of keywords and tags.
+		 BUT - look at ratings - ratings are just one number - it is likely that you don't want to as a user, have to think about 2 different places ratings 
+		 could be stored, (like tags vs keywords), but would rather have just the one concept of 'rating'. It is also ok, even deisrable, to be able to override the rating
+		 on a file. So ratings _should_ use kMDItemStarRating.
+		 Also look at 'less used' keys - like camera (kMDItemAcquisitionMake and  kMDItemAcquisitionModel) - although they will be set on perhaps thousands of photos in 
+		 what if you run into a PDF that is a picture taken with a camera, and you want to tag that? openmeta will allow you to to tag it with kMDItemAcquisitionMake and kMDItemAcquisitionModel
+		 so that searches for camera make an model do not have to 'know about openmeta' to work. 
+		 Plus it's always good to keep the number of keys down.
+        
+       
+        What about namespaces?
+        **********************
+        Open Meta is a clean simple way to set user entered searchable metadata on any file on Mac OS X. Concepts like namespaces are not encouraged, as 
+        most users have no idea what a namespace is. The tradeoff is a small amount of _understandable_ ambiguity - searching for Tags:apple (i.e. kOMUserTags == "apple"cd) will find
+        all files having to do with both the fruit one can eat, and the company that makes computers. Users expect this. With namespaces an improperly constructed query
+        will usually result in 'no matches'. 
+        
+        
+    -->
+  <!--
+            The 'attributes' section defines custom attributes that this metadata importer supports.  
+            Below is an example of a multivalued string attribute.  Uncomment this part 
+            of the file if you need to define a custom attribute.
+     
+            'multivalued' indicates whether the attribute is an array type or not.
+     
+            'type' indicates the data type of the attribute.   
+                        Available types are CFString, CFNumber, CFDate, CFBoolean and CFData.  
+     
+            If you don't need to define a custom attribute, it is safe to remove this section.
+            
+     
+            
+            To see the system's definitions for the builtin attributes and file types, look at the system schema,
+            /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Resources/schema.xml
+    -->
+    <attributes>
+        <attribute name="kOMUserTags" multivalued="true" type="CFString"/>
+        <attribute name="kOMUserTagTime" type="CFDate"/>
+        <attribute name="kOMDocumentDate" type="CFDate"/>
+        <attribute name="kOMBookmarks" multivalued="true" type="CFString"/>
+        <attribute name="kOMUserTagApplication" type="CFString"/>
+   </attributes>
+
+    <types>
+        <type name="com.openmeta.openmetaschema">  <!-- add one <type>...</type> entry for each UTI that you need to define. -->
+         
+            <!-- 'allattrs' is a whitespace separated list of all of the attributes that this UTI type normally has.
+                 It does not have to be exhaustive. -->
+            <allattrs> 
+			kOMUserTags
+			kOMUserTagTime
+			kOMDocumentDate
+			kOMBookmarks
+			kOMUserTagApplication
+            </allattrs>
+            <!-- 'displayattrs' is a whitespace separated list of the attributes that should normally be displayed when previewing files of this UTI type. -->
+            <displayattrs>
+			kOMUserTags
+			kOMUserTagTime
+			kOMDocumentDate
+			kOMBookmarks
+			kOMUserTagApplication
+            </displayattrs>
+            
+        </type>
+    </types>
+</schema>
+

@@ -106,7 +106,6 @@
 		48557AD80ADB8ADA0025CE9C /* PATaggerItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48557AD60ADB8ADA0025CE9C /* PATaggerItemCell.m */; };
 		4856C6740A516D8300E1D568 /* BrowserViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4856C6720A516D8300E1D568 /* BrowserViewController.h */; };
 		4856C6750A516D8300E1D568 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4856C6730A516D8300E1D568 /* BrowserViewController.m */; };
-		485710FE103B149D00C5CB4C /* QuickLookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 485710FD103B149D00C5CB4C /* QuickLookUI.framework */; };
 		485944A70AE4B41100AFB18F /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 485944A60AE4B41100AFB18F /* Credits.html */; };
 		485C09870ABAC830002CB2C2 /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = 485C09860ABAC830002CB2C2 /* drop.png */; };
 		485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 485FAF2A0A0DE54C0088AC08 /* PASidebarTableViewDropController.h */; };
@@ -118,6 +117,9 @@
 		486DC7510ACD3B2D00BE0F54 /* PATagManagementViewMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
 		486EBA4609D68F16000C154C /* PAFileBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 486EBA4409D68F16000C154C /* PAFileBox.h */; };
+		486F7B50103D91DC004164F9 /* OpenMetaSpotlight.mdimporter in Resources */ = {isa = PBXBuildFile; fileRef = 486F7B41103D91DC004164F9 /* OpenMetaSpotlight.mdimporter */; };
+		486F7B51103D91E6004164F9 /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */ = {isa = PBXBuildFile; fileRef = 486F7B41103D91DC004164F9 /* OpenMetaSpotlight.mdimporter */; };
+		486F7B5A103D920E004164F9 /* QuickLookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486F7B59103D920E004164F9 /* QuickLookUI.framework */; };
 		4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */; };
 		4870213C0A4FC1EC00CD5E75 /* PASidebarWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */; };
 		4870698E0A0C933C00A3ADE2 /* PATypeAheadFind.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */; };
@@ -196,8 +198,6 @@
 		651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */; };
 		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
 		651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */; };
-		65254D76101624360085A93C /* OpenMetaSpotlight.mdimporter in Resources */ = {isa = PBXBuildFile; fileRef = 65254D67101624360085A93C /* OpenMetaSpotlight.mdimporter */; };
-		65254D7D1016246B0085A93C /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */ = {isa = PBXBuildFile; fileRef = 65254D67101624360085A93C /* OpenMetaSpotlight.mdimporter */; };
 		6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */; };
 		6525F34F09EA3C2B006E1FB7 /* PASegmentedImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */; };
 		6525F46E09EA4FBD006E1FB7 /* MDListViewOff-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6525F46B09EA4FBD006E1FB7 /* MDListViewOff-1.tiff */; };
@@ -531,7 +531,7 @@
 			dstSubfolderSpec = 1;
 			files = (
 				480219560C02D31A001CF480 /* WeblocImporter.mdimporter in Copy Spotlight Importers */,
-				65254D7D1016246B0085A93C /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */,
+				486F7B51103D91E6004164F9 /* OpenMetaSpotlight.mdimporter in Copy Spotlight Importers */,
 			);
 			name = "Copy Spotlight Importers";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -765,7 +765,6 @@
 		48557AD60ADB8ADA0025CE9C /* PATaggerItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerItemCell.m; sourceTree = "<group>"; };
 		4856C6720A516D8300E1D568 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		4856C6730A516D8300E1D568 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
-		485710FD103B149D00C5CB4C /* QuickLookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookUI.framework; path = /System/Library/PrivateFrameworks/QuickLookUI.framework; sourceTree = "<absolute>"; };
 		485944A60AE4B41100AFB18F /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		485C09860ABAC830002CB2C2 /* drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop.png; sourceTree = "<group>"; };
 		485F402C0AB6D61300E230DC /* PAWebURLsWithTitlesPboardTypeDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAWebURLsWithTitlesPboardTypeDropHandler.h; sourceTree = "<group>"; };
@@ -783,6 +782,8 @@
 		486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementViewMainView.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
 		486EBA4409D68F16000C154C /* PAFileBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFileBox.h; sourceTree = "<group>"; };
+		486F7B41103D91DC004164F9 /* OpenMetaSpotlight.mdimporter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = OpenMetaSpotlight.mdimporter; path = Resources/OpenMetaSpotlight.mdimporter; sourceTree = "<group>"; };
+		486F7B59103D920E004164F9 /* QuickLookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookUI.framework; path = /System/Library/PrivateFrameworks/QuickLookUI.framework; sourceTree = "<absolute>"; };
 		487021390A4FC1EC00CD5E75 /* PASidebarWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASidebarWindow.h; sourceTree = "<group>"; };
 		4870213A0A4FC1EC00CD5E75 /* PASidebarWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarWindow.m; sourceTree = "<group>"; };
 		4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadFind.h; sourceTree = "<group>"; };
@@ -860,7 +861,6 @@
 		6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BGHUDAppKit.framework; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite.tiff; sourceTree = "<group>"; };
-		65254D67101624360085A93C /* OpenMetaSpotlight.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = OpenMetaSpotlight.mdimporter; sourceTree = "<group>"; };
 		6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASegmentedImageControl.h; sourceTree = "<group>"; };
 		6525F34D09EA3C2B006E1FB7 /* PASegmentedImageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASegmentedImageControl.m; sourceTree = "<group>"; };
 		6525F46B09EA4FBD006E1FB7 /* MDListViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDListViewOff-1.tiff"; sourceTree = "<group>"; };
@@ -1133,7 +1133,7 @@
 				6531BB7D0FA05F3C0038D287 /* libValidateUniversal.a in Frameworks */,
 				65F65A110FA1C0C40006E229 /* SSCrypto.framework in Frameworks */,
 				653216F90FAF739000FC2117 /* libEWS.a in Frameworks */,
-				485710FE103B149D00C5CB4C /* QuickLookUI.framework in Frameworks */,
+				486F7B5A103D920E004164F9 /* QuickLookUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1159,7 +1159,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				485710FD103B149D00C5CB4C /* QuickLookUI.framework */,
+				486F7B59103D920E004164F9 /* QuickLookUI.framework */,
 				48E760980F7F8B4400F9EEBA /* AddressBook.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				484496300B2D56CE009B262C /* ApplicationServices.framework */,
@@ -1231,7 +1231,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				65254D67101624360085A93C /* OpenMetaSpotlight.mdimporter */,
+				486F7B41103D91DC004164F9 /* OpenMetaSpotlight.mdimporter */,
 				657E6E120F6BC0E300AAD236 /* AppleScript */,
 				650D52660F6ACB8800E67680 /* Scripts */,
 				6572864C0BC427D1000034D2 /* Strings */,
@@ -2637,7 +2637,7 @@
 				65CA6A750FB2CA47007B509C /* warning.pdf in Resources */,
 				48EE0A760FCB1F8C0039154B /* source-panel-movies.tif in Resources */,
 				48EE0A770FCB1F8C0039154B /* source-panel-music.tif in Resources */,
-				65254D76101624360085A93C /* OpenMetaSpotlight.mdimporter in Resources */,
+				486F7B50103D91DC004164F9 /* OpenMetaSpotlight.mdimporter in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
