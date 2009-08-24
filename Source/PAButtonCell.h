@@ -62,6 +62,8 @@ extern int const FRAME_HEIGHT_REGULAR;
 	int							fontSize;
 	
 	BOOL						showsCloseIcon;
+	BOOL						showsExcludeIcon;
+	BOOL						excluded;
 	SEL							closeAction;	
 	BOOL						trackingInsideCloseIcon;
 	
@@ -82,6 +84,9 @@ extern int const FRAME_HEIGHT_REGULAR;
 - (void)setFontSize:(int)size;	/**< Sets the font size for the title being displayed. Ignored if style is not PATokenBezelStyle. */
 - (BOOL)showsCloseIcon;
 - (void)setShowsCloseIcon:(BOOL)flag;	/**< Sets flag if a PATagButton shows a close icon */
+- (BOOL)showsExcludeIcon;
+- (void)setShowsExcludeIcon:(BOOL)flag;	/**< Sets flag if a PATagButton shows an exclude icon */
+- (void)toggleExclusion;
 
 - (SEL)closeAction;
 - (void)setCloseAction:(SEL)action;

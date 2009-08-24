@@ -148,6 +148,7 @@
 		489DA0480C0B2EB40027E3FF /* PAServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 489DA0460C0B2EB40027E3FF /* PAServices.m */; };
 		48B0F1C30ACBFA6200738053 /* Tags.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1C20ACBFA6200738053 /* Tags.strings */; };
 		48B0F1D80ACC020800738053 /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1D70ACC020800738053 /* Global.strings */; };
+		48B9AE29104325C000EFF3D4 /* sl-status_exclude.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48B9AE28104325C000EFF3D4 /* sl-status_exclude.tiff */; };
 		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
 		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
 		48BFF6250B13420500C1A127 /* PADebugView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BFF6230B13420500C1A127 /* PADebugView.h */; };
@@ -803,6 +804,7 @@
 		489DA0460C0B2EB40027E3FF /* PAServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAServices.m; sourceTree = "<group>"; };
 		48B0F1C00ACBFA5200738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Tags.strings; sourceTree = "<group>"; };
 		48B0F1D50ACC020000738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Global.strings; sourceTree = "<group>"; };
+		48B9AE28104325C000EFF3D4 /* sl-status_exclude.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_exclude.tiff"; sourceTree = "<group>"; };
 		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
 		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
 		48BFF6230B13420500C1A127 /* PADebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADebugView.h; sourceTree = "<group>"; };
@@ -2189,6 +2191,7 @@
 		65D6ACC20A89E21200FDAC8A /* PAButton */ = {
 			isa = PBXGroup;
 			children = (
+				48B9AE28104325C000EFF3D4 /* sl-status_exclude.tiff */,
 				65D6ACBA0A89E1E800FDAC8A /* TabActive.png */,
 				65D6ACBB0A89E1E800FDAC8A /* TabHover.png */,
 				65D6ACBC0A89E1E800FDAC8A /* TabSelected.png */,
@@ -2638,6 +2641,7 @@
 				48EE0A760FCB1F8C0039154B /* source-panel-movies.tif in Resources */,
 				48EE0A770FCB1F8C0039154B /* source-panel-music.tif in Resources */,
 				486F7B50103D91DC004164F9 /* OpenMetaSpotlight.mdimporter in Resources */,
+				48B9AE29104325C000EFF3D4 /* sl-status_exclude.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

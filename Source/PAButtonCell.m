@@ -63,7 +63,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	[self setBezelColor:[NSColor colorWithDeviceRed:(222.0/255.0) green:(231.0/255.0) blue:(248.0/255.0) alpha:1.0]];
 	[self setSelectedBezelColor:[NSColor alternateSelectedControlColor]];
 	[self setFontSize:11];
-	
+		
 	tag = [[NSMutableDictionary alloc] init];
 }
 
@@ -278,6 +278,29 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 		
 		[icon drawAtPoint:targetPoint fromRect:iconRect operation:NSCompositeSourceOver fraction:1.0];
 	}
+	
+	// Draw exclusion icon
+	if ([self showsExcludeIcon] || excluded)
+	{
+		NSImage *icon = [NSImage imageNamed:@"sl-status_exclude"];
+
+		if([controlView isFlipped]) 
+		{
+			[icon setFlipped:YES];
+		}
+		
+		NSRect iconRect;
+		iconRect.origin = NSZeroPoint;
+		iconRect.size = [icon size];
+		
+		NSPoint targetPoint;
+		if([controlView isFlipped])
+			targetPoint = NSMakePoint(0, 0);
+		else
+			targetPoint = NSMakePoint(originalCellFrame.size.width, originalCellFrame.size.height - 1);
+		
+		[icon drawAtPoint:targetPoint fromRect:iconRect operation:NSCompositeSourceOver fraction:1.0];
+	}
 }
 
 
@@ -481,6 +504,21 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 - (void)setShowsCloseIcon:(BOOL)flag
 {
 	showsCloseIcon = flag;
+}
+
+- (BOOL)showsExcludeIcon
+{
+	return showsExcludeIcon;
+}
+
+- (void)setShowsExcludeIcon:(BOOL)flag
+{
+	showsExcludeIcon = flag;
+}
+
+- (void)toggleExclusion 
+{
+	excluded = (excluded) ? NO : YES;
 }
 
 - (void)setAction:(SEL)aSelector

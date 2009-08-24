@@ -217,6 +217,21 @@
 {
 	[[self cell] setShowsCloseIcon:flag];
 }
+
+- (BOOL)showsExcludeIcon
+{
+	return [[self cell] showsExcludeIcon];
+}
+
+- (void)setShowsExcludeIcon:(BOOL)flag
+{
+	[[self cell] setShowsExcludeIcon:flag];
+}
+
+- (void)toggleExclusion
+{
+	[[self cell] toggleExclusion];
+}
 	
 - (int)tag
 {

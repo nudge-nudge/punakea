@@ -42,6 +42,9 @@
 // TODO: - (void)setAlphaComponent:(float)alpha;
 - (BOOL)showsCloseIcon;
 - (void)setShowsCloseIcon:(BOOL)flag;	/**< Sets flag if a PATagButton shows a close icon */
+- (BOOL)showsExcludeIcon;
+- (void)setShowsExcludeIcon:(BOOL)flag;	/**< Sets flag if a PATagButton shows an exclude icon */
+- (void)toggleExclusion;
 - (int)tag;
 - (void)setTag:(int)aTag;
 

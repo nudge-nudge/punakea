@@ -142,6 +142,7 @@ int const PADDING_TO_RIGHT = 60;
 			[button setTitle:[tag name]];
 			[button setBezelStyle:PATagBezelStyle];
 			[button setShowsCloseIcon:YES];
+			[button setShowsExcludeIcon:YES];
 			[button setTarget:self];
 			[button setAction:@selector(tagClicked:)];
 			[button setCloseAction:@selector(tagClosed:)];
