@@ -280,27 +280,27 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	}
 	
 	// Draw exclusion icon
-	if ([self showsExcludeIcon] || excluded)
-	{
-		NSImage *icon = [NSImage imageNamed:@"sl-status_exclude"];
-
-		if([controlView isFlipped]) 
-		{
-			[icon setFlipped:YES];
-		}
-		
-		NSRect iconRect;
-		iconRect.origin = NSZeroPoint;
-		iconRect.size = [icon size];
-		
-		NSPoint targetPoint;
-		if([controlView isFlipped])
-			targetPoint = NSMakePoint(0, 0);
-		else
-			targetPoint = NSMakePoint(originalCellFrame.size.width, originalCellFrame.size.height - 1);
-		
-		[icon drawAtPoint:targetPoint fromRect:iconRect operation:NSCompositeSourceOver fraction:1.0];
-	}
+//	if ([self showsExcludeIcon] || excluded)
+//	{
+//		NSImage *icon = [NSImage imageNamed:@"sl-status_exclude"];
+//
+//		if([controlView isFlipped]) 
+//		{
+//			[icon setFlipped:YES];
+//		}
+//		
+//		NSRect iconRect;
+//		iconRect.origin = NSZeroPoint;
+//		iconRect.size = [icon size];
+//		
+//		NSPoint targetPoint;
+//		if([controlView isFlipped])
+//			targetPoint = NSMakePoint(0, 0);
+//		else
+//			targetPoint = NSMakePoint(originalCellFrame.size.width, originalCellFrame.size.height - 1);
+//		
+//		[icon drawAtPoint:targetPoint fromRect:iconRect operation:NSCompositeSourceOver fraction:1.0];
+//	}
 }
 
 

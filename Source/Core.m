@@ -1027,10 +1027,10 @@
 	{
 		qlFrameworkPath = [NSString stringWithString:@"/System/Library/PrivateFrameworks/QuickLookUI.framework"];
 	} 
-	else if (major > 6)
-	{
-		qlFrameworkPath = [NSString stringWithString:@"/System/Library/Frameworks/QuickLook.framework"];
-	}
+//	else if (major > 6)
+//	{
+//		qlFrameworkPath = [NSString stringWithString:@"/System/Library/Frameworks/QuickLook.framework"];
+//	}
 	
 	NSBundle *qlFrameworkBundle = [NSBundle bundleWithPath:qlFrameworkPath];
 	[qlFrameworkBundle load];
