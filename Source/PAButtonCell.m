@@ -62,6 +62,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	
 	[self setBezelColor:[NSColor colorWithDeviceRed:(222.0/255.0) green:(231.0/255.0) blue:(248.0/255.0) alpha:1.0]];
 	[self setSelectedBezelColor:[NSColor alternateSelectedControlColor]];
+	[self setNegatedBezelColor:[NSColor colorWithCalibratedRed:180.0/255.0 green:0.0 blue:0.0 alpha:1.0]];
 	[self setFontSize:11];
 		
 	tag = [[NSMutableDictionary alloc] init];
@@ -71,6 +72,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 {
 	if(bezelColor) [bezelColor release];
 	if(selectedBezelColor) [selectedBezelColor release];
+	if(negatedBezelColor) [negatedBezelColor release];
 	if(title) [title release];
 	if(attributedTitle) [attributedTitle release];
 	if(images) [images release];
@@ -230,11 +232,16 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	{
 		NSColor *outerBezelColor;
 		if([self isHighlighted] || [self isPressed])
-			outerBezelColor = [self selectedBezelColor];
-		else if([self isHovered])
+		{
+			if ([self isNegated])
+				outerBezelColor = [self negatedBezelColor];
+			else
+				outerBezelColor = [self selectedBezelColor];
+		} else if([self isHovered]) {
 			outerBezelColor = [bezelColor blendedColorWithFraction:0.55 ofColor:[self selectedBezelColor]];
-		else
+		} else {
 			outerBezelColor = [bezelColor blendedColorWithFraction:0.4 ofColor:[self selectedBezelColor]];
+		}
 		
 		NSBezierPath *bezel = [NSBezierPath bezierPathWithRoundRectInRect:cellFrame radius:20.0];
 		[bezel setLineWidth:1.1];
@@ -265,7 +272,9 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 		else
 			icon = [NSImage imageNamed:@"sl-status_stop"];
 
-		if([controlView isFlipped]) [icon setFlipped:YES];
+		if([controlView isFlipped])
+			[icon setFlipped:YES];
+		
 		NSRect iconRect;
 		iconRect.origin = NSZeroPoint;
 		iconRect.size = [icon size];
@@ -282,12 +291,14 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	// Draw exclusion icon
 //	if ([self showsExcludeIcon] || excluded)
 //	{
-//		NSImage *icon = [NSImage imageNamed:@"sl-status_exclude"];
+//		NSImage *icon;
+//		if([self isPressed] && trackingInsideExcludeIcon)
+//			icon = [NSImage imageNamed:@"sl-status_exclude"];
+//		else
+//			icon = [NSImage imageNamed:@"sl-status_exclude"];
 //
 //		if([controlView isFlipped]) 
-//		{
 //			[icon setFlipped:YES];
-//		}
 //		
 //		NSRect iconRect;
 //		iconRect.origin = NSZeroPoint;
@@ -295,7 +306,7 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 //		
 //		NSPoint targetPoint;
 //		if([controlView isFlipped])
-//			targetPoint = NSMakePoint(0, 0);
+//			targetPoint = NSMakePoint(originalCellFrame.size.width - iconRect.size.width, 0);
 //		else
 //			targetPoint = NSMakePoint(originalCellFrame.size.width, originalCellFrame.size.height - 1);
 //		
@@ -434,6 +445,16 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	return selected;
 }
 
+- (void)setNegated:(BOOL)flag
+{
+	negated = flag;
+}
+
+- (BOOL)isNegated
+{
+	return negated;
+}
+
 - (PAButtonState)state
 {
 	return state;
@@ -474,6 +495,17 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 {
 	if(selectedBezelColor) [selectedBezelColor release];
 	selectedBezelColor = [color retain];
+}
+
+- (NSColor *)negatedBezelColor
+{
+	return negatedBezelColor;
+}
+
+- (void)setNegatedBezelColor:(NSColor *)color
+{
+	if (negatedBezelColor) [negatedBezelColor release];
+	negatedBezelColor = [color retain];
 }
 
 - (PAButtonType)buttonType

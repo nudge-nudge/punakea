@@ -54,10 +54,12 @@ extern int const FRAME_HEIGHT_REGULAR;
 	BOOL						hovered;
 	BOOL						pressed;
 	BOOL						selected;
+	BOOL						negated;
 	PAButtonState				state;
 	PABezelStyle				bezelStyle;
 	NSColor						*bezelColor;
 	NSColor						*selectedBezelColor;
+	NSColor						*negatedBezelColor;
 	PAButtonType				buttonType;
 	int							fontSize;
 	
@@ -66,6 +68,7 @@ extern int const FRAME_HEIGHT_REGULAR;
 	BOOL						excluded;
 	SEL							closeAction;	
 	BOOL						trackingInsideCloseIcon;
+	BOOL						trackingInsideExcludeIcon;
 	
 	SEL							defaultAction;
 
@@ -77,6 +80,8 @@ extern int const FRAME_HEIGHT_REGULAR;
 - (void)setBezelColor:(NSColor *)color;
 - (NSColor *)selectedBezelColor;	/**< Sets the selected background color of the rounded rect bezel, if style is PATokenBezelStyle */
 - (void)setSelectedBezelColor:(NSColor *)color;
+- (NSColor *)negatedBezelColor;		/**< Sets the negated background color of the rounded rect bezel, if style is PATokenBezelStyle */
+- (void)setNegatedBezelColor:(NSColor *)color;
 
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)type;
@@ -103,6 +108,8 @@ extern int const FRAME_HEIGHT_REGULAR;
 - (void)setPressed:(BOOL)flag;
 - (void)select:(BOOL)flag;
 - (BOOL)isSelected;
+- (void)setNegated:(BOOL)flag;
+- (BOOL)isNegated;
 - (PAButtonState)state;
 - (void)setState:(PAButtonState)aState;
 

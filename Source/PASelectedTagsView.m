@@ -114,8 +114,16 @@ int const PADDING_TO_RIGHT = 60;
 		NSString *tagName = [tagButtonKeys objectAtIndex:i];		
 		NNTag *tag = [[NNTags sharedTags] tagForName:tagName];
 		
-		if(![selectedTags containsTag:tag])
+		if([selectedTags containsTag:tag])
 		{
+			// If the tag is still present, check if its negation flag has changed.
+			PAButton *button = [tagButtons objectForKey:[tag name]];
+			[button setNegated:[selectedTags isNegated:tag]];
+			[button setNeedsDisplay];
+		}
+		else
+		{
+			// Remove button. This tag isn't present any more.
 			[[tagButtons objectForKey:tagName] removeFromSuperview];
 			[tagButtons removeObjectForKey:tagName];
 		}
@@ -130,17 +138,18 @@ int const PADDING_TO_RIGHT = 60;
 	NSSize buttonSize = NSMakeSize(0, 0);
 
 	NSEnumerator *enumerator = [selectedTags objectEnumerator];
-	
 	NNTag *tag;
-	while(tag = [enumerator nextObject])
+	
+	while (tag = [enumerator nextObject])
 	{			
 		PAButton *button;
 		
 		if(!(button = [tagButtons objectForKey:[tag name]]))
 		{	
-			button = [[PAButton alloc] initWithFrame:[self frame]];
+			button = [[PAButton alloc] initWithFrame:[self frame]];		
 			[button setTitle:[tag name]];
 			[button setBezelStyle:PATagBezelStyle];
+			[button setNegated:[selectedTags isNegated:tag]];
 			[button setShowsCloseIcon:YES];
 			[button setShowsExcludeIcon:YES];
 			[button setTarget:self];
@@ -263,7 +272,8 @@ int const PADDING_TO_RIGHT = 60;
 
 - (void)tagClicked:(id)sender
 {
-	// nothing yet
+	[selectedTags toggleTagNegation:[[NNTags sharedTags] tagForName:[sender title]]];
+	[self updateTagButtons];
 }
 
 - (void)tagClosed:(id)sender

@@ -25,6 +25,8 @@
 - (BOOL)isHighlighted;
 - (void)select:(BOOL)flag;
 - (BOOL)isSelected;
+- (void)setNegated:(BOOL)flag;
+- (BOOL)isNegated;
 - (PAButtonState)state;
 - (void)setState:(PAButtonState)aState;
 
@@ -34,6 +36,8 @@
 - (void)setBezelColor:(NSColor *)color;
 - (NSColor *)selectedBezelColor;	/**< Sets the selected background color of the rounded rect bezel, if style is PATokenBezelStyle */
 - (void)setSelectedBezelColor:(NSColor *)color;
+- (NSColor *)negatedBezelColor;		/**< Sets the negated background color of the rounded rect bezel, if style is PATokenBezelStyle */
+- (void)setNegatedBezelColor:(NSColor *)color;
 
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)buttonType;

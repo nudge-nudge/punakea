@@ -148,6 +148,16 @@
 	return [[self cell] isSelected];
 }
 
+- (void)setNegated:(BOOL)flag
+{
+	[[self cell] setNegated:flag];
+}
+
+- (BOOL)isNegated
+{
+	return [[self cell] isNegated];
+}
+
 - (PAButtonState)state
 {
 	return [[self cell] state];
@@ -186,6 +196,16 @@
 - (void)setSelectedBezelColor:(NSColor *)color
 {
 	[[self cell] setSelectedBezelColor:color];
+}
+
+- (NSColor *)negatedBezelColor
+{
+	return [[self cell] negatedBezelColor];
+}
+
+- (void)setNegatedBezelColor:(NSColor *)color
+{
+	[[self cell] setNegatedBezelColor:color];
 }
 
 - (PAButtonType)buttonType
