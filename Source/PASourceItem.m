@@ -88,7 +88,7 @@
 	
 	newItem->children = [children copy];
 	
-	return [newItem autorelease];
+	return newItem;
 }
 
 

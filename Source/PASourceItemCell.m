@@ -254,6 +254,7 @@
 	[controlView addSubview:scrollView];
 	
 	[[controlView window] makeFirstResponder:scrollView];
+	[scrollView release];
 }
 
 - (void)endEditing:(NSText *)textObj

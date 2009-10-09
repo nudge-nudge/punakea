@@ -98,7 +98,8 @@
 																	   withString:@""
 																		  options:0
 																			range:NSMakeRange(0, [mutableEditorString length])];
-	
+	[mutableEditorString release];
+	 
 	if (numberOfTokens < [currentCompleteTagsInField count])
 	{
 		// look for deleted tags
