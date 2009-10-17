@@ -124,6 +124,23 @@
 	//[[PANotificationReceiver alloc] init];
 	
 	UKCrashReporterCheckForCrash();
+	
+	// TEST
+//	NSLog(@"%@",[NSDate date]);
+//	
+//    NNTagging *tagging = [NNTagging tagging];
+//    NSArray *tagged = [tagging allTaggedObjects];
+//    NSMutableArray *tagsets = [NSMutableArray array];
+//    
+//    for(NNTaggableObject *taggedObject in tagged) {
+//        [tagsets addObject:[taggedObject tags]];
+//    }
+//    
+//    [NNApriori frequentItemsetsForTagSets:tagsets minFreq:2];
+//    NSArray *rules = [NNApriori associationRulesForTagSets:tagsets minFreq:2 minConfidence:0.5];
+//    //NSLog(@"%@", rules);
+//	
+//	NSLog(@"%@",[NSDate date]);
 }
 
 - (void)dealloc

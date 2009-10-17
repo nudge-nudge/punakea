@@ -36,6 +36,10 @@
 
 #import "NNActiveAppSavingPanel.h"
 
+// TEST
+#import "NNTagging/NNApriori.h"
+#import "NNTagging/NNAssociationRule.h"
+
 //#import "PANotificationReceiver.h"
 
 @interface Core : NSWindowController
