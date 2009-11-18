@@ -378,7 +378,7 @@
 	
 	NSEnumerator *e = [filters objectEnumerator];
 	NNObjectFilter *filter;
-	unsigned int slot = 0;
+	NSUInteger slot = 0;
 	
 	// find place in the filter queue for the new filter
 	while ((filter = [e nextObject]) && ([filter weight] >= [newFilter weight]))
@@ -412,7 +412,7 @@
 	// stops check thread and resets main buffer
 	[self setObjects:filterObjects];
 	
-	unsigned int slot = [filters indexOfObject:filter];
+	NSUInteger slot = [filters indexOfObject:filter];
 	
 	if (slot == NSNotFound)
 		return;

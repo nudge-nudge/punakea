@@ -1,7 +1,7 @@
 #import "PATagButtonCell.h"
 
-int const MIN_FONT_SIZE = 12;
-int const MAX_FONT_SIZE = 25;
+NSInteger const MIN_FONT_SIZE = 12;
+NSInteger const MAX_FONT_SIZE = 25;
 
 @interface PATagButtonCell (PrivateAPI)
 
@@ -13,7 +13,7 @@ int const MAX_FONT_SIZE = 25;
 @implementation PATagButtonCell
 
 #pragma mark init
-- (id)initWithTag:(NNTag*)aTag rating:(float)aRating
+- (id)initWithTag:(NNTag*)aTag rating:(CGFloat)aRating
 {
 	if (self = [super initTextCell:[aTag name]])
 	{
@@ -50,16 +50,16 @@ int const MAX_FONT_SIZE = 25;
 	genericTag = aTag;
 }
 
-- (float)rating
+- (CGFloat)rating
 {
 	return rating;
 }
 
-- (void)setRating:(float)aRating
+- (void)setRating:(CGFloat)aRating
 {
 	rating = aRating;
 	
-	int newFontSize = MAX_FONT_SIZE * [self rating];
+	NSInteger newFontSize = MAX_FONT_SIZE * [self rating];
 	if (newFontSize < MIN_FONT_SIZE)
 		newFontSize = MIN_FONT_SIZE;
 	

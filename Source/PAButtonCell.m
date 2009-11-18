@@ -13,7 +13,7 @@ NSSize const PADDING_RECESSEDBEZELSTYLE = {8,0};
 NSSize const PADDING_TAGBEZELSTYLE = {10,2};
 NSSize const MARGIN_TAGBEZELSTYLE = {5,3};
 
-int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
+NSInteger const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 
 
 @interface PAButtonCell (PrivateAPI)
@@ -518,12 +518,12 @@ int const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 	buttonType = type;
 }
 
-- (int)fontSize
+- (NSInteger)fontSize
 {
 	return fontSize;
 }
 
-- (void)setFontSize:(int)size
+- (void)setFontSize:(NSInteger)size
 {
 	fontSize = size;
 }

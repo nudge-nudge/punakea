@@ -280,7 +280,7 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	{
 		[quickLookPreviewImage setImage:nil];
 	} else {
-		int row = [tableView selectedRow];
+		NSInteger row = [tableView selectedRow];
 		if (row == -1) { row = 0; }
 		
 		NNFile *file = [tableView itemAtRow:row];
@@ -299,7 +299,7 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 - (void)doubleAction:(id)sender
 {
 	NSIndexSet *selectedRowIndexes = [tableView selectedRowIndexes];	
-	unsigned row = [selectedRowIndexes firstIndex];
+	NSUInteger row = [selectedRowIndexes firstIndex];
 	while(row != NSNotFound) 
 	{
 		id item = [tableView itemAtRow:row];
@@ -335,7 +335,7 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 						  contextInfo:NULL];
 }
 
-- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo
 {
 	if(returnCode != NSOKButton) return;
 	
@@ -444,14 +444,14 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 
 
 #pragma mark TableView Data Source
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
 	return [taggableObjects count];
 }
 
 -      	      (id)tableView:(NSTableView *)aTableView 
   objectValueForTableColumn:(NSTableColumn *)aTableColumn
-						row:(int)rowIndex
+						row:(NSInteger)rowIndex
 {
 	return [taggableObjects objectAtIndex:rowIndex];
 }
@@ -461,7 +461,7 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 - (void)tableView:(NSTableView *)aTableView
    setObjectValue:(id)anObject
    forTableColumn:(NSTableColumn *)aTableColumn 
-			  row:(int)rowIndex
+			  row:(NSInteger)rowIndex
 {
 	NNTaggableObject *taggableObject = [taggableObjects objectAtIndex:rowIndex];
 	NSString *value = anObject;
@@ -473,7 +473,7 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 
 
 #pragma mark TableView Delegate
-- (float)tableView:(NSTableView *)tableView heightOfRow:(int)row
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
 	return 19.0;
 }
@@ -481,7 +481,7 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 #pragma mark tableview drop support
 - (NSDragOperation)tableView:(NSTableView*)tv 
 				validateDrop:(id <NSDraggingInfo>)info 
-				 proposedRow:(int)row 
+				 proposedRow:(NSInteger)row 
 	   proposedDropOperation:(NSTableViewDropOperation)op
 {
 	// If we're just editing tags on files, don't allow drop
@@ -492,7 +492,7 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	if(![dropManager acceptsSender:[info draggingSource]])
 		return NSDragOperationNone;
 	
-	int fileCount = [taggableObjects count];
+	NSInteger fileCount = [taggableObjects count];
 
 	if (fileCount == 0)
 	{
@@ -508,7 +508,7 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	
 - (BOOL)tableView:(NSTableView*)tv 
 	   acceptDrop:(id <NSDraggingInfo>)info 
-			  row:(int)row 
+			  row:(NSInteger)row 
 	dropOperation:(NSTableViewDropOperation)op
 {
 	NSArray *files = [dropManager handleDrop:[info draggingPasteboard]];

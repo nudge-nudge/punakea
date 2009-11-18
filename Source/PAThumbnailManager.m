@@ -9,8 +9,8 @@
 #import "PAThumbnailManager.h"
 
 
-int const CONCURRENT_IMAGE_LOADING_MAX = 5;
-int const NUMBER_OF_CACHED_ITEMS_MAX = 300;
+NSInteger const CONCURRENT_IMAGE_LOADING_MAX = 5;
+NSInteger const NUMBER_OF_CACHED_ITEMS_MAX = 300;
 useconds_t const FIRST_ITEM_NOTIFICATION_DELAY = 200000;		// 0.2 sec
 
 NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification = @"PAThumbnailManagerDidFinishGeneratingItemNotification";
@@ -21,7 +21,7 @@ NSString * const PAThumbnailManagerDidFinishGeneratingItemNotification = @"PAThu
 - (NSImage *)thumbnailFromFileNew:(NSString *)filename maxBounds:(NSSize)maxBounds;
 - (NSImage *)scaledImageFromFile:(NSString *)source 
 		               maxBounds:(NSSize)maxBounds
-		                quality:(float)quality;
+		                quality:(CGFloat)quality;
 
 @end
 
@@ -240,13 +240,13 @@ static PAThumbnailManager *sharedInstance = nil;
 		return img;			
 	} else {				
 		// image size
-		int w, nw, h, nh;
+		NSInteger w, nw, h, nh;
 		w = nw = CGImageGetWidth(image);
 		h = nh = CGImageGetHeight(image);
 		
 		if (w > maxBounds.width || h > maxBounds.height)
 		{
-			float wr, hr;
+			CGFloat wr, hr;
 			
 			// ratios
 			wr = w / maxBounds.width;
@@ -288,16 +288,16 @@ static PAThumbnailManager *sharedInstance = nil;
 
 - (NSImage *)scaledImageFromFile:(NSString *)source 
 		               maxBounds:(NSSize)maxBounds
-		                quality:(float)quality
+		                quality:(CGFloat)quality
 {
-	int width = maxBounds.width;
-	int height = maxBounds.height;
+	NSInteger width = maxBounds.width;
+	NSInteger height = maxBounds.height;
 
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSImageRep *rep = nil;
     NSImageRep *output = nil;
     NSImage *scratch = nil;
-    int w,h,nw,nh;
+    NSInteger w,h,nw,nh;
     NSData *bitmapData;
     
     rep = [NSImageRep imageRepWithContentsOfFile:source];
@@ -327,11 +327,11 @@ static PAThumbnailManager *sharedInstance = nil;
     
     if (w>width || h>height)
     {
-	float wr, hr;
+	CGFloat wr, hr;
 	
 	// ratios
-	wr = w/(float)width;
-	hr = h/(float)height;
+	wr = w/(CGFloat)width;
+	hr = h/(CGFloat)height;
 	
 	
 	if (wr>hr) // landscape
@@ -418,7 +418,7 @@ static PAThumbnailManager *sharedInstance = nil;
     // save as JPEG - for Alternative 1
     NSDictionary *properties =
         [NSDictionary dictionaryWithObjectsAndKeys:
-	    [NSNumber numberWithFloat:quality],
+	    [NSNumber numberWithDouble:quality],
 	    NSImageCompressionFactor, NULL];    
     
     bitmapData = [(NSBitmapImageRep *)output representationUsingType:NSJPEGFileType
@@ -498,9 +498,9 @@ static PAThumbnailManager *sharedInstance = nil;
     return self;
 }
 
-- (unsigned)retainCount
+- (NSUInteger)retainCount
 {
-    return UINT_MAX;  //denotes an object that cannot be released
+    return NSUIntegerMax;  //denotes an object that cannot be released
 }
 
 - (void)release

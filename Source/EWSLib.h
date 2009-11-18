@@ -516,7 +516,7 @@ OSStatus eWeb_ValidateActivation(const char *publisherID,
 	@result     If the serial number was already activated on the user's system, this will return a value greater than zero
 				representing the number of days since January 1, 2000 that the serial number was activated.
 */
-unsigned int eWeb_DateActivation (const char *publisherID,
+NSUInteger eWeb_DateActivation (const char *publisherID,
 								   const char *activationID,
 								   const char *serialNumber);
 
@@ -548,7 +548,7 @@ OSStatus eWeb_ManualActivateSerialNumber(const char *publisherID,
 	@discussion This function can be used to validate serial number or activation expirations.
 	@result     Number of days since January 1, 2000.
  */
-unsigned int eWeb_Today();
+NSUInteger eWeb_Today();
 
 #ifdef __cplusplus
 }

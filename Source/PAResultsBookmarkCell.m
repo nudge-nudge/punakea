@@ -37,7 +37,7 @@
 	iconFrame.origin.y += 1;
 	iconFrame.size = NSMakeSize(16,16);
 	
-	// TODO taggableObject does not necessarily have a path
+	// FIXME taggableObject does not necessarily have a path
 	NSImage *icon = [[PAThumbnailManager sharedInstance] iconForFile:[item path]
 	                                                          inView:controlView
 															   frame:iconFrame];
@@ -79,9 +79,9 @@
 	    withAttributes:fontAttributes];
 		
 	// Draw bookmark url	// TODO taggableObject does not necessarily have a path
-	NDResourceFork *resource = [[NDResourceFork alloc] initForReadingAtPath:[item path]];
-	NSData *data = [resource dataForType:'url ' Id:256];
-	NSString *url = [[NSString alloc] initWithData:data encoding:[NSString defaultCStringEncoding]];
+	// FIXME this badly needs refactoring into the controller - holy shit.
+	NSDictionary *weblocDic = [NSDictionary dictionaryWithContentsOfFile:[item path]];
+	NSString *url = [weblocDic objectForKey:@"URL"];
 	
 	NSMutableDictionary *urlFontAttributes = [[fontAttributes mutableCopy] autorelease];
 	
@@ -100,10 +100,6 @@
 								  cellFrame.size.width - 190 - 25,
 								  cellFrame.size.height - 17)
 	    withAttributes:urlFontAttributes];
-		
-	[resource release];
-	[url release];
-	
 		
 	// Draw last used date
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];	
@@ -125,7 +121,7 @@
 	NSLog(@"editWithFrame");
 }
 
-- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
+- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
 {	
 	NSRect frame = aRect;
 	frame.origin.x += 25;
@@ -148,7 +144,7 @@
 
 
 #pragma mark Class Methods
-+ (float)heightOfRow
++ (CGFloat)heightOfRow
 {
 	return 33.0;
 }

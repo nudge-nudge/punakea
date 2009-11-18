@@ -11,7 +11,7 @@
 
 @interface PASelectedTagsView (PrivateAPI)
 
-- (void)setFrameHeight:(float)height;
+- (void)setFrameHeight:(CGFloat)height;
 
 - (void)addHomeButton;
 - (void)refreshHomeButton;
@@ -21,7 +21,7 @@
 
 NSSize const SELECTEDTAGS_VIEW_PADDING = {10, 7};
 NSSize const INTERCELL_SPACING = {3, 3};
-int const PADDING_TO_RIGHT = 60;
+NSInteger const PADDING_TO_RIGHT = 60;
 
 
 @implementation PASelectedTagsView
@@ -109,7 +109,7 @@ int const PADDING_TO_RIGHT = 60;
 	// Remove all old tags
 	NSArray *tagButtonKeys = [tagButtons allKeys];
 	
-	for(unsigned i = 0; i < [tagButtonKeys count]; i++)
+	for(NSUInteger i = 0; i < [tagButtonKeys count]; i++)
 	{
 		NSString *tagName = [tagButtonKeys objectAtIndex:i];		
 		NNTag *tag = [[NNTags sharedTags] tagForName:tagName];
@@ -131,10 +131,10 @@ int const PADDING_TO_RIGHT = 60;
 	
 	
 	// Add or update tags
-	int x = SELECTEDTAGS_VIEW_PADDING.width;
-	int y = SELECTEDTAGS_VIEW_PADDING.height;
+	NSInteger x = SELECTEDTAGS_VIEW_PADDING.width;
+	NSInteger y = SELECTEDTAGS_VIEW_PADDING.height;
 	
-	int numberOfRows = 1;
+	NSInteger numberOfRows = 1;
 	NSSize buttonSize = NSMakeSize(0, 0);
 
 	NSEnumerator *enumerator = [selectedTags objectEnumerator];
@@ -183,14 +183,14 @@ int const PADDING_TO_RIGHT = 60;
 		x += buttonFrame.size.width + INTERCELL_SPACING.width;
 	}
 	
-	float height = numberOfRows * (buttonSize.height + INTERCELL_SPACING.height) + 2 * SELECTEDTAGS_VIEW_PADDING.height;
+	CGFloat height = numberOfRows * (buttonSize.height + INTERCELL_SPACING.height) + 2 * SELECTEDTAGS_VIEW_PADDING.height;
 	if(height < frame.size.height) height = frame.size.height;
 	[self setFrameHeight:height];
 	
 	[self refreshHomeButton];
 }
 
-- (void)setFrameHeight:(float)height
+- (void)setFrameHeight:(CGFloat)height
 {
 	ignoreFrameDidChange = YES;
 	

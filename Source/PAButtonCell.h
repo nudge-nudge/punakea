@@ -39,9 +39,9 @@ extern NSSize const PADDING_RECESSEDBEZELSTYLE;
 extern NSSize const PADDING_TAGBEZELSTYLE;
 extern NSSize const MARGIN_TAGBEZELSTYLE;
 
-extern int const FRAME_HEIGHT_MINI;
-extern int const FRAME_HEIGHT_SMALL;
-extern int const FRAME_HEIGHT_REGULAR;
+extern NSInteger const FRAME_HEIGHT_MINI;
+extern NSInteger const FRAME_HEIGHT_SMALL;
+extern NSInteger const FRAME_HEIGHT_REGULAR;
 
 
 @interface PAButtonCell : NSActionCell {
@@ -61,7 +61,7 @@ extern int const FRAME_HEIGHT_REGULAR;
 	NSColor						*selectedBezelColor;
 	NSColor						*negatedBezelColor;
 	PAButtonType				buttonType;
-	int							fontSize;
+	NSInteger							fontSize;
 	
 	BOOL						showsCloseIcon;
 	BOOL						showsExcludeIcon;
@@ -85,8 +85,8 @@ extern int const FRAME_HEIGHT_REGULAR;
 
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)type;
-- (int)fontSize;
-- (void)setFontSize:(int)size;	/**< Sets the font size for the title being displayed. Ignored if style is not PATokenBezelStyle. */
+- (NSInteger)fontSize;
+- (void)setFontSize:(NSInteger)size;	/**< Sets the font size for the title being displayed. Ignored if style is not PATokenBezelStyle. */
 - (BOOL)showsCloseIcon;
 - (void)setShowsCloseIcon:(BOOL)flag;	/**< Sets flag if a PATagButton shows a close icon */
 - (BOOL)showsExcludeIcon;

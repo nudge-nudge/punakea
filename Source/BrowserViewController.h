@@ -34,7 +34,7 @@ typedef enum _PATagCloudSortKey {
 @class PATagCloud;
 
 
-extern float const SPLITVIEW_PANEL_MIN_HEIGHT;
+extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 
 
 @interface BrowserViewController : PAViewController <NNBVCServerProtocol>

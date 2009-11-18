@@ -16,7 +16,7 @@
 
 @interface PARegisteredLicense (PrivateAPI)
 
-- (NSString *)checksumWithKey:(NSString *)aKey forName:(NSString *)aName andMajorAppVersion:(int)version;
+- (NSString *)checksumWithKey:(NSString *)aKey forName:(NSString *)aName andMajorAppVersion:(NSInteger)version;
 
 @end
 
@@ -40,7 +40,7 @@
 	{
 		[license setName:(NSString *)[userDefaults objectForKey:@"License.Name"]];
 		[license setKey:(NSString *)[userDefaults objectForKey:@"License.Key"]];
-		[license setMajorAppVersion:[(NSNumber *)[userDefaults objectForKey:@"License.MajorAppVersion"] intValue]];
+		[license setMajorAppVersion:[(NSNumber *)[userDefaults objectForKey:@"License.MajorAppVersion"] integerValue]];
 		[license setChecksum:(NSString *)[userDefaults objectForKey:@"License.Checksum"]];
 	}
 	
@@ -91,9 +91,9 @@
 	[self setChecksum:aChecksum];
 }
 
-- (NSString *)checksumWithKey:(NSString *)aKey forName:(NSString *)aName andMajorAppVersion:(int)version
+- (NSString *)checksumWithKey:(NSString *)aKey forName:(NSString *)aName andMajorAppVersion:(NSInteger)version
 {
-	NSString *checksumString = [NSString stringWithFormat:@"%@ %@ %i",
+	NSString *checksumString = [NSString stringWithFormat:@"%@ %@ %ld",
 								aKey, aName, version];
 	
 	SSCrypto *crypto = [[[SSCrypto alloc] init] autorelease];

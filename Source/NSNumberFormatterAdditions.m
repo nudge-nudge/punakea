@@ -13,7 +13,7 @@
 
 - (NSString *)stringFromFileSize:(unsigned long long)size
 {
-	float fileSize = [[NSNumber numberWithUnsignedLongLong:size] floatValue];
+	CGFloat fileSize = [[NSNumber numberWithUnsignedLongLong:size] doubleValue];
 	if(fileSize > 0 && fileSize < 4096)
 		fileSize = 4096;
 	
@@ -36,14 +36,14 @@
 		{
 			fileSize /= 1024;
 			
-			NSNumber *n = [NSNumber numberWithFloat:fileSize];					
+			NSNumber *n = [NSNumber numberWithDouble:fileSize];					
 			fileSizeString = [NSString stringWithFormat:@"%@ MB", [self stringFromNumber:n]];
 		}
 		else
 		{
 			fileSize /= (1024 * 1024);
 			
-			NSNumber *n = [NSNumber numberWithFloat:fileSize];
+			NSNumber *n = [NSNumber numberWithDouble:fileSize];
 			fileSizeString = [NSString stringWithFormat:@"%@ GB", [self stringFromNumber:n]];
 		}
 	}

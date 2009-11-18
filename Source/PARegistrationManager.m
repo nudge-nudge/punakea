@@ -108,7 +108,7 @@ static PARegistrationManager *sharedInstance = nil;
 		NSString *bundleVersionString = [[[NSBundle bundleForClass:[self class]] infoDictionary] 
 										  objectForKey:@"CFBundleVersion"];
 		
-		int majorAppVersion = [[bundleVersionString substringToIndex:1] intValue];
+		NSInteger majorAppVersion = [[bundleVersionString substringToIndex:1] integerValue];
 		
 		PATrialLicense *l = [PATrialLicense license];
 		[l setStartDate:[NSDate date]];
@@ -141,7 +141,7 @@ static PARegistrationManager *sharedInstance = nil;
 		NSString *bundleVersionString = [[[NSBundle bundleForClass:[self class]] infoDictionary] 
 										 objectForKey:@"CFBundleVersion"];
 		
-		int majorAppVersion = [[bundleVersionString substringToIndex:1] intValue];
+		NSInteger majorAppVersion = [[bundleVersionString substringToIndex:1] integerValue];
 		[l setMajorAppVersion:majorAppVersion];
 		
 		[l updateChecksum];
@@ -182,7 +182,7 @@ static PARegistrationManager *sharedInstance = nil;
 	}
 }
 
-- (void)unregisterAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+- (void)unregisterAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSAlertFirstButtonReturn) {
 		// Remove any license information from user defaults
@@ -208,7 +208,7 @@ static PARegistrationManager *sharedInstance = nil;
 		
 		[userDefaults setObject:@"Trial" forKey:@"License.Type"];
 		[userDefaults setObject:[l startDate] forKey:@"License.StartDate"];
-		[userDefaults setObject:[NSNumber numberWithInt:[l majorAppVersion]] forKey:@"License.MajorAppVersion"];
+		[userDefaults setObject:[NSNumber numberWithInteger:[l majorAppVersion]] forKey:@"License.MajorAppVersion"];
 		[userDefaults setObject:[l checksum] forKey:@"License.Checksum"];
 	}
 	else
@@ -218,7 +218,7 @@ static PARegistrationManager *sharedInstance = nil;
 		[userDefaults setObject:@"Registered" forKey:@"License.Type"];
 		[userDefaults setObject:[l name] forKey:@"License.Name"];
 		[userDefaults setObject:[l key] forKey:@"License.Key"];
-		[userDefaults setObject:[NSNumber numberWithInt:[l majorAppVersion]] forKey:@"License.MajorAppVersion"];
+		[userDefaults setObject:[NSNumber numberWithInteger:[l majorAppVersion]] forKey:@"License.MajorAppVersion"];
 		[userDefaults setObject:[l checksum] forKey:@"License.Checksum"];
 	}
 	
@@ -453,9 +453,9 @@ static PARegistrationManager *sharedInstance = nil;
     return self;
 }
 
-- (unsigned)retainCount
+- (NSUInteger)retainCount
 {
-    return UINT_MAX;  //denotes an object that cannot be released
+    return NSUIntegerMax;  //denotes an object that cannot be released
 }
 
 - (void)release

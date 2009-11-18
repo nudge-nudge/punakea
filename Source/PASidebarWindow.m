@@ -25,7 +25,7 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 @implementation PASidebarWindow
 
 #pragma mark init and dealloc
-- (id)initWithContentRect:(NSRect)contentRect styleMask:(unsigned int)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
+- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
 {
     /* Enforce borderless window; allows us to handle dragging ourselves */
     self = [super initWithContentRect:contentRect
@@ -59,7 +59,7 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 	NSView *contentView = [self contentView];
 	[contentView addTrackingRect:[contentView bounds] owner:self userData:NULL assumeInside:NO];
 	
-	sidebarPosition = [[defaultsController valueForKeyPath:SIDEBAR_POSITION_KEYPATH] intValue];
+	sidebarPosition = [[defaultsController valueForKeyPath:SIDEBAR_POSITION_KEYPATH] integerValue];
 	
 	[defaultsController addObserver:self 
 						 forKeyPath:SIDEBAR_POSITION_KEYPATH 
@@ -89,7 +89,7 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 {
 	if ((object == defaultsController) && [keyPath isEqualToString:SIDEBAR_POSITION_KEYPATH])
 	{
-		sidebarPosition = [[defaultsController valueForKeyPath:SIDEBAR_POSITION_KEYPATH] intValue];
+		sidebarPosition = [[defaultsController valueForKeyPath:SIDEBAR_POSITION_KEYPATH] integerValue];
 		[self reset];
 	}
 }			
@@ -251,7 +251,7 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 	
 	wid = [self windowNumber];
 	cid = _CGSDefaultConnection();
-	int tags[2] = { 0, 0 };
+	NSInteger tags[2] = { 0, 0 };
 	
 	if (!CGSGetWindowTags(cid, wid, tags, 32)) {
 		if (flag) {

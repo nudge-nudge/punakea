@@ -11,9 +11,9 @@
 
 @interface NSBezierPath (CocoaDevCategory)
 
-+ (NSBezierPath *)bezierPathWithJaggedOvalInRect:(NSRect)r spacing:(float)spacing;
-+ (NSBezierPath *)bezierPathWithJaggedPillInRect:(NSRect)r spacing:(float)spacing;
-+ (NSBezierPath*)bezierPathWithRoundRectInRect:(NSRect)aRect radius:(float)radius;
++ (NSBezierPath *)bezierPathWithJaggedOvalInRect:(NSRect)r spacing:(CGFloat)spacing;
++ (NSBezierPath *)bezierPathWithJaggedPillInRect:(NSRect)r spacing:(CGFloat)spacing;
++ (NSBezierPath*)bezierPathWithRoundRectInRect:(NSRect)aRect radius:(CGFloat)radius;
 + (NSBezierPath *)bezierPathWithTriangleInRect:(NSRect)r edge:(NSRectEdge)edge;
 
 @end

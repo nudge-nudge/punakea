@@ -28,7 +28,7 @@
 
 
 NSString * const FILENAME_FAVORITES_PLIST = @"favorites.plist";
-unsigned const VERSION_FAVORITES_PLIST = 1;
+NSUInteger const VERSION_FAVORITES_PLIST = 1;
 
 NSString * const VERTICAL_SPLITVIEW_DEFAULTS = @"0 0 200 553 0 201 0 494 553 0";
 NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0";
@@ -242,7 +242,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[editor setAutoresizingMask:NSViewWidthSizable];
 	
 	[editor setMinSize:NSMakeSize(0.0, 16.0)];
-	[editor setMaxSize:NSMakeSize(FLT_MAX, 16.0)];
+	[editor setMaxSize:NSMakeSize(CGFLOAT_MAX, 16.0)];
 	
 	[editor setVerticallyResizable:NO];
 	[editor setHorizontallyResizable:YES];
@@ -310,7 +310,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[theSheet orderOut:nil];
 }
 
-- (void)tagSetPanelDidEnd:(PATagSetPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
+- (void)tagSetPanelDidEnd:(PATagSetPanel *)panel returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSOKButton)
 	{
@@ -346,7 +346,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 			[item validateDisplayName];
 		
 			// Begin editing
-			int row = [sourcePanel rowForItem:item];
+			NSInteger row = [sourcePanel rowForItem:item];
 			[sourcePanel selectRow:row byExtendingSelection:NO];
 			[sourcePanel editColumn:0 row:row withEvent:nil select:YES];
 		} else {
@@ -497,7 +497,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
 	// Store version number for future versions and easy update procedure
-	[dict setObject:[NSNumber numberWithInt:VERSION_FAVORITES_PLIST] forKey:@"Version"];
+	[dict setObject:[NSNumber numberWithInteger:VERSION_FAVORITES_PLIST] forKey:@"Version"];
 	
 	NSMutableArray *favorites = [NSMutableArray array];
 	
@@ -685,7 +685,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 
 #pragma mark SplitView Delegate
-- (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+- (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
 {
 	if([sender isEqualTo:verticalSplitView])
 	{
@@ -703,7 +703,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	return 0.0;
 }
 
-- (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+- (CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
 {
 	if([sender isEqualTo:verticalSplitView])
 	{

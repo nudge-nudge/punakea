@@ -53,7 +53,7 @@ NSSize const STATUSBAR_LINK_MIN_SIZE = {0.0, 22};
 	// Underline only if there's an action present
 	if ([self action])
 	{
-		[fontAttributes setObject:[NSNumber numberWithInt:NSUnderlineStyleSingle]
+		[fontAttributes setObject:[NSNumber numberWithInteger:NSUnderlineStyleSingle]
 						   forKey:NSUnderlineStyleAttributeName];
 	}
 	

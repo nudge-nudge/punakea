@@ -75,7 +75,7 @@
 	NSArray *labels = [NSArray arrayWithObjects:createdLabel, modifiedLabel, 
 		lastOpenedLabel, nil];
 	
-	for(int i = 0; i < [textFields count]; i++)
+	for(NSInteger i = 0; i < [textFields count]; i++)
 	{
 		NSTextView *textField = [textFields objectAtIndex:i];
 		NSTextView *label = [labels objectAtIndex:i];

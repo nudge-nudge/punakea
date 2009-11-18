@@ -36,7 +36,7 @@
 #pragma mark Actions
 - (void)addSegment:(PAImageButtonCell *)imageButtonCell
 {
-	int col = [self numberOfColumns];
+	NSInteger col = [self numberOfColumns];
 	
 	[imageButtonCell setTarget:self];
 
@@ -60,7 +60,7 @@
 - (void)action:(id)sender
 {
 	// Deselect all cells except the one the user clicked on (RadioMode)
-	int i;
+	NSInteger i;
 	BOOL allCellsAreDeselected = YES;
 	for(i = 0; i < [self numberOfColumns]; i++)
 	{

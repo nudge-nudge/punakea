@@ -10,8 +10,6 @@
 #import "NNTagging/NNTaggableObject.h"
 #import "PAThumbnailManager.h"
 #import "NSDateFormatter+FriendlyFormat.h"
-#import "NNTagging/NDResourceFork.h"
-
 
 @interface PAResultsBookmarkCell : NSTextFieldCell {
 
@@ -19,6 +17,6 @@
 
 }
 
-+ (float)heightOfRow;
++ (CGFloat)heightOfRow;
 
 @end

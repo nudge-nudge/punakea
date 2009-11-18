@@ -9,7 +9,7 @@
 #import "PATaggerTableView.h"
 
 
-static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
+static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
 
 
 @implementation PATaggerTableView
@@ -71,7 +71,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Mouse Event Stuff
-- (int)mouseRowForEvent:(NSEvent *)theEvent
+- (NSInteger)mouseRowForEvent:(NSEvent *)theEvent
 {
     NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
     
@@ -86,7 +86,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)selectRowIndexes:(NSIndexSet *)rowIndexes byExtendingSelection:(BOOL)flag
 {
     NSEvent *theEvent     = [NSApp currentEvent];
-    int      mouseRow     = [self mouseRowForEvent:theEvent];
+    NSInteger      mouseRow     = [self mouseRowForEvent:theEvent];
     BOOL     modifierDown = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
     
     if ([[self selectedRowIndexes] containsIndex:mouseRow] && (modifierDown == NO))
@@ -102,7 +102,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)mouseDown:(NSEvent *)theEvent
 {
 
-    static float doubleClickThreshold = 0.0;
+    static CGFloat doubleClickThreshold = 0.0;
     
     if ( 0.0 == doubleClickThreshold )
     {
@@ -116,7 +116,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     BOOL    modifierDown    = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
     BOOL    doubleClick     = ([theEvent clickCount] == 2);
     
-    int mouseRow = [self mouseRowForEvent:theEvent];
+    NSInteger mouseRow = [self mouseRowForEvent:theEvent];
     
     if ((modifierDown == NO) && (doubleClick == NO))
     {
@@ -125,7 +125,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 												 selector:@selector(beginEditing)
 												   object:nil];
 		
-		int count = [[self selectedRowIndexes] count];
+		NSInteger count = [[self selectedRowIndexes] count];
 		if([self selectedRow] == mouseRow && count <= 1)
 		{
 			// perform editing like finder
@@ -183,7 +183,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	NSMutableDictionary *newUserInfo;
 	newUserInfo = [NSMutableDictionary dictionary];
-	[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+	[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 	
 	NSNotification *notification;
 	notification = [NSNotification notificationWithName:NSTextDidEndEditingNotification
@@ -228,13 +228,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// Force editing to end after pressing the Return key
 	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
 	
-	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
+	NSInteger textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] integerValue];
 	
 	if(textMovement == NSReturnTextMovement)
 	{
 		NSMutableDictionary *newUserInfo;
 		newUserInfo = [NSMutableDictionary dictionaryWithDictionary:[notification userInfo]];
-		[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+		[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 		
 		notification = [NSNotification notificationWithName:[notification name]
 													 object:[notification object]
@@ -252,7 +252,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Actions
-- (id)itemAtRow:(int)rowIndex
+- (id)itemAtRow:(NSInteger)rowIndex
 {
 	return [[self dataSource] tableView:self 
 			  objectValueForTableColumn:[[self tableColumns] objectAtIndex:0]

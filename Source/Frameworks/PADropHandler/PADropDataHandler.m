@@ -71,11 +71,11 @@
 	// increment until directory is found/created where file can be place
 	NSString *managedRoot = [self pathForFiles];
 	NSString *destination;
-	int i = 1;
+	NSInteger i = 1;
 	
 	while (true)
 	{
-		NSString *directory = [managedRoot stringByAppendingFormat:@"/%i/",i];
+		NSString *directory = [managedRoot stringByAppendingFormat:@"/%ld/",i];
 		
 		if ([fileManager fileExistsAtPath:directory] == NO) 
 			[fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL];

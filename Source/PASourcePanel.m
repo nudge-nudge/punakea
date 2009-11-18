@@ -16,7 +16,7 @@
 @end
 
 
-static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
+static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
 
 
 @implementation PASourcePanel
@@ -154,7 +154,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Mouse Events
-- (int)mouseRowForEvent:(NSEvent *)theEvent
+- (NSInteger)mouseRowForEvent:(NSEvent *)theEvent
 {
 	NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 
@@ -169,7 +169,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)selectRowIndexes:(NSIndexSet *)rowIndexes byExtendingSelection:(BOOL)flag
 {
     NSEvent *theEvent     = [NSApp currentEvent];
-    int      mouseRow     = [self mouseRowForEvent:theEvent];
+    NSInteger      mouseRow     = [self mouseRowForEvent:theEvent];
     BOOL     modifierDown = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
     
     if ( [[self selectedRowIndexes] containsIndex:mouseRow] && (modifierDown == NO))
@@ -184,7 +184,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)mouseDown:(NSEvent *)theEvent
 {	
-    static float doubleClickThreshold = 0.0;
+    static CGFloat doubleClickThreshold = 0.0;
     
     if ( 0.0 == doubleClickThreshold )
     {
@@ -198,7 +198,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     BOOL    modifierDown    = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
     BOOL    doubleClick     = ([theEvent clickCount] == 2);
     
-    int mouseRow = [self mouseRowForEvent:theEvent];
+    NSInteger mouseRow = [self mouseRowForEvent:theEvent];
     
     if ((modifierDown == NO) && (doubleClick == NO))
     {
@@ -211,7 +211,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		// cancel the editing by clicking again on the item
 		if ([self editedRow] != mouseRow)
 		{
-			int count = [[self selectedRowIndexes] count];
+			NSInteger count = [[self selectedRowIndexes] count];
 			if([self selectedRow] == mouseRow && count <= 1)
 			{
 				// perform editing like finder
@@ -256,7 +256,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 
 #pragma mark Misc
-- (NSRect)frameOfCellAtColumn:(int)column row:(int)row
+- (NSRect)frameOfCellAtColumn:(NSInteger)column row:(NSInteger)row
 {
 	NSRect rect = [super frameOfCellAtColumn:column row:row];
 	
@@ -266,7 +266,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// not to be drawn above our cell. Clicking on the cell's content would cause it to
 	// expand/collapse otherwise.
 	
-	int level = [self levelForRow:row];
+	NSInteger level = [self levelForRow:row];
 	if(level > 0)
 	{
 		rect.origin.x += level * [self indentationPerLevel];
@@ -278,7 +278,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)selectItemWithValue:(NSString *)value
 {
-	for(int row = 0; row < [self numberOfRows]; row++)
+	for(NSInteger row = 0; row < [self numberOfRows]; row++)
 	{
 		PASourceItem *item = [self itemAtRow:row];
 		
@@ -297,7 +297,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// Expand all items except ALL_ITEMS (hardcoded for now) and select first selectable item
 	BOOL selectableItemFound = NO;
 	
-	for(int row = 0; row < [self numberOfRows]; row++)
+	for(NSInteger row = 0; row < [self numberOfRows]; row++)
 	{
 		id item = [self itemAtRow:row];
 		
@@ -334,7 +334,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (PASourceItem *)itemWithValue:(NSString *)value
 {
-	for(int row = 0; row < [self numberOfRows]; row++)
+	for(NSInteger row = 0; row < [self numberOfRows]; row++)
 	{
 		PASourceItem *item = [self itemAtRow:row];
 		if([[item value] isEqualTo:value])
@@ -402,7 +402,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// Allow menu only for editable items by now
 			
 	NSPoint mousePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-	int row = [self rowAtPoint:mousePoint];		
+	NSInteger row = [self rowAtPoint:mousePoint];		
 	PASourceItem *item = (PASourceItem *)[self itemAtRow:row];
 	
 	if([item isEditable])
@@ -436,7 +436,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	NSTextView *editor = (NSTextView *)[[self window] fieldEditor:YES forObject:self];
 
-	[[editor textContainer] setContainerSize:NSMakeSize(FLT_MAX, 16.0)];
+	[[editor textContainer] setContainerSize:NSMakeSize(CGFLOAT_MAX, 16.0)];
 	[[editor textContainer] setWidthTracksTextView:NO];
 }
 
@@ -446,7 +446,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	[editor setString:[[self itemAtRow:[self selectedRow]] displayName]];
 	
 	NSMutableDictionary *newUserInfo = [[NSMutableDictionary alloc] init];
-	[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+	[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 	
 	NSNotification *notification;
 	notification = [NSNotification notificationWithName:NSTextDidEndEditingNotification
@@ -508,13 +508,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	[self setNeedsDisplay:YES];
 	
-	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
+	NSInteger textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] integerValue];
 	
 	if(textMovement == NSReturnTextMovement)
 	{
 		NSMutableDictionary *newUserInfo;
 		newUserInfo = [[NSMutableDictionary alloc] initWithDictionary:[notification userInfo]];
-		[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+		[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 		
 		notification = [NSNotification notificationWithName:[notification name]
 													 object:[notification object]

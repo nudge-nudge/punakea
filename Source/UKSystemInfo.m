@@ -11,8 +11,9 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
-unsigned	UKPhysicalRAMSize()
+NSUInteger	UKPhysicalRAMSize()
 {
+#warning 64BIT: Inspect use of long
 	long		ramSize;
 	
 	if( Gestalt( gestaltPhysicalRAMSizeInMegabytes, &ramSize ) == noErr )
@@ -24,6 +25,7 @@ unsigned	UKPhysicalRAMSize()
 
 NSString*	UKSystemVersionString()
 {
+#warning 64BIT: Inspect use of long
 	long		vMajor = 10, vMinor = 0, vBugfix = 0;
 	UKGetSystemVersionComponents( &vMajor, &vMinor, &vBugfix );
 	
@@ -31,8 +33,12 @@ NSString*	UKSystemVersionString()
 }
 
 
+#warning 64BIT: Inspect use of long
+#warning 64BIT: Inspect use of long
+#warning 64BIT: Inspect use of long
 void	UKGetSystemVersionComponents( long* outMajor, long* outMinor, long* outBugfix )
 {
+#warning 64BIT: Inspect use of long
 	long		sysVersion = UKSystemVersion();
 	if( sysVersion >= MAC_OS_X_VERSION_10_4 )
 	{
@@ -49,8 +55,10 @@ void	UKGetSystemVersionComponents( long* outMajor, long* outMinor, long* outBugf
 }
 
 
+#warning 64BIT: Inspect use of long
 long	UKSystemVersion()
 {
+#warning 64BIT: Inspect use of long
 	long		sysVersion;
 	
 	if( Gestalt( gestaltSystemVersion, &sysVersion ) != noErr )
@@ -60,8 +68,9 @@ long	UKSystemVersion()
 }
 
 
-unsigned	UKClockSpeed()
+NSUInteger	UKClockSpeed()
 {
+#warning 64BIT: Inspect use of long
 	long		speed;
 	
 	if( Gestalt( gestaltProcClkSpeed, &speed ) == noErr )
@@ -71,9 +80,10 @@ unsigned	UKClockSpeed()
 }
 
 
-unsigned	UKCountCores()
+NSUInteger	UKCountCores()
 {
-	unsigned	count = 0;
+	NSUInteger	count = 0;
+#warning 64BIT: Inspect use of sizeof
 	size_t		size = sizeof(count);
 
 	if( sysctlbyname( "hw.ncpu", &count, &size, NULL, 0 ) )
@@ -91,6 +101,7 @@ NSString*	UKMachineName()
 	
 	char*				machineName = NULL;
 	
+#warning 64BIT: Inspect use of long
 	if( Gestalt( gestaltUserVisibleMachineName, (long*) &machineName ) == noErr )
 	{
 		NSString*	internalName = [NSString stringWithCString: machineName +1 length: machineName[0]];
@@ -212,6 +223,7 @@ NSString*	UKCPUName()
 
 NSString*	UKAutoreleasedCPUName( BOOL releaseIt )
 {
+#warning 64BIT: Inspect use of long
 	long				cpu;
 	static NSString*	cpuName = nil;
 	
@@ -245,8 +257,10 @@ NSString*	UKAutoreleasedCPUName( BOOL releaseIt )
 			memmove( cpuCStr, &cpu, 4 );
 			if( (cpu & 0xff000000) >= 0x20000000 && (cpu & 0x00ff0000) >= 0x00200000
 				&& (cpu & 0x0000ff00) >= 0x00002000 && (cpu & 0x000000ff) >= 0x00000020)	// All valid as characters?
+#warning 64BIT: Check formatting arguments
 				cpuName = [NSString stringWithFormat: @"Unknown (%d/%s)", cpu, &cpu];
 			else
+#warning 64BIT: Check formatting arguments
 				cpuName = [NSString stringWithFormat: @"Unknown (%d)", cpu, &cpu];
 		}
 		[cpuName retain];		// Yeah, I know, I'm paranoid.

@@ -9,7 +9,7 @@
 #import "PAInfoPaneSubview.h"
 
 
-unsigned const LINE_HEIGHT = 16;
+NSUInteger const LINE_HEIGHT = 16;
 
 
 @implementation PAInfoPaneSubview

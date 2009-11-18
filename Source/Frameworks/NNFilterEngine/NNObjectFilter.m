@@ -54,7 +54,7 @@
 	return outQueue;
 }
 
-- (unsigned int)weight
+- (NSUInteger)weight
 { 
 	return weight;
 }

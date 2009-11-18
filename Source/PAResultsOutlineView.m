@@ -13,7 +13,7 @@
 - (void)triggerQuickLook;
 - (void)updateQuickLookUrls;
 
-- (int)mouseRowForEvent:(NSEvent *)theEvent;
+- (NSInteger)mouseRowForEvent:(NSEvent *)theEvent;
 - (void)selectOnlyRowIndexes:(NSIndexSet *)rowIndexes;
 - (void)selectRowIndexes:(NSIndexSet *)rowIndexes byExtendingSelection:(BOOL)flag;
 
@@ -22,7 +22,7 @@
 @end
 
 
-static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
+static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
 
 NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlineViewSelectionDidChangeNotification";
 
@@ -102,7 +102,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	[super highlightSelectionInClipRect:clipRect];
 }
 
--(void)_drawDropHighlightOnRow:(int)rowIndex
+-(void)_drawDropHighlightOnRow:(NSInteger)rowIndex
 {
 	NSSize offset = NSMakeSize(3.0, 3.0);
 
@@ -117,7 +117,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	drawRect.origin.y += offset.height / 2.0;
 
 	[[NSColor colorWithDeviceRed:(185.0/255.0) green:(215.0/255.0) blue:(255.0/255.0) alpha:1.0] set];
-	float lineWidth = [NSBezierPath defaultLineWidth];
+	CGFloat lineWidth = [NSBezierPath defaultLineWidth];
 	[NSBezierPath setDefaultLineWidth:3.0];
 	NSBezierPath *path = [NSBezierPath bezierPathWithRoundRectInRect:drawRect radius:4.0];
 	[path stroke];
@@ -128,7 +128,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 
 
 #pragma mark Actions
-- (NSRect)frameOfCellAtColumn:(int)column row:(int)row
+- (NSRect)frameOfCellAtColumn:(NSInteger)column row:(NSInteger)row
 {
 	NSRect rect = [super frameOfCellAtColumn:column row:row];
 
@@ -178,7 +178,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	// Restore group's state from user defaults
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSArray *collapsedGroups = [[defaults objectForKey:@"Results"] objectForKey:@"CollapsedGroups"];	
-	for(int i = 0; i < [self numberOfRows]; i++)
+	for(NSInteger i = 0; i < [self numberOfRows]; i++)
 	{
 		id item = [self itemAtRow:i];
 		if([item isKindOfClass:[NNQueryBundle class]])
@@ -229,7 +229,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	else
 	{	
 		// Otherwise proceed. 
-		for(unsigned row = 0; row < [self numberOfRows]; row++)
+		for(NSUInteger row = 0; row < [self numberOfRows]; row++)
 		{
 			id item = [self itemAtRow:row];
 			
@@ -279,7 +279,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		
 		for (NNTaggableObject *item in selectedItems)
 		{			
-			for(int i = 0; i < [self numberOfRows]; i++)
+			for(NSInteger i = 0; i < [self numberOfRows]; i++)
 			{
 				id thisItem = [self itemAtRow:i];
 				
@@ -288,7 +288,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 				if ([thisItem isEqualTo:item] ||
 					([thisItem isKindOfClass:[NSArray class]] && [thisItem containsObject:item]))
 				{					
-					int row = [self rowForItem:thisItem];
+					NSInteger row = [self rowForItem:thisItem];
 					
 					[self selectRow:row byExtendingSelection:YES];
 					
@@ -325,7 +325,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	[selectedItems removeObject:item];
 }
 
-- (unsigned)numberOfSelectedItems
+- (NSUInteger)numberOfSelectedItems
 {
 	return [selectedItems count];
 }
@@ -505,7 +505,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 
 
 #pragma mark Mouse Event Stuff
-- (int)mouseRowForEvent:(NSEvent *)theEvent
+- (NSInteger)mouseRowForEvent:(NSEvent *)theEvent
 {
     NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
     
@@ -520,7 +520,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 - (void)selectRowIndexes:(NSIndexSet *)rowIndexes byExtendingSelection:(BOOL)flag
 {
     NSEvent *theEvent     = [NSApp currentEvent];
-    int      mouseRow     = [self mouseRowForEvent:theEvent];
+    NSInteger      mouseRow     = [self mouseRowForEvent:theEvent];
     BOOL     modifierDown = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
     
     if ( [[self selectedRowIndexes] containsIndex:mouseRow] && (modifierDown == NO))
@@ -538,7 +538,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	// Clear stored key down for multi items
 	lastUpDownArrowFunctionKey = 0;	
 
-    static float doubleClickThreshold = 0.0;
+    static CGFloat doubleClickThreshold = 0.0;
     
     if ( 0.0 == doubleClickThreshold )
     {
@@ -552,7 +552,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
     BOOL    modifierDown    = ([theEvent modifierFlags] & PAModifierKeyMask) != 0;
     BOOL    doubleClick     = ([theEvent clickCount] == 2);
     
-    int mouseRow = [self mouseRowForEvent:theEvent];
+    NSInteger mouseRow = [self mouseRowForEvent:theEvent];
     
     if ((modifierDown == NO) && (doubleClick == NO))
     {
@@ -565,7 +565,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		// cancel the editing by clicking again on the item
 		if (![self isEditingRow:mouseRow])
 		{
-			int count = [[self selectedRowIndexes] count];
+			NSInteger count = [[self selectedRowIndexes] count];
 			if([self selectedRow] == mouseRow && count <= 1)
 			{
 				// perform editing like finder
@@ -612,7 +612,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 {
     // we are starting to drag one or more rows, so cancel any pending calls from our custom mouse down
     
-	int     mouseRow = [self mouseRowForEvent:theEvent];
+	NSInteger     mouseRow = [self mouseRowForEvent:theEvent];
     
 	// cancel editing action
 	[NSObject cancelPreviousPerformRequestsWithTarget:self
@@ -650,12 +650,12 @@ needed for supporting dragging to trash
     [nc addObserver:self selector:@selector(queryNote:) name:nil object:query];
 }
 
-- (unsigned int)lastUpDownArrowFunctionKey;
+- (NSUInteger)lastUpDownArrowFunctionKey;
 {
 	return lastUpDownArrowFunctionKey;
 }
 
-- (void)setLastUpDownArrowFunctionKey:(unsigned int)key
+- (void)setLastUpDownArrowFunctionKey:(NSUInteger)key
 {
 	lastUpDownArrowFunctionKey = key;
 }
@@ -692,7 +692,7 @@ needed for supporting dragging to trash
 	selectedItems = [[NSMutableArray alloc] initWithArray:theItems];
 }
 
-- (BOOL)isEditingRow:(int)row
+- (BOOL)isEditingRow:(NSInteger)row
 {
 	if ([self numberOfSelectedItems] != 1)
 		return NO;
@@ -721,7 +721,7 @@ needed for supporting dragging to trash
 
 	NSMutableDictionary *newUserInfo;
 	newUserInfo = [[NSMutableDictionary alloc] init];
-	[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+	[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 
 	NSNotification *notification;
 	notification = [NSNotification notificationWithName:NSTextDidEndEditingNotification
@@ -765,13 +765,13 @@ needed for supporting dragging to trash
 	// Force editing to end after pressing the Return key
 	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
 
-	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
+	NSInteger textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] integerValue];
 
 	if(textMovement == NSReturnTextMovement)
 	{
 		NSMutableDictionary *newUserInfo;
 		newUserInfo = [[NSMutableDictionary alloc] initWithDictionary:[notification userInfo]];
-		[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+		[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 
 		notification = [NSNotification notificationWithName:[notification name]
 													 object:[notification object]

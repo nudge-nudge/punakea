@@ -11,7 +11,7 @@
 #import "NSNumberFormatterAdditions.h"
 
 
-extern unsigned const LINE_HEIGHT;
+extern NSUInteger const LINE_HEIGHT;
 
 
 @interface PAInfoPaneSubview : NSView {	

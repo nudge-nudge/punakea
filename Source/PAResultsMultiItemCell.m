@@ -49,7 +49,7 @@
 	// Ensure matrix isn't hidden
 	[matrix setHidden:NO];
 	
-	float offsetToRightBorder = 20;
+	CGFloat offsetToRightBorder = 20;
 	NSRect rect = NSMakeRect(cellFrame.origin.x + 15,
 							 cellFrame.origin.y,
 							 cellFrame.size.width - offsetToRightBorder,

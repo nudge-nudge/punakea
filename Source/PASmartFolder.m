@@ -14,7 +14,7 @@
 + (NSString *)smartFolderFilenameForTag:(NNTag *)tag
 {
 	NSMutableDictionary *sf = [NSMutableDictionary dictionary];
-	[sf setObject:[NSNumber numberWithInt:1] forKey:@"CompatibleVersion"];
+	[sf setObject:[NSNumber numberWithInteger:1] forKey:@"CompatibleVersion"];
 	
 	NSString *rawQuery = [NSString stringWithFormat:@"(((%@))) &amp;&amp; (true)",[tag query]];
 	[sf setObject:rawQuery forKey:@"RawQuery"];
@@ -44,8 +44,8 @@
 	
 	NSMutableArray *criteria = [NSMutableArray array];
 	[criteria addObject:@"kOMUserTags"];
-	[criteria addObject:[NSNumber numberWithInt:103]];
-	[criteria addObject:[NSNumber numberWithInt:104]];
+	[criteria addObject:[NSNumber numberWithInteger:103]];
+	[criteria addObject:[NSNumber numberWithInteger:104]];
 	[criteriaSlice setObject:criteria forKey:@"criteria"];
 	
 	NSMutableArray *displayValues = [NSMutableArray array];
@@ -54,7 +54,7 @@
 	[displayValues addObject:[NSString stringWithFormat:@"%@",[tag name]]];
 	[criteriaSlice setObject:displayValues forKey:@"displayValues"];
 	
-	[criteriaSlice setObject:[NSNumber numberWithInt:0] forKey:@"rowType"];
+	[criteriaSlice setObject:[NSNumber numberWithInteger:0] forKey:@"rowType"];
 	[criteriaSlice setObject:[NSArray array] forKey:@"subrows"];
 	
 	NSMutableArray *criteriaSlices = [NSMutableArray arrayWithObject:criteriaSlice];

@@ -18,14 +18,14 @@
 	NSString				*autosaveName;
 	NSString				*defaults;
 	
-	float					minCoordinate1;
-	float					maxCoordinate1;
-	float					minCoordinate2;
-	float					maxCoordinate2;
+	CGFloat					minCoordinate1;
+	CGFloat					maxCoordinate1;
+	CGFloat					minCoordinate2;
+	CGFloat					maxCoordinate2;
 	
 }
 
-- (void)toggleSubviewAtIndex:(int)idx;
+- (void)toggleSubviewAtIndex:(NSInteger)idx;
 
 - (NSString *)autosaveName;
 - (void)setAutosaveName:(NSString *)aName defaults:(NSString *)theDefaults;

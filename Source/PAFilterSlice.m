@@ -7,10 +7,11 @@
 //
 
 #import "PAFilterSlice.h"
+#include <tgmath.h>
 
 
 NSSize const FILTERSLICE_PADDING = {10,5};
-unsigned const FILTERSLICE_BUTTON_SPACING = 2;
+NSUInteger const FILTERSLICE_BUTTON_SPACING = 2;
 
 
 @interface PAFilterSlice (PrivateAPI)
@@ -64,7 +65,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 #pragma mark Actions
 - (void)setupButtons
 {
-	for(unsigned i = 0; i < 9; i++)
+	for(NSUInteger i = 0; i < 9; i++)
 	{	
 		// Init button
 		PAFilterButton *button = [[PAFilterButton alloc] initWithFrame:[self frame]];
@@ -98,13 +99,13 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 				break;
 			case 4:		// PDF
 				[filter setObject:@"PDF" forKey:@"title"];
-				[filter setObject:[NSNumber numberWithInt:PAThumbnailMode] forKey:@"displayMode"];
+				[filter setObject:[NSNumber numberWithInteger:PAThumbnailMode] forKey:@"displayMode"];
 				[filter setObject:[NSArray arrayWithObject:@"PDF"] forKey:@"filterValues"];
 				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
 				break;
 			case 5:		// IMAGES
 				[filter setObject:@"IMAGES" forKey:@"title"];
-				[filter setObject:[NSNumber numberWithInt:PAThumbnailMode] forKey:@"displayMode"];
+				[filter setObject:[NSNumber numberWithInteger:PAThumbnailMode] forKey:@"displayMode"];
 				[filter setObject:[NSArray arrayWithObject:@"IMAGES"] forKey:@"filterValues"];
 				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
 				break;
@@ -179,7 +180,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 
 - (void)updateButtons
 {	
-	float x = FILTERSLICE_PADDING.width;
+	CGFloat x = FILTERSLICE_PADDING.width;
 
 	/*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *spotlightDict = [defaults persistentDomainForName:@"com.apple.spotlight"];
@@ -208,7 +209,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 			// Adjust button's frame and make visible if needed
 			
 			NSRect buttonFrame = [button frame];
-			x += ceilf(buttonFrame.size.width) + FILTERSLICE_BUTTON_SPACING;
+			x += ceil(buttonFrame.size.width) + FILTERSLICE_BUTTON_SPACING;
 		
 			if([button superview] != self)
 				[self addSubview:button];
@@ -270,7 +271,7 @@ unsigned const FILTERSLICE_BUTTON_SPACING = 2;
 	// Set display mode
 	if([filter objectForKey:@"displayMode"])
 	{
-		[outlineView setDisplayMode:[[filter objectForKey:@"displayMode"] intValue]];
+		[outlineView setDisplayMode:[[filter objectForKey:@"displayMode"] integerValue]];
 	} else {
 		[outlineView setDisplayMode:PAListMode];
 	}

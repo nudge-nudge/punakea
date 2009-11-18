@@ -47,7 +47,7 @@
 }
 
 #pragma mark Overridden SplitView Stuff
-- (float)dividerThickness
+- (CGFloat)dividerThickness
 {
 	return 1.0;
 }
@@ -155,7 +155,7 @@
 
 
 #pragma mark Misc
-- (void)toggleSubviewAtIndex:(int)idx
+- (void)toggleSubviewAtIndex:(NSInteger)idx
 {		
 	if(([self isVertical] &&
 		((idx == 0 && [[[self subviews] objectAtIndex:0] isHidden]) ||
@@ -205,9 +205,9 @@
 		f2 = previousFrame2;
 	}
 	
-	NSString *string = [NSString stringWithFormat: @"%d %d %d %d %d %d %d %d %d %d",
-		abs(f1.origin.x), abs(f1.origin.y), abs(f1.size.width), abs(f1.size.height), subview1Collapsed,
-		abs(f2.origin.x), abs(f2.origin.y), abs(f2.size.width), abs(f2.size.height), subview2Collapsed];
+	NSString *string = [NSString stringWithFormat: @"%ld %ld %ld %ld %ld %ld %ld %ld %ld %ld",
+		ABS(f1.origin.x), ABS(f1.origin.y), ABS(f1.size.width), ABS(f1.size.height), subview1Collapsed,
+		ABS(f2.origin.x), ABS(f2.origin.y), ABS(f2.size.width), ABS(f2.size.height), subview2Collapsed];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:string forKey:autosaveName];
 }
@@ -221,19 +221,29 @@
 	
 	NSScanner* scanner = [NSScanner scannerWithString: string];
 	NSRect f1, f2;
-	int subview1Collapsed, subview2Collapsed;
+	NSInteger subview1Collapsed, subview2Collapsed;
 	
 	BOOL didScan =
-		[scanner scanFloat: &(f1.origin.x)]		&&
-		[scanner scanFloat: &(f1.origin.y)]		&&
-		[scanner scanFloat: &(f1.size.width)]	&&
-		[scanner scanFloat: &(f1.size.height)]	&&
-		[scanner scanInt: &(subview1Collapsed)]	&&
-		[scanner scanFloat: &(f2.origin.x)]		&&
-		[scanner scanFloat: &(f2.origin.y)]		&&
-		[scanner scanFloat: &(f2.size.width)]	&&
-		[scanner scanFloat: &(f2.size.height)]	&&
-		[scanner scanInt: &(subview2Collapsed)];
+#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
+		[scanner scanFloat:&(f1.origin.x)]		&&
+#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
+		[scanner scanFloat:&(f1.origin.y)]		&&
+#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
+		[scanner scanFloat:&(f1.size.width)]	&&
+#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
+		[scanner scanFloat:&(f1.size.height)]	&&
+#warning 64BIT: scanInt: argument is pointer to int, not NSInteger; you can use scanInteger:
+		[scanner scanInt:&(subview1Collapsed)]	&&
+#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
+		[scanner scanFloat:&(f2.origin.x)]		&&
+#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
+		[scanner scanFloat:&(f2.origin.y)]		&&
+#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
+		[scanner scanFloat:&(f2.size.width)]	&&
+#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
+		[scanner scanFloat:&(f2.size.height)]	&&
+#warning 64BIT: scanInt: argument is pointer to int, not NSInteger; you can use scanInteger:
+		[scanner scanInt:&(subview2Collapsed)];
 	
 	if(didScan == NO)
 	{
@@ -270,7 +280,7 @@
 	if([self delegate] &&
 	   [[self delegate] respondsToSelector:@selector(splitView:constrainMinCoordinate:ofSubviewAt:)])
 	{
-		float min = [[self delegate] splitView:self constrainMinCoordinate:0.0 ofSubviewAt:0];
+		CGFloat min = [[self delegate] splitView:self constrainMinCoordinate:0.0 ofSubviewAt:0];
 		if(min) minCoordinate1 = min;
 		
 		min = [[self delegate] splitView:self constrainMinCoordinate:0.0 ofSubviewAt:1];
@@ -281,7 +291,7 @@
 	if([self delegate] &&
 	   [[self delegate] respondsToSelector:@selector(splitView:constrainMinCoordinate:ofSubviewAt:)])
 	{
-		float max = [[self delegate] splitView:self constrainMaxCoordinate:0.0 ofSubviewAt:0];
+		CGFloat max = [[self delegate] splitView:self constrainMaxCoordinate:0.0 ofSubviewAt:0];
 		if(max) maxCoordinate1 = max;
 		
 		max = [[self delegate] splitView:self constrainMaxCoordinate:0.0 ofSubviewAt:1];

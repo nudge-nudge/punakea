@@ -21,7 +21,7 @@ typedef enum _PALicenseType {
 	NSUserDefaults						*userDefaults;
 	
 	PALicenseType						type;
-	int									majorAppVersion;
+	NSInteger									majorAppVersion;
 	NSString							*checksum;
 	
 }
@@ -33,8 +33,8 @@ typedef enum _PALicenseType {
 
 - (PALicenseType)type;
 - (void)setType:(PALicenseType)theType;
-- (int)majorAppVersion;
-- (void)setMajorAppVersion:(int)version;
+- (NSInteger)majorAppVersion;
+- (void)setMajorAppVersion:(NSInteger)version;
 - (NSString *)checksum;
 - (void)setChecksum:(NSString *)aChecksum;
 

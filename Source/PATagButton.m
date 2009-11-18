@@ -2,16 +2,16 @@
 
 @interface PATagButton (PrivateAPI)
 
-- (float)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint;
+- (CGFloat)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint;
 - (void)startDrag:(NSEvent *)event;
 
-- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(float *)offsetX y:(float *)offsetY;
+- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(CGFloat *)offsetX y:(CGFloat *)offsetY;
 
 @end
 
 
 @implementation PATagButton
-- (id)initWithTag:(NNTag*)aTag rating:(float)aRating
+- (id)initWithTag:(NNTag*)aTag rating:(CGFloat)aRating
 {
     self = [super initWithFrame:NSMakeRect(0,0,0,0)];
     if (self) 
@@ -49,7 +49,7 @@ should be overridden according to apple docs
 }
 
 #pragma mark accessors
-- (void)setRating:(float)aRating
+- (void)setRating:(CGFloat)aRating
 {
 	[[self cell] setRating:aRating];
 }
@@ -204,10 +204,10 @@ should be overridden according to apple docs
 	[myPool release];
 }
 
-- (float)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint
+- (CGFloat)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint
 {
-	float dx = sourcePoint.x - destPoint.x;
-	float dy = sourcePoint.y - destPoint.y;
+	CGFloat dx = sourcePoint.x - destPoint.x;
+	CGFloat dy = sourcePoint.y - destPoint.y;
 	return sqrt(dx * dx + dy * dy);
 }
 
@@ -225,7 +225,7 @@ should be overridden according to apple docs
 	NSPoint dragPoint = [self convertPoint:[event locationInWindow] fromView:nil];
 	
 	// Determine drag image
-	float offsetX, offsetY;
+	CGFloat offsetX, offsetY;
 	NSImage *image = [self dragImageForMouseDownAtPoint:dragPoint offsetX:&offsetX y:&offsetY];
 		
 	// Drag point
@@ -270,7 +270,7 @@ should be overridden according to apple docs
 	[theEvent autorelease];
 }
 
-- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(float *)offsetX y:(float *)offsetY
+- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(CGFloat *)offsetX y:(CGFloat *)offsetY
 {
 	NSRect bounds = [self bounds];
 

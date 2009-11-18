@@ -57,7 +57,7 @@
 	NSString *bundleVersionString = [[[NSBundle bundleForClass:[self class]] infoDictionary] 
 									 objectForKey:@"CFBundleVersion"];
 	
-	int v = [[bundleVersionString substringToIndex:1] intValue];
+	NSInteger v = [[bundleVersionString substringToIndex:1] integerValue];
 	
 	return [self hasValidChecksum] && ([self majorAppVersion] == v);
 }
@@ -75,12 +75,12 @@
 	type = theType;
 }
 
-- (int)majorAppVersion
+- (NSInteger)majorAppVersion
 {
 	return majorAppVersion;
 }
 
-- (void)setMajorAppVersion:(int)version
+- (void)setMajorAppVersion:(NSInteger)version
 {
 	majorAppVersion = version;
 }

@@ -65,7 +65,7 @@
     return [displayName isEqualTo:[other displayName]];
 }
 
-- (unsigned)hash 
+- (NSUInteger)hash 
 {
 	return [displayName hash];
 }
@@ -101,7 +101,7 @@
 	[children addObject:anItem];
 }
 
-- (void)insertChild:(id)anItem atIndex:(unsigned)idx;
+- (void)insertChild:(id)anItem atIndex:(NSUInteger)idx;
 {
 	[anItem setParent:self];
 	[children insertObject:anItem atIndex:idx];
@@ -114,7 +114,7 @@
 
 - (void)removeChildWithValue:(NSString *)theValue
 {
-	for(unsigned i = 0; i < [children count]; i++)
+	for(NSUInteger i = 0; i < [children count]; i++)
 	{
 		if([[[children objectAtIndex:i] value] isEqualTo:theValue])
 		{
@@ -124,7 +124,7 @@
 	}
 }
 
-- (void)removeChildAtIndex:(int)idx
+- (void)removeChildAtIndex:(NSInteger)idx
 {
 	[children removeObjectAtIndex:idx];
 }
@@ -189,7 +189,7 @@
 	NSString *newName = newNameBase;	
 	
 	BOOL hasDuplicate = YES;
-	int numberOfLoops = 0;
+	NSInteger numberOfLoops = 0;
 	
 	while(hasDuplicate)
 	{
@@ -209,7 +209,7 @@
 		}
 		
 		if(hasDuplicate)
-			newName = [NSString stringWithFormat:@"%@ (%d)", newNameBase, numberOfLoops];
+			newName = [NSString stringWithFormat:@"%@ (%ld)", newNameBase, numberOfLoops];
 	}
 	
 	[self setDisplayName:newName];
@@ -252,7 +252,7 @@
 
 
 #pragma mark Misc
-- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)isLocal
+- (NSUInteger)draggingSourceOperationMaskForLocal:(BOOL)isLocal
 {
 	return NSDragOperationAll;
 }

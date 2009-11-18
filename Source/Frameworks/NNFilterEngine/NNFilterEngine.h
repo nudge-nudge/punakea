@@ -29,7 +29,7 @@
 	NSConditionLock *threadLock;
 	NSLock *filteredObjectsLock;
 	
-	unsigned int threadCount;
+	NSUInteger threadCount;
 	NSLock *threadCountLock;
 }
 

@@ -23,7 +23,7 @@ each filter comes with its own outQueue, and the inQueue will be connected to ot
 */
 @interface NNObjectFilter : NSObject {
 	/** higher weight causes the filter to be applied after filters with lower weight */
-	unsigned int weight;
+	NSUInteger weight;
 	
 	NSConditionLock *stateLock;
 	
@@ -45,7 +45,7 @@ each filter comes with its own outQueue, and the inQueue will be connected to ot
 - (NNQueue*)inQueue;
 - (void)setOutQueue:(NNQueue*)queue;
 - (NNQueue*)outQueue;
-- (unsigned int)weight;
+- (NSUInteger)weight;
 
 /**
 call this in a new thread

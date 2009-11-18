@@ -268,7 +268,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	
 	NNTag *currentBestTag = [tags currentBestTag];
 
-	[popularityIndicator setFloatValue:[tag relativeRatingToTag:currentBestTag]];
+	[popularityIndicator setDoubleValue:[tag relativeRatingToTag:currentBestTag]];
 	
 	NSWindow *window = [[self currentView] window];
 	[window makeFirstResponder:tagNameField];
@@ -334,7 +334,7 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 }
 
 #pragma mark alerts
-- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {	
 	if (contextInfo)
 	{

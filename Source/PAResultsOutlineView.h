@@ -38,7 +38,7 @@ typedef enum _PAResultsDisplayMode
 	PAResultsDisplayMode			displayMode;
 			
 	// Stores the last up or down arrow function key to get the direction of key navigation
-	unsigned int					lastUpDownArrowFunctionKey;
+	NSUInteger					lastUpDownArrowFunctionKey;
 	
 	// If not nil, forward keyboard events to responder
 	PAResultsMultiItemMatrix		*responder;
@@ -53,8 +53,8 @@ typedef enum _PAResultsDisplayMode
 - (NNQuery *)query;
 - (void)setQuery:(NNQuery *)aQuery;
 
-- (unsigned int)lastUpDownArrowFunctionKey;
-- (void)setLastUpDownArrowFunctionKey:(unsigned int)key;
+- (NSUInteger)lastUpDownArrowFunctionKey;
+- (void)setLastUpDownArrowFunctionKey:(NSUInteger)key;
 - (NSResponder *)responder;
 - (void)setResponder:(NSResponder *)aResponder;
 - (PAResultsDisplayMode)displayMode;
@@ -66,11 +66,11 @@ typedef enum _PAResultsDisplayMode
 - (void)addSelectedItem:(NNTaggableObject *)item;
 - (void)removeSelectedItem:(NNTaggableObject *)item;
 
-- (unsigned)numberOfSelectedItems;
+- (NSUInteger)numberOfSelectedItems;
 
 - (NSArray *)selectedItems;
 - (void)setSelectedItems:(NSArray *)theItems;
 
-- (BOOL)isEditingRow:(int)row;
+- (BOOL)isEditingRow:(NSInteger)row;
 
 @end

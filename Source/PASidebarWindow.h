@@ -13,12 +13,12 @@
 #import "NNActiveAppSavingPanel.h"
 
 // setSticky stuff
-typedef int CGSConnectionID;
-typedef int CGSWindowID;
+typedef NSInteger CGSConnectionID;
+typedef NSInteger CGSWindowID;
 extern CGSConnectionID _CGSDefaultConnection();
-extern OSStatus CGSGetWindowTags(const CGSConnectionID cid, const CGSWindowID wid, int *tags, int thirtyTwo);
-extern OSStatus CGSSetWindowTags(const CGSConnectionID cid, const CGSWindowID wid, int *tags, int thirtyTwo);
-extern OSStatus CGSClearWindowTags(const CGSConnectionID cid, const CGSWindowID wid, int *tags, int thirtyTwo);
+extern OSStatus CGSGetWindowTags(const CGSConnectionID cid, const CGSWindowID wid, NSInteger *tags, NSInteger thirtyTwo);
+extern OSStatus CGSSetWindowTags(const CGSConnectionID cid, const CGSWindowID wid, NSInteger *tags, NSInteger thirtyTwo);
+extern OSStatus CGSClearWindowTags(const CGSConnectionID cid, const CGSWindowID wid, NSInteger *tags, NSInteger thirtyTwo);
 
 typedef enum _PASidebarPosition {
 	PASidebarPositionLeft = 0,

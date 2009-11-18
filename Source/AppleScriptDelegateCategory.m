@@ -37,7 +37,7 @@
 		{
 			PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
 			
-			for (int i = 0; i < [[ov selectedItems] count]; i++)
+			for (NSInteger i = 0; i < [[ov selectedItems] count]; i++)
 			{
 				NNFile *file = [[ov selectedItems] objectAtIndex:i];
 				

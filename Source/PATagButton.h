@@ -12,11 +12,11 @@
 	PADropManager			*dropManager;		
 }
 
-- (id)initWithTag:(NNTag*)tag rating:(float)rating;
+- (id)initWithTag:(NNTag*)tag rating:(CGFloat)rating;
 
 - (NNTag*)genericTag;
 - (void)setGenericTag:(NNTag*)aTag;
 
-- (void)setRating:(float)aRating;
+- (void)setRating:(CGFloat)aRating;
 
 @end

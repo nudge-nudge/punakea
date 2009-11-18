@@ -97,7 +97,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	return item;
 }
 
-- (id)outlineView:(NSOutlineView *)ov child:(int)idx ofItem:(id)item
+- (id)outlineView:(NSOutlineView *)ov child:(NSInteger)idx ofItem:(id)item
 {		
 	if(item == nil)
 	{
@@ -116,7 +116,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	return ([self outlineView:ov numberOfChildrenOfItem:item] != 0);
 }
 
-- (int)outlineView:(NSOutlineView *)ov numberOfChildrenOfItem:(id)item
+- (NSInteger)outlineView:(NSOutlineView *)ov numberOfChildrenOfItem:(id)item
 {
 	if(item == nil)
 	{
@@ -201,7 +201,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 
 - (id)tableColumn:(NSTableColumn *)column
 	  inTableView:(NSTableView *)tableView
-   dataCellForRow:(int)row
+   dataCellForRow:(NSInteger)row
 {
 	PASourceItemCell *cell = [[[PASourceItemCell alloc] initTextCell:@""] autorelease];
 	
@@ -211,7 +211,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	return cell;
 }
 
-- (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
+- (CGFloat)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
 {
 	if([item isKindOfClass:[PASourceItem class]])
 	{
@@ -285,7 +285,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 - (NSDragOperation)outlineView:(NSOutlineView *)ov 
 				  validateDrop:(id <NSDraggingInfo>)info 
 				  proposedItem:(id)item 
-			proposedChildIndex:(int)idx
+			proposedChildIndex:(NSInteger)idx
 {
 	BOOL isDroppedOnItem = idx==NSOutlineViewDropOnItemIndex;
 	
@@ -383,7 +383,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 - (BOOL)outlineView:(NSOutlineView *)ov 
 		 acceptDrop:(id <NSDraggingInfo>)info 
 			   item:(id)item 
-		 childIndex:(int)idx
+		 childIndex:(NSInteger)idx
 {	
 	BOOL isDroppedOnItem = idx==NSOutlineViewDropOnItemIndex;
 	
@@ -554,7 +554,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		// If reordered item, delete the old one
 		if([sourceItem hasChildContainingObject:draggedObject])
 		{
-			for(int i = 0; i < [[sourceItem children] count]; i++)
+			for(NSInteger i = 0; i < [[sourceItem children] count]; i++)
 			{
 				PASourceItem *thisItem = [[sourceItem children] objectAtIndex:i];
 				if([[thisItem displayName] isEqualTo:[newItem displayName]] &&
@@ -573,7 +573,7 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 	
 	[ov reloadData];
 	
-	int newSelectedRow = [ov rowForItem:selectedItem];
+	NSInteger newSelectedRow = [ov rowForItem:selectedItem];
 	if(newSelectedRow == -1)
 		newSelectedRow = [ov rowForItem:newItem];
 	

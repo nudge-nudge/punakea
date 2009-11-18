@@ -19,13 +19,13 @@
 
 - (id)retain
 {
-	NSLog(@"%@ retained to %i",[self className],[self retainCount]+1);
+	NSLog(@"%@ retained to %lu",[self className],[self retainCount]+1);
 	return [super retain];
 }
 
 - (oneway void)release
 {
-	NSLog(@"%@ release to %i",[self className],[self retainCount]-1);
+	NSLog(@"%@ release to %lu",[self className],[self retainCount]-1);
 	[super release];
 }
 

@@ -7,20 +7,21 @@
 //
 
 #import "NSBezierPathCategory.h"
+#include <tgmath.h>
 		
 
 @implementation NSBezierPath (CocoaDevCategory)
 
-static NSPoint CubicBezierPathPointForPoints(NSPoint *p, float n) {
+static NSPoint CubicBezierPathPointForPoints(NSPoint *p, CGFloat n) {
 
 	// basic cubic bezier path formula where m = 1.0f - n:
 	//		B(n) = m^3 * P0 + 3.0f * m^2 * n * P1 + 3.0f * m * n^2 * P2 + n^3 * P3
-	float m = 1.0f - n;
-	float mSquared = m * m, nSquared = n * n;
-	float c0 = mSquared * m;
-	float c1 = 3.0f * mSquared * n;
-	float c2 = 3.0f * m * nSquared;
-	float c3 = nSquared * n;
+	CGFloat m = 1.0f - n;
+	CGFloat mSquared = m * m, nSquared = n * n;
+	CGFloat c0 = mSquared * m;
+	CGFloat c1 = 3.0f * mSquared * n;
+	CGFloat c2 = 3.0f * m * nSquared;
+	CGFloat c3 = nSquared * n;
 	return NSMakePoint(	c0 * p[0].x + c1 * p[1].x + c2 * p[2].x + c3 * p[3].x, 
 				c0 * p[0].y + c1 * p[1].y + c2 * p[2].y + c3 * p[3].y	);
 }
@@ -29,9 +30,9 @@ static NSPoint CubicBezierPathPointForPoints(NSPoint *p, float n) {
 
 // JaggedOvalCategory
 
-+ (NSRect)_joc_validRectWithRect:(NSRect)r a:(float *)a b:(float *)b spacing:(float *)spacing {
-	float aRatio = *a / NSWidth(r), bRatio = *b / NSHeight(r);
-	float min_spc = fminf(*a, *b) / 4.0f;
++ (NSRect)_joc_validRectWithRect:(NSRect)r a:(CGFloat *)a b:(CGFloat *)b spacing:(CGFloat *)spacing {
+	CGFloat aRatio = *a / NSWidth(r), bRatio = *b / NSHeight(r);
+	CGFloat min_spc = fmin(*a, *b) / 4.0f;
 	if (*spacing > min_spc) *spacing = min_spc;
 	r = NSInsetRect(r, -*spacing, -*spacing);
 	*a = NSWidth(r) * aRatio, *b = NSHeight(r) * bRatio;
@@ -39,31 +40,31 @@ static NSPoint CubicBezierPathPointForPoints(NSPoint *p, float n) {
 }
 
 
-static float CubicBezierPathGapAdjustment(float gap, float step, int *railCount, float *mod) {
+static CGFloat CubicBezierPathGapAdjustment(CGFloat gap, CGFloat step, NSInteger *railCount, CGFloat *mod) {
 
 	if (gap > 0.0f) {
-		gap += *mod = step - fmodf(gap, step);
-		int count = (int)(gap / step);
-		if (gap - (float)count * step > step / 2.0f) count++;
+		gap += *mod = step - fmod(gap, step);
+		NSInteger count = (NSInteger)(gap / step);
+		if (gap - (CGFloat)count * step > step / 2.0f) count++;
 		*railCount += count;
 	} else
 		*mod = 0.0f;
 	return gap / 2.0f;
 }
 
-- (void)_joc_jaggedLineToPoint:(NSPoint)p teeth:(unsigned)teeth width:(float)width buffer:(NSPoint *)buf {
+- (void)_joc_jaggedLineToPoint:(NSPoint)p teeth:(NSUInteger)teeth width:(CGFloat)width buffer:(NSPoint *)buf {
 
 	NSPoint points[4];
-	unsigned elementCount = [self elementCount];
+	NSUInteger elementCount = [self elementCount];
 	if (elementCount) {
 		[self elementAtIndex:elementCount - 1 associatedPoints:points];
-		float dx = p.x - points[0].x, dy = p.y - points[0].y;
-		float stepX = dx / (float)teeth, stepY = dy / (float)teeth;
-		float halfStepX = stepX / 2.0f, halfStepY = stepY / 2.0f;
-		float length = hypotf(dx, dy);
-		float normX = dy / length * width, normY = dx / length * width;
+		CGFloat dx = p.x - points[0].x, dy = p.y - points[0].y;
+		CGFloat stepX = dx / (CGFloat)teeth, stepY = dy / (CGFloat)teeth;
+		CGFloat halfStepX = stepX / 2.0f, halfStepY = stepY / 2.0f;
+		CGFloat length = hypotf(dx, dy);
+		CGFloat normX = dy / length * width, normY = dx / length * width;
 		NSPoint *pntPtr = buf;
-		int cnt_down = teeth;
+		NSInteger cnt_down = teeth;
 		while (cnt_down--) {
 			*pntPtr++ = NSMakePoint(points[0].x + normX + halfStepX, points[0].y + normY + halfStepY);
 			*pntPtr++ = points[0] = NSMakePoint(points[0].x + stepX, points[0].y + stepY);
@@ -74,9 +75,9 @@ static float CubicBezierPathGapAdjustment(float gap, float step, int *railCount,
 }
 
 + (NSBezierPath *)_joc_bezierPathWithJaggedRoundedRectInRect:(NSRect)r 
-                                                            a:(float)a 
-                                                            b:(float)b 
-                                                 spacing:(float)spacing 
+                                                            a:(CGFloat)a 
+                                                            b:(CGFloat)b 
+                                                 spacing:(CGFloat)spacing 
 {
 		
 	// Here's the base method to create the jagged oval icons you see in iTunes when dragging
@@ -96,9 +97,9 @@ static float CubicBezierPathGapAdjustment(float gap, float step, int *railCount,
 	// lengths[] - the running length at the end of each segment 
 	//				(e.g. if gaps[] = {1, 2, 3, 4...}, then lengths[] = {1, 3, 6, 10, ...})
 	
-	float *gaps, gapBuf[10], *lengths, lengthBuf[10];
-	float length = 0.0f;
-	float x, y, lastX = points[0].x, lastY = points[0].y;
+	CGFloat *gaps, gapBuf[10], *lengths, lengthBuf[10];
+	CGFloat length = 0.0f;
+	CGFloat x, y, lastX = points[0].x, lastY = points[0].y;
 
 	lengths = lengthBuf;
 	gaps = gapBuf;
@@ -117,27 +118,27 @@ static float CubicBezierPathGapAdjustment(float gap, float step, int *railCount,
 	gaps = gapBuf;
 	
 	// pointCount is the number of jagged points in a quadrant
-	int pointCount = length / spacing;
+	NSInteger pointCount = length / spacing;
 	if (pointCount < 0.0f) pointCount = 1;
 		
 	NSPoint lastTip = points[0];
-	float step = length / (float)pointCount;
-	int cnt = pointCount, gapIndex = 0;
-	float c = step, lastC = 0.0f, lastLength = 0.0f, lastN = 0.0f;
+	CGFloat step = length / (CGFloat)pointCount;
+	NSInteger cnt = pointCount, gapIndex = 0;
+	CGFloat c = step, lastC = 0.0f, lastLength = 0.0f, lastN = 0.0f;
 
 	NSPoint center = NSMakePoint(NSMidX(r), NSMidY(r));
-	int hRailCount = 0, vRailCount = 0;
+	NSInteger hRailCount = 0, vRailCount = 0;
 	
-	float vMod, hMod;
-	float aOffset = CubicBezierPathGapAdjustment((NSWidth(r) / 2.0f - a) * 2.0f, step, &hRailCount, &hMod);
-	float bOffset = CubicBezierPathGapAdjustment((NSHeight(r) / 2.0f - b) * 2.0f, step, &vRailCount, &vMod);
+	CGFloat vMod, hMod;
+	CGFloat aOffset = CubicBezierPathGapAdjustment((NSWidth(r) / 2.0f - a) * 2.0f, step, &hRailCount, &hMod);
+	CGFloat bOffset = CubicBezierPathGapAdjustment((NSHeight(r) / 2.0f - b) * 2.0f, step, &vRailCount, &vMod);
 	if (vRailCount) vRailCount++;
 
-	float leftOffset = center.x - aOffset, rightOffset = center.x + aOffset;
-	float upperOffset = center.y + bOffset, lowerOffset = center.y - bOffset;
+	CGFloat leftOffset = center.x - aOffset, rightOffset = center.x + aOffset;
+	CGFloat upperOffset = center.y + bOffset, lowerOffset = center.y - bOffset;
 
-	int block = pointCount * 2;
-	int buf_len = block * 4 + hRailCount * 2 + vRailCount * 2;
+	NSInteger block = pointCount * 2;
+	NSInteger buf_len = block * 4 + hRailCount * 2 + vRailCount * 2;
 
 	NSPoint *buf = malloc(buf_len * sizeof(NSPoint));
 
@@ -152,12 +153,12 @@ static float CubicBezierPathGapAdjustment(float gap, float step, int *railCount,
 
 	while (cnt--) {
 		while (gapIndex < 10) {
-			float len = lengths[gapIndex];
+			CGFloat len = lengths[gapIndex];
 			if (c < len || !cnt) {
-				float n = (float)gapIndex + ((gapIndex) ? c - lengths[gapIndex - 1] : c) / gaps[gapIndex];
+				CGFloat n = (CGFloat)gapIndex + ((gapIndex) ? c - lengths[gapIndex - 1] : c) / gaps[gapIndex];
 				n *= 0.1f;
 				NSPoint tip = (cnt) ? CubicBezierPathPointForPoints(points, n) : points[3];
-				float dx = tip.x - lastTip.x, dy = tip.y - lastTip.y;
+				CGFloat dx = tip.x - lastTip.x, dy = tip.y - lastTip.y;
 				NSPoint pit = NSMakePoint(lastTip.x + dx / 2.0f - dy, lastTip.y + dy / 2.0f + dx);
 				
 				*quad1++ = NSMakePoint(rightOffset + pit.x, upperOffset + pit.y);
@@ -181,7 +182,7 @@ static float CubicBezierPathGapAdjustment(float gap, float step, int *railCount,
 		c += step;
 	}
 
-	int quarter = pointCount * 2;
+	NSInteger quarter = pointCount * 2;
 	NSPoint *pntPtr = buf;	
 	
 	[path moveToPoint:pntPtr[0]];
@@ -231,10 +232,10 @@ static NSRect RectWithFlippedNegativeDimensions(NSRect r) {
 	return r;
 }
 
-+ (NSBezierPath *)bezierPathWithJaggedPillInRect:(NSRect)r spacing:(float)spacing {
++ (NSBezierPath *)bezierPathWithJaggedPillInRect:(NSRect)r spacing:(CGFloat)spacing {
 	
 	r = RectWithFlippedNegativeDimensions(r);
-	float a, b;
+	CGFloat a, b;
 	a = b = (NSWidth(r) / NSHeight(r) > 1.0f) ? NSHeight(r) / 2.0f : NSWidth(r) / 2.0f;
 	r = [self _joc_validRectWithRect:r a:&a b:&b spacing:&spacing];
 	if (spacing < 1.0f) return [NSBezierPath bezierPathWithRoundRectInRect:r radius:a];
@@ -242,11 +243,11 @@ static NSRect RectWithFlippedNegativeDimensions(NSRect r) {
 
 }
 
-+ (NSBezierPath *)bezierPathWithJaggedOvalInRect:(NSRect)r spacing:(float)spacing {
++ (NSBezierPath *)bezierPathWithJaggedOvalInRect:(NSRect)r spacing:(CGFloat)spacing {
 	
 	r = RectWithFlippedNegativeDimensions(r);
 	if (NSWidth(r) < 4.0f || NSHeight(r) < 4.0f || spacing < 3.0f) goto ABORT;
-	float a = NSWidth(r) / 2.0f, b = NSHeight(r) / 2.0f;
+	CGFloat a = NSWidth(r) / 2.0f, b = NSHeight(r) / 2.0f;
 	r = [self _joc_validRectWithRect:r a:&a b:&b spacing:&spacing];
 	if (spacing < 2.0f) goto ABORT;
 	return [self _joc_bezierPathWithJaggedRoundedRectInRect:r a:a b:b spacing:spacing];
@@ -288,7 +289,7 @@ ABORT:;
 	return bp;
 }
 
-+ (NSBezierPath*)bezierPathWithRoundRectInRect:(NSRect)aRect radius:(float)radius
++ (NSBezierPath*)bezierPathWithRoundRectInRect:(NSRect)aRect radius:(CGFloat)radius
 {
    NSBezierPath* path = [self bezierPath];
    radius = MIN(radius, 0.5f * MIN(NSWidth(aRect), NSHeight(aRect)));

@@ -147,7 +147,7 @@
 	
 	if(svDelegate && [svDelegate respondsToSelector:@selector(splitView:constrainSplitPosition:ofSubviewAt:)] )
 	{
-		float newHeight = [svDelegate splitView:resizableSplitView
+		CGFloat newHeight = [svDelegate splitView:resizableSplitView
 						 constrainSplitPosition:newFrame.size.height 
 									ofSubviewAt:1];
 		newFrame.size.height = newHeight;
@@ -155,7 +155,7 @@
 	
 	if(svDelegate && [svDelegate respondsToSelector:@selector(splitView:constrainMaxCoordinate:ofSubviewAt:)] )
 	{
-		float maxHeight = [svDelegate splitView:resizableSplitView
+		CGFloat maxHeight = [svDelegate splitView:resizableSplitView
 						 constrainMaxCoordinate:0.0
 									ofSubviewAt:1];
 		newFrame.size.height = MIN(maxHeight, newFrame.size.height);
@@ -163,7 +163,7 @@
 	
 	if(svDelegate && [svDelegate respondsToSelector:@selector(splitView:constrainMinCoordinate:ofSubviewAt:)] )
 	{
-		float minHeight = [svDelegate splitView:resizableSplitView
+		CGFloat minHeight = [svDelegate splitView:resizableSplitView
 						 constrainMinCoordinate:0.0 
 									ofSubviewAt:1];
 		newFrame.size.height = MAX(minHeight, newFrame.size.height);

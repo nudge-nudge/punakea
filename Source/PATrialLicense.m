@@ -10,12 +10,12 @@
 
 
 
-int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
+NSInteger const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 
 
 @interface PATrialLicense (PrivateAPI)
 
-- (NSString *)checksumWithStartDate:(NSDate *)aDate andMajorAppVersion:(int)version;
+- (NSString *)checksumWithStartDate:(NSDate *)aDate andMajorAppVersion:(NSInteger)version;
 
 @end
 
@@ -38,7 +38,7 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 	if ([[userDefaults objectForKey:@"License.Type"] isEqualTo:@"Trial"])
 	{
 		[license setStartDate:(NSDate *)[userDefaults objectForKey:@"License.StartDate"]];
-		[license setMajorAppVersion:[(NSNumber *)[userDefaults objectForKey:@"License.MajorAppVersion"] intValue]];
+		[license setMajorAppVersion:[(NSNumber *)[userDefaults objectForKey:@"License.MajorAppVersion"] integerValue]];
 		[license setChecksum:(NSString *)[userDefaults objectForKey:@"License.Checksum"]];
 	}
 	
@@ -72,10 +72,10 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 	return [self daysLeftForEvaluation] <= 0;
 }
 
-- (int)daysLeftForEvaluation
+- (NSInteger)daysLeftForEvaluation
 {
 	NSCalendar *cal = [NSCalendar currentCalendar];
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+	NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
 
 	// Strip of any time information from the expiration date
 	NSDate *expirationDate = [[self startDate] addTimeInterval:NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD * 60 * 60 * 24];
@@ -99,9 +99,9 @@ int const	NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD = 30;
 	[self setChecksum:aChecksum];
 }
 
-- (NSString *)checksumWithStartDate:(NSDate *)aDate andMajorAppVersion:(int)version
+- (NSString *)checksumWithStartDate:(NSDate *)aDate andMajorAppVersion:(NSInteger)version
 {
-	NSString *checksumString = [NSString stringWithFormat:@"%@ %i",
+	NSString *checksumString = [NSString stringWithFormat:@"%@ %ld",
 								aDate,
 								version];
 	

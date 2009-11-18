@@ -36,7 +36,7 @@
 		return NSDragOperationNone;
 	
 	NSEvent *currentEvent = [NSApp currentEvent];
-    unsigned flags = [currentEvent modifierFlags];
+    NSUInteger flags = [currentEvent modifierFlags];
     if (flags & NSAlternateKeyMask)
 		[dropManager setAlternateState:YES];
 	else 
@@ -61,7 +61,7 @@
 		return NSDragOperationNone;
 	
 	NSEvent *currentEvent = [NSApp currentEvent];
-    unsigned flags = [currentEvent modifierFlags];
+    NSUInteger flags = [currentEvent modifierFlags];
     if (flags & NSAlternateKeyMask)
 		[dropManager setAlternateState:YES];
 	else 

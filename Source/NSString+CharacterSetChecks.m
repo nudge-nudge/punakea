@@ -22,7 +22,7 @@
 	NSCharacterSet *wscs = [NSCharacterSet whitespaceCharacterSet];
 	BOOL isWhitespace = YES;
 	
-	for (int i=0;i<[self length];i++)
+	for (NSInteger i=0;i<[self length];i++)
 	{
 		if (![wscs characterIsMember:[self characterAtIndex:i]])
 			isWhitespace = NO;

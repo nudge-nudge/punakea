@@ -13,7 +13,7 @@
 #import "NNTagging/NNTagging.h"
 #import "NNTagging/NNTags.h"
 #import "TagAutoCompleteController.h"
-#import "SRRecorderControl.h";
+#import "ShortcutRecorder/SRRecorderControl.h";
 
 
 typedef enum _PAScheduledUpdateCheckInterval {

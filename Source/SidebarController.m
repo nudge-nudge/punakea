@@ -86,7 +86,7 @@ action called on dropping files to FileBox
 	[taggerController setManageFiles:manageFiles];
 	
 	NSEvent *currentEvent = [NSApp currentEvent];
-    unsigned flags = [currentEvent modifierFlags];
+    NSUInteger flags = [currentEvent modifierFlags];
     if (flags & NSAlternateKeyMask)
 	{
 		manageFiles = !manageFiles;

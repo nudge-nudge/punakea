@@ -32,7 +32,7 @@
 
 - (void)doubleAction;
 - (void)highlightCell:(BOOL)flag cell:(NSCell *)cell;
-- (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)column;
+- (void)highlightCell:(BOOL)flag atRow:(NSInteger)row column:(NSInteger)column;
 - (void)highlightOnlyCell:(NSCell *)cell;
 - (void)deselectSelectedCell;
 - (void)deselectAllCells;

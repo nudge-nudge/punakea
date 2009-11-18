@@ -10,7 +10,7 @@
 #import "NNTagging/NNTags.h"
 
 @interface PATagGroup : NSObject {
-	int maxSize;
+	NSInteger maxSize;
 	NSMutableArray *groupedTags;
 	NSArray *sortDescriptors;
 	

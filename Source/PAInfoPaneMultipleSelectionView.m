@@ -75,7 +75,7 @@
 	NSArray *textFields = [NSArray arrayWithObjects:itemsField, sizeField, nil];
 	NSArray *labels = [NSArray arrayWithObjects:itemsLabel, sizeLabel, nil];
 	
-	for(int i = 0; i < [textFields count]; i++)
+	for(NSInteger i = 0; i < [textFields count]; i++)
 	{
 		NSTextView *textField = [textFields objectAtIndex:i];
 		NSTextView *label = [labels objectAtIndex:i];
@@ -115,7 +115,7 @@
 	
 	// Update fields
 	
-	NSString *s = [NSString stringWithFormat:@"%d %@", [files count],
+	NSString *s = [NSString stringWithFormat:@"%lu %@", [files count],
 		NSLocalizedStringFromTable(@"FILES", @"Global", nil)];
 	[itemsField setStringValue:s];
 	

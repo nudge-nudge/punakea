@@ -42,7 +42,7 @@ only works if parent window is a PASidebar
 }
 
 // draw black border on drop TODO
--(void)_drawDropHighlightOnRow:(int)rowIndex 
+-(void)_drawDropHighlightOnRow:(NSInteger)rowIndex 
 {
 	NSRect cellFrame = [self frameOfCellAtColumn:0 row:rowIndex];
 	

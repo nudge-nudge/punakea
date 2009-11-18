@@ -13,14 +13,14 @@
 
 - (void)displayCellsForItems;
 
-- (float)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint;
+- (CGFloat)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint;
 - (void)startDrag:(NSEvent *)event;
-- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(float *)offsetX y:(float *)offsetY;
+- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(CGFloat *)offsetX y:(CGFloat *)offsetY;
 
 @end
 
 
-static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
+static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCommandKeyMask | NSControlKeyMask;
 
 
 @implementation PAResultsMultiItemMatrix
@@ -82,23 +82,23 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSSize cellSize = [self cellSize];
 	NSSize intercellSpacing = [self intercellSpacing];
 	
-	int numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
+	NSInteger numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
 	
 	// Break if numberOfItemsPerRow hasn't changed
 	if([self numberOfColumns] == numberOfItemsPerRow) return;
 	
 	NSMutableArray *cellArray = [NSMutableArray arrayWithCapacity:100];
 	
-	for(int row = 0; row < [self numberOfRows]; row++)
+	for(NSInteger row = 0; row < [self numberOfRows]; row++)
 	{
-		for(int column = 0; column < [self numberOfColumns]; column++)
+		for(NSInteger column = 0; column < [self numberOfColumns]; column++)
 		{
 			NSTextFieldCell *cell = [self cellAtRow:row column:column];
 			[cellArray addObject:[cell retain]];
 		}
 	}
 	
-	for(int i = 0; i < [self numberOfRows]; i++)
+	for(NSInteger i = 0; i < [self numberOfRows]; i++)
 	{
 		[self removeRow:i];
 	}
@@ -106,8 +106,8 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	NSTextFieldCell *aCell;
 	NSEnumerator *enumerator = [cellArray objectEnumerator];
-	int row = 0;
-	int column = 0;
+	NSInteger row = 0;
+	NSInteger column = 0;
 	while(aCell = [enumerator nextObject])
 	{				
 		if(column == numberOfItemsPerRow) 
@@ -115,7 +115,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			[self addRow];
 			
 			// Fill the new row with placeholder cells
-			for(int i = 0; i < column; i++)
+			for(NSInteger i = 0; i < column; i++)
 			{
 				NSTextFieldCell *cell = [[[PAResultsMultiItemPlaceholderCell alloc]
 										   initTextCell] autorelease];
@@ -161,7 +161,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)displayCellsForItems
 {
-	for(int i = 0; i < [self numberOfRows]; i++)
+	for(NSInteger i = 0; i < [self numberOfRows]; i++)
 	{
 		[self removeRow:i];
 	}
@@ -171,13 +171,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSSize cellSize = [self cellSize];
 	NSSize intercellSpacing = [self intercellSpacing];
 	
-	int numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
+	NSInteger numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
 	
 	NSEnumerator *enumerator = [items objectEnumerator];
 	NNTaggableObject *anObject;
 	
-	int row = 0;
-	int column = 0;
+	NSInteger row = 0;
+	NSInteger column = 0;
 	while(anObject = [enumerator nextObject])
 	{
 		NSTextFieldCell *cell =
@@ -189,7 +189,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			[self addRow];
 			
 			// Fill the new row with placeholder cells
-			for(int i = 0; i < column; i++)
+			for(NSInteger i = 0; i < column; i++)
 			{
 				NSTextFieldCell *thisCell = [[[PAResultsMultiItemPlaceholderCell alloc]
 										   initTextCell] autorelease];
@@ -212,7 +212,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	}
 	
 	// Highlight cells if there are already some selected indexes
-	unsigned idx = [selectedIndexes firstIndex];
+	NSUInteger idx = [selectedIndexes firstIndex];
 	while(idx != NSNotFound)
 	{
 		row = idx / [self numberOfColumns];
@@ -226,7 +226,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)doubleAction
 {	
-	unsigned idx = [selectedIndexes firstIndex];
+	NSUInteger idx = [selectedIndexes firstIndex];
 		
 	while (idx != NSNotFound)
 	{
@@ -240,13 +240,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 - (void)highlightCell:(BOOL)flag cell:(NSCell *)cell
 {
-	int row, column;
+	NSInteger row, column;
 	[self getRow:&row column:&column ofCell:cell];
 	
 	[self highlightCell:flag atRow:row column:column];
 }
 
-- (void)highlightCell:(BOOL)flag atRow:(int)row column:(int)column
+- (void)highlightCell:(BOOL)flag atRow:(NSInteger)row column:(NSInteger)column
 {
 	if(row == -1 || column == -1)
 	{
@@ -264,7 +264,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		return;
 	}
 	
-	unsigned int idx = row * [self numberOfColumns] + column;
+	NSUInteger idx = row * [self numberOfColumns] + column;
 	
 	if(flag)
 	{
@@ -292,7 +292,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	[self deselectAllCellsButCell:cell];
 
-	int row, column;
+	NSInteger row, column;
 	[self getRow:&row column:&column ofCell:cell];
 
 	[cell setEditable:NO];
@@ -318,7 +318,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	{
 		if(cell != aCell)
 		{
-			int r, c;
+			NSInteger r, c;
 			[self getRow:&r column:&c ofCell:aCell];
 			[self highlightCell:NO atRow:r column:c];
 		}
@@ -344,9 +344,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)moveSelectionUp:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
 {	
 	NSCell *cell;
-	int row = [self numberOfRows];
-	int column = 0;
-	int r, c;
+	NSInteger row = [self numberOfRows];
+	NSInteger column = 0;
+	NSInteger r, c;
 	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
 	
 	while(cell = [selCellsEnumerator nextObject])
@@ -373,7 +373,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		{
 			while(cell = [selCellsEnumerator nextObject])
 			{
-				int curRow, curCol;
+				NSInteger curRow, curCol;
 				[self getRow:&curRow column:&curCol ofCell:cell];
 				[self highlightCell:YES atRow:curRow column:curCol];
 			}
@@ -403,9 +403,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)moveSelectionDown:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
 {	
 	NSCell *cell;
-	int row = -1;
-	int column = 0;
-	int r, c;
+	NSInteger row = -1;
+	NSInteger column = 0;
+	NSInteger r, c;
 	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
 	
 	while(cell = [selCellsEnumerator nextObject])
@@ -438,7 +438,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		{
 			while(cell = [selCellsEnumerator nextObject])
 			{
-				int curRow, curCol;
+				NSInteger curRow, curCol;
 				[self getRow:&curRow column:&curCol ofCell:cell];
 				[self highlightCell:YES atRow:curRow column:curCol];
 			}
@@ -468,9 +468,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)moveSelectionRight:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
 {	
 	NSCell *cell;
-	int row = 0;
-	int column = -1;
-	int r, c;
+	NSInteger row = 0;
+	NSInteger column = -1;
+	NSInteger r, c;
 	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
 	
 	while(cell = [selCellsEnumerator nextObject])
@@ -512,7 +512,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		{
 			while(cell = [selCellsEnumerator nextObject])
 			{
-				int curRow, curCol;
+				NSInteger curRow, curCol;
 				[self getRow:&curRow column:&curCol ofCell:cell];
 				[self highlightCell:YES atRow:curRow column:curCol];
 			}
@@ -545,9 +545,9 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 - (void)moveSelectionLeft:(NSEvent *)theEvent byExtendingSelection:(BOOL)flag
 {	
 	NSCell *cell;
-	int row = [self numberOfRows] - 1;
-	int column = [self numberOfColumns] - 1;
-	int r, c;
+	NSInteger row = [self numberOfRows] - 1;
+	NSInteger column = [self numberOfColumns] - 1;
+	NSInteger r, c;
 	NSEnumerator *selCellsEnumerator = [[self selectedCells] objectEnumerator];
 	
 	while(cell = [selCellsEnumerator nextObject])
@@ -582,7 +582,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		{
 			while(cell = [selCellsEnumerator nextObject])
 			{
-				int curRow, curCol;
+				NSInteger curRow, curCol;
 				[self getRow:&curRow column:&curCol ofCell:cell];
 				[self highlightCell:YES atRow:curRow column:curCol];
 			}
@@ -612,7 +612,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// Scroll selected cell to visible
 	if([self selectedCell])
 	{
-		int row, column;
+		NSInteger row, column;
 		[self getRow:&row column:&column ofCell:[self selectedCell]];
 	
 		[self scrollRectToVisible:[self cellFrameAtRow:row column:column]];
@@ -679,7 +679,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 	// Make sure the corresponding multiitemcell in our outlineView is highlighted
 	NSPoint locationInOutlineView = [outlineView convertPoint:[theEvent locationInWindow] fromView:nil];
-	int row = [outlineView rowAtPoint:locationInOutlineView];	
+	NSInteger row = [outlineView rowAtPoint:locationInOutlineView];	
 	BOOL byExtendingSelection = ([theEvent modifierFlags] & NSShiftKeyMask) ||
 								([theEvent modifierFlags] & NSCommandKeyMask);	
 	[outlineView selectRow:row byExtendingSelection:byExtendingSelection];
@@ -687,7 +687,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	
 	
 	// Now, perform click action	
-	static float doubleClickThreshold = 0.0;    
+	static CGFloat doubleClickThreshold = 0.0;    
     if (doubleClickThreshold == 0.0)
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -703,7 +703,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSPoint location = [theEvent locationInWindow];
 	location = [self convertPoint:location fromView:nil];
 		
-	int column;
+	NSInteger column;
 	[self getRow:&row column:&column forPoint:location];
 	
 	NSCell *cell = [self cellAtRow:row column:column];
@@ -711,7 +711,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
     
     if (modifierDown == NO && doubleClick == NO)
     {
-		int count = [selectedIndexes count];
+		NSInteger count = [selectedIndexes count];
 		if([self selectedCell] == cell && count <= 1)
 		{
 			// cancel any previous editing action
@@ -736,7 +736,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 													 selector:@selector(beginEditing)
 													   object:nil];
 			
-			unsigned cellIndex = row * [self numberOfColumns] + column;			
+			NSUInteger cellIndex = row * [self numberOfColumns] + column;			
 			if([selectedIndexes count] > 1 && [selectedIndexes containsIndex:cellIndex])
 			{
 				// Select only this cell if the click becomes no double click
@@ -776,7 +776,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		// Select a range of cells with SHIFT
 		if([theEvent modifierFlags] & NSShiftKeyMask)
 		{
-			int firstRow = 0, firstColumn = 0;		
+			NSInteger firstRow = 0, firstColumn = 0;		
 			
 			if([self selectedCell])	
 				[self getRow:&firstRow column:&firstColumn ofCell:[self selectedCell]];	
@@ -786,15 +786,15 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 			if(firstRow > row ||
 			   (firstRow == row && firstColumn > column))
 			{
-				int rTemp = firstRow, cTemp = firstColumn;
+				NSInteger rTemp = firstRow, cTemp = firstColumn;
 				firstRow = row;
 				firstColumn = column;
 				row = rTemp;
 				column = cTemp;
 			}
 			
-			int c = firstColumn;
-			for(int r = firstRow; r <= row; r++)
+			NSInteger c = firstColumn;
+			for(NSInteger r = firstRow; r <= row; r++)
 			{
 				while((r < row && c < [self numberOfColumns]) ||
 					  (r == row && c <= column))
@@ -833,7 +833,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// If multiple items are selected, discard editing
 	if(![selectedIndexes count] == 1) return;
 
-	int row, column;
+	NSInteger row, column;
 	[self getRow:&row column:&column ofCell:[self selectedCell]];
 
 	[self deselectAllCellsButCell:[self selectedCell]];
@@ -854,7 +854,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 
 	NSMutableDictionary *newUserInfo;
 	newUserInfo = [[NSMutableDictionary alloc] init];
-	[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+	[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 
 	NSNotification *notification;
 	notification = [NSNotification notificationWithName:NSTextDidEndEditingNotification
@@ -872,11 +872,11 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 {
 	//[super textDidChange:notification];
 	
-	int r, c;
+	NSInteger r, c;
 	[self getRow:&r column:&c ofCell:[self selectedCell]];
 	
 	// Set text color to red if the new destination already exists
-	int idx = r * [self numberOfColumns] + c;
+	NSInteger idx = r * [self numberOfColumns] + c;
 	NNTaggableObject *taggableObject = [items objectAtIndex:idx];
 	
 	NSText *textView = [notification object];
@@ -923,16 +923,16 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// Force editing to end after pressing the Return key
 	// See http://developer.apple.com/documentation/Cocoa/Conceptual/TextEditing/Tasks/BatchEditing.html
 	
-	int r, c;
+	NSInteger r, c;
 	[self getRow:&r column:&c ofCell:[self selectedCell]];
 
-	int textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] intValue];
+	NSInteger textMovement = [[[notification userInfo] valueForKey:@"NSTextMovement"] integerValue];
 
 	if(textMovement == NSReturnTextMovement)
 	{
 		NSMutableDictionary *newUserInfo;
 		newUserInfo = [[NSMutableDictionary alloc] initWithDictionary:[notification userInfo]];
-		[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+		[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 
 		notification = [NSNotification notificationWithName:[notification name]
 													 object:[notification object]
@@ -944,7 +944,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		[newUserInfo release];
 		
 		// Forward renaming request to our delegate's query (delegate is equal to the outlineView's delegate)		
-		int					idx = r * [self numberOfColumns] + c;
+		NSInteger					idx = r * [self numberOfColumns] + c;
 		NNTaggableObject	*item = [items objectAtIndex:idx];
 		NSString			*newName = [[textView string] copy];
 		
@@ -965,7 +965,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 #pragma mark Drag'n'Drop Stuff
 - (void)mouseDragged:(NSEvent *)event
 {
-	int row, column; 
+	NSInteger row, column; 
 
     NSPoint point = [self convertPoint:[mouseDownEvent locationInWindow] fromView:nil];
 	NSPoint curPoint = [self convertPoint:[event locationInWindow] fromView:nil];
@@ -990,14 +990,14 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
         [self startDrag:mouseDownEvent]; 
 }
 
-- (float)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint
+- (CGFloat)distanceFromPoint:(NSPoint)sourcePoint to:(NSPoint)destPoint
 {
-	float dx = sourcePoint.x - destPoint.x;
-	float dy = sourcePoint.y - destPoint.y;
+	CGFloat dx = sourcePoint.x - destPoint.x;
+	CGFloat dy = sourcePoint.y - destPoint.y;
 	return sqrt(dx * dx + dy * dy);
 }
 
-- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)isLocal
+- (NSUInteger)draggingSourceOperationMaskForLocal:(BOOL)isLocal
 {
 	if(isLocal)
 	{
@@ -1017,7 +1017,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	// Create pasteboard contents
 	NSMutableArray *fileList = [NSMutableArray array];
 	
-	unsigned idx = [selectedIndexes firstIndex];	
+	NSUInteger idx = [selectedIndexes firstIndex];	
 	while (idx != NSNotFound)
 	{
 		NNTaggableObject *item = [items objectAtIndex:idx];
@@ -1035,7 +1035,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSPoint dragPoint = [self convertPoint:[event locationInWindow] fromView:nil];
 	
 	// Determine drag image
-	float offsetX, offsetY;
+	CGFloat offsetX, offsetY;
 	NSImage *image = [self dragImageForMouseDownAtPoint:dragPoint offsetX:&offsetX y:&offsetY];
 	
 	// Drag point
@@ -1058,13 +1058,13 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
           slideBack:YES]; 
 }
 
-- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(float *)offsetX y:(float *)offsetY
+- (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(CGFloat *)offsetX y:(CGFloat *)offsetY
 {
 	// First, determine the topmost and lowermost selected items in the visible rect to 
 	// calc the size of the image
 	NSRect selectedItemsRect = NSMakeRect(0,0,0,0);
 	NSSize intercellSpacing = [self intercellSpacing];
-	int topRow = -1, bottomRow = -1, leftColumn = -1, rightColumn = -1;
+	NSInteger topRow = -1, bottomRow = -1, leftColumn = -1, rightColumn = -1;
 	
 	NSMutableArray *visibleCells = [NSMutableArray array];
 	
@@ -1072,7 +1072,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	NSTextFieldCell *cell;
 	while(cell = [e nextObject])
 	{
-		int row, column;
+		NSInteger row, column;
 		[self getRow:&row column:&column ofCell:cell];
 		
 		NSRect cellFrame = [self cellFrameAtRow:row column:column];
@@ -1122,7 +1122,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 	e = [visibleCells objectEnumerator];
 	while(cell = [e nextObject])
 	{
-		int row, column;
+		NSInteger row, column;
 		[self getRow:&row column:&column ofCell:cell];
 		
 		NSRect cellFrame = [self cellFrameAtRow:row column:column];
@@ -1130,7 +1130,7 @@ static unsigned int PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NS
 		cellFrame.origin.y -= selectedItemsRect.origin.y;
 		
 		// Determine offset
-		int r, c;
+		NSInteger r, c;
 		[self getRow:&r column:&c forPoint:point];
 		NSTextFieldCell *clickedCell = [self cellAtRow:r column:c];
 		
@@ -1196,7 +1196,7 @@ needed for supporting dragging to trash
 {
 	NSMutableArray *selectedItems = [NSMutableArray array];
 		
-	unsigned idx = [selectedIndexes firstIndex];
+	NSUInteger idx = [selectedIndexes firstIndex];
 	while(idx != NSNotFound)
 	{
 		[selectedItems addObject:[items objectAtIndex:idx]];
@@ -1212,7 +1212,7 @@ needed for supporting dragging to trash
 	
 	for (NNTaggableObject *item in theSelectedItems)
 	{
-		unsigned idx = [items indexOfObjectIdenticalTo:item];
+		NSUInteger idx = [items indexOfObjectIdenticalTo:item];
 		if (idx != NSNotFound)
 			[selectedIndexes addIndex:idx];
 	}

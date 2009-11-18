@@ -117,11 +117,11 @@
 #pragma mark TEMP
 - (void)dummy:(id)sender
 {
-	for (int i = 0; i < 100; i++)
+	for (NSInteger i = 0; i < 100; i++)
 	{	
 		NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-		[dict setObject:[NSNumber numberWithInt:i] forKey:@"doubleValue"];
-		[dict setObject:[NSNumber numberWithInt:99] forKey:@"maxValue"];
+		[dict setObject:[NSNumber numberWithInteger:i] forKey:@"doubleValue"];
+		[dict setObject:[NSNumber numberWithInteger:99] forKey:@"maxValue"];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:NNProgressDidUpdateNotification
 															object:dict];

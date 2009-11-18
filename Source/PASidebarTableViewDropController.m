@@ -39,7 +39,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 
 - (NSDragOperation)tableView:(NSTableView*)tv 
 				validateDrop:(id <NSDraggingInfo>)info 
-				 proposedRow:(int)row 
+				 proposedRow:(NSInteger)row 
 	   proposedDropOperation:(NSTableViewDropOperation)op 
 {
 	// check if sender should be ignored
@@ -47,7 +47,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 		return NSDragOperationNone;
 	
 	NSEvent *currentEvent = [NSApp currentEvent];
-    unsigned flags = [currentEvent modifierFlags];
+    NSUInteger flags = [currentEvent modifierFlags];
     if (flags & NSAlternateKeyMask)
 		[dropManager setAlternateState:YES];
 	else 
@@ -62,7 +62,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 
 - (BOOL)tableView:(NSTableView*)tv 
 	   acceptDrop:(id <NSDraggingInfo>)info 
-			  row:(int)row 
+			  row:(NSInteger)row 
 	dropOperation:(NSTableViewDropOperation)op 
 {
 	NSArray *objects = [dropManager handleDrop:[info draggingPasteboard]];

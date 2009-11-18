@@ -2,7 +2,7 @@
 
 @implementation PAResultsTableColumn
 
-- (id)dataCellForRow:(int)row {
+- (id)dataCellForRow:(NSInteger)row {
     id delegate = [[self tableView] delegate];
     if ([delegate respondsToSelector:@selector(tableColumn:inTableView:dataCellForRow:)]) {
         return [delegate tableColumn:self inTableView:[self tableView] dataCellForRow:row];

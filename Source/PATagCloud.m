@@ -195,7 +195,7 @@ calculates the starting point in the next row according to the height of all the
 	
 	while (tag = [tagEnumerator nextObject])
 	{
-		float tagRating;
+		CGFloat tagRating;
 		
 		tagRating = [tag relativeRatingToTag:currentBestTag];
 				
@@ -305,7 +305,7 @@ calculates the starting point in the next row according to the height of all the
 	drawRect.origin.y += offset.height / 2.0;
 
 	[[NSColor colorWithDeviceRed:(185.0/255.0) green:(215.0/255.0) blue:(255.0/255.0) alpha:1.0] set];
-	float lineWidth = [NSBezierPath defaultLineWidth];
+	CGFloat lineWidth = [NSBezierPath defaultLineWidth];
 	[NSBezierPath setDefaultLineWidth:3.0];
 	NSBezierPath *path = [NSBezierPath bezierPathWithRoundRectInRect:drawRect radius:4.0];
 	[path stroke];
@@ -452,11 +452,11 @@ calculates the starting point in the next row according to the height of all the
 	tagPosition++;
 
 	NSRect frame = [tagButton frame];
-	float width = frame.size.width;
+	CGFloat width = frame.size.width;
 	
 	// We're going to use full pixels for CoreAnimation to produce nice results and no
 	// half-pixel antialiasing.
-	float xValue = ceil(pointForNextTagRect.x + width + TAGCLOUD_SPACING.width + TAGCLOUD_PADDING.width);
+	CGFloat xValue = ceil(pointForNextTagRect.x + width + TAGCLOUD_SPACING.width + TAGCLOUD_PADDING.width);
 	
 	//if the tag doesn't fit in this row, get first point in next row
 	if (xValue > rect.size.width)
@@ -477,15 +477,15 @@ calculates the starting point in the next row according to the height of all the
 - (NSPoint)firstPointForNextRowIn:(NSRect)rect;
 {
 	//values needed for calc
-	int rowWidth = 0;
-	float maxHeight = 0.0;
+	NSInteger rowWidth = 0;
+	CGFloat maxHeight = 0.0;
 	
 	/* while there are tags, compose a row and get the maximum height,
 		then keep the starting points for each one */
 	NSEnumerator *tagEnumerator = [[datasource visibleTags] objectEnumerator];
 	NNTag *tag;
 	
-	int i;
+	NSInteger i;
 	for (i=0;i<tagPosition;i++)
 	{
 		[tagEnumerator nextObject];
@@ -800,9 +800,9 @@ executes some interface stuff
 	NSRect buttonFrame = [tagButton frame];
 	NSSize viewSize = [self frame].size;
 	
-	float buttonLineMaxY = NSMaxY([[self maximumButtonOnLineWithPoint:buttonFrame.origin] frame]);
-	float topSkip = viewSize.height - TAGCLOUD_PADDING.height;
-	float bottomSkip = 0 + TAGCLOUD_PADDING.height;
+	CGFloat buttonLineMaxY = NSMaxY([[self maximumButtonOnLineWithPoint:buttonFrame.origin] frame]);
+	CGFloat topSkip = viewSize.height - TAGCLOUD_PADDING.height;
+	CGFloat bottomSkip = 0 + TAGCLOUD_PADDING.height;
 
 	if (buttonLineMaxY >= topSkip - 1)
 	{
@@ -1036,7 +1036,7 @@ executes some interface stuff
 - (PATagButton*)maximumButtonOnLineWithPoint:(NSPoint)point
 {
 	NSArray *buttons = [self buttonsWithOriginOnHorizontalLineWithPoint:point];
-	float maxHeight = 0.0;
+	CGFloat maxHeight = 0.0;
 	PATagButton *maxButton;
 	
 	NSEnumerator *e = [buttons objectEnumerator];

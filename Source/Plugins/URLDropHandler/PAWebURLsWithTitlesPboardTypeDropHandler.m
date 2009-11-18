@@ -39,7 +39,7 @@
 	
 	NSMutableArray *files = [NSMutableArray array];
 	
-	for (int i=0;i<[urls count];i++)
+	for (NSInteger i=0;i<[urls count];i++)
 	{
 		NSString *url = [urls objectAtIndex:i];
 		NSString *title = [titles objectAtIndex:i];

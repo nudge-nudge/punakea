@@ -19,7 +19,7 @@
 - (BOOL)appIsActive;
 
 - (void)loadUserDefaults;
-- (void)updateUserDefaultsToVersion:(int)newVersion;
+- (void)updateUserDefaultsToVersion:(NSInteger)newVersion;
 
 - (void)loadTagCache;
 - (void)saveTagCache;
@@ -911,7 +911,7 @@
 						contextInfo:nil];
 }
 
-- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	// terminate app (no path was found)
 	[[NSApplication sharedApplication] terminate:self];
@@ -1006,7 +1006,7 @@
 	[userDefaults registerDefaults:appDefaults];
 	
 	// Check for Version Information of User Defaults
-	int currentVersion = [userDefaults integerForKey:@"Version"];	
+	NSInteger currentVersion = [userDefaults integerForKey:@"Version"];	
 	if (currentVersion == 0)
 	{
 		// Below v0.4 there was no version information available!		
@@ -1018,16 +1018,16 @@
 			[self updateUserDefaultsToVersion:2];
 		} else {
 			// Mark defaults as being v2
-			[userDefaults setObject:[NSNumber numberWithInt:2] forKey:@"Version"];
+			[userDefaults setObject:[NSNumber numberWithInteger:2] forKey:@"Version"];
 		}
 	}
 }
 
 - (void)loadQuickLookFramework 
 {
-	unsigned major = 0;
-	unsigned minor = 0;
-	unsigned bugFix = 0;
+	NSUInteger major = 0;
+	NSUInteger minor = 0;
+	NSUInteger bugFix = 0;
 	
 	[NSApp getSystemVersionMajor:&major
 						   minor:&minor
@@ -1052,7 +1052,7 @@
 //	}
 }
 
-- (void)updateUserDefaultsToVersion:(int)newVersion 
+- (void)updateUserDefaultsToVersion:(NSInteger)newVersion 
 {
 	// Unfortunately, valueForKeyPath does NOT work for NSUserController.
 	// Chained valueForKey calls do, though... WHAT?!? ;)
@@ -1064,9 +1064,9 @@
 	{	
 		// General		
 		key = @"Appearance.SidebarPosition";
-		int intValue = [userDefaults integerForKey:key];
+		NSInteger intValue = [userDefaults integerForKey:key];
 		[userDefaults removeObjectForKey:key];						
-		[userDefaults setValue:[NSNumber numberWithInt:intValue] forKey:@"General.Sidebar.Position"];
+		[userDefaults setValue:[NSNumber numberWithInteger:intValue] forKey:@"General.Sidebar.Position"];
 		
 		key = @"General.LoadSidebar";
 		BOOL boolValue = [userDefaults boolForKey:key];
@@ -1093,7 +1093,7 @@
 		// Update Version Info	
 		// This may not be moved to UserDefaults.plist as a default value, as it is then not
 		// output to the preferences file!
-		[userDefaults setObject:[NSNumber numberWithInt:2] forKey:@"Version"];
+		[userDefaults setObject:[NSNumber numberWithInteger:2] forKey:@"Version"];
 		
 	} else
 	{

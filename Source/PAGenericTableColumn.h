@@ -11,7 +11,7 @@
 
 @interface NSObject (PAGenericTableColumnDelegate)
 
-- (id)tableColumn:(NSTableColumn *)column inTableView:(NSTableView *)tableView dataCellForRow:(int)row;
+- (id)tableColumn:(NSTableColumn *)column inTableView:(NSTableView *)tableView dataCellForRow:(NSInteger)row;
 
 @end
 

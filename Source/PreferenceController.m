@@ -21,12 +21,12 @@
 - (void)switchSpecialFolderDir:(NSDictionary *)userInfo;
 
 - (void)updateCurrentLocationForPopUpButton:(NSPopUpButton *)button;
-- (void)moveSubdirectoriesFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag;
+- (void)moveSubdirectoriesFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(NSInteger)tag;
 
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
 
-- (NSString *)controllerKeyPathForMenuItemTag:(int)tag;
-- (NSPopUpButton *)popUpButtonForMenuItemTag:(int)tag;
+- (NSString *)controllerKeyPathForMenuItemTag:(NSInteger)tag;
+- (NSPopUpButton *)popUpButtonForMenuItemTag:(NSInteger)tag;
 
 - (BOOL)isLoginItem;
 - (CFIndex)loginItemIndex;
@@ -59,7 +59,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		core = aCore;
 		
 		// Check if recentPage from UserDefaults is valid
-		int recentPage = [[NSUserDefaults standardUserDefaults] integerForKey:@"punakea.preferences.prefspanel.recentpage"];
+		NSInteger recentPage = [[NSUserDefaults standardUserDefaults] integerForKey:@"punakea.preferences.prefspanel.recentpage"];
 		if (recentPage > [tabView numberOfTabViewItems])
 		{
 			[[NSUserDefaults standardUserDefaults] setInteger:0
@@ -123,7 +123,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	
 	KeyCombo keyCombo;
 	keyCombo.code = [[userDefaultsController valueForKeyPath:@"values.General.Hotkey.Tagger.KeyCode"] shortValue];
-	keyCombo.flags = [[userDefaultsController valueForKeyPath:@"values.General.Hotkey.Tagger.Modifiers"] intValue];
+	keyCombo.flags = [[userDefaultsController valueForKeyPath:@"values.General.Hotkey.Tagger.Modifiers"] integerValue];
 	[hotkeyRecorderControl setKeyCombo:keyCombo];
 }
 
@@ -246,7 +246,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 			break;
 	}
 	
-	[[NSUserDefaults standardUserDefaults] setInteger:(int)timeInterval forKey:@"SUScheduledCheckInterval"];
+	[[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)timeInterval forKey:@"SUScheduledCheckInterval"];
 	[[core updater] scheduleCheckWithInterval:timeInterval];
 }		
 
@@ -340,7 +340,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 							contextInfo:sender];
 }
 
-- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo
 {	
 	NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
 	
@@ -354,7 +354,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 						
 		[userInfo setObject:oldDir forKey:@"oldDir"];
 		[userInfo setObject:newDir forKey:@"newDir"];
-		[userInfo setObject:[NSNumber numberWithInt:[(id)contextInfo tag]] forKey:@"tag"];
+		[userInfo setObject:[NSNumber numberWithInteger:[(id)contextInfo tag]] forKey:@"tag"];
 	}
 	else
 	{
@@ -368,7 +368,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	if (returnCode == NSOKButton)
 	{
 		// For the Tags Folder, show an alert, as files might be deleted from within this folder
-		if ((int)[(id)contextInfo tag] == 1)
+		if ((NSInteger)[(id)contextInfo tag] == 1)
 		{		
 			[self performSelector:@selector(showTagsFolderWarning:)
 					   withObject:userInfo
@@ -401,7 +401,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 
 - (void)switchSpecialFolderDir:(NSDictionary *)userInfo
 {	
-	int		 tag	 = [[userInfo objectForKey:@"tag"] intValue];
+	NSInteger		 tag	 = [[userInfo objectForKey:@"tag"] integerValue];
 	NSString *oldDir = [userInfo objectForKey:@"oldDir"];
 	NSString *newDir = [userInfo objectForKey:@"newDir"];
 	
@@ -503,7 +503,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	
 	[userInfo setObject:oldDir forKey:@"oldDir"];
 	[userInfo setObject:defaultDir forKey:@"newDir"];
-	[userInfo setObject:[NSNumber numberWithInt:[sender tag]] forKey:@"tag"];
+	[userInfo setObject:[NSNumber numberWithInteger:[sender tag]] forKey:@"tag"];
 	
 	[self switchSpecialFolderDir:userInfo];		
 }
@@ -532,11 +532,11 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		NSString *newManagedPath = [newPath stringByDeletingLastPathComponent];
 		
 		NSString *dirName = [oldPath lastPathComponent];
-		int i = [dirName intValue];
+		NSInteger i = [dirName integerValue];
 			
 		for (i;i>0;i--)
 		{
-			NSString *newDirName = [NSString stringWithFormat:@"%i",i];
+			NSString *newDirName = [NSString stringWithFormat:@"%ld",i];
 			[manager movePath:[newManagedPath stringByAppendingPathComponent:newDirName]
 						   toPath:[oldManagedPath stringByAppendingPathComponent:newDirName]
 						  handler:nil];
@@ -560,13 +560,13 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 						contextInfo:nil];
 }
 
-- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	// noting
 	return;
 }
 
-- (void)tagsFolderWarningDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+- (void)tagsFolderWarningDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {	
 	NSDictionary* userInfo = (NSDictionary*)contextInfo;
 		
@@ -578,7 +578,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	else
 	{
 		// Update UI - show original state in tags folder dropdown
-		int		 tag	 = [[userInfo objectForKey:@"tag"] intValue];
+		NSInteger		 tag	 = [[userInfo objectForKey:@"tag"] integerValue];
 		NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:tag];
 		[popUpButton selectItemAtIndex:0];
 	}
@@ -628,7 +628,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	
 }
 
-- (void)moveSubdirectoriesFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(int)tag
+- (void)moveSubdirectoriesFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(NSInteger)tag
 {
 	NSString *standardizedOldPath = [oldPath stringByStandardizingPath];
 	NSString *standardizedNewPath = [newPath stringByStandardizingPath];
@@ -651,7 +651,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	// Drop Box:		Copy all
 	
 	NSMutableArray *directories;
-	int i = 1;
+	NSInteger i = 1;
 	NSString *currentNumberedDir;
 	NSString *directory;
 	BOOL isDirectory;
@@ -662,7 +662,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		
 		while (true)
 		{
-			currentNumberedDir = [NSString stringWithFormat:@"/%i/",i];
+			currentNumberedDir = [NSString stringWithFormat:@"/%ld/",i];
 			directory = [standardizedOldPath stringByAppendingPathComponent:currentNumberedDir];
 		
 			if ([fileManager fileExistsAtPath:directory isDirectory:&isDirectory])
@@ -687,7 +687,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	{		
 		directories = [NSMutableArray arrayWithArray:[fileManager contentsOfDirectoryAtPath:standardizedOldPath error:NULL]];
 		
-		for(int j=0; j < [directories count]; j++)
+		for(NSInteger j=0; j < [directories count]; j++)
 		{
 			// Prefix each dir with its full path
 			NSString *fullPath = [standardizedOldPath stringByAppendingPathComponent:[directories objectAtIndex:j]];
@@ -733,7 +733,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	}
 }
 
-- (NSString *)controllerKeyPathForMenuItemTag:(int)tag
+- (NSString *)controllerKeyPathForMenuItemTag:(NSInteger)tag
 {
 	switch (tag)
 	{
@@ -743,7 +743,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	}
 }
 
-- (NSPopUpButton *)popUpButtonForMenuItemTag:(int)tag
+- (NSPopUpButton *)popUpButtonForMenuItemTag:(NSInteger)tag
 {
 	switch (tag)
 	{

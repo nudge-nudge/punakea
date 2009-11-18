@@ -218,12 +218,12 @@
 	[[self cell] setButtonType:buttonType];
 }
 
-- (int)fontSize
+- (NSInteger)fontSize
 {
 	return [[self cell] fontSize];
 }
 
-- (void)setFontSize:(int)size
+- (void)setFontSize:(NSInteger)size
 {
 	[[self cell] setFontSize:size];
 }
@@ -253,12 +253,12 @@
 	[[self cell] toggleExclusion];
 }
 	
-- (int)tag
+- (NSInteger)tag
 {
 	return [[self cell] tag];
 }
 
-- (void)setTag:(int)aTag
+- (void)setTag:(NSInteger)aTag
 {
 	[[self cell] setTag:aTag];
 }

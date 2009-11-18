@@ -48,6 +48,7 @@ void	UKCrashReporterCheckForCrash()
 			NS_VOIDRETURN;
 		}
 		
+#warning 64BIT: Inspect use of long
 		long	sysvMajor = 0, sysvMinor = 0, sysvBugfix = 0;
 		UKGetSystemVersionComponents( &sysvMajor, &sysvMinor, &sysvBugfix );
 		BOOL	isTenFiveOrBetter = sysvMajor >= 10 && sysvMinor >= 5;
@@ -75,13 +76,15 @@ void	UKCrashReporterCheckForCrash()
 				NSString*			crashLog = [NSString stringWithContentsOfFile: crashLogPath];
 				NSArray*			separateReports = [crashLog componentsSeparatedByString: @"\n\n**********\n\n"];
 				NSString*			currentReport = [separateReports count] > 0 ? [separateReports objectAtIndex: [separateReports count] -1] : @"*** Couldn't read Report ***";	// 1 since report 0 is empty (file has a delimiter at the top).
-				unsigned			numCores = UKCountCores();
+				NSUInteger			numCores = UKCountCores();
+#warning 64BIT: Check formatting arguments
 				NSString*			numCPUsString = (numCores == 1) ? @"" : [NSString stringWithFormat: @"%dx ",numCores];
 				
 				// Create a string containing Mac and CPU info, crash log and prefs:
+#warning 64BIT: Check formatting arguments
 				currentReport = [NSString stringWithFormat:
 									@"Model: %@\nCPU Speed: %@%.2f GHz\n%@\n\nPreferences:\n%@",
-									UKMachineName(), numCPUsString, ((float)UKClockSpeed()) / 1000.0f,
+									UKMachineName(), numCPUsString, ((CGFloat)UKClockSpeed()) / 1000.0f,
 									currentReport,
 									[[NSUserDefaults standardUserDefaults] persistentDomainForName: [[NSBundle mainBundle] bundleIdentifier]]];
 				
@@ -198,7 +201,7 @@ NSString*	gCrashLogString = nil;
 		NSString*		defaultKey = [emailAddresses primaryIdentifier];
 		if( defaultKey )
 		{
-			unsigned int	defaultIndex = [emailAddresses indexForIdentifier: defaultKey];
+			NSUInteger	defaultIndex = [emailAddresses indexForIdentifier: defaultKey];
 			if( defaultIndex >= 0 )
 				emailAddr = [emailAddresses valueAtIndex: defaultIndex];
 		}
@@ -218,15 +221,17 @@ NSString*	gCrashLogString = nil;
 	{
 		[remindButton setHidden: YES];
 		
-		int				itemIndex = [switchTabView indexOfTabViewItemWithIdentifier: @"de.zathras.ukcrashreporter.crashlog-tab"];
+		NSInteger				itemIndex = [switchTabView indexOfTabViewItemWithIdentifier: @"de.zathras.ukcrashreporter.crashlog-tab"];
 		NSTabViewItem*	crashLogItem = [switchTabView tabViewItemAtIndex: itemIndex];
-		unsigned		numCores = UKCountCores();
+		NSUInteger		numCores = UKCountCores();
+#warning 64BIT: Check formatting arguments
 		NSString*		numCPUsString = (numCores == 1) ? @"" : [NSString stringWithFormat: @"%dx ",numCores];
 		[crashLogItem setLabel: NSLocalizedStringFromTable(@"SYSTEM_INFO_TAB_NAME",@"UKCrashReporter",@"")];
 		
+#warning 64BIT: Check formatting arguments
 		NSString*	systemInfo = [NSString stringWithFormat: @"Application: %@ %@\nModel: %@\nCPU Speed: %@%.2f GHz\nSystem Version: %@\n\nPreferences:\n%@",
 									appName, [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleVersion"],
-									UKMachineName(), numCPUsString, ((float)UKClockSpeed()) / 1000.0f,
+									UKMachineName(), numCPUsString, ((CGFloat)UKClockSpeed()) / 1000.0f,
 									UKSystemVersionString(),
 									[[NSUserDefaults standardUserDefaults] persistentDomainForName: [[NSBundle mainBundle] bundleIdentifier]]];
 		[crashLogField setString: systemInfo];

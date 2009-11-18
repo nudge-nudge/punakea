@@ -5,8 +5,8 @@
 
 - (void)registerHotkeyForTagger
 {
-	int keyCode = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Hotkey.Tagger.KeyCode"];
-	unsigned int modifiers = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Hotkey.Tagger.Modifiers"];
+	NSInteger keyCode = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Hotkey.Tagger.KeyCode"];
+	NSUInteger modifiers = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Hotkey.Tagger.Modifiers"];
 	
 	// First, unregister hotkey if it's already set up
 	if (taggerHotkey)
@@ -53,7 +53,7 @@
 	// Handle files	
 	NSAppleEventDescriptor *filesDescriptor = [descriptor descriptorAtIndex:1];
 	
-	for (int i = 1; i <= [filesDescriptor numberOfItems]; i++)
+	for (NSInteger i = 1; i <= [filesDescriptor numberOfItems]; i++)
 	{
 		NSString *location = [[filesDescriptor descriptorAtIndex:i] stringValue];
 		

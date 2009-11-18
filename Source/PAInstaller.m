@@ -77,7 +77,7 @@
 	BOOL necessary  = NO;
 	
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-	int currentVersion = [userDefaults integerForKey:@"Version"];
+	NSInteger currentVersion = [userDefaults integerForKey:@"Version"];
 	
 	// This will only update if the preferences contain version 2 (TODO discuss with Daniel if this is allright -> what to do
 	// on the next update when we store the version in the UserDefaults.plist?)

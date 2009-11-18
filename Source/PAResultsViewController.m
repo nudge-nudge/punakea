@@ -197,7 +197,7 @@
 - (IBAction)doubleAction:(id)sender
 {
 	NSIndexSet *selectedRowIndexes = [outlineView selectedRowIndexes];	
-	unsigned row = [selectedRowIndexes firstIndex];
+	NSUInteger row = [selectedRowIndexes firstIndex];
 	while(row != NSNotFound) 
 	{
 		id item = [outlineView itemAtRow:row];
@@ -236,8 +236,8 @@
 		
 		[outlineView expandItem:item];
 		
-		int numberOfChildrenOfItem = [[outlineView delegate] outlineView:outlineView numberOfChildrenOfItem:item];
-		for(unsigned i = 0; i < previousVisibleRowsRange.length; i++)
+		NSInteger numberOfChildrenOfItem = [[outlineView delegate] outlineView:outlineView numberOfChildrenOfItem:item];
+		for(NSUInteger i = 0; i < previousVisibleRowsRange.length; i++)
 		{
 			[outlineView drawRow:(numberOfChildrenOfItem + previousVisibleRowsRange.location + i) clipRect:[outlineView bounds]];
 		}
@@ -434,7 +434,7 @@
 	return [item valueForAttribute:@"value"];*/
 }
 
-- (id)outlineView:(NSOutlineView *)ov child:(int)idx ofItem:(id)item
+- (id)outlineView:(NSOutlineView *)ov child:(NSInteger)idx ofItem:(id)item
 {		
 	if(item == nil)
 	{
@@ -475,7 +475,7 @@
 	return ([self outlineView:ov numberOfChildrenOfItem:item] != 0);
 }
 
-- (int)outlineView:(NSOutlineView *)ov numberOfChildrenOfItem:(id)item
+- (NSInteger)outlineView:(NSOutlineView *)ov numberOfChildrenOfItem:(id)item
 {
 	if(item == nil)
 	{
@@ -521,7 +521,7 @@
 }
 
 #pragma mark ResultsOutlineView Delegate
-- (float)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
+- (CGFloat)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
 {		
 	// Bundles have a fix height
 	if([item isKindOfClass:[NNQueryBundle class]]) return 20.0;
@@ -550,17 +550,17 @@
 	
 	NSSize cellSize = [cellClass cellSize];
 	NSSize intercellSpacing = [cellClass intercellSpacing];
-	float indentationPerLevel = [outlineView indentationPerLevel];
-	float offsetToRightBorder = 20.0;
+	CGFloat indentationPerLevel = [outlineView indentationPerLevel];
+	CGFloat offsetToRightBorder = 20.0;
 	NSRect frame = [outlineView frame];
 	
-	int numberOfItemsPerRow = (frame.size.width - indentationPerLevel - offsetToRightBorder) /
+	NSInteger numberOfItemsPerRow = (frame.size.width - indentationPerLevel - offsetToRightBorder) /
 		(cellSize.width + intercellSpacing.width);
 	
-	int numberOfRows = [item count] / numberOfItemsPerRow;
+	NSInteger numberOfRows = [item count] / numberOfItemsPerRow;
 	if([item count] % numberOfItemsPerRow > 0) numberOfRows++;
 	
-	int result = numberOfRows * (cellSize.height + intercellSpacing.height);
+	NSInteger result = numberOfRows * (cellSize.height + intercellSpacing.height);
 	if(result == 0) result = 1;
 	
 	return result;
@@ -568,7 +568,7 @@
 
 - (id)tableColumn:(NSTableColumn *)column
 	  inTableView:(NSTableView *)tableView
-   dataCellForRow:(int)row
+   dataCellForRow:(NSInteger)row
 {
 	NSOutlineView *ov = (NSOutlineView *)tableView;
 	id item = [ov itemAtRow:row];
@@ -765,7 +765,7 @@
 - (NSDragOperation)outlineView:(NSOutlineView *)ov 
 				  validateDrop:(id <NSDraggingInfo>)info 
 				  proposedItem:(id)item 
-			proposedChildIndex:(int)idx
+			proposedChildIndex:(NSInteger)idx
 {
 	// check if sender should be ignored
 	if(![dropManager acceptsSender:[info draggingSource]])
@@ -789,7 +789,7 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView 
 		 acceptDrop:(id <NSDraggingInfo>)info 
 			   item:(id)item 
-		 childIndex:(int)idx
+		 childIndex:(NSInteger)idx
 {
 	NSArray *objects = [dropManager handleDrop:[info draggingPasteboard]];
 	NSArray *tagArray = [selectedTags selectedTags];

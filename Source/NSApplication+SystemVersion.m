@@ -10,9 +10,9 @@
 
 @implementation NSApplication (SystemVersion)
 
-- (void)getSystemVersionMajor:(unsigned *)major
-                        minor:(unsigned *)minor
-                       bugFix:(unsigned *)bugFix;
+- (void)getSystemVersionMajor:(NSUInteger *)major
+                        minor:(NSUInteger *)minor
+                       bugFix:(NSUInteger *)bugFix;
 {
     OSErr err;
     SInt32 systemVersion, versionMajor, versionMinor, versionBugFix;
@@ -37,7 +37,7 @@
     return;
     
 fail:
-    NSLog(@"Unable to obtain system version: %ld", (long)err);
+    NSLog(@"Unable to obtain system version: %ld", (NSInteger)err);
     if (major) *major = 10;
     if (minor) *minor = 0;
     if (bugFix) *bugFix = 0;

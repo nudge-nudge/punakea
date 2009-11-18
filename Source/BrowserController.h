@@ -30,7 +30,7 @@
 
 
 extern NSString * const FILENAME_FAVORITES_PLIST;
-extern unsigned const VERSION_FAVORITES_PLIST;
+extern NSUInteger const VERSION_FAVORITES_PLIST;
 
 
 @interface BrowserController : NSWindowController 

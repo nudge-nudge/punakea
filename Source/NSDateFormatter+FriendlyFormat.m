@@ -22,8 +22,8 @@
 	NSDateFormatterStyle timeStyle = [self timeStyle];
 	
 	NSCalendarDate *cdate = [date dateWithCalendarFormat:nil timeZone:nil];
-	int today = [[NSCalendarDate calendarDate] dayOfCommonEra];
-	int dateDay = [cdate dayOfCommonEra];
+	NSInteger today = [[NSCalendarDate calendarDate] dayOfCommonEra];
+	NSInteger dateDay = [cdate dayOfCommonEra];
 	
 	NSString *value = nil;
 	
@@ -48,7 +48,7 @@
 	else
 	{
 		// Show only month and year if this is an older date		
-		if([date timeIntervalSinceNow] > [[NSNumber numberWithInt:-60*60*24*40] doubleValue])
+		if([date timeIntervalSinceNow] > [[NSNumber numberWithInteger:-60*60*24*40] doubleValue])
 		{
 			[self setTimeStyle:NSDateFormatterShortStyle];
 		} else {

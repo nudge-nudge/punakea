@@ -270,7 +270,7 @@
 	
 	if(svDelegate && [svDelegate respondsToSelector:@selector(splitView:constrainSplitPosition:ofSubviewAt:)] )
 	{
-		float newWidth = [svDelegate splitView:resizableSplitView
+		CGFloat newWidth = [svDelegate splitView:resizableSplitView
 						constrainSplitPosition:newFrame.size.width 
 								   ofSubviewAt:0];
 		newFrame.size.width = newWidth;
@@ -278,7 +278,7 @@
 	
 	if(svDelegate && [svDelegate respondsToSelector:@selector(splitView:constrainMaxCoordinate:ofSubviewAt:)] )
 	{
-		float maxWidth = [svDelegate splitView:resizableSplitView
+		CGFloat maxWidth = [svDelegate splitView:resizableSplitView
 						constrainMaxCoordinate:0.0 
 								   ofSubviewAt:0];
 		newFrame.size.width = MIN(maxWidth, newFrame.size.width);
@@ -286,7 +286,7 @@
 	
 	if(svDelegate && [svDelegate respondsToSelector:@selector(splitView:constrainMinCoordinate:ofSubviewAt:)] )
 	{
-		float minWidth = [svDelegate splitView:resizableSplitView
+		CGFloat minWidth = [svDelegate splitView:resizableSplitView
 						constrainMinCoordinate:0.0 
 								   ofSubviewAt:0];
 		newFrame.size.width = MAX(minWidth, newFrame.size.width);
@@ -328,7 +328,7 @@
 
 - (void)updateItems
 {
-	for(int i = 0; i < [[self subviews] count]; i++)
+	for(NSInteger i = 0; i < [[self subviews] count]; i++)
 	{
 		NSView *subview = [[self subviews] objectAtIndex:i];
 		if([subview isKindOfClass:[PAStatusBarButton class]] ||
@@ -338,7 +338,7 @@
 	
 	NSEnumerator *enumerator = [items objectEnumerator];
 	NSControl *control;
-	float current_x = 0.0;
+	CGFloat current_x = 0.0;
 	
 	// Process all left items
 	while(control = [enumerator nextObject])

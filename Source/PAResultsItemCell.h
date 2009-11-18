@@ -18,6 +18,6 @@
 
 }
 
-+ (float)heightOfRow;
++ (CGFloat)heightOfRow;
 
 @end

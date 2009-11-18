@@ -35,8 +35,8 @@
 #pragma mark Tag Field Delegate
 -    (NSArray *)tokenField:(NSTokenField *)tokenField 
    completionsForSubstring:(NSString *)substring 
-			  indexOfToken:(int)tokenIndex 
-	   indexOfSelectedItem:(int *)selectedIndex
+			  indexOfToken:(NSInteger)tokenIndex 
+	   indexOfSelectedItem:(NSInteger *)selectedIndex
 {
 	NSMutableArray *results = [NSMutableArray array];
 	
@@ -56,7 +56,7 @@
 
 - (NSArray *)tokenField:(NSTokenField *)tokenField 
 	   shouldAddObjects:(NSArray *)tokens 
-				atIndex:(unsigned)idx
+				atIndex:(NSUInteger)idx
 {
 	[currentCompleteTagsInField addObjectsFromArray:tokens];
 	
@@ -94,7 +94,7 @@
 	// get a count of the tags by replacing the \ufffc occurrences
 	NSString *objectReplacementCharacter = [NSString stringWithUTF8String:"\ufffc"];
 	NSMutableString *mutableEditorString = [editorString mutableCopy];
-	unsigned int numberOfTokens = [mutableEditorString replaceOccurrencesOfString:objectReplacementCharacter
+	NSUInteger numberOfTokens = [mutableEditorString replaceOccurrencesOfString:objectReplacementCharacter
 																	   withString:@""
 																		  options:0
 																			range:NSMakeRange(0, [mutableEditorString length])];

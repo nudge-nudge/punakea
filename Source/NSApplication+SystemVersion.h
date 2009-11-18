@@ -10,8 +10,8 @@
 
 @interface NSApplication (SystemVersion)
 
-- (void)getSystemVersionMajor:(unsigned *)major
-                        minor:(unsigned *)minor
-                       bugFix:(unsigned *)bugFix;
+- (void)getSystemVersionMajor:(NSUInteger *)major
+                        minor:(NSUInteger *)minor
+                       bugFix:(NSUInteger *)bugFix;
 
 @end

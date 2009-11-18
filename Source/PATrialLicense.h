@@ -10,7 +10,7 @@
 #import "PALicense.h"
 
 
-extern int const NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD;
+extern NSInteger const NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD;
 
 
 @interface PATrialLicense : PALicense {
@@ -23,7 +23,7 @@ extern int const NUMBER_OF_DAYS_FOR_EVALUATION_PERIOD;
 + (PATrialLicense *)licenseFromUserDefaults;
 
 - (BOOL)hasExpired;
-- (int)daysLeftForEvaluation;
+- (NSInteger)daysLeftForEvaluation;
 
 - (NSDate *)startDate;
 - (void)setStartDate:(NSDate *)aDate;

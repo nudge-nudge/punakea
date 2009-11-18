@@ -17,7 +17,7 @@
 
 extern NSSize const PADDING;
 extern NSSize const INTERCELL_SPACING;
-extern int const PADDING_TO_RIGHT;
+extern NSInteger const PADDING_TO_RIGHT;
 
 @interface PASelectedTagsView : NSView {
 	

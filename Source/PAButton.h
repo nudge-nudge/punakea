@@ -13,7 +13,7 @@
 @interface PAButton : NSControl {
 
 	NSTrackingRectTag		trackingRect;
-	int						*tag;
+	NSInteger						*tag;
 
 }
 
@@ -41,16 +41,16 @@
 
 - (PAButtonType)buttonType;
 - (void)setButtonType:(PAButtonType)buttonType;
-- (int)fontSize;
-- (void)setFontSize:(int)size;	/**< Sets the font size for the title being displayed. Ignored if style is not PATokenBezelStyle. */
+- (NSInteger)fontSize;
+- (void)setFontSize:(NSInteger)size;	/**< Sets the font size for the title being displayed. Ignored if style is not PATokenBezelStyle. */
 // TODO: - (void)setAlphaComponent:(float)alpha;
 - (BOOL)showsCloseIcon;
 - (void)setShowsCloseIcon:(BOOL)flag;	/**< Sets flag if a PATagButton shows a close icon */
 - (BOOL)showsExcludeIcon;
 - (void)setShowsExcludeIcon:(BOOL)flag;	/**< Sets flag if a PATagButton shows an exclude icon */
 - (void)toggleExclusion;
-- (int)tag;
-- (void)setTag:(int)aTag;
+- (NSInteger)tag;
+- (void)setTag:(NSInteger)aTag;
 
 - (SEL)action;
 - (void)setAction:(SEL)action;

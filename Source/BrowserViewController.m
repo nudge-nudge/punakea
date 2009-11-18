@@ -10,7 +10,7 @@
 #import "PATagCloud.h"
 
 
-float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
+CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 
 @interface BrowserViewController (PrivateAPI)
@@ -43,7 +43,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)updateSortDescriptor;
 
-- (int)nextID;
+- (NSInteger)nextID;
 
 @end
 
@@ -135,7 +135,7 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 	else if ([keyPath isEqual:@"values.TagCloud.SortKey"])
 	{
-		sortKey = [[[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:@"values.TagCloud.SortKey"] intValue];
+		sortKey = [[[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:@"values.TagCloud.SortKey"] integerValue];
 		[self updateSortDescriptor];
 		NSMutableArray *currentVisibleTags = [visibleTags mutableCopy];
 		[self setVisibleTags:currentVisibleTags];
@@ -693,12 +693,12 @@ float const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 
 #pragma mark Split View
-- (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+- (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
 {
 	return SPLITVIEW_PANEL_MIN_HEIGHT;
 }
 
-- (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
+- (CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset
 {
 	NSRect frame = [sender frame];
 	return frame.size.height - SPLITVIEW_PANEL_MIN_HEIGHT;

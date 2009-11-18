@@ -38,7 +38,7 @@ displays all [datasource visibleTags] in a nice tag cloud view
 	PATagButton						*activeButton; /**< currently selected tagButton */
 	
 	NSPoint							pointForNextTagRect; /**< saves the point for the next tag to be displayed */
-	int								tagPosition; /**< holds the position where the new line starts */
+	NSInteger								tagPosition; /**< holds the position where the new line starts */
 	
 	NSUserDefaultsController		*userDefaultsController; /**< holds user defaults for tag cloud */
 	

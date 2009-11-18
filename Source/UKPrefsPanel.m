@@ -89,7 +89,7 @@
 -(void)	awakeFromNib
 {
 	NSString*		key;
-	int				index = 0;
+	NSInteger				index = 0;
 	NSString*		wndTitle = nil;
 	
 	[[[tabView window] standardWindowButton:NSWindowToolbarButton] setFrame:NSMakeRect(0,0,0,0)];
@@ -129,7 +129,7 @@
 {
     // Create a new toolbar instance, and attach it to our document window 
     NSToolbar		*toolbar =[[tabView window] toolbar];
-	int				itemCount = 0,
+	NSInteger				itemCount = 0,
 	x = 0;
 	NSTabViewItem	*currPage = nil;
 	
@@ -309,17 +309,17 @@
 		contentRect = NSUnionRect(contentRect, [subview frame]);
 	}
 	contentRect.size.height += 40; //border
-	float height = NSHeight(contentRect) + [self toolbarHeightForWindow:[tabView window]];
+	CGFloat height = NSHeight(contentRect) + [self toolbarHeightForWindow:[tabView window]];
 	//NSRect frameRect = NSMakeRect(NSMinX(windowFrame), NSMaxY(windowFrame) - height, NSWidth([[[tabView selectedTabViewItem] view] frame]), height);
 	NSRect frameRect = NSMakeRect(NSMinX(windowFrame), NSMaxY(windowFrame) - height, windowFrame.size.width, height);
 	NSRect newWindowFrame = [NSWindow frameRectForContentRect:frameRect styleMask:[[tabView window] styleMask]];
 	[[tabView window] setFrame:newWindowFrame display:YES animate:[[tabView window] isVisible]];
 }
 
--(float)toolbarHeightForWindow:(NSWindow *)window
+-(CGFloat)toolbarHeightForWindow:(NSWindow *)window
 {
     NSToolbar *toolbar;
-    float toolbarHeight = 0.0;
+    CGFloat toolbarHeight = 0.0;
     NSRect windowFrame;
     
     toolbar = [window toolbar];
@@ -344,7 +344,7 @@
 
 -(NSArray*) toolbarDefaultItemIdentifiers: (NSToolbar *) toolbar
 {
-	int					itemCount = [tabView numberOfTabViewItems],
+	NSInteger					itemCount = [tabView numberOfTabViewItems],
 	x;
 	NSTabViewItem*		theItem = [tabView tabViewItemAtIndex:0];
 	//NSMutableArray*	defaultItems = [NSMutableArray arrayWithObjects: [theItem identifier], NSToolbarSeparatorItemIdentifier, nil];
