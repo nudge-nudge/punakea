@@ -315,9 +315,15 @@
 }
 
 - (void)relatedTagsHaveChanged:(NSNotification *)notification
-{
+{	
 	if (![relatedTags isUpdating] && ([relatedTags count] == 0))
 	{
+		// only applies if there has been a search (selected tags)
+		if ([selectedTags count] == 0)
+		{
+			return;
+		}
+		
 		[self setDisplayMessage:NSLocalizedStringFromTable(@"NO_RELATED_TAGS",@"Tags",@"")];
 		
 		// empty display tags until new related tags are found
