@@ -205,9 +205,12 @@
 		f2 = previousFrame2;
 	}
 	
-	NSString *string = [NSString stringWithFormat: @"%ld %ld %ld %ld %ld %ld %ld %ld %ld %ld",
-		ABS(f1.origin.x), ABS(f1.origin.y), ABS(f1.size.width), ABS(f1.size.height), subview1Collapsed,
-		ABS(f2.origin.x), ABS(f2.origin.y), ABS(f2.size.width), ABS(f2.size.height), subview2Collapsed];
+	NSInteger sub1coll = subview1Collapsed ? 1 : 0;
+	NSInteger sub2coll = subview2Collapsed ? 1 : 0;
+	
+	NSString *string = [NSString stringWithFormat: @"%ld %ld %ld %ld %lx %ld %ld %ld %ld %lx",
+		ABS(f1.origin.x), ABS(f1.origin.y), ABS(f1.size.width), ABS(f1.size.height), (long) sub1coll,
+		ABS(f2.origin.x), ABS(f2.origin.y), ABS(f2.size.width), ABS(f2.size.height), (long) sub2coll];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:string forKey:autosaveName];
 }
@@ -219,31 +222,21 @@
 	if(string == nil)
 		string = defaults;		// no configuration found, use defaults
 	
-	NSScanner* scanner = [NSScanner scannerWithString: string];
+	NSScanner* scanner = [NSScanner scannerWithString:string];
 	NSRect f1, f2;
 	NSInteger subview1Collapsed, subview2Collapsed;
 	
 	BOOL didScan =
-#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
-		[scanner scanFloat:&(f1.origin.x)]		&&
-#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
-		[scanner scanFloat:&(f1.origin.y)]		&&
-#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
-		[scanner scanFloat:&(f1.size.width)]	&&
-#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
-		[scanner scanFloat:&(f1.size.height)]	&&
-#warning 64BIT: scanInt: argument is pointer to int, not NSInteger; you can use scanInteger:
-		[scanner scanInt:&(subview1Collapsed)]	&&
-#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
-		[scanner scanFloat:&(f2.origin.x)]		&&
-#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
-		[scanner scanFloat:&(f2.origin.y)]		&&
-#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
-		[scanner scanFloat:&(f2.size.width)]	&&
-#warning 64BIT: scanFloat: argument is pointer to float, not CGFloat
-		[scanner scanFloat:&(f2.size.height)]	&&
-#warning 64BIT: scanInt: argument is pointer to int, not NSInteger; you can use scanInteger:
-		[scanner scanInt:&(subview2Collapsed)];
+		[scanner scanDouble:&(f1.origin.x)]		&&
+		[scanner scanDouble:&(f1.origin.y)]		&&
+		[scanner scanDouble:&(f1.size.width)]	&&
+		[scanner scanDouble:&(f1.size.height)]	&&
+		[scanner scanInteger:&(subview1Collapsed)]	&&
+		[scanner scanDouble:&(f2.origin.x)]		&&
+		[scanner scanDouble:&(f2.origin.y)]		&&
+		[scanner scanDouble:&(f2.size.width)]	&&
+		[scanner scanDouble:&(f2.size.height)]	&&
+		[scanner scanInteger:&(subview2Collapsed)];
 	
 	if(didScan == NO)
 	{
@@ -261,8 +254,8 @@
 	
 	[self adjustSubviews];
 	
-	if(subview1Collapsed) [self toggleSubviewAtIndex:0];	
-	if(subview2Collapsed) [self toggleSubviewAtIndex:1];
+	if(subview1Collapsed > 0) [self toggleSubviewAtIndex:0];	
+	if(subview2Collapsed > 0) [self toggleSubviewAtIndex:1];
 }
 
 
