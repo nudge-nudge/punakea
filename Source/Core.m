@@ -1040,16 +1040,18 @@
 		// pre-leopard do nothing
 		return;
 	}
-	else if (minor == 5) 
+	
+	if (minor == 5) 
 	{
 		qlFrameworkPath = [NSString stringWithString:@"/System/Library/PrivateFrameworks/QuickLookUI.framework"];
-		NSBundle *qlFrameworkBundle = [NSBundle bundleWithPath:qlFrameworkPath];
-		[qlFrameworkBundle load];
 	} 
-//	else if (minor >= 6)
-//	{
-//		qlFrameworkPath = [NSString stringWithString:@"/System/Library/Frameworks/QuickLook.framework"];
-//	}
+	else if (minor >= 6)
+	{
+		qlFrameworkPath = [NSString stringWithString:@"/System/Library/Frameworks/Quartz.framework/Frameworks/QuickLookUI.framework"];
+	}
+	
+	NSBundle *qlFrameworkBundle = [NSBundle bundleWithPath:qlFrameworkPath];
+	[qlFrameworkBundle load];
 }
 
 - (void)updateUserDefaultsToVersion:(NSInteger)newVersion 

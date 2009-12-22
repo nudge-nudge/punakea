@@ -161,6 +161,7 @@
 		48BFF6260B13420500C1A127 /* PADebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BFF6240B13420500C1A127 /* PADebugView.m */; };
 		48C2BF020FCB133900C48F03 /* NNActiveAppSavingPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C2BF010FCB133900C48F03 /* NNActiveAppSavingPanel.m */; };
 		48CDF4970AA57924002E9E78 /* toolbar-pref-general.tif in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4960AA57924002E9E78 /* toolbar-pref-general.tif */; };
+		48CE17CB10E0D010008B0D28 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
 		48CFDC320B2ED76A002282D9 /* toolbar-pref-update.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CFDC310B2ED76A002282D9 /* toolbar-pref-update.tiff */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
@@ -475,6 +476,41 @@
 			remoteGlobalIDString = 483184970AEF8D8600C3C672;
 			remoteInfo = PADropHandler;
 		};
+		48CE17A610E0CD5D008B0D28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
+		48CE17A910E0CD68008B0D28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
+		48CE17AC10E0CD6E008B0D28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
+		48CE17AE10E0CD75008B0D28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
+		48CE17B110E0CD7A008B0D28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* NNTagging */;
+			remoteInfo = NNTagging;
+		};
 		6566CDAC0AFF8B3500FEAD7E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -503,6 +539,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				48CE17CB10E0D010008B0D28 /* NNTagging.framework in Copy Frameworks */,
 				488D8C1E10B1E02C00F97BF2 /* ShortcutRecorder.framework in Copy Frameworks */,
 				65F65AC30FA1E22A0006E229 /* libValidateUniversal.a in Copy Frameworks */,
 				65F65AC10FA1E2230006E229 /* SSCrypto.framework in Copy Frameworks */,
@@ -2209,6 +2246,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				48CE17AF10E0CD75008B0D28 /* PBXTargetDependency */,
 			);
 			name = NNFilterEngine;
 			productName = NNFilterEngine;
@@ -2227,6 +2265,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				48CE17A710E0CD5D008B0D28 /* PBXTargetDependency */,
 			);
 			name = PADropHandler;
 			productName = PADropHandler;
@@ -2245,6 +2284,7 @@
 			);
 			dependencies = (
 				483184E90AEF91AE00C3C672 /* PBXTargetDependency */,
+				48CE17AA10E0CD68008B0D28 /* PBXTargetDependency */,
 			);
 			name = FilenamesDropHandler;
 			productName = FilenamesDropHandler;
@@ -2263,6 +2303,7 @@
 			);
 			dependencies = (
 				483C8A2E0D6C50C80051C8C3 /* PBXTargetDependency */,
+				48CE17B210E0CD7A008B0D28 /* PBXTargetDependency */,
 			);
 			name = PublicURLDropHandler;
 			productName = PublicUrlDropHandler;
@@ -2300,6 +2341,7 @@
 			);
 			dependencies = (
 				48C633C10AEF9724008F0E94 /* PBXTargetDependency */,
+				48CE17AD10E0CD6E008B0D28 /* PBXTargetDependency */,
 			);
 			name = WebURLsWithTitlesPboardTypeDropHandler;
 			productName = SafariBookmarkDropHandler;
@@ -2842,6 +2884,31 @@
 			isa = PBXTargetDependency;
 			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
 			targetProxy = 48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */;
+		};
+		48CE17A710E0CD5D008B0D28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 48CE17A610E0CD5D008B0D28 /* PBXContainerItemProxy */;
+		};
+		48CE17AA10E0CD68008B0D28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 48CE17A910E0CD68008B0D28 /* PBXContainerItemProxy */;
+		};
+		48CE17AD10E0CD6E008B0D28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 48CE17AC10E0CD6E008B0D28 /* PBXContainerItemProxy */;
+		};
+		48CE17AF10E0CD75008B0D28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 48CE17AE10E0CD75008B0D28 /* PBXContainerItemProxy */;
+		};
+		48CE17B210E0CD7A008B0D28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NNTagging;
+			targetProxy = 48CE17B110E0CD7A008B0D28 /* PBXContainerItemProxy */;
 		};
 		6566CDAD0AFF8B3500FEAD7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
