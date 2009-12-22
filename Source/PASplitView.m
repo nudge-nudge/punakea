@@ -205,8 +205,8 @@
 		f2 = previousFrame2;
 	}
 	
-	NSInteger sub1coll = subview1Collapsed ? 1 : 0;
-	NSInteger sub2coll = subview2Collapsed ? 1 : 0;
+	NSInteger sub1coll = subview1Collapsed ? 0 : 1;
+	NSInteger sub2coll = subview2Collapsed ? 0 : 1;
 	
 	NSString *string = [NSString stringWithFormat: @"%ld %ld %ld %ld %lx %ld %ld %ld %ld %lx",
 		ABS(f1.origin.x), ABS(f1.origin.y), ABS(f1.size.width), ABS(f1.size.height), (long) sub1coll,
