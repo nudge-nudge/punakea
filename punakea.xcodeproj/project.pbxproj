@@ -793,6 +793,8 @@
 		4870698C0A0C933C00A3ADE2 /* PATypeAheadFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATypeAheadFind.h; sourceTree = "<group>"; };
 		4870698D0A0C933C00A3ADE2 /* PATypeAheadFind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATypeAheadFind.m; sourceTree = "<group>"; };
 		4871792E0A5A619900A988DE /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/BrowserView.nib; sourceTree = "<group>"; };
+		4889C58110F118A30060E78B /* EWSLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWSLib.h; sourceTree = "<group>"; };
+		4889C58210F118AD0060E78B /* validateLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = validateLib.h; sourceTree = "<group>"; };
 		488CBBDD0AC9674400F6D20E /* PABrowserViewMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PABrowserViewMainController.m; sourceTree = "<group>"; };
 		488CBBDF0AC9676C00F6D20E /* PAResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsViewController.h; sourceTree = "<group>"; };
 		488CBBE00AC9676C00F6D20E /* PAResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsViewController.m; sourceTree = "<group>"; };
@@ -1731,6 +1733,8 @@
 				65F6596A0FA1AF9F0006E229 /* PATrialLicense.m */,
 				6531BB720FA05F0C0038D287 /* PARegistrationManager.h */,
 				6531BB730FA05F0C0038D287 /* PARegistrationManager.m */,
+				4889C58110F118A30060E78B /* EWSLib.h */,
+				4889C58210F118AD0060E78B /* validateLib.h */,
 			);
 			name = PARegistrationManager;
 			sourceTree = "<group>";
