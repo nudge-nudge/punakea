@@ -208,7 +208,7 @@
 	NSInteger sub1coll = subview1Collapsed ? 1 : 0;
 	NSInteger sub2coll = subview2Collapsed ? 1 : 0;
 	
-	NSString *string = [NSString stringWithFormat: @"%f %f %f %f %ld %f %f %f %f %ld",
+	NSString *string = [NSString stringWithFormat: @"%lf %lf %lf %lf %ld %lf %lf %lf %lf %ld",
 		ABS(f1.origin.x), ABS(f1.origin.y), ABS(f1.size.width), ABS(f1.size.height), (long) sub1coll,
 		ABS(f2.origin.x), ABS(f2.origin.y), ABS(f2.size.width), ABS(f2.size.height), (long) sub2coll];
 	
@@ -226,17 +226,30 @@
 	NSRect f1, f2;
 	NSInteger subview1Collapsed, subview2Collapsed;
 	
+	// need to scan in doubles first before copying to CGFloat
+	double f1_origin_x, f1_origin_y, f1_size_width, f1_size_height;
+	double f2_origin_x, f2_origin_y, f2_size_width, f2_size_height;
+	
 	BOOL didScan =
-		[scanner scanDouble:&(f1.origin.x)]		&&
-		[scanner scanDouble:&(f1.origin.y)]		&&
-		[scanner scanDouble:&(f1.size.width)]	&&
-		[scanner scanDouble:&(f1.size.height)]	&&
+		[scanner scanDouble:&f1_origin_x]		&&
+		[scanner scanDouble:&f1_origin_y]		&&
+		[scanner scanDouble:&f1_size_width]		&&
+		[scanner scanDouble:&f1_size_height]	&&
 		[scanner scanInteger:&(subview1Collapsed)]	&&
-		[scanner scanDouble:&(f2.origin.x)]		&&
-		[scanner scanDouble:&(f2.origin.y)]		&&
-		[scanner scanDouble:&(f2.size.width)]	&&
-		[scanner scanDouble:&(f2.size.height)]	&&
+		[scanner scanDouble:&f2_origin_x]		&&
+		[scanner scanDouble:&f2_origin_y]		&&
+		[scanner scanDouble:&f2_size_width]		&&
+		[scanner scanDouble:&f2_size_height]	&&
 		[scanner scanInteger:&(subview2Collapsed)];
+	
+	f1.origin.x = f1_origin_x;
+	f1.origin.y = f1_origin_y;
+	f1.size.width = f1_size_width;
+	f1.size.height = f1_size_height;
+	f2.origin.x = f2_origin_x;
+	f2.origin.y = f2_origin_y;
+	f2.size.width = f2_size_width;
+	f2.size.height = f2_size_height;
 	
 	if(didScan == NO)
 	{
