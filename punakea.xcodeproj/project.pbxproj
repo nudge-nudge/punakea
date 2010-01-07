@@ -157,6 +157,7 @@
 		48B9AE29104325C000EFF3D4 /* sl-status_exclude.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48B9AE28104325C000EFF3D4 /* sl-status_exclude.tiff */; };
 		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
 		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
+		48BE1CAD10F65F1700946400 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 48BE1CAC10F65F1700946400 /* dsa_pub.pem */; };
 		48BFF6250B13420500C1A127 /* PADebugView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BFF6230B13420500C1A127 /* PADebugView.h */; };
 		48BFF6260B13420500C1A127 /* PADebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BFF6240B13420500C1A127 /* PADebugView.m */; };
 		48C2BF020FCB133900C48F03 /* NNActiveAppSavingPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C2BF010FCB133900C48F03 /* NNActiveAppSavingPanel.m */; };
@@ -815,6 +816,7 @@
 		48B9AE28104325C000EFF3D4 /* sl-status_exclude.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_exclude.tiff"; sourceTree = "<group>"; };
 		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
 		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
+		48BE1CAC10F65F1700946400 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = Resources/dsa_pub.pem; sourceTree = "<group>"; };
 		48BFF6230B13420500C1A127 /* PADebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADebugView.h; sourceTree = "<group>"; };
 		48BFF6240B13420500C1A127 /* PADebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADebugView.m; sourceTree = "<group>"; };
 		48C2BF000FCB133900C48F03 /* NNActiveAppSavingPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNActiveAppSavingPanel.h; sourceTree = "<group>"; };
@@ -1244,6 +1246,7 @@
 				482B31130AC6C70D0071C33B /* ResultsView.nib */,
 				485944A60AE4B41100AFB18F /* Credits.html */,
 				48E760060F7F834000F9EEBA /* UKCrashReporter.nib */,
+				48BE1CAC10F65F1700946400 /* dsa_pub.pem */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2614,6 +2617,7 @@
 				48EE0A770FCB1F8C0039154B /* source-panel-music.tif in Resources */,
 				486F7B50103D91DC004164F9 /* OpenMetaSpotlight.mdimporter in Resources */,
 				48B9AE29104325C000EFF3D4 /* sl-status_exclude.tiff in Resources */,
+				48BE1CAD10F65F1700946400 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
