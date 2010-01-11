@@ -834,8 +834,6 @@
 		48EDB83E0BF5A6A2008452FF /* PAContentTypeFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAContentTypeFilter.m; sourceTree = "<group>"; };
 		48EE0A740FCB1F8C0039154B /* source-panel-movies.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-movies.tif"; sourceTree = "<group>"; };
 		48EE0A750FCB1F8C0039154B /* source-panel-music.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "source-panel-music.tif"; sourceTree = "<group>"; };
-		48F980760AEF5CAF003BA2DC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		48F980780AEF5CAF003BA2DC /* FileDropHandler */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; path = FileDropHandler; sourceTree = "<group>"; };
 		6503599F0F5D832F00BC204D /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		650846FB0BE641320046CB89 /* statusbar-button-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statusbar-button-info.png"; sourceTree = "<group>"; };
 		6508EB660D50C336004DA882 /* BusyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusyWindowController.h; sourceTree = "<group>"; };
@@ -845,7 +843,7 @@
 		650902100BEDF41B005468E0 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Toolbars.strings; sourceTree = "<group>"; };
 		650A72500F826A770082664D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Registration.xib; sourceTree = "<group>"; };
 		650C84180D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "toolbar-pref-managefiles.tiff"; sourceTree = "<group>"; };
-		650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; path = CurrentSelection.scpt; sourceTree = "<group>"; };
+		650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; name = CurrentSelection.scpt; path = ../CurrentSelection.scpt; sourceTree = "<group>"; };
 		6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BGHUDAppKit.framework; sourceTree = "<group>"; };
 		651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapsedTriangleWhite.tiff; sourceTree = "<group>"; };
 		651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ExpandedTriangleWhite.tiff; sourceTree = "<group>"; };
@@ -948,7 +946,7 @@
 		659040CC0A4C058400ADDC1D /* pane_key-favoriteIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "pane_key-favoriteIcon.tiff"; sourceTree = "<group>"; };
 		6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemMatrix.h; sourceTree = "<group>"; };
 		6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemMatrix.m; sourceTree = "<group>"; };
-		65943F980AFA56AA00A8922F /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = appicon.icns; sourceTree = "<group>"; };
+		65943F980AFA56AA00A8922F /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = appicon.icns; path = ../appicon.icns; sourceTree = "<group>"; };
 		6597D9D50FCC51F6003AE414 /* PAAddTagsCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAddTagsCommand.h; sourceTree = "<group>"; };
 		6597D9D60FCC51F6003AE414 /* PAAddTagsCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAddTagsCommand.m; sourceTree = "<group>"; };
 		65988C690A875A11000270E6 /* PAButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAButton.h; sourceTree = "<group>"; };
@@ -983,7 +981,7 @@
 		65B1FC870C0308EC0099D12B /* PAStatusBarProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBarProgressIndicator.h; sourceTree = "<group>"; };
 		65B1FC880C0308EC0099D12B /* PAStatusBarProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBarProgressIndicator.m; sourceTree = "<group>"; };
 		65B78F320AF0DA4600AF1102 /* statusbar.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = statusbar.tiff; sourceTree = "<group>"; };
-		65BCDB890D532A6D003D4C65 /* DropBox.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; name = DropBox.scpt; path = Resources/DropBox.scpt; sourceTree = "<group>"; };
+		65BCDB890D532A6D003D4C65 /* DropBox.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; path = DropBox.scpt; sourceTree = "<group>"; };
 		65BD569A0BF3155F00E202F8 /* PAInfoPaneSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInfoPaneSubview.h; sourceTree = "<group>"; };
 		65BD569B0BF3155F00E202F8 /* PAInfoPaneSubview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAInfoPaneSubview.m; sourceTree = "<group>"; };
 		65BD56D50BF31BF600E202F8 /* PAInfoPaneSingleSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInfoPaneSingleSelectionView.h; sourceTree = "<group>"; };
@@ -1189,14 +1187,6 @@
 				4802193B0C02CE42001CF480 /* Subprojects */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				654DBC1709C9D0320061BFA4 /* Documentation */,
-				483184990AEF8D8600C3C672 /* PADropHandler-Info.plist */,
-				483184E40AEF91A700C3C672 /* FilenamesDropHandler-Info.plist */,
-				48C633BC0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler-Info.plist */,
-				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
-				48186F3A0BE4C7BE000B4638 /* NNFilterEngine-Info.plist */,
-				483C8A260D6C50BC0051C8C3 /* PublicURLDropHandler-Info.plist */,
-				650A727F0F826BD70082664D /* Registration.xib */,
-				656DDED20F8BCB7D00273700 /* Installer.xib */,
 			);
 			name = Punakea;
 			sourceTree = "<group>";
@@ -1212,29 +1202,15 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				486F7B41103D91DC004164F9 /* OpenMetaSpotlight.mdimporter */,
 				657E6E120F6BC0E300AAD236 /* AppleScript */,
-				650D52660F6ACB8800E67680 /* Scripts */,
-				6572864C0BC427D1000034D2 /* Strings */,
-				65943F980AFA56AA00A8922F /* appicon.icns */,
-				48F980700AEF5C9F003BA2DC /* DropHandlerPlugins */,
-				4860293B0AEE0AF600B7DC6F /* SLA.r */,
-				481634150A5A4EEB003B8EE4 /* Browser.nib */,
-				4871792D0A5A619900A988DE /* BrowserView.nib */,
-				4816340E0A5A48A1003B8EE4 /* Tagger.nib */,
-				65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */,
+				48B8F49210FBB501002B1E35 /* Credits */,
+				48B8F48A10FBB410002B1E35 /* IB */,
 				6562A1D40996399100DBE7DB /* Images */,
-				8D1107310486CEB800E47090 /* Info.plist */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				65E7B0190994D02E00565251 /* MainMenu.nib */,
-				658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */,
-				65E7B01E0994D0AE00565251 /* Sidebar.nib */,
-				484F71900A666F5A00D886E5 /* TagManagementView.nib */,
-				4832722B0AA42D19003D98A6 /* Preferences.nib */,
-				482B31130AC6C70D0071C33B /* ResultsView.nib */,
-				485944A60AE4B41100AFB18F /* Credits.html */,
-				48E760060F7F834000F9EEBA /* UKCrashReporter.nib */,
-				48BE1CAC10F65F1700946400 /* dsa_pub.pem */,
+				48B8F49310FBB509002B1E35 /* License */,
+				48B8F48C10FBB47A002B1E35 /* MDImporter */,
+				48B8F48B10FBB45A002B1E35 /* Plists */,
+				48B8F48D10FBB4A9002B1E35 /* SparklePubKey */,
+				6572864C0BC427D1000034D2 /* Strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1590,6 +1566,73 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		48B8F48A10FBB410002B1E35 /* IB */ = {
+			isa = PBXGroup;
+			children = (
+				650A727F0F826BD70082664D /* Registration.xib */,
+				656DDED20F8BCB7D00273700 /* Installer.xib */,
+				481634150A5A4EEB003B8EE4 /* Browser.nib */,
+				4871792D0A5A619900A988DE /* BrowserView.nib */,
+				4816340E0A5A48A1003B8EE4 /* Tagger.nib */,
+				65E7B0190994D02E00565251 /* MainMenu.nib */,
+				65E7B01E0994D0AE00565251 /* Sidebar.nib */,
+				484F71900A666F5A00D886E5 /* TagManagementView.nib */,
+				4832722B0AA42D19003D98A6 /* Preferences.nib */,
+				482B31130AC6C70D0071C33B /* ResultsView.nib */,
+				48E760060F7F834000F9EEBA /* UKCrashReporter.nib */,
+			);
+			name = IB;
+			sourceTree = "<group>";
+		};
+		48B8F48B10FBB45A002B1E35 /* Plists */ = {
+			isa = PBXGroup;
+			children = (
+				65D86E3D09F15E1B006BCC8D /* UserDefaults.plist */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				658DCD1909E25A4F008FBC2C /* MDSimpleGrouping.plist */,
+				483184990AEF8D8600C3C672 /* PADropHandler-Info.plist */,
+				483184E40AEF91A700C3C672 /* FilenamesDropHandler-Info.plist */,
+				48C633BC0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler-Info.plist */,
+				48404B010AF8B357001F7BB7 /* Unit Testing-Info.plist */,
+				48186F3A0BE4C7BE000B4638 /* NNFilterEngine-Info.plist */,
+				483C8A260D6C50BC0051C8C3 /* PublicURLDropHandler-Info.plist */,
+			);
+			name = Plists;
+			sourceTree = "<group>";
+		};
+		48B8F48C10FBB47A002B1E35 /* MDImporter */ = {
+			isa = PBXGroup;
+			children = (
+				486F7B41103D91DC004164F9 /* OpenMetaSpotlight.mdimporter */,
+			);
+			name = MDImporter;
+			sourceTree = "<group>";
+		};
+		48B8F48D10FBB4A9002B1E35 /* SparklePubKey */ = {
+			isa = PBXGroup;
+			children = (
+				48BE1CAC10F65F1700946400 /* dsa_pub.pem */,
+			);
+			name = SparklePubKey;
+			sourceTree = "<group>";
+		};
+		48B8F49210FBB501002B1E35 /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				485944A60AE4B41100AFB18F /* Credits.html */,
+			);
+			name = Credits;
+			sourceTree = "<group>";
+		};
+		48B8F49310FBB509002B1E35 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				4860293B0AEE0AF600B7DC6F /* SLA.r */,
+			);
+			name = License;
+			sourceTree = "<group>";
+		};
 		48BDCECE09C4A1EE00A57165 /* TagCloud */ = {
 			isa = PBXGroup;
 			children = (
@@ -1636,47 +1679,6 @@
 			name = TagFilter;
 			sourceTree = "<group>";
 		};
-		48F980700AEF5C9F003BA2DC /* DropHandlerPlugins */ = {
-			isa = PBXGroup;
-			children = (
-				48F980740AEF5CAF003BA2DC /* FileDropHandler.ntagsdh */,
-			);
-			name = DropHandlerPlugins;
-			sourceTree = "<group>";
-		};
-		48F980740AEF5CAF003BA2DC /* FileDropHandler.ntagsdh */ = {
-			isa = PBXGroup;
-			children = (
-				48F980750AEF5CAF003BA2DC /* Contents */,
-			);
-			path = FileDropHandler.ntagsdh;
-			sourceTree = "<group>";
-		};
-		48F980750AEF5CAF003BA2DC /* Contents */ = {
-			isa = PBXGroup;
-			children = (
-				48F980760AEF5CAF003BA2DC /* Info.plist */,
-				48F980770AEF5CAF003BA2DC /* MacOS */,
-				48F980790AEF5CAF003BA2DC /* Resources */,
-			);
-			path = Contents;
-			sourceTree = "<group>";
-		};
-		48F980770AEF5CAF003BA2DC /* MacOS */ = {
-			isa = PBXGroup;
-			children = (
-				48F980780AEF5CAF003BA2DC /* FileDropHandler */,
-			);
-			path = MacOS;
-			sourceTree = "<group>";
-		};
-		48F980790AEF5CAF003BA2DC /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		6508EB650D50C316004DA882 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
@@ -1692,15 +1694,6 @@
 				65D6ACD30A89E25800FDAC8A /* BlueGradient24.png */,
 			);
 			name = "Filter Slice";
-			sourceTree = "<group>";
-		};
-		650D52660F6ACB8800E67680 /* Scripts */ = {
-			isa = PBXGroup;
-			children = (
-				65BCDB890D532A6D003D4C65 /* DropBox.scpt */,
-				650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */,
-			);
-			name = Scripts;
 			sourceTree = "<group>";
 		};
 		6531649B0AF2534B00928BEF /* Common */ = {
@@ -1839,9 +1832,9 @@
 				65A981300AA737C6009F9E34 /* Sidebar */,
 				65D6ACC10A89E20300FDAC8A /* Custom Controls */,
 				6509FA390A7D2774003D32D8 /* Filter Slice */,
-				65C0E03309E3ED9B006C5A7C /* transparent.tiff */,
 				65A4079109B9D53200B151F4 /* ResultsView */,
 				659040030A4C02E000ADDC1D /* SelectedTagsView */,
+				65943F980AFA56AA00A8922F /* appicon.icns */,
 			);
 			name = Images;
 			path = Resources;
@@ -1876,6 +1869,8 @@
 		657E6E120F6BC0E300AAD236 /* AppleScript */ = {
 			isa = PBXGroup;
 			children = (
+				65BCDB890D532A6D003D4C65 /* DropBox.scpt */,
+				650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */,
 				657E6E130F6BC10300AAD236 /* Punakea.sdef */,
 			);
 			name = AppleScript;
@@ -2181,6 +2176,7 @@
 		65F83DC90FB1881200CBA02E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				65C0E03309E3ED9B006C5A7C /* transparent.tiff */,
 				65CA6A740FB2CA47007B509C /* warning.pdf */,
 			);
 			name = Common;
