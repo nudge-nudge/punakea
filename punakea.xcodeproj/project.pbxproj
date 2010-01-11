@@ -154,6 +154,7 @@
 		48B7561710E00DDC00446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
 		48B8F45010FBB1B5002B1E35 /* PAURLDropDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */; };
 		48B8F45110FBB1B9002B1E35 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
+		48B8F4E110FBB6D2002B1E35 /* PAStringFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B8F4E010FBB6D2002B1E35 /* PAStringFilter.m */; };
 		48B9AE29104325C000EFF3D4 /* sl-status_exclude.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48B9AE28104325C000EFF3D4 /* sl-status_exclude.tiff */; };
 		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
 		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
@@ -801,6 +802,8 @@
 		489DA0460C0B2EB40027E3FF /* PAServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAServices.m; sourceTree = "<group>"; };
 		48B0F1C00ACBFA5200738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Tags.strings; sourceTree = "<group>"; };
 		48B0F1D50ACC020000738053 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Global.strings; sourceTree = "<group>"; };
+		48B8F4DF10FBB6D2002B1E35 /* PAStringFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStringFilter.h; sourceTree = "<group>"; };
+		48B8F4E010FBB6D2002B1E35 /* PAStringFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStringFilter.m; sourceTree = "<group>"; };
 		48B9AE28104325C000EFF3D4 /* sl-status_exclude.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "sl-status_exclude.tiff"; sourceTree = "<group>"; };
 		48BDCEE409C4A4E300A57165 /* PATagCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloud.h; sourceTree = "<group>"; };
 		48BDCEE509C4A4E300A57165 /* PATagCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCloud.m; sourceTree = "<group>"; };
@@ -1670,6 +1673,8 @@
 		48EDB82A0BF5A660008452FF /* TagFilter */ = {
 			isa = PBXGroup;
 			children = (
+				48B8F4DF10FBB6D2002B1E35 /* PAStringFilter.h */,
+				48B8F4E010FBB6D2002B1E35 /* PAStringFilter.m */,
 				48EDB8330BF5A68C008452FF /* PAStringPrefixFilter.h */,
 				48EDB8360BF5A693008452FF /* PAStringPrefixFilter.m */,
 				48EDB8390BF5A698008452FF /* PAContentTypeFilter.h */,
@@ -2808,6 +2813,7 @@
 				4831819810B1DB110083EE08 /* PTHotKeyCenter.m in Sources */,
 				4831819910B1DB110083EE08 /* PTKeyCombo.m in Sources */,
 				488D8C0B10B1DFD100F97BF2 /* CTGradient.m in Sources */,
+				48B8F4E110FBB6D2002B1E35 /* PAStringFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,7 @@
 	if (self = [super init])
 	{
 		weight = 1;
-		filterPrefix = [prefix copy];
+		filterPrefix = [[prefix lowercaseString] copy];
 	}
 	return self;
 }
