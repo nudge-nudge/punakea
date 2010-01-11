@@ -33,7 +33,6 @@
 		480C40490BF4484400C90B2C /* PATagCacheEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C40470BF4484400C90B2C /* PATagCacheEntry.m */; };
 		4815A0680AEF991A00969296 /* PAFilenamesDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 48209CA80AB1BEED00F3CF21 /* PAFilenamesDropHandler.m */; };
 		4815A0690AEF991A00969296 /* PAFilenamesDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */; };
-		4815A06B0AEF992300969296 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
 		4815A0A20AEF993B00969296 /* PAWebURLsWithTitlesPboardTypeDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 485F402D0AB6D61300E230DC /* PAWebURLsWithTitlesPboardTypeDropHandler.m */; };
 		4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
 		4815A1CA0AEFA06400969296 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
@@ -77,7 +76,6 @@
 		4832723E0AA42E8C003D98A6 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832723C0AA42E8C003D98A6 /* PreferenceController.m */; };
 		483C8A440D6C517C0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 483C8A250D6C50BC0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler */; };
 		483C8AA20D6C51EA0051C8C3 /* PAPublicURLDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C8A090D6C4F8D0051C8C3 /* PAPublicURLDropHandler.m */; };
-		483C8AA30D6C51EB0051C8C3 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
 		483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
 		484003CE0A9B3A7900C0AD99 /* PATypeAheadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 484003CC0A9B3A7900C0AD99 /* PATypeAheadView.h */; };
 		484003CF0A9B3A7900C0AD99 /* PATypeAheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484003CD0A9B3A7900C0AD99 /* PATypeAheadView.m */; };
@@ -154,6 +152,8 @@
 		48B755F610E00DC400446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
 		48B7561610E00DD200446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
 		48B7561710E00DDC00446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
+		48B8F45010FBB1B5002B1E35 /* PAURLDropDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */; };
+		48B8F45110FBB1B9002B1E35 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
 		48B9AE29104325C000EFF3D4 /* sl-status_exclude.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48B9AE28104325C000EFF3D4 /* sl-status_exclude.tiff */; };
 		48BDCEE609C4A4E300A57165 /* PATagCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48BDCEE409C4A4E300A57165 /* PATagCloud.h */; };
 		48BDCEE709C4A4E300A57165 /* PATagCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BDCEE509C4A4E300A57165 /* PATagCloud.m */; };
@@ -189,12 +189,6 @@
 		6509020C0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6509020A0BEDF1A1005468E0 /* toolbar-sort-by-rating.tif */; };
 		650902130BEDF429005468E0 /* Toolbars.strings in Resources */ = {isa = PBXBuildFile; fileRef = 650902120BEDF429005468E0 /* Toolbars.strings */; };
 		650A72800F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
-		650A72810F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
-		650A72820F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
-		650A72830F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
-		650A72840F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
-		650A72850F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
-		650A72860F826BD70082664D /* Registration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A727F0F826BD70082664D /* Registration.xib */; };
 		650C84190D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 650C84180D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff */; };
 		650D52A30F6ACD3600E67680 /* CurrentSelection.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */; };
 		6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */; };
@@ -253,13 +247,7 @@
 		656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */; };
 		656C20030AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */; };
 		656C59A009D30D9E008AA115 /* MDIconViewOn-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 656C599F09D30D9E008AA115 /* MDIconViewOn-1.tiff */; };
-		656DDED30F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
-		656DDED40F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
 		656DDED50F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
-		656DDED60F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
-		656DDED70F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
-		656DDED80F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
-		656DDED90F8BCB7D00273700 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656DDED20F8BCB7D00273700 /* Installer.xib */; };
 		6571138D0D5371A600076543 /* TagAutoCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6571138C0D5371A600076543 /* TagAutoCompleteController.m */; };
 		657CBD770AA5C4A800701D47 /* PAThumbnailManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 657CBD750AA5C4A800701D47 /* PAThumbnailManager.h */; };
 		657CBD780AA5C4A800701D47 /* PAThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 657CBD760AA5C4A800701D47 /* PAThumbnailManager.m */; };
@@ -782,8 +770,8 @@
 		486063DD0AA0553000D9E103 /* PASidebarTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASidebarTableView.m; sourceTree = "<group>"; };
 		4860846B0AB4371200CB0352 /* PAFilenamesDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAFilenamesDropDataHandler.h; path = ../../PAFilenamesDropDataHandler.h; sourceTree = "<group>"; };
 		4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAFilenamesDropDataHandler.m; path = ../../PAFilenamesDropDataHandler.m; sourceTree = "<group>"; };
-		4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAURLDropDataHandler.h; path = URLDropHandler/PAURLDropDataHandler.h; sourceTree = "<group>"; };
-		4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAURLDropDataHandler.m; path = URLDropHandler/PAURLDropDataHandler.m; sourceTree = "<group>"; };
+		4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAURLDropDataHandler.h; path = ../../Plugins/URLDropHandler/PAURLDropDataHandler.h; sourceTree = "<group>"; };
+		4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAURLDropDataHandler.m; path = ../../Plugins/URLDropHandler/PAURLDropDataHandler.m; sourceTree = "<group>"; };
 		486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementViewMainView.h; sourceTree = "<group>"; };
 		486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementViewMainView.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
@@ -1445,6 +1433,8 @@
 				483184BC0AEF906900C3C672 /* PADropHandler.m */,
 				483184B90AEF906900C3C672 /* PADropDataHandler.h */,
 				483184BA0AEF906900C3C672 /* PADropDataHandler.m */,
+				4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */,
+				4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */,
 			);
 			path = PADropHandler;
 			sourceTree = "<group>";
@@ -1497,8 +1487,6 @@
 			children = (
 				483C8A080D6C4F8D0051C8C3 /* PAPublicURLDropHandler.h */,
 				483C8A090D6C4F8D0051C8C3 /* PAPublicURLDropHandler.m */,
-				4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */,
-				4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */,
 			);
 			name = PublicUrlDropHandler;
 			sourceTree = "<group>";
@@ -2217,6 +2205,7 @@
 			files = (
 				483184BD0AEF906900C3C672 /* PADropDataHandler.h in Headers */,
 				483184BF0AEF906900C3C672 /* PADropHandler.h in Headers */,
+				48B8F45010FBB1B5002B1E35 /* PAURLDropDataHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2459,8 +2448,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				650A72850F826BD70082664D /* Registration.xib in Resources */,
-				656DDED60F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2468,8 +2455,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				650A72810F826BD70082664D /* Registration.xib in Resources */,
-				656DDED70F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2477,8 +2462,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				650A72820F826BD70082664D /* Registration.xib in Resources */,
-				656DDED80F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2486,8 +2469,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				650A72860F826BD70082664D /* Registration.xib in Resources */,
-				656DDED40F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2495,8 +2476,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				650A72840F826BD70082664D /* Registration.xib in Resources */,
-				656DDED90F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2504,8 +2483,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				650A72830F826BD70082664D /* Registration.xib in Resources */,
-				656DDED30F8BCB7D00273700 /* Installer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2682,6 +2659,7 @@
 			files = (
 				483184BE0AEF906900C3C672 /* PADropDataHandler.m in Sources */,
 				483184C00AEF906900C3C672 /* PADropHandler.m in Sources */,
+				48B8F45110FBB1B9002B1E35 /* PAURLDropDataHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2699,7 +2677,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				483C8AA20D6C51EA0051C8C3 /* PAPublicURLDropHandler.m in Sources */,
-				483C8AA30D6C51EB0051C8C3 /* PAURLDropDataHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2715,7 +2692,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4815A06B0AEF992300969296 /* PAURLDropDataHandler.m in Sources */,
 				4815A0A20AEF993B00969296 /* PAWebURLsWithTitlesPboardTypeDropHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
