@@ -7,13 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNObjectFilter.h"
+#import "PAStringFilter.h"
 
-@interface PAStringPrefixFilter : NNObjectFilter {
-	NSString *filterPrefix;
+@interface PAStringPrefixFilter : PAStringFilter {
+
 }
-
-- (id)initWithFilterPrefix:(NSString*)prefix;
-- (NSString*)filterPrefix;
 
 @end

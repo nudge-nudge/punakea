@@ -12,12 +12,12 @@
 @implementation PAStringFilter
 
 #pragma mark init
-- (id)initWithFilter:(NSString*)string
+- (id)initWithFilter:(NSString*)filterString
 {
 	if (self = [super init])
 	{
 		weight = 1;
-		filter = [[string lowercaseString] copy];
+		filter = [[filterString lowercaseString] copy];
 	}
 	return self;
 }
@@ -39,7 +39,8 @@
 {
 	NSString *tagName = [object name];
 	
-	if ([[tagName lowercaseString] hasPrefix:filter])
+	if (!NSEqualRanges([tagName rangeOfString:filter options:NSCaseInsensitiveSearch], 
+					   NSMakeRange(NSNotFound,0)))
 	{
 		[self objectFiltered:object];
 	}

@@ -14,7 +14,7 @@
 	NSString *filter;
 }
 
-- (id)initWithFilterPrefix:(NSString*)prefix;
-- (NSString*)filterPrefix;
+- (id)initWithFilter:(NSString*)filterString;
+- (NSString*)filter;
 
 @end

@@ -32,8 +32,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setMainController:(PABrowserViewMainController*)aController;
 
-- (void)setActivePrefixFilter:(PAStringPrefixFilter*)filter;
-- (PAStringPrefixFilter*)activePrefixFilter;
+- (void)setActiveFilter:(PAStringFilter*)filter;
+- (PAStringFilter*)activeFilter;
 
 - (void)filterTags:(NSArray*)someTags;
 - (void)setupFilterEngine;
@@ -91,7 +91,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 												   object:nil];
 		
 		filterEngine = [[NNFilterEngine alloc] init];
-		activePrefixFilter = nil;
+		activeFilter = nil;
 		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
 	}
@@ -116,7 +116,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[sortDescriptor release];
 	[mainController release];
 	[visibleTags release];
-	[activePrefixFilter release];
+	[activeFilter release];
 	[filterEngineConnection release];
 	[filterEngine release];
 	[searchFieldString release];
@@ -215,16 +215,16 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		return YES;
 }
 
-- (void)setActivePrefixFilter:(PAStringPrefixFilter*)filter
+- (void)setActiveFilter:(PAStringPrefixFilter*)filter
 {
 	[filter retain];
-	[activePrefixFilter release];
-	activePrefixFilter = filter;
+	[activeFilter release];
+	activeFilter = filter;
 }
 
-- (PAStringPrefixFilter*)activePrefixFilter
+- (PAStringPrefixFilter*)activeFilter
 {
-	return activePrefixFilter;
+	return activeFilter;
 }
 
 - (NSMutableArray*)visibleTags;
@@ -403,26 +403,35 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	if ([searchFieldString length] > 0)
 	{
 		// remove old filter
-		if (activePrefixFilter)
+		if (activeFilter)
 		{
-			[filterEngine removeFilter:[self activePrefixFilter]];
+			[filterEngine removeFilter:[self activeFilter]];
 		}
 		
 		NSString *decomposedSearchString = [searchFieldString decomposedStringWithCanonicalMapping];
 		
-		PAStringPrefixFilter *newFilter = [[[PAStringPrefixFilter alloc] initWithFilterPrefix:decomposedSearchString] autorelease];
+		PAStringFilter *newFilter;
+		
+		BOOL prefixOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.TagSearch.PrefixOnly"];
+				
+		if (prefixOnly) {
+			newFilter = [[[PAStringPrefixFilter alloc] initWithFilter:decomposedSearchString] autorelease];
+		} else {
+			newFilter = [[[PAStringFilter alloc] initWithFilter:decomposedSearchString] autorelease];
+		}
+		
 		[filterEngine addFilter:newFilter];
-		[self setActivePrefixFilter:newFilter];
+		[self setActiveFilter:newFilter];
 		
 		filterEngineIsWorking = YES;
 	}
 	else
 	{
-		if (activePrefixFilter) 
+		if (activeFilter) 
 		{
-			[filterEngine removeFilter:[self activePrefixFilter]];
+			[filterEngine removeFilter:[self activeFilter]];
 		}		
-		[self setActivePrefixFilter:nil];
+		[self setActiveFilter:nil];
 	}
 }
 
@@ -519,8 +528,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)removeAllFilters
 {
 	[self setActiveContentTypeFilters:[NSArray array]];
-	[filterEngine removeFilter:[self activePrefixFilter]];
-	[self setActivePrefixFilter:nil];
+	[filterEngine removeFilter:[self activeFilter]];
+	[self setActiveFilter:nil];
 }
 
 

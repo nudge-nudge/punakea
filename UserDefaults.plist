@@ -14,6 +14,8 @@
 	<false/>
 	<key>General.Hotkey.Tagger.KeyCode</key>
 	<integer>-1</integer>
+	<key>General.TagSearch.PrefixOnly</key>
+	<true/>
 	<key>Appearance.InfoPane.Active</key>
 	<string>INFO</string>
 	<key>ManageFiles.ManagedFolder.Enabled</key>

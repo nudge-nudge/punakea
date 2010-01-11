@@ -20,19 +20,17 @@
 #import "PASourcePanelController.h"
 
 #import "NNFilterEngine/NNFilterEngine.h"
+#import "PAStringFilter.h"
 #import "PAStringPrefixFilter.h"
 #import "PAContentTypeFilter.h"
 #import "PADropManager.h"
 
+@class PATagCloud;
 
 typedef enum _PATagCloudSortKey {
 	PATagCloudNameSortKey = 0,
 	PATagCloudRatingSortKey = 1
 } PATagCloudSortKey;
-
-
-@class PATagCloud;
-
 
 extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 
@@ -56,7 +54,7 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 			
 	NNFilterEngine						*filterEngine;
 	NSConnection						*filterEngineConnection;
-	PAStringPrefixFilter				*activePrefixFilter;
+	PAStringFilter						*activeFilter;
 	NSArray								*activeContentTypeFilters;
 	BOOL								filterEngineIsWorking;
 	
