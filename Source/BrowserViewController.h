@@ -32,6 +32,11 @@ typedef enum _PATagCloudSortKey {
 	PATagCloudRatingSortKey = 1
 } PATagCloudSortKey;
 
+typedef enum _PASearchType {
+	PATagPrefixSearchType = 0,
+	PATagSearchType = 1
+} PASearchType;
+
 extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 
 

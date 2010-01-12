@@ -992,7 +992,7 @@
 		65C0E03309E3ED9B006C5A7C /* transparent.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = transparent.tiff; sourceTree = "<group>"; };
 		65C0E04109E3EF11006C5A7C /* PAResultsGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsGroupCell.h; sourceTree = "<group>"; };
 		65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsGroupCell.m; sourceTree = "<group>"; };
-		65C39C4C10FCE33300BD4C71 /* Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Unit Testing.octest"; path = "build/Debug/Unit Testing.octest"; sourceTree = "<group>"; };
+		65C39C4C10FCE33300BD4C71 /* Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsOutlineView.h; sourceTree = "<group>"; };
 		65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsOutlineView.m; sourceTree = "<group>"; };
 		65CA6A740FB2CA47007B509C /* warning.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = warning.pdf; sourceTree = "<group>"; };

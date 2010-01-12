@@ -215,14 +215,14 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		return YES;
 }
 
-- (void)setActiveFilter:(PAStringPrefixFilter*)filter
+- (void)setActiveFilter:(PAStringFilter*)filter
 {
 	[filter retain];
 	[activeFilter release];
 	activeFilter = filter;
 }
 
-- (PAStringPrefixFilter*)activeFilter
+- (PAStringFilter*)activeFilter
 {
 	return activeFilter;
 }
@@ -394,6 +394,33 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
+- (IBAction)setSearchTypeFrom:(NSMenuItem *)menuItem
+{
+    PASearchType searchType = [menuItem tag];
+	
+	// update prefs
+	[[NSUserDefaults standardUserDefaults] setInteger:searchType forKey:@"General.Search.Type"];
+		
+	// update search field appearance
+	NSMenu *searchTypeMenu = [menuItem menu];
+	[menuItem setState:NSOnState];
+	
+	switch (searchType) {
+		case PATagPrefixSearchType:
+			[[searchTypeMenu itemAtIndex:PATagSearchType] setState:NSOffState];
+			break;
+		case PATagSearchType:
+			[[searchTypeMenu itemAtIndex:PATagPrefixSearchType] setState:NSOffState];
+			break;
+		default:
+			NSLog(@"Must not happen - FIXME");
+			break;
+	}
+	
+	// update search
+	[self searchFieldStringHasChanged];
+}
+
 - (void)searchFieldStringHasChanged
 {
 	[self clearVisibleTags];
@@ -412,12 +439,18 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		
 		PAStringFilter *newFilter;
 		
-		BOOL prefixOnly = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.TagSearch.PrefixOnly"];
-				
-		if (prefixOnly) {
-			newFilter = [[[PAStringPrefixFilter alloc] initWithFilter:decomposedSearchString] autorelease];
-		} else {
-			newFilter = [[[PAStringFilter alloc] initWithFilter:decomposedSearchString] autorelease];
+		PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
+			
+		switch (searchType) {
+			case PATagPrefixSearchType:
+				newFilter = [[[PAStringPrefixFilter alloc] initWithFilter:decomposedSearchString] autorelease];
+				break;
+			case PATagSearchType:
+				newFilter = [[[PAStringFilter alloc] initWithFilter:decomposedSearchString] autorelease];
+				break;
+			default:
+				NSLog(@"Must not happen - FIXME");
+				break;
 		}
 		
 		[filterEngine addFilter:newFilter];

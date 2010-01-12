@@ -11,6 +11,7 @@
 
 @interface BrowserController (PrivateAPI)
 
+- (NSSearchField*)createSearchField ;
 - (void)setupTabPanel;
 - (void)setupFieldEditor;
 - (void)setupToolbar;
@@ -41,9 +42,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 {
 	if (self = [super initWithWindowNibName:@"Browser"])
 	{
-		searchField = [[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)];
-		[[searchField cell] setSendsSearchStringImmediately:YES];
-		[searchField setDelegate:self];
+		// nothing
 	}	
 	return self;
 }
@@ -73,6 +72,10 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[browserViewController setNextResponder:[self window]];
 	[[[self window] contentView] setNextResponder:browserViewController];
 	
+	// create searchfield
+	searchField = [[self createSearchField] retain];
+	
+	// setup stuff
 	[self setupToolbar];
 	[self setupStatusBar];
 	[self setupTabPanel];
@@ -96,6 +99,51 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	// Load User Defaults
 	[self loadUserDefaults];
+}
+
+- (NSSearchField*)createSearchField 
+{
+	// get current category
+	PASearchType type = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
+	
+	// configure search field
+	NSSearchField *field = [[[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)] autorelease];
+	[field setDelegate:self];
+	
+	// create menu for determining search type
+	NSMenu *searchTypeMenu = [[NSMenu alloc] initWithTitle:@""];
+	
+	NSMenuItem *prefixTagSearchItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringFromTable(@"SEARCH_TAGS_BY_PREFIX",@"Toolbars",@"")
+									   action:@selector(setSearchTypeFrom:)
+								keyEquivalent:@""] autorelease];
+	[prefixTagSearchItem setEnabled:YES];
+	[prefixTagSearchItem setTag:PATagPrefixSearchType];
+	[prefixTagSearchItem setTarget:browserViewController];
+	[searchTypeMenu insertItem:prefixTagSearchItem atIndex:0];
+	
+	if (type == PATagPrefixSearchType) {
+		[prefixTagSearchItem setState:NSOnState];
+	} else {
+		[prefixTagSearchItem setState:NSOffState];
+	}
+	
+	NSMenuItem *tagSearchItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringFromTable(@"SEARCH_TAGS_ALL",@"Toolbars",@"")
+																  action:@selector(setSearchTypeFrom:)
+														   keyEquivalent:@""] autorelease];
+	[tagSearchItem setEnabled:YES];
+	[tagSearchItem setTag:PATagSearchType];
+	[tagSearchItem setTarget:browserViewController];
+	[searchTypeMenu insertItem:tagSearchItem atIndex:1];
+	
+	if (type == PATagSearchType) {
+		[tagSearchItem setState:NSOnState]; 
+	} else {
+		[tagSearchItem setState:NSOffState];
+	}
+	
+	[[field cell] setSearchMenuTemplate:searchTypeMenu];
+	
+	return field;
 }
 
 - (void)setupToolbar

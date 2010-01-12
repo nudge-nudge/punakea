@@ -7,4 +7,6 @@
 "SORT_BY_RATING" = "Sort by Rating";
 "SORT_BY_RATING_TOOLTIP" = "Sort tag cloud by rating of tags";
 "SEARCH" = "Search for tags";
-"SEARCH_TOOLTIP" = "Filter tag cloud by searching for a tag's prefix";
+"SEARCH_TOOLTIP" = "Search for tags";
+"SEARCH_TAGS_BY_PREFIX" = "Search by prefix";
+"SEARCH_TAGS_ALL" = "Search by wildcard string";

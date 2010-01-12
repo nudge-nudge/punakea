@@ -2,6 +2,8 @@
 
 @interface Core (PrivateAPI)
 
+- (void)loadQuickLookFramework;
+
 - (void)setupToolbar;
 - (void)showStatusItem;
 
