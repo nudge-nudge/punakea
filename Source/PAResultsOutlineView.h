@@ -68,6 +68,14 @@ typedef enum _PAResultsDisplayMode
 
 - (NSUInteger)numberOfSelectedItems;
 
+- (void)toggleQuickLook;
+- (void)openQuickLook;
+- (void)closeQuickLook;
+- (BOOL)quickLookIsOpen;
+- (void)updateQuickLook;
+- (void)selectNextPreviewItemInQuickLook;
+- (void)selectPreviousPreviewItemInQuickLook;
+
 - (NSArray *)selectedItems;
 - (void)setSelectedItems:(NSArray *)theItems;
 

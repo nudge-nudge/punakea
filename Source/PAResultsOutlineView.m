@@ -10,8 +10,15 @@
 
 @interface PAResultsOutlineView (PrivateAPI)
 
-- (void)triggerQuickLook;
-- (void)updateQuickLookUrls;
+- (BOOL)acceptsPreviewPanelControl:(id)panel;
+- (void)beginPreviewPanelControl:(id)panel;
+- (void)endPreviewPanelControl:(id)panel;
+
+- (void)updateQuickLookUsing105;
+- (BOOL)isUsingOldQuickLook;
+
+- (int)numberOfPreviewItemsInPreviewPanel:(id)sender;
+- (id)previewPanel:(id)panel previewItemAtIndex:(int)idx;
 
 - (NSInteger)mouseRowForEvent:(NSEvent *)theEvent;
 - (void)selectOnlyRowIndexes:(NSIndexSet *)rowIndexes;
@@ -330,39 +337,110 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	return [selectedItems count];
 }
 
-- (void)triggerQuickLook
+#pragma mark Quick Look
+- (void)toggleQuickLook
 {
-	if ([[QLPreviewPanel sharedPreviewPanel] isOpen])
+	if ([self quickLookIsOpen])
 	{
-		[[QLPreviewPanel sharedPreviewPanel] close];
-	}
-	else
+		[self closeQuickLook];
+	} else
 	{
-		// Quick Look API is different on Leopard and Snow Leopard
-		// 10.5: QL expects one to set its items by hand each time they change
-		// 10.6: QL queries a data source for its items
-		
-		if ([self isUsingOldQuickLook])
-		{
-			[self updateQuickLookUrls];
-			[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFrontWithEffect:1];
-		} else {			
-			[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:self];
-		}
-		
-		// Return focus to self
-		[[self window] makeKeyWindow];
+		[self openQuickLook];
 	}
 }
 
-- (void)updateQuickLookUrls
+- (void)openQuickLook
+{
+	// Quick Look API is different on Leopard and Snow Leopard
+	// 10.5: QL expects one to set its items by hand each time they change
+	// 10.6: QL queries a data source for its items
+	
+	if ([self isUsingOldQuickLook])
+	{
+		[self updateQuickLook];
+		[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFrontWithEffect:1];
+	} else
+	{			
+		[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:self];
+	}
+	
+	// Return focus to self
+	[[self window] makeKeyWindow];
+}
+
+- (void)closeQuickLook
+{
+	if ([self quickLookIsOpen])
+		[[QLPreviewPanel sharedPreviewPanel] close];
+}
+
+- (BOOL)quickLookIsOpen
 {
 	if ([self isUsingOldQuickLook])
 	{
-		[self updateQuickLookUrlsUsing105];
+		return [[QLPreviewPanel sharedPreviewPanel] isOpen];
+	} else {
+		return ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]);
+	}
+}
+
+- (void)selectNextPreviewItemInQuickLook
+{
+	if ([self isUsingOldQuickLook])
+	{
+		// TODO Don't know what to do for 10.5
+	}
+	else
+	{
+		int idx = [[QLPreviewPanel sharedPreviewPanel] currentPreviewItemIndex];
+		idx++;
+		
+		if (idx > [[self selectedItems] count] - 1)
+			idx = 0;
+		
+		[[QLPreviewPanel sharedPreviewPanel] setCurrentPreviewItemIndex:idx];
+	}
+}
+
+- (void)selectPreviousPreviewItemInQuickLook
+{
+	if ([self isUsingOldQuickLook])
+	{
+		// TODO Don't know what to do for 10.5
+	}
+	else
+	{
+		int idx = [[QLPreviewPanel sharedPreviewPanel] currentPreviewItemIndex];
+		idx--;
+		
+		if (idx < 0)
+			idx = [[self selectedItems] count] - 1;
+		
+		[[QLPreviewPanel sharedPreviewPanel] setCurrentPreviewItemIndex:idx];
+	}
+}
+
+- (void)updateQuickLook
+{
+	if ([self isUsingOldQuickLook])
+	{
+		[self updateQuickLookUsing105];
 	} else {
 		[[QLPreviewPanel sharedPreviewPanel] reloadData];
 	}
+}
+
+- (BOOL)isUsingOldQuickLook
+{
+	NSUInteger major = 0;
+	NSUInteger minor = 0;
+	NSUInteger bugFix = 0;
+	
+	[NSApp getSystemVersionMajor:&major
+						   minor:&minor
+						  bugFix:&bugFix];
+	
+	return (minor == 5);
 }
 
 #pragma mark Quick Look Delegate
@@ -383,7 +461,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 }
 
 #pragma mark Quick Look Compatiblity Methods (10.5)
-- (void)updateQuickLookUrlsUsing105
+- (void)updateQuickLookUsing105
 {
 	NSMutableArray *urls = [NSMutableArray array];
 	
@@ -408,19 +486,6 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	return [NSURL fileURLWithPath:[[[self selectedItems] objectAtIndex:idx] path]];
 }
 
-- (BOOL)isUsingOldQuickLook
-{
-	NSUInteger major = 0;
-	NSUInteger minor = 0;
-	NSUInteger bugFix = 0;
-	
-	[NSApp getSystemVersionMajor:&major
-						   minor:&minor
-						  bugFix:&bugFix];
-	
-	return (minor == 5);
-}
-
 
 #pragma mark Notifications
 - (void)selectionDidChange:(NSNotification *)notification
@@ -440,7 +505,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		// Update Quick Look URLs
 		if ([[QLPreviewPanel sharedPreviewPanel] isOpen])
 		{
-			[self performSelector:@selector(updateQuickLookUrls)
+			[self performSelector:@selector(updateQuickLook)
 					   withObject:nil
 					   afterDelay:0.1];
 		}
@@ -547,7 +612,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		}
 		
 		// Disable forwarding of alphanumeric keys to super (otherwise typeahead find starts)
-		if((key >= 48 && key <= 122) || key == 27)
+		if (key >= 48 && key <= 122)
 			return;  
 		
 		// Handle tab character by hand, as otherwise - with Leopard - editing begins.
@@ -561,7 +626,23 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		// Open/close Quick Look on Space
 		if (key == 32)
 		{			
-			[self triggerQuickLook];			
+			[self toggleQuickLook];			
+		}
+		
+		// Close Quick Look on ESC
+		if (key == 27)
+		{
+			[self closeQuickLook];
+		}
+		
+		// Move selection in QL if arrow right or left is pressed
+		if ([self quickLookIsOpen] && key == NSRightArrowFunctionKey)
+		{
+			[self selectNextPreviewItemInQuickLook];
+		}
+		if ([self quickLookIsOpen] && key == NSLeftArrowFunctionKey)
+		{
+			[self selectPreviousPreviewItemInQuickLook];
 		}
 	}
 	

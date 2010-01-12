@@ -662,7 +662,13 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 		// Open/close Quick Look on Space
 		if (key == 32)
 		{			
-			[outlineView triggerQuickLook];
+			[outlineView toggleQuickLook];
+		}
+		
+		// Close Quick Look on ESC
+		if (key == 27)
+		{
+			[outlineView closeQuickLook];
 		}
 		
 		// TODO: Too slow, but we need to invalidate our visibleRect if key was pressed for a while
