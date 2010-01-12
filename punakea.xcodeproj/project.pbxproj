@@ -971,7 +971,6 @@
 		659EBB4109D2D78300879091 /* PAImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImageButton.h; sourceTree = "<group>"; };
 		659EBB4209D2D78300879091 /* PAImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImageButton.m; sourceTree = "<group>"; };
 		659EBBB009D2DC3D00879091 /* MDIconViewOff-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MDIconViewOff-1.tiff"; sourceTree = "<group>"; };
-		65A292100D3E4BD900DE9F03 /* Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Unit Testing.octest"; path = "/Users/darklight/Projekte/nudgenudge/punakea/build/Release/Unit Testing.octest"; sourceTree = "<absolute>"; };
 		65A4079609B9D6BA00B151F4 /* MD0-0-Middle-1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "MD0-0-Middle-1.tiff"; sourceTree = "<group>"; };
 		65A74AB909E3AA23001131A8 /* PAResultsTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsTableColumn.h; sourceTree = "<group>"; };
 		65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsTableColumn.m; sourceTree = "<group>"; };
@@ -993,6 +992,7 @@
 		65C0E03309E3ED9B006C5A7C /* transparent.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = transparent.tiff; sourceTree = "<group>"; };
 		65C0E04109E3EF11006C5A7C /* PAResultsGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsGroupCell.h; sourceTree = "<group>"; };
 		65C0E04209E3EF11006C5A7C /* PAResultsGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsGroupCell.m; sourceTree = "<group>"; };
+		65C39C4C10FCE33300BD4C71 /* Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Unit Testing.octest"; path = "build/Debug/Unit Testing.octest"; sourceTree = "<group>"; };
 		65C4890409E2C30F00A45A17 /* PAResultsOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsOutlineView.h; sourceTree = "<group>"; };
 		65C4890509E2C30F00A45A17 /* PAResultsOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsOutlineView.m; sourceTree = "<group>"; };
 		65CA6A740FB2CA47007B509C /* warning.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = warning.pdf; sourceTree = "<group>"; };
@@ -1175,6 +1175,7 @@
 				48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */,
 				48186F390BE4C7BE000B4638 /* NNFilterEngine.framework */,
 				483C8A250D6C50BC0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler */,
+				65C39C4C10FCE33300BD4C71 /* Unit Testing.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2322,7 +2323,7 @@
 			);
 			name = "Unit Testing";
 			productName = "Unit Testing";
-			productReference = 65A292100D3E4BD900DE9F03 /* Unit Testing.octest */;
+			productReference = 65C39C4C10FCE33300BD4C71 /* Unit Testing.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		48C633BA0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler */ = {

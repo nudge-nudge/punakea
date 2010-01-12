@@ -334,15 +334,56 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 {
 	if ([[QLPreviewPanel sharedPreviewPanel] isOpen])
 	{
-		[[QLPreviewPanel sharedPreviewPanel] closeWithEffect:1];
-	} else {
-		[self updateQuickLookUrls];		
-		[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFrontWithEffect:1];
+		[[QLPreviewPanel sharedPreviewPanel] close];
+	}
+	else
+	{
+		// Quick Look API is different on Leopard and Snow Leopard
+		// 10.5: QL expects one to set its items by hand each time they change
+		// 10.6: QL queries a data source for its items
+		
+		if ([self isUsingOldQuickLook])
+		{
+			[self updateQuickLookUrls];
+			[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFrontWithEffect:1];
+		} else {			
+			[[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:self];
+		}
+		
+		// Return focus to self
 		[[self window] makeKeyWindow];
 	}
 }
 
 - (void)updateQuickLookUrls
+{
+	if ([self isUsingOldQuickLook])
+	{
+		[self updateQuickLookUrlsUsing105];
+	} else {
+		[[QLPreviewPanel sharedPreviewPanel] reloadData];
+	}
+}
+
+#pragma mark Quick Look Delegate
+- (BOOL)acceptsPreviewPanelControl:(id)panel
+{
+    return YES;
+}
+
+- (void)beginPreviewPanelControl:(id)panel
+{
+    [panel setDelegate:self];
+    [panel setDataSource:self];
+}
+
+- (void)endPreviewPanelControl:(id)panel
+{
+	// Nothing yet
+}
+
+#pragma mark Quick Look Compatiblity Methods (10.5)
+- (void)updateQuickLookUrlsUsing105
 {
 	NSMutableArray *urls = [NSMutableArray array];
 	
@@ -354,6 +395,30 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	[[QLPreviewPanel sharedPreviewPanel] setURLs:urls
 									currentIndex:0
 						  preservingDisplayState:YES];
+}
+
+#pragma mark Quick Look Data Source (10.6)
+- (int)numberOfPreviewItemsInPreviewPanel:(id)sender
+{
+	return [[self selectedItems] count];
+}
+
+- (id)previewPanel:(id)panel previewItemAtIndex:(int)idx
+{
+	return [NSURL fileURLWithPath:[[[self selectedItems] objectAtIndex:idx] path]];
+}
+
+- (BOOL)isUsingOldQuickLook
+{
+	NSUInteger major = 0;
+	NSUInteger minor = 0;
+	NSUInteger bugFix = 0;
+	
+	[NSApp getSystemVersionMajor:&major
+						   minor:&minor
+						  bugFix:&bugFix];
+	
+	return (minor == 5);
 }
 
 
