@@ -174,14 +174,15 @@ NSInteger const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 		// Draw scaled background
 		imgRect.origin = NSMakePoint(7, 0);
 		imgRect.size = NSMakeSize(1, 15);
-		destRect = NSMakeRect(cellFrame.origin.x + 7, cellFrame.origin.y, cellFrame.size.width - 16, 15);
+		destRect = NSMakeRect(cellFrame.origin.x + 7, cellFrame.origin.y, abs(cellFrame.size.width) - 15, 15);
+		NSLog(@"%f %f", cellFrame.origin.x, cellFrame.size.width);
 		[bezelImage drawInRect:destRect fromRect:imgRect operation:NSCompositeSourceOver fraction:1.0];
 		
 		// Draw right edge
 		imgRect.origin = NSMakePoint(8, 0);
 		imgRect.size = NSMakeSize(7, 15);
 		destRect = cellFrame;
-		destRect.origin.x = destRect.size.width - 8;
+		destRect.origin.x = abs(destRect.size.width) - 8;
 		destRect.size.width = 7;
 		[bezelImage drawInRect:destRect fromRect:imgRect operation:NSCompositeSourceOver fraction:1.0];
 	}
