@@ -401,24 +401,20 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// update prefs
 	[[NSUserDefaults standardUserDefaults] setInteger:searchType forKey:@"General.Search.Type"];
 		
-	// update search field appearance
+	// update search field appearance -
+	// set all to off and menuItem to on
 	NSMenu *searchTypeMenu = [menuItem menu];
-	[menuItem setState:NSOnState];
 	
-	switch (searchType) {
-		case PATagPrefixSearchType:
-			[[searchTypeMenu itemAtIndex:PATagSearchType] setState:NSOffState];
-			break;
-		case PATagSearchType:
-			[[searchTypeMenu itemAtIndex:PATagPrefixSearchType] setState:NSOffState];
-			break;
-		default:
-			NSLog(@"Must not happen - FIXME");
-			break;
+	for (NSMenuItem *item in [searchTypeMenu itemArray]) {
+		[item setState:NSOffState];
 	}
 	
-	// update search
-	[self searchFieldStringHasChanged];
+	[menuItem setState:NSOnState];
+	
+	// update search if there currently is a searchFieldString
+	if ([searchFieldString length] > 0) {
+		[self searchFieldStringHasChanged];	
+	}
 }
 
 - (void)searchFieldStringHasChanged
