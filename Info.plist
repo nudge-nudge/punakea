@@ -60,11 +60,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.5RC1</string>
+	<string>1.0.5RC2</string>
 	<key>CFBundleSignature</key>
 	<string>NNPA</string>
 	<key>CFBundleVersion</key>
-	<string>1587</string>
+	<string>1591</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
