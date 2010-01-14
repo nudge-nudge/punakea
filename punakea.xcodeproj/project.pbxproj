@@ -287,7 +287,6 @@
 		659040E00A4C058400ADDC1D /* pane_key-favoriteIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659040CC0A4C058400ADDC1D /* pane_key-favoriteIcon.tiff */; };
 		6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */; };
 		6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */; };
-		65929BAA10FE75B200AE5504 /* NewBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65929BA910FE75B200AE5504 /* NewBrowser.xib */; };
 		65943F990AFA56AA00A8922F /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 65943F980AFA56AA00A8922F /* appicon.icns */; };
 		6597D9D70FCC51F6003AE414 /* PAAddTagsCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6597D9D60FCC51F6003AE414 /* PAAddTagsCommand.m */; };
 		65988C6B0A875A11000270E6 /* PAButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65988C690A875A11000270E6 /* PAButton.h */; };
@@ -950,7 +949,6 @@
 		659040CC0A4C058400ADDC1D /* pane_key-favoriteIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "pane_key-favoriteIcon.tiff"; sourceTree = "<group>"; };
 		6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemMatrix.h; sourceTree = "<group>"; };
 		6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemMatrix.m; sourceTree = "<group>"; };
-		65929BA610FE759E00AE5504 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NewBrowser.xib; sourceTree = "<group>"; };
 		65943F980AFA56AA00A8922F /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = appicon.icns; path = ../appicon.icns; sourceTree = "<group>"; };
 		6597D9D50FCC51F6003AE414 /* PAAddTagsCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAddTagsCommand.h; sourceTree = "<group>"; };
 		6597D9D60FCC51F6003AE414 /* PAAddTagsCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAddTagsCommand.m; sourceTree = "<group>"; };
@@ -1192,7 +1190,6 @@
 				4802193B0C02CE42001CF480 /* Subprojects */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				654DBC1709C9D0320061BFA4 /* Documentation */,
-				65929BA910FE75B200AE5504 /* NewBrowser.xib */,
 			);
 			name = Punakea;
 			sourceTree = "<group>";
@@ -2599,7 +2596,6 @@
 				486F7B50103D91DC004164F9 /* OpenMetaSpotlight.mdimporter in Resources */,
 				48B9AE29104325C000EFF3D4 /* sl-status_exclude.tiff in Resources */,
 				48BE1CAD10F65F1700946400 /* dsa_pub.pem in Resources */,
-				65929BAA10FE75B200AE5504 /* NewBrowser.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3026,14 +3022,6 @@
 				655B2AB70ABFE884000A3AA4 /* English */,
 			);
 			name = FileManager.strings;
-			sourceTree = "<group>";
-		};
-		65929BA910FE75B200AE5504 /* NewBrowser.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				65929BA610FE759E00AE5504 /* English */,
-			);
-			name = NewBrowser.xib;
 			sourceTree = "<group>";
 		};
 		65E7B0190994D02E00565251 /* MainMenu.nib */ = {
