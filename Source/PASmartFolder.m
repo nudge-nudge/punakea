@@ -16,7 +16,7 @@
 	NSMutableDictionary *sf = [NSMutableDictionary dictionary];
 	[sf setObject:[NSNumber numberWithInteger:1] forKey:@"CompatibleVersion"];
 	
-	NSString *rawQuery = [NSString stringWithFormat:@"(((%@))) && (true)",[tag query]];
+	NSString *rawQuery = [NSString stringWithFormat:@"(true) && (((%@)))",[tag query]];
 	[sf setObject:rawQuery forKey:@"RawQuery"];
 	
 	NSMutableDictionary *rawQueryDict = [NSMutableDictionary dictionary];
@@ -43,8 +43,8 @@
 	NSMutableDictionary *criteriaSlice = [NSMutableDictionary dictionary];
 	
 	NSMutableArray *criteria = [NSMutableArray array];
-	[criteria addObject:@"kOMUserTags"];
-	[criteria addObject:[NSNumber numberWithInteger:103]];
+	[criteria addObject:@"kMDItemOMUserTags"];
+	[criteria addObject:[NSNumber numberWithInteger:120]];
 	[criteria addObject:[NSNumber numberWithInteger:104]];
 	[criteriaSlice setObject:criteria forKey:@"criteria"];
 	
