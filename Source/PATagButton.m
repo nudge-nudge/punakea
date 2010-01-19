@@ -270,6 +270,20 @@ should be overridden according to apple docs
 	[theEvent autorelease];
 }
 
+- (NSMenu *)menuForEvent:(NSEvent *)theEvent
+{
+	NSMenu *menu = [[[self superview] delegate] tagButtonContextualMenu];
+	
+	for (int i = 0; i < [menu numberOfItems]; i++)
+	{
+		NSMenuItem *menuItem = [menu itemAtIndex:i];
+		
+		[menuItem setRepresentedObject:[self genericTag]];
+	}
+		
+	return menu;
+}
+
 - (NSImage *)dragImageForMouseDownAtPoint:(NSPoint)point offsetX:(CGFloat *)offsetX y:(CGFloat *)offsetY
 {
 	NSRect bounds = [self bounds];

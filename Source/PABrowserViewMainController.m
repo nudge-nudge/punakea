@@ -24,6 +24,11 @@
 	return;
 }
 
+- (void)handleTagNegation:(NNTag*)tag
+{
+	return;
+}
+
 - (void)handleTagActivations:(NSArray*)someTags
 {
 	return;

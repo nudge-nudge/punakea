@@ -3,6 +3,7 @@
 #import <Cocoa/Cocoa.h>
 #import <math.h>
 #import "NNTagging/NNTag.h"
+#import "NNTagging/NNTags.h"
 #import "PATagButton.h"
 #import "PADropManager.h"
 
@@ -38,7 +39,7 @@ displays all [datasource visibleTags] in a nice tag cloud view
 	PATagButton						*activeButton; /**< currently selected tagButton */
 	
 	NSPoint							pointForNextTagRect; /**< saves the point for the next tag to be displayed */
-	NSInteger								tagPosition; /**< holds the position where the new line starts */
+	NSInteger						tagPosition; /**< holds the position where the new line starts */
 	
 	NSUserDefaultsController		*userDefaultsController; /**< holds user defaults for tag cloud */
 	
@@ -55,6 +56,11 @@ displays all [datasource visibleTags] in a nice tag cloud view
 - (void)setDelegate:(id)del;
 
 - (void)reloadData;
+
+- (NNTag*)selectedTag;
+- (void)setSelectedTag:(NNTag*)aTag;
+- (PATagButton*)activeButton;
+- (void)setActiveButton:(PATagButton*)aTag;
 
 - (NSString*)displayMessage;
 - (void)setDisplayMessage:(NSString*)message;

@@ -172,6 +172,13 @@
 	[tag incrementClickCount];
 }
 
+- (void)handleTagNegation:(NNTag*)tag
+{
+	[selectedTags addTag:tag negated:YES];
+	
+	[tag incrementClickCount];
+}
+
 // this behaves differently than handleTagActivation:
 // sets selected tags to new tags instead of adding
 // also removes filters

@@ -281,6 +281,11 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[tagCloud removeActiveTagButton];
 }
 
+- (NSMenu *)tagButtonContextualMenu
+{
+	return tagButtonContextualMenu;
+}
+
 - (PATagCloud *)tagCloud
 {
 	return tagCloud;
@@ -349,6 +354,19 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	NNTag *tag = [sender genericTag];
 	[mainController handleTagActivation:tag];
+}
+
+- (IBAction)negatedTagButtonClicked:(id)sender
+{
+	// Make tagcloud first responder on click of a tag button
+	if([[tagCloud window] firstResponder] != tagCloud)
+		[[tagCloud window] makeFirstResponder:tagCloud];
+	
+	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
+		[self resetSearchFieldString];
+	
+	NNTag *tag = [sender genericTag];
+	[mainController handleTagNegation:tag];
 }
 
 #pragma mark typeAheadFind
@@ -703,6 +721,55 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	NSMutableArray *currentVisibleTags = [visibleTags mutableCopy];
 	[self setVisibleTags:currentVisibleTags];
 	[currentVisibleTags release];
+}
+
+
+#pragma mark Contextual Menu for Tag Buttons of Tag Cloud
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	if ([menuItem action] == @selector(includeTag:) ||
+		[menuItem action] == @selector(excludeTag:))
+	{
+		// Disable menu items for MANAGE_TAGS view	
+		if (mainController &&
+			![mainController isKindOfClass:[PAResultsViewController class]])
+		{
+			return NO;
+		}
+	}
+	
+	return YES;
+}
+
+- (IBAction)includeTag:(id)sender
+{
+	NNTag *tag = (NNTag *)[(NSMenuItem *)sender representedObject];
+	
+	[tagCloud selectTag:tag];
+	[self tagButtonClicked:[tagCloud activeButton]]; 
+}
+
+- (IBAction)excludeTag:(id)sender
+{
+	NNTag *tag = (NNTag *)[(NSMenuItem *)sender representedObject];
+	
+	[tagCloud selectTag:tag];
+	[self negatedTagButtonClicked:[tagCloud activeButton]]; 	
+}
+
+- (IBAction)editTag:(id)sender
+{
+	NNTag *tag = (NNTag *)[(NSMenuItem *)sender representedObject];
+	
+	[tagCloud selectTag:tag];
+	
+	PATagButton *tagButton = [[tagCloud activeButton] retain];	// Pointer will be lost when navigating away in cloud
+	
+	[[NSApp delegate] goToManageTags:self];						// Navigate to manage tags
+	
+	[self tagButtonClicked:tagButton];							// Select tag
+	
+	[tagButton release];										// Free pointer
 }
 
 

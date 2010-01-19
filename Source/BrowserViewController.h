@@ -45,6 +45,7 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 	IBOutlet PATagCloud					*tagCloud;
 	IBOutlet PASplitView				*splitView;
 	IBOutlet NSView						*controlledView;
+	IBOutlet NSMenu						*tagButtonContextualMenu;
 			
 	PABrowserViewMainController			*mainController;
 	
@@ -96,6 +97,7 @@ highlights tag in tagcloud
 is called when a tag is clicked
  */
 - (IBAction)tagButtonClicked:(id)sender;
+- (IBAction)negatedTagButtonClicked:(id)sender;
 
 - (void)setSearchFieldString:(NSString*)string;
 
@@ -112,7 +114,15 @@ is called when a tag is clicked
 
 - (void)reloadData;
 
+// Tag Cloud delegate methods
+- (IBAction)includeTag:(id)sender;
+- (IBAction)excludeTag:(id)sender;
+- (IBAction)editTag:(id)sender;
+// --
+
 - (PATagCloud *)tagCloud;
+- (NSMenu *)tagButtonContextualMenu;
+
 - (NSArray *)allTags; /**< needed by tagcloud - this will be gone as soon as the tag cloud is a proper view and has no app logic anymore*/
 
 - (NSArray*)activeContentTypeFilters;

@@ -34,12 +34,6 @@ adds all the tags in [controller visibleTags]
 - (void)moveTagButton:(PATagButton*)tagButton toPoint:(NSPoint)origin;
 - (void)addTagButton:(PATagButton*)tagButton atPoint:(NSPoint)origin;
 
-- (NNTag*)selectedTag;
-- (void)setSelectedTag:(NNTag*)aTag;
-
-- (PATagButton*)activeButton;
-- (void)setActiveButton:(PATagButton*)aTag;
-
 - (void)displayActiveButton;
 
 /**
@@ -631,6 +625,7 @@ calculates the starting point in the next row according to the height of all the
 		[tagButtonDict removeObjectForKey:[activeTag name]];
 	}
 }
+
 
 #pragma mark event handling
 - (BOOL)acceptsFirstResponder
