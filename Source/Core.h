@@ -36,6 +36,8 @@
 
 #import "NNActiveAppSavingPanel.h"
 
+#import "lcl.h"
+
 // TEST
 #import "NNTagging/NNApriori.h"
 #import "NNTagging/NNAssociationRule.h"

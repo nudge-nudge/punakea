@@ -51,6 +51,8 @@
 {
     if (self = [super init])
     {
+		lcl_configure_by_name("main/*", lcl_vTrace);
+		
 		// dynamically load QuickLook framework to keep 10.5 compatibility
 		[self loadQuickLookFramework];
 		
@@ -63,8 +65,10 @@
 		[PAInstaller install];
 		
 		globalTags = [NNTags sharedTags];
+			
+		lcl_log(lcl_cglobal,lcl_vInfo, @"Punakea (compiled on %s at %s) started",__DATE__,__TIME__);
 		
-		// printf("Punakea compiled on %s at %s\n",__DATE__,__TIME__);
+//		@"Punakea compiled on %s at %s\n",__DATE__,__TIME__
 	}
     return self;
 }

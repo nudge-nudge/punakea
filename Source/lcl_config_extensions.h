@@ -1,6 +1,6 @@
 //
 //
-// lcl_config_logger.h
+// lcl_config_extensions.h
 //
 //
 // Copyright (c) 2008-2010 Arne Harren <ah@0xc0.de>
@@ -23,9 +23,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-// Use LCLLogFile as the LibComponentLogging logging back-end.
-#import "LCLLogFile.h"
+//
+// lcl_config_extensions.h template.
+//
 
-// The detailed configuration of the LCLLogFile class is stored in the
-// LCLLogFileConfig.h file which gets imported by LCLLogFile.h.
+
+//
+// The lcl_config_extensions.h file can be used to #include, #import, or define
+// log extensions.
+//
 
