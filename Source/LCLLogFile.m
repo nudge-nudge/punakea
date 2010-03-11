@@ -319,11 +319,6 @@ static void _LCLLogFile_log(const char *identifier_c, uint32_t level,
                             NSString *message) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    // variables for current time
-    struct timeval now;
-    struct tm now_tm;
-    char time_c[24];
-    
     // create the prefix
     NSString *prefix = _LCLLogFile_prefix(identifier_c, level, path_c, line, function_c);
     
@@ -349,8 +344,9 @@ static void _LCLLogFile_log(const char *identifier_c, uint32_t level,
     const char *message_c = [message UTF8String];
     
     // get size of log entry
+    const int time_c_len = 24;
     const int backslash_n_len = 1;
-    size_t entry_len = sizeof(time_c) + strlen(prefix_c) + strlen(message_c) + backslash_n_len;
+    size_t entry_len = time_c_len + strlen(prefix_c) + strlen(message_c) + backslash_n_len;
     
     // under lock protection ...
     [_LCLLogFile_lock lock];
@@ -366,22 +362,25 @@ static void _LCLLogFile_log(const char *identifier_c, uint32_t level,
             }
         }
         
+        // get current time
+        struct timeval now;
+        struct tm now_tm;
+        char time_c[time_c_len];
+        gettimeofday(&now, NULL);
+        localtime_r(&now.tv_sec, &now_tm);
+        snprintf(time_c, sizeof(time_c), "%04d-%02d-%02d %02d:%02d:%02d.%03d",
+                 now_tm.tm_year + 1900,
+                 now_tm.tm_mon + 1,
+                 now_tm.tm_mday,
+                 now_tm.tm_hour,
+                 now_tm.tm_min,
+                 now_tm.tm_sec,
+                 now.tv_usec / 1000);
+        
         // write the log message
         if (filehandle) {
             // increase file size
             _LCLLogFile_fileSize += entry_len;
-            
-            // get current time
-            gettimeofday(&now, NULL);
-            localtime_r(&now.tv_sec, &now_tm);
-            snprintf(time_c, sizeof(time_c), "%04d-%02d-%02d %02d:%02d:%02d.%03d",
-                     now_tm.tm_year + 1900,
-                     now_tm.tm_mon + 1,
-                     now_tm.tm_mday,
-                     now_tm.tm_hour,
-                     now_tm.tm_min,
-                     now_tm.tm_sec,
-                     now.tv_usec / 1000);
             
             // write current time and log message
             fprintf(filehandle, "%s%s%s\n", time_c, prefix_c, message_c);
@@ -392,7 +391,10 @@ static void _LCLLogFile_log(const char *identifier_c, uint32_t level,
         
         // mirror to stderr?
         if (_LCLLogFile_mirrorToStdErr) {
-            fprintf(stderr, "%s%s%s\n", time_c, prefix_c, message_c);
+#           ifndef __LCLLogFile_stderr
+#           define __LCLLogFile_stderr stderr
+#           endif
+            fprintf(__LCLLogFile_stderr, "%s%s%s\n", time_c, prefix_c, message_c);
         }
     }
     // ... done
