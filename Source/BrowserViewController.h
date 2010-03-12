@@ -25,6 +25,8 @@
 #import "PAContentTypeFilter.h"
 #import "PADropManager.h"
 
+#import "lcl.h"
+
 @class PATagCloud;
 
 typedef enum _PATagCloudSortKey {

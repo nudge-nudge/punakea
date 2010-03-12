@@ -497,6 +497,19 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark Notifications
 - (void)tagsHaveChanged:(NSNotification*)notification
 {
+	// check if required objects are available
+	if ([notification userInfo] == nil)
+	{
+		lcl_log(lcl_cglobal, lcl_vError, @"UserInfo not available");
+		return;
+	} 
+	else if ([[notification userInfo] objectForKey:NNTagOperation])
+	{
+		lcl_log(lcl_cglobal, lcl_vError, @"NNTagOperation not available");
+		return;
+	}
+	
+	// everything is there, do the work
 	NSString *changeOperation = [[notification userInfo] objectForKey:NNTagOperation];
 
 	// if there are any selected tags, every tag operation is ignored

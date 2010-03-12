@@ -81,6 +81,7 @@ NSString * const SIDEBAR_POSITION_KEYPATH = @"values.General.Sidebar.Position";
 
 - (void)dealloc
 {
+	[nc removeObserver:self];
 	[defaultsController removeObserver:self forKeyPath:SIDEBAR_POSITION_KEYPATH];
 	[super dealloc];
 }

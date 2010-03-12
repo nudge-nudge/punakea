@@ -101,6 +101,23 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[self loadUserDefaults];
 }
 
+- (void)dealloc
+{
+	[statusBarProgressIndicator release];
+	
+	[searchField unbind:@"value"];
+	if (searchField) [searchField release];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[sourcePanelFieldEditor release];
+	
+	// unbind stuff for retain count
+	[browserViewController release];
+	
+	[super dealloc];
+}
+
 - (NSSearchField*)createSearchField 
 {
 	// get current category
@@ -308,24 +325,6 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	[sourcePanelStatusBar reloadData];
 }
-
-- (void)dealloc
-{
-	[statusBarProgressIndicator release];
-	
-	[searchField unbind:@"value"];
-	if (searchField) [searchField release];
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	[sourcePanelFieldEditor release];
-		
-	// unbind stuff for retain count
-	[browserViewController release];
-		
-	[super dealloc];
-}
-
 
 #pragma mark Events
 - (void)flagsChanged:(NSEvent *)theEvent
