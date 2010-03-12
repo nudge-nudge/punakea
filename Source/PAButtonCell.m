@@ -175,7 +175,7 @@ NSInteger const HEIGHT_RECESSEDBEZELSTYLE_SMALL = 15;
 		imgRect.origin = NSMakePoint(7, 0);
 		imgRect.size = NSMakeSize(1, 15);
 		destRect = NSMakeRect(cellFrame.origin.x + 7, cellFrame.origin.y, abs(cellFrame.size.width) - 15, 15);
-		NSLog(@"%f %f", cellFrame.origin.x, cellFrame.size.width);
+		//NSLog(@"%f %f", cellFrame.origin.x, cellFrame.size.width);
 		[bezelImage drawInRect:destRect fromRect:imgRect operation:NSCompositeSourceOver fraction:1.0];
 		
 		// Draw right edge
