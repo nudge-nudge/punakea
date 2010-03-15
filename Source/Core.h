@@ -39,8 +39,8 @@
 #import "lcl.h"
 
 // TEST
-#import "NNTagging/NNApriori.h"
-#import "NNTagging/NNAssociationRule.h"
+//#import "NNTagging/NNApriori.h"
+//#import "NNTagging/NNAssociationRule.h"
 
 //#import "PANotificationReceiver.h"
 
