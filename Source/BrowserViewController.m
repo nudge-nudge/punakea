@@ -503,11 +503,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		lcl_log(lcl_cglobal, lcl_vError, @"UserInfo not available");
 		return;
 	} 
-	else if ([[notification userInfo] objectForKey:NNTagOperation])
-	{
-		lcl_log(lcl_cglobal, lcl_vError, @"NNTagOperation not available");
-		return;
-	}
 	
 	// everything is there, do the work
 	NSString *changeOperation = [[notification userInfo] objectForKey:NNTagOperation];
