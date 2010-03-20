@@ -47,10 +47,11 @@ NSString *appSupportSubpath = @"Application Support/Punakea/PlugIns";
 {
 	if ([[self handledPboardTypes] containsObject:[handler pboardType]])
 	{
-		NSLog(@"%@ not added, pboardType already registered by another dropHandler",handler);
+		lcl_log(lcl_cglobal, lcl_vWarning, @"%@ not added, pboardType already registered by another dropHandler", handler);
 	}
 	else
 	{
+		lcl_log(lcl_cglobal, lcl_vInfo, @"Added drophandler: %@", handler);
 		[dropHandlers addObject:handler];
 	}
 }

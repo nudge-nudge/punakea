@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "PADropHandler/PADropHandler.h"
 
+#import "lcl.h"
+
 @class PATagButton;
 
 /**

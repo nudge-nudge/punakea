@@ -49,7 +49,8 @@ data is NSDictionary with keys:
 									 ofItemAtPath:filePath
 											error:NULL];
 	
-	return [NNFile fileWithPath:filePath];
+	NNFile *weblocFile = [NNFile fileWithPath:filePath];
+	return weblocFile;
 }
 
 - (NSDragOperation)performedDragOperation
