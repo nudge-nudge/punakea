@@ -262,9 +262,11 @@ NSString * const PATagManagementRemoveOperation = @"PATagManagementRemoveOperati
 	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
 	[dateFormatter setDateStyle:NSDateFormatterLongStyle];	
 
-	[lastClickedField setStringValue:[dateFormatter friendlyStringFromDate:[tag lastClicked]]];
+	[totalClickedField setStringValue:[NSString stringWithFormat:@"%ld times",[tag clickCount]]];
+	[lastClickedField setStringValue:[NSString stringWithFormat:@"(last time: %@)",[dateFormatter friendlyStringFromDate:[tag lastClicked]]]];
 	
-	[lastUsedField setStringValue:[dateFormatter friendlyStringFromDate:[tag lastUsed]]];
+	[totalUsedField setStringValue:[NSString stringWithFormat:@"%ld times",[tag useCount]]];
+	[lastUsedField setStringValue:[NSString stringWithFormat:@"(last time: %@)",[dateFormatter friendlyStringFromDate:[tag lastUsed]]]];
 	
 	NNTag *currentBestTag = [tags currentBestTag];
 
