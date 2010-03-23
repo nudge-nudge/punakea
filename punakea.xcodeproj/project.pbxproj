@@ -27,8 +27,6 @@
 		4807215E0AEFE5600024118D /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 48C633BB0AEF9720008F0E94 /* WebURLsWithTitlesPboardTypeDropHandler.punakeaDropHandler */; };
 		480C40300BF4469A00C90B2C /* PATagCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 480C402E0BF4469A00C90B2C /* PATagCache.h */; };
 		480C40310BF4469A00C90B2C /* PATagCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C402F0BF4469A00C90B2C /* PATagCache.m */; };
-		480C403B0BF4471300C90B2C /* PASingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 480C40390BF4471300C90B2C /* PASingleton.h */; };
-		480C403C0BF4471300C90B2C /* PASingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C403A0BF4471300C90B2C /* PASingleton.m */; };
 		480C40480BF4484400C90B2C /* PATagCacheEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 480C40460BF4484400C90B2C /* PATagCacheEntry.h */; };
 		480C40490BF4484400C90B2C /* PATagCacheEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 480C40470BF4484400C90B2C /* PATagCacheEntry.m */; };
 		4815A0680AEF991A00969296 /* PAFilenamesDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 48209CA80AB1BEED00F3CF21 /* PAFilenamesDropHandler.m */; };
@@ -576,8 +574,6 @@
 		48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNTagging.xcodeproj; path = ../nntagging/NNTagging.xcodeproj; sourceTree = SOURCE_ROOT; };
 		480C402E0BF4469A00C90B2C /* PATagCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCache.h; sourceTree = "<group>"; };
 		480C402F0BF4469A00C90B2C /* PATagCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCache.m; sourceTree = "<group>"; };
-		480C40390BF4471300C90B2C /* PASingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASingleton.h; sourceTree = "<group>"; };
-		480C403A0BF4471300C90B2C /* PASingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASingleton.m; sourceTree = "<group>"; };
 		480C40460BF4484400C90B2C /* PATagCacheEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCacheEntry.h; sourceTree = "<group>"; };
 		480C40470BF4484400C90B2C /* PATagCacheEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagCacheEntry.m; sourceTree = "<group>"; };
 		4816340F0A5A48A1003B8EE4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Tagger.nib; sourceTree = "<group>"; };
@@ -1234,8 +1230,6 @@
 				65CB0AAB0BBBE7E400799E25 /* PASplitView.m */,
 				484F71AB0A66722000D886E5 /* PAViewController.h */,
 				484F71AC0A66722000D886E5 /* PAViewController.m */,
-				480C40390BF4471300C90B2C /* PASingleton.h */,
-				480C403A0BF4471300C90B2C /* PASingleton.m */,
 				480219520C02D2EE001CF480 /* PAInstaller.h */,
 				480219530C02D2EE001CF480 /* PAInstaller.m */,
 				488D8C0910B1DFD100F97BF2 /* CTGradient.h */,
@@ -2157,7 +2151,6 @@
 				486063DE0AA0553000D9E103 /* PASidebarTableView.h in Headers */,
 				485FAF2C0A0DE54C0088AC08 /* PASidebarTableViewDropController.h in Headers */,
 				4870213B0A4FC1EC00CD5E75 /* PASidebarWindow.h in Headers */,
-				480C403B0BF4471300C90B2C /* PASingleton.h in Headers */,
 				65FB5ADF0BBD4DD80024EE3C /* PASmartFolder.h in Headers */,
 				659945E90BBAB2F000F146D2 /* PASourceItem.h in Headers */,
 				65CB093B0BBBBDA800799E25 /* PASourceItemCell.h in Headers */,
@@ -2793,7 +2786,6 @@
 				65BD56D80BF31BF600E202F8 /* PAInfoPaneSingleSelectionView.m in Sources */,
 				65AA74BE0BF35D2C0054407D /* NSTextFieldAdditions.m in Sources */,
 				480C40310BF4469A00C90B2C /* PATagCache.m in Sources */,
-				480C403C0BF4471300C90B2C /* PASingleton.m in Sources */,
 				480C40490BF4484400C90B2C /* PATagCacheEntry.m in Sources */,
 				48D815CC0BF5BF6600821C25 /* PAStringPrefixFilter.m in Sources */,
 				48D815CE0BF5BF6600821C25 /* PAContentTypeFilter.m in Sources */,
