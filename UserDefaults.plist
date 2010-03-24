@@ -65,6 +65,14 @@
 		<key>ExpandedItems</key>
 		<array/>
 	</dict>
+	<key>SourcePanel.AvailableItems</key>
+	<array>
+		<string>BOOKMARKS</string>
+		<string>IMAGES</string>
+		<string>MOVIES</string>
+		<string>MUSIC</string>
+		<string>PDF</string>
+	</array>
 	<key>SUCheckAtStartup</key>
 	<true/>
 	<key>SUScheduledCheckInterval</key>

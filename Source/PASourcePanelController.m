@@ -32,40 +32,29 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 		[sourceItem setEditable:NO];
 		[sourceGroup addChild:sourceItem];
 		
-		PASourceItem *fileKindItem;
+		// Add all configured type filters to library
+		NSArray *kindItemIdentifiers = [[NSUserDefaults standardUserDefaults] arrayForKey:@"SourcePanel.AvailableItems"];
 		
-		fileKindItem = [PASourceItem itemWithValue:@"BOOKMARKS" displayName:
-						NSLocalizedStringFromTableInBundle(@"BOOKMARKS", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
-		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-bookmarks"]];
-		[fileKindItem setEditable:NO];
-		[sourceItem addChild:fileKindItem];
+		for (NSString *kindItemIdentifier in kindItemIdentifiers)
+		{
+			NSString *displayName = NSLocalizedStringFromTableInBundle(kindItemIdentifier, @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil);
+			NSImage *itemImage = [NSImage imageNamed:kindItemIdentifier];
+			
+			// use DOCUMENT icon as default
+			if (itemImage == nil)
+			{
+				itemImage = [NSImage imageNamed:@"DOCUMENT"];
+			}
+			
+			PASourceItem *fileKindItem = [PASourceItem itemWithValue:kindItemIdentifier 
+														 displayName:displayName];
+			
+			[fileKindItem setImage:itemImage];
+			[fileKindItem setEditable:NO];
+			[sourceItem addChild:fileKindItem];
+		}
 		
-		fileKindItem = [PASourceItem itemWithValue:@"IMAGES" displayName:
-						NSLocalizedStringFromTableInBundle(@"IMAGES", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
-		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-images"]];
-		[fileKindItem setEditable:NO];
-		[sourceItem addChild:fileKindItem];		
-		
-		fileKindItem = [PASourceItem itemWithValue:@"MOVIES" displayName:
-						NSLocalizedStringFromTableInBundle(@"MOVIES", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
-		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-movies"]];
-		[fileKindItem setEditable:NO];
-		[sourceItem addChild:fileKindItem];
-		
-		fileKindItem = [PASourceItem itemWithValue:@"MUSIC" displayName:
-						NSLocalizedStringFromTableInBundle(@"MUSIC", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
-		[fileKindItem setImage:[NSImage imageNamed:@"source-panel-music"]];
-		[fileKindItem setEditable:NO];
-		[sourceItem addChild:fileKindItem];
-		
-		fileKindItem = [PASourceItem itemWithValue:@"PDF" displayName:
-						NSLocalizedStringFromTableInBundle(@"PDF", @"MDSimpleGrouping", [NSBundle bundleWithIdentifier:@"eu.nudgenudge.nntagging"], nil)];
-		NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:@"PDF"];
-		[image setSize:NSMakeSize(16,16)];
-		[fileKindItem setImage:image];
-		[fileKindItem setEditable:NO];
-		[sourceItem addChild:fileKindItem];
-		
+		// Tag Management
 		sourceItem = [PASourceItem itemWithValue:@"MANAGE_TAGS" displayName:@"Manage Tags"];
 		[sourceItem setImage:[NSImage imageNamed:@"source-panel-manage-tags"]];
 		[sourceItem setEditable:NO];

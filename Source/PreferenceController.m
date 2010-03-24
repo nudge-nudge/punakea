@@ -56,6 +56,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	if (self = [super initWithWindowNibName:@"Preferences"])
 	{
 		userDefaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+				
 		core = aCore;
 		
 		// Check if recentPage from UserDefaults is valid

@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PASingleton.h"
 #import "PATagCacheEntry.h"
 
 #import "NNTagging/NNTag.h"
