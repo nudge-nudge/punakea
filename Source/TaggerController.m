@@ -415,8 +415,11 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	[self updateManageFilesFlagOnTaggableObjects];
 	
 	// get associated tags
-//	NSArray *currentTags = [[[[self currentCompleteTagsInField] selectedTags] copy] autorelease];
-//	NSArray *associatedTags = [[NNTagging tagging] associatedTagsForTags:currentTags];
+	NSArray *currentTags = [[[[self currentCompleteTagsInField] selectedTags] copy] autorelease];
+	NSArray *associatedTags = [[NNTagging tagging] associatedTagsForTags:currentTags];
+	NSArray *associatedTagnames = [[NNTagging tagging] tagNamesForTags:associatedTags];
+	NSString *suggestion = [associatedTagnames componentsJoinedByString:@", "];
+	[suggestionField setStringValue:suggestion];
 }
 
 /**

@@ -17,6 +17,8 @@
 	IBOutlet NSTableView				*tableView;
 	IBOutlet NSImageView				*quickLookPreviewImage;
 	
+	IBOutlet NSTextField				*suggestionField;
+	
 	IBOutlet NSButton					*manageFilesButton;
 	
 	IBOutlet TagAutoCompleteController	*tagAutoCompleteController;
