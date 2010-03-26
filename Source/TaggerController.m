@@ -413,6 +413,10 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 {
 	// Update manage files flag if first tag was entered
 	[self updateManageFilesFlagOnTaggableObjects];
+	
+	// get associated tags
+//	NSArray *currentTags = [[[[self currentCompleteTagsInField] selectedTags] copy] autorelease];
+//	NSArray *associatedTags = [[NNTagging tagging] associatedTagsForTags:currentTags];
 }
 
 /**

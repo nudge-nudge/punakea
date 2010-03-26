@@ -3,6 +3,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TagAutoCompleteController.h"
 #import "NNTagging/NNTaggableObject.h"
+#import "NNTagging/NNTagging.h"
 #import "PATypeAheadFind.h"
 #import "PADropManager.h"
 #import "PATaggerItemCell.h"
