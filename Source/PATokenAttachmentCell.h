@@ -11,10 +11,13 @@
 
 
 @interface PATokenAttachmentCell : NSTokenAttachmentCell {
-
+	
+	NSColor *tokenForegroundColor;
+	NSColor *tokenBackgroundColor;
+	
 }
 
-@property (readwrite, assign) NSColor *tokenForegroundColor;
-@property (readwrite, assign) NSColor *tokenBackgroundColor;
+- (void)setTokenForegroundColor:(NSColor *)color;
+- (void)setTokenBackgroundColor:(NSColor *)color;
 
 @end
