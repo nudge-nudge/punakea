@@ -266,6 +266,12 @@
 		6582F41F0C006AF00016AA2D /* triangle-gray-expanded-on.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6582F41D0C006AF00016AA2D /* triangle-gray-expanded-on.tif */; };
 		65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */; };
 		65851FFD099780B9009C3CA7 /* ToolbarDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */; };
+		658849CC115F61F8003C2303 /* NSTokenAttachmentCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 658849CA115F61F8003C2303 /* NSTokenAttachmentCell.h */; };
+		658849CD115F61F8003C2303 /* NSTokenAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 658849CB115F61F8003C2303 /* NSTokenAttachment.h */; };
+		658849D2115F6222003C2303 /* PATokenFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 658849CE115F6222003C2303 /* PATokenFieldCell.h */; };
+		658849D3115F6222003C2303 /* PATokenFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658849CF115F6222003C2303 /* PATokenFieldCell.m */; };
+		658849D4115F6222003C2303 /* PATokenAttachmentCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 658849D0115F6222003C2303 /* PATokenAttachmentCell.h */; };
+		658849D5115F6222003C2303 /* PATokenAttachmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658849D1115F6222003C2303 /* PATokenAttachmentCell.m */; };
 		6588EE160A07463D00082718 /* MDIconViewOffDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE120A07463D00082718 /* MDIconViewOffDisabled.tiff */; };
 		6588EE170A07463D00082718 /* MDIconViewOnDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE130A07463D00082718 /* MDIconViewOnDisabled.tiff */; };
 		6588EE180A07463D00082718 /* MDListViewOffDisabled.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6588EE140A07463D00082718 /* MDListViewOffDisabled.tiff */; };
@@ -832,6 +838,12 @@
 		6582F41D0C006AF00016AA2D /* triangle-gray-expanded-on.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "triangle-gray-expanded-on.tif"; sourceTree = "<group>"; };
 		65851FFA099780B9009C3CA7 /* ToolbarDelegateCategory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ToolbarDelegateCategory.h; sourceTree = "<group>"; };
 		65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ToolbarDelegateCategory.m; sourceTree = "<group>"; };
+		658849CA115F61F8003C2303 /* NSTokenAttachmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTokenAttachmentCell.h; sourceTree = "<group>"; };
+		658849CB115F61F8003C2303 /* NSTokenAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTokenAttachment.h; sourceTree = "<group>"; };
+		658849CE115F6222003C2303 /* PATokenFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATokenFieldCell.h; sourceTree = "<group>"; };
+		658849CF115F6222003C2303 /* PATokenFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATokenFieldCell.m; sourceTree = "<group>"; };
+		658849D0115F6222003C2303 /* PATokenAttachmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATokenAttachmentCell.h; sourceTree = "<group>"; };
+		658849D1115F6222003C2303 /* PATokenAttachmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATokenAttachmentCell.m; sourceTree = "<group>"; };
 		6588EE120A07463D00082718 /* MDIconViewOffDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDIconViewOffDisabled.tiff; sourceTree = "<group>"; };
 		6588EE130A07463D00082718 /* MDIconViewOnDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDIconViewOnDisabled.tiff; sourceTree = "<group>"; };
 		6588EE140A07463D00082718 /* MDListViewOffDisabled.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MDListViewOffDisabled.tiff; sourceTree = "<group>"; };
@@ -1041,6 +1053,7 @@
 				4816343A0A5A51D2003B8EE4 /* Browser */,
 				488E18BA0A2722E5009D2826 /* Sidebar */,
 				4816346E0A5A52EA003B8EE4 /* Misc */,
+				658849C8115F61C4003C2303 /* LegacyHeaders */,
 				4831849F0AEF8FD800C3C672 /* Frameworks */,
 				483184F20AEF91E100C3C672 /* Plugins */,
 				48404A130AF8A7B4001F7BB7 /* UnitTests */,
@@ -1827,6 +1840,26 @@
 			name = ResultsView;
 			sourceTree = "<group>";
 		};
+		658849C2115F617E003C2303 /* TokenField */ = {
+			isa = PBXGroup;
+			children = (
+				658849CE115F6222003C2303 /* PATokenFieldCell.h */,
+				658849CF115F6222003C2303 /* PATokenFieldCell.m */,
+				658849D0115F6222003C2303 /* PATokenAttachmentCell.h */,
+				658849D1115F6222003C2303 /* PATokenAttachmentCell.m */,
+			);
+			name = TokenField;
+			sourceTree = "<group>";
+		};
+		658849C8115F61C4003C2303 /* LegacyHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				658849CA115F61F8003C2303 /* NSTokenAttachmentCell.h */,
+				658849CB115F61F8003C2303 /* NSTokenAttachment.h */,
+			);
+			name = LegacyHeaders;
+			sourceTree = "<group>";
+		};
 		658AB8310BE60D000036FCA2 /* TabPanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2023,6 +2056,7 @@
 				65CC15540BE0A5C800866AF7 /* StatusBar */,
 				658AB8310BE60D000036FCA2 /* TabPanel */,
 				65C8A1FB0BEB4D3000DC032F /* Tag Field */,
+				658849C2115F617E003C2303 /* TokenField */,
 				48C2BE570FCB0C4900C48F03 /* Windows */,
 			);
 			name = Controls;
@@ -2206,6 +2240,10 @@
 				48238A1F111ECE090091B2CE /* LCLLogFile.h in Headers */,
 				481E5A751124B45E001FE5C5 /* LCLLogFileConfig.h in Headers */,
 				481E5A771124B496001FE5C5 /* lcl_config_extensions.h in Headers */,
+				658849CC115F61F8003C2303 /* NSTokenAttachmentCell.h in Headers */,
+				658849CD115F61F8003C2303 /* NSTokenAttachment.h in Headers */,
+				658849D2115F6222003C2303 /* PATokenFieldCell.h in Headers */,
+				658849D4115F6222003C2303 /* PATokenAttachmentCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2835,6 +2873,8 @@
 				48B8F4E110FBB6D2002B1E35 /* PAStringFilter.m in Sources */,
 				48238A1E111ECE090091B2CE /* lcl.m in Sources */,
 				48238A20111ECE090091B2CE /* LCLLogFile.m in Sources */,
+				658849D3115F6222003C2303 /* PATokenFieldCell.m in Sources */,
+				658849D5115F6222003C2303 /* PATokenAttachmentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
