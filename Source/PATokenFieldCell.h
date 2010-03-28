@@ -27,7 +27,8 @@
 - (NSColor *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell tokenBackgroundColorForRepresentedObject:(id)representedObject;
 
 // The NSTokenFieldCellDelegate protocol is available in 10.6 and later. Since we're currently building also for 
-// 10.5, this is a copy of the protocol from AppKit. For future versions, delete this. It's just here for downwards compatibility.
+// 10.5, this is a copy of the protocol from AppKit. For future versions, delete this and let the protocol inherit
+// from NSTokenFieldCellDelegate instead of NSObject.
 
 // BEGIN - NSTokenFieldCellDelegate
 - (NSArray *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex;
