@@ -15,7 +15,7 @@ abstract class, do not instantiate!
 do not mess with the NNQueues, they will be handled by the NNFilterEngine.
 each filter comes with its own outQueue, and the inQueue will be connected to other filters' outQueues
 */
-@interface NNObjectFilter : NSOperation {
+@interface NNObjectFilter : NSObject {
 	/** higher weight causes the filter to be applied after filters with lower weight */
 	NSUInteger weight;
 		
@@ -28,6 +28,11 @@ each filter comes with its own outQueue, and the inQueue will be connected to ot
 - (void)setOutQueue:(NNQueue*)queue;
 - (NNQueue*)outQueue;
 - (NSUInteger)weight;
+
+/**
+ call this to start the filtering
+ */
+- (void)run;
 
 /**
 call this if an object has passed the filter.

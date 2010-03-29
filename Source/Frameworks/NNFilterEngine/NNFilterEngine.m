@@ -30,6 +30,7 @@
 		
 		// create opQueue
 		opQueue = [[NSOperationQueue alloc] init];
+		[opQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
 		
 		// sort filters by weight - filters with lower weight are more efficient
 		// TODO sort descending!
@@ -74,9 +75,9 @@
 - (void)main
 {
 	// start all filters
-	for (NNObjectFilter *filterOp in filters)
+	for (NNObjectFilter *filter in filters)
 	{
-		[opQueue addOperation:filterOp];
+		[filter main];
 	}
 	
 	// wait a bit for the filters to do their work
@@ -100,7 +101,7 @@
 			// check again if cancelled in the mean time
 			if (![self isCancelled])
 			{
-				[delegate objectsFiltered:[NSArray arrayWithArray:filteredObjects]];
+				[delegate filterEngineFilteredObjects:[NSArray arrayWithArray:filteredObjects]];
 			}
 		}
 		else 
@@ -119,7 +120,7 @@
 			
 			if (done && ![self isCancelled])
 			{
-				[delegate filteringFinished];
+				[delegate filterEngineFinishedFiltering];
 				[self willChangeValueForKey:@"executing"];
 				[self willChangeValueForKey:@"finished"];
 				finished = YES;

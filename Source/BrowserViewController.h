@@ -42,7 +42,7 @@ typedef enum _PASearchType {
 extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 
 
-@interface BrowserViewController : PAViewController
+@interface BrowserViewController : PAViewController <NNFilterEngineDelegate>
 {
 	IBOutlet PATagCloud					*tagCloud;
 	IBOutlet PASplitView				*splitView;

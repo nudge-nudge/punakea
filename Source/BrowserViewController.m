@@ -502,6 +502,11 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
 }
 
+- (void)filterEngineFilteredObjects:(NSArray*)objects;
+{
+	[self setVisibleTags:[NSMutableArray arrayWithArray:objects]];
+}
+
 - (NSArray*)allFilters
 {
 	NSMutableArray *allFilters = [NSMutableArray array];
@@ -516,7 +521,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	return allFilters;
 }
 
-- (void)filteringFinished
+- (void)filterEngineFinishedFiltering
 {
 	filterEngineIsWorking = NO;
 	
@@ -542,11 +547,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setActiveContentTypeFilters:[NSArray arrayWithObject:filter]];
 	
 	[self filterTags:[tags tags]];
-}
-
-- (void)objectsFiltered:(NSArray*)objects;
-{
-	[self setVisibleTags:[NSMutableArray arrayWithArray:objects]];
 }
 
 #pragma mark actions

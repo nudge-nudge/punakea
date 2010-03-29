@@ -16,8 +16,8 @@
 
 @protocol NNFilterEngineDelegate
 
-- (void)objectsFiltered:(NSArray*)objects;
-- (void)filteringFinished;
+- (void)filterEngineFilteredObjects:(NSArray*)objects;
+- (void)filterEngineFinishedFiltering;
 
 @end
 

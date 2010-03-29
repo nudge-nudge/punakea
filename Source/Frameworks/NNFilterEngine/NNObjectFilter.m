@@ -58,19 +58,27 @@
 }
 
 #pragma mark function
-- (void)main
+- (void)run
 {
-	// start filtering until thread gets canceled	
+	[NSApplication detachDrawingThread:@selector(doFiltering)
+							  toTarget:self
+							withObject:nil];
+}
+
+- (void)doFiltering
+{
+	// start filtering until thread gets canceled
+	// TODO no operation anymore
 	while (![self isCancelled])
 	{
-		id object = [inQueue dequeueWithTimeout:0.1];
+		id object = [inQueue dequeue];
 		[self filterObject:object];
-	}
+	}	
 }
 
 - (void)objectFiltered:(id)object
 {
-//	NSLog(@"%@ - : - %@",self,object);
+	NSLog(@"%@ - : - %@",self,object);
 	[outQueue enqueue:object];
 }
 
@@ -78,7 +86,7 @@
 {
 	// nothing, implemented by subclass
 	
-	//NSLog(@"%@ looking at %@",self,object);
+	NSLog(@"%@ looking at %@",self,object);
 }
 
 #pragma mark NSOperation stuff
