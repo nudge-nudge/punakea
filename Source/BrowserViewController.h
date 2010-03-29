@@ -42,7 +42,7 @@ typedef enum _PASearchType {
 extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 
 
-@interface BrowserViewController : PAViewController <NNBVCServerProtocol>
+@interface BrowserViewController : PAViewController
 {
 	IBOutlet PATagCloud					*tagCloud;
 	IBOutlet PASplitView				*splitView;
@@ -60,8 +60,7 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 	IBOutlet NSSearchField				*searchField;
 	NSString							*searchFieldString;
 			
-	NNFilterEngine						*filterEngine;
-	NSConnection						*filterEngineConnection;
+	NSOperationQueue					*filterEngineOpQueue;
 	PAStringFilter						*activeFilter;
 	NSArray								*activeContentTypeFilters;
 	BOOL								filterEngineIsWorking;
@@ -70,6 +69,7 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 	
 	PATagCloudSortKey					sortKey;
 	NSSortDescriptor					*sortDescriptor;
+	
 }
 
 /** 
@@ -126,12 +126,5 @@ is called when a tag is clicked
 - (NSMenu *)tagButtonContextualMenu;
 
 - (NSArray *)allTags; /**< needed by tagcloud - this will be gone as soon as the tag cloud is a proper view and has no app logic anymore*/
-
-- (NSArray*)activeContentTypeFilters;
-- (void)setActiveContentTypeFilters:(NSArray*)filters;
-- (void)removeAllFilters;
-
-- (NSArray*)contentTypeFilterIdentifiers;
-- (void)setContentTypeFilterIdentifiers:(NSArray*)identifiers;
 
 @end

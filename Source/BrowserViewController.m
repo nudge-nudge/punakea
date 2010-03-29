@@ -32,22 +32,19 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setMainController:(PABrowserViewMainController*)aController;
 
+- (void)filterTags:(NSArray*)someTags;
 - (void)setActiveFilter:(PAStringFilter*)filter;
 - (PAStringFilter*)activeFilter;
-
-- (void)filterTags:(NSArray*)someTags;
-- (void)setupFilterEngine;
-- (void)filterTags;
-- (void)setFilterEngineConnection:(NSConnection*)conn;
-- (NSConnection*)filterEngineConnection;
+- (void)setActiveContentTypeFilters:(NSArray*)filters;
+- (NSArray*)activeContentTypeFilters;
+- (NSArray*)allFilters;
+- (void)contentTypeFilterUpdate:(NSNotification*)notification;
 
 - (void)updateSortDescriptor;
 
 - (NSInteger)nextID;
 
 @end
-
-
 
 @implementation BrowserViewController
 
@@ -58,10 +55,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	{
 		tags = [NNTags sharedTags];
 				
-		// needs to be setup before tags can be displayed
-		// cannot be done here or in awakeFromNib because of wrong
-		// order, self needs to be available already
-		filterEngine = nil;
+		filterEngineOpQueue = [[NSOperationQueue alloc] init];
 		
 		searchFieldString = [[NSMutableString alloc] init];
 		
@@ -89,8 +83,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 												 selector:@selector(contentTypeFilterUpdate:)
 													 name:PAContentTypeFilterUpdate
 												   object:nil];
-		
-		filterEngine = [[NNFilterEngine alloc] init];
 		activeFilter = nil;
 		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
@@ -117,8 +109,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[mainController release];
 	[visibleTags release];
 	[activeFilter release];
-	[filterEngineConnection release];
-	[filterEngine release];
+	[filterEngineOpQueue release];
 	[searchFieldString release];
 	[super dealloc];
 }
@@ -303,32 +294,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setActiveContentTypeFilters:(NSArray*)filters
 {
-	[self clearVisibleTags];
-	
-	[filters retain];
 	[activeContentTypeFilters release];
-	activeContentTypeFilters = filters;
-		
-	// adjust filterengine
-	// remove old content type filters
-	NSEnumerator *oldFiltersEnumerator = [[filterEngine filters] objectEnumerator];
-	NNObjectFilter *filter;
-	
-	while (filter = [oldFiltersEnumerator nextObject])
-	{
-		if ([filter isKindOfClass:[PAContentTypeFilter class]])
-		{
-			[filterEngine removeFilter:filter];
-		}
-	}
-	
-	// add new filters
-	NSEnumerator *newFilterEnumerator = [filters objectEnumerator];
-	
-	while (filter = [newFilterEnumerator nextObject])
-	{
-		[filterEngine addFilter:filter];
-	}
+	activeContentTypeFilters = [filters retain];
 }
 
 - (NSArray*)contentTypeFilterIdentifiers
@@ -443,12 +410,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// else display all tags
 	if ([searchFieldString length] > 0)
 	{
-		// remove old filter
-		if (activeFilter)
-		{
-			[filterEngine removeFilter:[self activeFilter]];
-		}
-		
 		NSString *decomposedSearchString = [searchFieldString decomposedStringWithCanonicalMapping];
 		
 		PAStringFilter *newFilter;
@@ -466,20 +427,15 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 				NSLog(@"Must not happen - FIXME");
 				break;
 		}
-		
-		[filterEngine addFilter:newFilter];
+
 		[self setActiveFilter:newFilter];
-		
-		filterEngineIsWorking = YES;
 	}
 	else
 	{
-		if (activeFilter) 
-		{
-			[filterEngine removeFilter:[self activeFilter]];
-		}		
 		[self setActiveFilter:nil];
 	}
+	
+	[self filterTags:[tags tags]];
 }
 
 - (void)controlledViewHasChanged
@@ -526,32 +482,38 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
-- (void)contentTypeFilterUpdate:(NSNotification*)notification
-{
-	[self showResults];
-	
-	NSString *contentType = [[notification userInfo] objectForKey:@"contentType"];
-	
-	[self setContentTypeFilterIdentifiers:[NSArray arrayWithObject:contentType]];
-	
-	NNObjectFilter *filter = [PAContentTypeFilter filterWithContentType:contentType];
-	[self setActiveContentTypeFilters:[NSArray arrayWithObject:filter]];
-}
-
-
 #pragma mark tag filtering
 - (void)filterTags:(NSArray*)someTags
 {
 	filterEngineIsWorking = YES;
-	[filterEngine setObjects:someTags];
 	
-	[filterEngine startWithServer:self];
-}
+	// cancel active filter engine (if one is active)
+	[filterEngineOpQueue cancelAllOperations];
+	
+	NNFilterEngine *filterEngineOp = [[NNFilterEngine alloc] initWithFilterObjects:someTags
+														 filters:[self allFilters]
+														delegate:self];
+	
+	[filterEngineOpQueue addOperation:filterEngineOp];
+	[filterEngineOp release];
 
-- (void)filteringStarted
-{
+	// show progress in the UI
 	NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_GATHERING_TAGS", @"Global", nil);
 	[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
+}
+
+- (NSArray*)allFilters
+{
+	NSMutableArray *allFilters = [NSMutableArray array];
+	
+	if ([self activeFilter] != nil)
+	{
+		[allFilters addObject:activeFilter];
+	}
+		
+	[allFilters addObjectsFromArray:[self activeContentTypeFilters]];
+	
+	return allFilters;
 }
 
 - (void)filteringFinished
@@ -568,27 +530,31 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			   afterDelay:0.2];
 }
 
+- (void)contentTypeFilterUpdate:(NSNotification*)notification
+{
+	[self showResults];
+	
+	NSString *contentType = [[notification userInfo] objectForKey:@"contentType"];
+	
+	[self setContentTypeFilterIdentifiers:[NSArray arrayWithObject:contentType]];
+	
+	NNObjectFilter *filter = [PAContentTypeFilter filterWithContentType:contentType];
+	[self setActiveContentTypeFilters:[NSArray arrayWithObject:filter]];
+	
+	[self filterTags:[tags tags]];
+}
+
+- (void)objectsFiltered:(NSArray*)objects;
+{
+	[self setVisibleTags:[NSMutableArray arrayWithArray:objects]];
+}
+
+#pragma mark actions
 - (void)reloadView
 {
 	[[self view] setNeedsDisplay:YES];
 }
 
-- (void)objectsFiltered
-{
-	[filterEngine lockFilteredObjects];
-	[self setVisibleTags:[filterEngine filteredObjects]];
-	[filterEngine unlockFilteredObjects];
-}
-
-- (void)removeAllFilters
-{
-	[self setActiveContentTypeFilters:[NSArray array]];
-	[filterEngine removeFilter:[self activeFilter]];
-	[self setActiveFilter:nil];
-}
-
-
-#pragma mark actions
 - (void)updateTagCloudDisplayMessage
 {
 	// if there are no visible tags,
@@ -611,8 +577,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			// give the mainController a chance to display a message
 			[tagCloud setDisplayMessage:[mainController displayMessage]];
 		}
-		else if (!filterEngineIsWorking && 
-				 [[filterEngine filters] count] > 0)
+		else if (!filterEngineIsWorking && ([self allFilters] > 0))
 		{
 			// no items found for content type
 			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_CONTENTTYPE",@"Tags",@"")];
@@ -632,10 +597,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	// empty active content filters
 	[self setContentTypeFilterIdentifiers:[NSArray array]];
-	
-	// reset filterEngine
-	[filterEngine reset];
-	
+		
 	// emptry search field	
 	[self resetSearchFieldString];
 	
@@ -682,9 +644,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	// empty active content filters
 	[self setContentTypeFilterIdentifiers:[NSArray array]];
-	
-	// reset filterEngine
-	[filterEngine reset];
 	
 	// emptry search field	
 	[self resetSearchFieldString];
