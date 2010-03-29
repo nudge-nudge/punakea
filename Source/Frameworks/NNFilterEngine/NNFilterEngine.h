@@ -29,8 +29,6 @@
 	NSArray				*filters;
 	NSMutableArray		*buffers;
 	
-	NSOperationQueue	*opQueue;
-	
 	NSMutableArray		*filteredObjects;
 }
 

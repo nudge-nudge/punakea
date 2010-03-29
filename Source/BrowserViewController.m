@@ -485,6 +485,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag filtering
 - (void)filterTags:(NSArray*)someTags
 {
+	NSLog(@"FILTERING");
+	
 	filterEngineIsWorking = YES;
 	
 	// cancel active filter engine (if one is active)
@@ -504,6 +506,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filterEngineFilteredObjects:(NSArray*)objects;
 {
+	NSLog(@"Got objects from filter");
+	
 	[self setVisibleTags:[NSMutableArray arrayWithArray:objects]];
 }
 
@@ -517,12 +521,14 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 		
 	[allFilters addObjectsFromArray:[self activeContentTypeFilters]];
-	
+		
 	return allFilters;
 }
 
 - (void)filterEngineFinishedFiltering
 {
+	NSLog(@"Filter finished");
+	
 	filterEngineIsWorking = NO;
 	
 	[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];

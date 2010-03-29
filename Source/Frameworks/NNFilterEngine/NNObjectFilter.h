@@ -21,6 +21,8 @@ each filter comes with its own outQueue, and the inQueue will be connected to ot
 		
 	NNQueue *inQueue;
 	NNQueue *outQueue;
+	
+	BOOL	cancelled;
 }
 
 - (void)setInQueue:(NNQueue*)queue;
@@ -33,6 +35,16 @@ each filter comes with its own outQueue, and the inQueue will be connected to ot
  call this to start the filtering
  */
 - (void)run;
+
+/**
+ call this to cancel the filter
+ */
+- (void)cancel;
+
+/**
+ @return YES if cancelled
+ */
+- (BOOL)isCancelled;
 
 /**
 call this if an object has passed the filter.

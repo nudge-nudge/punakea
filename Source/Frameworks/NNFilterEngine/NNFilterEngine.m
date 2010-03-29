@@ -23,15 +23,11 @@
 				   delegate:(id<NNFilterEngineDelegate>)aDelegate
 {
 	if (self = [super init])
-	{
+	{	
 		finished = NO;
 		
 		filteredObjects = [[NSMutableArray alloc] init];
-		
-		// create opQueue
-		opQueue = [[NSOperationQueue alloc] init];
-		[opQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
-		
+			
 		// sort filters by weight - filters with lower weight are more efficient
 		// TODO sort descending!
 		 filters = [[someFilters sortedArrayUsingSelector:@selector(weight)] retain];
@@ -48,8 +44,9 @@
 		[[self inBuffer] enqueueObjects:objects];
 		
 		// connect buffers with filters
+		// TODO buffers are not correct when more than 1 filter is present
 		for (NSUInteger i=0;i<[filters count];i++)
-		{
+		{			
 			NNObjectFilter *filter = [filters objectAtIndex:i];
 			[filter setInQueue:[buffers objectAtIndex:i]];
 			[filter setOutQueue:[buffers objectAtIndex:i+1]];
@@ -65,7 +62,6 @@
 {
 	[filters release];
 	[buffers release];
-	[opQueue release];
 	[filteredObjects release];
 	
 	[super dealloc];
@@ -77,15 +73,17 @@
 	// start all filters
 	for (NNObjectFilter *filter in filters)
 	{
-		[filter main];
+		[filter run];
 	}
-	
-	// wait a bit for the filters to do their work
-	usleep(5000);
 
 	// check if objects are filtered - call delegate if new ones are available
 	while (![self isCancelled]) 
 	{
+		for (NSUInteger i=0;i<([buffers count]);i++)
+		{
+			NSLog(@"Buffer %ld : %ld",i,[[buffers objectAtIndex:i] count]);
+		}		
+		
 		NSMutableArray *newObjects = [NSMutableArray array];
 		id obj;
 		while ((obj = [[self outBuffer] tryDequeue]) != nil)
@@ -120,6 +118,12 @@
 			
 			if (done && ![self isCancelled])
 			{
+				// cancel all NNObjectFilters
+				for (NNObjectFilter *filter in filters)
+				{
+					[filter cancel];
+				}
+				
 				[delegate filterEngineFinishedFiltering];
 				[self willChangeValueForKey:@"executing"];
 				[self willChangeValueForKey:@"finished"];
@@ -130,7 +134,6 @@
 			}
 		}
 
-		
 		usleep(50000);
 	}
 }
@@ -142,10 +145,7 @@
 
 - (NNQueue*)inBuffer
 {
-	if ([buffers count] > 0)
-		return [buffers objectAtIndex:0];
-	else
-		return nil;
+	return [buffers objectAtIndex:0];
 }
 
 - (NNQueue*)outBuffer

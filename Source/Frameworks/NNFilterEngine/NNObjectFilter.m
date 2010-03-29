@@ -16,6 +16,7 @@
 	if (self = [super init])
 	{
 		weight = 0;
+		cancelled = NO;
 	}
 	return self;
 }
@@ -60,25 +61,45 @@
 #pragma mark function
 - (void)run
 {
+	NSLog(@"Spawning %@",self);
+	
 	[NSApplication detachDrawingThread:@selector(doFiltering)
 							  toTarget:self
 							withObject:nil];
 }
 
+- (void)cancel
+{
+	cancelled = YES;
+}
+
+- (BOOL)isCancelled
+{
+	return cancelled;
+}
+
 - (void)doFiltering
 {
 	// start filtering until thread gets canceled
-	// TODO no operation anymore
+	// NNFilterEngine takes care of cancelling
+	NSLog(@"filtering");
+	
 	while (![self isCancelled])
 	{
-		id object = [inQueue dequeue];
-		[self filterObject:object];
+		NSLog(@"inQueue SIZE: %ld",[inQueue count]);
+		
+		id object = [inQueue dequeueWithTimeout:0.1];
+		
+		if (object != nil)
+		{
+			[self filterObject:object];
+		}
 	}	
 }
 
 - (void)objectFiltered:(id)object
 {
-	NSLog(@"%@ - : - %@",self,object);
+	//NSLog(@"%@ - : - %@",self,object);
 	[outQueue enqueue:object];
 }
 
@@ -86,24 +107,9 @@
 {
 	// nothing, implemented by subclass
 	
-	NSLog(@"%@ looking at %@",self,object);
+	//NSLog(@"%@ looking at %@",self,object);
 }
 
-#pragma mark NSOperation stuff
-- (BOOL)isConcurrent
-{
-	return YES;
-}
 
-//TODO
-//- (BOOL)isExecuting
-//{
-//	return !finished;
-//}
-//
-//- (BOOL)isFinished
-//{
-//	return finished;
-//}
 
 @end
