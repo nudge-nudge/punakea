@@ -28,9 +28,7 @@
 		
 		selectedTags = [[NNSelectedTags alloc] init];
 		query = [[NNQuery alloc] initWithTags:selectedTags];
-		
-		filterLock = [[NSLock alloc] init];
-		
+				
 		NNContentTypeTreeQueryFilter *filter = [NNContentTypeTreeQueryFilter contentTypeTreeQueryFilterForType:type];
 		[query addFilter:filter];
 	}
@@ -39,7 +37,6 @@
 
 - (void)dealloc
 {
-	[filterLock release];
 	[query release];
 	[selectedTags release];
 	[contentType release];

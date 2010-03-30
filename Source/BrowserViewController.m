@@ -21,9 +21,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
 - (void)clearVisibleTags;
 
-- (NNTag*)currentBestTag;
-- (void)setCurrentBestTag:(NNTag*)otherTag;
-
 - (void)updateTagCloudDisplayMessage;
 
 - (NSString*)searchFieldString;
@@ -139,18 +136,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark accessors
-- (NNTag*)currentBestTag
-{
-	return currentBestTag;
-}
-
-- (void)setCurrentBestTag:(NNTag*)otherTag
-{
-	[otherTag retain];
-	[currentBestTag release];
-	currentBestTag = otherTag;
-}
-
 - (NSString*)searchFieldString
 {
 	return searchFieldString;
@@ -196,14 +181,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (NSView*)controlledView
 {
 	return controlledView;
-}
-
-- (BOOL)isWorking
-{
-	if (!mainController || ![mainController isWorking])
-		return NO;
-	else
-		return YES;
 }
 
 - (void)setActiveFilter:(PAStringFilter*)filter
@@ -253,8 +230,12 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// empty visibleTags
 	[self clearVisibleTags];
 	
+	// remember active tags
+	[activeTags release];
+	activeTags = [someTags retain];
+	
 	// start filtering
-	[self filterTags:someTags];
+	[self filterTags:activeTags];
 }
 
 - (void)resetDisplayTags
@@ -307,33 +288,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[contentTypeFilterIdentifiers release];
 	contentTypeFilterIdentifiers = [identifiers retain];
-}
-
-#pragma mark tag stuff
-- (IBAction)tagButtonClicked:(id)sender
-{
-	// Make tagcloud first responder on click of a tag button
-	if([[tagCloud window] firstResponder] != tagCloud)
-		[[tagCloud window] makeFirstResponder:tagCloud];
-	
-	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
-		[self resetSearchFieldString];
-	
-	NNTag *tag = [sender genericTag];
-	[mainController handleTagActivation:tag];
-}
-
-- (IBAction)negatedTagButtonClicked:(id)sender
-{
-	// Make tagcloud first responder on click of a tag button
-	if([[tagCloud window] firstResponder] != tagCloud)
-		[[tagCloud window] makeFirstResponder:tagCloud];
-	
-	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
-		[self resetSearchFieldString];
-	
-	NNTag *tag = [sender genericTag];
-	[mainController handleTagNegation:tag];
 }
 
 #pragma mark typeAheadFind
@@ -435,7 +389,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		[self setActiveFilter:nil];
 	}
 	
-	[self filterTags:[tags tags]];
+	[self filterTags:activeTags];
 }
 
 - (void)controlledViewHasChanged
@@ -485,8 +439,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 #pragma mark tag filtering
 - (void)filterTags:(NSArray*)someTags
 {
-	NSLog(@"FILTERING");
-	
 	filterEngineIsWorking = YES;
 	
 	// cancel active filter engine (if one is active)
@@ -506,8 +458,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)filterEngineFilteredObjects:(NSArray*)objects;
 {
-	NSLog(@"Got objects from filter");
-	
 	[self setVisibleTags:[NSMutableArray arrayWithArray:objects]];
 }
 
@@ -519,22 +469,25 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	{
 		[allFilters addObject:activeFilter];
 	}
-		
-	[allFilters addObjectsFromArray:[self activeContentTypeFilters]];
-		
+	
+	// create and add content type filters	
+	for (NSString *contentTypeIdentifier in [self contentTypeFilterIdentifiers])
+	{
+		PAContentTypeFilter *filter = [PAContentTypeFilter filterWithContentType:contentTypeIdentifier];
+		[allFilters addObject:filter];
+	}
+				
 	return allFilters;
 }
 
 - (void)filterEngineFinishedFiltering
 {
-	NSLog(@"Filter finished");
-	
 	filterEngineIsWorking = NO;
 	
 	[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
-	
+		
 	[self updateTagCloudDisplayMessage];
-	
+			
 	// TODO workaround for missing thumbs/icons
 	[self performSelector:@selector(reloadView)
 			   withObject:nil
@@ -549,9 +502,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	[self setContentTypeFilterIdentifiers:[NSArray arrayWithObject:contentType]];
 	
-	NNObjectFilter *filter = [PAContentTypeFilter filterWithContentType:contentType];
-	[self setActiveContentTypeFilters:[NSArray arrayWithObject:filter]];
-	
+	// TODO activeTags?
 	[self filterTags:[tags tags]];
 }
 
@@ -669,11 +620,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self removeObserver:self forKeyPath:@"searchFieldString"];
 }
 
-- (void)makeControlledViewFirstResponder
-{
-	[[[self view] window] makeFirstResponder:[mainController dedicatedFirstResponder]];
-}
-
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
 	NSDictionary *userInfo = [aNotification userInfo];
@@ -745,31 +691,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[tagButton release];										// Free pointer
 }
 
-
-#pragma mark drag & drop stuff
-- (void)taggableObjectsHaveBeenDropped:(NSArray*)objects
-{
-	TaggerController *taggerController = [[TaggerController alloc] init];
-	
-	BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
-	
-	// Check if PADropManager is in alternate state
-	if([[PADropManager sharedInstance] alternateState])
-		manageFiles = !manageFiles;
-	
-	[taggerController setManageFiles:manageFiles];
-	
-	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-	
-	[taggerController showWindow:nil];	
-	[[taggerController window] makeKeyAndOrderFront:nil];
-	
-	[taggerController addTaggableObjects:objects];
-	
-	[[PADropManager sharedInstance] setAlternateState:NO];
-}
-
-
 #pragma mark Split View
 - (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
 {
@@ -801,6 +722,104 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		// default to name
 		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
 	}
+}
+
+#pragma mark TagCloud DataSource
+
+- (NSUInteger)numberOfTagsInTagCloud:(PATagCloud*)aTagCloud
+{
+	return [visibleTags count];
+}
+
+- (NNTag*)tagCloud:(PATagCloud*)aTagCloud tagForIndex:(NSUInteger)i
+{
+	return [visibleTags objectAtIndex:i];
+}
+
+- (BOOL)tagCloud:(PATagCloud*)aTagCloud containsTag:(NNTag*)aTag
+{
+	return [visibleTags containsObject:aTag];
+}
+
+- (NNTag*)currentBestTagInTagCloud:(PATagCloud*)aTagCloud
+{
+	NSEnumerator *e = [visibleTags objectEnumerator];
+	NNTag *tag;
+	NNTag *maxTag;
+			
+	if (tag = [e nextObject])
+		maxTag = tag;
+		
+	while (tag = [e nextObject])
+	{
+		if ([tag absoluteRating] > [maxTag absoluteRating])
+			maxTag = tag;
+	}	
+	
+	return maxTag;
+}
+
+#pragma mark TagCloud Delegate
+
+- (void)taggableObjectsHaveBeenDropped:(NSArray*)objects
+{
+	TaggerController *taggerController = [[TaggerController alloc] init];
+	
+	BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
+	
+	// Check if PADropManager is in alternate state
+	if([[PADropManager sharedInstance] alternateState])
+		manageFiles = !manageFiles;
+	
+	[taggerController setManageFiles:manageFiles];
+	
+	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+	
+	[taggerController showWindow:nil];	
+	[[taggerController window] makeKeyAndOrderFront:nil];
+	
+	[taggerController addTaggableObjects:objects];
+	
+	[[PADropManager sharedInstance] setAlternateState:NO];
+}
+
+- (BOOL)isWorking
+{
+	if (!mainController || ![mainController isWorking])
+		return NO;
+	else
+		return YES;
+}
+
+- (void)makeControlledViewFirstResponder
+{
+	[[[self view] window] makeFirstResponder:[mainController dedicatedFirstResponder]];
+}
+
+- (IBAction)tagButtonClicked:(PATagButton*)button
+{
+	// Make tagcloud first responder on click of a tag button
+	if([[tagCloud window] firstResponder] != tagCloud)
+		[[tagCloud window] makeFirstResponder:tagCloud];
+	
+	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
+		[self resetSearchFieldString];
+	
+	NNTag *tag = [button genericTag];
+	[mainController handleTagActivation:tag];
+}
+
+- (void)negatedTagButtonClicked:(PATagButton*)button
+{
+	// Make tagcloud first responder on click of a tag button
+	if([[tagCloud window] firstResponder] != tagCloud)
+		[[tagCloud window] makeFirstResponder:tagCloud];
+	
+	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
+		[self resetSearchFieldString];
+	
+	NNTag *tag = [button genericTag];
+	[mainController handleTagNegation:tag];
 }
 
 @end

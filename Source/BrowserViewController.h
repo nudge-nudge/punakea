@@ -25,6 +25,8 @@
 #import "PAContentTypeFilter.h"
 #import "PADropManager.h"
 
+#import "PATagCloudProtocols.h"
+
 #import "lcl.h"
 
 @class PATagCloud;
@@ -42,7 +44,7 @@ typedef enum _PASearchType {
 extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 
 
-@interface BrowserViewController : PAViewController <NNFilterEngineDelegate>
+@interface BrowserViewController : PAViewController <PATagCloudDelegate, PATagCloudDataSource, NNFilterEngineDelegate>
 {
 	IBOutlet PATagCloud					*tagCloud;
 	IBOutlet PASplitView				*splitView;
@@ -53,8 +55,8 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 	
 	NNTags								*tags;
 	
+	NSMutableArray						*activeTags;			/**< holds al the active tags for TagCloud */
 	NSMutableArray						*visibleTags;			/**< holds the (filtered) tags for TagCloud */
-	NNTag								*currentBestTag;		/**< holds the tag with the highest absolute rating currently in visibleTags */
 	
 	IBOutlet PATypeAheadView			*typeAheadView;
 	IBOutlet NSSearchField				*searchField;
@@ -94,12 +96,6 @@ highlights tag in tagcloud
 
 - (NSView*)controlledView;
 - (void)makeControlledViewFirstResponder;
-
-/**
-is called when a tag is clicked
- */
-- (IBAction)tagButtonClicked:(id)sender;
-- (IBAction)negatedTagButtonClicked:(id)sender;
 
 - (void)setSearchFieldString:(NSString*)string;
 

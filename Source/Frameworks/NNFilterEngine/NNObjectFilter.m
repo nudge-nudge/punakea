@@ -61,8 +61,6 @@
 #pragma mark function
 - (void)run
 {
-	NSLog(@"Spawning %@",self);
-	
 	[NSApplication detachDrawingThread:@selector(doFiltering)
 							  toTarget:self
 							withObject:nil];
@@ -74,20 +72,17 @@
 }
 
 - (BOOL)isCancelled
-{
+{	
 	return cancelled;
 }
 
 - (void)doFiltering
 {
-	// start filtering until thread gets canceled
-	// NNFilterEngine takes care of cancelling
-	NSLog(@"filtering");
 	
+	// start filtering until thread gets canceled
+	// NNFilterEngine takes care of cancelling	
 	while (![self isCancelled])
-	{
-		NSLog(@"inQueue SIZE: %ld",[inQueue count]);
-		
+	{				
 		id object = [inQueue dequeueWithTimeout:0.1];
 		
 		if (object != nil)
@@ -109,7 +104,5 @@
 	
 	//NSLog(@"%@ looking at %@",self,object);
 }
-
-
 
 @end

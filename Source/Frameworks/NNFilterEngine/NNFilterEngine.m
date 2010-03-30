@@ -29,8 +29,10 @@
 		filteredObjects = [[NSMutableArray alloc] init];
 			
 		// sort filters by weight - filters with lower weight are more efficient
-		// TODO sort descending!
-		 filters = [[someFilters sortedArrayUsingSelector:@selector(weight)] retain];
+		NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"weight"
+																 ascending:YES];
+		filters = [[someFilters sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDesc]] retain];
+		[sortDesc release];
 		
 		// create buffers for all filters
 		buffers = [[NSMutableArray alloc] init];
@@ -48,8 +50,12 @@
 		for (NSUInteger i=0;i<[filters count];i++)
 		{			
 			NNObjectFilter *filter = [filters objectAtIndex:i];
-			[filter setInQueue:[buffers objectAtIndex:i]];
-			[filter setOutQueue:[buffers objectAtIndex:i+1]];
+			
+			NNQueue *inBuffer = [buffers objectAtIndex:i];
+			NNQueue *outBuffer = [buffers objectAtIndex:i+1];
+			
+			[filter setInQueue:inBuffer];
+			[filter setOutQueue:outBuffer];
 		}
 		
 		// set delegate
@@ -69,7 +75,7 @@
 
 #pragma mark functionality
 - (void)main
-{
+{	
 	// start all filters
 	for (NNObjectFilter *filter in filters)
 	{
@@ -78,12 +84,7 @@
 
 	// check if objects are filtered - call delegate if new ones are available
 	while (![self isCancelled]) 
-	{
-		for (NSUInteger i=0;i<([buffers count]);i++)
-		{
-			NSLog(@"Buffer %ld : %ld",i,[[buffers objectAtIndex:i] count]);
-		}		
-		
+	{		
 		NSMutableArray *newObjects = [NSMutableArray array];
 		id obj;
 		while ((obj = [[self outBuffer] tryDequeue]) != nil)
@@ -99,7 +100,12 @@
 			// check again if cancelled in the mean time
 			if (![self isCancelled])
 			{
-				[delegate filterEngineFilteredObjects:[NSArray arrayWithArray:filteredObjects]];
+				if ([delegate respondsToSelector:@selector(filterEngineFilteredObjects:)])
+				{
+					[delegate performSelectorOnMainThread:@selector(filterEngineFilteredObjects:)
+											   withObject:[NSArray arrayWithArray:filteredObjects]
+											waitUntilDone:NO];
+				}
 			}
 		}
 		else 
@@ -124,7 +130,12 @@
 					[filter cancel];
 				}
 				
-				[delegate filterEngineFinishedFiltering];
+				if ([delegate respondsToSelector:@selector(filterEngineFinishedFiltering)])
+				{
+					[delegate performSelectorOnMainThread:@selector(filterEngineFinishedFiltering)
+											   withObject:nil
+											waitUntilDone:NO];
+				}
 				[self willChangeValueForKey:@"executing"];
 				[self willChangeValueForKey:@"finished"];
 				finished = YES;
@@ -167,6 +178,19 @@
 - (BOOL)isFinished
 {
 	return finished;
+}
+
+/** 
+ overwriting cancel - need to cancel all NNObjectFilters
+ */
+- (void)cancel
+{
+	for (NNObjectFilter *filter in filters)
+	{
+		[filter cancel];
+	}
+	
+	[super cancel];
 }
 
 @end

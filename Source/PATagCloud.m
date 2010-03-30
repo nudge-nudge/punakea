@@ -8,8 +8,8 @@ NSSize const TAGCLOUD_SPACING = {0,1};
 - (void)handleTagsChange;
 
 /**
-creates buttons for tags held in [controller visibleTags]. created buttons can be accessed in
- tagButtonDict afterwards. called by setDisplayTags
+creates buttons for tags held in dataSource. Created buttons can be accessed in
+ tagButtonDict afterwards.
  */
 - (void)updateButtons;
 
@@ -25,9 +25,6 @@ draws the background
 - (void)drawString:(NSString*)string;
 - (void)drawDropHighlightInRect:(NSRect)rect;
 
-/**
-adds all the tags in [controller visibleTags]
- */
 - (void)updateViewHierarchy;
 - (void)removeTagButton:(PATagButton*)tagButton;
 
@@ -121,27 +118,19 @@ calculates the starting point in the next row according to the height of all the
 {
 	[self setFrame:[self calcFrame]];
 	
-	if ([datasource respondsToSelector:@selector(visibleTags)])
-	{	
-		if ([[datasource visibleTags] count] > 0)
-		{
-			[self updateViewHierarchy];
-			
-			if ([self activeButton])
-			{
-				[self scrollToButton:[self activeButton]];
-			}
-			else
-			{
-				[self scrollToTop];
-			}
-		}	
-	}
-	else
+	if ([dataSource numberOfTagsInTagCloud:self] > 0)
 	{
-		[NSException raise:NSInternalInconsistencyException
-					format:@"datasource invalid"];
-	}
+		[self updateViewHierarchy];
+		
+		if ([self activeButton])
+		{
+			[self scrollToButton:[self activeButton]];
+		}
+		else
+		{
+			[self scrollToTop];
+		}
+	}	
 }
 
 - (void)handleTagsChange
@@ -171,27 +160,13 @@ calculates the starting point in the next row according to the height of all the
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	NSEnumerator *tagEnumerator;
-	NNTag *currentBestTag;
+	NNTag *currentBestTag = [dataSource currentBestTagInTagCloud:self];
 	
-	if ([datasource respondsToSelector:@selector(visibleTags)])
+	for (NSUInteger i=0;i<[dataSource numberOfTagsInTagCloud:self];i++)
 	{
-		tagEnumerator = [[datasource visibleTags] objectEnumerator];
-		currentBestTag = [self tagWithBestAbsoluteRating:[datasource visibleTags]];
-	}
-	else
-	{
-		[NSException raise:NSInternalInconsistencyException
-					format:@"datasource invalid"];
-	}
-	
-	NNTag *tag;
-	
-	while (tag = [tagEnumerator nextObject])
-	{
-		CGFloat tagRating;
+		NNTag *tag = [dataSource tagCloud:self tagForIndex:i];
 		
-		tagRating = [tag relativeRatingToTag:currentBestTag];
+		CGFloat tagRating = [tag relativeRatingToTag:currentBestTag];
 				
 		PATagButton *button;
 		
@@ -223,30 +198,16 @@ calculates the starting point in the next row according to the height of all the
 	NSRect clipViewFrame = [[self enclosingScrollView] documentVisibleRect];
 	NSRect tmpFrame = NSMakeRect(0,0,NSWidth(clipViewFrame),0);
 	[self calcInitialParametersInRect:tmpFrame];
-	
-	NSEnumerator *e;
-	
-	if ([datasource respondsToSelector:@selector(visibleTags)])
-	{
-		e = [[datasource visibleTags] objectEnumerator];
-	}
-	else
-	{
-		[NSException raise:NSInternalInconsistencyException
-					format:@"datasource not valid"];
-	}
-	
-	NNTag *tag;
-	
 	NSPoint buttonPoint = NSMakePoint(0.0,0.0);
 	
-	while (tag = [e nextObject])
+	for (NSInteger i=0;i<[dataSource numberOfTagsInTagCloud:self];i++)
 	{
+		NNTag *tag = [dataSource tagCloud:self tagForIndex:i];
 		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
 		buttonPoint = [self nextPointForTagButton:tagButton inRect:tmpFrame];
 		[tagButton setFrameOrigin:buttonPoint];
 	}
-	
+		
 	newSize.height = 0 - buttonPoint.y + TAGCLOUD_PADDING.height;
 	
 	if (newSize.height < NSHeight(clipViewFrame))
@@ -254,10 +215,7 @@ calculates the starting point in the next row according to the height of all the
 		newSize.height = NSHeight(clipViewFrame);
 	}
 	
-	if (!tag)
-	{
-		newSize.width = NSWidth([[self enclosingScrollView] frame]);
-	}
+	newSize.width = NSWidth([[self enclosingScrollView] frame]);
 	
 	NSRect newFrame = NSMakeRect(0.0,0.0,newSize.width,newSize.height);
 	return newFrame;
@@ -339,18 +297,6 @@ calculates the starting point in the next row according to the height of all the
 
 - (void)updateViewHierarchy
 {	
-	NSMutableArray *currentlyVisibleTags;
-	
-	if ([datasource respondsToSelector:@selector(visibleTags)])
-	{
-		currentlyVisibleTags = [datasource visibleTags];
-	}
-	else
-	{
-		[NSException raise:NSInternalInconsistencyException
-					format:@"datasource not valid"];
-	}
-	
 	NSRect rect = [self bounds];
 	
 	[self calcInitialParametersInRect:rect];
@@ -363,7 +309,7 @@ calculates the starting point in the next row according to the height of all the
 	
 	while (subview = [viewEnumerator nextObject])
 	{
-		if ([currentlyVisibleTags containsObject:[(PATagButton*)subview genericTag]])
+		if ([dataSource tagCloud:self containsTag:[(PATagButton*)subview genericTag]])
 		{
 			[viewsToKeep addObject:subview];
 		}
@@ -380,11 +326,9 @@ calculates the starting point in the next row according to the height of all the
 		[self removeTagButton:(PATagButton*)subview];
 	}
 	
-	NSEnumerator *e = [currentlyVisibleTags objectEnumerator];
-	NNTag *tag;
-	
-	while (tag = [e nextObject])
+	for (NSUInteger i=0;i<[dataSource numberOfTagsInTagCloud:self];i++)
 	{
+		NNTag *tag = [dataSource tagCloud:self tagForIndex:i];
 		PATagButton *tagButton = [tagButtonDict objectForKey:[tag name]];
 		NSPoint newOrigin = [self nextPointForTagButton:tagButton inRect:rect];
 		
@@ -435,7 +379,7 @@ calculates the starting point in the next row according to the height of all the
 	pointForNextTagRect = NSMakePoint(0,rect.size.height-5);
 	
 	//needed for drawing in rows
-	tagPosition = -1;
+	tagPosition = 0;
 	
 	//get the point for the very first tag
 	pointForNextTagRect = [self firstPointForNextRowIn:rect];
@@ -443,8 +387,6 @@ calculates the starting point in the next row according to the height of all the
 
 - (NSPoint)nextPointForTagButton:(PATagButton*)tagButton inRect:(NSRect)rect
 {
-	tagPosition++;
-
 	NSRect frame = [tagButton frame];
 	CGFloat width = frame.size.width;
 	
@@ -465,6 +407,8 @@ calculates the starting point in the next row according to the height of all the
 	pointForNextTagRect = NSMakePoint(pointForNextTagRect.x + width + TAGCLOUD_SPACING.width,
 									  pointForNextTagRect.y);
 	
+	tagPosition++;
+	
 	return newOrigin;
 }
 
@@ -476,32 +420,29 @@ calculates the starting point in the next row according to the height of all the
 	
 	/* while there are tags, compose a row and get the maximum height,
 		then keep the starting points for each one */
-	NSEnumerator *tagEnumerator = [[datasource visibleTags] objectEnumerator];
-	NNTag *tag;
-	
-	NSInteger i;
-	for (i=0;i<tagPosition;i++)
+	for (NSUInteger i=tagPosition;i<[dataSource numberOfTagsInTagCloud:self];i++)
 	{
-		[tagEnumerator nextObject];
-	}
-	
-	while (tag = [tagEnumerator nextObject])
-	{
+		NNTag *tag = [dataSource tagCloud:self tagForIndex:i];
+		
 		//get the size for the current tag
 		PATagButton *button = [tagButtonDict objectForKey:[tag name]];
 		NSRect frame = [button frame];
 		NSSize tagSize = frame.size;
-		
+			
 		//if the tag fills the row, stop adding tags
 		rowWidth += TAGCLOUD_SPACING.width + tagSize.width;
-		
+			
 		if (rowWidth + TAGCLOUD_SPACING.width > rect.size.width)
+		{
 			break;
-		
+		}
+			
 		//remember the maximum height
 		if (tagSize.height > maxHeight)
+		{
 			maxHeight = tagSize.height;
 		}
+	}
 	
 	return NSMakePoint(TAGCLOUD_SPACING.width,
 					   pointForNextTagRect.y - maxHeight - TAGCLOUD_SPACING.height);
@@ -526,22 +467,22 @@ calculates the starting point in the next row according to the height of all the
 }
 
 #pragma mark accessors
-- (id)datasource
+- (id<PATagCloudDataSource>)dataSource
 {
-	return datasource;
+	return dataSource;
 }
 
-- (void)setDatasource:(id)ds
+- (void)setDataSource:(id<PATagCloudDataSource>)ds
 {
-	datasource = ds;
+	dataSource = ds;
 }
 
-- (id)delegate
+- (id<PATagCloudDelegate>)delegate
 {
 	return delegate;
 }
 
-- (void)setDelegate:(id)del
+- (void)setDelegate:(id<PATagCloudDelegate>)del
 {
 	delegate = del;
 }
@@ -659,7 +600,10 @@ calculates the starting point in the next row according to the height of all the
 	{
 		if ([self activeButton])
 		{
-			[delegate tagButtonClicked:activeButton];
+			if ([delegate respondsToSelector:@selector(tagButtonClicked:)])
+			{
+				[delegate tagButtonClicked:activeButton];
+			}
 		}
 	}
 	else if (key == NSTabCharacter)
@@ -667,11 +611,6 @@ calculates the starting point in the next row according to the height of all the
 		if ([delegate respondsToSelector:@selector(makeControlledViewFirstResponder)])
 		{
 			[delegate makeControlledViewFirstResponder];
-		}
-		else
-		{
-			[NSException raise:NSInternalInconsistencyException
-						format:@"delegate does not respond to makeControlledViewFirstResponder"];
 		}
 	}
 	else
@@ -756,14 +695,12 @@ calculates the starting point in the next row according to the height of all the
 	if ([delegate respondsToSelector:@selector(taggableObjectsHaveBeenDropped:)])
 	{
 		[delegate taggableObjectsHaveBeenDropped:newObjects];
+		return YES;
 	}
 	else
 	{
-		[NSException raise:NSInternalInconsistencyException
-					format:@"delegate does not respond to taggableObjectsHaveBeenDropped"];
+		return NO;
 	}
-	
-    return YES;
 }
 
 /**

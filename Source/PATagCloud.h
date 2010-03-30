@@ -6,33 +6,18 @@
 #import "NNTagging/NNTags.h"
 #import "PATagButton.h"
 #import "PADropManager.h"
-
-@interface NSObject (PATagCloudDatasource)
-
-- (NSMutableArray*)visibleTags;
-- (NNTag*)currentBestTag;
-
-@end
-
-@interface NSObject (PATagCloudDelegate)
-
-- (void)taggableObjectsHaveBeenDropped:(NSArray*)objects;
-- (BOOL)isWorking;
-- (void)makeControlledViewFirstResponder;
-
-@end
-
+#import "PATagCloudProtocols.h"
 
 extern NSSize const TAGCLOUD_PADDING;
 extern NSSize const TAGCLOUD_SPACING;
 
 /**
-displays all [datasource visibleTags] in a nice tag cloud view
+displays all tags in dataSource in a nice tag cloud view
  */
 @interface PATagCloud : NSView
 {
-	id								delegate;
-	id								datasource;
+	id<PATagCloudDelegate>			delegate;
+	id<PATagCloudDataSource>		dataSource;
 
 	NSMutableDictionary				*tagButtonDict; /**< holds the current controls in the view */
 	NNTag							*selectedTag; /**< currently selected tag */
@@ -50,10 +35,10 @@ displays all [datasource visibleTags] in a nice tag cloud view
 	BOOL							showsDropBorder;	
 }
 
-- (id)datasource;
-- (void)setDatasource:(id)ds;
-- (id)delegate;
-- (void)setDelegate:(id)del;
+- (id<PATagCloudDataSource>)dataSource;
+- (void)setDataSource:(id<PATagCloudDataSource>)ds;
+- (id<PATagCloudDelegate>)delegate;
+- (void)setDelegate:(id<PATagCloudDelegate>)del;
 
 - (void)reloadData;
 

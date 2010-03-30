@@ -14,12 +14,7 @@
 
 #include <unistd.h>
 
-@protocol NNFilterEngineDelegate
-
-- (void)filterEngineFilteredObjects:(NSArray*)objects;
-- (void)filterEngineFinishedFiltering;
-
-@end
+@protocol NNFilterEngineDelegate;
 
 @interface NNFilterEngine : NSOperation {
 	BOOL				finished;
@@ -37,5 +32,13 @@
 				   delegate:(id<NNFilterEngineDelegate>)aDelegate;
 
 - (BOOL)hasFilters;
+
+@end
+
+@protocol NNFilterEngineDelegate <NSObject>
+
+@optional
+- (void)filterEngineFilteredObjects:(NSArray*)objects;
+- (void)filterEngineFinishedFiltering;
 
 @end

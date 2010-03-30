@@ -389,6 +389,7 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		B614C3A0115A639A00D04FB5 /* DOCUMENT.tif in Resources */ = {isa = PBXBuildFile; fileRef = B614C39F115A639A00D04FB5 /* DOCUMENT.tif */; };
 		B614C3B9115A648500D04FB5 /* PDF.tif in Resources */ = {isa = PBXBuildFile; fileRef = B614C3B8115A648500D04FB5 /* PDF.tif */; };
+		B6E5A51A11622E9000EB41FC /* PATagCloudProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = B6E5A51911622E9000EB41FC /* PATagCloudProtocols.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -965,6 +966,7 @@
 		8D1107320486CEB800E47090 /* Punakea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Punakea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B614C39F115A639A00D04FB5 /* DOCUMENT.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = DOCUMENT.tif; sourceTree = "<group>"; };
 		B614C3B8115A648500D04FB5 /* PDF.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PDF.tif; sourceTree = "<group>"; };
+		B6E5A51911622E9000EB41FC /* PATagCloudProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloudProtocols.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1565,6 +1567,7 @@
 				4842FC0E09DA801500C4A931 /* PATagButton.m */,
 				4842FC1109DA804100C4A931 /* PATagButtonCell.h */,
 				4842FC1209DA804100C4A931 /* PATagButtonCell.m */,
+				B6E5A51911622E9000EB41FC /* PATagCloudProtocols.h */,
 			);
 			name = TagCloud;
 			sourceTree = "<group>";
@@ -2241,6 +2244,7 @@
 				658849CD115F61F8003C2303 /* NSTokenAttachment.h in Headers */,
 				658849D2115F6222003C2303 /* PATokenFieldCell.h in Headers */,
 				658849D4115F6222003C2303 /* PATokenAttachmentCell.h in Headers */,
+				B6E5A51A11622E9000EB41FC /* PATagCloudProtocols.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
