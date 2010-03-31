@@ -16,14 +16,13 @@
 	if (self = [super init])
 	{
 		weight = 0;
-		stateLock = [[NSConditionLock alloc] initWithCondition:NNThreadStopped];
+		cancelled = NO;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[stateLock release];
 	[inQueue release];
 	[outQueue release];
 	[super dealloc];
@@ -62,71 +61,35 @@
 #pragma mark function
 - (void)run
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		
-	[stateLock lockWhenCondition:NNThreadStopped];
-	[stateLock unlockWithCondition:NNThreadRunning];
+	[NSApplication detachDrawingThread:@selector(doFiltering)
+							  toTarget:self
+							withObject:nil];
+}
+
+- (void)cancel
+{
+	cancelled = YES;
+}
+
+- (BOOL)isCancelled
+{	
+	return cancelled;
+}
+
+- (void)doFiltering
+{
 	
-	// start filtering until thread gets canceled	
-	while ([stateLock condition] == NNThreadRunning)
-	{
+	// start filtering until thread gets canceled
+	// NNFilterEngine takes care of cancelling	
+	while (![self isCancelled])
+	{				
 		id object = [inQueue dequeueWithTimeout:0.1];
 		
-		if ([stateLock tryLockWhenCondition:NNThreadRunning])
+		if (object != nil)
 		{
-			[stateLock unlock];
-			
-			if (object)
-				[self filterObject:object];
+			[self filterObject:object];
 		}
-		else
-		{
-			// put the object back from where it was taken
-			if (object)
-				[inQueue enqueue:object];
-			
-			// cancel filter
-			break;
-		}
-	}
-	
-	[stateLock lock];
-	[stateLock unlockWithCondition:NNThreadStopped];
-	
-	[pool release];
-}
-
-- (void)markAsCanceled
-{	
-	while(![stateLock lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]]);
-	
-	if ([stateLock condition] == NNThreadStopped)
-	{
-		[stateLock unlock];
-	}
-	else
-	{
-		[stateLock unlockWithCondition:NNThreadCanceled];
-	}
-}
-
-- (void)waitForStop
-{
-	BOOL stopped = NO;
-		
-	while (!stopped)
-	{
-		if ([stateLock lockWhenCondition:NNThreadStopped
-							  beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]])
-		{
-			stopped = YES;
-		}
-		else
-		{
-			// tell filter to stop
-			[self markAsCanceled];
-		}
-	}
+	}	
 }
 
 - (void)objectFiltered:(id)object

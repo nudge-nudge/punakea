@@ -10,355 +10,143 @@
 
 @interface NNFilterEngine (PrivateAPI)
 
-- (NSMutableArray*)currentlyFilteredObjects;
-
-- (void)runCheck;
-- (void)startFilterEngineWithPorts:(NSArray*)portArray;
-- (void)stopFilterEngine;
-
-- (NSConnection*)serverConnection;
-- (void)setServerConnection:(NSConnection*)newConnection;
-- (void)setPorts:(NSArray*)portArray;
-- (NSArray*)ports;
-
-- (void)setThreadShouldQuit;
-
-- (void)setFilterObjects:(NSArray*)objects;
-- (NSArray*)filterObjects;
-- (void)setFilteredObjects:(NSMutableArray*)objects;
-- (NSMutableArray*)filteredObjects;
-
-- (BOOL)checkIfDone;
+- (NNQueue*)inBuffer;
+- (NNQueue*)outBuffer;
 
 @end
 
 @implementation NNFilterEngine
 
 #pragma mark init
-- (id)init
+- (id)initWithFilterObjects:(NSArray*)objects 
+					filters:(NSArray*)someFilters 
+				   delegate:(id<NNFilterEngineDelegate>)aDelegate
 {
 	if (self = [super init])
-	{
-		filters = [[NSMutableArray alloc] init];
-		buffers = [[NSMutableArray alloc] init];
-		
-		// create input queue
-		[buffers addObject:[NNQueue queue]];
-		
-		// create lock, only one check-thread may be running
-		threadLock = [[NSConditionLock alloc] initWithCondition:NNThreadStopped];
+	{	
+		finished = NO;
 		
 		filteredObjects = [[NSMutableArray alloc] init];
-		filteredObjectsLock = [[NSLock alloc] init];
+			
+		// sort filters by weight - filters with lower weight are more efficient
+		NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"weight"
+																 ascending:YES];
+		filters = [[someFilters sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDesc]] retain];
+		[sortDesc release];
 		
-		threadCount = 0;
-		threadCountLock = [[NSLock alloc] init];
+		// create buffers for all filters
+		buffers = [[NSMutableArray alloc] init];
+		
+		for (NSUInteger i=0;i<[filters count]+1;i++)
+		{
+			[buffers addObject:[NNQueue queue]];
+		}
+		
+		// fill inBuffer
+		[[self inBuffer] enqueueObjects:objects];
+		
+		// connect buffers with filters
+		// TODO buffers are not correct when more than 1 filter is present
+		for (NSUInteger i=0;i<[filters count];i++)
+		{			
+			NNObjectFilter *filter = [filters objectAtIndex:i];
+			
+			NNQueue *inBuffer = [buffers objectAtIndex:i];
+			NNQueue *outBuffer = [buffers objectAtIndex:i+1];
+			
+			[filter setInQueue:inBuffer];
+			[filter setOutQueue:outBuffer];
+		}
+		
+		// set delegate
+		delegate = aDelegate;		
 	}
 	return self;
 }
-
+	
 - (void)dealloc
 {
-	[filterObjects release];
-	
-	[threadCountLock release];
-	[filteredObjectsLock release];
-	[filteredObjects release];
-	[threadLock release];
-	[buffers release];
 	[filters release];
+	[buffers release];
+	[filteredObjects release];
+	
 	[super dealloc];
 }
 
-#pragma mark threading stuff
-- (void)runCheckWithPorts:(NSArray*)portArray
-{
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-	// setup DO messaging stuff
-	NSConnection *serverConnection = [NSConnection connectionWithReceivePort:[portArray objectAtIndex:0] 
-																	sendPort:[portArray objectAtIndex:1]];
-	
-	[serverConnection setReplyTimeout:2.0];
-	
-	[[NSRunLoop currentRunLoop] run];
-	
-	// do some book keeping	
-	[threadCountLock lock];
-	if (threadCount == 0)
+#pragma mark functionality
+- (void)main
+{	
+	// start all filters
+	for (NNObjectFilter *filter in filters)
 	{
-		BOOL established = NO;
-		
-		while (!established)
-		{
-			@try
-			{
-				[(id)[serverConnection rootProxy] filteringStarted];
-				established = YES;
-			}
-			@catch (NSException *e)
-			{
-				// retry
-			}
-		}			
+		[filter run];
 	}
-	
-	threadCount++;
-	[threadCountLock unlock];
-	
-	// wait for possible previous thread to stop
-	[threadLock lockWhenCondition:NNThreadStopped];
-	
-	//  start thread
-	[threadLock unlockWithCondition:NNThreadRunning];
 
-	// reduce timeout to avoid deadlocks
-	[serverConnection setReplyTimeout:0.2];
-	
-	while ([threadLock condition] == NNThreadRunning)
+	// check if objects are filtered - call delegate if new ones are available
+	while (![self isCancelled]) 
 	{		
-		usleep(50000);
-
-		if ([threadLock lockWhenCondition:NNThreadRunning 
-							   beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]])
+		NSMutableArray *newObjects = [NSMutableArray array];
+		id obj;
+		while ((obj = [[self outBuffer] tryDequeue]) != nil)
 		{
-			NSMutableArray *currentlyFilteredObjects = [self currentlyFilteredObjects];
+			[newObjects addObject:obj];
+		}
+		
+		if ([newObjects count] > 0)
+		{
+			[filteredObjects addObjectsFromArray:newObjects];
 			
-			if ([currentlyFilteredObjects count] > 0)
+			// call delegate with a copy of the array (avoid races)
+			// check again if cancelled in the mean time
+			if (![self isCancelled])
 			{
-				[self lockFilteredObjects];
-				[filteredObjects addObjectsFromArray:currentlyFilteredObjects];
-				[self unlockFilteredObjects];
-				@try
+				if ([delegate respondsToSelector:@selector(filterEngineFilteredObjects:)])
 				{
-					[(id)[serverConnection rootProxy] objectsFiltered];
-				}
-				@catch (NSException *e)
-				{
-					// retry will happen because of the outer while-loop
+					[delegate performSelectorOnMainThread:@selector(filterEngineFilteredObjects:)
+											   withObject:[NSArray arrayWithArray:filteredObjects]
+											waitUntilDone:NO];
 				}
 			}
-			[threadLock unlock];
-		} 
+		}
+		else 
+		{
+			// check if all buffers are empty and the filtering is done
+			BOOL done = YES;
+			
+			for (NNQueue *buffer in buffers)
+			{
+				if (![buffer count] == 0)
+				{
+					done = NO;
+					break;
+				}
+			}
+			
+			if (done && ![self isCancelled])
+			{
+				// cancel all NNObjectFilters
+				for (NNObjectFilter *filter in filters)
+				{
+					[filter cancel];
+				}
 				
-		if ([self checkIfDone])
-			break;
-	}
-	
-	// increase timeout again
-	[serverConnection setReplyTimeout:2.0];
-	
-	[threadCountLock lock];
-	threadCount--;
-	if (threadCount == 0)
-	{
-		BOOL established = NO;
-		
-		while (!established)
-		{
-			@try
-			{
-				[(id)[serverConnection rootProxy] filteringFinished];
-				established = YES;
+				if ([delegate respondsToSelector:@selector(filterEngineFinishedFiltering)])
+				{
+					[delegate performSelectorOnMainThread:@selector(filterEngineFinishedFiltering)
+											   withObject:nil
+											waitUntilDone:NO];
+				}
+				[self willChangeValueForKey:@"executing"];
+				[self willChangeValueForKey:@"finished"];
+				finished = YES;
+				[self didChangeValueForKey:@"executing"];
+				[self didChangeValueForKey:@"finished"];
+				break;
 			}
-			@catch (NSException *e)
-			{
-				// retry
-			}		
 		}
+
+		usleep(50000);
 	}
-	[threadCountLock unlock];
-	
-	[threadLock lock];
-	
-	// invalidate stuff
-	[serverConnection invalidate];
-	[[portArray objectAtIndex:0] invalidate];
-	[[portArray objectAtIndex:1] invalidate];
-	
-	[threadLock unlockWithCondition:NNThreadStopped];
-	
-	[pool release];
-}
-
-#pragma mark accessors
-- (void)setFilterObjects:(NSArray*)objects
-{	
-	[objects retain];
-	[filterObjects release];
-	filterObjects = objects;
-}
-
-- (NSArray*)filterObjects
-{
-	return filterObjects;
-}
-
-- (void)setFilteredObjects:(NSMutableArray*)objects
-{
-	[objects retain];
-	[filteredObjects release];
-	filteredObjects = objects;
-}
-
-- (NSMutableArray*)filteredObjects
-{
-	return filteredObjects;
-}
-
-- (NNQueue*)inBuffer
-{
-	if ([buffers count] > 0)
-		return [buffers objectAtIndex:0];
-	else
-		return nil;
-}
-
-- (NNQueue*)outBuffer
-{
-	return [buffers lastObject];
-}
-
-#pragma mark function
-- (void)lockFilteredObjects
-{
-	[filteredObjectsLock lock];
-}
-
-- (void)unlockFilteredObjects
-{
-	[filteredObjectsLock unlock];
-}
-
-- (void)setObjects:(NSArray*)objects
-{
-	[self stopFilterEngine];
-	[self setFilterObjects:objects];
-}
-
-// will be called from outside
-- (void)startWithServer:(id <NNBVCServerProtocol>)aServer
-{	
-	// hold server reference
-	// needed if filters change without new filterObjects being set
-	server = aServer;
-	
-	// setup DO messaging
-	NSPort *port1;
-	NSPort *port2;
-	NSArray *portArray;
-	
-	port1 = [NSPort port];
-	port2 = [NSPort port];
-	
-	NSConnection *serverConnection = [[NSConnection alloc] initWithReceivePort:port1
-																	  sendPort:port2];
-	
-	[serverConnection setRootObject:server];
-		
-	portArray = [NSArray arrayWithObjects:port2,port1,nil];
-	
-	// start the engine
-	[self startFilterEngineWithPorts:portArray];
-}
-
-- (void)startFilterEngineWithPorts:(NSArray*)portArray
-{
-	// buffer in position 0 is the main input buffer
-	[[self inBuffer] enqueueObjects:[self filterObjects]];
-	
-//	NSLog(@"filterEngine started with %i filterObjects, %i inBuffer, filters: %@",
-//		  [[self filterObjects] count],
-//		  [[self inBuffer] count],
-//		  filters);
-	
-	NNObjectFilter *filter;
-	NSEnumerator *e = [filters objectEnumerator];
-	
-	// start filter threads
-	while (filter = [e nextObject])
-	{
-		[NSThread detachNewThreadSelector:@selector(run)
-								 toTarget:filter
-							   withObject:nil];
-	}
-	
-	// start check thread
-	[NSThread detachNewThreadSelector:@selector(runCheckWithPorts:)
-							 toTarget:self
-						   withObject:portArray];
-}
-
-- (void)reset
-{
-	[self stopFilterEngine];
-	[self removeAllFilters];
-}
-
-- (void)stopFilterEngine
-{
-	// stop check thread
-	[self setThreadShouldQuit];
-	
-	// cancel filter threads
-	NNObjectFilter *filter;
-	NSEnumerator *filterEnumerator = [filters objectEnumerator];
-	
-	while (filter = [filterEnumerator nextObject])
-		[filter markAsCanceled];
-	
-	// empty all buffers
-	NSEnumerator *bufferEnumerator = [buffers objectEnumerator];
-	NNQueue *buffer;
-	
-	while (buffer = [bufferEnumerator nextObject])
-		[buffer clear];	
-	
-	// empty results
-	[filteredObjects removeAllObjects];
-}
-
-- (NSMutableArray*)currentlyFilteredObjects
-{
-	NSMutableArray *results = [NSMutableArray array];
-	id obj;
-	
-	while (obj = [[self outBuffer] tryDequeue])
-	{
-		[results addObject:obj];
-	}
-	
-	return results;
-}
-
-- (BOOL)checkIfDone
-{
-	BOOL done = YES;
-	
-	// check if all buffers are empty
-	NSEnumerator *bufferEnumerator = [buffers objectEnumerator];
-	NNQueue *buffer;
-	
-	while (buffer = [bufferEnumerator nextObject])
-	{
-		if (![buffer count] == 0)
-		{
-			done = NO;
-			break;
-		}
-	}
-	
-	return done;	
-}
-
-- (void)setThreadShouldQuit
-{
-	[threadLock lock];
-	
-	if ([threadLock condition] == NNThreadStopped)
-		[threadLock unlock];
-	else
-		[threadLock unlockWithCondition:NNThreadCanceled];
 }
 
 - (BOOL)hasFilters
@@ -366,94 +154,43 @@
 	return ([filters count] > 0);
 }
 
-- (NSMutableArray*)filters
+- (NNQueue*)inBuffer
 {
-	return filters;
+	return [buffers objectAtIndex:0];
 }
 
-- (void)addFilter:(NNObjectFilter*)newFilter
-{	
-	// stops check thread and resets main buffer
-	[self setObjects:filterObjects];
-	
-	NSEnumerator *e = [filters objectEnumerator];
-	NNObjectFilter *filter;
-	NSUInteger slot = 0;
-	
-	// find place in the filter queue for the new filter
-	while ((filter = [e nextObject]) && ([filter weight] >= [newFilter weight]))
-		slot++;
-	
-	// connect newFilter's inqueue to the previous outQueue
-	[newFilter setInQueue:[buffers objectAtIndex:slot]];
-	
-	// create new outQueue-buffer for the filter
-	NNQueue *newOutQueue = [NNQueue queue];
-	[buffers insertObject:newOutQueue atIndex:slot+1];
-	[newFilter setOutQueue:newOutQueue];
-	
-	// insert new filter in the slot
-	[filters insertObject:newFilter atIndex:slot];
-	
-	// handle the case when the filter is not the last filter
-	if (slot < ([filters count]-1)) {
-		NNObjectFilter *nextFilter = [filters objectAtIndex:slot+1];
-		[nextFilter setInQueue:[newFilter outQueue]];
-	}
-	
-	[self startWithServer:server];
-}
-	
-- (void)removeFilter:(NNObjectFilter*)filter
+- (NNQueue*)outBuffer
 {
-	if (!filter)
-		return;
+	return [buffers lastObject];
+}
 
-	// stops check thread and resets main buffer
-	[self setObjects:filterObjects];
-	
-	NSUInteger slot = [filters indexOfObject:filter];
-	
-	if (slot == NSNotFound)
-		return;
-	
-	// reconnect next filter
-	if (slot < [filters count]-1)
+#pragma mark NSOperation stuff
+- (BOOL)isConcurrent
+{
+	return YES;
+}
+
+- (BOOL)isExecuting
+{
+	return !finished;
+}
+
+- (BOOL)isFinished
+{
+	return finished;
+}
+
+/** 
+ overwriting cancel - need to cancel all NNObjectFilters
+ */
+- (void)cancel
+{
+	for (NNObjectFilter *filter in filters)
 	{
-		NNObjectFilter *nextFilter = [filters objectAtIndex:slot+1];
-		[nextFilter setInQueue:[filter inQueue]];
+		[filter cancel];
 	}
 	
-	// remove filter and buffer
-	// wait for filter to stop
-	[filter waitForStop];
-	
-	[filters removeObjectAtIndex:slot];
-	[buffers removeObjectAtIndex:slot+1];
-	
-	[self startWithServer:server];
-}
-
-- (void)removeAllFilters
-{
-	// stops check thread and resets main buffer
-	[self setObjects:filterObjects];
-	
-	// wait for all filters to stop
-	NSEnumerator *e = [filters objectEnumerator];
-	NNObjectFilter *filter;
-		
-	while (filter = [e nextObject])
-		[filter waitForStop];
-	
-	// all filters are stopped now
-	[filters removeAllObjects];
-	
-	// remove all buffers
-	[buffers removeAllObjects];
-	
-	// re-add inbuffer
-	[buffers addObject:[NNQueue queue]];
+	[super cancel];
 }
 
 @end

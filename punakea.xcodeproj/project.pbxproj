@@ -174,7 +174,6 @@
 		48D815CC0BF5BF6600821C25 /* PAStringPrefixFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EDB8360BF5A693008452FF /* PAStringPrefixFilter.m */; };
 		48D815CD0BF5BF6600821C25 /* PAContentTypeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 48EDB8390BF5A698008452FF /* PAContentTypeFilter.h */; };
 		48D815CE0BF5BF6600821C25 /* PAContentTypeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EDB83E0BF5A6A2008452FF /* PAContentTypeFilter.m */; };
-		48D815F20BF5BFB000821C25 /* NNDistributedObjectProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */; };
 		48D81DAD09F79C1C0075EE44 /* TaggerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D81DAB09F79C1C0075EE44 /* TaggerController.h */; };
 		48D81DAE09F79C1C0075EE44 /* TaggerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D81DAC09F79C1C0075EE44 /* TaggerController.m */; };
 		48E386760D6DC45300204CDB /* IMAGES.tif in Resources */ = {isa = PBXBuildFile; fileRef = 48E386740D6DC45300204CDB /* IMAGES.tif */; };
@@ -390,6 +389,7 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		B614C3A0115A639A00D04FB5 /* DOCUMENT.tif in Resources */ = {isa = PBXBuildFile; fileRef = B614C39F115A639A00D04FB5 /* DOCUMENT.tif */; };
 		B614C3B9115A648500D04FB5 /* PDF.tif in Resources */ = {isa = PBXBuildFile; fileRef = B614C3B8115A648500D04FB5 /* PDF.tif */; };
+		B6E5A51A11622E9000EB41FC /* PATagCloudProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = B6E5A51911622E9000EB41FC /* PATagCloudProtocols.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -598,7 +598,6 @@
 		48186F4A0BE4C834000B4638 /* NNFilterEngine.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NNFilterEngine.m; sourceTree = "<group>"; };
 		48186F4B0BE4C834000B4638 /* NNObjectFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NNObjectFilter.h; sourceTree = "<group>"; };
 		48186F4C0BE4C834000B4638 /* NNObjectFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NNObjectFilter.m; sourceTree = "<group>"; };
-		48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NNDistributedObjectProtocols.h; sourceTree = "<group>"; };
 		481A642F0ABFD16F005516E7 /* LoginItemsAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LoginItemsAE.c; sourceTree = "<group>"; };
 		481A64300ABFD16F005516E7 /* LoginItemsAE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginItemsAE.h; sourceTree = "<group>"; };
 		481E5A741124B45E001FE5C5 /* LCLLogFileConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCLLogFileConfig.h; sourceTree = "<group>"; };
@@ -967,6 +966,7 @@
 		8D1107320486CEB800E47090 /* Punakea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Punakea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B614C39F115A639A00D04FB5 /* DOCUMENT.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = DOCUMENT.tif; sourceTree = "<group>"; };
 		B614C3B8115A648500D04FB5 /* PDF.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PDF.tif; sourceTree = "<group>"; };
+		B6E5A51911622E9000EB41FC /* PATagCloudProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloudProtocols.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1292,7 +1292,6 @@
 				48186F4A0BE4C834000B4638 /* NNFilterEngine.m */,
 				48186F4B0BE4C834000B4638 /* NNObjectFilter.h */,
 				48186F4C0BE4C834000B4638 /* NNObjectFilter.m */,
-				48186F7D0BE4C8CD000B4638 /* NNDistributedObjectProtocols.h */,
 			);
 			path = NNFilterEngine;
 			sourceTree = "<group>";
@@ -1568,6 +1567,7 @@
 				4842FC0E09DA801500C4A931 /* PATagButton.m */,
 				4842FC1109DA804100C4A931 /* PATagButtonCell.h */,
 				4842FC1209DA804100C4A931 /* PATagButtonCell.m */,
+				B6E5A51911622E9000EB41FC /* PATagCloudProtocols.h */,
 			);
 			name = TagCloud;
 			sourceTree = "<group>";
@@ -2244,6 +2244,7 @@
 				658849CD115F61F8003C2303 /* NSTokenAttachment.h in Headers */,
 				658849D2115F6222003C2303 /* PATokenFieldCell.h in Headers */,
 				658849D4115F6222003C2303 /* PATokenAttachmentCell.h in Headers */,
+				B6E5A51A11622E9000EB41FC /* PATagCloudProtocols.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2253,7 +2254,6 @@
 			files = (
 				48186F510BE4C834000B4638 /* NNFilterEngine.h in Headers */,
 				48186F530BE4C834000B4638 /* NNObjectFilter.h in Headers */,
-				48D815F20BF5BFB000821C25 /* NNDistributedObjectProtocols.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

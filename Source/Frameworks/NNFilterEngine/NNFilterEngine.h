@@ -11,46 +11,34 @@
 #import "NNTagging/NNTag.h"
 
 #import "NNObjectFilter.h"
-#import "NNDistributedObjectProtocols.h"
 
 #include <unistd.h>
 
-// TODO should the server be the delegate? only a delegate?
+@protocol NNFilterEngineDelegate;
 
-@interface NNFilterEngine : NSObject {
-	id <NNBVCServerProtocol> server;
+@interface NNFilterEngine : NSOperation {
+	BOOL				finished;
 	
-	NSArray *filterObjects;
-	NSMutableArray *filteredObjects; /**< use lockFilteredObjects before accessing them! */
+	id<NNFilterEngineDelegate> delegate;
+		
+	NSArray				*filters;
+	NSMutableArray		*buffers;
 	
-	NSMutableArray *filters;
-	NSMutableArray *buffers;
-	
-	NSConditionLock *threadLock;
-	NSLock *filteredObjectsLock;
-	
-	NSUInteger threadCount;
-	NSLock *threadCountLock;
+	NSMutableArray		*filteredObjects;
 }
+
+- (id)initWithFilterObjects:(NSArray*)objects 
+					filters:(NSArray*)filters 
+				   delegate:(id<NNFilterEngineDelegate>)aDelegate;
 
 - (BOOL)hasFilters;
 
-- (void)startWithServer:(id <NNBVCServerProtocol>)aServer;
-- (void)stopFilterEngine;
-- (void)reset;
+@end
 
-- (NNQueue*)inBuffer;
-- (NNQueue*)outBuffer;
+@protocol NNFilterEngineDelegate <NSObject>
 
-- (void)setObjects:(NSArray*)objects;
-
-- (NSMutableArray*)filters;
-- (void)addFilter:(NNObjectFilter*)filter;
-- (void)removeFilter:(NNObjectFilter*)filter;
-- (void)removeAllFilters;
-
-- (void)lockFilteredObjects;
-- (void)unlockFilteredObjects;
-- (NSMutableArray*)filteredObjects; /**< only access this with lock */
+@optional
+- (void)filterEngineFilteredObjects:(NSArray*)objects;
+- (void)filterEngineFinishedFiltering;
 
 @end

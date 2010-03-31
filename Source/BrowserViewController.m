@@ -21,9 +21,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
 - (void)clearVisibleTags;
 
-- (NNTag*)currentBestTag;
-- (void)setCurrentBestTag:(NNTag*)otherTag;
-
 - (void)updateTagCloudDisplayMessage;
 
 - (NSString*)searchFieldString;
@@ -32,22 +29,17 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setMainController:(PABrowserViewMainController*)aController;
 
-- (void)setActiveFilter:(PAStringFilter*)filter;
-- (PAStringFilter*)activeFilter;
-
 - (void)filterTags:(NSArray*)someTags;
-- (void)setupFilterEngine;
-- (void)filterTags;
-- (void)setFilterEngineConnection:(NSConnection*)conn;
-- (NSConnection*)filterEngineConnection;
+- (NSArray*)allFilters;
+- (PAStringFilter*)activeStringFilter;
+- (NSArray*)activeContentTypeFiltersForIdentifiers:(NSArray*)identifiers;
+- (void)contentTypeFilterUpdate:(NSNotification*)notification;
 
 - (void)updateSortDescriptor;
 
 - (NSInteger)nextID;
 
 @end
-
-
 
 @implementation BrowserViewController
 
@@ -58,10 +50,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	{
 		tags = [NNTags sharedTags];
 				
-		// needs to be setup before tags can be displayed
-		// cannot be done here or in awakeFromNib because of wrong
-		// order, self needs to be available already
-		filterEngine = nil;
+		filterEngineOpQueue = [[NSOperationQueue alloc] init];
 		
 		searchFieldString = [[NSMutableString alloc] init];
 		
@@ -90,9 +79,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 													 name:PAContentTypeFilterUpdate
 												   object:nil];
 		
-		filterEngine = [[NNFilterEngine alloc] init];
-		activeFilter = nil;
-		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
 	}
 	return self;
@@ -116,9 +102,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[sortDescriptor release];
 	[mainController release];
 	[visibleTags release];
-	[activeFilter release];
-	[filterEngineConnection release];
-	[filterEngine release];
+	[filterEngineOpQueue release];
 	[searchFieldString release];
 	[super dealloc];
 }
@@ -148,18 +132,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark accessors
-- (NNTag*)currentBestTag
-{
-	return currentBestTag;
-}
-
-- (void)setCurrentBestTag:(NNTag*)otherTag
-{
-	[otherTag retain];
-	[currentBestTag release];
-	currentBestTag = otherTag;
-}
-
 - (NSString*)searchFieldString
 {
 	return searchFieldString;
@@ -207,26 +179,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	return controlledView;
 }
 
-- (BOOL)isWorking
-{
-	if (!mainController || ![mainController isWorking])
-		return NO;
-	else
-		return YES;
-}
-
-- (void)setActiveFilter:(PAStringFilter*)filter
-{
-	[filter retain];
-	[activeFilter release];
-	activeFilter = filter;
-}
-
-- (PAStringFilter*)activeFilter
-{
-	return activeFilter;
-}
-
 - (NSMutableArray*)visibleTags;
 {
 	return visibleTags;
@@ -262,8 +214,12 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// empty visibleTags
 	[self clearVisibleTags];
 	
+	// remember active tags
+	[activeTags release];
+	activeTags = [someTags retain];
+	
 	// start filtering
-	[self filterTags:someTags];
+	[self filterTags:activeTags];
 }
 
 - (void)resetDisplayTags
@@ -296,41 +252,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	return [tags tags];
 }
 
-- (NSArray*)activeContentTypeFilters
-{
-	return activeContentTypeFilters;
-}
-
-- (void)setActiveContentTypeFilters:(NSArray*)filters
-{
-	[self clearVisibleTags];
-	
-	[filters retain];
-	[activeContentTypeFilters release];
-	activeContentTypeFilters = filters;
-		
-	// adjust filterengine
-	// remove old content type filters
-	NSEnumerator *oldFiltersEnumerator = [[filterEngine filters] objectEnumerator];
-	NNObjectFilter *filter;
-	
-	while (filter = [oldFiltersEnumerator nextObject])
-	{
-		if ([filter isKindOfClass:[PAContentTypeFilter class]])
-		{
-			[filterEngine removeFilter:filter];
-		}
-	}
-	
-	// add new filters
-	NSEnumerator *newFilterEnumerator = [filters objectEnumerator];
-	
-	while (filter = [newFilterEnumerator nextObject])
-	{
-		[filterEngine addFilter:filter];
-	}
-}
-
 - (NSArray*)contentTypeFilterIdentifiers
 {
 	return contentTypeFilterIdentifiers;
@@ -340,33 +261,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	[contentTypeFilterIdentifiers release];
 	contentTypeFilterIdentifiers = [identifiers retain];
-}
-
-#pragma mark tag stuff
-- (IBAction)tagButtonClicked:(id)sender
-{
-	// Make tagcloud first responder on click of a tag button
-	if([[tagCloud window] firstResponder] != tagCloud)
-		[[tagCloud window] makeFirstResponder:tagCloud];
-	
-	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
-		[self resetSearchFieldString];
-	
-	NNTag *tag = [sender genericTag];
-	[mainController handleTagActivation:tag];
-}
-
-- (IBAction)negatedTagButtonClicked:(id)sender
-{
-	// Make tagcloud first responder on click of a tag button
-	if([[tagCloud window] firstResponder] != tagCloud)
-		[[tagCloud window] makeFirstResponder:tagCloud];
-	
-	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
-		[self resetSearchFieldString];
-	
-	NNTag *tag = [sender genericTag];
-	[mainController handleTagNegation:tag];
 }
 
 #pragma mark typeAheadFind
@@ -438,48 +332,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)searchFieldStringHasChanged
 {
 	[self clearVisibleTags];
-	
-	// if searchFieldString has any content, display tags with corresponding prefix
-	// else display all tags
-	if ([searchFieldString length] > 0)
-	{
-		// remove old filter
-		if (activeFilter)
-		{
-			[filterEngine removeFilter:[self activeFilter]];
-		}
-		
-		NSString *decomposedSearchString = [searchFieldString decomposedStringWithCanonicalMapping];
-		
-		PAStringFilter *newFilter;
-		
-		PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
-			
-		switch (searchType) {
-			case PATagPrefixSearchType:
-				newFilter = [[[PAStringPrefixFilter alloc] initWithFilter:decomposedSearchString] autorelease];
-				break;
-			case PATagSearchType:
-				newFilter = [[[PAStringFilter alloc] initWithFilter:decomposedSearchString] autorelease];
-				break;
-			default:
-				NSLog(@"Must not happen - FIXME");
-				break;
-		}
-		
-		[filterEngine addFilter:newFilter];
-		[self setActiveFilter:newFilter];
-		
-		filterEngineIsWorking = YES;
-	}
-	else
-	{
-		if (activeFilter) 
-		{
-			[filterEngine removeFilter:[self activeFilter]];
-		}		
-		[self setActiveFilter:nil];
-	}
+	[self filterTags:activeTags];
 }
 
 - (void)controlledViewHasChanged
@@ -526,6 +379,61 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
+#pragma mark tag filtering
+- (void)filterTags:(NSArray*)someTags
+{
+	filterEngineIsWorking = YES;
+	
+	// cancel active filter engine (if one is active)
+	[filterEngineOpQueue cancelAllOperations];
+	
+	NNFilterEngine *filterEngineOp = [[NNFilterEngine alloc] initWithFilterObjects:someTags
+														 filters:[self allFilters]
+														delegate:self];
+	
+	[filterEngineOpQueue addOperation:filterEngineOp];
+	[filterEngineOp release];
+
+	// show progress in the UI
+	NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_GATHERING_TAGS", @"Global", nil);
+	[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
+}
+
+- (void)filterEngineFilteredObjects:(NSArray*)objects;
+{
+	[self setVisibleTags:[NSMutableArray arrayWithArray:objects]];
+}
+
+- (NSArray*)allFilters
+{
+	NSMutableArray *allFilters = [NSMutableArray array];
+	
+	PAStringFilter *activeStringFilter = [self activeStringFilter];
+	
+	if (activeStringFilter != nil)
+	{
+		[allFilters addObject:activeStringFilter];
+	}
+	
+	[allFilters addObjectsFromArray:[self activeContentTypeFiltersForIdentifiers:[self contentTypeFilterIdentifiers]]];
+				
+	return allFilters;
+}
+
+- (void)filterEngineFinishedFiltering
+{
+	filterEngineIsWorking = NO;
+	
+	[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
+		
+	[self updateTagCloudDisplayMessage];
+			
+	// TODO workaround for missing thumbs/icons
+	[self performSelector:@selector(reloadView)
+			   withObject:nil
+			   afterDelay:0.2];
+}
+
 - (void)contentTypeFilterUpdate:(NSNotification*)notification
 {
 	[self showResults];
@@ -534,61 +442,56 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	[self setContentTypeFilterIdentifiers:[NSArray arrayWithObject:contentType]];
 	
-	NNObjectFilter *filter = [PAContentTypeFilter filterWithContentType:contentType];
-	[self setActiveContentTypeFilters:[NSArray arrayWithObject:filter]];
+	[self filterTags:activeTags];
 }
 
-
-#pragma mark tag filtering
-- (void)filterTags:(NSArray*)someTags
+- (PAStringFilter*)activeStringFilter
 {
-	filterEngineIsWorking = YES;
-	[filterEngine setObjects:someTags];
+	PAStringFilter *newFilter = nil;
 	
-	[filterEngine startWithServer:self];
+	if ([searchFieldString length] > 0)
+	{
+		NSString *decomposedSearchString = [searchFieldString decomposedStringWithCanonicalMapping];
+		
+		
+		PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
+		
+		switch (searchType) {
+			case PATagPrefixSearchType:
+				newFilter = [[[PAStringPrefixFilter alloc] initWithFilter:decomposedSearchString] autorelease];
+				break;
+			case PATagSearchType:
+				newFilter = [[[PAStringFilter alloc] initWithFilter:decomposedSearchString] autorelease];
+				break;
+			default:
+				NSLog(@"Must not happen - FIXME");
+				break;
+		}
+	}
+	
+	return newFilter;
 }
 
-- (void)filteringStarted
+- (NSArray*)activeContentTypeFiltersForIdentifiers:(NSArray*)identifiers
 {
-	NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_GATHERING_TAGS", @"Global", nil);
-	[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
+	NSMutableArray *filters = [NSMutableArray array];
+	
+	// create and add content type filters	
+	for (NSString *contentTypeIdentifier in identifiers)
+	{
+		PAContentTypeFilter *filter = [PAContentTypeFilter filterWithContentType:contentTypeIdentifier];
+		[filters addObject:filter];
+	}
+	
+	return filters;
 }
 
-- (void)filteringFinished
-{
-	filterEngineIsWorking = NO;
-	
-	[[[[NSApplication sharedApplication] delegate] browserController] stopProgressAnimation];
-	
-	[self updateTagCloudDisplayMessage];
-	
-	// TODO workaround for missing thumbs/icons
-	[self performSelector:@selector(reloadView)
-			   withObject:nil
-			   afterDelay:0.2];
-}
-
+#pragma mark actions
 - (void)reloadView
 {
 	[[self view] setNeedsDisplay:YES];
 }
 
-- (void)objectsFiltered
-{
-	[filterEngine lockFilteredObjects];
-	[self setVisibleTags:[filterEngine filteredObjects]];
-	[filterEngine unlockFilteredObjects];
-}
-
-- (void)removeAllFilters
-{
-	[self setActiveContentTypeFilters:[NSArray array]];
-	[filterEngine removeFilter:[self activeFilter]];
-	[self setActiveFilter:nil];
-}
-
-
-#pragma mark actions
 - (void)updateTagCloudDisplayMessage
 {
 	// if there are no visible tags,
@@ -611,8 +514,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			// give the mainController a chance to display a message
 			[tagCloud setDisplayMessage:[mainController displayMessage]];
 		}
-		else if (!filterEngineIsWorking && 
-				 [[filterEngine filters] count] > 0)
+		else if (!filterEngineIsWorking && ([self allFilters] > 0))
 		{
 			// no items found for content type
 			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS_FOR_CONTENTTYPE",@"Tags",@"")];
@@ -632,10 +534,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	// empty active content filters
 	[self setContentTypeFilterIdentifiers:[NSArray array]];
-	
-	// reset filterEngine
-	[filterEngine reset];
-	
+		
 	// emptry search field	
 	[self resetSearchFieldString];
 	
@@ -683,9 +582,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	// empty active content filters
 	[self setContentTypeFilterIdentifiers:[NSArray array]];
 	
-	// reset filterEngine
-	[filterEngine reset];
-	
 	// emptry search field	
 	[self resetSearchFieldString];
 	
@@ -702,11 +598,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)unbindAll
 {
 	[self removeObserver:self forKeyPath:@"searchFieldString"];
-}
-
-- (void)makeControlledViewFirstResponder
-{
-	[[[self view] window] makeFirstResponder:[mainController dedicatedFirstResponder]];
 }
 
 - (void)controlTextDidChange:(NSNotification *)aNotification
@@ -780,31 +671,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[tagButton release];										// Free pointer
 }
 
-
-#pragma mark drag & drop stuff
-- (void)taggableObjectsHaveBeenDropped:(NSArray*)objects
-{
-	TaggerController *taggerController = [[TaggerController alloc] init];
-	
-	BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
-	
-	// Check if PADropManager is in alternate state
-	if([[PADropManager sharedInstance] alternateState])
-		manageFiles = !manageFiles;
-	
-	[taggerController setManageFiles:manageFiles];
-	
-	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-	
-	[taggerController showWindow:nil];	
-	[[taggerController window] makeKeyAndOrderFront:nil];
-	
-	[taggerController addTaggableObjects:objects];
-	
-	[[PADropManager sharedInstance] setAlternateState:NO];
-}
-
-
 #pragma mark Split View
 - (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
 {
@@ -836,6 +702,104 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		// default to name
 		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
 	}
+}
+
+#pragma mark TagCloud DataSource
+
+- (NSUInteger)numberOfTagsInTagCloud:(PATagCloud*)aTagCloud
+{
+	return [visibleTags count];
+}
+
+- (NNTag*)tagCloud:(PATagCloud*)aTagCloud tagForIndex:(NSUInteger)i
+{
+	return [visibleTags objectAtIndex:i];
+}
+
+- (BOOL)tagCloud:(PATagCloud*)aTagCloud containsTag:(NNTag*)aTag
+{
+	return [visibleTags containsObject:aTag];
+}
+
+- (NNTag*)currentBestTagInTagCloud:(PATagCloud*)aTagCloud
+{
+	NSEnumerator *e = [visibleTags objectEnumerator];
+	NNTag *tag;
+	NNTag *maxTag;
+			
+	if (tag = [e nextObject])
+		maxTag = tag;
+		
+	while (tag = [e nextObject])
+	{
+		if ([tag absoluteRating] > [maxTag absoluteRating])
+			maxTag = tag;
+	}	
+	
+	return maxTag;
+}
+
+#pragma mark TagCloud Delegate
+
+- (void)taggableObjectsHaveBeenDropped:(NSArray*)objects
+{
+	TaggerController *taggerController = [[TaggerController alloc] init];
+	
+	BOOL manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
+	
+	// Check if PADropManager is in alternate state
+	if([[PADropManager sharedInstance] alternateState])
+		manageFiles = !manageFiles;
+	
+	[taggerController setManageFiles:manageFiles];
+	
+	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+	
+	[taggerController showWindow:nil];	
+	[[taggerController window] makeKeyAndOrderFront:nil];
+	
+	[taggerController addTaggableObjects:objects];
+	
+	[[PADropManager sharedInstance] setAlternateState:NO];
+}
+
+- (BOOL)isWorking
+{
+	if (!mainController || ![mainController isWorking])
+		return NO;
+	else
+		return YES;
+}
+
+- (void)makeControlledViewFirstResponder
+{
+	[[[self view] window] makeFirstResponder:[mainController dedicatedFirstResponder]];
+}
+
+- (IBAction)tagButtonClicked:(PATagButton*)button
+{
+	// Make tagcloud first responder on click of a tag button
+	if([[tagCloud window] firstResponder] != tagCloud)
+		[[tagCloud window] makeFirstResponder:tagCloud];
+	
+	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
+		[self resetSearchFieldString];
+	
+	NNTag *tag = [button genericTag];
+	[mainController handleTagActivation:tag];
+}
+
+- (void)negatedTagButtonClicked:(PATagButton*)button
+{
+	// Make tagcloud first responder on click of a tag button
+	if([[tagCloud window] firstResponder] != tagCloud)
+		[[tagCloud window] makeFirstResponder:tagCloud];
+	
+	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
+		[self resetSearchFieldString];
+	
+	NNTag *tag = [button genericTag];
+	[mainController handleTagNegation:tag];
 }
 
 @end

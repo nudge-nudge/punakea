@@ -25,6 +25,8 @@
 #import "PAContentTypeFilter.h"
 #import "PADropManager.h"
 
+#import "PATagCloudProtocols.h"
+
 #import "lcl.h"
 
 @class PATagCloud;
@@ -42,7 +44,7 @@ typedef enum _PASearchType {
 extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 
 
-@interface BrowserViewController : PAViewController <NNBVCServerProtocol>
+@interface BrowserViewController : PAViewController <PATagCloudDelegate, PATagCloudDataSource, NNFilterEngineDelegate>
 {
 	IBOutlet PATagCloud					*tagCloud;
 	IBOutlet PASplitView				*splitView;
@@ -53,23 +55,21 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 	
 	NNTags								*tags;
 	
+	NSMutableArray						*activeTags;			/**< holds al the active tags for TagCloud */
 	NSMutableArray						*visibleTags;			/**< holds the (filtered) tags for TagCloud */
-	NNTag								*currentBestTag;		/**< holds the tag with the highest absolute rating currently in visibleTags */
 	
 	IBOutlet PATypeAheadView			*typeAheadView;
 	IBOutlet NSSearchField				*searchField;
 	NSString							*searchFieldString;
 			
-	NNFilterEngine						*filterEngine;
-	NSConnection						*filterEngineConnection;
-	PAStringFilter						*activeFilter;
-	NSArray								*activeContentTypeFilters;
+	NSOperationQueue					*filterEngineOpQueue;
 	BOOL								filterEngineIsWorking;
 	
 	NSArray								*contentTypeFilterIdentifiers;
 	
 	PATagCloudSortKey					sortKey;
 	NSSortDescriptor					*sortDescriptor;
+	
 }
 
 /** 
@@ -95,12 +95,6 @@ highlights tag in tagcloud
 - (NSView*)controlledView;
 - (void)makeControlledViewFirstResponder;
 
-/**
-is called when a tag is clicked
- */
-- (IBAction)tagButtonClicked:(id)sender;
-- (IBAction)negatedTagButtonClicked:(id)sender;
-
 - (void)setSearchFieldString:(NSString*)string;
 
 - (void)searchForTags:(NSArray*)someTags;
@@ -116,7 +110,7 @@ is called when a tag is clicked
 
 - (void)reloadData;
 
-// Tag Cloud delegate methods
+// Tag Cloud actions
 - (IBAction)includeTag:(id)sender;
 - (IBAction)excludeTag:(id)sender;
 - (IBAction)editTag:(id)sender;
@@ -125,13 +119,8 @@ is called when a tag is clicked
 - (PATagCloud *)tagCloud;
 - (NSMenu *)tagButtonContextualMenu;
 
-- (NSArray *)allTags; /**< needed by tagcloud - this will be gone as soon as the tag cloud is a proper view and has no app logic anymore*/
-
-- (NSArray*)activeContentTypeFilters;
-- (void)setActiveContentTypeFilters:(NSArray*)filters;
-- (void)removeAllFilters;
-
-- (NSArray*)contentTypeFilterIdentifiers;
 - (void)setContentTypeFilterIdentifiers:(NSArray*)identifiers;
+
+- (NSArray *)allTags; /**< needed by tagcloud - this will be gone as soon as the tag cloud is a proper view and has no app logic anymore*/
 
 @end

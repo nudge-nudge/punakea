@@ -9,12 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNQueue.h"
 
-typedef enum _NNThreadState {
-	NNThreadStopped = 0,
-	NNThreadRunning = 1,
-	NNThreadCanceled = 2
-} NNThreadState;
-
 /** 
 abstract class, do not instantiate!
 
@@ -24,22 +18,12 @@ each filter comes with its own outQueue, and the inQueue will be connected to ot
 @interface NNObjectFilter : NSObject {
 	/** higher weight causes the filter to be applied after filters with lower weight */
 	NSUInteger weight;
-	
-	NSConditionLock *stateLock;
-	
+		
 	NNQueue *inQueue;
 	NNQueue *outQueue;
+	
+	BOOL	cancelled;
 }
-
-/**
- this tells filter to stop, while the calling thread will wait for the stop to occur
-*/
-- (void)waitForStop; 
-
-/**
- mark the filter to be canceled. calling thread will continue immediately
- */
-- (void)markAsCanceled;
 
 - (void)setInQueue:(NNQueue*)queue;
 - (NNQueue*)inQueue;
@@ -48,9 +32,19 @@ each filter comes with its own outQueue, and the inQueue will be connected to ot
 - (NSUInteger)weight;
 
 /**
-call this in a new thread
+ call this to start the filtering
  */
 - (void)run;
+
+/**
+ call this to cancel the filter
+ */
+- (void)cancel;
+
+/**
+ @return YES if cancelled
+ */
+- (BOOL)isCancelled;
 
 /**
 call this if an object has passed the filter.
