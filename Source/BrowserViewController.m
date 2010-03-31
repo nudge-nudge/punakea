@@ -421,6 +421,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[filterEngineOp release];
 
 	// empty cloud and show progress in the UI
+	[self setVisibleTags:[NSArray array]];
 	NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_GATHERING_TAGS", @"Global", nil);
 	[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
 }
