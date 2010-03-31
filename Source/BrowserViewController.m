@@ -27,6 +27,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)resetSearchFieldString;
 - (void)searchFieldStringHasChanged;
 
+- (void)negatedTagButtonClicked:(PATagButton*)button;
+
 - (void)setMainController:(PABrowserViewMainController*)aController;
 
 - (void)filterTags:(NSArray*)someTags;
@@ -53,9 +55,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		filterEngineOpQueue = [[NSOperationQueue alloc] init];
 		
 		searchFieldString = [[NSMutableString alloc] init];
-		
-		[self addObserver:self forKeyPath:@"searchFieldString" options:0 context:NULL];
-	
+			
 		sortKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"TagCloud.SortKey"];
 		[self updateSortDescriptor];
 		
@@ -113,11 +113,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if ([keyPath isEqualToString:@"searchFieldString"])
-	{
-		[self searchFieldStringHasChanged];
-	}
-	else if ([keyPath isEqual:@"values.TagCloud.SortKey"])
+	if ([keyPath isEqual:@"values.TagCloud.SortKey"])
 	{
 		sortKey = [[[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:@"values.TagCloud.SortKey"] integerValue];
 		[self updateSortDescriptor];
@@ -144,6 +140,13 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	[searchFieldString release];
 	searchFieldString = [string mutableCopy];
+	
+	[self searchFieldStringHasChanged];
+}
+
+- (void)setSearchField:(NSSearchField*)aSearchField
+{
+	searchField = aSearchField;
 }
 
 - (PABrowserViewMainController*)mainController
@@ -283,6 +286,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		{
 			NSString *tmpSearchFieldString = [searchFieldString substringToIndex:[searchFieldString length]-1];
 			[self setSearchFieldString:tmpSearchFieldString];
+			[searchField setStringValue:tmpSearchFieldString];
 		}
 		else if ([mainController isKindOfClass:[PAResultsViewController class]])
 		// else delete the last selected tag (if resultsview is active)
@@ -293,11 +297,12 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	else if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:key]) 
 	{
 		// only add to searchFieldString if there are any tags, otherwise do nothing
-		NSMutableString *tmpsearchFieldString = [searchFieldString mutableCopy];
-		[tmpsearchFieldString appendString:[event charactersIgnoringModifiers]];
+		NSMutableString *tmpSearchFieldString = [searchFieldString mutableCopy];
+		[tmpSearchFieldString appendString:[event charactersIgnoringModifiers]];
 		
-		[self setSearchFieldString:tmpsearchFieldString];
-		[tmpsearchFieldString release];
+		[self setSearchFieldString:tmpSearchFieldString];
+		[searchField setStringValue:tmpSearchFieldString];
+		[tmpSearchFieldString release];
 	}
 	else
 	{
@@ -323,11 +328,20 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	[menuItem setState:NSOnState];
 	
-	// update search if there currently is a searchFieldString
+	// update search if there currently is a searchFieldString	
 	if ([searchFieldString length] > 0) {
 		[self searchFieldStringHasChanged];	
 	}
 }
+
+/** 
+ Search field delegate
+ */
+- (void)controlTextDidChange:(NSNotification *)aNotification
+{
+	NSTextView *fe = [[aNotification userInfo] objectForKey:@"NSFieldEditor"];
+	[self setSearchFieldString:[fe string]];
+}	
 
 - (void)searchFieldStringHasChanged
 {
@@ -439,8 +453,10 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self showResults];
 	
 	NSString *contentType = [[notification userInfo] objectForKey:@"contentType"];
-	
 	[self setContentTypeFilterIdentifiers:[NSArray arrayWithObject:contentType]];
+	
+	[self setSearchFieldString:@""];
+	[searchField setStringValue:@""];
 	
 	[self filterTags:activeTags];
 }
@@ -593,24 +609,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	// display all tags
 	[self setDisplayTags:[tags tags]];
-}
-
-- (void)unbindAll
-{
-	[self removeObserver:self forKeyPath:@"searchFieldString"];
-}
-
-- (void)controlTextDidChange:(NSNotification *)aNotification
-{
-	NSDictionary *userInfo = [aNotification userInfo];
-	NSText *fieldEditor = [userInfo objectForKey:@"NSFieldEditor"];
-	NSString *currentString = [fieldEditor string];
-	
-	if ([currentString isNotEqualTo:@""])
-	{
-		NSString *newString = [currentString substringToIndex:[currentString length]-1];
-		[fieldEditor setString:newString];
-	}
 }
 
 - (void)reloadData

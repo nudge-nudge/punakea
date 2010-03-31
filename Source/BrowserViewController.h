@@ -59,7 +59,7 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 	NSMutableArray						*visibleTags;			/**< holds the (filtered) tags for TagCloud */
 	
 	IBOutlet PATypeAheadView			*typeAheadView;
-	IBOutlet NSSearchField				*searchField;
+	NSSearchField						*searchField;
 	NSString							*searchFieldString;
 			
 	NSOperationQueue					*filterEngineOpQueue;
@@ -95,6 +95,7 @@ highlights tag in tagcloud
 - (NSView*)controlledView;
 - (void)makeControlledViewFirstResponder;
 
+- (void)setSearchField:(NSSearchField*)aSearchField;
 - (void)setSearchFieldString:(NSString*)string;
 
 - (void)searchForTags:(NSArray*)someTags;
@@ -105,8 +106,6 @@ highlights tag in tagcloud
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller;
 
 - (void)reset;
-
-- (void)unbindAll;
 
 - (void)reloadData;
 

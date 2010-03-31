@@ -80,13 +80,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[self setupStatusBar];
 	[self setupTabPanel];
 	[self setupFieldEditor];
-	
-	// bind search field to bvc searchFieldString
-	[searchField bind:@"value"
-			 toObject:browserViewController
-		  withKeyPath:@"searchFieldString"
-			  options:nil];
-	
+		
 	// Register for notifications
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
@@ -105,14 +99,12 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 {
 	[statusBarProgressIndicator release];
 	
-	[searchField unbind:@"value"];
 	if (searchField) [searchField release];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[sourcePanelFieldEditor release];
 	
-	// unbind stuff for retain count
 	[browserViewController release];
 	
 	[super dealloc];
@@ -125,7 +117,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	// configure search field
 	NSSearchField *field = [[[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)] autorelease];
-	[field setDelegate:self];
+	[field setDelegate:browserViewController];
+	[browserViewController setSearchField:field];
 	
 	// create menu for determining search type
 	NSMenu *searchTypeMenu = [[NSMenu alloc] initWithTitle:@""];
@@ -805,7 +798,6 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 #pragma mark Notifications
 - (void)windowWillClose:(NSNotification *)notification
 {
-	[browserViewController unbindAll];
 	[self autorelease];
 }
 
