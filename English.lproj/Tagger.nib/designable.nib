@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10C540</string>
+		<string key="IBDocument.SystemVersion">10D573</string>
 		<string key="IBDocument.InterfaceBuilderVersion">740</string>
-		<string key="IBDocument.AppKitVersion">1038.25</string>
-		<string key="IBDocument.HIToolboxVersion">458.00</string>
+		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.HIToolboxVersion">460.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
@@ -51,7 +51,7 @@
 			<object class="NSWindowTemplate" id="61245152">
 				<int key="NSWindowStyleMask">8223</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{706, 419}, {721, 257}}</string>
+				<string key="NSWindowRect">{{706, 431}, {721, 245}}</string>
 				<int key="NSWTFlags">276299776</int>
 				<string key="NSWindowTitle">Punakea : Tagger</string>
 				<string key="NSWindowClass">NNActiveAppSavingPanel</string>
@@ -68,7 +68,7 @@
 						<object class="NSTextField" id="962425944">
 							<reference key="NSNextResponder" ref="388370546"/>
 							<int key="NSvFlags">264</int>
-							<string key="NSFrame">{{181, 220}, {187, 17}}</string>
+							<string key="NSFrame">{{181, 208}, {187, 17}}</string>
 							<reference key="NSSuperview" ref="388370546"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="33067379">
@@ -94,7 +94,7 @@
 						<object class="NSButton" id="962897690">
 							<reference key="NSNextResponder" ref="388370546"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{184, 43}, {98, 19}}</string>
+							<string key="NSFrame">{{184, 31}, {98, 19}}</string>
 							<reference key="NSSuperview" ref="388370546"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="BGHUDButtonCell" key="NSCell" id="1035135437">
@@ -171,7 +171,7 @@
 															<int key="NSColorSpace">6</int>
 															<string key="NSCatalogName">System</string>
 															<string key="NSColorName">controlBackgroundColor</string>
-															<object class="NSColor" key="NSColor" id="570193029">
+															<object class="NSColor" key="NSColor">
 																<int key="NSColorSpace">3</int>
 																<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
 															</object>
@@ -239,7 +239,7 @@
 									<string key="themeKey">gradientTheme</string>
 								</object>
 							</object>
-							<string key="NSFrame">{{184, 70}, {517, 78}}</string>
+							<string key="NSFrame">{{184, 58}, {517, 78}}</string>
 							<reference key="NSSuperview" ref="388370546"/>
 							<reference key="NSNextKeyView" ref="24800814"/>
 							<int key="NSsFlags">18</int>
@@ -259,7 +259,7 @@
 									<string>NSStringPboardType</string>
 								</object>
 							</object>
-							<string key="NSFrame">{{184, 156}, {517, 56}}</string>
+							<string key="NSFrame">{{184, 144}, {517, 56}}</string>
 							<reference key="NSSuperview" ref="388370546"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="BGHUDTokenFieldCell" key="NSCell" id="923819556">
@@ -279,7 +279,7 @@
 						<object class="NSButton" id="394560567">
 							<reference key="NSNextResponder" ref="388370546"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{388, 44}, {315, 18}}</string>
+							<string key="NSFrame">{{388, 32}, {315, 18}}</string>
 							<reference key="NSSuperview" ref="388370546"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="BGHUDButtonCell" key="NSCell" id="175249294">
@@ -319,7 +319,7 @@
 									<string>NeXT TIFF v4.0 pasteboard type</string>
 								</object>
 							</object>
-							<string key="NSFrame">{{22, 75}, {140, 140}}</string>
+							<string key="NSFrame">{{22, 63}, {140, 140}}</string>
 							<reference key="NSSuperview" ref="388370546"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="415949344">
@@ -332,47 +332,8 @@
 							</object>
 							<bool key="NSEditable">YES</bool>
 						</object>
-						<object class="BGHUDLabel" id="910294313">
-							<reference key="NSNextResponder" ref="388370546"/>
-							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{181, 20}, {111, 17}}</string>
-							<reference key="NSSuperview" ref="388370546"/>
-							<bool key="NSEnabled">YES</bool>
-							<object class="NSTextFieldCell" key="NSCell" id="1020045123">
-								<int key="NSCellFlags">68288064</int>
-								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">Associated Tags:</string>
-								<reference key="NSSupport" ref="124142241"/>
-								<reference key="NSControlView" ref="910294313"/>
-								<object class="NSColor" key="NSBackgroundColor" id="331841748">
-									<int key="NSColorSpace">6</int>
-									<string key="NSCatalogName">System</string>
-									<string key="NSColorName">controlColor</string>
-									<reference key="NSColor" ref="570193029"/>
-								</object>
-								<reference key="NSTextColor" ref="86672221"/>
-							</object>
-							<string key="themeKey">gradientTheme</string>
-						</object>
-						<object class="BGHUDLabel" id="24406178">
-							<reference key="NSNextResponder" ref="388370546"/>
-							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{294, 20}, {410, 17}}</string>
-							<reference key="NSSuperview" ref="388370546"/>
-							<bool key="NSEnabled">YES</bool>
-							<object class="NSTextFieldCell" key="NSCell" id="200047111">
-								<int key="NSCellFlags">68288064</int>
-								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents"/>
-								<reference key="NSSupport" ref="124142241"/>
-								<reference key="NSControlView" ref="24406178"/>
-								<reference key="NSBackgroundColor" ref="331841748"/>
-								<reference key="NSTextColor" ref="86672221"/>
-							</object>
-							<string key="themeKey">gradientTheme</string>
-						</object>
 					</object>
-					<string key="NSFrameSize">{721, 257}</string>
+					<string key="NSFrameSize">{721, 245}</string>
 					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
@@ -506,14 +467,6 @@
 					</object>
 					<int key="connectionID">296</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">suggestionField</string>
-						<reference key="source" ref="438912823"/>
-						<reference key="destination" ref="24406178"/>
-					</object>
-					<int key="connectionID">315</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -563,8 +516,6 @@
 							<reference ref="461257739"/>
 							<reference ref="962897690"/>
 							<reference ref="394560567"/>
-							<reference ref="910294313"/>
-							<reference ref="24406178"/>
 						</object>
 						<reference key="parent" ref="61245152"/>
 					</object>
@@ -688,34 +639,6 @@
 						<reference key="object" ref="443295455"/>
 						<reference key="parent" ref="96228564"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">310</int>
-						<reference key="object" ref="910294313"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1020045123"/>
-						</object>
-						<reference key="parent" ref="388370546"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">311</int>
-						<reference key="object" ref="1020045123"/>
-						<reference key="parent" ref="910294313"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">312</int>
-						<reference key="object" ref="24406178"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="200047111"/>
-						</object>
-						<reference key="parent" ref="388370546"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">313</int>
-						<reference key="object" ref="200047111"/>
-						<reference key="parent" ref="24406178"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -744,12 +667,15 @@
 					<string>234.ImportedFromIB2</string>
 					<string>266.IBPluginDependency</string>
 					<string>266.ImportedFromIB2</string>
+					<string>298.IBPluginDependency</string>
+					<string>299.IBPluginDependency</string>
+					<string>300.IBPluginDependency</string>
+					<string>301.IBPluginDependency</string>
+					<string>302.IBPluginDependency</string>
+					<string>303.IBPluginDependency</string>
 					<string>303.IBShouldRemoveOnLegacySave</string>
+					<string>304.IBPluginDependency</string>
 					<string>304.IBShouldRemoveOnLegacySave</string>
-					<string>310.IBPluginDependency</string>
-					<string>311.IBPluginDependency</string>
-					<string>312.IBPluginDependency</string>
-					<string>313.IBPluginDependency</string>
 					<string>8.IBEditorWindowLastContentRect</string>
 					<string>8.IBPluginDependency</string>
 					<string>8.IBWindowTemplateEditedContentRect</string>
@@ -784,15 +710,18 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<boolean value="YES"/>
-					<boolean value="YES"/>
-					<string>com.binarymethod.BGHUDAppKitPlugin</string>
-					<string>com.binarymethod.BGHUDAppKitPlugin</string>
-					<string>com.binarymethod.BGHUDAppKitPlugin</string>
-					<string>com.binarymethod.BGHUDAppKitPlugin</string>
-					<string>{{0, 591}, {721, 257}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{0, 591}, {721, 257}}</string>
+					<string>com.binarymethod.BGHUDAppKitPlugin</string>
+					<string>com.binarymethod.BGHUDAppKitPlugin</string>
+					<string>com.binarymethod.BGHUDAppKitPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.binarymethod.BGHUDAppKitPlugin</string>
+					<boolean value="YES"/>
+					<string>com.binarymethod.BGHUDAppKitPlugin</string>
+					<boolean value="YES"/>
+					<string>{{0, 603}, {721, 245}}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{0, 603}, {721, 245}}</string>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
@@ -824,6 +753,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
 					<string key="className">FirstResponder</string>
+					<string key="superclassName">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
@@ -892,13 +822,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="502620565">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Source/PAStatusBar.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Source/PATagCloud.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1059,14 +982,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">BGHUDAppKit.framework/Headers/BGHUDButtonCell.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">BGHUDLabel</string>
-					<string key="superclassName">NSTextField</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">BGHUDAppKit.framework/Headers/BGHUDLabel.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
