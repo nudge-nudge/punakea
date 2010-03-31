@@ -63,8 +63,6 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 	NSString							*searchFieldString;
 			
 	NSOperationQueue					*filterEngineOpQueue;
-	PAStringFilter						*activeFilter;
-	NSArray								*activeContentTypeFilters;
 	BOOL								filterEngineIsWorking;
 	
 	NSArray								*contentTypeFilterIdentifiers;
@@ -112,7 +110,7 @@ highlights tag in tagcloud
 
 - (void)reloadData;
 
-// Tag Cloud delegate methods
+// Tag Cloud actions
 - (IBAction)includeTag:(id)sender;
 - (IBAction)excludeTag:(id)sender;
 - (IBAction)editTag:(id)sender;
@@ -120,6 +118,8 @@ highlights tag in tagcloud
 
 - (PATagCloud *)tagCloud;
 - (NSMenu *)tagButtonContextualMenu;
+
+- (void)setContentTypeFilterIdentifiers:(NSArray*)identifiers;
 
 - (NSArray *)allTags; /**< needed by tagcloud - this will be gone as soon as the tag cloud is a proper view and has no app logic anymore*/
 

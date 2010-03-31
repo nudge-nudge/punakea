@@ -30,11 +30,9 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)setMainController:(PABrowserViewMainController*)aController;
 
 - (void)filterTags:(NSArray*)someTags;
-- (void)setActiveFilter:(PAStringFilter*)filter;
-- (PAStringFilter*)activeFilter;
-- (void)setActiveContentTypeFilters:(NSArray*)filters;
-- (NSArray*)activeContentTypeFilters;
 - (NSArray*)allFilters;
+- (PAStringFilter*)activeStringFilter;
+- (NSArray*)activeContentTypeFiltersForIdentifiers:(NSArray*)identifiers;
 - (void)contentTypeFilterUpdate:(NSNotification*)notification;
 
 - (void)updateSortDescriptor;
@@ -80,7 +78,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 												 selector:@selector(contentTypeFilterUpdate:)
 													 name:PAContentTypeFilterUpdate
 												   object:nil];
-		activeFilter = nil;
 		
 		[NSBundle loadNibNamed:@"BrowserView" owner:self];
 	}
@@ -105,7 +102,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[sortDescriptor release];
 	[mainController release];
 	[visibleTags release];
-	[activeFilter release];
 	[filterEngineOpQueue release];
 	[searchFieldString release];
 	[super dealloc];
@@ -183,18 +179,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	return controlledView;
 }
 
-- (void)setActiveFilter:(PAStringFilter*)filter
-{
-	[filter retain];
-	[activeFilter release];
-	activeFilter = filter;
-}
-
-- (PAStringFilter*)activeFilter
-{
-	return activeFilter;
-}
-
 - (NSMutableArray*)visibleTags;
 {
 	return visibleTags;
@@ -266,17 +250,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (NSArray *)allTags
 {
 	return [tags tags];
-}
-
-- (NSArray*)activeContentTypeFilters
-{
-	return activeContentTypeFilters;
-}
-
-- (void)setActiveContentTypeFilters:(NSArray*)filters
-{
-	[activeContentTypeFilters release];
-	activeContentTypeFilters = [filters retain];
 }
 
 - (NSArray*)contentTypeFilterIdentifiers
@@ -359,36 +332,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)searchFieldStringHasChanged
 {
 	[self clearVisibleTags];
-	
-	// if searchFieldString has any content, display tags with corresponding prefix
-	// else display all tags
-	if ([searchFieldString length] > 0)
-	{
-		NSString *decomposedSearchString = [searchFieldString decomposedStringWithCanonicalMapping];
-		
-		PAStringFilter *newFilter;
-		
-		PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
-			
-		switch (searchType) {
-			case PATagPrefixSearchType:
-				newFilter = [[[PAStringPrefixFilter alloc] initWithFilter:decomposedSearchString] autorelease];
-				break;
-			case PATagSearchType:
-				newFilter = [[[PAStringFilter alloc] initWithFilter:decomposedSearchString] autorelease];
-				break;
-			default:
-				NSLog(@"Must not happen - FIXME");
-				break;
-		}
-
-		[self setActiveFilter:newFilter];
-	}
-	else
-	{
-		[self setActiveFilter:nil];
-	}
-	
 	[self filterTags:activeTags];
 }
 
@@ -465,17 +408,14 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	NSMutableArray *allFilters = [NSMutableArray array];
 	
-	if ([self activeFilter] != nil)
+	PAStringFilter *activeStringFilter = [self activeStringFilter];
+	
+	if (activeStringFilter != nil)
 	{
-		[allFilters addObject:activeFilter];
+		[allFilters addObject:activeStringFilter];
 	}
 	
-	// create and add content type filters	
-	for (NSString *contentTypeIdentifier in [self contentTypeFilterIdentifiers])
-	{
-		PAContentTypeFilter *filter = [PAContentTypeFilter filterWithContentType:contentTypeIdentifier];
-		[allFilters addObject:filter];
-	}
+	[allFilters addObjectsFromArray:[self activeContentTypeFiltersForIdentifiers:[self contentTypeFilterIdentifiers]]];
 				
 	return allFilters;
 }
@@ -502,8 +442,48 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	[self setContentTypeFilterIdentifiers:[NSArray arrayWithObject:contentType]];
 	
-	// TODO activeTags?
-	[self filterTags:[tags tags]];
+	[self filterTags:activeTags];
+}
+
+- (PAStringFilter*)activeStringFilter
+{
+	PAStringFilter *newFilter = nil;
+	
+	if ([searchFieldString length] > 0)
+	{
+		NSString *decomposedSearchString = [searchFieldString decomposedStringWithCanonicalMapping];
+		
+		
+		PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
+		
+		switch (searchType) {
+			case PATagPrefixSearchType:
+				newFilter = [[[PAStringPrefixFilter alloc] initWithFilter:decomposedSearchString] autorelease];
+				break;
+			case PATagSearchType:
+				newFilter = [[[PAStringFilter alloc] initWithFilter:decomposedSearchString] autorelease];
+				break;
+			default:
+				NSLog(@"Must not happen - FIXME");
+				break;
+		}
+	}
+	
+	return newFilter;
+}
+
+- (NSArray*)activeContentTypeFiltersForIdentifiers:(NSArray*)identifiers
+{
+	NSMutableArray *filters = [NSMutableArray array];
+	
+	// create and add content type filters	
+	for (NSString *contentTypeIdentifier in identifiers)
+	{
+		PAContentTypeFilter *filter = [PAContentTypeFilter filterWithContentType:contentTypeIdentifier];
+		[filters addObject:filter];
+	}
+	
+	return filters;
 }
 
 #pragma mark actions
