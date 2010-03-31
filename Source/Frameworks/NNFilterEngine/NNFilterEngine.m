@@ -92,8 +92,6 @@
 		
 		if ([newObjects count] > 0)
 		{
-			NSLog(@"count ... %ld",[newObjects count]);
-			
 			[filteredObjects addObjectsFromArray:newObjects];
 			
 			// call delegate with a copy of the array (avoid races)
@@ -142,8 +140,6 @@
 
 		usleep(50000);
 	}
-	
-	NSLog(@"%@ finished",self);
 }
 
 - (BOOL)hasFilters
@@ -167,8 +163,6 @@
  */
 - (void)cancel
 {
-	NSLog(@"cancelled");
-	
 	for (NNObjectFilter *filter in filters)
 	{
 		[filter cancel];
