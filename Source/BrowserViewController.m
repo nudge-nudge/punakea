@@ -286,7 +286,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		{
 			NSString *tmpSearchFieldString = [searchFieldString substringToIndex:[searchFieldString length]-1];
 			[self setSearchFieldString:tmpSearchFieldString];
-			[searchField setStringValue:tmpSearchFieldString];
 		}
 		else if ([mainController isKindOfClass:[PAResultsViewController class]])
 		// else delete the last selected tag (if resultsview is active)
@@ -301,8 +300,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		[tmpSearchFieldString appendString:[event charactersIgnoringModifiers]];
 		
 		[self setSearchFieldString:tmpSearchFieldString];
-		[searchField setStringValue:tmpSearchFieldString];
-		[tmpSearchFieldString release];
 	}
 	else
 	{
@@ -346,6 +343,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)searchFieldStringHasChanged
 {
 	[self clearVisibleTags];
+	[searchField setStringValue:searchFieldString];
 	[self filterTags:activeTags];
 }
 
@@ -454,10 +452,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	NSString *contentType = [[notification userInfo] objectForKey:@"contentType"];
 	[self setContentTypeFilterIdentifiers:[NSArray arrayWithObject:contentType]];
-	
-	[self setSearchFieldString:@""];
-	[searchField setStringValue:@""];
-	
+		
 	[self filterTags:activeTags];
 }
 
@@ -468,7 +463,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	if ([searchFieldString length] > 0)
 	{
 		NSString *decomposedSearchString = [searchFieldString decomposedStringWithCanonicalMapping];
-		
 		
 		PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
 		
