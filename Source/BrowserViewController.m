@@ -17,6 +17,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)tagsHaveChanged;
 
+- (void)setDisplayTags:(NSMutableArray *)someTags filterTags:(BOOL)flag;
+
 - (NSMutableArray*)visibleTags;
 - (void)setVisibleTags:(NSMutableArray*)otherTags;
 - (void)clearVisibleTags;
@@ -214,6 +216,11 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)setDisplayTags:(NSMutableArray*)someTags
 {
+	[self setDisplayTags:someTags filterTags:YES];
+}
+
+- (void)setDisplayTags:(NSMutableArray *)someTags filterTags:(BOOL)flag
+{
 	// empty visibleTags
 	[self clearVisibleTags];
 	
@@ -221,8 +228,11 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[activeTags release];
 	activeTags = [someTags retain];
 	
-	// start filtering
-	[self filterTags:activeTags];
+	if (flag)
+	{
+		// start filtering
+		[self filterTags:activeTags];
+	}
 }
 
 - (void)resetDisplayTags
@@ -410,7 +420,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[filterEngineOpQueue addOperation:filterEngineOp];
 	[filterEngineOp release];
 
-	// show progress in the UI
+	// empty cloud and show progress in the UI
 	NSString *desc = NSLocalizedStringFromTable(@"PROGRESS_GATHERING_TAGS", @"Global", nil);
 	[[[[NSApplication sharedApplication] delegate] browserController] startProgressAnimationWithDescription:desc];
 }
@@ -618,7 +628,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self displaySelectedTag:nil];
 	
 	// display all tags
-	[self setDisplayTags:[tags tags]];
+	[self setDisplayTags:[tags tags] filterTags:NO];
+	[self setVisibleTags:[tags tags]];
 }
 
 - (void)reloadData
