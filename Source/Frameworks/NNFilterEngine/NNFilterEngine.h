@@ -17,8 +17,6 @@
 @protocol NNFilterEngineDelegate;
 
 @interface NNFilterEngine : NSOperation {
-	BOOL				finished;
-	
 	id<NNFilterEngineDelegate> delegate;
 		
 	NSArray				*filters;
@@ -39,6 +37,6 @@
 
 @optional
 - (void)filterEngineFilteredObjects:(NSArray*)objects;
-- (void)filterEngineFinishedFiltering;
+- (void)filterEngineFinishedFiltering:(NSArray*)objects;
 
 @end

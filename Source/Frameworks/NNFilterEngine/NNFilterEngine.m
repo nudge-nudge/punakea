@@ -23,9 +23,7 @@
 				   delegate:(id<NNFilterEngineDelegate>)aDelegate
 {
 	if (self = [super init])
-	{	
-		finished = NO;
-		
+	{		
 		filteredObjects = [[NSMutableArray alloc] init];
 			
 		// sort filters by weight - filters with lower weight are more efficient
@@ -94,6 +92,8 @@
 		
 		if ([newObjects count] > 0)
 		{
+			NSLog(@"count ... %ld",[newObjects count]);
+			
 			[filteredObjects addObjectsFromArray:newObjects];
 			
 			// call delegate with a copy of the array (avoid races)
@@ -130,23 +130,20 @@
 					[filter cancel];
 				}
 				
-				if ([delegate respondsToSelector:@selector(filterEngineFinishedFiltering)])
+				if ([delegate respondsToSelector:@selector(filterEngineFinishedFiltering:)])
 				{
-					[delegate performSelectorOnMainThread:@selector(filterEngineFinishedFiltering)
-											   withObject:nil
+					[delegate performSelectorOnMainThread:@selector(filterEngineFinishedFiltering:)
+											   withObject:[NSArray arrayWithArray:filteredObjects]
 											waitUntilDone:NO];
 				}
-				[self willChangeValueForKey:@"executing"];
-				[self willChangeValueForKey:@"finished"];
-				finished = YES;
-				[self didChangeValueForKey:@"executing"];
-				[self didChangeValueForKey:@"finished"];
 				break;
 			}
 		}
 
 		usleep(50000);
 	}
+	
+	NSLog(@"%@ finished",self);
 }
 
 - (BOOL)hasFilters
@@ -165,26 +162,13 @@
 }
 
 #pragma mark NSOperation stuff
-- (BOOL)isConcurrent
-{
-	return YES;
-}
-
-- (BOOL)isExecuting
-{
-	return !finished;
-}
-
-- (BOOL)isFinished
-{
-	return finished;
-}
-
-/** 
+/*
  overwriting cancel - need to cancel all NNObjectFilters
  */
 - (void)cancel
 {
+	NSLog(@"cancelled");
+	
 	for (NNObjectFilter *filter in filters)
 	{
 		[filter cancel];
