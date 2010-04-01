@@ -125,6 +125,12 @@
 	// load services class and set as service provides
 	services =  [[PAServices alloc] init];
 	[NSApp setServicesProvider:services];
+	
+	// register for punakea:// url
+	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self 
+													   andSelector:@selector(getUrl:withReplyEvent:) 
+													 forEventClass:kInternetEventClass 
+														andEventID:kAEGetURL];
 
 	// DEBUG
 	//[[PANotificationReceiver alloc] init];
@@ -743,7 +749,6 @@
 	[self showBrowser:self];
 	[[browserController window] runToolbarCustomizationPalette:sender];
 }
-
 
 #pragma mark Misc
 - (IBAction)searchForTags:(NSArray*)someTags

@@ -389,6 +389,8 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		B614C3A0115A639A00D04FB5 /* DOCUMENT.tif in Resources */ = {isa = PBXBuildFile; fileRef = B614C39F115A639A00D04FB5 /* DOCUMENT.tif */; };
 		B614C3B9115A648500D04FB5 /* PDF.tif in Resources */ = {isa = PBXBuildFile; fileRef = B614C3B8115A648500D04FB5 /* PDF.tif */; };
+		B6C3D5AB11649A3600DAF3C2 /* URLHandlerCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = B6C3D5A911649A3600DAF3C2 /* URLHandlerCategory.h */; };
+		B6C3D5AC11649A3600DAF3C2 /* URLHandlerCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C3D5AA11649A3600DAF3C2 /* URLHandlerCategory.m */; };
 		B6E5A51A11622E9000EB41FC /* PATagCloudProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = B6E5A51911622E9000EB41FC /* PATagCloudProtocols.h */; };
 /* End PBXBuildFile section */
 
@@ -966,6 +968,8 @@
 		8D1107320486CEB800E47090 /* Punakea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Punakea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B614C39F115A639A00D04FB5 /* DOCUMENT.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = DOCUMENT.tif; sourceTree = "<group>"; };
 		B614C3B8115A648500D04FB5 /* PDF.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PDF.tif; sourceTree = "<group>"; };
+		B6C3D5A911649A3600DAF3C2 /* URLHandlerCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLHandlerCategory.h; sourceTree = "<group>"; };
+		B6C3D5AA11649A3600DAF3C2 /* URLHandlerCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLHandlerCategory.m; sourceTree = "<group>"; };
 		B6E5A51911622E9000EB41FC /* PATagCloudProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCloudProtocols.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1819,6 +1823,8 @@
 				65851FFB099780B9009C3CA7 /* ToolbarDelegateCategory.m */,
 				489DA0450C0B2EB40027E3FF /* PAServices.h */,
 				489DA0460C0B2EB40027E3FF /* PAServices.m */,
+				B6C3D5A911649A3600DAF3C2 /* URLHandlerCategory.h */,
+				B6C3D5AA11649A3600DAF3C2 /* URLHandlerCategory.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -2245,6 +2251,7 @@
 				658849D2115F6222003C2303 /* PATokenFieldCell.h in Headers */,
 				658849D4115F6222003C2303 /* PATokenAttachmentCell.h in Headers */,
 				B6E5A51A11622E9000EB41FC /* PATagCloudProtocols.h in Headers */,
+				B6C3D5AB11649A3600DAF3C2 /* URLHandlerCategory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2875,6 +2882,7 @@
 				48238A20111ECE090091B2CE /* LCLLogFile.m in Sources */,
 				658849D3115F6222003C2303 /* PATokenFieldCell.m in Sources */,
 				658849D5115F6222003C2303 /* PATokenAttachmentCell.m in Sources */,
+				B6C3D5AC11649A3600DAF3C2 /* URLHandlerCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
