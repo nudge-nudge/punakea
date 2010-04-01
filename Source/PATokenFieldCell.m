@@ -12,8 +12,6 @@
 
 @implementation PATokenFieldCell
 
-@synthesize delegate;
-
 - (id)setUpTokenAttachmentCell:(NSTokenAttachmentCell *)aCell forRepresentedObject:(id)anObj 
 {
 	PATokenAttachmentCell *attachmentCell = [[PATokenAttachmentCell alloc] initTextCell:[aCell stringValue]];
