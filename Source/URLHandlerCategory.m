@@ -23,9 +23,12 @@
 {
 	NNTagging *tagging = [NNTagging tagging];
 	
+	NSString *decodedURL = [tagURL stringByReplacingOccurrencesOfString:@"%20"
+															 withString:@" "];
+	
 	// strip protocol string and split tag names on "/"
-	NSString *tagString = [tagURL stringByReplacingOccurrencesOfString:@"punakea://"
-															withString:@""];
+	NSString *tagString = [decodedURL stringByReplacingOccurrencesOfString:@"punakea://"
+																withString:@""];
 	
 	NSArray *tagNames = [tagString componentsSeparatedByString:@"/"];
 	
