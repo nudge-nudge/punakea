@@ -16,20 +16,21 @@
 {
 	NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
 	NSArray *tags = [self tagsForPunakeaURL:url];
-	[self searchForTags:tags];
+	
+	if ([tags count] > 0)
+	{
+		[self searchForTags:tags];
+	}
 }
 
 - (NSArray*)tagsForPunakeaURL:(NSString*)tagURL
 {
 	NNTagging *tagging = [NNTagging tagging];
 	
-	NSString *decodedURL = [tagURL stringByReplacingOccurrencesOfString:@"%20"
-															 withString:@" "];
+	NSURL *url = [NSURL URLWithString:tagURL];
 	
-	// strip protocol string and split tag names on "/"
-	NSString *tagString = [decodedURL stringByReplacingOccurrencesOfString:@"punakea://"
-																withString:@""];
-	
+	NSString *tagString = [url path];
+		
 	NSArray *tagNames = [tagString componentsSeparatedByString:@"/"];
 	
 	NSArray *tags = [tagging tagsForTagnames:tagNames];
