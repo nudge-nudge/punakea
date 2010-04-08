@@ -65,6 +65,8 @@
 		[PAInstaller install];
 		
 		globalTags = [NNTags sharedTags];
+		
+		tagging = [NNTagging tagging];
 			
 		lcl_log(lcl_cglobal,lcl_vInfo, @"Punakea (compiled on %s at %s) started",__DATE__,__TIME__);
 		
@@ -736,6 +738,18 @@
 - (IBAction)revealInFinder:(id)sender
 {
 	[[browserController rightStatusBar] revealInFinder:self];
+}
+
+- (IBAction)importFolder:(id)sender
+{
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	[openPanel setCanChooseDirectories:YES];
+	
+	if ([openPanel runModal] == NSOKButton)
+	{
+		NSArray *filenames = [openPanel filenames];
+		[tagging importFolderAtPath:[filenames objectAtIndex:0] manageFiles:NO];
+	}
 }
 
 - (IBAction)toggleToolbarShown:(id)sender

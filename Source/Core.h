@@ -2,6 +2,7 @@
 #import <Cocoa/Cocoa.h>
 #import "NNTagging/NNTags.h"
 #import "NNTagging/NNTaggableObject.h"
+#import "NNTagging/NNTagging.h"
 
 #import "NSApplication+SystemVersion.h"
 
@@ -46,6 +47,7 @@
 	
 	IBOutlet NSMenu					*statusMenu;	
 	NNTags							*globalTags;
+	NNTagging						*tagging;
 	
 	BrowserController				*browserController;	
 	TaggerController				*_taggerController;
@@ -107,6 +109,7 @@
 - (IBAction)toggleToolbarShown:(id)sender;
 - (IBAction)runToolbarCustomizationPalette:(id)sender;
 
+- (IBAction)importFolder:(id)sender;
 
 - (IBAction)searchForTags:(NSArray*)someTags;
 
