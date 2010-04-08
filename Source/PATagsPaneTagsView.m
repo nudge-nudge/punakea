@@ -77,6 +77,15 @@
 	// DO THE ACTUAL WRITING OF TAGS TO FILES AFTER LOSING FOCUS, OTHERWISE
 	// QUERY WILL UPDATE AND TAGS PANE LOSES REFERENCES
 	
+	// FIXME tagAutoCompleteController is not available when the window is closed!
+	// This is just a small workaround - probably best to redesign this and
+	// pull the controller out of the nib!
+	if (tagAutoCompleteController == nil)
+	{
+		lcl_log(lcl_cglobal, lcl_vWarning, @"Notification received, but no tagAutoCompleteController available");
+		return;
+	}
+	
 	// Tag sets
 	NSSet *initialTagSet = [NSSet setWithArray:initialTags];
 	NSSet *tagSet = [NSSet setWithArray:[[tagAutoCompleteController currentCompleteTagsInField] selectedTags]];
