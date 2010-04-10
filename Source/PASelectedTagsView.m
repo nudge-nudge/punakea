@@ -244,7 +244,7 @@ NSInteger const PADDING_TO_RIGHT = 60;
 	[homeButton setToolTip:NSLocalizedStringFromTable(@"HOME", @"Menus", nil)];
 	
 	[homeButton setTarget:[[NSApplication sharedApplication] delegate]];
-	[homeButton setAction:@selector(goHome:)];
+	[homeButton setAction:@selector(emptySelectedTags:)];
 	
 	[homeButton setHidden:YES];
 	

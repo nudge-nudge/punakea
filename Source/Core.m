@@ -492,6 +492,11 @@
 	[[browserController browserViewController] reset];
 }
 
+- (IBAction)emptySelectedTags:(id)sender
+{
+	[[browserController browserViewController] emptySelectedTags];
+}
+
 - (IBAction)toggleInfoPane:(id)sender
 {
 	[browserController toggleInfoPane:sender];

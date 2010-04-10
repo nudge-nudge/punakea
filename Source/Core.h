@@ -79,6 +79,7 @@
 - (IBAction)getInfo:(id)sender;
 
 - (IBAction)goHome:(id)sender;
+- (IBAction)emptySelectedTags:(id)sender;
 - (IBAction)toggleInfoPane:(id)sender;
 - (IBAction)toggleTagsPane:(id)sender;
 - (IBAction)goToAllItems:(id)sender;
