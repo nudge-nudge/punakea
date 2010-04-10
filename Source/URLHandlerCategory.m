@@ -25,8 +25,6 @@
 
 - (NSArray*)tagsForPunakeaURL:(NSString*)tagURL
 {
-	NNTagging *tagging = [NNTagging tagging];
-	
 	NSURL *url = [NSURL URLWithString:tagURL];
 	
 	NSString *tagString = [url path];

@@ -745,10 +745,43 @@
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	[openPanel setCanChooseDirectories:YES];
 	
+	NSButton *checkBox = [[NSButton alloc] initWithFrame:NSMakeRect(0.0, 0.0, 25.0, 10.0)];
+	NSButtonCell *checkBoxCell = [checkBox cell];
+	[checkBoxCell setButtonType:NSSwitchButton];
+	[checkBoxCell setTitle:NSLocalizedStringFromTable(@"MOVE_FILES_ON_IMPORTING",@"FileManager",@"")];
+	
+	// set checkbox according to userDefaults
+	if ([userDefaults boolForKey:@"ManageFiles.ManagedFolder.Enabled"])
+	{
+		[checkBoxCell setState:NSOnState];
+	}	
+	
+	[checkBox sizeToFit];
+	[openPanel setAccessoryView:checkBox];
+	[checkBox release];
+	
 	if ([openPanel runModal] == NSOKButton)
 	{
 		NSArray *filenames = [openPanel filenames];
-		[tagging importFolderAtPath:[filenames objectAtIndex:0] manageFiles:NO];
+		
+		NNFolderToTagImporter *importer = [[NNFolderToTagImporter alloc] init];
+				
+		NSButton *accessoryView = (NSButton*) [openPanel accessoryView];
+		
+		if ([accessoryView state] == NSOnState)
+		{
+			[importer setManagesFiles:YES];
+		}
+		
+		BusyWindowController *bwc = [[self busyWindow] delegate];
+		
+		[bwc setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_IMPORTING_FOLDER",@"FileManager",@"")];
+		[bwc performBusySelector:@selector(importPath:)
+						onObject:importer
+					  withObject:[filenames objectAtIndex:0]];
+		
+		[busyWindow center];
+		[NSApp runModalForWindow:busyWindow];
 	}
 }
 

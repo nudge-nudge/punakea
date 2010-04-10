@@ -3,6 +3,7 @@
 #import "NNTagging/NNTags.h"
 #import "NNTagging/NNTaggableObject.h"
 #import "NNTagging/NNTagging.h"
+#import "NNTagging/NNFolderToTagImporter.h"
 
 #import "NSApplication+SystemVersion.h"
 
