@@ -127,6 +127,11 @@
 	selectedTags = otherSelectedTags;
 }
 
+- (IBAction)emptySelectedTags:(id)senders
+{
+	[selectedTags removeAllTags];
+}
+
 - (NSString*)displayMessage
 {
 	return displayMessage;

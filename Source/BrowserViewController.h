@@ -99,7 +99,6 @@ highlights tag in tagcloud
 - (void)setSearchFieldString:(NSString*)string;
 
 - (void)searchForTags:(NSArray*)someTags;
-- (void)emptySelectedTags;
 
 - (void)manageTags;
 - (void)showResults;

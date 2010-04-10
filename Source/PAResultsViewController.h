@@ -45,6 +45,8 @@
 - (NNSelectedTags*)selectedTags;
 - (void)setSelectedTags:(NNSelectedTags*)otherSelectedTags;
 
+- (IBAction)emptySelectedTags:(id)senders;
+
 - (void)removeLastTag;
 
 - (NSArray*)draggedItems;

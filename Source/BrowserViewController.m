@@ -569,11 +569,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[[self mainController] handleTagActivations:someTags];
 }
 
-- (void)emptySelectedTags
-{
-	[[self mainController] reset];
-}
-
 - (void)manageTags
 {
 	if ([[self mainController] isKindOfClass:[PATagManagementViewController class]])
