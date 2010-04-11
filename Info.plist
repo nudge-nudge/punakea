@@ -75,7 +75,7 @@
 	<key>CFBundleSignature</key>
 	<string>NNPA</string>
 	<key>CFBundleVersion</key>
-	<string>1646</string>
+	<string>1653</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
