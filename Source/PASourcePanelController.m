@@ -202,11 +202,16 @@ NSString * const PAContentTypeFilterUpdate = @"PAContentTypeFilterUpdate";
 
 - (CGFloat)outlineView:(NSOutlineView *)ov heightOfRowByItem:(id)item
 {
-	if((item != nil) && [item isKindOfClass:[PASourceItem class]])
+	if((item != nil)
 	{
-		PASourceItem *sourceItem = (PASourceItem *)item;
-		if([sourceItem isHeading])
-			return 25.0;
+		if ([item isKindOfClass:[PASourceItem class]])
+		{
+			SourceItem *sourceItem = (PASourceItem *)item;
+			
+			if([sourceItem isHeading])
+			{
+				return 25.0;
+			}
 	}
 	
 	return 20.0;
