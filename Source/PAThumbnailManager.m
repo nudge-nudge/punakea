@@ -169,17 +169,20 @@ static PAThumbnailManager *sharedInstance = nil;
 	NSImage *thumbnail = [self thumbnailFromFileNew:filename maxBounds:NSMakeSize(76,75)];
 	//if([[thumbnailItem view] isFlipped]) [thumbnail setFlipped:YES];
 	
-	[processLock lock];
+	if (thumbnail != nil)
+	{
+		[processLock lock];
 
-	[thumbnails removeObjectForKey:filename];
-	[thumbnails setObject:thumbnail forKey:filename];
-	[stack addObject:filename];
+		[thumbnails removeObjectForKey:filename];
+		[thumbnails setObject:thumbnail forKey:filename];
+		[stack addObject:filename];
 	
-	[processLock unlock];
+		[processLock unlock];
 	
-	// Post notification
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
+		// Post notification
+		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+		[nc postNotificationName:PAThumbnailManagerDidFinishGeneratingItemNotification object:thumbnailItem];
+	}
 }
 
 - (void)generateIconForFile:(PAThumbnailItem *)thumbnailItem
