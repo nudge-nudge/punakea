@@ -65,7 +65,7 @@ NSUInteger const FILTERSLICE_BUTTON_SPACING = 2;
 #pragma mark Actions
 - (void)setupButtons
 {
-	for(NSUInteger i = 0; i < 9; i++)
+	for(NSUInteger i = 0; i < 10; i++)
 	{	
 		// Init button
 		PAFilterButton *button = [[PAFilterButton alloc] initWithFrame:[self frame]];
@@ -124,6 +124,12 @@ NSUInteger const FILTERSLICE_BUTTON_SPACING = 2;
 				[filter setObject:[NSArray arrayWithObject:@"BOOKMARKS"] forKey:@"filterValues"];
 				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
 				break;
+			case 9:		// FOLDERS
+				[filter setObject:@"DIRECTORIES" forKey:@"title"];
+				[filter setObject:[NSArray arrayWithObject:@"DIRECTORIES"] forKey:@"filterValues"];
+				[filter setObject:@"kMDItemContentTypeTree" forKey:@"filterBundlingAttribute"];
+				break;
+
 		}
 		
 		// Determine button's title
