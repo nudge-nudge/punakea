@@ -141,6 +141,7 @@
 		488E18BE0A27231F009D2826 /* PATagTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */; };
 		488E802C0AF3898400660B7B /* PACollectionNotEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */; };
 		488E802D0AF3898400660B7B /* PACollectionNotEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */; };
+		4895A4AD1191652100D428A5 /* DIRECTORIES.tif in Resources */ = {isa = PBXBuildFile; fileRef = 4895A4AC1191652100D428A5 /* DIRECTORIES.tif */; };
 		489A603F0ADA4AF500C6CE36 /* drop_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 489A603E0ADA4AF500C6CE36 /* drop_highlight.png */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
@@ -709,6 +710,7 @@
 		488E18BC0A27231F009D2826 /* PATagTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagTextFieldCell.m; sourceTree = "<group>"; };
 		488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACollectionNotEmpty.h; sourceTree = "<group>"; };
 		488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACollectionNotEmpty.m; sourceTree = "<group>"; };
+		4895A4AC1191652100D428A5 /* DIRECTORIES.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = DIRECTORIES.tif; sourceTree = "<group>"; };
 		489A603E0ADA4AF500C6CE36 /* drop_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop_highlight.png; sourceTree = "<group>"; };
 		489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagsView.h; sourceTree = "<group>"; };
 		489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTagsView.m; sourceTree = "<group>"; };
@@ -2143,6 +2145,7 @@
 				659E8DB70C143AD000D5ED38 /* BOOKMARKS.tif */,
 				B614C3B8115A648500D04FB5 /* PDF.tif */,
 				B614C39F115A639A00D04FB5 /* DOCUMENT.tif */,
+				4895A4AC1191652100D428A5 /* DIRECTORIES.tif */,
 			);
 			name = Types;
 			sourceTree = "<group>";
@@ -2662,6 +2665,7 @@
 				48BE1CAD10F65F1700946400 /* dsa_pub.pem in Resources */,
 				B614C3A0115A639A00D04FB5 /* DOCUMENT.tif in Resources */,
 				B614C3B9115A648500D04FB5 /* PDF.tif in Resources */,
+				4895A4AD1191652100D428A5 /* DIRECTORIES.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
