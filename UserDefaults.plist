@@ -72,6 +72,7 @@
 		<string>MOVIES</string>
 		<string>MUSIC</string>
 		<string>PDF</string>
+		<string>DIRECTORIES</string>
 	</array>
 	<key>SUCheckAtStartup</key>
 	<true/>
