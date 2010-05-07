@@ -39,7 +39,7 @@
 {
 	NSString *tagName = [object name];
 	
-	if (!NSEqualRanges([tagName rangeOfString:filter options:NSCaseInsensitiveSearch], 
+	if (!NSEqualRanges([tagName rangeOfString:filter options:(NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch)], 
 					   NSMakeRange(NSNotFound,0)))
 	{
 		[self objectFiltered:object];

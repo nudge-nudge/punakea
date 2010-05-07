@@ -69,7 +69,7 @@
 	
 	while (tag = [e nextObject])
 	{
-		if (!NSEqualRanges([[tag name] rangeOfString:prefix options:(NSCaseInsensitiveSearch | NSAnchoredSearch)],
+		if (!NSEqualRanges([[tag name] rangeOfString:prefix options:(NSCaseInsensitiveSearch | NSAnchoredSearch | NSDiacriticInsensitiveSearch)],
 						   NSMakeRange(NSNotFound,0)))
 		{
 			return true;

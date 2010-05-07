@@ -17,7 +17,8 @@
 {
 	NSString *tagName = [object name];
 	
-	if ([[tagName lowercaseString] hasPrefix:filter])
+	if (!NSEqualRanges([tagName rangeOfString:filter options:(NSCaseInsensitiveSearch | NSAnchoredSearch | NSDiacriticInsensitiveSearch)], 
+					   NSMakeRange(NSNotFound,0)))
 	{
 		[self objectFiltered:object];
 	}
