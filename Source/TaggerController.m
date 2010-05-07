@@ -87,12 +87,7 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 		   selector:@selector(tagsHaveChanged:)
 			   name:NNSelectedTagsHaveChangedNotification
 			 object:[tagAutoCompleteController currentCompleteTagsInField]];
-	
-	[nc addObserver:self
-		   selector:@selector(editingDidEnd:)
-			   name:NSControlTextDidEndEditingNotification
-			 object:[self tagField]];
-	
+		
 	// Check manage files
 	if(manageFilesAutomatically)
 		manageFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];	
@@ -124,11 +119,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 
 - (void)dealloc
 {
-	// make sure the tags are written
-	[self	 writeTags:[[self currentCompleteTagsInField] selectedTags]
-	   withInitialTags:[self initialTags]
-     toTaggableObjects:taggableObjects];
-	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[taggableObjects release];
@@ -168,6 +158,17 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	{
 		for(NNTaggableObject *taggableObject in taggableObjects)
 			[taggableObject addTags:[diffSetToAdd allObjects]];
+	}
+	
+	// if the manage files checkbox is checked, make sure that
+	// every file is at its correct place, even if no tags have
+	// changed
+	if (manageFiles)
+	{
+		for (NNTaggableObject *taggableObject in taggableObjects) 
+		{
+			[taggableObject handleFileManagement];
+		}
 	}
 }
 
@@ -382,6 +383,14 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
  */
 - (IBAction)confirmTags:(id)sender
 {
+	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
+	withInitialTags:[self initialTags]
+  toTaggableObjects:taggableObjects];
+	
+	// update inital tags to current tags - other changes have been written
+	NSArray *currentTags = [[[[self currentCompleteTagsInField] selectedTags] copy] autorelease];
+	[self setInitialTags:currentTags];
+	
 	[self close];
 }
 
@@ -420,21 +429,6 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
 	NSArray *associatedTagnames = [[NNTagging tagging] tagNamesForTags:associatedTags];
 	NSString *suggestion = [associatedTagnames componentsJoinedByString:@", "];
 	[suggestionField setStringValue:suggestion];
-}
-
-/**
- The only time the tags are written is when the user 
- finishes editing the tags in the tokenfield
- */
-- (void)editingDidEnd:(NSNotification *)aNotification
-{
-	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
-	withInitialTags:[self initialTags]
-  toTaggableObjects:taggableObjects];
-	
-	// update inital tags to current tags - other changes have been written
-	NSArray *currentTags = [[[[self currentCompleteTagsInField] selectedTags] copy] autorelease];
-	[self setInitialTags:currentTags];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
