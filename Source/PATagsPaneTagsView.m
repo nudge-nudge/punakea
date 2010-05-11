@@ -23,6 +23,8 @@
     self = [super initWithFrame:frame];
     if(self)
 	{		
+		[tagAutoCompleteController retain]; // extra retain to keep it even when the view unloads
+		
 		[self setInitialTags:[NSArray array]];
 		
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -61,6 +63,7 @@
 	
 	[taggableObjects release];
 	[initialTags release];
+	[tagAutoCompleteController release];
 	
 	[super dealloc];
 }
