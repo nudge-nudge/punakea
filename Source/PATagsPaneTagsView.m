@@ -63,8 +63,7 @@
 	
 	[taggableObjects release];
 	[initialTags release];
-	[tagAutoCompleteController release];
-	
+
 	[super dealloc];
 }
 
