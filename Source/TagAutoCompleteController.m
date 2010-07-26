@@ -16,8 +16,9 @@
 {
 	if (self = [super init])
 	{			
-		currentCompleteTagsInField = [[NNSelectedTags alloc] init];		
 		globalTags = [NNTags sharedTags];		
+
+		currentCompleteTagsInField = [[NNSelectedTags alloc] init];		
 		typeAheadFind = [[PATypeAheadFind alloc] init];
 	}
 	return self;
@@ -27,6 +28,8 @@
 {
 	[currentCompleteTagsInField release];
 	[typeAheadFind release];
+	
+	NSLog(@"dealloc %@",self);
 	
 	[super dealloc];
 }
@@ -121,6 +124,15 @@
 	}
 }
 
+- (id)retain{
+	NSLog(@"retain %@:%i",self,[self retainCount]);
+	return [super retain];
+}
+
+- (void)release {
+	NSLog(@"release %@:%i",self,[self retainCount]);
+	[super release];	
+}
 
 #pragma mark Accessors
 - (NSTokenField *)tagField
