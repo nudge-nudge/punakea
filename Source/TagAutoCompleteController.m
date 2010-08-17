@@ -124,16 +124,6 @@
 	}
 }
 
-- (id)retain{
-	NSLog(@"retain %@:%i",self,[self retainCount]);
-	return [super retain];
-}
-
-- (void)release {
-	NSLog(@"release %@:%i",self,[self retainCount]);
-	[super release];	
-}
-
 #pragma mark Accessors
 - (NSTokenField *)tagField
 {
