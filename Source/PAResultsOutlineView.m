@@ -571,10 +571,15 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	return [super performKeyEquivalent:theEvent];
 }
 
-- (NSMenu *)menuForEvent:(NSEvent *)theEvent
+- (NSMenu *)menuForEvent:(NSEvent *)event
 {
-	if ([[self selectedItems] count] != 0)
+	NSInteger row = [self mouseRowForEvent:event];
+	
+	if (row >= 0 && [[self target] outlineView:self shouldSelectItem:[self itemAtRow:row]])
 	{
+		if (![[self selectedRowIndexes] containsIndex:row])
+			[self selectRow:row byExtendingSelection:NO];
+		
 		return [self menu];
 	}
 	
