@@ -81,6 +81,12 @@
 	[outlineView registerForDraggedTypes:[dropManager handledPboardTypes]];
 	[outlineView setDraggingSourceOperationMask:NSDragOperationNone forLocal:YES];
 	[outlineView setDraggingSourceOperationMask:(dragOperation | NSDragOperationCopy | NSDragOperationDelete) forLocal:NO];
+	
+	// Add view to popup menu
+	FVColorMenuView *menuView = [FVColorMenuView menuView];
+	[menuView setTarget:self];
+	[menuView setAction:@selector(changeFinderLabel:)];
+	[colorLabelMenuItem setView:menuView];
 }
 
 - (void)dealloc
@@ -267,6 +273,31 @@
 	
 	[results setObject:collapsedGroups forKey:@"CollapsedGroups"];		
 	[defaults setObject:results forKey:@"Results"];
+}
+
+
+#pragma mark Popup Menu
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	NSLog(@"here");
+	
+	NNFile *file = [[outlineView selectedItems] objectAtIndex:0];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"file://%@", [file path]]];
+		
+	// Set default selection to the currently selected item's color label
+	[(FVColorMenuView *)[colorLabelMenuItem view] selectLabel:[FVFinderLabel finderLabelForURL:url]];
+	
+	return YES;
+}
+
+- (IBAction)changeFinderLabel:(id)sender
+{
+	NNFile *file = [[outlineView selectedItems] objectAtIndex:0];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"file://%@", [file path]]];
+	
+	[FVFinderLabel setFinderLabel:[sender tag] forURL:url];
+	
+	[[colorLabelMenuItem menu] cancelTracking];
 }
 
 

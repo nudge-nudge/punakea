@@ -571,6 +571,16 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	return [super performKeyEquivalent:theEvent];
 }
 
+- (NSMenu *)menuForEvent:(NSEvent *)theEvent
+{
+	if ([[self selectedItems] count] != 0)
+	{
+		return [self menu];
+	}
+	
+	return nil;
+}
+
 /**
 	Custom keyDown event allows opening files with CMD + ARROW-DOWN
 */

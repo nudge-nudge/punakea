@@ -5,3 +5,40 @@
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
 #endif
+
+// Prefix headers by Adam Maxwell for color labels
+
+// docs say not to send [super initialize]
+#if !defined(FVINITIALIZE)
+#define FVINITIALIZE(aClass) \
+do { if ([aClass self] != self) return; } while(0)
+#endif /* FVINITIALIZE */
+
+#if !defined(_FVAPIAssertBody)
+#define _FVAPIAssertBody(condition, desc, arg1, arg2, arg3) \
+do { if(!(condition)) { [NSException raise:NSInvalidArgumentException format:(desc), (arg1), (arg2), (arg3)]; } } while(0)
+#endif /* _FVAPIAssertBody */
+
+// use NSAssert internally for debugging; these asserts are to enforce public API usage for framework clients
+#define FVAPIAssert(condition, desc) \
+_FVAPIAssertBody((condition), desc, 0, 0, 0)
+
+#define FVAPIAssert1(condition, desc, arg1) \
+_FVAPIAssertBody((condition), (desc), (arg1), 0, 0)
+
+#define FVAPIAssert2(condition, desc, arg1, arg2) \
+_FVAPIAssertBody((condition), (desc), (arg1), (arg2), 0)
+
+#define FVAPIAssert3(condition, desc, arg1, arg2, arg3) \
+_FVAPIAssertBody((condition), (desc), (arg1), (arg2), (arg3))
+
+#define FVAPIParameterAssert(condition)			\
+_FVAPIAssertBody((condition), @"Invalid parameter not satisfying: %s", #condition, 0, 0)
+
+#ifdef __cplusplus
+#define FV_EXTERN		extern "C"
+#define FV_PRIVATE_EXTERN	__private_extern__ "C"
+#else
+#define FV_EXTERN		extern
+#define FV_PRIVATE_EXTERN	__private_extern__
+#endif

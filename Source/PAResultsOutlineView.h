@@ -38,7 +38,7 @@ typedef enum _PAResultsDisplayMode
 	PAResultsDisplayMode			displayMode;
 			
 	// Stores the last up or down arrow function key to get the direction of key navigation
-	NSUInteger					lastUpDownArrowFunctionKey;
+	NSUInteger						lastUpDownArrowFunctionKey;
 	
 	// If not nil, forward keyboard events to responder
 	PAResultsMultiItemMatrix		*responder;

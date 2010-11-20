@@ -23,6 +23,9 @@
 #import "PATagButton.h"
 #import "PAThumbnailItem.h"
 
+#import "FVColorMenuView.h"
+#import "FVFinderLabel.h"
+
 
 @interface PAResultsViewController : PABrowserViewMainController {
 	
@@ -31,6 +34,8 @@
 	NNTags								*tags;
 	NNRelatedTags						*relatedTags;
 	NNSelectedTags						*selectedTags;
+	
+	IBOutlet NSMenuItem					*colorLabelMenuItem;
 	
 	PADropManager						*dropManager;
 	NNQuery								*query;
@@ -55,6 +60,8 @@
 - (NNQuery *)query;
 
 - (IBAction)setGroupingAttributes:(id)sender;
+
+- (IBAction)changeFinderLabel:(id)sender;
 
 - (void)deleteDraggedItems;
 - (void)deleteFilesForSelectedItems:(id)sender;

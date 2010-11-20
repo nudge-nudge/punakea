@@ -238,6 +238,13 @@
 		6557CAF40A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6557CAF20A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h */; };
 		6557CAF50A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6557CAF30A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m */; };
 		655B2ABF0ABFE8AC000A3AA4 /* FileManager.strings in Resources */ = {isa = PBXBuildFile; fileRef = 655B2ABE0ABFE8AC000A3AA4 /* FileManager.strings */; };
+		655BB0791297D6620001EE59 /* FVColorMenuView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 655BB0781297D6620001EE59 /* FVColorMenuView.nib */; };
+		655BB0831297D6DD0001EE59 /* FVColorMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = 655BB0811297D6DD0001EE59 /* FVColorMenuView.h */; };
+		655BB0841297D6DD0001EE59 /* FVColorMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 655BB0821297D6DD0001EE59 /* FVColorMenuView.m */; };
+		655BB1741297E1100001EE59 /* FVFinderLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 655BB1721297E1100001EE59 /* FVFinderLabel.h */; };
+		655BB1751297E1100001EE59 /* FVFinderLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 655BB1731297E1100001EE59 /* FVFinderLabel.m */; };
+		655BB1B51297E3060001EE59 /* FVUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 655BB1B31297E3060001EE59 /* FVUtilities.h */; };
+		655BB1B61297E3060001EE59 /* FVUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 655BB1B41297E3060001EE59 /* FVUtilities.m */; };
 		655BC1DF0AE795E9000A004A /* SnapBackPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655BC1DD0AE795E9000A004A /* SnapBackPressed.tif */; };
 		655BC1E00AE795E9000A004A /* SnapBack.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655BC1DE0AE795E9000A004A /* SnapBack.tif */; };
 		655D3BF50A7DD5CB009479F9 /* PAFilterSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 655D3BF30A7DD5CB009479F9 /* PAFilterSlice.h */; };
@@ -811,6 +818,13 @@
 		6557CAF20A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemThumbnailCell.h; sourceTree = "<group>"; };
 		6557CAF30A44663E00902BF3 /* PAResultsMultiItemThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemThumbnailCell.m; sourceTree = "<group>"; };
 		655B2AB70ABFE884000A3AA4 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/FileManager.strings; sourceTree = "<group>"; };
+		655BB0781297D6620001EE59 /* FVColorMenuView.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = FVColorMenuView.nib; sourceTree = "<group>"; };
+		655BB0811297D6DD0001EE59 /* FVColorMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FVColorMenuView.h; sourceTree = "<group>"; };
+		655BB0821297D6DD0001EE59 /* FVColorMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FVColorMenuView.m; sourceTree = "<group>"; };
+		655BB1721297E1100001EE59 /* FVFinderLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FVFinderLabel.h; sourceTree = "<group>"; };
+		655BB1731297E1100001EE59 /* FVFinderLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FVFinderLabel.m; sourceTree = "<group>"; };
+		655BB1B31297E3060001EE59 /* FVUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FVUtilities.h; sourceTree = "<group>"; };
+		655BB1B41297E3060001EE59 /* FVUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FVUtilities.m; sourceTree = "<group>"; };
 		655BC1DD0AE795E9000A004A /* SnapBackPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SnapBackPressed.tif; sourceTree = "<group>"; };
 		655BC1DE0AE795E9000A004A /* SnapBack.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SnapBack.tif; sourceTree = "<group>"; };
 		655D3BF30A7DD5CB009479F9 /* PAFilterSlice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFilterSlice.h; sourceTree = "<group>"; };
@@ -1500,6 +1514,7 @@
 		48B8F48A10FBB410002B1E35 /* IB */ = {
 			isa = PBXGroup;
 			children = (
+				655BB0781297D6620001EE59 /* FVColorMenuView.nib */,
 				650A727F0F826BD70082664D /* Registration.xib */,
 				656DDED20F8BCB7D00273700 /* Installer.xib */,
 				481634150A5A4EEB003B8EE4 /* Browser.nib */,
@@ -1711,6 +1726,19 @@
 				655377CC0AAD8C5000C6376B /* dummyThumbLarge.gif */,
 			);
 			name = "Thumbnail Manager";
+			sourceTree = "<group>";
+		};
+		655BB07C1297D6CA0001EE59 /* ColorLabelView */ = {
+			isa = PBXGroup;
+			children = (
+				655BB0811297D6DD0001EE59 /* FVColorMenuView.h */,
+				655BB0821297D6DD0001EE59 /* FVColorMenuView.m */,
+				655BB1721297E1100001EE59 /* FVFinderLabel.h */,
+				655BB1731297E1100001EE59 /* FVFinderLabel.m */,
+				655BB1B31297E3060001EE59 /* FVUtilities.h */,
+				655BB1B41297E3060001EE59 /* FVUtilities.m */,
+			);
+			name = ColorLabelView;
 			sourceTree = "<group>";
 		};
 		655D3BF20A7DD598009479F9 /* Filter Slice */ = {
@@ -2061,6 +2089,7 @@
 		65CC15530BE0A5B800866AF7 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				655BB07C1297D6CA0001EE59 /* ColorLabelView */,
 				65CC15540BE0A5C800866AF7 /* StatusBar */,
 				658AB8310BE60D000036FCA2 /* TabPanel */,
 				65C8A1FB0BEB4D3000DC032F /* Tag Field */,
@@ -2255,6 +2284,9 @@
 				658849D4115F6222003C2303 /* PATokenAttachmentCell.h in Headers */,
 				B6E5A51A11622E9000EB41FC /* PATagCloudProtocols.h in Headers */,
 				B6C3D5AB11649A3600DAF3C2 /* URLHandlerCategory.h in Headers */,
+				655BB0831297D6DD0001EE59 /* FVColorMenuView.h in Headers */,
+				655BB1741297E1100001EE59 /* FVFinderLabel.h in Headers */,
+				655BB1B51297E3060001EE59 /* FVUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2452,6 +2484,7 @@
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "punakea" */;
 			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2666,6 +2699,7 @@
 				B614C3A0115A639A00D04FB5 /* DOCUMENT.tif in Resources */,
 				B614C3B9115A648500D04FB5 /* PDF.tif in Resources */,
 				4895A4AD1191652100D428A5 /* DIRECTORIES.tif in Resources */,
+				655BB0791297D6620001EE59 /* FVColorMenuView.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2887,6 +2921,9 @@
 				658849D3115F6222003C2303 /* PATokenFieldCell.m in Sources */,
 				658849D5115F6222003C2303 /* PATokenAttachmentCell.m in Sources */,
 				B6C3D5AC11649A3600DAF3C2 /* URLHandlerCategory.m in Sources */,
+				655BB0841297D6DD0001EE59 /* FVColorMenuView.m in Sources */,
+				655BB1751297E1100001EE59 /* FVFinderLabel.m in Sources */,
+				655BB1B61297E3060001EE59 /* FVUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3943,9 +3980,14 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_OBJC_GC = unsupported;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = punakea_Prefix.pch;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
 			name = Debug;
@@ -3959,10 +4001,15 @@
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = punakea_Prefix.pch;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
 			name = Release;
