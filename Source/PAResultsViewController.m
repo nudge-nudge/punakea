@@ -280,12 +280,10 @@
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	NSLog(@"here");
-	
-	NNFile *file = [[outlineView selectedItems] objectAtIndex:0];
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"file://%@", [file path]]];
-		
+			
 	// Set default selection to the currently selected item's color label
-	[(FVColorMenuView *)[colorLabelMenuItem view] selectLabel:[FVFinderLabel finderLabelForURL:url]];
+	NNFile *file = [[outlineView selectedItems] objectAtIndex:0];
+	[(FVColorMenuView *)[colorLabelMenuItem view] selectLabel:[FVFinderLabel finderLabelForURL:[file url]]];
 	
 	return YES;
 }
@@ -293,9 +291,8 @@
 - (IBAction)changeFinderLabel:(id)sender
 {
 	NNFile *file = [[outlineView selectedItems] objectAtIndex:0];
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"file://%@", [file path]]];
 	
-	[FVFinderLabel setFinderLabel:[sender tag] forURL:url];
+	[FVFinderLabel setFinderLabel:[sender tag] forURL:[file url]];
 	
 	[[colorLabelMenuItem menu] cancelTracking];
 }
