@@ -296,9 +296,10 @@
 
 - (IBAction)changeFinderLabel:(id)sender
 {
-	NNFile *file = [[outlineView selectedItems] objectAtIndex:0];
-	
-	[FVFinderLabel setFinderLabel:[sender tag] forURL:[file url]];
+	for (NNFile *file in [outlineView selectedItems])
+	{	
+		[FVFinderLabel setFinderLabel:[sender tag] forURL:[file url]];
+	}
 	
 	[[colorLabelMenuItem menu] cancelTracking];
 }
