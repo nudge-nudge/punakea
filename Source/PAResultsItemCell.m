@@ -30,7 +30,20 @@
 
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{		
+{	
+	NSUInteger label = [FVFinderLabel finderLabelForURL:[item url]];
+	
+	if (![self isHighlighted])
+	{
+		[FVFinderLabel drawFinderLabel:label inRect:cellFrame roundEnds:YES];
+	} else {
+		NSRect frame = NSMakeRect(cellFrame.origin.x + cellFrame.size.width - cellFrame.size.height - 7,
+								  cellFrame.origin.y + 2,
+								  cellFrame.size.height - 4,
+								  cellFrame.size.height - 4);
+		[FVFinderLabel drawFinderLabel:label inRect:frame roundEnds:YES];
+	}
+	
 	// Draw icon
 	NSRect iconFrame = cellFrame;
 	iconFrame.origin.x += 5;
