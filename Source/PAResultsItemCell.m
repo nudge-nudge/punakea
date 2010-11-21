@@ -31,13 +31,14 @@
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {	
+	// Draw finder label
 	NSUInteger label = [FVFinderLabel finderLabelForURL:[item url]];
 	
 	if (![self isHighlighted])
 	{
 		[FVFinderLabel drawFinderLabel:label inRect:cellFrame roundEnds:YES];
 	} else {
-		NSRect frame = NSMakeRect(cellFrame.origin.x + cellFrame.size.width - cellFrame.size.height - 7,
+		NSRect frame = NSMakeRect(cellFrame.origin.x + cellFrame.size.width - cellFrame.size.height - 2,
 								  cellFrame.origin.y + 2,
 								  cellFrame.size.height - 4,
 								  cellFrame.size.height - 4);

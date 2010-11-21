@@ -10,10 +10,12 @@
 #import "NNTagging/NNTaggableObject.h"
 #import "PAThumbnailManager.h"
 #import "NSDateFormatter+FriendlyFormat.h"
+#import "FVFinderLabel.h"
+
 
 @interface PAResultsBookmarkCell : NSTextFieldCell {
 
-	NNTaggableObject				*item;
+	NNFile				*item;
 
 }
 

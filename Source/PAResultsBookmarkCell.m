@@ -30,14 +30,30 @@
 
 #pragma mark Drawing
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
-{		
+{	
+	// Draw finder label
+	NSUInteger label = [FVFinderLabel finderLabelForURL:[item url]];
+	
+	if (![self isHighlighted])
+	{
+		NSRect frame = cellFrame;
+		frame.size.height = 18;
+		
+		[FVFinderLabel drawFinderLabel:label inRect:frame roundEnds:YES];
+	} else {
+		NSRect frame = NSMakeRect(cellFrame.origin.x + cellFrame.size.width - 19 - 2,
+								  cellFrame.origin.y + 2,
+								  19 - 4,
+								  19 - 4);
+		[FVFinderLabel drawFinderLabel:label inRect:frame roundEnds:YES];
+	}
+	
 	// Draw icon
 	NSRect iconFrame = cellFrame;
 	iconFrame.origin.x += 5;
 	iconFrame.origin.y += 1;
 	iconFrame.size = NSMakeSize(16,16);
 	
-	// FIXME taggableObject does not necessarily have a path
 	NSImage *icon = [[PAThumbnailManager sharedInstance] iconForFile:[item path]
 	                                                          inView:controlView
 															   frame:iconFrame];
