@@ -10,6 +10,7 @@
 #import "PAResultsMultiItemGenericCell.h"
 #import "PAThumbnailManager.h"
 #import "NSBezierPathCategory.h"
+#import "FVFinderLabel.h"
 
 
 @interface PAResultsMultiItemThumbnailCell : PAResultsMultiItemGenericCell {

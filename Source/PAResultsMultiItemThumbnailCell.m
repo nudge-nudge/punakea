@@ -63,15 +63,30 @@
 	NSRect bezelFrame = cellFrame;
 	bezelFrame.origin.y += cellFrame.size.height - 30;
 	bezelFrame.size.height = 16;  // Spotlight height
-
+	
+	// Draw Finder label
+	NSUInteger label = [FVFinderLabel finderLabelForURL:[[self item] url]];
+	
+	[FVFinderLabel drawFinderLabel:label inRect:bezelFrame roundEnds:YES];
+	
+	// Draw selection
 	if([self isHighlighted])
 	{	
+		NSRect selRect = bezelFrame;
+		
+		// Inset rect if there's a Finder label
+		if (label > 0)
+		{
+			selRect = NSInsetRect(selRect, 2, 2);
+		}
+		
 		[[NSColor alternateSelectedControlColor] set];
-		[[NSBezierPath bezierPathWithRoundRectInRect:bezelFrame radius:20] fill];
+		[[NSBezierPath bezierPathWithRoundRectInRect:selRect radius:20] fill];
 	}
 	
 	NSSize padding = NSMakeSize(5,1);
 	
+	// Draw label
 	NSRect valueLabelFrame = bezelFrame;
 	valueLabelFrame.origin.x = bezelFrame.origin.x + padding.width;
 	valueLabelFrame.origin.y += padding.height;

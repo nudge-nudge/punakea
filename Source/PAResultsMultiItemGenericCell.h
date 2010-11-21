@@ -12,7 +12,7 @@
 
 @interface PAResultsMultiItemGenericCell : NSTextFieldCell {
 
-	NNTaggableObject			*item;
+	NNFile			*item;
 
 }
 
@@ -21,7 +21,7 @@
 + (NSSize)cellSize;				/**< subclass must override */
 + (NSSize)intercellSpacing;		/**< subclass must override */
 
-- (NNTaggableObject *)item;
-- (void)setItem:(NNTaggableObject *)anItem;
+- (NNFile *)item;
+- (void)setItem:(NNFile *)anItem;
 
 @end

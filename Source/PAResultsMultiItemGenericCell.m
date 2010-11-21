@@ -42,12 +42,12 @@
 
 
 #pragma mark Accessors
-- (NNTaggableObject *)item
+- (NNFile *)item
 {
 	return item;
 }
 
-- (void)setItem:(NNTaggableObject *)anItem
+- (void)setItem:(NNFile *)anItem
 {
 	if(item) [item release];
 	item = [anItem retain];
