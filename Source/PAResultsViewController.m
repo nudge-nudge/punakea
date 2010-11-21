@@ -279,11 +279,17 @@
 #pragma mark Popup Menu
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-	NSLog(@"here");
-			
 	// Set default selection to the currently selected item's color label
+	// (to the first one, if multiple, like the Finder does)
 	NNFile *file = [[outlineView selectedItems] objectAtIndex:0];
 	[(FVColorMenuView *)[colorLabelMenuItem view] selectLabel:[FVFinderLabel finderLabelForURL:[file url]]];
+	
+	if ([menuItem action] == @selector(revealInFinder:))
+	{
+		// "Reveal in Finder" only works for single selection
+		if ([[outlineView selectedItems] count] > 1)
+			return NO;
+	}
 	
 	return YES;
 }
@@ -705,6 +711,21 @@
 	{
 		[item moveToTrash:YES errorWindow:[outlineView window]];
 	}
+}
+
+- (IBAction)openFiles:(id)sender
+{
+	[[NSApp delegate] openFiles:sender];
+}
+
+- (IBAction)revealInFinder:(id)sender
+{
+	[[NSApp delegate] revealInFinder:sender];
+}
+
+- (IBAction)getInfo:(id)sender
+{
+	[[NSApp delegate] getInfo:sender];
 }
 
 - (NSArray*)createContentTypeQueryFilters

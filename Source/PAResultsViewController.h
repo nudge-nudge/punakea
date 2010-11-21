@@ -64,7 +64,10 @@
 - (IBAction)changeFinderLabel:(id)sender;
 
 - (void)deleteDraggedItems;
-- (void)deleteFilesForSelectedItems:(id)sender;
+- (IBAction)deleteFilesForSelectedItems:(id)sender;
+- (IBAction)openFiles:(id)sender;
+- (IBAction)revealInFinder:(id)sender;
+- (IBAction)getInfo:(id)sender;
 
 - (PAResultsOutlineView *)outlineView;
 

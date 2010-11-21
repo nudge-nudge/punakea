@@ -820,6 +820,33 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 	}
 }
 
+- (NSMenu *)menuForEvent:(NSEvent *)event
+{
+	// Make sure the corresponding multiitemcell in our outlineView is highlighted
+	NSPoint locationInOutlineView = [outlineView convertPoint:[event locationInWindow] fromView:nil];
+	NSInteger row = [outlineView rowAtPoint:locationInOutlineView];	
+	BOOL byExtendingSelection = ([event modifierFlags] & NSShiftKeyMask) ||
+	([event modifierFlags] & NSCommandKeyMask);	
+	[outlineView selectRow:row byExtendingSelection:byExtendingSelection];	
+	
+	NSPoint location = [self convertPoint:[event locationInWindow] fromView:nil];
+	
+	NSInteger column;
+	[self getRow:&row column:&column forPoint:location];
+	
+	NSCell *cell = [self cellAtRow:row column:column];
+	
+	// Item and cell indexes are aligned
+	NSUInteger idx = row * [self numberOfColumns] + column;
+	
+	if (![selectedIndexes containsIndex:idx])
+	{
+		[self highlightOnlyCell:cell];
+	}
+	
+	return [outlineView menu];
+}
+
 
 #pragma mark Notifications
 -(void)thumbnailWasGenerated:(NSNotification *)notification
