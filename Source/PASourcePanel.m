@@ -423,9 +423,15 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 	if(!(sourceItem && [sourceItem isEditable]))
 		return;
 	
+	// Retaining the item saves us from crashing ;)
+	[sourceItem retain];
+	
 	[[sourceItem parent] removeChild:sourceItem];
 	
 	[self reloadDataAndSelectItemWithValue:@"ALL_ITEMS"];
+	
+	// Now it should be save to release the item
+	[sourceItem release];
 }
 
 - (void)beginEditing
