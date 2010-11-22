@@ -688,6 +688,35 @@
 
 
 #pragma mark Misc
+- (void)arrangeBy:(NSString *)type 
+{
+	NSSortDescriptor *desc = nil;
+	
+	if ([type isEqualToString:@"Name"]) {
+		desc = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
+	} else if ([type isEqualToString:@"Date Modified"]) {
+		desc = [[NSSortDescriptor alloc] initWithKey:@"modificationDate" ascending:NO];
+	} else if ([type isEqualToString:@"Date Created"]) {
+		desc = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+	} else if ([type isEqualToString:@"Size"]) {
+		desc = [[NSSortDescriptor alloc] initWithKey:@"size" ascending:NO];
+	} else if ([type isEqualToString:@"Kind"]) {
+		desc = [[NSSortDescriptor alloc] initWithKey:@"kind" ascending:NO];
+	}
+	
+	if (desc != nil) {
+		NSArray *sortDescriptors = [NSArray arrayWithObject:desc];
+		[query setSortDescriptors:sortDescriptors];		
+	} else {
+		lcl_log(lcl_cglobal, lcl_vError, @"sortDescriptors unset, this must not happen");
+	}
+}
+
+- (void)toggleResultsGrouping
+{
+	[query toggleResultsGrouping];
+}
+
 - (void)deleteDraggedItems
 {
 	if (draggedItems)

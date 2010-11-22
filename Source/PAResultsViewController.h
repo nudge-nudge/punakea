@@ -60,6 +60,8 @@
 - (NNQuery *)query;
 
 - (IBAction)setGroupingAttributes:(id)sender;
+- (void)arrangeBy:(NSString*)type;
+- (void)toggleResultsGrouping;
 
 - (IBAction)changeFinderLabel:(id)sender;
 

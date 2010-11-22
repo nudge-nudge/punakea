@@ -367,7 +367,14 @@ static PAThumbnailManager *sharedInstance = nil;
 		// draw into image to scale it   
 		[scratch autorelease];
 		
-		[scratch lockFocus];
+		@try {
+			[scratch lockFocus];
+		}
+		@catch (NSException * e) {
+			NSLog(@"Couldn't lockFocus on image");
+			return nil;
+		}
+		
 		[NSGraphicsContext saveGraphicsState];
 	
 		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
@@ -390,7 +397,14 @@ static PAThumbnailManager *sharedInstance = nil;
 		
 		[scratch setFlipped:YES];
 		
-		[scratch lockFocus];
+		@try {
+			[scratch lockFocus];
+		}
+		@catch (NSException * e) {
+			NSLog(@"Couldn't lockFocus on image");
+			return nil;
+		}
+
 		[NSGraphicsContext saveGraphicsState];
 		
 		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationLow];

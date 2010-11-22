@@ -516,6 +516,26 @@
 	[[browserController window] makeFirstResponder:[browserController sourcePanel]];
 }
 
+- (IBAction)arrangeBy:(id)sender
+{
+	NSString *type = [sender title];
+
+	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
+	if ([mainController isKindOfClass:[PAResultsViewController class]])
+	{
+		[mainController arrangeBy:type];
+	}
+}
+
+- (IBAction)toggleResultsGrouping:(id)sender 
+{
+	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
+	if ([mainController isKindOfClass:[PAResultsViewController class]])
+	{
+		[mainController toggleResultsGrouping];
+	}
+}
+
 - (IBAction)showPreferences:(id)sender
 {
 	if (![self appHasPreferences])

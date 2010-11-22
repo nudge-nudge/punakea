@@ -83,6 +83,8 @@
 - (IBAction)toggleTagsPane:(id)sender;
 - (IBAction)goToAllItems:(id)sender;
 - (IBAction)goToManageTags:(id)sender;
+- (IBAction)arrangeBy:(id)sender;
+- (IBAction)toggleResultsGrouping:(id)sender;
 - (IBAction)showPreferences:(id)sender;
 
 - (IBAction)openFiles:(id)sender;
