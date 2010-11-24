@@ -523,7 +523,9 @@
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
-		[mainController arrangeBy:type];
+		PAResultsViewController *rvc = (PAResultsViewController*)mainController;
+		[rvc arrangeBy:type];
+		[[rvc outlineView] reloadData];
 	}
 }
 
@@ -532,7 +534,9 @@
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
-		[mainController toggleResultsGrouping];
+		PAResultsViewController *rvc = (PAResultsViewController*)mainController;
+		[rvc toggleResultsGrouping];
+		[[rvc outlineView] reloadData];
 	}
 }
 

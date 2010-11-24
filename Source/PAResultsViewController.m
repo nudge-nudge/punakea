@@ -702,6 +702,8 @@
 		desc = [[NSSortDescriptor alloc] initWithKey:@"size" ascending:NO];
 	} else if ([type isEqualToString:@"Kind"]) {
 		desc = [[NSSortDescriptor alloc] initWithKey:@"kind" ascending:NO];
+	} else if ([type isEqualToString:@"Label"]) {
+		desc = [[NSSortDescriptor alloc] initWithKey:@"label" ascending:NO];
 	}
 	
 	if (desc != nil) {

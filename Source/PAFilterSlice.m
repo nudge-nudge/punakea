@@ -282,7 +282,7 @@ NSUInteger const FILTERSLICE_BUTTON_SPACING = 2;
 		[outlineView setDisplayMode:PAListMode];
 	}
 	
-	[outlineView reloadData]; // TODO needed?
+	[outlineView reloadData];
 	
 	// Scrolling - if item is an array, it handles scrolling itself
 	/*if(![[outlineView itemAtRow:[outlineView selectedRow]] isKindOfClass:[NSArray class]])
