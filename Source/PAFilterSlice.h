@@ -23,6 +23,7 @@ extern NSUInteger const FILTERSLICE_BUTTON_SPACING;
 	IBOutlet PAResultsViewController	*controller; 	
 	
 	NSMutableArray						*buttons;
+	NSButton							*groupingButton;
 
 }
 

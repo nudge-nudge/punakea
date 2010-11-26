@@ -16,6 +16,8 @@
 	<integer>-1</integer>
 	<key>General.Search.Category</key>
 	<integer>0</integer>
+	<key>General.Results.GroupResults</key>
+	<true/>
 	<key>Appearance.InfoPane.Active</key>
 	<string>INFO</string>
 	<key>ManageFiles.ManagedFolder.Enabled</key>

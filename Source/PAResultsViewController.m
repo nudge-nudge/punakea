@@ -13,6 +13,8 @@
 - (void)setDisplayMessage:(NSString*)message;
 - (NSArray*)createContentTypeQueryFilters;
 
+- (void)restartQuery;
+
 @end
 
 @implementation PAResultsViewController
@@ -27,9 +29,12 @@
 		selectedTags = [[NNSelectedTags alloc] init];
 		
 		query = [[NNQuery alloc] init];
-		[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
-		//[query setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
 		
+		bundleQueryResults = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.Results.GroupResults"];
+		if (bundleQueryResults) {
+			[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
+		}
+
 		dropManager = [PADropManager sharedInstance];
 		
 		relatedTags = [[NNRelatedTags alloc] initWithQuery:query];
@@ -62,10 +67,13 @@
 			 selector:@selector(contentTypeFilterUpdate:)
 				 name:PAContentTypeFilterUpdate
 			   object:nil];
-
+		
 		[self setDisplayMessage:@""];
 		
 		[NSBundle loadNibNamed:@"ResultsView" owner:self];
+		
+		NSUserDefaultsController *defaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+		[defaultsController addObserver:self forKeyPath:@"values.General.Results.GroupResults" options:0 context:NULL];
 	}
 	return self;
 }
@@ -92,6 +100,7 @@
 - (void)dealloc
 {	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.General.Results.GroupResults"];
 	
 	[outlineView unregisterDraggedTypes];
 	[draggedItems release];
@@ -101,7 +110,6 @@
 	[selectedTags release];
 	[super dealloc];
 }
-
 
 #pragma mark accessors
 - (NNQuery*)query
@@ -308,6 +316,11 @@
 #pragma mark Notifications
 - (void)selectedTagsHaveChanged:(NSNotification*)notification
 {
+	[self restartQuery];
+}
+
+- (void)restartQuery
+{
 	// reset displayMessage
 	[self setDisplayMessage:@""];
 	
@@ -327,7 +340,7 @@
 		// set tags to search for
 		[query setTags:selectedTags];
 		[query startQuery];
-				
+		
 		// empty display tags until new related tags are found
 		if ([delegate respondsToSelector:@selector(clearVisibleTags)])
 		{
@@ -347,7 +360,7 @@
 		// set tags to search for
 		[query setTags:selectedTags];
 		[query startQuery];
-			
+		
 		// there are no selected tags, reset all tags
 		if ([delegate respondsToSelector:@selector(resetDisplayTags)])
 		{
@@ -358,7 +371,7 @@
 			[NSException raise:NSInternalInconsistencyException
 						format:@"delegate does not implement resetDisplayTags"];
 		}
-	}
+	}	
 }
 
 - (void)relatedTagsHaveChanged:(NSNotification *)notification
@@ -461,6 +474,21 @@
 	[query addFilter:filter];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if ((object == [NSUserDefaultsController sharedUserDefaultsController]) 
+		&& [keyPath isEqualToString:@"values.General.Results.GroupResults"]) {
+		bundleQueryResults = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.Results.GroupResults"];
+		
+		if (bundleQueryResults) {
+			[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
+		} else {
+			[query setBundlingAttributes:[NSArray arrayWithObjects:nil]];
+		}
+		
+		[self restartQuery];
+	}
+}
 
 #pragma mark Temp
 - (void)setGroupingAttributes:(id)sender;
@@ -712,11 +740,6 @@
 	} else {
 		lcl_log(lcl_cglobal, lcl_vError, @"sortDescriptors unset, this must not happen");
 	}
-}
-
-- (void)toggleResultsGrouping
-{
-	[query toggleResultsGrouping];
 }
 
 - (void)deleteDraggedItems

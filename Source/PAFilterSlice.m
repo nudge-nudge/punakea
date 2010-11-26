@@ -143,6 +143,21 @@ NSUInteger const FILTERSLICE_BUTTON_SPACING = 2;
 		// Add button to array
 		[buttons addObject:button];
 		[button release];
+		
+//		// Draw sorting an grouping buttons
+//		groupingButton = [[NSButton alloc] initWithFrame:[self frame]];
+//		[groupingButton setTitle:@"Group"];
+//		//[groupingButton setBezelStyle:NSDisclosureBezelStyle];
+//		[groupingButton setButtonType:NSPushOnPushOffButton];
+//		
+//		
+//		[self addSubview:groupingButton];
+//		NSRect buttonFrame = [groupingButton frame];
+//		buttonFrame.origin.x = 200;
+//		buttonFrame.origin.y = FILTERSLICE_PADDING.height;
+////		buttonFrame.size.width = 50;
+////		buttonFrame.size.height = 20;
+//		[groupingButton setFrame:buttonFrame];
 	}
 }
 
