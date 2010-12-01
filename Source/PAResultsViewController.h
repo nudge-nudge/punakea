@@ -30,6 +30,7 @@
 @interface PAResultsViewController : PABrowserViewMainController {
 	
 	IBOutlet PAResultsOutlineView		*outlineView;
+	IBOutlet NSButton					*groupingButton;
 	
 	NNTags								*tags;
 	NNRelatedTags						*relatedTags;

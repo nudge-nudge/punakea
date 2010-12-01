@@ -33,6 +33,7 @@
 		bundleQueryResults = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.Results.GroupResults"];
 		if (bundleQueryResults) {
 			[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
+			[groupingButton setState:NSOnState];
 		}
 
 		dropManager = [PADropManager sharedInstance];
@@ -482,8 +483,10 @@
 		
 		if (bundleQueryResults) {
 			[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
+			[groupingButton setState:NSOnState];
 		} else {
 			[query setBundlingAttributes:[NSArray arrayWithObjects:nil]];
+			[groupingButton setState:NSOffState];
 		}
 		
 		[self restartQuery];

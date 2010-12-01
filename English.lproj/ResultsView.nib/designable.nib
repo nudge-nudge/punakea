@@ -307,11 +307,19 @@
 								<object class="NSButtonCell" key="NSCell" id="90044708">
 									<int key="NSCellFlags">-2080244224</int>
 									<int key="NSCellFlags2">134217728</int>
-									<string key="NSContents">G</string>
+									<string key="NSContents"/>
 									<reference key="NSSupport" ref="792708455"/>
 									<reference key="NSControlView" ref="803936069"/>
-									<int key="NSButtonFlags">-1232846593</int>
+									<int key="NSButtonFlags">-926138113</int>
 									<int key="NSButtonFlags2">162</int>
+									<object class="NSCustomResource" key="NSNormalImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">Grouping_Off</string>
+									</object>
+									<object class="NSCustomResource" key="NSAlternateImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">Grouping_On</string>
+									</object>
 									<string key="NSAlternateContents"/>
 									<string key="NSKeyEquivalent"/>
 									<int key="NSPeriodicDelay">400</int>
@@ -621,6 +629,14 @@
 					</object>
 					<int key="connectionID">79</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">groupingButton</string>
+						<reference key="source" ref="642006413"/>
+						<reference key="destination" ref="803936069"/>
+					</object>
+					<int key="connectionID">83</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -717,8 +733,8 @@
 						<reference key="object" ref="679466216"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="803936069"/>
 							<reference ref="650037619"/>
+							<reference ref="803936069"/>
 						</object>
 						<reference key="parent" ref="437883448"/>
 					</object>
@@ -974,7 +990,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABEHcAAwaAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABEJsAAwcgAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1021,7 +1037,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">82</int>
+			<int key="maxID">83</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1619,11 +1635,13 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>colorLabelMenuItem</string>
+							<string>groupingButton</string>
 							<string>outlineView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSMenuItem</string>
+							<string>NSButton</string>
 							<string>PAResultsOutlineView</string>
 						</object>
 					</object>
@@ -1632,6 +1650,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>colorLabelMenuItem</string>
+							<string>groupingButton</string>
 							<string>outlineView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1639,6 +1658,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">colorLabelMenuItem</string>
 								<string key="candidateClassName">NSMenuItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">groupingButton</string>
+								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">outlineView</string>
@@ -2445,11 +2468,15 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>Grouping_Off</string>
+				<string>Grouping_On</string>
 				<string>NSMenuCheckmark</string>
 				<string>NSMenuMixedState</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{22, 20}</string>
+				<string>{22, 20}</string>
 				<string>{9, 8}</string>
 				<string>{7, 2}</string>
 			</object>
