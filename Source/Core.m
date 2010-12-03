@@ -351,7 +351,7 @@
 	
 	// Check all items that are browser-specific
 	if(![self appHasBrowser])
-	{
+	{	
 		// File menu
 		if([item action] == @selector(addTagSet:)) return NO;
 		if([item action] == @selector(openFiles:)) return NO;
@@ -369,6 +369,8 @@
 		if([item action] == @selector(toggleTagsPane:)) return NO;
 		if([item action] == @selector(goToAllItems:)) return NO;
 		if([item action] == @selector(goToManageTags:)) return NO;
+		if([item tag] == 2) return NO; // TODO
+		if([item tag] == 3) return NO; // TODO
 		if([item action] == @selector(toggleToolbarShown:)) return NO;
 		if([item action] == @selector(runToolbarCustomizationPalette:)) return NO;		
 	}

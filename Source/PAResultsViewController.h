@@ -32,6 +32,11 @@
 	IBOutlet PAResultsOutlineView		*outlineView;
 	IBOutlet NSButton					*groupingButton;
 	
+	IBOutlet NSPopUpButton				*sortingButton;
+	NSSortDescriptor					*sortDescriptor;
+	NSImage								*sortAscIcon;
+	NSImage								*sortDescIcon;
+	
 	NNTags								*tags;
 	NNRelatedTags						*relatedTags;
 	NNSelectedTags						*selectedTags;

@@ -29,12 +29,14 @@
 		selectedTags = [[NNSelectedTags alloc] init];
 		
 		query = [[NNQuery alloc] init];
-		
+				
 		bundleQueryResults = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.Results.GroupResults"];
 		if (bundleQueryResults) {
 			[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
 			[groupingButton setState:NSOnState];
 		}
+		
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
 
 		dropManager = [PADropManager sharedInstance];
 		
@@ -81,6 +83,9 @@
 
 - (void)awakeFromNib
 {
+	sortAscIcon = [NSImage imageNamed:@"Sort_Ascending"];
+	sortDescIcon = [NSImage imageNamed:@"Sort_Descending"];
+	
 	// if we are managing files, copy on drag
 	// else move
 	BOOL managingFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"ManageFiles.ManagedFolder.Enabled"];
@@ -106,6 +111,8 @@
 	[outlineView unregisterDraggedTypes];
 	[draggedItems release];
 
+	[sortDescriptor release];
+	
 	[relatedTags release];
     [query release];
 	[selectedTags release];
@@ -721,7 +728,7 @@
 #pragma mark Misc
 - (void)arrangeBy:(NSString *)type 
 {
-	NSSortDescriptor *desc = nil;
+	NSSortDescriptor *desc = nil;	
 	
 	if ([type isEqualToString:@"Name"]) {
 		desc = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
@@ -738,8 +745,31 @@
 	}
 	
 	if (desc != nil) {
-		NSArray *sortDescriptors = [NSArray arrayWithObject:desc];
-		[query setSortDescriptors:sortDescriptors];		
+		// if the sort descriptor has the same key, flip ascending/descending
+		NSString *currentSortKey = [sortDescriptor key];
+		NSString *newSortKey = [desc key];
+		
+		if ([currentSortKey isEqualToString:newSortKey]) {
+			BOOL order = ![sortDescriptor ascending];
+			
+			NSSortDescriptor *newDesc = [[NSSortDescriptor alloc] initWithKey:newSortKey ascending:order];
+			[sortDescriptor release];
+			sortDescriptor = newDesc;
+			[desc release];
+		} else {
+			[sortDescriptor release];
+			sortDescriptor = desc;
+		}
+		
+		NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+		[query setSortDescriptors:sortDescriptors];
+		
+		if ([sortDescriptor ascending])
+		{
+			[[sortingButton itemAtIndex:0] setImage:sortAscIcon];
+		} else {
+			[[sortingButton itemAtIndex:0] setImage:sortDescIcon];
+		}		
 	} else {
 		lcl_log(lcl_cglobal, lcl_vError, @"sortDescriptors unset, this must not happen");
 	}

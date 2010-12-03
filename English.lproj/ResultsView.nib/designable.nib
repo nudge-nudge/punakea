@@ -196,7 +196,7 @@
 							<object class="NSPopUpButton" id="650037619">
 								<reference key="NSNextResponder" ref="679466216"/>
 								<int key="NSvFlags">297</int>
-								<string key="NSFrame">{{558, 3}, {110, 24}}</string>
+								<string key="NSFrame">{{625, 3}, {42, 24}}</string>
 								<reference key="NSSuperview" ref="679466216"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSPopUpButtonCell" key="NSCell" id="769625600">
@@ -204,7 +204,7 @@
 									<int key="NSCellFlags2">134219776</int>
 									<reference key="NSSupport" ref="792708455"/>
 									<reference key="NSControlView" ref="650037619"/>
-									<int key="NSButtonFlags">-2038284033</int>
+									<int key="NSButtonFlags">-2031075073</int>
 									<int key="NSButtonFlags2">162</int>
 									<string key="NSAlternateContents"/>
 									<string key="NSKeyEquivalent"/>
@@ -212,11 +212,16 @@
 									<int key="NSPeriodicInterval">75</int>
 									<object class="NSMenuItem" key="NSMenuItem" id="742729335">
 										<reference key="NSMenu" ref="500292316"/>
-										<string key="NSTitle">Name</string>
+										<bool key="NSIsHidden">YES</bool>
+										<string key="NSTitle"/>
 										<string key="NSKeyEquiv"/>
 										<int key="NSKeyEquivModMask">1048576</int>
 										<int key="NSMnemonicLoc">2147483647</int>
 										<int key="NSState">1</int>
+										<object class="NSCustomResource" key="NSImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">Sort_Ascending</string>
+										</object>
 										<object class="NSCustomResource" key="NSOnImage" id="888022237">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">NSMenuCheckmark</string>
@@ -234,6 +239,16 @@
 										<object class="NSMutableArray" key="NSMenuItems">
 											<bool key="EncodedWithXMLCoder">YES</bool>
 											<reference ref="742729335"/>
+											<object class="NSMenuItem" id="507242308">
+												<reference key="NSMenu" ref="500292316"/>
+												<string key="NSTitle">Name</string>
+												<string key="NSKeyEquiv"/>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="888022237"/>
+												<reference key="NSMixedImage" ref="1003126786"/>
+												<string key="NSAction">_popUpItemAction:</string>
+												<reference key="NSTarget" ref="769625600"/>
+											</object>
 											<object class="NSMenuItem" id="261149360">
 												<reference key="NSMenu" ref="500292316"/>
 												<string key="NSTitle">Date Modified</string>
@@ -292,7 +307,8 @@
 										</object>
 										<reference key="NSMenuFont" ref="792708455"/>
 									</object>
-									<int key="NSPreferredEdge">1</int>
+									<bool key="NSPullDown">YES</bool>
+									<int key="NSPreferredEdge">2</int>
 									<bool key="NSUsesItemFromMenu">YES</bool>
 									<bool key="NSAltersState">YES</bool>
 									<int key="NSArrowPosition">2</int>
@@ -637,6 +653,22 @@
 					</object>
 					<int key="connectionID">83</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">arrangeBy:</string>
+						<reference key="source" ref="404419834"/>
+						<reference key="destination" ref="507242308"/>
+					</object>
+					<int key="connectionID">86</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">sortingButton</string>
+						<reference key="source" ref="642006413"/>
+						<reference key="destination" ref="650037619"/>
+					</object>
+					<int key="connectionID">87</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -672,9 +704,9 @@
 						<reference key="object" ref="437883448"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="160168433"/>
 							<reference ref="679466216"/>
 							<reference ref="948408783"/>
+							<reference ref="160168433"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">ResultsView</string>
@@ -733,8 +765,8 @@
 						<reference key="object" ref="679466216"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="650037619"/>
 							<reference ref="803936069"/>
+							<reference ref="650037619"/>
 						</object>
 						<reference key="parent" ref="437883448"/>
 					</object>
@@ -843,6 +875,7 @@
 							<reference ref="842302282"/>
 							<reference ref="421316793"/>
 							<reference ref="674078872"/>
+							<reference ref="507242308"/>
 						</object>
 						<reference key="parent" ref="769625600"/>
 					</object>
@@ -874,6 +907,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">78</int>
 						<reference key="object" ref="674078872"/>
+						<reference key="parent" ref="500292316"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">85</int>
+						<reference key="object" ref="507242308"/>
 						<reference key="parent" ref="500292316"/>
 					</object>
 				</object>
@@ -921,12 +959,14 @@
 					<string>5.IBViewIntegration.shadowOffsetHeight</string>
 					<string>5.IBViewIntegration.shadowOffsetWidth</string>
 					<string>5.ImportedFromIB2</string>
+					<string>57.IBAttributePlaceholdersKey</string>
 					<string>57.IBPluginDependency</string>
 					<string>57.IBViewBoundsToFrameTransform</string>
 					<string>58.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>6.IBViewBoundsToFrameTransform</string>
 					<string>6.ImportedFromIB2</string>
+					<string>62.IBAttributePlaceholdersKey</string>
 					<string>62.IBPluginDependency</string>
 					<string>62.IBViewBoundsToFrameTransform</string>
 					<string>63.IBPluginDependency</string>
@@ -941,6 +981,7 @@
 					<string>8.IBPluginDependency</string>
 					<string>8.IBViewBoundsToFrameTransform</string>
 					<string>8.ImportedFromIB2</string>
+					<string>85.IBPluginDependency</string>
 					<string>9.CustomClassName</string>
 					<string>9.IBPluginDependency</string>
 					<string>9.ImportedFromIB2</string>
@@ -981,13 +1022,21 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{0, 642}, {691, 364}}</string>
+					<string>{{361, 691}, {691, 364}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="0.0"/>
 					<reference ref="991501076"/>
 					<real value="0.0"/>
 					<real value="0.0"/>
 					<boolean value="YES"/>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">ToolTip</string>
+						<object class="IBToolTipAttribute" key="NS.object.0">
+							<string key="name">ToolTip</string>
+							<reference key="object" ref="803936069"/>
+							<string key="toolTip">Enable or Disable Result Grouping by Filetype</string>
+						</object>
+					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABEJsAAwcgAAA</bytes>
@@ -998,12 +1047,20 @@
 						<bytes key="NSTransformStruct">AQAAAABDogAAA</bytes>
 					</object>
 					<boolean value="YES"/>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDv4AAwbgAAA</bytes>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">ToolTip</string>
+						<object class="IBToolTipAttribute" key="NS.object.0">
+							<string key="name">ToolTip</string>
+							<reference key="object" ref="650037619"/>
+							<string key="toolTip">Sort Results - select same key twice to change ordering</string>
+						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{557, 844}, {161, 123}}</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAABEHEAAwcgAAA</bytes>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{979, 873}, {161, 145}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1016,6 +1073,7 @@
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw5UAAA</bytes>
 					</object>
 					<boolean value="YES"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>PAResultsOutlineView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
@@ -1037,7 +1095,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">83</int>
+			<int key="maxID">87</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1637,12 +1695,14 @@
 							<string>colorLabelMenuItem</string>
 							<string>groupingButton</string>
 							<string>outlineView</string>
+							<string>sortingButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSMenuItem</string>
 							<string>NSButton</string>
 							<string>PAResultsOutlineView</string>
+							<string>NSPopUpButton</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1652,6 +1712,7 @@
 							<string>colorLabelMenuItem</string>
 							<string>groupingButton</string>
 							<string>outlineView</string>
+							<string>sortingButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1666,6 +1727,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">outlineView</string>
 								<string key="candidateClassName">PAResultsOutlineView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">sortingButton</string>
+								<string key="candidateClassName">NSPopUpButton</string>
 							</object>
 						</object>
 					</object>
@@ -2472,6 +2537,7 @@
 				<string>Grouping_On</string>
 				<string>NSMenuCheckmark</string>
 				<string>NSMenuMixedState</string>
+				<string>Sort_Ascending</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2479,6 +2545,7 @@
 				<string>{22, 20}</string>
 				<string>{9, 8}</string>
 				<string>{7, 2}</string>
+				<string>{22, 20}</string>
 			</object>
 		</object>
 	</data>
