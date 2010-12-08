@@ -902,7 +902,11 @@
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 			</object>
-			<object class="NSUserDefaultsController" id="474005972">
+			<object class="NSUserDefaultsController" id="407099069">
+				<object class="NSMutableArray" key="NSDeclaredKeys">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>General.Results.GroupResults</string>
+				</object>
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 		</object>
@@ -1367,19 +1371,115 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.General.Results.GroupResults</string>
+						<string key="label">enabled: appHasBrowser</string>
 						<reference key="source" ref="929230216"/>
-						<reference key="destination" ref="474005972"/>
+						<reference key="destination" ref="72823720"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="929230216"/>
-							<reference key="NSDestination" ref="474005972"/>
-							<string key="NSLabel">value: values.General.Results.GroupResults</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.General.Results.GroupResults</string>
+							<reference key="NSDestination" ref="72823720"/>
+							<string key="NSLabel">enabled: appHasBrowser</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">appHasBrowser</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">927</int>
+					<int key="connectionID">938</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: appHasBrowser</string>
+						<reference key="source" ref="490419155"/>
+						<reference key="destination" ref="72823720"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="490419155"/>
+							<reference key="NSDestination" ref="72823720"/>
+							<string key="NSLabel">enabled: appHasBrowser</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">appHasBrowser</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">944</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: appHasBrowser</string>
+						<reference key="source" ref="563135129"/>
+						<reference key="destination" ref="72823720"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="563135129"/>
+							<reference key="NSDestination" ref="72823720"/>
+							<string key="NSLabel">enabled: appHasBrowser</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">appHasBrowser</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">947</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: appHasBrowser</string>
+						<reference key="source" ref="913847479"/>
+						<reference key="destination" ref="72823720"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="913847479"/>
+							<reference key="NSDestination" ref="72823720"/>
+							<string key="NSLabel">enabled: appHasBrowser</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">appHasBrowser</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">950</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: appHasBrowser</string>
+						<reference key="source" ref="964967976"/>
+						<reference key="destination" ref="72823720"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="964967976"/>
+							<reference key="NSDestination" ref="72823720"/>
+							<string key="NSLabel">enabled: appHasBrowser</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">appHasBrowser</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">953</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: appHasBrowser</string>
+						<reference key="source" ref="1033320736"/>
+						<reference key="destination" ref="72823720"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="1033320736"/>
+							<reference key="NSDestination" ref="72823720"/>
+							<string key="NSLabel">enabled: appHasBrowser</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">appHasBrowser</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">956</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: appHasBrowser</string>
+						<reference key="source" ref="861392598"/>
+						<reference key="destination" ref="72823720"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="861392598"/>
+							<reference key="NSDestination" ref="72823720"/>
+							<string key="NSLabel">enabled: appHasBrowser</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">appHasBrowser</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">959</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1387,15 +1487,23 @@
 						<reference key="source" ref="72823720"/>
 						<reference key="destination" ref="534731096"/>
 					</object>
-					<int key="connectionID">928</int>
+					<int key="connectionID">974</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">groupResultsMenuItem</string>
-						<reference key="source" ref="72823720"/>
-						<reference key="destination" ref="929230216"/>
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: values.General.Results.GroupResults</string>
+						<reference key="source" ref="929230216"/>
+						<reference key="destination" ref="407099069"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="929230216"/>
+							<reference key="NSDestination" ref="407099069"/>
+							<string key="NSLabel">value: values.General.Results.GroupResults</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">values.General.Results.GroupResults</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
 					</object>
-					<int key="connectionID">929</int>
+					<int key="connectionID">978</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2058,8 +2166,8 @@
 						<reference key="parent" ref="388962887"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">918</int>
-						<reference key="object" ref="474005972"/>
+						<int key="objectID">931</int>
+						<reference key="object" ref="407099069"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</object>
@@ -2289,7 +2397,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{810, 1010}, {164, 113}}</string>
+					<string>{{201, 664}, {164, 113}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2309,7 +2417,7 @@
 					<string>{{960, 1000}, {208, 123}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{677, 1123}, {415, 20}}</string>
+					<string>{{68, 777}, {415, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2331,7 +2439,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{854, 900}, {235, 223}}</string>
+					<string>{{245, 554}, {235, 223}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2343,7 +2451,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{42, 753}, {160, 103}}</string>
+					<string>{{119, 477}, {160, 103}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2400,7 +2508,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{904, 1100}, {214, 23}}</string>
+					<string>{{295, 754}, {214, 23}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2426,7 +2534,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{1089, 870}, {183, 123}}</string>
+					<string>{{480, 524}, {183, 123}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2455,7 +2563,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">929</int>
+			<int key="maxID">978</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2771,6 +2879,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>arrangeByMenuItem</string>
 							<string>busyWindow</string>
 							<string>statusMenu</string>
 							<string>updater</string>
@@ -2778,6 +2887,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSMenuItem</string>
 							<string>NSWindow</string>
 							<string>NSMenu</string>
 							<string>SUUpdater</string>
@@ -2788,6 +2898,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>arrangeByMenuItem</string>
 							<string>busyWindow</string>
 							<string>statusMenu</string>
 							<string>updater</string>
@@ -2795,6 +2906,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">arrangeByMenuItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">busyWindow</string>
 								<string key="candidateClassName">NSWindow</string>

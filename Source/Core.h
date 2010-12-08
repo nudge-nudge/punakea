@@ -44,7 +44,8 @@
 
 @interface Core : NSWindowController
 {
-	IBOutlet NSMenu					*viewMenu;	
+	IBOutlet NSMenu					*viewMenu;
+	IBOutlet NSMenuItem				*arrangeByMenuItem;
 	
 	IBOutlet NSMenu					*statusMenu;	
 	NNTags							*globalTags;
