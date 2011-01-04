@@ -8,6 +8,8 @@
 
 #import "PAResultsViewController.h"
 
+#import "Core.h"
+
 @interface PAResultsViewController (PrivateAPI)
 
 - (void)setDisplayMessage:(NSString*)message;
@@ -770,6 +772,22 @@
 		} else {
 			[[sortingButton itemAtIndex:0] setImage:sortDescIcon];
 		}		
+		
+		// tick menuitem by which results are arranged
+		// tick in button
+		for (NSMenuItem *item in [sortingButton itemArray]) {
+			[item setState:NSOffState];
+		}
+		NSMenuItem *activeItem = [sortingButton itemWithTitle:type];
+		[activeItem setState:NSOnState];
+		
+		// tick in mainmenu
+		NSMenuItem *arrangeByMenuItem = [(Core*)[NSApp delegate] arrangeByMenuItem];
+		for (NSMenuItem *item in [[arrangeByMenuItem submenu] itemArray]) {
+			[item setState:NSOffState];
+		}
+		NSMenuItem *activeArrangeByItem = [[arrangeByMenuItem submenu] itemWithTitle:type];
+		[activeArrangeByItem setState:NSOnState];		
 	} else {
 		lcl_log(lcl_cglobal, lcl_vError, @"sortDescriptors unset, this must not happen");
 	}

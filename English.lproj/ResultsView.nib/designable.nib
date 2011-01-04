@@ -3,16 +3,16 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
 		<string key="IBDocument.SystemVersion">10H574</string>
-		<string key="IBDocument.InterfaceBuilderVersion">804</string>
+		<string key="IBDocument.InterfaceBuilderVersion">823</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">804</string>
+			<string key="NS.object.0">823</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="11"/>
+			<integer value="5"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -244,6 +244,7 @@
 												<string key="NSTitle">Name</string>
 												<string key="NSKeyEquiv"/>
 												<int key="NSMnemonicLoc">2147483647</int>
+												<int key="NSState">1</int>
 												<reference key="NSOnImage" ref="888022237"/>
 												<reference key="NSMixedImage" ref="1003126786"/>
 												<string key="NSAction">_popUpItemAction:</string>
@@ -307,6 +308,7 @@
 										</object>
 										<reference key="NSMenuFont" ref="792708455"/>
 									</object>
+									<int key="NSSelectedIndex">1</int>
 									<bool key="NSPullDown">YES</bool>
 									<int key="NSPreferredEdge">2</int>
 									<bool key="NSUsesItemFromMenu">YES</bool>
@@ -1022,7 +1024,7 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{361, 691}, {691, 364}}</string>
+					<string>{{361, 642}, {691, 364}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="0.0"/>
 					<reference ref="991501076"/>
@@ -1060,7 +1062,7 @@
 						<bytes key="NSTransformStruct">P4AAAL+AAABEHEAAwcgAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{979, 873}, {161, 145}}</string>
+					<string>{{975, 824}, {161, 145}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1349,6 +1351,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>arrangeByMenuItem</string>
 							<string>busyWindow</string>
 							<string>statusMenu</string>
 							<string>updater</string>
@@ -1356,6 +1359,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSMenuItem</string>
 							<string>NSWindow</string>
 							<string>NSMenu</string>
 							<string>SUUpdater</string>
@@ -1366,6 +1370,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>arrangeByMenuItem</string>
 							<string>busyWindow</string>
 							<string>statusMenu</string>
 							<string>updater</string>
@@ -1373,6 +1378,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">arrangeByMenuItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">busyWindow</string>
 								<string key="candidateClassName">NSWindow</string>

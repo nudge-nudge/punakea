@@ -26,6 +26,8 @@
 #import "FVColorMenuView.h"
 #import "FVFinderLabel.h"
 
+@class Core;
+
 
 @interface PAResultsViewController : PABrowserViewMainController {
 	

@@ -1201,4 +1201,9 @@
 	return busyWindow;
 }
 
+- (NSMenuItem*)arrangeByMenuItem
+{
+	return arrangeByMenuItem;
+}
+
 @end
