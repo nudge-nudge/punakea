@@ -123,5 +123,6 @@
 - (BrowserController *)browserController;
 - (TaggerController *)taggerController;
 - (NSWindow *)busyWindow;
+- (NSMenuItem*)arrangeByMenuItem;
 
 @end
