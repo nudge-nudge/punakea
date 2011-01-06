@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/NNTaggableObject.h"
+#import "NNTagging/NNFile.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 
 @interface PAResultsMultiItemGenericCell : NSTextFieldCell {

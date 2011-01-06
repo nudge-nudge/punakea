@@ -117,17 +117,49 @@
 								  cellFrame.size.height - 17)
 	    withAttributes:urlFontAttributes];
 		
-	// Draw last used date
+	// Begin drawing second column
+	NSString *sortKey = [[[controlView delegate] sortDescriptor] key];
+	
+	// Set up date formatter
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];	
 	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 	[dateFormatter setDateStyle:NSDateFormatterLongStyle];	
 	
-	NSDate *lastUsedDate = [item lastUsedDate];
+	if ([sortKey isEqualToString:@"displayName"] ||
+		[sortKey isEqualToString:@"label"])
+	{		
+		//value = [dateFormatter friendlyStringFromDate:[item lastUsedDate]];
+		value = [dateFormatter stringFromDate:[item lastUsedDate]];
+	} 
+	else if ([sortKey isEqualToString:@"creationDate"])
+	{
+		value = [dateFormatter stringFromDate:[item creationDate]];
+	}
+	else if ([sortKey isEqualToString:@"modificationDate"])
+	{
+		value = [dateFormatter stringFromDate:[item modificationDate]];
+	}
+	else if ([sortKey isEqualToString:@"kind"])
+	{
+		value = [item kind];
+	}
+	else if ([sortKey isEqualToString:@"size"])
+	{
+		NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+		[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+		
+		value = [numberFormatter stringFromFileSize:[item size]];
+	}
+	else {
+		value = @"";
+	}
 	
-	value = [dateFormatter friendlyStringFromDate:lastUsedDate];
-	
-	[value drawAtPoint:NSMakePoint(cellFrame.origin.x + cellFrame.size.width - 170, cellFrame.origin.y + 2)
-	  	withAttributes:fontAttributes];
+	[value	drawInRect:NSMakeRect(cellFrame.origin.x + cellFrame.size.width - 170,
+								  cellFrame.origin.y + 2,
+								  160,
+								  cellFrame.size.height - 2)
+	   withAttributes:fontAttributes];
 }
 
 

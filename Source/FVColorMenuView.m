@@ -38,7 +38,7 @@
 
 #import "FVColorMenuView.h"
 #import "FVUtilities.h"
-#import <FileView/FVFinderLabel.h>
+#import "FVFinderLabel.h"
 
 static NSString * const FVColorNameUpdateNotification = @"FVColorNameUpdateNotification";
 

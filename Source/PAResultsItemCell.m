@@ -106,8 +106,6 @@
 	// Begin drawing second column
 	NSString *sortKey = [[[controlView delegate] sortDescriptor] key];
 	
-	NSLog(sortKey);
-	
 	// Set up date formatter
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];	
 	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
@@ -131,6 +129,13 @@
 	else if ([sortKey isEqualToString:@"kind"])
 	{
 		value = [item kind];
+	}
+	else if ([sortKey isEqualToString:@"size"])
+	{
+		NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+		[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+		
+		value = [numberFormatter stringFromFileSize:[item size]];
 	}
 	else {
 		value = @"";

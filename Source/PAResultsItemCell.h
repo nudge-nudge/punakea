@@ -7,10 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "NNTagging/NNTaggableObject.h"
+#import "NNTagging/NNFile.h"
 #import "PAThumbnailManager.h"
 #import "NSDateFormatter+FriendlyFormat.h"
 #import "FVFinderLabel.h"
+#import "NSNumberFormatterAdditions.h"
 
 
 @interface PAResultsItemCell : NSTextFieldCell {

@@ -12,7 +12,7 @@
 @implementation PAResultsMultiItemThumbnailCell
 
 #pragma mark Init + Dealloc
-- (id)initTextCell:(NNTaggableObject *)anItem
+- (id)initTextCell:(NNFile *)anItem
 {
 	self = [super initTextCell:anItem];
 	if(self)
@@ -132,13 +132,43 @@
 
 	[thumbImage drawAtPoint:targetPoint fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	
-	// Draw last used date
-	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-	[dateFormatter setDateStyle:NSDateFormatterShortStyle];		
-	NSDate *lastUsedDate = [item valueForAttribute:(id)kMDItemLastUsedDate];
+	// Begin drawing bottom row
+	NSString *sortKey = [[[controlView delegate] sortDescriptor] key];
 	
-	value = [dateFormatter friendlyStringFromDate:lastUsedDate];
+	// Set up date formatter
+	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];	
+	[dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+	[dateFormatter setDateStyle:NSDateFormatterShortStyle];	
+	
+	if ([sortKey isEqualToString:@"displayName"] ||
+		[sortKey isEqualToString:@"label"])
+	{		
+		//value = [dateFormatter friendlyStringFromDate:[item lastUsedDate]];
+		value = [dateFormatter stringFromDate:[item lastUsedDate]];
+	} 
+	else if ([sortKey isEqualToString:@"creationDate"])
+	{
+		value = [dateFormatter stringFromDate:[item creationDate]];
+	}
+	else if ([sortKey isEqualToString:@"modificationDate"])
+	{
+		value = [dateFormatter stringFromDate:[item modificationDate]];
+	}
+	else if ([sortKey isEqualToString:@"kind"])
+	{
+		value = [item kind];
+	}
+	else if ([sortKey isEqualToString:@"size"])
+	{
+		NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+		[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+		
+		value = [numberFormatter stringFromFileSize:[item size]];
+	}
+	else {
+		value = @"";
+	}	
 	
 	NSMutableDictionary *fontAttributes = [NSMutableDictionary dictionaryWithCapacity:3];
 	[fontAttributes setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];		

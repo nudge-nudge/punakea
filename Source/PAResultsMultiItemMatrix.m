@@ -174,7 +174,7 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 	NSInteger numberOfItemsPerRow = frame.size.width / (cellSize.width + intercellSpacing.width);
 	
 	NSEnumerator *enumerator = [items objectEnumerator];
-	NNTaggableObject *anObject;
+	NNFile *anObject;
 	
 	NSInteger row = 0;
 	NSInteger column = 0;
