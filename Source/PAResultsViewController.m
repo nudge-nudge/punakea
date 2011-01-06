@@ -912,6 +912,11 @@
 	return outlineView;
 }
 
+- (NSSortDescriptor *)sortDescriptor
+{
+	return sortDescriptor;
+}
+
 #pragma mark table drag & drop support
 - (BOOL)outlineView:(NSOutlineView *)outlineView
 		 writeItems:(NSArray *)items 
