@@ -18,6 +18,10 @@
 	<integer>0</integer>
 	<key>General.Results.GroupResults</key>
 	<true/>
+	<key>General.Results.SortKey</key>
+	<string>displayName</string>
+	<key>General.Results.SortOrder</key>
+	<true/>
 	<key>Appearance.InfoPane.Active</key>
 	<string>INFO</string>
 	<key>ManageFiles.ManagedFolder.Enabled</key>

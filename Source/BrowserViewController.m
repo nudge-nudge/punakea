@@ -397,7 +397,9 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	{
 		// clicks are ignored, as they are (normally)
 		// causing the displayed tags to change
-		[self setDisplayTags:[tags tags]];
+		[self performSelectorOnMainThread:@selector(setDisplayTags:)
+							   withObject:[tags tags]
+							waitUntilDone:NO];
 	}
 }
 

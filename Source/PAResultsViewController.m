@@ -37,9 +37,7 @@
 			[query setBundlingAttributes:[NSArray arrayWithObjects:@"kMDItemContentTypeTree", nil]];
 			[groupingButton setState:NSOnState];
 		}
-		
-		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
-
+				
 		dropManager = [PADropManager sharedInstance];
 		
 		relatedTags = [[NNRelatedTags alloc] initWithQuery:query];
@@ -103,6 +101,17 @@
 	[menuView setTarget:self];
 	[menuView setAction:@selector(changeFinderLabel:)];
 	[colorLabelMenuItem setView:menuView];
+	
+	// Set sorting button
+	NSString *sortKey = [[NSUserDefaults standardUserDefaults] stringForKey:@"General.Results.SortKey"];
+	BOOL sortOrder = [[NSUserDefaults standardUserDefaults] boolForKey:@"General.Results.SortOrder"];
+	
+	if (!sortOrder) {
+		[self arrangeBy:sortKey];
+		[self arrangeBy:sortKey];
+	} else {
+		[self arrangeBy:sortKey];
+	}
 }
 
 - (void)dealloc
@@ -735,15 +744,15 @@
 	if ([type isEqualToString:@"Name"]) {
 		desc = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
 	} else if ([type isEqualToString:@"Date Modified"]) {
-		desc = [[NSSortDescriptor alloc] initWithKey:@"modificationDate" ascending:NO];
+		desc = [[NSSortDescriptor alloc] initWithKey:@"modificationDate" ascending:YES];
 	} else if ([type isEqualToString:@"Date Created"]) {
-		desc = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+		desc = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES];
 	} else if ([type isEqualToString:@"Size"]) {
-		desc = [[NSSortDescriptor alloc] initWithKey:@"size" ascending:NO];
+		desc = [[NSSortDescriptor alloc] initWithKey:@"size" ascending:YES];
 	} else if ([type isEqualToString:@"Kind"]) {
-		desc = [[NSSortDescriptor alloc] initWithKey:@"kind" ascending:NO];
+		desc = [[NSSortDescriptor alloc] initWithKey:@"kind" ascending:YES];
 	} else if ([type isEqualToString:@"Label"]) {
-		desc = [[NSSortDescriptor alloc] initWithKey:@"label" ascending:NO];
+		desc = [[NSSortDescriptor alloc] initWithKey:@"label" ascending:YES];
 	}
 	
 	if (desc != nil) {
@@ -762,6 +771,9 @@
 			[sortDescriptor release];
 			sortDescriptor = desc;
 		}
+		
+		[[NSUserDefaults standardUserDefaults] setObject:type forKey:@"General.Results.SortKey"];
+		[[NSUserDefaults standardUserDefaults] setBool:[sortDescriptor ascending] forKey:@"General.Results.SortOrder"];
 		
 		NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 		[query setSortDescriptors:sortDescriptors];
@@ -787,7 +799,7 @@
 			[item setState:NSOffState];
 		}
 		NSMenuItem *activeArrangeByItem = [[arrangeByMenuItem submenu] itemWithTitle:type];
-		[activeArrangeByItem setState:NSOnState];		
+		[activeArrangeByItem setState:NSOnState];	
 	} else {
 		lcl_log(lcl_cglobal, lcl_vError, @"sortDescriptors unset, this must not happen");
 	}
