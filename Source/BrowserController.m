@@ -193,38 +193,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[sbitem setAction:@selector(toggleTagsPane:)];
 	[sourcePanelStatusBar addItem:sbitem];
 	
-	// Right StatusBar
-	PARegistrationManager *rm = [PARegistrationManager defaultManager];
-	if (![rm hasRegisteredLicense])
-	{
-		PAStatusBarLink *sbLink = [PAStatusBarLink statusBarLink];
-		
-		if ([rm isTimeLimitedBeta])
-		{						
-			NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-			[dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"EN"]];
-			[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-			[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-			
-			NSString *expirationDateString = [dateFormatter stringFromDate:[rm timeLimitedBetaExpirationDate]];
-
-			NSString *s = [NSString stringWithFormat:NSLocalizedStringFromTable(@"EXPIRES_ON",@"Registration",@""),
-													 expirationDateString];
-			
-			[sbLink setStringValue:s];
-		} else {
-			[sbLink setTarget:[NSApp delegate]];
-			[sbLink setAction:@selector(purchase:)];
-			
-			NSString *s = [NSString stringWithFormat:NSLocalizedStringFromTable(@"DAYS_LEFT_FOR_EVALUATION",@"Registration",@""),
-												     [(PATrialLicense *)[rm license] daysLeftForEvaluation]];
-			
-			[sbLink setStringValue:s];
-		}
-	
-		[rightStatusBar addItem:sbLink];
-	}
-	
+	// Right StatusBar	
 	statusBarProgressIndicator = [[PAStatusBarProgressIndicator statusBarProgressIndicator] retain];
 	[statusBarProgressIndicator setStringValue:@"Gathering Tags"];
 	[statusBarProgressIndicator setHidden:YES];

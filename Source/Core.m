@@ -1,3 +1,23 @@
+// Copyright (c) 2006-2011 nudge:nudge (Johannes Hoffart & Daniel BŠr)
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
 #import "Core.h";
 
 @interface Core (PrivateAPI)
@@ -58,9 +78,6 @@
 		
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		[self loadUserDefaults];
-		
-		if ([[PARegistrationManager defaultManager] hasExpired])
-			[[PARegistrationManager defaultManager] showVersionHasExpiredWindow:self];
 		
 		[PAInstaller install];
 		
@@ -317,37 +334,8 @@
 		else
 			[item setTitle:@"Show Toolbar"];
 	}
-	else if ([item action] == @selector(enterLicenseKey:))
-	{
-		if ([[PARegistrationManager defaultManager] hasRegisteredLicense])
-			[item setTitle:NSLocalizedStringFromTable(@"MANAGE_LICENSE_KEY", @"Menus", @"")];
-		else
-			[item setTitle:NSLocalizedStringFromTable(@"ENTER_LICENSE_KEY", @"Menus", @"")];
-	}
-	
+
 	// Check on common stuff first
-	
-	// App menu
-	if ([[item title] isEqualToString:@"REGISTRATION_SPACER"] ||
-		[item action] == @selector(enterLicenseKey:))
-	{			
-		if ([[PARegistrationManager defaultManager] isTimeLimitedBeta])
-		{
-			[item setHidden:YES];
-			return NO;
-		}
-		return YES;
-	}
-	else if ([item action] == @selector(purchase:))
-	{
-		if ([[PARegistrationManager defaultManager] isTimeLimitedBeta] ||
-			[[PARegistrationManager defaultManager] hasRegisteredLicense])
-		{
-			[item setHidden:YES];
-			return NO;
-		}
-		return YES;
-	}
 	
 	// Check all items that are browser-specific
 	if(![self appHasBrowser])
@@ -471,17 +459,6 @@
 	}
 	
 	return YES;
-}
-
-- (IBAction)purchase:(id)sender
-{
-	NSURL *url = [NSURL URLWithString:NSLocalizedStringFromTable(@"STORE", @"Urls", nil)];
-	[[NSWorkspace sharedWorkspace] openURL:url];
-}
-
-- (IBAction)enterLicenseKey:(id)sender
-{
-	[[PARegistrationManager defaultManager] showLicenseManagerWindow:self];
 }
 
 - (IBAction)addTagSet:(id)sender

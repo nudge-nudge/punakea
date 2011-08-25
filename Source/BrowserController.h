@@ -26,8 +26,6 @@
 #import "PAInfoPaneMultipleSelectionView.h"
 #import "PATagsPaneTagsView.h"
 #import "PADropManager.h"
-#import "PARegistrationManager.h"
-
 
 extern NSString * const FILENAME_FAVORITES_PLIST;
 extern NSUInteger const VERSION_FAVORITES_PLIST;
