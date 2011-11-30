@@ -32,6 +32,8 @@
 - (void)togglePaneWithIdentifier:(NSString *)identifier;
 - (BOOL)paneWithIdentifierIsVisible:(NSString *)identifier;
 
+- (CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset;
+
 - (void)loadFavorites;
 - (void)loadUserDefaults;
 

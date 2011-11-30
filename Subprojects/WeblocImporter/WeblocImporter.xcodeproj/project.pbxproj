@@ -132,7 +132,11 @@
 			};
 			buildConfigurationList = 70138C880896BE9A00968C2F /* Build configuration list for PBXProject "WeblocImporter" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* WeblocImporter */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -200,10 +204,8 @@
 		4822E5360C0CC5F000435942 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -214,6 +216,7 @@
 				INSTALL_PATH = /Library/Spotlight;
 				LIBRARY_STYLE = Bundle;
 				PRODUCT_NAME = WeblocImporter;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = mdimporter;
 				ZERO_LINK = YES;
 			};
@@ -232,6 +235,7 @@
 		70138C850896BE9A00968C2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -242,6 +246,7 @@
 				INSTALL_PATH = /Library/Spotlight;
 				LIBRARY_STYLE = Bundle;
 				PRODUCT_NAME = WeblocImporter;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = mdimporter;
 				ZERO_LINK = YES;
 			};
@@ -250,10 +255,8 @@
 		70138C860896BE9A00968C2F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -261,6 +264,7 @@
 				INSTALL_PATH = /Library/Spotlight;
 				LIBRARY_STYLE = Bundle;
 				PRODUCT_NAME = WeblocImporter;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Release;
