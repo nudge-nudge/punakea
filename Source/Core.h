@@ -105,12 +105,15 @@
 - (IBAction)goToManageTags:(id)sender;
 - (IBAction)arrangeBy:(id)sender;
 - (IBAction)toggleResultsGrouping:(id)sender;
+- (IBAction)toggleFullScreen:(id)sender;
+
 - (IBAction)showPreferences:(id)sender;
 
 - (IBAction)openFiles:(id)sender;
 - (IBAction)delete:(id)sender;
 - (IBAction)selectAll:(id)sender;
-- (IBAction)tagSearch:(id)sender;
+- (IBAction)findTag:(id)sender;
+- (IBAction)findInResults:(id)sender;
 
 - (IBAction)showBrowser:(id)sender;
 - (IBAction)showBrowserResults:(id)sender;

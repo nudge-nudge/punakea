@@ -63,6 +63,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 - (void)awakeFromNib
 {
+	titleBar = (PATitleBar *)((PABrowserWindow *)self.window).titleBarView;
+	
 	// this keeps the windowcontroller from auto-placing the window
 	// - window is always opened where it was closed
 	[self setShouldCascadeWindows:NO];
@@ -89,11 +91,15 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	// create searchfield
 	searchField = [[self createSearchField] retain];
 	
+	// Set the title bar height
+	PABrowserWindow *aWindow = (PABrowserWindow *)[self window];
+    aWindow.titleBarHeight = 40.0;
+	
 	// setup stuff
 	[self setupToolbar];
 	[self setupStatusBar];
 	[self setupTabPanel];
-	[self setupFieldEditor];
+	[self setupFieldEditor];	
 		
 	// Register for notifications
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -124,6 +130,13 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[super dealloc];
 }
 
+- (void)windowDidLoad
+{
+    [super windowDidLoad];
+    // The class of the window has been set in INAppStoreWindow in Interface Builder
+    
+}
+
 - (NSSearchField*)createSearchField 
 {
 	// get current category
@@ -131,13 +144,14 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	
 	// configure search field
 	NSSearchField *field = [[[NSSearchField alloc] initWithFrame:NSMakeRect(0, 0, 130, 22)] autorelease];
+	[field setFont:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
 	[field setDelegate:browserViewController];
 	[browserViewController setSearchField:field];
 	
 	// create menu for determining search type
 	NSMenu *searchTypeMenu = [[NSMenu alloc] initWithTitle:@""];
 	
-	NSMenuItem *prefixTagSearchItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringFromTable(@"SEARCH_TAGS_BY_PREFIX",@"Toolbars",@"")
+	NSMenuItem *prefixTagSearchItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringFromTable(@"FIND_TAG_BY_PREFIX",@"Toolbars",@"")
 									   action:@selector(setSearchTypeFrom:)
 								keyEquivalent:@""] autorelease];
 	[prefixTagSearchItem setEnabled:YES];
@@ -151,7 +165,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		[prefixTagSearchItem setState:NSOffState];
 	}
 	
-	NSMenuItem *tagSearchItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringFromTable(@"SEARCH_TAGS_ALL",@"Toolbars",@"")
+	NSMenuItem *tagSearchItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringFromTable(@"FIND_TAG_BY_SUBSTRING",@"Toolbars",@"")
 																  action:@selector(setSearchTypeFrom:)
 														   keyEquivalent:@""] autorelease];
 	[tagSearchItem setEnabled:YES];
@@ -165,6 +179,15 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 		[tagSearchItem setState:NSOffState];
 	}
 	
+	// create menu for determining search type
+	NSMenuItem *fulltextSearchItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringFromTable(@"FIND_IN_RESULTS",@"Toolbars",@"")
+																  action:@selector(setSearchTypeFrom:)
+														   keyEquivalent:@""] autorelease];
+	[fulltextSearchItem setEnabled:YES];
+	[fulltextSearchItem setTag:0];
+	[fulltextSearchItem setTarget:browserViewController];
+	[searchTypeMenu insertItem:fulltextSearchItem atIndex:2];
+	
 	[[field cell] setSearchMenuTemplate:searchTypeMenu];
 	
 	return field;
@@ -177,7 +200,24 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
     [toolbar setAllowsUserCustomization:YES];
     [toolbar setAutosavesConfiguration:YES];
 	
-	[[self window] setToolbar:[toolbar autorelease]];
+	//[[self window] setToolbar:[toolbar autorelease]];
+	
+	PATitleBarButton *tbitem = [PATitleBarButton titleBarButton];
+	[tbitem setIdentifier:@"sync"];
+	[tbitem setImage:[NSImage imageNamed:@"toolbar-sync"]];
+	[titleBar addSubview:tbitem positioned:PATitleBarButtonRightAlignment];
+	
+	PATitleBarSearchButton *tbsitem = [PATitleBarSearchButton titleBarButton];
+	[tbsitem setIdentifier:@"search"];
+	[tbsitem setExtensionWidth:235.0];
+	[tbsitem setSearchField:[self createSearchField]];
+	[tbsitem setImage:[NSImage imageNamed:@"toolbar-search"]];
+	[titleBar addSubview:tbsitem positioned:PATitleBarButtonRightAlignment];
+	
+	/*PATitleBarButton *tbitem = [PATitleBarButton titleBarButton];
+	[tbitem setToolTip:@"Add new tag set to favorites"];
+	[tbitem setImage:[NSImage imageNamed:@"toolbar-show-tagger"]];
+	[titleBar addSubview:tbitem positioned:PATitleBarButtonRightAlignment];*/
 }
 
 - (void)setupStatusBar
@@ -777,20 +817,17 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	return nil;
 }
 
+- (NSRect)window:(NSWindow *)window willPositionSheet:(NSWindow *)sheet usingRect:(NSRect)rect
+{
+	rect.origin.y = window.frame.size.height - ((PABrowserWindow *)self.window).titleBarView.frame.size.height;
+	return rect;
+}
+
 
 #pragma mark Notifications
 - (void)windowWillClose:(NSNotification *)notification
 {
 	[self autorelease];
-}
-
-- (void)controlTextDidEndEditing:(NSNotification *)notification
-{
-	// Return key in search field makes tag cloud the first responder
-	if([[notification object] isMemberOfClass:[NSSearchField class]])
-	{
-		[[self window] makeFirstResponder:[browserViewController tagCloud]];
-	}
 }
 
 - (void)resultsOutlineViewSelectionDidChange:(NSNotification *)notification
@@ -907,6 +944,11 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 - (PASourcePanel *)sourcePanel
 {
 	return sourcePanel;
+}
+
+- (PATitleBar *)titleBar
+{
+	return titleBar;
 }
 
 @end

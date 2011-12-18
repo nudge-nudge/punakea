@@ -19,6 +19,7 @@
 // THE SOFTWARE.
 
 #import <Cocoa/Cocoa.h>
+#import "PABrowserWindow.h"
 #import "BrowserViewController.h"
 #import "NNTagging/NNTag.h"
 #import "NNTagging/NNTagSet.h"
@@ -38,15 +39,17 @@
 #import "PAInfoPaneMultipleSelectionView.h"
 #import "PATagsPaneTagsView.h"
 #import "PADropManager.h"
+#import "PATitleBar.h"
 
 extern NSString * const FILENAME_FAVORITES_PLIST;
 extern NSUInteger const VERSION_FAVORITES_PLIST;
 
 
-@interface BrowserController : NSWindowController 
+@interface BrowserController : NSWindowController
 {
-	
 	IBOutlet PATagSetPanel						*tagSetPanel;
+	
+	PATitleBar									*titleBar;
 	
 	BrowserViewController						*browserViewController;
 	
@@ -102,5 +105,7 @@ extern NSUInteger const VERSION_FAVORITES_PLIST;
 - (PAStatusBar *)sourcePanelStatusBar;
 - (PAStatusBar *)rightStatusBar;
 - (PASourcePanel *)sourcePanel;
+
+- (PATitleBar *)titleBar;
 
 @end

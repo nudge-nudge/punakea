@@ -7,4 +7,5 @@
 "SHOW_TAGS" = "Show Tags";
 "HIDE_TAGS" = "Hide Tags";
 "HOME" = "Home";
-
+"ENTER_FULL_SCREEN" = "Enter Full Screen";
+"EXIT_FULL_SCREEN" = "Exit Full Screen";

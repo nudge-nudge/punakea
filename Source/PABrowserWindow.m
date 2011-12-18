@@ -23,6 +23,8 @@
 
 @implementation PABrowserWindow
 
+
+
 - (void)flagsChanged:(NSEvent *)theEvent
 {
 	// As event messages are not forwarded to the delegate by default, we need to

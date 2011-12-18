@@ -20,6 +20,8 @@
 
 #import "Core.h";
 
+#define RUNNING_LION (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_6)
+
 @interface Core (PrivateAPI)
 
 - (void)loadQuickLookFramework;
@@ -348,8 +350,9 @@
 		
 		// Edit menu
 		if([item action] == @selector(delete:)) return NO;
-		if([item action] == @selector(tagSearch:)) return NO;
 		if([item action] == @selector(selectAll:)) return NO;
+		if([item action] == @selector(findTag:)) return NO;
+		if([item action] == @selector(findInResults:)) return NO;
 		
 		// View menu
 		if([item action] == @selector(goHome:)) return NO;
@@ -358,6 +361,7 @@
 		if([item action] == @selector(goToAllItems:)) return NO;
 		if([item action] == @selector(goToManageTags:)) return NO;
 		[arrangeByMenuItem setEnabled:NO];
+		if([item action] == @selector(toggleFullScreen:)) return NO;
 		
 		if([item action] == @selector(toggleToolbarShown:)) return NO;
 		if([item action] == @selector(runToolbarCustomizationPalette:)) return NO;		
@@ -454,6 +458,20 @@
 				[item setState:NSOnState];
 			else
 				[item setState:NSOffState];
+		}
+		
+		// View menu Lion only
+		if (!RUNNING_LION && ([item action] == @selector(toggleFullScreen:)))
+		{
+			NSInteger separatorIdx = [[item menu] indexOfItem:item] - 1;
+			[[[item menu] itemAtIndex:separatorIdx] setHidden:YES];
+		}
+		else if (RUNNING_LION && ([item action] == @selector(toggleFullScreen:)))
+		{
+			if ([[browserController window] isFullScreen])
+				[item setTitle:NSLocalizedStringFromTable(@"EXIT_FULL_SCREEN", @"Menus", nil)];
+			else
+				[item setTitle:NSLocalizedStringFromTable(@"ENTER_FULL_SCREEN", @"Menus", nil)];
 		}
 		[arrangeByMenuItem setEnabled:YES];
 	}
@@ -575,24 +593,14 @@
 	}
 }
 
-- (IBAction)tagSearch:(id)sender
+- (IBAction)findTag:(id)sender
 {
-	// Make sure browser toolbar is visible
-	NSToolbar *toolbar = [[browserController window] toolbar];	
-	if(![toolbar isVisible])
-		[toolbar setVisible:YES];
-	
-	// Make search field the first responder if its toolbar item is visible
-	NSEnumerator *e = [[toolbar items] objectEnumerator];
-	NSToolbarItem *item;
-	while(item = [e nextObject])
-	{
-		if([[item view] isKindOfClass:[NSSearchField class]])
-		{
-			[[browserController window] makeFirstResponder:[item view]];
-			return;
-		}
-	}
+	[[browserController titleBar] performClickOnButtonWithIdentifier:@"search"];
+} 
+
+- (IBAction)findInResults:(id)sender
+{
+	[[browserController titleBar] performClickOnButtonWithIdentifier:@"search"];
 } 
 
 - (IBAction)showBrowser:(id)sender
@@ -630,6 +638,11 @@
 - (IBAction)showBrowserManageTags:(id)sender
 {
 	[[browserController browserViewController] manageTags];
+}
+
+- (IBAction)toggleFullScreen:(id)sender
+{
+	[[browserController window] toggleFullScreen:self];
 }
 
 - (IBAction)resetBrowser:(id)sender

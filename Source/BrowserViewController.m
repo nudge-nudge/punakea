@@ -353,6 +353,32 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 }
 
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command
+{
+	if (control == searchField)
+	{
+		if (command == @selector(insertNewline:) || command == @selector(complete:))
+		{
+			[[tagCloud window] makeFirstResponder:tagCloud];
+			
+			// If there's only a single tag in the tag cloud, perform Click operation on this tag
+			if ([visibleTags count] == 1)
+				[[tagCloud activeButton] performClick:[tagCloud activeButton]];
+		}
+		if (command == @selector(cancelOperation:))
+		{
+			// Cancel search filter
+			[self resetSearchFieldString];
+			
+			// Close search field on ENTER and focus the tag cloud
+			[[control superview] closeSearchField:control];
+			[[tagCloud window] makeFirstResponder:tagCloud];
+		}
+	}	
+	
+	return NO;
+}
+
 /** 
  Search field delegate
  */

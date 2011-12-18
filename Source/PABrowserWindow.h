@@ -19,9 +19,10 @@
 // THE SOFTWARE.
 
 #import <Cocoa/Cocoa.h>
+#import "PAAppStoreWindow.h"
 
 
-@interface PABrowserWindow : NSWindow {
+@interface PABrowserWindow : PAAppStoreWindow {
 
 }
 
