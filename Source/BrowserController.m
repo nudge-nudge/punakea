@@ -770,8 +770,10 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 {
 	if([sender isEqualTo:verticalSplitView])
 	{
+		// NSLog(@"told left %f is %f", 300.0, [[[verticalSplitView subviews] objectAtIndex:0] frame].size.width);
+		
 		// left, right subview
-		if(offset == 0) return 300.0;
+		if(offset == 0) return 600.0;
 		if(offset == 1) return [sender frame].size.width - [self splitView:sender constrainMinCoordinate:0.0 ofSubviewAt:0];
 	}
 	else

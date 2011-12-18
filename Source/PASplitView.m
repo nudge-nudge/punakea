@@ -70,7 +70,7 @@
 	NSRectFill(aRect);
 }
 
-- (void)adjustSubviews
+/*- (void)adjustSubviews
 {
 	// NSSplitView does not accept values given by setFrame for subviews.
 	// This seems to be a bug. Thus we will handle the frames manually...
@@ -163,7 +163,7 @@
 	
 	[previousSubview setNeedsDisplay:YES];
 	[subview setNeedsDisplay:YES];
-}
+}*/
 
 
 #pragma mark Misc
@@ -307,7 +307,7 @@
 	
 	// Max constraint
 	if([self delegate] &&
-	   [[self delegate] respondsToSelector:@selector(splitView:constrainMinCoordinate:ofSubviewAt:)])
+	   [[self delegate] respondsToSelector:@selector(splitView:constrainMaxCoordinate:ofSubviewAt:)])
 	{
 		CGFloat max = [[self delegate] splitView:self constrainMaxCoordinate:0.0 ofSubviewAt:0];
 		if(max) maxCoordinate1 = max;
