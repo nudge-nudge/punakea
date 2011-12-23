@@ -20,6 +20,7 @@
 
 /* Controller */
 #import <Cocoa/Cocoa.h>
+
 #import "NNTagging/NNTags.h"
 #import "NNTagging/NNTaggableObject.h"
 #import "NNTagging/NNTagging.h"
@@ -56,6 +57,8 @@
 #import "UKCrashReporter.h"
 
 #import "NNActiveAppSavingPanel.h"
+
+#import "STPrivilegedTask.h"
 
 #import "lcl.h"
 
@@ -129,6 +132,7 @@
 - (IBAction)openWebsite:(id)sender;
 
 - (IBAction)cleanTagDB:(id)sender;
+- (IBAction)enableSpotlightIndexingOnVolume:(id)sender;
 
 - (IBAction)revealInFinder:(id)sender;
 

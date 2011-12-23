@@ -86,10 +86,10 @@
 		globalTags = [NNTags sharedTags];
 		
 		tagging = [NNTagging tagging];
-			
+        
 		lcl_log(lcl_cglobal,lcl_vInfo, @"Punakea (compiled on %s at %s) started",__DATE__,__TIME__);
 		
-//		@"Punakea compiled on %s at %s\n",__DATE__,__TIME__
+        //		@"Punakea compiled on %s at %s\n",__DATE__,__TIME__
 	}
     return self;
 }
@@ -152,7 +152,7 @@
 													   andSelector:@selector(getUrl:withReplyEvent:) 
 													 forEventClass:kInternetEventClass 
 														andEventID:kAEGetURL];
-
+    
 	// DEBUG
 	//[[PANotificationReceiver alloc] init];
 	
@@ -264,14 +264,14 @@
 	NSBundle *bundle = [NSBundle mainBundle];
 	NSString *path = [bundle bundlePath];
 	NSString *appName = [[path lastPathComponent] stringByDeletingPathExtension]; 
-		
+    
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSString *folder = [NSString stringWithFormat:@"~/Library/Application Support/%@/",appName];
 	folder = [folder stringByExpandingTildeInPath]; 
-		
+    
 	if ([fileManager fileExistsAtPath: folder] == NO) 
 		[fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:NULL];
-		
+    
 	return [folder stringByAppendingPathComponent:fileName]; 
 }
 
@@ -336,7 +336,7 @@
 		else
 			[item setTitle:@"Show Toolbar"];
 	}
-
+    
 	// Check on common stuff first
 	
 	// Check all items that are browser-specific
@@ -413,7 +413,7 @@
 				   [(PASourceItem *)[sp itemAtRow:[sp selectedRow]] isEditable])
 					return YES;
 			}
-				
+            
 			return NO;
 		}
 		else if([item action] == @selector(openFiles:))
@@ -517,7 +517,7 @@
 - (IBAction)arrangeBy:(id)sender
 {
 	NSString *type = [sender title];
-
+    
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
@@ -552,11 +552,11 @@
 - (IBAction)openFiles:(id)sender
 {		
 	PABrowserViewMainController *mainController = [[browserController browserViewController] mainController];
-
+    
 	if ([mainController isKindOfClass:[PAResultsViewController class]])
 	{
 		PAResultsOutlineView *ov = [(PAResultsViewController*)mainController outlineView];
-	
+        
 		if([ov responder])
 			[[[ov responder] target] performSelector:@selector(doubleAction)];
 		else	
@@ -622,7 +622,7 @@
 	{
 		// Select all items of library
 		[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];	
-			
+        
 		// Focus tag cloud
 		[[browserController window] makeFirstResponder:[[browserController browserViewController] tagCloud]];
 	}
@@ -728,6 +728,52 @@
 	[NSApp runModalForWindow:[self busyWindow]];
 }
 
+- (IBAction)enableSpotlightIndexingOnVolume:(id)sender
+{
+    // get directory from user
+    NSOpenPanel *openDlg = [NSOpenPanel openPanel];
+    
+    [openDlg setCanChooseFiles:NO];
+    [openDlg setCanChooseDirectories:YES];
+    [openDlg setMessage:NSLocalizedStringFromTable(@"ENABLE_TAGGING_ON_VOLUME_MESSAGE", @"FileManager", nil)];
+    [openDlg setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+    
+    if ([openDlg runModal] == NSOKButton )
+    {
+        NSArray *volumeUrls = [openDlg URLs];
+                
+        // Loop through all the selected directories and call mdutil -i on them
+        for(NSURL *volumeUrl in volumeUrls)
+        {            
+            NSMutableArray *args = [NSArray arrayWithObjects:@"-i", @"on", [volumeUrl path], nil];
+            STPrivilegedTask *mdutil = [[STPrivilegedTask alloc] initWithLaunchPath:@"/usr/bin/mdutil" arguments:args];
+            OSStatus status = [mdutil launch];
+            [mdutil waitUntilExit]; 
+            
+            // give user feedback on success
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"OK"];
+            [alert setAlertStyle:NSWarningAlertStyle];
+            
+            if (status == 0)
+            {
+                [alert setMessageText:
+                    [NSString stringWithFormat:NSLocalizedStringFromTable(@"ENABLE_TAGGING_ON_VOLUME_SUCCESS", @"FileManager", nil), [volumeUrl path]]];
+            }
+            else
+            {
+                [alert setMessageText:
+                    [NSString stringWithFormat:NSLocalizedStringFromTable(@"ENABLE_TAGGING_ON_VOLUME_FAILURE", @"FileManager", nil), [volumeUrl path]]];
+                [alert setInformativeText:
+                    [NSString stringWithFormat:NSLocalizedStringFromTable(@"ENABLE_TAGGING_ON_VOLUME_FAILURE_REASON", @"FileManager", nil), status]];
+            }          
+            
+            [alert runModal];
+            [alert release];
+        }
+    }
+}
+
 - (IBAction)getInfo:(id)sender
 {
 	PAResultsOutlineView *ov = (PAResultsOutlineView *)[[browserController window] firstResponder];
@@ -782,7 +828,7 @@
 		NSArray *filenames = [openPanel filenames];
 		
 		NNFolderToTagImporter *importer = [[NNFolderToTagImporter alloc] init];
-				
+        
 		NSButton *accessoryView = (NSButton*) [openPanel accessoryView];
 		
 		if ([accessoryView state] == NSOnState)
@@ -904,31 +950,35 @@
 		}
 		else
 		{
-			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
-			
+			success = [fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:&error];
+            
 			// make sure the directory is writable before setting the icon
 			NSDictionary *writableAttributes = [NSDictionary dictionaryWithObject:[NSNumber numberWithLong:448]
 																		   forKey:NSFilePosixPermissions];
-			success = [fileManager setAttributes:writableAttributes
-									ofItemAtPath:dir
-										   error:&error];
+			success = success && [fileManager setAttributes:writableAttributes
+											   ofItemAtPath:dir
+													  error:NULL];
 			
-			// set the icon
-			[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
-										   forFile:dir
-										   options:NSExclude10_4ElementsIconCreationOption];
-		
-			if(generateContent)
-			{
-				// Generate folder hierarchy from scratch
-				BusyWindowController *busyWindowController = [busyWindow delegate];
+			if (!success) {
+				[self displayWarningWithMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"UNABLE_TO_CREATE", @"FileManager", @""), dir, [error localizedDescription]]];
+			} else {
+				// set the icon
+				[[NSWorkspace sharedWorkspace] setIcon:[NSImage imageNamed:@"TagFolder"] 
+											   forFile:dir
+											   options:NSExclude10_4ElementsIconCreationOption];
 				
-				[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
-				[busyWindowController performBusySelector:@selector(createDirectoryStructure)
-												 onObject:[NNTagging tagging]];
-				
-				[busyWindow center];
-				[NSApp runModalForWindow:busyWindow];
+				if(generateContent)
+				{
+					// Generate folder hierarchy from scratch
+					BusyWindowController *busyWindowController = [busyWindow delegate];
+					
+					[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER", @"FileManager", nil)];
+					[busyWindowController performBusySelector:@selector(createDirectoryStructure)
+													 onObject:[NNTagging tagging]];
+					
+					[busyWindow center];
+					[NSApp runModalForWindow:busyWindow];
+				}	
 			}
 		}
 	}
@@ -949,7 +999,11 @@
 		}
 		else
 		{
-			[fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL];
+			success = [fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:&error];
+			
+			if (!success) {
+				[self displayWarningWithMessage:[NSString stringWithFormat:NSLocalizedStringFromTable(@"UNABLE_TO_CREATE", @"FileManager", @""), dir, [error localizedDescription]]];
+			}
 		}
 	}
 }
@@ -1132,7 +1186,7 @@
 		BOOL boolValue = [userDefaults boolForKey:key];
 		[userDefaults removeObjectForKey:key];						
 		[userDefaults setValue:[NSNumber numberWithBool:boolValue] forKey:@"General.Sidebar.Enabled"];
-				
+        
 		key = @"General.LoadStatusItem";
 		boolValue = [userDefaults boolForKey:key];
 		[userDefaults removeObjectForKey:key];	

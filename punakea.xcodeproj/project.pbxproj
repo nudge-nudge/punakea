@@ -79,6 +79,9 @@
 		483272350AA42DC6003D98A6 /* UKPrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483272330AA42DC6003D98A6 /* UKPrefsPanel.m */; };
 		4832723D0AA42E8C003D98A6 /* PreferenceController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4832723B0AA42E8C003D98A6 /* PreferenceController.h */; };
 		4832723E0AA42E8C003D98A6 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832723C0AA42E8C003D98A6 /* PreferenceController.m */; };
+		483B905214A38B2E00DE3CDD /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 483B905014A38B2E00DE3CDD /* STPrivilegedTask.m */; };
+		483B905314A38B2E00DE3CDD /* STPrivilegedTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 483B905114A38B2E00DE3CDD /* STPrivilegedTask.h */; };
+		483B906414A39CBC00DE3CDD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483B906314A39CBC00DE3CDD /* Security.framework */; };
 		483C8A440D6C517C0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 483C8A250D6C50BC0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler */; };
 		483C8AA20D6C51EA0051C8C3 /* PAPublicURLDropHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 483C8A090D6C4F8D0051C8C3 /* PAPublicURLDropHandler.m */; };
 		483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 483184980AEF8D8600C3C672 /* PADropHandler.framework */; };
@@ -651,6 +654,9 @@
 		483272330AA42DC6003D98A6 /* UKPrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKPrefsPanel.m; sourceTree = "<group>"; };
 		4832723B0AA42E8C003D98A6 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
 		4832723C0AA42E8C003D98A6 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
+		483B905014A38B2E00DE3CDD /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
+		483B905114A38B2E00DE3CDD /* STPrivilegedTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
+		483B906314A39CBC00DE3CDD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		483C8A080D6C4F8D0051C8C3 /* PAPublicURLDropHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAPublicURLDropHandler.h; path = URLDropHandler/PAPublicURLDropHandler.h; sourceTree = "<group>"; };
 		483C8A090D6C4F8D0051C8C3 /* PAPublicURLDropHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAPublicURLDropHandler.m; path = URLDropHandler/PAPublicURLDropHandler.m; sourceTree = "<group>"; };
 		483C8A250D6C50BC0051C8C3 /* PublicUrlDropHandler.punakeaDropHandler */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PublicUrlDropHandler.punakeaDropHandler; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1049,6 +1055,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483B906414A39CBC00DE3CDD /* Security.framework in Frameworks */,
 				48B755F110E00D9D00446B38 /* NNTagging.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
@@ -1078,6 +1085,7 @@
 				658849C8115F61C4003C2303 /* LegacyHeaders */,
 				4831849F0AEF8FD800C3C672 /* Frameworks */,
 				483184F20AEF91E100C3C672 /* Plugins */,
+				483B904F14A38AE600DE3CDD /* 3rdParty */,
 				48404A130AF8A7B4001F7BB7 /* UnitTests */,
 			);
 			path = Source;
@@ -1094,6 +1102,7 @@
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				489BAAA81046FFF200E9D7A3 /* QuickLook.framework */,
+				483B906314A39CBC00DE3CDD /* Security.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -1399,6 +1408,15 @@
 				4832723C0AA42E8C003D98A6 /* PreferenceController.m */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		483B904F14A38AE600DE3CDD /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				483B905014A38B2E00DE3CDD /* STPrivilegedTask.m */,
+				483B905114A38B2E00DE3CDD /* STPrivilegedTask.h */,
+			);
+			name = 3rdParty;
 			sourceTree = "<group>";
 		};
 		483C8A120D6C507B0051C8C3 /* PublicUrlDropHandler */ = {
@@ -2295,6 +2313,7 @@
 				655EE2CE148B793C00D86FB4 /* PATitleBar.h in Headers */,
 				65D51DDD148BA7100097F499 /* PATitleBarButtonCell.h in Headers */,
 				65D51DE1148BACB50097F499 /* PATitleBarSearchButton.h in Headers */,
+				483B905314A38B2E00DE3CDD /* STPrivilegedTask.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2939,6 +2958,7 @@
 				655EE2CF148B793C00D86FB4 /* PATitleBar.m in Sources */,
 				65D51DDE148BA7100097F499 /* PATitleBarButtonCell.m in Sources */,
 				65D51DE2148BACB50097F499 /* PATitleBarSearchButton.m in Sources */,
+				483B905214A38B2E00DE3CDD /* STPrivilegedTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

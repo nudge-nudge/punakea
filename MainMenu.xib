@@ -95,32 +95,6 @@
 									<reference key="NSOnImage" ref="453764835"/>
 									<reference key="NSMixedImage" ref="327890942"/>
 								</object>
-								<object class="NSMenuItem" id="445828536">
-									<reference key="NSMenu" ref="478303251"/>
-									<string key="NSTitle">Purchase Punakea...</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="453764835"/>
-									<reference key="NSMixedImage" ref="327890942"/>
-								</object>
-								<object class="NSMenuItem" id="519556874">
-									<reference key="NSMenu" ref="478303251"/>
-									<string key="NSTitle">Enter License Key...</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="453764835"/>
-									<reference key="NSMixedImage" ref="327890942"/>
-								</object>
-								<object class="NSMenuItem" id="824066858">
-									<reference key="NSMenu" ref="478303251"/>
-									<bool key="NSIsDisabled">YES</bool>
-									<bool key="NSIsSeparator">YES</bool>
-									<string key="NSTitle"/>
-									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="453764835"/>
-									<reference key="NSMixedImage" ref="327890942"/>
-								</object>
 								<object class="NSMenuItem" id="137675262">
 									<reference key="NSMenu" ref="478303251"/>
 									<string key="NSTitle">Preferences…</string>
@@ -645,6 +619,14 @@
 									<reference key="NSOnImage" ref="453764835"/>
 									<reference key="NSMixedImage" ref="327890942"/>
 								</object>
+								<object class="NSMenuItem" id="119306005">
+									<reference key="NSMenu" ref="635600166"/>
+									<string key="NSTitle">Enable Tagging on Volume...</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="453764835"/>
+									<reference key="NSMixedImage" ref="327890942"/>
+								</object>
 							</object>
 						</object>
 					</object>
@@ -924,7 +906,7 @@
 					</object>
 					<string key="NSFrameSize">{244, 72}</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -1273,22 +1255,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">purchase:</string>
-						<reference key="source" ref="72823720"/>
-						<reference key="destination" ref="445828536"/>
-					</object>
-					<int key="connectionID">883</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">enterLicenseKey:</string>
-						<reference key="source" ref="72823720"/>
-						<reference key="destination" ref="519556874"/>
-					</object>
-					<int key="connectionID">884</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">openFAQ:</string>
 						<reference key="source" ref="72823720"/>
 						<reference key="destination" ref="895571872"/>
@@ -1527,6 +1493,14 @@
 					</object>
 					<int key="connectionID">989</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">enableSpotlightIndexingOnVolume:</string>
+						<reference key="source" ref="72823720"/>
+						<reference key="destination" ref="119306005"/>
+					</object>
+					<int key="connectionID">991</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1656,9 +1630,6 @@
 							<reference ref="463198570"/>
 							<reference ref="455345788"/>
 							<reference ref="303377279"/>
-							<reference ref="519556874"/>
-							<reference ref="824066858"/>
-							<reference ref="445828536"/>
 						</object>
 						<reference key="parent" ref="1048560594"/>
 					</object>
@@ -1729,21 +1700,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">786</int>
 						<reference key="object" ref="303377279"/>
-						<reference key="parent" ref="478303251"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">880</int>
-						<reference key="object" ref="519556874"/>
-						<reference key="parent" ref="478303251"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">881</int>
-						<reference key="object" ref="824066858"/>
-						<reference key="parent" ref="478303251"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">882</int>
-						<reference key="object" ref="445828536"/>
 						<reference key="parent" ref="478303251"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1976,6 +1932,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="179987173"/>
+							<reference ref="119306005"/>
 						</object>
 						<reference key="parent" ref="144587683"/>
 					</object>
@@ -2208,6 +2165,11 @@
 						<reference key="object" ref="924554802"/>
 						<reference key="parent" ref="423322069"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">990</int>
+						<reference key="object" ref="119306005"/>
+						<reference key="parent" ref="635600166"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -2289,9 +2251,6 @@
 					<string>866.IBPluginDependency</string>
 					<string>873.IBPluginDependency</string>
 					<string>877.IBPluginDependency</string>
-					<string>880.IBPluginDependency</string>
-					<string>881.IBPluginDependency</string>
-					<string>882.IBPluginDependency</string>
 					<string>890.IBPluginDependency</string>
 					<string>893.IBPluginDependency</string>
 					<string>894.IBPluginDependency</string>
@@ -2314,11 +2273,10 @@
 					<string>982.IBPluginDependency</string>
 					<string>985.IBPluginDependency</string>
 					<string>986.IBPluginDependency</string>
+					<string>990.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2431,7 +2389,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">989</int>
+			<int key="maxID">991</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2487,6 +2445,7 @@
 							<string>arrangeBy:</string>
 							<string>cleanTagDB:</string>
 							<string>delete:</string>
+							<string>enableSpotlightIndexingOnVolume:</string>
 							<string>enterLicenseKey:</string>
 							<string>findInResults:</string>
 							<string>findTag:</string>
@@ -2539,6 +2498,7 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
 							<string>NSArray</string>
 							<string>id</string>
 							<string>id</string>
@@ -2562,6 +2522,7 @@
 							<string>arrangeBy:</string>
 							<string>cleanTagDB:</string>
 							<string>delete:</string>
+							<string>enableSpotlightIndexingOnVolume:</string>
 							<string>enterLicenseKey:</string>
 							<string>findInResults:</string>
 							<string>findTag:</string>
@@ -2608,6 +2569,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">delete:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">enableSpotlightIndexingOnVolume:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

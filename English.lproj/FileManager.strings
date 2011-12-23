@@ -12,6 +12,7 @@
 "DESTINATION_CONTAINS_NEEDED_DIR" = "The chosen folder contains the folder '%@'. This folder name is needed for the managed tags. Please choose a different folder or delete '%@'.";
 "ERROR_MOVING_DIR" = "There was an error (%@) moving the folder '%@'. Please choose a different folder. Files already moved will be restored in the original folder.";
 "CRITICAL_MOVING_ERROR" = "There was an unhandled error while moving the files. Please check the new location and the old location for your files.";
+"UNABLE_TO_CREATE" = "The path '%@' (%@) could not be created. Please make sure you have write permissions. When done, restart this application.";
 
 "DESTINATION_NOT_FOLDER_ERROR" = "The path '%@' does not point to a folder. Please make sure to remove this file. When done, restart this application.";
 
@@ -26,3 +27,8 @@
 "DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "Punakea might delete contents in the \"Tags Folder\".";
 
 "MOVE_FILES_ON_IMPORTING" = "Move files to managed folder on import";
+
+"ENABLE_TAGGING_ON_VOLUME_MESSAGE" = "Select the folder where the volume is mounted (NOT the dmg file itself).";
+"ENABLE_TAGGING_ON_VOLUME_SUCCESS" = "Tagging enabled on '%@'";
+"ENABLE_TAGGING_ON_VOLUME_FAILURE" = "Tagging could not be enabled on '%@'";
+"ENABLE_TAGGING_ON_VOLUME_FAILURE_REASON" = "Error code: %i";
