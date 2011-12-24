@@ -10,6 +10,7 @@
 #import "PAAppStoreWindow.h"
 #import "PATitleBarButton.h"
 #import "PATitleBarSearchButton.h"
+#import "PATitleBarSpinButton.h"
 
 @class PABrowserWindow;
 

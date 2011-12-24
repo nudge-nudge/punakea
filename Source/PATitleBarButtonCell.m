@@ -55,22 +55,14 @@
 	
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
-	imageRect.size = [img size];	
-	
-	// Tint image
-	[img lockFocus];
-	if (![self isHighlighted])		
-		[[NSColor colorWithCalibratedWhite:1.0 alpha:0.475] set];
-	else
-		[[NSColor colorWithCalibratedWhite:1.0 alpha:0.3] set];
-	NSRectFillUsingOperation(imageRect, NSCompositeSourceAtop);
-	[img unlockFocus];
+	imageRect.size = [img size];
 	
 	NSRect destRect;
 	destRect.origin.x = cellFrame.origin.x;
 	destRect.origin.y = cellFrame.origin.y + (cellFrame.size.height - imageRect.size.height) / 2;
 	destRect.size = imageRect.size;
 	
+	img = [self tintedImage:img cellFrame:cellFrame];
 	[img drawInRect:destRect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	
 	/*if(![self isHighlighted])
@@ -82,6 +74,31 @@
 	// DEBUG
 	// [[NSColor yellowColor] set];
 	// [NSBezierPath fillRect:destRect];
+}
+
+- (NSImage *)tintedImage:(NSImage *)img cellFrame:cellFrame
+{
+	NSRect imageRect;
+	imageRect.origin = NSZeroPoint;
+	imageRect.size = [img size];	
+	
+	/*NSShadow * shadow = [NSShadow new];
+	[shadow setShadowColor: [NSColor colorWithDeviceWhite: 1.0f alpha: 1.0f]];
+	[shadow setShadowBlurRadius: 0.0f];
+	[shadow setShadowOffset: NSMakeSize(0, -1)];
+	[shadow set];*/
+	
+	// Tint image
+	[img lockFocus];
+	if (![self isHighlighted])		
+		[[NSColor colorWithCalibratedWhite:1.0 alpha:0.475] set];
+	else
+		[[NSColor colorWithCalibratedWhite:1.0 alpha:0.3] set];
+	NSRectFillUsingOperation(imageRect, NSCompositeSourceAtop);
+
+	[img unlockFocus];
+	
+	return img;
 }
 
 

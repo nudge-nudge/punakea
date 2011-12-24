@@ -9,3 +9,4 @@
 "FIND_TAG_BY_PREFIX" = "Find tag by prefix";
 "FIND_TAG_BY_SUBSTRING" = "Find tag by substring";
 "FIND_IN_RESULTS" = "Find fulltext in results";
+"SYNC_TAGS_TOOLTIP" = "Synchronize Tags";

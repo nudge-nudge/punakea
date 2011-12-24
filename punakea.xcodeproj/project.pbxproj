@@ -219,6 +219,11 @@
 		653948DD0C0359C4001705D6 /* button-goto-on.tif in Resources */ = {isa = PBXBuildFile; fileRef = 653948DB0C0359C4001705D6 /* button-goto-on.tif */; };
 		6539B9FB0BE35A3B00B1D216 /* statusbar-button-gear.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6539B9F90BE35A3B00B1D216 /* statusbar-button-gear.pdf */; };
 		6539B9FC0BE35A3B00B1D216 /* statusbar-button-plus.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6539B9FA0BE35A3B00B1D216 /* statusbar-button-plus.pdf */; };
+		653D945D14A4B7C3002D604F /* PATitleBarSpinButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 653D945914A4B7C3002D604F /* PATitleBarSpinButton.h */; };
+		653D945E14A4B7C3002D604F /* PATitleBarSpinButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 653D945A14A4B7C3002D604F /* PATitleBarSpinButton.m */; };
+		653D945F14A4B7C3002D604F /* PATitleBarSpinButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 653D945B14A4B7C3002D604F /* PATitleBarSpinButtonCell.h */; };
+		653D946014A4B7C3002D604F /* PATitleBarSpinButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 653D945C14A4B7C3002D604F /* PATitleBarSpinButtonCell.m */; };
+		653D946214A4B7E0002D604F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653D946114A4B7E0002D604F /* QuartzCore.framework */; };
 		6540FA550AEE0F5100EF51F3 /* PAResultsBookmarkCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */; };
 		6540FA560AEE0F5100EF51F3 /* PAResultsBookmarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */; };
 		6540FA670AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6540FA650AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h */; };
@@ -799,6 +804,11 @@
 		653948DB0C0359C4001705D6 /* button-goto-on.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "button-goto-on.tif"; sourceTree = "<group>"; };
 		6539B9F90BE35A3B00B1D216 /* statusbar-button-gear.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "statusbar-button-gear.pdf"; sourceTree = "<group>"; };
 		6539B9FA0BE35A3B00B1D216 /* statusbar-button-plus.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "statusbar-button-plus.pdf"; sourceTree = "<group>"; };
+		653D945914A4B7C3002D604F /* PATitleBarSpinButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATitleBarSpinButton.h; sourceTree = "<group>"; };
+		653D945A14A4B7C3002D604F /* PATitleBarSpinButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATitleBarSpinButton.m; sourceTree = "<group>"; };
+		653D945B14A4B7C3002D604F /* PATitleBarSpinButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATitleBarSpinButtonCell.h; sourceTree = "<group>"; };
+		653D945C14A4B7C3002D604F /* PATitleBarSpinButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATitleBarSpinButtonCell.m; sourceTree = "<group>"; };
+		653D946114A4B7E0002D604F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsBookmarkCell.h; sourceTree = "<group>"; };
 		6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsBookmarkCell.m; sourceTree = "<group>"; };
 		6540FA650AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemGenericCell.h; sourceTree = "<group>"; };
@@ -1055,6 +1065,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				653D946214A4B7E0002D604F /* QuartzCore.framework in Frameworks */,
 				483B906414A39CBC00DE3CDD /* Security.framework in Frameworks */,
 				48B755F110E00D9D00446B38 /* NNTagging.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
@@ -1134,6 +1145,7 @@
 		29B97314FDCFA39411CA2CEA /* Punakea */ = {
 			isa = PBXGroup;
 			children = (
+				653D946114A4B7E0002D604F /* QuartzCore.framework */,
 				080E96DDFE201D6D7F000001 /* Source */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -1753,6 +1765,10 @@
 				65D51DDC148BA7100097F499 /* PATitleBarButtonCell.m */,
 				65D51DDF148BACB50097F499 /* PATitleBarSearchButton.h */,
 				65D51DE0148BACB50097F499 /* PATitleBarSearchButton.m */,
+				653D945914A4B7C3002D604F /* PATitleBarSpinButton.h */,
+				653D945A14A4B7C3002D604F /* PATitleBarSpinButton.m */,
+				653D945B14A4B7C3002D604F /* PATitleBarSpinButtonCell.h */,
+				653D945C14A4B7C3002D604F /* PATitleBarSpinButtonCell.m */,
 			);
 			name = Titlebar;
 			sourceTree = "<group>";
@@ -2314,6 +2330,8 @@
 				65D51DDD148BA7100097F499 /* PATitleBarButtonCell.h in Headers */,
 				65D51DE1148BACB50097F499 /* PATitleBarSearchButton.h in Headers */,
 				483B905314A38B2E00DE3CDD /* STPrivilegedTask.h in Headers */,
+				653D945D14A4B7C3002D604F /* PATitleBarSpinButton.h in Headers */,
+				653D945F14A4B7C3002D604F /* PATitleBarSpinButtonCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2959,6 +2977,8 @@
 				65D51DDE148BA7100097F499 /* PATitleBarButtonCell.m in Sources */,
 				65D51DE2148BACB50097F499 /* PATitleBarSearchButton.m in Sources */,
 				483B905214A38B2E00DE3CDD /* STPrivilegedTask.m in Sources */,
+				653D945E14A4B7C3002D604F /* PATitleBarSpinButton.m in Sources */,
+				653D946014A4B7C3002D604F /* PATitleBarSpinButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
