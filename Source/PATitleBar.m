@@ -112,6 +112,19 @@ static CGImageRef createNoiseImageRef(int width, int height, float factor)
 	[self addSubview:aView];
 }
 
+- (PATitleBarButton *)buttonWithIdentifier:(NSString *)anIdentifier
+{
+	PATitleBarButton *btn = nil;
+	
+	for (PATitleBarButton *button in self.subviews)
+	{
+		if ([[button identifier] isEqualToString:anIdentifier])
+			btn = button;
+	}
+	
+	return btn;
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
 	float xoffset = 0.0;

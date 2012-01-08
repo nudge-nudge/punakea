@@ -27,12 +27,13 @@ typedef enum
 
 @interface PATitleBar : NSView
 {
-	NSMutableArray		*subviews;
+	
 }
 
 - (NSBezierPath*)clippingPathWithRect:(NSRect)aRect cornerRadius:(CGFloat)radius;
 
 - (void)addSubview:(NSView *)aView positioned:(PATitleBarButtonAlignment)place;
+- (PATitleBarButton *)buttonWithIdentifier:(NSString *)anIdentifier;
 
 - (void)performClickOnButtonWithIdentifier:(NSString *)anIdentifier;
 

@@ -206,6 +206,8 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[tbitem setIdentifier:@"sync"];
 	[tbitem setImage:[NSImage imageNamed:@"toolbar-sync"]];
 	[tbitem setToolTip:NSLocalizedStringFromTable(@"SYNC_TAGS_TOOLTIP", @"Toolbars", nil)];
+	[tbitem setTarget:[NSApp delegate]];
+	[tbitem setAction:@selector(syncTags:)];
 	[titleBar addSubview:tbitem positioned:PATitleBarButtonRightAlignment];
 	
 	PATitleBarSearchButton *tbsitem = [PATitleBarSearchButton titleBarButton];

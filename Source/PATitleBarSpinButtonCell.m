@@ -43,10 +43,10 @@
 		spinning = YES;
 		[[self controlView] start:nil];
 		[super stopTracking:lastPoint at:stopPoint inView:controlView mouseIsUp:flag];
-	} else {
+	} /*else {
 		// TODO Only for testing. Remove if connected to external actions.
 		[[self controlView] stop:nil];
-	}
+	}*/
 }
 
 

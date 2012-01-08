@@ -173,6 +173,8 @@
 	[udc removeObserver:self forKeyPath:@"values.General.Hotkey.Tagger.KeyCode"];
 	[udc removeObserver:self forKeyPath:@"values.General.Hotkey.Tagger.Modifiers"];
 	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	[preferenceController release];
 	
     [super dealloc];
@@ -365,6 +367,9 @@
 		
 		if([item action] == @selector(toggleToolbarShown:)) return NO;
 		if([item action] == @selector(runToolbarCustomizationPalette:)) return NO;		
+		
+		// Tools menu
+		if([item action] == @selector(syncTags:)) return NO;
 	}
 	
 	// Check all items that are browser-specific and have constraints	
@@ -716,16 +721,51 @@
 	[[NSWorkspace sharedWorkspace] openURL:url];
 }
 
-- (IBAction)cleanTagDB:(id)sender
+- (IBAction)syncTags:(id)sender
 {
-	BusyWindowController *busyWindowController = [[self busyWindow] delegate];
+	[[NNTagging tagging] performSelectorOnMainThread:@selector(cleanTagDB)
+										  withObject:nil
+									   waitUntilDone:NO];
 	
-	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB", @"FileManager", nil)];
-	[busyWindowController performBusySelector:@selector(cleanTagDB)
-									 onObject:[NNTagging tagging]];
+	[[NSNotificationCenter defaultCenter] addObserver:self	
+											 selector:@selector(syncTagsDone:) 
+												 name:NNProgressDidUpdateNotification
+											   object:[NNTagging tagging]];
 	
-	[[self busyWindow] center];
-	[NSApp runModalForWindow:[self busyWindow]];
+	if (![sender isKindOfClass:[PATitleBarButton class]])
+	{
+		[[[browserController titleBar] buttonWithIdentifier:@"sync"] start:self];
+	}
+	
+	/*
+		BusyWindowController *busyWindowController = [[self busyWindow] delegate];
+		
+		[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB", @"FileManager", nil)];
+		[busyWindowController performBusySelector:@selector(cleanTagDB)
+										 onObject:[NNTagging tagging]];
+		
+		[[self busyWindow] center];
+		[NSApp runModalForWindow:[self busyWindow]];
+	*/
+}
+
+- (void)syncTagsDone:(NSNotification *)notification
+{
+	NSDictionary *dict = [notification userInfo];
+	
+	double doubleValue = [[dict objectForKey:@"currentProgress"] doubleValue];
+	double maxValue = [[dict objectForKey:@"maximumProgress"] doubleValue];
+	
+	//NSLog(@"%f %f", doubleValue, maxValue);
+	
+	if(doubleValue == maxValue)
+	{
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:NNProgressDidUpdateNotification
+													  object:[NNTagging tagging]];
+		
+		[[[browserController titleBar] buttonWithIdentifier:@"sync"] stop:self];
+	}
 }
 
 - (IBAction)enableSpotlightIndexingOnVolume:(id)sender

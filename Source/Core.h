@@ -131,7 +131,7 @@
 - (IBAction)openScreencast:(id)sender;
 - (IBAction)openWebsite:(id)sender;
 
-- (IBAction)cleanTagDB:(id)sender;
+- (IBAction)syncTags:(id)sender;
 - (IBAction)enableSpotlightIndexingOnVolume:(id)sender;
 
 - (IBAction)revealInFinder:(id)sender;
