@@ -86,9 +86,22 @@
 	[searchField performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:[[NSAnimationContext currentContext] duration]];
 }
 
-- (void)selectSearchMenuItemAtIndex:(NSInteger)idx
+- (void)selectSearchMenuItemWithTag:(NSInteger)tag
 {
-	[[[[searchField cell] searchMenuTemplate] itemAtIndex:idx] setState:NSOnState];
+	// Update menu item states
+	NSMenu *menu = [[searchField cell] searchMenuTemplate];
+	
+	for (NSMenuItem *item in [menu itemArray])
+	{
+		[item setState:NSOffState];
+	}
+	
+	[[menu itemWithTag:tag] setState:NSOnState];
+	
+	[[searchField cell] setSearchMenuTemplate:menu];
+	
+	// update prefs
+	[[NSUserDefaults standardUserDefaults] setInteger:tag forKey:@"General.Search.Type"];
 }
 
 

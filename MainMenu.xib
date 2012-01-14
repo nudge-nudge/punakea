@@ -381,7 +381,7 @@
 											<bool key="EncodedWithXMLCoder">YES</bool>
 											<object class="NSMenuItem" id="301566673">
 												<reference key="NSMenu" ref="884435328"/>
-												<string key="NSTitle">Find Tag...</string>
+												<string key="NSTitle">Find Tags...</string>
 												<string key="NSKeyEquiv">f</string>
 												<int key="NSKeyEquivModMask">1048576</int>
 												<int key="NSMnemonicLoc">2147483647</int>
@@ -611,7 +611,7 @@
 									<reference key="NSMenu" ref="635600166"/>
 									<string key="NSTitle">Synchronize Tags</string>
 									<string key="NSKeyEquiv">r</string>
-									<int key="NSKeyEquivModMask">1572864</int>
+									<int key="NSKeyEquivModMask">1310720</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="453764835"/>
 									<reference key="NSMixedImage" ref="327890942"/>

@@ -184,7 +184,7 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 																  action:@selector(setSearchTypeFrom:)
 														   keyEquivalent:@""] autorelease];
 	[fulltextSearchItem setEnabled:YES];
-	[fulltextSearchItem setTag:0];
+	[fulltextSearchItem setTag:PAFullTextSearchType];
 	[fulltextSearchItem setTarget:browserViewController];
 	[searchTypeMenu insertItem:fulltextSearchItem atIndex:2];
 	
@@ -537,6 +537,11 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 - (IBAction)removeTagSet:(id)sender
 {
 	[[[NSApplication sharedApplication] delegate] delete:sender];
+}
+
+- (void)setSearchType:(PASearchType)type
+{
+	[(PATitleBarSearchButton *)[titleBar buttonWithIdentifier:@"search"] selectSearchMenuItemWithTag:type];
 }
 
 
@@ -949,6 +954,11 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 - (PASourcePanel *)sourcePanel
 {
 	return sourcePanel;
+}
+
+- (NSSearchField *)searchField
+{
+	return [[titleBar buttonWithIdentifier:@"search"] searchField];
 }
 
 - (PATitleBar *)titleBar

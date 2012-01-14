@@ -390,9 +390,20 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)searchFieldStringHasChanged
 {
-	[self clearVisibleTags];
-	[searchField setStringValue:searchFieldString];
-	[self filterTags:activeTags];
+	PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
+	
+	if (searchType == PAFullTextSearchType)
+	{
+		// Perform a fulltext search
+		NSLog(@"perform full text search");
+	}
+	else
+	{
+		// Perform a search for tags	
+		[self clearVisibleTags];
+		[searchField setStringValue:searchFieldString];
+		[self filterTags:activeTags];
+	}
 }
 
 - (void)controlledViewHasChanged

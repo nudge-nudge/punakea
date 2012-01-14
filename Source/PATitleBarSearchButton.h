@@ -24,6 +24,8 @@
 - (void)abortSearch:(id)sender;
 - (void)closeSearchField:(id)sender;
 
+- (void)selectSearchMenuItemWithTag:(NSInteger)tag;
+
 - (float)extensionWidth;
 - (void)setExtensionWidth:(float)aWidth;
 

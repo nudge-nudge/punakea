@@ -50,7 +50,8 @@ typedef enum _PATagCloudSortKey {
 
 typedef enum _PASearchType {
 	PATagPrefixSearchType = 0,
-	PATagSearchType = 1
+	PATagSearchType = 1,
+	PAFullTextSearchType = 2
 } PASearchType;
 
 extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;

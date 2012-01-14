@@ -600,11 +600,13 @@
 
 - (IBAction)findTag:(id)sender
 {
+	[browserController setSearchType:PATagPrefixSearchType];
 	[[browserController titleBar] performClickOnButtonWithIdentifier:@"search"];
 } 
 
 - (IBAction)findInResults:(id)sender
 {
+	[browserController setSearchType:PAFullTextSearchType];
 	[[browserController titleBar] performClickOnButtonWithIdentifier:@"search"];
 } 
 

@@ -96,6 +96,8 @@ extern NSUInteger const VERSION_FAVORITES_PLIST;
 
 - (void)saveFavorites;
 
+- (void)setSearchType:(PASearchType)type;
+
 - (void)startProgressAnimationWithDescription:(NSString *)aString;
 - (void)stopProgressAnimation;
 
@@ -105,6 +107,7 @@ extern NSUInteger const VERSION_FAVORITES_PLIST;
 - (PAStatusBar *)sourcePanelStatusBar;
 - (PAStatusBar *)rightStatusBar;
 - (PASourcePanel *)sourcePanel;
+- (NSSearchField *)searchField;
 
 - (PATitleBar *)titleBar;
 

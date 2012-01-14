@@ -3,10 +3,10 @@
 "MANAGE_TAGS" = "Manage Tags";
 "MANAGE_TAGS_TOOLTIP" = "Switch to tag management view that allows you to edit your tags";
 "SORT_BY_NAME" = "Sort by Name";
-"SORT_BY_NAME_TOOLTIP" = "Sort tag cloud by name of tags";
+"SORT_BY_NAME_TOOLTIP" = "Sort tag cloud by tag name";
 "SORT_BY_RATING" = "Sort by Rating";
-"SORT_BY_RATING_TOOLTIP" = "Sort tag cloud by rating of tags";
-"FIND_TAG_BY_PREFIX" = "Find tag by prefix";
-"FIND_TAG_BY_SUBSTRING" = "Find tag by substring";
+"SORT_BY_RATING_TOOLTIP" = "Sort tag cloud by tag rating";
+"FIND_TAG_BY_PREFIX" = "Find tags by prefix";
+"FIND_TAG_BY_SUBSTRING" = "Find tags by substring";
 "FIND_IN_RESULTS" = "Find fulltext in results";
 "SYNC_TAGS_TOOLTIP" = "Synchronize Tags";
