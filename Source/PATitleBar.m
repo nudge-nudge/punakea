@@ -11,7 +11,7 @@
 
 NSSize const TITLEBAR_BUTTON_MARGIN = {7,0};
 
-#define IN_RUNNING_LION (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_6)
+#define IN_RUNNING_LION (floor(NSAppKitVersionNumber) > 1038) // This is NSAppKitVersionNumber10_6
 
 /** -----------------------------------------
  - There are 2 sets of colors, one for an active (key) state and one for an inactivate state
@@ -69,12 +69,12 @@ static CGImageRef createNoiseImageRef(int width, int height, float factor)
 		{
 			[[NSNotificationCenter defaultCenter] addObserver:self
 													 selector:@selector(enterFullScreen:) 
-														 name:NSWindowWillEnterFullScreenNotification 
+														 name:@"NSWindowWillEnterFullScreenNotification" 
 													   object:[self window]];
 			
 			[[NSNotificationCenter defaultCenter] addObserver:self
 													 selector:@selector(exitFullScreen:) 
-														 name:NSWindowWillExitFullScreenNotification 
+														 name:@"NSWindowWillExitFullScreenNotification" 
 													   object:[self window]];
 		}
     }
@@ -130,7 +130,7 @@ static CGImageRef createNoiseImageRef(int width, int height, float factor)
 	float xoffset = 0.0;
 	if (IN_RUNNING_LION)
 	{
-		NSButton *fsButton = [[self window] standardWindowButton:NSWindowFullScreenButton];
+		NSButton *fsButton = [[self window] standardWindowButton:7]; // NSWindowFullScreenButton
 		[fsButton setFrameOrigin:NSMakePoint([self window].frame.size.width - 20.0 - TITLEBAR_BUTTON_MARGIN.width,
 											 [self window].frame.size.height - self.frame.size.height + (self.frame.size.height - fsButton.frame.size.height) / 2.0 - 1.0)];
 		

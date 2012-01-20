@@ -20,7 +20,7 @@
 
 #import "Core.h";
 
-#define RUNNING_LION (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_6)
+#define RUNNING_LION (floor(NSAppKitVersionNumber) > 1038) // This is NSAppKitVersionNumber10_6
 
 @interface Core (PrivateAPI)
 

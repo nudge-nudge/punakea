@@ -317,7 +317,7 @@ static CGImageRef createNoiseImageRef(int width, int height, float factor)
 }
 
 - (BOOL)isFullScreen
-{
-    return (([self styleMask] & NSFullScreenWindowMask) == NSFullScreenWindowMask);
+{	
+    return (([self styleMask] & (1 << 14)) == (1 << 14));	// 1 << 14 == NSFullScreenWindowMask
 }
 @end
