@@ -69,6 +69,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		filterEngineOpQueue = [[NSOperationQueue alloc] init];
 		
 		searchFieldString = [[NSMutableString alloc] init];
+		
+		fulltextQueryFilters = [[NSMutableArray alloc] init];
 			
 		sortKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"TagCloud.SortKey"];
 		[self updateSortDescriptor];
@@ -118,6 +120,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[visibleTags release];
 	[filterEngineOpQueue release];
 	[searchFieldString release];
+	[fulltextQueryFilters release];
 	[super dealloc];
 }
 
@@ -394,8 +397,49 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	if (searchType == PAFullTextSearchType)
 	{
-		// Perform a fulltext search
-		NSLog(@"perform full text search");
+		// Disallow full text search for tag management view
+		if (![[self mainController] isKindOfClass:[PAResultsViewController class]])
+			return;
+		
+		// Get the query
+		NNQuery *query = [(PAResultsViewController*)mainController query];
+
+		// Remove all active full text search filters
+		NSMutableArray *newFilters = [NSMutableArray array];
+	
+		for (NNQueryFilter *filter in [query filters])
+		{
+			if (![fulltextQueryFilters containsObject:filter])
+				[newFilters addObject:filter];
+		}
+		
+		// Check if there's a "real" search string present or only whitespaces
+		NSString *trimmedSearchString = [searchFieldString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+				
+		// If so, we're done. If not, go on
+		if ([trimmedSearchString length] > 0)
+		{
+			NSArray *searchTerms = [trimmedSearchString componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+			
+			// For each search term, create a separate key-value filter.
+			// This corresponds to Spotlight's search behavior.
+			for (NSString *searchTerm in searchTerms)
+			{
+				NSString *wildcardSearchTerm = [NSString stringWithFormat:@"%@*", searchTerm];
+				
+				NNSimpleQueryFilter *filter =
+					[NNSimpleQueryFilter simpleQueryFilterWithAttribute:(NSString *)kMDItemTextContent value:wildcardSearchTerm];
+				[filter setValueUsesWildcard:YES];
+				[filter setOptions:@"cdw"];		// Like Spotlight passes the search terms.
+				
+				[fulltextQueryFilters addObject:filter];
+				[newFilters addObject:filter];
+			}
+		}
+		
+		// Restart the query with updated filters
+		[query setFilters:newFilters];
+		[query startQuery];
 	}
 	else
 	{
@@ -542,7 +586,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 				newFilter = [[[PAStringFilter alloc] initWithFilter:decomposedSearchString] autorelease];
 				break;
 			default:
-				NSLog(@"Must not happen - FIXME");
+				//NSLog(@"Must not happen - FIXME");
+				return nil;
 				break;
 		}
 	}

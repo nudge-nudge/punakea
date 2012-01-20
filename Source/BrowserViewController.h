@@ -39,6 +39,8 @@
 
 #import "PATagCloudProtocols.h"
 
+#import "NNTagging/NNSimpleQueryFilter.h"
+
 #import "lcl.h"
 
 @class PATagCloud;
@@ -83,6 +85,7 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 	PATagCloudSortKey					sortKey;
 	NSSortDescriptor					*sortDescriptor;
 	
+	NSMutableArray						*fulltextQueryFilters;	// We use multiple filters in order to adress cases of search strings with whitespaces in between, e.g. "term1 term2" results in two filters.
 }
 
 /** 

@@ -397,6 +397,8 @@
 		65EB722C0BE20ECC007FF40C /* PAStatusBarButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EB722A0BE20ECC007FF40C /* PAStatusBarButtonCell.h */; };
 		65EB722D0BE20ECC007FF40C /* PAStatusBarButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EB722B0BE20ECC007FF40C /* PAStatusBarButtonCell.m */; };
 		65EF60EE0F6958C100AAE151 /* HotkeyDelegateCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF60ED0F6958C100AAE151 /* HotkeyDelegateCategory.m */; };
+		65EFD9E914C9BF920080E270 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656A0DC614C998800079DB46 /* NNTagging.framework */; };
+		65EFD9EC14C9BFF30080E270 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656A0DC614C998800079DB46 /* NNTagging.framework */; };
 		65F6746A0FA84A1D00F1C450 /* Urls.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F674690FA84A1D00F1C450 /* Urls.strings */; };
 		65F6764C0FA88C9D00F1C450 /* Registration.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F6764B0FA88C9D00F1C450 /* Registration.strings */; };
 		65F9B95C09D41AA0008BF1BD /* MDIconViewPressed-1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 65F9B95B09D41AA0008BF1BD /* MDIconViewPressed-1.tiff */; };
@@ -491,6 +493,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Punakea;
+		};
+		65EFD9EA14C9BFBD0080E270 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 483184970AEF8D8600C3C672;
+			remoteInfo = PADropHandler;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -990,6 +999,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */,
+				65EFD9EC14C9BFF30080E270 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,6 +1015,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */,
+				65EFD9E914C9BF920080E270 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2444,6 +2455,7 @@
 				48186F8F0BE4C930000B4638 /* PBXTargetDependency */,
 				4802194C0C02CE85001CF480 /* PBXTargetDependency */,
 				483C8A3E0D6C51630051C8C3 /* PBXTargetDependency */,
+				65EFD9EB14C9BFBD0080E270 /* PBXTargetDependency */,
 			);
 			name = Punakea;
 			productInstallPath = "$(HOME)/Applications";
@@ -2957,6 +2969,11 @@
 			target = 8D1107260486CEB800E47090 /* Punakea */;
 			targetProxy = 6566CDAC0AFF8B3500FEAD7E /* PBXContainerItemProxy */;
 		};
+		65EFD9EB14C9BFBD0080E270 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
+			targetProxy = 65EFD9EA14C9BFBD0080E270 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -3312,6 +3329,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/build/Debug\"",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -3343,6 +3361,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/build/Debug\"",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3453,6 +3472,7 @@
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3485,6 +3505,7 @@
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
