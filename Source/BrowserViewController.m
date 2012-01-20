@@ -365,7 +365,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		if (command == @selector(insertNewline:) || command == @selector(complete:))
 		{
 			[[tagCloud window] makeFirstResponder:tagCloud];
-			
+			 
 			// If there's only a single tag in the tag cloud, perform Click operation on this tag -
 			// but only if we're in Tag Search Mode
 			if ([visibleTags count] == 1)
@@ -387,7 +387,10 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			// Close search field on ENTER and focus the tag cloud
 			[[control superview] closeSearchField:control];
 			[[tagCloud window] makeFirstResponder:tagCloud];
-		}
+			
+			// Set to prefix search
+			[[NSUserDefaults standardUserDefaults] setInteger:PATagPrefixSearchType forKey:@"General.Search.Type"];
+		}		
 	}	
 	
 	return NO;

@@ -97,6 +97,7 @@ extern NSUInteger const VERSION_FAVORITES_PLIST;
 - (void)saveFavorites;
 
 - (void)setSearchType:(PASearchType)type;
+- (void)abortSearch:(id)sender;
 
 - (void)startProgressAnimationWithDescription:(NSString *)aString;
 - (void)stopProgressAnimation;

@@ -497,6 +497,7 @@
 
 - (IBAction)goHome:(id)sender
 {
+	[browserController abortSearch:sender];
 	[[browserController sourcePanel] selectItemWithValue:@"ALL_ITEMS"];
 	[[browserController browserViewController] reset];
 }

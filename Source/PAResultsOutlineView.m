@@ -248,8 +248,8 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 
 - (void)saveSelection
 {
-	// Just clear the selection if there are no tags selected.
-	if ([[query tags] count] == 0)
+	// Just clear the selection if there are no results.
+	if ([self numberOfRows] == 0)
 	{
 		[self setSelectedItems:[NSArray array]];
 	}

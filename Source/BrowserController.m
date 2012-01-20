@@ -544,6 +544,11 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 	[(PATitleBarSearchButton *)[titleBar buttonWithIdentifier:@"search"] selectSearchMenuItemWithTag:type];
 }
 
+- (void)abortSearch:(id)sender
+{
+	[(PATitleBarSearchButton *)[titleBar buttonWithIdentifier:@"search"] abortSearch:sender];
+}
+
 
 #pragma mark Misc
 - (NSString *)pathOfFavoritesFile
