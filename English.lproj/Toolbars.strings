@@ -8,5 +8,5 @@
 "SORT_BY_RATING_TOOLTIP" = "Sort tag cloud by tag rating";
 "FIND_TAG_BY_PREFIX" = "Find tags by prefix";
 "FIND_TAG_BY_SUBSTRING" = "Find tags by substring";
-"FIND_IN_RESULTS" = "Find fulltext in results";
+"FIND_IN_RESULTS" = "Find full text";
 "SYNC_TAGS_TOOLTIP" = "Synchronize Tags";

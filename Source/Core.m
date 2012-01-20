@@ -432,6 +432,12 @@
 			
 			return NO;
 		}
+		else if ([item action] == @selector(findInResults:))
+		{
+			PASourcePanel *sp = [browserController sourcePanel];
+			if([sp selectedRow] ==[sp rowForItem:[sp itemWithValue:@"MANAGE_TAGS"]])
+				return NO;
+		}
 		
 		// View menu
 		if([item action] == @selector(toggleInfoPane:))

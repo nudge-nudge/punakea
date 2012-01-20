@@ -29,6 +29,8 @@
 #import "TaggerController.h"
 #import "PASplitView.h"
 
+#import "PATitleBarSearchButton.h"
+
 #import "PASourcePanelController.h"
 
 #import "NNFilterEngine/NNFilterEngine.h"

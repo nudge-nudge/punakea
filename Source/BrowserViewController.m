@@ -295,7 +295,9 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)resetSearchFieldString
 {
 	if ([searchFieldString length] > 0)
+	{
 		[self setSearchFieldString:@""];
+	}
 }
 
 #pragma mark events
@@ -364,14 +366,23 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		{
 			[[tagCloud window] makeFirstResponder:tagCloud];
 			
-			// If there's only a single tag in the tag cloud, perform Click operation on this tag
+			// If there's only a single tag in the tag cloud, perform Click operation on this tag -
+			// but only if we're in Tag Search Mode
 			if ([visibleTags count] == 1)
-				[[tagCloud activeButton] performClick:[tagCloud activeButton]];
+			{
+				PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
+				
+				if (searchType != PAFullTextSearchType)
+					[[tagCloud activeButton] performClick:[tagCloud activeButton]];
+			}
 		}
 		if (command == @selector(cancelOperation:))
-		{
+		{			
 			// Cancel search filter
 			[self resetSearchFieldString];
+			
+			// Update tag cloud
+			[self setVisibleTags:[tags tags]];
 			
 			// Close search field on ENTER and focus the tag cloud
 			[[control superview] closeSearchField:control];
@@ -395,14 +406,14 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
 	
+	// Get the query
+	NNQuery *query = [(PAResultsViewController*)mainController query];
+	
 	if (searchType == PAFullTextSearchType)
 	{
 		// Disallow full text search for tag management view
 		if (![[self mainController] isKindOfClass:[PAResultsViewController class]])
 			return;
-		
-		// Get the query
-		NNQuery *query = [(PAResultsViewController*)mainController query];
 
 		// Remove all active full text search filters
 		NSMutableArray *newFilters = [NSMutableArray array];
@@ -412,6 +423,9 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			if (![fulltextQueryFilters containsObject:filter])
 				[newFilters addObject:filter];
 		}
+		
+		// Clear up all previous filters
+		[fulltextQueryFilters removeAllObjects];
 		
 		// Check if there's a "real" search string present or only whitespaces
 		NSString *trimmedSearchString = [searchFieldString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -443,6 +457,18 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	}
 	else
 	{
+		// Remove all active full text search filters
+		NSMutableArray *newFilters = [NSMutableArray array];
+		
+		for (NNQueryFilter *filter in [query filters])
+		{
+			if (![fulltextQueryFilters containsObject:filter])
+				[newFilters addObject:filter];
+		}
+		
+		// Clear up all previous filters
+		[fulltextQueryFilters removeAllObjects];
+		
 		// Perform a search for tags	
 		[self clearVisibleTags];
 		[searchField setStringValue:searchFieldString];
