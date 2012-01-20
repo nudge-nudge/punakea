@@ -155,12 +155,6 @@
 		48B0F1D80ACC020800738053 /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1D70ACC020800738053 /* Global.strings */; };
 		48B5E14212A646F700293604 /* Grouping_Off.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48B5E14012A646F700293604 /* Grouping_Off.tiff */; };
 		48B5E14812A6472000293604 /* Grouping_On.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48B5E14712A6472000293604 /* Grouping_On.tiff */; };
-		48B755F110E00D9D00446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
-		48B755F410E00DB000446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
-		48B755F510E00DBC00446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
-		48B755F610E00DC400446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
-		48B7561610E00DD200446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
-		48B7561710E00DDC00446B38 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
 		48B8F45010FBB1B5002B1E35 /* PAURLDropDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */; };
 		48B8F45110FBB1B9002B1E35 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
 		48B8F4E110FBB6D2002B1E35 /* PAStringFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B8F4E010FBB6D2002B1E35 /* PAStringFilter.m */; };
@@ -172,7 +166,6 @@
 		48BFF6260B13420500C1A127 /* PADebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48BFF6240B13420500C1A127 /* PADebugView.m */; };
 		48C2BF020FCB133900C48F03 /* NNActiveAppSavingPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C2BF010FCB133900C48F03 /* NNActiveAppSavingPanel.m */; };
 		48CDF4970AA57924002E9E78 /* toolbar-pref-general.tif in Resources */ = {isa = PBXBuildFile; fileRef = 48CDF4960AA57924002E9E78 /* toolbar-pref-general.tif */; };
-		48CE17CB10E0D010008B0D28 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48B755F010E00D8C00446B38 /* NNTagging.framework */; };
 		48CFDC320B2ED76A002282D9 /* toolbar-pref-update.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48CFDC310B2ED76A002282D9 /* toolbar-pref-update.tiff */; };
 		48D16FEF0A5A6468006C667B /* BrowserController.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D16FED0A5A6468006C667B /* BrowserController.h */; };
 		48D16FF00A5A6468006C667B /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D16FEE0A5A6468006C667B /* BrowserController.m */; };
@@ -268,6 +261,11 @@
 		6560C864148A81FE001704FA /* PAAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6560C862148A81FE001704FA /* PAAppStoreWindow.m */; };
 		6563884B09E419D300BE59AE /* PAResultsItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6563884909E419D300BE59AE /* PAResultsItemCell.h */; };
 		6563884C09E419D300BE59AE /* PAResultsItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6563884A09E419D300BE59AE /* PAResultsItemCell.m */; };
+		656A0DC714C998800079DB46 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656A0DC614C998800079DB46 /* NNTagging.framework */; };
+		656A0DC914C999220079DB46 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 656A0DC614C998800079DB46 /* NNTagging.framework */; };
+		656A0DCA14C99CEA0079DB46 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656A0DC614C998800079DB46 /* NNTagging.framework */; };
+		656A0DCB14C99D000079DB46 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656A0DC614C998800079DB46 /* NNTagging.framework */; };
+		656A0DCC14C99D210079DB46 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656A0DC614C998800079DB46 /* NNTagging.framework */; };
 		656BAADD0D6DE4B600AB3FDF /* PATagsPaneTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 656BAADC0D6DE4B600AB3FDF /* PATagsPaneTagsView.m */; };
 		656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */; };
 		656C20030AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 656C20010AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.m */; };
@@ -480,61 +478,12 @@
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Punakea;
 		};
-		48B755EF10E00D8C00446B38 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = NNTagging;
-		};
-		48B7563610E00E7F00446B38 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = NNTagging;
-		};
 		48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 483184970AEF8D8600C3C672;
 			remoteInfo = PADropHandler;
-		};
-		48CE17A610E0CD5D008B0D28 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = NNTagging;
-		};
-		48CE17A910E0CD68008B0D28 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = NNTagging;
-		};
-		48CE17AC10E0CD6E008B0D28 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = NNTagging;
-		};
-		48CE17AE10E0CD75008B0D28 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = NNTagging;
-		};
-		48CE17B110E0CD7A008B0D28 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = NNTagging;
 		};
 		6566CDAC0AFF8B3500FEAD7E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -564,9 +513,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				48CE17CB10E0D010008B0D28 /* NNTagging.framework in Copy Frameworks */,
 				488D8C1E10B1E02C00F97BF2 /* ShortcutRecorder.framework in Copy Frameworks */,
 				651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */,
+				656A0DC914C999220079DB46 /* NNTagging.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
 				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
@@ -600,7 +549,6 @@
 		480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WeblocImporter.xcodeproj; path = WeblocImporter/WeblocImporter.xcodeproj; sourceTree = "<group>"; };
 		480219520C02D2EE001CF480 /* PAInstaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAInstaller.h; sourceTree = "<group>"; };
 		480219530C02D2EE001CF480 /* PAInstaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAInstaller.m; sourceTree = "<group>"; };
-		48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNTagging.xcodeproj; path = ../nntagging/NNTagging.xcodeproj; sourceTree = SOURCE_ROOT; };
 		4804199012A93B4300DCB6C8 /* Sort_Descending.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Sort_Descending.tiff; sourceTree = "<group>"; };
 		4804199112A93B4300DCB6C8 /* Sort_Ascending.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Sort_Ascending.tiff; sourceTree = "<group>"; };
 		480C402E0BF4469A00C90B2C /* PATagCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagCache.h; sourceTree = "<group>"; };
@@ -855,6 +803,7 @@
 		6560C862148A81FE001704FA /* PAAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAppStoreWindow.m; sourceTree = "<group>"; };
 		6563884909E419D300BE59AE /* PAResultsItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsItemCell.h; sourceTree = "<group>"; };
 		6563884A09E419D300BE59AE /* PAResultsItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsItemCell.m; sourceTree = "<group>"; };
+		656A0DC614C998800079DB46 /* NNTagging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NNTagging.framework; path = "../../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release/NNTagging.framework"; sourceTree = "<group>"; };
 		656BAADB0D6DE4B600AB3FDF /* PATagsPaneTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagsPaneTagsView.h; sourceTree = "<group>"; };
 		656BAADC0D6DE4B600AB3FDF /* PATagsPaneTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagsPaneTagsView.m; sourceTree = "<group>"; };
 		656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+FriendlyFormat.h"; sourceTree = "<group>"; };
@@ -1015,7 +964,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B755F410E00DB000446B38 /* NNTagging.framework in Frameworks */,
+				656A0DCA14C99CEA0079DB46 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1023,7 +972,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B755F610E00DC400446B38 /* NNTagging.framework in Frameworks */,
+				656A0DCB14C99D000079DB46 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1031,8 +980,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B755F510E00DBC00446B38 /* NNTagging.framework in Frameworks */,
 				4815A1CA0AEFA06400969296 /* PADropHandler.framework in Frameworks */,
+				656A0DCC14C99D210079DB46 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1040,7 +989,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B7561710E00DDC00446B38 /* NNTagging.framework in Frameworks */,
 				483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1056,7 +1004,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B7561610E00DD200446B38 /* NNTagging.framework in Frameworks */,
 				4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1067,7 +1014,6 @@
 			files = (
 				653D946214A4B7E0002D604F /* QuartzCore.framework in Frameworks */,
 				483B906414A39CBC00DE3CDD /* Security.framework in Frameworks */,
-				48B755F110E00D9D00446B38 /* NNTagging.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
@@ -1078,6 +1024,7 @@
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
 				489BAAA91046FFF200E9D7A3 /* QuickLook.framework in Frameworks */,
 				4831816710B1D9590083EE08 /* ShortcutRecorder.framework in Frameworks */,
+				656A0DC714C998800079DB46 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1122,6 +1069,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				656A0DC614C998800079DB46 /* NNTagging.framework */,
 				4831816610B1D9590083EE08 /* ShortcutRecorder.framework */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
 				484497A90B2D9925009B262C /* Sparkle.framework */,
@@ -1192,7 +1140,6 @@
 		4802193B0C02CE42001CF480 /* Subprojects */ = {
 			isa = PBXGroup;
 			children = (
-				48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */,
 				480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */,
 			);
 			path = Subprojects;
@@ -1529,14 +1476,6 @@
 				489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */,
 			);
 			name = SelectedTagsView;
-			sourceTree = "<group>";
-		};
-		48B755EB10E00D8C00446B38 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				48B755F010E00D8C00446B38 /* NNTagging.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		48B8F48A10FBB410002B1E35 /* IB */ = {
@@ -2387,7 +2326,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				48CE17AF10E0CD75008B0D28 /* PBXTargetDependency */,
 			);
 			name = NNFilterEngine;
 			productName = NNFilterEngine;
@@ -2406,7 +2344,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				48CE17A710E0CD5D008B0D28 /* PBXTargetDependency */,
 			);
 			name = PADropHandler;
 			productName = PADropHandler;
@@ -2425,7 +2362,6 @@
 			);
 			dependencies = (
 				483184E90AEF91AE00C3C672 /* PBXTargetDependency */,
-				48CE17AA10E0CD68008B0D28 /* PBXTargetDependency */,
 			);
 			name = FilenamesDropHandler;
 			productName = FilenamesDropHandler;
@@ -2444,7 +2380,6 @@
 			);
 			dependencies = (
 				483C8A2E0D6C50C80051C8C3 /* PBXTargetDependency */,
-				48CE17B210E0CD7A008B0D28 /* PBXTargetDependency */,
 			);
 			name = PublicURLDropHandler;
 			productName = PublicUrlDropHandler;
@@ -2482,7 +2417,6 @@
 			);
 			dependencies = (
 				48C633C10AEF9724008F0E94 /* PBXTargetDependency */,
-				48CE17AD10E0CD6E008B0D28 /* PBXTargetDependency */,
 			);
 			name = WebURLsWithTitlesPboardTypeDropHandler;
 			productName = SafariBookmarkDropHandler;
@@ -2510,7 +2444,6 @@
 				48186F8F0BE4C930000B4638 /* PBXTargetDependency */,
 				4802194C0C02CE85001CF480 /* PBXTargetDependency */,
 				483C8A3E0D6C51630051C8C3 /* PBXTargetDependency */,
-				48B7563710E00E7F00446B38 /* PBXTargetDependency */,
 			);
 			name = Punakea;
 			productInstallPath = "$(HOME)/Applications";
@@ -2550,10 +2483,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 48B755EB10E00D8C00446B38 /* Products */;
-					ProjectRef = 48021BAA0C02E50C001CF480 /* NNTagging.xcodeproj */;
-				},
-				{
 					ProductGroup = 480219440C02CE7B001CF480 /* Products */;
 					ProjectRef = 480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */;
 				},
@@ -2579,13 +2508,6 @@
 			fileType = wrapper.cfbundle;
 			path = WeblocImporter.mdimporter;
 			remoteRef = 480219470C02CE7B001CF480 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		48B755F010E00D8C00446B38 /* NNTagging.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = NNTagging.framework;
-			remoteRef = 48B755EF10E00D8C00446B38 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -3025,40 +2947,10 @@
 			target = 8D1107260486CEB800E47090 /* Punakea */;
 			targetProxy = 48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */;
 		};
-		48B7563710E00E7F00446B38 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NNTagging;
-			targetProxy = 48B7563610E00E7F00446B38 /* PBXContainerItemProxy */;
-		};
 		48C633C10AEF9724008F0E94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
 			targetProxy = 48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */;
-		};
-		48CE17A710E0CD5D008B0D28 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NNTagging;
-			targetProxy = 48CE17A610E0CD5D008B0D28 /* PBXContainerItemProxy */;
-		};
-		48CE17AA10E0CD68008B0D28 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NNTagging;
-			targetProxy = 48CE17A910E0CD68008B0D28 /* PBXContainerItemProxy */;
-		};
-		48CE17AD10E0CD6E008B0D28 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NNTagging;
-			targetProxy = 48CE17AC10E0CD6E008B0D28 /* PBXContainerItemProxy */;
-		};
-		48CE17AF10E0CD75008B0D28 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NNTagging;
-			targetProxy = 48CE17AE10E0CD75008B0D28 /* PBXContainerItemProxy */;
-		};
-		48CE17B210E0CD7A008B0D28 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NNTagging;
-			targetProxy = 48CE17B110E0CD7A008B0D28 /* PBXContainerItemProxy */;
 		};
 		6566CDAD0AFF8B3500FEAD7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3218,6 +3110,7 @@
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -3230,6 +3123,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "NNFilterEngine-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -3237,7 +3131,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = NNFilterEngine;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -3253,6 +3147,7 @@
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -3263,6 +3158,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "NNFilterEngine-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -3270,7 +3166,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = NNFilterEngine;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -3286,6 +3182,7 @@
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -3304,7 +3201,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PADropHandler;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -3320,6 +3217,7 @@
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -3336,7 +3234,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PADropHandler;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -3350,6 +3248,7 @@
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3367,7 +3266,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = FilenamesDropHandler;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = YES;
 			};
@@ -3382,6 +3281,7 @@
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"\"$(SRCROOT)/build/Release\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -3397,7 +3297,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = FilenamesDropHandler;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
 			};
@@ -3427,7 +3327,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PublicUrlDropHandler;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = YES;
 			};
@@ -3456,7 +3356,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PublicUrlDropHandler;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
 			};
@@ -3570,7 +3470,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = WebURLsWithTitlesPboardTypeDropHandler;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = YES;
 			};
@@ -3600,7 +3500,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = WebURLsWithTitlesPboardTypeDropHandler;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
 			};
@@ -3648,6 +3548,7 @@
 					"\"$(SRCROOT)/Frameworks\"",
 					"\"$(SRCROOT)/build/Release\"",
 					"\"$(SRCROOT)/../../../../../System/Library/PrivateFrameworks\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
@@ -3699,6 +3600,7 @@
 					"\"$(SRCROOT)/Frameworks\"",
 					"\"$(SRCROOT)/build/Release\"",
 					"\"$(SRCROOT)/../../../../../System/Library/PrivateFrameworks\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Frameworks\"";
@@ -3735,11 +3637,11 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = punakea_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
@@ -3759,11 +3661,11 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = punakea_Prefix.pch;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};
