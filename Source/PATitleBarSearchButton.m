@@ -37,7 +37,7 @@
 #pragma mark Actions
 - (void)showSearchField:(id)sender
 {
-	if (!expanded)
+	/*if (!expanded)
 	{
 		// Search button is minimized, so extend it an add the search field as a subview
 		
@@ -63,7 +63,8 @@
 	{
 		// Search button is already extended. Just make it the first responder.
 		[[self window] makeFirstResponder:searchField];
-	}
+	}*/
+	[[self window] makeFirstResponder:searchField];
 }
 
 - (void)abortSearch:(id)sender
@@ -75,7 +76,8 @@
 
 - (void)closeSearchField:(id)sender
 {
-	if (expanded) {
+	[searchField setStringValue:@""];
+	/*if (expanded) {
 		[[self animator] setFrame:NSMakeRect(self.frame.origin.x + extensionWidth,
 											 self.frame.origin.y,
 											 self.frame.size.width - extensionWidth,
@@ -85,6 +87,7 @@
 	expanded = NO;	
 	
 	[searchField performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:[[NSAnimationContext currentContext] duration]];
+	 */
 }
 
 - (void)selectSearchMenuItemWithTag:(NSInteger)tag
@@ -103,6 +106,21 @@
 	
 	// update prefs
 	[[NSUserDefaults standardUserDefaults] setInteger:tag forKey:@"General.Search.Type"];
+}
+
+- (void)viewWillMoveToSuperview:(NSView *)newSuperview
+{
+	[self addSubview:searchField];
+	[searchField setAutoresizingMask:NSViewWidthSizable];
+	[searchField setFrame:NSMakeRect(0, 0, self.frame.size.width, self.frame.size.height)];
+	
+	[self setFrame:NSMakeRect(self.frame.origin.x - extensionWidth,
+										 self.frame.origin.y,
+										 self.frame.size.width + extensionWidth,
+										 self.frame.size.height)];
+	
+	[[[searchField cell] cancelButtonCell] setAction:@selector(abortSearch:)];
+	[[[searchField cell] cancelButtonCell] setTarget:self];
 }
 
 

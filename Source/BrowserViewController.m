@@ -325,12 +325,13 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		NSMutableString *tmpSearchFieldString = [searchFieldString mutableCopy];
 		[tmpSearchFieldString appendString:[event charactersIgnoringModifiers]];
 		
-		[self setSearchFieldString:tmpSearchFieldString];
+		//[self setSearchFieldString:tmpSearchFieldString];
 		
-		/*[searchField setStringValue:tmpSearchFieldString];
-		[[searchField currentEditor] setSelectedRange:NSMakeRange(1,0)];
+		[searchField setStringValue:tmpSearchFieldString];
+		[[tagCloud window] makeFirstResponder:searchField];
+		[[searchField currentEditor] setSelectedRange:NSMakeRange([[searchField stringValue] length],0)];
 		
-		if ([[searchField stringValue] length] == 1)
+		/*if ([[searchField stringValue] length] == 1)
 		{
 			[[[NSApp delegate] browserController] setSearchType:PATagPrefixSearchType];
 			[[[[NSApp delegate] browserController] titleBar] performClickOnButtonWithIdentifier:@"search"];
