@@ -409,7 +409,7 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 	[super keyDown:theEvent];
 }
 
-- (NSMenu *)menuForEvent:(NSEvent *)theEvent
+/* - (NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
 	// Allow menu only for editable items by now
 			
@@ -424,6 +424,31 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 	} else {
 		return nil;
 	}
+} */
+
+- (NSMenu *)menuForEvent:(NSEvent *)theEvent
+{
+	if ([theEvent type] == NSRightMouseDown)
+	{
+		// get the current selections for the outline view. 
+		NSIndexSet *selectedRowIndexes = [self selectedRowIndexes];
+		
+		// select the row that was clicked before showing the menu for the event
+		NSPoint mousePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+		int row = [self rowAtPoint:mousePoint];
+		
+		PASourceItem *item = (PASourceItem *)[self itemAtRow:row];
+		if([item isEditable])
+		{
+			if ([selectedRowIndexes containsIndex:row] == NO)
+				[self selectRow:row byExtendingSelection:NO];
+			
+			[[self window] makeFirstResponder:self];
+			return [super menuForEvent:theEvent];
+		}
+	}
+	
+	return nil;
 }
 
 
