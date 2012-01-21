@@ -28,7 +28,8 @@
 
 "MOVE_FILES_ON_IMPORTING" = "Move files to managed folder on import";
 
-"ENABLE_TAGGING_ON_VOLUME_MESSAGE" = "Select the folder where the volume is mounted (NOT the dmg file itself).";
-"ENABLE_TAGGING_ON_VOLUME_SUCCESS" = "Tagging enabled on '%@'";
-"ENABLE_TAGGING_ON_VOLUME_FAILURE" = "Tagging could not be enabled on '%@'";
+"ENABLE_TAGGING_ON_VOLUME_TITLE" = "Enable Tagging on Volume";
+"ENABLE_TAGGING_ON_VOLUME_MESSAGE" = "To enable tagging on a volume, select the mounted volume below.\nDo not select any disk image file which is a container for a volume.";
+"ENABLE_TAGGING_ON_VOLUME_SUCCESS" = "Tagging enabled on '%@'.";
+"ENABLE_TAGGING_ON_VOLUME_FAILURE" = "Tagging could not be enabled on '%@'.";
 "ENABLE_TAGGING_ON_VOLUME_FAILURE_REASON" = "Error code: %i";

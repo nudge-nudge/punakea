@@ -784,8 +784,10 @@
     
     [openDlg setCanChooseFiles:NO];
     [openDlg setCanChooseDirectories:YES];
+	[openDlg setTitle:NSLocalizedStringFromTable(@"ENABLE_TAGGING_ON_VOLUME_TITLE", @"FileManager", nil)];
     [openDlg setMessage:NSLocalizedStringFromTable(@"ENABLE_TAGGING_ON_VOLUME_MESSAGE", @"FileManager", nil)];
     [openDlg setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+	
     
     if ([openDlg runModal] == NSOKButton )
     {
