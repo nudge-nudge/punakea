@@ -417,7 +417,12 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		// Disallow full text search for tag management view
 		if (![[self mainController] isKindOfClass:[PAResultsViewController class]])
 			return;
+	}
+	
 
+	if (searchType == PAFullTextSearchType ||
+		(searchType != PAFullTextSearchType && [fulltextQueryFilters count] > 0))
+	{
 		// Remove all active full text search filters
 		NSMutableArray *newFilters = [NSMutableArray array];
 	
@@ -429,6 +434,23 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		
 		// Clear up all previous filters
 		[fulltextQueryFilters removeAllObjects];
+		
+		// Restart the query with updated filters
+		[query setFilters:newFilters];
+		[query startQuery];
+	}
+	
+	// Reset tags if the search filter was set from full text to tag search while
+	// search field stayed open
+	if (searchType != PAFullTextSearchType && [fulltextQueryFilters count] > 0)
+	{
+		[self clearVisibleTags];
+		[self setDisplayTags:activeTags];
+	}
+	
+	if (searchType == PAFullTextSearchType)
+	{
+		NSMutableArray *newFilters = [[query filters] mutableCopy];
 		
 		// Check if there's a "real" search string present or only whitespaces
 		NSString *trimmedSearchString = [searchFieldString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -458,23 +480,13 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		[query setFilters:newFilters];
 		[query startQuery];
 	}
-	else
+	
+	if (searchType != PAFullTextSearchType)
 	{
-		// Remove all active full text search filters
-		NSMutableArray *newFilters = [NSMutableArray array];
-		
-		for (NNQueryFilter *filter in [query filters])
-		{
-			if (![fulltextQueryFilters containsObject:filter])
-				[newFilters addObject:filter];
-		}
-		
-		// Clear up all previous filters
-		[fulltextQueryFilters removeAllObjects];
-		
 		// Perform a search for tags	
-		[self clearVisibleTags];
-		[searchField setStringValue:searchFieldString];
+		//[self clearVisibleTags];
+		//[searchField setStringValue:searchFieldString];
+		
 		[self filterTags:activeTags];
 	}
 }
