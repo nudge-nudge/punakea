@@ -804,7 +804,7 @@
             // give user feedback on success
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"OK"];
-            [alert setAlertStyle:NSWarningAlertStyle];
+            [alert setAlertStyle:NSInformationalAlertStyle];
             
             if (status == 0)
             {
