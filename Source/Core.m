@@ -87,6 +87,8 @@
 		
 		tagging = [NNTagging tagging];
         
+        [OpenMetaPrefs setPrefsFile:@"eu.nudgenudge.punakea"];
+        
 		lcl_log(lcl_cglobal,lcl_vInfo, @"Punakea (compiled on %s at %s) started",__DATE__,__TIME__);
 		
         //		@"Punakea compiled on %s at %s\n",__DATE__,__TIME__
