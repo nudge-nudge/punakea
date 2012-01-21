@@ -122,6 +122,11 @@
 		485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */; };
 		486063DE0AA0553000D9E103 /* PASidebarTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 486063DC0AA0553000D9E103 /* PASidebarTableView.h */; };
 		486063DF0AA0553000D9E103 /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486063DD0AA0553000D9E103 /* PASidebarTableView.m */; };
+		4863B45614CB05A200F92A59 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
+		4863B45714CB05EF00F92A59 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
+		4863B45814CB05FB00F92A59 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
+		4863B45914CB05FF00F92A59 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
+		4863B45A14CB060300F92A59 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
 		486DC7500ACD3B2D00BE0F54 /* PATagManagementViewMainView.h in Headers */ = {isa = PBXBuildFile; fileRef = 486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */; };
 		486DC7510ACD3B2D00BE0F54 /* PATagManagementViewMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
@@ -145,11 +150,6 @@
 		488E802C0AF3898400660B7B /* PACollectionNotEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */; };
 		488E802D0AF3898400660B7B /* PACollectionNotEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */; };
 		4895A4AD1191652100D428A5 /* DIRECTORIES.tif in Resources */ = {isa = PBXBuildFile; fileRef = 4895A4AC1191652100D428A5 /* DIRECTORIES.tif */; };
-		48976F5A14CB015C00FA09C7 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48976F5914CB013400FA09C7 /* NNTagging.framework */; };
-		48976F5B14CB01B000FA09C7 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48976F5914CB013400FA09C7 /* NNTagging.framework */; };
-		48976F5C14CB01BD00FA09C7 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48976F5914CB013400FA09C7 /* NNTagging.framework */; };
-		48976F5D14CB020400FA09C7 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48976F5914CB013400FA09C7 /* NNTagging.framework */; };
-		48976F6014CB02B000FA09C7 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48976F5914CB013400FA09C7 /* NNTagging.framework */; };
 		489A603F0ADA4AF500C6CE36 /* drop_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 489A603E0ADA4AF500C6CE36 /* drop_highlight.png */; };
 		489AE71609DD4DA900EB60EB /* PASelectedTagsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */; };
 		489AE71709DD4DA900EB60EB /* PASelectedTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */; };
@@ -478,16 +478,16 @@
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Punakea;
 		};
-		48976F5814CB013400FA09C7 /* PBXContainerItemProxy */ = {
+		4863B45214CB056300F92A59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 48976F5014CB013400FA09C7 /* NNTagging.xcodeproj */;
+			containerPortal = 4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = NNTagging;
 		};
-		48976F5E14CB026500FA09C7 /* PBXContainerItemProxy */ = {
+		4863B45414CB059B00F92A59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 48976F5014CB013400FA09C7 /* NNTagging.xcodeproj */;
+			containerPortal = 4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = NNTagging;
@@ -537,8 +537,8 @@
 				488D8C1E10B1E02C00F97BF2 /* ShortcutRecorder.framework in Copy Frameworks */,
 				651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
-				48976F6014CB02B000FA09C7 /* NNTagging.framework in Copy Frameworks */,
 				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
+				4863B45614CB05A200F92A59 /* NNTagging.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -679,6 +679,7 @@
 		4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAFilenamesDropDataHandler.m; path = ../../PAFilenamesDropDataHandler.m; sourceTree = "<group>"; };
 		4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAURLDropDataHandler.h; path = ../../Plugins/URLDropHandler/PAURLDropDataHandler.h; sourceTree = "<group>"; };
 		4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAURLDropDataHandler.m; path = ../../Plugins/URLDropHandler/PAURLDropDataHandler.m; sourceTree = "<group>"; };
+		4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNTagging.xcodeproj; path = ../../../NNTagging/trunk/NNTagging.xcodeproj; sourceTree = "<group>"; };
 		486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementViewMainView.h; sourceTree = "<group>"; };
 		486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementViewMainView.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
@@ -699,7 +700,6 @@
 		488E802A0AF3898400660B7B /* PACollectionNotEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACollectionNotEmpty.h; sourceTree = "<group>"; };
 		488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACollectionNotEmpty.m; sourceTree = "<group>"; };
 		4895A4AC1191652100D428A5 /* DIRECTORIES.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = DIRECTORIES.tif; sourceTree = "<group>"; };
-		48976F5014CB013400FA09C7 /* NNTagging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNTagging.xcodeproj; path = ../../nntagging/NNTagging.xcodeproj; sourceTree = "<group>"; };
 		489A603E0ADA4AF500C6CE36 /* drop_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop_highlight.png; sourceTree = "<group>"; };
 		489AE71409DD4DA900EB60EB /* PASelectedTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASelectedTagsView.h; sourceTree = "<group>"; };
 		489AE71509DD4DA900EB60EB /* PASelectedTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASelectedTagsView.m; sourceTree = "<group>"; };
@@ -986,7 +986,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48976F5C14CB01BD00FA09C7 /* NNTagging.framework in Frameworks */,
+				4863B45A14CB060300F92A59 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,7 +994,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48976F5B14CB01B000FA09C7 /* NNTagging.framework in Frameworks */,
+				4863B45814CB05FB00F92A59 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,7 +1003,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4815A1CA0AEFA06400969296 /* PADropHandler.framework in Frameworks */,
-				48976F5D14CB020400FA09C7 /* NNTagging.framework in Frameworks */,
+				4863B45914CB05FF00F92A59 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1046,7 +1046,7 @@
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
 				489BAAA91046FFF200E9D7A3 /* QuickLook.framework in Frameworks */,
 				4831816710B1D9590083EE08 /* ShortcutRecorder.framework in Frameworks */,
-				48976F5A14CB015C00FA09C7 /* NNTagging.framework in Frameworks */,
+				4863B45714CB05EF00F92A59 /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,7 +1162,7 @@
 		4802193B0C02CE42001CF480 /* Subprojects */ = {
 			isa = PBXGroup;
 			children = (
-				48976F5014CB013400FA09C7 /* NNTagging.xcodeproj */,
+				4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */,
 				480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */,
 			);
 			path = Subprojects;
@@ -1448,6 +1448,14 @@
 			name = StatusItem;
 			sourceTree = "<group>";
 		};
+		4863B44B14CB056300F92A59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4863B45314CB056300F92A59 /* NNTagging.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4870698B0A0C930700A3ADE2 /* Type-Ahead Find */ = {
 			isa = PBXGroup;
 			children = (
@@ -1488,14 +1496,6 @@
 				488E802B0AF3898400660B7B /* PACollectionNotEmpty.m */,
 			);
 			name = "Value Transformers";
-			sourceTree = "<group>";
-		};
-		48976F5114CB013400FA09C7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				48976F5914CB013400FA09C7 /* NNTagging.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		489AE71309DD4D7800EB60EB /* SelectedTagsView */ = {
@@ -2470,7 +2470,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				48976F5F14CB026500FA09C7 /* PBXTargetDependency */,
+				4863B45514CB059B00F92A59 /* PBXTargetDependency */,
 				483185030AEF92FD00C3C672 /* PBXTargetDependency */,
 				480721EC0AEFE8F40024118D /* PBXTargetDependency */,
 				48186F8F0BE4C930000B4638 /* PBXTargetDependency */,
@@ -2516,8 +2516,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 48976F5114CB013400FA09C7 /* Products */;
-					ProjectRef = 48976F5014CB013400FA09C7 /* NNTagging.xcodeproj */;
+					ProductGroup = 4863B44B14CB056300F92A59 /* Products */;
+					ProjectRef = 4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */;
 				},
 				{
 					ProductGroup = 480219440C02CE7B001CF480 /* Products */;
@@ -2547,11 +2547,11 @@
 			remoteRef = 480219470C02CE7B001CF480 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		48976F5914CB013400FA09C7 /* NNTagging.framework */ = {
+		4863B45314CB056300F92A59 /* NNTagging.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = NNTagging.framework;
-			remoteRef = 48976F5814CB013400FA09C7 /* PBXContainerItemProxy */;
+			remoteRef = 4863B45214CB056300F92A59 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2991,10 +2991,10 @@
 			target = 8D1107260486CEB800E47090 /* Punakea */;
 			targetProxy = 48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */;
 		};
-		48976F5F14CB026500FA09C7 /* PBXTargetDependency */ = {
+		4863B45514CB059B00F92A59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = NNTagging;
-			targetProxy = 48976F5E14CB026500FA09C7 /* PBXContainerItemProxy */;
+			targetProxy = 4863B45414CB059B00F92A59 /* PBXContainerItemProxy */;
 		};
 		48C633C10AEF9724008F0E94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
