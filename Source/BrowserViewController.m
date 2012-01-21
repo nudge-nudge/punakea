@@ -321,12 +321,20 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		}
 	}
 	else if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:key]) 
-	{
-		// only add to searchFieldString if there are any tags, otherwise do nothing
+	{	
 		NSMutableString *tmpSearchFieldString = [searchFieldString mutableCopy];
 		[tmpSearchFieldString appendString:[event charactersIgnoringModifiers]];
 		
 		[self setSearchFieldString:tmpSearchFieldString];
+		
+		/*[searchField setStringValue:tmpSearchFieldString];
+		[[searchField currentEditor] setSelectedRange:NSMakeRange(1,0)];
+		
+		if ([[searchField stringValue] length] == 1)
+		{
+			[[[NSApp delegate] browserController] setSearchType:PATagPrefixSearchType];
+			[[[[NSApp delegate] browserController] titleBar] performClickOnButtonWithIdentifier:@"search"];
+		}*/
 	}
 	else
 	{
