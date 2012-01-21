@@ -95,8 +95,6 @@
 		4842FC1309DA804100C4A931 /* PATagButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4842FC1109DA804100C4A931 /* PATagButtonCell.h */; };
 		4842FC1409DA804100C4A931 /* PATagButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4842FC1209DA804100C4A931 /* PATagButtonCell.m */; };
 		484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484496300B2D56CE009B262C /* ApplicationServices.framework */; };
-		484497BD0B2D9925009B262C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484497A90B2D9925009B262C /* Sparkle.framework */; };
-		484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 484497A90B2D9925009B262C /* Sparkle.framework */; };
 		4845CBA90B4A7B8F003D242C /* PANotificationReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = 4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */; };
 		4845CBAA0B4A7B8F003D242C /* PANotificationReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4845CBA80B4A7B8F003D242C /* PANotificationReceiver.m */; };
 		48469B9E0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h in Headers */ = {isa = PBXBuildFile; fileRef = 48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */; };
@@ -537,7 +535,6 @@
 				488D8C1E10B1E02C00F97BF2 /* ShortcutRecorder.framework in Copy Frameworks */,
 				651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
-				484497BE0B2D993F009B262C /* Sparkle.framework in Copy Frameworks */,
 				4863B45614CB05A200F92A59 /* NNTagging.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
 			);
@@ -647,7 +644,6 @@
 		4842FC1109DA804100C4A931 /* PATagButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagButtonCell.h; sourceTree = "<group>"; };
 		4842FC1209DA804100C4A931 /* PATagButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagButtonCell.m; sourceTree = "<group>"; };
 		484496300B2D56CE009B262C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
-		484497A90B2D9925009B262C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		4845CBA70B4A7B8F003D242C /* PANotificationReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PANotificationReceiver.h; sourceTree = "<group>"; };
 		4845CBA80B4A7B8F003D242C /* PANotificationReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PANotificationReceiver.m; sourceTree = "<group>"; };
 		48469B9C0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CharacterSetChecks.h"; sourceTree = "<group>"; };
@@ -1040,7 +1036,6 @@
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */,
-				484497BD0B2D9925009B262C /* Sparkle.framework in Frameworks */,
 				650359A00F5D832F00BC204D /* Carbon.framework in Frameworks */,
 				6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */,
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
@@ -1094,7 +1089,6 @@
 				656A0DC614C998800079DB46 /* NNTagging.framework */,
 				4831816610B1D9590083EE08 /* ShortcutRecorder.framework */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
-				484497A90B2D9925009B262C /* Sparkle.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";

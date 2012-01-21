@@ -72,15 +72,6 @@
 									<reference key="NSOnImage" ref="453764835"/>
 									<reference key="NSMixedImage" ref="327890942"/>
 								</object>
-								<object class="NSMenuItem" id="303377279">
-									<reference key="NSMenu" ref="478303251"/>
-									<string key="NSTitle">Check for Updates...</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="453764835"/>
-									<reference key="NSMixedImage" ref="327890942"/>
-								</object>
 								<object class="NSMenuItem" id="455345788">
 									<reference key="NSMenu" ref="478303251"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -1323,14 +1314,6 @@
 					<int key="connectionID">992</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">checkForUpdates:</string>
-						<reference key="source" ref="615975515"/>
-						<reference key="destination" ref="303377279"/>
-					</object>
-					<int key="connectionID">787</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="571021869"/>
@@ -1628,7 +1611,6 @@
 							<reference ref="302928424"/>
 							<reference ref="463198570"/>
 							<reference ref="455345788"/>
-							<reference ref="303377279"/>
 						</object>
 						<reference key="parent" ref="1048560594"/>
 					</object>
@@ -1694,11 +1676,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">196</int>
 						<reference key="object" ref="455345788"/>
-						<reference key="parent" ref="478303251"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">786</int>
-						<reference key="object" ref="303377279"/>
 						<reference key="parent" ref="478303251"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -2218,7 +2195,6 @@
 					<string>779.IBPluginDependency</string>
 					<string>780.IBPluginDependency</string>
 					<string>785.IBPluginDependency</string>
-					<string>786.IBPluginDependency</string>
 					<string>79.IBPluginDependency</string>
 					<string>791.IBPluginDependency</string>
 					<string>792.IBPluginDependency</string>
@@ -2276,7 +2252,6 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

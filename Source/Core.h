@@ -48,8 +48,6 @@
 
 #import "PAInstaller.h"
 
-#import "Sparkle/SUUpdater.h"
-
 #import "PAServices.h"
 
 #import "PTHotkey.h"
@@ -86,11 +84,8 @@
 	
 	PAServices						*services;
 	
-	IBOutlet SUUpdater				*updater;
 	IBOutlet NSWindow				*busyWindow;
 }
-
-- (SUUpdater*)updater;
 
 - (void)createDirectoriesIfNeeded;
 

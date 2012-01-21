@@ -197,11 +197,6 @@
     [[self window] setToolbar:[toolbar autorelease]];
 }
 
-- (SUUpdater*)updater
-{
-	return updater;
-}
-
 - (void)showStatusItem
 {
 	// create status item

@@ -26,7 +26,6 @@
 @interface PreferenceController (PrivateAPI)
 
 - (void)startOnLoginHasChanged;
-- (void)scheduledUpdateCheckIntervalHasChanged;
 - (void)tagsFolderStateHasChanged;
 - (void)dropBoxStateHasChanged;
 
@@ -169,10 +168,6 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		{
 			[self startOnLoginHasChanged];
 		}
-		else if ([keyPath isEqualToString:@"values.PAScheduledUpdateCheckInterval"])
-		{
-			[self scheduledUpdateCheckIntervalHasChanged];
-		}
 		else if ([keyPath isEqualToString:@"values.ManageFiles.ManagedFolder.Enabled"])
 		{
 			[core createDirectoriesIfNeeded];
@@ -239,28 +234,6 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		LIAEAddURLAtEnd(url, false);
 	
 	CFRelease(url);
-}
-
-- (void)scheduledUpdateCheckIntervalHasChanged
-{
-	PAScheduledUpdateCheckInterval interval = [[NSUserDefaults standardUserDefaults] integerForKey:@"PAScheduledUpdateCheckInterval"];
-	NSTimeInterval timeInterval = 60.0*60.0*24.0*7.0*30.0;
-	
-	switch (interval)
-	{
-		case PAScheduledUpdateCheckDaily:
-			timeInterval = 60.0*60.0*24.0;
-			break;
-		case PAScheduledUpdateCheckWeekly:
-			timeInterval = 60.0*60.0*24.0*7.0;
-			break;
-		case PAScheduledUpdateCheckMonthly:
-			timeInterval = 60.0*60.0*24.0*7.0*30.0;
-			break;
-	}
-	
-	[[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)timeInterval forKey:@"SUScheduledCheckInterval"];
-	[[core updater] scheduleCheckWithInterval:timeInterval];
 }		
 
 - (void)tagsFolderStateHasChanged
@@ -827,11 +800,6 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	CFRelease(url);
 	
 	return itemIndex;
-}
-
-- (IBAction)checkForUpdates:(id)sender
-{
-	[[core updater] checkForUpdates:self];
 }
 
 - (void)updateDropBoxTagField

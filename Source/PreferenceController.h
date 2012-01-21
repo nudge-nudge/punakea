@@ -68,6 +68,4 @@ extern NSString * const DROP_BOX_SCRIPTNAME;
 - (IBAction)locateDirectory:(id)sender;
 - (IBAction)switchSpecialFolderDirToDefault:(id)sender;
 
-- (IBAction)checkForUpdates:(id)sender;
-
 @end
