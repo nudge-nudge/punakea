@@ -428,7 +428,8 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 
 - (NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-	if ([theEvent type] == NSRightMouseDown)
+	if ([theEvent type] == NSRightMouseDown ||
+		([theEvent type] == NSLeftMouseDown && ([theEvent modifierFlags] & NSControlKeyMask)))
 	{
 		// get the current selections for the outline view. 
 		NSIndexSet *selectedRowIndexes = [self selectedRowIndexes];
@@ -441,7 +442,7 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 		if([item isEditable])
 		{
 			if ([selectedRowIndexes containsIndex:row] == NO)
-				[self selectRow:row byExtendingSelection:NO];
+				[self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 			
 			[[self window] makeFirstResponder:self];
 			return [super menuForEvent:theEvent];
