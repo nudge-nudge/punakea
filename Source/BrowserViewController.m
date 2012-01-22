@@ -37,8 +37,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)updateTagCloudDisplayMessage;
 
-- (NSString*)searchFieldString;
-- (void)resetSearchFieldString;
 - (void)searchFieldStringHasChanged;
 
 - (void)negatedTagButtonClicked:(PATagButton*)button;
@@ -67,8 +65,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		tags = [NNTags sharedTags];
 				
 		filterEngineOpQueue = [[NSOperationQueue alloc] init];
-		
-		searchFieldString = [[NSMutableString alloc] init];
 		
 		fulltextQueryFilters = [[NSMutableArray alloc] init];
 			
@@ -119,7 +115,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[mainController release];
 	[visibleTags release];
 	[filterEngineOpQueue release];
-	[searchFieldString release];
 	[fulltextQueryFilters release];
 	[super dealloc];
 }
@@ -145,22 +140,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 }
 
 #pragma mark accessors
-- (NSString*)searchFieldString
-{
-	return searchFieldString;
-}
-
-- (void)setSearchFieldString:(NSString*)string
-{
-	if (!string)
-		string = @"";
-	
-	[searchFieldString release];
-	searchFieldString = [string mutableCopy];
-	
-	[self searchFieldStringHasChanged];
-}
-
 - (void)setSearchField:(NSSearchField*)aSearchField
 {
 	searchField = aSearchField;
@@ -217,7 +196,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	// if find-as-you-type is active, select upper left tag
 	// this way the tag can be activated directly by clicking enter
-	if ([searchFieldString length] > 0)
+	if ([[searchField stringValue] length] > 0)
 		[tagCloud selectUpperLeftButton];
 }
 
@@ -291,15 +270,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	contentTypeFilterIdentifiers = [identifiers retain];
 }
 
-#pragma mark typeAheadFind
-- (void)resetSearchFieldString
-{
-	if ([searchFieldString length] > 0)
-	{
-		[self setSearchFieldString:@""];
-	}
-}
-
 #pragma mark events
 - (void)keyDown:(NSEvent*)event 
 {
@@ -308,34 +278,23 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	if (key == NSDeleteCharacter) 
 	{
-		// if searchFieldString has any content (i.e. user is using type-ahead-find), delete last char
-		if ([searchFieldString length] > 0)
-		{
-			NSString *tmpSearchFieldString = [searchFieldString substringToIndex:[searchFieldString length]-1];
-			[self setSearchFieldString:tmpSearchFieldString];
-		}
-		else if ([mainController isKindOfClass:[PAResultsViewController class]])
-		// else delete the last selected tag (if resultsview is active)
+		// Delete the last selected tag (if resultsview is active)
+		if ([mainController isKindOfClass:[PAResultsViewController class]])
 		{
 			[(PAResultsViewController*)mainController removeLastTag];
 		}
 	}
 	else if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:key]) 
 	{	
-		NSMutableString *tmpSearchFieldString = [searchFieldString mutableCopy];
-		[tmpSearchFieldString appendString:[event charactersIgnoringModifiers]];
+		[searchField setStringValue:[NSString stringWithFormat:@"%@%@",
+									 [searchField stringValue], [event charactersIgnoringModifiers]]];
 		
-		//[self setSearchFieldString:tmpSearchFieldString];
-		
-		[searchField setStringValue:tmpSearchFieldString];
 		[[tagCloud window] makeFirstResponder:searchField];
 		[[searchField currentEditor] setSelectedRange:NSMakeRange([[searchField stringValue] length],0)];
 		
-		/*if ([[searchField stringValue] length] == 1)
-		{
-			[[[NSApp delegate] browserController] setSearchType:PATagPrefixSearchType];
-			[[[[NSApp delegate] browserController] titleBar] performClickOnButtonWithIdentifier:@"search"];
-		}*/
+		[self searchFieldStringHasChanged];
+
+		[[[NSApp delegate] browserController] setSearchType:PATagPrefixSearchType];
 	}
 	else
 	{
@@ -361,10 +320,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	[menuItem setState:NSOnState];
 	
-	// update search if there currently is a searchFieldString	
-	if ([searchFieldString length] > 0) {
-		[self searchFieldStringHasChanged];	
-	}
+	[self searchFieldStringHasChanged];	
 }
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command
@@ -386,15 +342,15 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			}
 		}
 		if (command == @selector(cancelOperation:))
-		{			
-			// Cancel search filter
-			[self resetSearchFieldString];
-			
+		{						
 			// Update tag cloud
-			[self setVisibleTags:[tags tags]];
+			//[self setVisibleTags:[tags tags]];
 			
 			// Close search field on ENTER and focus the tag cloud
 			[[control superview] closeSearchField:control];
+			
+			[self searchFieldStringHasChanged];
+			
 			[[tagCloud window] makeFirstResponder:tagCloud];
 			
 			// Set to prefix search
@@ -410,8 +366,9 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
  */
 - (void)controlTextDidChange:(NSNotification *)aNotification
 {
-	NSTextView *fe = [[aNotification userInfo] objectForKey:@"NSFieldEditor"];
-	[self setSearchFieldString:[fe string]];
+	//NSTextView *fe = [[aNotification userInfo] objectForKey:@"NSFieldEditor"];
+	//[self setSearchFieldString:[fe string]];
+	[self searchFieldStringHasChanged];
 }	
 
 - (void)searchFieldStringHasChanged
@@ -447,6 +404,17 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		// Restart the query with updated filters
 		[query setFilters:newFilters];
 		[query startQuery];
+		
+		// Clear tags
+		[self clearVisibleTags];
+		
+		// Fix tags
+		if ([activeTags count] == 0)
+		{
+			NSLog(@"jaaaa");
+			[self setDisplayTags:[tags tags]];
+			//[self setVisibleTags:[tags tags]];
+		}
 	}
 	
 	// Reset tags if the search filter was set from full text to tag search while
@@ -454,15 +422,16 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	if (searchType != PAFullTextSearchType && [fulltextQueryFilters count] > 0)
 	{
 		[self clearVisibleTags];
-		[self setDisplayTags:activeTags];
+		//[self setDisplayTags:activeTags];
+		[self setVisibleTags:[tags tags]];
 	}
 	
-	if (searchType == PAFullTextSearchType)
+	if (searchType == PAFullTextSearchType && [[searchField stringValue] length] > 0)
 	{
 		NSMutableArray *newFilters = [[query filters] mutableCopy];
 		
 		// Check if there's a "real" search string present or only whitespaces
-		NSString *trimmedSearchString = [searchFieldString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		NSString *trimmedSearchString = [[searchField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 				
 		// If so, we're done. If not, go on
 		if ([trimmedSearchString length] > 0)
@@ -493,7 +462,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	if (searchType != PAFullTextSearchType)
 	{
 		// Perform a search for tags	
-		//[self clearVisibleTags];
+		[self clearVisibleTags];
 		//[searchField setStringValue:searchFieldString];
 		
 		[self filterTags:activeTags];
@@ -622,9 +591,9 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 {
 	PAStringFilter *newFilter = nil;
 	
-	if ([searchFieldString length] > 0)
+	if ([[searchField stringValue] length] > 0)
 	{
-		NSString *decomposedSearchString = [searchFieldString decomposedStringWithCanonicalMapping];
+		NSString *decomposedSearchString = [[searchField stringValue] decomposedStringWithCanonicalMapping];
 		
 		PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
 		
@@ -675,7 +644,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		{
 			[tagCloud setDisplayMessage:NSLocalizedStringFromTable(@"NO_TAGS",@"Tags",@"")];
 		}
-		else if (([searchFieldString length] > 0) && 
+		else if (([[searchField stringValue] length] > 0) && 
 				 !filterEngineIsWorking && 
 				 ![mainController isWorking])
 		{
@@ -709,7 +678,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setContentTypeFilterIdentifiers:[NSArray array]];
 		
 	// emptry search field	
-	[self resetSearchFieldString];
+	[searchField setStringValue:@""];
 	
 	[self showResults];
 	[[self mainController] handleTagActivations:someTags];
@@ -745,7 +714,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 
 - (void)switchMainControllerTo:(PABrowserViewMainController*)controller
 {
-	[self resetSearchFieldString];
 	[self setDisplayTags:[tags tags]];
 	[self setMainController:controller];
 }
@@ -756,7 +724,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	[self setContentTypeFilterIdentifiers:[NSArray array]];
 	
 	// emptry search field	
-	[self resetSearchFieldString];
+	[searchField setStringValue:@""];
 	
 	// reset maincontroller
 	[mainController reset];
@@ -939,7 +907,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		[[tagCloud window] makeFirstResponder:tagCloud];
 	
 	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
-		[self resetSearchFieldString];
+		[searchField setStringValue:@""];
 	
 	NNTag *tag = [button genericTag];
 	[mainController handleTagActivation:tag];
@@ -952,7 +920,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		[[tagCloud window] makeFirstResponder:tagCloud];
 	
 	if (mainController && [mainController isKindOfClass:[PAResultsViewController class]])
-		[self resetSearchFieldString];
+		[searchField setStringValue:@""];
 	
 	NNTag *tag = [button genericTag];
 	[mainController handleTagNegation:tag];

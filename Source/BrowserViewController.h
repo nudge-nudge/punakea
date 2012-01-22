@@ -77,7 +77,6 @@ extern CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT;
 	
 	IBOutlet PATypeAheadView			*typeAheadView;
 	NSSearchField						*searchField;
-	NSString							*searchFieldString;
 			
 	NSOperationQueue					*filterEngineOpQueue;
 	BOOL								filterEngineIsWorking;
@@ -114,7 +113,6 @@ highlights tag in tagcloud
 - (void)makeControlledViewFirstResponder;
 
 - (void)setSearchField:(NSSearchField*)aSearchField;
-- (void)setSearchFieldString:(NSString*)string;
 
 - (void)searchForTags:(NSArray*)someTags;
 
