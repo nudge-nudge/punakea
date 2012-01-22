@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "Core.h";
+#import "Core.h"
 
 #define RUNNING_LION (floor(NSAppKitVersionNumber) > 1038) // This is NSAppKitVersionNumber10_6
 
