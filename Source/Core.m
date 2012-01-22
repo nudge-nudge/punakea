@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "Core.h"
+#import "Core.h";
 
 #define RUNNING_LION (floor(NSAppKitVersionNumber) > 1038) // This is NSAppKitVersionNumber10_6
 
@@ -471,8 +471,12 @@
 		// View menu Lion only
 		if (!RUNNING_LION && ([item action] == @selector(toggleFullScreen:)))
 		{
+			// Hide separator above fullscreen item
 			NSInteger separatorIdx = [[item menu] indexOfItem:item] - 1;
 			[[[item menu] itemAtIndex:separatorIdx] setHidden:YES];
+			
+			// Hide the item itself
+			[[[item menu] itemAtIndex:(separatorIdx + 1)] setHidden:YES];
 		}
 		else if (RUNNING_LION && ([item action] == @selector(toggleFullScreen:)))
 		{

@@ -111,5 +111,6 @@ extern NSUInteger const VERSION_FAVORITES_PLIST;
 - (NSSearchField *)searchField;
 
 - (PATitleBar *)titleBar;
+- (PABrowserWindow *)window;
 
 @end
