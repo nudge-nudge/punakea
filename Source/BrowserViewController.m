@@ -278,9 +278,15 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	
 	if (key == NSDeleteCharacter) 
 	{
-		// Delete the last selected tag (if resultsview is active)
-		if ([mainController isKindOfClass:[PAResultsViewController class]])
+		if ([[searchField stringValue] length] > 0)
 		{
+			int endIndex = [[searchField stringValue] length] - 1;
+			[searchField setStringValue:[[searchField stringValue] substringToIndex:endIndex]];
+			[self searchFieldStringHasChanged];
+		}
+		else if ([mainController isKindOfClass:[PAResultsViewController class]])
+		{
+			// Delete the last selected tag (if resultsview is active)
 			[(PAResultsViewController*)mainController removeLastTag];
 		}
 	}
@@ -289,7 +295,6 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		[searchField setStringValue:[NSString stringWithFormat:@"%@%@",
 									 [searchField stringValue], [event charactersIgnoringModifiers]]];
 		
-		[[tagCloud window] makeFirstResponder:searchField];
 		[[searchField currentEditor] setSelectedRange:NSMakeRange([[searchField stringValue] length],0)];
 		
 		[self searchFieldStringHasChanged];
