@@ -219,7 +219,6 @@
 		653D945E14A4B7C3002D604F /* PATitleBarSpinButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 653D945A14A4B7C3002D604F /* PATitleBarSpinButton.m */; };
 		653D945F14A4B7C3002D604F /* PATitleBarSpinButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 653D945B14A4B7C3002D604F /* PATitleBarSpinButtonCell.h */; };
 		653D946014A4B7C3002D604F /* PATitleBarSpinButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 653D945C14A4B7C3002D604F /* PATitleBarSpinButtonCell.m */; };
-		653D946214A4B7E0002D604F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653D946114A4B7E0002D604F /* QuartzCore.framework */; };
 		6540FA550AEE0F5100EF51F3 /* PAResultsBookmarkCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */; };
 		6540FA560AEE0F5100EF51F3 /* PAResultsBookmarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */; };
 		6540FA670AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6540FA650AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h */; };
@@ -774,7 +773,6 @@
 		653D945A14A4B7C3002D604F /* PATitleBarSpinButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATitleBarSpinButton.m; sourceTree = "<group>"; };
 		653D945B14A4B7C3002D604F /* PATitleBarSpinButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATitleBarSpinButtonCell.h; sourceTree = "<group>"; };
 		653D945C14A4B7C3002D604F /* PATitleBarSpinButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATitleBarSpinButtonCell.m; sourceTree = "<group>"; };
-		653D946114A4B7E0002D604F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		6540FA530AEE0F5100EF51F3 /* PAResultsBookmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsBookmarkCell.h; sourceTree = "<group>"; };
 		6540FA540AEE0F5100EF51F3 /* PAResultsBookmarkCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsBookmarkCell.m; sourceTree = "<group>"; };
 		6540FA650AEE0F9B00EF51F3 /* PAResultsMultiItemGenericCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemGenericCell.h; sourceTree = "<group>"; };
@@ -1030,7 +1028,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				653D946214A4B7E0002D604F /* QuartzCore.framework in Frameworks */,
 				483B906414A39CBC00DE3CDD /* Security.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
@@ -1069,7 +1066,6 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				653D946114A4B7E0002D604F /* QuartzCore.framework */,
 				48E760980F7F8B4400F9EEBA /* AddressBook.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				484496300B2D56CE009B262C /* ApplicationServices.framework */,

@@ -195,14 +195,14 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 
 - (void)setupToolbar
 {	
-	NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"BrowserToolbar"];
+	/*NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"BrowserToolbar"];
     [toolbar setDelegate:self];
     [toolbar setAllowsUserCustomization:YES];
-    [toolbar setAutosavesConfiguration:YES];
+    [toolbar setAutosavesConfiguration:YES];*/
 	
 	//[[self window] setToolbar:[toolbar autorelease]];
 	
-	PATitleBarSpinButton *tbitem = [PATitleBarSpinButton titleBarButton];
+	PATitleBarButton *tbitem = [PATitleBarButton titleBarButton];
 	[tbitem setIdentifier:@"sync"];
 	[tbitem setImage:[NSImage imageNamed:@"toolbar-sync"]];
 	[tbitem setToolTip:NSLocalizedStringFromTable(@"SYNC_TAGS_TOOLTIP", @"Toolbars", nil)];

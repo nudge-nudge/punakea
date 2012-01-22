@@ -366,7 +366,7 @@
 		if([item action] == @selector(runToolbarCustomizationPalette:)) return NO;		
 		
 		// Tools menu
-		if([item action] == @selector(syncTags:)) return NO;
+		//if([item action] == @selector(syncTags:)) return NO;
 	}
 	
 	// Check all items that are browser-specific and have constraints	
@@ -733,7 +733,7 @@
 
 - (IBAction)syncTags:(id)sender
 {
-	[[NNTagging tagging] performSelectorOnMainThread:@selector(cleanTagDB)
+	/*[[NNTagging tagging] performSelectorOnMainThread:@selector(cleanTagDB)
 										  withObject:nil
 									   waitUntilDone:NO];
 	
@@ -745,18 +745,16 @@
 	if (![sender isKindOfClass:[PATitleBarButton class]])
 	{
 		[[[browserController titleBar] buttonWithIdentifier:@"sync"] start:self];
-	}
+	}*/
 	
-	/*
-		BusyWindowController *busyWindowController = [[self busyWindow] delegate];
-		
-		[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB", @"FileManager", nil)];
-		[busyWindowController performBusySelector:@selector(cleanTagDB)
-										 onObject:[NNTagging tagging]];
-		
-		[[self busyWindow] center];
-		[NSApp runModalForWindow:[self busyWindow]];
-	*/
+	BusyWindowController *busyWindowController = (BusyWindowController *)[[self busyWindow] delegate];
+	
+	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB", @"FileManager", nil)];
+	[busyWindowController performBusySelector:@selector(cleanTagDB)
+									 onObject:[NNTagging tagging]];
+	
+	[[self busyWindow] center];
+	[NSApp runModalForWindow:[self busyWindow]];
 }
 
 - (void)syncTagsDone:(NSNotification *)notification

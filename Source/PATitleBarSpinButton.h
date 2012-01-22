@@ -8,7 +8,7 @@
 
 #import "PATitleBarButton.h"
 #import "PATitleBarSpinButtonCell.h"
-#import <QuartzCore/QuartzCore.h>
+//#import <QuartzCore/QuartzCore.h>
 
 
 @interface PATitleBarSpinButton : PATitleBarButton<NSAnimationDelegate>

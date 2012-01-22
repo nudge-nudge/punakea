@@ -55,7 +55,7 @@
 {	
 	if (!shouldStop)
 	{
-		CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+		/*CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
 		[animation setDuration:1.0f];
 		[animation setAutoreverses:NO];
 		[animation setRepeatCount:1.0f];
@@ -63,7 +63,7 @@
 		[animation setFromValue:[NSNumber numberWithDouble:(M_PI * 2.0f)]];	
 		[animation setRemovedOnCompletion:NO];
 		[animation setDelegate:self];
-		[imageView.layer addAnimation:animation forKey:@"spin"];
+		[imageView.layer addAnimation:animation forKey:@"spin"];*/
 	}
 }
 
