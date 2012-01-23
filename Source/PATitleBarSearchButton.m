@@ -33,6 +33,12 @@
 	return (PATitleBarSearchButton *)[super titleBarButton];
 }
 
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObject:self];
+	[super dealloc];
+}
+
 
 #pragma mark Actions
 - (void)showSearchField:(id)sender
