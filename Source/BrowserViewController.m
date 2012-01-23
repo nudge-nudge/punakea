@@ -345,6 +345,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 				if (searchType != PAFullTextSearchType)
 					[[tagCloud activeButton] performClick:[tagCloud activeButton]];
 			}
+			
+			return YES;
 		}
 		if (command == @selector(cancelOperation:))
 		{						
@@ -360,6 +362,8 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			
 			// Set to prefix search
 			[[NSUserDefaults standardUserDefaults] setInteger:PATagPrefixSearchType forKey:@"General.Search.Type"];
+			
+			return YES;
 		}		
 	}	
 	
