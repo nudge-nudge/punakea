@@ -290,7 +290,9 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			[(PAResultsViewController*)mainController removeLastTag];
 		}
 	}
-	else if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:key]) 
+	else if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:key] ||
+			 [[NSCharacterSet symbolCharacterSet] characterIsMember:key] ||
+			 [[NSCharacterSet punctuationCharacterSet] characterIsMember:key]) 
 	{	
 		[searchField setStringValue:[NSString stringWithFormat:@"%@%@",
 									 [searchField stringValue], [event charactersIgnoringModifiers]]];
@@ -394,9 +396,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			return;
 	}
 	
-
-	if (searchType == PAFullTextSearchType ||
-		(searchType != PAFullTextSearchType && [fulltextQueryFilters count] > 0))
+	if ([fulltextQueryFilters count] > 0)
 	{
 		// Remove all active full text search filters
 		NSMutableArray *newFilters = [NSMutableArray array];
