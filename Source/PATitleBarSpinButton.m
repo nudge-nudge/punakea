@@ -3,7 +3,7 @@
 //  punakea
 //
 //  Created by Daniel Bär on 18.12.11.
-//  Copyright 2011 nudge:nudge. All rights reserved.
+//  Copyright 2012 nudge:nudge. All rights reserved.
 //
 
 #import "PATitleBarSpinButton.h"
@@ -32,7 +32,7 @@
 		
 		// Set the anchor point for the animation to the center of the image view
 		// (relative coordinates ranging from 0 to 1 in both directions)
-		imageView.layer.anchorPoint = NSMakePoint(0.5, 0.5);
+		imageView.layer.anchorPoint = CGPointMake(0.5, 0.5);
 	}
     
     return self;

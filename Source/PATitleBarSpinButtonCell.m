@@ -3,7 +3,7 @@
 //  punakea
 //
 //  Created by Daniel Bär on 19.12.11.
-//  Copyright 2011 nudge:nudge. All rights reserved.
+//  Copyright 2012 nudge:nudge. All rights reserved.
 //
 
 #import "PATitleBarSpinButtonCell.h"
