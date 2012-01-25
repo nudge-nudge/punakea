@@ -75,9 +75,12 @@
 
 - (void)abortSearch:(id)sender
 {
-	[searchField setStringValue:@""];
-	[[[[NSApp delegate] browserController] browserViewController] control:searchField textView:nil doCommandBySelector:@selector(cancelOperation:)];
-	[self closeSearchField:self];
+	if ([[searchField stringValue] length] > 0)
+	{
+		[searchField setStringValue:@""];
+		[[[[NSApp delegate] browserController] browserViewController] control:searchField textView:nil doCommandBySelector:@selector(cancelOperation:)];
+		//[self closeSearchField:self];
+	}
 }
 
 - (void)closeSearchField:(id)sender

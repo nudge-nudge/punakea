@@ -335,7 +335,7 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 	if (control == searchField)
 	{
 		if (command == @selector(insertNewline:) || command == @selector(complete:))
-		{
+		{			
 			[[tagCloud window] makeFirstResponder:tagCloud];
 			 
 			// If there's only a single tag in the tag cloud, perform Click operation on this tag -
