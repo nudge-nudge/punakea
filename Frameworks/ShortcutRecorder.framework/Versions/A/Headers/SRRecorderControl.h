@@ -31,8 +31,8 @@
 
 #pragma mark *** Key Combination Control ***
 
-- (unsigned int)allowedFlags;
-- (void)setAllowedFlags:(unsigned int)flags;
+- (NSUInteger)allowedFlags;
+- (void)setAllowedFlags:(NSUInteger)flags;
 
 - (BOOL)allowsKeyOnly;
 - (void)setAllowsKeyOnly:(BOOL)nAllowsKeyOnly escapeKeysRecord:(BOOL)nEscapeKeysRecord;
@@ -41,27 +41,19 @@
 - (BOOL)canCaptureGlobalHotKeys;
 - (void)setCanCaptureGlobalHotKeys:(BOOL)inState;
 
-- (unsigned int)requiredFlags;
-- (void)setRequiredFlags:(unsigned int)flags;
+- (NSUInteger)requiredFlags;
+- (void)setRequiredFlags:(NSUInteger)flags;
 
 - (KeyCombo)keyCombo;
 - (void)setKeyCombo:(KeyCombo)aKeyCombo;
-- (void)clearKeyCombo;
 
 - (NSString *)keyChars;
 - (NSString *)keyCharsIgnoringModifiers;
 
-#pragma mark *** Deprecated ***
+#pragma mark *** Autosave Control ***
 
-- (NSString *)autosaveName SR_DEPRECATED_ATTRIBUTE;
-- (void)setAutosaveName:(NSString *)aName SR_DEPRECATED_ATTRIBUTE;
-
-#pragma mark -
-
-#pragma mark IB3 tomfoolery
-
-- (void)forIBuse__nilOutDeprecatedAutosaveName:(id)sender;
-- (BOOL)forIBuse__hasDeprecatedAutosaveName;
+- (NSString *)autosaveName;
+- (void)setAutosaveName:(NSString *)aName;
 
 #pragma mark -
 
@@ -70,13 +62,13 @@
 
 #pragma mark *** Conversion Methods ***
 
-- (unsigned int)cocoaToCarbonFlags:(unsigned int)cocoaFlags;
-- (unsigned int)carbonToCocoaFlags:(unsigned int)carbonFlags;
+- (NSUInteger)cocoaToCarbonFlags:(NSUInteger)cocoaFlags;
+- (NSUInteger)carbonToCocoaFlags:(NSUInteger)carbonFlags;
 
 @end
 
 // Delegate Methods
 @interface NSObject (SRRecorderDelegate)
-- (BOOL)shortcutRecorder:(SRRecorderControl *)aRecorder isKeyCode:(signed short)keyCode andFlagsTaken:(unsigned int)flags reason:(NSString **)aReason;
+- (BOOL)shortcutRecorder:(SRRecorderControl *)aRecorder isKeyCode:(NSInteger)keyCode andFlagsTaken:(NSUInteger)flags reason:(NSString **)aReason;
 - (void)shortcutRecorder:(SRRecorderControl *)aRecorder keyComboDidChange:(KeyCombo)newKeyCombo;
 @end
