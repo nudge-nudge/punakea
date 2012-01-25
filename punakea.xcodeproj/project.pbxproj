@@ -3135,6 +3135,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3163,6 +3164,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = NNFilterEngine;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				ZERO_LINK = YES;
 			};
@@ -3172,6 +3174,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3198,6 +3201,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = NNFilterEngine;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				ZERO_LINK = NO;
 			};
@@ -3207,6 +3211,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3233,6 +3238,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PADropHandler;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				ZERO_LINK = YES;
 			};
@@ -3242,6 +3248,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3266,6 +3273,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PADropHandler;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				ZERO_LINK = NO;
 			};
@@ -3275,6 +3283,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3298,6 +3307,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = FilenamesDropHandler;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = YES;
@@ -3308,6 +3318,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3329,6 +3340,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = FilenamesDropHandler;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
@@ -3339,6 +3351,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3360,6 +3373,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PublicUrlDropHandler;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
@@ -3371,6 +3385,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3391,6 +3406,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PublicUrlDropHandler;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
@@ -3402,6 +3418,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Punakea.app/Contents/MacOS/Punakea";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(value)",
@@ -3424,6 +3441,7 @@
 					SenTestingKit,
 				);
 				PRODUCT_NAME = "Unit Testing";
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
 			};
@@ -3433,6 +3451,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Punakea.app/Contents/MacOS/Punakea";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(value)",
@@ -3453,6 +3472,7 @@
 					SenTestingKit,
 				);
 				PRODUCT_NAME = "Unit Testing";
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
@@ -3484,7 +3504,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3508,7 +3528,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = WebURLsWithTitlesPboardTypeDropHandler;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
@@ -3520,7 +3540,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3542,7 +3562,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = WebURLsWithTitlesPboardTypeDropHandler;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
@@ -3575,6 +3595,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS)",
@@ -3619,6 +3640,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = Punakea;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
@@ -3629,6 +3651,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
@@ -3665,6 +3688,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = Punakea;
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
@@ -3674,7 +3698,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3688,7 +3712,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				SKIP_INSTALL = NO;
 			};
@@ -3702,7 +3726,7 @@
 					x86_64,
 					i386,
 				);
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3715,7 +3739,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E5DAA10F-960D-485A-BFEF-FCCFE61EF33D";
 				SDKROOT = macosx10.6;
 				SKIP_INSTALL = NO;
 			};
