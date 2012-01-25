@@ -217,6 +217,7 @@
 				LIBRARY_STYLE = Bundle;
 				PRODUCT_NAME = WeblocImporter;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 				ZERO_LINK = YES;
 			};
@@ -229,6 +230,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SKIP_INSTALL = YES;
 			};
 			name = Beta;
 		};
@@ -247,6 +249,7 @@
 				LIBRARY_STYLE = Bundle;
 				PRODUCT_NAME = WeblocImporter;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 				ZERO_LINK = YES;
 			};
@@ -265,6 +268,7 @@
 				LIBRARY_STYLE = Bundle;
 				PRODUCT_NAME = WeblocImporter;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Release;
@@ -276,6 +280,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -286,6 +291,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};

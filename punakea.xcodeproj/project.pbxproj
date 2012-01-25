@@ -56,11 +56,11 @@
 		4820107A103960BB00BE2FA3 /* NSApplication+SystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 48201079103960BB00BE2FA3 /* NSApplication+SystemVersion.m */; };
 		48209CAB0AB1BEED00F3CF21 /* PADropManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 48209CA50AB1BEED00F3CF21 /* PADropManager.h */; };
 		48209CAC0AB1BEED00F3CF21 /* PADropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 48209CA60AB1BEED00F3CF21 /* PADropManager.m */; };
-		48238A1B111ECE090091B2CE /* lcl_config_components.h in Headers */ = {isa = PBXBuildFile; fileRef = 48238A15111ECE090091B2CE /* lcl_config_components.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		48238A1C111ECE090091B2CE /* lcl_config_logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 48238A16111ECE090091B2CE /* lcl_config_logger.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		48238A1D111ECE090091B2CE /* lcl.h in Headers */ = {isa = PBXBuildFile; fileRef = 48238A17111ECE090091B2CE /* lcl.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		48238A1B111ECE090091B2CE /* lcl_config_components.h in Headers */ = {isa = PBXBuildFile; fileRef = 48238A15111ECE090091B2CE /* lcl_config_components.h */; settings = {ATTRIBUTES = (); }; };
+		48238A1C111ECE090091B2CE /* lcl_config_logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 48238A16111ECE090091B2CE /* lcl_config_logger.h */; settings = {ATTRIBUTES = (); }; };
+		48238A1D111ECE090091B2CE /* lcl.h in Headers */ = {isa = PBXBuildFile; fileRef = 48238A17111ECE090091B2CE /* lcl.h */; settings = {ATTRIBUTES = (); }; };
 		48238A1E111ECE090091B2CE /* lcl.m in Sources */ = {isa = PBXBuildFile; fileRef = 48238A18111ECE090091B2CE /* lcl.m */; };
-		48238A1F111ECE090091B2CE /* LCLLogFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 48238A19111ECE090091B2CE /* LCLLogFile.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		48238A1F111ECE090091B2CE /* LCLLogFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 48238A19111ECE090091B2CE /* LCLLogFile.h */; settings = {ATTRIBUTES = (); }; };
 		48238A20111ECE090091B2CE /* LCLLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 48238A1A111ECE090091B2CE /* LCLLogFile.m */; };
 		482B31150AC6C70D0071C33B /* ResultsView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 482B31130AC6C70D0071C33B /* ResultsView.nib */; };
 		482B314B0AC6D6DD0071C33B /* PABrowserViewMainController.h in Headers */ = {isa = PBXBuildFile; fileRef = 482B31490AC6D6DD0071C33B /* PABrowserViewMainController.h */; };
@@ -158,7 +158,7 @@
 		48B0F1D80ACC020800738053 /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B0F1D70ACC020800738053 /* Global.strings */; };
 		48B5E14212A646F700293604 /* Grouping_Off.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48B5E14012A646F700293604 /* Grouping_Off.tiff */; };
 		48B5E14812A6472000293604 /* Grouping_On.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48B5E14712A6472000293604 /* Grouping_On.tiff */; };
-		48B8F45010FBB1B5002B1E35 /* PAURLDropDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */; };
+		48B8F45010FBB1B5002B1E35 /* PAURLDropDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B8F45110FBB1B9002B1E35 /* PAURLDropDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */; };
 		48B8F4E110FBB6D2002B1E35 /* PAStringFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B8F4E010FBB6D2002B1E35 /* PAStringFilter.m */; };
 		48B9AE29104325C000EFF3D4 /* sl-status_exclude.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 48B9AE28104325C000EFF3D4 /* sl-status_exclude.tiff */; };
@@ -229,6 +229,7 @@
 		654B4CFC0AF1FD37001082BA /* PATaggerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 654B4CFA0AF1FD37001082BA /* PATaggerHeaderCell.m */; };
 		655377CD0AAD8C5000C6376B /* dummyThumbSmall.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655377CB0AAD8C5000C6376B /* dummyThumbSmall.gif */; };
 		655377CE0AAD8C5000C6376B /* dummyThumbLarge.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655377CC0AAD8C5000C6376B /* dummyThumbLarge.gif */; };
+		6553885B14D0A77900E9977C /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6553885A14D0A77900E9977C /* appicon.icns */; };
 		655540F30BF1EEA200D3AF8E /* Menus.strings in Resources */ = {isa = PBXBuildFile; fileRef = 655540F20BF1EEA200D3AF8E /* Menus.strings */; };
 		655541B20BF1F9C800D3AF8E /* statusbar-button-info-on.tif in Resources */ = {isa = PBXBuildFile; fileRef = 655541B10BF1F9C800D3AF8E /* statusbar-button-info-on.tif */; };
 		655563A20A50672A0050104E /* stopRollover.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6555639F0A50672A0050104E /* stopRollover.tif */; };
@@ -311,7 +312,6 @@
 		659040E00A4C058400ADDC1D /* pane_key-favoriteIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 659040CC0A4C058400ADDC1D /* pane_key-favoriteIcon.tiff */; };
 		6591FC6A09F521BA0026115A /* PAResultsMultiItemMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */; };
 		6591FC6B09F521BA0026115A /* PAResultsMultiItemMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */; };
-		65943F990AFA56AA00A8922F /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 65943F980AFA56AA00A8922F /* appicon.icns */; };
 		6597D9D70FCC51F6003AE414 /* PAAddTagsCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6597D9D60FCC51F6003AE414 /* PAAddTagsCommand.m */; };
 		65988C6B0A875A11000270E6 /* PAButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 65988C690A875A11000270E6 /* PAButton.h */; };
 		65988C6C0A875A11000270E6 /* PAButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65988C6A0A875A11000270E6 /* PAButton.m */; };
@@ -784,6 +784,7 @@
 		654DBC1A09C9D0620061BFA4 /* index.html */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.html; name = index.html; path = html/index.html; sourceTree = "<group>"; };
 		655377CB0AAD8C5000C6376B /* dummyThumbSmall.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dummyThumbSmall.gif; sourceTree = "<group>"; };
 		655377CC0AAD8C5000C6376B /* dummyThumbLarge.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dummyThumbLarge.gif; sourceTree = "<group>"; };
+		6553885A14D0A77900E9977C /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = appicon.icns; sourceTree = "<group>"; };
 		655540EE0BF1EE8E00D3AF8E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Menus.strings; sourceTree = "<group>"; };
 		655541B10BF1F9C800D3AF8E /* statusbar-button-info-on.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "statusbar-button-info-on.tif"; sourceTree = "<group>"; };
 		6555639F0A50672A0050104E /* stopRollover.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stopRollover.tif; sourceTree = "<group>"; };
@@ -870,7 +871,6 @@
 		659040CC0A4C058400ADDC1D /* pane_key-favoriteIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "pane_key-favoriteIcon.tiff"; sourceTree = "<group>"; };
 		6591FC6809F521BA0026115A /* PAResultsMultiItemMatrix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemMatrix.h; sourceTree = "<group>"; };
 		6591FC6909F521BA0026115A /* PAResultsMultiItemMatrix.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsMultiItemMatrix.m; sourceTree = "<group>"; };
-		65943F980AFA56AA00A8922F /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = appicon.icns; path = ../appicon.icns; sourceTree = "<group>"; };
 		6597D9D50FCC51F6003AE414 /* PAAddTagsCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAddTagsCommand.h; sourceTree = "<group>"; };
 		6597D9D60FCC51F6003AE414 /* PAAddTagsCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAddTagsCommand.m; sourceTree = "<group>"; };
 		65988C690A875A11000270E6 /* PAButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAButton.h; sourceTree = "<group>"; };
@@ -1104,6 +1104,7 @@
 		29B97314FDCFA39411CA2CEA /* Punakea */ = {
 			isa = PBXGroup;
 			children = (
+				6553885A14D0A77900E9977C /* appicon.icns */,
 				080E96DDFE201D6D7F000001 /* Source */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -1776,7 +1777,6 @@
 				6509FA390A7D2774003D32D8 /* Filter Slice */,
 				65A4079109B9D53200B151F4 /* ResultsView */,
 				659040030A4C02E000ADDC1D /* SelectedTagsView */,
-				65943F980AFA56AA00A8922F /* appicon.icns */,
 			);
 			name = Images;
 			path = Resources;
@@ -2176,6 +2176,10 @@
 				4856C6740A516D8300E1D568 /* BrowserViewController.h in Headers */,
 				481A64320ABFD16F005516E7 /* LoginItemsAE.h in Headers */,
 				65823B840A67CCFF0004DC39 /* NSBezierPathCategory.h in Headers */,
+				48238A1B111ECE090091B2CE /* lcl_config_components.h in Headers */,
+				48238A1C111ECE090091B2CE /* lcl_config_logger.h in Headers */,
+				48238A1D111ECE090091B2CE /* lcl.h in Headers */,
+				48238A1F111ECE090091B2CE /* LCLLogFile.h in Headers */,
 				656C20020AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h in Headers */,
 				65E38E530BFB390E000C1976 /* NSNumberFormatterAdditions.h in Headers */,
 				48469B9E0AD0F02D00DDEA7E /* NSString+CharacterSetChecks.h in Headers */,
@@ -2258,10 +2262,6 @@
 				48D81DAD09F79C1C0075EE44 /* TaggerController.h in Headers */,
 				65851FFC099780B9009C3CA7 /* ToolbarDelegateCategory.h in Headers */,
 				483272340AA42DC6003D98A6 /* UKPrefsPanel.h in Headers */,
-				48238A1B111ECE090091B2CE /* lcl_config_components.h in Headers */,
-				48238A1C111ECE090091B2CE /* lcl_config_logger.h in Headers */,
-				48238A1D111ECE090091B2CE /* lcl.h in Headers */,
-				48238A1F111ECE090091B2CE /* LCLLogFile.h in Headers */,
 				481E5A751124B45E001FE5C5 /* LCLLogFileConfig.h in Headers */,
 				481E5A771124B496001FE5C5 /* lcl_config_extensions.h in Headers */,
 				658849CC115F61F8003C2303 /* NSTokenAttachmentCell.h in Headers */,
@@ -2636,7 +2636,6 @@
 				65B78F330AF0DA4600AF1102 /* statusbar.tiff in Resources */,
 				658ADF600AF6610A00063AE1 /* RemoveRound.tif in Resources */,
 				658ADF610AF6610A00063AE1 /* RemoveRoundPressed.tif in Resources */,
-				65943F990AFA56AA00A8922F /* appicon.icns in Resources */,
 				48CFDC320B2ED76A002282D9 /* toolbar-pref-update.tiff in Resources */,
 				6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */,
 				6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */,
@@ -2695,6 +2694,7 @@
 				652F30C3148D58E300AA26A6 /* MainMenu.xib in Resources */,
 				652F30C7148D609700AA26A6 /* Browser.xib in Resources */,
 				659D7846149E1A6200591555 /* toolbar-sync.png in Resources */,
+				6553885B14D0A77900E9977C /* appicon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3361,6 +3361,7 @@
 				);
 				PRODUCT_NAME = PublicUrlDropHandler;
 				SDKROOT = macosx10.6;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = YES;
 			};
@@ -3391,6 +3392,7 @@
 				);
 				PRODUCT_NAME = PublicUrlDropHandler;
 				SDKROOT = macosx10.6;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
 			};
@@ -3482,6 +3484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3505,7 +3508,9 @@
 					AppKit,
 				);
 				PRODUCT_NAME = WebURLsWithTitlesPboardTypeDropHandler;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.6;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = YES;
 			};
@@ -3515,6 +3520,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3536,7 +3542,9 @@
 					AppKit,
 				);
 				PRODUCT_NAME = WebURLsWithTitlesPboardTypeDropHandler;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.6;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
 			};
@@ -3608,6 +3616,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = Punakea;
 				SDKROOT = macosx10.6;
@@ -3654,6 +3663,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = Punakea;
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
@@ -3680,6 +3690,7 @@
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.6;
+				SKIP_INSTALL = NO;
 			};
 			name = Debug;
 		};
@@ -3706,6 +3717,7 @@
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx10.6;
+				SKIP_INSTALL = NO;
 			};
 			name = Release;
 		};
