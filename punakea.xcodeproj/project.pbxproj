@@ -192,8 +192,6 @@
 		650902130BEDF429005468E0 /* Toolbars.strings in Resources */ = {isa = PBXBuildFile; fileRef = 650902120BEDF429005468E0 /* Toolbars.strings */; };
 		650C84190D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 650C84180D5A2C1C0010A508 /* toolbar-pref-managefiles.tiff */; };
 		650D52A30F6ACD3600E67680 /* CurrentSelection.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 650D52900F6ACBEF00E67680 /* CurrentSelection.scpt */; };
-		6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */; };
-		651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */; };
 		651C4B5A09B9FECE003E6626 /* CollapsedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5809B9FECE003E6626 /* CollapsedTriangleWhite.tiff */; };
 		651C4B5B09B9FECE003E6626 /* ExpandedTriangleWhite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 651C4B5909B9FECE003E6626 /* ExpandedTriangleWhite.tiff */; };
 		6525F34E09EA3C2B006E1FB7 /* PASegmentedImageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6525F34C09EA3C2B006E1FB7 /* PASegmentedImageControl.h */; };
@@ -338,6 +336,8 @@
 		65AA051D0AA6DE31003E4E2F /* PAThumbnailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AA051B0AA6DE31003E4E2F /* PAThumbnailItem.m */; };
 		65AA3ACF14D13B0700250F83 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AA3ACE14D13B0700250F83 /* ShortcutRecorder.framework */; };
 		65AA3AD014D13B0D00250F83 /* ShortcutRecorder.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65AA3ACE14D13B0700250F83 /* ShortcutRecorder.framework */; };
+		65AA3ADE14D13E1B00250F83 /* BGHUDAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */; };
+		65AA3ADF14D13E3000250F83 /* BGHUDAppKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */; };
 		65AA74BD0BF35D2C0054407D /* NSTextFieldAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 65AA74BB0BF35D2C0054407D /* NSTextFieldAdditions.h */; };
 		65AA74BE0BF35D2C0054407D /* NSTextFieldAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AA74BC0BF35D2C0054407D /* NSTextFieldAdditions.m */; };
 		65AC736E0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 65AC736C0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h */; };
@@ -530,8 +530,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				651599AB0F6C3EF60089273E /* BGHUDAppKit.framework in Copy Frameworks */,
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
+				65AA3ADF14D13E3000250F83 /* BGHUDAppKit.framework in Copy Frameworks */,
 				4863B45614CB05A200F92A59 /* NNTagging.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
 				65AA3AD014D13B0D00250F83 /* ShortcutRecorder.framework in Copy Frameworks */,
@@ -1028,11 +1028,11 @@
 			files = (
 				483B906414A39CBC00DE3CDD /* Security.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
+				65AA3ADE14D13E1B00250F83 /* BGHUDAppKit.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				484496450B2D56CE009B262C /* ApplicationServices.framework in Frameworks */,
 				650359A00F5D832F00BC204D /* Carbon.framework in Frameworks */,
-				6515998B0F6C3ED60089273E /* BGHUDAppKit.framework in Frameworks */,
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
 				489BAAA91046FFF200E9D7A3 /* QuickLook.framework in Frameworks */,
 				4863B45714CB05EF00F92A59 /* NNTagging.framework in Frameworks */,
