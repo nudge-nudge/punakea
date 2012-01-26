@@ -336,6 +336,8 @@
 		65A74ABC09E3AA23001131A8 /* PAResultsTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */; };
 		65AA051C0AA6DE31003E4E2F /* PAThumbnailItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 65AA051A0AA6DE31003E4E2F /* PAThumbnailItem.h */; };
 		65AA051D0AA6DE31003E4E2F /* PAThumbnailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AA051B0AA6DE31003E4E2F /* PAThumbnailItem.m */; };
+		65AA3ACF14D13B0700250F83 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AA3ACE14D13B0700250F83 /* ShortcutRecorder.framework */; };
+		65AA3AD014D13B0D00250F83 /* ShortcutRecorder.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 65AA3ACE14D13B0700250F83 /* ShortcutRecorder.framework */; };
 		65AA74BD0BF35D2C0054407D /* NSTextFieldAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 65AA74BB0BF35D2C0054407D /* NSTextFieldAdditions.h */; };
 		65AA74BE0BF35D2C0054407D /* NSTextFieldAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AA74BC0BF35D2C0054407D /* NSTextFieldAdditions.m */; };
 		65AC736E0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 65AC736C0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h */; };
@@ -532,6 +534,7 @@
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
 				4863B45614CB05A200F92A59 /* NNTagging.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
+				65AA3AD014D13B0D00250F83 /* ShortcutRecorder.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -894,6 +897,7 @@
 		65A74ABA09E3AA23001131A8 /* PAResultsTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PAResultsTableColumn.m; sourceTree = "<group>"; };
 		65AA051A0AA6DE31003E4E2F /* PAThumbnailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAThumbnailItem.h; sourceTree = "<group>"; };
 		65AA051B0AA6DE31003E4E2F /* PAThumbnailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAThumbnailItem.m; sourceTree = "<group>"; };
+		65AA3ACE14D13B0700250F83 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShortcutRecorder.framework; sourceTree = "<group>"; };
 		65AA74BB0BF35D2C0054407D /* NSTextFieldAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTextFieldAdditions.h; sourceTree = "<group>"; };
 		65AA74BC0BF35D2C0054407D /* NSTextFieldAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTextFieldAdditions.m; sourceTree = "<group>"; };
 		65AC736C0A690C0500602325 /* PAResultsMultiItemPlaceholderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsMultiItemPlaceholderCell.h; sourceTree = "<group>"; };
@@ -1032,6 +1036,7 @@
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
 				489BAAA91046FFF200E9D7A3 /* QuickLook.framework in Frameworks */,
 				4863B45714CB05EF00F92A59 /* NNTagging.framework in Frameworks */,
+				65AA3ACF14D13B0700250F83 /* ShortcutRecorder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1075,6 +1080,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65AA3ACE14D13B0700250F83 /* ShortcutRecorder.framework */,
 				656A0DC614C998800079DB46 /* NNTagging.framework */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
 			);
