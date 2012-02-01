@@ -26,6 +26,7 @@
 @interface PreferenceController (PrivateAPI)
 
 - (void)startOnLoginHasChanged;
+- (void)managedFolderStateHasChanged;
 - (void)tagsFolderStateHasChanged;
 - (void)dropBoxStateHasChanged;
 
@@ -170,8 +171,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		}
 		else if ([keyPath isEqualToString:@"values.ManageFiles.ManagedFolder.Enabled"])
 		{
-			[core createDirectoriesIfNeeded];
-			[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
+			[self managedFolderStateHasChanged];
 		}
 		else if ([keyPath isEqualToString:@"values.ManageFiles.TagsFolder.Enabled"])
 		{
@@ -234,7 +234,13 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		LIAEAddURLAtEnd(url, false);
 	
 	CFRelease(url);
-}		
+}	
+
+- (void)managedFolderStateHasChanged
+{
+	[core createDirectoriesIfNeeded];
+	[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
+}
 
 - (void)tagsFolderStateHasChanged
 {	

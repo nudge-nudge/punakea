@@ -29,7 +29,7 @@
 	<key>ManageFiles.ManagedFolder.Location</key>
 	<string>~/Documents/Punakea/Files/</string>
 	<key>ManageFiles.TagsFolder.Enabled</key>
-	<true/>
+	<false/>
 	<key>ManageFiles.TagsFolder.Location</key>
 	<string>~/Documents/Punakea/Tags/</string>
 	<key>ManageFiles.DropBox.Enabled</key>
@@ -94,5 +94,7 @@
 	<string></string>
 	<key>Version</key>
 	<integer>3</integer>
+	<key>NSWindow Frame punakea.browser</key>
+	<string>125 157 937 667 0 0 1440 878 </string>
 </dict>
 </plist>
