@@ -25,6 +25,7 @@
 @interface BusyWindowController (PrivateAPI)
 
 - (void)stopModal;
+- (void)executeSelector;
 
 @end
 
@@ -54,15 +55,12 @@
 #pragma mark Notifications
 - (void)performBusyAction:(NSNotification *)notification
 {
-    [busyObject performSelectorOnMainThread:busySelector
-                                 withObject:busyArg
-                              waitUntilDone:NO 
-                                      modes:[NSArray arrayWithObject:NSModalPanelRunLoopMode]];
+    [busyObject performSelectorInBackground:busySelector
+                                 withObject:busyArg];
 	
 	[progressIndicator setIndeterminate:YES];
 	[progressIndicator setUsesThreadedAnimation:YES];
-	[progressIndicator startAnimation:self];
-	
+	[progressIndicator startAnimation:self];    
 	// Ensure we get this notification only once
 	[[NSNotificationCenter defaultCenter] removeObserver:self
 													name:NSWindowDidBecomeKeyNotification
