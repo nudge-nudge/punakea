@@ -26,16 +26,10 @@
 	<string>INFO</string>
 	<key>ManageFiles.ManagedFolder.Enabled</key>
 	<false/>
-	<key>ManageFiles.ManagedFolder.Location</key>
-	<string>~/Documents/Punakea/Files/</string>
 	<key>ManageFiles.TagsFolder.Enabled</key>
 	<false/>
-	<key>ManageFiles.TagsFolder.Location</key>
-	<string>~/Documents/Punakea/Tags/</string>
 	<key>ManageFiles.DropBox.Enabled</key>
 	<false/>
-	<key>ManageFiles.DropBox.Location</key>
-	<string>~/Documents/Punakea/Drop Box/</string>
 	<key>ManageFiles.DropBox.Tags</key>
 	<array>
 		<string>untagged</string>

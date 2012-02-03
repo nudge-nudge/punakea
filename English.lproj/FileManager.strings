@@ -23,8 +23,11 @@
 "BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB" = "Punakea is rebuilding the tags database.";
 "BUSY_WINDOW_MESSAGE_IMPORTING_FOLDER" = "Punakea is adding tags to files according to the imported folder structure";
 
-"DESTINATION_FOLDER_MAY_GET_DELETED" = "Make sure that \"%@\" is really empty!";
-"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "Punakea might delete contents in the \"Tags Folder\".";
+"DESTINATION_FOLDER_MAY_GET_DELETED" = "Make sure that \"%@\" is an empty folder.";
+"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "Punakea will automatically create and remove items in this folder.";
+
+"TAGS_FOLDER_NEEDS_TO_COPY_SCRIPT_FILE_MESSAGE" = "Confirm script installation";
+"TAGS_FOLDER_NEEDS_TO_COPY_SCRIPT_FILE_INFORMATIVE" = "Punakea will copy a script file to \"~/Library/Scripts/Folder Action Scripts/\" in order to set up a drop box at your chosen location. If you disable the drop box later on, the script file will be removed automatically.";
 
 "MOVE_FILES_ON_IMPORTING" = "Move files to managed folder on import";
 
@@ -33,3 +36,7 @@
 "ENABLE_TAGGING_ON_VOLUME_SUCCESS" = "Tagging enabled on '%@'.";
 "ENABLE_TAGGING_ON_VOLUME_FAILURE" = "Tagging could not be enabled on '%@'.";
 "ENABLE_TAGGING_ON_VOLUME_FAILURE_REASON" = "Error code: %i";
+
+"CHOOSE_LOCATION_OF_MANAGED_FOLDER" = "Choose a folder where all your tagged files will be kept. It is recommended to use a\npreviously empty folder when setting up a new location.";
+"CHOOSE_LOCATION_OF_TAGS_FOLDER" = "You will be able to access all tagged documents by a folder structure.\nMake sure to use a previously empty folder when setting up a new location.";
+"CHOOSE_LOCATION_OF_DROP_BOX" = "Choose a folder which will serve as Punakea's drop box.";

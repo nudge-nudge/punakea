@@ -34,9 +34,13 @@ typedef enum _PAScheduledUpdateCheckInterval {
 	PAScheduledUpdateCheckMonthly = 2
 } PAScheduledUpdateCheckInterval;
 
-extern NSString * const MANAGED_FOLDER_LOCATION_CONTROLLER_KEYPATH;
-extern NSString * const TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH;
-extern NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
+extern NSString * const MANAGED_FOLDER_LOCATION_KEYPATH;
+extern NSString * const TAGS_FOLDER_LOCATION_KEYPATH;
+extern NSString * const DROP_BOX_LOCATION_KEYPATH;
+
+extern NSString * const MANAGED_FOLDER_ENABLED_KEYPATH;
+extern NSString * const TAGS_FOLDER_ENABLED_KEYPATH;
+extern NSString * const DROP_BOX_ENABLED_KEYPATH;
 
 extern NSString * const DROP_BOX_SCRIPTNAME;
 
@@ -66,6 +70,6 @@ extern NSString * const DROP_BOX_SCRIPTNAME;
 - (id)initWithCore:(Core*)aCore;
 
 - (IBAction)locateDirectory:(id)sender;
-- (IBAction)switchSpecialFolderDirToDefault:(id)sender;
+//- (IBAction)switchSpecialFolderDirToDefault:(id)sender;
 
 @end

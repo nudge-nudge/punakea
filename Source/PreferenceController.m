@@ -30,15 +30,21 @@
 - (void)tagsFolderStateHasChanged;
 - (void)dropBoxStateHasChanged;
 
+- (void)showTagsFolderWarning:(NSDictionary *)userInfo;
+- (void)showDropBoxWarning:(NSDictionary *)userInfo;
 - (void)switchSpecialFolderDir:(NSDictionary *)userInfo;
 
 - (void)updateCurrentLocationForPopUpButton:(NSPopUpButton *)button;
 - (void)moveSubdirectoriesFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(NSInteger)tag;
 
 - (void)displayWarningWithMessage:(NSString*)messageInfo;
+- (void)tagsFolderWarningDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+- (void)dropBoxWarningDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 
-- (NSString *)controllerKeyPathForMenuItemTag:(NSInteger)tag;
+- (NSString *)locationKeyPathForMenuItemTag:(NSInteger)tag;
+- (NSString *)enabledKeyPathForMenuItemTag:(NSInteger)tag;
 - (NSPopUpButton *)popUpButtonForMenuItemTag:(NSInteger)tag;
+- (NSString *)openPanelMessageForMenuItemTag:(NSInteger)tag;
 
 - (BOOL)isLoginItem;
 - (CFIndex)loginItemIndex;
@@ -52,10 +58,13 @@
 
 @end
 
+NSString * const MANAGED_FOLDER_LOCATION_KEYPATH = @"values.ManageFiles.ManagedFolder.Location";
+NSString * const TAGS_FOLDER_LOCATION_KEYPATH = @"values.ManageFiles.TagsFolder.Location";
+NSString * const DROP_BOX_LOCATION_KEYPATH = @"values.ManageFiles.DropBox.Location";
 
-NSString * const MANAGED_FOLDER_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.ManagedFolder.Location";
-NSString * const TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.TagsFolder.Location";
-NSString * const DROP_BOX_LOCATION_CONTROLLER_KEYPATH = @"values.ManageFiles.DropBox.Location";
+NSString * const MANAGED_FOLDER_ENABLED_KEYPATH = @"values.ManageFiles.ManagedFolder.Enabled";
+NSString * const TAGS_FOLDER_ENABLED_KEYPATH = @"values.ManageFiles.TagsFolder.Enabled";
+NSString * const DROP_BOX_ENABLED_KEYPATH = @"values.ManageFiles.DropBox.Enabled";
 
 NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 
@@ -100,17 +109,17 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 								context:NULL];
 	
 	[userDefaultsController addObserver:self
-							 forKeyPath:@"values.ManageFiles.ManagedFolder.Enabled"
+							 forKeyPath:MANAGED_FOLDER_ENABLED_KEYPATH
 								options:0
 								context:NULL];
 	
 	[userDefaultsController addObserver:self
-							 forKeyPath:@"values.ManageFiles.TagsFolder.Enabled"
+							 forKeyPath:TAGS_FOLDER_ENABLED_KEYPATH
 								options:0
 								context:NULL];
 	
 	[userDefaultsController addObserver:self
-							 forKeyPath:@"values.ManageFiles.DropBox.Enabled"
+							 forKeyPath:DROP_BOX_ENABLED_KEYPATH
 								options:0
 								context:NULL];
 	
@@ -147,11 +156,11 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	[userDefaultsController removeObserver:self
 								forKeyPath:@"values.PAScheduledUpdateCheckInterval"];
 	[userDefaultsController removeObserver:self
-								forKeyPath:@"values.ManageFiles.ManagedFolder.Enabled"];
+								forKeyPath:MANAGED_FOLDER_ENABLED_KEYPATH];
 	[userDefaultsController removeObserver:self
-								forKeyPath:@"values.ManageFiles.TagsFolder.Enabled"];
+								forKeyPath:TAGS_FOLDER_ENABLED_KEYPATH];
 	[userDefaultsController removeObserver:self
-								forKeyPath:@"values.ManageFiles.DropBox.Enabled"];
+								forKeyPath:DROP_BOX_ENABLED_KEYPATH];
 	[userDefaultsController removeObserver:self
 								forKeyPath:@"values.ManageFiles.DropBox.Tags"];
 	
@@ -169,15 +178,15 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		{
 			[self startOnLoginHasChanged];
 		}
-		else if ([keyPath isEqualToString:@"values.ManageFiles.ManagedFolder.Enabled"])
+		else if ([keyPath isEqualToString:MANAGED_FOLDER_ENABLED_KEYPATH])
 		{
 			[self managedFolderStateHasChanged];
 		}
-		else if ([keyPath isEqualToString:@"values.ManageFiles.TagsFolder.Enabled"])
+		else if ([keyPath isEqualToString:TAGS_FOLDER_ENABLED_KEYPATH])
 		{
 			[self tagsFolderStateHasChanged];
 		}
-		else if ([keyPath isEqualToString:@"values.ManageFiles.DropBox.Enabled"])
+		else if ([keyPath isEqualToString:DROP_BOX_ENABLED_KEYPATH])
 		{
 			[self dropBoxStateHasChanged];
 		}
@@ -238,72 +247,79 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 
 - (void)managedFolderStateHasChanged
 {
-	[core createDirectoriesIfNeeded];
-	[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
+	if ([[userDefaultsController valueForKeyPath:MANAGED_FOLDER_ENABLED_KEYPATH] boolValue] == YES)
+	{
+		if ([userDefaultsController valueForKeyPath:MANAGED_FOLDER_LOCATION_KEYPATH] == nil)
+		{	
+			[self locateDirectory:[[[self popUpButtonForMenuItemTag:0] menu] itemAtIndex:2]];
+		}
+		else
+		{
+			[core createDirectoriesIfNeeded];
+			[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
+		}
+	}
 }
 
 - (void)tagsFolderStateHasChanged
 {	
-	[core createDirectoriesIfNeeded];
-	[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
-
-	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.TagsFolder.Enabled"] boolValue])
-		[self createTagsFolderStructure];
-	else 
-		[self cleanTagsFolder];
+	if ([[userDefaultsController valueForKeyPath:TAGS_FOLDER_ENABLED_KEYPATH] boolValue] == YES)
+	{
+		if ([userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_KEYPATH] == nil)
+		{	
+			[self locateDirectory:[[[self popUpButtonForMenuItemTag:1] menu] itemAtIndex:2]];
+		}
+		else
+		{
+			[core createDirectoriesIfNeeded];
+			[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
+			
+			[self createTagsFolderStructure];
+		}
+	}
+	else
+	{
+		// Do some cleanup
+		if ([userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_KEYPATH] != nil)
+			[self cleanTagsFolder];
+	}
 }
 
 - (void)dropBoxStateHasChanged
 {	
-	[core createDirectoriesIfNeeded];
-	[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
-	[self updateDropBoxTagField];
-	
-	NSString *targetDir = @"~/Library/Scripts/Folder Action Scripts/";
-	targetDir = [targetDir stringByStandardizingPath];
-	
-	NSString *targetPath = [targetDir stringByAppendingPathComponent:DROP_BOX_SCRIPTNAME];
-	
-	if([[userDefaultsController valueForKeyPath:@"values.ManageFiles.DropBox.Enabled"] boolValue])
-	{		
-		NSFileManager *fileManager = [NSFileManager defaultManager];
-		
-		// Copy Folder Action Script to Library
-		
-		NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"DropBox" ofType:@"scpt"];
-		
-		BOOL isDir;
-		
-		if(!([fileManager fileExistsAtPath:targetDir isDirectory:&isDir] && isDir))
-		{
-			[fileManager createDirectoryAtPath:targetDir
-				   withIntermediateDirectories:YES
-									attributes:nil
-										 error:NULL];
-		}
-		
-		[fileManager copyItemAtPath:scriptPath
-							 toPath:targetPath
-							  error:NULL];
-		
-		// Make executable??
-		
-		//NSDictionary *attr = [NSMutableDictionary dictionaryWithCapacity:1];
-		//[attr setValue:[NSNumber numberWithInt:511] forKey:NSFilePosixPermissions];
-		
-		//[fileManager changeFileAttributes:attr atPath:targetPath];
-		
-		// Attach Folder Action
-		
-		[self attachDropBoxFolderAction];
-	}
-	else 
+	if ([[userDefaultsController valueForKeyPath:DROP_BOX_ENABLED_KEYPATH] boolValue] == YES)
 	{
-		[self removeDropBoxFolderAction];
-		
-		// Remove Script File		
-		
-		[[NSFileManager defaultManager] removeFileAtPath:targetPath handler:NULL];
+		if ([userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_KEYPATH] == nil)
+		{	
+			[self locateDirectory:[[[self popUpButtonForMenuItemTag:2] menu] itemAtIndex:2]];
+		}
+		else
+		{
+			[core createDirectoriesIfNeeded];
+			[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
+			
+			[self updateDropBoxTagField];
+		}
+	}
+	else
+	{
+		// Do some cleanup
+		if ([userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_KEYPATH] != nil)
+		{
+			// Remove the action from the folder
+			[self removeDropBoxFolderAction];
+			
+			// Remove Script File	
+			NSString *targetDir = @"~/Library/Scripts/Folder Action Scripts/";
+			targetDir = [targetDir stringByStandardizingPath];			
+			NSString *targetPath = [targetDir stringByAppendingPathComponent:DROP_BOX_SCRIPTNAME];
+			
+			[[NSFileManager defaultManager] removeFileAtPath:targetPath handler:NULL];
+			
+			[userDefaultsController setValue:nil forKeyPath:DROP_BOX_LOCATION_KEYPATH];
+			
+			[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
+		}
 	}
 }
 
@@ -311,12 +327,14 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 #pragma mark file location
 - (IBAction)locateDirectory:(id)sender
 {
-	NSString *keyPath = [self controllerKeyPathForMenuItemTag:[sender tag]];
+	NSString *keyPath = [self locationKeyPathForMenuItemTag:[sender tag]];
 	
 	NSString *currentPath = [[userDefaultsController valueForKeyPath:keyPath] retain];
 	
 	// create open panel with the needed settings
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	
+	[openPanel setMessage:[self openPanelMessageForMenuItemTag:[sender tag]]];
 	
 	[openPanel setAllowsMultipleSelection:NO];
 	[openPanel setCanChooseFiles:NO];
@@ -336,33 +354,32 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 {	
 	NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
 	
+	long tag = [(id)contextInfo tag];
+	
+	NSString *keyPath = [self locationKeyPathForMenuItemTag:tag];
+	
 	if (returnCode == NSOKButton)
 	{
 		NSString *newDir = [[panel filenames] objectAtIndex:0];
 		
-		NSString *keyPath = [self controllerKeyPathForMenuItemTag:[(id)contextInfo tag]];
-		
 		NSString *oldDir = [userDefaultsController valueForKeyPath:keyPath];
 						
-		[userInfo setObject:oldDir forKey:@"oldDir"];
+		if (oldDir)
+			[userInfo setObject:oldDir forKey:@"oldDir"];
+		
 		[userInfo setObject:newDir forKey:@"newDir"];
-		[userInfo setObject:[NSNumber numberWithInteger:[(id)contextInfo tag]] forKey:@"tag"];
-	}
-	else
-	{
-		// Update UI
-		NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:[(id)contextInfo tag]];
-		[popUpButton selectItemAtIndex:0];
-	}
-	
-	// Perform the actual dir switch outside of this method to ensure neat closing of the Open Panel	
-	// For the Tags Folder, tagsFolderWarningDidEnd: does perfom this action after presenting an alert.
-	if (returnCode == NSOKButton)
-	{
+		[userInfo setObject:[NSNumber numberWithInteger:tag] forKey:@"tag"];
+		
 		// For the Tags Folder, show an alert, as files might be deleted from within this folder
-		if ((NSInteger)[(id)contextInfo tag] == 1)
+		if (tag == 1)
 		{		
 			[self performSelector:@selector(showTagsFolderWarning:)
+					   withObject:userInfo
+					   afterDelay:0.2];
+		}
+		else if (tag == 2)
+		{
+			[self performSelector:@selector(showDropBoxWarning:)
 					   withObject:userInfo
 					   afterDelay:0.2];
 		}
@@ -370,6 +387,21 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		{
 			[self performSelectorInBackground:@selector(switchSpecialFolderDir:)
 								   withObject:userInfo];
+		}
+
+//		[self updateCurrentLocationForPopUpButton:popUpButton];
+	}
+	else
+	{
+		// Check if there has been a directory selected before.
+		// If not, disable the checkbox again
+		if ([userDefaultsController valueForKeyPath:keyPath] == nil)
+		{
+			NSString *enabledKeyPath = [self enabledKeyPathForMenuItemTag:[(id)contextInfo tag]];
+			[userDefaultsController setValue:NO forKeyPath:enabledKeyPath];
+		} else {
+			NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:[(id)contextInfo tag]];
+			[popUpButton selectItemAtIndex:0];
 		}
 	}
 }
@@ -391,17 +423,34 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 						contextInfo:[userInfo retain]];
 }
 
+- (void)showDropBoxWarning:(NSDictionary *)userInfo
+{
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert setMessageText:[NSString stringWithFormat:
+						   NSLocalizedStringFromTable(@"TAGS_FOLDER_NEEDS_TO_COPY_SCRIPT_FILE_MESSAGE",@"FileManager",@""),[userInfo objectForKey:@"newDir"]]];
+	[alert setInformativeText:NSLocalizedStringFromTable(@"TAGS_FOLDER_NEEDS_TO_COPY_SCRIPT_FILE_INFORMATIVE",@"FileManager",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OK",@"Global",@"")];
+	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"CANCEL",@"Global",@"")];
+	
+	[alert setAlertStyle:NSWarningAlertStyle];
+	
+	[alert beginSheetModalForWindow:[self window]
+					  modalDelegate:self 
+					 didEndSelector:@selector(dropBoxWarningDidEnd:returnCode:contextInfo:)
+						contextInfo:[userInfo retain]];
+}
+
 - (void)switchSpecialFolderDir:(NSDictionary *)userInfo
 {	
-	NSInteger		 tag	 = [[userInfo objectForKey:@"tag"] integerValue];
+	NSInteger tag	 = [[userInfo objectForKey:@"tag"] integerValue];
 	NSString *oldDir = [userInfo objectForKey:@"oldDir"];
 	NSString *newDir = [userInfo objectForKey:@"newDir"];
 	
 	NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:tag];
-	NSString *keyPath = [self controllerKeyPathForMenuItemTag:tag];
+	NSString *keyPath = [self locationKeyPathForMenuItemTag:tag];
 	
 	// Break if nothing to do
-	if([oldDir isEqualTo:newDir])
+	if(oldDir && [oldDir isEqualTo:newDir])
 	{
 		[popUpButton selectItemAtIndex:0];
 		return;
@@ -423,13 +472,15 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		[popUpButton selectItemAtIndex:0];		
 		[popUpButton display];
 		
-		// Do It!				
-		[self moveSubdirectoriesFromPath:oldDir toPath:newDir tag:tag];
+		// Do It!
+		if (oldDir)
+			[self moveSubdirectoriesFromPath:oldDir toPath:newDir tag:tag];
 	}
 	else if (tag == 1)		// Tags Folder
 	{
 		// Remove old dir
-		[self cleanTagsFolder];
+		if (oldDir)
+			[self cleanTagsFolder];
 		
 		// Create new dir
 		[[NSFileManager defaultManager] createDirectoryAtPath:newDir
@@ -454,7 +505,8 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	}
 	else if (tag == 2)		// Drop Box
 	{
-		[self removeDropBoxFolderAction];
+		if (oldDir)
+			[self removeDropBoxFolderAction];
 		
 		// Create new dir
 		[[NSFileManager defaultManager] createDirectoryAtPath:newDir
@@ -470,16 +522,17 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		[popUpButton selectItemAtIndex:0];		
 		[popUpButton display];
 		
-		// Do It!				
-		[self moveSubdirectoriesFromPath:oldDir toPath:newDir tag:tag];
+		// Do It!	
+		if (oldDir)
+			[self moveSubdirectoriesFromPath:oldDir toPath:newDir tag:tag];
 		
 		[self attachDropBoxFolderAction];
 	}
 }
 
-- (IBAction)switchSpecialFolderDirToDefault:(id)sender
+/*- (IBAction)switchSpecialFolderDirToDefault:(id)sender
 {
-	NSString *keyPath = [self controllerKeyPathForMenuItemTag:[sender tag]];
+	NSString *keyPath = [self locationKeyPathForMenuItemTag:[sender tag]];
 	
 	NSString *oldDir = [userDefaultsController valueForKeyPath:keyPath];
 	
@@ -498,7 +551,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	[userInfo setObject:[NSNumber numberWithInteger:[sender tag]] forKey:@"tag"];
 	
 	[self switchSpecialFolderDir:userInfo];		
-}
+}*/
 
 
 #pragma mark file error handler
@@ -561,6 +614,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 - (void)tagsFolderWarningDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {	
 	NSDictionary* userInfo = (NSDictionary*)contextInfo;
+	NSInteger tag = 1;
 		
 	if (returnCode == NSAlertFirstButtonReturn)
 	{		
@@ -568,11 +622,57 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 							   withObject:userInfo];
 	}
 	else
+	{		
+		if ([userDefaultsController valueForKeyPath:[self locationKeyPathForMenuItemTag:tag]] == nil)
+		{
+			[userDefaultsController setValue:NO forKeyPath:[self enabledKeyPathForMenuItemTag:tag]];
+		}
+		[self updateCurrentLocationForPopUpButton:[self popUpButtonForMenuItemTag:tag]];
+	}
+}
+
+- (void)dropBoxWarningDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{	
+	NSDictionary* userInfo = (NSDictionary*)contextInfo;
+	NSInteger tag = 2;
+	
+	if (returnCode == NSAlertFirstButtonReturn)
 	{
-		// Update UI - show original state in tags folder dropdown
-		NSInteger		 tag	 = [[userInfo objectForKey:@"tag"] integerValue];
-		NSPopUpButton *popUpButton = [self popUpButtonForMenuItemTag:tag];
-		[popUpButton selectItemAtIndex:0];
+		// Copy Folder Action Script to Library
+		
+		NSString *targetDir = @"~/Library/Scripts/Folder Action Scripts/";
+		targetDir = [targetDir stringByStandardizingPath];
+		
+		NSString *targetPath = [targetDir stringByAppendingPathComponent:DROP_BOX_SCRIPTNAME];
+		
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+			
+		NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"DropBox" ofType:@"scpt"];
+			
+		BOOL isDir;
+			
+		if(!([fileManager fileExistsAtPath:targetDir isDirectory:&isDir] && isDir))
+		{
+			[fileManager createDirectoryAtPath:targetDir
+				   withIntermediateDirectories:YES
+									attributes:nil
+										 error:NULL];
+		}
+		
+		[fileManager copyItemAtPath:scriptPath
+							 toPath:targetPath
+							  error:NULL];
+		
+		[self performSelectorInBackground:@selector(switchSpecialFolderDir:)
+							   withObject:userInfo];
+	}
+	else
+	{		
+		if ([userDefaultsController valueForKeyPath:[self locationKeyPathForMenuItemTag:tag]] == nil)
+		{
+			[userDefaultsController setValue:NO forKeyPath:[self enabledKeyPathForMenuItemTag:tag]];
+		}
+		[self updateCurrentLocationForPopUpButton:[self popUpButtonForMenuItemTag:tag]];
 	}
 }
 
@@ -594,30 +694,39 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	id currentLocation = [button itemAtIndex:0];
 	
 	NSString *keyPath = @"";
-	if(button == managedFolderPopUpButton)	keyPath = MANAGED_FOLDER_LOCATION_CONTROLLER_KEYPATH;
-	if(button == tagsFolderPopUpButton)		keyPath = TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH;
-	if(button == dropBoxPopUpButton)		keyPath = DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
+	if(button == managedFolderPopUpButton)	keyPath = MANAGED_FOLDER_LOCATION_KEYPATH;
+	if(button == tagsFolderPopUpButton)		keyPath = TAGS_FOLDER_LOCATION_KEYPATH;
+	if(button == dropBoxPopUpButton)		keyPath = DROP_BOX_LOCATION_KEYPATH;
 	   
 	NSString *dir = [userDefaultsController valueForKeyPath:keyPath];
 	dir = [dir stringByExpandingTildeInPath];
 	
 	BOOL isDirectory;
 	
-	if([[NSFileManager defaultManager] fileExistsAtPath:dir isDirectory:&isDirectory] && isDirectory)
-	{	
-		NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:dir];
-		[icon setSize:NSMakeSize(16.0,16.0)];
+	if (dir)
+	{
+		if([[NSFileManager defaultManager] fileExistsAtPath:dir isDirectory:&isDirectory] && isDirectory)
+		{	
+			NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:dir];
+			[icon setSize:NSMakeSize(16.0,16.0)];
+			
+			[currentLocation setImage:icon];
+			[currentLocation setTitle:[dir lastPathComponent]];
+		}
+		else
+		{
+			[currentLocation setImage:nil];
+			[currentLocation setTitle:@""];
+		}
 		
-		[currentLocation setImage:icon];
-		[currentLocation setTitle:[dir lastPathComponent]];
-	}
+		// Select this item
+		[button selectItemAtIndex:0];
+	} 
 	else
 	{
-		[currentLocation setImage:nil];
-		[currentLocation setTitle:@""];
-	}
-	
-	
+		// If there's no path stored, select the "Choose" option
+		[button selectItemAtIndex:2];
+	}	
 }
 
 - (void)moveSubdirectoriesFromPath:(NSString*)oldPath toPath:(NSString*)newPath tag:(NSInteger)tag
@@ -725,13 +834,24 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	}
 }
 
-- (NSString *)controllerKeyPathForMenuItemTag:(NSInteger)tag
+- (NSString *)locationKeyPathForMenuItemTag:(NSInteger)tag
 {
 	switch (tag)
 	{
-		case 1:		return TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH;
-		case 2:		return DROP_BOX_LOCATION_CONTROLLER_KEYPATH;
-		default:	return MANAGED_FOLDER_LOCATION_CONTROLLER_KEYPATH;
+		case 1:		return TAGS_FOLDER_LOCATION_KEYPATH;
+		case 2:		return DROP_BOX_LOCATION_KEYPATH;
+		default:	return MANAGED_FOLDER_LOCATION_KEYPATH;
+	}
+}
+
+
+- (NSString *)enabledKeyPathForMenuItemTag:(NSInteger)tag
+{
+	switch (tag)
+	{
+		case 1:		return TAGS_FOLDER_ENABLED_KEYPATH;
+		case 2:		return DROP_BOX_ENABLED_KEYPATH;
+		default:	return MANAGED_FOLDER_ENABLED_KEYPATH;
 	}
 }
 
@@ -742,6 +862,17 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		case 1:		return tagsFolderPopUpButton;
 		case 2:		return dropBoxPopUpButton;
 		default:	return managedFolderPopUpButton;
+	}
+}
+
+- (NSString *)openPanelMessageForMenuItemTag:(NSInteger)tag
+{
+	switch (tag)
+	{
+		case 1:		return NSLocalizedStringFromTable(@"CHOOSE_LOCATION_OF_TAGS_FOLDER", @"FileManager", nil);
+		case 2:		return NSLocalizedStringFromTable(@"CHOOSE_LOCATION_OF_DROP_BOX", @"FileManager", nil);
+		default:	return NSLocalizedStringFromTable(@"CHOOSE_LOCATION_OF_MANAGED_FOLDER", @"FileManager", nil);
+;
 	}
 }
 
@@ -858,7 +989,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	
 	BusyWindowController *busyWindowController = [[core busyWindow] delegate];
 	
-	NSString *tagsFolderDir = [userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_CONTROLLER_KEYPATH];
+	NSString *tagsFolderDir = [userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_KEYPATH];
 	tagsFolderDir = [tagsFolderDir stringByStandardizingPath];
 	
 	[busyWindowController setMessage:NSLocalizedStringFromTable(@"BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER", @"FileManager", nil)];
@@ -871,7 +1002,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 
 - (void)attachDropBoxFolderAction
 {
-	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
+	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_KEYPATH];
 	dropBoxDir = [dropBoxDir stringByStandardizingPath];
 	
 	// Attach Folder Action
@@ -926,7 +1057,7 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 
 - (void)removeDropBoxFolderAction
 {
-	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_CONTROLLER_KEYPATH];
+	NSString *dropBoxDir = [userDefaultsController valueForKeyPath:DROP_BOX_LOCATION_KEYPATH];
 	dropBoxDir = [dropBoxDir stringByStandardizingPath];
 	
 	// Remove Folder Action
