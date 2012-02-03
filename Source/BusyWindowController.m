@@ -54,9 +54,10 @@
 #pragma mark Notifications
 - (void)performBusyAction:(NSNotification *)notification
 {
-	[busyObject performSelectorOnMainThread:busySelector
-								 withObject:busyArg
-							  waitUntilDone:NO];
+    [busyObject performSelectorOnMainThread:busySelector
+                                 withObject:busyArg
+                              waitUntilDone:NO 
+                                      modes:[NSArray arrayWithObject:NSModalPanelRunLoopMode]];
 	
 	[progressIndicator setIndeterminate:YES];
 	[progressIndicator setUsesThreadedAnimation:YES];
