@@ -447,17 +447,23 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		{
 			NSArray *searchTerms = [trimmedSearchString componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 			
+			// Set up attributes to search
+			NSMutableArray *attrs = [NSMutableArray array];
+			[attrs addObject:(NSString *)kMDItemDisplayName];
+			[attrs addObject:(NSString *)kMDItemTextContent];
+			
 			// For each search term, create a separate key-value filter.
 			// This corresponds to Spotlight's search behavior.
 			for (NSString *searchTerm in searchTerms)
 			{
 				NSString *wildcardSearchTerm = [NSString stringWithFormat:@"%@*", searchTerm];
 				
-				NNSimpleQueryFilter *filter =
-					[NNSimpleQueryFilter simpleQueryFilterWithAttribute:(NSString *)kMDItemTextContent value:wildcardSearchTerm];
+				NNMultipleAttributesQueryFilter *filter =
+					[NNMultipleAttributesQueryFilter queryFilterWithAttributes:attrs value:wildcardSearchTerm];
 				[filter setValueUsesWildcard:YES];
 				[filter setOptions:@"cdw"];		// Like Spotlight passes the search terms.
 				
+				// Add to filters
 				[fulltextQueryFilters addObject:filter];
 				[newFilters addObject:filter];
 			}

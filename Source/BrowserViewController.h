@@ -42,6 +42,7 @@
 #import "PATagCloudProtocols.h"
 
 #import "NNTagging/NNSimpleQueryFilter.h"
+#import "NNTagging/NNMultipleAttributesQueryFilter.h"
 
 #import "lcl.h"
 
