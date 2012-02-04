@@ -418,12 +418,13 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 		[self clearVisibleTags];
 		
 		// Fix tags
-		if ([activeTags count] == 0)
+		[self setDisplayTags:[tags tags]];
+		/*if ([activeTags count] == 0)
 		{
 			NSLog(@"jaaaa");
 			[self setDisplayTags:[tags tags]];
-			//[self setVisibleTags:[tags tags]];
-		}
+			// [self setVisibleTags:[tags tags]];
+		}*/
 	}
 	
 	// Reset tags if the search filter was set from full text to tag search while

@@ -610,12 +610,14 @@
 {
 	[browserController setSearchType:PATagPrefixSearchType];
 	[[browserController titleBar] performClickOnButtonWithIdentifier:@"search"];
+	[[browserController browserViewController] searchFieldStringHasChanged];
 } 
 
 - (IBAction)findInResults:(id)sender
 {
 	[browserController setSearchType:PAFullTextSearchType];
 	[[browserController titleBar] performClickOnButtonWithIdentifier:@"search"];
+	[[browserController browserViewController] searchFieldStringHasChanged];
 } 
 
 - (IBAction)showBrowser:(id)sender
@@ -755,7 +757,19 @@
 	
 	[[self busyWindow] center];
 	[NSApp runModalForWindow:[self busyWindow]];
+	
+	/*[NSApp beginSheet:[self busyWindow]
+	   modalForWindow:[browserController window]
+		modalDelegate:self 
+	   didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:)
+		  contextInfo:nil];*/
 }
+
+/*- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+	NSLog(@"here");
+	// do nothing
+}*/
 
 - (void)syncTagsDone:(NSNotification *)notification
 {
