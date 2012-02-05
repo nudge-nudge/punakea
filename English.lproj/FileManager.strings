@@ -18,13 +18,13 @@
 
 "SERVICE_NOT_WORKING" = "Punakea could not handle the input given to the System Service";
 
-"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER" = "Punakea is setting up the Tags Folder. This may take some minutes.";
-"BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER" = "Punakea is cleaning up the Tags Folder...";
-"BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB" = "Punakea is synchronizing tags...";
-"BUSY_WINDOW_MESSAGE_IMPORTING_FOLDER" = "Punakea is adding tags to files according to the imported folder structure...";
+"BUSY_WINDOW_MESSAGE_REBUILDING_TAGS_FOLDER" = "Setting up the Tags Folder...";
+"BUSY_WINDOW_MESSAGE_REMOVING_TAGS_FOLDER" = "Cleaning up the Tags Folder...";
+"BUSY_WINDOW_MESSAGE_REBUILDING_TAG_DB" = "Synchronizing tags...";
+"BUSY_WINDOW_MESSAGE_IMPORTING_FOLDER" = "Tagging imported files...";
 
-"DESTINATION_FOLDER_MAY_GET_DELETED" = "Make sure that \"%@\" is an empty folder.";
-"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "Punakea will automatically create and remove items in this folder.";
+"DESTINATION_FOLDER_MAY_GET_DELETED" = "Confirm folder handling";
+"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE" = "Make sure that the chosen folder is empty. Punakea will automatically create and remove files and folders in \"%@\".";
 
 "TAGS_FOLDER_NEEDS_TO_COPY_SCRIPT_FILE_MESSAGE" = "Confirm script installation";
 "TAGS_FOLDER_NEEDS_TO_COPY_SCRIPT_FILE_INFORMATIVE" = "Punakea will copy a script file to \"~/Library/Scripts/Folder Action Scripts/\" in order to set up a drop box at your chosen location. If you disable the drop box later on, the script file will be removed automatically.";

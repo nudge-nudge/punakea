@@ -259,6 +259,11 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 			[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
 		}
 	}
+	else
+	{
+		[userDefaultsController setValue:nil forKeyPath:MANAGED_FOLDER_LOCATION_KEYPATH];
+		[self updateCurrentLocationForPopUpButton:managedFolderPopUpButton];
+	}
 }
 
 - (void)tagsFolderStateHasChanged
@@ -282,6 +287,9 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		// Do some cleanup
 		if ([userDefaultsController valueForKeyPath:TAGS_FOLDER_LOCATION_KEYPATH] != nil)
 			[self cleanTagsFolder];
+		
+		[userDefaultsController setValue:nil forKeyPath:TAGS_FOLDER_LOCATION_KEYPATH];
+		[self updateCurrentLocationForPopUpButton:tagsFolderPopUpButton];
 	}
 }
 
@@ -317,9 +325,10 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 			[[NSFileManager defaultManager] removeFileAtPath:targetPath handler:NULL];
 			
 			[userDefaultsController setValue:nil forKeyPath:DROP_BOX_LOCATION_KEYPATH];
-			
-			[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
 		}
+		
+		[userDefaultsController setValue:nil forKeyPath:DROP_BOX_LOCATION_KEYPATH];
+		[self updateCurrentLocationForPopUpButton:dropBoxPopUpButton];
 	}
 }
 
@@ -409,9 +418,8 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 - (void)showTagsFolderWarning:(NSDictionary *)userInfo
 {
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-	[alert setMessageText:[NSString stringWithFormat:
-						   NSLocalizedStringFromTable(@"DESTINATION_FOLDER_MAY_GET_DELETED",@"FileManager",@""),[userInfo objectForKey:@"newDir"]]];
-	[alert setInformativeText:NSLocalizedStringFromTable(@"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE",@"FileManager",@"")];
+	[alert setMessageText:NSLocalizedStringFromTable(@"DESTINATION_FOLDER_MAY_GET_DELETED",@"FileManager",@"")];
+	[alert setInformativeText:[NSString stringWithFormat:NSLocalizedStringFromTable(@"DESTINATION_FOLDER_MAY_GET_DELETED_INFORMATIVE",@"FileManager",@""), [userInfo objectForKey:@"newDir"]]];
 	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"OK",@"Global",@"")];
 	[alert addButtonWithTitle:NSLocalizedStringFromTable(@"CANCEL",@"Global",@"")];
 	
@@ -618,8 +626,9 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 		
 	if (returnCode == NSAlertFirstButtonReturn)
 	{		
-		[self performSelectorInBackground:@selector(switchSpecialFolderDir:)
-							   withObject:userInfo];
+		[self performSelector:@selector(switchSpecialFolderDir:)
+				   withObject:userInfo
+				   afterDelay:0.2];
 	}
 	else
 	{		
@@ -979,8 +988,13 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	[busyWindowController performBusySelector:@selector(createDirectoryStructure)
 									 onObject:[NNTagging tagging]];
 	
-	[[core busyWindow] center];
-	[NSApp runModalForWindow:[core busyWindow]];
+	[NSApp beginSheet:[busyWindowController window]
+	   modalForWindow:[self window]
+		modalDelegate:nil 
+	   didEndSelector:NULL
+		  contextInfo:NULL];
+	
+	[NSApp runModalForWindow:[busyWindowController window]];
 }
 
 - (void)cleanTagsFolder
@@ -996,8 +1010,13 @@ NSString * const DROP_BOX_SCRIPTNAME = @"Punakea - Drop Box.scpt";
 	[busyWindowController performBusySelector:@selector(cleanTagsFolder)
 									 onObject:[NNTagging tagging]];
 	
-	[[core busyWindow] center];
-	[NSApp runModalForWindow:[core busyWindow]];
+	[NSApp beginSheet:[busyWindowController window]
+	   modalForWindow:[self window]
+		modalDelegate:nil 
+	   didEndSelector:NULL
+		  contextInfo:NULL];
+	
+	[NSApp runModalForWindow:[busyWindowController window]];
 }
 
 - (void)attachDropBoxFolderAction

@@ -346,6 +346,7 @@
 		if([item action] == @selector(openFiles:)) return NO;
 		if([item action] == @selector(getInfo:)) return NO;
 		if([item action] == @selector(revealInFinder:)) return NO;
+		if([item action] == @selector(importFolder:)) return NO;
 		
 		// Edit menu
 		if([item action] == @selector(delete:)) return NO;
@@ -366,7 +367,7 @@
 		if([item action] == @selector(runToolbarCustomizationPalette:)) return NO;		
 		
 		// Tools menu
-		//if([item action] == @selector(syncTags:)) return NO;
+		if([item action] == @selector(syncTags:)) return NO;
 	}
 	
 	// Check all items that are browser-specific and have constraints	
@@ -755,21 +756,16 @@
 	[busyWindowController performBusySelector:@selector(cleanTagDB)
 									 onObject:[NNTagging tagging]];
 	
-	[[self busyWindow] center];
-	[NSApp runModalForWindow:[self busyWindow]];
+	//[[self busyWindow] center];	
 	
-	/*[NSApp beginSheet:[self busyWindow]
+	[NSApp beginSheet:[self busyWindow]
 	   modalForWindow:[browserController window]
 		modalDelegate:self 
-	   didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:)
-		  contextInfo:nil];*/
+	   didEndSelector:NULL
+		  contextInfo:NULL];
+	
+	[NSApp runModalForWindow:[self busyWindow]];
 }
-
-/*- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	NSLog(@"here");
-	// do nothing
-}*/
 
 - (void)syncTagsDone:(NSNotification *)notification
 {
@@ -907,8 +903,15 @@
 						onObject:importer
 					  withObject:[filenames objectAtIndex:0]];
 		
-		[busyWindow center];
-		[NSApp runModalForWindow:busyWindow];
+		//[busyWindow center];
+		
+		[NSApp beginSheet:[self busyWindow]
+		   modalForWindow:[browserController window]
+			modalDelegate:self 
+		   didEndSelector:NULL
+			  contextInfo:NULL];
+		
+		[NSApp runModalForWindow:[self busyWindow]];
 	}
 }
 

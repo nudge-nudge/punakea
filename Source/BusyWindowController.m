@@ -106,8 +106,9 @@
 {
 	[progressIndicator setDoubleValue:0.0];
 	
-	[[self window] close];
-	[NSApp abortModal];
+	[NSApp abortModal];	
+	[NSApp endSheet:[self window]];
+	[[self window] orderOut:self];
 	
 	// Register again for notification
 	[[NSNotificationCenter defaultCenter] addObserver:self 
