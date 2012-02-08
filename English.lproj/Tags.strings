@@ -5,7 +5,7 @@
 "TAG_WHITESPACE_REQUEST" = "Please enter a tag name";
 "TAG_WHITESPACE_REQUEST_INFO" = "No whitespace-only tags allowed";
 "NO_RELATED_TAGS" = "no related tags";
-"NO_TAGS" = "to get started\ndrop files here \nor on the sidebar drop zone";
+"NO_TAGS" = "To tag a file, drop it here.\nYou can tag any file from local or remote volumes\n for which Spotlight indexing is enabled.";
 "NO_TAGS_FOR_SEARCHSTRING" = "no tags found";
 "NO_TAGS_FOR_CONTENTTYPE" = "no tags\nfor this content type";
 
