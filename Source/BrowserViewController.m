@@ -385,6 +385,15 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 - (void)searchFieldStringHasChanged
 {
 	PASearchType searchType = [[NSUserDefaults standardUserDefaults] integerForKey:@"General.Search.Type"];
+
+	// In Tag Management mode, perform a tag search as before
+	if ([[self mainController] isKindOfClass:[PATagManagementViewController class]])
+	{		
+		[self clearVisibleTags];		
+		[self filterTags:activeTags];		
+		
+		return;
+	}
 	
 	// Get the query
 	NNQuery *query = [(PAResultsViewController*)mainController query];
