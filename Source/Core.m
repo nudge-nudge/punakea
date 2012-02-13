@@ -981,6 +981,20 @@
 	BOOL success;
 	NSError *error;
 	
+    // check if dirs are set, otherwise disable the setting
+    if ([userDefaults boolForKey:@"ManageFiles.ManagedFolder.Enabled"] && ([userDefaults stringForKey:@"ManageFiles.ManagedFolder.Location"] == nil)) {
+        [userDefaults setBool:NO forKey:@"ManageFiles.ManagedFolder.Enabled"];
+    }
+    
+    if ([userDefaults boolForKey:@"ManageFiles.TagsFolder.Enabled"] && ([userDefaults stringForKey:@"ManageFiles.TagsFolder.Location"] == nil)) {
+        [userDefaults setBool:NO forKey:@"ManageFiles.TagsFolder.Enabled"];
+    }
+    
+    if ([userDefaults boolForKey:@"ManageFiles.DropBox.Enabled"] && ([userDefaults stringForKey:@"ManageFiles.DropBox.Location"] == nil)) {
+        [userDefaults setBool:NO forKey:@"ManageFiles.DropBox.Enabled"];
+    }
+
+    
 	// Managed Folder
 	if ([userDefaults boolForKey:@"ManageFiles.ManagedFolder.Enabled"])
 	{	
@@ -1004,7 +1018,7 @@
 	// Tags Folder
 	if ([userDefaults boolForKey:@"ManageFiles.TagsFolder.Enabled"])
 	{	
-		dir = [userDefaults stringForKey:@"ManageFiles.TagsFolder.Location"];
+		dir = [userDefaults stringForKey:@"ManageFiles.TagsFolder.Location"];        
 		dir = [dir stringByStandardizingPath];		
 		
 		if ([fileManager fileExistsAtPath:dir isDirectory:&isDirectory])
