@@ -715,7 +715,7 @@ static void _LCLLogFile_log(const char *identifier_c, uint32_t level,
 // with the prefix ~/Library/Logs and the given fallback path.
 + (NSString *)defaultPathInHomeLibraryLogsOrPath:(NSString *)path {
     return [LCLLogFile defaultPathWithPathPrefix:
-            [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Punakea/Logs"]
+            [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/Punakea/Logs"]
                                           orPath:path];
 }
 

@@ -55,7 +55,7 @@ void	UKCrashReporterCheckForCrash()
 		
 		// Get the log file, its last change date and last report date:
 		NSString*		appName = [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleExecutable"];
-		NSString*		crashLogsFolder = [@"~/Library/Punakea/Logs/CrashReporter/" stringByExpandingTildeInPath];
+		NSString*		crashLogsFolder = [@"~/Library/Application Support/Punakea/Logs/CrashReporter/" stringByExpandingTildeInPath];
 		NSString*		crashLogName = [appName stringByAppendingString: @".crash.log"];
 		NSString*		crashLogPath = nil;
 		if( !isTenFiveOrBetter )
