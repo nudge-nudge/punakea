@@ -744,7 +744,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	
 		// Do only something if this row is not being edited and the user wants to
 		// cancel the editing by clicking again on the item
-		if (![self isEditingRow:mouseRow])
+		if (![self isEditingRow:mouseRow] && (mouseRow != -1))
 		{
 			NSInteger count = [[self selectedRowIndexes] count];
 			if([self selectedRow] == mouseRow && count <= 1)
