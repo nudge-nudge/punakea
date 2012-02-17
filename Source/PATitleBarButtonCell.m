@@ -8,6 +8,11 @@
 
 #import "PATitleBarButtonCell.h"
 
+@interface PATitleBarButtonCell (PrivateAPI)
+- (NSImage *)tintedImage:(NSImage *)img cellFrame:(NSRect)cellFrame;
+@end
+
+
 @implementation PATitleBarButtonCell
 
 #pragma mark Init + Dealloc
@@ -76,7 +81,7 @@
 	// [NSBezierPath fillRect:destRect];
 }
 
-- (NSImage *)tintedImage:(NSImage *)img cellFrame:cellFrame
+- (NSImage *)tintedImage:(NSImage *)img cellFrame:(NSRect)cellFrame
 {
 	NSRect imageRect;
 	imageRect.origin = NSZeroPoint;
