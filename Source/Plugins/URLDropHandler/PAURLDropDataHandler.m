@@ -70,4 +70,15 @@ data is NSDictionary with keys:
 		return NSDragOperationCopy;
 }
 
+- (NSString*)pathForFiles
+{ 
+	NSString *directory = [[NSUserDefaults standardUserDefaults] objectForKey:@"ManageFiles.Bookmarks.Location"];
+	directory = [directory stringByExpandingTildeInPath]; 
+	
+	if ([fileManager fileExistsAtPath:directory] == NO) 
+		[fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL];
+	
+	return directory; 
+}
+
 @end

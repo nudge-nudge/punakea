@@ -85,7 +85,7 @@
 	NSString *destination;
 	NSInteger i = 1;
 	
-	while (true)
+	while (i < 1048576) // make sure it stops at some point in time ...
 	{
 		NSString *directory = [managedRoot stringByAppendingFormat:@"/%ld/",i];
 		
