@@ -403,15 +403,19 @@ toTaggableObjects:(NSArray*)someTaggableObjects;
  */
 - (IBAction)confirmTags:(id)sender
 {
-	[self writeTags:[[self currentCompleteTagsInField] selectedTags]
-	withInitialTags:[self initialTags]
-  toTaggableObjects:taggableObjects];
-	
-	// update inital tags to current tags - other changes have been written
-	NSArray *currentTags = [[[[self currentCompleteTagsInField] selectedTags] copy] autorelease];
-	[self setInitialTags:currentTags];
-	
-	[self close];
+    NSArray *currentTags = [[self currentCompleteTagsInField] selectedTags];
+    
+    if (![currentTags isEqualToArray:[self initialTags]]) {
+        [self writeTags:currentTags
+        withInitialTags:[self initialTags]
+      toTaggableObjects:taggableObjects];
+        
+        // update inital tags to current tags - other changes have been written
+        NSArray *currentTags = [[[[self currentCompleteTagsInField] selectedTags] copy] autorelease];
+        [self setInitialTags:currentTags];
+    }
+    
+    [self close];
 }
 
 - (void)updateTokenFieldEditable

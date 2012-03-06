@@ -40,9 +40,7 @@
 {
 	[currentCompleteTagsInField release];
 	[typeAheadFind release];
-	
-	NSLog(@"dealloc %@",self);
-	
+		
 	[super dealloc];
 }
 
