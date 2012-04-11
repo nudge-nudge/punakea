@@ -40,6 +40,8 @@
 
 - (void)removeAllTags;
 
+- (IBAction)confirmSheet:(id)sender;
+
 - (NSArray *)tags;
 - (void)setTags:(NSArray *)someTags;
 - (NSTokenField *)tagField;

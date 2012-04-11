@@ -26,6 +26,9 @@
 
 - (void)validateConfirmButton;
 
+- (void)simulateEnterKeyOnTagField:(id)sender;
+- (void)closeSheet:(id)sender;
+
 @end
 
 
@@ -76,6 +79,36 @@
 	[confirmButton setEnabled:([[tagAutoCompleteController currentCompleteTagsInField] count] > 0)];
 }
 
+- (IBAction)confirmSheet:(id)sender
+{
+	// In order to add unconfirmed tags to the tag set,
+	// we need to simulate pressing the ENTER key twice
+	
+	[self performSelector:@selector(simulateEnterKeyOnTagField:) withObject:sender afterDelay:0.05];
+	[self performSelector:@selector(simulateEnterKeyOnTagField:) withObject:sender afterDelay:0.10];
+	[self performSelector:@selector(closeSheet:) withObject:sender afterDelay:0.15];
+}
+	
+- (void)simulateEnterKeyOnTagField:(id)sender
+{
+	NSEvent *enterEvent = [NSEvent keyEventWithType:NSKeyDown
+										   location:NSZeroPoint
+									  modifierFlags:0
+										  timestamp:[[NSDate date] timeIntervalSince1970]
+									   windowNumber:[[NSApp mainWindow] windowNumber]
+											context:nil
+										 characters:@"\n"
+						charactersIgnoringModifiers:@"\n"
+										  isARepeat:NO
+											keyCode:13];
+	
+	[NSApp postEvent:enterEvent atStart:YES];
+}
+
+- (void)closeSheet:(id)sender
+{
+	[[self delegate] confirmSheet:sender];
+}
 
 #pragma mark Notifications
 - (void)tagsHaveChanged:(NSNotification *)notification

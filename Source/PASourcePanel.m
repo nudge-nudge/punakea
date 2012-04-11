@@ -211,9 +211,11 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
     BOOL    doubleClick     = ([theEvent clickCount] == 2);
     
     NSInteger mouseRow = [self mouseRowForEvent:theEvent];
-    
+	    
     if ((modifierDown == NO) && (doubleClick == NO))
     {
+		NSLog(@"single");
+		
 		// cancel any previous editing action
 		[NSObject cancelPreviousPerformRequestsWithTarget:self
 												 selector:@selector(beginEditing)
@@ -229,7 +231,7 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 				// perform editing like finder
 				[self performSelector:@selector(beginEditing)
 						   withObject:nil
-						   afterDelay:doubleClickThreshold];   
+						   afterDelay:doubleClickThreshold];
 			}
 			else if([[self selectedRowIndexes] containsIndex:mouseRow])
 			{
@@ -237,15 +239,21 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 				[self performSelector:@selector(selectOnlyRowIndexes:)
 						   withObject:[NSIndexSet indexSetWithIndex:mouseRow]
 						   afterDelay:doubleClickThreshold];
+			} else {
+				[super mouseDown:theEvent]; 
 			}
+		} else {
+			[super mouseDown:theEvent]; 
 		}
 		
 		// we still need to pass the event to super, to handle things like dragging, but 
 		// we have disabled row deselection by overriding selectRowIndexes:byExtendingSelection:
-		[super mouseDown:theEvent]; 
+		//[super mouseDown:theEvent]; 
     }
     else if(doubleClick)
     {		
+		NSLog(@"double");		
+		
 		// cancel editing action
 		[NSObject cancelPreviousPerformRequestsWithTarget:self
 										         selector:@selector(beginEditing)
