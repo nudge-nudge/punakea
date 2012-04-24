@@ -133,8 +133,47 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    // The class of the window has been set in INAppStoreWindow in Interface Builder
-    
+
+	// Inform the user that extended attributes will be added to tagged files
+	// in order to comply with Apple's sandboxing policy.
+	bool messageExtAttrShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"Message.ExtendedAttributesWillBeAddedToTaggedFiles.Shown"];
+	
+	if (!messageExtAttrShown)
+	{
+		NSAlert *alert = [[NSAlert alloc] init];
+		
+		// NSLocalizedStringFromTable(@"CHANGE_FILE_EXTENSION", @"FileManager", @"")
+		
+		NSString *text = NSLocalizedStringFromTable(@"MSG_EXTENDED_ATTRIBUTES_WILL_BE_ADDED_TO_TAGGED_FILES_TITLE", @"Global", @"");
+		[alert setMessageText:text];
+		
+		text = NSLocalizedStringFromTable(@"MSG_EXTENDED_ATTRIBUTES_WILL_BE_ADDED_TO_TAGGED_FILES_MESSAGE", @"Global", @"");
+		[alert setInformativeText:text];
+		
+		text = NSLocalizedStringFromTable(@"MSG_EXTENDED_ATTRIBUTES_WILL_BE_ADDED_TO_TAGGED_FILES_BUTTON_OK", @"Global", @"");
+		[alert addButtonWithTitle:text];
+		
+		text = NSLocalizedStringFromTable(@"MSG_EXTENDED_ATTRIBUTES_WILL_BE_ADDED_TO_TAGGED_FILES_BUTTON_CANCEL", @"Global", @"");
+		[alert addButtonWithTitle:text];
+		
+		[alert beginSheetModalForWindow:[self window]
+						  modalDelegate:self
+						 didEndSelector:@selector(learnMoreAboutExtendedAttributes:returnCode:contextInfo:)
+							contextInfo:nil];
+    }
+}
+
+- (void)learnMoreAboutExtendedAttributes:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)context
+{
+	if (returnCode == NSAlertFirstButtonReturn)
+	{
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Message.ExtendedAttributesWillBeAddedToTaggedFiles.Shown"];
+	}
+	else if (returnCode == NSAlertSecondButtonReturn)
+	{
+		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.nudgenudge.eu/tutorial"]];
+		[NSApp terminate:nil];
+	}
 }
 
 - (NSSearchField*)createSearchField 

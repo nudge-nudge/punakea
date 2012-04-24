@@ -92,5 +92,7 @@
 	<string>125 157 937 667 0 0 1440 878 </string>
 	<key>ManageFiles.Bookmarks.Location</key>
 	<string>~/Library/Application Support/Punakea/Bookmarks</string>
+	<key>Message.ExtendedAttributesWillBeAddedToTaggedFiles.Shown</key>
+	<false/>
 </dict>
 </plist>

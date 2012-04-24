@@ -25,3 +25,8 @@
 "PROGRESS_GATHERING_TAGS" = "Gathering Tags";
 
 "REVEAL_IN_FINDER" = "Reveal in Finder";
+
+"MSG_EXTENDED_ATTRIBUTES_WILL_BE_ADDED_TO_TAGGED_FILES_TITLE" = "Permission to add extended attributes to tagged files";
+"MSG_EXTENDED_ATTRIBUTES_WILL_BE_ADDED_TO_TAGGED_FILES_MESSAGE" = "Punakea needs to be able to add extended attributes to any file which will be tagged. Therefore, it uses the emerging OpenMeta standard. OpenMeta uses a file system feature that allows arbitrary data to be stored alongside the actual file contents. These attributes are non-destructive and will not change the contents of a file in any way.";
+"MSG_EXTENDED_ATTRIBUTES_WILL_BE_ADDED_TO_TAGGED_FILES_BUTTON_OK" = "Start Tagging";
+"MSG_EXTENDED_ATTRIBUTES_WILL_BE_ADDED_TO_TAGGED_FILES_BUTTON_CANCEL" = "Learn More and Quit";
