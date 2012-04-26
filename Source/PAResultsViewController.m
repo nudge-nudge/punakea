@@ -754,7 +754,7 @@
 	NSSortDescriptor *desc = nil;	
 	
 	if ([type isEqualToString:@"Name"]) {
-		desc = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
+		desc = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
 	} else if ([type isEqualToString:@"Date Modified"]) {
 		desc = [[NSSortDescriptor alloc] initWithKey:@"modificationDate" ascending:YES];
 	} else if ([type isEqualToString:@"Date Created"]) {
@@ -775,7 +775,13 @@
 		if ([currentSortKey isEqualToString:newSortKey]) {
 			BOOL order = ![sortDescriptor ascending];
 			
-			NSSortDescriptor *newDesc = [[NSSortDescriptor alloc] initWithKey:newSortKey ascending:order];
+			NSSortDescriptor *newDesc;
+			if ([type isEqualToString:@"Name"]) {
+				newDesc = [[NSSortDescriptor alloc] initWithKey:newSortKey ascending:order selector:@selector(localizedCaseInsensitiveCompare:)];
+			} else {
+				newDesc = [[NSSortDescriptor alloc] initWithKey:newSortKey ascending:order];
+			}
+				
 			[sortDescriptor release];
 			sortDescriptor = newDesc;
 			[desc release];
