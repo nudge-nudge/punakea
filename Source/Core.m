@@ -749,6 +749,9 @@
 	{
 		[[[browserController titleBar] buttonWithIdentifier:@"sync"] start:self];
 	}*/
+    
+    // clear selected tags so that there is no problem when rebuilding/searching all the time
+    [self goHome:self];
 	
 	BusyWindowController *busyWindowController = (BusyWindowController *)[[self busyWindow] delegate];
 	
