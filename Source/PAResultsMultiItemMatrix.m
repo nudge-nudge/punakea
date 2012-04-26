@@ -438,9 +438,9 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 	if(row != [self numberOfRows] - 1) 
 	{
 		// If the cell that is to be selected represents a placeholder, we will ignore it
-		if([[[self cellAtRow:row+1 column:column] class] isEqualTo:[PAResultsMultiItemPlaceholderCell class]])
+		while([[[self cellAtRow:row+1 column:column] class] isEqualTo:[PAResultsMultiItemPlaceholderCell class]])
 		{
-			column = 0;
+			column--;
 		}
 	
 		selCellsEnumerator = [[self selectedCells] objectEnumerator];
@@ -503,9 +503,13 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 	column++;
 	if(column == [self numberOfColumns])
 	{
+		// Finder now just stops when we're at the right-most item.
+		// We stick to this, too.
+		return;
+		
 		// Wrap selection into next line
-		column--;
-		row++;
+		//column--;
+		//row++;
 	}
 	
 	// If the cell that is to be selected represents a placeholder, we will ignore it
@@ -531,7 +535,12 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 		}		
 		
 		[self highlightCell:YES atRow:row column:column];
-	} else {		
+	}
+	
+	// The following snippet was the old behavior.
+	// Finder now just stops when we're at the right-most item.
+	// We stick to this, too.
+	/*else {		
 		// Modify event so that selection moves down instead of right (if possible)
 		unichar downArrowChar = NSDownArrowFunctionKey;
 		theEvent = [NSEvent keyEventWithType:[theEvent type]
@@ -546,7 +555,7 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 								     keyCode:125];
 		
 		[self moveSelectionDown:theEvent byExtendingSelection:flag];
-	}
+	}*/
 }
 
 - (void)moveSelectionLeft:(NSEvent *)theEvent
@@ -580,9 +589,10 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 	column--;
 	if(column == -1)
 	{
+		return;
 		// Wrap selection into next line
-		column++;
-		row--;
+		//column++;
+		//row--;
 	}
 	
 	if(row != -1) 
