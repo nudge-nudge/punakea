@@ -214,8 +214,6 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 	    
     if ((modifierDown == NO) && (doubleClick == NO))
     {
-		NSLog(@"single");
-		
 		// cancel any previous editing action
 		[NSObject cancelPreviousPerformRequestsWithTarget:self
 												 selector:@selector(beginEditing)

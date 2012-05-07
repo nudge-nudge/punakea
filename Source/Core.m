@@ -45,6 +45,8 @@
 - (void)loadUserDefaults;
 - (void)updateUserDefaultsToVersion:(NSInteger)newVersion;
 
+- (void)upgradeToVersion_1_2_5;
+
 - (void)loadTagCache;
 - (void)saveTagCache;
 - (NSString*)pathForTagCacheFile;
@@ -80,6 +82,10 @@
 		
 		userDefaults = [NSUserDefaults standardUserDefaults];
 		[self loadUserDefaults];
+		
+		// Remove tag cache in version 1.2.5 once, as it needs to be rebuilt
+		// due to modified type identifiers for bookmarks
+		[self upgradeToVersion_1_2_5];
 		
 		[PAInstaller install];
 		
@@ -1296,6 +1302,30 @@
 	} else
 	{
 		[NSException raise:NSInvalidArgumentException format:@"User Defaults can only be updated from v1 to v2!"];
+	}
+}
+
+- (void)upgradeToVersion_1_2_5
+{
+	bool done = [[NSUserDefaults standardUserDefaults] boolForKey:@"DidUpgradeToVersion_1_2_5"];
+	
+	if (!done)
+	{
+		// use default location in app support
+		NSBundle *bundle = [NSBundle mainBundle];
+		NSString *path = [bundle bundlePath];
+		NSString *appName = [[path lastPathComponent] stringByDeletingPathExtension]; 
+		
+		NSString *tagCache = [NSString stringWithFormat:@"~/Library/Application Support/%@/tagCache.plist", appName];
+		tagCache = [tagCache stringByExpandingTildeInPath];
+		
+		NSError *error = nil;
+		[[NSFileManager defaultManager] removeItemAtPath:tagCache error:&error];
+		
+		// Mark as done
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DidUpgradeToVersion_1_2_5"];
+		
+		NSLog(@"upgrade done");
 	}
 }
 
