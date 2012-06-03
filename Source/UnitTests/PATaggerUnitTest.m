@@ -42,7 +42,7 @@
 	[testTags addObject:test_8];
 	[testTags addObject:test_9];
 	
-	tags = [NNTags sharedTags;
+	tags = [NNTags sharedTags];
 	[tags addTag:test_0];
 	[tags addTag:test_1];
 	[tags addTag:test_2];

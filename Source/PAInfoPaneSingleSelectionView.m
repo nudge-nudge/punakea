@@ -40,7 +40,7 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(frameDidChange:)
 													 name:NSViewFrameDidChangeNotification
-												   object:self];		
+												   object:self];	
     }
     return self;
 }
@@ -58,6 +58,7 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[NSNotificationCenter defaultCenter] removeObserver:file];
 	
 	[file release];
 	
@@ -134,16 +135,30 @@
 	[modifiedField setStringValue:[dateFormatter saveStringFromDate:[file modificationDate]]];
 	[lastOpenedField setStringValue:[dateFormatter saveStringFromDate:[file lastUsedDate]]];
 	
+	// Threaded file size computation
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:NNFileSizeChangeOperation object:file];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sizeChanged:) name:NNFileSizeChangeOperation object:file];	
+	
+	[file performSelectorInBackground:@selector(computeSizeThreaded) withObject:nil];
+	
+	[sizeField setStringValue:@"Calculating..."];
+	
+	[self repositionFields];
+}
+
+- (void)sizeChanged:(NSNotification *)notification
+{
 	NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
 	[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
 	
+	NSNumber *sizeNumber = (NSNumber *)[[notification userInfo] valueForKey:@"size"];
+	unsigned long long size = [sizeNumber unsignedLongLongValue];
+	
 	NSString *s = [NSString stringWithFormat:
-		NSLocalizedStringFromTable(@"FILE_SIZE_ON_DISK", @"Global", nil),
-		[numberFormatter stringFromFileSize:[file size]]];
+				   NSLocalizedStringFromTable(@"FILE_SIZE_ON_DISK", @"Global", nil),
+				   [numberFormatter stringFromFileSize:size]];
 	
 	[sizeField setStringValue:s];
-	
-	[self repositionFields];
 }
 
 @end
