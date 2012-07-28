@@ -136,29 +136,40 @@
 	[lastOpenedField setStringValue:[dateFormatter saveStringFromDate:[file lastUsedDate]]];
 	
 	// Threaded file size computation
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:NNFileSizeChangeOperation object:file];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sizeChanged:) name:NNFileSizeChangeOperation object:file];	
+//	[[NSNotificationCenter defaultCenter] removeObserver:self name:NNFileSizeChangeOperation object:file];
+//	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sizeChanged:) name:NNFileSizeChangeOperation object:file];	
+//	
+//	[file performSelectorInBackground:@selector(computeSizeThreaded) withObject:nil];
+//	[sizeField setStringValue:@"Calculating..."];
 	
-	[file performSelectorInBackground:@selector(computeSizeThreaded) withObject:nil];
+	NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+	[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
 	
-	[sizeField setStringValue:@"Calculating..."];
+	NSNumber *sizeNumber = [NSNumber numberWithUnsignedLongLong:[file size]];
+	unsigned long long size = [sizeNumber unsignedLongLongValue];
+	
+	NSString *s = [NSString stringWithFormat:
+						NSLocalizedStringFromTable(@"FILE_SIZE_ON_DISK", @"Global", nil),
+						[numberFormatter stringFromFileSize:size]];
+	
+	[sizeField setStringValue:s];
 	
 	[self repositionFields];
 }
 
-- (void)sizeChanged:(NSNotification *)notification
-{
-	NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
-	[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-	
-	NSNumber *sizeNumber = (NSNumber *)[[notification userInfo] valueForKey:@"size"];
-	unsigned long long size = [sizeNumber unsignedLongLongValue];
-	
-	NSString *s = [NSString stringWithFormat:
-				   NSLocalizedStringFromTable(@"FILE_SIZE_ON_DISK", @"Global", nil),
-				   [numberFormatter stringFromFileSize:size]];
-	
-	[sizeField setStringValue:s];
-}
+//- (void)sizeChanged:(NSNotification *)notification
+//{
+//	NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+//	[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+//	
+//	NSNumber *sizeNumber = (NSNumber *)[[notification userInfo] valueForKey:@"size"];
+//	unsigned long long size = [sizeNumber unsignedLongLongValue];
+//	
+//	NSString *s = [NSString stringWithFormat:
+//				   NSLocalizedStringFromTable(@"FILE_SIZE_ON_DISK", @"Global", nil),
+//				   [numberFormatter stringFromFileSize:size]];
+//	
+//	[sizeField setStringValue:s];
+//}
 
 @end

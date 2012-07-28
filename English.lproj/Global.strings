@@ -14,7 +14,7 @@
 "TO" = "To";
 "DATE" = "Date";
 
-"FILE_SIZE_ON_DISK" = "%@ on disk";
+"FILE_SIZE_ON_DISK" = "%@";
 
 "FILES" = "files";
 
