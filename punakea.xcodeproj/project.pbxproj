@@ -3095,7 +3095,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3135,7 +3135,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3173,7 +3173,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3211,7 +3211,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3247,7 +3247,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3283,7 +3283,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3317,7 +3317,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3352,7 +3352,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3386,7 +3386,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Punakea.app/Contents/MacOS/Punakea";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(value)",
@@ -3421,7 +3421,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Punakea.app/Contents/MacOS/Punakea";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(value)",
@@ -3476,7 +3476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3513,7 +3513,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3569,7 +3569,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS)",
@@ -3623,7 +3623,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				CODE_SIGN_IDENTITY = "Developer ID Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",

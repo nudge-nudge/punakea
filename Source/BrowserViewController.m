@@ -290,6 +290,11 @@ CGFloat const SPLITVIEW_PANEL_MIN_HEIGHT = 150.0;
 			[(PAResultsViewController*)mainController removeLastTag];
 		}
 	}
+	else if (key == 27)
+	{
+		// Go home on Escape
+		[[[NSApplication sharedApplication] delegate] goHome:self];
+	}
 	else if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:key] ||
 			 [[NSCharacterSet symbolCharacterSet] characterIsMember:key] ||
 			 [[NSCharacterSet punctuationCharacterSet] characterIsMember:key]) 
