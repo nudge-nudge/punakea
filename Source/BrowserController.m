@@ -460,7 +460,15 @@ NSString * const HORIZONTAL_SPLITVIEW_DEFAULTS = @"0 0 202 361 0 0 362 202 168 0
 				[item setDisplayName:[item defaultDisplayName]];
 		}
 		
+		// Save favorites
 		[self saveFavorites];
+		
+		// Start search for the selected tag set in case it was modified
+		if([panel sourceItem])
+		{
+			[[NSNotificationCenter defaultCenter] postNotificationName:NSOutlineViewSelectionDidChangeNotification
+																object:sourcePanel];
+		}
 	}
 }
 
