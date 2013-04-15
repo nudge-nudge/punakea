@@ -597,8 +597,15 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	
 	if (row >= 0 && [[self target] outlineView:self shouldSelectItem:[self itemAtRow:row]])
 	{
+		// Make sure self has the first responder
+		[[self window] makeFirstResponder:self];
+		
+		// Select the proper row
 		if (![[self selectedRowIndexes] containsIndex:row])
 			[self selectRow:row byExtendingSelection:NO];
+		
+		// Copy over the Open With menu from main menu
+		[openWithMenuItem setSubmenu:[[[[NSApp delegate] openWithMenuItem] submenu] copy]];
 		
 		return [self menu];
 	}

@@ -350,6 +350,7 @@
 		// File menu
 		if([item action] == @selector(addTagSet:)) return NO;
 		if([item action] == @selector(openFiles:)) return NO;
+		[openWithMenuItem setEnabled:NO];
 		if([item action] == @selector(getInfo:)) return NO;
 		if([item action] == @selector(revealInFinder:)) return NO;
 		if([item action] == @selector(importFolder:)) return NO;
@@ -381,7 +382,7 @@
 	{
 		NSResponder *firstResponder = [[browserController window] firstResponder];
 		
-		// File menu
+		// File menu		
 		if([item action] == @selector(getInfo:))
 		{
 			if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
@@ -431,8 +432,13 @@
 			{
 				PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
 				if([ov numberOfSelectedItems] > 0)
+				{
+					[openWithMenuItem setEnabled:YES];
 					return YES;
+				}
 			}
+			
+			[openWithMenuItem setEnabled:NO];
 			
 			return NO;
 		}
@@ -496,6 +502,141 @@
 	}
 	
 	return YES;
+}
+
+// Menu delegate - currently for the Open With submenu exclusively, so we don't handle the case of multiple menus yet
+- (void)menuNeedsUpdate:(NSMenu *)menu
+{
+	NSResponder *firstResponder = [[browserController window] firstResponder];
+	
+	if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
+	{
+		PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
+		
+		// Clear up
+		[menu removeAllItems];
+		
+		// Get Open With applications for selected items
+		NSMutableSet *sharedAppUrls = [NSMutableSet set];
+		
+		for (int i = 0; i < [[ov selectedItems] count]; i++)
+		{
+			NNFile *item = [[ov selectedItems] objectAtIndex:i];
+			
+			// Get the apps
+			NSMutableArray *appUrls = [(NSMutableArray *)LSCopyApplicationURLsForURL((CFURLRef)[item url], kLSRolesAll) autorelease];
+			
+			if (i == 0)
+				[sharedAppUrls addObjectsFromArray:appUrls];
+			else
+				[sharedAppUrls intersectSet:[NSSet setWithArray:appUrls]];
+		}
+		
+		// Get default application per selected item
+		NSURL *defaultAppUrl = nil;
+		
+		for (NNFile *item in [ov selectedItems])
+		{
+			CFURLRef out;
+			LSGetApplicationForURL((CFURLRef)[item url], kLSRolesAll, NULL, &out);
+			
+			if (defaultAppUrl == nil && out != NULL)
+			{
+				defaultAppUrl = (NSURL *)out;
+			}
+			else if (defaultAppUrl != nil &&
+					 out != NULL &&
+					 ![defaultAppUrl isEqualTo:(NSURL *)out])
+			{
+				// The selected items have different default applications, so don't show one.
+				defaultAppUrl = nil;
+				break;
+			}
+		}
+		
+		// Remove default app from appUrls
+		if (defaultAppUrl)
+			[sharedAppUrls removeObject:defaultAppUrl];
+		
+		// Sort urls alphabetically by application name
+		NSArray *sortedAppUrls = [[sharedAppUrls allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
+			  {
+				  NSURL *url1 = obj1;
+				  NSURL *url2 = obj2;
+				  
+				  NSString *path1 = [[url1 absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				  NSString *path2 = [[url2 absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				  
+				  NSString *title1 = [[path1 lastPathComponent] stringByDeletingPathExtension];
+				  NSString *title2 = [[path2 lastPathComponent] stringByDeletingPathExtension];
+				  
+				  return [title1 compare:title2];
+			  }];
+		
+		// Create the submenu
+		//NSMenu *openWithMenu = [[NSMenu alloc] initWithTitle:@""];
+		
+		// Create default app menu item
+		if (defaultAppUrl)
+		{
+			NSString *path = [[defaultAppUrl absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			
+			NSString *title = [[path lastPathComponent] stringByDeletingPathExtension];
+			title = [title stringByAppendingString:@" (default)"];
+			
+			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title
+														  action:@selector(openWith:)
+												   keyEquivalent:@""];
+			[item setRepresentedObject:defaultAppUrl];
+			
+			NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[defaultAppUrl path]];
+			[icon setSize:NSMakeSize(16, 16)];
+			[item setImage:icon];
+			
+			[menu addItem:item];
+			
+			// Add separator item below
+			[menu addItem:[NSMenuItem separatorItem]];
+		}
+		
+		// Create submenu items
+		for (int i = 0; i < sortedAppUrls.count; i++)
+		{
+			NSURL *url = [sortedAppUrls objectAtIndex:i];
+			
+			NSString *path = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			
+			NSString *title = [[path lastPathComponent] stringByDeletingPathExtension];
+			
+			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title
+														  action:@selector(openWith:)
+												   keyEquivalent:@""];
+			[item setRepresentedObject:url];
+			
+			NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[url path]];
+			[icon setSize:NSMakeSize(16, 16)];
+			[item setImage:icon];
+			
+			[menu addItem:item];
+		}
+		
+		// If no (shared) application was found, say "None" as Finder does
+		if ([sortedAppUrls count] == 0 && defaultAppUrl == nil)
+		{
+			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"None"
+														  action:nil
+												   keyEquivalent:@""];
+			[menu addItem:item];
+		}
+		
+		// Add application chooser
+		[menu addItem:[NSMenuItem separatorItem]];
+		
+		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Other..."
+													  action:@selector(openWithOther:)
+											   keyEquivalent:@""];
+		[menu addItem:item];
+	}
 }
 
 - (IBAction)addTagSet:(id)sender
@@ -584,8 +725,50 @@
 	}
 }
 
+- (void)openWith:(id)sender
+{
+	NSMenuItem *item = (NSMenuItem *)sender;
+	
+	NSResponder *firstResponder = [[browserController window] firstResponder];
+	PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
+	
+	for (NNFile *file in [ov selectedItems])
+	{
+		[[NSWorkspace sharedWorkspace] openFile:[file path]
+								withApplication:[[item representedObject] path]];
+	}
+}
+
+- (void)openWithOther:(id)sender
+{
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	[openPanel setTitle:NSLocalizedStringFromTable(@"OPEN_WITH_CHOOSE_APPLICATION_TITLE", @"FileManager", @"")];
+	[openPanel setMessage:NSLocalizedStringFromTable(@"OPEN_WITH_CHOOSE_APPLICATION_MESSAGE", @"FileManager", @"")];
+	[openPanel setAllowsMultipleSelection:NO]; // ?
+	[openPanel setCanChooseDirectories:NO];
+	[openPanel setAllowedFileTypes:[NSArray arrayWithObject:@"APP"]];
+
+	[openPanel setDirectoryURL:[[[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSSystemDomainMask] objectAtIndex:0]];
+	
+	NSInteger result = [openPanel runModal];
+	
+	if (result == NSOKButton)
+	{
+		NSURL *application = [[openPanel URLs] objectAtIndex:0];
+		
+		NSResponder *firstResponder = [[browserController window] firstResponder];
+		PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
+		
+		for (NNFile *file in [ov selectedItems])
+		{
+			[[NSWorkspace sharedWorkspace] openFile:[file path]
+									withApplication:[application path]];
+		}
+	}
+}
+
 - (IBAction)delete:(id)sender
-{		
+{
 	NSResponder *firstResponder = [[browserController window] firstResponder];
 	
 	if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
@@ -1359,9 +1542,14 @@
 	return busyWindow;
 }
 
-- (NSMenuItem*)arrangeByMenuItem
+- (NSMenuItem *)arrangeByMenuItem
 {
 	return arrangeByMenuItem;
+}
+
+- (NSMenuItem *)openWithMenuItem
+{
+	return openWithMenuItem;
 }
 
 @end

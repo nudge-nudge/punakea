@@ -62,9 +62,10 @@
 
 //#import "PANotificationReceiver.h"
 
-@interface Core : NSWindowController
+@interface Core : NSWindowController <NSMenuDelegate>
 {
 	IBOutlet NSMenu					*viewMenu;
+	IBOutlet NSMenuItem				*openWithMenuItem;
 	IBOutlet NSMenuItem				*arrangeByMenuItem;
 	
 	IBOutlet NSMenu					*statusMenu;	
@@ -108,6 +109,8 @@
 - (IBAction)showPreferences:(id)sender;
 
 - (IBAction)openFiles:(id)sender;
+- (void)openWith:(id)sender;
+- (void)openWithOther:(id)sender;
 - (IBAction)delete:(id)sender;
 - (IBAction)selectAll:(id)sender;
 - (IBAction)findTag:(id)sender;
@@ -144,6 +147,7 @@
 - (BrowserController *)browserController;
 - (TaggerController *)taggerController;
 - (NSWindow *)busyWindow;
-- (NSMenuItem*)arrangeByMenuItem;
+- (NSMenuItem *)arrangeByMenuItem;
+- (NSMenuItem *)openWithMenuItem;
 
 @end

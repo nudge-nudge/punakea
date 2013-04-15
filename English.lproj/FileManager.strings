@@ -40,3 +40,6 @@
 "CHOOSE_LOCATION_OF_MANAGED_FOLDER" = "Choose a folder where all your tagged files will be kept. It is recommended to use a\npreviously empty folder when setting up a new location.";
 "CHOOSE_LOCATION_OF_TAGS_FOLDER" = "You will be able to access all tagged documents by a folder structure.\nMake sure to use a previously empty folder when setting up a new location.";
 "CHOOSE_LOCATION_OF_DROP_BOX" = "Choose a folder which will serve as Punakea's drop box.";
+
+"OPEN_WITH_CHOOSE_APPLICATION_TITLE" = "Choose Application";
+"OPEN_WITH_CHOOSE_APPLICATION_MESSAGE" = "Choose an application to open the selected documents.";

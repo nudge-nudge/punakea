@@ -61,6 +61,8 @@ typedef enum _PAResultsDisplayMode
 	// If not nil, forward keyboard events to responder
 	PAResultsMultiItemMatrix		*responder;
 	
+	IBOutlet NSMenuItem				*openWithMenuItem;
+	
 	// A collection of selected NNTaggableObjects. OutlineView stores them for various responders,
 	// so that they are able to restore their selection if necessary.
 	NSMutableArray					*selectedItems;
