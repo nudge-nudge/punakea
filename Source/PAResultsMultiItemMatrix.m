@@ -866,7 +866,7 @@ static NSUInteger PAModifierKeyMask = NSShiftKeyMask | NSAlternateKeyMask | NSCo
 		[self highlightOnlyCell:cell];
 	}
 	
-	return [outlineView menu];
+	return [outlineView menuForEvent:event];
 }
 
 
