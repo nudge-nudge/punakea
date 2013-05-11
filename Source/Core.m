@@ -507,135 +507,138 @@
 // Menu delegate - currently for the Open With submenu exclusively, so we don't handle the case of multiple menus yet
 - (void)menuNeedsUpdate:(NSMenu *)menu
 {
-	NSResponder *firstResponder = [[browserController window] firstResponder];
-	
-	if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
-	{
-		PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
+	if ([self appHasBrowser])
+	{		
+		NSResponder *firstResponder = [[browserController window] firstResponder];
 		
-		// Clear up
-		[menu removeAllItems];
-		
-		// Get Open With applications for selected items
-		NSMutableSet *sharedAppUrls = [NSMutableSet set];
-		
-		for (int i = 0; i < [[ov selectedItems] count]; i++)
+		if([firstResponder isMemberOfClass:[PAResultsOutlineView class]])
 		{
-			NNFile *item = [[ov selectedItems] objectAtIndex:i];
+			PAResultsOutlineView *ov = (PAResultsOutlineView *)firstResponder;
 			
-			// Get the apps
-			NSMutableArray *appUrls = [(NSMutableArray *)LSCopyApplicationURLsForURL((CFURLRef)[item url], kLSRolesAll) autorelease];
+			// Clear up
+			[menu removeAllItems];
 			
-			if (i == 0)
-				[sharedAppUrls addObjectsFromArray:appUrls];
-			else
-				[sharedAppUrls intersectSet:[NSSet setWithArray:appUrls]];
-		}
-		
-		// Get default application per selected item
-		NSURL *defaultAppUrl = nil;
-		
-		for (NNFile *item in [ov selectedItems])
-		{
-			CFURLRef out;
-			LSGetApplicationForURL((CFURLRef)[item url], kLSRolesAll, NULL, &out);
+			// Get Open With applications for selected items
+			NSMutableSet *sharedAppUrls = [NSMutableSet set];
 			
-			if (defaultAppUrl == nil && out != NULL)
+			for (int i = 0; i < [[ov selectedItems] count]; i++)
 			{
-				defaultAppUrl = (NSURL *)out;
+				NNFile *item = [[ov selectedItems] objectAtIndex:i];
+				
+				// Get the apps
+				NSMutableArray *appUrls = [(NSMutableArray *)LSCopyApplicationURLsForURL((CFURLRef)[item url], kLSRolesAll) autorelease];
+				
+				if (i == 0)
+					[sharedAppUrls addObjectsFromArray:appUrls];
+				else
+					[sharedAppUrls intersectSet:[NSSet setWithArray:appUrls]];
 			}
-			else if (defaultAppUrl != nil &&
-					 out != NULL &&
-					 ![defaultAppUrl isEqualTo:(NSURL *)out])
+			
+			// Get default application per selected item
+			NSURL *defaultAppUrl = nil;
+			
+			for (NNFile *item in [ov selectedItems])
 			{
-				// The selected items have different default applications, so don't show one.
-				defaultAppUrl = nil;
-				break;
+				CFURLRef out;
+				LSGetApplicationForURL((CFURLRef)[item url], kLSRolesAll, NULL, &out);
+				
+				if (defaultAppUrl == nil && out != NULL)
+				{
+					defaultAppUrl = (NSURL *)out;
+				}
+				else if (defaultAppUrl != nil &&
+						 out != NULL &&
+						 ![defaultAppUrl isEqualTo:(NSURL *)out])
+				{
+					// The selected items have different default applications, so don't show one.
+					defaultAppUrl = nil;
+					break;
+				}
 			}
-		}
-		
-		// Remove default app from appUrls
-		if (defaultAppUrl)
-			[sharedAppUrls removeObject:defaultAppUrl];
-		
-		// Sort urls alphabetically by application name
-		NSArray *sortedAppUrls = [[sharedAppUrls allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
-			  {
-				  NSURL *url1 = obj1;
-				  NSURL *url2 = obj2;
-				  
-				  NSString *path1 = [[url1 absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-				  NSString *path2 = [[url2 absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-				  
-				  NSString *title1 = [[path1 lastPathComponent] stringByDeletingPathExtension];
-				  NSString *title2 = [[path2 lastPathComponent] stringByDeletingPathExtension];
-				  
-				  return [title1 compare:title2];
-			  }];
-		
-		// Create the submenu
-		//NSMenu *openWithMenu = [[NSMenu alloc] initWithTitle:@""];
-		
-		// Create default app menu item
-		if (defaultAppUrl)
-		{
-			NSString *path = [[defaultAppUrl absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			
-			NSString *title = [[path lastPathComponent] stringByDeletingPathExtension];
-			title = [title stringByAppendingString:@" (default)"];
+			// Remove default app from appUrls
+			if (defaultAppUrl)
+				[sharedAppUrls removeObject:defaultAppUrl];
 			
-			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title
-														  action:@selector(openWith:)
-												   keyEquivalent:@""];
-			[item setRepresentedObject:defaultAppUrl];
+			// Sort urls alphabetically by application name
+			NSArray *sortedAppUrls = [[sharedAppUrls allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
+				  {
+					  NSURL *url1 = obj1;
+					  NSURL *url2 = obj2;
+					  
+					  NSString *path1 = [[url1 absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+					  NSString *path2 = [[url2 absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+					  
+					  NSString *title1 = [[path1 lastPathComponent] stringByDeletingPathExtension];
+					  NSString *title2 = [[path2 lastPathComponent] stringByDeletingPathExtension];
+					  
+					  return [title1 compare:title2];
+				  }];
 			
-			NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[defaultAppUrl path]];
-			[icon setSize:NSMakeSize(16, 16)];
-			[item setImage:icon];
+			// Create the submenu
+			//NSMenu *openWithMenu = [[NSMenu alloc] initWithTitle:@""];
 			
-			[menu addItem:item];
+			// Create default app menu item
+			if (defaultAppUrl)
+			{
+				NSString *path = [[defaultAppUrl absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				
+				NSString *title = [[path lastPathComponent] stringByDeletingPathExtension];
+				title = [title stringByAppendingString:@" (default)"];
+				
+				NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title
+															  action:@selector(openWith:)
+													   keyEquivalent:@""];
+				[item setRepresentedObject:defaultAppUrl];
+				
+				NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[defaultAppUrl path]];
+				[icon setSize:NSMakeSize(16, 16)];
+				[item setImage:icon];
+				
+				[menu addItem:item];
+				
+				// Add separator item below
+				[menu addItem:[NSMenuItem separatorItem]];
+			}
 			
-			// Add separator item below
+			// Create submenu items
+			for (int i = 0; i < sortedAppUrls.count; i++)
+			{
+				NSURL *url = [sortedAppUrls objectAtIndex:i];
+				
+				NSString *path = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				
+				NSString *title = [[path lastPathComponent] stringByDeletingPathExtension];
+				
+				NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title
+															  action:@selector(openWith:)
+													   keyEquivalent:@""];
+				[item setRepresentedObject:url];
+				
+				NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[url path]];
+				[icon setSize:NSMakeSize(16, 16)];
+				[item setImage:icon];
+				
+				[menu addItem:item];
+			}
+			
+			// If no (shared) application was found, say "None" as Finder does
+			if ([sortedAppUrls count] == 0 && defaultAppUrl == nil)
+			{
+				NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"None"
+															  action:nil
+													   keyEquivalent:@""];
+				[menu addItem:item];
+			}
+			
+			// Add application chooser
 			[menu addItem:[NSMenuItem separatorItem]];
-		}
-		
-		// Create submenu items
-		for (int i = 0; i < sortedAppUrls.count; i++)
-		{
-			NSURL *url = [sortedAppUrls objectAtIndex:i];
 			
-			NSString *path = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-			
-			NSString *title = [[path lastPathComponent] stringByDeletingPathExtension];
-			
-			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title
-														  action:@selector(openWith:)
-												   keyEquivalent:@""];
-			[item setRepresentedObject:url];
-			
-			NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[url path]];
-			[icon setSize:NSMakeSize(16, 16)];
-			[item setImage:icon];
-			
-			[menu addItem:item];
-		}
-		
-		// If no (shared) application was found, say "None" as Finder does
-		if ([sortedAppUrls count] == 0 && defaultAppUrl == nil)
-		{
-			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"None"
-														  action:nil
+			NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Other..."
+														  action:@selector(openWithOther:)
 												   keyEquivalent:@""];
 			[menu addItem:item];
 		}
-		
-		// Add application chooser
-		[menu addItem:[NSMenuItem separatorItem]];
-		
-		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Other..."
-													  action:@selector(openWithOther:)
-											   keyEquivalent:@""];
-		[menu addItem:item];
 	}
 }
 
