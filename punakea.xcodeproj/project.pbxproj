@@ -3454,20 +3454,24 @@
 		488A52EC0A81D9FA005B54A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PRODUCT_NAME = Documentation;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		488A52ED0A81D9FA005B54A8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				PRODUCT_NAME = Documentation;
+				PROVISIONING_PROFILE = "";
 				ZERO_LINK = NO;
 			};
 			name = Release;
