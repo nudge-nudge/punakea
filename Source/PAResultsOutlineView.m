@@ -69,9 +69,9 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 	NSRect bounds = [self bounds];
 	[[[self tableColumns] objectAtIndex:0] setWidth:bounds.size.width];	
 	
-	// TODO: Double-click
+	// Double click
 	[self setTarget:[self delegate]];
-	[self setDoubleAction:@selector(doubleAction:)];
+	//[self setDoubleAction:@selector(doubleAction:)];	// we trigger the action programmatically in mouseDown:
 	
 	// Get notifications
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -788,7 +788,13 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 
         // perform double action
 		if([[[self itemAtRow:mouseRow] class] isNotEqualTo:[NNQueryBundle class]])
+		{
+			if (![[self selectedRowIndexes] containsIndex:mouseRow])
+			{
+				[self selectOnlyRowIndexes:[NSIndexSet indexSetWithIndex:mouseRow]];
+			}
 			[[self target] performSelector:@selector(doubleAction:)];
+		}
     }
     else
     {
