@@ -748,10 +748,16 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		[NSObject cancelPreviousPerformRequestsWithTarget:self
 												 selector:@selector(beginEditing)
 												   object:nil];
-	
+
 		// Do only something if this row is not being edited and the user wants to
 		// cancel the editing by clicking again on the item
-		if (![self isEditingRow:mouseRow] && (mouseRow != -1))
+		
+		/* TODO [self editedRow] is not working and always returns -1 in the current
+		 * implementation. Set the edited row manually, and then a click anywhere else
+		 * than the field editor in the edited row should cancel the editing.
+		 */
+		
+		if (mouseRow != -1)
 		{
 			NSInteger count = [[self selectedRowIndexes] count];
 			if([self selectedRow] == mouseRow && count <= 1)
@@ -759,7 +765,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 				// perform editing like finder
 				[self performSelector:@selector(beginEditing)
 						   withObject:nil
-						   afterDelay:doubleClickThreshold];   
+						   afterDelay:doubleClickThreshold];
 			}
 			else if([[self selectedRowIndexes] containsIndex:mouseRow])
 			{
@@ -780,7 +786,7 @@ NSString *PAResultsOutlineViewSelectionDidChangeNotification = @"PAResultsOutlin
 		[NSObject cancelPreviousPerformRequestsWithTarget:self
 										         selector:@selector(beginEditing)
 										           object:nil];
-	
+
         // cancel the row-selection action
         [NSObject cancelPreviousPerformRequestsWithTarget:self
 											     selector:@selector(selectOnlyRowIndexes:)
@@ -884,18 +890,6 @@ needed for supporting dragging to trash
 	if(selectedItems) [selectedItems release];
 	
 	selectedItems = [[NSMutableArray alloc] initWithArray:theItems];
-}
-
-- (BOOL)isEditingRow:(NSInteger)row
-{
-	if ([self numberOfSelectedItems] != 1)
-		return NO;
-	
-	if ([self rowForItem:[[self selectedItems] objectAtIndex:0]] != row)
-		return NO;
-	
-	NSText *textView = [[self window] fieldEditor:NO forObject:self];
-	return [textView isFieldEditor];
 }
 
 

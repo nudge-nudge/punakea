@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">3084</string>
@@ -77,6 +77,7 @@
 										<string key="NSFrameSize">{691, 300}</string>
 										<reference key="NSSuperview" ref="788645260"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="100473367"/>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 										<bool key="NSControlAllowsExpansionToolTips">YES</bool>
@@ -116,7 +117,7 @@
 													</object>
 												</object>
 												<object class="NSTextFieldCell" key="NSDataCell" id="750542292">
-													<int key="NSCellFlags">337641536</int>
+													<int key="NSCellFlags">69206081</int>
 													<int key="NSCellFlags2">2048</int>
 													<object class="NSFont" key="NSSupport" id="792708455">
 														<string key="NSName">LucidaGrande</string>
@@ -142,7 +143,6 @@
 												</object>
 												<int key="NSResizingMask">3</int>
 												<bool key="NSIsResizeable">YES</bool>
-												<bool key="NSIsEditable">YES</bool>
 												<reference key="NSTableView" ref="448164422"/>
 											</object>
 										</object>
@@ -208,7 +208,7 @@
 						<string key="NSFrameSize">{691, 300}</string>
 						<reference key="NSSuperview" ref="437883448"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="100473367"/>
+						<reference key="NSNextKeyView" ref="788645260"/>
 						<int key="NSsFlags">133680</int>
 						<reference key="NSVScroller" ref="32007029"/>
 						<reference key="NSHScroller" ref="100473367"/>
@@ -1431,6 +1431,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>arrangeByMenuItem</string>
 							<string>busyWindow</string>
+							<string>openWithMenuItem</string>
 							<string>statusMenu</string>
 							<string>viewMenu</string>
 						</object>
@@ -1438,6 +1439,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSMenuItem</string>
 							<string>NSWindow</string>
+							<string>NSMenuItem</string>
 							<string>NSMenu</string>
 							<string>NSMenu</string>
 						</object>
@@ -1448,6 +1450,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>arrangeByMenuItem</string>
 							<string>busyWindow</string>
+							<string>openWithMenuItem</string>
 							<string>statusMenu</string>
 							<string>viewMenu</string>
 						</object>
@@ -1460,6 +1463,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">busyWindow</string>
 								<string key="candidateClassName">NSWindow</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">openWithMenuItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">statusMenu</string>
