@@ -119,11 +119,6 @@
 		485FAF2D0A0DE54C0088AC08 /* PASidebarTableViewDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485FAF2B0A0DE54C0088AC08 /* PASidebarTableViewDropController.m */; };
 		486063DE0AA0553000D9E103 /* PASidebarTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 486063DC0AA0553000D9E103 /* PASidebarTableView.h */; };
 		486063DF0AA0553000D9E103 /* PASidebarTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486063DD0AA0553000D9E103 /* PASidebarTableView.m */; };
-		4863B45614CB05A200F92A59 /* NNTagging.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
-		4863B45714CB05EF00F92A59 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
-		4863B45814CB05FB00F92A59 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
-		4863B45914CB05FF00F92A59 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
-		4863B45A14CB060300F92A59 /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4863B45314CB056300F92A59 /* NNTagging.framework */; };
 		486DC7500ACD3B2D00BE0F54 /* PATagManagementViewMainView.h in Headers */ = {isa = PBXBuildFile; fileRef = 486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */; };
 		486DC7510ACD3B2D00BE0F54 /* PATagManagementViewMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */; };
 		486EBA4509D68F16000C154C /* PAFileBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 486EBA4309D68F16000C154C /* PAFileBox.m */; };
@@ -204,6 +199,12 @@
 		6530FF360AF2229400D7A79A /* PATaggerTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6530FF340AF2229400D7A79A /* PATaggerTableView.h */; };
 		6530FF370AF2229400D7A79A /* PATaggerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6530FF350AF2229400D7A79A /* PATaggerTableView.m */; };
 		6531BB6D0FA05ED20038D287 /* PAStatusBarLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 6531BB6C0FA05ED20038D287 /* PAStatusBarLink.m */; };
+		6534CF1E18673F17004C2E8D /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534CF1C18673E8B004C2E8D /* NNTagging.framework */; };
+		6534CF1F18673F1B004C2E8D /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534CF1C18673E8B004C2E8D /* NNTagging.framework */; };
+		6534CF2018673F1F004C2E8D /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534CF1C18673E8B004C2E8D /* NNTagging.framework */; };
+		6534CF2118673F58004C2E8D /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534CF1C18673E8B004C2E8D /* NNTagging.framework */; };
+		6534CF2218673F5D004C2E8D /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534CF1C18673E8B004C2E8D /* NNTagging.framework */; };
+		6534CF2318673F60004C2E8D /* NNTagging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534CF1C18673E8B004C2E8D /* NNTagging.framework */; };
 		6534E0EB0BA1B38A0015D466 /* MenuBarIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */; };
 		6534E0EC0BA1B38A0015D466 /* MenuBarIconAlt.tif in Resources */ = {isa = PBXBuildFile; fileRef = 6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */; };
 		653948DC0C0359C4001705D6 /* button-goto.tif in Resources */ = {isa = PBXBuildFile; fileRef = 653948DA0C0359C4001705D6 /* button-goto.tif */; };
@@ -468,26 +469,19 @@
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Punakea;
 		};
-		4863B45214CB056300F92A59 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = NNTagging;
-		};
-		4863B45414CB059B00F92A59 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = NNTagging;
-		};
 		48C633C00AEF9724008F0E94 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 483184970AEF8D8600C3C672;
 			remoteInfo = PADropHandler;
+		};
+		6534CF1B18673E8B004C2E8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6534CF1618673E8B004C2E8D /* NNTagging.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = NNTagging;
 		};
 		6566CDAC0AFF8B3500FEAD7E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -526,7 +520,6 @@
 			files = (
 				48186F6B0BE4C886000B4638 /* NNFilterEngine.framework in Copy Frameworks */,
 				65AA3ADF14D13E3000250F83 /* BGHUDAppKit.framework in Copy Frameworks */,
-				4863B45614CB05A200F92A59 /* NNTagging.framework in Copy Frameworks */,
 				483185180AEF93DC00C3C672 /* PADropHandler.framework in Copy Frameworks */,
 				65AA3AD014D13B0D00250F83 /* ShortcutRecorder.framework in Copy Frameworks */,
 			);
@@ -666,7 +659,6 @@
 		4860846C0AB4371200CB0352 /* PAFilenamesDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAFilenamesDropDataHandler.m; path = ../../PAFilenamesDropDataHandler.m; sourceTree = "<group>"; };
 		4860851A0AB43A4500CB0352 /* PAURLDropDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAURLDropDataHandler.h; path = ../../Plugins/URLDropHandler/PAURLDropDataHandler.h; sourceTree = "<group>"; };
 		4860851B0AB43A4500CB0352 /* PAURLDropDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAURLDropDataHandler.m; path = ../../Plugins/URLDropHandler/PAURLDropDataHandler.m; sourceTree = "<group>"; };
-		4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNTagging.xcodeproj; path = ../../../NNTagging/trunk/NNTagging.xcodeproj; sourceTree = "<group>"; };
 		486DC74E0ACD3B2D00BE0F54 /* PATagManagementViewMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagManagementViewMainView.h; sourceTree = "<group>"; };
 		486DC74F0ACD3B2D00BE0F54 /* PATagManagementViewMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagManagementViewMainView.m; sourceTree = "<group>"; };
 		486EBA4309D68F16000C154C /* PAFileBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFileBox.m; sourceTree = "<group>"; };
@@ -754,6 +746,7 @@
 		6530FF350AF2229400D7A79A /* PATaggerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATaggerTableView.m; sourceTree = "<group>"; };
 		6531BB6B0FA05ED20038D287 /* PAStatusBarLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStatusBarLink.h; sourceTree = "<group>"; };
 		6531BB6C0FA05ED20038D287 /* PAStatusBarLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStatusBarLink.m; sourceTree = "<group>"; };
+		6534CF1618673E8B004C2E8D /* NNTagging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNTagging.xcodeproj; path = NNTagging/NNTagging.xcodeproj; sourceTree = "<group>"; };
 		6534E0E90BA1B38A0015D466 /* MenuBarIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIcon.tif; sourceTree = "<group>"; };
 		6534E0EA0BA1B38A0015D466 /* MenuBarIconAlt.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MenuBarIconAlt.tif; sourceTree = "<group>"; };
 		653948DA0C0359C4001705D6 /* button-goto.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "button-goto.tif"; sourceTree = "<group>"; };
@@ -811,7 +804,6 @@
 		6560C862148A81FE001704FA /* PAAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAppStoreWindow.m; sourceTree = "<group>"; };
 		6563884909E419D300BE59AE /* PAResultsItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAResultsItemCell.h; sourceTree = "<group>"; };
 		6563884A09E419D300BE59AE /* PAResultsItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAResultsItemCell.m; sourceTree = "<group>"; };
-		656A0DC614C998800079DB46 /* NNTagging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NNTagging.framework; path = "../../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release/NNTagging.framework"; sourceTree = "<group>"; };
 		656BAADB0D6DE4B600AB3FDF /* PATagsPaneTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATagsPaneTagsView.h; sourceTree = "<group>"; };
 		656BAADC0D6DE4B600AB3FDF /* PATagsPaneTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATagsPaneTagsView.m; sourceTree = "<group>"; };
 		656C20000AECEB56009CAA51 /* NSDateFormatter+FriendlyFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+FriendlyFormat.h"; sourceTree = "<group>"; };
@@ -966,7 +958,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4863B45A14CB060300F92A59 /* NNTagging.framework in Frameworks */,
+				6534CF1F18673F1B004C2E8D /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -974,7 +966,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4863B45814CB05FB00F92A59 /* NNTagging.framework in Frameworks */,
+				6534CF2018673F1F004C2E8D /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -983,7 +975,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4815A1CA0AEFA06400969296 /* PADropHandler.framework in Frameworks */,
-				4863B45914CB05FF00F92A59 /* NNTagging.framework in Frameworks */,
+				6534CF2118673F58004C2E8D /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -992,6 +984,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				483C8AB20D6C520B0051C8C3 /* PADropHandler.framework in Frameworks */,
+				6534CF2318673F60004C2E8D /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,6 +1000,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4815A1C10AEFA05800969296 /* PADropHandler.framework in Frameworks */,
+				6534CF2218673F5D004C2E8D /* NNTagging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,6 +1009,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				483B906414A39CBC00DE3CDD /* Security.framework in Frameworks */,
+				6534CF1E18673F17004C2E8D /* NNTagging.framework in Frameworks */,
 				48186F6A0BE4C87F000B4638 /* NNFilterEngine.framework in Frameworks */,
 				65AA3ADE14D13E1B00250F83 /* BGHUDAppKit.framework in Frameworks */,
 				48893B590AF0AB1600BA0B50 /* PADropHandler.framework in Frameworks */,
@@ -1023,7 +1018,6 @@
 				650359A00F5D832F00BC204D /* Carbon.framework in Frameworks */,
 				48E760990F7F8B4400F9EEBA /* AddressBook.framework in Frameworks */,
 				489BAAA91046FFF200E9D7A3 /* QuickLook.framework in Frameworks */,
-				4863B45714CB05EF00F92A59 /* NNTagging.framework in Frameworks */,
 				65AA3ACF14D13B0700250F83 /* ShortcutRecorder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1068,7 +1062,6 @@
 			isa = PBXGroup;
 			children = (
 				65AA3ACE14D13B0700250F83 /* ShortcutRecorder.framework */,
-				656A0DC614C998800079DB46 /* NNTagging.framework */,
 				6515998A0F6C3ED60089273E /* BGHUDAppKit.framework */,
 			);
 			name = "Other Frameworks";
@@ -1137,7 +1130,7 @@
 		4802193B0C02CE42001CF480 /* Subprojects */ = {
 			isa = PBXGroup;
 			children = (
-				4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */,
+				6534CF1618673E8B004C2E8D /* NNTagging.xcodeproj */,
 				480219430C02CE7B001CF480 /* WeblocImporter.xcodeproj */,
 			);
 			path = Subprojects;
@@ -1423,14 +1416,6 @@
 			name = StatusItem;
 			sourceTree = "<group>";
 		};
-		4863B44B14CB056300F92A59 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4863B45314CB056300F92A59 /* NNTagging.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4870698B0A0C930700A3ADE2 /* Type-Ahead Find */ = {
 			isa = PBXGroup;
 			children = (
@@ -1609,6 +1594,14 @@
 				483272220AA42C7E003D98A6 /* Preferences */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		6534CF1718673E8B004C2E8D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6534CF1C18673E8B004C2E8D /* NNTagging.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		653948D90C035993001705D6 /* Buttons */ = {
@@ -2411,7 +2404,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4863B45514CB059B00F92A59 /* PBXTargetDependency */,
 				483185030AEF92FD00C3C672 /* PBXTargetDependency */,
 				480721EC0AEFE8F40024118D /* PBXTargetDependency */,
 				48186F8F0BE4C930000B4638 /* PBXTargetDependency */,
@@ -2457,8 +2449,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 4863B44B14CB056300F92A59 /* Products */;
-					ProjectRef = 4863B44A14CB056300F92A59 /* NNTagging.xcodeproj */;
+					ProductGroup = 6534CF1718673E8B004C2E8D /* Products */;
+					ProjectRef = 6534CF1618673E8B004C2E8D /* NNTagging.xcodeproj */;
 				},
 				{
 					ProductGroup = 480219440C02CE7B001CF480 /* Products */;
@@ -2488,11 +2480,11 @@
 			remoteRef = 480219470C02CE7B001CF480 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4863B45314CB056300F92A59 /* NNTagging.framework */ = {
+		6534CF1C18673E8B004C2E8D /* NNTagging.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = NNTagging.framework;
-			remoteRef = 4863B45214CB056300F92A59 /* PBXContainerItemProxy */;
+			remoteRef = 6534CF1B18673E8B004C2E8D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2929,11 +2921,6 @@
 			target = 8D1107260486CEB800E47090 /* Punakea */;
 			targetProxy = 48404B130AF8B3A6001F7BB7 /* PBXContainerItemProxy */;
 		};
-		4863B45514CB059B00F92A59 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NNTagging;
-			targetProxy = 4863B45414CB059B00F92A59 /* PBXContainerItemProxy */;
-		};
 		48C633C10AEF9724008F0E94 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 483184970AEF8D8600C3C672 /* PADropHandler */;
@@ -3094,16 +3081,17 @@
 		48186F3C0BE4C7C0000B4638 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
-					"\"$(SRCROOT)/build/Release\"",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
+					"\\\"$(SRCROOT)/build/Release\\\"",
+					"\\\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\\\"",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -3126,7 +3114,7 @@
 				);
 				PRODUCT_NAME = NNFilterEngine;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -3134,16 +3122,17 @@
 		48186F3D0BE4C7C0000B4638 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
-					"\"$(SRCROOT)/build/Release\"",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\"",
+					"\\\"$(SRCROOT)/build/Release\\\"",
+					"\\\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release\\\"",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/NNTagging-eqrukcedllagiifmeqmfebhdsoht/Build/Products/Release",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks\"";
 				FRAMEWORK_VERSION = A;
@@ -3164,7 +3153,7 @@
 				);
 				PRODUCT_NAME = NNFilterEngine;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -3172,8 +3161,8 @@
 		4831849B0AEF8D8700C3C672 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3202,7 +3191,7 @@
 				);
 				PRODUCT_NAME = PADropHandler;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -3210,8 +3199,8 @@
 		4831849C0AEF8D8700C3C672 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3238,7 +3227,7 @@
 				);
 				PRODUCT_NAME = PADropHandler;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -3246,8 +3235,8 @@
 		483184E60AEF91A700C3C672 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3273,7 +3262,7 @@
 				);
 				PRODUCT_NAME = FilenamesDropHandler;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = YES;
 			};
@@ -3282,8 +3271,8 @@
 		483184E70AEF91A700C3C672 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3307,7 +3296,7 @@
 				);
 				PRODUCT_NAME = FilenamesDropHandler;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
 			};
@@ -3316,8 +3305,8 @@
 		483C8A270D6C50BC0051C8C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3341,7 +3330,7 @@
 				);
 				PRODUCT_NAME = PublicUrlDropHandler;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = YES;
@@ -3351,8 +3340,8 @@
 		483C8A290D6C50BC0051C8C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3375,7 +3364,7 @@
 				);
 				PRODUCT_NAME = PublicUrlDropHandler;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
@@ -3386,7 +3375,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Punakea.app/Contents/MacOS/Punakea";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(value)",
@@ -3411,7 +3400,7 @@
 				);
 				PRODUCT_NAME = "Unit Testing";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
 			};
@@ -3421,7 +3410,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Punakea.app/Contents/MacOS/Punakea";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(value)",
@@ -3444,7 +3433,7 @@
 				);
 				PRODUCT_NAME = "Unit Testing";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
@@ -3479,8 +3468,8 @@
 		48C633BE0AEF9721008F0E94 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3506,7 +3495,7 @@
 				);
 				PRODUCT_NAME = WebURLsWithTitlesPboardTypeDropHandler;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = YES;
@@ -3516,8 +3505,8 @@
 		48C633BF0AEF9721008F0E94 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3541,7 +3530,7 @@
 				);
 				PRODUCT_NAME = WebURLsWithTitlesPboardTypeDropHandler;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = punakeaDropHandler;
 				ZERO_LINK = NO;
@@ -3572,8 +3561,8 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS)",
@@ -3617,7 +3606,7 @@
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = Punakea;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -3626,8 +3615,8 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
@@ -3663,7 +3652,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = Punakea;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -3671,8 +3660,8 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3688,7 +3677,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
 			};
 			name = Debug;
@@ -3696,12 +3685,8 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					x86_64,
-					i386,
-				);
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3716,7 +3701,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
 			};
 			name = Release;

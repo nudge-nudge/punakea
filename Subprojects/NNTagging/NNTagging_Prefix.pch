@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'NNTagging' target in the 'NNTagging' project.
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
+
+#define LCLLogFile NNTaggingLCLLogFile

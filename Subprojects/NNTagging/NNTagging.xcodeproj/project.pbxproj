@@ -1,0 +1,1063 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		48AE6B340B667EB000E4EEE9 /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 48AE6B4B0B667EDD00E4EEE9 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				48AE6B330B667EB000E4EEE9 /* Run Doxygen */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		4804F5830F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4804F5810F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4804F5840F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4804F5820F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.m */; };
+		4807E2840F7D0CBE00165CA9 /* NNTagBackup.h in Headers */ = {isa = PBXBuildFile; fileRef = 4807E2820F7D0CBE00165CA9 /* NNTagBackup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4807E2850F7D0CBE00165CA9 /* NNTagBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4807E2830F7D0CBE00165CA9 /* NNTagBackup.m */; };
+		481E5A121124B2BE001FE5C5 /* LCLLogFileConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 481E5A111124B2BE001FE5C5 /* LCLLogFileConfig.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		481E5A1F1124B344001FE5C5 /* lcl_config_extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 481E5A1E1124B344001FE5C5 /* lcl_config_extensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		482661460F64330700E0C348 /* NNTagToFinderCommentWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 482661440F64330700E0C348 /* NNTagToFinderCommentWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		482661470F64330700E0C348 /* NNTagToFinderCommentWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 482661450F64330700E0C348 /* NNTagToFinderCommentWriter.m */; };
+		482661510F6438AA00E0C348 /* NNTagToOpenMetaWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4826614F0F6438AA00E0C348 /* NNTagToOpenMetaWriter.m */; };
+		4828B1AF0D4DF050006EAA1D /* NNTagDirectoryWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4828B1AD0D4DF050006EAA1D /* NNTagDirectoryWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4828B1B00D4DF050006EAA1D /* NNTagDirectoryWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4828B1AE0D4DF050006EAA1D /* NNTagDirectoryWriter.m */; };
+		4836668C0B5F701200509B60 /* NNQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4836666E0B5F701200509B60 /* NNQueue.m */; };
+		4836668D0B5F701200509B60 /* NNQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 4836666F0B5F701200509B60 /* NNQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4836668E0B5F701200509B60 /* NNTagSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666700B5F701200509B60 /* NNTagSet.m */; };
+		4836668F0B5F701200509B60 /* NNTagSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666710B5F701200509B60 /* NNTagSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483666900B5F701200509B60 /* NNTagSave.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666720B5F701200509B60 /* NNTagSave.m */; };
+		483666910B5F701200509B60 /* NNTagSave.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666730B5F701200509B60 /* NNTagSave.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483666920B5F701200509B60 /* NNTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666740B5F701200509B60 /* NNTags.m */; };
+		483666930B5F701200509B60 /* NNTags.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666750B5F701200509B60 /* NNTags.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483666940B5F701200509B60 /* NNTaggableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666760B5F701200509B60 /* NNTaggableObject.m */; };
+		483666950B5F701200509B60 /* NNTaggableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666770B5F701200509B60 /* NNTaggableObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483666960B5F701200509B60 /* NNTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666780B5F701200509B60 /* NNTag.m */; };
+		483666970B5F701200509B60 /* NNTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666790B5F701200509B60 /* NNTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483666980B5F701200509B60 /* NNSimpleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 4836667A0B5F701200509B60 /* NNSimpleTag.m */; };
+		483666990B5F701200509B60 /* NNSimpleTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 4836667B0B5F701200509B60 /* NNSimpleTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4836669A0B5F701200509B60 /* NNSelectedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 4836667C0B5F701200509B60 /* NNSelectedTags.m */; };
+		4836669B0B5F701200509B60 /* NNSelectedTags.h in Headers */ = {isa = PBXBuildFile; fileRef = 4836667D0B5F701200509B60 /* NNSelectedTags.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4836669C0B5F701200509B60 /* NNRelatedTagsStandalone.m in Sources */ = {isa = PBXBuildFile; fileRef = 4836667E0B5F701200509B60 /* NNRelatedTagsStandalone.m */; };
+		4836669D0B5F701200509B60 /* NNRelatedTagsStandalone.h in Headers */ = {isa = PBXBuildFile; fileRef = 4836667F0B5F701200509B60 /* NNRelatedTagsStandalone.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4836669E0B5F701200509B60 /* NNRelatedTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666800B5F701200509B60 /* NNRelatedTags.m */; };
+		4836669F0B5F701200509B60 /* NNRelatedTags.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666810B5F701200509B60 /* NNRelatedTags.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483666A00B5F701200509B60 /* NNQueryBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666820B5F701200509B60 /* NNQueryBundle.m */; };
+		483666A10B5F701200509B60 /* NNQueryBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666830B5F701200509B60 /* NNQueryBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483666A20B5F701200509B60 /* NNQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666840B5F701200509B60 /* NNQuery.m */; };
+		483666A30B5F701200509B60 /* NNQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666850B5F701200509B60 /* NNQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483666A40B5F701200509B60 /* NNFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666860B5F701200509B60 /* NNFile.m */; };
+		483666A50B5F701200509B60 /* NNFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666870B5F701200509B60 /* NNFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		483666A60B5F701200509B60 /* NSFileManager+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 483666880B5F701200509B60 /* NSFileManager+Extensions.m */; };
+		483666A70B5F701200509B60 /* NSFileManager+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 483666890B5F701200509B60 /* NSFileManager+Extensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		485706B20BE698C000797286 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 485706B10BE698C000797286 /* LICENSE */; };
+		485C51A10B62199F00AEB8FD /* NNCompatbilityChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 485C519F0B62199F00AEB8FD /* NNCompatbilityChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		485C51A20B62199F00AEB8FD /* NNCompatbilityChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C51A00B62199F00AEB8FD /* NNCompatbilityChecker.m */; };
+		485D46D30F8BDA6500E202F8 /* lcl.h in Headers */ = {isa = PBXBuildFile; fileRef = 485D46CF0F8BDA6500E202F8 /* lcl.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		485D46D40F8BDA6500E202F8 /* lcl.m in Sources */ = {isa = PBXBuildFile; fileRef = 485D46D00F8BDA6500E202F8 /* lcl.m */; };
+		485D46D50F8BDA6500E202F8 /* lcl_config_components.h in Headers */ = {isa = PBXBuildFile; fileRef = 485D46D10F8BDA6500E202F8 /* lcl_config_components.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		485D46D90F8BDA7000E202F8 /* lcl_config_logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 485D46D60F8BDA7000E202F8 /* lcl_config_logger.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		4863B47414CB0F6900F92A59 /* OpenMeta.h in Headers */ = {isa = PBXBuildFile; fileRef = 4863B46C14CB0F6900F92A59 /* OpenMeta.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4863B47514CB0F6900F92A59 /* OpenMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 4863B46D14CB0F6900F92A59 /* OpenMeta.m */; };
+		4863B47814CB0F6900F92A59 /* OpenMetaBackup.h in Headers */ = {isa = PBXBuildFile; fileRef = 4863B47014CB0F6900F92A59 /* OpenMetaBackup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4863B47914CB0F6900F92A59 /* OpenMetaBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4863B47114CB0F6900F92A59 /* OpenMetaBackup.m */; };
+		4863B47A14CB0F6900F92A59 /* OpenMetaPrefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 4863B47214CB0F6900F92A59 /* OpenMetaPrefs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4863B47B14CB0F6900F92A59 /* OpenMetaPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 4863B47314CB0F6900F92A59 /* OpenMetaPrefs.m */; };
+		486943720D46186C0022E21D /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486943710D46186C0022E21D /* ScriptingBridge.framework */; };
+		486C5EB70C85EBB800301D48 /* NNSimpleTagToFileWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 486C5EB50C85EBB800301D48 /* NNSimpleTagToFileWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		486C5EB80C85EBB800301D48 /* NNSimpleTagToFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 486C5EB60C85EBB800301D48 /* NNSimpleTagToFileWriter.m */; };
+		486F95720C057717008AB8BD /* NNContentTypeTreeQueryFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 486F95700C057717008AB8BD /* NNContentTypeTreeQueryFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		486F95730C057717008AB8BD /* NNContentTypeTreeQueryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 486F95710C057717008AB8BD /* NNContentTypeTreeQueryFilter.m */; };
+		486F95880C057809008AB8BD /* NNSimpleQueryFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 486F95860C057809008AB8BD /* NNSimpleQueryFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		486F95890C057809008AB8BD /* NNSimpleQueryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 486F95870C057809008AB8BD /* NNSimpleQueryFilter.m */; };
+		4872216D0D52227D004F0014 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4872216C0D52227D004F0014 /* Settings.plist */; };
+		4872216F0D522285004F0014 /* Finder.h in Headers */ = {isa = PBXBuildFile; fileRef = 4872216E0D522285004F0014 /* Finder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4877268B0C89B0C30068BD48 /* NNTagStoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 487726890C89B0C30068BD48 /* NNTagStoreManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4877268C0C89B0C30068BD48 /* NNTagStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4877268A0C89B0C30068BD48 /* NNTagStoreManager.m */; };
+		487837CB0C818DC100F5C5D4 /* NNTagToFileWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 487837C90C818DC100F5C5D4 /* NNTagToFileWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		487837CC0C818DC100F5C5D4 /* NNTagToFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 487837CA0C818DC100F5C5D4 /* NNTagToFileWriter.m */; };
+		487837DA0C81933400F5C5D4 /* NNSecureTagToFileWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 487837D80C81933400F5C5D4 /* NNSecureTagToFileWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		487837DB0C81933400F5C5D4 /* NNSecureTagToFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 487837D90C81933400F5C5D4 /* NNSecureTagToFileWriter.m */; };
+		4879C5F80D6C722500A3DC74 /* MDSimpleGrouping.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4879C5F70D6C722500A3DC74 /* MDSimpleGrouping.strings */; };
+		488AB7BF1170FBED0053ADBD /* NNFolderToTagImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 488AB7BD1170FBED0053ADBD /* NNFolderToTagImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		488AB7C01170FBED0053ADBD /* NNFolderToTagImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 488AB7BE1170FBED0053ADBD /* NNFolderToTagImporter.m */; };
+		48AABA74110CACAD00819713 /* LCLLogFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 48AABA72110CACAD00819713 /* LCLLogFile.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		48AABA75110CACAD00819713 /* LCLLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AABA73110CACAD00819713 /* LCLLogFile.m */; };
+		48AC0FAB0D61F395007E2BF9 /* NNTempTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 48AC0FA90D61F395007E2BF9 /* NNTempTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48AC0FAC0D61F395007E2BF9 /* NNTempTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 48AC0FAA0D61F395007E2BF9 /* NNTempTag.m */; };
+		48B8E8C00BF0B956004A07B9 /* NNQueryFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 48B8E8BE0BF0B956004A07B9 /* NNQueryFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B8E8C10BF0B956004A07B9 /* NNQueryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B8E8BF0BF0B956004A07B9 /* NNQueryFilter.m */; };
+		48D8BA050D6EB5C300389D66 /* NNTagChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D8BA030D6EB5C300389D66 /* NNTagChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48D8BA060D6EB5C300389D66 /* NNTagChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D8BA040D6EB5C300389D66 /* NNTagChecker.m */; };
+		48E8AF8E0D5AEBBA00370942 /* UKFileWatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E8AF860D5AEBBA00370942 /* UKFileWatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48E8AF8F0D5AEBBA00370942 /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E8AF870D5AEBBA00370942 /* UKFileWatcher.m */; };
+		48E8AF900D5AEBBA00370942 /* UKFNSubscribeFileWatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E8AF880D5AEBBA00370942 /* UKFNSubscribeFileWatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48E8AF910D5AEBBA00370942 /* UKFNSubscribeFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E8AF890D5AEBBA00370942 /* UKFNSubscribeFileWatcher.m */; };
+		48E8AF920D5AEBBA00370942 /* UKKQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E8AF8A0D5AEBBA00370942 /* UKKQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48E8AF930D5AEBBA00370942 /* UKKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E8AF8B0D5AEBBA00370942 /* UKKQueue.m */; };
+		48E8AF940D5AEBBA00370942 /* UKMainThreadProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E8AF8C0D5AEBBA00370942 /* UKMainThreadProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48E8AF950D5AEBBA00370942 /* UKMainThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E8AF8D0D5AEBBA00370942 /* UKMainThreadProxy.m */; };
+		48F341260D3C995500D3DB70 /* NNTagging.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F341240D3C995500D3DB70 /* NNTagging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48F341270D3C995500D3DB70 /* NNTagging.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F341250D3C995500D3DB70 /* NNTagging.m */; };
+		48F53DDD0F6EE584001C8C6F /* NNTagToOpenMetaWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4826614E0F6438AA00E0C348 /* NNTagToOpenMetaWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48FDDD070D5303080007C9CE /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 48FDDD010D5303080007C9CE /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48FDDD080D5303080007C9CE /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FDDD020D5303080007C9CE /* FMDatabase.m */; };
+		48FDDD0B0D5303080007C9CE /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 48FDDD050D5303080007C9CE /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48FDDD0C0D5303080007C9CE /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FDDD060D5303080007C9CE /* FMResultSet.m */; };
+		6508EB850D50C5B5004DA882 /* NNCommonNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 6508EB830D50C5B5004DA882 /* NNCommonNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6508EB860D50C5B5004DA882 /* NNCommonNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 6508EB840D50C5B5004DA882 /* NNCommonNotifications.m */; };
+		6544C97714DC4FC100627280 /* NNMultipleAttributesQueryFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6544C97514DC4FC100627280 /* NNMultipleAttributesQueryFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6544C97814DC4FC100627280 /* NNMultipleAttributesQueryFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6544C97614DC4FC100627280 /* NNMultipleAttributesQueryFilter.m */; };
+		655AEB750BF45E9C005DD0C1 /* MDSimpleGrouping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 486AD8FD0BF20D01002B9B5C /* MDSimpleGrouping.plist */; };
+		65AA74980BF358600054407D /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65AA74970BF358600054407D /* Global.strings */; };
+		65C3218818547E5800422DCE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C3218618547E1B00422DCE /* libsqlite3.dylib */; };
+		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
+		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
+		B62C8AE9115CF18000CCB83B /* NNAssociationRuleDiscoveryOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = B62C8AE7115CF18000CCB83B /* NNAssociationRuleDiscoveryOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B62C8AEA115CF18100CCB83B /* NNAssociationRuleDiscoveryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B62C8AE8115CF18000CCB83B /* NNAssociationRuleDiscoveryOperation.m */; };
+		B62C8B72115CF9B400CCB83B /* NNAssociationRules.h in Headers */ = {isa = PBXBuildFile; fileRef = B62C8B70115CF9B400CCB83B /* NNAssociationRules.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B62C8B73115CF9B400CCB83B /* NNAssociationRules.m in Sources */ = {isa = PBXBuildFile; fileRef = B62C8B71115CF9B400CCB83B /* NNAssociationRules.m */; };
+		DA7177D510615DE7008EA2D6 /* NNAprioriItemset.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7177D110615DE7008EA2D6 /* NNAprioriItemset.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA7177D610615DE7008EA2D6 /* NNAprioriItemset.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7177D210615DE7008EA2D6 /* NNAprioriItemset.m */; };
+		DA7177D710615DE7008EA2D6 /* NNApriori.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7177D310615DE7008EA2D6 /* NNApriori.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA7177D810615DE7008EA2D6 /* NNApriori.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7177D410615DE7008EA2D6 /* NNApriori.m */; };
+		DABF352A1062CBAB000429EC /* NNAssociationRule.h in Headers */ = {isa = PBXBuildFile; fileRef = DABF35281062CBAB000429EC /* NNAssociationRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DABF352B1062CBAB000429EC /* NNAssociationRule.m in Sources */ = {isa = PBXBuildFile; fileRef = DABF35291062CBAB000429EC /* NNAssociationRule.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		486943110D45E47B0022E21D /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = UNUSED;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).h",
+			);
+			script = "sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		48DBBAE40F644FBE0037EEC6 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		32DBCF5E0370ADEE00C91783 /* NNTagging_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagging_Prefix.pch; sourceTree = "<group>"; };
+		4804F5810F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSymlinkTagDirectoryWriter.h; sourceTree = "<group>"; };
+		4804F5820F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNSymlinkTagDirectoryWriter.m; sourceTree = "<group>"; };
+		4807E2820F7D0CBE00165CA9 /* NNTagBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagBackup.h; sourceTree = "<group>"; };
+		4807E2830F7D0CBE00165CA9 /* NNTagBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTagBackup.m; sourceTree = "<group>"; };
+		481E5A111124B2BE001FE5C5 /* LCLLogFileConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCLLogFileConfig.h; sourceTree = "<group>"; };
+		481E5A1E1124B344001FE5C5 /* lcl_config_extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lcl_config_extensions.h; sourceTree = "<group>"; };
+		482661440F64330700E0C348 /* NNTagToFinderCommentWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagToFinderCommentWriter.h; sourceTree = "<group>"; };
+		482661450F64330700E0C348 /* NNTagToFinderCommentWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTagToFinderCommentWriter.m; sourceTree = "<group>"; };
+		4826614E0F6438AA00E0C348 /* NNTagToOpenMetaWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagToOpenMetaWriter.h; sourceTree = "<group>"; };
+		4826614F0F6438AA00E0C348 /* NNTagToOpenMetaWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTagToOpenMetaWriter.m; sourceTree = "<group>"; };
+		4828B1AD0D4DF050006EAA1D /* NNTagDirectoryWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagDirectoryWriter.h; sourceTree = "<group>"; };
+		4828B1AE0D4DF050006EAA1D /* NNTagDirectoryWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTagDirectoryWriter.m; sourceTree = "<group>"; };
+		4836666E0B5F701200509B60 /* NNQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNQueue.m; sourceTree = "<group>"; };
+		4836666F0B5F701200509B60 /* NNQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNQueue.h; sourceTree = "<group>"; };
+		483666700B5F701200509B60 /* NNTagSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTagSet.m; sourceTree = "<group>"; };
+		483666710B5F701200509B60 /* NNTagSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagSet.h; sourceTree = "<group>"; };
+		483666720B5F701200509B60 /* NNTagSave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTagSave.m; sourceTree = "<group>"; };
+		483666730B5F701200509B60 /* NNTagSave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagSave.h; sourceTree = "<group>"; };
+		483666740B5F701200509B60 /* NNTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTags.m; sourceTree = "<group>"; };
+		483666750B5F701200509B60 /* NNTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTags.h; sourceTree = "<group>"; };
+		483666760B5F701200509B60 /* NNTaggableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTaggableObject.m; sourceTree = "<group>"; };
+		483666770B5F701200509B60 /* NNTaggableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTaggableObject.h; sourceTree = "<group>"; };
+		483666780B5F701200509B60 /* NNTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTag.m; sourceTree = "<group>"; };
+		483666790B5F701200509B60 /* NNTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTag.h; sourceTree = "<group>"; };
+		4836667A0B5F701200509B60 /* NNSimpleTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNSimpleTag.m; sourceTree = "<group>"; };
+		4836667B0B5F701200509B60 /* NNSimpleTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSimpleTag.h; sourceTree = "<group>"; };
+		4836667C0B5F701200509B60 /* NNSelectedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNSelectedTags.m; sourceTree = "<group>"; };
+		4836667D0B5F701200509B60 /* NNSelectedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSelectedTags.h; sourceTree = "<group>"; };
+		4836667E0B5F701200509B60 /* NNRelatedTagsStandalone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRelatedTagsStandalone.m; sourceTree = "<group>"; };
+		4836667F0B5F701200509B60 /* NNRelatedTagsStandalone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRelatedTagsStandalone.h; sourceTree = "<group>"; };
+		483666800B5F701200509B60 /* NNRelatedTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRelatedTags.m; sourceTree = "<group>"; };
+		483666810B5F701200509B60 /* NNRelatedTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRelatedTags.h; sourceTree = "<group>"; };
+		483666820B5F701200509B60 /* NNQueryBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNQueryBundle.m; sourceTree = "<group>"; };
+		483666830B5F701200509B60 /* NNQueryBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNQueryBundle.h; sourceTree = "<group>"; };
+		483666840B5F701200509B60 /* NNQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNQuery.m; sourceTree = "<group>"; };
+		483666850B5F701200509B60 /* NNQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNQuery.h; sourceTree = "<group>"; };
+		483666860B5F701200509B60 /* NNFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNFile.m; sourceTree = "<group>"; };
+		483666870B5F701200509B60 /* NNFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNFile.h; sourceTree = "<group>"; };
+		483666880B5F701200509B60 /* NSFileManager+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Extensions.m"; sourceTree = "<group>"; };
+		483666890B5F701200509B60 /* NSFileManager+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Extensions.h"; sourceTree = "<group>"; };
+		484F298811871CDE003797CF /* Doxyfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Doxyfile; path = Resources/Doxyfile; sourceTree = "<group>"; };
+		484F298B11871CFD003797CF /* empty_file */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = empty_file; path = Resources/empty_file; sourceTree = "<group>"; };
+		485706B10BE698C000797286 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		485C519F0B62199F00AEB8FD /* NNCompatbilityChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNCompatbilityChecker.h; sourceTree = "<group>"; };
+		485C51A00B62199F00AEB8FD /* NNCompatbilityChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNCompatbilityChecker.m; sourceTree = "<group>"; };
+		485D46CF0F8BDA6500E202F8 /* lcl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lcl.h; sourceTree = "<group>"; };
+		485D46D00F8BDA6500E202F8 /* lcl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lcl.m; sourceTree = "<group>"; };
+		485D46D10F8BDA6500E202F8 /* lcl_config_components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lcl_config_components.h; sourceTree = "<group>"; };
+		485D46D60F8BDA7000E202F8 /* lcl_config_logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lcl_config_logger.h; sourceTree = "<group>"; };
+		4863B46C14CB0F6900F92A59 /* OpenMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenMeta.h; sourceTree = "<group>"; };
+		4863B46D14CB0F6900F92A59 /* OpenMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenMeta.m; sourceTree = "<group>"; };
+		4863B47014CB0F6900F92A59 /* OpenMetaBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenMetaBackup.h; sourceTree = "<group>"; };
+		4863B47114CB0F6900F92A59 /* OpenMetaBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenMetaBackup.m; sourceTree = "<group>"; };
+		4863B47214CB0F6900F92A59 /* OpenMetaPrefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenMetaPrefs.h; sourceTree = "<group>"; };
+		4863B47314CB0F6900F92A59 /* OpenMetaPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenMetaPrefs.m; sourceTree = "<group>"; };
+		486943710D46186C0022E21D /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
+		486AD8FD0BF20D01002B9B5C /* MDSimpleGrouping.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = MDSimpleGrouping.plist; sourceTree = "<group>"; };
+		486C5EB50C85EBB800301D48 /* NNSimpleTagToFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSimpleTagToFileWriter.h; sourceTree = "<group>"; };
+		486C5EB60C85EBB800301D48 /* NNSimpleTagToFileWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNSimpleTagToFileWriter.m; sourceTree = "<group>"; };
+		486F95700C057717008AB8BD /* NNContentTypeTreeQueryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNContentTypeTreeQueryFilter.h; sourceTree = "<group>"; };
+		486F95710C057717008AB8BD /* NNContentTypeTreeQueryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNContentTypeTreeQueryFilter.m; sourceTree = "<group>"; };
+		486F95860C057809008AB8BD /* NNSimpleQueryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSimpleQueryFilter.h; sourceTree = "<group>"; };
+		486F95870C057809008AB8BD /* NNSimpleQueryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNSimpleQueryFilter.m; sourceTree = "<group>"; };
+		4872216C0D52227D004F0014 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Settings.plist; path = Resources/Settings.plist; sourceTree = "<group>"; };
+		4872216E0D522285004F0014 /* Finder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Finder.h; path = Source/Finder.h; sourceTree = "<group>"; };
+		487726890C89B0C30068BD48 /* NNTagStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NNTagStoreManager.h; sourceTree = "<group>"; };
+		4877268A0C89B0C30068BD48 /* NNTagStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NNTagStoreManager.m; sourceTree = "<group>"; };
+		487837C90C818DC100F5C5D4 /* NNTagToFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagToFileWriter.h; sourceTree = "<group>"; };
+		487837CA0C818DC100F5C5D4 /* NNTagToFileWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTagToFileWriter.m; sourceTree = "<group>"; };
+		487837D80C81933400F5C5D4 /* NNSecureTagToFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNSecureTagToFileWriter.h; sourceTree = "<group>"; };
+		487837D90C81933400F5C5D4 /* NNSecureTagToFileWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNSecureTagToFileWriter.m; sourceTree = "<group>"; };
+		4879C5F50D6C721800A3DC74 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/MDSimpleGrouping.strings; sourceTree = "<group>"; };
+		488AB7BD1170FBED0053ADBD /* NNFolderToTagImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNFolderToTagImporter.h; sourceTree = "<group>"; };
+		488AB7BE1170FBED0053ADBD /* NNFolderToTagImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNFolderToTagImporter.m; sourceTree = "<group>"; };
+		48AABA72110CACAD00819713 /* LCLLogFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCLLogFile.h; sourceTree = "<group>"; };
+		48AABA73110CACAD00819713 /* LCLLogFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCLLogFile.m; sourceTree = "<group>"; };
+		48AC0FA90D61F395007E2BF9 /* NNTempTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTempTag.h; sourceTree = "<group>"; };
+		48AC0FAA0D61F395007E2BF9 /* NNTempTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTempTag.m; sourceTree = "<group>"; };
+		48B8E8BE0BF0B956004A07B9 /* NNQueryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNQueryFilter.h; sourceTree = "<group>"; };
+		48B8E8BF0BF0B956004A07B9 /* NNQueryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNQueryFilter.m; sourceTree = "<group>"; };
+		48D8BA030D6EB5C300389D66 /* NNTagChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagChecker.h; sourceTree = "<group>"; };
+		48D8BA040D6EB5C300389D66 /* NNTagChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTagChecker.m; sourceTree = "<group>"; };
+		48E8AF860D5AEBBA00370942 /* UKFileWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFileWatcher.h; sourceTree = "<group>"; };
+		48E8AF870D5AEBBA00370942 /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
+		48E8AF880D5AEBBA00370942 /* UKFNSubscribeFileWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFNSubscribeFileWatcher.h; sourceTree = "<group>"; };
+		48E8AF890D5AEBBA00370942 /* UKFNSubscribeFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFNSubscribeFileWatcher.m; sourceTree = "<group>"; };
+		48E8AF8A0D5AEBBA00370942 /* UKKQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKKQueue.h; sourceTree = "<group>"; };
+		48E8AF8B0D5AEBBA00370942 /* UKKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKKQueue.m; sourceTree = "<group>"; };
+		48E8AF8C0D5AEBBA00370942 /* UKMainThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMainThreadProxy.h; sourceTree = "<group>"; };
+		48E8AF8D0D5AEBBA00370942 /* UKMainThreadProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMainThreadProxy.m; sourceTree = "<group>"; };
+		48F341240D3C995500D3DB70 /* NNTagging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNTagging.h; sourceTree = "<group>"; };
+		48F341250D3C995500D3DB70 /* NNTagging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNTagging.m; sourceTree = "<group>"; };
+		48FDDD010D5303080007C9CE /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		48FDDD020D5303080007C9CE /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		48FDDD050D5303080007C9CE /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		48FDDD060D5303080007C9CE /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		6508EB830D50C5B5004DA882 /* NNCommonNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNCommonNotifications.h; sourceTree = "<group>"; };
+		6508EB840D50C5B5004DA882 /* NNCommonNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNCommonNotifications.m; sourceTree = "<group>"; };
+		6544C97514DC4FC100627280 /* NNMultipleAttributesQueryFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNMultipleAttributesQueryFilter.h; sourceTree = "<group>"; };
+		6544C97614DC4FC100627280 /* NNMultipleAttributesQueryFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNMultipleAttributesQueryFilter.m; sourceTree = "<group>"; };
+		65AA74930BF3585B0054407D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Global.strings; sourceTree = "<group>"; };
+		65C3218618547E1B00422DCE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8DC2EF5B0486A6940098B216 /* NNTagging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NNTagging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B62C8AE7115CF18000CCB83B /* NNAssociationRuleDiscoveryOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNAssociationRuleDiscoveryOperation.h; sourceTree = "<group>"; };
+		B62C8AE8115CF18000CCB83B /* NNAssociationRuleDiscoveryOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNAssociationRuleDiscoveryOperation.m; sourceTree = "<group>"; };
+		B62C8B70115CF9B400CCB83B /* NNAssociationRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNAssociationRules.h; sourceTree = "<group>"; };
+		B62C8B71115CF9B400CCB83B /* NNAssociationRules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNAssociationRules.m; sourceTree = "<group>"; };
+		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		DA7177D110615DE7008EA2D6 /* NNAprioriItemset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNAprioriItemset.h; sourceTree = "<group>"; };
+		DA7177D210615DE7008EA2D6 /* NNAprioriItemset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNAprioriItemset.m; sourceTree = "<group>"; };
+		DA7177D310615DE7008EA2D6 /* NNApriori.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNApriori.h; sourceTree = "<group>"; };
+		DA7177D410615DE7008EA2D6 /* NNApriori.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNApriori.m; sourceTree = "<group>"; };
+		DABF35281062CBAB000429EC /* NNAssociationRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNAssociationRule.h; sourceTree = "<group>"; };
+		DABF35291062CBAB000429EC /* NNAssociationRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNAssociationRule.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DC2EF560486A6940098B216 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65C3218818547E5800422DCE /* libsqlite3.dylib in Frameworks */,
+				8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */,
+				486943720D46186C0022E21D /* ScriptingBridge.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5B0486A6940098B216 /* NNTagging.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* NNTagging */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Source */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				089C1665FE841158C02AAC07 /* Resources */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = NNTagging;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				4826613E0F642ADC00E0C348 /* Frameworks */,
+				4812664E0D49E97C0007C0EE /* Scripting Bridge Headers */,
+				1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */,
+				1058C7B2FEA5585E11CA2CBB /* Other Frameworks */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C1665FE841158C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				484F298511871CD1003797CF /* Documentation */,
+				4872216C0D52227D004F0014 /* Settings.plist */,
+				65AA745D0BF355960054407D /* Strings */,
+				486AD8FD0BF20D01002B9B5C /* MDSimpleGrouping.plist */,
+				485706B10BE698C000797286 /* LICENSE */,
+				8DC2EF5A0486A6940098B216 /* Info.plist */,
+				089C1666FE841158C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DA7177D010615DC8008EA2D6 /* Mining */,
+				481E4C0A0BE4F09D0018B342 /* Collections */,
+				488DFC5A0B7221710062DDC6 /* Tags */,
+				48A2D0C70B5FF245004F84AC /* Query */,
+				48A2D0C40B5FF22A004F84AC /* Taggables */,
+				481E4C100BE4F0DE0018B342 /* Storage */,
+				481E4C130BE4F1020018B342 /* Upgrading */,
+				481E4C0D0BE4F0C30018B342 /* Misc */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65C3218618547E1B00422DCE /* libsqlite3.dylib */,
+				486943710D46186C0022E21D /* ScriptingBridge.framework */,
+				1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7B2FEA5585E11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0867D6A5FE840307C02AAC07 /* AppKit.framework */,
+				D2F7E79907B2D74100F64583 /* CoreData.framework */,
+				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCF5E0370ADEE00C91783 /* NNTagging_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		4804F57F0F7BB99000D6CBA1 /* TagWriters */ = {
+			isa = PBXGroup;
+			children = (
+				487837C90C818DC100F5C5D4 /* NNTagToFileWriter.h */,
+				487837CA0C818DC100F5C5D4 /* NNTagToFileWriter.m */,
+				482661440F64330700E0C348 /* NNTagToFinderCommentWriter.h */,
+				482661450F64330700E0C348 /* NNTagToFinderCommentWriter.m */,
+				487837D80C81933400F5C5D4 /* NNSecureTagToFileWriter.h */,
+				487837D90C81933400F5C5D4 /* NNSecureTagToFileWriter.m */,
+				486C5EB50C85EBB800301D48 /* NNSimpleTagToFileWriter.h */,
+				486C5EB60C85EBB800301D48 /* NNSimpleTagToFileWriter.m */,
+				4826614E0F6438AA00E0C348 /* NNTagToOpenMetaWriter.h */,
+				4826614F0F6438AA00E0C348 /* NNTagToOpenMetaWriter.m */,
+			);
+			name = TagWriters;
+			sourceTree = "<group>";
+		};
+		4804F5800F7BB9A700D6CBA1 /* TagDirectoryWriters */ = {
+			isa = PBXGroup;
+			children = (
+				4828B1AD0D4DF050006EAA1D /* NNTagDirectoryWriter.h */,
+				4828B1AE0D4DF050006EAA1D /* NNTagDirectoryWriter.m */,
+				4804F5810F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.h */,
+				4804F5820F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.m */,
+			);
+			name = TagDirectoryWriters;
+			sourceTree = "<group>";
+		};
+		4812664E0D49E97C0007C0EE /* Scripting Bridge Headers */ = {
+			isa = PBXGroup;
+			children = (
+				4872216E0D522285004F0014 /* Finder.h */,
+			);
+			name = "Scripting Bridge Headers";
+			sourceTree = "<group>";
+		};
+		481E4C0A0BE4F09D0018B342 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				483666750B5F701200509B60 /* NNTags.h */,
+				483666740B5F701200509B60 /* NNTags.m */,
+				483666810B5F701200509B60 /* NNRelatedTags.h */,
+				483666800B5F701200509B60 /* NNRelatedTags.m */,
+				4836667F0B5F701200509B60 /* NNRelatedTagsStandalone.h */,
+				4836667E0B5F701200509B60 /* NNRelatedTagsStandalone.m */,
+				4836667D0B5F701200509B60 /* NNSelectedTags.h */,
+				4836667C0B5F701200509B60 /* NNSelectedTags.m */,
+			);
+			name = Collections;
+			sourceTree = "<group>";
+		};
+		481E4C0D0BE4F0C30018B342 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				482DD7880F9F7F3D0055BC5F /* OpenMeta */,
+				485D46BC0F8BDA4700E202F8 /* Logging */,
+				48E8AF6F0D5AEBA800370942 /* UKKQueue */,
+				48F341240D3C995500D3DB70 /* NNTagging.h */,
+				48F341250D3C995500D3DB70 /* NNTagging.m */,
+				6508EB830D50C5B5004DA882 /* NNCommonNotifications.h */,
+				6508EB840D50C5B5004DA882 /* NNCommonNotifications.m */,
+				483666890B5F701200509B60 /* NSFileManager+Extensions.h */,
+				483666880B5F701200509B60 /* NSFileManager+Extensions.m */,
+				4836666F0B5F701200509B60 /* NNQueue.h */,
+				4836666E0B5F701200509B60 /* NNQueue.m */,
+				488AB7BD1170FBED0053ADBD /* NNFolderToTagImporter.h */,
+				488AB7BE1170FBED0053ADBD /* NNFolderToTagImporter.m */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		481E4C100BE4F0DE0018B342 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				4804F5800F7BB9A700D6CBA1 /* TagDirectoryWriters */,
+				4804F57F0F7BB99000D6CBA1 /* TagWriters */,
+				48FDDCAC0D52FBC40007C9CE /* sqlite3 */,
+				487726890C89B0C30068BD48 /* NNTagStoreManager.h */,
+				4877268A0C89B0C30068BD48 /* NNTagStoreManager.m */,
+				483666730B5F701200509B60 /* NNTagSave.h */,
+				483666720B5F701200509B60 /* NNTagSave.m */,
+				48D8BA030D6EB5C300389D66 /* NNTagChecker.h */,
+				48D8BA040D6EB5C300389D66 /* NNTagChecker.m */,
+				4807E2820F7D0CBE00165CA9 /* NNTagBackup.h */,
+				4807E2830F7D0CBE00165CA9 /* NNTagBackup.m */,
+			);
+			name = Storage;
+			sourceTree = "<group>";
+		};
+		481E4C130BE4F1020018B342 /* Upgrading */ = {
+			isa = PBXGroup;
+			children = (
+				485C519F0B62199F00AEB8FD /* NNCompatbilityChecker.h */,
+				485C51A00B62199F00AEB8FD /* NNCompatbilityChecker.m */,
+			);
+			name = Upgrading;
+			sourceTree = "<group>";
+		};
+		4826613E0F642ADC00E0C348 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		482DD7880F9F7F3D0055BC5F /* OpenMeta */ = {
+			isa = PBXGroup;
+			children = (
+				4863B46C14CB0F6900F92A59 /* OpenMeta.h */,
+				4863B46D14CB0F6900F92A59 /* OpenMeta.m */,
+				4863B47014CB0F6900F92A59 /* OpenMetaBackup.h */,
+				4863B47114CB0F6900F92A59 /* OpenMetaBackup.m */,
+				4863B47214CB0F6900F92A59 /* OpenMetaPrefs.h */,
+				4863B47314CB0F6900F92A59 /* OpenMetaPrefs.m */,
+			);
+			name = OpenMeta;
+			sourceTree = "<group>";
+		};
+		484F298511871CD1003797CF /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				484F298811871CDE003797CF /* Doxyfile */,
+				484F298B11871CFD003797CF /* empty_file */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+		485D46BC0F8BDA4700E202F8 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				485D46D10F8BDA6500E202F8 /* lcl_config_components.h */,
+				485D46D60F8BDA7000E202F8 /* lcl_config_logger.h */,
+				481E5A111124B2BE001FE5C5 /* LCLLogFileConfig.h */,
+				481E5A1E1124B344001FE5C5 /* lcl_config_extensions.h */,
+				485D46CF0F8BDA6500E202F8 /* lcl.h */,
+				485D46D00F8BDA6500E202F8 /* lcl.m */,
+				48AABA72110CACAD00819713 /* LCLLogFile.h */,
+				48AABA73110CACAD00819713 /* LCLLogFile.m */,
+			);
+			name = Logging;
+			sourceTree = "<group>";
+		};
+		488DFC5A0B7221710062DDC6 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				483666790B5F701200509B60 /* NNTag.h */,
+				483666780B5F701200509B60 /* NNTag.m */,
+				4836667B0B5F701200509B60 /* NNSimpleTag.h */,
+				4836667A0B5F701200509B60 /* NNSimpleTag.m */,
+				48AC0FA90D61F395007E2BF9 /* NNTempTag.h */,
+				48AC0FAA0D61F395007E2BF9 /* NNTempTag.m */,
+				483666710B5F701200509B60 /* NNTagSet.h */,
+				483666700B5F701200509B60 /* NNTagSet.m */,
+			);
+			name = Tags;
+			sourceTree = "<group>";
+		};
+		48A2D0C40B5FF22A004F84AC /* Taggables */ = {
+			isa = PBXGroup;
+			children = (
+				483666770B5F701200509B60 /* NNTaggableObject.h */,
+				483666760B5F701200509B60 /* NNTaggableObject.m */,
+				483666870B5F701200509B60 /* NNFile.h */,
+				483666860B5F701200509B60 /* NNFile.m */,
+			);
+			name = Taggables;
+			sourceTree = "<group>";
+		};
+		48A2D0C70B5FF245004F84AC /* Query */ = {
+			isa = PBXGroup;
+			children = (
+				483666850B5F701200509B60 /* NNQuery.h */,
+				483666840B5F701200509B60 /* NNQuery.m */,
+				483666830B5F701200509B60 /* NNQueryBundle.h */,
+				483666820B5F701200509B60 /* NNQueryBundle.m */,
+				48B8E8BE0BF0B956004A07B9 /* NNQueryFilter.h */,
+				48B8E8BF0BF0B956004A07B9 /* NNQueryFilter.m */,
+				486F95860C057809008AB8BD /* NNSimpleQueryFilter.h */,
+				486F95870C057809008AB8BD /* NNSimpleQueryFilter.m */,
+				6544C97514DC4FC100627280 /* NNMultipleAttributesQueryFilter.h */,
+				6544C97614DC4FC100627280 /* NNMultipleAttributesQueryFilter.m */,
+				486F95700C057717008AB8BD /* NNContentTypeTreeQueryFilter.h */,
+				486F95710C057717008AB8BD /* NNContentTypeTreeQueryFilter.m */,
+			);
+			name = Query;
+			sourceTree = "<group>";
+		};
+		48E8AF6F0D5AEBA800370942 /* UKKQueue */ = {
+			isa = PBXGroup;
+			children = (
+				48E8AF860D5AEBBA00370942 /* UKFileWatcher.h */,
+				48E8AF870D5AEBBA00370942 /* UKFileWatcher.m */,
+				48E8AF880D5AEBBA00370942 /* UKFNSubscribeFileWatcher.h */,
+				48E8AF890D5AEBBA00370942 /* UKFNSubscribeFileWatcher.m */,
+				48E8AF8A0D5AEBBA00370942 /* UKKQueue.h */,
+				48E8AF8B0D5AEBBA00370942 /* UKKQueue.m */,
+				48E8AF8C0D5AEBBA00370942 /* UKMainThreadProxy.h */,
+				48E8AF8D0D5AEBBA00370942 /* UKMainThreadProxy.m */,
+			);
+			name = UKKQueue;
+			sourceTree = "<group>";
+		};
+		48FDDCAC0D52FBC40007C9CE /* sqlite3 */ = {
+			isa = PBXGroup;
+			children = (
+				48FDDD010D5303080007C9CE /* FMDatabase.h */,
+				48FDDD020D5303080007C9CE /* FMDatabase.m */,
+				48FDDD050D5303080007C9CE /* FMResultSet.h */,
+				48FDDD060D5303080007C9CE /* FMResultSet.m */,
+			);
+			name = sqlite3;
+			sourceTree = "<group>";
+		};
+		65AA745D0BF355960054407D /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				65AA74970BF358600054407D /* Global.strings */,
+				4879C5F70D6C722500A3DC74 /* MDSimpleGrouping.strings */,
+			);
+			name = Strings;
+			sourceTree = "<group>";
+		};
+		DA7177D010615DC8008EA2D6 /* Mining */ = {
+			isa = PBXGroup;
+			children = (
+				DA7177D310615DE7008EA2D6 /* NNApriori.h */,
+				DA7177D410615DE7008EA2D6 /* NNApriori.m */,
+				B62C8B70115CF9B400CCB83B /* NNAssociationRules.h */,
+				B62C8B71115CF9B400CCB83B /* NNAssociationRules.m */,
+				DA7177D110615DE7008EA2D6 /* NNAprioriItemset.h */,
+				DA7177D210615DE7008EA2D6 /* NNAprioriItemset.m */,
+				DABF35281062CBAB000429EC /* NNAssociationRule.h */,
+				DABF35291062CBAB000429EC /* NNAssociationRule.m */,
+				B62C8AE7115CF18000CCB83B /* NNAssociationRuleDiscoveryOperation.h */,
+				B62C8AE8115CF18000CCB83B /* NNAssociationRuleDiscoveryOperation.m */,
+			);
+			name = Mining;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8DC2EF500486A6940098B216 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4872216F0D522285004F0014 /* Finder.h in Headers */,
+				4836668D0B5F701200509B60 /* NNQueue.h in Headers */,
+				4836668F0B5F701200509B60 /* NNTagSet.h in Headers */,
+				483666910B5F701200509B60 /* NNTagSave.h in Headers */,
+				483666930B5F701200509B60 /* NNTags.h in Headers */,
+				483666950B5F701200509B60 /* NNTaggableObject.h in Headers */,
+				483666970B5F701200509B60 /* NNTag.h in Headers */,
+				483666990B5F701200509B60 /* NNSimpleTag.h in Headers */,
+				4836669B0B5F701200509B60 /* NNSelectedTags.h in Headers */,
+				4836669D0B5F701200509B60 /* NNRelatedTagsStandalone.h in Headers */,
+				4836669F0B5F701200509B60 /* NNRelatedTags.h in Headers */,
+				483666A10B5F701200509B60 /* NNQueryBundle.h in Headers */,
+				483666A30B5F701200509B60 /* NNQuery.h in Headers */,
+				483666A50B5F701200509B60 /* NNFile.h in Headers */,
+				483666A70B5F701200509B60 /* NSFileManager+Extensions.h in Headers */,
+				485C51A10B62199F00AEB8FD /* NNCompatbilityChecker.h in Headers */,
+				48B8E8C00BF0B956004A07B9 /* NNQueryFilter.h in Headers */,
+				486F95720C057717008AB8BD /* NNContentTypeTreeQueryFilter.h in Headers */,
+				486F95880C057809008AB8BD /* NNSimpleQueryFilter.h in Headers */,
+				487837CB0C818DC100F5C5D4 /* NNTagToFileWriter.h in Headers */,
+				487837DA0C81933400F5C5D4 /* NNSecureTagToFileWriter.h in Headers */,
+				486C5EB70C85EBB800301D48 /* NNSimpleTagToFileWriter.h in Headers */,
+				4877268B0C89B0C30068BD48 /* NNTagStoreManager.h in Headers */,
+				48F341260D3C995500D3DB70 /* NNTagging.h in Headers */,
+				4828B1AF0D4DF050006EAA1D /* NNTagDirectoryWriter.h in Headers */,
+				6508EB850D50C5B5004DA882 /* NNCommonNotifications.h in Headers */,
+				48FDDD070D5303080007C9CE /* FMDatabase.h in Headers */,
+				48FDDD0B0D5303080007C9CE /* FMResultSet.h in Headers */,
+				48E8AF8E0D5AEBBA00370942 /* UKFileWatcher.h in Headers */,
+				48E8AF900D5AEBBA00370942 /* UKFNSubscribeFileWatcher.h in Headers */,
+				48E8AF920D5AEBBA00370942 /* UKKQueue.h in Headers */,
+				48E8AF940D5AEBBA00370942 /* UKMainThreadProxy.h in Headers */,
+				48AC0FAB0D61F395007E2BF9 /* NNTempTag.h in Headers */,
+				48D8BA050D6EB5C300389D66 /* NNTagChecker.h in Headers */,
+				482661460F64330700E0C348 /* NNTagToFinderCommentWriter.h in Headers */,
+				48F53DDD0F6EE584001C8C6F /* NNTagToOpenMetaWriter.h in Headers */,
+				4804F5830F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.h in Headers */,
+				4807E2840F7D0CBE00165CA9 /* NNTagBackup.h in Headers */,
+				485D46D30F8BDA6500E202F8 /* lcl.h in Headers */,
+				485D46D50F8BDA6500E202F8 /* lcl_config_components.h in Headers */,
+				485D46D90F8BDA7000E202F8 /* lcl_config_logger.h in Headers */,
+				DA7177D710615DE7008EA2D6 /* NNApriori.h in Headers */,
+				4863B47414CB0F6900F92A59 /* OpenMeta.h in Headers */,
+				4863B47814CB0F6900F92A59 /* OpenMetaBackup.h in Headers */,
+				4863B47A14CB0F6900F92A59 /* OpenMetaPrefs.h in Headers */,
+				DA7177D510615DE7008EA2D6 /* NNAprioriItemset.h in Headers */,
+				6544C97714DC4FC100627280 /* NNMultipleAttributesQueryFilter.h in Headers */,
+				DABF352A1062CBAB000429EC /* NNAssociationRule.h in Headers */,
+				48AABA74110CACAD00819713 /* LCLLogFile.h in Headers */,
+				481E5A121124B2BE001FE5C5 /* LCLLogFileConfig.h in Headers */,
+				481E5A1F1124B344001FE5C5 /* lcl_config_extensions.h in Headers */,
+				B62C8AE9115CF18000CCB83B /* NNAssociationRuleDiscoveryOperation.h in Headers */,
+				B62C8B72115CF9B400CCB83B /* NNAssociationRules.h in Headers */,
+				488AB7BF1170FBED0053ADBD /* NNFolderToTagImporter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8DC2EF4F0486A6940098B216 /* NNTagging */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "NNTagging" */;
+			buildPhases = (
+				8DC2EF500486A6940098B216 /* Headers */,
+				8DC2EF520486A6940098B216 /* Resources */,
+				8DC2EF540486A6940098B216 /* Sources */,
+				8DC2EF560486A6940098B216 /* Frameworks */,
+				48DBBAE40F644FBE0037EEC6 /* Copy Frameworks */,
+			);
+			buildRules = (
+				486943110D45E47B0022E21D /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = NNTagging;
+			productInstallPath = "$(HOME)/Library/Frameworks";
+			productName = NNTagging;
+			productReference = 8DC2EF5B0486A6940098B216 /* NNTagging.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "nudge:nudge";
+			};
+			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "NNTagging" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* NNTagging */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DC2EF4F0486A6940098B216 /* NNTagging */,
+				48AE6B340B667EB000E4EEE9 /* Documentation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8DC2EF520486A6940098B216 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */,
+				485706B20BE698C000797286 /* LICENSE in Resources */,
+				655AEB750BF45E9C005DD0C1 /* MDSimpleGrouping.plist in Resources */,
+				65AA74980BF358600054407D /* Global.strings in Resources */,
+				4872216D0D52227D004F0014 /* Settings.plist in Resources */,
+				4879C5F80D6C722500A3DC74 /* MDSimpleGrouping.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		48AE6B330B667EB000E4EEE9 /* Run Doxygen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Doxygen";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Applications/Doxygen.app/Contents/Resources/doxygen Resources/Doxyfile";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DC2EF540486A6940098B216 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4836668C0B5F701200509B60 /* NNQueue.m in Sources */,
+				4836668E0B5F701200509B60 /* NNTagSet.m in Sources */,
+				483666900B5F701200509B60 /* NNTagSave.m in Sources */,
+				483666920B5F701200509B60 /* NNTags.m in Sources */,
+				483666940B5F701200509B60 /* NNTaggableObject.m in Sources */,
+				483666960B5F701200509B60 /* NNTag.m in Sources */,
+				483666980B5F701200509B60 /* NNSimpleTag.m in Sources */,
+				4836669A0B5F701200509B60 /* NNSelectedTags.m in Sources */,
+				4836669C0B5F701200509B60 /* NNRelatedTagsStandalone.m in Sources */,
+				4836669E0B5F701200509B60 /* NNRelatedTags.m in Sources */,
+				483666A00B5F701200509B60 /* NNQueryBundle.m in Sources */,
+				483666A20B5F701200509B60 /* NNQuery.m in Sources */,
+				483666A40B5F701200509B60 /* NNFile.m in Sources */,
+				483666A60B5F701200509B60 /* NSFileManager+Extensions.m in Sources */,
+				485C51A20B62199F00AEB8FD /* NNCompatbilityChecker.m in Sources */,
+				48B8E8C10BF0B956004A07B9 /* NNQueryFilter.m in Sources */,
+				486F95730C057717008AB8BD /* NNContentTypeTreeQueryFilter.m in Sources */,
+				486F95890C057809008AB8BD /* NNSimpleQueryFilter.m in Sources */,
+				487837CC0C818DC100F5C5D4 /* NNTagToFileWriter.m in Sources */,
+				487837DB0C81933400F5C5D4 /* NNSecureTagToFileWriter.m in Sources */,
+				486C5EB80C85EBB800301D48 /* NNSimpleTagToFileWriter.m in Sources */,
+				4877268C0C89B0C30068BD48 /* NNTagStoreManager.m in Sources */,
+				48F341270D3C995500D3DB70 /* NNTagging.m in Sources */,
+				4828B1B00D4DF050006EAA1D /* NNTagDirectoryWriter.m in Sources */,
+				6508EB860D50C5B5004DA882 /* NNCommonNotifications.m in Sources */,
+				48FDDD080D5303080007C9CE /* FMDatabase.m in Sources */,
+				48FDDD0C0D5303080007C9CE /* FMResultSet.m in Sources */,
+				48E8AF8F0D5AEBBA00370942 /* UKFileWatcher.m in Sources */,
+				48E8AF910D5AEBBA00370942 /* UKFNSubscribeFileWatcher.m in Sources */,
+				48E8AF930D5AEBBA00370942 /* UKKQueue.m in Sources */,
+				48E8AF950D5AEBBA00370942 /* UKMainThreadProxy.m in Sources */,
+				48AC0FAC0D61F395007E2BF9 /* NNTempTag.m in Sources */,
+				48D8BA060D6EB5C300389D66 /* NNTagChecker.m in Sources */,
+				482661470F64330700E0C348 /* NNTagToFinderCommentWriter.m in Sources */,
+				482661510F6438AA00E0C348 /* NNTagToOpenMetaWriter.m in Sources */,
+				4804F5840F7BB9D200D6CBA1 /* NNSymlinkTagDirectoryWriter.m in Sources */,
+				4807E2850F7D0CBE00165CA9 /* NNTagBackup.m in Sources */,
+				485D46D40F8BDA6500E202F8 /* lcl.m in Sources */,
+				DA7177D610615DE7008EA2D6 /* NNAprioriItemset.m in Sources */,
+				DA7177D810615DE7008EA2D6 /* NNApriori.m in Sources */,
+				DABF352B1062CBAB000429EC /* NNAssociationRule.m in Sources */,
+				48AABA75110CACAD00819713 /* LCLLogFile.m in Sources */,
+				B62C8AEA115CF18100CCB83B /* NNAssociationRuleDiscoveryOperation.m in Sources */,
+				B62C8B73115CF9B400CCB83B /* NNAssociationRules.m in Sources */,
+				488AB7C01170FBED0053ADBD /* NNFolderToTagImporter.m in Sources */,
+				4863B47514CB0F6900F92A59 /* OpenMeta.m in Sources */,
+				4863B47914CB0F6900F92A59 /* OpenMetaBackup.m in Sources */,
+				4863B47B14CB0F6900F92A59 /* OpenMetaPrefs.m in Sources */,
+				6544C97814DC4FC100627280 /* NNMultipleAttributesQueryFilter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C1667FE841158C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4879C5F70D6C722500A3DC74 /* MDSimpleGrouping.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4879C5F50D6C721800A3DC74 /* English */,
+			);
+			name = MDSimpleGrouping.strings;
+			sourceTree = "<group>";
+		};
+		65AA74970BF358600054407D /* Global.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65AA74930BF3585B0054407D /* English */,
+			);
+			name = Global.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91AE08733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = NNTagging_Prefix.pch;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Resources/sqlite3\"",
+					"\"$(SRCROOT)\"",
+					"\"$(DEVELOPER_DIR)/SDKs/MacOSX10.5.sdk/usr/lib\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = NNTagging;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = NO;
+				VERSIONING_SYSTEM = "";
+				WARNING_CFLAGS = "";
+				WRAPPER_EXTENSION = framework;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB91AF08733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = NNTagging_Prefix.pch;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(DEVELOPER_DIR)/SDKs/MacOSX10.5.sdk/usr/lib\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = NNTagging;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = NO;
+				VALID_ARCHS = " i386 x86_64";
+				VERSIONING_SYSTEM = "";
+				WARNING_CFLAGS = "";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		1DEB91B208733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1DEB91B308733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "ppc64 ppc7400 ppc970 i386 x86_64 ppc";
+			};
+			name = Release;
+		};
+		48AE6B4C0B667EDD00E4EEE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = Documentation;
+			};
+			name = Debug;
+		};
+		48AE6B4D0B667EDD00E4EEE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				COPY_PHASE_STRIP = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = Documentation;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "NNTagging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91AE08733DA50010E9CD /* Debug */,
+				1DEB91AF08733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "NNTagging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91B208733DA50010E9CD /* Debug */,
+				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48AE6B4B0B667EDD00E4EEE9 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48AE6B4C0B667EDD00E4EEE9 /* Debug */,
+				48AE6B4D0B667EDD00E4EEE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
