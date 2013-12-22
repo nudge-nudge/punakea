@@ -6,4 +6,4 @@ The official web page is hosted [here](http://nudge-nudge.github.io/punakea/).
 
 More information can be found in the [wiki](http://github.com/nudge-nudge/punakea/wiki).
 
-Punakea has been originally developed by <a href="www.xing.com/profiles/Daniel_Baer6">Daniel Bär</a> and <a href="http://jhoff.de/">Johannes Hoffart</a> from 2006 to 2013. At the end of 2013, Punakea has been made available as an open source project.
+Punakea has been originally developed by <a href="http://www.xing.com/profiles/Daniel_Baer6">Daniel Bär</a> and <a href="http://www.jhoff.de/">Johannes Hoffart</a> from 2006 to 2013. At the end of 2013, Punakea has been made available as an open source project.
