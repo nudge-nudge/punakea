@@ -1,0 +1,101 @@
+#TB_overlay {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  background: #000;
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+  opacity: 0.6;
+}
+
+#TB_window {
+  position: absolute;
+  background: #ffffff;
+  z-index: 102;
+  color: #000000;
+  display: none;
+  border: none #525252 1px;
+  text-align: left;
+}
+
+#TB_window img {
+  display: block;
+  margin: 15px 0 0 15px;
+	border: none;
+}
+
+#TB_caption{
+  height: 20px;
+  //padding: 7px 30px 10px 25px;
+  float: left;
+}
+
+#TB_closeWindow{
+  	margin: -28px 0 0 -28px;
+ 	float: left;
+	z-index: 999;
+}
+
+#TB_closeAjaxWindow {
+	margin: -28px 0 0 -28px;
+ 	float: left;
+	z-index: 999;
+}
+
+#TB_ajaxWindowTitle{
+  float: left;
+  padding: 7px 0 5px 10px;
+  margin-bottom: 1px;
+}
+
+#TB_title{
+  background: #e8e8e8;
+  height: 27px;
+}
+
+#TB_ajaxContent{
+    clear: both;
+ 	padding: 2px 15px 15px 15px;
+ 	overflow: visible;
+ 	text-align: left;
+ 	line-height: 1.4em;
+}
+
+#TB_ajaxContent p{
+  padding: 5px 0 5px 0;
+}
+
+#TB_load{
+  position: absolute;
+  background: url(loading_animation.gif);
+  display: none;
+  height: 22px;
+  width: 126px;
+  z-index: 101;
+}
+
+#TB_HideSelect{
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border: none;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  opacity: 0;
+}
+
+#TB_iframeContent{
+  clear: both;
+  border: none;
+  margin-bottom: -1px;
+  margin-top: 1px;
+  _margin-bottom: 1px;
+}
