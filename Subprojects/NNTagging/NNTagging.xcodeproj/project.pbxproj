@@ -721,7 +721,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "nudge:nudge";
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "NNTagging" */;
@@ -882,8 +882,8 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
+				GCC_ENABLE_OBJC_GC = unsupported;
+				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = NNTagging_Prefix.pch;
@@ -916,7 +916,7 @@
 				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = framework;
-				ZERO_LINK = YES;
+				ZERO_LINK = "";
 			};
 			name = Debug;
 		};
@@ -935,8 +935,9 @@
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
+				GCC_MODEL_TUNING = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = NNTagging_Prefix.pch;
 				GCC_VERSION = "";
@@ -969,6 +970,7 @@
 				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = framework;
+				ZERO_LINK = "";
 			};
 			name = Release;
 		};
@@ -978,7 +980,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PROVISIONING_PROFILE = "";
@@ -993,7 +995,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: nudge:nudge - Johannes Hoffart & Daniel Baer GbR";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
